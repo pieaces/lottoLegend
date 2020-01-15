@@ -1,5 +1,6 @@
 import Statistics, {Stats} from './Statistics'
 import {List} from 'immutable';
+import Calculate from './Calculate';
 
 interface LottoData{
     round: number;
@@ -8,7 +9,7 @@ interface LottoData{
     numbers: number[]
 }
 
-export class Lotto{
+class Lotto{
     private static instance: Lotto;
     private readonly data:List<LottoData>;
     public readonly SIZE:number;
@@ -43,15 +44,21 @@ export default class LottoStat {
     static readonly BALL_NUMBER: number = 45;
     static allLotto:Lotto = Lotto.getInstance();
     private readonly data: Array<number[]> = [];
-
+    private SIZE:number = 0;
     constructor() {}
+
+    getSize():number {
+        return this.SIZE;
+    }
 
     push(numbers: Array<number>): void {
         if (numbers.length !== LottoStat.COUNT) throw new SyntaxError(`The length of data element has to be ${LottoStat.COUNT}`);
         this.data.push(numbers);
+        this.SIZE++;
     }
     setData(numsArray: Array<number[]>){
         numsArray.forEach(numbers => this.push(numbers));
+        this.SIZE = numsArray.length;
     }
     
     oddCount(): Stats {
@@ -63,10 +70,10 @@ export default class LottoStat {
     }
 
     posCount$1(): number[] {
-        return Statistics.posCount$1(this.data);
+        return Calculate.posCount$1(this.data);
     }
     posCount$10(): number[] {
-        return Statistics.posCount$10(this.data);
+        return Calculate.posCount$10(this.data);
     }
 
     howLongNone(): number[] {
@@ -144,8 +151,12 @@ export default class LottoStat {
     diffMaxMin(): Stats {
         return Statistics.diffMaxMin(this.data);
     }
-    
+
     AC(): Stats {
         return Statistics.AC(this.data);
+    }
+
+    frequencyPercent(): number[] {
+        return Calculate.frequencyCount(this.data).map(value => value/this.getSize()*100);
     }
 }

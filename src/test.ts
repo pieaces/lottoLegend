@@ -24,22 +24,18 @@ export enum Mode { $1 = 1, $2 = 2, $12 = 12, $24 = 24, $48 = 48, $96 = 96, $384 
 try {
     const lottoStat = new LottoStat();
     lottoStat.setData(LottoStat.allLotto.getNumbers());
-    //console.log(lottoStat.aveRatioOddEven());
-    //console.log(lottoStat.aveSum());
-    //console.log(lottoStat.aveRatio$10());
-    //console.log(lottoStat.howLongNone());
-    //console.log(lottoStat.getData());
-    //console.log(lottoStat.harmony());
-    //cout(lottoStat.aveGetMinMax());
+
+    /*
     cout('posCount$1',lottoStat.posCount$1());
     cout('posCount$10',lottoStat.posCount$10());
     cout('sum',lottoStat.sum());
     cout('odd', lottoStat.oddCount());
-
     cout('min', lottoStat.min());
     cout('max', lottoStat.max());
     cout('diff', lottoStat.diffMaxMin());
     cout('AC', lottoStat.AC());
+    */
+   cout('frequency', lottoStat.frequencyPercent());
 } catch (err) {
     console.log(err);
 }

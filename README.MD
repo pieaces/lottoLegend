@@ -42,3 +42,6 @@ AC(): Stats
 diffMaxMin(): Stats
 
 **번호별 통계**
+
+frequencyPercent(): number[]
+

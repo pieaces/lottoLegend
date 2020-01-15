@@ -29,29 +29,6 @@ export default class Statistics {
         return this.getStats(data);
     }
 
-    
-    private static posNumCount(numsArray: Array<number[]>, pos: Position): number[] {
-        const result:number[] = new Array<number>(pos).fill(0);
-        numsArray.forEach(numbers => {
-            let temp:number[];
-            switch(pos){
-                case Position.$1: temp = Calculate.ratio$1(numbers);
-                    break;
-                case Position.$10:temp = Calculate.ratio$10(numbers);
-                    break;
-            }
-            temp.forEach((value, index) => result[index] += value);
-        });
-        return result;
-    }
-
-    static posCount$1(numsArray: Array<number[]>): number[] {
-        return this.posNumCount(numsArray, Position.$1);
-    }
-    static posCount$10(numsArray: Array<number[]>): number[] {
-        return this.posNumCount(numsArray, Position.$10);
-    }
-
     static min(numsArray: Array<number[]>): Stats{
         const data:number[] = numsArray.map(numbers => Calculate.min(numbers));
         return this.getStats(data);
@@ -64,6 +41,7 @@ export default class Statistics {
         const data:number[] = numsArray.map(numbers => Calculate.max(numbers) - Calculate.min(numbers));
         return this.getStats(data);
     }
+
     static AC(numsArray: Array<number[]>): Stats {
         const data:number[] = numsArray.map(numbers => Calculate.AC(numbers));
         return this.getStats(data);
