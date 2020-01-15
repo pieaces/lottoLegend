@@ -1,7 +1,7 @@
 
 # 로또 통계
 
-V 1.0.0 (2020-01-15)
+v 1.0.1 (2020-01-15)
 
 ## 기능
 
@@ -17,24 +17,28 @@ oddCount(): Stats
 
 sum(): Stats
 
-**첫수(십의자리)**
-
-posCount$10(): number[]
-
 **끝수(일의자리)**
 
 posCount$1(): number[]
 
-**AC 합**
+**첫수(십의자리)**
 
-returnAC(numbers: number[]): number
+posCount$10(): number[]
+
+**장기간 미출현 기간**
+
+howLongNone(): number[]
+
+**궁합수**
+
+harmony(): HarmonyData[]
+
+**AC**
+
+AC(): Stats
 
 **고저 차**
 
 diffMaxMin(): Stats
 
 **번호별 통계**
-
-**미출현 기간**
-
-**이월 번호**

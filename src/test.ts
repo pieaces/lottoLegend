@@ -1,6 +1,5 @@
 import * as readline from "readline"
-import { returnAC } from './function'
-import LottoStat, { Mode } from './class'
+import LottoStat from './class/LottoStat'
 
 /*
 const rl = readline.createInterface({
@@ -20,8 +19,11 @@ rl.question("Input numbers: ", (answer: string) => {
 function cout(str:string, obj:any):void{
     console.log(str + ":", obj);
 }
+
+export enum Mode { $1 = 1, $2 = 2, $12 = 12, $24 = 24, $48 = 48, $96 = 96, $384 = 384};
 try {
-    const lottoStat = new LottoStat(Mode.$2);
+    const lottoStat = new LottoStat();
+    lottoStat.setData(LottoStat.allLotto.getNumbers());
     //console.log(lottoStat.aveRatioOddEven());
     //console.log(lottoStat.aveSum());
     //console.log(lottoStat.aveRatio$10());
@@ -37,6 +39,7 @@ try {
     cout('min', lottoStat.min());
     cout('max', lottoStat.max());
     cout('diff', lottoStat.diffMaxMin());
+    cout('AC', lottoStat.AC());
 } catch (err) {
     console.log(err);
 }
