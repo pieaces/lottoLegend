@@ -24,7 +24,7 @@ module.exports = {
         hot: true
     },
     plugins: [
-        new CopyWebpackPlugin(['src/lotto.html']),
+        new CopyWebpackPlugin(['src/index.html']),
         new webpack.HotModuleReplacementPlugin()
     ],
     resolve: {

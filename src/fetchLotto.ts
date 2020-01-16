@@ -1,5 +1,3 @@
-//import fetch from 'node-fetch'
-
 const getLotto = async () => {
     const headers: any = {
         'x-api-key': 'LZn9Pykicg982PNmTmdiB8pkso4xbGiQ4n4P1z1k'
@@ -15,10 +13,9 @@ const getLotto = async () => {
         return {
             round: Number(item.no.N),
             date: item.date.S,
-            bonusnum: Number(item.bonusNum.N),
+            bonusNum: Number(item.bonusNum.N),
             numbers: item.numbers.NS.map((item: any) => Number(item)).sort((a: number, b: number) => a - b)
         };
     }).sort((a: { round: number; }, b: { round: number; }) => b.round - a.round);
 };
-
 export default getLotto;
