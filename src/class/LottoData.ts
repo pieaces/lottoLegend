@@ -1,11 +1,11 @@
 import Calculate from './Statistics/Calculate'
 import Analyze from './Analyze/Analyze'
-import Lotto from './Lotto'
+import Lotto, {LData} from './Lotto'
 
 export default class LottoStat extends Lotto{
     public mode:number;
-    constructor(mode:number) {
-        super();
+    constructor(data:LData[], mode:number) {
+        super(data);
         this.mode = mode;
     }
 
@@ -45,11 +45,11 @@ export default class LottoStat extends Lotto{
     }
 
     frequencyPercent(mode:number = this.mode): number[] {
-        return Analyze.frequencyCount(this.getNumbers(mode)).map(value => value/this.SIZE*100);
+        return Analyze.frequencyCount(this.getNumbers(mode)).map(value => value/this.getSize()*100);
     }
 
-    static howLongNone(){ //HData[]
-        return Analyze.howLongNone(Lotto.getInstance().getData());
+    howLongNone(){ //HData[]
+        return Analyze.howLongNone(this.getData());
     }
 
     harmony(mode:number = this.mode){ //HarmonyData[]

@@ -1,10 +1,10 @@
 import Statistics, {Stats} from './Statistics/Statistics'
 import Analyze from './Analyze/Analyze'
 import LottoData from './LottoData'
-
+import {LData} from './Lotto'
 export default class LottoStat extends LottoData{
-    constructor(mode:number = LottoStat.getInstance().SIZE) {
-        super(mode);
+    constructor(data:LData[], mode:number = data.length) {
+        super(data, mode);
     }
 
     oddCountStats(mode:number = this.mode): Stats {

@@ -1,5 +1,5 @@
-import * as readline from "readline"
 import LottoStat from './class/LottoStat'
+import fetchLotto from './fetchLotto'
 /*
 const rl = readline.createInterface({
     input: process.stdin,
@@ -15,12 +15,16 @@ rl.question("Input numbers: ", (answer: string) => {
     rl.close();
 });
 */
-function cout(str: string, obj: any): void {
+function cout(obj: any, str=''): void {
     console.log(str + ":", obj);
 }
-
-enum Mode { $1 = 1, $2 = 2, $4 = 4, $12 = 12, $24 = 24, $48 = 48, $96 = 96, $384 = 384, $ALL = LottoStat.getInstance().SIZE };
-const lottoStat = new LottoStat(Mode.$ALL);
-
+enum Mode { $1 = 1, $2 = 2, $4 = 4, $12 = 12, $24 = 24, $48 = 48, $96 = 96, $384 = 384 };
 //cout('interval', lottoStat.intervalStats());
-cout('odds...', lottoStat.gatherOddCount());
+
+fetchLotto()
+.then(data =>{
+    const lottoStat = new LottoStat(data, Mode.$12);
+    cout(lottoStat.gatherOddCount(), 'odd..');
+    cout(lottoStat.oddCountStats(), 'oddStats');
+    cout(lottoStat.sumStats(), 'sumStats');
+});

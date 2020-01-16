@@ -9,22 +9,19 @@ export interface LData{
 export default class Lotto{
     private static instance: Lotto;
 
-    public readonly SIZE:number;
+    private SIZE:number;
     public static readonly BALL_NUM:number = 45;
 
-    private readonly data:List<LData>;
+    private data:List<LData>;
 
-    protected constructor(){
-        this.data = List<LData>(require('../lotto.json'));
+    protected constructor(data:LData[]){
+        this.data = List<LData>(data);
         this.SIZE = this.data.size;
     }
 
-    public static getInstance(): Lotto {
-        if (!Lotto.instance) Lotto.instance = new Lotto();
-
-        return Lotto.instance;
+    public getSize():number{
+        return this.SIZE;
     }
-
     public getData(size:number=this.SIZE):LData[]{
         return this.data.toJS().slice(0, size);
     }
