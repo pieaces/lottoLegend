@@ -2,6 +2,10 @@
 export default class Calculate {
     private constructor() { }
 
+    public static getData(numsArray: Array<number[]>, method:(numbers:number[])=>number){
+        return numsArray.map(numbers => method(numbers));
+    }
+
     static oddCount(numbers: number[]): number {
         let count = 0;
         numbers.forEach(value => {

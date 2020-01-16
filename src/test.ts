@@ -15,30 +15,12 @@ rl.question("Input numbers: ", (answer: string) => {
     rl.close();
 });
 */
-function cout(str:string, obj:any):void{
+function cout(str: string, obj: any): void {
     console.log(str + ":", obj);
 }
 
-enum Mode { $1 = 1, $2 = 2, $4=4, $12 = 12, $24 = 24, $48 = 48, $96 = 96, $384 = 384, $ALL=LottoStat.getInstance().SIZE};
-try {
-    const lottoStat = new LottoStat(Mode.$24);
-    //cout('howlong', LottoStat.howLongNone());
-    cout('interval', lottoStat.interval());
-    //lottoStat.setData(LottoStat.allLotto.getNumbers());
+enum Mode { $1 = 1, $2 = 2, $4 = 4, $12 = 12, $24 = 24, $48 = 48, $96 = 96, $384 = 384, $ALL = LottoStat.getInstance().SIZE };
+const lottoStat = new LottoStat(Mode.$ALL);
 
-    
-    //cout('posCount$1',lottoStat.posCount$1());
-    //cout('posCount$10',lottoStat.posCount$10());
-    /*
-    cout('sum',lottoStat.sum());
-    cout('odd', lottoStat.oddCount());
-    cout('min', lottoStat.min());
-    cout('max', lottoStat.max());
-    cout('diff', lottoStat.diffMaxMin());
-    cout('AC', lottoStat.AC());
-    cout('harmony', lottoStat.harmony());
-    */
-   //cout('frequency', lottoStat.frequencyPercent());
-} catch (err) {
-    console.log(err);
-}
+//cout('interval', lottoStat.intervalStats());
+cout('odds...', lottoStat.gatherOddCount());
