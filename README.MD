@@ -1,7 +1,7 @@
 
-# 로또 통계
+# 로또 통계(2020-01-15)
 
-v 1.0.1 (2020-01-15)
+v 1.0.2 (2020-01-16)
 
 ## 기능
 
@@ -45,3 +45,6 @@ diffMaxMin(): Stats
 
 frequencyPercent(): number[]
 
+**출현 간격**
+
+interval(): Stats[]
