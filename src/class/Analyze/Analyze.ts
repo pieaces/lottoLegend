@@ -1,4 +1,4 @@
-import Lotto, {LData} from '../Lotto'
+import LottoBase, {LData} from '../Lotto/LottoBase'
 import PosAnalyze from './PosAnalyze'
 interface HarmonyData {
     one: number;
@@ -17,7 +17,7 @@ export default class Analyze extends PosAnalyze {
     private constructor() { super(); }
 
     static frequencyCount(numsArray: Array<number[]>): number[] {
-        const result = new Array<number>(Lotto.BALL_NUM).fill(0);
+        const result = new Array<number>(LottoBase.BALL_NUM).fill(0);
 
         for (let i = 0; i < numsArray.length; i++) {
             for (let j = 0; j < numsArray[i].length; j++)
@@ -29,7 +29,7 @@ export default class Analyze extends PosAnalyze {
 
     private static emergePoint(numsArray: Array<number[]>): Array<number[]> {
         const result:Array<number[]> = [];
-        for(let i =0; i<Lotto.BALL_NUM; i++) result[i] = [];
+        for(let i =0; i<LottoBase.BALL_NUM; i++) result[i] = [];
         numsArray.forEach((numbers, round) => {
             numbers.forEach(num => result[num-1].push(round));
         });
@@ -59,8 +59,8 @@ export default class Analyze extends PosAnalyze {
             }
             return check;
         }
-        const results:HData[] = new Array<HData>(Lotto.BALL_NUM);
-        for(let i=0; i<Lotto.BALL_NUM; i++) results[i] = ({count:-1, round:0});
+        const results:HData[] = new Array<HData>(LottoBase.BALL_NUM);
+        for(let i=0; i<LottoBase.BALL_NUM; i++) results[i] = ({count:-1, round:0});
 
         for (let i = 0; i < lottoArray.length; i++) {
             for (let j = 0; j < lottoArray[i].numbers.length; j++) {
@@ -79,9 +79,9 @@ export default class Analyze extends PosAnalyze {
     static harmony(lottoArray: LData[]): HarmonyData[] {
         const harmonyHash = (lottoArray: LData[]): Array<HData[]> => {
             const result: Array<HData[]> = [];
-            for (let i = 1; i < Lotto.BALL_NUM; i++) {
+            for (let i = 1; i < LottoBase.BALL_NUM; i++) {
                 const temp: HData[] = [];
-                for (let j = 0; j < Lotto.BALL_NUM - i; j++) temp.push({ count: 0, round: 0 });
+                for (let j = 0; j < LottoBase.BALL_NUM - i; j++) temp.push({ count: 0, round: 0 });
                 result.push(temp);
             }
             lottoArray.forEach((lotto) => {
@@ -118,4 +118,5 @@ export default class Analyze extends PosAnalyze {
             return b.count - a.count !== 0 ? b.count - a.count : b.round - a.round;
         });
     }
+
 }

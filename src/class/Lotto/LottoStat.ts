@@ -1,8 +1,8 @@
-import Statistics, {Stats} from './Statistics/Statistics'
-import Analyze from './Analyze/Analyze'
-import LottoData from './LottoData'
-import {LData} from './Lotto'
-export default class LottoStat extends LottoData{
+import Statistics, {Stats} from '../Statistics/Statistics'
+import Analyze from '../Analyze/Analyze'
+import LottoCal from './LottoCal'
+import {LData} from './LottoBase'
+export default class LottoStat extends LottoCal{
     constructor(data:LData[], mode:number = data.length) {
         super(data, mode);
     }
