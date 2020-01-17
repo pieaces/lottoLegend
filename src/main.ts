@@ -1,12 +1,13 @@
 import LottoStat from './class/Lotto/LottoStat'
+import Statistics from './class/Statistics/Statistics'
 import fetchLotto from './fetchLotto'
 import Chart from 'chart.js'
 
 function cout(obj: any, str = ''): void {
     console.log(str + ":", obj);
 }
-enum Mode { $1 = 1, $2 = 2, $4 = 4, $12 = 12, $24 = 24, $48 = 48, $96 = 96, $384 = 384 };
 
+enum Mode { $12 = 12, $24 = 24, $48 = 48, $96 = 96, $384 = 384 };
 let lottoStat: LottoStat = new LottoStat(require('./lotto.json'));
 /*
 fetchLotto()
@@ -16,8 +17,7 @@ fetchLotto()
 */
 const button = document.getElementById('button');
 button.onclick = function () {
-    const oddCount = lottoStat.gatherOddCount();
-
+    cout(lottoStat.frequencyPercent().map(value => 1-value));
     var canvas = <HTMLCanvasElement>document.getElementById("myChart");
     var ctx = canvas.getContext("2d");
     var chart = new Chart(ctx, {
@@ -26,18 +26,19 @@ button.onclick = function () {
 
         // The data for our dataset
         data: {
+            //labels: new Array<number>(893).fill(0).map((item, index) => index+1).map(value => String(value)),
             labels: ['0', '1', '2', '3', '4', '5', '6'],
             datasets: [{
-                label: '홀수 개수',
+                label: `Latest ${lottoStat.getSize()} Lotto Odd Count`,
                 //backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: oddCount
+                data: lottoStat.gatherOddCount()
             },
             {
-                label: '홀수 개수',
+                label: `Ideal ${lottoStat.getSize()} Odd Count`,
                 //backgroundColor: 'rgb(99, 99, 132)',
                 borderColor: 'rgb(14, 99, 132)',
-                data: [10,40,200,300,140,20,10]
+                data: Statistics.pqc(6, 23/45).map(value => Number((value*lottoStat.getSize()).toFixed(2)))
             },
             ]
         },

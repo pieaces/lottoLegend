@@ -24,6 +24,6 @@ export default class LottoBase{
         return this.data.toJS().slice(0, size);
     }
     public getNumbers(size:number = this.SIZE): Array<number[]>{
-        return this.data.map<number[]>(item => item.numbers).toJS().slice(0, size);
+        return this.data.map<number[]>((item: { numbers: any; }) => item.numbers).toJS().slice(0, size);
     }
 }
