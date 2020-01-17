@@ -29,5 +29,3 @@ export default class Probability {
         return numerator / denominator;
     }
 }
-
-console.log(Probability.C(7,6));

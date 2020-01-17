@@ -9,29 +9,44 @@ export default class LottoData extends LottoCal{
         super(data, mode);
     }
     gatherOddCount(){
-        const SIZE = 7;
+        const SIZE = 7//0~6;
         const result = new Array<number>(SIZE).fill(0);
         this.oddCountData().forEach(num => result[num]++);
         
         return result;
     }
-    sumData(mode:number = this.mode): number[] {
-        return Calculate.getData(this.getNumbers(mode), Calculate.sum);
-    }
+    gatherSumData(): number[] {
+        const SIZE = 235//21~255
+        const result = new Array<number>(SIZE).fill(0);
+        this.oddCountData().forEach(num => result[num-21]++);
+        
+        return result;    }
 
-    minData(mode:number = this.mode): number[]{
-        return Calculate.getData(this.getNumbers(mode), Calculate.min);
-    }
-    maxData(mode:number = this.mode): number[]{
-        return Calculate.getData(this.getNumbers(mode), Calculate.max);
-    }
-    diffMaxMinData(mode:number = this.mode): number[] {
-        return Calculate.getData(this.getNumbers(mode), Calculate.diffMaxMin);
-    }
+    gatherMinData(): number[]{
+        const SIZE = 40//1~40;
+        const result = new Array<number>(SIZE).fill(0);
+        this.minData().forEach(num => result[num-1]++);
+        
+        return result;    }
+    gatherMaxData(): number[]{
+        const SIZE = 40//6~45;
+        const result = new Array<number>(SIZE).fill(0);
+        this.maxData().forEach(num => result[num-6]++);
+        
+        return result;    }
+    gatherDiffMaxMinData(): number[] {
+        const SIZE = 40//6~45;
+        const result = new Array<number>(SIZE).fill(0);
+        this.diffMaxMinData().forEach(num => result[num-6]++);
+        
+        return result;    }
 
-    acData(mode:number = this.mode): number[] {
-        return Calculate.getData(this.getNumbers(mode), Calculate.AC);
-    }
+    gatherACData(): number[] {
+        const SIZE = 11//0~11;
+        const result = new Array<number>(SIZE).fill(0);
+        this.acData().forEach(num => result[num]++);
+        
+        return result;    }
 
     posCount$1(mode:number = this.mode): number[] {
         return Analyze.posCount$1(this.getNumbers(mode));

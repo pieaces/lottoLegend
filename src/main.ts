@@ -6,7 +6,7 @@ import Chart from 'chart.js'
 function cout(obj: any, str = ''): void {
     console.log(str + ":", obj);
 }
-
+const AC = [0, 0.0001, 0.001, 0.0032, 0.0127, 0.0295, 0.1011, 0.1410, 0.325, 0.1976, 0.1854]
 enum Mode { $12 = 12, $24 = 24, $48 = 48, $96 = 96, $384 = 384 };
 let lottoStat: LottoStat = new LottoStat(require('./lotto.json'));
 /*
@@ -17,7 +17,6 @@ fetchLotto()
 */
 const button = document.getElementById('button');
 button.onclick = function () {
-    cout(lottoStat.frequencyPercent().map(value => 1-value));
     var canvas = <HTMLCanvasElement>document.getElementById("myChart");
     var ctx = canvas.getContext("2d");
     var chart = new Chart(ctx, {
