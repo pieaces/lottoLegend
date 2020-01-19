@@ -1,5 +1,4 @@
 import LottoStat from './class/Lotto/LottoStat'
-import Statistics from './class/Statistics/Statistics'
 import fetchLotto from './fetchLotto'
 import Chart from 'chart.js'
 
@@ -7,14 +6,18 @@ function cout(obj: any, str = ''): void {
     console.log(str + ":", obj);
 }
 const AC = [0, 0.0001, 0.001, 0.0032, 0.0127, 0.0295, 0.1011, 0.1410, 0.325, 0.1976, 0.1854]
-enum Mode { $12 = 12, $24 = 24, $48 = 48, $96 = 96, $384 = 384 };
-let lottoStat: LottoStat = new LottoStat(require('./lotto.json'));
+//mode: 12, 24, 48
+let lottoStat: LottoStat = new LottoStat(require('./lotto.json'), 24);
+cout(lottoStat.gatherCarry(), 'carry');
+cout(lottoStat.gatherLineCount(), 'lineCount');
+cout(lottoStat.factLineCount(lottoStat.mode), 'lineFACT');
 /*
 fetchLotto()
 .then(data =>{
     lottoStat = new LottoStat(data);
 });
 */
+/*
 const button = document.getElementById('button');
 button.onclick = function () {
     var canvas = <HTMLCanvasElement>document.getElementById("myChart");
@@ -43,3 +46,4 @@ button.onclick = function () {
         },
     });
 }
+*/

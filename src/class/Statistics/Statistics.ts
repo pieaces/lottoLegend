@@ -7,7 +7,7 @@ export interface Stats {
 export default class Statistics extends Probability {
     private constructor() { super(); }
 
-    public static getStats(data: number[]): Stats {
+    public static getStats(data: number[]): Stats | null {
         const N = data.length;
         if (N === 0) return null;
         if (N === 1) return { mean: data[0], stdev: 0 };

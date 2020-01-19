@@ -7,23 +7,23 @@ export interface LData{
 }
 //로또 전회차
 export default class LottoBase{
-    private SIZE:number;
+    private TOTAL_SIZE:number;
     public static readonly BALL_NUM:number = 45;
 
     private data:List<LData>;
 
-    protected constructor(data:LData[]){
+    constructor(data:LData[]){
         this.data = List<LData>(data);
-        this.SIZE = this.data.size;
+        this.TOTAL_SIZE = this.data.size;
     }
 
-    public getSize():number{
-        return this.SIZE;
+    public getTotalSize():number{
+        return this.TOTAL_SIZE;
     }
-    public getData(size:number=this.SIZE):LData[]{
+    public getLData(size:number=this.TOTAL_SIZE):LData[]{
         return this.data.toJS().slice(0, size);
     }
-    public getNumbers(size:number = this.SIZE): Array<number[]>{
+    public getLNumbers(size:number = this.TOTAL_SIZE): Array<number[]>{
         return this.data.map<number[]>((item: { numbers: any; }) => item.numbers).toJS().slice(0, size);
     }
 }

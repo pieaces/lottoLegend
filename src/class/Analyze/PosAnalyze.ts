@@ -4,16 +4,19 @@ export default class PosAnalyze {
     private static ratio$1(numbers: number[]): number[] {
         const result: number[] = new Array<number>(PosNumber.$1).fill(0);
         numbers.forEach((value) => result[value % 10]++);
+        /*
         return result.map((value, index) => {
             if (index > 5) return value * (5 / 4);
             else return value;
         });
+        */
+       return result;
     };
     private static ratio$10(numbers: number[]): number[] {
         const result: number[] = new Array<number>(PosNumber.$10).fill(0);
         numbers.forEach((value) => result[Math.floor(value / 10)]++);
-        result[0] *= 10 / 9;
-        result[4] *= 10 / 6;
+        //result[0] *= 10 / 9;
+        //result[4] *= 10 / 6;
         return result;
     };
     private static posCount(numsArray: Array<number[]>, posNum: PosNumber): number[] {
@@ -38,5 +41,4 @@ export default class PosAnalyze {
     static posCount$10(numsArray: Array<number[]>): number[] {
         return PosAnalyze.posCount(numsArray, PosNumber.$10);
     }
-
 }

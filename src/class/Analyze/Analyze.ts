@@ -10,7 +10,7 @@ interface HarmonyData {
 interface HData {
     count: number;
     round: number;
-    date?: string;
+    date: string;
 }
 //분석: 이차원 데이터 => 일차원 데이터
 export default class Analyze extends PosAnalyze {
@@ -27,6 +27,20 @@ export default class Analyze extends PosAnalyze {
         return result;
     }
 
+    static carry(numsArray: Array<number[]>): number[] {
+        const result = new Array<number>(numsArray.length-1).fill(0);
+
+        numsArray.forEach((numbers, index, array) => {
+            let count = 0;
+            numbers.forEach(num => {
+                if(!!array[index+1] && array[index+1].indexOf(num) !== -1) count++;
+            });
+            result[index] = count;
+        });
+        result.pop();
+        return result;
+    }
+    
     private static emergePoint(numsArray: Array<number[]>): Array<number[]> {
         const result:Array<number[]> = [];
         for(let i =0; i<LottoBase.BALL_NUM; i++) result[i] = [];
@@ -60,7 +74,7 @@ export default class Analyze extends PosAnalyze {
             return check;
         }
         const results:HData[] = new Array<HData>(LottoBase.BALL_NUM);
-        for(let i=0; i<LottoBase.BALL_NUM; i++) results[i] = ({count:-1, round:0});
+        for(let i=0; i<LottoBase.BALL_NUM; i++) results[i] = ({count:-1, round:0, date:''});
 
         for (let i = 0; i < lottoArray.length; i++) {
             for (let j = 0; j < lottoArray[i].numbers.length; j++) {
@@ -81,7 +95,7 @@ export default class Analyze extends PosAnalyze {
             const result: Array<HData[]> = [];
             for (let i = 1; i < LottoBase.BALL_NUM; i++) {
                 const temp: HData[] = [];
-                for (let j = 0; j < LottoBase.BALL_NUM - i; j++) temp.push({ count: 0, round: 0 });
+                for (let j = 0; j < LottoBase.BALL_NUM - i; j++) temp.push({ count: 0, round: 0, date:'' });
                 result.push(temp);
             }
             lottoArray.forEach((lotto) => {
@@ -118,5 +132,4 @@ export default class Analyze extends PosAnalyze {
             return b.count - a.count !== 0 ? b.count - a.count : b.round - a.round;
         });
     }
-
 }

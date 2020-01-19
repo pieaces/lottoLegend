@@ -1,69 +1,84 @@
 import Calculate from '../Statistics/Calculate'
 import Analyze from '../Analyze/Analyze'
-import LottoCal from './LottoCal'
-import {LData} from './LottoBase'
+import LottoBase, {LData} from './LottoBase'
+import factMixedIn from './factMixedIn'
 
-export default class LottoData extends LottoCal{
-    public mode:number;
-    constructor(data:LData[], mode:number) {
-        super(data, mode);
+interface Helper{
+    method: (numbers: number[])=> number;
+    from: number;
+    to: number;
+    mode: number;
+}
+export default class LottoData extends factMixedIn(LottoBase) {
+    public mode: number;
+    constructor(data: LData[], mode: number) {
+        super(data);
+        this.mode = mode;
     }
-    gatherOddCount(){
-        const SIZE = 7//0~6;
-        const result = new Array<number>(SIZE).fill(0);
-        this.oddCountData().forEach(num => result[num]++);
-        
+
+    private gatherHelper(helper:Helper):number[] {
+        const result = new Array<number>(helper.to - helper.from + 1).fill(0);
+        Calculate.getData(this.getLNumbers(helper.mode), helper.method).forEach(num => result[num - helper.from]++);
         return result;
     }
-    gatherSumData(): number[] {
-        const SIZE = 235//21~255
-        const result = new Array<number>(SIZE).fill(0);
-        this.oddCountData().forEach(num => result[num-21]++);
-        
-        return result;    }
 
-    gatherMinData(): number[]{
-        const SIZE = 40//1~40;
-        const result = new Array<number>(SIZE).fill(0);
-        this.minData().forEach(num => result[num-1]++);
-        
-        return result;    }
-    gatherMaxData(): number[]{
-        const SIZE = 40//6~45;
-        const result = new Array<number>(SIZE).fill(0);
-        this.maxData().forEach(num => result[num-6]++);
-        
-        return result;    }
-    gatherDiffMaxMinData(): number[] {
-        const SIZE = 40//6~45;
-        const result = new Array<number>(SIZE).fill(0);
-        this.diffMaxMinData().forEach(num => result[num-6]++);
-        
-        return result;    }
-
-    gatherACData(): number[] {
-        const SIZE = 11//0~11;
-        const result = new Array<number>(SIZE).fill(0);
-        this.acData().forEach(num => result[num]++);
-        
-        return result;    }
-
-    posCount$1(mode:number = this.mode): number[] {
-        return Analyze.posCount$1(this.getNumbers(mode));
-    }
-    posCount$10(mode:number = this.mode): number[] {
-        return Analyze.posCount$10(this.getNumbers(mode));    
+    //회차별 계산된 결과(LottoCal)를 종합.
+    gatherLineCount(mode:number = this.mode): number[] {
+        return Analyze.posCount$10(this.getLNumbers(mode));
     }
 
-    frequencyPercent(mode:number = this.mode): number[] {
-        return Analyze.frequencyCount(this.getNumbers(mode)).map(value => value/this.getSize());
+    gatherSum$10(mode:number = this.mode):number[] {
+        const helper:Helper = {
+            method:Calculate.sum$10,
+            from:0, to:24, mode
+        };
+        return this.gatherHelper(helper);
     }
 
-    howLongNone(){ //HData[]
-        return Analyze.howLongNone(this.getData());
+    gatherOddCount(mode:number = this.mode): number[] {
+        const helper:Helper = {
+            method:Calculate.sum,
+            from:0, to:6, mode
+        };
+        return this.gatherHelper(helper);
+    }
+    gather$3Count(mode:number = this.mode): number[] {
+        const helper:Helper = {
+            method:Calculate.$3Count,
+            from:0, to:6, mode
+        };
+        return this.gatherHelper(helper);
     }
 
-    harmony(mode:number = this.mode){ //HarmonyData[]
-        return Analyze.harmony(this.getData(mode));
+    gatherAC(mode:number = this.mode): number[] {
+        const helper:Helper = {
+            method:Calculate.AC,
+            from:0, to:10, mode
+        };
+        return this.gatherHelper(helper);
+    }
+
+    gatherDiffMaxMinData(mode:number = this.mode): number[] {
+        const helper:Helper = {
+            method:Calculate.AC,
+            from:5, to:44, mode
+        };
+        return this.gatherHelper(helper);
+    }
+
+    gatherCarry(mode:number = this.mode): number[] {
+        return Analyze.carry(this.getLNumbers(mode).reverse());
+    }
+
+    gatherFrequencyPercent(mode: number = this.mode): number[] {
+        return Analyze.frequencyCount(this.getLNumbers(mode)).map(value => value / this.getTotalSize());
+    }
+
+    gatherHowLongNone() { //HData[]
+        return Analyze.howLongNone(this.getLData());
+    }
+
+    gatherHarmony(mode: number = this.mode) { //HarmonyData[]
+        return Analyze.harmony(this.getLData(mode));
     }
 }
