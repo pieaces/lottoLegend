@@ -11,8 +11,8 @@ export default class LottoStat extends LottoData {
     private getStats(method: (numbers: number[]) => number, mode = this.mode): Stats {
         return Statistics.getStats(Calculate.getData(this.getLNumbers(mode), method))
     }
-    annihilatedLineCountStats(mode: number = this.mode): Stats {
-        return this.getStats(Calculate.annihilatedLineCount, mode);
+    exceptedLineCountStats(mode: number = this.mode): Stats {
+        return this.getStats(Calculate.exceptedLineCount, mode);
     }
 
     sum$10Stats(mode: number = this.mode): Stats {

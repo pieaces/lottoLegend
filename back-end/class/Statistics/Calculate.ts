@@ -6,6 +6,17 @@ export default class Calculate {
         return numsArray.map(numbers => method(numbers));
     }
 
+    static exceptedLineCount(numbers: number[]): number {
+        const SIZE = 5;
+        const set = new Set<number>();
+
+        numbers.forEach(num => {
+            set.add(Math.floor(num / 10));
+        });
+
+        return SIZE - set.size;
+    }
+
     static oddCount(numbers: number[]): number {
         let count = 0;
         numbers.forEach(value => {
@@ -37,21 +48,6 @@ export default class Calculate {
 
     static diffMaxMin(numbers: number[]): number {
         return this.max(numbers) - this.min(numbers);
-    }
-
-    static annihilatedLineCount(numbers: number[]): number {
-        const SIZE = 5;
-        const isEmpty = new Array<boolean>(SIZE).fill(true);
-        let result = 0;
-
-        numbers.forEach(num => {
-            isEmpty[Math.floor(num / 10)] = false;
-        });
-        isEmpty.forEach(value => {
-            if (value === true) result++;
-        });
-
-        return result;
     }
 
     static AC(numbers: number[]): number {

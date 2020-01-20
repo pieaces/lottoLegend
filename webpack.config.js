@@ -4,7 +4,7 @@ const path = require('path');
 
 module.exports = {
     mode: 'development',
-    entry: './src/main.ts',
+    entry: './back-end/main.ts',
     output: {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist')
@@ -24,7 +24,7 @@ module.exports = {
         hot: true
     },
     plugins: [
-        new CopyWebpackPlugin(['src/index.html']),
+        new CopyWebpackPlugin(['back-end/index.html']),
         new webpack.HotModuleReplacementPlugin()
     ],
     resolve: {

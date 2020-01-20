@@ -21,9 +21,9 @@ export default class LottoData extends expectationMixIn(LottoBase) {
         return result;
     }
 
-    gatherAnnihilatedLineCount(mode:number = this.mode): number[] {
+    gatherExceptedLineCount(mode:number = this.mode): number[] {
         const helper:Helper = {
-            method:Calculate.annihilatedLineCount,
+            method:Calculate.exceptedLineCount,
             from:0, to:5, mode
         };
         return this.gatherHelper(helper);

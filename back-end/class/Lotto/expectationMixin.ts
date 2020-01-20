@@ -4,7 +4,7 @@ const expectationMixIn = <TBase extends Constructor>(Base: TBase) =>
     class extends Base {
         public mode: number;
         //전체 공의 개수 중에서 해당색깔의 공의 기댓값
-        expectedAnnihilatedLineCount(mode: number = this.mode):number[] {
+        expectedExceptedLineCount(mode: number = this.mode):number[] {
             const pos = [
                 0.1325957083189074,
                 0.5249193989976747,

@@ -15,20 +15,26 @@ AC값(0~10) 범위
 뜨거운수 차가운수 
 미출현번호
 */
-class Generator {
-    annihilatedLineCount: number;
-    exceptedLine: number[];
+
+type ZeroToTwo = 0|1|2;
+type ZeroToFour = 0|1|2|3|4;
+type ZeroToSix = 0|1|2|3|4|5|6;
+
+export default class Generator {
+    exceptedLineCount: ZeroToFour;
+    exceptedLines: ZeroToFour[];
+    consecutiveNumber: ZeroToTwo;
     sum$10: [number, number];
-    oddCount: number;
-    $3Count: number;
+    oddCount: ZeroToSix;
+    $3Count: ZeroToSix;
     ac: [number, number];
     diffMaxMin: [number, number];
-    carryCount?: number;
+    carryCount?: ZeroToSix;
 
     traversal(method?: () => void): number {
         const SIZE = 6;
         const box = [1, 2, 3, 4, 5, 6];
-        const upb = [41, 42, 43, 44, 45, 46];
+        const upb = [40, 41, 42, 43, 44, 45];
         const moveBox = (box: number[]): void => {
             for (let i = SIZE - 2; i >= 0; i--) {
                 if (box[i] < upb[i]) {
@@ -40,61 +46,53 @@ class Generator {
                 }
             }
         }
-        const exceptedLine = function (box: number[]) {
-            const temp: boolean[] = new Array<boolean>(5).fill(false);
-            box.forEach(value => {
-                temp[Math.floor(value / 10)] = true;
-            });
-            const result: number[] = [];
-            temp.forEach((value, index) => {
-                if (!value) result.push(index);
-            });
-
-            return result;
+        const exceptedLineChecker = function (box: number[], exceptedLines:number[]):boolean { //없어야하는 것들을 포함하면 false
+            let check = true;
+            const linesSet = new Set<number>();
+            for(let i=0; i<box.length; i++){
+                linesSet.add(Math.floor(box[i]/10));
+            }
+            const lines = [...linesSet];
+            for(let i =0; i<lines.length; i++){
+                if(exceptedLines.indexOf(lines[i]) !== -1){
+                    check = false;
+                    break;
+                }
+            }
+            
+            return check;
         }
+
         let count = 0;
         while (true) {
             let check = true;
             //조건체크 후 실행
 
-            const exceptedLines = exceptedLine(box);
-            if (Calculate.annihilatedLineCount(box) !== this.annihilatedLineCount) {
+            if (Calculate.exceptedLineCount(box) !== this.exceptedLineCount) {
                 check = false;
             }
-            /*
-            if (exceptedLines.length !== this.exceptedLine.length) {
-                console.log(box, '전멸라인');
-
-                check = false;
-            }*/
-            exceptedLines.forEach((value, i) => {
-                if (value !== this.exceptedLine[i]) {
-                    check = false;
-                }
-            });
-            if (!(Calculate.sum$10(box) <= this.sum$10[0] && Calculate.sum$10(box) <= this.sum$10[1])) {
+            else if(!exceptedLineChecker(box, this.exceptedLines)){
                 check = false;
             }
-            if (Calculate.oddCount(box) !== this.oddCount) {
-
+            else if (!(this.sum$10[0] <= Calculate.sum$10(box) && Calculate.sum$10(box) <= this.sum$10[1])) {
                 check = false;
             }
-            if (Calculate.$3Count(box) !== this.$3Count) {
-
+            else if (Calculate.oddCount(box) !== this.oddCount) {
                 check = false;
             }
-            if (!(Calculate.AC(box) <= this.ac[0] && Calculate.AC(box) <= this.ac[1])) {
-
+            else if (Calculate.$3Count(box) !== this.$3Count) {
                 check = false;
             }
-            if (!(Calculate.diffMaxMin(box) <= this.diffMaxMin[0] && Calculate.diffMaxMin(box) <= this.diffMaxMin[1])) {
-
+            else if (!(this.ac[0] <= Calculate.AC(box) && Calculate.AC(box) <= this.ac[1])) {
                 check = false;
             }
-            //
-            if (check) {
+            else if (!(this.diffMaxMin[0] <= Calculate.diffMaxMin(box) && Calculate.diffMaxMin(box) <= this.diffMaxMin[1])) {
+                check = false;
+            }else{//모든 조건상황에서도 참이었을 때,
                 count++;
+                //console.log(box);
             }
+            
             if (box[0] === upb[0]) break;
             else {
                 box[SIZE - 1]++;
@@ -104,14 +102,3 @@ class Generator {
         return count;
     }
 }
-
-const gen = new Generator();
-gen.annihilatedLineCount = 1;
-gen.exceptedLine = [2];
-gen.sum$10 = [11,12];
-gen.oddCount = 3;
-gen.$3Count = 2;
-gen.ac = [7,9];
-gen.diffMaxMin = [35,39];
-
-console.log(gen.traversal());
