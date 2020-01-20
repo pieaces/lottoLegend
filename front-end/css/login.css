@@ -1,0 +1,129 @@
+/* init css */
+
+@import url('https://fonts.googleapis.com/css?family=Roboto|Nanum+Gothic&display=swap');
+
+:root{
+    --default-color:white;
+    --main-color:rgb(73,73,234);
+    --title-color:#a5484c;
+    --lotto-color:rgba(231, 76, 60, 0.2);
+    --footer-color:#003d33;
+    --border-color:rgba(0,0,0,0.3);
+}
+
+*{
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+    font-family: 'Roboto','Nanum Gothic', sans-serif;
+}
+
+a{
+    text-decoration: none;
+    color:black;
+}
+
+h1{
+    font-weight: normal;
+}
+
+ul{
+    padding:0;
+    list-style-type: none;
+}
+
+/* button */
+
+.btn{
+    cursor: pointer;
+    border:none;
+    outline: none;
+}
+
+/* container */
+
+#wrapper{
+    width:100%;
+}
+
+.container{
+    margin: 0 auto;
+    width:1200px;
+    height:100%;
+}
+
+/* header */
+
+#header{
+    height:180px;
+    padding:60px 0;
+}
+
+.logo{
+    height:100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+/* login box */
+
+.login-container{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-box{
+    width:460px;
+   display:flex;
+   flex-direction: column;
+}
+
+.login-box> input{
+    outline: none;
+    border: 1px solid var(--border-color);
+    margin-bottom:30px;
+    padding:10px 30px 10px 10px;
+    height:50px;
+    font-size:0.9rem;
+}
+
+.login-box> input:focus{
+    border: 1px solid var(--main-color);
+}
+
+.login-btn{
+    background-color: var(--main-color);
+    color:var(--default-color);
+    height:60px;
+    font-size:1.3rem;
+}
+
+.login-service{
+    display:flex;
+    align-items: center;
+    justify-content: space-around;
+    height:100px;
+}
+
+.login-diff{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.login-diff-btn{
+    width:220px;
+    height:60px;
+    background-color: var(--default-color);
+    border: 1px solid var(--border-color);
+    font-size:1.1rem;
+}
+
+.login-diff-btn > i{
+    padding-right:10px;
+    color:var(--main-color);
+}
+
