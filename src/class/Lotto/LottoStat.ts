@@ -35,7 +35,7 @@ export default class LottoStat extends LottoData {
     }
 
     carryStats(mode: number = this.mode): Stats {
-        return Statistics.getStats(Analyze.carry(this.getLNumbers(mode)));
+        return Statistics.getStats(Analyze.carryCount(this.getLNumbers(mode)));
     }
 
     intervalStats(mode: number = this.mode): Array<Stats> {

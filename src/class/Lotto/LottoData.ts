@@ -73,7 +73,7 @@ export default class LottoData extends expectationMixIn(LottoBase) {
     }
 
     gatherCarry(mode:number = this.mode): number[] {
-        return Analyze.carry(this.getLNumbers(mode).reverse());
+        return Analyze.carryCount(this.getLNumbers(mode).reverse());
     }
 
     gatherFrequencyPercent(mode: number = this.mode): number[] {

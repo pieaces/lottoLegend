@@ -27,7 +27,7 @@ export default class Analyze extends PosAnalyze {
         return result;
     }
 
-    static carry(numsArray: Array<number[]>): number[] {
+    static carryCount(numsArray: Array<number[]>): number[] {
         const result = new Array<number>(numsArray.length-1).fill(0);
 
         numsArray.forEach((numbers, index, array) => {
