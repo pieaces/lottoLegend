@@ -8,37 +8,37 @@ export default class LottoStat extends LottoData {
         super(data, mode);
     }
 
-    private getStats(method: (numbers: number[]) => number, mode = this.mode): Stats | null {
+    private getStats(method: (numbers: number[]) => number, mode = this.mode): Stats {
         return Statistics.getStats(Calculate.getData(this.getLNumbers(mode), method))
     }
-    annihilatedLineCountStats(mode: number = this.mode): Stats | null {
+    annihilatedLineCountStats(mode: number = this.mode): Stats {
         return this.getStats(Calculate.annihilatedLineCount, mode);
     }
 
-    sum$10Stats(mode: number = this.mode): Stats | null {
+    sum$10Stats(mode: number = this.mode): Stats {
         return this.getStats(Calculate.sum$10, mode);
     }
 
-    oddCountStats(mode: number = this.mode): Stats | null {
+    oddCountStats(mode: number = this.mode): Stats {
         return this.getStats(Calculate.oddCount, mode);
     }
-    $3CountStats(mode: number = this.mode): Stats | null {
+    $3CountStats(mode: number = this.mode): Stats {
         return this.getStats(Calculate.$3Count, mode);
     }
 
-    acStats(mode: number = this.mode): Stats | null {
+    acStats(mode: number = this.mode): Stats {
         return this.getStats(Calculate.AC, mode);
     }
 
-    diffMaxMinStats(mode: number = this.mode): Stats | null {
+    diffMaxMinStats(mode: number = this.mode): Stats {
         return this.getStats(Calculate.diffMaxMin, mode);
     }
 
-    carryStats(mode: number = this.mode): Stats | null{
+    carryStats(mode: number = this.mode): Stats {
         return Statistics.getStats(Analyze.carry(this.getLNumbers(mode)));
     }
 
-    intervalStats(mode: number = this.mode): Array<Stats | null> {
+    intervalStats(mode: number = this.mode): Array<Stats> {
         return Analyze.interval(this.getLNumbers(mode)).map(item => Statistics.getStats(item));
     }
 }

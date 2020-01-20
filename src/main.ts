@@ -1,16 +1,14 @@
 import LottoStat from './class/Lotto/LottoStat'
-import fetchLotto from './fetchLotto'
+import fetchLotto from './function/fetchLotto'
 import Chart from 'chart.js'
 
 function cout(obj: any, str = ''): void {
     console.log(str + ":", obj);
 }
-const AC = [0, 0.0001, 0.001, 0.0032, 0.0127, 0.0295, 0.1011, 0.1410, 0.325, 0.1976, 0.1854]
+
 //mode: 12, 24, 48
-let lottoStat: LottoStat = new LottoStat(require('./lotto.json'), 24);
-cout(lottoStat.gatherCarry(), 'carry');
-cout(lottoStat.gatherLineCount(), 'lineCount');
-cout(lottoStat.factLineCount(lottoStat.mode), 'lineFACT');
+let lottoStat: LottoStat = new LottoStat(require('./lotto.json'), 48);
+
 /*
 fetchLotto()
 .then(data =>{

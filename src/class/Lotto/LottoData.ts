@@ -1,7 +1,7 @@
 import Calculate from '../Statistics/Calculate'
 import Analyze from '../Analyze/Analyze'
 import LottoBase, {LData} from './LottoBase'
-import factMixedIn from './factMixedIn'
+import expectationMixIn from './expectationMixin'
 
 interface Helper{
     method: (numbers: number[])=> number;
@@ -9,8 +9,7 @@ interface Helper{
     to: number;
     mode: number;
 }
-export default class LottoData extends factMixedIn(LottoBase) {
-    public mode: number;
+export default class LottoData extends expectationMixIn(LottoBase) {
     constructor(data: LData[], mode: number) {
         super(data);
         this.mode = mode;
@@ -22,6 +21,13 @@ export default class LottoData extends factMixedIn(LottoBase) {
         return result;
     }
 
+    gatherAnnihilatedLineCount(mode:number = this.mode): number[] {
+        const helper:Helper = {
+            method:Calculate.annihilatedLineCount,
+            from:0, to:5, mode
+        };
+        return this.gatherHelper(helper);
+    }
     //회차별 계산된 결과(LottoCal)를 종합.
     gatherLineCount(mode:number = this.mode): number[] {
         return Analyze.posCount$10(this.getLNumbers(mode));

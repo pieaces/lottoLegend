@@ -28,4 +28,13 @@ export default class Probability {
 
         return numerator / denominator;
     }
+
+    static pqc(cases: number, prob: number): number[] { //p^(k)q^(n-k)C(n,k)
+        const discreteProb = (n: number, prob:number, k:number):number => Math.pow(prob, k) * Math.pow(1 - prob, n-k) * Probability.C(n, k);
+        
+        const result:number[] = [];
+        for(let num=0; num<=cases; num++) result.push(discreteProb(cases, prob, num));
+
+        return result;
+    }
 }
