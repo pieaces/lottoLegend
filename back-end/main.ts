@@ -12,16 +12,18 @@ let lottoStat: LottoStat = new LottoStat(require('./lotto.json'), 48);
 
 const gen = new Generator();
 gen.exceptedLineCount = 2;
-gen.exceptedLines = [2, 4];
-gen.sum$10 = [8, 14];
+gen.exceptedLines = [3,4];
+gen.sum$10 = [8, 18];
 gen.oddCount = 3;
 gen.$3Count = 2;
 gen.ac = [6, 10];
-gen.diffMaxMin = [30, 38];
+gen.diffMaxMin = [30, 40];
 const button = document.getElementById('button');
 button.onclick = function () {
     console.log(gen.traversal());
 }
+
+
 /*
 fetchLotto()
 .then(data =>{

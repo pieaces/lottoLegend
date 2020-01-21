@@ -32,71 +32,52 @@ export default class Generator {
     carryCount?: ZeroToSix;
 
     traversal(method?: () => void): number {
-        const SIZE = 6;
-        const box = [1, 2, 3, 4, 5, 6];
-        const upb = [40, 41, 42, 43, 44, 45];
-        const moveBox = (box: number[]): void => {
-            for (let i = SIZE - 2; i >= 0; i--) {
-                if (box[i] < upb[i]) {
-                    box[i]++;
-                    for (let j = i + 1; j < SIZE; j++) {
-                        box[j] = box[j - 1] + 1;
+        const list:number[] = [];
+        for (let i = 0; i < 45; i++) {
+            if (this.exceptedLines.indexOf(<ZeroToFour>Math.floor((i + 1) / 10)) === -1) {
+                list.push(i);
+            }
+        }
+        const BOX_SIZE = 6;
+        const indexBox = [0, 1, 2, 3, 4, 5]; //list의 index를 value로 취함.
+
+        const LIST_SIZE = list.length;
+        const indexUpb = [LIST_SIZE-6, LIST_SIZE-5, LIST_SIZE-4, LIST_SIZE-3, LIST_SIZE-2, LIST_SIZE-1]; //list의 index를 value로 취함.
+
+        const moveBox = (): void => {
+            for (let i = BOX_SIZE - 2; i >= 0; i--) {
+                if (indexBox[i] < indexUpb[i]) {
+                    indexBox[i]++;
+                    for (let j = i + 1; j < BOX_SIZE; j++) {
+                        indexBox[j] = indexBox[j - 1] + 1;
                     }
                     break;
                 }
             }
         }
-        const exceptedLineChecker = function (box: number[], exceptedLines:number[]):boolean { //없어야하는 것들을 포함하면 false
-            let check = true;
-            const linesSet = new Set<number>();
-            for(let i=0; i<box.length; i++){
-                linesSet.add(Math.floor(box[i]/10));
-            }
-            const lines = [...linesSet];
-            for(let i =0; i<lines.length; i++){
-                if(exceptedLines.indexOf(lines[i]) !== -1){
-                    check = false;
-                    break;
-                }
-            }
-            
-            return check;
-        }
 
         let count = 0;
         while (true) {
-            let check = true;
             //조건체크 후 실행
-
-            if (Calculate.exceptedLineCount(box) !== this.exceptedLineCount) {
-                check = false;
-            }
-            else if(!exceptedLineChecker(box, this.exceptedLines)){
-                check = false;
-            }
-            else if (!(this.sum$10[0] <= Calculate.sum$10(box) && Calculate.sum$10(box) <= this.sum$10[1])) {
-                check = false;
+            const box = indexBox.map(value => list[value]);
+            if (!(this.sum$10[0] <= Calculate.sum$10(box) && Calculate.sum$10(box) <= this.sum$10[1])) {
             }
             else if (Calculate.oddCount(box) !== this.oddCount) {
-                check = false;
             }
             else if (Calculate.$3Count(box) !== this.$3Count) {
-                check = false;
             }
             else if (!(this.ac[0] <= Calculate.AC(box) && Calculate.AC(box) <= this.ac[1])) {
-                check = false;
             }
             else if (!(this.diffMaxMin[0] <= Calculate.diffMaxMin(box) && Calculate.diffMaxMin(box) <= this.diffMaxMin[1])) {
-                check = false;
             }else{//모든 조건상황에서도 참이었을 때,
                 count++;
                 //console.log(box);
             }
             
-            if (box[0] === upb[0]) break;
+            if (indexBox[0] === indexUpb[0]) break;
             else {
-                box[SIZE - 1]++;
-                if (box[SIZE - 1] > upb[SIZE - 1]) moveBox(box);
+                indexBox[BOX_SIZE - 1]++;
+                if (indexBox[BOX_SIZE - 1] > indexUpb[BOX_SIZE - 1]) moveBox();
             }
         }
         return count;
