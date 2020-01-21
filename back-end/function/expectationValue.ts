@@ -102,7 +102,7 @@ console.log(pos.reduce((acc, cur) => acc + cur, 0));
 console.log(pos);
 */
 
-function $10() {
+function sumPerExceptedLineJSON() {
     const exceptedLines = (box:number[]) => {
         const check = new Array<boolean>(5).fill(true);
         box.forEach((value) => {
@@ -134,28 +134,29 @@ function $10() {
     
     while (true) {
         const excepted = exceptedLines(box);
+        
         const mapDArr = [...map.keys()];
         let outCheck = true;
         for(let i =0; i<mapDArr.length; i++){
             if(mapDArr[i].length === excepted.length){
-                let check = true;
+                let innerCheck = true;
                 for(let j =0; j<mapDArr[i].length; j++){
                     if(mapDArr[i][j] !== excepted[j]){
-                        check = false;
+                        innerCheck = false;
                         break;
                     }
                 }
-                if(check){
+                if(innerCheck){
                     const target = mapDArr[i];
                     const value = map.get(target);
-                    value.add(Calculate.sum$10(box));
+                    value.add(Math.floor(Calculate.sum(box)/10)*10);
                     map.set(target, value);
                     outCheck = false;
                 }
             }
          }
          if(outCheck){
-            map.set(excepted, new Set<number>([Calculate.sum$10(box)]));
+            map.set(excepted, new Set<number>([Math.floor(Calculate.sum(box)/10)*10]));
          }
         if (box[SIZE - 1] === ub[SIZE - 1]) {
             break;
@@ -166,6 +167,10 @@ function $10() {
             moveBox(box);
         }
     }
-    console.log(map);
+    let str = "{";
+    map.forEach((value, key) => {
+        str += (`"${key.join('')}": [${[...value].sort((a,b)=>a-b)}],\n`);
+    });
+    str += '}';
+    console.log(str);
 }
-$10();

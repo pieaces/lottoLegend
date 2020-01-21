@@ -8,7 +8,7 @@ function cout(obj: any, str = ''): void {
 }
 
 //mode: 12, 24, 48
-let lottoStat: LottoStat = new LottoStat(require('./lotto.json'), 48);
+let lottoStat: LottoStat = new LottoStat(require('./json/lotto.json'), 48);
 
 const gen = new Generator();
 

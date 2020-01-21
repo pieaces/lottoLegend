@@ -5,7 +5,7 @@
 4. 소수갯수(0~6) 값
 5. 3의배수 갯수(0~6) 값
 6. 십의자리 합(0~24) 범위
-7. 일의자리 합(2~44) 범위
+7. 번호합 (21~255) 범위
 8. 고저차(5~44) 범위
 9. AC값(0~10) 값 or 범위
 10 이월갯수(0~6) 값 => 포함할 수 선택 나머지 제외.
@@ -27,7 +27,7 @@ export default class GeneratorBase{
     protected primeCount: ZeroToSix = 2;
     protected $3Count: ZeroToSix = 2;
     protected sum$10: Range = {from:9, to:15};
-    protected sum$1: Range;
+    protected sum: Range;
     protected diffMaxMin: Range = {from:25, to:40};
     protected AC: Range = {from:7, to:9};
     protected includeNumber: LottoNumber[];
@@ -63,29 +63,64 @@ export default class GeneratorBase{
     setOddCount(oddCount:ZeroToSix):boolean {
         if(this.capableNumbers.length === 0) return false;
 
-        this.oddCount = oddCount;
-        return true;
+        if(Calculate.oddCount(this.capableNumbers) >= oddCount){
+            this.oddCount = oddCount;
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    setPrimeCount(primeCount:ZeroToSix):boolean {
+        if(this.capableNumbers.length === 0) return false;
+
+        if(Calculate.primeCount(this.capableNumbers) >= primeCount){
+            this.primeCount = primeCount;
+            return true;
+        }else{
+            return false;
+        }
     }
 
     set$3Count($3Count:ZeroToSix):boolean {
         if(this.capableNumbers.length === 0) return false;
 
-        this.$3Count = $3Count;
-        return true;
+        if(Calculate.$3Count(this.capableNumbers) >= $3Count){
+            this.$3Count = $3Count;
+            return true;
+        }else{
+            return false;
+        }
     }
 
     setSum$10(sum$10:Range):boolean{
         if(this.capableNumbers.length === 0) return false;
 
-        if(this.exceptedLines.indexOf(4) !== -1){
-            if(sum$10.from < 0 || 18 < sum$10.to) return false;
+        const constraint:number[] = require('../../json/sum$10')[this.exceptedLines.join('')];
+        let check = false;
+        for(let i=0; i<constraint.length; i++){
+            if(sum$10.from <= constraint[i] && constraint[i] <= sum$10.to){
+                check = true;
+                break;
+            }
         }
-        if(this.exceptedLines.indexOf(0) !== -1){
-            if(sum$10.from < 6 || 24 < sum$10.to) return false;
+        return check;
+    }
+
+    setSum(sum:Range):boolean{
+        if(this.capableNumbers.length === 0) return false;
+
+        const constraint:number[] = require('../../json/sum')[this.exceptedLines.join('')];
+        let check = false;
+        for(let i=0; i<constraint.length; i++){
+            if(sum.from <= constraint[i] && constraint[i] <= sum.to){
+                check = true;
+                break;
+            }
         }
+        return check;
     }
 }
-
 
 const gen = new GeneratorBase();
 gen.setExceptedLines([0,1,2]);

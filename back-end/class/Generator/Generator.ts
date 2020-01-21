@@ -19,8 +19,8 @@ export default class Generator extends GeneratorBase{
     private checkSum$10(numbers: number[]): boolean{
         return this.sum$10.from <= Calculate.sum$10(numbers) && Calculate.sum$10(numbers) <= this.sum$10.to;
     }
-    private checkSum$1(numbers: number[]): boolean{
-        return this.sum$1.from <= Calculate.sum$1(numbers) && Calculate.sum$1(numbers) <= this.sum$1.to;
+    private checkSum(numbers: number[]): boolean{
+        return this.sum.from <= Calculate.sum(numbers) && Calculate.sum(numbers) <= this.sum.to;
     }
     private checkDiffMinMax(numbers: number[]): boolean{
         return this.diffMaxMin.from <= Calculate.diffMaxMin(numbers) && Calculate.diffMaxMin(numbers) <= this.diffMaxMin.to;
@@ -76,7 +76,7 @@ export default class Generator extends GeneratorBase{
             } else if (!this.check$3Count(box)) {
             } else if (!this.checkLowCount(box)) {
             } else if (!this.checkSum$10(box)) {
-            } else if (!this.checkSum$1(box)){
+            } else if (!this.checkSum(box)){
             } else if (!this.checkDiffMinMax(box)) {
             } else if (!this.checkAC(box)) {
             } else {//모든 조건상황에서도 참이었을 때,
