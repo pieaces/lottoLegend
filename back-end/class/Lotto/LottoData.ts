@@ -40,6 +40,7 @@ export default class LottoData extends expectationMixIn(LottoBase) {
         };
         return this.gatherHelper(helper);
     }
+
     gatherSum$10(mode:number = this.mode):number[] {
         const helper:Helper = {
             method:Calculate.sum$10,
@@ -47,10 +48,24 @@ export default class LottoData extends expectationMixIn(LottoBase) {
         };
         return this.gatherHelper(helper);
     }
+    gatherSum$1(mode:number = this.mode):number[] {
+        const helper:Helper = {
+            method:Calculate.sum$1,
+            from:2, to:52, mode
+        };
+        return this.gatherHelper(helper);
+    }
 
     gatherOddCount(mode:number = this.mode): number[] {
         const helper:Helper = {
-            method:Calculate.sum,
+            method:Calculate.oddCount,
+            from:0, to:6, mode
+        };
+        return this.gatherHelper(helper);
+    }
+    gatherPrimeCount(mode:number = this.mode): number[] {
+        const helper:Helper = {
+            method:Calculate.primeCount,
             from:0, to:6, mode
         };
         return this.gatherHelper(helper);
@@ -73,7 +88,7 @@ export default class LottoData extends expectationMixIn(LottoBase) {
 
     gatherDiffMaxMinData(mode:number = this.mode): number[] {
         const helper:Helper = {
-            method:Calculate.AC,
+            method:Calculate.diffMaxMin,
             from:5, to:44, mode
         };
         return this.gatherHelper(helper);

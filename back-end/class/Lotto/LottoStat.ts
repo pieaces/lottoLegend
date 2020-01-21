@@ -18,12 +18,18 @@ export default class LottoStat extends LottoData {
     sum$10Stats(mode: number = this.mode): Stats {
         return this.getStats(Calculate.sum$10, mode);
     }
+    sum$1Stats(mode: number = this.mode): Stats {
+        return this.getStats(Calculate.sum$1, mode);
+    }
 
     lowCountStats(mode:number = this.mode): Stats {
         return this.getStats(Calculate.lowCount, mode);
     }
     oddCountStats(mode: number = this.mode): Stats {
         return this.getStats(Calculate.oddCount, mode);
+    }
+    primeCountStats(mode: number = this.mode): Stats {
+        return this.getStats(Calculate.primeCount, mode);
     }
     $3CountStats(mode: number = this.mode): Stats {
         return this.getStats(Calculate.$3Count, mode);

@@ -27,8 +27,9 @@ export default class GeneratorBase{
     protected primeCount: ZeroToSix = 2;
     protected $3Count: ZeroToSix = 2;
     protected sum$10: Range = {from:9, to:15};
+    protected sum$1: Range;
     protected diffMaxMin: Range = {from:25, to:40};
-    protected ac: Range = {from:7, to:9};
+    protected AC: Range = {from:7, to:9};
     protected includeNumber: LottoNumber[];
     protected excludeNumber: LottoNumber[];
     private capableNumbers: LottoNumber[] = [];

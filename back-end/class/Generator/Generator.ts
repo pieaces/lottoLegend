@@ -1,8 +1,34 @@
-import GeneratorBase, { ZeroToFour, ZeroToSix, LottoNumber, Range } from './GeneratorBase'
+import GeneratorBase, { ZeroToFour, LottoNumber, Range } from './GeneratorBase'
 import Calculate from '../Statistics/Calculate'
 
 export default class Generator extends GeneratorBase{
     constructor(){super();}
+
+    private checkOddCount(numbers: number[]): boolean{
+        return Calculate.oddCount(numbers) === this.oddCount;
+    }
+    private checkPrimeCount(numbers: number[]): boolean{
+        return Calculate.primeCount(numbers) === this.primeCount;
+    }
+    private check$3Count(numbers: number[]): boolean{
+        return Calculate.$3Count(numbers) === this.$3Count;
+    }
+    private checkLowCount(numbers:number[]):boolean{
+        return Calculate.lowCount(numbers) === this.lowCount;
+    }
+    private checkSum$10(numbers: number[]): boolean{
+        return this.sum$10.from <= Calculate.sum$10(numbers) && Calculate.sum$10(numbers) <= this.sum$10.to;
+    }
+    private checkSum$1(numbers: number[]): boolean{
+        return this.sum$1.from <= Calculate.sum$1(numbers) && Calculate.sum$1(numbers) <= this.sum$1.to;
+    }
+    private checkDiffMinMax(numbers: number[]): boolean{
+        return this.diffMaxMin.from <= Calculate.diffMaxMin(numbers) && Calculate.diffMaxMin(numbers) <= this.diffMaxMin.to;
+    }
+    private checkAC(numbers: number[]): boolean{
+        return this.AC.from <= Calculate.AC(numbers) && Calculate.AC(numbers) <= this.AC.to;
+
+    }
     generate(): Array<LottoNumber[]> {
         const list: number[] = [];
         for (let i = 0; i < 45; i++) {
@@ -45,12 +71,14 @@ export default class Generator extends GeneratorBase{
                 box[i] = list[indexBox[i-1]]
             }
 
-            if (Calculate.oddCount(box) !== this.oddCount) {
-            } else if (Calculate.$3Count(box) !== this.$3Count) {
-            } else if (Calculate.lowCount(box) !== this.lowCount) {
-            } else if (!(this.sum$10.from <= Calculate.sum$10(box) && Calculate.sum$10(box) <= this.sum$10.to)) {
-            } else if (!(this.diffMaxMin.from <= Calculate.diffMaxMin(box) && Calculate.diffMaxMin(box) <= this.diffMaxMin.to)) {
-            } else if (!(this.ac.from <= Calculate.AC(box) && Calculate.AC(box) <= this.ac.to)) {
+            if (!this.checkOddCount(box)) {
+            }else if(!this.checkPrimeCount(box)){
+            } else if (!this.check$3Count(box)) {
+            } else if (!this.checkLowCount(box)) {
+            } else if (!this.checkSum$10(box)) {
+            } else if (!this.checkSum$1(box)){
+            } else if (!this.checkDiffMinMax(box)) {
+            } else if (!this.checkAC(box)) {
             } else {//모든 조건상황에서도 참이었을 때,
                 result.push(box);
             }

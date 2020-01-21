@@ -24,6 +24,19 @@ export default class Calculate {
         });
         return count;
     }
+    static primeCount(numbers:number[]): number {
+        let count = 0;
+        numbers.forEach(value => {
+            switch(value){
+                case 2: case 3: case 5: case 7:
+                case 11: case 13: case 17: case 19:
+                case 23: case 29: case 31: case 37:
+                case 41: case 43: 
+                count++;
+            }
+        });
+        return count;
+    }
     static $3Count(numbers: number[]): number {
         let count = 0;
         numbers.forEach(value => {
@@ -38,7 +51,9 @@ export default class Calculate {
     static sum$10(numbers: number[]): number {
         return numbers.reduce((acc, cur) => acc + Math.floor(cur / 10), 0);
     }
-
+    static sum$1(numbers: number[]): number {
+        return numbers.reduce((acc, cur) => acc + cur % 10, 0);
+    }
     static min(numbers: number[]): number {
         return Math.min(...numbers);
     }
@@ -47,7 +62,7 @@ export default class Calculate {
     }
 
     static diffMaxMin(numbers: number[]): number {
-        return this.max(numbers) - this.min(numbers);
+        return Calculate.max(numbers) - Calculate.min(numbers);
     }
 
     static AC(numbers: number[]): number {
