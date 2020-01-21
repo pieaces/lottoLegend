@@ -1,24 +1,13 @@
-import Generatable, { ZeroToFour, ZeroToSix, Range } from './Generatable'
+import GeneratorBase, { ZeroToFour, ZeroToSix, LottoNumber, Range } from './GeneratorBase'
 import Calculate from '../Statistics/Calculate'
 
-export default class Generator implements Generatable {
-    exceptedLineCount: ZeroToFour = 1;
-    exceptedLines: ZeroToFour[] = [2];
-    lowCount: ZeroToSix = 3;
-    sum$10: Range = {from:9, to:15};
-    oddCount: ZeroToSix = 3;
-    $3Count: ZeroToSix = 2;
-    ac: Range = {from:7, to:9};
-    diffMaxMin: Range = {from:25, to:40};
-    carryCount: ZeroToSix;
-    includeNumber: number[];
-    excludeNumber: number[];
-
-    generate(): Array<number[]> {
+export default class Generator extends GeneratorBase{
+    constructor(){super();}
+    generate(): Array<LottoNumber[]> {
         const list: number[] = [];
         for (let i = 0; i < 45; i++) {
             const existExcept = this.exceptedLines.indexOf(<ZeroToFour>Math.floor((i + 1) / 10));
-            if (existExcept === -1 && this.excludeNumber.indexOf(i+1) === -1 && this.includeNumber.indexOf(i+1) === -1) {
+            if (existExcept === -1 && this.excludeNumber.indexOf(<LottoNumber>(i+1)) === -1 && this.includeNumber.indexOf((i+1) as LottoNumber) === -1) {
                 list.push(i);
             }
         }
@@ -72,6 +61,6 @@ export default class Generator implements Generatable {
                 if (indexBox[BOX_SIZE - 1] > indexUpb[BOX_SIZE - 1]) moveBox();
             }
         }
-        return result;
+        return result as Array<LottoNumber[]>;
     }
 }

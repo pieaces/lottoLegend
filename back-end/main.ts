@@ -11,15 +11,7 @@ function cout(obj: any, str = ''): void {
 let lottoStat: LottoStat = new LottoStat(require('./lotto.json'), 48);
 
 const gen = new Generator();
-gen.exceptedLineCount = 1;
-gen.exceptedLines = [3];
-gen.sum$10 = {from:10, to:15};
-gen.oddCount = 3;
-gen.$3Count = 2;
-gen.ac = {from:7, to:8};
-gen.diffMaxMin = {from:32, to:40};
-gen.includeNumber = [9];
-gen.excludeNumber = [1, 19, 10];
+
 const button = document.getElementById('button');
 button.onclick = function () {
     console.log(gen.generate());
