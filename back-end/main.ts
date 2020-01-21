@@ -14,7 +14,6 @@ const gen = new Generator();
 
 const button = document.getElementById('button');
 button.onclick = function () {
-    console.log(gen.generate());
 }
 
 

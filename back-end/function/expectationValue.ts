@@ -102,7 +102,7 @@ console.log(pos.reduce((acc, cur) => acc + cur, 0));
 console.log(pos);
 */
 
-function sumPerExceptedLineJSON() {
+function constraintJSON(method:(box:number[])=>number) {
     const exceptedLines = (box:number[]) => {
         const check = new Array<boolean>(5).fill(true);
         box.forEach((value) => {
@@ -149,14 +149,14 @@ function sumPerExceptedLineJSON() {
                 if(innerCheck){
                     const target = mapDArr[i];
                     const value = map.get(target);
-                    value.add(Math.floor(Calculate.sum(box)/10)*10);
+                    value.add(method(box));
                     map.set(target, value);
                     outCheck = false;
                 }
             }
          }
          if(outCheck){
-            map.set(excepted, new Set<number>([Math.floor(Calculate.sum(box)/10)*10]));
+            map.set(excepted, new Set<number>([method(box)]));
          }
         if (box[SIZE - 1] === ub[SIZE - 1]) {
             break;
@@ -174,3 +174,5 @@ function sumPerExceptedLineJSON() {
     str += '}';
     console.log(str);
 }
+
+constraintJSON((box:number[])=>Calculate.AC(box));

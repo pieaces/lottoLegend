@@ -63,12 +63,13 @@ export default class Generator extends GeneratorBase{
         }
 
         const result: Array<number[]> = [];
-        const box:number[] = [];
-        this.includeNumber.forEach(value => box.push(value));
+
         while (true) {
+            const box:number[] = [];
+            this.includeNumber.forEach(value => box.push(value));
             //조건체크 후 실행
             for(let i =INCLUDE_SIZE; i<INCLUDE_SIZE+BOX_SIZE; i++){
-                box[i] = list[indexBox[i-1]]
+                box[i] = list[indexBox[i]]
             }
 
             if (!this.checkOddCount(box)) {
