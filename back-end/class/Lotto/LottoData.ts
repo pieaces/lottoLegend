@@ -33,6 +33,13 @@ export default class LottoData extends expectationMixIn(LottoBase) {
         return Analyze.posCount$10(this.getLNumbers(mode));
     }
 
+    gatherLowCount(mode:number = this.mode): number[] {
+        const helper:Helper = {
+            method:Calculate.lowCount,
+            from:0, to:6, mode
+        };
+        return this.gatherHelper(helper);
+    }
     gatherSum$10(mode:number = this.mode):number[] {
         const helper:Helper = {
             method:Calculate.sum$10,

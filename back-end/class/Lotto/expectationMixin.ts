@@ -4,15 +4,15 @@ const expectationMixIn = <TBase extends Constructor>(Base: TBase) =>
     class extends Base {
         public mode: number;
         //전체 공의 개수 중에서 해당색깔의 공의 기댓값
-        expectedExceptedLineCount(mode: number = this.mode):number[] {
+        expectedExceptedLineCount(mode: number = this.mode): number[] {
             const pos = [
                 0.1325957083189074,
                 0.5249193989976747,
                 0.3149148072574051,
                 0.027482302156153545,
                 0.00008778326985927667
-              ];
-              return pos.map(value => value * mode);
+            ];
+            return pos.map(value => value * mode);
         }
         expectedLineCount(mode: number = this.mode): number[] {//1~9, 10~19, 20~29, 30~39, 40~45
             const pos = [9 / 45, 10 / 45, 10 / 45, 10 / 45, 6 / 45];
@@ -51,6 +51,18 @@ const expectationMixIn = <TBase extends Constructor>(Base: TBase) =>
             ];
             return pos.map(value => value * (mode));
         }
+        expectedLowCount(mode: number = this.mode): number[] {
+            const pos = [
+                0.012393647192285877,
+                0.09088674607676309,
+                0.25113442994895063,
+                0.33484590659860086,
+                0.22721686519190773,
+                0.07436188315371525,
+                0.009160521837776518
+            ];
+            return pos.map(value => value * mode);
+        }
         expected$3Count(mode: number = this.mode): number[] {
             const pos = [
                 0.05852766346593512,
@@ -77,7 +89,7 @@ const expectationMixIn = <TBase extends Constructor>(Base: TBase) =>
                 0.3285034118840131,
                 0.19756441327626806,
                 0.18539531937149634
-              ];
+            ];
             return pos.map(value => value * (mode));
         }
         expectedDiffMaxMinData(mode: number = this.mode): number[] { //5~44

@@ -19,6 +19,9 @@ export default class LottoStat extends LottoData {
         return this.getStats(Calculate.sum$10, mode);
     }
 
+    lowCountStats(mode:number = this.mode): Stats {
+        return this.getStats(Calculate.lowCount, mode);
+    }
     oddCountStats(mode: number = this.mode): Stats {
         return this.getStats(Calculate.oddCount, mode);
     }

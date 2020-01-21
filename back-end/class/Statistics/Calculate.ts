@@ -57,4 +57,12 @@ export default class Calculate {
         copy.sort((a, b) => b-a).forEach((bigValue, index, array) => array.slice(index + 1).forEach(smallValue => set.add(bigValue - smallValue)));
         return set.size - (numbers.length - 1);
     }
+
+    static lowCount(numbers: number[]): number {
+        let count =0;
+        numbers.forEach(value => {
+            if(value <23) count++;
+        });
+        return count;
+    }
 }

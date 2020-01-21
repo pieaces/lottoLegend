@@ -171,7 +171,14 @@ function expectedAC(): number[] {
     return pos.map(value => value / C(45, 6));
 }
 
-const pos = expectedAnnhilationCount();
+const expectedLowCount = ():number[] => {
+    const pos = new Array<number>(7);
+    for(let i =0; i<=6; i++){
+        pos[i] = C(22,i) * C(23,6-i) / C(45, 6)
+    }
+    return pos;
+}
+const pos = expectedLowCount();
 
 console.log(pos.reduce((acc, cur) => acc + cur, 0));
 console.log(pos);
