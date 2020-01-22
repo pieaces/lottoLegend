@@ -179,7 +179,7 @@ export default class GeneratorBase {
 
         //5단위로 할 것
         const constraint: number[] = require('../../json/sum_compressed.json')[this.lowCount.toString() + this.exceptedLines.join('')];
-        if (constraint[0] <= sum.from && sum.to <= constraint[1]) {
+        if (sum.from <= constraint[1] && sum.to >= constraint[0]) {
             this.sum = sum;
             return true;
         }
@@ -191,7 +191,7 @@ export default class GeneratorBase {
 
         const constraint: number[] = require('../../json/diffMaxMin_compressed.json')[this.lowCount.toString() + this.exceptedLines.join('')];
 
-        if (constraint[0] <= diffMaxMin.from && diffMaxMin.to <= constraint[1]) {
+        if (diffMaxMin.from <= constraint[1] && diffMaxMin.to >= constraint[0]) {
             this.diffMaxMin = diffMaxMin;
             return true;
         }
@@ -202,7 +202,7 @@ export default class GeneratorBase {
 
         const constraint: number[] = require('../../json/AC_compressed.json')[this.lowCount.toString() + this.exceptedLines.join('')];
 
-        if (constraint[0] <= AC.from && AC.to <= constraint[1]) {
+        if (AC.from <= constraint[1] && AC.to >= constraint[0]) {
             this.AC = AC;
             return true;
         }

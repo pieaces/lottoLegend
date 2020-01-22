@@ -20,7 +20,7 @@ const gen = new Generator();
 
 console.log('1', gen.setExceptedLines([2]));
 
-console.log('2', gen.setLowCount(1));
+console.log('2', gen.setLowCount(2));
 
 console.log('3', gen.setOddCount(2));
 
@@ -30,7 +30,7 @@ console.log('5', gen.set$3Count(2));
 
 console.log('6', gen.setSum$10({from:4, to:17}));
 
-console.log('7', gen.setSum({from:115, to:190}));
+console.log('7', gen.setSum({from:150, to:190}));
 
 console.log('8', gen.setDiffMaxMin({from:7, to:43}));
 
