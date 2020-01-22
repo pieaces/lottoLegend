@@ -20,25 +20,25 @@ const gen = new Generator();
 
 console.log('1', gen.setExceptedLines([2]));
 
-console.log('2', gen.setLowCount(2));
+console.log('2', gen.setLowCount(1));
 
-console.log('3', gen.setOddCount(3));
+console.log('3', gen.setOddCount(2));
 
-console.log('4', gen.setPrimeCount(1));
+console.log('4', gen.setPrimeCount(0));
 
 console.log('5', gen.set$3Count(2));
 
-console.log('6', gen.setSum$10({from:7, to:19}));
+console.log('6', gen.setSum$10({from:4, to:17}));
 
-console.log('7', gen.setSum({from:115, to:195}));
+console.log('7', gen.setSum({from:115, to:190}));
 
-console.log('8', gen.setDiffMaxMin({from:7, to:42}));
+console.log('8', gen.setDiffMaxMin({from:7, to:43}));
 
-console.log('9', gen.setAC({from:7, to:9}));
+console.log('9', gen.setAC({from:7, to:7}));
 
-console.log('10', gen.setInclude([]));
+console.log('10', gen.setInclude([14]));
 
-console.log('11', gen.setExclude([]));
+console.log('11', gen.setExclude([19]));
 
 
 const numbers = gen.generate();

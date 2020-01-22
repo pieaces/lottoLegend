@@ -31,9 +31,9 @@ export default class Generator extends GeneratorBase{
     }
     generate(): Array<LottoNumber[]> {
         const list: number[] = [];
-        for (let i = 0; i < 45; i++) {
-            const existExcept = this.exceptedLines.indexOf(<ZeroToFour>Math.floor((i + 1) / 10));
-            if (existExcept === -1 && this.excludeNumber.indexOf(<LottoNumber>(i+1)) === -1 && this.includeNumber.indexOf((i+1) as LottoNumber) === -1) {
+        for (let i = 1; i <= 45; i++) {
+            const existExcept = this.exceptedLines.indexOf(<ZeroToFour>Math.floor((i) / 10));
+            if (existExcept === -1 && this.excludeNumber.indexOf(<LottoNumber>(i)) === -1 && this.includeNumber.indexOf((i) as LottoNumber) === -1) {
                 list.push(i);
             }
         }
@@ -61,15 +61,13 @@ export default class Generator extends GeneratorBase{
                 }
             }
         }
-
         const result: Array<number[]> = [];
-
         while (true) {
             const box:number[] = [];
             this.includeNumber.forEach(value => box.push(value));
             //조건체크 후 실행
             for(let i =INCLUDE_SIZE; i<INCLUDE_SIZE+BOX_SIZE; i++){
-                box[i] = list[indexBox[i]]
+                box[i] = list[indexBox[i-INCLUDE_SIZE]]
             }
 
             if (!this.checkOddCount(box)) {
@@ -81,7 +79,7 @@ export default class Generator extends GeneratorBase{
             } else if (!this.checkDiffMinMax(box)) {
             } else if (!this.checkAC(box)) {
             } else {//모든 조건상황에서도 참이었을 때,
-                result.push(box);
+                result.push(box.sort((a,b) => a-b));
             }
 
             if (indexBox[0] === indexUpb[0]) break;

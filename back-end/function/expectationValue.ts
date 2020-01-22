@@ -108,7 +108,7 @@ function constraintJSON(method:(box:number[])=>number) {
         box.forEach((value) => {
             check[Math.floor(value/10)] = false;
         });
-        const result:number[] = [];
+        const result:number[] = [Calculate.lowCount(box)];
         check.forEach((value, i)=>{
             if(value) result.push(i);
         });
@@ -169,10 +169,10 @@ function constraintJSON(method:(box:number[])=>number) {
     }
     let str = "{";
     map.forEach((value, key) => {
-        str += (`"${key.join('')}": [${[...value].sort((a,b)=>a-b)}],\n`);
+        str += (`"${key.join('')}": [${[...value].sort((a,b)=>a-b).join(', ')}],\n`);
     });
     str += '}';
     console.log(str);
 }
 
-constraintJSON((box:number[])=>Calculate.AC(box));
+constraintJSON((box:number[])=>Calculate.sum$10(box));
