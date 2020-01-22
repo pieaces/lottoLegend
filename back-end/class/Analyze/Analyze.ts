@@ -51,6 +51,27 @@ export default class Analyze extends PosAnalyze {
         return result;
     }
 
+    private static emergePointForOne(numsArray: Array<number[]>, one:number): number[] {//가장최근회차 기준
+        const result:number[] = [];
+        numsArray.forEach((numbers, round)=>{
+            numbers.forEach(num => {
+                if(num === one) result.push(round);
+            });
+        });
+
+        return result;
+    }
+
+    public static emergedRoundForOne(lData:LData[], one:number): number[] {
+        const result:number[] = [];
+        lData.forEach((lotto)=>{
+            lotto.numbers.forEach(num => {
+                if(num === one) result.push(lotto.round);
+            });
+        });
+
+        return result;
+    }
     public static interval(numsArray: Array<number[]>): Array<number[]>{
         return this.emergePoint(numsArray).map(points => {
             const result = [];
@@ -62,6 +83,18 @@ export default class Analyze extends PosAnalyze {
             return result;
         })
     }
+
+    public static intervalForOne(numsArray: Array<number[]>, one:number): number[]{//가장최근회차 기준
+        const points = this.emergePointForOne(numsArray, one);
+        const result = [];
+        if(!points[0]) return null;
+        result[0] = points[0];
+        for(let i=1; i<points.length; i++){
+            result[i] = points[i] - points[i-1];
+        }
+        return result;
+    }
+
     static howLongNone(lottoArray: LData[]): HData[] {
         const isChecked = (hData: HData[]): boolean => {
             let check: boolean = true;

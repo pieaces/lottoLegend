@@ -33,6 +33,13 @@ export default class LottoData extends ExpectationMixIn(LottoBase) {
         return Analyze.posCount$10(this.getLNumbers(mode));
     }
 
+    gatherEmergedRoundForOne(one:number, mode:number=this.mode): number[] {
+        return Analyze.emergedRoundForOne(this.getLData(mode), one);
+    }
+    gatherIntervalForOne(one:number, mode:number=this.mode): number[] {
+        return Analyze.intervalForOne(this.getLNumbers(mode), one);
+    }
+
     gatherLowCount(mode:number = this.mode): number[] {
         const helper:Helper = {
             method:Calculate.lowCount,
