@@ -40,6 +40,7 @@ console.log('10', gen.setInclude([14]));
 
 console.log('11', gen.setExclude([19]));
 
+console.log('12', gen.setConsecutiveExclude(true));
 
 const numbers = gen.generate();
 console.log(numbers, numbers.length);

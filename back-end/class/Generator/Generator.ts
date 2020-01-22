@@ -27,7 +27,9 @@ export default class Generator extends GeneratorBase{
     }
     private checkAC(numbers: number[]): boolean{
         return this.AC.from <= Calculate.AC(numbers) && Calculate.AC(numbers) <= this.AC.to;
-
+    }
+    private checkConsecutiveExist(numbers:number[]): boolean{
+        return Calculate.consecutiveExist(numbers) === 1 //1일경우 존재함. 0일경우 존재하지않음.
     }
     generate(): Array<LottoNumber[]> {
         const list: number[] = [];
@@ -78,8 +80,9 @@ export default class Generator extends GeneratorBase{
             } else if (!this.checkSum(box)){
             } else if (!this.checkDiffMinMax(box)) {
             } else if (!this.checkAC(box)) {
+            } else if (this.consecutiveExclude && this.checkConsecutiveExist(box.sort((a,b) => a-b))) {//제외하라고 했는데, 연속번호 존재하면 여기서 걸림. +여기서 정렬은 배열을 바꿈
             } else {//모든 조건상황에서도 참이었을 때,
-                result.push(box.sort((a,b) => a-b));
+                result.push(box);
             }
 
             if (indexBox[0] === indexUpb[0]) break;

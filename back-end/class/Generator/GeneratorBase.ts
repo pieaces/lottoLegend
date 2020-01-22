@@ -1,16 +1,17 @@
 /*
 1. 제외할 공색(0,1,2,3,4) 중 택
 2. 저값(0~6) 값
-3. 홀수갯수(0~6) 값
-4. 소수갯수(0~6) 값
-5. 3의배수 갯수(0~6) 값
-6. 십의자리 합(0~24) 범위
-7. 번호합 (21~255) 범위
-8. 고저차(5~44) 범위
-9. AC값(0~10) 값 or 범위
+3. 십의자리 합(0~24) 범위
+4. 번호합 (21~255) 범위
+5. 고저차(5~44) 범위
+6. AC값(0~10) 값 or 범위
+7. 홀수갯수(0~6) 값
+8. 소수갯수(0~6) 값
+9. 3의배수 갯수(0~6) 값
 10 이월갯수(0~6) 값 => 포함할 수 선택 나머지 제외.
 11. 번호빈도 => 미출현번호, 차가운수 '포함할 수'
 12. 번호빈도 => 뜨거운 수 최근 출현빈도, 번호간격, '제외할 수'
+13. 연속번호 제외여부
 */
 import Calculate from '../Statistics/Calculate'
 import { Range } from 'immutable';
@@ -37,6 +38,7 @@ export default class GeneratorBase {
     protected sum: Range;
     protected diffMaxMin: Range = { from: 25, to: 40 };
     protected AC: Range = { from: 7, to: 9 };
+    protected consecutiveExclude: boolean = false;
     protected includeNumber: LottoNumber[] = [];
     protected excludeNumber: LottoNumber[] = [];
     private capableNumbers: LottoNumber[] = [];
@@ -59,7 +61,6 @@ export default class GeneratorBase {
         }
         if (Calculate.primeCount(includeNumber) > this.primeCount) {
             console.log('!!!');
-
             return false;
         }
         if (Calculate.$3Count(includeNumber) > this.$3Count) {
@@ -215,6 +216,11 @@ export default class GeneratorBase {
         }
 
         return false;
+    }
+
+    setConsecutiveExclude(check:boolean): boolean {
+        this.consecutiveExclude = check;
+        return true;
     }
 }
 
