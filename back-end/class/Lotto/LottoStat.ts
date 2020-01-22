@@ -11,49 +11,49 @@ export default class LottoStat extends LottoData {
     private getStats(method: (numbers: number[]) => number, mode = this.mode): Stats {
         return Statistics.getStats(Calculate.getData(this.getLNumbers(mode), method))
     }
-    exceptedLineCountStats(mode: number = this.mode): Stats {
+    statsExceptedLineCount(mode: number = this.mode): Stats {
         return this.getStats(Calculate.exceptedLineCount, mode);
     }
 
-    sum$10Stats(mode: number = this.mode): Stats {
+    statsSum$10(mode: number = this.mode): Stats {
         return this.getStats(Calculate.sum$10, mode);
     }
-    sum$1Stats(mode: number = this.mode): Stats {
+    statsSum$1(mode: number = this.mode): Stats {
         return this.getStats(Calculate.sum$1, mode);
     }
-    sumStats(mode: number = this.mode): Stats {
+    statsSum(mode: number = this.mode): Stats {
         return this.getStats(Calculate.sum, mode);
     }
 
-    lowCountStats(mode:number = this.mode): Stats {
+    statsLowCountStats(mode:number = this.mode): Stats {
         return this.getStats(Calculate.lowCount, mode);
     }
-    oddCountStats(mode: number = this.mode): Stats {
+    statsOddCount(mode: number = this.mode): Stats {
         return this.getStats(Calculate.oddCount, mode);
     }
-    primeCountStats(mode: number = this.mode): Stats {
+    statsPrimeCount(mode: number = this.mode): Stats {
         return this.getStats(Calculate.primeCount, mode);
     }
-    $3CountStats(mode: number = this.mode): Stats {
+    stats$3Count(mode: number = this.mode): Stats {
         return this.getStats(Calculate.$3Count, mode);
     }
 
-    acStats(mode: number = this.mode): Stats {
+    statsAC(mode: number = this.mode): Stats {
         return this.getStats(Calculate.AC, mode);
     }
 
-    diffMaxMinStats(mode: number = this.mode): Stats {
+    statsDiffMaxMin(mode: number = this.mode): Stats {
         return this.getStats(Calculate.diffMaxMin, mode);
     }
 
-    consecutiveExistStats(mode:number = this.mode): Stats {
+    statsConsecutiveExistStats(mode:number = this.mode): Stats {
         return this.getStats(Calculate.consecutiveExist, mode);
     }
-    carryCountStats(mode: number = this.mode): Stats {
+    statsCarryCount(mode: number = this.mode): Stats {
         return Statistics.getStats(Analyze.carryCount(this.getLNumbers(mode)));
     }
 
-    intervalStats(mode: number = this.mode): Array<Stats> {
+    statsInterval(mode: number = this.mode): Array<Stats> {
         return Analyze.interval(this.getLNumbers(mode)).map(item => Statistics.getStats(item));
     }
 }
