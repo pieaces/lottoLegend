@@ -1,14 +1,14 @@
 type Constructor<T = {}> = new (...args: any[]) => T;
-const posLineCount = require('../../json/Expectaiton/lineCount.json');
-const posSum$10 = require('../../json/Expectaiton/sum$10.json');
-const posSum = require('../../json/Expectaiton/sum.json');
-const posPrimeCount = require('../../json/Expectaiton/primeCount.json');
-const posOddCount = require('../../json/Expectaiton/oddCount.json');
-const posLowCount = require('../../json/Expectaiton/lowCount.json');
-const pos$3Count = require('../../json/Expectaiton/$3Count.json');
-const posAC = require('../../json/Expectaiton/AC.json');
-const posDiffMaxMin = require('../../json/Expectaiton/diffMaxMin.json');
-const posCarryCount = require('../../json/Expectaiton/carrycount.json');
+const posLineCount = require('../../json/Expectation/lineCount.json');
+const posSum$10 = require('../../json/Expectation/sum$10.json');
+const posSum = require('../../json/Expectation/sum.json');
+const posPrimeCount = require('../../json/Expectation/primeCount.json');
+const posOddCount = require('../../json/Expectation/oddCount.json');
+const posLowCount = require('../../json/Expectation/lowCount.json');
+const pos$3Count = require('../../json/Expectation/$3Count.json');
+const posAC = require('../../json/Expectation/AC.json');
+const posDiffMaxMin = require('../../json/Expectation/diffMaxMin.json');
+const posCarryCount = require('../../json/Expectation/carrycount.json');
 
 const ExpectationMixIn = <TBase extends Constructor>(Base: TBase) =>
     class extends Base {
