@@ -30,6 +30,8 @@ console.log('4', gen.setPrimeCount(2));
 console.log('5', gen.set$3Count(2));
 console.log('12', gen.setConsecutiveExclude(true));
 
+console.log(gen);
+
 let numbers = gen.generate();
 const numberSet = new Set<number>();
 numbers.forEach(numArr =>{
@@ -37,10 +39,10 @@ numbers.forEach(numArr =>{
 });
 console.log(numbers, numbers.length);
 console.log('모든숫자집합: ',[...numberSet].sort((a,b)=>a-b));
-console.log('10', gen.setInclude([3]));
-console.log('11', gen.setExclude([9]));
+console.log('10', gen.setInclude([3,7]));
+console.log('11', gen.setExclude([25]));
 
-numbers = gen.generate(); // 추후에는 기존 number 받아온 것에서 체 거르기 할 것
+numbers = gen.filter(numbers) // 추후에는 기존 number 받아온 것에서 체 거르기 할 것
 console.log(numbers, numbers.length);
 
 /*

@@ -35,16 +35,13 @@ export default class Generator extends GeneratorBase{
         const list: number[] = [];
         for (let i = 1; i <= 45; i++) {
             const existExcept = this.exceptedLines.indexOf(<ZeroToFour>Math.floor((i) / 10));
-            if (existExcept === -1 && this.excludeNumber.indexOf(<LottoNumber>(i)) === -1 && this.includeNumber.indexOf((i) as LottoNumber) === -1) {
+            if (existExcept === -1) {
                 list.push(i);
             }
         }
-        const indexBox:number[] = []; //list의 index를 value로 취함.
-        const INCLUDE_SIZE = this.includeNumber.length;
-        for(let i =0; i<6-INCLUDE_SIZE; i++){
-            indexBox[i]=i;
-        }
-        const BOX_SIZE = indexBox.length;
+
+        const BOX_SIZE = 6;
+        const indexBox:number[] = [0,1,2,3,4,5]; //list의 index를 value로 취함.
 
         const LIST_SIZE = list.length;
         const indexUpb = new Array<number>(BOX_SIZE);
@@ -63,13 +60,13 @@ export default class Generator extends GeneratorBase{
                 }
             }
         }
+
         const result: Array<number[]> = [];
         while (true) {
             const box:number[] = [];
-            this.includeNumber.forEach(value => box.push(value));
             //조건체크 후 실행
-            for(let i =INCLUDE_SIZE; i<INCLUDE_SIZE+BOX_SIZE; i++){
-                box[i] = list[indexBox[i-INCLUDE_SIZE]]
+            for(let i =0; i<BOX_SIZE; i++){
+                box[i] = list[indexBox[i]]
             }
 
             if (!this.checkOddCount(box)) {
@@ -92,5 +89,29 @@ export default class Generator extends GeneratorBase{
             }
         }
         return result as Array<LottoNumber[]>;
+    }
+    filter(numsArray:Array<LottoNumber[]>):Array<LottoNumber[]>{
+        const result:Array<LottoNumber[]> = [];
+        for(let i =0; i<numsArray.length; i++){
+            const include = this.includeNumbers;
+            const exclude = this. excludeNumbers;
+            let check = true;
+            for(let j =0; j<include.length; j++){
+                if(numsArray[i].indexOf(include[j]) === -1){
+                    check = false;
+
+                    break;
+                }
+            }
+            if(!check) continue;
+            for(let j =0; j<exclude.length; j++){
+                if(numsArray[i].indexOf(exclude[j]) !== -1){
+                    check = false;
+                    break;
+                }
+            }
+            if(check) result.push(numsArray[i]);
+        }
+        return result;
     }
 }

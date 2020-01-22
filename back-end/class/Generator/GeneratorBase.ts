@@ -27,18 +27,18 @@ const constraintDiffMaxMin = require('../../json/Generator/diffMaxMin_compressed
 const constraintAC = require('../../json/Generator/AC_compressed.json');
 
 export default class GeneratorBase {
-    protected exceptedLines: ZeroToFour[] = [2];
-    protected lowCount: ZeroToSix = 3;
-    protected oddCount: ZeroToSix = 3;
-    protected primeCount: ZeroToSix = 2;
-    protected $3Count: ZeroToSix = 2;
+    protected exceptedLines: ZeroToFour[];
+    protected lowCount: ZeroToSix;
+    protected oddCount: ZeroToSix;
+    protected primeCount: ZeroToSix;
+    protected $3Count: ZeroToSix;
     protected sum$10: Range = { from: 9, to: 15 };
     protected sum: Range;
     protected diffMaxMin: Range = { from: 25, to: 40 };
     protected AC: Range = { from: 7, to: 9 };
     protected consecutiveExclude: boolean = false;
-    protected includeNumber: LottoNumber[] = [];
-    protected excludeNumber: LottoNumber[] = [];
+    protected includeNumbers: LottoNumber[] = [];
+    protected excludeNumbers: LottoNumber[] = [];
     private capableNumbers: LottoNumber[] = [];
 
     constructor() { }
@@ -49,27 +49,28 @@ export default class GeneratorBase {
     setInclude(includeNumber: LottoNumber[]): boolean {
         includeNumber.forEach(value => {
             if (this.capableNumbers.indexOf(value) === -1) {
-                console.log('!');
+                console.log('setInclude: 없는 수를 포함시킴');
                 return false;
             }
         })
         if (Calculate.oddCount(includeNumber) > this.oddCount) {
-            console.log('!!');
+            console.log('setInclude: 홀수갯수가 초과됨');
             return false;
         }
         if (Calculate.primeCount(includeNumber) > this.primeCount) {
-            console.log('!!!');
+            console.log('setInclude: 소수개수가 초과됨');
             return false;
         }
         if (Calculate.$3Count(includeNumber) > this.$3Count) {
-            console.log('!!!!');
+            console.log('setInclude: 3배수가 초과됨');
             return false;
         }
         if (this.sum$10.to <= Calculate.sum$10(includeNumber)) {
-            console.log('!!!!!');
+            console.log('setInclude: 십의자리 합이 충족되지 않음');
             return false;
         }
-        this.includeNumber = includeNumber;
+
+        this.includeNumbers = includeNumber;
         return true;
     }
     setExclude(excludeNumber: LottoNumber[]): boolean {
@@ -104,10 +105,10 @@ export default class GeneratorBase {
             this.capableNumbers = copy;
             return false;
         }
-        this.excludeNumber = excludeNumber;
+        this.excludeNumbers = excludeNumber;
         return true;
     }
-    setExceptedLines(exceptedLines: ZeroToFour[]): boolean {
+    setExceptedLines(exceptedLines: ZeroToFour[]): void {
         this.exceptedLines = exceptedLines;
 
         this.capableNumbers = [];
@@ -117,8 +118,6 @@ export default class GeneratorBase {
                 this.capableNumbers.push(i as LottoNumber);
             }
         }
-
-        return true;
     }
 
     setLowCount(lowCount: ZeroToSix): boolean {
@@ -216,12 +215,8 @@ export default class GeneratorBase {
         return false;
     }
 
-    setConsecutiveExclude(check:boolean): boolean {
+    setConsecutiveExclude(check: boolean): boolean {
         this.consecutiveExclude = check;
         return true;
     }
 }
-
-const gen = new GeneratorBase();
-gen.setExceptedLines([0, 1, 2]);
-console.log(gen.setLowCount(0));
