@@ -20,10 +20,10 @@ export default class LottoBase{
     public getTotalSize():number{
         return this.TOTAL_SIZE;
     }
-    public getLData(size:number=this.TOTAL_SIZE):LData[]{
-        return this.data.toJS().slice(0, size);
+    public getLData(mode:number=this.TOTAL_SIZE):LData[]{
+        return this.data.toJS().slice(0, mode);
     }
-    public getLNumbers(size:number = this.TOTAL_SIZE): Array<number[]>{
-        return this.data.map<number[]>((item: { numbers: any; }) => item.numbers).toJS().slice(0, size);
+    public getLNumbers(mode:number = this.TOTAL_SIZE): Array<number[]>{
+        return this.data.map<number[]>((item: { numbers: any; }) => item.numbers).toJS().slice(0, mode);
     }
 }
