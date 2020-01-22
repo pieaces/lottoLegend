@@ -84,7 +84,7 @@ while (true) {
         const include: string = readlineSync.question('포함할 수: ex) 10,15,29');
         const includeArr = include.split(',').map(value => Number(value) as LottoNumber);
         console.log(includeArr);
-        if (!gen.setInclude(includeArr)) {
+        if (gen.setInclude(includeArr)) {
             break;
         }
     }
@@ -92,15 +92,20 @@ while (true) {
         const exclude: string = readlineSync.question('제외할 수: ex) 13,17,31,39');
         const excludeArr = exclude.split(',').map(value => Number(value) as LottoNumber);
         console.log(excludeArr);
-        if(!gen.setExclude(excludeArr)){
+        if(gen.setExclude(excludeArr)){
             break;
         }
     }
+
+    numbers = gen.filter1(numbers);
+    console.log(`현재 주어진 설정으로 추출된 번호는 ${numbers.length}개 입니다.`);
+
     const YesOrNo: string = readlineSync.question('연속번호를 제외하시겠습니까? (y/n)');
     console.log(YesOrNo);
     gen.setConsecutiveExclude(YesOrNo === "y" ? true : false);
 
-    numbers = gen.filter(numbers);
+    console.log(gen);
+    numbers = gen.filter2(numbers);
 
     if (numbers.length > 0) break;
     else {

@@ -42,7 +42,7 @@ console.log('모든숫자집합: ',[...numberSet].sort((a,b)=>a-b));
 console.log('10', gen.setInclude([3,7]));
 console.log('11', gen.setExclude([25]));
 
-numbers = gen.filter(numbers) // 추후에는 기존 number 받아온 것에서 체 거르기 할 것
+numbers = gen.filter1(numbers) // 추후에는 기존 number 받아온 것에서 체 거르기 할 것
 console.log(numbers, numbers.length);
 
 /*

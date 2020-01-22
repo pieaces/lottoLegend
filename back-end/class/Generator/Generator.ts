@@ -90,7 +90,7 @@ export default class Generator extends GeneratorBase{
         }
         return result as Array<LottoNumber[]>;
     }
-    filter(numsArray:Array<LottoNumber[]>):Array<LottoNumber[]>{
+    filter1(numsArray:Array<LottoNumber[]>):Array<LottoNumber[]>{
         const result:Array<LottoNumber[]> = [];
         for(let i =0; i<numsArray.length; i++){
             const include = this.includeNumbers;
@@ -112,6 +112,16 @@ export default class Generator extends GeneratorBase{
             }
             if(check) result.push(numsArray[i]);
         }
+        return result;
+    }
+    filter2(numsArray:Array<LottoNumber[]>):Array<LottoNumber[]>{
+        console.log('설정:', this.consecutiveExclude);
+        const result:Array<LottoNumber[]> = [];
+        numsArray.forEach(numbers =>{
+            if(!(this.consecutiveExclude && Calculate.consecutiveExist(numbers) === 1)){
+                result.push(numbers);
+            }
+        });
         return result;
     }
 }
