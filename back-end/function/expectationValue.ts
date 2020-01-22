@@ -5,13 +5,13 @@ const C = Probability.C;
 const pqc = Probability.pqc;
 
 function traversal(pos: number[], method: (numbers: number[]) => number) {
-    const ub = [45, 44, 43, 42, 41, 40];
+    const ub = [40, 41, 42, 43, 44, 45];
     const moveBox = (box: number[]): void => {
-        for (let i = 1; i < box.length; i++) {
+        for (let i = SIZE-2; i >= 0; i--) {
             if (box[i] < ub[i]) {
                 box[i]++;
-                for (let j = i - 1; j >= 0; j--) {
-                    box[j] = box[j + 1] + 1;
+                for (let j = i + 1; j < SIZE; j++) {
+                    box[j] = box[j - 1] + 1;
                 }
                 break;
             }
@@ -19,22 +19,23 @@ function traversal(pos: number[], method: (numbers: number[]) => number) {
     }
 
     const SIZE = 6;
-    const box = [6, 5, 4, 3, 2, 1];
+    const box = [1, 2, 3, 4, 5, 6];
 
     while (true) {
         pos[method(box)]++;
 
-        if (box[SIZE - 1] === ub[SIZE - 1]) {
+        if (box[0] === ub[0]) {
             break;
         }
 
-        box[0]++;
-        if (box[0] > ub[0]) {
+        box[SIZE-1]++;
+        if (box[SIZE-1] > ub[SIZE-1]) {
             moveBox(box);
         }
     }
     return pos.map(value => value / C(45, 6));
 }
+
 function expectedAnnhilationCount() {
     return traversal(new Array<number>(5).fill(0),
         (box: number[]): number => {
@@ -59,6 +60,11 @@ function expectedSum$1(): number[] {
     return traversal(new Array<number>(51).fill(0),
     (box:number[]):number => Calculate.sum$1(box) - 2);
 }
+function expectedSum(): number[] {
+    return traversal(new Array<number>(235).fill(0),
+    (box:number[]):number => Calculate.sum(box) - 21);
+}
+
 function expectedOddCount(): number[] {
     return pqc(7, 23 / 45);
 }
@@ -95,84 +101,18 @@ const expectedLowCount = (): number[] => {
     }
     return pos;
 }
-/*
-const pos = expectedPrimeCount();
 
-console.log(pos.reduce((acc, cur) => acc + cur, 0));
-console.log(pos);
-*/
-
-function constraintJSON(method:(box:number[])=>number) {
-    const exceptedLines = (box:number[]) => {
-        const check = new Array<boolean>(5).fill(true);
-        box.forEach((value) => {
-            check[Math.floor(value/10)] = false;
-        });
-        const result:number[] = [Calculate.lowCount(box)];
-        check.forEach((value, i)=>{
-            if(value) result.push(i);
-        });
-        return result;
-    };
-    const ub = [45, 44, 43, 42, 41, 40];
-    const moveBox = (box: number[]): void => {
-        for (let i = 1; i < box.length; i++) {
-            if (box[i] < ub[i]) {
-                box[i]++;
-                for (let j = i - 1; j >= 0; j--) {
-                    box[j] = box[j + 1] + 1;
-                }
-                break;
-            }
-        }
-    }
-
-    const SIZE = 6;
-    const box = [6, 5, 4, 3, 2, 1];
-
-    const map = new Map<number[], Set<number>>();
-    
-    while (true) {
-        const excepted = exceptedLines(box);
-        
-        const mapDArr = [...map.keys()];
-        let outCheck = true;
-        for(let i =0; i<mapDArr.length; i++){
-            if(mapDArr[i].length === excepted.length){
-                let innerCheck = true;
-                for(let j =0; j<mapDArr[i].length; j++){
-                    if(mapDArr[i][j] !== excepted[j]){
-                        innerCheck = false;
-                        break;
-                    }
-                }
-                if(innerCheck){
-                    const target = mapDArr[i];
-                    const value = map.get(target);
-                    value.add(method(box));
-                    map.set(target, value);
-                    outCheck = false;
-                }
-            }
-         }
-         if(outCheck){
-            map.set(excepted, new Set<number>([method(box)]));
-         }
-        if (box[SIZE - 1] === ub[SIZE - 1]) {
-            break;
-        }
-
-        box[0]++;
-        if (box[0] > ub[0]) {
-            moveBox(box);
-        }
-    }
-    let str = "{";
-    map.forEach((value, key) => {
-        str += (`"${key.join('')}": [${[...value].sort((a,b)=>a-b).join(', ')}],\n`);
-    });
-    str += '}';
-    console.log(str);
+function expectedConsecutive(): number[] {
+    return traversal(new Array<number>(2).fill(0), Calculate.consecutiveExist);
 }
 
-constraintJSON((box:number[])=>Calculate.sum$10(box));
+
+const pos = expectedSum();
+
+console.log(pos.reduce((acc, cur) => acc + cur, 0));
+
+let str = "[\n";
+pos.forEach(value =>{
+    str += `\t${value},\n`
+});
+console.log(str);

@@ -24,7 +24,7 @@ console.log('2', gen.setLowCount(2));
 
 console.log('3', gen.setOddCount(2));
 
-console.log('4', gen.setPrimeCount(0));
+console.log('4', gen.setPrimeCount(2));
 
 console.log('5', gen.set$3Count(2));
 
@@ -42,4 +42,4 @@ console.log('11', gen.setExclude([19]));
 
 
 const numbers = gen.generate();
-console.log(numbers.length, numbers);
+console.log(numbers, numbers.length);

@@ -1,7 +1,7 @@
 import Calculate from '../Statistics/Calculate'
 import Analyze from '../Analyze/Analyze'
 import LottoBase, {LData} from './LottoBase'
-import expectationMixIn from './expectationMixin'
+import ExpectationMixIn from './ExpectationMixin'
 
 interface Helper{
     method: (numbers: number[])=> number;
@@ -9,7 +9,7 @@ interface Helper{
     to: number;
     mode: number;
 }
-export default class LottoData extends expectationMixIn(LottoBase) {
+export default class LottoData extends ExpectationMixIn(LottoBase) {
     constructor(data: LData[], mode: number) {
         super(data);
         this.mode = mode;
@@ -55,6 +55,13 @@ export default class LottoData extends expectationMixIn(LottoBase) {
         };
         return this.gatherHelper(helper);
     }
+    gatherSum(mode:number = this.mode):number[] {
+        const helper:Helper = {
+            method:Calculate.sum,
+            from:21, to:255, mode
+        };
+        return this.gatherHelper(helper);
+    }
 
     gatherOddCount(mode:number = this.mode): number[] {
         const helper:Helper = {
@@ -94,7 +101,14 @@ export default class LottoData extends expectationMixIn(LottoBase) {
         return this.gatherHelper(helper);
     }
 
-    gatherCarry(mode:number = this.mode): number[] {
+    gatherConsecutiveExist(mode:number = this.mode): number[] {
+        const helper:Helper = {
+            method:Calculate.consecutiveExist,
+            from:0, to:1, mode
+        };
+        return this.gatherHelper(helper);
+    }
+    gatherCarryCount(mode:number = this.mode): number[] {
         return Analyze.carryCount(this.getLNumbers(mode).reverse());
     }
 

@@ -21,6 +21,9 @@ export default class LottoStat extends LottoData {
     sum$1Stats(mode: number = this.mode): Stats {
         return this.getStats(Calculate.sum$1, mode);
     }
+    sumStats(mode: number = this.mode): Stats {
+        return this.getStats(Calculate.sum, mode);
+    }
 
     lowCountStats(mode:number = this.mode): Stats {
         return this.getStats(Calculate.lowCount, mode);
@@ -43,7 +46,10 @@ export default class LottoStat extends LottoData {
         return this.getStats(Calculate.diffMaxMin, mode);
     }
 
-    carryStats(mode: number = this.mode): Stats {
+    consecutiveExistStats(mode:number = this.mode): Stats {
+        return this.getStats(Calculate.consecutiveExist, mode);
+    }
+    carryCountStats(mode: number = this.mode): Stats {
         return Statistics.getStats(Analyze.carryCount(this.getLNumbers(mode)));
     }
 

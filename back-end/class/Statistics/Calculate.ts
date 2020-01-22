@@ -80,4 +80,13 @@ export default class Calculate {
         });
         return count;
     }
+
+    static consecutiveExist(numbers: number[]): 0|1 {
+        for(let i =1; i<numbers.length; i++){
+            if(numbers[i] -1 === numbers[i-1]){
+                return 1;
+            }
+        }
+        return 0;
+    }
 }

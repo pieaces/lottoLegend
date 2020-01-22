@@ -19,6 +19,13 @@ export type ZeroToFour = 0 | 1 | 2 | 3 | 4;
 export type ZeroToSix = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 export type LottoNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 | 42 | 43 | 44 | 45;
 export type Range = { from: number, to: number };
+namespace Constraint{
+    const str:string = "";
+}
+const constraintSum$10 = require('../../json/Generator/sum$10.json');
+const constraintSum = require('../../json/Generator/sum_compressed.json');
+const constraintDiffMaxMin = require('../../json/Generator/diffMaxMin_compressed.json');
+const constraintAC = require('../../json/Generator/AC_compressed.json');
 
 export default class GeneratorBase {
     protected exceptedLines: ZeroToFour[] = [2];
@@ -162,7 +169,7 @@ export default class GeneratorBase {
     setSum$10(sum$10: Range): boolean {
         if (this.capableNumbers.length === 0) return false;
 
-        const constraint: number[] = require('../../json/sum$10.json')[this.lowCount.toString() + this.exceptedLines.join('')];
+        const constraint: number[] = constraintSum$10[this.lowCount.toString() + this.exceptedLines.join('')];
 
         for (let i = 0; i < constraint.length; i++) {
             if (sum$10.from <= constraint[i] && constraint[i] <= sum$10.to) {
@@ -178,7 +185,7 @@ export default class GeneratorBase {
         if (this.capableNumbers.length === 0) return false;
 
         //5단위로 할 것
-        const constraint: number[] = require('../../json/sum_compressed.json')[this.lowCount.toString() + this.exceptedLines.join('')];
+        const constraint: number[] = constraintSum[this.lowCount.toString() + this.exceptedLines.join('')];
         if (sum.from <= constraint[1] && sum.to >= constraint[0]) {
             this.sum = sum;
             return true;
@@ -189,7 +196,7 @@ export default class GeneratorBase {
     setDiffMaxMin(diffMaxMin: Range): boolean {
         if (this.capableNumbers.length === 0) return false;
 
-        const constraint: number[] = require('../../json/diffMaxMin_compressed.json')[this.lowCount.toString() + this.exceptedLines.join('')];
+        const constraint: number[] = constraintDiffMaxMin[this.lowCount.toString() + this.exceptedLines.join('')];
 
         if (diffMaxMin.from <= constraint[1] && diffMaxMin.to >= constraint[0]) {
             this.diffMaxMin = diffMaxMin;
@@ -200,7 +207,7 @@ export default class GeneratorBase {
     setAC(AC: Range): boolean {
         if (this.capableNumbers.length === 0) return false;
 
-        const constraint: number[] = require('../../json/AC_compressed.json')[this.lowCount.toString() + this.exceptedLines.join('')];
+        const constraint: number[] = constraintAC[this.lowCount.toString() + this.exceptedLines.join('')];
 
         if (AC.from <= constraint[1] && AC.to >= constraint[0]) {
             this.AC = AC;
