@@ -75,9 +75,9 @@ console.log($3CountNum);
 console.log('9', gen.set$3Count($3CountNum));
 
 
-let numbers = gen.generate();
+gen.generate();
 while (true) {
-    console.log(`현재 주어진 설정으로 추출된 번호는 ${numbers.length}개 입니다.`);
+    console.log(`현재 주어진 설정으로 추출된 번호는 ${gen.getGeneratedNumbers().length}개 입니다.`);
     console.log('가용번호: ', gen.getCapableNumbers());
 
     while (true) {
@@ -97,20 +97,20 @@ while (true) {
         }
     }
 
-    numbers = gen.filter1(numbers);
-    console.log(`현재 주어진 설정으로 추출된 번호는 ${numbers.length}개 입니다.`);
+    gen.filterInclude();
+    console.log(`현재 주어진 설정으로 추출된 번호는 ${gen.getGeneratedNumbers().length}개 입니다.`);
 
     const YesOrNo: string = readlineSync.question('연속번호를 제외하시겠습니까? (y/n)');
     console.log(YesOrNo);
     gen.setConsecutiveExclude(YesOrNo === "y" ? true : false);
 
     console.log(gen);
-    numbers = gen.filter2(numbers);
+    gen.filterExclude();
 
-    if (numbers.length > 0) break;
+    if (gen.getGeneratedNumbers().length > 0) break;
     else {
         console.log('주어진 조건에 맞는 번호가 없어 포함수,제외수를 다시 설정합니다.')
     }
 }
 
-console.log(numbers.length, numbers);
+console.log(gen.getGeneratedNumbers().length, gen.getGeneratedNumbers());

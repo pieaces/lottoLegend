@@ -20,31 +20,26 @@ const gen = new Generator();
 */
 
 console.log('1', gen.setExceptedLines([3]));
-console.log('2', gen.setLowCount(3));
+console.log('2', gen.setLowCount(2));
 console.log('6', gen.setSum$10({from:10, to:12}));
-console.log('7', gen.setSum({from:120, to:140}));
+console.log('7', gen.setSum({from:140, to:160}));
 console.log('8', gen.setDiffMaxMin({from:32, to:37}));
-console.log('9', gen.setAC({from:2, to:3}));
+console.log('9', gen.setAC({from:7, to:7}));
 console.log('3', gen.setOddCount(3));
 console.log('4', gen.setPrimeCount(2));
 console.log('5', gen.set$3Count(2));
 console.log('12', gen.setConsecutiveExclude(true));
 
-console.log(gen);
+gen.generate();
 
-let numbers = gen.generate();
-const numberSet = new Set<number>();
-numbers.forEach(numArr =>{
-    numArr.forEach(value => numberSet.add(value));
-});
-console.log(numbers, numbers.length);
-console.log('모든숫자집합: ',[...numberSet].sort((a,b)=>a-b));
+console.log(gen.getGeneratedNumbers(), gen.getGeneratedNumbers().length);
+/*
 console.log('10', gen.setInclude([3,7]));
 console.log('11', gen.setExclude([25]));
 
-numbers = gen.filter1(numbers) // 추후에는 기존 number 받아온 것에서 체 거르기 할 것
-console.log(numbers, numbers.length);
-
+gen.filterInclude() // 추후에는 기존 number 받아온 것에서 체 거르기 할 것
+console.log(gen.getGeneratedNumbers(), gen.getGeneratedNumbers().length);
+*/
 /*
 3제외, 저3
 10합 9~13, 15 => 10,14
