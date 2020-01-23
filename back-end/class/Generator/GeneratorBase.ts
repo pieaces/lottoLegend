@@ -46,68 +46,21 @@ export default class GeneratorBase {
     getCapableNumbers(): LottoNumber[] {
         return this.capableNumbers;
     }
-    setInclude(includeNumber: LottoNumber[]): boolean {
-        includeNumber.forEach(value => {
-            if (this.capableNumbers.indexOf(value) === -1) {
-                console.log('setInclude: 없는 수를 포함시킴');
-                return false;
-            }
-        })
-        if (Calculate.oddCount(includeNumber) > this.oddCount) {
-            console.log('setInclude: 홀수갯수가 초과됨');
-            return false;
-        }
-        if (Calculate.primeCount(includeNumber) > this.primeCount) {
-            console.log('setInclude: 소수개수가 초과됨');
-            return false;
-        }
-        if (Calculate.$3Count(includeNumber) > this.$3Count) {
-            console.log('setInclude: 3배수가 초과됨');
-            return false;
-        }
-        if (this.sum$10.to <= Calculate.sum$10(includeNumber)) {
-            console.log('setInclude: 십의자리 합이 충족되지 않음');
-            return false;
-        }
-
-        this.includeNumbers = includeNumber;
-        return true;
+    
+    setInclude(includeNumbers: LottoNumber[]): void {
+        this.includeNumbers = includeNumbers;
     }
-    setExclude(excludeNumber: LottoNumber[]): boolean {
-        const copy: LottoNumber[] = [];
-        this.capableNumbers.forEach((value, i) => copy[i] = value);
-
-        excludeNumber.forEach(value => {
-            const index = this.capableNumbers.indexOf(value);
-            if (index === -1) {
-                this.capableNumbers = copy;
-                return false;
-            }
-            this.capableNumbers.splice(index, 1);
-        });
-        if (Calculate.oddCount(this.capableNumbers) < this.oddCount) {
-            this.capableNumbers = copy;
-            return false;
-        }
-        if (Calculate.primeCount(this.capableNumbers) < this.primeCount) {
-            this.capableNumbers = copy;
-            return false;
-        }
-        if (Calculate.$3Count(this.capableNumbers) < this.$3Count) {
-            this.capableNumbers = copy;
-            return false;
-        }
-        if (Calculate.sum$10(this.capableNumbers) < this.sum$10.from) {
-            this.capableNumbers = copy;
-            return false;
-        }
-        if (Calculate.sum(this.capableNumbers) < this.sum.from) {
-            this.capableNumbers = copy;
-            return false;
-        }
-        this.excludeNumbers = excludeNumber;
-        return true;
+    setExclude(excludeNumbers: LottoNumber[]): void {
+        this.excludeNumbers = excludeNumbers;
     }
+
+    addInclude(includeNumbers: LottoNumber[]): void {
+        this.includeNumbers.push(...includeNumbers);
+    }
+    addExclude(excludeNumbers: LottoNumber[]): void {
+        this.excludeNumbers.push(...excludeNumbers);
+    }
+
     setExceptedLines(exceptedLines: ZeroToFour[]): void {
         this.exceptedLines = exceptedLines;
 

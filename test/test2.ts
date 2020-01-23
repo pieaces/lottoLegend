@@ -22,14 +22,15 @@ const gen = new Generator();
 console.log('1', gen.setExceptedLines([3]));
 console.log('2', gen.setLowCount(2));
 console.log('6', gen.setSum$10({from:10, to:12}));
-console.log('7', gen.setSum({from:140, to:160}));
+console.log('7', gen.setSum({from:150, to:160}));
 console.log('8', gen.setDiffMaxMin({from:32, to:37}));
-console.log('9', gen.setAC({from:7, to:7}));
+console.log('9', gen.setAC({from:5, to:5}));
 console.log('3', gen.setOddCount(3));
 console.log('4', gen.setPrimeCount(2));
 console.log('5', gen.set$3Count(2));
 console.log('12', gen.setConsecutiveExclude(true));
-
+gen.setExclude([45,29]);
+gen.setInclude([25]);
 gen.generate();
 
 console.log(gen.getGeneratedNumbers(), gen.getGeneratedNumbers().length);

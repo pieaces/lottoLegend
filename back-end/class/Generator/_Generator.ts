@@ -39,14 +39,18 @@ export default class Generator extends GeneratorBase {
     generate(): void {
         const list: number[] = [];
         for (let i = 1; i <= 45; i++) {
-            const existExcept = this.exceptedLines.indexOf(<ZeroToFour>Math.floor((i) / 10));
-            if (existExcept === -1) {
+            const notExistExcept:boolean = this.exceptedLines.indexOf(<ZeroToFour>Math.floor((i) / 10)) === -1;
+            const notExistExclude = this.excludeNumbers.indexOf(<LottoNumber>(i)) === -1
+            const notExistInclude = this.includeNumbers.indexOf((i) as LottoNumber) === -1
+            if (notExistExcept && notExistExclude && notExistInclude) {
                 list.push(i);
             }
         }
 
-        const BOX_SIZE = 6;
-        const indexBox: number[] = [0, 1, 2, 3, 4, 5]; //list의 index를 value로 취함.
+        const indexBox: number[] = []; //list의 index를 value로 취함.
+        const INCLUDE_SIZE = this.includeNumbers.length;
+        for(let i =0; i<6-INCLUDE_SIZE; i++) indexBox[i]=i;
+        const BOX_SIZE = indexBox.length;
 
         const LIST_SIZE = list.length;
         const indexUpb = new Array<number>(BOX_SIZE);
@@ -68,16 +72,15 @@ export default class Generator extends GeneratorBase {
 
         while (true) {
             const box: LottoNumber[] = [];
-            //조건체크 후 실행
-            for (let i = 0; i < BOX_SIZE; i++) {
-                box[i] = list[indexBox[i]] as LottoNumber
-            }
+
+            for (let i = 0; i < INCLUDE_SIZE; i++) box[i] = this.includeNumbers[i];
+            for (let i = INCLUDE_SIZE; i < INCLUDE_SIZE + BOX_SIZE; i++) box[i] = list[indexBox[i-INCLUDE_SIZE]] as LottoNumber
 
             if(1 < 1){
-            }else if(!this.checkOddCount(box)) {
-            } else if (!this.checkPrimeCount(box)) {
-            } else if (!this.check$3Count(box)) {
-            } else if (!this.checkLowCount(box)) {
+            //}else if(!this.checkOddCount(box)) {
+            //} else if (!this.checkPrimeCount(box)) {
+            //} else if (!this.check$3Count(box)) {
+            //} else if (!this.checkLowCount(box)) {
             }else if (!this.checkSum$10(box)) {
             } else if (!this.checkSum(box)) {
             } else if (!this.checkDiffMinMax(box)) {
