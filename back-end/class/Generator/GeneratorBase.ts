@@ -1,17 +1,19 @@
 /*
-1. 제외할 공색(0,1,2,3,4) 중 택
-2. 저값(0~6) 값
-3. 십의자리 합(0~24) 범위
-4. 번호합 (21~255) 범위
-5. 고저차(5~44) 범위
-6. AC값(0~10) 값 or 범위
-7. 홀수갯수(0~6) 값
-8. 소수갯수(0~6) 값
-9. 3의배수 갯수(0~6) 값
-10 이월갯수(0~6) 값 => 포함할 수 선택 나머지 제외.
-11. 번호빈도 => 미출현번호, 차가운수 '포함할 수'
-12. 번호빈도 => 뜨거운 수 최근 출현빈도, 번호간격, '제외할 수'
-13. 연속번호 제외여부
+전회차 번호 표시 => 포함 및 제외
+뜨거운 수, 차가운 수 표시 => 포함 및 제외
+제외할 공색(0,1,2,3,4) 중 택
+저값(0~6) 값
+십의자리 합(0~24) 범위
+번호합 (21~255) 범위
+고저차(5~44) 범위
+AC값(0~10) 값 or 범위
+홀수갯수(0~6) 값
+소수갯수(0~6) 값
+3의배수 갯수(0~6) 값
+이월갯수(0~6) 값 => 포함할 수 선택 나머지 제외.
+번호빈도 => 미출현번호, 차가운수 '포함할 수'
+번호빈도 => 뜨거운 수 최근 출현빈도, 번호간격, '제외할 수'
+연속번호 제외여부
 */
 import Calculate from '../Statistics/Calculate'
 import { Range } from 'immutable';
@@ -32,25 +34,33 @@ export default class GeneratorBase {
     protected oddCount: ZeroToSix;
     protected primeCount: ZeroToSix;
     protected $3Count: ZeroToSix;
-    protected sum$10: Range = { from: 9, to: 15 };
+    protected sum$10: Range;
     protected sum: Range;
-    protected diffMaxMin: Range = { from: 25, to: 40 };
-    protected AC: Range = { from: 7, to: 9 };
+    protected diffMaxMin: Range;
+    protected AC: Range;
     protected consecutiveExclude: boolean = false;
     protected includeNumbers: LottoNumber[] = [];
     protected excludeNumbers: LottoNumber[] = [];
     private capableNumbers: LottoNumber[] = [];
 
-    constructor() { }
+    constructor() {
+        for(let i =0; i<45; i++){
+            this.capableNumbers[i] = i+1 as LottoNumber;
+        }
+    }
 
     getCapableNumbers(): LottoNumber[] {
         return this.capableNumbers;
     }
-    
+
     setInclude(includeNumbers: LottoNumber[]): void {
         this.includeNumbers = includeNumbers;
     }
     setExclude(excludeNumbers: LottoNumber[]): void {
+        for(let i=this.capableNumbers.length-1; i>=0; i--){
+            if(excludeNumbers.indexOf(this.capableNumbers[i]) !== -1) this.capableNumbers.splice(i, 1);
+        }
+        
         this.excludeNumbers = excludeNumbers;
     }
 

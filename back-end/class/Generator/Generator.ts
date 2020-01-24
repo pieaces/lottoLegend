@@ -3,6 +3,7 @@ import { LottoNumber } from './GeneratorBase';
 import Calculate from '../Statistics/Calculate';
 
 export default class Generator extends _Generator {
+    constructor(){super();}
     filterInclude(): void {
         const numsArray = this.generatedNumbers;
         const include = this.includeNumbers;

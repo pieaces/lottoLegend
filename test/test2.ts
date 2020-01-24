@@ -18,7 +18,7 @@ const gen = new Generator();
 12. 번호빈도 => 뜨거운 수 최근 출현빈도, 번호간격, '제외할 수'
 13. 연속번호 제외여부
 */
-
+const date = new Date();
 console.log('1', gen.setExceptedLines([3]));
 console.log('2', gen.setLowCount(2));
 console.log('6', gen.setSum$10({from:10, to:12}));
@@ -34,6 +34,8 @@ gen.setInclude([25]);
 gen.generate();
 
 console.log(gen.getGeneratedNumbers(), gen.getGeneratedNumbers().length);
+const date2 = new Date();
+console.log(Number(date2) - Number(date));
 /*
 console.log('10', gen.setInclude([3,7]));
 console.log('11', gen.setExclude([25]));

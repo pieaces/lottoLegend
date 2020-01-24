@@ -54,6 +54,7 @@ export default class Calculate {
     static sum$1(numbers: number[]): number {
         return numbers.reduce((acc, cur) => acc + cur % 10, 0);
     }
+
     static min(numbers: number[]): number {
         return Math.min(...numbers);
     }

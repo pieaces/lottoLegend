@@ -22,16 +22,20 @@ export default class Generator extends GeneratorBase {
         return Calculate.lowCount(numbers) === this.lowCount;
     }
     private checkSum$10(numbers: number[]): boolean {
-        return this.sum$10.from <= Calculate.sum$10(numbers) && Calculate.sum$10(numbers) <= this.sum$10.to;
+        const sum$10 = Calculate.sum$10(numbers);
+        return this.sum$10.from <= sum$10 && sum$10 <= this.sum$10.to;
     }
     private checkSum(numbers: number[]): boolean {
-        return this.sum.from <= Calculate.sum(numbers) && Calculate.sum(numbers) <= this.sum.to;
+        const sum = Calculate.sum(numbers);
+        return this.sum.from <= sum && sum <= this.sum.to;
     }
     private checkDiffMinMax(numbers: number[]): boolean {
-        return this.diffMaxMin.from <= Calculate.diffMaxMin(numbers) && Calculate.diffMaxMin(numbers) <= this.diffMaxMin.to;
+        const diffMaxMin = Calculate.diffMaxMin(numbers);
+        return this.diffMaxMin.from <= diffMaxMin && diffMaxMin <= this.diffMaxMin.to;
     }
     private checkAC(numbers: number[]): boolean {
-        return this.AC.from <= Calculate.AC(numbers) && Calculate.AC(numbers) <= this.AC.to;
+        const AC = Calculate.AC(numbers);
+        return this.AC.from <= AC && AC <= this.AC.to;
     }
     private checkConsecutiveExist(numbers: number[]): boolean {
         return Calculate.consecutiveExist(numbers) === 1 //1일경우 존재함. 0일경우 존재하지않음.
@@ -46,13 +50,13 @@ export default class Generator extends GeneratorBase {
                 list.push(i);
             }
         }
+        const LIST_SIZE = list.length;
 
         const indexBox: number[] = []; //list의 index를 value로 취함.
         const INCLUDE_SIZE = this.includeNumbers.length;
         for(let i =0; i<6-INCLUDE_SIZE; i++) indexBox[i]=i;
         const BOX_SIZE = indexBox.length;
 
-        const LIST_SIZE = list.length;
         const indexUpb = new Array<number>(BOX_SIZE);
         for (let i = 0; i < BOX_SIZE; i++) {
             indexUpb[i] = LIST_SIZE - (BOX_SIZE - i);
@@ -77,11 +81,11 @@ export default class Generator extends GeneratorBase {
             for (let i = INCLUDE_SIZE; i < INCLUDE_SIZE + BOX_SIZE; i++) box[i] = list[indexBox[i-INCLUDE_SIZE]] as LottoNumber
 
             if(1 < 1){
-            //}else if(!this.checkOddCount(box)) {
-            //} else if (!this.checkPrimeCount(box)) {
-            //} else if (!this.check$3Count(box)) {
-            //} else if (!this.checkLowCount(box)) {
-            }else if (!this.checkSum$10(box)) {
+            }else if(!this.checkOddCount(box)) {
+            } else if (!this.checkPrimeCount(box)) {
+            } else if (!this.check$3Count(box)) {
+            } else if (!this.checkLowCount(box)) {
+            } else if (!this.checkSum$10(box)) {
             } else if (!this.checkSum(box)) {
             } else if (!this.checkDiffMinMax(box)) {
             } else if (!this.checkAC(box)) {
