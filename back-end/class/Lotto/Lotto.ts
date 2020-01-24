@@ -1,9 +1,9 @@
 import Statistics, { Stats } from '../Statistics/Statistics'
 import Calculate from '../Statistics/Calculate'
 import Analyze from '../Analyze/Analyze'
-import LottoData from './LottoData'
-import { LData } from './LottoBase'
-export default class LottoStat extends LottoData {
+import Gather from './Gather'
+import { LData } from './Base'
+export default class Lotto extends Gather {
     constructor(data: LData[], mode: number = data.length) {
         super(data, mode);
     }

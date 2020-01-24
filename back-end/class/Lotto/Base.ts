@@ -6,7 +6,7 @@ export interface LData{
     numbers: number[]
 }
 //로또 전회차
-export default class LottoBase{
+export default class Base{
     private TOTAL_SIZE:number;
     public static readonly BALL_NUM:number = 45;
 

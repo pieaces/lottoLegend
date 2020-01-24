@@ -1,6 +1,6 @@
 import Calculate from '../Statistics/Calculate'
 import Analyze from '../Analyze/Analyze'
-import LottoBase, {LData} from './LottoBase'
+import Base, {LData} from './Base'
 import ExpectationMixIn from './ExpectationMixin'
 
 interface Helper{
@@ -9,7 +9,7 @@ interface Helper{
     to: number;
     mode: number;
 }
-export default class LottoData extends ExpectationMixIn(LottoBase) {
+export default class Gather extends ExpectationMixIn(Base) {
     constructor(data: LData[], mode: number) {
         super(data);
         this.mode = mode;

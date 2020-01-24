@@ -1,7 +1,8 @@
 import Generator from '../back-end/class/Generator/Generator'
-import { ZeroToFour, ZeroToSix, LottoNumber } from '../back-end/class/Generator/GeneratorBase';
+import { ZeroToFour, ZeroToSix, LottoNumber } from '../back-end/class/Generator/Base';
 const readlineSync = require('readline-sync');
 
+const date = new Date();
 const gen = new Generator();
 /*
 1. 제외할 공색(0,1,2,3,4) 중 택
@@ -18,24 +19,24 @@ const gen = new Generator();
 12. 번호빈도 => 뜨거운 수 최근 출현빈도, 번호간격, '제외할 수'
 13. 연속번호 제외여부
 */
-const date = new Date();
-console.log('1', gen.setExceptedLines([3]));
-console.log('2', gen.setLowCount(2));
-console.log('6', gen.setSum$10({from:10, to:12}));
-console.log('7', gen.setSum({from:150, to:160}));
-console.log('8', gen.setDiffMaxMin({from:32, to:37}));
-console.log('9', gen.setAC({from:5, to:5}));
-console.log('3', gen.setOddCount(3));
-console.log('4', gen.setPrimeCount(2));
-console.log('5', gen.set$3Count(2));
-console.log('12', gen.setConsecutiveExclude(true));
-gen.setExclude([45,29]);
-gen.setInclude([25]);
+
+gen.setExceptedLines([4]);
+gen.setLowCount(2);
+gen.setSum$10({from:10, to:12});
+gen.setSum({from:140, to:160});
+gen.setDiffMaxMin({from:32, to:37});
+gen.setAC({from:5, to:5});
+gen.setOddCount(3);
+gen.setPrimeCount(2);
+gen.set$3Count(2);
+gen.onConsecutiveExclude(true);
+gen.setExclude([]);
+gen.setInclude([]);
 gen.generate();
 
-console.log(gen.getGeneratedNumbers(), gen.getGeneratedNumbers().length);
+//console.log(gen.getGeneratedNumbers(), gen.getGeneratedNumbers().length);
 const date2 = new Date();
-console.log(Number(date2) - Number(date));
+console.log(gen.getGeneratedNumbers().length, Number(date2) - Number(date));
 /*
 console.log('10', gen.setInclude([3,7]));
 console.log('11', gen.setExclude([25]));

@@ -68,9 +68,11 @@ export default class Calculate {
 
     static AC(numbers: number[]): number {
         const set = new Set<number>();
-        const copy:number[] = [];
-        numbers.forEach(value => copy.push(value));
-        copy.sort((a, b) => b-a).forEach((bigValue, index, array) => array.slice(index + 1).forEach(smallValue => set.add(bigValue - smallValue)));
+        for(let i = 0; i<numbers.length; i++){
+            for(let j=i+1; j<numbers.length; j++){
+                set.add(Math.abs(numbers[j]-numbers[i]));
+            }
+        }
         return set.size - (numbers.length - 1);
     }
 
