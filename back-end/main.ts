@@ -1,6 +1,6 @@
 import LottoStat from './class/Lotto/Lotto'
 //import fetchLotto from './function/fetchLotto'
-//import Chart from 'chart.js'
+import Chart from 'chart.js'
 import Generator from './class/Generator/Generator'
 
 function cout(obj: any, str = ''): void {
@@ -10,22 +10,10 @@ function cout(obj: any, str = ''): void {
 //mode: 12, 24, 48
 let lottoStat: LottoStat = new LottoStat(require('./json/lotto.json'), 48);
 
-const gen = new Generator();
+const gen = new Generator({});
 
 const button = document.getElementById('button');
 button.onclick = function () {
-    gen.setExceptedLines([4]);
-    gen.setLowCount(2);
-    gen.setSum$10({from:10, to:12});
-    gen.setSum({from:140, to:160});
-    gen.setDiffMaxMin({from:32, to:37});
-    gen.setAC({from:5, to:5});
-    gen.setOddCount(3);
-    gen.setPrimeCount(2);
-    gen.set$3Count(2);
-    gen.onConsecutiveExclude(true);
-    gen.setExclude([]);
-    gen.setInclude([]);
     gen.generate();
     console.log(gen.getGeneratedNumbers());
 }

@@ -1,12 +1,7 @@
 import Generator from '../back-end/class/Generator/Generator'
-import { ZeroToFour, ZeroToSix, LottoNumber } from '../back-end/class/Generator/Base';
-import Calculate from '../back-end/class/Statistics/Calculate';
-const readlineSync = require('readline-sync');
 
 const date = new Date();
-const gen = new Generator();
-gen.setExceptedLines([4]);
-gen.setLowCount(2);
+const gen = new Generator({exceptedLines:[2]});
 /*
 
 gen.setSum({from:140, to:160});
@@ -21,7 +16,7 @@ gen.setInclude([]);
 */
 gen.generate();
 const date2 = new Date();
-console.log([...gen.sumSet][0], [...gen.sumSet][[...gen.sumSet].length-1]);
+console.log([...gen.numberSet][0], [...gen.numberSet][[...gen.numberSet].length-1]);
 //gen.getGeneratedNumbers().forEach(value => console.log(value));
 console.log(gen.getGeneratedNumbers().length + '개', Number(date2) - Number(date) + 'ms');
 /*

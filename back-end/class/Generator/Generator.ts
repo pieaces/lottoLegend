@@ -1,12 +1,11 @@
-import { ZeroToFour, LottoNumber } from './Base'
+import { GeneratorOption, ZeroToFour, LottoNumber } from './Base'
 import Calculate from '../Statistics/Calculate'
-import Confirmer from './Confirmer';
-import Lotto from '../Lotto/Lotto';
+import Check from './Check';
 
-export default class Generator extends Confirmer {
+export default class Generator extends Check {
     protected generatedNumbers: Array<LottoNumber[]> = [];
-    sumSet: Set<LottoNumber> = new Set<LottoNumber>();
-    constructor() { super(); }
+    numberSet: Set<LottoNumber> = new Set<LottoNumber>();
+    constructor(option:GeneratorOption) { super(option); }
 
     getGeneratedNumbers(): Array<LottoNumber[]> {
         return this.generatedNumbers;
@@ -17,9 +16,9 @@ export default class Generator extends Confirmer {
 
         let highIndex = -1;
         for (let i = 1; i <= 45; i++) {
-            const notExistExcept: boolean = this.exceptedLines ? this.exceptedLines.indexOf(<ZeroToFour>Math.floor((i) / 10)) === -1 : true;
-            const notExistExclude = this.excludeNumbers.indexOf(<LottoNumber>(i)) === -1
-            const notExistInclude = this.includeNumbers.indexOf((i) as LottoNumber) === -1
+            const notExistExcept: boolean = this.option.exceptedLines ? this.option.exceptedLines.indexOf(<ZeroToFour>Math.floor((i) / 10)) === -1 : true;
+            const notExistExclude = this.option.excludeNumbers.indexOf(<LottoNumber>(i)) === -1
+            const notExistInclude = this.option.includeNumbers.indexOf((i) as LottoNumber) === -1
             if (notExistExcept && notExistExclude && notExistInclude) {
                 if (highIndex === -1 && i >= 23) highIndex = list.length;
                 list.push(i as LottoNumber);
@@ -27,9 +26,9 @@ export default class Generator extends Confirmer {
         }
 
         const LIST_SIZE = list.length;
-        const INCLUDE_SIZE = this.includeNumbers.length;
+        const INCLUDE_SIZE = this.option.includeNumbers.length;
         const BOX_SIZE = 6 - INCLUDE_SIZE;
-        const LOW_COUNT = this.lowCount ? this.lowCount - Calculate.lowCount(this.includeNumbers) : -1;
+        const LOW_COUNT = this.option.lowCount ? this.option.lowCount - Calculate.lowCount(this.option.includeNumbers) : -1;
 
         const indexBox = new Array<number>(BOX_SIZE); //list의 index를 value로 취함.
         const indexDnb = new Array<number>(BOX_SIZE);
@@ -97,25 +96,25 @@ export default class Generator extends Confirmer {
         while (true) {
             const box: LottoNumber[] = [];
 
-            for (let i = 0; i < INCLUDE_SIZE; i++) box[i] = this.includeNumbers[i];
+            for (let i = 0; i < INCLUDE_SIZE; i++) box[i] = this.option.includeNumbers[i];
             for (let i = INCLUDE_SIZE; i < INCLUDE_SIZE + BOX_SIZE; i++) box[i] = list[indexBox[i - INCLUDE_SIZE]] as LottoNumber
 
             if (1 < 1) {
-            } else if (this.sum && !this.checkSum(box)) {
-            } else if (this.oddCount && !this.checkOddCount(box)) {
-            } else if (this.primeCount && !this.checkPrimeCount(box)) {
-            } else if (this.$3Count && !this.check$3Count(box)) {
-            } else if (this.diffMaxMin && !this.checkDiffMinMax(box)) {
-            } else if (this.sum$10 && !this.checkSum$10(box)) {
-            } else if (this.exceptedLines && !this.checkExceptedLines(box)) {
-            } else if (this.AC && !this.checkAC(box)) {
-            } else if (this.consecutiveExclude && this.checkConsecutiveExist(box.sort((a, b) => a - b))) {//제외하라고 했는데, 연속번호 존재하면 여기서 걸림. +여기서 정렬은 배열을 바꿈
+            } else if (this.option.sum && !this.checkSum(box)) {
+            } else if (this.option.oddCount && !this.checkOddCount(box)) {
+            } else if (this.option.primeCount && !this.checkPrimeCount(box)) {
+            } else if (this.option.$3Count && !this.check$3Count(box)) {
+            } else if (this.option.diffMaxMin && !this.checkDiffMinMax(box)) {
+            } else if (this.option.sum$10 && !this.checkSum$10(box)) {
+            } else if (this.option.exceptedLines && !this.checkExceptedLines(box)) {
+            } else if (this.option.AC && !this.checkAC(box)) {
+            } else if (this.option.consecutiveExclude && this.checkConsecutiveExist(box.sort((a, b) => a - b))) {//제외하라고 했는데, 연속번호 존재하면 여기서 걸림. +여기서 정렬은 배열을 바꿈
             } else {//모든 조건상황에서도 참이었을 때,
                 result.push(box);
-                this.sumSet.add(Calculate.sum(box) as LottoNumber);
+                this.numberSet.add(Calculate.sum(box) as LottoNumber);
             }
 
-            if (indexBox[0] === indexUpb[0] && this.lowCount &&indexBox[this.lowCount] === indexUpb[this.lowCount] || indexBox[0] === indexUpb[0] && !this.lowCount) break;
+            if (indexBox[0] === indexUpb[0] && this.option.lowCount &&indexBox[this.option.lowCount] === indexUpb[this.option.lowCount] || indexBox[0] === indexUpb[0] && !this.option.lowCount) break;
             else {
                 indexBox[BOX_SIZE - 1]++;
                 if (indexBox[BOX_SIZE - 1] > indexUpb[BOX_SIZE - 1]) moveBox();
