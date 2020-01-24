@@ -1,4 +1,4 @@
-import LottoBase, {LData} from '../Lotto/LottoBase'
+import LottoBase, {LData} from '../Lotto/Base'
 import PosAnalyze from './PosAnalyze'
 interface HarmonyData {
     one: number;

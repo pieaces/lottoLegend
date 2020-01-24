@@ -8,7 +8,7 @@ const posLowCount = require('../../json/Expectation/lowCount.json');
 const pos$3Count = require('../../json/Expectation/$3Count.json');
 const posAC = require('../../json/Expectation/AC.json');
 const posDiffMaxMin = require('../../json/Expectation/diffMaxMin.json');
-const posCarryCount = require('../../json/Expectation/carrycount.json');
+const posCarryCount = require('../../json/Expectation/carryCount.json');
 
 const ExpectationMixIn = <TBase extends Constructor>(Base: TBase) =>
     class extends Base {

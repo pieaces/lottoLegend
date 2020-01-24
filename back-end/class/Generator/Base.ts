@@ -1,19 +1,18 @@
 /*
-전회차 번호 표시 => 포함 및 제외
-뜨거운 수, 차가운 수 표시 => 포함 및 제외
-제외할 공색(0,1,2,3,4) 중 택
-저값(0~6) 값
-십의자리 합(0~24) 범위
-번호합 (21~255) 범위
-고저차(5~44) 범위
-AC값(0~10) 값 or 범위
-홀수갯수(0~6) 값
-소수갯수(0~6) 값
-3의배수 갯수(0~6) 값
-이월갯수(0~6) 값 => 포함할 수 선택 나머지 제외.
-번호빈도 => 미출현번호, 차가운수 '포함할 수'
-번호빈도 => 뜨거운 수 최근 출현빈도, 번호간격, '제외할 수'
-연속번호 제외여부
+1. 이월수 => 포함 및 제외 최소 5제외
+2. 차가운 수 => 포함
+3. 뜨거운 수 => 제외
+4. 전멸번호 => 제외
+5. 번호합(21~255) => 필터
+6. 홀수갯수(0~6) => 필터
+7. 소수갯수(0~6) => 필터
+8. 3배수갯수(0~6) => 필터
+9. 저갯수(0~6) => 필터
+10. 고저차(5~44) => 필터
+11. 첫수합(0~24) => 필터
+12. AC(0~10) => 필터
+
++ 궁합수, 끝수합, 연속번호 제외여부
 */
 import Calculate from '../Statistics/Calculate'
 import { Range } from 'immutable';
@@ -22,11 +21,6 @@ export type ZeroToFour = 0 | 1 | 2 | 3 | 4;
 export type ZeroToSix = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 export type LottoNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 | 42 | 43 | 44 | 45;
 export type Range = { from: number, to: number };
-
-const constraintSum$10 = require('../../json/Generator/sum$10.json');
-const constraintSum = require('../../json/Generator/sum_compressed.json');
-const constraintDiffMaxMin = require('../../json/Generator/diffMaxMin_compressed.json');
-const constraintAC = require('../../json/Generator/AC_compressed.json');
 
 export default class GeneratorBase {
     protected exceptedLines: ZeroToFour[];

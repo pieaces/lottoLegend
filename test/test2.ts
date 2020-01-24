@@ -36,7 +36,7 @@ gen.generate();
 
 //console.log(gen.getGeneratedNumbers(), gen.getGeneratedNumbers().length);
 const date2 = new Date();
-console.log(gen.getGeneratedNumbers().length, Number(date2) - Number(date));
+console.log(gen.getGeneratedNumbers().length + '개', Number(date2) - Number(date) + 'ms');
 /*
 console.log('10', gen.setInclude([3,7]));
 console.log('11', gen.setExclude([25]));
