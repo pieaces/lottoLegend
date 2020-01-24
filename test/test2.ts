@@ -1,5 +1,6 @@
 import Generator from '../back-end/class/Generator/Generator'
 import { ZeroToFour, ZeroToSix, LottoNumber } from '../back-end/class/Generator/Base';
+import Calculate from '../back-end/class/Statistics/Calculate';
 const readlineSync = require('readline-sync');
 
 const date = new Date();
@@ -20,8 +21,9 @@ const gen = new Generator();
 13. 연속번호 제외여부
 */
 
-gen.setExceptedLines([4]);
+gen.setExceptedLines([3,4]);
 gen.setLowCount(2);
+/*
 gen.setSum$10({from:10, to:12});
 gen.setSum({from:140, to:160});
 gen.setDiffMaxMin({from:32, to:37});
@@ -30,12 +32,14 @@ gen.setOddCount(3);
 gen.setPrimeCount(2);
 gen.set$3Count(2);
 gen.onConsecutiveExclude(true);
-gen.setExclude([]);
-gen.setInclude([]);
+gen.setExclude([1,10,20,30,40]);
+gen.setInclude([12]);
+*/
 gen.generate();
 
 //console.log(gen.getGeneratedNumbers(), gen.getGeneratedNumbers().length);
 const date2 = new Date();
+console.log(gen.sumSet);
 console.log(gen.getGeneratedNumbers().length + '개', Number(date2) - Number(date) + 'ms');
 /*
 console.log('10', gen.setInclude([3,7]));

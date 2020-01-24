@@ -29,34 +29,19 @@ function constraintJSON(method: (box: number[]) => number) {
     const SIZE = 6;
     const box = [6, 5, 4, 3, 2, 1];
 
-    const map = new Map<number[], Set<number>>();
+    const obj:any = {};
 
     while (true) {
         const excepted = exceptedLines(box);
 
-        const mapDArr = [...map.keys()];
-        let outCheck = true;
-        for (let i = 0; i < mapDArr.length; i++) {
-            if (mapDArr[i].length === excepted.length) {
-                let innerCheck = true;
-                for (let j = 0; j < mapDArr[i].length; j++) {
-                    if (mapDArr[i][j] !== excepted[j]) {
-                        innerCheck = false;
-                        break;
-                    }
-                }
-                if (innerCheck) {
-                    const target = mapDArr[i];
-                    const value = map.get(target);
-                    value.add(method(box));
-                    map.set(target, value);
-                    outCheck = false;
-                }
-            }
+        const key = excepted.join('');
+
+        if(obj.hasOwnProperty(key)){
+            obj[key].add(method(box));
+        }else{
+            obj[key] = new Set<number>([method(box)]);
         }
-        if (outCheck) {
-            map.set(excepted, new Set<number>([method(box)]));
-        }
+
         if (box[SIZE - 1] === ub[SIZE - 1]) {
             break;
         }
@@ -67,8 +52,10 @@ function constraintJSON(method: (box: number[]) => number) {
         }
     }
     let str = "{\n";
-    map.forEach((value, key) => {
-        const arr = [...value].sort((a, b) => a - b);
+    for(let prop in obj){
+        const key = prop;
+        const value = obj[prop];
+        const arr = [...value].sort((a:number, b:number) => a - b);
         //압축시키는 코드 예) 1,2,3,4 => 1,4
         let flag = true;
         for(let i =1; i<arr.length; i++){
@@ -84,8 +71,9 @@ function constraintJSON(method: (box: number[]) => number) {
             temp = arr;
         }
         ////
-        str += (`\t"${key.join('')}": [${temp.join(', ')}],\n`);
-    });
+        str += (`\t"${key}": [${temp.join(', ')}],\n`);
+    }
+
     str = str.slice(0, -2);
     str += '\n}';
     return str;
@@ -97,7 +85,7 @@ function constraintJSON(method: (box: number[]) => number) {
 //3(box: number[]) => Calculate.diffMaxMin(box);
 //4(box: number[]) => Calculate.AC(box)
 
-const mode: number = 4;
+const mode: number = 1;
 let method, str;
 switch (mode) {
     case 1:
@@ -119,5 +107,5 @@ switch (mode) {
 }
 
 const data: string = constraintJSON(method);
-fs.writeFileSync(`./back-end/json/${str}_compressed.json`, data);
+fs.writeFileSync(`./back-end/json/Generator/${str}_compressed.json`, data);
 console.log('완료');
