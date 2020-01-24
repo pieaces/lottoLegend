@@ -7,7 +7,7 @@ export type Range = { from: number, to: number };
 
 export interface GeneratorOption{
     exceptedLines?: ZeroToFour[];
-    lowCount?: ZeroToSix;
+    lowCount: ZeroToSix;
     oddCount?: ZeroToSix;
     primeCount?: ZeroToSix;
     $3Count?: ZeroToSix;

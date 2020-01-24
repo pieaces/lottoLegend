@@ -1,7 +1,7 @@
 import Generator from '../back-end/class/Generator/Generator'
 
 const date = new Date();
-const gen = new Generator({exceptedLines:[2]});
+const gen = new Generator({exceptedLines:[2], lowCount:2});
 /*
 
 gen.setSum({from:140, to:160});
