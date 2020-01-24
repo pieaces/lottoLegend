@@ -33,7 +33,16 @@ export default class Confirmer extends Configurer {
     protected checkConsecutiveExist(numbers: LottoNumber[]): boolean {
         return Calculate.consecutiveExist(numbers) === 1 //1일경우 존재함. 0일경우 존재하지않음.
     }
-
+    protected checkExceptedLines(numbers: LottoNumber[]): boolean {
+            const set = new Set<number>();
+            for(let i = 0; i<numbers.length; i++){
+                set.add(Math.floor(numbers[i]/10));
+            }
+            for(let i=0; i<this.exceptedLines.length; i++){
+                set.add(this.exceptedLines[i]);
+            }
+            return set.size === 5;
+    }
     constraintSum():Range{
         const range = constraintSum[this.lowCount.toString() + this.exceptedLines.join('')];
         return {from:range[0], to:range[1]};

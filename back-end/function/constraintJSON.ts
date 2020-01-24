@@ -34,8 +34,10 @@ function constraintJSON(method: (box: number[]) => number) {
     while (true) {
         const excepted = exceptedLines(box);
 
+        if(box[5] === 1 && box[4] === 2 && box[3] === 23 && box[2] ===24 && box[1] ===25){
+            console.log(box, exceptedLines(box));
+        }
         const key = excepted.join('');
-
         if(obj.hasOwnProperty(key)){
             obj[key].add(method(box));
         }else{

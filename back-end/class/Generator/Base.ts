@@ -11,45 +11,12 @@ export default class Base {
     protected oddCount: ZeroToSix;
     protected primeCount: ZeroToSix;
     protected $3Count: ZeroToSix;
-    protected sum: Range = {from:21, to:255};
-    protected sum$10: Range = {from:0, to:24};
-    protected diffMaxMin: Range = {from: 5, to: 44};
-    protected AC: Range = {from:0, to:10};
+    protected sum: Range;
+    protected sum$10: Range;
+    protected diffMaxMin: Range;
+    protected AC: Range;
     protected includeNumbers: LottoNumber[] = [];
     protected excludeNumbers: LottoNumber[] = [];
-    //
-    protected stautsConsecutive: boolean = false;
-    protected statusSum:boolean = false;
-    protected statusSum$10:boolean = false;
-    protected statusDiffMaxMin:boolean = false;
-    protected statusOddCount:boolean = false;
-    protected statusPrimeCount:boolean = false;
-    protected status$3Count:boolean = false;
-    protected statusAC:boolean = false;
+    protected consecutiveExclude: boolean = false;
     protected constructor() {}
-
-    onConsecutiveExclude(check: boolean=true): void {
-        this.stautsConsecutive = check;
-    }
-    onSum(check: boolean=true): void {
-        this.statusSum = check;
-    }
-    onSum$10(check: boolean=true): void {
-        this.statusSum$10 = check;
-    }
-    onDiffMaxMin(check: boolean=true): void {
-        this.statusDiffMaxMin = check;
-    }
-    onAC(check: boolean=true): void {
-        this.statusAC = check;
-    }
-    onOddCount(check: boolean=true): void {
-        this.statusOddCount = check;
-    }
-    onPrimeCount(check: boolean=true): void {
-        this.statusPrimeCount = check;
-    }
-    on$3Count(check: boolean=true): void {
-        this.status$3Count = check;
-    }
 }

@@ -5,41 +5,24 @@ const readlineSync = require('readline-sync');
 
 const date = new Date();
 const gen = new Generator();
-/*
-1. 제외할 공색(0,1,2,3,4) 중 택
-2. 저값(0~6) 값
-3. 십의자리 합(0~24) 범위
-4. 번호합 (21~255) 범위
-5. 고저차(5~44) 범위
-6. AC값(0~10) 값 or 범위
-7. 홀수갯수(0~6) 값
-8. 소수갯수(0~6) 값
-9. 3의배수 갯수(0~6) 값
-10 이월갯수(0~6) 값 => 포함할 수 선택 나머지 제외.
-11. 번호빈도 => 미출현번호, 차가운수 '포함할 수'
-12. 번호빈도 => 뜨거운 수 최근 출현빈도, 번호간격, '제외할 수'
-13. 연속번호 제외여부
-*/
-
-gen.setExceptedLines([3,4]);
+gen.setExceptedLines([4]);
 gen.setLowCount(2);
 /*
-gen.setSum$10({from:10, to:12});
+
 gen.setSum({from:140, to:160});
+gen.setSum$10({from:10, to:12});
 gen.setDiffMaxMin({from:32, to:37});
 gen.setAC({from:5, to:5});
 gen.setOddCount(3);
 gen.setPrimeCount(2);
 gen.set$3Count(2);
-gen.onConsecutiveExclude(true);
-gen.setExclude([1,10,20,30,40]);
-gen.setInclude([12]);
+gen.setExclude([20]);
+gen.setInclude([]);
 */
 gen.generate();
-
-//console.log(gen.getGeneratedNumbers(), gen.getGeneratedNumbers().length);
 const date2 = new Date();
-console.log(gen.sumSet);
+console.log([...gen.sumSet][0], [...gen.sumSet][[...gen.sumSet].length-1]);
+//gen.getGeneratedNumbers().forEach(value => console.log(value));
 console.log(gen.getGeneratedNumbers().length + '개', Number(date2) - Number(date) + 'ms');
 /*
 console.log('10', gen.setInclude([3,7]));
