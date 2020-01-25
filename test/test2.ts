@@ -9,12 +9,12 @@ const date = new Date();
 const gen = new Generator({
     lowCount:2,
     //exceptedLines:[4],
-    excludeNumbers:[2,17,31,32,34,37,38,40,41,42],
+    excludeNumbers:[2,17,31,32,34,37,38],
     includeNumbers:[],
     sum:{from:140, to:160},
-    oddCount:6,
-    primeCount:1,
-    $3Count:2,
+    oddCount:{from:4, to:4},
+    primeCount:{from:2, to:2},
+    $3Count:{from:2,to:2},
 });
 
 gen.generate();

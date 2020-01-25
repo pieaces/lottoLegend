@@ -1,4 +1,4 @@
-import Base, { GeneratorOption, LottoNumber, Range } from "./Base";
+import Base, { GeneratorOption, LottoNumber, Range, CountRange } from "./Base";
 import Calculate from "../Statistics/Calculate";
 
 const constraintSum = require('../../json/Generator/sum_compressed.json');
@@ -8,13 +8,16 @@ export default class Confirmer extends Base {
         super(option);
     }
     protected checkOddCount(numbers: LottoNumber[]): boolean {
-        return Calculate.oddCount(numbers) === this.option.oddCount;
+        const oddCount = Calculate.oddCount(numbers);
+        return this.option.oddCount.from <= oddCount && oddCount <= this.option.oddCount.to;
     }
     protected checkPrimeCount(numbers: LottoNumber[]): boolean {
-        return Calculate.primeCount(numbers) === this.option.primeCount;
+        const primeCount = Calculate.primeCount(numbers);
+        return this.option.primeCount.from <= primeCount && primeCount <= this.option.primeCount.to;
     }
     protected check$3Count(numbers: LottoNumber[]): boolean {
-        return Calculate.$3Count(numbers) === this.option.$3Count;
+        const $3Count = Calculate.$3Count(numbers);
+        return this.option.$3Count.from <= $3Count && $3Count <= this.option.$3Count.to;
     }
     protected checkSum$10(numbers: LottoNumber[]): boolean {
         const sum$10 = Calculate.sum$10(numbers);
