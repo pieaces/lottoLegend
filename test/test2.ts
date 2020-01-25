@@ -19,7 +19,7 @@ const gen = new Generator({
 
 gen.generate();
 const date2 = new Date();
-console.log([...gen.numberSet][0], [...gen.numberSet][[...gen.numberSet].length-1]);
+console.log([...gen.rangeSet][0], [...gen.rangeSet][[...gen.rangeSet].length-1]);
 //gen.getGeneratedNumbers().forEach(value => console.log(value));
 console.log(gen.getGeneratedNumbers().length + '개', Number(date2) - Number(date) + 'ms');
 /*

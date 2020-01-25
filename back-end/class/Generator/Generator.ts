@@ -4,7 +4,8 @@ import Check from './Check';
 
 export default class Generator extends Check {
     protected generatedNumbers: Array<LottoNumber[]> = [];
-    numberSet: Set<LottoNumber> = new Set<LottoNumber>();
+    rangeSet: Set<number>;
+    rangeFinder:(numbers:number[])=>number;
     constructor(option: GeneratorOption) { super(option); }
 
     getGeneratedNumbers(): Array<LottoNumber[]> {
@@ -12,11 +13,12 @@ export default class Generator extends Check {
     }
 
     generate(): void {
+        this.rangeSet = new Set<number>();
         const list: LottoNumber[] = [];
 
         let highIndex = -1;
         for (let i = 1; i <= 45; i++) {
-            const notExistExcept: boolean = this.option.exceptedLines ? this.option.exceptedLines.indexOf(<ZeroToFour>Math.floor((i) / 10)) === -1 : true;
+            const notExistExcept: boolean = this.option.excludedLines ? this.option.excludedLines.indexOf(<ZeroToFour>Math.floor((i) / 10)) === -1 : true;
             const notExistExclude = this.option.excludeNumbers ? this.option.excludeNumbers.indexOf(<LottoNumber>(i)) === -1 : true;
             const notExistInclude = this.option.includeNumbers ? this.option.includeNumbers.indexOf((i) as LottoNumber) === -1 : true;
             if (notExistExcept && notExistExclude && notExistInclude) {
@@ -88,12 +90,12 @@ export default class Generator extends Check {
             } else if (this.option.$3Count && !this.check$3Count(box)) {
             } else if (this.option.diffMaxMin && !this.checkDiffMinMax(box)) {
             } else if (this.option.sum$10 && !this.checkSum$10(box)) {
-            } else if (this.option.exceptedLines && !this.checkExceptedLines(box)) {
+            } else if (this.option.excludedLines && !this.checkExceptedLines(box)) {
             } else if (this.option.AC && !this.checkAC(box)) {
             } else if (this.option.consecutiveExclude && this.checkConsecutiveExist(box.sort((a, b) => a - b))) {//제외하라고 했는데, 연속번호 존재하면 여기서 걸림. +여기서 정렬은 배열을 바꿈
             } else {//모든 조건상황에서도 참이었을 때,
                 result.push(box);
-                this.numberSet.add(Calculate.sum(box) as LottoNumber);
+                if(this.rangeFinder) this.rangeSet.add(this.rangeFinder(box));
             }
 
             if (indexBox[0] === indexUpb[0] && indexBox[this.option.lowCount] === indexUpb[this.option.lowCount]) break;

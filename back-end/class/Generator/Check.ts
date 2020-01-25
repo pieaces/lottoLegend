@@ -43,13 +43,13 @@ export default class Confirmer extends Base {
             for(let i = 0; i<numbers.length; i++){
                 set.add(Math.floor(numbers[i]/10));
             }
-            for(let i=0; i<this.option.exceptedLines.length; i++){
-                set.add(this.option.exceptedLines[i]);
+            for(let i=0; i<this.option.excludedLines.length; i++){
+                set.add(this.option.excludedLines[i]);
             }
             return set.size === 5;
     }
     constraintSum():Range{
-        const range = constraintSum[this.option.lowCount.toString() + this.option.exceptedLines.join('')];
+        const range = constraintSum[this.option.lowCount.toString() + this.option.excludedLines.join('')];
         return {from:range[0], to:range[1]};
     }
 }

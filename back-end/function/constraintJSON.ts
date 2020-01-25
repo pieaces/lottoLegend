@@ -34,9 +34,6 @@ function constraintJSON(method: (box: number[]) => number) {
     while (true) {
         const excepted = exceptedLines(box);
 
-        if(box[5] === 1 && box[4] === 2 && box[3] === 23 && box[2] ===24 && box[1] ===25){
-            console.log(box, exceptedLines(box));
-        }
         const key = excepted.join('');
         if(obj.hasOwnProperty(key)){
             obj[key].add(method(box));
@@ -87,7 +84,7 @@ function constraintJSON(method: (box: number[]) => number) {
 //3(box: number[]) => Calculate.diffMaxMin(box);
 //4(box: number[]) => Calculate.AC(box)
 
-const mode: number = 1;
+const mode: number = 5;
 let method, str;
 switch (mode) {
     case 1:
@@ -105,6 +102,10 @@ switch (mode) {
     case 4:
         method = (box: number[]) => Calculate.AC(box);
         str = 'AC'
+        break;
+    case 5:
+        method = (box: number[]) => Calculate.lowCount(box);
+        str = 'lowCount'
         break;
 }
 

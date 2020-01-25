@@ -1,0 +1,122 @@
+import Generator from '../back-end/class/Generator/Generator'
+import { ZeroToFour, ZeroToSix, LottoNumber, GeneratorOption } from '../back-end/class/Generator/Base';
+import Calculate from '../back-end/class/Statistics/Calculate';
+const readlineSync = require('readline-sync');
+////
+const constraintLowCount = require('../back-end/json/Generator/lowCount_compressed.json');
+const constraintSum = require('../back-end/json/Generator/sum_compressed.json');
+////
+function cout(str:string, obj:any=""){
+    console.log(str, obj);
+}
+
+cout('로또 번호 생성기[알파고 엔진 v 1.0.1]\n');
+
+const option:GeneratorOption = { lowCount:3 };
+
+const excludedLines: string = readlineSync.question('excludedLines: (split with "," 1,2,3)');
+let excludedLinesArr:ZeroToFour[];
+if(excludedLines){
+    if(excludedLines === ' ') excludedLinesArr = [];
+    else excludedLinesArr = excludedLines.split(',').map(value => Number(value) as ZeroToFour);
+}
+cout('전멸라인: ',excludedLinesArr);
+cout('');
+option.excludedLines = excludedLinesArr;
+
+
+console.log('가용범위: ',constraintLowCount[excludedLinesArr.join('')].join('~'));
+const lowCount: string = readlineSync.question('lowCount: (0~6)');
+const lowCountNum = Number(lowCount) as ZeroToSix;
+cout('저값 개수: ', lowCountNum);
+cout('');
+option.lowCount = lowCountNum;
+////////////////////////
+const constraintConstant = lowCount.toString() + excludedLinesArr.join('');
+const sum: string = readlineSync.question(`sumRange: ${constraintSum[constraintConstant].join('~')} / (21~255)`);
+let range = sum.split(',').map(value => Number(value));
+cout('번호합 범위: ', range);
+cout('');
+option.sum = { from: range[0] as LottoNumber, to: range[1] as LottoNumber };
+
+const gen = new Generator(option);
+const generate = ():void=>{
+    const date1 = new Date();
+    gen.generate();
+    const date2 = new Date();
+    console.log(Number(date2) - Number(date1),'ms');
+}
+
+gen.rangeFinder = Calculate.oddCount;
+generate();
+cout('필터링된 번호개수: ' ,gen.getGeneratedNumbers().length);
+console.log('가용범위: ',[...gen.rangeSet].sort((a,b)=>a-b));
+////////////////////////
+const oddCount: string = readlineSync.question('oddCountRange: (0~6)');
+range = oddCount.split(',').map(value => Number(value));
+cout('홀수 범위: ', range);
+cout('');
+option.oddCount = { from: range[0] as ZeroToSix, to: range[1] as ZeroToSix };
+
+gen.rangeFinder = Calculate.primeCount;
+generate();
+cout('필터링된 번호개수: ' ,gen.getGeneratedNumbers().length);
+console.log('가용범위: ',[...gen.rangeSet].sort((a,b)=>a-b));
+////////////////////////
+const primeCount: string = readlineSync.question('primeCountRange: (0~6)');
+range = primeCount.split(',').map(value => Number(value));
+cout('소수 범위: ', range);
+cout('');
+option.primeCount = { from: range[0] as ZeroToSix, to: range[1] as ZeroToSix };
+
+gen.rangeFinder = Calculate.$3Count;
+generate();
+cout('필터링된 번호개수: ' ,gen.getGeneratedNumbers().length);
+console.log('가용범위: ',[...gen.rangeSet].sort((a,b)=>a-b));
+////////////////////////
+const $3Count: string = readlineSync.question('$3CountRange: (0~6)');
+range = $3Count.split(',').map(value => Number(value));
+cout('3배수 범위: ', range);
+cout('');
+option.$3Count = { from: range[0] as ZeroToSix, to: range[1] as ZeroToSix };
+
+gen.rangeFinder = Calculate.diffMaxMin;
+generate();
+cout('필터링된 번호개수: ' ,gen.getGeneratedNumbers().length);
+console.log('가용범위: ',[...gen.rangeSet][0], [...gen.rangeSet][[...gen.rangeSet].length-1]);
+////////////////////////
+console.log([...gen.rangeSet][0], [...gen.rangeSet][[...gen.rangeSet].length-1]);
+const diffMaxMin: string = readlineSync.question(`difference between Max and Min: (5~44)`);
+range = diffMaxMin.split(',').map(value => Number(value));
+cout('고저차범위: ', range);
+cout('');
+option.diffMaxMin = { from: range[0] as ZeroToSix, to: range[1] as ZeroToSix };
+
+gen.rangeFinder = Calculate.sum$10;
+generate();
+cout('필터링된 번호개수: ' ,gen.getGeneratedNumbers().length);
+console.log('가용범위: ',[...gen.rangeSet][0], [...gen.rangeSet][[...gen.rangeSet].length-1]);
+////////////////////////
+console.log([...gen.rangeSet][0], [...gen.rangeSet][[...gen.rangeSet].length-1]);
+const sum$10: string = readlineSync.question(`sum$10Range: / (0~24)`);
+range = sum$10.split(',').map(value => Number(value));
+cout('십의자리 합 범위: ', range);
+cout('');
+option.sum$10 = { from: range[0] as LottoNumber, to: range[1] as LottoNumber };
+
+gen.rangeFinder = Calculate.AC;
+generate();
+cout('필터링된 번호개수: ' ,gen.getGeneratedNumbers().length);
+console.log('가용범위: ',[...gen.rangeSet][0], [...gen.rangeSet][[...gen.rangeSet].length-1]);
+////////////////////////
+console.log([...gen.rangeSet][0], [...gen.rangeSet][[...gen.rangeSet].length-1]);
+const AC: string = readlineSync.question(`AC: (0~10)`);
+range = AC.split(',').map(value => Number(value));
+cout('3배수 범위: ', range);
+cout('');
+option.AC = { from: range[0] as ZeroToSix, to: range[1] as ZeroToSix };
+
+generate();
+console.log(gen.getGeneratedNumbers());
+console.log(gen.getGeneratedNumbers().length);
+////////////////////////
