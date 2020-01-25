@@ -1,19 +1,22 @@
 import Generator from '../back-end/class/Generator/Generator'
-
-const date = new Date();
-const gen = new Generator({exceptedLines:[2], lowCount:2});
 /*
-
-gen.setSum({from:140, to:160});
-gen.setSum$10({from:10, to:12});
-gen.setDiffMaxMin({from:32, to:37});
-gen.setAC({from:5, to:5});
-gen.setOddCount(3);
-gen.setPrimeCount(2);
-gen.set$3Count(2);
-gen.setExclude([20]);
-gen.setInclude([]);
+전회차 이월여부로 포함,제외
+뜨거운수, 차가운수(번호간격, 최근출현) + 번호별퍼센트 로 포함,제외
+전멸라인 설정으로 제외
+위의 설정으로 10개 수 제외시킬 것.
 */
+const date = new Date();
+const gen = new Generator({
+    lowCount:2,
+    //exceptedLines:[4],
+    excludeNumbers:[2,17,31,32,34,37,38,40,41,42],
+    includeNumbers:[],
+    sum:{from:140, to:160},
+    oddCount:6,
+    primeCount:1,
+    $3Count:2,
+});
+
 gen.generate();
 const date2 = new Date();
 console.log([...gen.numberSet][0], [...gen.numberSet][[...gen.numberSet].length-1]);

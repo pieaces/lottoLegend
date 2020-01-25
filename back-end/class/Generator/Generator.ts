@@ -78,7 +78,6 @@ export default class Generator extends Check {
         const result: Array<LottoNumber[]> = [];
         while (true) {
             const box: LottoNumber[] = [];
-
             for (let i = 0; i < INCLUDE_SIZE; i++) box[i] = this.option.includeNumbers[i];
             for (let i = INCLUDE_SIZE; i < INCLUDE_SIZE + BOX_SIZE; i++) box[i] = list[indexBox[i - INCLUDE_SIZE]] as LottoNumber
 
@@ -97,7 +96,7 @@ export default class Generator extends Check {
                 this.numberSet.add(Calculate.sum(box) as LottoNumber);
             }
 
-            if (indexBox[0] === indexUpb[0] && indexBox[this.option.lowCount]) break;
+            if (indexBox[0] === indexUpb[0] && indexBox[this.option.lowCount] === indexUpb[this.option.lowCount]) break;
             else {
                 indexBox[BOX_SIZE - 1]++;
                 if (indexBox[BOX_SIZE - 1] > indexUpb[BOX_SIZE - 1]) moveBox();
