@@ -19,9 +19,10 @@ export default class Calculate {
 
     static oddCount(numbers: number[]): number {
         let count = 0;
-        numbers.forEach(value => {
-            if (value % 2 === 1) count++;
-        });
+        for(let i =0; i<numbers.length; i++){
+            if(numbers[i] % 2 === 1) count++;
+        }
+        //numbers.forEach(value => {if (value % 2 === 1) count++;});
         return count;
     }
     static primeCount(numbers:number[]): number {
@@ -46,7 +47,12 @@ export default class Calculate {
     }
 
     static sum(numbers: number[]): number {
-        return numbers.reduce((acc, cur) => acc + cur, 0);
+        let sum=0;
+        for(let i=0; i<numbers.length; i++){
+            sum += numbers[i];
+        }
+        return sum
+        //return numbers.reduce((acc, cur) => acc + cur, 0);
     }
     static sum$10(numbers: number[]): number {
         let sum=0;

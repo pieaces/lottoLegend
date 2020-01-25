@@ -105,29 +105,30 @@ cout('3배수 범위: ', range);
 cout('');
 option.$3Count = { from: range[0] as ZeroToSix, to: range[1] as ZeroToSix };
 
-gen.rangeFinder = Calculate.diffMaxMin;
+gen.rangeFinder = Calculate.sum$10;
 generate();
 cout('필터링된 번호개수: ' ,gen.getGeneratedNumbers().length);
 let capableRange = [...gen.rangeSet].sort((a,b)=>a-b);
 console.log('가용범위: ',capableRange[0],capableRange[capableRange.length-1]);
 ////////////////////////
-const diffMaxMin: string = readlineSync.question(`9.difference between Max and Min: (5~44)`);
-range = diffMaxMin.split(',').map(value => Number(value));
-cout('고저차범위: ', range);
+const sum$10: string = readlineSync.question(`9.sum$10Range: / (0~24)`);
+range = sum$10.split(',').map(value => Number(value));
+cout('십의자리 합 범위: ', range);
 cout('');
-option.diffMaxMin = { from: range[0] as ZeroToSix, to: range[1] as ZeroToSix };
+option.sum$10 = { from: range[0] as LottoNumber, to: range[1] as LottoNumber };
 
-gen.rangeFinder = Calculate.sum$10;
+
+gen.rangeFinder = Calculate.diffMaxMin;
 generate();
 cout('필터링된 번호개수: ' ,gen.getGeneratedNumbers().length);
 capableRange = [...gen.rangeSet].sort((a,b)=>a-b);
 console.log('가용범위: ',capableRange[0],capableRange[capableRange.length-1]);
 ////////////////////////
-const sum$10: string = readlineSync.question(`10.sum$10Range: / (0~24)`);
-range = sum$10.split(',').map(value => Number(value));
-cout('십의자리 합 범위: ', range);
+const diffMaxMin: string = readlineSync.question(`10.difference between Max and Min: (5~44)`);
+range = diffMaxMin.split(',').map(value => Number(value));
+cout('고저차범위: ', range);
 cout('');
-option.sum$10 = { from: range[0] as LottoNumber, to: range[1] as LottoNumber };
+option.diffMaxMin = { from: range[0] as ZeroToSix, to: range[1] as ZeroToSix };
 
 gen.rangeFinder = Calculate.AC;
 generate();
