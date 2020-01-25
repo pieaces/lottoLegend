@@ -8,13 +8,14 @@ import Generator from '../back-end/class/Generator/Generator'
 const date = new Date();
 const gen = new Generator({
     lowCount:2,
-    //exceptedLines:[4],
-    excludeNumbers:[2,17,31,32,34,37,38],
+    excludedLines:[4],
+    excludeNumbers:[19,32,36,37],
     includeNumbers:[],
-    sum:{from:140, to:160},
-    oddCount:{from:4, to:4},
-    primeCount:{from:2, to:2},
+    sum:{from:150, to:170},
+    oddCount:{from:2, to:3},
+    primeCount:{from:0, to:1},
     $3Count:{from:2,to:2},
+    sum$10: {from:11,to:12},
 });
 
 gen.generate();

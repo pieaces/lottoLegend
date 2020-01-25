@@ -49,7 +49,12 @@ export default class Calculate {
         return numbers.reduce((acc, cur) => acc + cur, 0);
     }
     static sum$10(numbers: number[]): number {
-        return numbers.reduce((acc, cur) => acc + Math.floor(cur / 10), 0);
+        let sum=0;
+        for(let i=0; i<numbers.length; i++){
+            sum += Math.floor(numbers[i]/10);
+        }
+        return sum
+        //return numbers.reduce((acc, cur) => acc + Math.floor(cur / 10), 0);
     }
     static sum$1(numbers: number[]): number {
         return numbers.reduce((acc, cur) => acc + cur % 10, 0);
@@ -63,7 +68,13 @@ export default class Calculate {
     }
 
     static diffMaxMin(numbers: number[]): number {
-        return Calculate.max(numbers) - Calculate.min(numbers);
+        let min=numbers[0], max = numbers[0];
+        for(let i=1; i<numbers.length; i++){
+            if(min > numbers[i]) min = numbers[i];
+            if(max < numbers[i]) max = numbers[i];
+        }
+        return max-min;
+        //return Calculate.max(numbers) - Calculate.min(numbers);
     }
 
     static AC(numbers: number[]): number {
