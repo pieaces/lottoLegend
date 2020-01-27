@@ -109,7 +109,7 @@ gen.rangeFinder = Calculate.sum$10;
 generate();
 cout('필터링된 번호개수: ' ,gen.getGeneratedNumbers().length);
 let capableRange = [...gen.rangeSet].sort((a,b)=>a-b);
-console.log('가용범위: ',capableRange[0],capableRange[capableRange.length-1]);
+console.log('가용범위: ',capableRange);
 ////////////////////////
 const sum$10: string = readlineSync.question(`9.sum$10Range: / (0~24)`);
 range = sum$10.split(',').map(value => Number(value));
@@ -122,7 +122,7 @@ gen.rangeFinder = Calculate.diffMaxMin;
 generate();
 cout('필터링된 번호개수: ' ,gen.getGeneratedNumbers().length);
 capableRange = [...gen.rangeSet].sort((a,b)=>a-b);
-console.log('가용범위: ',capableRange[0],capableRange[capableRange.length-1]);
+console.log('가용범위: ',capableRange);
 ////////////////////////
 const diffMaxMin: string = readlineSync.question(`10.difference between Max and Min: (5~44)`);
 range = diffMaxMin.split(',').map(value => Number(value));
@@ -134,7 +134,7 @@ gen.rangeFinder = Calculate.AC;
 generate();
 cout('필터링된 번호개수: ' ,gen.getGeneratedNumbers().length);
 capableRange = [...gen.rangeSet].sort((a,b)=>a-b);
-console.log('가용범위: ',capableRange[0],capableRange[capableRange.length-1]);
+console.log('가용범위: ',capableRange);
 ////////////////////////
 const AC: string = readlineSync.question(`11.AC: (0~10)`);
 range = AC.split(',').map(value => Number(value));

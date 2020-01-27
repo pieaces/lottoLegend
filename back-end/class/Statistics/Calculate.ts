@@ -6,7 +6,7 @@ export default class Calculate {
         return numsArray.map(numbers => method(numbers));
     }
 
-    static exceptedLineCount(numbers: number[]): number {
+    static excludedLineCount(numbers: number[]): number {
         const SIZE = 5;
         const set = new Set<number>();
 

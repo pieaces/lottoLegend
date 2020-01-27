@@ -12,7 +12,7 @@ export default class Lotto extends Gather {
         return Statistics.getStats(Calculate.getData(this.getLNumbers(mode), method))
     }
     statsExceptedLineCount(mode: number = this.mode): Stats {
-        return this.getStats(Calculate.exceptedLineCount, mode);
+        return this.getStats(Calculate.excludedLineCount, mode);
     }
 
     statsSum$10(mode: number = this.mode): Stats {
