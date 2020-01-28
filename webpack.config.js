@@ -6,7 +6,7 @@ module.exports = {
   mode: 'development',
   entry: './front-end/js/lotto-func1.ts',
   output: {
-    filename: 'lotto-func1.bundle.js',
+    filename: 'lotto-func1.js',
     path: path.resolve(__dirname, 'dist')
   },
   module: {

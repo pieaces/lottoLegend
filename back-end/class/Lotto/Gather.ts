@@ -1,13 +1,8 @@
 import Calculate from '../Statistics/Calculate'
 import Analyze from '../Analyze/Analyze'
 import Base, {LData} from './Base'
-import ExpectationMixIn from './ExpectationMixin'
+import ExpectationMixIn, {Params} from './ExpectationMixin'
 
-interface Params{
-    from?:number;
-    to?:number;
-    mode?:number;
-}
 interface Helper extends Params{
     method: (numbers: number[])=> number;
 }
