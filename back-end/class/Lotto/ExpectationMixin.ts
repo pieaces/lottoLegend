@@ -1,5 +1,5 @@
 type Constructor<T = {}> = new (...args: any[]) => T;
-const posLineCount = require('../../json/Expectation/lineCount.json');
+const posLineCount = require('../../json/Expectation/excludedLineCount.json');
 const posSum$10 = require('../../json/Expectation/sum$10.json');
 const posSum = require('../../json/Expectation/sum.json');
 const posPrimeCount = require('../../json/Expectation/primeCount.json');
