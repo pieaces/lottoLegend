@@ -14,18 +14,31 @@ const chart11 = new Chart(
 
     // The data for our dataset
     data: {
-      labels: ['30', '31', '32', '33', '34', '35', '36', '37',' 38', '39', '40', '41'],
+      labels: [
+        '30',
+        '31',
+        '32',
+        '33',
+        '34',
+        '35',
+        '36',
+        '37',
+        ' 38',
+        '39',
+        '40',
+        '41'
+      ],
       datasets: [
         {
           label: '실제 홀수',
           borderColor: '#0026ca',
-          data: lotto.gatherDiffMaxMinData({from:30, to:41}),
+          data: lotto.gatherDiffMaxMinData({ from: 30, to: 41 }),
           fill: false
         },
         {
           label: '이상적',
           borderColor: '#388e3c',
-          data: lotto.expectedDiffMaxMinData({from:30, to:41}),
+          data: lotto.expectedDiffMaxMinData({ from: 30, to: 41 }),
           fill: false
         }
       ]
@@ -61,7 +74,7 @@ const chart12 = new Chart(
         {
           label: '이상적',
           borderColor: '#388e3c',
-          data: method2({mode: 24}),
+          data: method2({ mode: 24 }),
           fill: false
         }
       ]
@@ -97,7 +110,7 @@ const chart21 = new Chart(
         {
           label: '이상적',
           borderColor: '#388e3c',
-          data: method2({mode: 48}),
+          data: method2({ mode: 48 }),
           fill: false
         }
       ]
