@@ -26,16 +26,19 @@ const ExpectationMixIn = <TBase extends Constructor>(Base: TBase) =>
             const pos:number[] = posExcludedLineCount;
             return pos.slice(from, to+1).map(value => value * params.mode);
         }
-        expectedLineCount(mode: number = this.mode): number[] {//1~9, 10~19, 20~29, 30~39, 40~45
+        expectedLineCount(params:Params={}): number[] {//1~9, 10~19, 20~29, 30~39, 40~45
+            const from = params.from || 0;
+            const to = params.to || 24;
+            const mode = params.mode || this.mode;
             const pos = [9 / 45, 10 / 45, 10 / 45, 10 / 45, 6 / 45];
-            return pos.map(value => value * (6 * mode));
+            return pos.slice(from, to+1).map(value => value * (6 * mode));
         }
         //십의자리 합의 기댓값
         expectedSum$10(params:Params={}): number[] { // 0~24
             const from = params.from || 0;
             const to = params.to || 24;
             const mode = params.mode || this.mode;
-            const pos:number[] = posSum;
+            const pos:number[] = posSum$10;
             return pos.slice(from, to+1).map(value => value * params.mode);
         }
         expectedSum(params:Params={}): number[] { // 21~255
