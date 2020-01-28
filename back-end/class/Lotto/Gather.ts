@@ -16,8 +16,13 @@ export default class Gather extends ExpectationMixIn(Base) {
     }
 
     private gatherHelper(helper:Helper):number[] {
-        const result = new Array<number>(helper.to - helper.from + 1).fill(0);
-        Calculate.getData(this.getLNumbers(helper.mode), helper.method).forEach(num => result[num - helper.from]++);
+        const result = new Array<number>(helper.to-helper.from+1).fill(0);
+        Calculate.getData(this.getLNumbers(helper.mode), helper.method).forEach(value =>{
+            if(helper.from <= value && value <= helper.to){
+                result[value-helper.from]++;
+            }
+        });
+
         return result;
     }
 
@@ -48,18 +53,12 @@ export default class Gather extends ExpectationMixIn(Base) {
         return this.gatherHelper(helper);
     }
 
-    gatherSum$10(numbers:number[], mode: number = this.mode): number[] {
-        let helper: Helper = {
-                method: Calculate.sum$10,
-                from:0, to:24, mode
-            };
-        const temp:number[] = this.gatherHelper(helper);
-        const result:number[] = [];
-        numbers.forEach(value => {
-            result.push(temp[value]);
-        })
-
-        return result;
+    gatherSum$10(from:number=0, to:number=24, mode:number = this.mode): number[] {
+        const helper:Helper = {
+            method:Calculate.sum$10,
+            from, to, mode
+        };
+        return this.gatherHelper(helper);
     }
     gatherSum$1(from:number, to:number, mode:number = this.mode):number[] {
         const helper:Helper = {
@@ -77,7 +76,7 @@ export default class Gather extends ExpectationMixIn(Base) {
         return this.gatherHelper(helper);
     }
 */
-    gatherSum55(from:number, to:number, mode:number = this.mode):number[] {//21~255
+    gatherSum55(from:number=21, to:number=255, mode:number = this.mode):number[] {//21~255
         const result = new Array<number>(Math.floor((to-from)/10)+1).fill(0);
         Calculate.getData(this.getLNumbers(mode), Calculate.sum).forEach(value =>{
             if(from <= value && value <= to){
@@ -88,69 +87,42 @@ export default class Gather extends ExpectationMixIn(Base) {
         return result;
     }
 
-    gatherOddCount(numbers:number[], mode:number = this.mode): number[] {
+    gatherOddCount(from:number=0, to:number=6, mode:number = this.mode): number[] {
         let helper: Helper = {
             method: Calculate.oddCount,
-            from: 0, to: 6, mode
+            from, to, mode
         };
-        const temp: number[] = this.gatherHelper(helper);
-        const result: number[] = [];
-        numbers.forEach(value => {
-            result.push(temp[value]);
-        })
-
-        return result;
+        return this.gatherHelper(helper);
     }
-    gatherPrimeCount(numbers:number[], mode:number = this.mode): number[] {
+    gatherPrimeCount(from:number=0, to:number=6, mode:number = this.mode): number[] {
         let helper: Helper = {
             method: Calculate.primeCount,
-            from: 0, to: 6, mode
+            from, to, mode
         };
-        const temp: number[] = this.gatherHelper(helper);
-        const result: number[] = [];
-        numbers.forEach(value => {
-            result.push(temp[value]);
-        })
-
-        return result;
+        return this.gatherHelper(helper);
     }
-    gather$3Count(numbers:number[], mode:number = this.mode): number[] {
+    gather$3Count(from:number=0, to:number=6, mode:number = this.mode): number[] {
         let helper: Helper = {
             method: Calculate.$3Count,
-            from: 0, to: 6, mode
+            from, to, mode
         };
-        const temp: number[] = this.gatherHelper(helper);
-        const result: number[] = [];
-        numbers.forEach(value => {
-            result.push(temp[value]);
-        })
-
-        return result;
+        return this.gatherHelper(helper);
     }
 
-    gatherAC(numbers:number[], mode:number = this.mode): number[] {
+    gatherAC(from:number=0, to:number=10, mode:number = this.mode): number[] {
         let helper: Helper = {
             method: Calculate.AC,
-            from: 0, to: 10, mode
+            from, to, mode
         };
-        const temp: number[] = this.gatherHelper(helper);
-        const result: number[] = [];
-        numbers.forEach(value => {
-            result.push(temp[value]);
-        })
-
-        return result;
+        return this.gatherHelper(helper);
     }
 
-    gatherDiffMaxMinData(from:number, to:number, mode:number = this.mode): number[] {
-        const result = new Array<number>(Math.floor((to-from)/3)+1).fill(0);
-        Calculate.getData(this.getLNumbers(mode), Calculate.diffMaxMin).forEach(value =>{
-            if(from <= value && value <= to){
-                result[Math.floor((value-from)/3)]++;
-            }
-        });
-
-        return result;
+    gatherDiffMaxMinData(from:number=5, to:number=44, mode:number = this.mode): number[] {
+        let helper: Helper = {
+            method: Calculate.diffMaxMin,
+            from, to, mode
+        };
+        return this.gatherHelper(helper);
     }
 
     gatherConsecutiveExist(mode:number = this.mode): number[] {

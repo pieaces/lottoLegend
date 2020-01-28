@@ -15,7 +15,8 @@ const gen = new Generator({
     oddCount:{from:2, to:3},
     primeCount:{from:0, to:1},
     $3Count:{from:2,to:2},
-    sum$10: {from:11,to:12},
+    diffMaxMin:{from:34,to:34},
+    sum$10: {from:11,to:11},
 });
 
 gen.generate();
