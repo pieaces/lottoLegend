@@ -1,3 +1,4 @@
+import fs from 'fs'
 import Probability from '../class/Statistics/Probability'
 import Calculate from '../class/Statistics/Calculate'
 
@@ -36,7 +37,7 @@ function traversal(pos: number[], method: (numbers: number[]) => number) {
     return pos.map(value => value / C(45, 6));
 }
 
-function expectedAnnhilationCount() {
+function excludedLineCount() {
     return traversal(new Array<number>(5).fill(0),
         (box: number[]): number => {
 
@@ -52,36 +53,36 @@ function expectedAnnhilationCount() {
         });
 }
 
-function expectedSum$10(): number[] {
+function sum$10(): number[] {
     return traversal(new Array<number>(25).fill(0), Calculate.sum$10);
 
 }
-function expectedSum$1(): number[] {
+function sum$1(): number[] {
     return traversal(new Array<number>(51).fill(0),
     (box:number[]):number => Calculate.sum$1(box) - 2);
 }
-function expectedSum(): number[] {
+function sum(): number[] {
     return traversal(new Array<number>(235).fill(0),
     (box:number[]):number => Calculate.sum(box) - 21);
 }
 
-function expectedOddCount(): number[] {
-    return pqc(7, 23 / 45);
+function oddCount(): number[] {
+    return pqc(6, 23 / 45);
 }
 
-function expectedPrimeCount(): number[] {
-    return pqc(7, 14/45);
+function primeCount(): number[] {
+    return pqc(6, 14/45);
 }
-function expected$3Count(): number[] {
-    return pqc(7, 1 / 3);
+function $3Count(): number[] {
+    return pqc(6, 1 / 3);
 }
 
-function expectedDiffMaxMinData(): number[] {
+function diffMaxMinData(): number[] {
     return traversal(new Array<number>(40).fill(0),
     (box:number[]):number => Calculate.diffMaxMin(box) - 5);
 
 }
-function expectedCarry(): number[] {
+function carryCount(): number[] {
     const pos = new Array<number>(7).fill(0);
     pos[0] = C(39, 6) / C(45, 6);
     for (let i = 1; i <= 6; i++) {
@@ -90,11 +91,11 @@ function expectedCarry(): number[] {
     return pos;
 }
 
-function expectedAC(): number[] {
+function AC(): number[] {
     return traversal(new Array<number>(11).fill(0), Calculate.AC);
 }
 
-const expectedLowCount = (): number[] => {
+const lowCount = (): number[] => {
     const pos = new Array<number>(7);
     for (let i = 0; i <= 6; i++) {
         pos[i] = C(22, i) * C(23, 6 - i) / C(45, 6)
@@ -102,12 +103,13 @@ const expectedLowCount = (): number[] => {
     return pos;
 }
 
-function expectedConsecutive(): number[] {
+function consecutive(): number[] {
     return traversal(new Array<number>(2).fill(0), Calculate.consecutiveExist);
 }
 
 
-const pos = expectedSum();
+const method = $3Count;
+const pos = method();
 
 console.log(pos.reduce((acc, cur) => acc + cur, 0));
 
@@ -115,4 +117,9 @@ let str = "[\n";
 pos.forEach(value =>{
     str += `\t${value},\n`
 });
+str = str.slice(0,-2);
+str += '\n]'
 console.log(str);
+
+fs.writeFileSync(`./back-end/json/Expectation/${method.name}.json`, str);
+console.log('완료');

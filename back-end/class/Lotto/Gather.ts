@@ -3,12 +3,15 @@ import Analyze from '../Analyze/Analyze'
 import Base, {LData} from './Base'
 import ExpectationMixIn from './ExpectationMixin'
 
-interface Helper{
-    method: (numbers: number[])=> number;
-    from: number;
-    to: number;
-    mode: number;
+interface Params{
+    from?:number;
+    to?:number;
+    mode?:number;
 }
+interface Helper extends Params{
+    method: (numbers: number[])=> number;
+}
+
 export default class Gather extends ExpectationMixIn(Base) {
     constructor(data: LData[], mode: number) {
         super(data);
@@ -53,10 +56,10 @@ export default class Gather extends ExpectationMixIn(Base) {
         return this.gatherHelper(helper);
     }
 
-    gatherSum$10(from:number=0, to:number=24, mode:number = this.mode): number[] {
+    gatherSum$10(params:Params): number[] {
         const helper:Helper = {
             method:Calculate.sum$10,
-            from, to, mode
+            from:params.from || 0, to:params.to || 24, mode: params.mode || this.mode
         };
         return this.gatherHelper(helper);
     }
@@ -87,40 +90,40 @@ export default class Gather extends ExpectationMixIn(Base) {
         return result;
     }
 
-    gatherOddCount(from:number=0, to:number=6, mode:number = this.mode): number[] {
+    gatherOddCount(params:Params = {from:0, to:6, mode:this.mode}): number[] {
         let helper: Helper = {
             method: Calculate.oddCount,
-            from, to, mode
+            from:params.from || 0, to:params.to || 6, mode: params.mode || this.mode
         };
         return this.gatherHelper(helper);
     }
-    gatherPrimeCount(from:number=0, to:number=6, mode:number = this.mode): number[] {
+    gatherPrimeCount(params:Params = {from:0, to:6, mode:this.mode}): number[] {
         let helper: Helper = {
             method: Calculate.primeCount,
-            from, to, mode
+            from:params.from || 0, to:params.to || 6, mode: params.mode || this.mode
         };
         return this.gatherHelper(helper);
     }
-    gather$3Count(from:number=0, to:number=6, mode:number = this.mode): number[] {
+    gather$3Count(params:Params = {from:0, to:6, mode:this.mode}): number[] {
         let helper: Helper = {
             method: Calculate.$3Count,
-            from, to, mode
+            from:params.from || 0, to:params.to || 6, mode: params.mode || this.mode
         };
         return this.gatherHelper(helper);
     }
 
-    gatherAC(from:number=0, to:number=10, mode:number = this.mode): number[] {
+    gatherAC(params:Params = {from:0, to:10, mode:this.mode}): number[] {
         let helper: Helper = {
             method: Calculate.AC,
-            from, to, mode
+            from:params.from || 0, to:params.to || 10, mode: params.mode || this.mode
         };
         return this.gatherHelper(helper);
     }
 
-    gatherDiffMaxMinData(from:number=5, to:number=44, mode:number = this.mode): number[] {
+    gatherDiffMaxMinData(params:Params = {from:5, to:44, mode:this.mode}): number[] {
         let helper: Helper = {
             method: Calculate.diffMaxMin,
-            from, to, mode
+            from:params.from || 5, to:params.to || 44, mode: params.mode || this.mode
         };
         return this.gatherHelper(helper);
     }
