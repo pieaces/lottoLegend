@@ -1,5 +1,13 @@
+import Chart from 'chart.js';
+
+import Lotto from '../../back-end/class/Lotto/Lotto';
+
+const lotto = new Lotto(require('../../back-end/json/lotto.json'));
+const method1 = lotto.gather$3Count.bind(lotto);
+const method2 = lotto.expected$3Count.bind(lotto);
+
 const chart11 = new Chart(
-  document.querySelector('.chart-1-1').getContext('2d'),
+  (<HTMLCanvasElement>document.querySelector('.chart-1-1')).getContext('2d'),
   {
     // The type of chart we want to create
     type: 'line',
@@ -11,13 +19,13 @@ const chart11 = new Chart(
         {
           label: '실제 홀수',
           borderColor: '#0026ca',
-          data: [0, 10, 5, 2, 20, 30, 45],
+          data: method1({ mode: 12 }),
           fill: false
         },
         {
           label: '이상적',
           borderColor: '#388e3c',
-          data: [0, 5, 7, 10, 8, 15, 13],
+          data: method2(12),
           fill: false
         }
       ]
@@ -35,7 +43,7 @@ const chart11 = new Chart(
 );
 
 const chart12 = new Chart(
-  document.querySelector('.chart-1-2').getContext('2d'),
+  (<HTMLCanvasElement>document.querySelector('.chart-1-2')).getContext('2d'),
   {
     // The type of chart we want to create
     type: 'line',
@@ -47,13 +55,13 @@ const chart12 = new Chart(
         {
           label: '실제 홀수',
           borderColor: '#0026ca',
-          data: [0, 10, 5, 2, 20, 30, 45],
+          data: method1({ mode: 24 }),
           fill: false
         },
         {
           label: '이상적',
           borderColor: '#388e3c',
-          data: [0, 5, 7, 10, 8, 15, 13],
+          data: method2(24),
           fill: false
         }
       ]
@@ -71,7 +79,7 @@ const chart12 = new Chart(
 );
 
 const chart21 = new Chart(
-  document.querySelector('.chart-2-1').getContext('2d'),
+  (<HTMLCanvasElement>document.querySelector('.chart-2-1')).getContext('2d'),
   {
     // The type of chart we want to create
     type: 'line',
@@ -83,13 +91,13 @@ const chart21 = new Chart(
         {
           label: '실제 홀수',
           borderColor: '#0026ca',
-          data: [0, 10, 5, 2, 20, 30, 45],
+          data: method1({ mode: 48 }),
           fill: false
         },
         {
           label: '이상적',
           borderColor: '#388e3c',
-          data: [0, 5, 7, 10, 8, 15, 13],
+          data: method2(48),
           fill: false
         }
       ]
@@ -107,7 +115,7 @@ const chart21 = new Chart(
 );
 
 const chart22 = new Chart(
-  document.querySelector('.chart-2-2').getContext('2d'),
+  (<HTMLCanvasElement>document.querySelector('.chart-2-2')).getContext('2d'),
   {
     // The type of chart we want to create
     type: 'line',
@@ -119,13 +127,13 @@ const chart22 = new Chart(
         {
           label: '실제 홀수',
           borderColor: '#0026ca',
-          data: [0, 10, 5, 2, 20, 30, 45],
+          data: method1(),
           fill: false
         },
         {
           label: '이상적',
           borderColor: '#388e3c',
-          data: [0, 5, 7, 10, 8, 15, 13],
+          data: method2(),
           fill: false
         }
       ]
