@@ -1,0 +1,103 @@
+/* header */
+/* top-nav */
+
+.top-nav-container {
+  height: 45px;
+}
+
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.top-nav-left > ul {
+  display: flex;
+}
+
+.top-nav-left > ul > li {
+  padding: 0 10px;
+  font-size: 0.8rem;
+}
+
+.top-nav-left > ul > li:not(:last-child) {
+  border-right: 1px solid var(--border-color);
+}
+
+.top-nav-right > ul {
+  display: flex;
+}
+
+.top-nav-right > ul > li {
+  padding: 0 10px;
+  font-size: 0.8rem;
+}
+
+.top-nav-right > ul > li:not(:last-child) {
+  border-right: 1px solid var(--border-color);
+}
+
+/* mid-nav */
+
+.mid-nav-container {
+  height: 120px;
+  background-color: var(--main-color);
+  color: var(--default-color);
+}
+
+.mid-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mid-nav > h1 > a {
+  color: var(--default-color);
+  font-size: 2.5rem;
+}
+
+.mid-nav > ul {
+  display: flex;
+  align-items: center;
+}
+
+.mid-nav > ul > li {
+  padding: 0 20px;
+}
+
+.mid-nav > ul > li > a {
+  color: var(--default-color);
+  font-size: 1.2rem;
+}
+
+/* bottom-nav */
+
+.bottom-nav-container {
+  height: 60px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.bottom-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bottom-nav-left > ul {
+  display: flex;
+}
+
+.bottom-nav-left > ul > li {
+  padding: 0 10px;
+  font-size: 0.7rem;
+}
+
+.bottom-nav-left > ul > li:nth-child(1) {
+  color: var(--default-color);
+  background-color: red;
+}
+
+.bottom-nav-right > p {
+  display: flex;
+  font-weight: bold;
+}
