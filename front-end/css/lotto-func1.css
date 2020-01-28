@@ -32,12 +32,15 @@
   grid-column: 1/4;
   padding-top: 100px;
   display: grid;
-  grid-template-rows: 700px;
+  grid-template-rows: repeat(12, 80px);
   grid-template-columns: 1fr;
 }
 
+.aside > div {
+  background-color: var(--main-color);
+}
+
 .aside-1-1 {
-  background-color: var(--default-color);
 }
 
 /* main */
