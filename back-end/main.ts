@@ -17,9 +17,12 @@ button.onclick = function () {
     console.log(gen.getGeneratedNumbers());
 }
 */
-const method1 = lotto.gatherOddCount.bind(lotto);
-const method2 = lotto.expectedOddCount.bind(lotto);
-
+const method1 = lotto.gatherPrimeCount.bind(lotto);
+const method2 = lotto.expectedPrimeCount.bind(lotto);
+const labels:string[] = [];
+for(let i =0; i<=6; i++){
+    labels.push(i.toString());
+}
 const button = document.getElementById('button');
 
     var canvas1 = <HTMLCanvasElement>document.getElementById("myChart1");
@@ -54,9 +57,9 @@ const button = document.getElementById('button');
         // The data for our dataset
         data: {
             //labels: new Array<number>(893).fill(0).map((item, index) => index+1).map(value => String(value)),
-            labels: ['0', '1', '2', '3', '4', '5', '6'],
+            labels,
             datasets: [{
-                label: `Latest ${12} Lotto Odd Count`,
+                label: `Latest ${12} ${method1.name}`,
                 //backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
                 data: method1({mode:12})
@@ -69,8 +72,13 @@ const button = document.getElementById('button');
             },
             ]
         },
+        options: {
+            // This chart will not respond to mousemove, etc
+            events: ['click']
+        }
     });
 
+    
     var chart2 = new Chart(ctx2, {
         // The type of chart we want to create
         type: 'line',
@@ -78,7 +86,7 @@ const button = document.getElementById('button');
         // The data for our dataset
         data: {
             //labels: new Array<number>(893).fill(0).map((item, index) => index+1).map(value => String(value)),
-            labels: ['0', '1', '2', '3', '4', '5', '6'],
+            labels,
             datasets: [{
                 label: `Latest ${24} Lotto Odd Count`,
                 //backgroundColor: 'rgb(255, 99, 132)',
@@ -102,7 +110,7 @@ const button = document.getElementById('button');
         // The data for our dataset
         data: {
             //labels: new Array<number>(893).fill(0).map((item, index) => index+1).map(value => String(value)),
-            labels: ['0', '1', '2', '3', '4', '5', '6'],
+            labels,
             datasets: [{
                 label: `Latest ${48} Lotto Odd Count`,
                 //backgroundColor: 'rgb(255, 99, 132)',
@@ -126,7 +134,7 @@ const button = document.getElementById('button');
         // The data for our dataset
         data: {
             //labels: new Array<number>(893).fill(0).map((item, index) => index+1).map(value => String(value)),
-            labels: ['0', '1', '2', '3', '4', '5', '6'],
+            labels,
             datasets: [{
                 label: `Latest ${96} Lotto Odd Count`,
                 //backgroundColor: 'rgb(255, 99, 132)',
@@ -150,7 +158,7 @@ const button = document.getElementById('button');
         // The data for our dataset
         data: {
             //labels: new Array<number>(893).fill(0).map((item, index) => index+1).map(value => String(value)),
-            labels: ['0', '1', '2', '3', '4', '5', '6'],
+            labels,
             datasets: [{
                 label: `Latest ${384} Lotto Odd Count`,
                 //backgroundColor: 'rgb(255, 99, 132)',
@@ -167,29 +175,6 @@ const button = document.getElementById('button');
         },
     });
 
-    var chart6 = new Chart(ctx6, {
-        // The type of chart we want to create
-        type: 'line',
-
-        // The data for our dataset
-        data: {
-            //labels: new Array<number>(893).fill(0).map((item, index) => index+1).map(value => String(value)),
-            labels: ['0', '1', '2', '3', '4', '5', '6'],
-            datasets: [{
-                label: `Latest ${768} Lotto Odd Count`,
-                //backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: method1({mode:768})
-            },
-            {
-                label: `Ideal ${768} Odd Count`,
-                //backgroundColor: 'rgb(99, 99, 132)',
-                borderColor: 'rgb(14, 99, 132)',
-                data: method2({mode:768})
-            },
-            ]
-        },
-    });
 
     var chart7 = new Chart(ctx7, {
         // The type of chart we want to create
@@ -198,7 +183,7 @@ const button = document.getElementById('button');
         // The data for our dataset
         data: {
             //labels: new Array<number>(893).fill(0).map((item, index) => index+1).map(value => String(value)),
-            labels: ['0', '1', '2', '3', '4', '5', '6'],
+            labels,
             datasets: [{
                 label: `Latest ${lotto.mode} Lotto Odd Count`,
                 //backgroundColor: 'rgb(255, 99, 132)',
@@ -221,7 +206,7 @@ const button = document.getElementById('button');
         // The data for our dataset
         data: {
             //labels: new Array<number>(893).fill(0).map((item, index) => index+1).map(value => String(value)),
-            labels: ['0', '1', '2', '3', '4', '5', '6'],
+            labels,
             datasets: [{
                 label: `Latest ${12} Lotto Odd Count`,
                 //backgroundColor: 'rgb(255, 99, 132)',
@@ -244,7 +229,7 @@ const button = document.getElementById('button');
         // The data for our dataset
         data: {
             //labels: new Array<number>(893).fill(0).map((item, index) => index+1).map(value => String(value)),
-            labels: ['0', '1', '2', '3', '4', '5', '6'],
+            labels,
             datasets: [{
                 label: `Latest ${24} Lotto Odd Count`,
                 //backgroundColor: 'rgb(255, 99, 132)',
@@ -267,7 +252,7 @@ const button = document.getElementById('button');
         // The data for our dataset
         data: {
             //labels: new Array<number>(893).fill(0).map((item, index) => index+1).map(value => String(value)),
-            labels: ['0', '1', '2', '3', '4', '5', '6'],
+            labels,
             datasets: [{
                 label: `Latest ${48} Lotto Odd Count`,
                 //backgroundColor: 'rgb(255, 99, 132)',
@@ -290,7 +275,7 @@ const button = document.getElementById('button');
         // The data for our dataset
         data: {
             //labels: new Array<number>(893).fill(0).map((item, index) => index+1).map(value => String(value)),
-            labels: ['0', '1', '2', '3', '4', '5', '6'],
+            labels,
             datasets: [{
                 label: `Latest ${894-768} Lotto Odd Count`,
                 //backgroundColor: 'rgb(255, 99, 132)',

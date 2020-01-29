@@ -24,16 +24,16 @@ export default class Gather extends ExpectationMixIn(Base) {
         return result;
     }
 
-    gatherExcludedLineCount(mode:Mode = this.mode): number[] {
+    gatherExcludedLineCount(params:Params = {from:0, to:5, mode: this.mode}): number[] {
         const helper:Helper = {
             method:Calculate.excludedLineCount,
-            from:0, to:5, mode
+            from:params.from || 0, to:params.to || 5, mode:params.mode || this.mode
         };
         return this.gatherHelper(helper);
     }
     //회차별 계산된 결과(LottoCal)를 종합.
-    gatherLineCount(mode:Mode = this.mode): number[] {
-        return Analyze.posCount$10(this.getLNumbers(mode));
+    gatherLineCount(params:Params = {mode: this.mode}): number[] {
+        return Analyze.posCount$10(this.getLNumbers(params.mode));
     }
 
     gatherEmergedRoundForOne(one:number, mode:Mode=this.mode): number[] {
@@ -43,15 +43,16 @@ export default class Gather extends ExpectationMixIn(Base) {
         return Analyze.intervalForOne(this.getLNumbers(mode), one);
     }
 
-    gatherLowCount(mode:Mode = this.mode): number[] {
+    gatherLowCount(params:Params={from:0, to:6, mode: this.mode}): number[] {
         const helper:Helper = {
             method:Calculate.lowCount,
-            from:0, to:6, mode
+            from:params.from || 0, to:params.to || 6, mode: params.mode || this.mode
+
         };
         return this.gatherHelper(helper);
     }
 
-    gatherSum$10(params:Params): number[] {
+    gatherSum$10(params:Params = {from:0, to:24, mode:this.mode}): number[] {
         const helper:Helper = {
             method:Calculate.sum$10,
             from:params.from || 0, to:params.to || 24, mode: params.mode || this.mode
@@ -74,11 +75,11 @@ export default class Gather extends ExpectationMixIn(Base) {
         return this.gatherHelper(helper);
     }
 */
-    gatherSum55(from:number=21, to:number=255, mode:Mode = this.mode):number[] {//21~255
-        const result = new Array<number>(Math.floor((to-from)/10)+1).fill(0);
-        Calculate.getData(this.getLNumbers(mode), Calculate.sum).forEach(value =>{
-            if(from <= value && value <= to){
-                result[Math.floor((value-from)/10)]++;
+    gatherSum55(params:Params = {from:21, to:255, mode: this.mode}):number[] {//21~255
+        const result = new Array<number>(Math.floor((params.to-params.from)/10)+1).fill(0);
+        Calculate.getData(this.getLNumbers(params.mode), Calculate.sum).forEach(value =>{
+            if(params.from <= value && value <= params.to){
+                result[Math.floor((value-params.from)/10)]++;
             }
         });
 
@@ -130,8 +131,8 @@ export default class Gather extends ExpectationMixIn(Base) {
         };
         return this.gatherHelper(helper);
     }
-    gatherCarryCount(mode:Mode = this.mode): number[] {
-        return Analyze.carryCount(this.getLNumbers(mode).reverse());
+    gatherCarryCount(params:Params = {mode:this.mode}): number[] {
+        return Analyze.carryCount(this.getLNumbers(params.mode).reverse());
     }
 
     gatherFrequencyPercent(mode: Mode = this.mode): number[] {
