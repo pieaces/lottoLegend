@@ -17,8 +17,8 @@ button.onclick = function () {
     console.log(gen.getGeneratedNumbers());
 }
 */
-const method1 = lotto.gather$3Count.bind(lotto);
-const method2 = lotto.expected$3Count.bind(lotto);
+const method1 = lotto.gatherOddCount.bind(lotto);
+const method2 = lotto.expectedOddCount.bind(lotto);
 
 const button = document.getElementById('button');
 
@@ -26,10 +26,27 @@ const button = document.getElementById('button');
     var canvas2 = <HTMLCanvasElement>document.getElementById("myChart2");
     var canvas3 = <HTMLCanvasElement>document.getElementById("myChart3");
     var canvas4 = <HTMLCanvasElement>document.getElementById("myChart4");
+    var canvas5 = <HTMLCanvasElement>document.getElementById("myChart5");
+    var canvas6 = <HTMLCanvasElement>document.getElementById("myChart6");
+    var canvas7 = <HTMLCanvasElement>document.getElementById("myChart7");
+    var canvas8 = <HTMLCanvasElement>document.getElementById("myChart8");
+    var canvas9 = <HTMLCanvasElement>document.getElementById("myChart9");
+    var canvas10 = <HTMLCanvasElement>document.getElementById("myChart10");
+    var canvas11 = <HTMLCanvasElement>document.getElementById("myChart11");
+    var canvas12 = <HTMLCanvasElement>document.getElementById("myChart12");
+
     var ctx1 = canvas1.getContext("2d");
     var ctx2 = canvas2.getContext("2d");
     var ctx3 = canvas3.getContext("2d");
     var ctx4 = canvas4.getContext("2d");
+    var ctx5 = canvas5.getContext("2d");
+    var ctx6 = canvas6.getContext("2d");
+    var ctx7 = canvas7.getContext("2d");
+    var ctx8 = canvas8.getContext("2d");
+    var ctx9 = canvas9.getContext("2d");
+    var ctx10 = canvas10.getContext("2d");
+    var ctx11 = canvas11.getContext("2d");
+    var ctx12 = canvas12.getContext("2d");
     var chart1 = new Chart(ctx1, {
         // The type of chart we want to create
         type: 'line',
@@ -39,22 +56,22 @@ const button = document.getElementById('button');
             //labels: new Array<number>(893).fill(0).map((item, index) => index+1).map(value => String(value)),
             labels: ['0', '1', '2', '3', '4', '5', '6'],
             datasets: [{
-                label: `Latest ${lotto.mode} Lotto Odd Count`,
+                label: `Latest ${12} Lotto Odd Count`,
                 //backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
                 data: method1({mode:12})
             },
             {
-                label: `Ideal ${lotto.mode} Odd Count`,
+                label: `Ideal ${12} Odd Count`,
                 //backgroundColor: 'rgb(99, 99, 132)',
                 borderColor: 'rgb(14, 99, 132)',
-                data: method2(12)
+                data: method2({mode:12})
             },
             ]
         },
     });
 
-    var chart1 = new Chart(ctx2, {
+    var chart2 = new Chart(ctx2, {
         // The type of chart we want to create
         type: 'line',
 
@@ -63,22 +80,22 @@ const button = document.getElementById('button');
             //labels: new Array<number>(893).fill(0).map((item, index) => index+1).map(value => String(value)),
             labels: ['0', '1', '2', '3', '4', '5', '6'],
             datasets: [{
-                label: `Latest ${lotto.mode} Lotto Odd Count`,
+                label: `Latest ${24} Lotto Odd Count`,
                 //backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
                 data: method1({mode:24})
             },
             {
-                label: `Ideal ${lotto.mode} Odd Count`,
+                label: `Ideal ${24} Odd Count`,
                 //backgroundColor: 'rgb(99, 99, 132)',
                 borderColor: 'rgb(14, 99, 132)',
-                data: method2(24)
+                data: method2({mode:24})
             },
             ]
         },
     });
 
-    var chart1 = new Chart(ctx3, {
+    var chart3 = new Chart(ctx3, {
         // The type of chart we want to create
         type: 'line',
 
@@ -87,22 +104,94 @@ const button = document.getElementById('button');
             //labels: new Array<number>(893).fill(0).map((item, index) => index+1).map(value => String(value)),
             labels: ['0', '1', '2', '3', '4', '5', '6'],
             datasets: [{
-                label: `Latest ${lotto.mode} Lotto Odd Count`,
+                label: `Latest ${48} Lotto Odd Count`,
                 //backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
                 data: method1({mode:48})
             },
             {
-                label: `Ideal ${lotto.mode} Odd Count`,
+                label: `Ideal ${48} Odd Count`,
                 //backgroundColor: 'rgb(99, 99, 132)',
                 borderColor: 'rgb(14, 99, 132)',
-                data: method2(48)
+                data: method2({mode:48})
             },
             ]
         },
     });
 
-    var chart1 = new Chart(ctx4, {
+    var chart4 = new Chart(ctx4, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            //labels: new Array<number>(893).fill(0).map((item, index) => index+1).map(value => String(value)),
+            labels: ['0', '1', '2', '3', '4', '5', '6'],
+            datasets: [{
+                label: `Latest ${96} Lotto Odd Count`,
+                //backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: method1({mode:96})
+            },
+            {
+                label: `Ideal ${96} Odd Count`,
+                //backgroundColor: 'rgb(99, 99, 132)',
+                borderColor: 'rgb(14, 99, 132)',
+                data: method2({mode:96})
+            },
+            ]
+        },
+    });
+
+    var chart5 = new Chart(ctx5, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            //labels: new Array<number>(893).fill(0).map((item, index) => index+1).map(value => String(value)),
+            labels: ['0', '1', '2', '3', '4', '5', '6'],
+            datasets: [{
+                label: `Latest ${384} Lotto Odd Count`,
+                //backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: method1({mode:384})
+            },
+            {
+                label: `Ideal ${384} Odd Count`,
+                //backgroundColor: 'rgb(99, 99, 132)',
+                borderColor: 'rgb(14, 99, 132)',
+                data: method2({mode:384})
+            },
+            ]
+        },
+    });
+
+    var chart6 = new Chart(ctx6, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            //labels: new Array<number>(893).fill(0).map((item, index) => index+1).map(value => String(value)),
+            labels: ['0', '1', '2', '3', '4', '5', '6'],
+            datasets: [{
+                label: `Latest ${768} Lotto Odd Count`,
+                //backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: method1({mode:768})
+            },
+            {
+                label: `Ideal ${768} Odd Count`,
+                //backgroundColor: 'rgb(99, 99, 132)',
+                borderColor: 'rgb(14, 99, 132)',
+                data: method2({mode:768})
+            },
+            ]
+        },
+    });
+
+    var chart7 = new Chart(ctx7, {
         // The type of chart we want to create
         type: 'line',
 
@@ -125,4 +214,95 @@ const button = document.getElementById('button');
             ]
         },
     });
+    var chart9 = new Chart(ctx9, {
+        // The type of chart we want to create
+        type: 'line',
 
+        // The data for our dataset
+        data: {
+            //labels: new Array<number>(893).fill(0).map((item, index) => index+1).map(value => String(value)),
+            labels: ['0', '1', '2', '3', '4', '5', '6'],
+            datasets: [{
+                label: `Latest ${12} Lotto Odd Count`,
+                //backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: method1({mode:-12})
+            },
+            {
+                label: `Ideal ${12} Odd Count`,
+                //backgroundColor: 'rgb(99, 99, 132)',
+                borderColor: 'rgb(14, 99, 132)',
+                data: method2({mode:-12})
+            },
+            ]
+        },
+    });
+    var chart10 = new Chart(ctx10, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            //labels: new Array<number>(893).fill(0).map((item, index) => index+1).map(value => String(value)),
+            labels: ['0', '1', '2', '3', '4', '5', '6'],
+            datasets: [{
+                label: `Latest ${24} Lotto Odd Count`,
+                //backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: method1({mode:[-12, -24]})
+            },
+            {
+                label: `Ideal ${24} Odd Count`,
+                //backgroundColor: 'rgb(99, 99, 132)',
+                borderColor: 'rgb(14, 99, 132)',
+                data: method2({mode:[-12,-24]})
+            },
+            ]
+        },
+    });
+    var chart11 = new Chart(ctx11, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            //labels: new Array<number>(893).fill(0).map((item, index) => index+1).map(value => String(value)),
+            labels: ['0', '1', '2', '3', '4', '5', '6'],
+            datasets: [{
+                label: `Latest ${48} Lotto Odd Count`,
+                //backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: method1({mode:[-24, -36]})
+            },
+            {
+                label: `Ideal ${48} Odd Count`,
+                //backgroundColor: 'rgb(99, 99, 132)',
+                borderColor: 'rgb(14, 99, 132)',
+                data: method2({mode:[-24, -36]})
+            },
+            ]
+        },
+    });
+    var chart12 = new Chart(ctx12, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            //labels: new Array<number>(893).fill(0).map((item, index) => index+1).map(value => String(value)),
+            labels: ['0', '1', '2', '3', '4', '5', '6'],
+            datasets: [{
+                label: `Latest ${894-768} Lotto Odd Count`,
+                //backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: method1({mode:[-36, -48]})
+            },
+            {
+                label: `Ideal ${894-768} Odd Count`,
+                //backgroundColor: 'rgb(99, 99, 132)',
+                borderColor: 'rgb(14, 99, 132)',
+                data: method2({mode:[-36, -48]})
+            },
+            ]
+        },
+    });

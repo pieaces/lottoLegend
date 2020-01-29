@@ -1,6 +1,6 @@
 import Calculate from '../Statistics/Calculate'
 import Analyze from '../Analyze/Analyze'
-import Base, {LData} from './Base'
+import Base, {LData, Mode} from './Base'
 import ExpectationMixIn, {Params} from './ExpectationMixin'
 
 interface Helper extends Params{
@@ -8,7 +8,7 @@ interface Helper extends Params{
 }
 
 export default class Gather extends ExpectationMixIn(Base) {
-    constructor(data: LData[], mode: number) {
+    constructor(data: LData[], mode: Mode) {
         super(data);
         this.mode = mode;
     }
@@ -24,7 +24,7 @@ export default class Gather extends ExpectationMixIn(Base) {
         return result;
     }
 
-    gatherExcludedLineCount(mode:number = this.mode): number[] {
+    gatherExcludedLineCount(mode:Mode = this.mode): number[] {
         const helper:Helper = {
             method:Calculate.excludedLineCount,
             from:0, to:5, mode
@@ -32,18 +32,18 @@ export default class Gather extends ExpectationMixIn(Base) {
         return this.gatherHelper(helper);
     }
     //회차별 계산된 결과(LottoCal)를 종합.
-    gatherLineCount(mode:number = this.mode): number[] {
+    gatherLineCount(mode:Mode = this.mode): number[] {
         return Analyze.posCount$10(this.getLNumbers(mode));
     }
 
-    gatherEmergedRoundForOne(one:number, mode:number=this.mode): number[] {
+    gatherEmergedRoundForOne(one:number, mode:Mode=this.mode): number[] {
         return Analyze.emergedRoundForOne(this.getLData(mode), one);
     }
-    gatherIntervalForOne(one:number, mode:number=this.mode): number[] {
+    gatherIntervalForOne(one:number, mode:Mode=this.mode): number[] {
         return Analyze.intervalForOne(this.getLNumbers(mode), one);
     }
 
-    gatherLowCount(mode:number = this.mode): number[] {
+    gatherLowCount(mode:Mode = this.mode): number[] {
         const helper:Helper = {
             method:Calculate.lowCount,
             from:0, to:6, mode
@@ -58,7 +58,7 @@ export default class Gather extends ExpectationMixIn(Base) {
         };
         return this.gatherHelper(helper);
     }
-    gatherSum$1(from:number, to:number, mode:number = this.mode):number[] {
+    gatherSum$1(from:number, to:number, mode:Mode = this.mode):number[] {
         const helper:Helper = {
             method:Calculate.sum$1,
             from:2, to:52, mode
@@ -74,7 +74,7 @@ export default class Gather extends ExpectationMixIn(Base) {
         return this.gatherHelper(helper);
     }
 */
-    gatherSum55(from:number=21, to:number=255, mode:number = this.mode):number[] {//21~255
+    gatherSum55(from:number=21, to:number=255, mode:Mode = this.mode):number[] {//21~255
         const result = new Array<number>(Math.floor((to-from)/10)+1).fill(0);
         Calculate.getData(this.getLNumbers(mode), Calculate.sum).forEach(value =>{
             if(from <= value && value <= to){
@@ -123,18 +123,18 @@ export default class Gather extends ExpectationMixIn(Base) {
         return this.gatherHelper(helper);
     }
 
-    gatherConsecutiveExist(mode:number = this.mode): number[] {
+    gatherConsecutiveExist(mode:Mode = this.mode): number[] {
         const helper:Helper = {
             method:Calculate.consecutiveExist,
             from:0, to:1, mode
         };
         return this.gatherHelper(helper);
     }
-    gatherCarryCount(mode:number = this.mode): number[] {
+    gatherCarryCount(mode:Mode = this.mode): number[] {
         return Analyze.carryCount(this.getLNumbers(mode).reverse());
     }
 
-    gatherFrequencyPercent(mode: number = this.mode): number[] {
+    gatherFrequencyPercent(mode: Mode = this.mode): number[] {
         return Analyze.frequencyCount(this.getLNumbers(mode)).map(value => value / this.getTotalSize());
     }
 
@@ -142,7 +142,7 @@ export default class Gather extends ExpectationMixIn(Base) {
         return Analyze.howLongNone(this.getLData());
     }
 
-    gatherHarmony(mode: number = this.mode) { //HarmonyData[]
+    gatherHarmony(mode: Mode = this.mode) { //HarmonyData[]
         return Analyze.harmony(this.getLData(mode));
     }
 }

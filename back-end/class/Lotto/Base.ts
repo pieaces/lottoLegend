@@ -1,29 +1,58 @@
-import {List} from 'immutable';
-export interface LData{
+import { List } from 'immutable';
+
+export type Mode = [number, number] | number;
+export function isNumber(x: Mode): x is number {
+    return typeof x === "number";
+}
+export function isTuple(x: Mode): x is [number, number] {
+    return typeof x === 'object';
+}
+
+export interface LData {
     round: number;
     date: string;
     bonusNum: number;
     numbers: number[]
 }
 //로또 전회차
-export default class Base{
-    private TOTAL_SIZE:number;
-    public static readonly BALL_NUM:number = 45;
+export default class Base {
+    private TOTAL_SIZE: number;
+    public static readonly BALL_NUM: number = 45;
 
-    private data:List<LData>;
+    private data: List<LData>;
 
-    constructor(data:LData[]){
+    constructor(data: LData[]) {
         this.data = List<LData>(data);
         this.TOTAL_SIZE = this.data.size;
     }
 
-    public getTotalSize():number{
+    public getTotalSize(): number {
         return this.TOTAL_SIZE;
     }
-    public getLData(mode:number=this.TOTAL_SIZE):LData[]{
-        return this.data.toJS().slice(0, mode);
+    //mode:number => 개수를 의미
+    //mode:tuple => 범위를 의미
+    public getLData(mode: Mode = this.TOTAL_SIZE): LData[] {
+        if (isNumber(mode)) {
+            if (mode > 0) return this.data.toJS().slice(-mode);
+            else return this.data.toJS().slice(0, -mode);
+        } else if (isTuple(mode)) {
+            if (mode[0] < 0 && mode[1] < mode[0]) {
+                return this.data.toJS().slice(-mode[0] - 1, -mode[1] - 1);
+            } else if (mode[0] > 0 && mode[1] > mode[0]) {
+                return this.data.toJS().slice(-mode[1] + 1, -mode[0] + 1);
+            }
+        }
     }
-    public getLNumbers(mode:number = this.TOTAL_SIZE): Array<number[]>{
-        return this.data.map<number[]>((item: { numbers: any; }) => item.numbers).toJS().slice(0, mode);
+    public getLNumbers(mode: Mode = this.TOTAL_SIZE): Array<number[]> {
+        if (isNumber(mode)) {
+            if (mode > 0) return this.data.map<number[]>((item: { numbers: number[]; }) => item.numbers).toJS().slice(-mode);
+            else return this.data.map<number[]>((item: { numbers: number[]; }) => item.numbers).toJS().slice(0, -mode);
+        } else if (isTuple(mode)) {
+            if (mode[0] < 0 && mode[1] < mode[0]) {
+                return this.data.map<number[]>((item: { numbers: number[]; }) => item.numbers).toJS().slice(-mode[0] - 1, -mode[1] - 1);
+            } else if (mode[0] > 0 && mode[1] > mode[0]) {
+                return this.data.map<number[]>((item: { numbers: number[]; }) => item.numbers).toJS().slice(-mode[1] + 1, -mode[0] + 1);
+            }
+        }
     }
 }
