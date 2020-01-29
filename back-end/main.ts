@@ -17,10 +17,10 @@ button.onclick = function () {
     console.log(gen.getGeneratedNumbers());
 }
 */
-const method1 = lotto.gatherPrimeCount.bind(lotto);
-const method2 = lotto.expectedPrimeCount.bind(lotto);
+const method1 = lotto.gatherSum55.bind(lotto);
+const method2 = lotto.expectedSum55.bind(lotto);
 const labels:string[] = [];
-for(let i =0; i<=6; i++){
+for(let i =0; i<=25; i++){
     labels.push(i.toString());
 }
 const button = document.getElementById('button');
@@ -59,7 +59,7 @@ const button = document.getElementById('button');
             //labels: new Array<number>(893).fill(0).map((item, index) => index+1).map(value => String(value)),
             labels,
             datasets: [{
-                label: `Latest ${12} ${method1.name}`,
+                label: `${12} ${method1.name}`,
                 //backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
                 data: method1({mode:12})

@@ -76,10 +76,12 @@ export default class Gather extends ExpectationMixIn(Base) {
     }
 */
     gatherSum55(params:Params = {from:21, to:255, mode: this.mode}):number[] {//21~255
-        const result = new Array<number>(Math.floor((params.to-params.from)/10)+1).fill(0);
+        const from = params.from || 21;
+        const to = params.to || 255;
+        const result = new Array<number>(Math.floor((to-from)/10)+1).fill(0);
         Calculate.getData(this.getLNumbers(params.mode), Calculate.sum).forEach(value =>{
-            if(params.from <= value && value <= params.to){
-                result[Math.floor((value-params.from)/10)]++;
+            if(from <= value && value <= to){
+                result[Math.floor((value-from)/10)]++;
             }
         });
 
@@ -132,7 +134,14 @@ export default class Gather extends ExpectationMixIn(Base) {
         return this.gatherHelper(helper);
     }
     gatherCarryCount(params:Params = {mode:this.mode}): number[] {
-        return Analyze.carryCount(this.getLNumbers(params.mode).reverse());
+        const carryCounts =  Analyze.carryCount(this.getLNumbers(params.mode).reverse());
+
+        const result = new Array<number>(7).fill(0);
+        carryCounts.forEach(value =>{
+            result[value]++;
+        });
+
+        return result;
     }
 
     gatherFrequencyPercent(mode: Mode = this.mode): number[] {
