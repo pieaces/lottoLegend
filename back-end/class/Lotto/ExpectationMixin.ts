@@ -45,9 +45,9 @@ const ExpectationMixIn = <TBase extends Constructor>(Base: TBase) =>
             const pos: number[] = posExcludedLineCount;
             return pos.slice(from, to + 1).map(value => value * count);
         }
-        expectedLineCount(params:Params = {mode:this.mode}): number[] {//1~9, 10~19, 20~29, 30~39, 40~45
-            const defaultParam = {mode: this.mode}
-            const {count} = returnParams(defaultParam, params);
+        expectedLineCount(params: Params = { mode: this.mode }): number[] {//1~9, 10~19, 20~29, 30~39, 40~45
+            const defaultParam = { mode: this.mode }
+            const { count } = returnParams(defaultParam, params);
 
             const pos = [9 / 45, 10 / 45, 10 / 45, 10 / 45, 6 / 45];
             return pos.map(value => value * (6 * count));
@@ -67,27 +67,25 @@ const ExpectationMixIn = <TBase extends Constructor>(Base: TBase) =>
             const pos: number[] = posSum;
             return pos.slice(from - 21, to - 21 + 1).map(value => value * count);
         }
-        expectedSum55(params: Params = {}): number[] {
+        expectedSum49(params: Params = {}): number[] {
             const defaultParam = { from: 21, to: 255, mode: this.mode }
             const { from, to, count } = returnParams(defaultParam, params)
 
             let pos: number[] = posSum;
-            pos = pos.slice(from - 21, to - 21 + 1).map(value => value * count);
-
-            const result = new Array<number>(Math.floor((to-from)/10)+1).fill(0);
-            pos.forEach(value =>{
-                if(from <= value && value <= to){
-                    result[Math.floor((value-from)/10)]++;
+            const result = new Array<number>(Math.floor((to - from) / 10) + 1).fill(0);
+            pos.forEach((value, index) => {
+                if (from <= index + 21 && index + 21 <= to) {
+                    result[Math.floor((index + 21 - from) / 10)] += value;
                 }
             });
-    
-            return result;
+
+            return result.map(value => value * count);
         }
         //홀수갯수의 기댓값
         expectedOddCount(params: Params = {}): number[] {
             const defaultParam = { from: 0, to: 6, mode: this.mode }
             const { from, to, count } = returnParams(defaultParam, params)
-            
+
             const pos: number[] = posOddCount;
             return pos.slice(from, to + 1).map(value => value * count);
         }
@@ -98,7 +96,7 @@ const ExpectationMixIn = <TBase extends Constructor>(Base: TBase) =>
             const pos: number[] = posPrimeCount;
             return pos.slice(from, to + 1).map(value => value * count);
         }
-        expectedLowCount(params: Params = {mode: this.mode}): number[] {
+        expectedLowCount(params: Params = { mode: this.mode }): number[] {
             const defaultParam = { from: 0, to: 6, mode: this.mode }
             const { count } = returnParams(defaultParam, params)
 

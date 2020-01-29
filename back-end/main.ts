@@ -17,8 +17,8 @@ button.onclick = function () {
     console.log(gen.getGeneratedNumbers());
 }
 */
-const method1 = lotto.gatherSum55.bind(lotto);
-const method2 = lotto.expectedSum55.bind(lotto);
+const method1 = lotto.gatherSum49.bind(lotto);
+const method2 = lotto.expectedSum49.bind(lotto);
 const labels:string[] = [];
 for(let i =0; i<=25; i++){
     labels.push(i.toString());
