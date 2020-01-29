@@ -1,56 +1,66 @@
-/*
-[
-  0, 0, 1, 5,
-  3, 2, 1
-] [
-  0.16384841642251924,
-  1.0277764302867114,
-  2.686233851885722,
-  3.7444471874770664,
-  2.9359869992717913,
-  1.2277763815136578,
-  0.21393073314253125
-]
-[
-  1, 1, 4, 8,
-  5, 4, 1
-] [
-  0.3276968328450385,
-  2.055552860573423,
-  5.372467703771444,
-  7.488894374954133,
-  5.871973998543583,
-  2.4555527630273155,
-  0.4278614662850625
-]
-[
-   3, 4, 10, 12,
-  11, 7,  1
-] [
-  0.655393665690077,
-  4.111105721146846,
-  10.744935407542888,
-  14.977788749908266,
-  11.743947997087165,
-  4.911105526054631,
-  0.855722932570125
-]
-[
-   10, 60, 198, 309,
-  231, 70,  16
-] [
-  12.206707023477684,
-  76.56934405636001,
-  200.1244219654863,
-  278.96131546704146,
-  218.73103144574847,
-  91.4693404227675,
-  15.937839619118579
-]
-*/
+// [0, 0, 1, 5, 3, 2, 1][
+//   (0.16384841642251924,
+//   1.0277764302867114,
+//   2.686233851885722,
+//   3.7444471874770664,
+//   2.9359869992717913,
+//   1.2277763815136578,
+//   0.21393073314253125)
+// ][(1, 1, 4, 8, 5, 4, 1)][
+//   (0.3276968328450385,
+//   2.055552860573423,
+//   5.372467703771444,
+//   7.488894374954133,
+//   5.871973998543583,
+//   2.4555527630273155,
+//   0.4278614662850625)
+// ][(3, 4, 10, 12, 11, 7, 1)][
+//   (0.655393665690077,
+//   4.111105721146846,
+//   10.744935407542888,
+//   14.977788749908266,
+//   11.743947997087165,
+//   4.911105526054631,
+//   0.855722932570125)
+// ][(10, 60, 198, 309, 231, 70, 16)][
+//   (12.206707023477684,
+//   76.56934405636001,
+//   200.1244219654863,
+//   278.96131546704146,
+//   218.73103144574847,
+//   91.4693404227675,
+//   15.937839619118579)
+// ];
 
 const lottofunc1 = {
-  chartSlideParam: 1
+  chartSlideParam: 1,
+  chartSlideNum: 6,
+  chartTopData: [
+    {
+      real: [0, 0, 1, 5, 3, 2, 1],
+      ideal: [
+        0.16384841642251924,
+        1.0277764302867114,
+        2.686233851885722,
+        3.7444471874770664,
+        2.9359869992717913,
+        1.2277763815136578,
+        0.21393073314253125
+      ]
+    },
+    {
+      real: [1, 1, 4, 8, 5, 4, 1],
+      ideal: [
+        0.3276968328450385,
+        2.055552860573423,
+        5.372467703771444,
+        7.488894374954133,
+        5.871973998543583,
+        2.4555527630273155,
+        0.4278614662850625
+      ]
+    }
+  ]
 };
 const chartBottomContainer = document.querySelector('.chart-bottom-container');
 const leftChart = document.querySelector('#left-chart-btn');
@@ -64,15 +74,36 @@ function chartSlide() {
     if (e.target.id === 'left-chart-btn') {
       lottofunc1.chartSlideParam--;
       if (lottofunc1.chartSlideParam === 0) {
-        lottofunc1.chartSlideParam = 6;
+        lottofunc1.chartSlideParam = lottofunc1.chartSlideParam;
       }
     } else if (e.target.id === 'right-chart-btn') {
       lottofunc1.chartSlideParam++;
-      if (lottofunc1.chartSlideParam === 7) {
+      if (lottofunc1.chartSlideParam > lottofunc1.chartSlideParam) {
         lottofunc1.chartSlideParam = 1;
         chartBottomContainer.scrollIntoView({
           behavior: 'smooth'
         });
+      }
+    }
+
+    for (let i = 0; i <= lottofunc1.chartSlideParam; i++) {
+      if (lottofunc1.chartSlideParam === 1) {
+        chartTopData.datasets[i].data = [0, 0, 1, 5, 3, 2, 1];
+        chartTopData.datasets[i + 1].data = [
+          0.16384841642251924,
+          1.0277764302867114,
+          2.686233851885722,
+          3.7444471874770664,
+          2.9359869992717913,
+          1.2277763815136578,
+          0.21393073314253125
+        ];
+        chartTopInstance.update();
+        if (e.target.id === 'left-chart-btn') {
+          chartTopNum[i + 1].style.backgroundColor = 'gray';
+        } else if (e.target.id === 'right-chart-btn') {
+        }
+        chartTopNum[i].style.backgroundColor = 'blue';
       }
     }
 
@@ -88,8 +119,9 @@ function chartSlide() {
         0.21393073314253125
       ];
       chartTopInstance.update();
-      for (node of chartTopNum) {
-        node.style.backgroundColor = 'gray';
+      if (e.target.id === 'left-chart-btn') {
+        chartTopNum[1].style.backgroundColor = 'gray';
+      } else if (e.target.id === 'right-chart-btn') {
       }
       chartTopNum[0].style.backgroundColor = 'blue';
     } else if (lottofunc1.chartSlideParam === 2) {
@@ -104,8 +136,10 @@ function chartSlide() {
         0.4278614662850625
       ];
       chartTopInstance.update();
-      for (node of chartTopNum) {
-        node.style.backgroundColor = 'gray';
+      if (e.target.id === 'left-chart-btn') {
+        chartTopNum[2].style.backgroundColor = 'gray';
+      } else if (e.target.id === 'right-chart-btn') {
+        chartTopNum[0].style.backgroundColor = 'gray';
       }
       chartTopNum[1].style.backgroundColor = 'blue';
     } else if (lottofunc1.chartSlideParam === 3) {
@@ -120,8 +154,10 @@ function chartSlide() {
         0.855722932570125
       ];
       chartTopInstance.update();
-      for (node of chartTopNum) {
-        node.style.backgroundColor = 'gray';
+      if (e.target.id === 'left-chart-btn') {
+        chartTopNum[3].style.backgroundColor = 'gray';
+      } else if (e.target.id === 'right-chart-btn') {
+        chartTopNum[1].style.backgroundColor = 'gray';
       }
       chartTopNum[2].style.backgroundColor = 'blue';
     } else if (lottofunc1.chartSlideParam === 4) {
@@ -136,8 +172,10 @@ function chartSlide() {
         15.937839619118579
       ];
       chartTopInstance.update();
-      for (node of chartTopNum) {
-        node.style.backgroundColor = 'gray';
+      if (e.target.id === 'left-chart-btn') {
+        chartTopNum[4].style.backgroundColor = 'gray';
+      } else if (e.target.id === 'right-chart-btn') {
+        chartTopNum[2].style.backgroundColor = 'gray';
       }
       chartTopNum[3].style.backgroundColor = 'blue';
     } else if (lottofunc1.chartSlideParam === 5) {
@@ -152,8 +190,10 @@ function chartSlide() {
         0.855722932570125
       ];
       chartTopInstance.update();
-      for (node of chartTopNum) {
-        node.style.backgroundColor = 'gray';
+      if (e.target.id === 'left-chart-btn') {
+        chartTopNum[5].style.backgroundColor = 'gray';
+      } else if (e.target.id === 'right-chart-btn') {
+        chartTopNum[3].style.backgroundColor = 'gray';
       }
       chartTopNum[4].style.backgroundColor = 'blue';
     } else if (lottofunc1.chartSlideParam === 6) {
@@ -168,8 +208,10 @@ function chartSlide() {
         15.937839619118579
       ];
       chartTopInstance.update();
-      for (node of chartTopNum) {
-        node.style.backgroundColor = 'gray';
+      if (e.target.id === 'left-chart-btn') {
+        chartTopNum[6].style.backgroundColor = 'gray';
+      } else if (e.target.id === 'right-chart-btn') {
+        chartTopNum[4].style.backgroundColor = 'gray';
       }
       chartTopNum[5].style.backgroundColor = 'blue';
     }
