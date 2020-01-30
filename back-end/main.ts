@@ -17,10 +17,12 @@ button.onclick = function () {
     console.log(gen.getGeneratedNumbers());
 }
 */
-const method1 = lotto.gatherSum49.bind(lotto);
-const method2 = lotto.expectedSum49.bind(lotto);
+const method1 = lotto.gatherOddCount.bind(lotto);
+const method2 = lotto.expectedOddCount.bind(lotto);
+const count:number[] = [24,72,168,360,890,895];
+
 const labels:string[] = [];
-for(let i =0; i<=25; i++){
+for(let i =0; i<=6; i++){
     labels.push(i.toString());
 }
 const button = document.getElementById('button');
@@ -59,16 +61,16 @@ const button = document.getElementById('button');
             //labels: new Array<number>(893).fill(0).map((item, index) => index+1).map(value => String(value)),
             labels,
             datasets: [{
-                label: `${12} ${method1.name}`,
+                label: `${count[0]} ${method1.name}`,
                 //backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: method1({mode:12})
+                data: method1({mode:count[0]})
             },
             {
-                label: `Ideal ${12} Odd Count`,
+                label: `Ideal ${count[0]} Odd Count`,
                 //backgroundColor: 'rgb(99, 99, 132)',
                 borderColor: 'rgb(14, 99, 132)',
-                data: method2({mode:12})
+                data: method2({mode:count[0]})
             },
             ]
         },
@@ -88,16 +90,16 @@ const button = document.getElementById('button');
             //labels: new Array<number>(893).fill(0).map((item, index) => index+1).map(value => String(value)),
             labels,
             datasets: [{
-                label: `Latest ${24} Lotto Odd Count`,
+                label: `Latest ${count[1]} Lotto Odd Count`,
                 //backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: method1({mode:24})
+                data: method1({mode:count[1]})
             },
             {
-                label: `Ideal ${24} Odd Count`,
+                label: `Ideal ${count[1]} Odd Count`,
                 //backgroundColor: 'rgb(99, 99, 132)',
                 borderColor: 'rgb(14, 99, 132)',
-                data: method2({mode:24})
+                data: method2({mode:count[1]})
             },
             ]
         },
@@ -112,16 +114,16 @@ const button = document.getElementById('button');
             //labels: new Array<number>(893).fill(0).map((item, index) => index+1).map(value => String(value)),
             labels,
             datasets: [{
-                label: `Latest ${48} Lotto Odd Count`,
+                label: `Latest ${count[2]} Lotto Odd Count`,
                 //backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: method1({mode:48})
+                data: method1({mode:count[2]})
             },
             {
-                label: `Ideal ${48} Odd Count`,
+                label: `Ideal ${count[2]} Odd Count`,
                 //backgroundColor: 'rgb(99, 99, 132)',
                 borderColor: 'rgb(14, 99, 132)',
-                data: method2({mode:48})
+                data: method2({mode:count[2]})
             },
             ]
         },
@@ -136,16 +138,16 @@ const button = document.getElementById('button');
             //labels: new Array<number>(893).fill(0).map((item, index) => index+1).map(value => String(value)),
             labels,
             datasets: [{
-                label: `Latest ${96} Lotto Odd Count`,
+                label: `Latest ${count[3]} Lotto Odd Count`,
                 //backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: method1({mode:96})
+                data: method1({mode:count[3]})
             },
             {
-                label: `Ideal ${96} Odd Count`,
+                label: `Ideal ${count[3]} Odd Count`,
                 //backgroundColor: 'rgb(99, 99, 132)',
                 borderColor: 'rgb(14, 99, 132)',
-                data: method2({mode:96})
+                data: method2({mode:count[3]})
             },
             ]
         },
@@ -160,16 +162,16 @@ const button = document.getElementById('button');
             //labels: new Array<number>(893).fill(0).map((item, index) => index+1).map(value => String(value)),
             labels,
             datasets: [{
-                label: `Latest ${384} Lotto Odd Count`,
+                label: `Latest ${count[4]} Lotto Odd Count`,
                 //backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: method1({mode:384})
+                data: method1({mode:count[4]})
             },
             {
-                label: `Ideal ${384} Odd Count`,
+                label: `Ideal ${count[4]} Odd Count`,
                 //backgroundColor: 'rgb(99, 99, 132)',
                 borderColor: 'rgb(14, 99, 132)',
-                data: method2({mode:384})
+                data: method2({mode:count[4]})
             },
             ]
         },
