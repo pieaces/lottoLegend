@@ -192,7 +192,7 @@ const chartTopDataBox = {
 };
 
 const chartOptions = {
-  responsive: true,
+  responsive: false,
   scales: {
     xAxes: [
       {
