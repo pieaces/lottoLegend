@@ -41,61 +41,77 @@ const chartRadarInstance = new Chart(chartRadarBox, {
   options: chartRadarOptions
 });
 
-const chartGaussBox = document
-  .querySelector('.chart-func2-gauss')
-  .getContext('2d');
+window.chartColors = {
+  red: 'rgb(255, 99, 132)',
+  orange: 'rgb(255, 159, 64)',
+  yellow: 'rgb(255, 205, 86)',
+  green: 'rgb(75, 192, 192)',
+  blue: 'rgb(54, 162, 235)',
+  purple: 'rgb(153, 102, 255)',
+  grey: 'rgb(201, 203, 207)'
+};
 
-const chartGaussDataBox = {
-  labels: [0, 1, 2, 3, 4, 5, 6],
-  datasets: [
-    {
-      label: '이상값',
-      backgroundColor: 'rgba(91, 81,255, 0.2)',
-      pointBackgroundColor: 'white',
-      borderWidth: 2,
-      borderColor: 'rgb(14,99,132)',
-      data: [0, 0, 2, 5, 4, 7, 2]
+window.randomScalingFactor = function() {
+  return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
+};
+
+function createConfig(details, data) {
+  return {
+    type: 'line',
+    data: {
+      labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6'],
+      datasets: [
+        {
+          label:
+            'steppedLine: ' +
+            (typeof details.steppedLine === 'boolean'
+              ? details.steppedLine
+              : `'${details.steppedLine}'`),
+          steppedLine: details.steppedLine,
+          data: data,
+          borderColor: details.color,
+          fill: false
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      title: {
+        display: true,
+        text: details.label
+      }
     }
-  ]
+  };
+}
+window.onload = function() {
+  var data = [1, 2, 3, 4, 5, 6];
+  var steppedLineSettings = [
+    {
+      steppedLine: true,
+      label: 'No Step Interpolation',
+      color: window.chartColors.red
+    },
+    {
+      steppedLine: true,
+      label: 'Step Before Interpolation',
+      color: window.chartColors.green
+    },
+    {
+      steppedLine: 'before',
+      label: 'Step Before Interpolation',
+      color: window.chartColors.green
+    },
+    {
+      steppedLine: 'after',
+      label: 'Step After Interpolation',
+      color: window.chartColors.purple
+    }
+  ];
+  steppedLineSettings.forEach(function(details) {
+    var config = createConfig(details, data);
+    new Chart(
+      document.querySelector('.chart-func2-gauss').getContext('2d'),
+      config
+    );
+  });
 };
-
-const chartGaussOptions = {
-  responsive: false,
-  scales: {
-    xAxes: [
-      {
-        gridLines: {
-          color: 'rgba(200, 200, 200, 0.5)',
-          lineWidth: 1
-        }
-      }
-    ],
-    yAxes: [
-      {
-        gridLines: {
-          color: 'rgba(200, 200, 200, 0.5)',
-          lineWidth: 1
-        }
-      }
-    ]
-  },
-  legend: {
-    display: false
-  },
-
-  tooltips: {
-    titleFontFamily: 'Open Sans',
-    backgroundColor: 'rgba(0,0,0,0.3)',
-    titleFontColor: 'red',
-    caretSize: 5,
-    cornerRadius: 2,
-    xPadding: 10,
-    yPadding: 10
-  }
-};
-
-const chartGaussInstance = new Chart(chartGaussBox, {
-  type: 'line',
-  data: chartGaussDataBox,
-  options: chartGaussOptions
-});
