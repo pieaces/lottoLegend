@@ -9,7 +9,6 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   padding: 10px 0;
-  grid-gap: 30px;
 }
 
 .main {
@@ -34,6 +33,7 @@
   display: grid;
   grid-template-rows: repeat(12, 80px);
   grid-template-columns: 1fr;
+  padding-right: 30px;
 }
 
 .aside > div {
