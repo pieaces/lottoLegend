@@ -1,155 +1,177 @@
 import Calculate from '../Statistics/Calculate'
 import Analyze from '../Analyze/Analyze'
-import Base, {LData, Mode} from './Base'
-import ExpectationMixIn, {Params} from './ExpectationMixin'
+import Base, { LData, Mode } from './Base'
+import ExpectationMixIn, { Params } from './ExpectationMixin'
 
-interface Helper extends Params{
-    method: (numbers: number[])=> number;
+interface Helper extends Params {
+    method: (numbers: number[]) => number;
 }
-
+interface AnalyzeHelper extends Params {
+    method: (...something: any) => number[];
+    one?: number;
+}
 export default class Gather extends ExpectationMixIn(Base) {
     constructor(data: LData[], mode: Mode) {
         super(data);
         this.mode = mode;
     }
 
-    private gatherHelper(helper:Helper):number[] {
-        const result = new Array<number>(helper.to-helper.from+1).fill(0);
-        Calculate.getData(this.getLNumbers(helper.mode), helper.method).forEach(value =>{
-            if(helper.from <= value && value <= helper.to){
-                result[value-helper.from]++;
+    private gatherHelper(helper: Helper): number[] {
+        const result = new Array<number>(helper.to - helper.from + 1).fill(0);
+        Calculate.getData(this.getLNumbers(helper.mode), helper.method).forEach(value => {
+            if (helper.from <= value && value <= helper.to) {
+                result[value - helper.from]++;
             }
         });
 
         return result;
     }
+    private gatherAnalzeHelper(helper: AnalyzeHelper): number[] {
+        const temp = helper.method(this.getLNumbers(helper.mode), helper.one);
+        const from = helper.from || 1, to = helper.to || 12;
 
-    gatherExcludedLineCount(params:Params = {from:0, to:5, mode: this.mode}): number[] {
-        const helper:Helper = {
-            method:Calculate.excludedLineCount,
-            from:params.from || 0, to:params.to || 5, mode:params.mode || this.mode
+        const result: number[] = new Array<number>(to - from + 1).fill(0);
+
+        temp.forEach(value => {
+            if (from <= value && value <= to)
+                result[value - from]++;
+        });
+        return result;
+    }
+
+    gatherExcludedLineCount(params: Params = { from: 0, to: 5, mode: this.mode }): number[] {
+        const helper: Helper = {
+            method: Calculate.excludedLineCount,
+            from: params.from || 0, to: params.to || 5, mode: params.mode || this.mode
         };
         return this.gatherHelper(helper);
     }
     //회차별 계산된 결과(LottoCal)를 종합.
-    gatherLineCount(params:Params = {mode: this.mode}): number[] {
+    gatherLineCount(params: Params = { mode: this.mode }): number[] {
         return Analyze.posCount$10(this.getLNumbers(params.mode));
     }
 
-    gatherEmergedRoundForOne(one:number, mode:Mode=this.mode): number[] {
+    gatherEmergedRoundForOne(one: number, mode:Mode = this.mode): number[] {
         return Analyze.emergedRoundForOne(this.getLData(mode), one);
     }
-    gatherIntervalForOne(one:number, mode:Mode=this.mode): number[] {
-        return Analyze.intervalForOne(this.getLNumbers(mode), one);
+
+    gatherIntervalForOne(one: number, params: Params = { from: 1, to: 12, mode: this.mode }): number[] {
+        const analyzeHelper: AnalyzeHelper = {
+            method: Analyze.intervalForOne,
+            one,
+            from: params.from || 1, to: params.to || 12, mode: params.mode || this.mode
+        }
+
+        return this.gatherAnalzeHelper(analyzeHelper);
     }
 
-    gatherLowCount(params:Params={from:0, to:6, mode: this.mode}): number[] {
-        const helper:Helper = {
-            method:Calculate.lowCount,
-            from:params.from || 0, to:params.to || 6, mode: params.mode || this.mode
+    gatherHowLongNone() { //HData[]
+        return Analyze.howLongNone(this.getLData());
+    }
+
+    gatherLowCount(params: Params = { from: 0, to: 6, mode: this.mode }): number[] {
+        const helper: Helper = {
+            method: Calculate.lowCount,
+            from: params.from || 0, to: params.to || 6, mode: params.mode || this.mode
 
         };
         return this.gatherHelper(helper);
     }
 
-    gatherSum$10(params:Params = {from:0, to:24, mode:this.mode}): number[] {
-        const helper:Helper = {
-            method:Calculate.sum$10,
-            from:params.from || 0, to:params.to || 24, mode: params.mode || this.mode
+    gatherSum$10(params: Params = { from: 0, to: 24, mode: this.mode }): number[] {
+        const helper: Helper = {
+            method: Calculate.sum$10,
+            from: params.from || 0, to: params.to || 24, mode: params.mode || this.mode
         };
         return this.gatherHelper(helper);
     }
-    gatherSum$1(from:number, to:number, mode:Mode = this.mode):number[] {
-        const helper:Helper = {
-            method:Calculate.sum$1,
-            from:2, to:52, mode
+    gatherSum$1(from: number, to: number, mode: Mode = this.mode): number[] {
+        const helper: Helper = {
+            method: Calculate.sum$1,
+            from: 2, to: 52, mode
         };
         return this.gatherHelper(helper);
     }
-/*
-    gatherSum(from:number, to:number, mode:number = this.mode):number[] {
-        const helper:Helper = {
-            method:Calculate.sum,
-            from, to, mode
-        };
-        return this.gatherHelper(helper);
-    }
-*/
-    gatherSum49(params:Params = {from:21, to:255, mode: this.mode}):number[] {//21~255
+    /*
+        gatherSum(from:number, to:number, mode:number = this.mode):number[] {
+            const helper:Helper = {
+                method:Calculate.sum,
+                from, to, mode
+            };
+            return this.gatherHelper(helper);
+        }
+    */
+    gatherSum49(params: Params = { from: 21, to: 255, mode: this.mode }): number[] {//21~255
         const from = params.from || 21;
         const to = params.to || 255;
-        const result = new Array<number>(Math.floor((to-from)/10)+1).fill(0);
-        Calculate.getData(this.getLNumbers(params.mode), Calculate.sum).forEach(value =>{
-            if(from <= value && value <= to){
-                result[Math.floor((value-from)/10)]++;
+        const result = new Array<number>(Math.floor((to - from) / 10) + 1).fill(0);
+        Calculate.getData(this.getLNumbers(params.mode), Calculate.sum).forEach(value => {
+            if (from <= value && value <= to) {
+                result[Math.floor((value - from) / 10)]++;
             }
         });
 
         return result;
     }
 
-    gatherOddCount(params:Params = {from:0, to:6, mode:this.mode}): number[] {
+    gatherOddCount(params: Params = { from: 0, to: 6, mode: this.mode }): number[] {
         let helper: Helper = {
             method: Calculate.oddCount,
-            from:params.from || 0, to:params.to || 6, mode: params.mode || this.mode
+            from: params.from || 0, to: params.to || 6, mode: params.mode || this.mode
         };
         return this.gatherHelper(helper);
     }
-    gatherPrimeCount(params:Params = {from:0, to:6, mode:this.mode}): number[] {
+    gatherPrimeCount(params: Params = { from: 0, to: 6, mode: this.mode }): number[] {
         let helper: Helper = {
             method: Calculate.primeCount,
-            from:params.from || 0, to:params.to || 6, mode: params.mode || this.mode
+            from: params.from || 0, to: params.to || 6, mode: params.mode || this.mode
         };
         return this.gatherHelper(helper);
     }
-    gather$3Count(params:Params = {from:0, to:6, mode:this.mode}): number[] {
+    gather$3Count(params: Params = { from: 0, to: 6, mode: this.mode }): number[] {
         let helper: Helper = {
             method: Calculate.$3Count,
-            from:params.from || 0, to:params.to || 6, mode: params.mode || this.mode
+            from: params.from || 0, to: params.to || 6, mode: params.mode || this.mode
         };
         return this.gatherHelper(helper);
     }
 
-    gatherAC(params:Params = {from:0, to:10, mode:this.mode}): number[] {
+    gatherAC(params: Params = { from: 0, to: 10, mode: this.mode }): number[] {
         let helper: Helper = {
             method: Calculate.AC,
-            from:params.from || 0, to:params.to || 10, mode: params.mode || this.mode
+            from: params.from || 0, to: params.to || 10, mode: params.mode || this.mode
         };
         return this.gatherHelper(helper);
     }
 
-    gatherDiffMaxMinData(params:Params = {from:5, to:44, mode:this.mode}): number[] {
+    gatherDiffMaxMinData(params: Params = { from: 5, to: 44, mode: this.mode }): number[] {
         let helper: Helper = {
             method: Calculate.diffMaxMin,
-            from:params.from || 5, to:params.to || 44, mode: params.mode || this.mode
+            from: params.from || 5, to: params.to || 44, mode: params.mode || this.mode
         };
         return this.gatherHelper(helper);
     }
 
-    gatherConsecutiveExist(mode:Mode = this.mode): number[] {
-        const helper:Helper = {
-            method:Calculate.consecutiveExist,
-            from:0, to:1, mode
+    gatherConsecutiveExist(mode: Mode = this.mode): number[] {
+        const helper: Helper = {
+            method: Calculate.consecutiveExist,
+            from: 0, to: 1, mode
         };
         return this.gatherHelper(helper);
     }
-    gatherCarryCount(params:Params = {mode:this.mode}): number[] {
-        const carryCounts =  Analyze.carryCount(this.getLNumbers(params.mode).reverse());
+    gatherCarryCount(params: Params = { mode: this.mode }): number[] {
+        const carryCounts = Analyze.carryCount(this.getLNumbers(params.mode).reverse());
 
         const result = new Array<number>(7).fill(0);
-        carryCounts.forEach(value =>{
+        carryCounts.forEach(value => {
             result[value]++;
         });
 
         return result;
     }
 
-    gatherFrequencyPercent(mode: Mode = this.mode): number[] {
-        return Analyze.frequencyCount(this.getLNumbers(mode)).map(value => value / this.getTotalSize());
-    }
-
-    gatherHowLongNone() { //HData[]
-        return Analyze.howLongNone(this.getLData());
+    gatherFrequency(mode: Mode = this.mode): number[] {
+        return Analyze.frequencyCount(this.getLNumbers(mode));
     }
 
     gatherHarmony(mode: Mode = this.mode) { //HarmonyData[]

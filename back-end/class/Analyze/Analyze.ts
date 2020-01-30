@@ -41,7 +41,7 @@ export default class Analyze extends PosAnalyze {
         return result;
     }
     
-    private static emergePoint(numsArray: Array<number[]>): Array<number[]> {
+    private static emergedPoint(numsArray: Array<number[]>): Array<number[]> {
         const result:Array<number[]> = [];
         for(let i =0; i<LottoBase.BALL_NUM; i++) result[i] = [];
         numsArray.forEach((numbers, round) => {
@@ -51,7 +51,7 @@ export default class Analyze extends PosAnalyze {
         return result;
     }
 
-    private static emergePointForOne(numsArray: Array<number[]>, one:number): number[] {//가장최근회차 기준
+    private static emergedPointForOne(numsArray: Array<number[]>, one:number): number[] {//가장최근회차 기준
         const result:number[] = [];
         numsArray.forEach((numbers, round)=>{
             numbers.forEach(num => {
@@ -73,7 +73,7 @@ export default class Analyze extends PosAnalyze {
         return result;
     }
     public static interval(numsArray: Array<number[]>): Array<number[]>{
-        return this.emergePoint(numsArray).map(points => {
+        return Analyze.emergedPoint(numsArray).map(points => {
             const result = [];
             if(points.length > 0){
                 result[0] = points[0];
@@ -85,9 +85,9 @@ export default class Analyze extends PosAnalyze {
     }
 
     public static intervalForOne(numsArray: Array<number[]>, one:number): number[]{//가장최근회차 기준
-        const points = this.emergePointForOne(numsArray, one);
+        const points = Analyze.emergedPointForOne(numsArray, one);
         const result = [];
-        if(!points[0]) return null;
+        if(points.length < 1) return null;
         result[0] = points[0];
         for(let i=1; i<points.length; i++){
             result[i] = points[i] - points[i-1];
