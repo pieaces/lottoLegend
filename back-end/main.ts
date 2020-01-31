@@ -7,7 +7,7 @@ function cout(obj: any, str = ''): void {
 }
 
 //mode: 12, 24, 48
-const lotto: Lotto = new Lotto(require('./json/lotto.json'));
+const lotto: Lotto = new Lotto(require('./json/lotto.json').reverse());
 
 const gen = new Generator({lowCount:2, excludeNumbers:[4,11,42], includeNumbers:[3], sum:{from:130,to:160}});
 /*

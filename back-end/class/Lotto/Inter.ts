@@ -1,5 +1,5 @@
 import Gather from "./Gather";
-import { Params } from './ExpectationMixin'
+import { Params } from './Expectation'
 
 interface InterData {
     actual: number[];
@@ -16,7 +16,7 @@ export default class Inter extends Gather {
         return interData.actual.map((value, index) => value - interData.ideal[index]);
     }
 
-    interExcludedLineCount(params: Params): number[] {
+    interExcludedLineCount(params: Params = {}): number[] {
         return this.interHelper(
             params,
             this.gatherExcludedLineCount,
@@ -24,7 +24,7 @@ export default class Inter extends Gather {
         );
     }
 
-    interLineCount(params: Params): number[] {
+    interLineCount(params: Params = {}): number[] {
         return this.interHelper(
             params,
             this.gatherLineCount,
@@ -32,7 +32,7 @@ export default class Inter extends Gather {
         );
     }
 
-    interLowCount(params: Params): number[] {
+    interLowCount(params: Params = {}): number[] {
         return this.interHelper(
             params,
             this.gatherLowCount,
@@ -40,7 +40,7 @@ export default class Inter extends Gather {
         );
     }
 
-    interSum(params: Params): number[] {
+    interSum(params: Params = {}): number[] {
         return this.interHelper(
             params,
             this.gatherSum,
@@ -48,7 +48,7 @@ export default class Inter extends Gather {
         );
     }
 
-    interOddCount(params: Params): number[] {
+    interOddCount(params: Params = {}): number[] {
         return this.interHelper(
             params,
             this.gatherOddCount,
@@ -56,7 +56,7 @@ export default class Inter extends Gather {
         );
     }
 
-    interPrimeCount(params: Params): number[] {
+    interPrimeCount(params: Params = {}): number[] {
         return this.interHelper(
             params,
             this.gatherPrimeCount,
@@ -64,7 +64,7 @@ export default class Inter extends Gather {
         );
     }
 
-    inter$3Count(params: Params): number[] {
+    inter$3Count(params: Params = {}): number[] {
         return this.interHelper(
             params,
             this.gather$3Count,
@@ -72,7 +72,7 @@ export default class Inter extends Gather {
         );
     }
 
-    interSum$10(params: Params): number[] {
+    interSum$10(params: Params = {}): number[] {
         return this.interHelper(
             params,
             this.gatherSum$10,
@@ -81,7 +81,7 @@ export default class Inter extends Gather {
     }
 
 
-    interDiffMaxMin(params: Params): number[] {
+    interDiffMaxMin(params: Params = {}): number[] {
         return this.interHelper(
             params,
             this.gatherDiffMaxMinData,
@@ -89,7 +89,7 @@ export default class Inter extends Gather {
         );
     }
 
-    interAC(params: Params): number[] {
+    interAC(params: Params = {}): number[] {
         return this.interHelper(
             params,
             this.gatherAC,
@@ -97,7 +97,7 @@ export default class Inter extends Gather {
         );
     }
 
-    interConsecutiveExist(params: Params): number[] {
+    interConsecutiveExist(params: Params = {}): number[] {
         return this.interHelper(
             params,
             this.gatherConsecutiveExist,

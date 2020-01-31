@@ -1,7 +1,6 @@
 import Calculate from '../Statistics/Calculate'
 import Analyze from '../Analyze/Analyze'
-import Base, { LData, Mode } from './Base'
-import ExpectationMixIn, { Params } from './ExpectationMixin'
+import Expectation, { Params } from './Expectation'
 
 interface Helper extends Params {
     method: (numbers: number[]) => number;
@@ -10,11 +9,7 @@ interface AnalyzeHelper extends Params {
     method: (...something: any) => number[];
     one?: number;
 }
-export default class Gather extends ExpectationMixIn(Base) {
-    constructor(data: LData[], mode: Mode) {
-        super(data);
-        this.mode = mode;
-    }
+export default class Gather extends Expectation {
 
     private gatherHelper(helper: Helper): number[] {
         const result = new Array<number>(helper.to - helper.from + 1).fill(0);
@@ -51,7 +46,7 @@ export default class Gather extends ExpectationMixIn(Base) {
         return Analyze.posCount$10(this.getLNumbers(params.mode));
     }
 
-    gatherEmergedRoundForOne(one: number, mode: Mode = this.mode): number[] {
+    gatherEmergedRoundForOne(one: number, mode = this.mode): number[] {
         return Analyze.emergedRoundForOne(this.getLData(mode), one);
     }
 
@@ -85,7 +80,7 @@ export default class Gather extends ExpectationMixIn(Base) {
         };
         return this.gatherHelper(helper);
     }
-    gatherSum$1(from: number, to: number, mode: Mode = this.mode): number[] {
+    gatherSum$1(from: number, to: number, mode = this.mode): number[] {
         const helper: Helper = {
             method: Calculate.sum$1,
             from: 2, to: 52, mode
@@ -170,11 +165,11 @@ export default class Gather extends ExpectationMixIn(Base) {
         return result;
     }
 
-    gatherFrequency(mode: Mode = this.mode): number[] {
+    gatherFrequency(mode = this.mode): number[] {
         return Analyze.frequencyCount(this.getLNumbers(mode));
     }
 
-    gatherHarmony(mode: Mode = this.mode) { //HarmonyData[]
+    gatherHarmony(mode = this.mode) { //HarmonyData[]
         return Analyze.harmony(this.getLData(mode));
     }
 }
