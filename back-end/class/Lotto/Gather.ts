@@ -101,7 +101,7 @@ export default class Gather extends ExpectationMixIn(Base) {
             return this.gatherHelper(helper);
         }
     */
-    gatherSum49(params: Params = { from: 21, to: 255, mode: this.mode }): number[] {//21~255
+    gatherSum55(params: Params = { from: 21, to: 255, mode: this.mode }): number[] {//21~255
         const from = params.from || 21;
         const to = params.to || 255;
         const result = new Array<number>(Math.floor((to - from) / 10) + 1).fill(0);

@@ -31,4 +31,5 @@ const howLongNone = lotto.gatherHowLongNone();
 const frequency = lotto.gatherFrequency();
 
 
-console.log(intervalForOneWithin12);
+//console.log(intervalForOneWithin12);
+console.log(lotto.gatherConsecutiveExist(), lotto.expectedConsecutiveExist());

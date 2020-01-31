@@ -10,6 +10,7 @@ const pos$3Count = require('../../json/Expectation/$3Count.json');
 const posAC = require('../../json/Expectation/AC.json');
 const posDiffMaxMin = require('../../json/Expectation/diffMaxMin.json');
 const posCarryCount = require('../../json/Expectation/carryCount.json');
+const posConsecutiveExist = require('../../json/Expectation/consecutiveExist.json');
 
 export interface Params {
     from?: number;
@@ -67,7 +68,7 @@ const ExpectationMixIn = <TBase extends Constructor>(Base: TBase) =>
             const pos: number[] = posSum;
             return pos.slice(from - 21, to - 21 + 1).map(value => value * count);
         }
-        expectedSum49(params: Params = {}): number[] {
+        expectedSum55(params: Params = {}): number[] {
             const defaultParam = { from: 21, to: 255, mode: this.mode }
             const { from, to, count } = returnParams(defaultParam, params)
 
@@ -130,6 +131,12 @@ const ExpectationMixIn = <TBase extends Constructor>(Base: TBase) =>
 
             const pos: number[] = posCarryCount;
             return pos.slice(from, to + 1).map(value => value * count);
+        }
+        expectedConsecutiveExist(mode:Mode = this.mode): number[] {
+            const { count } = returnParams({mode}, {});
+
+            const pos: number[] = posConsecutiveExist;
+            return pos.map(value => value * count);
         }
     };
 
