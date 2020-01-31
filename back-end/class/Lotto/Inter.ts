@@ -5,7 +5,6 @@ interface InterData {
     actual: number[];
     ideal: number[];
 }
-
 export default class Inter extends Gather {
     private interHelper(params: Params, methodActual: (params: Params) => number[], methodIdeal: (params: Params) => number[]): number[] {
         const interData: InterData = {
