@@ -104,6 +104,7 @@ const lottoNum = document.querySelectorAll('.lotto-num-box> div > div');
 const selectNumBox = document.querySelector('.select-num-box');
 const numExcludeBtn = document.querySelector('.num-exclude-btn');
 const resetNumBtn = document.querySelector('.reset-num-btn');
+const winNum = document.querySelectorAll('.win-num-box > div');
 
 function numExclude() {
   const nums = new Set();
@@ -114,13 +115,13 @@ function numExclude() {
       if (!nums.has(nodeValue)) {
         if (num !== null) {
           if (!nums.has(num)) {
-            lottoNum[num - 1].style.backgroundColor = 'rgb(91, 81, 253)';
+            lottoNum[num - 1].style.backgroundColor = 'rgba(231, 76, 60, 0.2)';
           }
         }
         num = nodeValue;
         node.style.backgroundColor = 'yellow';
       } else {
-        node.style.backgroundColor = 'rgb(91, 81, 253)';
+        node.style.backgroundColor = 'rgba(231, 76, 60, 0.2)';
         nums.delete(nodeValue);
 
         for (const node of selectNumBox.children) {
@@ -139,7 +140,7 @@ function numExclude() {
       let i = 0;
       lottoNum[
         parseInt(selectNumBox.children[i].textContent) - 1
-      ].style.backgroundColor = 'rgb(91, 81, 253)';
+      ].style.backgroundColor = 'rgba(231, 76, 60, 0.2)';
       selectNumBox.children[i].remove();
       i++;
     }
@@ -152,10 +153,30 @@ function numExclude() {
         nums.add(num);
         const numBox = document.createElement('div');
         numBox.textContent = num;
+        setColorLotto(num, numBox);
         selectNumBox.appendChild(numBox);
       }
     }
   });
+}
+
+function setColorLotto(num, Box) {
+  if (1 <= num && num <= 10) {
+    Box.style.backgroundColor = '#FBC400';
+  } else if (num <= 20) {
+    Box.style.backgroundColor = '#69C8F2';
+  } else if (num <= 30) {
+    Box.style.backgroundColor = '#FF7272';
+  } else if (num <= 40) {
+    Box.style.backgroundColor = '#AAAAAA';
+  } else if (num <= 45) {
+    Box.style.backgroundColor = '#B0D840';
+  }
+}
+
+for (const node of winNum) {
+  const nodeValue = parseInt(node.textContent);
+  setColorLotto(nodeValue, node);
 }
 
 function init() {

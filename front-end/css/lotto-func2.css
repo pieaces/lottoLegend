@@ -120,7 +120,7 @@
   border-radius: 50%;
   margin-right: 10px;
   color: var(--default-color);
-  background-color: var(--main-color);
+  background-color: var(--lotto-num-color);
 }
 
 .num-exclude-btn {
@@ -167,7 +167,6 @@
   border-radius: 50%;
   margin-right: 10px;
   color: var(--default-color);
-  background-color: var(--main-color);
 
   /* Animation to spin and move the sphere */
 
