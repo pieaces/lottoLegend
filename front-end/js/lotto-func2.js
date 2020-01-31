@@ -102,25 +102,64 @@ const myBarChart = new Chart(chartBarBox, {
 
 const lottoNum = document.querySelectorAll('.lotto-num-box> div > div');
 const selectNumBox = document.querySelector('.select-num-box');
+const numExcludeBtn = document.querySelector('.num-exclude-btn');
+const resetNumBtn = document.querySelector('.reset-num-btn');
 
-function selectNum() {
+function numExclude() {
   const nums = new Set();
+  let num = null;
   for (const node of lottoNum) {
+    const nodeValue = parseInt(node.textContent);
     node.addEventListener('click', () => {
-      if (nums.size < 9) {
-        if (!nums.has(node.textContent) || nums.size === 0) {
-          nums.add(node.textContent);
-          const num = document.createElement('div');
-          num.textContent = node.textContent;
-          selectNumBox.appendChild(num);
+      if (!nums.has(nodeValue)) {
+        if (num !== null) {
+          if (!nums.has(num)) {
+            lottoNum[num - 1].style.backgroundColor = 'rgb(91, 81, 253)';
+          }
+        }
+        num = nodeValue;
+        node.style.backgroundColor = 'yellow';
+      } else {
+        node.style.backgroundColor = 'rgb(91, 81, 253)';
+        nums.delete(nodeValue);
+
+        for (const node of selectNumBox.children) {
+          if (parseInt(node.textContent) === nodeValue) {
+            node.remove();
+            break;
+          }
         }
       }
     });
   }
+
+  resetNumBtn.addEventListener('click', () => {
+    nums.clear();
+    while (selectNumBox.children.length !== 0) {
+      let i = 0;
+      lottoNum[
+        parseInt(selectNumBox.children[i].textContent) - 1
+      ].style.backgroundColor = 'rgb(91, 81, 253)';
+      selectNumBox.children[i].remove();
+      i++;
+    }
+  });
+
+  numExcludeBtn.addEventListener('click', () => {
+    if (nums.size < 9) {
+      if (!nums.has(num) || nums.size === 0) {
+        lottoNum[num - 1].style.backgroundColor = 'gray';
+        nums.add(num);
+        const numBox = document.createElement('div');
+        numBox.textContent = num;
+        selectNumBox.appendChild(numBox);
+      }
+    }
+  });
 }
 
 function init() {
-  selectNum();
+  numExclude();
 }
 
 init();
