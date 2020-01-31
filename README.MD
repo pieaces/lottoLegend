@@ -53,9 +53,9 @@ v 0.9.5 (2020-01-31)
     
         Calculate.sum
         
-        new Lotto().gatherSum55
+        new Lotto().gatherSum
         
-        new Lotto().expectedSum55
+        new Lotto().expectedSum
 
 6. 홀수개수 범위 입력 (가용범위: 0~6)
     

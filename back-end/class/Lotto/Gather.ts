@@ -51,7 +51,7 @@ export default class Gather extends ExpectationMixIn(Base) {
         return Analyze.posCount$10(this.getLNumbers(params.mode));
     }
 
-    gatherEmergedRoundForOne(one: number, mode:Mode = this.mode): number[] {
+    gatherEmergedRoundForOne(one: number, mode: Mode = this.mode): number[] {
         return Analyze.emergedRoundForOne(this.getLData(mode), one);
     }
 
@@ -92,15 +92,15 @@ export default class Gather extends ExpectationMixIn(Base) {
         };
         return this.gatherHelper(helper);
     }
-    /*
-        gatherSum(from:number, to:number, mode:number = this.mode):number[] {
-            const helper:Helper = {
-                method:Calculate.sum,
-                from, to, mode
-            };
-            return this.gatherHelper(helper);
-        }
-    */
+
+    gatherSum(params: Params = { from: 21, to: 255, mode: this.mode }): number[] {
+        const helper: Helper = {
+            method: Calculate.sum,
+            from: params.from || 21, to: params.to || 255, mode: params.mode || this.mode
+        };
+        return this.gatherHelper(helper);
+    }
+
     gatherSum55(params: Params = { from: 21, to: 255, mode: this.mode }): number[] {//21~255
         const from = params.from || 21;
         const to = params.to || 255;
@@ -152,10 +152,10 @@ export default class Gather extends ExpectationMixIn(Base) {
         return this.gatherHelper(helper);
     }
 
-    gatherConsecutiveExist(mode: Mode = this.mode): number[] {
+    gatherConsecutiveExist(params: Params = { mode: this.mode }): number[] {
         const helper: Helper = {
             method: Calculate.consecutiveExist,
-            from: 0, to: 1, mode
+            from: params.from || 0, to: params.to || 1, mode: params.mode || this.mode
         };
         return this.gatherHelper(helper);
     }

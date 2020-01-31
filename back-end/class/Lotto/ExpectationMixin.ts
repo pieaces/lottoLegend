@@ -132,8 +132,8 @@ const ExpectationMixIn = <TBase extends Constructor>(Base: TBase) =>
             const pos: number[] = posCarryCount;
             return pos.slice(from, to + 1).map(value => value * count);
         }
-        expectedConsecutiveExist(mode:Mode = this.mode): number[] {
-            const { count } = returnParams({mode}, {});
+        expectedConsecutiveExist(params: Params = {}): number[] {
+            const { count } = returnParams({mode:this.mode}, params);
 
             const pos: number[] = posConsecutiveExist;
             return pos.map(value => value * count);
