@@ -9,7 +9,13 @@ const chartRadarDataBox = {
       borderColor: 'rgba(179,181,198,1)',
       pointBorderColor: '#fff',
       pointBackgroundColor: 'rgba(179,181,198,1)',
-      data: [8.77, 55.61, 21.69, 6.62, 6.82]
+      data: [
+        Math.round(Math.random() * 100),
+        Math.round(Math.random() * 100),
+        Math.round(Math.random() * 100),
+        Math.round(Math.random() * 100),
+        Math.round(Math.random() * 100)
+      ]
     },
     {
       fill: true,
@@ -109,9 +115,10 @@ const winNum = document.querySelectorAll('.win-num-box > div');
 function numExclude() {
   const nums = new Set();
   let num = null;
+
   for (const node of lottoNum) {
-    const nodeValue = parseInt(node.textContent);
     node.addEventListener('click', () => {
+      const nodeValue = parseInt(node.textContent);
       if (!nums.has(nodeValue)) {
         if (num !== null) {
           if (!nums.has(num)) {
@@ -174,12 +181,15 @@ function setColorLotto(num, Box) {
   }
 }
 
-for (const node of winNum) {
-  const nodeValue = parseInt(node.textContent);
-  setColorLotto(nodeValue, node);
+function setColorWinNum() {
+  for (const node of winNum) {
+    const nodeValue = parseInt(node.textContent);
+    setColorLotto(nodeValue, node);
+  }
 }
 
 function init() {
+  setColorWinNum();
   numExclude();
 }
 

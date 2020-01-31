@@ -33,8 +33,6 @@
 // ];
 
 const lottofunc1 = {
-  chartSlideNum: 6,
-  chartSlideCurrent: 0,
   chartTopData: [
     {
       real: [0, 0, 1, 5, 3, 2, 1],
@@ -164,8 +162,6 @@ const chartBottomContainer = document.querySelector('.chart-bottom-container');
 const leftChartBtn = document.querySelector('#left-chart-btn');
 const rightChartBtn = document.querySelector('#right-chart-btn');
 const chartTopNum = document.querySelectorAll('.chart-top-num > div');
-leftChartBtn.addEventListener('click', chartSlide());
-rightChartBtn.addEventListener('click', chartSlide());
 
 const chartTopBox = document.querySelector('.chart-top').getContext('2d');
 
@@ -360,62 +356,120 @@ const chartBottomInstance22 = new Chart(chartBottomBox22, {
   options: chartOptions
 });
 
+// function chartSlide() {
+//   return function(e) {
+//     if (e.target.id === 'left-chart-btn') {
+//       if (lottofunc1.chartSlideCurrent === -1) {
+//         lottofunc1.chartSlideCurrent = 0;
+//       } else {
+//         chartTopNum[lottofunc1.chartSlideCurrent].style.backgroundColor =
+//           'gray';
+//         lottofunc1.chartSlideCurrent--;
+//         chartTopNum[lottofunc1.chartSlideCurrent].style.backgroundColor =
+//           'blue';
+//       }
+//     } else if (e.target.id === 'right-chart-btn') {
+//       if (lottofunc1.chartSlideCurrent === lottofunc1.chartSlideNum - 1) {
+//         lottofunc1.chartSlideCurrent = 0;
+//         chartTopNum[lottofunc1.chartSlideNum - 1].style.backgroundColor =
+//           'gray';
+//         chartTopNum[lottofunc1.chartSlideCurrent].style.backgroundColor =
+//           'blue';
+//         chartBottomContainer.scrollIntoView({
+//           behavior: 'smooth'
+//         });
+//       } else {
+//         chartTopNum[lottofunc1.chartSlideCurrent].style.backgroundColor =
+//           'gray';
+//         lottofunc1.chartSlideCurrent++;
+//         chartTopNum[lottofunc1.chartSlideCurrent].style.backgroundColor =
+//           'blue';
+//       }
+//     }
+
+//     leftChartBtnToggle();
+
+//     chartTopDataBox.datasets[0].data =
+//       lottofunc1.chartTopData[lottofunc1.chartSlideCurrent].real;
+//     chartTopDataBox.datasets[1].data =
+//       lottofunc1.chartTopData[lottofunc1.chartSlideCurrent].ideal;
+//     chartTopInstance.update();
+//   };
+// }
+// for (let i = 0; i < lottofunc1.chartSlideNum; i++) {
+//   chartTopNum[i].addEventListener('click', () => {
+//     chartTopDataBox.datasets[0].data = lottofunc1.chartTopData[i].real;
+//     chartTopDataBox.datasets[1].data = lottofunc1.chartTopData[i].ideal;
+//     chartTopNum[lottofunc1.chartSlideCurrent].style.backgroundColor = 'gray';
+//     lottofunc1.chartSlideCurrent = i;
+//     chartTopNum[lottofunc1.chartSlideCurrent].style.backgroundColor = 'blue';
+//     leftChartBtnToggle();
+//     chartTopInstance.update();
+//   });
+// }
+
 function chartSlide() {
-  return function(e) {
-    if (e.target.id === 'left-chart-btn') {
-      if (lottofunc1.chartSlideCurrent === -1) {
-        lottofunc1.chartSlideCurrent = 0;
-      } else {
-        chartTopNum[lottofunc1.chartSlideCurrent].style.backgroundColor =
-          'gray';
-        lottofunc1.chartSlideCurrent--;
-        chartTopNum[lottofunc1.chartSlideCurrent].style.backgroundColor =
-          'blue';
-      }
-    } else if (e.target.id === 'right-chart-btn') {
-      if (lottofunc1.chartSlideCurrent === lottofunc1.chartSlideNum - 1) {
-        lottofunc1.chartSlideCurrent = 0;
-        chartTopNum[lottofunc1.chartSlideNum - 1].style.backgroundColor =
-          'gray';
-        chartTopNum[lottofunc1.chartSlideCurrent].style.backgroundColor =
-          'blue';
-        chartBottomContainer.scrollIntoView({
-          behavior: 'smooth'
-        });
-      } else {
-        chartTopNum[lottofunc1.chartSlideCurrent].style.backgroundColor =
-          'gray';
-        lottofunc1.chartSlideCurrent++;
-        chartTopNum[lottofunc1.chartSlideCurrent].style.backgroundColor =
-          'blue';
-      }
+  let chartSlideCurrent = 0;
+  const chartSlideNum = 6;
+  leftChartBtn.addEventListener('click', () => {
+    if (chartSlideCurrent === -1) {
+      chartSlideCurrent = 0;
+    } else {
+      chartTopNum[chartSlideCurrent].style.backgroundColor = 'gray';
+      chartSlideCurrent--;
+      chartTopNum[chartSlideCurrent].style.backgroundColor = 'blue';
     }
-
-    leftChartBtnToggle();
-
-    chartTopDataBox.datasets[0].data =
-      lottofunc1.chartTopData[lottofunc1.chartSlideCurrent].real;
-    chartTopDataBox.datasets[1].data =
-      lottofunc1.chartTopData[lottofunc1.chartSlideCurrent].ideal;
-    chartTopInstance.update();
-  };
-}
-for (let i = 0; i < lottofunc1.chartSlideNum; i++) {
-  chartTopNum[i].addEventListener('click', () => {
-    chartTopDataBox.datasets[0].data = lottofunc1.chartTopData[i].real;
-    chartTopDataBox.datasets[1].data = lottofunc1.chartTopData[i].ideal;
-    chartTopNum[lottofunc1.chartSlideCurrent].style.backgroundColor = 'gray';
-    lottofunc1.chartSlideCurrent = i;
-    chartTopNum[lottofunc1.chartSlideCurrent].style.backgroundColor = 'blue';
-    leftChartBtnToggle();
-    chartTopInstance.update();
+    leftChartBtnToggle(chartSlideCurrent);
+    chartDataSet();
   });
-}
+  rightChartBtn.addEventListener('click', () => {
+    if (chartSlideCurrent === chartSlideNum - 1) {
+      chartSlideCurrent = 0;
+      chartTopNum[chartSlideNum - 1].style.backgroundColor = 'gray';
+      chartTopNum[chartSlideCurrent].style.backgroundColor = 'blue';
+      chartBottomContainer.scrollIntoView({
+        behavior: 'smooth'
+      });
+    } else {
+      chartTopNum[chartSlideCurrent].style.backgroundColor = 'gray';
+      chartSlideCurrent++;
+      chartTopNum[chartSlideCurrent].style.backgroundColor = 'blue';
+    }
+    leftChartBtnToggle(chartSlideCurrent);
+    chartDataSet();
+  });
 
-function leftChartBtnToggle() {
-  if (lottofunc1.chartSlideCurrent === 0) {
-    leftChartBtn.style.display = 'none';
-  } else {
-    leftChartBtn.style.display = 'block';
+  for (let i = 0; i < chartSlideNum; i++) {
+    chartTopNum[i].addEventListener('click', () => {
+      chartTopDataBox.datasets[0].data = lottofunc1.chartTopData[i].real;
+      chartTopDataBox.datasets[1].data = lottofunc1.chartTopData[i].ideal;
+      chartTopNum[chartSlideCurrent].style.backgroundColor = 'gray';
+      chartSlideCurrent = i;
+      chartTopNum[chartSlideCurrent].style.backgroundColor = 'blue';
+      leftChartBtnToggle(chartSlideCurrent);
+      chartTopInstance.update();
+    });
+  }
+
+  function leftChartBtnToggle(chartSlideCurrent) {
+    if (chartSlideCurrent === 0) {
+      leftChartBtn.style.display = 'none';
+    } else {
+      leftChartBtn.style.display = 'block';
+    }
+  }
+
+  function chartDataSet() {
+    chartTopDataBox.datasets[0].data =
+      lottofunc1.chartTopData[chartSlideCurrent].real;
+    chartTopDataBox.datasets[1].data =
+      lottofunc1.chartTopData[chartSlideCurrent].ideal;
+    chartTopInstance.update();
   }
 }
+
+function init() {
+  chartSlide();
+}
+
+init();
