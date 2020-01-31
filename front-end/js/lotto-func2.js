@@ -41,77 +41,86 @@ const chartRadarInstance = new Chart(chartRadarBox, {
   options: chartRadarOptions
 });
 
-window.chartColors = {
-  red: 'rgb(255, 99, 132)',
-  orange: 'rgb(255, 159, 64)',
-  yellow: 'rgb(255, 205, 86)',
-  green: 'rgb(75, 192, 192)',
-  blue: 'rgb(54, 162, 235)',
-  purple: 'rgb(153, 102, 255)',
-  grey: 'rgb(201, 203, 207)'
+const chartGaussBox = document.querySelector('.chart-func2-gauss');
+const chartGaussDataBox = {
+  labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'],
+  datasets: [
+    {
+      steppedLine: true,
+      data: [0, 1, 2, 3, 4, 5, 6],
+      borderColor: 'red',
+      fill: false
+    }
+  ]
 };
 
-window.randomScalingFactor = function() {
-  return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
+const chartGaussOptions = {
+  responsive: true,
+  legend: false,
+  title: {
+    display: true,
+    text: 'hi'
+  }
 };
 
-function createConfig(details, data) {
-  return {
-    type: 'line',
-    data: {
-      labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6'],
-      datasets: [
-        {
-          label:
-            'steppedLine: ' +
-            (typeof details.steppedLine === 'boolean'
-              ? details.steppedLine
-              : `'${details.steppedLine}'`),
-          steppedLine: details.steppedLine,
-          data: data,
-          borderColor: details.color,
-          fill: false
+const chartGaussInstance = new Chart(chartGaussBox, {
+  type: 'line',
+  data: chartGaussDataBox,
+  options: chartGaussOptions
+});
+
+const chartBarBox = document.querySelector('.chart-func2-bar');
+
+// Data with datasets options
+const chartBarDataBox = {
+  labels: ['Vanilla', 'Chocolate', 'Strawberry'],
+  datasets: [
+    {
+      label: 'Ice Cream Sales ',
+      fill: true,
+      backgroundColor: ['moccasin', 'saddlebrown', 'lightpink'],
+      data: [11, 9, 4]
+    }
+  ]
+};
+
+// Notice how nested the beginAtZero is
+const chartBarOptions = {
+  legend: false,
+  title: {
+    display: true,
+    text: 'Ice Cream Truck Report'
+  }
+};
+
+// Chart declaration:
+const myBarChart = new Chart(chartBarBox, {
+  type: 'bar',
+  data: chartBarDataBox,
+  options: chartBarOptions
+});
+
+const lottoNum = document.querySelectorAll('.lotto-num-box> div > div');
+const selectNumBox = document.querySelector('.select-num-box');
+
+function selectNum() {
+  const nums = new Set();
+  for (const node of lottoNum) {
+    node.addEventListener('click', () => {
+      if (nums.size < 9) {
+        if (!nums.has(node.textContent) || nums.size === 0) {
+          nums.add(node.textContent);
+          const num = document.createElement('div');
+          num.textContent = node.textContent;
+          selectNumBox.appendChild(num);
         }
-      ]
-    },
-    options: {
-      responsive: true,
-      title: {
-        display: true,
-        text: details.label
       }
-    }
-  };
+    });
+  }
 }
-window.onload = function() {
-  var data = [1, 2, 3, 4, 5, 6];
-  var steppedLineSettings = [
-    {
-      steppedLine: true,
-      label: 'No Step Interpolation',
-      color: window.chartColors.red
-    },
-    {
-      steppedLine: true,
-      label: 'Step Before Interpolation',
-      color: window.chartColors.green
-    },
-    {
-      steppedLine: 'before',
-      label: 'Step Before Interpolation',
-      color: window.chartColors.green
-    },
-    {
-      steppedLine: 'after',
-      label: 'Step After Interpolation',
-      color: window.chartColors.purple
-    }
-  ];
-  steppedLineSettings.forEach(function(details) {
-    var config = createConfig(details, data);
-    new Chart(
-      document.querySelector('.chart-func2-gauss').getContext('2d'),
-      config
-    );
-  });
-};
+
+function init() {
+  selectNum();
+}
+
+init();
