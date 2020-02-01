@@ -25,7 +25,13 @@ const chartRadarDataBox = {
       pointBorderColor: '#fff',
       pointBackgroundColor: 'rgba(255,99,132,1)',
       pointBorderColor: '#fff',
-      data: [25.48, 54.16, 7.61, 8.06, 4.45]
+      data: [
+        Math.round(Math.random() * 100),
+        Math.round(Math.random() * 100),
+        Math.round(Math.random() * 100),
+        Math.round(Math.random() * 100),
+        Math.round(Math.random() * 100)
+      ]
     }
   ]
 };
@@ -53,7 +59,15 @@ const chartGaussDataBox = {
   datasets: [
     {
       steppedLine: true,
-      data: [0, 1, 2, 3, 4, 5, 6],
+      data: [
+        Math.round(Math.random() * 100),
+        Math.round(Math.random() * 100),
+        Math.round(Math.random() * 100),
+        Math.round(Math.random() * 100),
+        Math.round(Math.random() * 100),
+        Math.round(Math.random() * 100),
+        Math.round(Math.random() * 100)
+      ],
       borderColor: 'red',
       fill: false
     }
@@ -85,7 +99,11 @@ const chartBarDataBox = {
       label: 'Ice Cream Sales ',
       fill: true,
       backgroundColor: ['moccasin', 'saddlebrown', 'lightpink'],
-      data: [11, 9, 4]
+      data: [
+        Math.round(Math.random() * 100),
+        Math.round(Math.random() * 100),
+        Math.round(Math.random() * 100)
+      ]
     }
   ]
 };
@@ -100,7 +118,7 @@ const chartBarOptions = {
 };
 
 // Chart declaration:
-const myBarChart = new Chart(chartBarBox, {
+const chartBarInstance = new Chart(chartBarBox, {
   type: 'bar',
   data: chartBarDataBox,
   options: chartBarOptions
@@ -111,9 +129,26 @@ const selectNumBox = document.querySelector('.select-num-box');
 const numExcludeBtn = document.querySelector('.num-exclude-btn');
 const resetNumBtn = document.querySelector('.reset-num-btn');
 const winNum = document.querySelectorAll('.win-num-box > div');
+const filterCheckBox = document.querySelectorAll('.filter-checkbox');
+
+for (const node of filterCheckBox) {
+  node.addEventListener('click', () => {
+    if (node.checked) {
+      node.parentElement.style.backgroundColor = 'rgb(91, 81, 253)';
+      node.parentElement.style.color = 'white';
+    } else {
+      node.parentElement.style.backgroundColor = 'white';
+      node.parentElement.style.color = 'black';
+    }
+  });
+}
 
 function numExclude() {
+  const lottoNumDefaultColor = 'rgba(231, 76, 60, 0.2)';
+  const lottoNumSelectColor = '#e6e600';
+  const lottoNumExcludeColor = 'gray';
   const nums = new Set();
+  const numExcludeCount = 9;
   let num = null;
 
   for (const node of lottoNum) {
@@ -122,14 +157,18 @@ function numExclude() {
       if (!nums.has(nodeValue)) {
         if (num !== null) {
           if (!nums.has(num)) {
-            lottoNum[num - 1].style.backgroundColor = 'rgba(231, 76, 60, 0.2)';
+            lottoNum[num - 1].style.backgroundColor = lottoNumDefaultColor;
           }
         }
         num = nodeValue;
-        node.style.backgroundColor = 'yellow';
+        node.style.backgroundColor = lottoNumSelectColor;
       } else {
-        node.style.backgroundColor = 'rgba(231, 76, 60, 0.2)';
-        nums.delete(nodeValue);
+        if (!nums.has(num)) {
+          lottoNum[num - 1].style.backgroundColor = lottoNumDefaultColor;
+        }
+        num = nodeValue;
+        node.style.backgroundColor = lottoNumSelectColor;
+        nums.delete(num);
 
         for (const node of selectNumBox.children) {
           if (parseInt(node.textContent) === nodeValue) {
@@ -143,25 +182,52 @@ function numExclude() {
 
   resetNumBtn.addEventListener('click', () => {
     nums.clear();
+
     while (selectNumBox.children.length !== 0) {
       let i = 0;
       lottoNum[
         parseInt(selectNumBox.children[i].textContent) - 1
-      ].style.backgroundColor = 'rgba(231, 76, 60, 0.2)';
+      ].style.backgroundColor = lottoNumDefaultColor;
       selectNumBox.children[i].remove();
       i++;
     }
+    lottoNum[num - 1].style.backgroundColor = lottoNumSelectColor;
   });
 
   numExcludeBtn.addEventListener('click', () => {
-    if (nums.size < 9) {
-      if (!nums.has(num) || nums.size === 0) {
-        lottoNum[num - 1].style.backgroundColor = 'gray';
+    if (nums.size < numExcludeCount) {
+      if (!nums.has(num)) {
+        lottoNum[num - 1].style.backgroundColor = lottoNumExcludeColor;
         nums.add(num);
         const numBox = document.createElement('div');
         numBox.textContent = num;
         setColorLotto(num, numBox);
         selectNumBox.appendChild(numBox);
+        chartGaussDataBox.datasets[0].data = [
+          Math.round(Math.random() * 100),
+          Math.round(Math.random() * 100),
+          Math.round(Math.random() * 100),
+          Math.round(Math.random() * 100),
+          Math.round(Math.random() * 100),
+          Math.round(Math.random() * 100),
+          Math.round(Math.random() * 100)
+        ];
+        chartRadarDataBox.datasets[0].data = [
+          Math.round(Math.random() * 100),
+          Math.round(Math.random() * 100),
+          Math.round(Math.random() * 100),
+          Math.round(Math.random() * 100),
+          Math.round(Math.random() * 100)
+        ];
+        chartBarDataBox.datasets[0].data = [
+          Math.round(Math.random() * 100),
+          Math.round(Math.random() * 100),
+          Math.round(Math.random() * 100)
+        ];
+
+        chartGaussInstance.update();
+        chartRadarInstance.update();
+        chartBarInstance.update();
       }
     }
   });

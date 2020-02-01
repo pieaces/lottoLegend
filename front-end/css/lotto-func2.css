@@ -22,12 +22,20 @@
   grid-template-columns: 1fr;
 }
 
-.aside > div {
-  border: 1px solid var(--border-color);
+.aside-1-1 {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(12, 1fr);
 }
 
-.aside-1-1 {
-  background-color: var(--default-color);
+.aside-1-1 > div {
+  background-color: #3498db;
+  border: 1px solid rgba(50, 50, 50, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  color: var(--default-color);
 }
 
 /* main */
@@ -60,6 +68,12 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
+}
+
+.win-num-times {
+  background-color: var(--main-color);
+  color: var(--default-color);
+  padding: 5px;
 }
 
 .win-num-box {
@@ -95,10 +109,33 @@
   grid-template-rows: 1fr 6fr;
 }
 
-.lotto-btn-box {
+.lotto-checkbox {
   display: flex;
   align-items: center;
   justify-content: space-around;
+}
+
+.lotto-checkbox > button {
+  position: relative;
+}
+
+.filter-checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.filter-checkbox:checked {
+  background-color: var(--main-color);
+}
+
+.square-btn {
+  width: 80px;
+  height: 40px;
+  background-color: var(--default-color);
 }
 
 .lotto-num-box {
@@ -170,11 +207,9 @@
 
   /* Animation to spin and move the sphere */
 
-  animation: spin 1s linear, moveLeftToRight 1s linear;
+  animation: spin 800ms linear, moveLeftToRight 800ms linear;
 
   position: relative;
-
-  transition: all 1s ease;
 }
 
 /* Spinning the sphere using key frames */
@@ -199,14 +234,29 @@
   }
 }
 
-.next-btn-container {
+.next-reset-btn-container {
   width: 30%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.next-btn-container > button {
+.next-reset-btn-container > button {
   margin-right: 10px;
+}
+
+.circle-btn {
+  border-radius: 100px;
+  background-color: var(--default-color);
+  width: 80px;
+  height: 40px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  transition: 0.15s all ease-in-out;
+  font-size: 0.9rem;
+}
+
+.circle-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
 }
 
 .chart {
