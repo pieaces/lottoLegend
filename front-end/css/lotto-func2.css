@@ -22,7 +22,7 @@
 }
 
 .aside-1-1 {
-  padding: 0 25px;
+  padding-left: 30px;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(12, 1fr);
@@ -41,6 +41,7 @@
 /* main */
 
 .main {
+  margin-left: -20px;
   padding-top: 100px;
   grid-column: 4/13;
   display: grid;
