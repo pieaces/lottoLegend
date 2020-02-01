@@ -46,10 +46,10 @@ export default class InterCoef extends Inter {
         );
     }
 
-    CoefSum55(params: Params = {}): number[] {
+    CoefSum(params: Params = {}): number[] {
         return this.coefHelper(
             params,
-            this.interMap.get(Method.sum55)
+            this.interMap.get(Method.sum)
         );
     }
 

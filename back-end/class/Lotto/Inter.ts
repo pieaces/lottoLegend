@@ -14,7 +14,7 @@ export enum Method {
     lineCount,
     carryCount,
     lowCount,
-    sum55,
+    sum,
     oddCount,
     primeCount,
     $3Count,
@@ -51,7 +51,7 @@ export default class Inter extends Gather{
             }
         ],
         [
-            Method.sum55, {
+            Method.sum, {
                 ideal: this.expectedSum55,
                 actual: this.gatherSum55
             }

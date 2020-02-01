@@ -40,10 +40,10 @@ export default class Inter extends InterCoef {
         );
     }
 
-    interSum55(params: Params = {}): number[] {
+    interSum(params: Params = {}): number[] {
         return this.interHelper(
             params,
-            this.interMap.get(Method.sum55)
+            this.interMap.get(Method.sum)
         );
     }
 
