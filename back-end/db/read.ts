@@ -1,9 +1,8 @@
 import AWS from 'aws-sdk';
-import Lotto from '../back-end/class/Lotto/Lotto'
-import {LData} from '../back-end/class/Lotto/Base'
+import Lotto from '../class/Lotto/Lotto'
+import {LData} from '../class/Lotto/Base'
 
 AWS.config.update(require('./key.json'));
-
 const dynamodb = new AWS.DynamoDB();
 
 var params = {

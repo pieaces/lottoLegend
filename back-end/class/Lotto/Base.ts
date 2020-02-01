@@ -14,7 +14,7 @@ export interface LData {
     bonusNum: number;
     numbers: number[]
 }
-//로또 전회차
+
 export default class Base {
     private TOTAL_SIZE: number;
     public static readonly BALL_NUM: number = 45;
@@ -29,8 +29,7 @@ export default class Base {
     public getTotalSize(): number {
         return this.TOTAL_SIZE;
     }
-    //mode:number => 개수를 의미
-    //mode:tuple => 범위를 의미
+
     public getLData(mode: Mode = this.TOTAL_SIZE): LData[] {
         if (isNumber(mode)) {
             if (mode > 0) return this.data.toJS().slice(0, mode);

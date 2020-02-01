@@ -20,7 +20,6 @@ export interface Params {
 
 export default class Expectation extends Base {
     public mode: Mode;
-    //전체 공의 개수 중에서 해당색깔의 공의 기댓값
 
     constructor(data: LData[], mode: Mode = data.length) {
         super(data);
@@ -58,14 +57,23 @@ export default class Expectation extends Base {
         const pos = [9 / 45, 10 / 45, 10 / 45, 10 / 45, 6 / 45];
         return pos.map(value => value * (6 * count));
     }
-    //십의자리 합의 기댓값
-    expectedSum$10(params: Params = {}): number[] { // 0~24
-        const defaultParam = { from: 0, to: 24, mode: this.mode }
+
+    expectedCarryCount(params: Params = {}): number[] {
+        const defaultParam = { from: 0, to: 6, mode: this.mode }
         const { from, to, count } = this.returnParams(defaultParam, params)
 
-        const pos: number[] = posSum$10;
+        const pos: number[] = posCarryCount;
         return pos.slice(from, to + 1).map(value => value * count);
     }
+    
+    expectedLowCount(params: Params = { mode: this.mode }): number[] {
+        const defaultParam = { from: 0, to: 6, mode: this.mode }
+        const { from, to, count } = this.returnParams(defaultParam, params)
+
+        const pos: number[] = posLowCount;
+        return pos.slice(from, to + 1).map(value => value * count);
+    }
+
     expectedSum(params: Params = {}): number[] { // 21~255
         const defaultParam = { from: 21, to: 255, mode: this.mode }
         const { from, to, count } = this.returnParams(defaultParam, params)
@@ -87,7 +95,7 @@ export default class Expectation extends Base {
 
         return result.map(value => value * count);
     }
-    //홀수갯수의 기댓값
+
     expectedOddCount(params: Params = {}): number[] {
         const defaultParam = { from: 0, to: 6, mode: this.mode }
         const { from, to, count } = this.returnParams(defaultParam, params)
@@ -102,13 +110,6 @@ export default class Expectation extends Base {
         const pos: number[] = posPrimeCount;
         return pos.slice(from, to + 1).map(value => value * count);
     }
-    expectedLowCount(params: Params = { mode: this.mode }): number[] {
-        const defaultParam = { from: 0, to: 6, mode: this.mode }
-        const { from, to, count } = this.returnParams(defaultParam, params)
-
-        const pos: number[] = posLowCount;
-        return pos.slice(from, to + 1).map(value => value * count);
-    }
     expected$3Count(params: Params = {}): number[] {
         const defaultParam = { from: 0, to: 6, mode: this.mode }
         const { from, to, count } = this.returnParams(defaultParam, params)
@@ -116,13 +117,15 @@ export default class Expectation extends Base {
         const pos: number[] = pos$3Count;
         return pos.slice(from, to + 1).map(value => value * count);
     }
-    expectedAC(params: Params = {}): number[] {
-        const defaultParam = { from: 0, to: 10, mode: this.mode }
+
+    expectedSum$10(params: Params = {}): number[] { // 0~24
+        const defaultParam = { from: 0, to: 24, mode: this.mode }
         const { from, to, count } = this.returnParams(defaultParam, params)
 
-        const pos: number[] = posAC;
+        const pos: number[] = posSum$10;
         return pos.slice(from, to + 1).map(value => value * count);
     }
+
     expectedDiffMaxMinData(params: Params = {}): number[] { //5~44
         const defaultParam = { from: 5, to: 44, mode: this.mode }
         const { from, to, count } = this.returnParams(defaultParam, params)
@@ -130,13 +133,15 @@ export default class Expectation extends Base {
         const pos: number[] = posDiffMaxMin;
         return pos.slice(from - 5, to - 5 + 1).map(value => value * count);
     }
-    expectedCarryCount(params: Params = {}): number[] {
-        const defaultParam = { from: 0, to: 6, mode: this.mode }
+
+    expectedAC(params: Params = {}): number[] {
+        const defaultParam = { from: 0, to: 10, mode: this.mode }
         const { from, to, count } = this.returnParams(defaultParam, params)
 
-        const pos: number[] = posCarryCount;
+        const pos: number[] = posAC;
         return pos.slice(from, to + 1).map(value => value * count);
     }
+
     expectedConsecutiveExist(params: Params = {}): number[] {
         const { count } = this.returnParams({ mode: this.mode }, params);
 

@@ -49,7 +49,6 @@ export default class Gather extends Expectation {
     gatherEmergedRoundForOne(one: number, mode = this.mode): number[] {
         return Analyze.emergedRoundForOne(this.getLData(mode), one);
     }
-
     gatherIntervalForOne(one: number, params: Params = { from: 1, to: 12, mode: this.mode }): number[] {
         const analyzeHelper: AnalyzeHelper = {
             method: Analyze.intervalForOne,
@@ -59,9 +58,25 @@ export default class Gather extends Expectation {
 
         return this.gatherAnalzeHelper(analyzeHelper);
     }
-
     gatherHowLongNone() { //HData[]
         return Analyze.howLongNone(this.getLData());
+    }
+    gatherFrequency(mode = this.mode): number[] {
+        return Analyze.frequencyCount(this.getLNumbers(mode));
+    }
+    gatherHarmony(mode = this.mode) { //HarmonyData[]
+        return Analyze.harmony(this.getLData(mode));
+    }
+
+    gatherCarryCount(params: Params = { mode: this.mode }): number[] {
+        const carryCounts = Analyze.carryCount(this.getLNumbers(params.mode).reverse());
+
+        const result = new Array<number>(7).fill(0);
+        carryCounts.forEach(value => {
+            result[value]++;
+        });
+
+        return result;
     }
 
     gatherLowCount(params: Params = { from: 0, to: 6, mode: this.mode }): number[] {
@@ -72,22 +87,6 @@ export default class Gather extends Expectation {
         };
         return this.gatherHelper(helper);
     }
-
-    gatherSum$10(params: Params = { from: 0, to: 24, mode: this.mode }): number[] {
-        const helper: Helper = {
-            method: Calculate.sum$10,
-            from: params.from || 0, to: params.to || 24, mode: params.mode || this.mode
-        };
-        return this.gatherHelper(helper);
-    }
-    gatherSum$1(from: number, to: number, mode = this.mode): number[] {
-        const helper: Helper = {
-            method: Calculate.sum$1,
-            from: 2, to: 52, mode
-        };
-        return this.gatherHelper(helper);
-    }
-
     gatherSum(params: Params = { from: 21, to: 255, mode: this.mode }): number[] {
         const helper: Helper = {
             method: Calculate.sum,
@@ -95,7 +94,6 @@ export default class Gather extends Expectation {
         };
         return this.gatherHelper(helper);
     }
-
     gatherSum55(params: Params = { from: 21, to: 255, mode: this.mode }): number[] {//21~255
         const from = params.from || 21;
         const to = params.to || 255;
@@ -131,10 +129,17 @@ export default class Gather extends Expectation {
         return this.gatherHelper(helper);
     }
 
-    gatherAC(params: Params = { from: 0, to: 10, mode: this.mode }): number[] {
-        let helper: Helper = {
-            method: Calculate.AC,
-            from: params.from || 0, to: params.to || 10, mode: params.mode || this.mode
+    gatherSum$10(params: Params = { from: 0, to: 24, mode: this.mode }): number[] {
+        const helper: Helper = {
+            method: Calculate.sum$10,
+            from: params.from || 0, to: params.to || 24, mode: params.mode || this.mode
+        };
+        return this.gatherHelper(helper);
+    }
+    gatherSum$1(from: number, to: number, mode = this.mode): number[] {
+        const helper: Helper = {
+            method: Calculate.sum$1,
+            from: 2, to: 52, mode
         };
         return this.gatherHelper(helper);
     }
@@ -147,29 +152,19 @@ export default class Gather extends Expectation {
         return this.gatherHelper(helper);
     }
 
+    gatherAC(params: Params = { from: 0, to: 10, mode: this.mode }): number[] {
+        let helper: Helper = {
+            method: Calculate.AC,
+            from: params.from || 0, to: params.to || 10, mode: params.mode || this.mode
+        };
+        return this.gatherHelper(helper);
+    }
+
     gatherConsecutiveExist(params: Params = { mode: this.mode }): number[] {
         const helper: Helper = {
             method: Calculate.consecutiveExist,
             from: params.from || 0, to: params.to || 1, mode: params.mode || this.mode
         };
         return this.gatherHelper(helper);
-    }
-    gatherCarryCount(params: Params = { mode: this.mode }): number[] {
-        const carryCounts = Analyze.carryCount(this.getLNumbers(params.mode).reverse());
-
-        const result = new Array<number>(7).fill(0);
-        carryCounts.forEach(value => {
-            result[value]++;
-        });
-
-        return result;
-    }
-
-    gatherFrequency(mode = this.mode): number[] {
-        return Analyze.frequencyCount(this.getLNumbers(mode));
-    }
-
-    gatherHarmony(mode = this.mode) { //HarmonyData[]
-        return Analyze.harmony(this.getLData(mode));
     }
 }
