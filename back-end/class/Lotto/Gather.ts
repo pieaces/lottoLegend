@@ -49,6 +49,9 @@ export default class Gather extends Expectation {
     gatherEmergedRoundForOne(one: number, mode = this.mode): number[] {
         return Analyze.emergedRoundForOne(this.getLData(mode), one);
     }
+    gatherEmergedBooleanForOne(one: number, mode = this.mode): boolean[] {
+        return Analyze.emergedBooleanForOne(this.getLNumbers(mode), one);
+    }
     gatherIntervalForOne(one: number, params: Params = { from: 1, to: 12, mode: this.mode }): number[] {
         const analyzeHelper: AnalyzeHelper = {
             method: Analyze.intervalForOne,

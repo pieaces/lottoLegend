@@ -72,6 +72,23 @@ export default class Analyze extends PosAnalyze {
 
         return result;
     }
+    public static emergedBooleanForOne(numsArray:Array<number[]>, one:number): boolean[] {
+        const result = new Array<boolean>(numsArray.length).fill(false);
+        numsArray.forEach((numbers, index) => {
+            let flag = false;
+            for(let i =0; i<numbers.length; i++){
+                if(one === numbers[i]){
+                    flag = true;
+                    break;
+                }
+            }
+            if(flag){
+                result[index] = true;
+            }
+        })
+
+        return result;
+    }
     public static interval(numsArray: Array<number[]>): Array<number[]>{
         return Analyze.emergedPoint(numsArray).map(points => {
             const result = [];

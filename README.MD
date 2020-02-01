@@ -61,9 +61,9 @@ v 0.9.5 (2020-01-31)
 
 * 제외 및 포함수 선택 (최근 5회차 번호 제시, 번호간격, 번호빈도) +(궁합수, 9궁도)
 
-                new Lotto().gatherEmergedRoundForOne
+                new Lotto().gatherEmergedBooleanForOne
 
-                new Lotto().gatherIntervalForOne
+                new Lotto().gatherIntervalForOne //default: 12간격이내
 
                 new Lotto().gatherHowLongNone
 

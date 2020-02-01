@@ -44,8 +44,8 @@ async function getLotto(round: number): Promise<boolean> {
     return bool;
 }
 
-async function execute() {
-    for (let i = 1; i <= 895; i++) {
+async function writeAllLotto(round:number) {
+    for (let i = 1; i <= round; i++) {
         const bool = await getLotto(i);
         console.log(i, bool);
     }
