@@ -1,106 +1,95 @@
 import Gather from "./Gather";
 import { Params } from './Expectation'
 
-interface InterData {
-    actual: number[];
+export interface InterData {
     ideal: number[];
+    actual: number[];
 }
-export default class Inter extends Gather {
-    private interHelper(params: Params, methodActual: (params: Params) => number[], methodIdeal: (params: Params) => number[]): number[] {
-        const interData: InterData = {
-            actual: methodActual.bind(this)(params),
-            ideal: methodIdeal.bind(this)(params)
-        };
+export interface InterMethod {
+    ideal: (params: Params) => number[];
+    actual: (params: Params) => number[];
+}
+export enum Method {
+    excludedLineCount,
+    lineCount,
+    lowCount,
+    sum,
+    oddCount,
+    primeCount,
+    $3Count,
+    sum$10,
+    diffMaxMin,
+    AC,
+    consecutiveExist
+}
 
-        return interData.actual.map((value, index) => value - interData.ideal[index]);
-    }
-
-    interExcludedLineCount(params: Params = {}): number[] {
-        return this.interHelper(
-            params,
-            this.gatherExcludedLineCount,
-            this.expectedExcludedLineCount
-        );
-    }
-
-    interLineCount(params: Params = {}): number[] {
-        return this.interHelper(
-            params,
-            this.gatherLineCount,
-            this.expectedLineCount
-        );
-    }
-
-    interLowCount(params: Params = {}): number[] {
-        return this.interHelper(
-            params,
-            this.gatherLowCount,
-            this.expectedLowCount
-        );
-    }
-
-    interSum(params: Params = {}): number[] {
-        return this.interHelper(
-            params,
-            this.gatherSum,
-            this.expectedSum
-        );
-    }
-
-    interOddCount(params: Params = {}): number[] {
-        return this.interHelper(
-            params,
-            this.gatherOddCount,
-            this.expectedOddCount
-        );
-    }
-
-    interPrimeCount(params: Params = {}): number[] {
-        return this.interHelper(
-            params,
-            this.gatherPrimeCount,
-            this.expectedPrimeCount
-        );
-    }
-
-    inter$3Count(params: Params = {}): number[] {
-        return this.interHelper(
-            params,
-            this.gather$3Count,
-            this.expected$3Count
-        );
-    }
-
-    interSum$10(params: Params = {}): number[] {
-        return this.interHelper(
-            params,
-            this.gatherSum$10,
-            this.expectedSum$10
-        );
-    }
-
-
-    interDiffMaxMin(params: Params = {}): number[] {
-        return this.interHelper(
-            params,
-            this.gatherDiffMaxMinData,
-            this.expectedDiffMaxMinData
-        );
-    }
-
-    interAC(params: Params = {}): number[] {
-        return this.interHelper(
-            params,
-            this.gatherAC,
-            this.expectedAC
-        );
-    }
-
-    interConsecutiveExist(params: Params = {}): number[] {
-        return this.interHelper(
-            params,
-            this.gatherConsecutiveExist,
-            this.expectedConsecutiveExist
-        );
-    }
+export default class Inter extends Gather{
+    interMap = new Map<Method, InterMethod>([
+        [
+            Method.excludedLineCount, {
+                ideal: this.expectedExcludedLineCount,
+                actual: this.gatherExcludedLineCount,
+            }
+        ],
+        [
+            Method.lineCount, {
+                ideal: this.expectedLineCount,
+                actual: this.gatherLineCount
+            }
+        ],
+        [
+            Method.lowCount, {
+                ideal: this.expectedLowCount,
+                actual: this.gatherLowCount
+            }
+        ],
+        [
+            Method.sum, {
+                ideal: this.expectedSum,
+                actual: this.gatherSum
+            }
+        ],
+        [
+            Method.oddCount, {
+                ideal: this.expectedOddCount,
+                actual: this.gatherOddCount
+            }
+        ],
+        [
+            Method.primeCount, {
+                ideal: this.expectedPrimeCount,
+                actual: this.gatherPrimeCount
+            }
+        ],
+        [
+            Method.$3Count, {
+                ideal: this.expected$3Count,
+                actual: this.gather$3Count
+            }
+        ],
+        [
+            Method.sum$10, {
+                ideal: this.expectedSum$10,
+                actual: this.gatherSum$10
+            }
+        ],
+        [
+            Method.diffMaxMin, {
+                ideal: this.expectedDiffMaxMinData,
+                actual: this.gatherDiffMaxMinData
+            }
+        ],
+        [
+            Method.AC, {
+                ideal: this.expectedAC,
+                actual: this.gatherAC
+            }
+        ],
+        [
+            Method.consecutiveExist, {
+                ideal: this.expectedConsecutiveExist,
+                actual: this.gatherConsecutiveExist
+            }
+        ],
+    ]);
 }
