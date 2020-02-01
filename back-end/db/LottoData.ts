@@ -48,6 +48,18 @@ export default class LottoData extends Lotto {
     processCarryCount(): AllData{
         return this.processHelper(this.interMap.get(Method.carryCount));
     }
+    processEmergedBooleanForOne():boolean[]{
+        return this.gatherEmergedBooleanForOne(1, -12);
+    }
+    processIntervalForOne():number[]{
+        return this.gatherIntervalForOne(1);
+    }
+    processHowLongNone():{round:number, date:string}[]{
+        return this.gatherHowLongNone();
+    }
+    processFrequency():number[]{
+        return this.gatherFrequency();
+    }
     processLowCount(): AllData{
         return this.processHelper(this.interMap.get(Method.lowCount));
     }
