@@ -4,9 +4,9 @@ const path = require('path');
 
 module.exports = {
   mode: 'development',
-  entry: './front-end/js/lotto-func1.ts',
+  entry: './back-end/main.ts',
   output: {
-    filename: 'lotto-func1.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
   module: {
@@ -24,7 +24,7 @@ module.exports = {
     hot: true
   },
   plugins: [
-    new CopyWebpackPlugin(['front-end/lotto-func1.html']),
+    new CopyWebpackPlugin(['back-end/index.html']),
     new webpack.HotModuleReplacementPlugin()
   ],
   resolve: {
