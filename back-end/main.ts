@@ -19,7 +19,7 @@ button.onclick = function () {
 */
 const method1 = lotto.gatherOddCount.bind(lotto);
 const method2 = lotto.expectedOddCount.bind(lotto);
-const count:number[] = [24,72,168,360,890,895];
+const count:number[] = [12,24,48,192,895];
 
 const labels:string[] = [];
 for(let i =0; i<=6; i++){

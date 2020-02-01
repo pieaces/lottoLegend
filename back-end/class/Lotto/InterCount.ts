@@ -3,7 +3,7 @@ import { InterData, InterMethod, Method } from "./Inter";
 import { Params } from './Expectation'
 
 export default class Inter extends InterCoef {
-    private interHelper(params: Params, interMethod: InterMethod): number[] {
+    interHelper(params: Params, interMethod: InterMethod): number[] {
         const interData: InterData = {
             ideal: interMethod.ideal.bind(this)(params),
             actual: interMethod.actual.bind(this)(params)
