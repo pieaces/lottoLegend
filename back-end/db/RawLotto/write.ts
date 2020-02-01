@@ -1,6 +1,6 @@
 import AWS from 'aws-sdk';
 import axios from 'axios'
-import {LData} from '../class/Lotto/Base'
+import {LData} from '../../class/Lotto/Base'
 
 AWS.config.update(require('./key.json'));
 const dynamodb = new AWS.DynamoDB();
@@ -32,8 +32,8 @@ async function getLotto(round: number): Promise<boolean> {
             };
 
             dynamodb.putItem(params, function (err, data) {
-                if (err) console.log(err, err.stack); // an error occurred
-                else console.log('success');           // successful response
+                if (err) console.log(err, err.stack);
+                else console.log('success');
             });
             return true;
         })

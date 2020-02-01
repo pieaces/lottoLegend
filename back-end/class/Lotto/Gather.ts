@@ -34,10 +34,10 @@ export default class Gather extends Expectation {
         return result;
     }
 
-    gatherExcludedLineCount(params: Params = { from: 0, to: 5, mode: this.mode }): number[] {
+    gatherExcludedLineCount(params: Params = { from: 0, to: 4, mode: this.mode }): number[] {
         const helper: Helper = {
             method: Calculate.excludedLineCount,
-            from: params.from || 0, to: params.to || 5, mode: params.mode || this.mode
+            from: params.from || 0, to: params.to || 4, mode: params.mode || this.mode
         };
         return this.gatherHelper(helper);
     }

@@ -10,18 +10,18 @@ export interface InterMethod {
     actual: (params: Params) => number[];
 }
 export enum Method {
-    excludedLineCount,
-    lineCount,
-    carryCount,
-    lowCount,
-    sum,
-    oddCount,
-    primeCount,
-    $3Count,
-    sum$10,
-    diffMaxMin,
-    AC,
-    consecutiveExist
+    excludedLineCount = "excludedLineCount",
+    lineCount = "lineCount",
+    carryCount = "carryCount",
+    lowCount = "lowCount",
+    sum = "sum",
+    oddCount = "oddCount",
+    primeCount = "primeCount",
+    $3Count = "$3Count",
+    sum$10 = "sum$10",
+    diffMaxMin = "diffMaxMin",
+    AC = "AC",
+    consecutiveExist = "consecutiveExist"
 }
 
 export default class Inter extends Gather{
@@ -52,8 +52,8 @@ export default class Inter extends Gather{
         ],
         [
             Method.sum, {
-                ideal: this.expectedSum55,
-                actual: this.gatherSum55
+                ideal: this.expectedSum,
+                actual: this.gatherSum
             }
         ],
         [

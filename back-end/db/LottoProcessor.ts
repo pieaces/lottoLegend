@@ -1,17 +1,24 @@
 import Lotto from "../class/Lotto/Lotto";
 import { Mode, LData } from "../class/Lotto/Base";
-import { InterMethod, Method } from "../class/Lotto/Inter";
+import { Method } from "../class/Lotto/Inter";
 
-interface DataVersion {
+export enum Method2{
+    emergence = "emergence",
+    interval = "interval",
+    howLongNone = "howLongNone",
+    frequency = "frequency"
+}
+export interface Assembly {
     $12: number[];
     $24: number[];
     $48: number[];
     $192: number[];
+    all: number[];
     latest: number[];
 }
-interface AllData {
-    ideal: DataVersion;
-    actual: DataVersion;
+export interface ProcessedData {
+    ideal: Assembly;
+    actual: Assembly;
     coef: number[];
 }
 
@@ -20,19 +27,23 @@ export default class LottoProcessor extends Lotto {
         super(data, mode);
     }
 
-    private processHelper(interMethod: InterMethod): AllData {
-        const ideal: DataVersion = {
+    processHelper(method: Method): ProcessedData {
+        const interMethod = this.interMap.get(method);
+
+        const ideal: Assembly = {
             $12: interMethod.ideal.bind(this)({ mode: 12 }),
             $24: interMethod.ideal.bind(this)({ mode: 24 }),
             $48: interMethod.ideal.bind(this)({ mode: 48 }),
             $192: interMethod.ideal.bind(this)({ mode: 192 }),
+            all: interMethod.ideal.bind(this)({}),
             latest: interMethod.ideal.bind(this)({ mode: -12 })
         };
-        const actual: DataVersion = {
+        const actual: Assembly = {
             $12: interMethod.actual.bind(this)({ mode: 12 }),
             $24: interMethod.actual.bind(this)({ mode: 24 }),
             $48: interMethod.actual.bind(this)({ mode: 48 }),
             $192: interMethod.actual.bind(this)({ mode: 192 }),
+            all: interMethod.actual.bind(this)({}),
             latest: interMethod.actual.bind(this)({ mode: -12 })
         };
         const coef = this.coefHelper({ mode: -12 }, interMethod);
@@ -40,20 +51,20 @@ export default class LottoProcessor extends Lotto {
         return { ideal, actual, coef };
     }
 
-    processExcludedLineCount(): AllData {
-        return this.processHelper(this.interMap.get(Method.excludedLineCount));
+    processExcludedLineCount(): ProcessedData {
+        return this.processHelper(Method.excludedLineCount);
     }
-    processLineCount(): AllData {
-        return this.processHelper(this.interMap.get(Method.lineCount));
+    processLineCount(): ProcessedData {
+        return this.processHelper(Method.lineCount);
     }
-    processCarryCount(): AllData {
-        return this.processHelper(this.interMap.get(Method.carryCount));
+    processCarryCount(): ProcessedData {
+        return this.processHelper(Method.carryCount);
     }
-    processEmergedBooleanForOne(): boolean[] {
-        return this.gatherEmergedBooleanForOne(1, -12);
+    processEmergedBooleanForOne(one:number): boolean[] {
+        return this.gatherEmergedBooleanForOne(one, -12);
     }
-    processIntervalForOne(): number[] {
-        return this.gatherIntervalForOne(1);
+    processIntervalForOne(one:number): number[] {
+        return this.gatherIntervalForOne(one);
     }
     processHowLongNone(): { round: number, date: string }[] {
         return this.gatherHowLongNone();
@@ -61,31 +72,31 @@ export default class LottoProcessor extends Lotto {
     processFrequency(): number[] {
         return this.gatherFrequency();
     }
-    processLowCount(): AllData {
-        return this.processHelper(this.interMap.get(Method.lowCount));
+    processLowCount(): ProcessedData {
+        return this.processHelper(Method.lowCount);
     }
-    processSum55(): AllData {
-        return this.processHelper(this.interMap.get(Method.sum));
+    processSum(): ProcessedData {
+        return this.processHelper(Method.sum);
     }
-    processOddCount(): AllData {
-        return this.processHelper(this.interMap.get(Method.oddCount));
+    processOddCount(): ProcessedData {
+        return this.processHelper(Method.oddCount);
     }
-    processPrimeCount(): AllData {
-        return this.processHelper(this.interMap.get(Method.primeCount));
+    processPrimeCount(): ProcessedData {
+        return this.processHelper(Method.primeCount);
     }
-    process$3Count(): AllData {
-        return this.processHelper(this.interMap.get(Method.$3Count));
+    process$3Count(): ProcessedData {
+        return this.processHelper(Method.$3Count);
     }
-    processSum$10(): AllData {
-        return this.processHelper(this.interMap.get(Method.sum$10));
+    processSum$10(): ProcessedData {
+        return this.processHelper(Method.sum$10);
     }
-    processDiffMaxMin(): AllData {
-        return this.processHelper(this.interMap.get(Method.diffMaxMin));
+    processDiffMaxMin(): ProcessedData {
+        return this.processHelper(Method.diffMaxMin);
     }
-    processAC(): AllData {
-        return this.processHelper(this.interMap.get(Method.AC));
+    processAC(): ProcessedData {
+        return this.processHelper(Method.AC);
     }
-    processConsecutiveExist(): AllData {
-        return this.processHelper(this.interMap.get(Method.consecutiveExist));
+    processConsecutiveExist(): ProcessedData {
+        return this.processHelper(Method.consecutiveExist);
     }
 }

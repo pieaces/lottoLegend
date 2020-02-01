@@ -1,30 +1,15 @@
 import AWS from 'aws-sdk';
-import Lotto from '../class/Lotto/Lotto'
-import {LData} from '../class/Lotto/Base'
+import Lotto from '../../class/Lotto/Lotto'
+import {LData} from '../../class/Lotto/Base'
 
 AWS.config.update(require('./key.json'));
 const dynamodb = new AWS.DynamoDB();
 
 var params = {
-/*
-    ExpressionAttributeNames: {
-        "#R": "Round",
-        "#NS": "Numbers"
-    },
-
-    ExpressionAttributeValues: {
-        ":n": {
-            N: "891"
-        }
-    },
-    FilterExpression: "round = :n",
-
-    ProjectionExpression: "#R, #NS",
-    */
     TableName: "LottoData"
 };
 dynamodb.scan(params, function (err, data) {
-    if (err) console.log(err, err.stack); // an error occurred
+    if (err) console.log(err, err.stack);
     else {
         const lottos:LData[] = [];
         data.Items.forEach((lotto)=>{
