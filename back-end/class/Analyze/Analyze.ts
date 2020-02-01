@@ -126,11 +126,11 @@ export default class Analyze extends PosAnalyze {
         const results:HData[] = new Array<HData>(LottoBase.BALL_NUM);
         for(let i=0; i<LottoBase.BALL_NUM; i++) results[i] = ({count:-1, round:0, date:''});
 
-        for (let i = 0; i < lottoArray.length; i++) {
+        for (let i = lottoArray.length-1; i >= 0; i--) {
             for (let j = 0; j < lottoArray[i].numbers.length; j++) {
                 const num = lottoArray[i].numbers[j];
                 if (results[num - 1].count === -1){
-                    results[num - 1].count = i;
+                    results[num - 1].count = num;
                     results[num - 1].round = lottoArray[i].round;
                     results[num - 1].date = lottoArray[i].date;
                 }
