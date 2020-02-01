@@ -2,89 +2,90 @@ import Lotto from "../class/Lotto/Lotto";
 import { Mode, LData } from "../class/Lotto/Base";
 import { InterMethod, Method } from "../class/Lotto/Inter";
 
-interface RawData {
+interface DataVersion {
     $12: number[];
     $24: number[];
     $48: number[];
     $192: number[];
+    latest: number[];
 }
 interface AllData {
-    ideal: RawData;    
-    actual: RawData;
+    ideal: DataVersion;
+    actual: DataVersion;
     coef: number[];
-    inter: number[];
 }
 
-export default class LottoData extends Lotto {
+export default class LottoProcessor extends Lotto {
     constructor(data: LData[], mode: Mode = data.length) {
         super(data, mode);
     }
 
     private processHelper(interMethod: InterMethod): AllData {
-        const ideal: RawData = {
+        const ideal: DataVersion = {
             $12: interMethod.ideal.bind(this)({ mode: 12 }),
             $24: interMethod.ideal.bind(this)({ mode: 24 }),
             $48: interMethod.ideal.bind(this)({ mode: 48 }),
             $192: interMethod.ideal.bind(this)({ mode: 192 }),
+            latest: interMethod.ideal.bind(this)({ mode: -12 })
         };
-        const actual: RawData = {
+        const actual: DataVersion = {
             $12: interMethod.actual.bind(this)({ mode: 12 }),
             $24: interMethod.actual.bind(this)({ mode: 24 }),
             $48: interMethod.actual.bind(this)({ mode: 48 }),
             $192: interMethod.actual.bind(this)({ mode: 192 }),
+            latest: interMethod.actual.bind(this)({ mode: -12 })
         };
-        const coef = this.coefHelper({mode:-12}, interMethod);
-        const inter = this.interHelper({mode:-12}, interMethod);
+        const coef = this.coefHelper({ mode: -12 }, interMethod);
 
-        return { ideal, actual,coef, inter };
+        return { ideal, actual, coef };
     }
 
-    processExcludedLineCount(): AllData{
+    processExcludedLineCount(): AllData {
         return this.processHelper(this.interMap.get(Method.excludedLineCount));
     }
-    processLineCount(): AllData{
+    processLineCount(): AllData {
         return this.processHelper(this.interMap.get(Method.lineCount));
     }
-    processCarryCount(): AllData{
+    processCarryCount(): AllData {
         return this.processHelper(this.interMap.get(Method.carryCount));
     }
-    processEmergedBooleanForOne():boolean[]{
+    processEmergedBooleanForOne(): boolean[] {
         return this.gatherEmergedBooleanForOne(1, -12);
     }
-    processIntervalForOne():number[]{
+    processIntervalForOne(): number[] {
         return this.gatherIntervalForOne(1);
     }
-    processHowLongNone():{round:number, date:string}[]{
+    processHowLongNone(): { round: number, date: string }[] {
         return this.gatherHowLongNone();
     }
-    processFrequency():number[]{
+    processFrequency(): number[] {
         return this.gatherFrequency();
     }
-    processLowCount(): AllData{
+    processLowCount(): AllData {
         return this.processHelper(this.interMap.get(Method.lowCount));
     }
-    processSum55(): AllData{
+    processSum55(): AllData {
         return this.processHelper(this.interMap.get(Method.sum));
     }
-    processOddCount(): AllData{
+    processOddCount(): AllData {
         return this.processHelper(this.interMap.get(Method.oddCount));
     }
-    processPrimeCount(): AllData{
+    processPrimeCount(): AllData {
         return this.processHelper(this.interMap.get(Method.primeCount));
     }
-    process$3Count(): AllData{
+    process$3Count(): AllData {
         return this.processHelper(this.interMap.get(Method.$3Count));
     }
-    processSum$10(): AllData{
+    processSum$10(): AllData {
         return this.processHelper(this.interMap.get(Method.sum$10));
     }
-    processDiffMaxMin(): AllData{
+    processDiffMaxMin(): AllData {
         return this.processHelper(this.interMap.get(Method.diffMaxMin));
     }
-    processAC(): AllData{
+    processAC(): AllData {
         return this.processHelper(this.interMap.get(Method.AC));
     }
-    processConsecutiveExist(): AllData{
+    processConsecutiveExist(): AllData {
         return this.processHelper(this.interMap.get(Method.consecutiveExist));
     }
 }
