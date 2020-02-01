@@ -16,19 +16,21 @@ export default class Lotto extends InterCount {
         return this.getStats(Calculate.excludedLineCount, mode);
     }
 
-    statsSum$10(mode: Mode = this.mode): Stats {
-        return this.getStats(Calculate.sum$10, mode);
+    statsCarryCount(mode: Mode = this.mode): Stats {
+        return Statistics.getStats(Analyze.carryCount(this.getLNumbers(mode)));
     }
-    statsSum$1(mode: Mode = this.mode): Stats {
-        return this.getStats(Calculate.sum$1, mode);
-    }
-    statsSum(mode: Mode = this.mode): Stats {
-        return this.getStats(Calculate.sum, mode);
+    statsInterval(mode: Mode = this.mode): Array<Stats> {
+        return Analyze.interval(this.getLNumbers(mode)).map(item => Statistics.getStats(item));
     }
 
     statsLowCountStats(mode:Mode = this.mode): Stats {
         return this.getStats(Calculate.lowCount, mode);
     }
+
+    statsSum(mode: Mode = this.mode): Stats {
+        return this.getStats(Calculate.sum, mode);
+    }
+
     statsOddCount(mode: Mode = this.mode): Stats {
         return this.getStats(Calculate.oddCount, mode);
     }
@@ -39,22 +41,22 @@ export default class Lotto extends InterCount {
         return this.getStats(Calculate.$3Count, mode);
     }
 
-    statsAC(mode: Mode = this.mode): Stats {
-        return this.getStats(Calculate.AC, mode);
+    statsSum$10(mode: Mode = this.mode): Stats {
+        return this.getStats(Calculate.sum$10, mode);
+    }
+    statsSum$1(mode: Mode = this.mode): Stats {
+        return this.getStats(Calculate.sum$1, mode);
     }
 
     statsDiffMaxMin(mode: Mode = this.mode): Stats {
         return this.getStats(Calculate.diffMaxMin, mode);
     }
 
-    statsConsecutiveExistStats(mode:Mode = this.mode): Stats {
-        return this.getStats(Calculate.consecutiveExist, mode);
-    }
-    statsCarryCount(mode: Mode = this.mode): Stats {
-        return Statistics.getStats(Analyze.carryCount(this.getLNumbers(mode)));
+    statsAC(mode: Mode = this.mode): Stats {
+        return this.getStats(Calculate.AC, mode);
     }
 
-    statsInterval(mode: Mode = this.mode): Array<Stats> {
-        return Analyze.interval(this.getLNumbers(mode)).map(item => Statistics.getStats(item));
+    statsConsecutiveExistStats(mode:Mode = this.mode): Stats {
+        return this.getStats(Calculate.consecutiveExist, mode);
     }
 }

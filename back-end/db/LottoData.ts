@@ -52,7 +52,7 @@ export default class LottoData extends Lotto {
         return this.processHelper(this.interMap.get(Method.lowCount));
     }
     processSum55(): AllData{
-        return this.processHelper(this.interMap.get(Method.sum55));
+        return this.processHelper(this.interMap.get(Method.sum));
     }
     processOddCount(): AllData{
         return this.processHelper(this.interMap.get(Method.oddCount));
