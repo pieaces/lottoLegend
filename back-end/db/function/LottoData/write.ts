@@ -1,8 +1,8 @@
 import AWS from 'aws-sdk';
 import axios from 'axios'
-import {LData} from '../../class/Lotto/Base'
+import {LData} from '../../../class/Lotto/Base'
 
-AWS.config.update(require('./key.json'));
+AWS.config.update(require('../../key.json'));
 const dynamodb = new AWS.DynamoDB();
 
 async function getLotto(round: number): Promise<boolean> {

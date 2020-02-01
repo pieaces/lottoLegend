@@ -1,12 +1,18 @@
-import Lotto from "../class/Lotto/Lotto";
-import { Mode, LData } from "../class/Lotto/Base";
-import { Method } from "../class/Lotto/Inter";
+import Lotto from "../../class/Lotto/Lotto";
+import { Mode, LData } from "../../class/Lotto/Base";
+import { Method } from "../../class/Lotto/Inter";
+import { LottoNumber } from "../../class/Generator/Base";
 
 export enum Method2{
     emergence = "emergence",
     interval = "interval",
     howLongNone = "howLongNone",
     frequency = "frequency"
+}
+
+export interface LottoDate{
+    round: number;
+    date: string;
 }
 export interface Assembly {
     $12: number[];
@@ -60,13 +66,13 @@ export default class LottoProcessor extends Lotto {
     processCarryCount(): ProcessedData {
         return this.processHelper(Method.carryCount);
     }
-    processEmergedBooleanForOne(one:number): boolean[] {
+    processEmergedStatusForOne(one:LottoNumber): boolean[] {
         return this.gatherEmergedBooleanForOne(one, -12);
     }
-    processIntervalForOne(one:number): number[] {
+    processIntervalForOne(one:LottoNumber): number[] {
         return this.gatherIntervalForOne(one);
     }
-    processHowLongNone(): { round: number, date: string }[] {
+    processHowLongNone(): LottoDate[] {
         return this.gatherHowLongNone();
     }
     processFrequency(): number[] {

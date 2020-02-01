@@ -1,7 +1,7 @@
 import AWS from 'aws-sdk';
-import { LData } from '../../class/Lotto/Base';
+import { LData } from '../../../class/Lotto/Base';
 
-AWS.config.update(require('../key.json'));
+AWS.config.update(require('../../key.json'));
 const dynamoDB = new AWS.DynamoDB();
 
 export default async function read(): Promise<LData[]> {

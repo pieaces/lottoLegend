@@ -1,13 +1,14 @@
 import Calculate from '../Statistics/Calculate'
 import Analyze from '../Analyze/Analyze'
 import Expectation, { Params } from './Expectation'
+import { LottoNumber } from '../Generator/Base';
 
 interface Helper extends Params {
     method: (numbers: number[]) => number;
 }
 interface AnalyzeHelper extends Params {
     method: (...something: any) => number[];
-    one?: number;
+    one?: LottoNumber;
 }
 export default class Gather extends Expectation {
 
@@ -46,13 +47,13 @@ export default class Gather extends Expectation {
         return Analyze.posCount$10(this.getLNumbers(params.mode));
     }
 
-    gatherEmergedRoundForOne(one: number, mode = this.mode): number[] {
+    gatherEmergedRoundForOne(one: LottoNumber, mode = this.mode): number[] {
         return Analyze.emergedRoundForOne(this.getLData(mode), one);
     }
-    gatherEmergedBooleanForOne(one: number, mode = this.mode): boolean[] {
+    gatherEmergedBooleanForOne(one: LottoNumber, mode = this.mode): boolean[] {
         return Analyze.emergedBooleanForOne(this.getLNumbers(mode), one);
     }
-    gatherIntervalForOne(one: number, params: Params = { from: 1, to: 12, mode: this.mode }): number[] {
+    gatherIntervalForOne(one: LottoNumber, params: Params = { from: 1, to: 12, mode: this.mode }): number[] {
         const analyzeHelper: AnalyzeHelper = {
             method: Analyze.intervalForOne,
             one,

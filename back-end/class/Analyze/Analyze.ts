@@ -1,5 +1,7 @@
 import LottoBase, {LData} from '../Lotto/Base'
 import PosAnalyze from './PosAnalyze'
+import {LottoNumber} from '../Generator/Base'
+
 interface HarmonyData {
     one: number;
     another: number;
@@ -51,7 +53,7 @@ export default class Analyze extends PosAnalyze {
         return result;
     }
 
-    private static emergedPointForOne(numsArray: Array<number[]>, one:number): number[] {//가장최근회차 기준
+    private static emergedPointForOne(numsArray: Array<number[]>, one:LottoNumber): number[] {//가장최근회차 기준
         const result:number[] = [];
         numsArray.forEach((numbers, round)=>{
             numbers.forEach(num => {
@@ -62,7 +64,7 @@ export default class Analyze extends PosAnalyze {
         return result;
     }
 
-    public static emergedRoundForOne(lData:LData[], one:number): number[] {
+    public static emergedRoundForOne(lData:LData[], one:LottoNumber): number[] {
         const result:number[] = [];
         lData.forEach((lotto)=>{
             lotto.numbers.forEach(num => {
@@ -72,7 +74,7 @@ export default class Analyze extends PosAnalyze {
 
         return result;
     }
-    public static emergedBooleanForOne(numsArray:Array<number[]>, one:number): boolean[] {
+    public static emergedBooleanForOne(numsArray:Array<number[]>, one:LottoNumber): boolean[] {
         const result = new Array<boolean>(numsArray.length).fill(false);
         numsArray.forEach((numbers, index) => {
             let flag = false;
@@ -101,7 +103,7 @@ export default class Analyze extends PosAnalyze {
         })
     }
 
-    public static intervalForOne(numsArray: Array<number[]>, one:number): number[]{//가장최근회차 기준
+    public static intervalForOne(numsArray: Array<number[]>, one:LottoNumber): number[]{//가장최근회차 기준
         const points = Analyze.emergedPointForOne(numsArray, one);
         const result = [];
         if(points.length < 1) return null;
