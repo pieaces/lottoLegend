@@ -1,6 +1,7 @@
 import fs from 'fs'
 import Probability from '../class/Statistics/Probability'
 import Calculate from '../class/Statistics/Calculate'
+import { exec } from 'child_process';
 
 const C = Probability.C;
 const pqc = Probability.pqc;
@@ -8,7 +9,7 @@ const pqc = Probability.pqc;
 function traversal(pos: number[], method: (numbers: number[]) => number) {
     const ub = [40, 41, 42, 43, 44, 45];
     const moveBox = (box: number[]): void => {
-        for (let i = SIZE-2; i >= 0; i--) {
+        for (let i = SIZE - 2; i >= 0; i--) {
             if (box[i] < ub[i]) {
                 box[i]++;
                 for (let j = i + 1; j < SIZE; j++) {
@@ -29,8 +30,8 @@ function traversal(pos: number[], method: (numbers: number[]) => number) {
             break;
         }
 
-        box[SIZE-1]++;
-        if (box[SIZE-1] > ub[SIZE-1]) {
+        box[SIZE - 1]++;
+        if (box[SIZE - 1] > ub[SIZE - 1]) {
             moveBox(box);
         }
     }
@@ -59,11 +60,11 @@ function sum$10(): number[] {
 }
 function sum$1(): number[] {
     return traversal(new Array<number>(51).fill(0),
-    (box:number[]):number => Calculate.sum$1(box) - 2);
+        (box: number[]): number => Calculate.sum$1(box) - 2);
 }
 function sum(): number[] {
     return traversal(new Array<number>(235).fill(0),
-    (box:number[]):number => Calculate.sum(box) - 21);
+        (box: number[]): number => Calculate.sum(box) - 21);
 }
 
 function oddCount(): number[] {
@@ -71,7 +72,7 @@ function oddCount(): number[] {
 }
 
 function primeCount(): number[] {
-    return pqc(6, 14/45);
+    return pqc(6, 14 / 45);
 }
 function $3Count(): number[] {
     return pqc(6, 1 / 3);
@@ -79,7 +80,7 @@ function $3Count(): number[] {
 
 function diffMaxMinData(): number[] {
     return traversal(new Array<number>(40).fill(0),
-    (box:number[]):number => Calculate.diffMaxMin(box) - 5);
+        (box: number[]): number => Calculate.diffMaxMin(box) - 5);
 
 }
 function carryCount(): number[] {
@@ -103,23 +104,25 @@ const lowCount = (): number[] => {
     return pos;
 }
 
-function consecutive(): number[] {
+function consecutiveExist(): number[] {
     return traversal(new Array<number>(2).fill(0), Calculate.consecutiveExist);
 }
 
+function execute(method:()=>number[]) {
+    const pos = method();
 
-const method = $3Count;
-const pos = method();
+    console.log(pos.reduce((acc, cur) => acc + cur, 0));
 
-console.log(pos.reduce((acc, cur) => acc + cur, 0));
+    let str = "[\n";
+    pos.forEach(value => {
+        str += `\t${value},\n`
+    });
+    str = str.slice(0, -2);
+    str += '\n]'
+    console.log(str);
 
-let str = "[\n";
-pos.forEach(value =>{
-    str += `\t${value},\n`
-});
-str = str.slice(0,-2);
-str += '\n]'
-console.log(str);
+    fs.writeFileSync(`./back-end/json/Expectation/${method.name}.json`, str);
+    console.log('완료');
+}
 
-fs.writeFileSync(`./back-end/json/Expectation/${method.name}.json`, str);
-console.log('완료');
+execute(consecutiveExist);
