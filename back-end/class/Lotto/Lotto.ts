@@ -9,7 +9,7 @@ export default class Lotto extends InterCount {
         super(data, mode);
     }
 
-    private getStats(method: (numbers: number[]) => number, mode:Mode = this.mode): Stats {
+    private getStats(method: (numbers: number[]) => number, mode: Mode = this.mode): Stats {
         return Statistics.getStats(Calculate.getData(this.getLNumbers(mode), method))
     }
     statsExceptedLineCount(mode: Mode = this.mode): Stats {
@@ -20,10 +20,14 @@ export default class Lotto extends InterCount {
         return Statistics.getStats(Analyze.carryCount(this.getLNumbers(mode)));
     }
     statsInterval(mode: Mode = this.mode): Array<Stats> {
-        return Analyze.interval(this.getLNumbers(mode)).map(item => Statistics.getStats(item));
+        return Analyze.interval(this.getLNumbers(mode)).map(item => {
+            const stats = Statistics.getStats(item);
+            stats.max = Math.max(...item);
+            return stats;
+        });
     }
 
-    statsLowCountStats(mode:Mode = this.mode): Stats {
+    statsLowCountStats(mode: Mode = this.mode): Stats {
         return this.getStats(Calculate.lowCount, mode);
     }
 
@@ -56,7 +60,7 @@ export default class Lotto extends InterCount {
         return this.getStats(Calculate.AC, mode);
     }
 
-    statsConsecutiveExistStats(mode:Mode = this.mode): Stats {
+    statsConsecutiveExistStats(mode: Mode = this.mode): Stats {
         return this.getStats(Calculate.consecutiveExist, mode);
     }
 }
