@@ -22,7 +22,7 @@
 }
 
 .aside-1-1 {
-  padding-left: 30px;
+  padding: 0 40px;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(12, 1fr);
