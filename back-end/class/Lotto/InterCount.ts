@@ -26,6 +26,13 @@ export default class Inter extends InterCoef {
         );
     }
 
+    interCarryCount(params: Params = {}): number[] {
+        return this.interHelper(
+            params,
+            this.interMap.get(Method.carryCount)
+        );
+    }
+
     interLowCount(params: Params = {}): number[] {
         return this.interHelper(
             params,
@@ -33,10 +40,10 @@ export default class Inter extends InterCoef {
         );
     }
 
-    interSum(params: Params = {}): number[] {
+    interSum55(params: Params = {}): number[] {
         return this.interHelper(
             params,
-            this.interMap.get(Method.sum)
+            this.interMap.get(Method.sum55)
         );
     }
 

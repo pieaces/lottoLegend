@@ -2,7 +2,7 @@ import Inter, { InterMethod, Method } from "./Inter";
 import { Params } from './Expectation'
 
 export default class InterCoef extends Inter {
-    private interCoefHelper(params: Params, interMethod: InterMethod):number[] {
+    private CoefHelper(params: Params, interMethod: InterMethod):number[] {
         const ideal:number[] = interMethod.ideal.bind(this)(params);
         const actual:number[] = interMethod.actual.bind(this)(params);
         const p:number[] = interMethod.ideal.bind(this)({ mode: 1 });
@@ -21,79 +21,86 @@ export default class InterCoef extends Inter {
         return result;
     }
 
-    interCoefExcludedLineCount(params: Params = {}): number[] {
-        return this.interCoefHelper(
+    CoefExcludedLineCount(params: Params = {}): number[] {
+        return this.CoefHelper(
             params,
             this.interMap.get(Method.excludedLineCount)
         );
     }
 
-    interCoefLineCount(params: Params = {}): number[] {
-        return this.interCoefHelper(
+    CoefLineCount(params: Params = {}): number[] {
+        return this.CoefHelper(
             params,
             this.interMap.get(Method.lineCount)
         );
     }
 
-    interCoefLowCount(params: Params = {}): number[] {
-        return this.interCoefHelper(
+    CoefCarryCount(params: Params = {}): number[] {
+        return this.CoefHelper(
+            params,
+            this.interMap.get(Method.carryCount)
+        );
+    }
+
+    CoefLowCount(params: Params = {}): number[] {
+        return this.CoefHelper(
             params,
             this.interMap.get(Method.lowCount)
         );
     }
 
-    interCoefSum(params: Params = {}): number[] {
-        return this.interCoefHelper(
+    CoefSum55(params: Params = {}): number[] {
+        return this.CoefHelper(
             params,
-            this.interMap.get(Method.sum)
+            this.interMap.get(Method.sum55)
         );
     }
 
-    interCoefOddCount(params: Params = {}): number[] {
-        return this.interCoefHelper(
+    CoefOddCount(params: Params = {}): number[] {
+        return this.CoefHelper(
             params,
             this.interMap.get(Method.oddCount)
         );
     }
 
-    interCoefPrimeCount(params: Params = {}): number[] {
-        return this.interCoefHelper(
+    CoefPrimeCount(params: Params = {}): number[] {
+        return this.CoefHelper(
             params,
             this.interMap.get(Method.primeCount)
         );
     }
 
-    interCoef$3Count(params: Params = {}): number[] {
-        return this.interCoefHelper(
+    Coef$3Count(params: Params = {}): number[] {
+        return this.CoefHelper(
             params,
             this.interMap.get(Method.$3Count)
 
         );
     }
 
-    interCoefSum$10(params: Params = {}): number[] {
-        return this.interCoefHelper(
+    CoefSum$10(params: Params = {}): number[] {
+        return this.CoefHelper(
             params,
             this.interMap.get(Method.sum$10)
         );
     }
 
-    interCoefDiffMaxMin(params: Params = {}): number[] {
-        return this.interCoefHelper(
+    CoefDiffMaxMin(params: Params = {}): number[] {
+        return this.CoefHelper(
             params,
             this.interMap.get(Method.diffMaxMin)
         );
     }
 
-    interCoefAC(params: Params = {}): number[] {
-        return this.interCoefHelper(
+    CoefAC(params: Params = {}): number[] {
+        return this.CoefHelper(
             params,
             this.interMap.get(Method.AC)
         );
     }
 
-    interCoefConsecutiveExist(params: Params = {}): number[] {
-        return this.interCoefHelper(
+    CoefConsecutiveExist(params: Params = {}): number[] {
+        return this.CoefHelper(
             params,
             this.interMap.get(Method.consecutiveExist)
         );

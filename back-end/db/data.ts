@@ -1,4 +1,4 @@
-import Lotto from "../back-end/class/Lotto/Lotto";
+import Lotto from "../class/Lotto/Lotto";
 
 const lotto: Lotto = new Lotto(require('../back-end/json/lotto.json'));
 
