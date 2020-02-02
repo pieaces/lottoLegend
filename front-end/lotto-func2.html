@@ -9,7 +9,11 @@
     <title>CanvasLotto</title>
   </head>
 
-  <body>
+  <body
+    oncontextmenu="return false"
+    onselectstart="return false"
+    ondragstart="return false"
+  >
     <div id="wrapper">
       <header include-html="./components/header/header.html"></header>
       <section class="section1">
@@ -33,20 +37,6 @@
 
           <div class="main">
             <div class="main-1-1">
-              <div>
-                <div class="win-num-times">
-                  891
-                </div>
-
-                <div class="win-num-box">
-                  <div>15</div>
-                  <div>20</div>
-                  <div>35</div>
-                  <div>41</div>
-                  <div>5</div>
-                  <div>16</div>
-                </div>
-              </div>
               <div>
                 <div class="win-num-times">
                   891
@@ -77,12 +67,12 @@
               </div>
             </div>
             <div class="main-2-1"></div>
-            <div class="main-1-2"></div>
-            <div class="main-2-2">
-              <canvas class="chart-func2-radar chart"></canvas>
-            </div>
-            <div class="main-2-3">
+            <div class="main-1-2">
               <canvas class="chart-func2-gauss chart"></canvas>
+            </div>
+
+            <div class="main-2-3">
+              <canvas class="chart-func2-radar chart"></canvas>
             </div>
             <div class="main-2-4">
               <canvas class="chart-func2-bar chart"></canvas>
@@ -107,15 +97,6 @@
                     class="filter-checkbox"
                   />
                   번호빈도
-                </button>
-                <button type="button" class="btn square-btn ">
-                  <input
-                    type="checkbox"
-                    name=""
-                    id=""
-                    class="filter-checkbox"
-                  />
-                  간격x빈도
                 </button>
               </div>
               <div class="lotto-num-box">
@@ -184,7 +165,17 @@
               </div>
             </div>
             <div class="main-1-4">
-              <div class="select-num-box"></div>
+              <div class="select-num-box">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
               <div class="next-reset-btn-container">
                 <button type="button" class="btn circle-btn reset-num-btn">
                   초기화
