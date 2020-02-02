@@ -15,6 +15,8 @@ export enum Method {
     carryCount = "carryCount",
     lowCount = "lowCount",
     sum = "sum",
+    sum55 = "sum55",
+    sum77 = "sum77",
     oddCount = "oddCount",
     primeCount = "primeCount",
     $3Count = "$3Count",
@@ -67,6 +69,20 @@ export default class Inter extends Lotto{
             Method.sum, {
                 ideal: this.expectedSum,
                 actual: this.gatherSum,
+                stats: this.statsSum
+            }
+        ],
+        [
+            Method.sum55, {
+                ideal: this.expectedSum55,
+                actual: this.gatherSum55,
+                stats: this.statsSum
+            }
+        ],
+        [
+            Method.sum77, {
+                ideal: this.expectedSum77,
+                actual: this.gatherSum77,
                 stats: this.statsSum
             }
         ],

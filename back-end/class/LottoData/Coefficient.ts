@@ -7,7 +7,6 @@ export default class InterCoef extends Inter {
         const ideal: number[] = sampleMethod.ideal.bind(this)(params);
         const actual: number[] = sampleMethod.actual.bind(this)(params);
         const p: number[] = sampleMethod.ideal.bind(this)({ mode: 1 });
-
         const result = new Array<number>(actual.length);
 
         for (let i = 0; i < actual.length; i++) {
@@ -33,6 +32,12 @@ export default class InterCoef extends Inter {
     }
     CoefSum(params: Params = {}): number[] {
         return this.coefHelper(params, Method.sum);
+    }
+    CoefSum55(params: Params = {}): number[] {
+        return this.coefHelper(params, Method.sum55);
+    }
+    CoefSum77(params: Params = {}): number[] {
+        return this.coefHelper(params, Method.sum77);
     }
     CoefOddCount(params: Params = {}): number[] {
         return this.coefHelper(params, Method.oddCount);

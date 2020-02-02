@@ -64,8 +64,8 @@ export default class LottoStatDB extends LottoDB {
         }
     }
 
-    static async queryStat(name: Method) {
-        const data = queryStats(name);
+    static async queryStat(name: Method | string) {
+        const data = queryStats(name as Method);
         return data;
     }
 

@@ -1,6 +1,6 @@
-import Lotto from './class/Lotto/Lotto'
+import Lotto from './class/Lotto'
 import Chart from 'chart.js'
-import Generator from './class/Generator/Generator'
+import Generator from './class/Generator'
 
 function cout(obj: any, str = ''): void {
     console.log(str + ":", obj);

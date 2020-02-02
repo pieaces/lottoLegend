@@ -81,21 +81,31 @@ export default class Expectation extends Base {
         const pos: number[] = posSum;
         return pos.slice(from - 21, to - 21 + 1).map(value => value * count);
     }
-    expectedSum55(params: Params = {}): number[] {
+    private expectedSumVersion(version:55|77, params: Params = {}){
+        let pack:number;
+        if(version === 55) pack = 20;
+        else if(version === 77) pack = 10;
+
         const defaultParam = { from: 21, to: 255, mode: this.mode }
         const { from, to, count } = this.returnParams(defaultParam, params)
 
         let pos: number[] = posSum;
-        const result = new Array<number>(Math.floor((to - from) / 10) + 1).fill(0);
+        const result = new Array<number>(Math.floor((to - from) / pack) + 1).fill(0);
         pos.forEach((value, index) => {
             if (from <= index + 21 && index + 21 <= to) {
-                result[Math.floor((index + 21 - from) / 10)] += value;
+                result[Math.floor((index + 21 - from) / pack)] += value;
             }
         });
 
         return result.map(value => value * count);
     }
-
+    expectedSum55(params: Params = {}): number[] {
+        return this.expectedSumVersion(55, params);
+    }
+    expectedSum77(params: Params = {}): number[] {
+        return this.expectedSumVersion(77, params);
+    }
+    
     expectedOddCount(params: Params = {}): number[] {
         const defaultParam = { from: 0, to: 6, mode: this.mode }
         const { from, to, count } = this.returnParams(defaultParam, params)

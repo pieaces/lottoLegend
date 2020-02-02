@@ -97,17 +97,27 @@ export default class Gather extends Expectation {
         };
         return this.gatherHelper(helper);
     }
-    gatherSum55(params: Params = { from: 21, to: 255, mode: this.mode }): number[] {//21~255
+    private gatherSumVersion(version:55|77, params: Params = { from: 21, to: 255, mode: this.mode }): number[] {
+        let pack:number;
+        if(version === 55) pack = 20;
+        else if(version === 77) pack = 10;
+
         const from = params.from || 21;
         const to = params.to || 255;
-        const result = new Array<number>(Math.floor((to - from) / 10) + 1).fill(0);
+        const result = new Array<number>(Math.floor((to - from) / pack) + 1).fill(0);
         Calculate.getData(this.getLNumbers(params.mode), Calculate.sum).forEach(value => {
             if (from <= value && value <= to) {
-                result[Math.floor((value - from) / 10)]++;
+                result[Math.floor((value - from) / pack)]++;
             }
         });
 
         return result;
+    }
+    gatherSum55(params: Params = { from: 21, to: 255, mode: this.mode }): number[] {//21~255
+        return this.gatherSumVersion(55);
+    }
+    gatherSum77(params: Params = { from: 21, to: 255, mode: this.mode }): number[] {//21~255
+        return this.gatherSumVersion(77);
     }
 
     gatherOddCount(params: Params = { from: 0, to: 6, mode: this.mode }): number[] {
