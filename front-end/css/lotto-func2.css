@@ -194,6 +194,8 @@
   margin-left: 20px;
   margin-right: 20px;
   width: 70%;
+  position: relative;
+  align-items: center;
 }
 
 .select-num-box > div {
@@ -206,11 +208,52 @@
   margin-right: 10px;
   color: var(--default-color);
 
-  /* Animation to spin and move the sphere */
+  position: absolute;
+}
 
-  animation: spin 800ms linear, moveLeftToRight 800ms linear;
+.select-num-box > div:nth-child(1) {
+  animation: spin 800ms linear, moveRightToLeft1 800ms ease-in;
+  right: 90%;
+}
 
-  position: relative;
+.select-num-box > div:nth-child(2) {
+  animation: spin 800ms linear, moveRightToLeft2 800ms ease-in;
+  right: 80%;
+}
+
+.select-num-box > div:nth-child(3) {
+  animation: spin 800ms linear, moveRightToLeft3 800ms ease-in;
+  right: 70%;
+}
+
+.select-num-box > div:nth-child(4) {
+  animation: spin 800ms linear, moveRightToLeft4 800ms ease-in;
+  right: 60%;
+}
+
+.select-num-box > div:nth-child(5) {
+  animation: spin 800ms linear, moveRightToLeft5 800ms ease-in;
+  right: 50%;
+}
+
+.select-num-box > div:nth-child(6) {
+  animation: spin 800ms linear, moveRightToLeft6 800ms ease-in;
+  right: 40%;
+}
+
+.select-num-box > div:nth-child(7) {
+  animation: spin 800ms linear, moveRightToLeft7 800ms ease-in;
+  right: 30%;
+}
+
+.select-num-box > div:nth-child(8) {
+  animation: spin 800ms linear, moveRightToLeft8 800ms ease-in;
+  right: 20%;
+}
+
+.select-num-box > div:nth-child(9) {
+  animation: spin 800ms linear, moveRightToLeft9 800ms ease-in;
+  right: 10%;
 }
 
 /* Spinning the sphere using key frames */
@@ -226,12 +269,82 @@
 
 /* Move sphere from left to right */
 
-@keyframes moveLeftToRight {
+@keyframes moveRightToLeft1 {
   0% {
-    left: 300px;
+    right: -15%;
   }
   100% {
-    left: 0;
+    right: 90%;
+  }
+}
+
+@keyframes moveRightToLeft2 {
+  0% {
+    right: -15%;
+  }
+  100% {
+    right: 80%;
+  }
+}
+
+@keyframes moveRightToLeft3 {
+  0% {
+    right: -15%;
+  }
+  100% {
+    right: 70%;
+  }
+}
+
+@keyframes moveRightToLeft4 {
+  0% {
+    right: -15%;
+  }
+  100% {
+    right: 60%;
+  }
+}
+
+@keyframes moveRightToLeft5 {
+  0% {
+    right: -15%;
+  }
+  100% {
+    right: 50%;
+  }
+}
+
+@keyframes moveRightToLeft6 {
+  0% {
+    right: -15%;
+  }
+  100% {
+    right: 40%;
+  }
+}
+@keyframes moveRightToLeft7 {
+  0% {
+    right: -15%;
+  }
+  100% {
+    right: 30%;
+  }
+}
+@keyframes moveRightToLeft8 {
+  0% {
+    right: -15%;
+  }
+  100% {
+    right: 20%;
+  }
+}
+
+@keyframes moveRightToLeft9 {
+  0% {
+    right: -15%;
+  }
+  100% {
+    right: 10%;
   }
 }
 

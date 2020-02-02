@@ -131,16 +131,18 @@ const resetNumBtn = document.querySelector('.reset-num-btn');
 const winNum = document.querySelectorAll('.win-num-box > div');
 const filterCheckBox = document.querySelectorAll('.filter-checkbox');
 
-for (const node of filterCheckBox) {
-  node.addEventListener('click', () => {
-    if (node.checked) {
-      node.parentElement.style.backgroundColor = 'rgb(91, 81, 253)';
-      node.parentElement.style.color = 'white';
-    } else {
-      node.parentElement.style.backgroundColor = 'white';
-      node.parentElement.style.color = 'black';
-    }
-  });
+function filterCheckBoxToggle() {
+  for (const node of filterCheckBox) {
+    node.addEventListener('click', () => {
+      if (node.checked) {
+        node.parentElement.style.backgroundColor = 'rgb(91, 81, 253)';
+        node.parentElement.style.color = 'white';
+      } else {
+        node.parentElement.style.backgroundColor = 'white';
+        node.parentElement.style.color = 'black';
+      }
+    });
+  }
 }
 
 function numExclude() {
@@ -151,8 +153,10 @@ function numExclude() {
   const numExcludeCount = 9;
   let num = null;
 
+  // 번호판 색깔 설정과 번호판 번호 삭제와 선택번호배열,선택번호 삭제
+
   for (const node of lottoNum) {
-    node.addEventListener('click', () => {
+    node.addEventListener('click', e => {
       const nodeValue = parseInt(node.textContent);
       if (!nums.has(nodeValue)) {
         if (num !== null) {
@@ -163,7 +167,7 @@ function numExclude() {
         num = nodeValue;
         node.style.backgroundColor = lottoNumSelectColor;
       } else {
-        if (!nums.has(num)) {
+        if (num !== null) {
           lottoNum[num - 1].style.backgroundColor = lottoNumDefaultColor;
         }
         num = nodeValue;
@@ -177,8 +181,11 @@ function numExclude() {
           }
         }
       }
+      e.stopPropagation();
     });
   }
+
+  //초기화함수: 선택번호배열,선택번호, 번호판 초기화
 
   resetNumBtn.addEventListener('click', () => {
     nums.clear();
@@ -191,47 +198,87 @@ function numExclude() {
       selectNumBox.children[i].remove();
       i++;
     }
-    lottoNum[num - 1].style.backgroundColor = lottoNumSelectColor;
-  });
-
-  numExcludeBtn.addEventListener('click', () => {
-    if (nums.size < numExcludeCount) {
-      if (!nums.has(num)) {
-        lottoNum[num - 1].style.backgroundColor = lottoNumExcludeColor;
-        nums.add(num);
-        const numBox = document.createElement('div');
-        numBox.textContent = num;
-        setColorLotto(num, numBox);
-        selectNumBox.appendChild(numBox);
-        chartGaussDataBox.datasets[0].data = [
-          Math.round(Math.random() * 100),
-          Math.round(Math.random() * 100),
-          Math.round(Math.random() * 100),
-          Math.round(Math.random() * 100),
-          Math.round(Math.random() * 100),
-          Math.round(Math.random() * 100),
-          Math.round(Math.random() * 100)
-        ];
-        chartRadarDataBox.datasets[0].data = [
-          Math.round(Math.random() * 100),
-          Math.round(Math.random() * 100),
-          Math.round(Math.random() * 100),
-          Math.round(Math.random() * 100),
-          Math.round(Math.random() * 100)
-        ];
-        chartBarDataBox.datasets[0].data = [
-          Math.round(Math.random() * 100),
-          Math.round(Math.random() * 100),
-          Math.round(Math.random() * 100)
-        ];
-
-        chartGaussInstance.update();
-        chartRadarInstance.update();
-        chartBarInstance.update();
-      }
+    if (num !== null) {
+      lottoNum[num - 1].style.backgroundColor = lottoNumDefaultColor;
+      num = null;
     }
   });
+
+  //번호제외함수: 선택번호 배열 추가(중복x), 번호판 색깔 설정, 선택번호 추가
+
+  numExcludeBtn.addEventListener('click', e => {
+    if (nums.size < numExcludeCount) {
+      if (!nums.has(num)) {
+        if (num !== null) {
+          lottoNum[num - 1].style.backgroundColor = lottoNumExcludeColor;
+          nums.add(num);
+          const numBox = document.createElement('div');
+          numBox.textContent = num;
+          setColorLotto(num, numBox);
+          selectNumBox.appendChild(numBox);
+          num = null;
+          chartGaussDataBox.datasets[0].data = [
+            Math.round(Math.random() * 100),
+            Math.round(Math.random() * 100),
+            Math.round(Math.random() * 100),
+            Math.round(Math.random() * 100),
+            Math.round(Math.random() * 100),
+            Math.round(Math.random() * 100),
+            Math.round(Math.random() * 100)
+          ];
+          chartRadarDataBox.datasets[0].data = [
+            Math.round(Math.random() * 100),
+            Math.round(Math.random() * 100),
+            Math.round(Math.random() * 100),
+            Math.round(Math.random() * 100),
+            Math.round(Math.random() * 100)
+          ];
+          chartBarDataBox.datasets[0].data = [
+            Math.round(Math.random() * 100),
+            Math.round(Math.random() * 100),
+            Math.round(Math.random() * 100)
+          ];
+
+          chartGaussInstance.update();
+          chartRadarInstance.update();
+          chartBarInstance.update();
+        }
+      }
+    }
+    e.stopPropagation();
+  });
+
+  // 번호판 다른 곳 누르면 선택색깔 초기화, 다른 함수들 이벤트 전파 막아야 함
+
+  let myExclusiveEl = document.querySelectorAll('body *');
+  let myEls = document.querySelectorAll('.main-1-3 *');
+
+  myExclusiveEl = [...myExclusiveEl].filter(parent => {
+    let containedByExclusionNode = [...myEls].filter(child => {
+      if (parent === child) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+    if (containedByExclusionNode.length === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+
+  for (const node of myExclusiveEl) {
+    node.addEventListener('click', e => {
+      if (num !== null) {
+        lottoNum[num - 1].style.backgroundColor = lottoNumDefaultColor;
+        num = null;
+      }
+    });
+  }
 }
+
+// 번호색깔지정함수
 
 function setColorLotto(num, Box) {
   if (1 <= num && num <= 10) {
@@ -247,6 +294,8 @@ function setColorLotto(num, Box) {
   }
 }
 
+// 당첨번호색깔설정함수
+
 function setColorWinNum() {
   for (const node of winNum) {
     const nodeValue = parseInt(node.textContent);
@@ -254,9 +303,11 @@ function setColorWinNum() {
   }
 }
 
+// 함수 실행
 function init() {
   setColorWinNum();
   numExclude();
+  filterCheckBoxToggle();
 }
 
 init();
