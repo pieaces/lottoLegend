@@ -133,7 +133,7 @@ const filterCheckBox = document.querySelectorAll('.filter-checkbox');
 
 function filterCheckBoxToggle() {
   for (const node of filterCheckBox) {
-    node.addEventListener('click', () => {
+    node.addEventListener('click', e => {
       if (node.checked) {
         node.parentElement.style.backgroundColor = 'rgb(91, 81, 253)';
         node.parentElement.style.color = 'white';
@@ -201,7 +201,7 @@ function numExclude() {
 
   //초기화함수: 선택번호배열,선택번호, 번호판 초기화
 
-  resetNumBtn.addEventListener('click', () => {
+  resetNumBtn.addEventListener('click', e => {
     for (const node of [...selectNumBox.children]) {
       node.textContent = '';
       node.style.backgroundColor = '';
@@ -209,6 +209,7 @@ function numExclude() {
 
     for (let i = 0; i < nums.length; i++) {
       lottoNum[nums[i] - 1].style.backgroundColor = lottoNumDefaultColor;
+      selectNumBox.children[i].classList.remove(`select-num-box${i + 1}`);
     }
 
     nums.splice(0, nums.length);
@@ -216,6 +217,7 @@ function numExclude() {
       lottoNum[num - 1].style.backgroundColor = lottoNumDefaultColor;
       num = null;
     }
+    e.stopPropagation();
   });
 
   //번호제외함수: 선택번호 배열 추가(중복x), 번호판 색깔 설정, 선택번호 추가
@@ -264,7 +266,7 @@ function numExclude() {
     e.stopPropagation();
   });
 
-  // 번호판 다른 곳 누르면 선택색깔 초기화, 다른 함수들 이벤트 전파 막아야 함
+  // 번호판 다른 곳 누르면 선택색깔 초기화, numExclude 함수 안의 다른 함수들 이벤트 전파 막아야 함
 
   let myExclusiveEl = document.querySelectorAll('body *');
   let myEls = document.querySelectorAll('.main-1-3 *');

@@ -410,7 +410,7 @@ const chartBottomInstance22 = new Chart(chartBottomBox22, {
 
 function chartSlide() {
   let chartSlideCurrent = 0;
-  const chartSlideNum = 6;
+  const chartSlideNum = 5;
   leftChartBtn.addEventListener('click', () => {
     if (chartSlideCurrent === -1) {
       chartSlideCurrent = 0;
