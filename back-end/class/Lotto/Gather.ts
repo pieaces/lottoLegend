@@ -11,7 +11,6 @@ interface AnalyzeHelper extends Params {
     one?: LottoNumber;
 }
 export default class Gather extends Expectation {
-
     private gatherHelper(helper: Helper): number[] {
         const result = new Array<number>(helper.to - helper.from + 1).fill(0);
         Calculate.getData(this.getLNumbers(helper.mode), helper.method).forEach(value => {

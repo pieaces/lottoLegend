@@ -1,5 +1,5 @@
 import InterCoef from "./InterCoef";
-import { InterData, InterMethod, Method } from "./Inter";
+import { InterData, InterMethod, Method1 } from "./Inter";
 import { Params } from './Expectation'
 
 export default class Inter extends InterCoef {
@@ -15,56 +15,56 @@ export default class Inter extends InterCoef {
     interExcludedLineCount(params: Params = {}): number[] {
         return this.interHelper(
             params,
-            this.interMap.get(Method.excludedLineCount)
+            this.interMap.get(Method1.excludedLineCount)
         );
     }
 
     interLineCount(params: Params = {}): number[] {
         return this.interHelper(
             params,
-            this.interMap.get(Method.lineCount)
+            this.interMap.get(Method1.lineCount)
         );
     }
 
     interCarryCount(params: Params = {}): number[] {
         return this.interHelper(
             params,
-            this.interMap.get(Method.carryCount)
+            this.interMap.get(Method1.carryCount)
         );
     }
 
     interLowCount(params: Params = {}): number[] {
         return this.interHelper(
             params,
-            this.interMap.get(Method.lowCount)
+            this.interMap.get(Method1.lowCount)
         );
     }
 
     interSum(params: Params = {}): number[] {
         return this.interHelper(
             params,
-            this.interMap.get(Method.sum)
+            this.interMap.get(Method1.sum)
         );
     }
 
     interOddCount(params: Params = {}): number[] {
         return this.interHelper(
             params,
-            this.interMap.get(Method.oddCount)
+            this.interMap.get(Method1.oddCount)
         );
     }
 
     interPrimeCount(params: Params = {}): number[] {
         return this.interHelper(
             params,
-            this.interMap.get(Method.primeCount)
+            this.interMap.get(Method1.primeCount)
         );
     }
 
     inter$3Count(params: Params = {}): number[] {
         return this.interHelper(
             params,
-            this.interMap.get(Method.$3Count)
+            this.interMap.get(Method1.$3Count)
 
         );
     }
@@ -72,28 +72,28 @@ export default class Inter extends InterCoef {
     interSum$10(params: Params = {}): number[] {
         return this.interHelper(
             params,
-            this.interMap.get(Method.sum$10)
+            this.interMap.get(Method1.sum$10)
         );
     }
 
     interDiffMaxMin(params: Params = {}): number[] {
         return this.interHelper(
             params,
-            this.interMap.get(Method.diffMaxMin)
+            this.interMap.get(Method1.diffMaxMin)
         );
     }
 
     interAC(params: Params = {}): number[] {
         return this.interHelper(
             params,
-            this.interMap.get(Method.AC)
+            this.interMap.get(Method1.AC)
         );
     }
 
     interConsecutiveExist(params: Params = {}): number[] {
         return this.interHelper(
             params,
-            this.interMap.get(Method.consecutiveExist)
+            this.interMap.get(Method1.consecutiveExist)
         );
     }
 }

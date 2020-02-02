@@ -5,7 +5,7 @@ import InterCount from './InterCount'
 import { LData, Mode } from './Base'
 
 export default class Lotto extends InterCount {
-    constructor(data: LData[], mode: Mode = data.length) {
+    constructor(data: LData[]=[], mode: Mode = data.length) {
         super(data, mode);
     }
 

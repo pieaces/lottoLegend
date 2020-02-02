@@ -1,6 +1,5 @@
 import Lotto from "../../class/Lotto/Lotto";
-import { Mode, LData } from "../../class/Lotto/Base";
-import { Method } from "../../class/Lotto/Inter";
+import { Method1 } from "../../class/Lotto/Inter";
 import { LottoNumber } from "../../class/Generator/Base";
 
 export enum Method2{
@@ -29,11 +28,7 @@ export interface ProcessedData {
 }
 
 export default class LottoProcessor extends Lotto {
-    constructor(data: LData[], mode: Mode = data.length) {
-        super(data, mode);
-    }
-
-    processHelper(method: Method): ProcessedData {
+    processHelper(method: Method1): ProcessedData {
         const interMethod = this.interMap.get(method);
 
         const ideal: Assembly = {
@@ -58,13 +53,13 @@ export default class LottoProcessor extends Lotto {
     }
 
     processExcludedLineCount(): ProcessedData {
-        return this.processHelper(Method.excludedLineCount);
+        return this.processHelper(Method1.excludedLineCount);
     }
     processLineCount(): ProcessedData {
-        return this.processHelper(Method.lineCount);
+        return this.processHelper(Method1.lineCount);
     }
     processCarryCount(): ProcessedData {
-        return this.processHelper(Method.carryCount);
+        return this.processHelper(Method1.carryCount);
     }
     processEmergedStatusForOne(one:LottoNumber): boolean[] {
         return this.gatherEmergedBooleanForOne(one, -12);
@@ -79,30 +74,30 @@ export default class LottoProcessor extends Lotto {
         return this.gatherFrequency();
     }
     processLowCount(): ProcessedData {
-        return this.processHelper(Method.lowCount);
+        return this.processHelper(Method1.lowCount);
     }
     processSum(): ProcessedData {
-        return this.processHelper(Method.sum);
+        return this.processHelper(Method1.sum);
     }
     processOddCount(): ProcessedData {
-        return this.processHelper(Method.oddCount);
+        return this.processHelper(Method1.oddCount);
     }
     processPrimeCount(): ProcessedData {
-        return this.processHelper(Method.primeCount);
+        return this.processHelper(Method1.primeCount);
     }
     process$3Count(): ProcessedData {
-        return this.processHelper(Method.$3Count);
+        return this.processHelper(Method1.$3Count);
     }
     processSum$10(): ProcessedData {
-        return this.processHelper(Method.sum$10);
+        return this.processHelper(Method1.sum$10);
     }
     processDiffMaxMin(): ProcessedData {
-        return this.processHelper(Method.diffMaxMin);
+        return this.processHelper(Method1.diffMaxMin);
     }
     processAC(): ProcessedData {
-        return this.processHelper(Method.AC);
+        return this.processHelper(Method1.AC);
     }
     processConsecutiveExist(): ProcessedData {
-        return this.processHelper(Method.consecutiveExist);
+        return this.processHelper(Method1.consecutiveExist);
     }
 }

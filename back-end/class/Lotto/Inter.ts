@@ -9,7 +9,7 @@ export interface InterMethod {
     ideal: (params: Params) => number[];
     actual: (params: Params) => number[];
 }
-export enum Method {
+export enum Method1 {
     excludedLineCount = "excludedLineCount",
     lineCount = "lineCount",
     carryCount = "carryCount",
@@ -25,75 +25,75 @@ export enum Method {
 }
 
 export default class Inter extends Gather{
-    interMap = new Map<Method, InterMethod>([
+    interMap = new Map<Method1, InterMethod>([
         [
-            Method.excludedLineCount, {
+            Method1.excludedLineCount, {
                 ideal: this.expectedExcludedLineCount,
                 actual: this.gatherExcludedLineCount,
             }
         ],
         [
-            Method.lineCount, {
+            Method1.lineCount, {
                 ideal: this.expectedLineCount,
                 actual: this.gatherLineCount
             }
         ],
         [
-            Method.carryCount, {
+            Method1.carryCount, {
                 ideal: this.expectedCarryCount,
                 actual: this.gatherCarryCount
             }
         ],
         [
-            Method.lowCount, {
+            Method1.lowCount, {
                 ideal: this.expectedLowCount,
                 actual: this.gatherLowCount
             }
         ],
         [
-            Method.sum, {
+            Method1.sum, {
                 ideal: this.expectedSum,
                 actual: this.gatherSum
             }
         ],
         [
-            Method.oddCount, {
+            Method1.oddCount, {
                 ideal: this.expectedOddCount,
                 actual: this.gatherOddCount
             }
         ],
         [
-            Method.primeCount, {
+            Method1.primeCount, {
                 ideal: this.expectedPrimeCount,
                 actual: this.gatherPrimeCount
             }
         ],
         [
-            Method.$3Count, {
+            Method1.$3Count, {
                 ideal: this.expected$3Count,
                 actual: this.gather$3Count
             }
         ],
         [
-            Method.sum$10, {
+            Method1.sum$10, {
                 ideal: this.expectedSum$10,
                 actual: this.gatherSum$10
             }
         ],
         [
-            Method.diffMaxMin, {
+            Method1.diffMaxMin, {
                 ideal: this.expectedDiffMaxMinData,
                 actual: this.gatherDiffMaxMinData
             }
         ],
         [
-            Method.AC, {
+            Method1.AC, {
                 ideal: this.expectedAC,
                 actual: this.gatherAC
             }
         ],
         [
-            Method.consecutiveExist, {
+            Method1.consecutiveExist, {
                 ideal: this.expectedConsecutiveExist,
                 actual: this.gatherConsecutiveExist
             }

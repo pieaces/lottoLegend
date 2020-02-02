@@ -11,7 +11,7 @@ export default async function read(): Promise<LData[]> {
     return await new Promise((resolve, reject) => {
         dynamoDB.scan(params, (err, data) => {
             if (err) {
-                console.log(err, err.stack);
+                console.log('LottoData - read 과정 에러', err);
                 reject(err);
             }
             else {

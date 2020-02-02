@@ -32,8 +32,8 @@ async function getLotto(round: number): Promise<boolean> {
             };
 
             dynamodb.putItem(params, function (err, data) {
-                if (err) console.log(err, err.stack);
-                else console.log('success');
+                if (err) console.log('LottoData - write 과정 에러', err);
+                else console.log('LottoData - write success');
             });
             return true;
         })

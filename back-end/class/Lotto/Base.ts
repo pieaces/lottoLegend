@@ -16,10 +16,9 @@ export interface LData {
 }
 
 export default class Base {
-    private TOTAL_SIZE: number;
+    protected TOTAL_SIZE: number;
     public static readonly BALL_NUM: number = 45;
-
-    private data: List<LData>;
+    protected data: List<LData>;
 
     constructor(data: LData[]) {
         this.data = List<LData>(data);
