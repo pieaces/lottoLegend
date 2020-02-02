@@ -2,7 +2,7 @@ import { LData, Mode } from './Base'
 import Gather from './Gather';
 import Calculate from '../Calculate'
 import Statistics, { Stats } from '../Statistics'
-import Analyze from '../Analyze/Analyze'
+import Analyze from '../Analyze'
 
 export default class LottoStatistics extends Gather{
     constructor(data: LData[]=[], mode: Mode = data.length) {

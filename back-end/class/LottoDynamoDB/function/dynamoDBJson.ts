@@ -1,4 +1,4 @@
-import { Assembly, LottoDate } from '../../LottoData/LottoProcess'
+import { Assembly, LottoDate } from '../../LottoData'
 import { Stats } from '../../Statistics';
 
 export type dynamoData = Assembly | number[] | Stats | number[][] | boolean[][] | LottoDate[];

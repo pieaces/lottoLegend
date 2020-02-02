@@ -1,5 +1,5 @@
 import { Method } from '../../LottoData/Base'
-import { Assembly, DBData } from '../../LottoData/LottoProcess'
+import { Assembly, DBData } from '../../LottoData'
 import AWS from 'aws-sdk';
 import { Stats } from '../../Statistics';
 AWS.config.update(require('./key.json'));

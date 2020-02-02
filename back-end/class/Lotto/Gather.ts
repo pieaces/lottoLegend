@@ -1,5 +1,5 @@
 import Calculate from '../Calculate'
-import Analyze from '../Analyze/Analyze'
+import Analyze from '../Analyze'
 import Expectation, { Params } from './Expectation'
 import { LottoNumber } from '../Generator/Base';
 
