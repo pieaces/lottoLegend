@@ -1,11 +1,11 @@
 import AWS from 'aws-sdk';
 import axios from 'axios'
-import {LData} from '../../../class/Lotto/Base'
+import {LData} from '../../Lotto/Base'
 
-AWS.config.update(require('../../key.json'));
+AWS.config.update(require('./key.json'));
 const dynamodb = new AWS.DynamoDB();
 
-async function getLotto(round: number): Promise<boolean> {
+async function putLotto(round: number): Promise<boolean> {
     const bool = await axios.get('http://www.nlotto.co.kr/common.do?method=getLottoNumber&drwNo=' + round)
         .then(result => {
             const data = result.data;
@@ -46,7 +46,7 @@ async function getLotto(round: number): Promise<boolean> {
 
 async function writeAllLotto(round:number) {
     for (let i = 1; i <= round; i++) {
-        const bool = await getLotto(i);
+        const bool = await putLotto(i);
         console.log(i, bool);
     }
 }

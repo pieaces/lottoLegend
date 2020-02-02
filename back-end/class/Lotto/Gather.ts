@@ -1,4 +1,4 @@
-import Calculate from '../Statistics/Calculate'
+import Calculate from '../Calculate'
 import Analyze from '../Analyze/Analyze'
 import Expectation, { Params } from './Expectation'
 import { LottoNumber } from '../Generator/Base';
@@ -8,7 +8,7 @@ interface Helper extends Params {
 }
 interface AnalyzeHelper extends Params {
     method: (...something: any) => number[];
-    one?: LottoNumber;
+    one: LottoNumber;
 }
 export default class Gather extends Expectation {
     private gatherHelper(helper: Helper): number[] {

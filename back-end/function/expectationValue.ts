@@ -1,6 +1,6 @@
 import fs from 'fs'
 import Probability from '../class/Statistics/Probability'
-import Calculate from '../class/Statistics/Calculate'
+import Calculate from '../class/Calculate'
 import { exec } from 'child_process';
 
 const C = Probability.C;

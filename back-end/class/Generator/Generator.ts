@@ -1,5 +1,5 @@
 import { GeneratorOption, ZeroToFour, LottoNumber } from './Base'
-import Calculate from '../Statistics/Calculate'
+import Calculate from '../Calculate'
 import Check from './Check';
 
 export default class Generator extends Check {
@@ -83,8 +83,7 @@ export default class Generator extends Check {
             for (let i = 0; i < INCLUDE_SIZE; i++) box[i] = this.option.includeNumbers[i];
             for (let i = INCLUDE_SIZE; i < INCLUDE_SIZE + BOX_SIZE; i++) box[i] = list[indexBox[i - INCLUDE_SIZE]] as LottoNumber
 
-            if (1 < 1) {
-            } else if (this.option.sum && !this.checkSum(box)) {
+            if (this.option.sum && !this.checkSum(box)) {
             } else if (this.option.oddCount && !this.checkOddCount(box)) {
             } else if (this.option.primeCount && !this.checkPrimeCount(box)) {
             } else if (this.option.$3Count && !this.check$3Count(box)) {

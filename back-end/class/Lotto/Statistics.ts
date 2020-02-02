@@ -1,10 +1,10 @@
-import Statistics, { Stats } from '../Statistics/Statistics'
-import Calculate from '../Statistics/Calculate'
-import Analyze from '../Analyze/Analyze'
-import InterCount from './InterCount'
 import { LData, Mode } from './Base'
+import Gather from './Gather';
+import Calculate from '../Calculate'
+import Statistics, { Stats } from '../Statistics'
+import Analyze from '../Analyze/Analyze'
 
-export default class Lotto extends InterCount {
+export default class LottoStatistics extends Gather{
     constructor(data: LData[]=[], mode: Mode = data.length) {
         super(data, mode);
     }
@@ -12,7 +12,7 @@ export default class Lotto extends InterCount {
     private getStats(method: (numbers: number[]) => number, mode: Mode = this.mode): Stats {
         return Statistics.getStats(Calculate.getData(this.getLNumbers(mode), method))
     }
-    statsExceptedLineCount(mode: Mode = this.mode): Stats {
+    statsExcludedLineCount(mode: Mode = this.mode): Stats {
         return this.getStats(Calculate.excludedLineCount, mode);
     }
 
@@ -22,7 +22,6 @@ export default class Lotto extends InterCount {
     statsInterval(mode: Mode = this.mode): Array<Stats> {
         return Analyze.interval(this.getLNumbers(mode)).map(item => {
             const stats = Statistics.getStats(item);
-            stats.max = Math.max(...item);
             return stats;
         });
     }
