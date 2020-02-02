@@ -114,10 +114,10 @@ export default class Gather extends Expectation {
         return result;
     }
     gatherSum55(params: Params = { from: 21, to: 255, mode: this.mode }): number[] {//21~255
-        return this.gatherSumVersion(55);
+        return this.gatherSumVersion(55, params);
     }
     gatherSum77(params: Params = { from: 21, to: 255, mode: this.mode }): number[] {//21~255
-        return this.gatherSumVersion(77);
+        return this.gatherSumVersion(77, params);
     }
 
     gatherOddCount(params: Params = { from: 0, to: 6, mode: this.mode }): number[] {
