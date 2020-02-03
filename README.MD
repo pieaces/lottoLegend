@@ -43,7 +43,7 @@ v 0.9.9 (2020-02-03)
                 *API: /stats?method=lineCount
 
 
-2. ~3. 제외 및 포함수 선택
+**2~3. 제외 및 포함수 선택**
 * 이월수 선택
 
                 Analyze.carryCount
@@ -72,7 +72,7 @@ v 0.9.9 (2020-02-03)
 
                 *API: /stats?method=frequency
 
-4. 저번호 개수 입력 (가용값: 0~6)
+**4. 저번호 개수 입력 (가용값: 0~6)**
     
                 Calculate.lowCount
                 
@@ -82,7 +82,7 @@ v 0.9.9 (2020-02-03)
 
                 *API: /stats?method=lowCount
 
-5. 번호 합 범위 입력 (가용범위: 21~255) (20,10단위 묶음)
+**5. 번호 합 범위 입력 (가용범위: 21~255) (20,10단위 묶음)**
     
                 Calculate.sum
                 
@@ -92,7 +92,7 @@ v 0.9.9 (2020-02-03)
 
                 *API: /stats?method=sum | sum55 | sum77
 
-6. 홀수개수 범위 입력 (가용범위: 0~6)
+**6. 홀수개수 범위 입력 (가용범위: 0~6)**
     
                 Calculate.oddCount
                 
@@ -102,7 +102,7 @@ v 0.9.9 (2020-02-03)
 
                 *API: /stats?method=oddCount
 
-7. 소수개수 범위 입력 (가용범위: 0~6)
+**7. 소수개수 범위 입력 (가용범위: 0~6)**
     
                 Calculate.primeCount
                 
@@ -112,7 +112,7 @@ v 0.9.9 (2020-02-03)
 
                 *API: /stats?method=primeCount
 
-8. 3의배수 개수 범위 입력 (가용범위: 0~6)
+**8. 3의배수 개수 범위 입력 (가용범위: 0~6)**
     
                 Calculate.$3Count
                 
@@ -122,7 +122,7 @@ v 0.9.9 (2020-02-03)
 
                 *API: /stats?method=$3Count
 
-9. 첫수(십의자리)합 범위 입력 (가용범위: 0~24) 3단위=>8묶음
+**9. 첫수(십의자리)합 범위 입력 (가용범위: 0~24) 3단위=>8묶음**
     
                 Calculate.sum$10
                 
@@ -132,7 +132,7 @@ v 0.9.9 (2020-02-03)
 
                 *API: /stats?method=sum$10
 
-10. 고저차 범위 입력 (가용범위: 5~44)=>5단위=>8묶음
+**10. 고저차 범위 입력 (가용범위: 5~44)=>5단위=>8묶음**
     
                 Calculate.diffMaxMin
                 
@@ -142,7 +142,7 @@ v 0.9.9 (2020-02-03)
 
                 *API: /stats?method=diffMaxMin
 
-11. AC(Arithmetic Complex) 범위 입력 (가용범위: 0~10)
+**11. AC(Arithmetic Complex) 범위 입력 (가용범위: 0~10)**
     
                 Calculate.AC
                 
@@ -152,7 +152,7 @@ v 0.9.9 (2020-02-03)
 
                 *API: /stats?method=AC
 
-12. 연속번호 제외 여부 (Y/N)
+**12. 연속번호 제외 여부 (Y/N)**
     
                 Calculate.consecutiveExist
                 
