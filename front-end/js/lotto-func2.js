@@ -167,32 +167,37 @@ function numExclude() {
         num = nodeValue;
         node.style.backgroundColor = lottoNumSelectColor;
       } else {
-        if (num !== null) {
-          lottoNum[num - 1].style.backgroundColor = lottoNumDefaultColor;
-        }
-        num = nodeValue;
-        node.style.backgroundColor = lottoNumSelectColor;
-        selectNumBox.children[nums.length - 1].classList.remove(
-          `select-num-box${nums.length}`
-        );
-        for (let i = 0; i < selectNumBox.children.length; i++) {
-          if (nums.indexOf(nodeValue) !== -1) {
-            selectNumBox.children[nums.indexOf(nodeValue)].textContent = '';
-            nums.splice(nums.indexOf(nodeValue), 1);
-            break;
+        if (confirm(`번호 ${nodeValue} 선택취소하시겠습니까?`)) {
+          if (num !== null) {
+            lottoNum[num - 1].style.backgroundColor = lottoNumDefaultColor;
           }
-        }
-
-        for (let i = 0; i < selectNumBox.children.length; i++) {
-          selectNumBox.children[i].textContent = nums[i];
-          selectNumBox.children[i].style.backgroundColor = '';
-        }
-
-        for (let i = 0; i < nums.length; i++) {
-          setColorLotto(
-            parseInt(selectNumBox.children[i].textContent),
-            selectNumBox.children[i]
+          num = nodeValue;
+          node.style.backgroundColor = lottoNumSelectColor;
+          selectNumBox.children[nums.length - 1].classList.remove(
+            `select-num-box${nums.length}`
           );
+          for (let i = 0; i < selectNumBox.children.length; i++) {
+            if (nums.indexOf(nodeValue) !== -1) {
+              selectNumBox.children[nums.indexOf(nodeValue)].textContent = '';
+              nums.splice(nums.indexOf(nodeValue), 1);
+              break;
+            }
+          }
+
+          for (let i = 0; i < selectNumBox.children.length; i++) {
+            selectNumBox.children[i].textContent = nums[i];
+            selectNumBox.children[i].style.backgroundColor = '';
+          }
+
+          for (let i = 0; i < nums.length; i++) {
+            setColorLotto(
+              parseInt(selectNumBox.children[i].textContent),
+              selectNumBox.children[i]
+            );
+          }
+        } else {
+          lottoNum[num - 1].style.backgroundColor = lottoNumDefaultColor;
+          num = null;
         }
       }
       e.stopPropagation();
@@ -202,20 +207,26 @@ function numExclude() {
   //초기화함수: 선택번호배열,선택번호, 번호판 초기화
 
   resetNumBtn.addEventListener('click', e => {
-    for (const node of [...selectNumBox.children]) {
-      node.textContent = '';
-      node.style.backgroundColor = '';
-    }
+    if (nums.length === 0) {
+      alert('초기화 할 번호가 없습니다');
+    } else {
+      if (confirm(`선택번호를 모두 초기화하시겠습니까?`)) {
+        for (const node of [...selectNumBox.children]) {
+          node.textContent = '';
+          node.style.backgroundColor = '';
+        }
 
-    for (let i = 0; i < nums.length; i++) {
-      lottoNum[nums[i] - 1].style.backgroundColor = lottoNumDefaultColor;
-      selectNumBox.children[i].classList.remove(`select-num-box${i + 1}`);
-    }
+        for (let i = 0; i < nums.length; i++) {
+          lottoNum[nums[i] - 1].style.backgroundColor = lottoNumDefaultColor;
+          selectNumBox.children[i].classList.remove(`select-num-box${i + 1}`);
+        }
 
-    nums.splice(0, nums.length);
-    if (num !== null) {
-      lottoNum[num - 1].style.backgroundColor = lottoNumDefaultColor;
-      num = null;
+        nums.splice(0, nums.length);
+        if (num !== null) {
+          lottoNum[num - 1].style.backgroundColor = lottoNumDefaultColor;
+          num = null;
+        }
+      }
     }
     e.stopPropagation();
   });
@@ -262,7 +273,10 @@ function numExclude() {
           chartBarInstance.update();
         }
       }
+    } else {
+      alert(`더 이상 번호를 제외할 수 없습니다(최대 개수:${numExcludeCount})`);
     }
+
     e.stopPropagation();
   });
 

@@ -1,39 +1,5 @@
-// [0, 0, 1, 5, 3, 2, 1][
-//   (0.16384841642251924,
-//   1.0277764302867114,
-//   2.686233851885722,
-//   3.7444471874770664,
-//   2.9359869992717913,
-//   1.2277763815136578,
-//   0.21393073314253125)
-// ][(1, 1, 4, 8, 5, 4, 1)][
-//   (0.3276968328450385,
-//   2.055552860573423,
-//   5.372467703771444,
-//   7.488894374954133,
-//   5.871973998543583,
-//   2.4555527630273155,
-//   0.4278614662850625)
-// ][(3, 4, 10, 12, 11, 7, 1)][
-//   (0.655393665690077,
-//   4.111105721146846,
-//   10.744935407542888,
-//   14.977788749908266,
-//   11.743947997087165,
-//   4.911105526054631,
-//   0.855722932570125)
-// ][(10, 60, 198, 309, 231, 70, 16)][
-//   (12.206707023477684,
-//   76.56934405636001,
-//   200.1244219654863,
-//   278.96131546704146,
-//   218.73103144574847,
-//   91.4693404227675,
-//   15.937839619118579)
-// ];
-
 const lottofunc1 = {
-  chartTopData: [
+  chartLineData: [
     {
       real: [0, 0, 1, 5, 3, 2, 1],
       ideal: [
@@ -92,35 +58,11 @@ const lottofunc1 = {
         2.9359869992717913,
         1.2277763815136578,
         0.21393073314253125
-      ]
-    },
-    {
-      real: [1, 1, 4, 8, 5, 4, 1],
-      ideal: [
-        0.3276968328450385,
-        2.055552860573423,
-        5.372467703771444,
-        7.488894374954133,
-        5.871973998543583,
-        2.4555527630273155,
-        0.4278614662850625
       ]
     }
   ],
-  chartBottomData: {
-    '11': {
-      real: [0, 0, 1, 5, 3, 2, 1],
-      ideal: [
-        0.16384841642251924,
-        1.0277764302867114,
-        2.686233851885722,
-        3.7444471874770664,
-        2.9359869992717913,
-        1.2277763815136578,
-        0.21393073314253125
-      ]
-    },
-    '12': {
+  chartBarData: [
+    {
       real: [1, 1, 4, 8, 5, 4, 1],
       ideal: [
         0.3276968328450385,
@@ -132,7 +74,7 @@ const lottofunc1 = {
         0.4278614662850625
       ]
     },
-    '21': {
+    {
       real: [0, 0, 1, 5, 3, 2, 1],
       ideal: [
         0.16384841642251924,
@@ -144,7 +86,7 @@ const lottofunc1 = {
         0.21393073314253125
       ]
     },
-    '22': {
+    {
       real: [1, 1, 4, 8, 5, 4, 1],
       ideal: [
         0.3276968328450385,
@@ -156,16 +98,14 @@ const lottofunc1 = {
         0.4278614662850625
       ]
     }
-  }
+  ]
 };
-const chartBottomContainer = document.querySelector('.chart-bottom-container');
-const leftChartBtn = document.querySelector('#left-chart-btn');
-const rightChartBtn = document.querySelector('#right-chart-btn');
-const chartTopNum = document.querySelectorAll('.chart-top-num > div');
 
-const chartTopBox = document.querySelector('.chart-top').getContext('2d');
+const chartLineBox = document
+  .querySelector('#chart-func1-line')
+  .getContext('2d');
 
-const chartTopDataBox = {
+const chartLineDataBox = {
   labels: [0, 1, 2, 3, 4, 5, 6],
   datasets: [
     {
@@ -174,7 +114,7 @@ const chartTopDataBox = {
       pointBackgroundColor: 'white',
       borderWidth: 2,
       borderColor: 'rgb(199, 54, 44)',
-      data: lottofunc1.chartTopData[0].real
+      data: lottofunc1.chartLineData[0].real
     },
     {
       label: '이상값',
@@ -182,12 +122,12 @@ const chartTopDataBox = {
       pointBackgroundColor: 'white',
       borderWidth: 2,
       borderColor: 'rgb(14,99,132)',
-      data: lottofunc1.chartTopData[0].ideal
+      data: lottofunc1.chartLineData[0].ideal
     }
   ]
 };
 
-const chartOptions = {
+const chartLineOptions = {
   responsive: false,
   scales: {
     xAxes: [
@@ -222,17 +162,15 @@ const chartOptions = {
   }
 };
 
-const chartTopInstance = new Chart(chartTopBox, {
+const chartLineInstance = new Chart(chartLineBox, {
   type: 'line',
-  data: chartTopDataBox,
-  options: chartOptions
+  data: chartLineDataBox,
+  options: chartLineOptions
 });
 
-const chartBottomBox11 = document
-  .querySelector('.chart-bottom-1-1')
-  .getContext('2d');
+const chartBarBox = document.querySelector('#chart-func1-bar');
 
-const chartBottomDataBox11 = {
+const chartBarDataBox = {
   labels: [0, 1, 2, 3, 4, 5, 6],
   datasets: [
     {
@@ -241,7 +179,7 @@ const chartBottomDataBox11 = {
       pointBackgroundColor: 'white',
       borderWidth: 2,
       borderColor: 'rgb(199, 54, 44)',
-      data: lottofunc1.chartBottomData['11'].real
+      data: lottofunc1.chartLineData[0].real
     },
     {
       label: '이상값',
@@ -249,227 +187,181 @@ const chartBottomDataBox11 = {
       pointBackgroundColor: 'white',
       borderWidth: 2,
       borderColor: 'rgb(14,99,132)',
-      data: lottofunc1.chartBottomData['11'].ideal
+      data: lottofunc1.chartLineData[0].ideal
     }
   ]
 };
 
-const chartBottomInstance11 = new Chart(chartBottomBox11, {
-  type: 'line',
-  data: chartBottomDataBox11,
-  options: chartOptions
+const chartBarOptions = {
+  legend: false,
+  title: {
+    display: true,
+    text: 'Ice Cream Truck Report'
+  }
+};
+
+const chartBarInstance = new Chart(chartBarBox, {
+  type: 'bar',
+  data: chartBarDataBox,
+  options: chartBarOptions
 });
 
-const chartBottomBox21 = document
-  .querySelector('.chart-bottom-2-1')
-  .getContext('2d');
+const chartBubbleBox = document.querySelector('#chart-func1-bubble');
 
-const chartBottomDataBox21 = {
-  labels: [0, 1, 2, 3, 4, 5, 6],
+const chartBubbleDataBox = {
   datasets: [
     {
-      label: '실제값',
-      backgroundColor: 'rgba(91, 81,255, 0.2)',
-      pointBackgroundColor: 'white',
-      borderWidth: 2,
-      borderColor: 'rgb(199, 54, 44)',
-      data: lottofunc1.chartBottomData['21'].real
-    },
-    {
-      label: '이상값',
-      backgroundColor: 'rgba(91, 81,255, 0.2)',
-      pointBackgroundColor: 'white',
-      borderWidth: 2,
-      borderColor: 'rgb(14,99,132)',
-      data: lottofunc1.chartBottomData['21'].ideal
+      label: ['Deer Population'],
+      data: [
+        {
+          x: 100,
+          y: 0,
+          r: 10
+        },
+        {
+          x: 60,
+          y: 30,
+          r: 20
+        },
+        {
+          x: 40,
+          y: 60,
+          r: 25
+        },
+        {
+          x: 80,
+          y: 80,
+          r: 50
+        },
+        {
+          x: 20,
+          y: 30,
+          r: 25
+        },
+        {
+          x: 0,
+          y: 100,
+          r: 5
+        }
+      ],
+      backgroundColor: '#9966FF',
+      hoverBackgroundColor: '#000000',
+      hoverBorderColor: '#9966FF',
+      hoverBorderWidth: 5,
+      hoverRadius: 5
     }
   ]
 };
 
-const chartBottomInstance21 = new Chart(chartBottomBox21, {
-  type: 'line',
-  data: chartBottomDataBox21,
-  options: chartOptions
-});
-
-const chartBottomBox12 = document
-  .querySelector('.chart-bottom-1-2')
-  .getContext('2d');
-
-const chartBottomDataBox12 = {
-  labels: [0, 1, 2, 3, 4, 5, 6],
-  datasets: [
-    {
-      label: '실제값',
-      backgroundColor: 'rgba(91, 81,255, 0.2)',
-      pointBackgroundColor: 'white',
-      borderWidth: 2,
-      borderColor: 'rgb(199, 54, 44)',
-      data: lottofunc1.chartBottomData['12'].real
-    },
-    {
-      label: '이상값',
-      backgroundColor: 'rgba(91, 81,255, 0.2)',
-      pointBackgroundColor: 'white',
-      borderWidth: 2,
-      borderColor: 'rgb(14,99,132)',
-      data: lottofunc1.chartBottomData['12'].ideal
-    }
-  ]
+const chartBubbleOptions = {
+  legend: false,
+  title: {
+    display: true,
+    text: 'Ice Cream Truck Report'
+  }
 };
 
-const chartBottomInstance12 = new Chart(chartBottomBox12, {
-  type: 'line',
-  data: chartBottomDataBox12,
-  options: chartOptions
+const chartBubbleInstance = new Chart(chartBubbleBox, {
+  type: 'bubble',
+  data: chartBubbleDataBox,
+  options: chartBubbleOptions
 });
 
-const chartBottomBox22 = document
-  .querySelector('.chart-bottom-2-2')
-  .getContext('2d');
+const leftLineChartBtn = document.querySelector('#left-line-chart-btn');
+const rightLineChartBtn = document.querySelector('#right-line-chart-btn');
+const leftBarChartBtn = document.querySelector('#left-bar-chart-btn');
+const rightBarChartBtn = document.querySelector('#right-bar-chart-btn');
+const chartLineNum = document.querySelectorAll('.chart-line-num > div');
+const chartBarNum = document.querySelectorAll('.chart-bar-num > div');
+const main14 = document.querySelector('.main-1-4');
 
-const chartBottomDataBox22 = {
-  labels: [0, 1, 2, 3, 4, 5, 6],
-  datasets: [
-    {
-      label: '실제값',
-      backgroundColor: 'rgba(91, 81,255, 0.2)',
-      pointBackgroundColor: 'white',
-      borderWidth: 2,
-      borderColor: 'rgb(199, 54, 44)',
-      data: lottofunc1.chartBottomData['22'].real
-    },
-    {
-      label: '이상값',
-      backgroundColor: 'rgba(91, 81,255, 0.2)',
-      pointBackgroundColor: 'white',
-      borderWidth: 2,
-      borderColor: 'rgb(14,99,132)',
-      data: lottofunc1.chartBottomData['22'].ideal
-    }
-  ]
-};
-
-const chartBottomInstance22 = new Chart(chartBottomBox22, {
-  type: 'line',
-  data: chartBottomDataBox22,
-  options: chartOptions
-});
-
-// function chartSlide() {
-//   return function(e) {
-//     if (e.target.id === 'left-chart-btn') {
-//       if (lottofunc1.chartSlideCurrent === -1) {
-//         lottofunc1.chartSlideCurrent = 0;
-//       } else {
-//         chartTopNum[lottofunc1.chartSlideCurrent].style.backgroundColor =
-//           'gray';
-//         lottofunc1.chartSlideCurrent--;
-//         chartTopNum[lottofunc1.chartSlideCurrent].style.backgroundColor =
-//           'blue';
-//       }
-//     } else if (e.target.id === 'right-chart-btn') {
-//       if (lottofunc1.chartSlideCurrent === lottofunc1.chartSlideNum - 1) {
-//         lottofunc1.chartSlideCurrent = 0;
-//         chartTopNum[lottofunc1.chartSlideNum - 1].style.backgroundColor =
-//           'gray';
-//         chartTopNum[lottofunc1.chartSlideCurrent].style.backgroundColor =
-//           'blue';
-//         chartBottomContainer.scrollIntoView({
-//           behavior: 'smooth'
-//         });
-//       } else {
-//         chartTopNum[lottofunc1.chartSlideCurrent].style.backgroundColor =
-//           'gray';
-//         lottofunc1.chartSlideCurrent++;
-//         chartTopNum[lottofunc1.chartSlideCurrent].style.backgroundColor =
-//           'blue';
-//       }
-//     }
-
-//     leftChartBtnToggle();
-
-//     chartTopDataBox.datasets[0].data =
-//       lottofunc1.chartTopData[lottofunc1.chartSlideCurrent].real;
-//     chartTopDataBox.datasets[1].data =
-//       lottofunc1.chartTopData[lottofunc1.chartSlideCurrent].ideal;
-//     chartTopInstance.update();
-//   };
-// }
-// for (let i = 0; i < lottofunc1.chartSlideNum; i++) {
-//   chartTopNum[i].addEventListener('click', () => {
-//     chartTopDataBox.datasets[0].data = lottofunc1.chartTopData[i].real;
-//     chartTopDataBox.datasets[1].data = lottofunc1.chartTopData[i].ideal;
-//     chartTopNum[lottofunc1.chartSlideCurrent].style.backgroundColor = 'gray';
-//     lottofunc1.chartSlideCurrent = i;
-//     chartTopNum[lottofunc1.chartSlideCurrent].style.backgroundColor = 'blue';
-//     leftChartBtnToggle();
-//     chartTopInstance.update();
-//   });
-// }
-
-function chartSlide() {
+function chartSlide(
+  slideNum,
+  slideOrder,
+  chartDataBox,
+  instance,
+  datas,
+  leftBtn,
+  rightBtn
+) {
   let chartSlideCurrent = 0;
-  const chartSlideNum = 5;
-  leftChartBtn.addEventListener('click', () => {
-    if (chartSlideCurrent === -1) {
+  leftBtn.addEventListener('click', () => {
+    if (chartSlideCurrent <= 0) {
       chartSlideCurrent = 0;
     } else {
-      chartTopNum[chartSlideCurrent].style.backgroundColor = 'gray';
+      slideOrder[chartSlideCurrent].classList.remove('chart-slide-current');
       chartSlideCurrent--;
-      chartTopNum[chartSlideCurrent].style.backgroundColor = 'blue';
+      slideOrder[chartSlideCurrent].classList.add('chart-slide-current');
     }
     leftChartBtnToggle(chartSlideCurrent);
-    chartDataSet();
+    chartDataSet(chartDataBox, instance, datas, chartSlideCurrent);
   });
-  rightChartBtn.addEventListener('click', () => {
-    if (chartSlideCurrent === chartSlideNum - 1) {
+  rightBtn.addEventListener('click', e => {
+    if (chartSlideCurrent === slideNum - 1) {
       chartSlideCurrent = 0;
-      chartTopNum[chartSlideNum - 1].style.backgroundColor = 'gray';
-      chartTopNum[chartSlideCurrent].style.backgroundColor = 'blue';
-      chartBottomContainer.scrollIntoView({
-        behavior: 'smooth'
-      });
+      slideOrder[slideNum - 1].classList.remove('chart-slide-current');
+      slideOrder[chartSlideCurrent].classList.add('chart-slide-current');
+
+      if (e.target.parentNode.children[2].id === 'chart-func1-line') {
+        main14.scrollIntoView({
+          behavior: 'smooth'
+        });
+      }
     } else {
-      chartTopNum[chartSlideCurrent].style.backgroundColor = 'gray';
+      slideOrder[chartSlideCurrent].classList.remove('chart-slide-current');
       chartSlideCurrent++;
-      chartTopNum[chartSlideCurrent].style.backgroundColor = 'blue';
+      slideOrder[chartSlideCurrent].classList.add('chart-slide-current');
     }
     leftChartBtnToggle(chartSlideCurrent);
-    chartDataSet();
+    chartDataSet(chartDataBox, instance, datas, chartSlideCurrent);
   });
 
-  for (let i = 0; i < chartSlideNum; i++) {
-    chartTopNum[i].addEventListener('click', () => {
-      chartTopDataBox.datasets[0].data = lottofunc1.chartTopData[i].real;
-      chartTopDataBox.datasets[1].data = lottofunc1.chartTopData[i].ideal;
-      chartTopNum[chartSlideCurrent].style.backgroundColor = 'gray';
+  for (let i = 0; i < slideNum; i++) {
+    slideOrder[i].addEventListener('click', () => {
+      slideOrder[chartSlideCurrent].classList.remove('chart-slide-current');
       chartSlideCurrent = i;
-      chartTopNum[chartSlideCurrent].style.backgroundColor = 'blue';
+      slideOrder[chartSlideCurrent].classList.add('chart-slide-current');
       leftChartBtnToggle(chartSlideCurrent);
-      chartTopInstance.update();
+
+      chartDataSet(chartDataBox, instance, datas, chartSlideCurrent);
     });
   }
 
   function leftChartBtnToggle(chartSlideCurrent) {
     if (chartSlideCurrent === 0) {
-      leftChartBtn.style.display = 'none';
+      leftBtn.style.display = 'none';
     } else {
-      leftChartBtn.style.display = 'block';
+      leftBtn.style.display = 'block';
     }
-  }
-
-  function chartDataSet() {
-    chartTopDataBox.datasets[0].data =
-      lottofunc1.chartTopData[chartSlideCurrent].real;
-    chartTopDataBox.datasets[1].data =
-      lottofunc1.chartTopData[chartSlideCurrent].ideal;
-    chartTopInstance.update();
   }
 }
 
+function chartDataSet(chartDataBox, instance, datas, datasIndex) {
+  chartDataBox.datasets[0].data = datas[datasIndex].real;
+  chartDataBox.datasets[1].data = datas[datasIndex].ideal;
+  instance.update();
+}
+
 function init() {
-  chartSlide();
+  chartSlide(
+    5,
+    chartLineNum,
+    chartLineDataBox,
+    chartLineInstance,
+    lottofunc1.chartLineData,
+    leftLineChartBtn,
+    rightLineChartBtn
+  );
+
+  chartSlide(
+    3,
+    chartBarNum,
+    chartBarDataBox,
+    chartBarInstance,
+    lottofunc1.chartBarData,
+    leftBarChartBtn,
+    rightBarChartBtn
+  );
 }
 
 init();
