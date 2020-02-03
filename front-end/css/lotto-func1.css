@@ -72,16 +72,16 @@
 
 .chart-slide-num > div {
   cursor: pointer;
-  width: 40px;
-  height: 40px;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(0, 0, 0, 0.4);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 .chart-slide-current {
-  background-color: #3498db;
+  background-color: var(--lotto-title-color);
   color: var(--default-color);
 }
 
@@ -132,6 +132,7 @@
 
 .main-1-5 {
   grid-row: 5/6;
+  margin-bottom: 10px;
 }
 
 .main-1-6 {

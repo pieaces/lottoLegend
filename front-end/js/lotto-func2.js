@@ -39,8 +39,7 @@ const chartRadarDataBox = {
 const chartRadarOptions = {
   responsive: false,
   title: {
-    display: true,
-    text: 'Distribution in % of world population'
+    display: false
   },
   legend: {
     display: false
@@ -55,11 +54,16 @@ const chartRadarInstance = new Chart(chartRadarBox, {
 
 const chartGaussBox = document.querySelector('.chart-func2-gauss');
 const chartGaussDataBox = {
-  labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'],
+  labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
   datasets: [
     {
       steppedLine: true,
       data: [
+        Math.round(Math.random() * 100),
+        Math.round(Math.random() * 100),
+        Math.round(Math.random() * 100),
+        Math.round(Math.random() * 100),
+        Math.round(Math.random() * 100),
         Math.round(Math.random() * 100),
         Math.round(Math.random() * 100),
         Math.round(Math.random() * 100),
@@ -93,17 +97,13 @@ const chartBarBox = document.querySelector('.chart-func2-bar');
 
 // Data with datasets options
 const chartBarDataBox = {
-  labels: ['Vanilla', 'Chocolate', 'Strawberry'],
+  labels: ['Vanilla', 'Chocolate'],
   datasets: [
     {
       label: 'Ice Cream Sales ',
       fill: true,
-      backgroundColor: ['moccasin', 'saddlebrown', 'lightpink'],
-      data: [
-        Math.round(Math.random() * 100),
-        Math.round(Math.random() * 100),
-        Math.round(Math.random() * 100)
-      ]
+      backgroundColor: ['moccasin', 'saddlebrown'],
+      data: [Math.round(Math.random() * 100), Math.round(Math.random() * 100)]
     }
   ]
 };
@@ -129,28 +129,16 @@ const selectNumBox = document.querySelector('.select-num-box');
 const numExcludeBtn = document.querySelector('.num-exclude-btn');
 const resetNumBtn = document.querySelector('.reset-num-btn');
 const winNum = document.querySelectorAll('.win-num-box > div');
-const filterCheckBox = document.querySelectorAll('.filter-checkbox');
 
-function filterCheckBoxToggle() {
-  for (const node of filterCheckBox) {
-    node.addEventListener('click', e => {
-      if (node.checked) {
-        node.parentElement.style.backgroundColor = 'rgb(91, 81, 253)';
-        node.parentElement.style.color = 'white';
-      } else {
-        node.parentElement.style.backgroundColor = 'white';
-        node.parentElement.style.color = 'black';
-      }
-    });
-  }
-}
+const numTerm = document.querySelector('.num-term');
+const numFreq = document.querySelector('.num-freq');
 
 function numExclude() {
   const lottoNumDefaultColor = 'rgba(231, 76, 60, 0.2)';
   const lottoNumSelectColor = '#e6e600';
-  const lottoNumExcludeColor = 'gray';
+  const lottoNumExcludeColor = 'darkgray';
   const nums = new Array();
-  const numExcludeCount = 9;
+  const numExcludeCount = 10;
   let num = null;
 
   // 번호판 색깔 설정과 번호판 번호 삭제와 선택번호배열,선택번호 삭제
@@ -253,6 +241,11 @@ function numExclude() {
             Math.round(Math.random() * 100),
             Math.round(Math.random() * 100),
             Math.round(Math.random() * 100),
+            Math.round(Math.random() * 100),
+            Math.round(Math.random() * 100),
+            Math.round(Math.random() * 100),
+            Math.round(Math.random() * 100),
+            Math.round(Math.random() * 100),
             Math.round(Math.random() * 100)
           ];
           chartRadarDataBox.datasets[0].data = [
@@ -263,7 +256,6 @@ function numExclude() {
             Math.round(Math.random() * 100)
           ];
           chartBarDataBox.datasets[0].data = [
-            Math.round(Math.random() * 100),
             Math.round(Math.random() * 100),
             Math.round(Math.random() * 100)
           ];
@@ -335,11 +327,23 @@ function setColorWinNum() {
   }
 }
 
+function numFreqOrTermToggle() {
+  numTerm.addEventListener('click', () => {
+    numTerm.classList.add('lotto-check-current');
+    numFreq.classList.remove('lotto-check-current');
+  });
+
+  numFreq.addEventListener('click', () => {
+    numFreq.classList.add('lotto-check-current');
+    numTerm.classList.remove('lotto-check-current');
+  });
+}
+
 // 함수 실행
 function init() {
+  numFreqOrTermToggle();
   setColorWinNum();
   numExclude();
-  filterCheckBoxToggle();
 }
 
 init();

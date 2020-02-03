@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <style>
+      body {
+        width: 100%;
+        height: 100%;
+      }
+      #app {
+        width: 600;
+        height: 400;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <graph-bubble
+        :width="600"
+        :height="400"
+        :axis-min="0"
+        :axis-max="50"
+        :axis-interval="1000 * 60 * 60"
+        :axis-format="'HH'"
+        :display="'max'"
+        :active-event="'click'"
+        :show-text="true"
+        :labels="labels"
+        :values="values"
+      >
+        <note :text="'Bubble Chart'" :align="'left'"></note>
+        <legends :names="[ 'Date', 'Value' ]"></legends>
+      </graph-bubble>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          labels: [
+            new Date('2018-07-09 00:00:00'),
+            new Date('2018-07-10 00:00:00')
+          ],
+          values: [
+            [new Date('2018-07-09 05:23:00'), 20],
+            [new Date('2018-07-09 12:00:00'), 15],
+            [new Date('2018-07-09 15:55:00'), 12],
+            [new Date('2018-07-09 19:01:00'), 30]
+          ]
+        }
+      });
+    </script>
+  </body>
+</html>
