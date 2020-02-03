@@ -4,27 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack && webpack-dev-server --mode development",
-    "build": "webpack"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/chart.js": "^2.9.9",
-    "@types/node": "^13.1.6",
-    "copy-webpack-plugin": "^5.1.1",
-    "immutable": "^4.0.0-rc.12",
-    "ts-loader": "^6.2.1",
-    "typescript": "^3.7.4",
-    "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.10.1"
+    "@types/node": "^13.1.6"
   },
   "dependencies": {
     "aws-sdk": "^2.610.0",
     "axios": "^0.19.2",
-    "chart.js": "^2.9.3",
-    "readline-sync": "^1.4.10"
+    "immutable": "^4.0.0-rc.12"
   }
 }
