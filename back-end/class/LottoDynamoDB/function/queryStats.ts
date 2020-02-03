@@ -26,6 +26,9 @@ export default async function getStats(name: Method) {
                 reject(err);
             }
             else {
+                if(!(name in Method)){
+                    reject("The parameter doesn't exist.");
+                }
                 const item = data.Items[0];
                 let list: Array<any>;
                 switch (name) {

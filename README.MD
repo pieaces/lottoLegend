@@ -1,7 +1,7 @@
 
 # 로또 통계(2020-01-15)
 
-v 0.9.9 (2020-02-02)
+v 0.9.9 (2020-02-03)
 
 ## Class
 
@@ -21,7 +21,7 @@ v 0.9.9 (2020-02-02)
 
 ## 필터 순서
 
-1. 전멸라인
+**1. 전멸라인**
 * 전멸라인 개수 입력 (가용범위: 0~3)
 
                 Calculate.excludedLineCount
@@ -30,9 +30,7 @@ v 0.9.9 (2020-02-02)
 
                 new Lotto().expectedExcludedLineCount
 
-                new Lotto().coefExcludedLineCount
-
-                new Lotto().interExcludedLineCount
+                *API: /stats?method=excludedLineCount
 
 * 전멸라인 (0, 10, 20, 30, 40번대) 중 복수선택 (가용값: 0~4)
 
@@ -42,9 +40,8 @@ v 0.9.9 (2020-02-02)
 
                 new Lotto().expectedLineCount
 
-                new Lotto().coefLineCount
+                *API: /stats?method=lineCount
 
-                new Lotto().interLineCount
 
 2. ~3. 제외 및 포함수 선택
 * 이월수 선택
@@ -55,19 +52,25 @@ v 0.9.9 (2020-02-02)
 
                 new Lotto().expectedCarryCount
 
-                new Lotto().coefCarryCount
-
-                new Lotto().interCarryCount
+                *API: /stats?method=carryCount
 
 * 제외 및 포함수 선택 (최근 5회차 번호 제시, 번호간격, 번호빈도) +(궁합수, 9궁도)
 
                 new Lotto().gatherEmergedBooleanForOne
 
+                *API: /stats?method=emergence
+
                 new Lotto().gatherIntervalForOne //default: 12간격이내
+
+                *API: /stats?method=interval
 
                 new Lotto().gatherHowLongNone
 
+                *API: /stats?method=howLongNone
+
                 new Lotto().gatherFrequency
+
+                *API: /stats?method=frequency
 
 4. 저번호 개수 입력 (가용값: 0~6)
     
@@ -77,21 +80,17 @@ v 0.9.9 (2020-02-02)
                 
                 new Lotto().expectedLowCount
 
-                new Lotto().coefLowCount
+                *API: /stats?method=lowCount
 
-                new Lotto().interLowCount
-
-5. 번호 합 범위 입력 (가용범위: 21~255) 30단위=>8묶음
+5. 번호 합 범위 입력 (가용범위: 21~255) (20,10단위 묶음)
     
-                Calculate.sum55
+                Calculate.sum
                 
-                new Lotto().gatherSum55
+                new Lotto().gatherSum(,55,77)
                 
-                new Lotto().expectedSum55
+                new Lotto().expectedSum(,55,77)
 
-                new Lotto().coefSum5
-
-                new Lotto().interSum55
+                *API: /stats?method=sum | sum55 | sum77
 
 6. 홀수개수 범위 입력 (가용범위: 0~6)
     
@@ -101,9 +100,7 @@ v 0.9.9 (2020-02-02)
                 
                 new Lotto().expectedOddCount
 
-                new Lotto().coefOddCount
-
-                new Lotto().interOddCount
+                *API: /stats?method=oddCount
 
 7. 소수개수 범위 입력 (가용범위: 0~6)
     
@@ -113,9 +110,7 @@ v 0.9.9 (2020-02-02)
                 
                 new Lotto().expectedPrimeCount
 
-                new Lotto().coefPrimeCount
-
-                new Lotto().interPrimeCount
+                *API: /stats?method=primeCount
 
 8. 3의배수 개수 범위 입력 (가용범위: 0~6)
     
@@ -125,9 +120,7 @@ v 0.9.9 (2020-02-02)
                 
                 new Lotto().expected$3Count
 
-                new Lotto().coef$3Count
-
-                new Lotto().inter$3Count
+                *API: /stats?method=$3Count
 
 9. 첫수(십의자리)합 범위 입력 (가용범위: 0~24) 3단위=>8묶음
     
@@ -137,9 +130,7 @@ v 0.9.9 (2020-02-02)
                 
                 new Lotto().expectedSum$10
 
-                new Lotto().coefSum$10
-
-                new Lotto().interSum$10
+                *API: /stats?method=sum$10
 
 10. 고저차 범위 입력 (가용범위: 5~44)=>5단위=>8묶음
     
@@ -149,9 +140,7 @@ v 0.9.9 (2020-02-02)
                 
                 new Lotto().expectedDiffMaxMin
 
-                new Lotto().coefDiffMaxMin
-
-                new Lotto().interDiffMaxMin
+                *API: /stats?method=diffMaxMin
 
 11. AC(Arithmetic Complex) 범위 입력 (가용범위: 0~10)
     
@@ -161,9 +150,7 @@ v 0.9.9 (2020-02-02)
                 
                 new Lotto().expectedAC
 
-                new Lotto().coefAC
-
-                new Lotto().interAC
+                *API: /stats?method=AC
 
 12. 연속번호 제외 여부 (Y/N)
     
@@ -173,6 +160,4 @@ v 0.9.9 (2020-02-02)
                 
                 new Lotto().expectedConsecutiveExist
                 
-                new Lotto().coefConsecutiveExist
-
-                new Lotto().interConsecutiveExist
+                *API: /stats?method=consecutiveExist

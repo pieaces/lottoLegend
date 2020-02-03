@@ -8,16 +8,16 @@ export type CountRange = {from: ZeroToSix, to:ZeroToSix};
 
 export interface GeneratorOption{
     excludedLines?: ZeroToFour[];
+    includeNumbers?: LottoNumber[];
+    excludeNumbers?: LottoNumber[];
     lowCount: ZeroToSix;
+    sum?: Range;
     oddCount?: CountRange;
     primeCount?: CountRange;
     $3Count?: CountRange;
-    sum?: Range;
     sum$10?: Range;
     diffMaxMin?: Range;
     AC?: Range;
-    includeNumbers?: LottoNumber[];
-    excludeNumbers?: LottoNumber[];
     consecutiveExclude?: boolean;
 }
 export default class Base{
