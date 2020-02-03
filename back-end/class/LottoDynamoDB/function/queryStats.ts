@@ -2,7 +2,7 @@ import { Method } from '../../LottoData/Base'
 import { Assembly, DBData } from '../../LottoData'
 import AWS from 'aws-sdk';
 import { Stats } from '../../Statistics';
-AWS.config.update(require('./key.json'));
+// AWS.config.update(require('./key.json'));
 const dynamoDB = new AWS.DynamoDB();
 
 export default async function getStats(name: Method) {

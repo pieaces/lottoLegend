@@ -5,7 +5,7 @@ import dynamoDBJson, { dynamoData } from './function/dynamoDBJson'
 import queryStats from './function/queryStats'
 
 import AWS from 'aws-sdk';
-AWS.config.update(require('./function/key.json'));
+// AWS.config.update(require('./function/key.json'));
 const dynamoDB = new AWS.DynamoDB();
 
 export default class LottoStatDB extends LottoDB {
