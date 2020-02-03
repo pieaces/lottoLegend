@@ -64,11 +64,10 @@
     "forceConsistentCasingInFileNames": true  /* Disallow inconsistently-cased references to the same file. */
   },
   "include": [
-    "back-end/**/*",
+    "LottoAPI/**/*",
   ],
   "exclude": [
     "node_modules",
     "**/*.spec.ts",
-    "**/main.ts"
   ]
 }
