@@ -21,7 +21,7 @@ v 0.9.9 (2020-02-03)
 
 ## API URL
 
-API URL: https://is6q0wtgml.execute-api.ap-northeast-2.amazonaws.com/dev
+https://is6q0wtgml.execute-api.ap-northeast-2.amazonaws.com/dev
 
 ## 필터 순서
 
