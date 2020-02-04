@@ -69,6 +69,12 @@ const chartLineInstance = new Chart(chartLineBox, {
   options: chartLineOptions
 });
 
+const chartLineObject = {
+  chartBox: chartLineBox,
+  chartDataBox: chartLineDataBox,
+  instance: chartLineInstance
+};
+
 const chartBarBox = document.querySelector('#chart-func1-bar');
 
 const chartBarDataBox = {
@@ -107,35 +113,47 @@ const chartBarInstance = new Chart(chartBarBox, {
   options: chartBarOptions
 });
 
+const chartBarObject = {
+  chartBox: chartBarBox,
+  chartDataBox: chartBarDataBox,
+  instance: chartBarInstance
+};
+
 const chartBubbleBox = document.querySelector('#chart-func1-bubble');
 
-const chartBubbleDataBox = {
-  datasets: [
-    {
-      label: ['Deer Population'],
-      data: null,
-      backgroundColor: '#9966FF',
-      hoverBackgroundColor: '#000000',
-      hoverBorderColor: '#9966FF',
-      hoverBorderWidth: 5,
-      hoverRadius: 5
-    }
-  ]
-};
-
-const chartBubbleOptions = {
-  legend: false,
-  title: {
-    display: true,
-    text: 'Ice Cream Truck Report'
+function drawBubbleChart() {
+  const dataBubble = [['ID', '전체적 맥락', '부분적 맥락']];
+  for (
+    let i = 0;
+    i < lottofunc1.lottoData.oddCount.data.ideal['all'].length;
+    i++
+  ) {
+    const data = [
+      String(i),
+      lottofunc1.lottoData.oddCount.data.coef[i],
+      (lottofunc1.lottoData.oddCount.data.ideal['all'][i] -
+        lottofunc1.lottoData.oddCount.data.actual['all'][i]) /
+        lottofunc1.lottoData.oddCount.total
+    ];
+    dataBubble.push(data);
   }
-};
+  console.log(dataBubble);
 
-const chartBubbleInstance = new Chart(chartBubbleBox, {
-  type: 'bubble',
-  data: chartBubbleDataBox,
-  options: chartBubbleOptions
-});
+  const chartBubbleDataBox = google.visualization.arrayToDataTable(dataBubble);
+
+  const chartBubbleOptions = {
+    title:
+      'Correlation between life expectancy, fertility rate ' +
+      'and population of some world countries (2010)',
+
+    bubble: { textStyle: { fontSize: 11 } },
+    hAxis: { maxValue: 0.2, minValue: -0.2 },
+    vAxis: { maxValue: 0.2, minValue: -0.2 }
+  };
+
+  const chart = new google.visualization.BubbleChart(chartBubbleBox);
+  chart.draw(chartBubbleDataBox, chartBubbleOptions);
+}
 
 const leftLineChartBtn = document.querySelector('#left-line-chart-btn');
 const rightLineChartBtn = document.querySelector('#right-line-chart-btn');
@@ -201,58 +219,58 @@ function chartSlide(slideNum, slideOrder, chartObject, leftBtn, rightBtn) {
       leftBtn.style.display = 'block';
     }
   }
+}
 
-  function setChartData(chartObject, chartSlideCurrent) {
-    const { chartBox, chartDataBox, instance } = chartObject;
-    const lineMap = new Map([
-      [0, '$12'],
-      [1, '$24'],
-      [2, '$48'],
-      [3, '$192'],
-      [4, 'all']
-    ]);
+function setChartData(chartObject, chartSlideCurrent) {
+  const { chartBox, chartDataBox, instance } = chartObject;
+  const lineMap = new Map([
+    [0, '$12'],
+    [1, '$24'],
+    [2, '$48'],
+    [3, '$192'],
+    [4, 'all']
+  ]);
 
-    if (chartBox.id === 'chart-func1-line') {
+  if (chartBox.id === 'chart-func1-line') {
+    chartDataBox.datasets[0].data =
+      lottofunc1.lottoData.oddCount.data.actual[lineMap.get(chartSlideCurrent)];
+    chartDataBox.datasets[1].data =
+      lottofunc1.lottoData.oddCount.data.ideal[lineMap.get(chartSlideCurrent)];
+    instance.update();
+  }
+  if (chartBox.id === 'chart-func1-bar') {
+    if (chartSlideCurrent === 0) {
       chartDataBox.datasets[0].data =
-        lottofunc1.lottoData.oddCount.data.actual[
-          lineMap.get(chartSlideCurrent)
-        ];
+        lottofunc1.lottoData.oddCount.data.actual['latest'];
       chartDataBox.datasets[1].data =
-        lottofunc1.lottoData.oddCount.data.ideal[
-          lineMap.get(chartSlideCurrent)
-        ];
+        lottofunc1.lottoData.oddCount.data.ideal['latest'];
       instance.update();
-    }
-    if (chartBox.id === 'chart-func1-bar') {
-      if (chartSlideCurrent === 0) {
-        chartDataBox.datasets[0].data =
-          lottofunc1.lottoData.oddCount.data.actual['latest'];
-        chartDataBox.datasets[1].data =
-          lottofunc1.lottoData.oddCount.data.ideal['latest'];
-        instance.update();
-      } else if (chartSlideCurrent === 1) {
-        const datas = [];
+    } else if (chartSlideCurrent === 1) {
+      const datas = [];
 
-        for (
-          let i = 0;
-          i < lottofunc1.lottoData.oddCount.data.ideal['latest'].length;
-          i++
-        ) {
-          datas.push(
-            lottofunc1.lottoData.oddCount.data.ideal['latest'][i] -
-              lottofunc1.lottoData.oddCount.data.actual['latest'][i]
-          );
-        }
-        chartDataBox.datasets[0].data = datas;
-
-        chartDataBox.datasets[1].data = null;
-        instance.update();
+      for (
+        let i = 0;
+        i < lottofunc1.lottoData.oddCount.data.ideal['latest'].length;
+        i++
+      ) {
+        const data =
+          lottofunc1.lottoData.oddCount.data.ideal['latest'][i] -
+          lottofunc1.lottoData.oddCount.data.actual['latest'][i];
+        datas.push(data);
       }
+      chartDataBox.datasets[0].data = datas;
+
+      chartDataBox.datasets[1].data = null;
+      instance.update();
     }
   }
 }
 
 function initChartData() {
+  const map = new Map([
+    [chartLineDataBox, '$12'],
+    [chartBarDataBox, '$latest']
+  ]);
   chartLineDataBox.datasets[0].data =
     lottofunc1.lottoData.oddCount.data.actual['$12'];
   chartLineDataBox.datasets[1].data =
@@ -264,6 +282,9 @@ function initChartData() {
   chartBarDataBox.datasets[1].data =
     lottofunc1.lottoData.oddCount.data.actual['latest'];
   chartBarInstance.update();
+
+  google.charts.load('current', { packages: ['corechart'] });
+  google.charts.setOnLoadCallback(drawBubbleChart);
 }
 
 async function setLottoOddCount() {
@@ -280,21 +301,8 @@ async function getLottoOddCount() {
     { method: 'GET', headers }
   );
   const data = JSON.parse(await fetchResult.text());
-
   return data;
 }
-
-const chartLineObject = {
-  chartBox: chartLineBox,
-  chartDataBox: chartLineDataBox,
-  instance: chartLineInstance
-};
-
-const chartBarObject = {
-  chartBox: chartBarBox,
-  chartDataBox: chartBarDataBox,
-  instance: chartBarInstance
-};
 
 async function init() {
   await setLottoOddCount();
