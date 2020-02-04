@@ -1,6 +1,7 @@
 import Base, { GeneratorOption, LottoNumber, Range } from "./Base";
 import Calculate from "../Calculate";
 
+const constraintLowCount = require('../../json/Generator/lowCount_compressed.json');
 const constraintSum = require('../../json/Generator/sum_compressed.json');
 
 export default class Confirmer extends Base {
@@ -47,6 +48,10 @@ export default class Confirmer extends Base {
                 set.add(this.option.excludedLines[i]);
             }
             return set.size === 5;
+    }
+    constraintLowCount():Range{
+        const range = constraintLowCount[this.option.excludedLines.join('')];
+        return {from:range[0], to:range[1]};
     }
     constraintSum():Range{
         const range = constraintSum[this.option.lowCount.toString() + this.option.excludedLines.join('')];

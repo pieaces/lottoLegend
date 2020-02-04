@@ -52,6 +52,11 @@ app.post('/numbers/generator', (req, res) => {
     const generator = new Generator(option);
 
     switch (current) {
+        case 'excludedLines':
+            res.json({
+                range: generator.constraintLowCount()
+            });
+            break;
         case 'lowCount':
             res.json({
                 range: generator.constraintSum()
