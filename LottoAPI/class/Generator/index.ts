@@ -19,8 +19,8 @@ export default class Generator extends Check {
         let highIndex = -1;
         for (let i = 1; i <= 45; i++) {
             const notExistExcept: boolean = this.option.excludedLines ? this.option.excludedLines.indexOf(<ZeroToFour>Math.floor((i) / 10)) === -1 : true;
-            const notExistExclude = this.option.excludeNumbers ? this.option.excludeNumbers.indexOf(<LottoNumber>(i)) === -1 : true;
-            const notExistInclude = this.option.includeNumbers ? this.option.includeNumbers.indexOf((i) as LottoNumber) === -1 : true;
+            const notExistExclude = this.option.excludedNumbers ? this.option.excludedNumbers.indexOf(<LottoNumber>(i)) === -1 : true;
+            const notExistInclude = this.option.includedNumbers ? this.option.includedNumbers.indexOf((i) as LottoNumber) === -1 : true;
             if (notExistExcept && notExistExclude && notExistInclude) {
                 if (highIndex === -1 && i >= 23) highIndex = list.length;
                 list.push(i as LottoNumber);
@@ -28,9 +28,9 @@ export default class Generator extends Check {
         }
 
         const LIST_SIZE = list.length;
-        const INCLUDE_SIZE = this.option.includeNumbers ? this.option.includeNumbers.length : 0;
+        const INCLUDE_SIZE = this.option.includedNumbers ? this.option.includedNumbers.length : 0;
         const BOX_SIZE = 6 - INCLUDE_SIZE;
-        const LOW_COUNT = this.option.includeNumbers ? this.option.lowCount - Calculate.lowCount(this.option.includeNumbers) : this.option.lowCount;
+        const LOW_COUNT = this.option.includedNumbers ? this.option.lowCount - Calculate.lowCount(this.option.includedNumbers) : this.option.lowCount;
 
         const indexBox = new Array<number>(BOX_SIZE); //list의 index를 value로 취함.
         const indexDnb = new Array<number>(BOX_SIZE);
@@ -80,7 +80,7 @@ export default class Generator extends Check {
         const result: Array<LottoNumber[]> = [];
         while (true) {
             const box: LottoNumber[] = [];
-            for (let i = 0; i < INCLUDE_SIZE; i++) box[i] = this.option.includeNumbers[i];
+            for (let i = 0; i < INCLUDE_SIZE; i++) box[i] = this.option.includedNumbers[i];
             for (let i = INCLUDE_SIZE; i < INCLUDE_SIZE + BOX_SIZE; i++) box[i] = list[indexBox[i - INCLUDE_SIZE]] as LottoNumber
 
             if (this.option.sum && !this.checkSum(box)) {

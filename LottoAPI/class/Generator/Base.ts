@@ -6,8 +6,8 @@ export type CountRange = {from: ZeroToSix, to:ZeroToSix};
 
 export interface GeneratorOption{
     excludedLines?: ZeroToFour[];
-    includeNumbers?: LottoNumber[];
-    excludeNumbers?: LottoNumber[];
+    includedNumbers?: LottoNumber[];
+    excludedNumbers?: LottoNumber[];
     lowCount?: ZeroToSix;
     sum?: Range;
     oddCount?: CountRange;

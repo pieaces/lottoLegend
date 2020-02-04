@@ -36,8 +36,8 @@ app.post('/numbers/generator', (req, res) => {
     const option: GeneratorOption = {};
 
     option.excludedLines = req.body.excludedLines,
-        option.includeNumbers = req.body.includeNumbers,
-        option.excludeNumbers = req.body.excludeNumbers,
+        option.includedNumbers = req.body.includedNumbers,
+        option.excludedNumbers = req.body.excludedNumbers,
         option.lowCount = req.body.lowCount,
         option.sum = req.body.sum,
         option.oddCount = req.body.oddCount,
