@@ -29,24 +29,48 @@ app.get('/stats', async (req, res) => {
     const plusDate = Math.floor(between / 24 / 3600 / 1000 / 7);
 
     const data = await queryStats(method);
-    res.json({data, total:896+plusDate});
+    res.json({ data, total: 896 + plusDate });
 });
 
 app.post('/numbers/generator', (req, res) => {
     const option: GeneratorOption = {};
 
-    option.excludedLines = req.body.excludedLines,
-        option.includedNumbers = req.body.includedNumbers,
-        option.excludedNumbers = req.body.excludedNumbers,
-        option.lowCount = req.body.lowCount,
-        option.sum = req.body.sum,
-        option.oddCount = req.body.oddCount,
-        option.primeCount = req.body.primeCount,
-        option.$3Count = req.body.$3Count,
-        option.sum$10 = req.body.sum$10,
-        option.diffMaxMin = req.body.diffMaxMin,
-        option.AC = req.body.AC,
+    if (req.body.excludedLines) {
+        option.excludedLines = req.body.excludedLines;
+    }
+    if (req.body.includedNumbers) {
+        option.includedNumbers = req.body.includedNumbers;
+    }
+    if (req.body.excludedNumbers){
+        option.excludedNumbers = req.body.excludedNumbers;
+    }
+    if (req.body.lowCount) {
+        option.lowCount = req.body.lowCount;
+    }
+    if (req.body.sum) {
+        option.sum = req.body.sum;
+    }
+    if (req.body.oddCount) {
+        option.oddCount = req.body.oddCount;
+    }
+    if (req.body.primeCount) {
+        option.primeCount = req.body.primeCount;
+    }
+    if (req.body.$3Count) {
+        option.$3Count = req.body.$3Count;
+    }
+    if (req.body.sum$10) {
+        option.sum$10 = req.body.sum$10;
+    }
+    if (req.body.diffMaxMin) {
+        option.diffMaxMin = req.body.diffMaxMin;
+    }
+    if (req.body.AC) {
+        option.AC = req.body.AC;
+    }
+    if (req.body.consecutiveExist) {
         option.consecutiveExist = req.body.consecutiveExist;
+    }
 
     const current: string = req.body.current;
     const generator = new Generator(option);
@@ -91,7 +115,7 @@ app.post('/numbers/generator', (req, res) => {
         });
     } else {
         res.json({
-            range: [...generator.rangeSet].sort((a,b)=>(a-b)),
+            range: [...generator.rangeSet].sort((a, b) => (a - b)),
             count: generator.getGeneratedNumbers().length
         });
     }
