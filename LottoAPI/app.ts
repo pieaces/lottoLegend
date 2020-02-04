@@ -91,7 +91,7 @@ app.post('/numbers/generator', (req, res) => {
         });
     } else {
         res.json({
-            range: generator.rangeSet,
+            range: [...generator.rangeSet].sort((a,b)=>(a-b)),
             count: generator.getGeneratedNumbers().length
         });
     }
