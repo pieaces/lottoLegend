@@ -3,9 +3,10 @@ import Calculate from "../Calculate";
 
 const constraintLowCount = require('../../json/Generator/lowCount_compressed.json');
 const constraintSum = require('../../json/Generator/sum_compressed.json');
+const constraintSumNotExcluded = require('../../json/Generator/sum_notExcluded.json');
 
 export default class Confirmer extends Base {
-    constructor(option: GeneratorOption){
+    constructor(option: GeneratorOption) {
         super(option);
     }
     protected checkOddCount(numbers: LottoNumber[]): boolean {
@@ -40,21 +41,26 @@ export default class Confirmer extends Base {
         return Calculate.consecutiveExist(numbers) === 1 //1일경우 존재함. 0일경우 존재하지않음.
     }
     protected checkExceptedLines(numbers: LottoNumber[]): boolean {
-            const set = new Set<number>();
-            for(let i = 0; i<numbers.length; i++){
-                set.add(Math.floor(numbers[i]/10));
-            }
-            for(let i=0; i<this.option.excludedLines.length; i++){
-                set.add(this.option.excludedLines[i]);
-            }
-            return set.size === 5;
+        const set = new Set<number>();
+        for (let i = 0; i < numbers.length; i++) {
+            set.add(Math.floor(numbers[i] / 10));
+        }
+        for (let i = 0; i < this.option.excludedLines.length; i++) {
+            set.add(this.option.excludedLines[i]);
+        }
+        return set.size === 5;
     }
-    constraintLowCount():Range{
+    constraintLowCount(): Range {
         const range = constraintLowCount[this.option.excludedLines.join('')];
-        return {from:range[0], to:range[1]};
+        return { from: range[0], to: range[1] };
     }
-    constraintSum():Range{
-        const range = constraintSum[this.option.lowCount.toString() + this.option.excludedLines.join('')];
-        return {from:range[0], to:range[1]};
+    constraintSum(): Range {
+        if (this.option.excludedLines) {
+            const range = constraintSum[this.option.lowCount.toString() + this.option.excludedLines.join('')];
+            return { from: range[0], to: range[1] };
+        } else {
+            const range = constraintSumNotExcluded[this.option.lowCount.toString()];
+            return { from: range[0], to: range[1] };
+        }
     }
 }
