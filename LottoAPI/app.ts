@@ -122,7 +122,7 @@ app.post('/numbers/generator', (req, res) => {
 });
 
 app.listen(3000, () => {
-    console.log("LottoApi");
+    console.log("LottoApi 서버 가동");
 });
 
 export default app;
