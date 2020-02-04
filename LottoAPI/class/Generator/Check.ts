@@ -1,4 +1,4 @@
-import Base, { GeneratorOption, LottoNumber, Range, CountRange } from "./Base";
+import Base, { GeneratorOption, LottoNumber, Range } from "./Base";
 import Calculate from "../Calculate";
 
 const constraintSum = require('../../json/Generator/sum_compressed.json');
