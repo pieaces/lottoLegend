@@ -1,7 +1,7 @@
-import { Method } from '../../LottoData/Base'
-import { Assembly, DBData } from '../../LottoData'
+import { Method } from '../class/LottoData/Base'
+import { Assembly, DBData } from '../class/LottoData'
 import AWS from 'aws-sdk';
-import { Stats } from '../../Statistics';
+import { Stats } from '../class/Statistics';
 // AWS.config.update(require('./key.json'));
 const dynamoDB = new AWS.DynamoDB();
 

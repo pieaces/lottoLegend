@@ -1,8 +1,8 @@
 import LottoDB from './LottoDB';
 import { Method } from '../LottoData/Base'
 import { LottoNumber } from '../Generator/Base';
-import dynamoDBJson, { dynamoData } from './function/dynamoDBJson'
-import queryStats from './function/queryStats'
+import dynamoDBJson, { dynamoData } from '../../function/dynamoDBJson'
+import queryStats from '../../function/queryStats'
 
 import AWS from 'aws-sdk';
 // AWS.config.update(require('./function/key.json'));

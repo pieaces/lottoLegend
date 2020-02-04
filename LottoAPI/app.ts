@@ -1,6 +1,6 @@
 import express from 'express';
 import awsServerlessExpressMiddleware from 'aws-serverless-express/middleware';
-import queryStats from './class/LottoDynamoDB/function/queryStats'
+import queryStats from './function/queryStats'
 import { Method } from './class/LottoData/Base';
 import { GeneratorOption } from './class/Generator/Base';
 import Generator from './class/Generator';
@@ -9,7 +9,7 @@ import Calculate from './class/Calculate';
 const app = express();
 app.use(awsServerlessExpressMiddleware.eventContext());
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*")
@@ -22,8 +22,14 @@ app.get('/stats', async (req, res) => {
     if (!(method in Method)) {
         res.json("The parameter doesn't exist");
     }
+
+    const theDate = new Date('2020-02-01:20:40');
+    const today = new Date();
+    const between = Number(today) - Number(theDate);
+    const plusDate = Math.floor(between / 24 / 3600 / 1000 / 7);
+
     const data = await queryStats(method);
-    res.json(data);
+    res.json({data, total:896+plusDate});
 });
 
 app.post('/numbers/generator', (req, res) => {
@@ -74,11 +80,11 @@ app.post('/numbers/generator', (req, res) => {
             break;
     }
     generator.generate();
-    if(current === 'consecutiveExist'){
+    if (current === 'consecutiveExist') {
         res.json({
             numbers: generator.getGeneratedNumbers()
         });
-    }else{
+    } else {
         res.json({
             range: generator.rangeSet,
             count: generator.getGeneratedNumbers().length
