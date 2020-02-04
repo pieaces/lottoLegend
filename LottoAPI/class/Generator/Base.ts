@@ -10,7 +10,7 @@ export interface GeneratorOption{
     excludedLines?: ZeroToFour[];
     includeNumbers?: LottoNumber[];
     excludeNumbers?: LottoNumber[];
-    lowCount: ZeroToSix;
+    lowCount?: ZeroToSix;
     sum?: Range;
     oddCount?: CountRange;
     primeCount?: CountRange;
@@ -18,7 +18,7 @@ export interface GeneratorOption{
     sum$10?: Range;
     diffMaxMin?: Range;
     AC?: Range;
-    consecutiveExclude?: boolean;
+    consecutiveExist?: boolean;
 }
 export default class Base{
     option: GeneratorOption;
