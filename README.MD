@@ -19,6 +19,10 @@ v 0.9.9 (2020-02-03)
 
 * 정해진 순서(필터)에 따른 적합한 번호 생성
 
+## API URL
+
+API URL: https://is6q0wtgml.execute-api.ap-northeast-2.amazonaws.com/dev
+
 ## 필터 순서
 
 **1. 전멸라인**
