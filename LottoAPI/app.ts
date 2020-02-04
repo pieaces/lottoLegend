@@ -63,25 +63,25 @@ app.post('/numbers/generator', (req, res) => {
             });
             break;
         case 'sum':
-            generator.rangeFinder = Calculate.sum;
-            break;
-        case 'oddCount':
             generator.rangeFinder = Calculate.oddCount;
             break;
-        case 'primeCount':
+        case 'oddCount':
             generator.rangeFinder = Calculate.primeCount;
             break;
-        case '$3Count':
+        case 'primeCount':
             generator.rangeFinder = Calculate.$3Count;
             break;
-        case 'sum$10':
+        case '$3Count':
             generator.rangeFinder = Calculate.sum$10;
             break;
-        case 'diffMaxMin':
+        case 'sum$10':
             generator.rangeFinder = Calculate.diffMaxMin;
             break;
-        case 'AC':
+        case 'diffMaxMin':
             generator.rangeFinder = Calculate.AC;
+            break;
+        case 'AC':
+            generator.rangeFinder = Calculate.consecutiveExist;
             break;
     }
     generator.generate();
