@@ -214,68 +214,30 @@ function chartSlide(
 }
 
 function setChartData(chartBox, chartDataBox, chartSlideCurrent, instance) {
-  if (chartBox.id === 'chart-func1-line') {
-    if (chartSlideCurrent === 0) {
-      chartDataBox.datasets[0].data =
-        lottofunc1.lottoData.oddCount.actual['$12'];
-      chartDataBox.datasets[1].data =
-        lottofunc1.lottoData.oddCount.ideal['$12'];
-      instance.update();
-    } else if (chartSlideCurrent === 1) {
-      chartDataBox.datasets[0].data =
-        lottofunc1.lottoData.oddCount.actual['$24'];
-      chartDataBox.datasets[1].data =
-        lottofunc1.lottoData.oddCount.ideal['$24'];
-      instance.update();
-    } else if (chartSlideCurrent === 2) {
-      chartDataBox.datasets[0].data =
-        lottofunc1.lottoData.oddCount.actual['$48'];
-      chartDataBox.datasets[1].data =
-        lottofunc1.lottoData.oddCount.ideal['$48'];
-      instance.update();
-    } else if (chartSlideCurrent === 3) {
-      chartDataBox.datasets[0].data =
-        lottofunc1.lottoData.oddCount.actual['$192'];
-      chartDataBox.datasets[1].data =
-        lottofunc1.lottoData.oddCount.ideal['$192'];
-      instance.update();
-    } else if (chartSlideCurrent === 4) {
-      chartDataBox.datasets[0].data =
-        lottofunc1.lottoData.oddCount.actual['all'];
-      chartDataBox.datasets[1].data =
-        lottofunc1.lottoData.oddCount.ideal['all'];
-      instance.update();
+  const map = new Map([
+    [0, '$12'], [1, '$24'], [2, '$48'], [3, '$192'], [4, 'all']
+  ]);
+  for (let i = 0; i < 5; i++) {
+    if (chartBox.id === 'chart-func1-line') {
+        chartDataBox.datasets[0].data =
+          lottofunc1.lottoData.oddCount.actual[map.get(i)];
+        chartDataBox.datasets[1].data =
+          lottofunc1.lottoData.oddCount.ideal[map.get(i)];
+        instance.update();
     }
-  } else if (chartBox.id === 'chart-func1-bar') {
+  }
+  if (chartBox.id === 'chart-func1-bar') {
     if (chartSlideCurrent === 0) {
       chartDataBox.datasets[0].data =
-        lottofunc1.lottoData.oddCount.actual['$12'];
+        lottofunc1.lottoData.oddCount.actual['latest'];
       chartDataBox.datasets[1].data =
-        lottofunc1.lottoData.oddCount.ideal['$12'];
+        lottofunc1.lottoData.oddCount.ideal['latest'];
       instance.update();
     } else if (chartSlideCurrent === 1) {
+      //상쓰에게 맡김
       chartDataBox.datasets[0].data =
-        lottofunc1.lottoData.oddCount.actual['$24'];
-      chartDataBox.datasets[1].data =
-        lottofunc1.lottoData.oddCount.ideal['$24'];
-      instance.update();
-    } else if (chartSlideCurrent === 2) {
-      chartDataBox.datasets[0].data =
-        lottofunc1.lottoData.oddCount.actual['$48'];
-      chartDataBox.datasets[1].data =
-        lottofunc1.lottoData.oddCount.ideal['$48'];
-      instance.update();
-    } else if (chartSlideCurrent === 3) {
-      chartDataBox.datasets[0].data =
-        lottofunc1.lottoData.oddCount.actual['$192'];
-      chartDataBox.datasets[1].data =
-        lottofunc1.lottoData.oddCount.ideal['$192'];
-      instance.update();
-    } else if (chartSlideCurrent === 4) {
-      chartDataBox.datasets[0].data =
-        lottofunc1.lottoData.oddCount.actual['all'];
-      chartDataBox.datasets[1].data =
-        lottofunc1.lottoData.oddCount.ideal['all'];
+        lottofunc1.lottoData.oddCount.actual['$12'];
+
       instance.update();
     }
   }
