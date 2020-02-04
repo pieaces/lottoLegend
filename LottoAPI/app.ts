@@ -8,6 +8,8 @@ import Calculate from './class/Calculate';
 
 const app = express();
 app.use(awsServerlessExpressMiddleware.eventContext());
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*")
@@ -85,7 +87,7 @@ app.post('/numbers/generator', (req, res) => {
 });
 
 app.listen(3000, () => {
-    console.log("LottoApi", new Date());
+    console.log("LottoApi");
 });
 
 export default app;
