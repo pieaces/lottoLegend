@@ -216,15 +216,11 @@ function setChartData(chartObject, chartSlideCurrent) {
   ]);
 
   if (chartBox.id === 'chart-func1-line') {
-    for (let i = 0; i < 5; i++) {
-      if (chartSlideCurrent === i) {
         chartDataBox.datasets[0].data =
-          lottofunc1.lottoData.oddCount.data.actual[lineMap.get(i)];
+          lottofunc1.lottoData.oddCount.data.actual[lineMap.get(chartSlideCurrent)];
         chartDataBox.datasets[1].data =
-          lottofunc1.lottoData.oddCount.data.ideal[lineMap.get(i)];
+          lottofunc1.lottoData.oddCount.data.ideal[lineMap.get(chartSlideCurrent)];
         instance.update();
-      }
-    }
   }
   if (chartBox.id === 'chart-func1-bar') {
     if (chartSlideCurrent === 0) {
