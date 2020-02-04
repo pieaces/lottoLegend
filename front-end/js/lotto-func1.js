@@ -203,49 +203,53 @@ function chartSlide(slideNum, slideOrder, chartObject, leftBtn, rightBtn) {
       leftBtn.style.display = 'block';
     }
   }
-}
 
-function setChartData(chartObject, chartSlideCurrent) {
-  const { chartBox, chartDataBox, instance } = chartObject;
-  const lineMap = new Map([
-    [0, '$12'],
-    [1, '$24'],
-    [2, '$48'],
-    [3, '$192'],
-    [4, 'all']
-  ]);
+  function setChartData(chartObject, chartSlideCurrent) {
+    const { chartBox, chartDataBox, instance } = chartObject;
+    const lineMap = new Map([
+      [0, '$12'],
+      [1, '$24'],
+      [2, '$48'],
+      [3, '$192'],
+      [4, 'all']
+    ]);
 
-  if (chartBox.id === 'chart-func1-line') {
-        chartDataBox.datasets[0].data =
-          lottofunc1.lottoData.oddCount.data.actual[lineMap.get(chartSlideCurrent)];
-        chartDataBox.datasets[1].data =
-          lottofunc1.lottoData.oddCount.data.ideal[lineMap.get(chartSlideCurrent)];
-        instance.update();
-  }
-  if (chartBox.id === 'chart-func1-bar') {
-    if (chartSlideCurrent === 0) {
+    if (chartBox.canvas.id === 'chart-func1-line') {
       chartDataBox.datasets[0].data =
-        lottofunc1.lottoData.oddCount.data.actual['latest'];
+        lottofunc1.lottoData.oddCount.data.actual[
+          lineMap.get(chartSlideCurrent)
+        ];
       chartDataBox.datasets[1].data =
-        lottofunc1.lottoData.oddCount.data.ideal['latest'];
+        lottofunc1.lottoData.oddCount.data.ideal[
+          lineMap.get(chartSlideCurrent)
+        ];
       instance.update();
-    } else if (chartSlideCurrent === 1) {
-      const datas = [];
+    }
+    if (chartBox.id === 'chart-func1-bar') {
+      if (chartSlideCurrent === 0) {
+        chartDataBox.datasets[0].data =
+          lottofunc1.lottoData.oddCount.data.actual['latest'];
+        chartDataBox.datasets[1].data =
+          lottofunc1.lottoData.oddCount.data.ideal['latest'];
+        instance.update();
+      } else if (chartSlideCurrent === 1) {
+        const datas = [];
 
-      for (
-        let i = 0;
-        i < lottofunc1.lottoData.oddCount.data.ideal['latest'].length;
-        i++
-      ) {
-        datas.push(
-          lottofunc1.lottoData.oddCount.data.ideal['latest'][i] -
-            lottofunc1.lottoData.oddCount.data.actual['latest'][i]
-        );
+        for (
+          let i = 0;
+          i < lottofunc1.lottoData.oddCount.data.ideal['latest'].length;
+          i++
+        ) {
+          datas.push(
+            lottofunc1.lottoData.oddCount.data.ideal['latest'][i] -
+              lottofunc1.lottoData.oddCount.data.actual['latest'][i]
+          );
+        }
+        chartDataBox.datasets[0].data = datas;
+
+        chartDataBox.datasets[1].data = null;
+        instance.update();
       }
-      chartDataBox.datasets[0].data = datas;
-
-      chartDataBox.datasets[1].data = null;
-      instance.update();
     }
   }
 }
