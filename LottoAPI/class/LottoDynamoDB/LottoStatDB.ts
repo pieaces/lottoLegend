@@ -42,7 +42,7 @@ export default class LottoStatDB extends LottoDB {
                     const dbData = this.processHelper(method);
                     Item["Ideal"] = dynamoDBJson(dbData.ideal);
                     Item["Actual"] = dynamoDBJson(dbData.actual);
-                    Item["Coef"] = dynamoDBJson(dbData.coef);
+                    Item["Pos"] = dynamoDBJson(dbData.pos);
                     if (dbData.stats) {
                         Item["Stats"] = dynamoDBJson(dbData.stats);
                     }

@@ -17,7 +17,7 @@ export interface Assembly {
 export interface DBData {
     ideal: Assembly;
     actual: Assembly;
-    coef: number[];
+    pos: number[];
     stats?: Stats;
 }
 
@@ -41,9 +41,10 @@ export default class LottoProcess extends Coefficient {
             all: sampleMethod.actual.bind(this)({}),
             latest: sampleMethod.actual.bind(this)({ mode: -12 })
         };
-        const coef = this.coefHelper({ mode: -12 }, method);
+        //const coef = this.coefHelper({ mode: -12 }, method);
+        const pos = this.sampleMap.get(method).ideal.bind(this)({mode:1});
         const stats = sampleMethod.stats && sampleMethod.stats.bind(this)(this.mode);
-        return { ideal, actual, coef, stats };
+        return { ideal, actual, pos, stats };
     }
 
     processExcludedLineCount(): DBData {

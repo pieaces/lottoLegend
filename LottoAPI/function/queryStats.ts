@@ -78,8 +78,9 @@ export default async function getStats(name: Method) {
                             all: item.Actual.M.all.L.map(value => Number(value.N)),
                             latest: item.Actual.M.latest.L.map(value => Number(value.N)),
                         };
-                        const coef = item.Coef.L.map(value => Number(value.N));
-                        const dbData: DBData = { ideal, actual, coef };
+                        //const coef = item.Coef.L.map(value => Number(value.N));
+                        const pos = item.Pos.L.map(value => Number(value.N));
+                        const dbData: DBData = { ideal, actual, pos };
                         if (item.Stats) {
                             const stats: Stats = {
                                 mean: Number(item.Stats.M.mean.N),
