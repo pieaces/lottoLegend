@@ -1,6 +1,6 @@
-import AWS from 'aws-sdk';
 import { LData } from '../class/Lotto/Base';
 
+import AWS from 'aws-sdk';
 // AWS.config.update(require('./key.json'));
 const dynamoDB = new AWS.DynamoDB();
 
