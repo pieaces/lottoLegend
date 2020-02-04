@@ -60,8 +60,9 @@
   position: relative;
   grid-row: 1/2;
   display: grid;
+  grid-row-gap: 10px;
   grid-template-columns: 1fr;
-  grid-template-rows: 100px 300px;
+  grid-template-rows: 70px 300px;
 }
 
 .chart-slide-num {
@@ -78,6 +79,7 @@
   align-items: center;
   justify-content: center;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  font-size: 1.3rem;
 }
 
 .chart-slide-current {
@@ -107,7 +109,7 @@
 .chart {
   width: 100%;
   height: 100%;
-  padding: 10px;
+  padding-top: 10px;
 }
 
 .main-1-2 {
@@ -126,8 +128,9 @@
   grid-row: 4/5;
   position: relative;
   display: grid;
+  grid-row-gap: 10px;
   grid-template-columns: 1fr;
-  grid-template-rows: 100px 300px;
+  grid-template-rows: 70px 300px;
 }
 
 .main-1-5 {

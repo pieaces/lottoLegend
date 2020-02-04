@@ -1,105 +1,23 @@
 const lottofunc1 = {
-  chartLineData: [
-    {
-      real: [0, 0, 1, 5, 3, 2, 1],
-      ideal: [
-        0.16384841642251924,
-        1.0277764302867114,
-        2.686233851885722,
-        3.7444471874770664,
-        2.9359869992717913,
-        1.2277763815136578,
-        0.21393073314253125
-      ]
-    },
-    {
-      real: [1, 1, 4, 8, 5, 4, 1],
-      ideal: [
-        0.3276968328450385,
-        2.055552860573423,
-        5.372467703771444,
-        7.488894374954133,
-        5.871973998543583,
-        2.4555527630273155,
-        0.4278614662850625
-      ]
-    },
-    {
-      real: [0, 0, 1, 5, 3, 2, 1],
-      ideal: [
-        0.16384841642251924,
-        1.0277764302867114,
-        2.686233851885722,
-        3.7444471874770664,
-        2.9359869992717913,
-        1.2277763815136578,
-        0.21393073314253125
-      ]
-    },
-    {
-      real: [1, 1, 4, 8, 5, 4, 1],
-      ideal: [
-        0.3276968328450385,
-        2.055552860573423,
-        5.372467703771444,
-        7.488894374954133,
-        5.871973998543583,
-        2.4555527630273155,
-        0.4278614662850625
-      ]
-    },
-    {
-      real: [0, 0, 1, 5, 3, 2, 1],
-      ideal: [
-        0.16384841642251924,
-        1.0277764302867114,
-        2.686233851885722,
-        3.7444471874770664,
-        2.9359869992717913,
-        1.2277763815136578,
-        0.21393073314253125
-      ]
-    }
-  ],
-  chartBarData: [
-    {
-      real: [1, 1, 4, 8, 5, 4, 1],
-      ideal: [
-        0.3276968328450385,
-        2.055552860573423,
-        5.372467703771444,
-        7.488894374954133,
-        5.871973998543583,
-        2.4555527630273155,
-        0.4278614662850625
-      ]
-    },
-    {
-      real: [0, 0, 1, 5, 3, 2, 1],
-      ideal: [
-        0.16384841642251924,
-        1.0277764302867114,
-        2.686233851885722,
-        3.7444471874770664,
-        2.9359869992717913,
-        1.2277763815136578,
-        0.21393073314253125
-      ]
-    },
-    {
-      real: [1, 1, 4, 8, 5, 4, 1],
-      ideal: [
-        0.3276968328450385,
-        2.055552860573423,
-        5.372467703771444,
-        7.488894374954133,
-        5.871973998543583,
-        2.4555527630273155,
-        0.4278614662850625
-      ]
-    }
-  ]
+  lottoData: {
+    oddCount: null
+  }
 };
+
+async function setLottoOddData() {
+  let response = await promiseLottoOddData();
+  lottofunc1.lottoData.oddCount = response;
+}
+
+async function promiseLottoOddData() {
+  let response = await fetch(
+    'https://is6q0wtgml.execute-api.ap-northeast-2.amazonaws.com/dev/stats?method=oddCount'
+  );
+  let data = await response.json();
+  return data;
+}
+
+setLottoOddData();
 
 const chartLineBox = document
   .querySelector('#chart-func1-line')
@@ -114,7 +32,7 @@ const chartLineDataBox = {
       pointBackgroundColor: 'white',
       borderWidth: 2,
       borderColor: 'rgb(199, 54, 44)',
-      data: lottofunc1.chartLineData[0].real
+      data: lottofunc1.lottoData.oddCount.actual['$12']
     },
     {
       label: '이상값',
@@ -122,7 +40,7 @@ const chartLineDataBox = {
       pointBackgroundColor: 'white',
       borderWidth: 2,
       borderColor: 'rgb(14,99,132)',
-      data: lottofunc1.chartLineData[0].ideal
+      data: lottofunc1.lottoData.oddCount.ideal['$12']
     }
   ]
 };
@@ -274,13 +192,13 @@ const rightBarChartBtn = document.querySelector('#right-bar-chart-btn');
 const chartLineNum = document.querySelectorAll('.chart-line-num > div');
 const chartBarNum = document.querySelectorAll('.chart-bar-num > div');
 const main14 = document.querySelector('.main-1-4');
+const main16 = document.querySelector('.main-1-6');
 
 function chartSlide(
   slideNum,
   slideOrder,
   chartDataBox,
   instance,
-  datas,
   leftBtn,
   rightBtn
 ) {
@@ -293,8 +211,39 @@ function chartSlide(
       chartSlideCurrent--;
       slideOrder[chartSlideCurrent].classList.add('chart-slide-current');
     }
+    if (chartSlideCurrent === 0) {
+      chartDataBox.datasets[0].data =
+        lottofunc1.lottoData.lottoOddData.actual['$12'];
+      chartDataBox.datasets[1].data =
+        lottofunc1.lottoData.lottoOddData.ideal['$12'];
+      instance.update();
+    } else if (chartSlideCurrent === 1) {
+      chartDataBox.datasets[0].data =
+        lottofunc1.lottoData.lottoOddData.actual['$24'];
+      chartDataBox.datasets[1].data =
+        lottofunc1.lottoData.lottoOddData.ideal['$24'];
+      instance.update();
+    } else if (chartSlideCurrent === 2) {
+      chartDataBox.datasets[0].data =
+        lottofunc1.lottoData.lottoOddData.actual['$48'];
+      chartDataBox.datasets[1].data =
+        lottofunc1.lottoData.lottoOddData.ideal['$48'];
+      instance.update();
+    } else if (chartSlideCurrent === 3) {
+      chartDataBox.datasets[0].data =
+        lottofunc1.lottoData.lottoOddData.actual['$192'];
+      chartDataBox.datasets[1].data =
+        lottofunc1.lottoData.lottoOddData.ideal['$192'];
+      instance.update();
+    } else if (chartSlideCurrent === 4) {
+      chartDataBox.datasets[0].data =
+        lottofunc1.lottoData.lottoOddData.actual['all'];
+      chartDataBox.datasets[1].data =
+        lottofunc1.lottoData.lottoOddData.ideal['all'];
+      instance.update();
+    }
+
     leftChartBtnToggle(chartSlideCurrent);
-    chartDataSet(chartDataBox, instance, datas, chartSlideCurrent);
   });
   rightBtn.addEventListener('click', e => {
     if (chartSlideCurrent === slideNum - 1) {
@@ -306,6 +255,10 @@ function chartSlide(
         main14.scrollIntoView({
           behavior: 'smooth'
         });
+      } else if (e.target.parentNode.children[3].id === 'chart-func1-bar') {
+        main16.scrollIntoView({
+          behavior: 'smooth'
+        });
       }
     } else {
       slideOrder[chartSlideCurrent].classList.remove('chart-slide-current');
@@ -313,7 +266,6 @@ function chartSlide(
       slideOrder[chartSlideCurrent].classList.add('chart-slide-current');
     }
     leftChartBtnToggle(chartSlideCurrent);
-    chartDataSet(chartDataBox, instance, datas, chartSlideCurrent);
   });
 
   for (let i = 0; i < slideNum; i++) {
@@ -322,8 +274,6 @@ function chartSlide(
       chartSlideCurrent = i;
       slideOrder[chartSlideCurrent].classList.add('chart-slide-current');
       leftChartBtnToggle(chartSlideCurrent);
-
-      chartDataSet(chartDataBox, instance, datas, chartSlideCurrent);
     });
   }
 
@@ -348,20 +298,10 @@ function init() {
     chartLineNum,
     chartLineDataBox,
     chartLineInstance,
-    lottofunc1.chartLineData,
     leftLineChartBtn,
     rightLineChartBtn
   );
-
-  chartSlide(
-    3,
-    chartBarNum,
-    chartBarDataBox,
-    chartBarInstance,
-    lottofunc1.chartBarData,
-    leftBarChartBtn,
-    rightBarChartBtn
-  );
+  chartSlide(2, chartBarNum, leftBarChartBtn, rightBarChartBtn);
 }
 
 init();
