@@ -4,9 +4,7 @@ const lottofunc1 = {
   }
 };
 
-const chartLineBox = document
-  .querySelector('#chart-func1-line')
-  .getContext('2d');
+const chartLineBox = document.querySelector('#chart-func1-line');
 
 const chartLineDataBox = {
   labels: [0, 1, 2, 3, 4, 5, 6],
@@ -214,7 +212,7 @@ function chartSlide(slideNum, slideOrder, chartObject, leftBtn, rightBtn) {
       [4, 'all']
     ]);
 
-    if (chartBox.canvas.id === 'chart-func1-line') {
+    if (chartBox.id === 'chart-func1-line') {
       chartDataBox.datasets[0].data =
         lottofunc1.lottoData.oddCount.data.actual[
           lineMap.get(chartSlideCurrent)
