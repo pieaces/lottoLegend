@@ -148,15 +148,7 @@ const chartBarNum = document.querySelectorAll('.chart-bar-num > div');
 const main14 = document.querySelector('.main-1-4');
 const main16 = document.querySelector('.main-1-6');
 
-function chartSlide(
-  slideNum,
-  slideOrder,
-  chartBox,
-  chartDataBox,
-  instance,
-  leftBtn,
-  rightBtn
-) {
+function chartSlide(slideNum, slideOrder, chartObject, leftBtn, rightBtn) {
   let chartSlideCurrent = 0;
   leftBtn.addEventListener('click', () => {
     if (chartSlideCurrent <= 0) {
@@ -166,7 +158,7 @@ function chartSlide(
       chartSlideCurrent--;
       slideOrder[chartSlideCurrent].classList.add('chart-slide-current');
     }
-    setChartData(chartBox, chartDataBox, chartSlideCurrent, instance);
+    setChartData(chartObject, chartSlideCurrent);
 
     leftChartBtnToggle(chartSlideCurrent);
   });
@@ -191,7 +183,7 @@ function chartSlide(
       slideOrder[chartSlideCurrent].classList.add('chart-slide-current');
     }
     leftChartBtnToggle(chartSlideCurrent);
-    setChartData(chartBox, chartDataBox, chartSlideCurrent, instance);
+    setChartData(chartObject, chartSlideCurrent);
   });
 
   for (let i = 0; i < slideNum; i++) {
@@ -200,7 +192,7 @@ function chartSlide(
       chartSlideCurrent = i;
       slideOrder[chartSlideCurrent].classList.add('chart-slide-current');
       leftChartBtnToggle(chartSlideCurrent);
-      setChartData(chartBox, chartDataBox, chartSlideCurrent, instance);
+      setChartData(chartObject, chartSlideCurrent);
     });
   }
 
@@ -213,42 +205,67 @@ function chartSlide(
   }
 }
 
-function setChartData(chartBox, chartDataBox, chartSlideCurrent, instance) {
-  const map = new Map([
-    [0, '$12'], [1, '$24'], [2, '$48'], [3, '$192'], [4, 'all']
+function setChartData(chartObject, chartSlideCurrent) {
+  const { chartBox, chartDataBox, instance } = chartObject;
+  const lineMap = new Map([
+    [0, '$12'],
+    [1, '$24'],
+    [2, '$48'],
+    [3, '$192'],
+    [4, 'all']
   ]);
-  for (let i = 0; i < 5; i++) {
-    if (chartBox.id === 'chart-func1-line') {
+
+  if (chartBox.id === 'chart-func1-line') {
+    for (let i = 0; i < 5; i++) {
+      if (chartSlideCurrent === i) {
         chartDataBox.datasets[0].data =
-          lottofunc1.lottoData.oddCount.actual[map.get(i)];
+          lottofunc1.lottoData.oddCount.data.actual[lineMap.get(i)];
         chartDataBox.datasets[1].data =
-          lottofunc1.lottoData.oddCount.ideal[map.get(i)];
+          lottofunc1.lottoData.oddCount.data.ideal[lineMap.get(i)];
         instance.update();
+      }
     }
   }
   if (chartBox.id === 'chart-func1-bar') {
     if (chartSlideCurrent === 0) {
       chartDataBox.datasets[0].data =
-        lottofunc1.lottoData.oddCount.actual['latest'];
+        lottofunc1.lottoData.oddCount.data.actual['latest'];
       chartDataBox.datasets[1].data =
-        lottofunc1.lottoData.oddCount.ideal['latest'];
+        lottofunc1.lottoData.oddCount.data.ideal['latest'];
       instance.update();
     } else if (chartSlideCurrent === 1) {
-      //상쓰에게 맡김
-      chartDataBox.datasets[0].data =
-        lottofunc1.lottoData.oddCount.actual['$12'];
+      const datas = [];
 
+      for (
+        let i = 0;
+        i < lottofunc1.lottoData.oddCount.data.ideal['latest'].length;
+        i++
+      ) {
+        datas.push(
+          lottofunc1.lottoData.oddCount.data.ideal['latest'][i] -
+            lottofunc1.lottoData.oddCount.data.actual['latest'][i]
+        );
+      }
+      chartDataBox.datasets[0].data = datas;
+
+      chartDataBox.datasets[1].data = null;
       instance.update();
     }
   }
 }
 
-function initLineChartData() {
+function initChartData() {
   chartLineDataBox.datasets[0].data =
-    lottofunc1.lottoData.oddCount.actual['$12'];
+    lottofunc1.lottoData.oddCount.data.actual['$12'];
   chartLineDataBox.datasets[1].data =
-    lottofunc1.lottoData.oddCount.ideal['$12'];
+    lottofunc1.lottoData.oddCount.data.ideal['$12'];
   chartLineInstance.update();
+
+  chartBarDataBox.datasets[0].data =
+    lottofunc1.lottoData.oddCount.data.ideal['latest'];
+  chartBarDataBox.datasets[1].data =
+    lottofunc1.lottoData.oddCount.data.actual['latest'];
+  chartBarInstance.update();
 }
 
 async function setLottoOddCount() {
@@ -257,25 +274,43 @@ async function setLottoOddCount() {
 }
 
 async function getLottoOddCount() {
-  let response = await fetch(
-    'https://is6q0wtgml.execute-api.ap-northeast-2.amazonaws.com/dev/stats?method=oddCount'
+  const headers = {
+    'x-api-key': 'LZn9Pykicg982PNmTmdiB8pkso4xbGiQ4n4P1z1k' //API KEY
+  };
+  const fetchResult = await fetch(
+    'https://is6q0wtgml.execute-api.ap-northeast-2.amazonaws.com/dev/stats?method=oddCount', //API 주소, querystring = name
+    { method: 'GET', headers }
   );
-  let data = await response.json();
+  const data = JSON.parse(await fetchResult.text());
+
   return data;
 }
 
+const chartLineObject = {
+  chartBox: chartLineBox,
+  chartDataBox: chartLineDataBox,
+  instance: chartLineInstance
+};
+
+const chartBarObject = {
+  chartBox: chartBarBox,
+  chartDataBox: chartBarDataBox,
+  instance: chartBarInstance
+};
+
 async function init() {
   await setLottoOddCount();
-  initLineChartData();
+  initChartData();
+
   chartSlide(
     5,
     chartLineNum,
-    chartLineBox,
-    chartLineDataBox,
-    chartLineInstance,
+    chartLineObject,
     leftLineChartBtn,
     rightLineChartBtn
   );
+
+  chartSlide(2, chartBarNum, chartBarObject, leftBarChartBtn, rightBarChartBtn);
 }
 
 init();
