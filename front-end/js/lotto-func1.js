@@ -130,10 +130,10 @@ function drawBubbleChart() {
   ) {
     const data = [
       String(i),
-      lottofunc1.lottoData.oddCount.data.coef[i],
       (lottofunc1.lottoData.oddCount.data.ideal['all'][i] -
         lottofunc1.lottoData.oddCount.data.actual['all'][i]) /
-        lottofunc1.lottoData.oddCount.total
+        lottofunc1.lottoData.oddCount.total,
+      lottofunc1.lottoData.oddCount.data.coef[i]
     ];
     dataBubble.push(data);
   }
@@ -267,10 +267,6 @@ function setChartData(chartObject, chartSlideCurrent) {
 }
 
 function initChartData() {
-  const map = new Map([
-    [chartLineDataBox, '$12'],
-    [chartBarDataBox, '$latest']
-  ]);
   chartLineDataBox.datasets[0].data =
     lottofunc1.lottoData.oddCount.data.actual['$12'];
   chartLineDataBox.datasets[1].data =
