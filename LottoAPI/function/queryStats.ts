@@ -62,17 +62,24 @@ export default async function queryStats(method: Method, params: Params): Promis
                         resolve(list);
                         break;
                     default:
-                        if (!params.from || !params.to) {
-                            reject("Range doesn't exist");
-                        }
                         let from = params.from, to = params.to;
-                        if (method === Method.sum) {
-                            from -= 21;
-                            to -= 21;
-                        } else if (method === Method.diffMaxMin) {
-                            from -= 5;
-                            to -= 5;
+                        switch(method){
+                            case Method.excludedLineCount:
+                                from = 0; to = 3;
+                                break;
+                                case Method.lineCount:
+                                from = 0; to = 4;
+                                break;
+                                case Method.carryCount:
+                                from = 0; to = 6;
+                                break;
+                            case Method.sum:
+                                from -= 21; to -= 21;
+                                break;
+                            case Method.diffMaxMin:
+                                from -=5; to-=5;
                         }
+                        to++;
                         const ideal: Assembly = {
                             $12: item.Ideal.M.$12.L.slice(from, to).map(value => Number(value.N)),
                             $24: item.Ideal.M.$24.L.slice(from, to).map(value => Number(value.N)),

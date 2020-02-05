@@ -72,13 +72,13 @@ Range = {from:number, to:number}
 
                 excludedLineCount
 
-                *API:GET /stats/excludedLineCount?from=0&to=3
+                *API:GET /stats/excludedLineCount
 
 * 전멸라인 (0, 10, 20, 30, 40번대) 중 복수선택 (가용값: 0~4)
 
                 lineCount
 
-                *API:GET /stats/lineCount?from=0&to=4
+                *API:GET /stats/lineCount
 
 
 **2~3. 제외 및 포함수 선택**
