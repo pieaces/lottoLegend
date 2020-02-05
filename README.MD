@@ -1,9 +1,13 @@
 
 # 로또 통계(2020-01-15)
 
-v 0.9.9 (2020-02-03)
+v 1.0.0 (2020-02-05)
 
 ## Class
+
+**Generator**
+
+* 정해진 순서(필터)에 따른 적합한 번호 생성
 
 **Lotto**
 
@@ -15,153 +19,143 @@ v 0.9.9 (2020-02-03)
 
 * 수학적 기댓값과 실제 데이터와의 차이 분석
 
-**Generator**
+**LottoDB**
 
-* 정해진 순서(필터)에 따른 적합한 번호 생성
+* 로또데이터, 로또통계 AWS DB에 저장
 
 ## API URL
 
 https://is6q0wtgml.execute-api.ap-northeast-2.amazonaws.com/dev
 
-## 필터 순서
+## Generator
+
+*API:POST /numbers/generator
+
+ZeroToFour = 0 ~ 4
+
+ZertoToSix = 0 ~ 6
+
+LottoNumber = 1~45
+
+Range = {from:number, to:number}
+
+* Option
+
+                excludedLines: ZeroToFour[];
+
+                excludedNumbers: LottoNumber[];
+
+                includedNumbers: LottoNumber[];
+
+                lowCount: ZeroToSix;
+
+                sum: Range;
+
+                oddCount: Range;
+
+                primeCount: Range;
+
+                $3Count: Range;
+
+                sum$10: Range;
+
+                diffMaxMin: Range;
+
+                AC: Range;
+
+                consecutiveExist: boolean;
+
+## Filer
 
 **1. 전멸라인**
 * 전멸라인 개수 입력 (가용범위: 0~3)
 
-                Calculate.excludedLineCount
+                excludedLineCount
 
-                new Lotto().gatherExcludedLineCount
-
-                new Lotto().expectedExcludedLineCount
-
-                *API: /stats?method=excludedLineCount
+                *API:GET /stats/excludedLineCount?from=0&to=3
 
 * 전멸라인 (0, 10, 20, 30, 40번대) 중 복수선택 (가용값: 0~4)
 
-                Analyze.posCount$10
+                lineCount
 
-                new Lotto().gatherLineCount
-
-                new Lotto().expectedLineCount
-
-                *API: /stats?method=lineCount
+                *API:GET /stats/lineCount?from=0&to=4
 
 
 **2~3. 제외 및 포함수 선택**
 * 이월수 선택
 
-                Analyze.carryCount
+                carryCount
 
-                new Lotto().gatherCarryCount
-
-                new Lotto().expectedCarryCount
-
-                *API: /stats?method=carryCount
+                *API:GET /stats?method=carryCount
 
 * 제외 및 포함수 선택 (최근 5회차 번호 제시, 번호간격, 번호빈도) +(궁합수, 9궁도)
 
-                new Lotto().gatherEmergedBooleanForOne
+                emergence
 
-                *API: /stats?method=emergence
+                *API:GET /stats/emergence
 
-                new Lotto().gatherIntervalForOne //default: 12간격이내
+                interval
 
-                *API: /stats?method=interval
+                *API:GET /stats/interval
 
-                new Lotto().gatherHowLongNone
+                howLongNone
 
-                *API: /stats?method=howLongNone
+                *API:GET /stats/howLongNone
 
-                new Lotto().gatherFrequency
+                frequency
 
-                *API: /stats?method=frequency
+                *API:GET /stats/frequency
 
 **4. 저번호 개수 입력 (가용값: 0~6)**
     
-                Calculate.lowCount
-                
-                new Lotto().gatherLowCount
-                
-                new Lotto().expectedLowCount
+                lowCount
 
-                *API: /stats?method=lowCount
+                *API:GET /stats/lowCount?from=0&to=6
 
 **5. 번호 합 범위 입력 (가용범위: 21~255) (20,10단위 묶음)**
     
-                Calculate.sum
-                
-                new Lotto().gatherSum(,55,77)
-                
-                new Lotto().expectedSum(,55,77)
+                sum
 
-                *API: /stats?method=sum | sum55 | sum77
+                *API:GET /stats/sum?from=21&to=255
 
 **6. 홀수개수 범위 입력 (가용범위: 0~6)**
     
-                Calculate.oddCount
-                
-                new Lotto().gatherOddCount
-                
-                new Lotto().expectedOddCount
+                oddCount
 
-                *API: /stats?method=oddCount
+                *API:GET /stats/oddCount?from=0&to=6
 
 **7. 소수개수 범위 입력 (가용범위: 0~6)**
     
-                Calculate.primeCount
-                
-                new Lotto().gatherPrimeCount
-                
-                new Lotto().expectedPrimeCount
+                primeCount
 
-                *API: /stats?method=primeCount
+                *API:GET /stats/primeCount?from=0&to=6
 
 **8. 3의배수 개수 범위 입력 (가용범위: 0~6)**
     
-                Calculate.$3Count
-                
-                new Lotto().gather$3Count
-                
-                new Lotto().expected$3Count
+                $3Count
 
-                *API: /stats?method=$3Count
+                *API:GET /stats/$3Count?from=0&to=6
 
 **9. 첫수(십의자리)합 범위 입력 (가용범위: 0~24) 3단위=>8묶음**
     
-                Calculate.sum$10
-                
-                new Lotto().gatherSum$10
-                
-                new Lotto().expectedSum$10
+                sum$10
 
-                *API: /stats?method=sum$10
+                *API:GET /stats/sum$10?from=0&to=24
 
 **10. 고저차 범위 입력 (가용범위: 5~44)=>5단위=>8묶음**
     
-                Calculate.diffMaxMin
-                
-                new Lotto().gatherDiffMaxMin
-                
-                new Lotto().expectedDiffMaxMin
+                diffMaxMin
 
-                *API: /stats?method=diffMaxMin
+                *API:GET /stats/diffMaxMin?from=5&to=44
 
 **11. AC(Arithmetic Complex) 범위 입력 (가용범위: 0~10)**
     
-                Calculate.AC
-                
-                new Lotto().gatherAC
-                
-                new Lotto().expectedAC
+                AC
 
-                *API: /stats?method=AC
+                *API:GET /stats/AC?from=0&to=10
 
 **12. 연속번호 제외 여부 (Y/N)**
     
-                Calculate.consecutiveExist
-                
-                new Lotto().gatherConsecutiveExist
-                
-                new Lotto().expectedConsecutiveExist
-                
-                *API: /stats?method=consecutiveExist
+                consecutiveExist
+
+                *API:GET /stats/consecutiveExist?from=0&to=1
