@@ -95,6 +95,7 @@ function chartSlide(chartSlideObj) {
     if (chartSlideCurrent === 0) {
       slideOrder[chartSlideCurrent].classList.remove('chart-slide-current');
       slideOrder[slideNum - 1].classList.add('chart-slide-current');
+      chartSlideCurrent = slideNum - 1;
     } else {
       slideOrder[chartSlideCurrent].classList.remove('chart-slide-current');
       chartSlideCurrent--;
@@ -147,11 +148,13 @@ function setChartData(chartDataObj, chartSlideCurrent) {
   if (chartBox.id === 'chart-func1-bar') {
     if (chartSlideCurrent === 0) {
       chartDataBox.datasets[0].data =
-        lottofunc1.lottoData.oddCount.data.actual['latest'];
-      chartDataBox.datasets[1].data =
         lottofunc1.lottoData.oddCount.data.ideal['latest'];
       instance.update();
     } else if (chartSlideCurrent === 1) {
+      chartDataBox.datasets[0].data =
+        lottofunc1.lottoData.oddCount.data.actual['latest'];
+      instance.update();
+    } else if (chartSlideCurrent === 2) {
       const datas = [];
 
       for (
@@ -166,7 +169,6 @@ function setChartData(chartDataObj, chartSlideCurrent) {
       }
       chartDataBox.datasets[0].data = datas;
 
-      chartDataBox.datasets[1].data = null;
       instance.update();
     }
   }
@@ -183,8 +185,6 @@ function initChartData(chartInitDataBoxObj) {
 
   chartDataBox[1].datasets[0].data =
     lottofunc1.lottoData.oddCount.data.ideal['latest'];
-  chartDataBox[1].datasets[1].data =
-    lottofunc1.lottoData.oddCount.data.actual['latest'];
   instance[1].update();
 
   google.charts.load('current', { packages: ['corechart'] });
@@ -281,14 +281,6 @@ function chartInit() {
     labels: [0, 1, 2, 3, 4, 5, 6],
     datasets: [
       {
-        label: '실제값',
-        backgroundColor: 'rgba(91, 81,255, 0.2)',
-        pointBackgroundColor: 'white',
-        borderWidth: 2,
-        borderColor: 'rgb(199, 54, 44)',
-        data: null
-      },
-      {
         label: '이상값',
         backgroundColor: 'rgba(91, 81,255, 0.2)',
         pointBackgroundColor: 'white',
@@ -314,7 +306,7 @@ function chartInit() {
   });
 
   const chartBarSlideObj = {
-    slideNum: 2,
+    slideNum: 3,
     slideOrder: chartBarNum,
     chartBox: chartBarBox,
     chartDataBox: chartBarDataBox,
