@@ -92,16 +92,15 @@ function chartSlide(chartSlideObj) {
   const main13 = document.querySelector('.main-1-3');
   const main14 = document.querySelector('.main-1-4');
   leftChartBtn.addEventListener('click', () => {
-    if (chartSlideCurrent <= 0) {
-      chartSlideCurrent = 0;
+    if (chartSlideCurrent === 0) {
+      slideOrder[chartSlideCurrent].classList.remove('chart-slide-current');
+      slideOrder[slideNum - 1].classList.add('chart-slide-current');
     } else {
       slideOrder[chartSlideCurrent].classList.remove('chart-slide-current');
       chartSlideCurrent--;
       slideOrder[chartSlideCurrent].classList.add('chart-slide-current');
     }
     setChartData(chartDataObj, chartSlideCurrent);
-
-    leftChartBtnToggle(chartSlideCurrent, leftChartBtn);
   });
   rightChartBtn.addEventListener('click', e => {
     if (chartSlideCurrent === slideNum - 1) {
@@ -113,7 +112,7 @@ function chartSlide(chartSlideObj) {
       chartSlideCurrent++;
       slideOrder[chartSlideCurrent].classList.add('chart-slide-current');
     }
-    leftChartBtnToggle(chartSlideCurrent, leftChartBtn);
+
     setChartData(chartDataObj, chartSlideCurrent);
   });
 
@@ -122,17 +121,9 @@ function chartSlide(chartSlideObj) {
       slideOrder[chartSlideCurrent].classList.remove('chart-slide-current');
       chartSlideCurrent = i;
       slideOrder[chartSlideCurrent].classList.add('chart-slide-current');
-      leftChartBtnToggle(chartSlideCurrent, leftChartBtn);
+
       setChartData(chartDataObj, chartSlideCurrent);
     });
-  }
-}
-
-function leftChartBtnToggle(chartSlideCurrent, leftChartBtn) {
-  if (chartSlideCurrent === 0) {
-    leftChartBtn.style.display = 'none';
-  } else {
-    leftChartBtn.style.display = 'block';
   }
 }
 
