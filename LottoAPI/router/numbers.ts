@@ -41,7 +41,7 @@ router.post('/generator', (req, res) => {
     if (req.body.AC) {
         option.AC = req.body.AC;
     }
-    if (req.body.consecutiveExist) {
+    if (typeof req.body.consecutiveExist !== 'undefined') {
         option.consecutiveExist = req.body.consecutiveExist;
     }
 
