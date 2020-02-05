@@ -1,8 +1,9 @@
+import Expectation from './Expectation';
 import Calculate from '../Calculate'
 import Analyze from '../Analyze'
-import Expectation, { Params } from './Expectation'
-import { LottoNumber } from '../Generator/Base';
 
+import { Params } from '../../interface/Lotto';
+import { LottoNumber } from '../../interface/Lotto';
 interface Helper extends Params {
     method: (numbers: number[]) => number;
 }
@@ -10,6 +11,7 @@ interface AnalyzeHelper extends Params {
     method: (...something: any) => number[];
     one: LottoNumber;
 }
+
 export default class Gather extends Expectation {
     private gatherHelper(helper: Helper): number[] {
         const result = new Array<number>(helper.to - helper.from + 1).fill(0);

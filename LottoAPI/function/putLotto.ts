@@ -1,6 +1,6 @@
 import axios from 'axios'
-import {LData} from '../class/Lotto/Base'
 
+import { LData } from '../interface/Lotto';
 import AWS from 'aws-sdk';
 // AWS.config.update(require('./key.json'));
 const dynamodb = new AWS.DynamoDB();

@@ -1,43 +1,16 @@
-import { Mode } from "../Lotto/Base";
-import { Params } from '../Lotto/Expectation'
 import Lotto from "../Lotto";
-import {Stats} from '../Statistics'
 
-export interface SampleData {
-    ideal: number[];
-    actual: number[];
-    stats?: Stats;
-}
-
-export enum Method {
-    excludedLineCount = "excludedLineCount",
-    lineCount = "lineCount",
-    carryCount = "carryCount",
-    lowCount = "lowCount",
-    sum = "sum",
-    sum55 = "sum55",
-    sum77 = "sum77",
-    oddCount = "oddCount",
-    primeCount = "primeCount",
-    $3Count = "$3Count",
-    sum$10 = "sum$10",
-    diffMaxMin = "diffMaxMin",
-    AC = "AC",
-    consecutiveExist = "consecutiveExist",
-//
-    emergence = "emergence",
-    interval = "interval",
-    howLongNone = "howLongNone",
-    frequency = "frequency"
-}
-
-interface SampleMethod {
+import { Method } from "../../interface/LottoDB";
+import { Stats } from "../../interface/Statistics";
+import { Params, Mode } from "../../interface/Lotto";
+interface MethodMap {
     ideal: (params: Params) => number[];
     actual: (params: Params) => number[];
     stats?: (mode:Mode) => Stats;
 }
+
 export default class LottoMap extends Lotto{
-    sampleMap = new Map<Method, SampleMethod>([
+    methodMap = new Map<Method, MethodMap>([
         [
             Method.excludedLineCount, {
                 ideal: this.expectedExcludedLineCount,

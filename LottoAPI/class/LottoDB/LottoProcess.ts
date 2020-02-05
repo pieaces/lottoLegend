@@ -1,36 +1,11 @@
-import LottoData, { Method } from "./Base";
-import { LottoNumber } from "../Generator/Base";
-import {Stats} from '../Statistics'
-export interface LottoDate{
-    round: number;
-    date: string;
-}
-export enum AssemblyVersion {
-    $12 = "$12",
-    $24 = "$24",
-    $48 = "$48",
-    $192 = "$192",
-    all = "all",
-    latest = "latest"
-}
-export interface Assembly {
-    $12: number[];
-    $24: number[];
-    $48: number[];
-    $192: number[];
-    all: number[];
-    latest: number[];
-}
-export interface DBData {
-    ideal: Assembly;
-    actual: Assembly;
-    pos: number[];
-    stats?: Stats;
-}
+import LottoMap from "./LottoMap";
 
-export default class LottoProcess extends LottoData {
+import { Assembly, DBData, LottoDate, Method } from "../../interface/LottoDB";
+import { LottoNumber } from "../../interface/Lotto";
+
+export default class LottoProcess extends LottoMap {
     processHelper(method: Method): DBData {
-        const sampleMethod = this.sampleMap.get(method);
+        const sampleMethod = this.methodMap.get(method);
 
         const ideal: Assembly = {
             $12: sampleMethod.ideal.bind(this)({ mode: 12 }),
@@ -49,7 +24,7 @@ export default class LottoProcess extends LottoData {
             latest: sampleMethod.actual.bind(this)({ mode: -12 })
         };
         //const coef = this.coefHelper({ mode: -12 }, method);
-        const pos = this.sampleMap.get(method).ideal.bind(this)({mode:1});
+        const pos = this.methodMap.get(method).ideal.bind(this)({mode:1});
         const stats = sampleMethod.stats && sampleMethod.stats.bind(this)(this.mode);
         return { ideal, actual, pos, stats };
     }

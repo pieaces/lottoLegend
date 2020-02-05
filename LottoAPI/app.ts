@@ -1,10 +1,11 @@
 import express from 'express';
 import awsServerlessExpressMiddleware from 'aws-serverless-express/middleware';
 import queryStats from './function/queryStats'
-import { Method } from './class/LottoData/Base';
-import { GeneratorOption } from './class/Generator/Base';
+
 import Generator from './class/Generator';
 import Calculate from './class/Calculate';
+import { Method } from './interface/LottoDB';
+import { GeneratorOption } from './interface/Generator';
 
 const app = express();
 app.use(awsServerlessExpressMiddleware.eventContext());

@@ -1,15 +1,26 @@
-import LottoDB from './LottoDB';
-import { Method } from '../LottoData/Base'
-import { LottoNumber } from '../Generator/Base';
+import LottoProcess from './LottoProcess';
+import { List } from 'immutable';
+
 import dynamoDBJson, { dynamoData } from '../../function/dynamoDBJson'
 import queryStats from '../../function/queryStats'
+import scanLotto from '../../function/scanLotto'
 
+import { Method } from '../../interface/LottoDB';
+import { LData, Params, LottoNumber } from '../../interface/Lotto';
 import AWS from 'aws-sdk';
-import { Params } from '../Lotto/Expectation';
 //AWS.config.update(require('../../function/key.json'));
 const dynamoDB = new AWS.DynamoDB();
 
-export default class LottoStatDB extends LottoDB {
+export default class LottoStatDB extends LottoProcess {
+    protected hasLotto = false;
+
+    async scanLotto() {
+        const lottoData: LData[] = await scanLotto();
+        this.data = List<LData>(lottoData);
+        this.TOTAL_SIZE = this.data.size;
+        this.mode = this.TOTAL_SIZE;
+        this.hasLotto = true;
+    }
     async putStat(method: Method): Promise<void> {
         if (this.hasLotto) {
             let Item: any = { "Name": { S: method } };

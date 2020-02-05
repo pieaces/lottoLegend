@@ -1,6 +1,8 @@
-import Base, { GeneratorOption, LottoNumber, Range } from "./Base";
+import Base from "./Base";
 import Calculate from "../Calculate";
 
+import { LottoNumber } from "../../interface/Lotto";
+import { GeneratorOption, Range } from "../../interface/Generator";
 const constraintLowCount = require('../../json/Generator/lowCount_compressed.json');
 const constraintSum = require('../../json/Generator/sum_compressed.json');
 const constraintSumNotExcluded = require('../../json/Generator/sum_notExcluded.json');

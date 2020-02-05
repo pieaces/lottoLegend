@@ -1,10 +1,9 @@
-import { Method } from '../class/LottoData/Base'
-import { Assembly, DBData, AssemblyVersion } from '../class/LottoData'
-import { Stats } from '../class/Statistics';
+import { Params } from '../interface/Lotto';
+import { Stats } from '../interface/Statistics';
+import { Method, DBData, Assembly, AssemblyVersion } from '../interface/LottoDB';
 
 import AWS from 'aws-sdk';
-import { Params } from '../class/Lotto/Expectation';
-AWS.config.update(require('./key.json'));
+//AWS.config.update(require('./key.json'));
 const dynamoDB = new AWS.DynamoDB();
 
 export default async function queryStats(method: Method, params: Params): Promise<any[] | DBData> {

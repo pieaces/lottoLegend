@@ -1,7 +1,6 @@
-import LottoBase, {LData} from '../Lotto/Base'
+import Lotto from '../Lotto/Base'
 import PosAnalyze from './PosAnalyze'
-import {LottoNumber} from '../Generator/Base'
-
+import { LData, LottoNumber } from '../../interface/Lotto';
 interface HarmonyData {
     one: number;
     another: number;
@@ -14,12 +13,13 @@ interface HData {
     round: number;
     date: string;
 }
+
 //분석: 이차원 데이터 => 일차원 데이터
 export default class Analyze extends PosAnalyze {
     private constructor() { super(); }
 
     static frequencyCount(numsArray: Array<number[]>): number[] {
-        const result = new Array<number>(LottoBase.BALL_NUM).fill(0);
+        const result = new Array<number>(Lotto.BALL_NUM).fill(0);
 
         for (let i = 0; i < numsArray.length; i++) {
             for (let j = 0; j < numsArray[i].length; j++)
@@ -45,7 +45,7 @@ export default class Analyze extends PosAnalyze {
     
     private static emergedPoint(numsArray: Array<number[]>): Array<number[]> {
         const result:Array<number[]> = [];
-        for(let i =0; i<LottoBase.BALL_NUM; i++) result[i] = [];
+        for(let i =0; i<Lotto.BALL_NUM; i++) result[i] = [];
         numsArray.forEach((numbers, round) => {
             numbers.forEach(num => result[num-1].push(round));
         });
@@ -125,8 +125,8 @@ export default class Analyze extends PosAnalyze {
             }
             return check;
         }
-        const results:HData[] = new Array<HData>(LottoBase.BALL_NUM);
-        for(let i=0; i<LottoBase.BALL_NUM; i++) results[i] = ({count:-1, round:0, date:''});
+        const results:HData[] = new Array<HData>(Lotto.BALL_NUM);
+        for(let i=0; i<Lotto.BALL_NUM; i++) results[i] = ({count:-1, round:0, date:''});
 
         for (let i = lottoArray.length-1; i >= 0; i--) {
             for (let j = 0; j < lottoArray[i].numbers.length; j++) {
@@ -145,9 +145,9 @@ export default class Analyze extends PosAnalyze {
     static harmony(lottoArray: LData[]): HarmonyData[] {
         const harmonyHash = (lottoArray: LData[]): Array<HData[]> => {
             const result: Array<HData[]> = [];
-            for (let i = 1; i < LottoBase.BALL_NUM; i++) {
+            for (let i = 1; i < Lotto.BALL_NUM; i++) {
                 const temp: HData[] = [];
-                for (let j = 0; j < LottoBase.BALL_NUM - i; j++) temp.push({ count: 0, round: 0, date:'' });
+                for (let j = 0; j < Lotto.BALL_NUM - i; j++) temp.push({ count: 0, round: 0, date:'' });
                 result.push(temp);
             }
             lottoArray.forEach((lotto) => {

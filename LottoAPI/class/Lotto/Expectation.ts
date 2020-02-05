@@ -1,5 +1,5 @@
-import Base, { LData, Mode, isNumber, isTuple } from './Base'
-
+import Base from './Base'
+import { Params, LData, Mode, isNumber, isTuple } from '../../interface/Lotto';
 const posExcludedLineCount = require('../../json/Expectation/excludedLineCount.json');
 const posSum$10 = require('../../json/Expectation/sum$10.json');
 const posSum = require('../../json/Expectation/sum.json');
@@ -11,12 +11,6 @@ const posAC = require('../../json/Expectation/AC.json');
 const posDiffMaxMin = require('../../json/Expectation/diffMaxMin.json');
 const posCarryCount = require('../../json/Expectation/carryCount.json');
 const posConsecutiveExist = require('../../json/Expectation/consecutiveExist.json');
-
-export interface Params {
-    from?: number;
-    to?: number;
-    mode?: Mode;
-}
 
 export default class Expectation extends Base {
     public mode: Mode;

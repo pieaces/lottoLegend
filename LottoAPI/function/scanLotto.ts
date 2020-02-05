@@ -1,4 +1,4 @@
-import { LData } from '../class/Lotto/Base';
+import { LData, LottoNumber } from '../interface/Lotto';
 
 import AWS from 'aws-sdk';
 // AWS.config.update(require('./key.json'));
@@ -16,12 +16,12 @@ export default async function read(): Promise<LData[]> {
             }
             else {
                 const item = data.Items;
-                const lottoData = item.map(item => {
+                const lottoData:LData[] = item.map(item => {
                     return {
                         round: Number(item.Round.N),
                         date: item.LDate.S,
                         bonusNum: Number(item.BonusNum.N),
-                        numbers: item.Numbers.NS.map(value => Number(value)).sort((a, b) => a - b)
+                        numbers: item.Numbers.NS.map(value => Number(value) as LottoNumber).sort((a, b) => a - b)
                     };
                 });
                 resolve(lottoData.sort((a, b) => a.round - b.round));

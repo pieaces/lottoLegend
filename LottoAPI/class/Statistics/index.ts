@@ -1,10 +1,6 @@
 import Probability from './Probability'
-export interface Stats {
-    mean: number;
-    stdev: number;
-    max: number;
-    min: number;
-}
+import { Stats } from '../../interface/Statistics';
+
 //통계: 일차원 데이터 => 객체 데이터
 export default class Statistics extends Probability {
     private constructor() { super(); }

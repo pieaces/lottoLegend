@@ -1,19 +1,5 @@
 import { List } from 'immutable';
-
-export type Mode = [number, number] | number;
-export function isNumber(x: Mode): x is number {
-    return typeof x === "number";
-}
-export function isTuple(x: Mode): x is [number, number] {
-    return typeof x === 'object';
-}
-
-export interface LData {
-    round: number;
-    date: string;
-    bonusNum: number;
-    numbers: number[]
-}
+import { LData, Mode, isTuple, isNumber } from '../../interface/Lotto';
 
 export default class Base {
     protected TOTAL_SIZE: number;
