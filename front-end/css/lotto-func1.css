@@ -174,8 +174,8 @@
 .left-chart-btn {
   cursor: pointer;
   position: absolute;
-  top: 45%;
-  left: 10%;
+  top: 85%;
+  left: 42%;
   color: var(--main-color);
   opacity: 0.3;
   display: none;
@@ -184,8 +184,8 @@
 .right-chart-btn {
   cursor: pointer;
   position: absolute;
-  top: 45%;
-  right: 5%;
+  top: 85%;
+  right: 34%;
   color: var(--main-color);
   opacity: 0.3;
 }
