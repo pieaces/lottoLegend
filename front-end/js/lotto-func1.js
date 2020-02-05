@@ -26,8 +26,8 @@ function filterBoxCheck() {
 function drawBubbleChart() {
   const chartBubbleBox = document.querySelector('#chart-func1-bubble');
   const dataBubble = [['ID', '전체적 맥락', '부분적 맥락', '희소성', '확률']];
-  const X = {max:-1, min:1};
-  const Y = {max:-1, min:1};
+  const X = { max: -1, min: 1 };
+  const Y = { max: -1, min: 1 };
   for (
     let i = 0;
     i < lottofunc1.lottoData.oddCount.data.ideal['all'].length;
@@ -54,25 +54,27 @@ function drawBubbleChart() {
     else y /= lottofunc1.lottoData.oddCount.data.actual['latest'][i];
     y *= lottofunc1.lottoData.oddCount.data.pos[i];
 
-    if(x > X.max) X.max = x;
-    if(x < X.min) X.min = x;
-    if(y > Y.max) Y.max = y;
-    if(y < Y.min) Y.min = y;
+    if (x > X.max) X.max = x;
+    if (x < X.min) X.min = x;
+    if (y > Y.max) Y.max = y;
+    if (y < Y.min) Y.min = y;
 
-    const data = [String(i), x, y, y, lottofunc1.lottoData.oddCount.data.pos[i]];
+    const data = [
+      String(i),
+      x,
+      y,
+      y,
+      lottofunc1.lottoData.oddCount.data.pos[i]
+    ];
     dataBubble.push(data);
   }
-console.log(X, Y)
+  console.log(X, Y);
   const chartBubbleDataBox = google.visualization.arrayToDataTable(dataBubble);
-const C = 0.01
+  const C = 0.01;
   const chartBubbleOptions = {
-    title:
-      'Correlation between life expectancy, fertility rate ' +
-      'and population of some world countries (2010)',
-
     bubble: { textStyle: { fontSize: 11 } },
-    hAxis: { maxValue: X.max+C, minValue: X.min-C },
-    vAxis: { maxValue: Y.max+C, minValue: Y.min-C }
+    hAxis: { maxValue: X.max + C, minValue: X.min - C },
+    vAxis: { maxValue: Y.max + C, minValue: Y.min - C }
   };
 
   const chart = new google.visualization.BubbleChart(chartBubbleBox);
@@ -232,7 +234,6 @@ function chartInit() {
   };
 
   const chartLineOptions = {
-    responsive: false,
     scales: {
       xAxes: [
         {
@@ -299,11 +300,7 @@ function chartInit() {
   };
 
   const chartBarOptions = {
-    legend: false,
-    title: {
-      display: true,
-      text: 'Ice Cream Truck Report'
-    }
+    legend: false
   };
 
   const chartBarInstance = new Chart(chartBarBox, {
