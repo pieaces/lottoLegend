@@ -83,15 +83,16 @@
 }
 
 .filter-box-container {
-  width: 40%;
+  width: 33%;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .filter-box {
-  width: 150px;
+  width: 200px;
   height: 45px;
-  background-color: #2c89c6;
+  border: 1px solid rgba(0, 0, 0, 0.3);
   position: relative;
   display: flex;
   align-items: center;
@@ -100,11 +101,9 @@
 
 .filter-box > a {
   font-size: 1.3rem;
-  color: var(--default-color);
 }
 
 .filter-box > i {
-  color: var(--default-color);
   position: absolute;
   top: 35%;
   right: 10%;
@@ -123,22 +122,29 @@
 .filter-list > li {
   font-size: 1.3rem;
   height: 100%;
-  background-color: #eeeeee;
+  background-color: var(--default-color);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--border-color);
+  border-left: 1px solid rgba(0, 0, 0, 0.3);
+  border-right: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.filter-list > li:last-child {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 .filter-current-container {
-  width: 60%;
+  width: 65%;
   display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .filter-text {
-  width: 45px;
+  width: 140px;
   height: 45px;
-  background-color: #2c89c6;
+  border: 1px solid var(--border-color);
 }
 
 .main-1-2 {
