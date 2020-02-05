@@ -6,6 +6,14 @@ export interface LottoDate{
     round: number;
     date: string;
 }
+export enum AssemblyVersion {
+    $12 = "$12",
+    $24 = "$24",
+    $48 = "$48",
+    $192 = "$192",
+    all = "all",
+    latest = "latest"
+}
 export interface Assembly {
     $12: number[];
     $24: number[];

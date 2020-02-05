@@ -5,6 +5,7 @@ import dynamoDBJson, { dynamoData } from '../../function/dynamoDBJson'
 import queryStats from '../../function/queryStats'
 
 import AWS from 'aws-sdk';
+import { Params } from '../Lotto/Expectation';
 //AWS.config.update(require('../../function/key.json'));
 const dynamoDB = new AWS.DynamoDB();
 
@@ -64,8 +65,8 @@ export default class LottoStatDB extends LottoDB {
         }
     }
 
-    static async queryStat(name: Method | string) {
-        const data = queryStats(name as Method);
+    static async queryStat(method: Method, params:Params) {
+        const data = queryStats(method, params);
         return data;
     }
 

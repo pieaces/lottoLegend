@@ -1,13 +1,14 @@
 import { Method } from '../class/LottoData/Base'
-import { Assembly, DBData } from '../class/LottoData'
+import { Assembly, DBData, AssemblyVersion } from '../class/LottoData'
 import { Stats } from '../class/Statistics';
 
 import AWS from 'aws-sdk';
-// AWS.config.update(require('./key.json'));
+import { Params } from '../class/Lotto/Expectation';
+AWS.config.update(require('./key.json'));
 const dynamoDB = new AWS.DynamoDB();
 
-export default async function getStats(name: Method) {
-    var params = {
+export default async function queryStats(method: Method, params: Params): Promise<any[] | DBData> {
+    const queryParams = {
         TableName: "LottoStat",
         KeyConditionExpression: "#Name = :Name",
         ExpressionAttributeNames: {
@@ -15,13 +16,13 @@ export default async function getStats(name: Method) {
         },
         ExpressionAttributeValues: {
             ":Name": {
-                S: name
+                S: method
             }
         }
     };
 
     return await new Promise((resolve, reject) => {
-        dynamoDB.query(params, function (err, data) {
+        dynamoDB.query(queryParams, function (err, data) {
             if (err) {
                 console.log('LottoStat - read 과정 에러', err);
                 reject(err);
@@ -29,7 +30,7 @@ export default async function getStats(name: Method) {
             else {
                 const item = data.Items[0];
                 let list: Array<any>;
-                switch (name) {
+                switch (method) {
                     case Method.frequency:
                         list = item.List.L.map(value => Number(value.N));
                         resolve(list);
@@ -62,24 +63,51 @@ export default async function getStats(name: Method) {
                         resolve(list);
                         break;
                     default:
+                        if (!params.from || !params.to) {
+                            reject("Range doesn't exist");
+                        }
+                        let from = params.from, to = params.to;
+                        if (method === Method.sum) {
+                            from -= 21;
+                            to -= 21;
+                        } else if (method === Method.diffMaxMin) {
+                            from -= 5;
+                            to -= 5;
+                        }
                         const ideal: Assembly = {
-                            $12: item.Ideal.M.$12.L.map(value => Number(value.N)),
-                            $24: item.Ideal.M.$24.L.map(value => Number(value.N)),
-                            $48: item.Ideal.M.$48.L.map(value => Number(value.N)),
-                            $192: item.Ideal.M.$192.L.map(value => Number(value.N)),
-                            all: item.Ideal.M.all.L.map(value => Number(value.N)),
-                            latest: item.Ideal.M.latest.L.map(value => Number(value.N)),
+                            $12: item.Ideal.M.$12.L.slice(from, to).map(value => Number(value.N)),
+                            $24: item.Ideal.M.$24.L.slice(from, to).map(value => Number(value.N)),
+                            $48: item.Ideal.M.$48.L.slice(from, to).map(value => Number(value.N)),
+                            $192: item.Ideal.M.$192.L.slice(from, to).map(value => Number(value.N)),
+                            all: item.Ideal.M.all.L.slice(from, to).map(value => Number(value.N)),
+                            latest: item.Ideal.M.latest.L.slice(from, to).map(value => Number(value.N)),
                         };
                         const actual: Assembly = {
-                            $12: item.Actual.M.$12.L.map(value => Number(value.N)),
-                            $24: item.Actual.M.$24.L.map(value => Number(value.N)),
-                            $48: item.Actual.M.$48.L.map(value => Number(value.N)),
-                            $192: item.Actual.M.$192.L.map(value => Number(value.N)),
-                            all: item.Actual.M.all.L.map(value => Number(value.N)),
-                            latest: item.Actual.M.latest.L.map(value => Number(value.N)),
+                            $12: item.Actual.M.$12.L.slice(from, to).map(value => Number(value.N)),
+                            $24: item.Actual.M.$24.L.slice(from, to).map(value => Number(value.N)),
+                            $48: item.Actual.M.$48.L.slice(from, to).map(value => Number(value.N)),
+                            $192: item.Actual.M.$192.L.slice(from, to).map(value => Number(value.N)),
+                            all: item.Actual.M.all.L.slice(from, to).map(value => Number(value.N)),
+                            latest: item.Actual.M.latest.L.slice(from, to).map(value => Number(value.N)),
                         };
+
+                        let PACK: number;
+                        if (method === Method.sum) {
+                            PACK = 10;
+                        }
+                        if (method === Method.diffMaxMin) {
+                            PACK = 5;
+                        }
                         //const coef = item.Coef.L.map(value => Number(value.N));
-                        const pos = item.Pos.L.map(value => Number(value.N));
+                        let pos = item.Pos.L.slice(from, to).map(value => Number(value.N));
+
+                        if (method === Method.sum || method === Method.diffMaxMin) {
+                            for (const v in ideal) {
+                                ideal[v as AssemblyVersion] = compressNumbers(ideal[v as AssemblyVersion], PACK);
+                                actual[v as AssemblyVersion] = compressNumbers(actual[v as AssemblyVersion], PACK);
+                            }
+                            pos = compressNumbers(pos, PACK);
+                        }
                         const dbData: DBData = { ideal, actual, pos };
                         if (item.Stats) {
                             const stats: Stats = {
@@ -96,4 +124,16 @@ export default async function getStats(name: Method) {
             }
         })
     });
+}
+
+function compressNumbers(numbers: number[], PACK: number): number[] {
+    numbers = numbers.reduce((acc, cur, index) => {
+        if (index % PACK === 0) {
+            acc.push(cur);
+        } else {
+            acc[acc.length - 1] += cur;
+        }
+        return acc;
+    }, []);
+    return numbers;
 }
