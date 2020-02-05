@@ -8,8 +8,8 @@
 .grid-section-1 {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  margin-bottom: 20px;
   grid-gap: 30px;
+  padding-bottom: 20px;
 }
 
 .main {
@@ -47,22 +47,20 @@
   font-weight: bold;
 }
 
-.aside-1-1{
-  height:100%;
+.aside-1-1 {
+  height: 100%;
   background-color: var(--main-color);
-  color:var(--default-color);
-  display:flex;
+  color: var(--default-color);
+  display: flex;
   align-items: center;
   justify-content: center;
 }
-
 
 .aside-bottom {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 100px repeat(3, 200px);
 }
-
 
 /* main */
 

@@ -4,124 +4,27 @@ const lottofunc1 = {
   }
 };
 
-const chartLineBox = document.querySelector('#chart-func1-line');
-
-const chartLineDataBox = {
-  labels: [0, 1, 2, 3, 4, 5, 6],
-  datasets: [
-    {
-      label: '실제값',
-      backgroundColor: 'rgba(91, 81,255, 0.2)',
-      pointBackgroundColor: 'white',
-      borderWidth: 2,
-      borderColor: 'rgb(199, 54, 44)',
-      data: null
-    },
-    {
-      label: '이상값',
-      backgroundColor: 'rgba(91, 81,255, 0.2)',
-      pointBackgroundColor: 'white',
-      borderWidth: 2,
-      borderColor: 'rgb(14,99,132)',
-      data: null
+function filterBoxCheck() {
+  const filterBox = document.querySelector('.filter-box');
+  const filterArrow = document.querySelector('.filter-arrow');
+  const filterList = document.querySelector('.filter-list');
+  let flag = true;
+  filterBox.addEventListener('click', () => {
+    if (flag) {
+      filterArrow.classList.remove('fa-sort-down');
+      filterArrow.classList.add('fa-sort-up');
+      filterList.style.display = 'block';
+    } else {
+      filterArrow.classList.add('fa-sort-down');
+      filterArrow.classList.remove('fa-sort-up');
+      filterList.style.display = 'none';
     }
-  ]
-};
-
-const chartLineOptions = {
-  responsive: false,
-  scales: {
-    xAxes: [
-      {
-        gridLines: {
-          color: 'rgba(200, 200, 200, 0.5)',
-          lineWidth: 1
-        }
-      }
-    ],
-    yAxes: [
-      {
-        gridLines: {
-          color: 'rgba(200, 200, 200, 0.5)',
-          lineWidth: 1
-        }
-      }
-    ]
-  },
-  legend: {
-    display: false
-  },
-
-  tooltips: {
-    titleFontFamily: 'Open Sans',
-    backgroundColor: 'rgba(0,0,0,0.3)',
-    titleFontColor: 'red',
-    caretSize: 5,
-    cornerRadius: 2,
-    xPadding: 10,
-    yPadding: 10
-  }
-};
-
-const chartLineInstance = new Chart(chartLineBox, {
-  type: 'line',
-  data: chartLineDataBox,
-  options: chartLineOptions
-});
-
-const chartLineObject = {
-  chartBox: chartLineBox,
-  chartDataBox: chartLineDataBox,
-  instance: chartLineInstance
-};
-
-const chartBarBox = document.querySelector('#chart-func1-bar');
-
-const chartBarDataBox = {
-  labels: [0, 1, 2, 3, 4, 5, 6],
-  datasets: [
-    {
-      label: '실제값',
-      backgroundColor: 'rgba(91, 81,255, 0.2)',
-      pointBackgroundColor: 'white',
-      borderWidth: 2,
-      borderColor: 'rgb(199, 54, 44)',
-      data: null
-    },
-    {
-      label: '이상값',
-      backgroundColor: 'rgba(91, 81,255, 0.2)',
-      pointBackgroundColor: 'white',
-      borderWidth: 2,
-      borderColor: 'rgb(14,99,132)',
-      data: null
-    }
-  ]
-};
-
-const chartBarOptions = {
-  legend: false,
-  title: {
-    display: true,
-    text: 'Ice Cream Truck Report'
-  }
-};
-
-const chartBarInstance = new Chart(chartBarBox, {
-  type: 'bar',
-  data: chartBarDataBox,
-  options: chartBarOptions
-});
-
-const chartBarObject = {
-  chartBox: chartBarBox,
-  chartDataBox: chartBarDataBox,
-  instance: chartBarInstance
-};
-
-const chartBubbleBox = document.querySelector('#chart-func1-bubble');
+    flag = !flag;
+  });
+}
 
 function drawBubbleChart() {
+  const chartBubbleBox = document.querySelector('#chart-func1-bubble');
   const dataBubble = [['ID', '전체적 맥락', '부분적 맥락']];
   for (
     let i = 0;
@@ -137,7 +40,6 @@ function drawBubbleChart() {
     ];
     dataBubble.push(data);
   }
-  console.log(dataBubble);
 
   const chartBubbleDataBox = google.visualization.arrayToDataTable(dataBubble);
 
@@ -155,18 +57,26 @@ function drawBubbleChart() {
   chart.draw(chartBubbleDataBox, chartBubbleOptions);
 }
 
-const leftLineChartBtn = document.querySelector('#left-line-chart-btn');
-const rightLineChartBtn = document.querySelector('#right-line-chart-btn');
-const leftBarChartBtn = document.querySelector('#left-bar-chart-btn');
-const rightBarChartBtn = document.querySelector('#right-bar-chart-btn');
-const chartLineNum = document.querySelectorAll('.chart-line-num > div');
-const chartBarNum = document.querySelectorAll('.chart-bar-num > div');
-const main14 = document.querySelector('.main-1-4');
-const main16 = document.querySelector('.main-1-6');
+function chartSlide(chartSlideObj) {
+  const {
+    slideNum,
+    slideOrder,
+    chartBox,
+    chartDataBox,
+    instance,
+    leftChartBtn,
+    rightChartBtn
+  } = chartSlideObj;
+  const chartDataObj = {
+    chartBox: chartBox,
+    chartDataBox: chartDataBox,
+    instance: instance
+  };
 
-function chartSlide(slideNum, slideOrder, chartObject, leftBtn, rightBtn) {
   let chartSlideCurrent = 0;
-  leftBtn.addEventListener('click', () => {
+  const main14 = document.querySelector('.main-1-4');
+  const main16 = document.querySelector('.main-1-6');
+  leftChartBtn.addEventListener('click', () => {
     if (chartSlideCurrent <= 0) {
       chartSlideCurrent = 0;
     } else {
@@ -174,11 +84,11 @@ function chartSlide(slideNum, slideOrder, chartObject, leftBtn, rightBtn) {
       chartSlideCurrent--;
       slideOrder[chartSlideCurrent].classList.add('chart-slide-current');
     }
-    setChartData(chartObject, chartSlideCurrent);
+    setChartData(chartDataObj, chartSlideCurrent);
 
-    leftChartBtnToggle(chartSlideCurrent);
+    leftChartBtnToggle(chartSlideCurrent, leftChartBtn);
   });
-  rightBtn.addEventListener('click', e => {
+  rightChartBtn.addEventListener('click', e => {
     if (chartSlideCurrent === slideNum - 1) {
       chartSlideCurrent = 0;
       slideOrder[slideNum - 1].classList.remove('chart-slide-current');
@@ -198,8 +108,8 @@ function chartSlide(slideNum, slideOrder, chartObject, leftBtn, rightBtn) {
       chartSlideCurrent++;
       slideOrder[chartSlideCurrent].classList.add('chart-slide-current');
     }
-    leftChartBtnToggle(chartSlideCurrent);
-    setChartData(chartObject, chartSlideCurrent);
+    leftChartBtnToggle(chartSlideCurrent, leftChartBtn);
+    setChartData(chartDataObj, chartSlideCurrent);
   });
 
   for (let i = 0; i < slideNum; i++) {
@@ -207,22 +117,22 @@ function chartSlide(slideNum, slideOrder, chartObject, leftBtn, rightBtn) {
       slideOrder[chartSlideCurrent].classList.remove('chart-slide-current');
       chartSlideCurrent = i;
       slideOrder[chartSlideCurrent].classList.add('chart-slide-current');
-      leftChartBtnToggle(chartSlideCurrent);
-      setChartData(chartObject, chartSlideCurrent);
+      leftChartBtnToggle(chartSlideCurrent, leftChartBtn);
+      setChartData(chartDataObj, chartSlideCurrent);
     });
-  }
-
-  function leftChartBtnToggle(chartSlideCurrent) {
-    if (chartSlideCurrent === 0) {
-      leftBtn.style.display = 'none';
-    } else {
-      leftBtn.style.display = 'block';
-    }
   }
 }
 
-function setChartData(chartObject, chartSlideCurrent) {
-  const { chartBox, chartDataBox, instance } = chartObject;
+function leftChartBtnToggle(chartSlideCurrent, leftChartBtn) {
+  if (chartSlideCurrent === 0) {
+    leftChartBtn.style.display = 'none';
+  } else {
+    leftChartBtn.style.display = 'block';
+  }
+}
+
+function setChartData(chartDataObj, chartSlideCurrent) {
+  const { chartBox, chartDataBox, instance } = chartDataObj;
   const lineMap = new Map([
     [0, '$12'],
     [1, '$24'],
@@ -266,21 +176,167 @@ function setChartData(chartObject, chartSlideCurrent) {
   }
 }
 
-function initChartData() {
-  chartLineDataBox.datasets[0].data =
-    lottofunc1.lottoData.oddCount.data.actual['$12'];
-  chartLineDataBox.datasets[1].data =
-    lottofunc1.lottoData.oddCount.data.ideal['$12'];
-  chartLineInstance.update();
+function initChartData(chartInitDataBoxObj) {
+  const { chartDataBox, instance } = chartInitDataBoxObj;
 
-  chartBarDataBox.datasets[0].data =
+  chartDataBox[0].datasets[0].data =
+    lottofunc1.lottoData.oddCount.data.actual['$12'];
+  chartDataBox[1].datasets[1].data =
+    lottofunc1.lottoData.oddCount.data.ideal['$12'];
+  instance[0].update();
+
+  chartDataBox[1].datasets[0].data =
     lottofunc1.lottoData.oddCount.data.ideal['latest'];
-  chartBarDataBox.datasets[1].data =
+  chartDataBox[1].datasets[1].data =
     lottofunc1.lottoData.oddCount.data.actual['latest'];
-  chartBarInstance.update();
+  instance[1].update();
 
   google.charts.load('current', { packages: ['corechart'] });
   google.charts.setOnLoadCallback(drawBubbleChart);
+}
+
+function chartInit() {
+  const leftLineChartBtn = document.querySelector('#left-line-chart-btn');
+  const rightLineChartBtn = document.querySelector('#right-line-chart-btn');
+  const leftBarChartBtn = document.querySelector('#left-bar-chart-btn');
+  const rightBarChartBtn = document.querySelector('#right-bar-chart-btn');
+
+  const chartLineNum = document.querySelectorAll('.chart-line-num > div');
+  const chartBarNum = document.querySelectorAll('.chart-bar-num > div');
+
+  const chartLineBox = document.querySelector('#chart-func1-line');
+
+  const chartLineDataBox = {
+    labels: [0, 1, 2, 3, 4, 5, 6],
+    datasets: [
+      {
+        label: '실제값',
+        backgroundColor: 'rgba(91, 81,255, 0.2)',
+        pointBackgroundColor: 'white',
+        borderWidth: 2,
+        borderColor: 'rgb(199, 54, 44)',
+        data: null
+      },
+      {
+        label: '이상값',
+        backgroundColor: 'rgba(91, 81,255, 0.2)',
+        pointBackgroundColor: 'white',
+        borderWidth: 2,
+        borderColor: 'rgb(14,99,132)',
+        data: null
+      }
+    ]
+  };
+
+  const chartLineOptions = {
+    responsive: false,
+    scales: {
+      xAxes: [
+        {
+          gridLines: {
+            color: 'rgba(200, 200, 200, 0.5)',
+            lineWidth: 1
+          }
+        }
+      ],
+      yAxes: [
+        {
+          gridLines: {
+            color: 'rgba(200, 200, 200, 0.5)',
+            lineWidth: 1
+          }
+        }
+      ]
+    },
+    legend: {
+      display: false
+    },
+
+    tooltips: {
+      titleFontFamily: 'Open Sans',
+      backgroundColor: 'rgba(0,0,0,0.3)',
+      titleFontColor: 'red',
+      caretSize: 5,
+      cornerRadius: 2,
+      xPadding: 10,
+      yPadding: 10
+    }
+  };
+
+  const chartLineInstance = new Chart(chartLineBox, {
+    type: 'line',
+    data: chartLineDataBox,
+    options: chartLineOptions
+  });
+
+  const chartLineSlideObj = {
+    slideNum: 5,
+    slideOrder: chartLineNum,
+    chartBox: chartLineBox,
+    chartDataBox: chartLineDataBox,
+    instance: chartLineInstance,
+    leftChartBtn: leftLineChartBtn,
+    rightChartBtn: rightLineChartBtn
+  };
+
+  const chartBarBox = document.querySelector('#chart-func1-bar');
+
+  const chartBarDataBox = {
+    labels: [0, 1, 2, 3, 4, 5, 6],
+    datasets: [
+      {
+        label: '실제값',
+        backgroundColor: 'rgba(91, 81,255, 0.2)',
+        pointBackgroundColor: 'white',
+        borderWidth: 2,
+        borderColor: 'rgb(199, 54, 44)',
+        data: null
+      },
+      {
+        label: '이상값',
+        backgroundColor: 'rgba(91, 81,255, 0.2)',
+        pointBackgroundColor: 'white',
+        borderWidth: 2,
+        borderColor: 'rgb(14,99,132)',
+        data: null
+      }
+    ]
+  };
+
+  const chartBarOptions = {
+    legend: false,
+    title: {
+      display: true,
+      text: 'Ice Cream Truck Report'
+    }
+  };
+
+  const chartBarInstance = new Chart(chartBarBox, {
+    type: 'bar',
+    data: chartBarDataBox,
+    options: chartBarOptions
+  });
+
+  const chartBarSlideObj = {
+    slideNum: 2,
+    slideOrder: chartBarNum,
+    chartBox: chartBarBox,
+    chartDataBox: chartBarDataBox,
+    instance: chartBarInstance,
+    leftChartBtn: leftBarChartBtn,
+    rightChartBtn: rightBarChartBtn
+  };
+
+  const chartInitDataBoxObj = {
+    chartDataBox: [chartLineDataBox, chartBarDataBox],
+    instance: [chartLineInstance, chartBarInstance]
+  };
+
+  initChartData(chartInitDataBoxObj);
+
+  chartSlide(chartLineSlideObj);
+
+  chartSlide(chartBarSlideObj);
 }
 
 async function setLottoOddCount() {
@@ -293,7 +349,7 @@ async function getLottoOddCount() {
     'x-api-key': 'LZn9Pykicg982PNmTmdiB8pkso4xbGiQ4n4P1z1k' //API KEY
   };
   const fetchResult = await fetch(
-    'https://is6q0wtgml.execute-api.ap-northeast-2.amazonaws.com/dev/stats?method=oddCount', //API 주소, querystring = name
+    'https://is6q0wtgml.execute-api.ap-northeast-2.amazonaws.com/dev/stats/oddCount?from=0&to=6', //API 주소, querystring = name
     { method: 'GET', headers }
   );
   const data = JSON.parse(await fetchResult.text());
@@ -301,18 +357,9 @@ async function getLottoOddCount() {
 }
 
 async function init() {
+  filterBoxCheck();
   await setLottoOddCount();
-  initChartData();
-
-  chartSlide(
-    5,
-    chartLineNum,
-    chartLineObject,
-    leftLineChartBtn,
-    rightLineChartBtn
-  );
-
-  chartSlide(2, chartBarNum, chartBarObject, leftBarChartBtn, rightBarChartBtn);
+  chartInit();
 }
 
 init();
