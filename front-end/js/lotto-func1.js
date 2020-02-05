@@ -26,17 +26,20 @@ function filterBoxCheck() {
 function drawBubbleChart() {
   const chartBubbleBox = document.querySelector('#chart-func1-bubble');
   const dataBubble = [['ID', '전체적 맥락', '부분적 맥락']];
-  for (
-    let i = 0;
-    i < lottofunc1.lottoData.oddCount.data.ideal['all'].length;
-    i++
-  ) {
+  for (let i = 0; i < lottofunc1.lottoData.oddCount.data.ideal['all'].length; i++) {
+    let x = lottofunc1.lottoData.oddCount.data.ideal['all'][i] - lottofunc1.lottoData.oddCount.data.actual['all'][i];
+    if(lottofunc1.lottoData.oddCount.data.ideal['all'][i] >= lottofunc1.lottoData.oddCount.data.actual['all'][i])
+      x /= lottofunc1.lottoData.oddCount.data.ideal['all'][i];
+    else x /= lottofunc1.lottoData.oddCount.data.actual['all'][i];
+    x *= lottofunc1.lottoData.oddCount.data.pos[i];
+    let y = lottofunc1.lottoData.oddCount.data.ideal['latest'][i] - lottofunc1.lottoData.oddCount.data.actual['latest'][i];
+    if(lottofunc1.lottoData.oddCount.data.ideal['latest'][i] >= lottofunc1.lottoData.oddCount.data.actual['latest'][i])
+      y /= lottofunc1.lottoData.oddCount.data.ideal['latest'][i];
+    else y /= lottofunc1.lottoData.oddCount.data.actual['latest'][i];
+    y *= lottofunc1.lottoData.oddCount.data.pos[i];
+
     const data = [
-      String(i),
-      (lottofunc1.lottoData.oddCount.data.ideal['all'][i] -
-        lottofunc1.lottoData.oddCount.data.actual['all'][i]) /
-        lottofunc1.lottoData.oddCount.total,
-      lottofunc1.lottoData.oddCount.data.coef[i]
+      String(i), x, y
     ];
     dataBubble.push(data);
   }
