@@ -1,5 +1,4 @@
-import Coefficient from "./Coefficient";
-import { Method } from "./Base";
+import LottoData, { Method } from "./Base";
 import { LottoNumber } from "../Generator/Base";
 import {Stats} from '../Statistics'
 export interface LottoDate{
@@ -29,7 +28,7 @@ export interface DBData {
     stats?: Stats;
 }
 
-export default class LottoProcess extends Coefficient {
+export default class LottoProcess extends LottoData {
     processHelper(method: Method): DBData {
         const sampleMethod = this.sampleMap.get(method);
 

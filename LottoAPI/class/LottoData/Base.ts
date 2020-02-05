@@ -36,7 +36,7 @@ interface SampleMethod {
     actual: (params: Params) => number[];
     stats?: (mode:Mode) => Stats;
 }
-export default class Inter extends Lotto{
+export default class LottoMap extends Lotto{
     sampleMap = new Map<Method, SampleMethod>([
         [
             Method.excludedLineCount, {
