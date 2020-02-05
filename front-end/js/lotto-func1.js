@@ -26,21 +26,33 @@ function filterBoxCheck() {
 function drawBubbleChart() {
   const chartBubbleBox = document.querySelector('#chart-func1-bubble');
   const dataBubble = [['ID', '전체적 맥락', '부분적 맥락']];
-  for (let i = 0; i < lottofunc1.lottoData.oddCount.data.ideal['all'].length; i++) {
-    let x = lottofunc1.lottoData.oddCount.data.ideal['all'][i] - lottofunc1.lottoData.oddCount.data.actual['all'][i];
-    if(lottofunc1.lottoData.oddCount.data.ideal['all'][i] >= lottofunc1.lottoData.oddCount.data.actual['all'][i])
+  for (
+    let i = 0;
+    i < lottofunc1.lottoData.oddCount.data.ideal['all'].length;
+    i++
+  ) {
+    let x =
+      lottofunc1.lottoData.oddCount.data.ideal['all'][i] -
+      lottofunc1.lottoData.oddCount.data.actual['all'][i];
+    if (
+      lottofunc1.lottoData.oddCount.data.ideal['all'][i] >=
+      lottofunc1.lottoData.oddCount.data.actual['all'][i]
+    )
       x /= lottofunc1.lottoData.oddCount.data.ideal['all'][i];
     else x /= lottofunc1.lottoData.oddCount.data.actual['all'][i];
     x *= lottofunc1.lottoData.oddCount.data.pos[i];
-    let y = lottofunc1.lottoData.oddCount.data.ideal['latest'][i] - lottofunc1.lottoData.oddCount.data.actual['latest'][i];
-    if(lottofunc1.lottoData.oddCount.data.ideal['latest'][i] >= lottofunc1.lottoData.oddCount.data.actual['latest'][i])
+    let y =
+      lottofunc1.lottoData.oddCount.data.ideal['latest'][i] -
+      lottofunc1.lottoData.oddCount.data.actual['latest'][i];
+    if (
+      lottofunc1.lottoData.oddCount.data.ideal['latest'][i] >=
+      lottofunc1.lottoData.oddCount.data.actual['latest'][i]
+    )
       y /= lottofunc1.lottoData.oddCount.data.ideal['latest'][i];
     else y /= lottofunc1.lottoData.oddCount.data.actual['latest'][i];
     y *= lottofunc1.lottoData.oddCount.data.pos[i];
 
-    const data = [
-      String(i), x, y
-    ];
+    const data = [String(i), x, y];
     dataBubble.push(data);
   }
 
@@ -77,8 +89,8 @@ function chartSlide(chartSlideObj) {
   };
 
   let chartSlideCurrent = 0;
+  const main13 = document.querySelector('.main-1-3');
   const main14 = document.querySelector('.main-1-4');
-  const main16 = document.querySelector('.main-1-6');
   leftChartBtn.addEventListener('click', () => {
     if (chartSlideCurrent <= 0) {
       chartSlideCurrent = 0;
@@ -96,16 +108,6 @@ function chartSlide(chartSlideObj) {
       chartSlideCurrent = 0;
       slideOrder[slideNum - 1].classList.remove('chart-slide-current');
       slideOrder[chartSlideCurrent].classList.add('chart-slide-current');
-
-      if (e.target.parentNode.children[2].id === 'chart-func1-line') {
-        main14.scrollIntoView({
-          behavior: 'smooth'
-        });
-      } else if (e.target.parentNode.children[3].id === 'chart-func1-bar') {
-        main16.scrollIntoView({
-          behavior: 'smooth'
-        });
-      }
     } else {
       slideOrder[chartSlideCurrent].classList.remove('chart-slide-current');
       chartSlideCurrent++;
@@ -184,7 +186,7 @@ function initChartData(chartInitDataBoxObj) {
 
   chartDataBox[0].datasets[0].data =
     lottofunc1.lottoData.oddCount.data.actual['$12'];
-  chartDataBox[1].datasets[1].data =
+  chartDataBox[0].datasets[1].data =
     lottofunc1.lottoData.oddCount.data.ideal['$12'];
   instance[0].update();
 
