@@ -92,7 +92,7 @@
 .filter-box {
   width: 200px;
   height: 45px;
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.6), -1px -1px 1px rgba(0, 0, 0, 0.6);
   position: relative;
   display: flex;
   align-items: center;
@@ -126,8 +126,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-left: 1px solid rgba(0, 0, 0, 0.3);
-  border-right: 1px solid rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2), -1px -1px 1px rgba(0, 0, 0, 0.2);
 }
 
 .filter-list > li:last-child {
@@ -145,6 +144,14 @@
   width: 140px;
   height: 45px;
   border: 1px solid var(--border-color);
+}
+
+.filter-before {
+  background-color: gray;
+}
+
+.filter-current {
+  background-color: yellow;
 }
 
 .main-1-2 {

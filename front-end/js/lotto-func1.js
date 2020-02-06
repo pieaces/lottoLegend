@@ -7,17 +7,25 @@ const lottofunc1 = {
 function filterBoxCheck() {
   const filterBox = document.querySelector('.filter-box');
   const filterArrow = document.querySelector('.filter-arrow');
-  const filterList = document.querySelector('.filter-list');
+  const filterListBox = document.querySelector('.filter-list');
+  const filterList = document.querySelectorAll('.filter-list > li');
+  const filterSelectText = document.querySelector('.filter-box > a');
+
   let flag = true;
   filterBox.addEventListener('click', () => {
     if (flag) {
       filterArrow.classList.remove('fa-sort-down');
       filterArrow.classList.add('fa-sort-up');
-      filterList.style.display = 'block';
+      filterListBox.style.display = 'block';
+      for (const node of filterList) {
+        node.addEventListener('click', () => {
+          filterSelectText.textContent = node.textContent;
+        });
+      }
     } else {
       filterArrow.classList.add('fa-sort-down');
       filterArrow.classList.remove('fa-sort-up');
-      filterList.style.display = 'none';
+      filterListBox.style.display = 'none';
     }
     flag = !flag;
   });
@@ -68,7 +76,7 @@ function drawBubbleChart() {
     ];
     dataBubble.push(data);
   }
-  console.log(X, Y);
+
   const chartBubbleDataBox = google.visualization.arrayToDataTable(dataBubble);
   const C = 0.01;
   const chartBubbleOptions = {
@@ -83,6 +91,7 @@ function drawBubbleChart() {
 
 function chartSlide(chartSlideObj) {
   const {
+    chartTextBox,
     slideNum,
     slideOrder,
     chartBox,
@@ -91,79 +100,145 @@ function chartSlide(chartSlideObj) {
     leftChartBtn,
     rightChartBtn
   } = chartSlideObj;
+
   const chartDataObj = {
     chartBox: chartBox,
     chartDataBox: chartDataBox,
     instance: instance
   };
 
-  let chartSlideCurrent = 0;
-  const main13 = document.querySelector('.main-1-3');
-  const main14 = document.querySelector('.main-1-4');
-  leftChartBtn.addEventListener('click', () => {
-    if (chartSlideCurrent === 0) {
-      slideOrder[chartSlideCurrent].classList.remove('chart-slide-current');
-      slideOrder[slideNum - 1].classList.add('chart-slide-current');
-      chartSlideCurrent = slideNum - 1;
-    } else {
-      slideOrder[chartSlideCurrent].classList.remove('chart-slide-current');
-      chartSlideCurrent--;
-      slideOrder[chartSlideCurrent].classList.add('chart-slide-current');
-    }
-    setChartData(chartDataObj, chartSlideCurrent);
-  });
-  rightChartBtn.addEventListener('click', e => {
-    if (chartSlideCurrent === slideNum - 1) {
-      chartSlideCurrent = 0;
-      slideOrder[slideNum - 1].classList.remove('chart-slide-current');
-      slideOrder[chartSlideCurrent].classList.add('chart-slide-current');
-    } else {
-      slideOrder[chartSlideCurrent].classList.remove('chart-slide-current');
-      chartSlideCurrent++;
-      slideOrder[chartSlideCurrent].classList.add('chart-slide-current');
-    }
+  const chartBtnObj = {
+    chartTextBox: chartTextBox,
+    slideNum: slideNum,
+    slideOrder: slideOrder
+  };
 
-    setChartData(chartDataObj, chartSlideCurrent);
-  });
+  const currentObj = {
+    slideCurrent: 0
+  };
 
+  leftChartBtnClick(chartDataObj, chartBtnObj, leftChartBtn, currentObj);
+  rightChartBtnClick(chartDataObj, chartBtnObj, rightChartBtn, currentObj);
+  chartNumClick(chartDataObj, chartBtnObj, currentObj);
+}
+
+function chartNumClick(chartDataObj, chartBtnObj, currentObj) {
+  const { slideNum, slideOrder, chartTextBox } = chartBtnObj;
+  const { chartBox } = chartDataObj;
   for (let i = 0; i < slideNum; i++) {
     slideOrder[i].addEventListener('click', () => {
-      slideOrder[chartSlideCurrent].classList.remove('chart-slide-current');
-      chartSlideCurrent = i;
-      slideOrder[chartSlideCurrent].classList.add('chart-slide-current');
+      slideOrder[currentObj.slideCurrent].classList.remove(
+        'chart-slide-current'
+      );
+      currentObj.slideCurrent = i;
+      slideOrder[currentObj.slideCurrent].classList.add('chart-slide-current');
 
-      setChartData(chartDataObj, chartSlideCurrent);
+      setChartData(chartDataObj, currentObj, slideNum);
+      setChartText(chartBox, chartTextBox, currentObj, slideNum);
     });
   }
 }
 
-function setChartData(chartDataObj, chartSlideCurrent) {
+function setChartText(chartBox, chartTextBox, currentObj, slideNum) {
+  if (chartBox.id === 'chart-func1-line') {
+    for (let i = 0; i < slideNum; i++) {
+      if (currentObj.slideCurrent === i) {
+        chartTextBox.textContent = i;
+      }
+    }
+  } else if (chartBox.id === 'chart-func1-bar') {
+    for (let i = 0; i < slideNum; i++) {
+      if (currentObj.slideCurrent === i) {
+        chartTextBox.textContent = i;
+      }
+    }
+  }
+}
+
+function leftChartBtnClick(
+  chartDataObj,
+  chartBtnObj,
+  leftChartBtn,
+  currentObj
+) {
+  const { chartBox } = chartDataObj;
+  const { slideNum, slideOrder, chartTextBox } = chartBtnObj;
+
+  leftChartBtn.addEventListener('click', () => {
+    if (currentObj.slideCurrent === 0) {
+      slideOrder[currentObj.slideCurrent].classList.remove(
+        'chart-slide-current'
+      );
+      slideOrder[slideNum - 1].classList.add('chart-slide-current');
+      currentObj.slideCurrent = slideNum - 1;
+    } else {
+      slideOrder[currentObj.slideCurrent].classList.remove(
+        'chart-slide-current'
+      );
+      currentObj.slideCurrent--;
+      slideOrder[currentObj.slideCurrent].classList.add('chart-slide-current');
+    }
+    setChartData(chartDataObj, currentObj, slideNum);
+    setChartText(chartBox, chartTextBox, currentObj, slideNum);
+  });
+}
+function rightChartBtnClick(
+  chartDataObj,
+  chartBtnObj,
+  rightChartBtn,
+  currentObj
+) {
+  const { chartBox } = chartDataObj;
+  const { slideNum, slideOrder, chartTextBox } = chartBtnObj;
+
+  rightChartBtn.addEventListener('click', e => {
+    if (currentObj.slideCurrent === slideNum - 1) {
+      currentObj.slideCurrent = 0;
+      slideOrder[slideNum - 1].classList.remove('chart-slide-current');
+      slideOrder[currentObj.slideCurrent].classList.add('chart-slide-current');
+    } else {
+      slideOrder[currentObj.slideCurrent].classList.remove(
+        'chart-slide-current'
+      );
+      currentObj.slideCurrent++;
+      slideOrder[currentObj.slideCurrent].classList.add('chart-slide-current');
+    }
+
+    setChartData(chartDataObj, currentObj, slideNum);
+    setChartText(chartBox, chartTextBox, currentObj, slideNum);
+  });
+}
+
+function setChartData(chartDataObj, currentObj, slideNum) {
   const { chartBox, chartDataBox, instance } = chartDataObj;
-  const lineMap = new Map([
-    [0, '$12'],
-    [1, '$24'],
-    [2, '$48'],
-    [3, '$192'],
-    [4, 'all']
-  ]);
 
   if (chartBox.id === 'chart-func1-line') {
+    const lineMap = new Map([
+      [0, '$12'],
+      [1, '$24'],
+      [2, '$48'],
+      [3, '$192'],
+      [4, 'all']
+    ]);
     chartDataBox.datasets[0].data =
-      lottofunc1.lottoData.oddCount.data.actual[lineMap.get(chartSlideCurrent)];
+      lottofunc1.lottoData.oddCount.data.actual[
+        lineMap.get(currentObj.slideCurrent)
+      ];
     chartDataBox.datasets[1].data =
-      lottofunc1.lottoData.oddCount.data.ideal[lineMap.get(chartSlideCurrent)];
+      lottofunc1.lottoData.oddCount.data.ideal[
+        lineMap.get(currentObj.slideCurrent)
+      ];
     instance.update();
   }
   if (chartBox.id === 'chart-func1-bar') {
-    if (chartSlideCurrent === 0) {
-      chartDataBox.datasets[0].data =
-        lottofunc1.lottoData.oddCount.data.ideal['latest'];
-      instance.update();
-    } else if (chartSlideCurrent === 1) {
-      chartDataBox.datasets[0].data =
-        lottofunc1.lottoData.oddCount.data.actual['latest'];
-      instance.update();
-    } else if (chartSlideCurrent === 2) {
+    for (let i = 0; i < slideNum - 1; i++) {
+      if (currentObj.slideCurrent === i) {
+        chartDataBox.datasets[0].data =
+          lottofunc1.lottoData.oddCount.data.ideal['latest'];
+        instance.update();
+      }
+    }
+    if (currentObj.slideCurrent === slideNum - 1) {
       const datas = [];
 
       for (
@@ -205,10 +280,10 @@ function chartInit() {
   const rightLineChartBtn = document.querySelector('#right-line-chart-btn');
   const leftBarChartBtn = document.querySelector('#left-bar-chart-btn');
   const rightBarChartBtn = document.querySelector('#right-bar-chart-btn');
-
+  const main22 = document.querySelector('.main-2-2');
+  const main23 = document.querySelector('.main-2-3');
   const chartLineNum = document.querySelectorAll('.chart-line-num > div');
   const chartBarNum = document.querySelectorAll('.chart-bar-num > div');
-
   const chartLineBox = document.querySelector('#chart-func1-line');
 
   const chartLineDataBox = {
@@ -274,6 +349,7 @@ function chartInit() {
   });
 
   const chartLineSlideObj = {
+    chartTextBox: main22,
     slideNum: 5,
     slideOrder: chartLineNum,
     chartBox: chartLineBox,
@@ -310,6 +386,7 @@ function chartInit() {
   });
 
   const chartBarSlideObj = {
+    chartTextBox: main23,
     slideNum: 3,
     slideOrder: chartBarNum,
     chartBox: chartBarBox,
