@@ -31,6 +31,7 @@ function drawBubbleChart(methodName) {
   const dataBubble = [['ID', '전체적 맥락', '부분적 맥락', '희소성', '확률']];
   const X = { max: -1, min: 1 };
   const Y = { max: -1, min: 1 };
+
   for (let i = 0; i < stats[methodName].ideal['all'].length; i++) {
     let x =
       stats[methodName].ideal['all'][i] - stats[methodName].actual['all'][i];
@@ -222,7 +223,7 @@ function setChartData(DataObj, currentObj, slideNum, methodName) {
 
 function initChartData(InitDataBoxObj, methodName) {
   const { DataBox, instance } = InitDataBoxObj;
-  console.log(stats);
+
   DataBox[0].datasets[0].data = stats[methodName].actual['$12'];
   DataBox[0].datasets[1].data = stats[methodName].ideal['$12'];
   instance[0].update();
@@ -231,7 +232,9 @@ function initChartData(InitDataBoxObj, methodName) {
   instance[1].update();
 
   google.charts.load('current', { packages: ['corechart'] });
-  google.charts.setOnLoadCallback(drawBubbleChart);
+  google.charts.setOnLoadCallback(function() {
+    drawBubbleChart(methodName);
+  });
 }
 
 function chartInit(methodName) {

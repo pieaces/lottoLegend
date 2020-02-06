@@ -5,149 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
-    <style>
-      @import 'compass/css3';
-      @import url('https://fonts.googleapis.com/css?family=Lato:300,400,700,900');
-      @import url(https://fonts.googleapis.com/css?family=Pacifico);
-      body {
-        font-family: 'Lato', Helvetica, Arial;
-        font-size: 16px;
-      }
-      .text-center {
-        text-align: center;
-      }
-      *,
-      *:before,
-      *:after {
-        -webkit-border-sizing: border-box;
-        -moz-border-sizing: border-box;
-        border-sizing: border-box;
-      }
-      .container {
-        width: 350px;
-        margin: 50px auto;
-      }
-      .container > ul {
-        list-style: none;
-        padding: 0;
-        margin: 0 0 20px 0;
-      }
-      .title {
-        font-family: 'Pacifico';
-        font-weight: norma;
-        font-size: 40px;
-        text-align: center;
-        line-height: 1.4;
-        color: #2980b9;
-      }
-      .dropdown a {
-        text-decoration: none;
-      }
-      .dropdown [data-toggle='dropdown'] {
-        position: relative;
-        display: block;
-        color: white;
-        background: #2980b9;
-        padding: 10px;
-      }
-      .dropdown [data-toggle='dropdown']:hover {
-        background: #2c89c6;
-      }
-      .dropdown .icon-arrow {
-        position: absolute;
-        display: block;
-        font-size: 0.7em;
-        color: #fff;
-        top: 14px;
-        right: 10px;
-      }
-      .dropdown .icon-arrow:before {
-        content: '\25BC';
-      }
-      .dropdown .dropdown-menu {
-        max-height: 0;
-        overflow: hidden;
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-      .dropdown .dropdown-menu li {
-        padding: 0;
-      }
-      .dropdown .dropdown-menu li a {
-        display: block;
-        color: #6f6f6f;
-        background: #eee;
-        padding: 10px 10px;
-      }
-      .dropdown .show {
-        display: block;
-        max-height: 9999px;
-        animation: showAnimation 0.5s ease-in-out;
-        -moz-animation: showAnimation 0.5s ease-in-out;
-        -webkit-animation: showAnimation 0.5s ease-in-out;
-      }
-      .dropdown .hide {
-        max-height: 0;
-        animation: hideAnimation 0.4s ease-out;
-        -moz-animation: hideAnimation 0.4s ease-out;
-        -webkit-animation: hideAnimation 0.4s ease-out;
-      }
-    </style>
+    <link rel="stylesheet" href="" />
   </head>
   <body>
-    <div class="container">
-      <h1 class="title">Dropdown Menu</h1>
-      <ul>
-        <li class="dropdown">
-          <a href="#" data-toggle="dropdown"
-            >First Menu <i class="icon-arrow"></i
-          ></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
-          </ul>
-        </li>
-      </ul>
-      <p class="text-center">
-        See this same menu only with CSS3:
-        <a href="https://codepen.io/pedronauck/pen/jaluz" target="_blank"
-          >https://codepen.io/pedronauck/pen/jaluz</a
-        >
-      </p>
-    </div>
+    <script src="js/test.js"></script>
     <script>
-      // Dropdown Menu
-      var dropdown = document.querySelectorAll('.dropdown');
-      var dropdownArray = Array.prototype.slice.call(dropdown, 0);
-      dropdownArray.forEach(function(el) {
-        var button = el.querySelector('a[data-toggle="dropdown"]'),
-          menu = el.querySelector('.dropdown-menu'),
-          arrow = button.querySelector('i.icon-arrow');
+      function removejscssfile(filename, filetype) {
+        var targetelement =
+          filetype == 'js' ? 'script' : filetype == 'css' ? 'link' : 'none'; //determine element type to create nodelist from
+        var targetattr =
+          filetype == 'js' ? 'src' : filetype == 'css' ? 'href' : 'none'; //determine corresponding attribute to test for
+        var allsuspects = document.getElementsByTagName(targetelement);
+        for (var i = allsuspects.length; i >= 0; i--) {
+          //search backwards within nodelist for matching elements to remove
+          if (
+            allsuspects[i] &&
+            allsuspects[i].getAttribute(targetattr) != null &&
+            allsuspects[i].getAttribute(targetattr).indexOf(filename) != -1
+          )
+            allsuspects[i].parentNode.removeChild(allsuspects[i]); //remove element by calling parentNode.removeChild()
+        }
+      }
 
-        button.onclick = function(event) {
-          if (!menu.hasClass('show')) {
-            menu.classList.add('show');
-            menu.classList.remove('hide');
-
-            event.preventDefault();
-          } else {
-            menu.classList.remove('show');
-            menu.classList.add('hide');
-
-            event.preventDefault();
-          }
-        };
-      });
-
-      Element.prototype.hasClass = function(className) {
-        return (
-          this.className &&
-          new RegExp('(^|\\s)' + className + '(\\s|$)').test(this.className)
-        );
-      };
+      removejscssfile('somescript.js', 'js'); //remove all occurences of "somescript.js" on page
+      removejscssfile('somestyle.css', 'css'); //remove all occurences "somestyle.css" on page
     </script>
   </body>
 </html>
