@@ -87,3 +87,6 @@ class Generator {
     return data;
   }
 }
+
+const stats = new Stats();
+const generator = new Generator();
