@@ -26,36 +26,36 @@ function filterBoxCheck() {
   });
 }
 
-function drawBubbleChart(methodName) {
+function drawBubbleChart(chartData) {
   const BubbleBox = document.querySelector('#chart-func1-bubble');
   const dataBubble = [['ID', '전체적 맥락', '부분적 맥락', '희소성', '확률']];
   const X = { max: -1, min: 1 };
   const Y = { max: -1, min: 1 };
 
-  for (let i = 0; i < stats[methodName].ideal['all'].length; i++) {
+  for (let i = 0; i < chartData.ideal['all'].length; i++) {
     let x =
-      stats[methodName].ideal['all'][i] - stats[methodName].actual['all'][i];
-    if (stats[methodName].ideal['all'][i] >= stats[methodName].actual['all'][i])
-      x /= stats[methodName].ideal['all'][i];
-    else x /= stats[methodName].actual['all'][i];
-    x *= stats[methodName].pos[i];
+      chartData.ideal['all'][i] - chartData.actual['all'][i];
+    if (chartData.ideal['all'][i] >= chartData.actual['all'][i])
+      x /= chartData.ideal['all'][i];
+    else x /= chartData.actual['all'][i];
+    x *= chartData.pos[i];
     let y =
-      stats[methodName].ideal['latest'][i] -
-      stats[methodName].actual['latest'][i];
+      chartData.ideal['latest'][i] -
+      chartData.actual['latest'][i];
     if (
-      stats[methodName].ideal['latest'][i] >=
-      stats[methodName].actual['latest'][i]
+      chartData.ideal['latest'][i] >=
+      chartData.actual['latest'][i]
     )
-      y /= stats[methodName].ideal['latest'][i];
-    else y /= stats[methodName].actual['latest'][i];
-    y *= stats[methodName].pos[i];
+      y /= chartData.ideal['latest'][i];
+    else y /= chartData.actual['latest'][i];
+    y *= chartData.pos[i];
 
     if (x > X.max) X.max = x;
     if (x < X.min) X.min = x;
     if (y > Y.max) Y.max = y;
     if (y < Y.min) Y.min = y;
 
-    const data = [String(i), x, y, y, stats[methodName].pos[i]];
+    const data = [String(i), x, y, y, chartData.pos[i]];
     dataBubble.push(data);
   }
 
@@ -71,7 +71,7 @@ function drawBubbleChart(methodName) {
   chart.draw(BubbleDataBox, BubbleOptions);
 }
 
-function chartSlide(slideObj, methodName) {
+function chartSlide(slideObj, chartData) {
   const {
     TextBox,
     slideNum,
@@ -99,12 +99,12 @@ function chartSlide(slideObj, methodName) {
     slideCurrent: 0
   };
 
-  leftBtnClick(DataObj, BtnObj, leftBtn, currentObj, methodName);
-  rightBtnClick(DataObj, BtnObj, rightBtn, currentObj, methodName);
-  chartNumClick(DataObj, BtnObj, currentObj, methodName);
+  leftBtnClick(DataObj, BtnObj, leftBtn, currentObj, chartData);
+  rightBtnClick(DataObj, BtnObj, rightBtn, currentObj, chartData);
+  chartNumClick(DataObj, BtnObj, currentObj, chartData);
 }
 
-function chartNumClick(DataObj, BtnObj, currentObj, methodName) {
+function chartNumClick(DataObj, BtnObj, currentObj, chartData) {
   const { slideNum, slideOrder, TextBox } = BtnObj;
   const { Box } = DataObj;
   for (let i = 0; i < slideNum; i++) {
@@ -115,7 +115,7 @@ function chartNumClick(DataObj, BtnObj, currentObj, methodName) {
       currentObj.slideCurrent = i;
       slideOrder[currentObj.slideCurrent].classList.add('chart-slide-current');
 
-      setChartData(DataObj, currentObj, slideNum, methodName);
+      setChartData(DataObj, currentObj, slideNum, chartData);
       setChartText(Box, TextBox, currentObj, slideNum);
     });
   }
@@ -137,7 +137,7 @@ function setChartText(Box, TextBox, currentObj, slideNum) {
   }
 }
 
-function leftBtnClick(DataObj, BtnObj, leftBtn, currentObj, methodName) {
+function leftBtnClick(DataObj, BtnObj, leftBtn, currentObj, chartData) {
   const { Box } = DataObj;
   const { slideNum, slideOrder, TextBox } = BtnObj;
 
@@ -155,11 +155,11 @@ function leftBtnClick(DataObj, BtnObj, leftBtn, currentObj, methodName) {
       currentObj.slideCurrent--;
       slideOrder[currentObj.slideCurrent].classList.add('chart-slide-current');
     }
-    setChartData(DataObj, currentObj, slideNum, methodName);
+    setChartData(DataObj, currentObj, slideNum, chartData);
     setChartText(Box, TextBox, currentObj, slideNum);
   });
 }
-function rightBtnClick(DataObj, BtnObj, rightBtn, currentObj, methodName) {
+function rightBtnClick(DataObj, BtnObj, rightBtn, currentObj, chartData) {
   const { Box } = DataObj;
   const { slideNum, slideOrder, TextBox } = BtnObj;
 
@@ -176,12 +176,12 @@ function rightBtnClick(DataObj, BtnObj, rightBtn, currentObj, methodName) {
       slideOrder[currentObj.slideCurrent].classList.add('chart-slide-current');
     }
 
-    setChartData(DataObj, currentObj, slideNum, methodName);
+    setChartData(DataObj, currentObj, slideNum, chartData);
     setChartText(Box, TextBox, currentObj, slideNum);
   });
 }
 
-function setChartData(DataObj, currentObj, slideNum, methodName) {
+function setChartData(DataObj, currentObj, slideNum, chartData) {
   const { Box, DataBox, instance } = DataObj;
 
   if (Box.id === 'chart-func1-line') {
@@ -193,25 +193,25 @@ function setChartData(DataObj, currentObj, slideNum, methodName) {
       [4, 'all']
     ]);
     DataBox.datasets[0].data =
-      stats[methodName].actual[lineMap.get(currentObj.slideCurrent)];
+      chartData.actual[lineMap.get(currentObj.slideCurrent)];
     DataBox.datasets[1].data =
-      stats[methodName].ideal[lineMap.get(currentObj.slideCurrent)];
+      chartData.ideal[lineMap.get(currentObj.slideCurrent)];
     instance.update();
   }
   if (Box.id === 'chart-func1-bar') {
     for (let i = 0; i < slideNum - 1; i++) {
       if (currentObj.slideCurrent === i) {
-        DataBox.datasets[0].data = stats[methodName].ideal['latest'];
+        DataBox.datasets[0].data = chartData.ideal['latest'];
         instance.update();
       }
     }
     if (currentObj.slideCurrent === slideNum - 1) {
       const datas = [];
 
-      for (let i = 0; i < stats[methodName].ideal['latest'].length; i++) {
+      for (let i = 0; i < chartData.ideal['latest'].length; i++) {
         const data =
-          stats[methodName].ideal['latest'][i] -
-          stats[methodName].actual['latest'][i];
+          chartData.ideal['latest'][i] -
+          chartData.actual['latest'][i];
         datas.push(data);
       }
       DataBox.datasets[0].data = datas;
@@ -221,23 +221,23 @@ function setChartData(DataObj, currentObj, slideNum, methodName) {
   }
 }
 
-function initChartData(InitDataBoxObj, methodName) {
+function initChartData(InitDataBoxObj, chartData) {
   const { DataBox, instance } = InitDataBoxObj;
 
-  DataBox[0].datasets[0].data = stats[methodName].actual['$12'];
-  DataBox[0].datasets[1].data = stats[methodName].ideal['$12'];
+  DataBox[0].datasets[0].data = chartData.actual['$12'];
+  DataBox[0].datasets[1].data = chartData.ideal['$12'];
   instance[0].update();
 
-  DataBox[1].datasets[0].data = stats[methodName].ideal['latest'];
+  DataBox[1].datasets[0].data = chartData.ideal['latest'];
   instance[1].update();
 
   google.charts.load('current', { packages: ['corechart'] });
   google.charts.setOnLoadCallback(function() {
-    drawBubbleChart(methodName);
+    drawBubbleChart(chartData);
   });
 }
 
-function chartInit(methodName) {
+function chartInit(chartData) {
   const leftLineBtn = document.querySelector('#left-line-chart-btn');
   const rightLineBtn = document.querySelector('#right-line-chart-btn');
   const leftBarBtn = document.querySelector('#left-bar-chart-btn');
@@ -249,7 +249,7 @@ function chartInit(methodName) {
   const LineBox = document.querySelector('#chart-func1-line');
 
   const LineDataBox = {
-    labels: [0, 1, 2, 3, 4, 5, 6],
+    labels: chartData.actual.$12.length,
     datasets: [
       {
         label: '실제값',
@@ -324,7 +324,7 @@ function chartInit(methodName) {
   const BarBox = document.querySelector('#chart-func1-bar');
 
   const BarDataBox = {
-    labels: [0, 1, 2, 3, 4, 5, 6],
+    labels: chartData.actual.$12.length,
     datasets: [
       {
         label: '이상값',
@@ -363,9 +363,9 @@ function chartInit(methodName) {
     instance: [LineInstance, BarInstance]
   };
 
-  initChartData(InitDataBoxObj, methodName);
+  initChartData(InitDataBoxObj, chartData);
 
-  chartSlide(LineSlideObj, methodName);
+  chartSlide(LineSlideObj, chartData);
 
-  chartSlide(BarSlideObj, methodName);
+  chartSlide(BarSlideObj, chartData);
 }

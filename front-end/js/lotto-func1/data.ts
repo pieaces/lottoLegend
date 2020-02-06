@@ -7,26 +7,28 @@ interface Range {
   from: number;
   to: number;
 }
-enum Method {
-  excludedLineCount = 'excludedLineCount',
-  lineCount = 'lineCount',
-  carryCount = 'carryCount',
-  excludeInclude = 'excludeInclude',
-  lowCount = 'lowCount',
-  sum = 'sum',
-  oddCount = 'oddCount',
-  primeCount = 'primeCount',
-  $3Count = '$3Count',
-  sum$10 = 'sum$10',
-  diffMaxMin = 'diffMaxMin',
-  AC = 'AC',
-  consecutiveExist = 'consecutiveExist'
+
+const MethodMap = {
+  "1-1":'excludedLineCount',
+  "1-2":'lineCount',
+  "2":'carryCount',
+  "3-1":'excludedNumbers',
+  "3-2":'includedNumbers',
+  "4":'lowCount',
+  "5":'sum',
+  "6":'oddCount',
+  "7":'primeCount',
+  "8":'$3Count',
+  "9":'sum$10',
+  "10":'diffMaxMin',
+  "11":'AC',
+  "12":'consecutiveExist',
 }
 
 class Stats {
   [x: string]: any;
 
-  async getData(method: Method, params: Params) {
+  async getData(method: string, params: Params) {
     const headers = {
       'x-api-key': 'LZn9Pykicg982PNmTmdiB8pkso4xbGiQ4n4P1z1k' //API KEY
     };
