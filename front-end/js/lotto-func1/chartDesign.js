@@ -324,7 +324,7 @@ function chartInit(chartData) {
   const BarBox = document.querySelector('#chart-func1-bar');
 
   const BarDataBox = {
-    labels: chartData.actual.$12.length,
+    labels: [0, 1, 2, 3, 4, 5, 6],
     datasets: [
       {
         label: '이상값',

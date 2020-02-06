@@ -8,23 +8,6 @@ interface Range {
   to: number;
 }
 
-const MethodMap = {
-  "1-1":'excludedLineCount',
-  "1-2":'lineCount',
-  "2":'carryCount',
-  "3-1":'excludedNumbers',
-  "3-2":'includedNumbers',
-  "4":'lowCount',
-  "5":'sum',
-  "6":'oddCount',
-  "7":'primeCount',
-  "8":'$3Count',
-  "9":'sum$10',
-  "10":'diffMaxMin',
-  "11":'AC',
-  "12":'consecutiveExist',
-}
-
 class Stats {
   [x: string]: any;
 
@@ -68,11 +51,28 @@ interface GeneratorOption {
 
 class Generator {
   option: GeneratorOption;
-
-  constructor(){
+  currentFilter: string;
+  methodMap: any = {
+    "1-1": 'excludedLineCount',
+    "1-2": 'lineCount',
+    "2": 'carryCount',
+    "3-1": 'excludedNumbers',
+    "3-2": 'includedNumbers',
+    "4": 'lowCount',
+    "5": 'sum',
+    "6": 'oddCount',
+    "7": 'primeCount',
+    "8": '$3Count',
+    "9": 'sum$10',
+    "10": 'diffMaxMin',
+    "11": 'AC',
+    "12": 'consecutiveExist'
+  };
+  constructor() {
     this.option = {
       current: "excludedLineCount"
     };
+    this.currentFilter = "1-1";
   }
   async generate() {
     const headers = {
