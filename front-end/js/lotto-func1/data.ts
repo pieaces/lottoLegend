@@ -47,9 +47,9 @@ class Stats {
 }
 
 interface GeneratorOption {
-  excludedLineCount: number;
+  excludedLineCount?: number;
   excludedLines?: number[];
-  carryCount: number;
+  carryCount?: number;
   includedNumbers?: number[];
   excludedNumbers?: number[];
   lowCount?: number;
@@ -68,7 +68,9 @@ class Generator {
   option: GeneratorOption;
 
   constructor(){
-    this.option.current = "excludedLinecount";
+    this.option = {
+      current: "excludedLineCount"
+    };
   }
   async generate() {
     const headers = {
