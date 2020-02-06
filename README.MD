@@ -67,28 +67,30 @@ Range = {from:number, to:number}
 
 ## Filer
 
-**1. 전멸라인**
-* 전멸라인 개수 입력 (가용범위: 0~3)
+**1. 전멸구간**
+* 1 전멸구간 개수 (가용범위: 0~3)
 
                 excludedLineCount
 
                 *API:GET /stats/excludedLineCount
 
-* 전멸라인 (0, 10, 20, 30, 40번대) 중 복수선택 (가용값: 0~4)
+* 2 전멸구간 (가용값: 0~4)
 
                 lineCount
 
                 *API:GET /stats/lineCount
 
 
-**2~3. 제외 및 포함수 선택**
-* 이월수 선택
+**2. 이월수 개수**
 
                 carryCount
 
                 *API:GET /stats/carryCount
 
-* 제외 및 포함수 선택 (최근 5회차 번호 제시, 번호간격, 번호빈도) +(궁합수, 9궁도)
+**3. 제외 및 포함수**
+* 1 제외수 (최근 12회차 번호 제시, 번호간격, 번호빈도) +(궁합수, 9궁도)
+
+* 2 포함수 (최근 12회차 번호 제시, 번호간격, 번호빈도) +(궁합수, 9궁도)
 
                 emergence
 
@@ -110,19 +112,19 @@ Range = {from:number, to:number}
 
                 *API:GET /stats/excludeInclude
 
-**4. 저번호 개수 입력 (가용값: 0~6)**
+**4. 고/저 비율 (가용값: 0~6)**
     
                 lowCount
 
                 *API:GET /stats/lowCount
 
-**5. 번호 합 범위 입력 (가용범위: 21~255) (20,10단위 묶음)**
+**5. 번호합 (가용범위: 21~255) (20,10단위 묶음)**
     
                 sum
 
                 *API:GET /stats/sum?from=21&to=255
 
-**6. 홀수개수 범위 입력 (가용범위: 0~6)**
+**6. 홀수개수 (가용범위: 0~6)**
     
                 oddCount
 
@@ -130,7 +132,7 @@ Range = {from:number, to:number}
                 
                 QueryString: ?list=${decodeURI(number[])} | ?from=0&to=6
 
-**7. 소수개수 범위 입력 (가용범위: 0~6)**
+**7. 소수개수 (가용범위: 0~6)**
     
                 primeCount
 
@@ -138,7 +140,7 @@ Range = {from:number, to:number}
 
                 QueryString: ?list=${decodeURI(number[])} | ?from=0&to=6
 
-**8. 3의배수 개수 범위 입력 (가용범위: 0~6)**
+**8. 3의배수 개수 (가용범위: 0~6)**
     
                 $3Count
 
@@ -146,7 +148,7 @@ Range = {from:number, to:number}
 
                 QueryString: ?list=${decodeURI(number[])} | ?from=0&to=6
 
-**9. 첫수(십의자리)합 범위 입력 (가용범위: 0~24)**
+**9. 첫수(십의자리)합 (가용범위: 0~24)**
     
                 sum$10
 
@@ -154,7 +156,7 @@ Range = {from:number, to:number}
 
                 QueryString: ?list=${decodeURI(number[])} | ?from=0&to=24
 
-**10. 고저차 범위 입력 (가용범위: 5~44)**
+**10. 고저차 (가용범위: 5~44)**
     
                 diffMaxMin
 
@@ -162,7 +164,7 @@ Range = {from:number, to:number}
 
                 QueryString: ?list=${decodeURI(number[])} | ?from=5&to=24
 
-**11. AC(Arithmetic Complex) 범위 입력 (가용범위: 0~10)**
+**11. AC(Arithmetic Complex) (가용범위: 0~10)**
     
                 AC
 
