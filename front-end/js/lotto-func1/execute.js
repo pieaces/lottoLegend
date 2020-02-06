@@ -1,7 +1,7 @@
 async function init() {
   filterBoxCheck();
   stats.getData();
-  chartInit(methodName);
+  chartInit(generator.option.current);
 }
 
 init();

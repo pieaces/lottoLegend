@@ -87,6 +87,7 @@ var Stats = /** @class */ (function () {
 }());
 var Generator = /** @class */ (function () {
     function Generator() {
+        this.option.current = "excludedLinecount";
     }
     Generator.prototype.generate = function () {
         return __awaiter(this, void 0, void 0, function () {

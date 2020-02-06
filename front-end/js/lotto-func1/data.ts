@@ -67,6 +67,9 @@ interface GeneratorOption {
 class Generator {
   option: GeneratorOption;
 
+  constructor(){
+    this.option.current = "excludedLinecount";
+  }
   async generate() {
     const headers = {
       'x-api-key': 'LZn9Pykicg982PNmTmdiB8pkso4xbGiQ4n4P1z1k',
