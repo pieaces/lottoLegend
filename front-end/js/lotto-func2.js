@@ -124,14 +124,14 @@ const chartBarInstance = new Chart(chartBarBox, {
   options: chartBarOptions
 });
 
-const lottoNum = document.querySelectorAll('.lotto-num-box> div > div');
-const selectNumBox = document.querySelector('.select-num-box');
-const numExcludeBtn = document.querySelector('.num-exclude-btn');
-const resetNumBtn = document.querySelector('.reset-num-btn');
-const winNum = document.querySelectorAll('.win-num-box > div');
+const lottoNum = document.querySelectorAll('#func2 .lotto-num-box> div > div');
+const selectNumBox = document.querySelector('#func2 .select-num-box');
+const numExcludeBtn = document.querySelector('#func2 .num-exclude-btn');
+const resetNumBtn = document.querySelector('#func2 .reset-num-btn');
+const winNum = document.querySelectorAll('#func2 .win-num-box > div');
 
-const numTerm = document.querySelector('.num-term');
-const numFreq = document.querySelector('.num-freq');
+const numTerm = document.querySelector('#func2 .num-term');
+const numFreq = document.querySelector('#func2 .num-freq');
 
 function numExclude() {
   const lottoNumDefaultColor = 'rgba(231, 76, 60, 0.2)';
@@ -274,8 +274,8 @@ function numExclude() {
 
   // 번호판 다른 곳 누르면 선택색깔 초기화, numExclude 함수 안의 다른 함수들 이벤트 전파 막아야 함
 
-  let myExclusiveEl = document.querySelectorAll('body *');
-  let myEls = document.querySelectorAll('.main-1-3 *');
+  let myExclusiveEl = document.querySelectorAll('#func2 *');
+  let myEls = document.querySelectorAll('#fun2 .main-1-3 *');
 
   myExclusiveEl = [...myExclusiveEl].filter(parent => {
     let containedByExclusionNode = [...myEls].filter(child => {
