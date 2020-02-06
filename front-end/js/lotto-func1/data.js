@@ -77,7 +77,7 @@ var Stats = /** @class */ (function () {
                         return [4 /*yield*/, fetchResult.text()];
                     case 2:
                         data = _b.apply(_a, [_c.sent()]);
-                        this[method] = data;
+                        this[method] = data.data;
                         return [2 /*return*/];
                 }
             });

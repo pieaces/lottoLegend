@@ -8,19 +8,19 @@ interface Range {
   to: number;
 }
 enum Method {
-  excludedLineCount = "excludedLineCount",
-  lineCount = "lineCount",
-  carryCount = "carryCount",
-  excludeInclude = "excludeInclude",
-  lowCount = "lowCount",
-  sum = "sum",
-  oddCount = "oddCount",
-  primeCount = "primeCount",
-  $3Count = "$3Count",
-  sum$10 = "sum$10",
-  diffMaxMin = "diffMaxMin",
-  AC = "AC",
-  consecutiveExist = "consecutiveExist",
+  excludedLineCount = 'excludedLineCount',
+  lineCount = 'lineCount',
+  carryCount = 'carryCount',
+  excludeInclude = 'excludeInclude',
+  lowCount = 'lowCount',
+  sum = 'sum',
+  oddCount = 'oddCount',
+  primeCount = 'primeCount',
+  $3Count = '$3Count',
+  sum$10 = 'sum$10',
+  diffMaxMin = 'diffMaxMin',
+  AC = 'AC',
+  consecutiveExist = 'consecutiveExist'
 }
 
 class Stats {
@@ -32,15 +32,17 @@ class Stats {
     };
     let url = `https://is6q0wtgml.execute-api.ap-northeast-2.amazonaws.com/dev/stats/${method}`;
     if (params) {
-      if (params.from & params.to) url += `?from=${params.from}&to=${params.to}`;
-      else if (params.list) url += `?list=${encodeURI(JSON.stringify(params.list))}`
+      if (params.from & params.to)
+        url += `?from=${params.from}&to=${params.to}`;
+      else if (params.list)
+        url += `?list=${encodeURI(JSON.stringify(params.list))}`;
     }
     console.log(url);
 
     const fetchResult = await fetch(url, { method: 'GET', headers });
     const data = JSON.parse(await fetchResult.text());
 
-    this[method] = data;
+    this[method] = data.data;
   }
 }
 

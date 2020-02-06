@@ -26,49 +26,39 @@ function filterBoxCheck() {
   });
 }
 
-function drawBubbleChart() {
+function drawBubbleChart(methodNameName) {
   const BubbleBox = document.querySelector('#chart-func1-bubble');
   const dataBubble = [['ID', '전체적 맥락', '부분적 맥락', '희소성', '확률']];
   const X = { max: -1, min: 1 };
   const Y = { max: -1, min: 1 };
-  for (
-    let i = 0;
-    i < lottofunc1.lottoData.oddCount.data.ideal['all'].length;
-    i++
-  ) {
+  for (let i = 0; i < stats[methodNameName].ideal['all'].length; i++) {
     let x =
-      lottofunc1.lottoData.oddCount.data.ideal['all'][i] -
-      lottofunc1.lottoData.oddCount.data.actual['all'][i];
+      stats[methodNameName].ideal['all'][i] -
+      stats[methodNameName].actual['all'][i];
     if (
-      lottofunc1.lottoData.oddCount.data.ideal['all'][i] >=
-      lottofunc1.lottoData.oddCount.data.actual['all'][i]
+      stats[methodNameName].ideal['all'][i] >=
+      stats[methodNameName].actual['all'][i]
     )
-      x /= lottofunc1.lottoData.oddCount.data.ideal['all'][i];
-    else x /= lottofunc1.lottoData.oddCount.data.actual['all'][i];
-    x *= lottofunc1.lottoData.oddCount.data.pos[i];
+      x /= stats[methodNameName].ideal['all'][i];
+    else x /= stats[methodNameName].actual['all'][i];
+    x *= stats[methodNameName].pos[i];
     let y =
-      lottofunc1.lottoData.oddCount.data.ideal['latest'][i] -
-      lottofunc1.lottoData.oddCount.data.actual['latest'][i];
+      stats[methodNameName].ideal['latest'][i] -
+      stats[methodNameName].actual['latest'][i];
     if (
-      lottofunc1.lottoData.oddCount.data.ideal['latest'][i] >=
-      lottofunc1.lottoData.oddCount.data.actual['latest'][i]
+      stats[methodNameName].ideal['latest'][i] >=
+      stats[methodNameName].actual['latest'][i]
     )
-      y /= lottofunc1.lottoData.oddCount.data.ideal['latest'][i];
-    else y /= lottofunc1.lottoData.oddCount.data.actual['latest'][i];
-    y *= lottofunc1.lottoData.oddCount.data.pos[i];
+      y /= stats[methodNameName].ideal['latest'][i];
+    else y /= stats[methodNameName].actual['latest'][i];
+    y *= stats[methodNameName].pos[i];
 
     if (x > X.max) X.max = x;
     if (x < X.min) X.min = x;
     if (y > Y.max) Y.max = y;
     if (y < Y.min) Y.min = y;
 
-    const data = [
-      String(i),
-      x,
-      y,
-      y,
-      lottofunc1.lottoData.oddCount.data.pos[i]
-    ];
+    const data = [String(i), x, y, y, stats[methodNameName].pos[i]];
     dataBubble.push(data);
   }
 
@@ -128,7 +118,7 @@ function chartNumClick(DataObj, BtnObj, currentObj) {
       currentObj.slideCurrent = i;
       slideOrder[currentObj.slideCurrent].classList.add('chart-slide-current');
 
-      setChartData(DataObj, currentObj, slideNum);
+      setChartData(DataObj, currentObj, slideNum, methodNameName);
       setChartText(Box, TextBox, currentObj, slideNum);
     });
   }
@@ -168,7 +158,7 @@ function leftBtnClick(DataObj, BtnObj, leftBtn, currentObj) {
       currentObj.slideCurrent--;
       slideOrder[currentObj.slideCurrent].classList.add('chart-slide-current');
     }
-    setChartData(DataObj, currentObj, slideNum);
+    setChartData(DataObj, currentObj, slideNum, methodNameName);
     setChartText(Box, TextBox, currentObj, slideNum);
   });
 }
@@ -189,12 +179,12 @@ function rightBtnClick(DataObj, BtnObj, rightBtn, currentObj) {
       slideOrder[currentObj.slideCurrent].classList.add('chart-slide-current');
     }
 
-    setChartData(DataObj, currentObj, slideNum);
+    setChartData(DataObj, currentObj, slideNum, methodNameName);
     setChartText(Box, TextBox, currentObj, slideNum);
   });
 }
 
-function setChartData(DataObj, currentObj, slideNum) {
+function setChartData(DataObj, currentObj, slideNum, methodNameName) {
   const { Box, DataBox, instance } = DataObj;
 
   if (Box.id === 'chart-func1-line') {
@@ -206,34 +196,25 @@ function setChartData(DataObj, currentObj, slideNum) {
       [4, 'all']
     ]);
     DataBox.datasets[0].data =
-      lottofunc1.lottoData.oddCount.data.actual[
-        lineMap.get(currentObj.slideCurrent)
-      ];
+      stats[methodNameName].actual[lineMap.get(currentObj.slideCurrent)];
     DataBox.datasets[1].data =
-      lottofunc1.lottoData.oddCount.data.ideal[
-        lineMap.get(currentObj.slideCurrent)
-      ];
+      stats[methodNameName].ideal[lineMap.get(currentObj.slideCurrent)];
     instance.update();
   }
   if (Box.id === 'chart-func1-bar') {
     for (let i = 0; i < slideNum - 1; i++) {
       if (currentObj.slideCurrent === i) {
-        DataBox.datasets[0].data =
-          lottofunc1.lottoData.oddCount.data.ideal['latest'];
+        DataBox.datasets[0].data = stats[methodNameName].ideal['latest'];
         instance.update();
       }
     }
     if (currentObj.slideCurrent === slideNum - 1) {
       const datas = [];
 
-      for (
-        let i = 0;
-        i < lottofunc1.lottoData.oddCount.data.ideal['latest'].length;
-        i++
-      ) {
+      for (let i = 0; i < stats[methodNameName].ideal['latest'].length; i++) {
         const data =
-          lottofunc1.lottoData.oddCount.data.ideal['latest'][i] -
-          lottofunc1.lottoData.oddCount.data.actual['latest'][i];
+          stats[methodNameName].ideal['latest'][i] -
+          stats[methodNameName].actual['latest'][i];
         datas.push(data);
       }
       DataBox.datasets[0].data = datas;
@@ -243,23 +224,21 @@ function setChartData(DataObj, currentObj, slideNum) {
   }
 }
 
-function initChartData(InitDataBoxObj) {
+function initChartData(InitDataBoxObj, methodNameName) {
   const { DataBox, instance } = InitDataBoxObj;
 
-  DataBox[0].datasets[0].data =
-    lottofunc1.lottoData.oddCount.data.actual['$12'];
-  DataBox[0].datasets[1].data = lottofunc1.lottoData.oddCount.data.ideal['$12'];
+  DataBox[0].datasets[0].data = stats[methodNameName].actual['$12'];
+  DataBox[0].datasets[1].data = stats[methodNameName].ideal['$12'];
   instance[0].update();
 
-  DataBox[1].datasets[0].data =
-    lottofunc1.lottoData.oddCount.data.ideal['latest'];
+  DataBox[1].datasets[0].data = stats[methodNameName].ideal['latest'];
   instance[1].update();
 
   google.charts.load('current', { packages: ['corechart'] });
   google.charts.setOnLoadCallback(drawBubbleChart);
 }
 
-function chartInit() {
+function chartInit(methodNameName) {
   const leftLineBtn = document.querySelector('#left-line-chart-btn');
   const rightLineBtn = document.querySelector('#right-line-chart-btn');
   const leftBarBtn = document.querySelector('#left-bar-chart-btn');
@@ -385,9 +364,9 @@ function chartInit() {
     instance: [LineInstance, BarInstance]
   };
 
-  initChartData(InitDataBoxObj);
+  initChartData(InitDataBoxObj, methodNameName);
 
-  chartSlide(LineSlideObj);
+  chartSlide(LineSlideObj, methodNameName);
 
-  chartSlide(BarSlideObj);
+  chartSlide(BarSlideObj, methodNameName);
 }

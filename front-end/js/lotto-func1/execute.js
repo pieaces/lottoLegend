@@ -1,7 +1,7 @@
 async function init() {
-    filterBoxCheck();
-    await setLottoOddCount();
-    chartInit();
+  filterBoxCheck();
+  stats.getData();
+  chartInit(methodName);
 }
 
 init();
