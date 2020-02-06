@@ -14,6 +14,7 @@ function filterBoxCheck() {
       for (const node of filterList) {
         node.addEventListener('click', () => {
           filterSelectText.textContent = node.textContent;
+          options.currentFilter = node.textContent;
         });
       }
     } else {

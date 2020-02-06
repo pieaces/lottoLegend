@@ -39,9 +39,11 @@
                   <a href="#">1</a>
                   <i class="fas fa-sort-down filter-arrow"></i>
                   <ul class="filter-list">
-                    <li>1</li>
+                    <li>1-1</li>
+                    <li>1-2</li>
                     <li>2</li>
-                    <li>3</li>
+                    <li>3-1</li>
+                    <li>3-2</li>
                     <li>4</li>
                     <li>5</li>
                     <li>6</li>
@@ -54,13 +56,17 @@
                   </ul>
                 </div>
               </div>
-              <div class="filter-current-container">
-                <div class="filter-text filter-before">
-                  1
-                </div>
-                <div class="filter-text filter-current">2</div>
-                <div class="filter-text filter-after">3</div>
-              </div>
+              <ul class="steps">
+                <li class="past">
+                  <span> <strong>Step 1</strong> </span>
+                </li>
+                <li class="present">
+                  <span> <strong>Step 2</strong> </span><i></i>
+                </li>
+                <li class="future">
+                  <span> <strong>Step 3</strong> </span>
+                </li>
+              </ul>
             </div>
             <div class="main-1-2">
               <div class="chart-slide-num chart-line-num">
@@ -73,12 +79,12 @@
               <div class="chart-container">
                 <i
                   id="left-line-chart-btn"
-                  class="left-chart-btn far fa-3x fa-arrow-alt-circle-left"
+                  class="left-chart-btn fas fa-angle-left fa-4x "
                 ></i>
 
                 <i
                   id="right-line-chart-btn"
-                  class="right-chart-btn far fa-3x fa-arrow-alt-circle-right"
+                  class="right-chart-btn fas fa-angle-right fa-4x "
                 ></i>
                 <canvas id="chart-func1-line" class="chart"></canvas>
               </div>
@@ -96,12 +102,12 @@
               <div class="chart-container">
                 <i
                   id="left-bar-chart-btn"
-                  class="left-chart-btn far fa-3x fa-arrow-alt-circle-left"
+                  class="left-chart-btn fas fa-angle-left fa-4x "
                 ></i>
 
                 <i
                   id="right-bar-chart-btn"
-                  class="right-chart-btn far fa-3x fa-arrow-alt-circle-right"
+                  class="right-chart-btn fas fa-angle-right fa-4x "
                 ></i>
                 <canvas id="chart-func1-bar" class="chart"></canvas>
               </div>
@@ -163,7 +169,7 @@
       type="text/javascript"
       src="https://www.gstatic.com/charts/loader.js"
     ></script>
-
+    <script src="js/lotto-func.js"></script>
     <script src="js/lotto-func1/chartDesign.js"></script>
     <script src="js/lotto-func1/data.js"></script>
   </body>
