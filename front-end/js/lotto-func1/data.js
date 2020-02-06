@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -35,8 +34,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-exports.__esModule = true;
-var node_fetch_1 = require("node-fetch");
 var Method;
 (function (Method) {
     Method["excludedLineCount"] = "excludedLineCount";
@@ -52,7 +49,7 @@ var Method;
     Method["diffMaxMin"] = "diffMaxMin";
     Method["AC"] = "AC";
     Method["consecutiveExist"] = "consecutiveExist";
-})(Method = exports.Method || (exports.Method = {}));
+})(Method || (Method = {}));
 var Stats = /** @class */ (function () {
     function Stats() {
     }
@@ -73,7 +70,7 @@ var Stats = /** @class */ (function () {
                                 url += "?list=" + encodeURI(JSON.stringify(params.list));
                         }
                         console.log(url);
-                        return [4 /*yield*/, node_fetch_1["default"](url, { method: 'GET', headers: headers })];
+                        return [4 /*yield*/, fetch(url, { method: 'GET', headers: headers })];
                     case 1:
                         fetchResult = _c.sent();
                         _b = (_a = JSON).parse;
@@ -88,7 +85,6 @@ var Stats = /** @class */ (function () {
     };
     return Stats;
 }());
-exports.Stats = Stats;
 var Generator = /** @class */ (function () {
     function Generator() {
     }
@@ -105,7 +101,7 @@ var Generator = /** @class */ (function () {
                         clone = JSON.parse(JSON.stringify(this.option));
                         delete clone.excludedLineCount;
                         delete clone.carryCount;
-                        return [4 /*yield*/, node_fetch_1["default"]('https://is6q0wtgml.execute-api.ap-northeast-2.amazonaws.com/dev/numbers/generator', //API 주소
+                        return [4 /*yield*/, fetch('https://is6q0wtgml.execute-api.ap-northeast-2.amazonaws.com/dev/numbers/generator', //API 주소
                             {
                                 headers: headers,
                                 method: 'POST',
@@ -124,4 +120,3 @@ var Generator = /** @class */ (function () {
     };
     return Generator;
 }());
-exports.Generator = Generator;

@@ -1,5 +1,3 @@
-import fetch from 'node-fetch'
-
 interface Params {
   from?: number;
   to?: number;
@@ -9,7 +7,7 @@ interface Range {
   from: number;
   to: number;
 }
-export enum Method {
+enum Method {
   excludedLineCount = "excludedLineCount",
   lineCount = "lineCount",
   carryCount = "carryCount",
@@ -25,7 +23,7 @@ export enum Method {
   consecutiveExist = "consecutiveExist",
 }
 
-export class Stats {
+class Stats {
   [x: string]: any;
 
   async getData(method: Method, params: Params) {
@@ -64,7 +62,7 @@ interface GeneratorOption {
   current: string;
 }
 
-export class Generator {
+class Generator {
   option: GeneratorOption;
 
   async generate() {
