@@ -106,6 +106,10 @@ Range = {from:number, to:number}
 
                 *API:GET /stats/frequency
 
+                위 4개 통합: excludeInclude
+
+                *API:GET /stats/excludeInclude
+
 **4. 저번호 개수 입력 (가용값: 0~6)**
     
                 lowCount
