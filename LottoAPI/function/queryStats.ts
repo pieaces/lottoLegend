@@ -2,11 +2,14 @@ import { Params } from '../interface/Lotto';
 import { Stats } from '../interface/Statistics';
 import { Method, DBData, Assembly, AssemblyVersion } from '../interface/LottoDB';
 
+interface extendedParams extends Params {
+    list?: number[];
+}
 import AWS from 'aws-sdk';
 //AWS.config.update(require('./key.json'));
 const dynamoDB = new AWS.DynamoDB();
 
-export default async function queryStats(method: Method, params: Params): Promise<any[] | DBData> {
+export default async function queryStats(method: Method, params: extendedParams): Promise<any[] | DBData> {
     const queryParams = {
         TableName: "LottoStat",
         KeyConditionExpression: "#Name = :Name",
@@ -62,58 +65,25 @@ export default async function queryStats(method: Method, params: Params): Promis
                         resolve(list);
                         break;
                     default:
-                        let from = params.from, to = params.to;
-                        switch(method){
-                            case Method.excludedLineCount:
-                                from = 0; to = 3;
-                                break;
-                                case Method.lineCount:
-                                from = 0; to = 4;
-                                break;
-                                case Method.carryCount:
-                                from = 0; to = 6;
-                                break;
-                            case Method.sum:
-                                from -= 21; to -= 21;
-                                break;
-                            case Method.diffMaxMin:
-                                from -=5; to-=5;
-                        }
-                        to++;
-                        const ideal: Assembly = {
-                            $12: item.Ideal.M.$12.L.slice(from, to).map(value => Number(value.N)),
-                            $24: item.Ideal.M.$24.L.slice(from, to).map(value => Number(value.N)),
-                            $48: item.Ideal.M.$48.L.slice(from, to).map(value => Number(value.N)),
-                            $192: item.Ideal.M.$192.L.slice(from, to).map(value => Number(value.N)),
-                            all: item.Ideal.M.all.L.slice(from, to).map(value => Number(value.N)),
-                            latest: item.Ideal.M.latest.L.slice(from, to).map(value => Number(value.N)),
-                        };
-                        const actual: Assembly = {
-                            $12: item.Actual.M.$12.L.slice(from, to).map(value => Number(value.N)),
-                            $24: item.Actual.M.$24.L.slice(from, to).map(value => Number(value.N)),
-                            $48: item.Actual.M.$48.L.slice(from, to).map(value => Number(value.N)),
-                            $192: item.Actual.M.$192.L.slice(from, to).map(value => Number(value.N)),
-                            all: item.Actual.M.all.L.slice(from, to).map(value => Number(value.N)),
-                            latest: item.Actual.M.latest.L.slice(from, to).map(value => Number(value.N)),
-                        };
-
-                        let PACK: number;
                         if (method === Method.sum) {
-                            PACK = 10;
+                            params.from -= 21;
+                            params.to -= 21;
+                        } else if (method === Method.diffMaxMin) {
+                            params.list.map(value => value - 5);
                         }
-                        if (method === Method.diffMaxMin) {
-                            PACK = 5;
-                        }
-                        //const coef = item.Coef.L.map(value => Number(value.N));
-                        let pos = item.Pos.L.slice(from, to).map(value => Number(value.N));
 
-                        if (method === Method.sum || method === Method.diffMaxMin) {
+                        const ideal: Assembly = makeAssembly(item.Ideal.M, params);
+                        const actual: Assembly = makeAssembly(item.Actual.M, params);
+                        let pos: number[] = transformNumbers(item.Pos.L, params);
+                        if (method === Method.sum) {
+                            const PACK = 10;
                             for (const v in ideal) {
                                 ideal[v as AssemblyVersion] = compressNumbers(ideal[v as AssemblyVersion], PACK);
                                 actual[v as AssemblyVersion] = compressNumbers(actual[v as AssemblyVersion], PACK);
                             }
                             pos = compressNumbers(pos, PACK);
                         }
+
                         const dbData: DBData = { ideal, actual, pos };
                         if (item.Stats) {
                             const stats: Stats = {
@@ -128,12 +98,12 @@ export default async function queryStats(method: Method, params: Params): Promis
                         break;
                 }
             }
-        })
+        });
     });
 }
 
 function compressNumbers(numbers: number[], PACK: number): number[] {
-    numbers = numbers.reduce((acc, cur, index) => {
+    const result = numbers.reduce((acc, cur, index) => {
         if (index % PACK === 0) {
             acc.push(cur);
         } else {
@@ -141,5 +111,35 @@ function compressNumbers(numbers: number[], PACK: number): number[] {
         }
         return acc;
     }, []);
-    return numbers;
+    return result;
+}
+
+function transformNumbers(list: AWS.DynamoDB.ListAttributeValue, params: extendedParams): number[] {
+    let result: number[];
+    if (params.list) {
+        result = list.filter((value, index) => {
+            if (params.list.indexOf(index) !== -1) return value;
+        }).map(value => Number(value.N));
+    } else if (params.from && params.to) {
+        result = list.slice(params.from, params.to + 1).map((value) => Number(value.N))
+    } else {
+        result = list.map((value) => Number(value.N));
+    }
+
+    return result;
+}
+
+function makeAssembly(obj: AWS.DynamoDB.MapAttributeValue, params: extendedParams): Assembly {
+    let result: Assembly;
+
+    result = {
+        $12: transformNumbers(obj.$12.L, params),
+        $24: transformNumbers(obj.$24.L, params),
+        $48: transformNumbers(obj.$48.L, params),
+        $192: transformNumbers(obj.$192.L, params),
+        all: transformNumbers(obj.all.L, params),
+        latest: transformNumbers(obj.latest.L, params),
+    };
+
+    return result;
 }
