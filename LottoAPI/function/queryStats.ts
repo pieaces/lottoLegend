@@ -1,15 +1,11 @@
-import { Params } from '../interface/Lotto';
 import { Stats } from '../interface/Statistics';
-import { Method, DBData, Assembly, AssemblyVersion } from '../interface/LottoDB';
+import { Method, DBData, Assembly, AssemblyVersion, QueryStatsParams } from '../interface/LottoDB';
 
-interface extendedParams extends Params {
-    list?: number[];
-}
 import AWS from 'aws-sdk';
 //AWS.config.update(require('./key.json'));
 const dynamoDB = new AWS.DynamoDB();
 
-export default async function queryStats(method: Method, params: extendedParams): Promise<any[] | DBData> {
+export default async function queryStats(method: Method, params: QueryStatsParams): Promise<any[] | DBData> {
     const queryParams = {
         TableName: "LottoStat",
         KeyConditionExpression: "#Name = :Name",
@@ -114,7 +110,7 @@ function compressNumbers(numbers: number[], PACK: number): number[] {
     return result;
 }
 
-function transformNumbers(list: AWS.DynamoDB.ListAttributeValue, params: extendedParams): number[] {
+function transformNumbers(list: AWS.DynamoDB.ListAttributeValue, params: QueryStatsParams): number[] {
     let result: number[];
     if (params.list) {
         result = list.filter((value, index) => {
@@ -129,7 +125,7 @@ function transformNumbers(list: AWS.DynamoDB.ListAttributeValue, params: extende
     return result;
 }
 
-function makeAssembly(obj: AWS.DynamoDB.MapAttributeValue, params: extendedParams): Assembly {
+function makeAssembly(obj: AWS.DynamoDB.MapAttributeValue, params: QueryStatsParams): Assembly {
     let result: Assembly;
 
     result = {

@@ -1,4 +1,5 @@
 import { Stats } from "../Statistics";
+import { Params } from "../Lotto";
 
 export interface LottoDate{
     round: number;
@@ -53,4 +54,8 @@ export enum Method {
     interval = "interval",
     howLongNone = "howLongNone",
     frequency = "frequency"
+}
+
+export interface QueryStatsParams extends Params {
+    list?: number[];
 }
