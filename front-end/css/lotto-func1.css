@@ -141,6 +141,9 @@
 }
 
 .filter-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 140px;
   height: 45px;
   border: 1px solid var(--border-color);
@@ -152,6 +155,10 @@
 
 .filter-current {
   background-color: yellow;
+}
+
+.filter-after {
+  background-color: blue;
 }
 
 .main-1-2 {

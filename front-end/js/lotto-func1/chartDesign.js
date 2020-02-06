@@ -26,7 +26,7 @@ function filterBoxCheck() {
 }
 
 function drawBubbleChart() {
-  const chartBubbleBox = document.querySelector('#chart-func1-bubble');
+  const BubbleBox = document.querySelector('#chart-func1-bubble');
   const dataBubble = [['ID', '전체적 맥락', '부분적 맥락', '희소성', '확률']];
   const X = { max: -1, min: 1 };
   const Y = { max: -1, min: 1 };
@@ -71,38 +71,38 @@ function drawBubbleChart() {
     dataBubble.push(data);
   }
 
-  const chartBubbleDataBox = google.visualization.arrayToDataTable(dataBubble);
+  const BubbleDataBox = google.visualization.arrayToDataTable(dataBubble);
   const C = 0.01;
-  const chartBubbleOptions = {
+  const BubbleOptions = {
     bubble: { textStyle: { fontSize: 11 } },
     hAxis: { maxValue: X.max + C, minValue: X.min - C },
     vAxis: { maxValue: Y.max + C, minValue: Y.min - C }
   };
 
-  const chart = new google.visualization.BubbleChart(chartBubbleBox);
-  chart.draw(chartBubbleDataBox, chartBubbleOptions);
+  const chart = new google.visualization.BubbleChart(BubbleBox);
+  chart.draw(BubbleDataBox, BubbleOptions);
 }
 
-function chartSlide(chartSlideObj) {
+function chartSlide(slideObj) {
   const {
-    chartTextBox,
+    TextBox,
     slideNum,
     slideOrder,
-    chartBox,
-    chartDataBox,
+    Box,
+    DataBox,
     instance,
-    leftChartBtn,
-    rightChartBtn
-  } = chartSlideObj;
+    leftBtn,
+    rightBtn
+  } = slideObj;
 
-  const chartDataObj = {
-    chartBox: chartBox,
-    chartDataBox: chartDataBox,
+  const DataObj = {
+    Box: Box,
+    DataBox: DataBox,
     instance: instance
   };
 
-  const chartBtnObj = {
-    chartTextBox: chartTextBox,
+  const BtnObj = {
+    TextBox: TextBox,
     slideNum: slideNum,
     slideOrder: slideOrder
   };
@@ -111,14 +111,14 @@ function chartSlide(chartSlideObj) {
     slideCurrent: 0
   };
 
-  leftChartBtnClick(chartDataObj, chartBtnObj, leftChartBtn, currentObj);
-  rightChartBtnClick(chartDataObj, chartBtnObj, rightChartBtn, currentObj);
-  chartNumClick(chartDataObj, chartBtnObj, currentObj);
+  leftBtnClick(DataObj, BtnObj, leftBtn, currentObj);
+  rightBtnClick(DataObj, BtnObj, rightBtn, currentObj);
+  chartNumClick(DataObj, BtnObj, currentObj);
 }
 
-function chartNumClick(chartDataObj, chartBtnObj, currentObj) {
-  const { slideNum, slideOrder, chartTextBox } = chartBtnObj;
-  const { chartBox } = chartDataObj;
+function chartNumClick(DataObj, BtnObj, currentObj) {
+  const { slideNum, slideOrder, TextBox } = BtnObj;
+  const { Box } = DataObj;
   for (let i = 0; i < slideNum; i++) {
     slideOrder[i].addEventListener('click', () => {
       slideOrder[currentObj.slideCurrent].classList.remove(
@@ -127,38 +127,33 @@ function chartNumClick(chartDataObj, chartBtnObj, currentObj) {
       currentObj.slideCurrent = i;
       slideOrder[currentObj.slideCurrent].classList.add('chart-slide-current');
 
-      setChartData(chartDataObj, currentObj, slideNum);
-      setChartText(chartBox, chartTextBox, currentObj, slideNum);
+      setChartData(DataObj, currentObj, slideNum);
+      setChartText(Box, TextBox, currentObj, slideNum);
     });
   }
 }
 
-function setChartText(chartBox, chartTextBox, currentObj, slideNum) {
-  if (chartBox.id === 'chart-func1-line') {
+function setChartText(Box, TextBox, currentObj, slideNum) {
+  if (Box.id === 'chart-func1-line') {
     for (let i = 0; i < slideNum; i++) {
       if (currentObj.slideCurrent === i) {
-        chartTextBox.textContent = i;
+        TextBox.textContent = i;
       }
     }
-  } else if (chartBox.id === 'chart-func1-bar') {
+  } else if (Box.id === 'chart-func1-bar') {
     for (let i = 0; i < slideNum; i++) {
       if (currentObj.slideCurrent === i) {
-        chartTextBox.textContent = i;
+        TextBox.textContent = i;
       }
     }
   }
 }
 
-function leftChartBtnClick(
-  chartDataObj,
-  chartBtnObj,
-  leftChartBtn,
-  currentObj
-) {
-  const { chartBox } = chartDataObj;
-  const { slideNum, slideOrder, chartTextBox } = chartBtnObj;
+function leftBtnClick(DataObj, BtnObj, leftBtn, currentObj) {
+  const { Box } = DataObj;
+  const { slideNum, slideOrder, TextBox } = BtnObj;
 
-  leftChartBtn.addEventListener('click', () => {
+  leftBtn.addEventListener('click', () => {
     if (currentObj.slideCurrent === 0) {
       slideOrder[currentObj.slideCurrent].classList.remove(
         'chart-slide-current'
@@ -172,20 +167,15 @@ function leftChartBtnClick(
       currentObj.slideCurrent--;
       slideOrder[currentObj.slideCurrent].classList.add('chart-slide-current');
     }
-    setChartData(chartDataObj, currentObj, slideNum);
-    setChartText(chartBox, chartTextBox, currentObj, slideNum);
+    setChartData(DataObj, currentObj, slideNum);
+    setChartText(Box, TextBox, currentObj, slideNum);
   });
 }
-function rightChartBtnClick(
-  chartDataObj,
-  chartBtnObj,
-  rightChartBtn,
-  currentObj
-) {
-  const { chartBox } = chartDataObj;
-  const { slideNum, slideOrder, chartTextBox } = chartBtnObj;
+function rightBtnClick(DataObj, BtnObj, rightBtn, currentObj) {
+  const { Box } = DataObj;
+  const { slideNum, slideOrder, TextBox } = BtnObj;
 
-  rightChartBtn.addEventListener('click', e => {
+  rightBtn.addEventListener('click', e => {
     if (currentObj.slideCurrent === slideNum - 1) {
       currentObj.slideCurrent = 0;
       slideOrder[slideNum - 1].classList.remove('chart-slide-current');
@@ -198,15 +188,15 @@ function rightChartBtnClick(
       slideOrder[currentObj.slideCurrent].classList.add('chart-slide-current');
     }
 
-    setChartData(chartDataObj, currentObj, slideNum);
-    setChartText(chartBox, chartTextBox, currentObj, slideNum);
+    setChartData(DataObj, currentObj, slideNum);
+    setChartText(Box, TextBox, currentObj, slideNum);
   });
 }
 
-function setChartData(chartDataObj, currentObj, slideNum) {
-  const { chartBox, chartDataBox, instance } = chartDataObj;
+function setChartData(DataObj, currentObj, slideNum) {
+  const { Box, DataBox, instance } = DataObj;
 
-  if (chartBox.id === 'chart-func1-line') {
+  if (Box.id === 'chart-func1-line') {
     const lineMap = new Map([
       [0, '$12'],
       [1, '$24'],
@@ -214,20 +204,20 @@ function setChartData(chartDataObj, currentObj, slideNum) {
       [3, '$192'],
       [4, 'all']
     ]);
-    chartDataBox.datasets[0].data =
+    DataBox.datasets[0].data =
       lottofunc1.lottoData.oddCount.data.actual[
         lineMap.get(currentObj.slideCurrent)
       ];
-    chartDataBox.datasets[1].data =
+    DataBox.datasets[1].data =
       lottofunc1.lottoData.oddCount.data.ideal[
         lineMap.get(currentObj.slideCurrent)
       ];
     instance.update();
   }
-  if (chartBox.id === 'chart-func1-bar') {
+  if (Box.id === 'chart-func1-bar') {
     for (let i = 0; i < slideNum - 1; i++) {
       if (currentObj.slideCurrent === i) {
-        chartDataBox.datasets[0].data =
+        DataBox.datasets[0].data =
           lottofunc1.lottoData.oddCount.data.ideal['latest'];
         instance.update();
       }
@@ -245,23 +235,22 @@ function setChartData(chartDataObj, currentObj, slideNum) {
           lottofunc1.lottoData.oddCount.data.actual['latest'][i];
         datas.push(data);
       }
-      chartDataBox.datasets[0].data = datas;
+      DataBox.datasets[0].data = datas;
 
       instance.update();
     }
   }
 }
 
-function initChartData(chartInitDataBoxObj) {
-  const { chartDataBox, instance } = chartInitDataBoxObj;
+function initChartData(InitDataBoxObj) {
+  const { DataBox, instance } = InitDataBoxObj;
 
-  chartDataBox[0].datasets[0].data =
+  DataBox[0].datasets[0].data =
     lottofunc1.lottoData.oddCount.data.actual['$12'];
-  chartDataBox[0].datasets[1].data =
-    lottofunc1.lottoData.oddCount.data.ideal['$12'];
+  DataBox[0].datasets[1].data = lottofunc1.lottoData.oddCount.data.ideal['$12'];
   instance[0].update();
 
-  chartDataBox[1].datasets[0].data =
+  DataBox[1].datasets[0].data =
     lottofunc1.lottoData.oddCount.data.ideal['latest'];
   instance[1].update();
 
@@ -270,17 +259,17 @@ function initChartData(chartInitDataBoxObj) {
 }
 
 function chartInit() {
-  const leftLineChartBtn = document.querySelector('#left-line-chart-btn');
-  const rightLineChartBtn = document.querySelector('#right-line-chart-btn');
-  const leftBarChartBtn = document.querySelector('#left-bar-chart-btn');
-  const rightBarChartBtn = document.querySelector('#right-bar-chart-btn');
+  const leftLineBtn = document.querySelector('#left-line-chart-btn');
+  const rightLineBtn = document.querySelector('#right-line-chart-btn');
+  const leftBarBtn = document.querySelector('#left-bar-chart-btn');
+  const rightBarBtn = document.querySelector('#right-bar-chart-btn');
   const main22 = document.querySelector('.main-2-2');
   const main23 = document.querySelector('.main-2-3');
-  const chartLineNum = document.querySelectorAll('.chart-line-num > div');
-  const chartBarNum = document.querySelectorAll('.chart-bar-num > div');
-  const chartLineBox = document.querySelector('#chart-func1-line');
+  const LineNum = document.querySelectorAll('.chart-line-num > div');
+  const BarNum = document.querySelectorAll('.chart-bar-num > div');
+  const LineBox = document.querySelector('#chart-func1-line');
 
-  const chartLineDataBox = {
+  const LineDataBox = {
     labels: [0, 1, 2, 3, 4, 5, 6],
     datasets: [
       {
@@ -302,7 +291,7 @@ function chartInit() {
     ]
   };
 
-  const chartLineOptions = {
+  const LineOptions = {
     scales: {
       xAxes: [
         {
@@ -336,26 +325,26 @@ function chartInit() {
     }
   };
 
-  const chartLineInstance = new Chart(chartLineBox, {
+  const LineInstance = new Chart(LineBox, {
     type: 'line',
-    data: chartLineDataBox,
-    options: chartLineOptions
+    data: LineDataBox,
+    options: LineOptions
   });
 
-  const chartLineSlideObj = {
-    chartTextBox: main22,
+  const LineSlideObj = {
+    TextBox: main22,
     slideNum: 5,
-    slideOrder: chartLineNum,
-    chartBox: chartLineBox,
-    chartDataBox: chartLineDataBox,
-    instance: chartLineInstance,
-    leftChartBtn: leftLineChartBtn,
-    rightChartBtn: rightLineChartBtn
+    slideOrder: LineNum,
+    Box: LineBox,
+    DataBox: LineDataBox,
+    instance: LineInstance,
+    leftBtn: leftLineBtn,
+    rightBtn: rightLineBtn
   };
 
-  const chartBarBox = document.querySelector('#chart-func1-bar');
+  const BarBox = document.querySelector('#chart-func1-bar');
 
-  const chartBarDataBox = {
+  const BarDataBox = {
     labels: [0, 1, 2, 3, 4, 5, 6],
     datasets: [
       {
@@ -369,35 +358,35 @@ function chartInit() {
     ]
   };
 
-  const chartBarOptions = {
+  const BarOptions = {
     legend: false
   };
 
-  const chartBarInstance = new Chart(chartBarBox, {
+  const BarInstance = new Chart(BarBox, {
     type: 'bar',
-    data: chartBarDataBox,
-    options: chartBarOptions
+    data: BarDataBox,
+    options: BarOptions
   });
 
-  const chartBarSlideObj = {
-    chartTextBox: main23,
+  const BarSlideObj = {
+    TextBox: main23,
     slideNum: 3,
-    slideOrder: chartBarNum,
-    chartBox: chartBarBox,
-    chartDataBox: chartBarDataBox,
-    instance: chartBarInstance,
-    leftChartBtn: leftBarChartBtn,
-    rightChartBtn: rightBarChartBtn
+    slideOrder: BarNum,
+    Box: BarBox,
+    DataBox: BarDataBox,
+    instance: BarInstance,
+    leftBtn: leftBarBtn,
+    rightBtn: rightBarBtn
   };
 
-  const chartInitDataBoxObj = {
-    chartDataBox: [chartLineDataBox, chartBarDataBox],
-    instance: [chartLineInstance, chartBarInstance]
+  const InitDataBoxObj = {
+    DataBox: [LineDataBox, BarDataBox],
+    instance: [LineInstance, BarInstance]
   };
 
-  initChartData(chartInitDataBoxObj);
+  initChartData(InitDataBoxObj);
 
-  chartSlide(chartLineSlideObj);
+  chartSlide(LineSlideObj);
 
-  chartSlide(chartBarSlideObj);
+  chartSlide(BarSlideObj);
 }
