@@ -249,7 +249,7 @@ function chartInit(chartData) {
   const LineBox = document.querySelector('#chart-func1-line');
 
   const LineDataBox = {
-    labels: chartData.actual.$12.length,
+    labels: [0, 1, 2, 3, 4, 5, 6],
     datasets: [
       {
         label: '실제값',
