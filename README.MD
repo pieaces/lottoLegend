@@ -1,7 +1,7 @@
 
 # 로또 통계(2020-01-15)
 
-v 1.0.0 (2020-02-05)
+v 1.1.0 (2020-02-06)
 
 ## Class
 
@@ -86,7 +86,7 @@ Range = {from:number, to:number}
 
                 carryCount
 
-                *API:GET /stats?method=carryCount
+                *API:GET /stats/carryCount
 
 * 제외 및 포함수 선택 (최근 5회차 번호 제시, 번호간격, 번호빈도) +(궁합수, 9궁도)
 
@@ -110,7 +110,7 @@ Range = {from:number, to:number}
     
                 lowCount
 
-                *API:GET /stats/lowCount?from=0&to=6
+                *API:GET /stats/lowCount
 
 **5. 번호 합 범위 입력 (가용범위: 21~255) (20,10단위 묶음)**
     
@@ -122,40 +122,53 @@ Range = {from:number, to:number}
     
                 oddCount
 
-                *API:GET /stats/oddCount?from=0&to=6
+                *API:GET /stats/oddCount
+                
+                QueryString: ?list=${decodeURI(number[])} | ?from=0&to=6
 
 **7. 소수개수 범위 입력 (가용범위: 0~6)**
     
                 primeCount
 
-                *API:GET /stats/primeCount?from=0&to=6
+                *API:GET /stats/primeCount
+
+                QueryString: ?list=${decodeURI(number[])} | ?from=0&to=6
 
 **8. 3의배수 개수 범위 입력 (가용범위: 0~6)**
     
                 $3Count
 
-                *API:GET /stats/$3Count?from=0&to=6
+                *API:GET /stats/$3Count
 
-**9. 첫수(십의자리)합 범위 입력 (가용범위: 0~24) 3단위=>8묶음**
+                QueryString: ?list=${decodeURI(number[])} | ?from=0&to=6
+
+**9. 첫수(십의자리)합 범위 입력 (가용범위: 0~24)**
     
                 sum$10
 
-                *API:GET /stats/sum$10?from=0&to=24
+                *API:GET /stats/sum$10
 
-**10. 고저차 범위 입력 (가용범위: 5~44)=>5단위=>8묶음**
+                QueryString: ?list=${decodeURI(number[])} | ?from=0&to=24
+
+**10. 고저차 범위 입력 (가용범위: 5~44)**
     
                 diffMaxMin
 
-                *API:GET /stats/diffMaxMin?from=5&to=44
+                *API:GET /stats/diffMaxMin
+
+                QueryString: ?list=${decodeURI(number[])} | ?from=5&to=24
 
 **11. AC(Arithmetic Complex) 범위 입력 (가용범위: 0~10)**
     
                 AC
 
-                *API:GET /stats/AC?from=0&to=10
+                *API:GET /stats/AC
+
+                QueryString: ?list=${decodeURI(number[])} | from=0&to=10
+
 
 **12. 연속번호 제외 여부 (Y/N)**
     
                 consecutiveExist
 
-                *API:GET /stats/consecutiveExist?from=0&to=1
+                *API:GET /stats/consecutiveExist
