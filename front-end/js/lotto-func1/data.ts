@@ -157,16 +157,13 @@ class Filter {
     await this.stats.getData(this.statsList[this.current], params);
     console.log(params);
   }
+
   private async getGen(): Promise<void> {
-    const data = await this.generator.generate()
     const { count, range, numbers } = await this.generator.generate();
     this.rangeList[this.current+1] = range;
     this.count = count;
-console.log(data);
-    if (numbers) {
-      this.numbers = numbers;
-      console.log(numbers);
-    }
+
+    if(numbers) console.log(numbers);
   }
 
   leap(page: number): void {
@@ -183,6 +180,7 @@ console.log(data);
     }
   }
   async forward(optionData: any = undefined): Promise<void> {
+    console.log('forward', this.current);
     if (0 <= this.current && this.current < this.statsList.length) {
       const option = this.optionList[this.current];
       if (option) {
@@ -191,13 +189,20 @@ console.log(data);
       if (this.current >= 6) {
         await this.getGen();
       }
-
+      if(this.current < this.statsList.length - 1){
       this.current++;
       await this.setStats();
+      }
+
     }
   }
 
+  async submit(){
+    await this.generator.generate();
+  }
+
   async init(){
+    this.current = 0;
     await this.setStats();
   }
 
@@ -212,17 +217,17 @@ async function initf() {
   await filter.forward();
   await filter.forward([2]);
   await filter.forward();
-  await filter.forward([2, 10]);
-  await filter.forward([9]);
+  await filter.forward([2, 10,42,44,45]);
+  await filter.forward();
   await filter.forward(2);
-  await filter.forward({ from: 100, to: 200 });
-  await filter.forward({ from: 2, to: 4 });
-  await filter.forward({ from: 1, to: 3 });
+  await filter.forward({ from: 150, to: 180 });
+  await filter.forward({ from: 2, to: 3 });
+  await filter.forward({ from: 2, to: 3 });
   await filter.forward({ from: 1, to: 3 });
   await filter.forward({ from: 10, to: 14 });
-  await filter.forward({ from: 20, to: 38 });
+  await filter.forward({ from: 30, to: 38 });
   await filter.forward({ from: 6, to: 8 });
-  await filter.forward();
+  await filter.forward(true);
   console.log(filter.numbers);
 }
 
