@@ -217,7 +217,9 @@ class Filter {
     return this.stats[this.statsList[this.current]];
   }
 }
+const filter = new Filter();
 
+/*
 async function initf() {
   const filter = new Filter();
   await filter.init();
@@ -240,3 +242,4 @@ async function initf() {
 }
 
 initf();
+*/
