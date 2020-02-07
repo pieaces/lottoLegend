@@ -79,35 +79,40 @@ const constraintLowCount = require('../../json/lowCount_compressed.json');
 const constraintSum = require('../../json/sum_compressed.json');
 const constraintSumNotExcluded = require('../../json/sum_notExcluded.json');
 
-function compressNumbers(numbers: number[]){
+function compressNumbers(numbers: number[]):Params {
   let flag = true;
-  for(let i =1; i<numbers.length; i++){
-    if(numbers[i] -1 !== numbers[i-1]){
+  for (let i = 1; i < numbers.length; i++) {
+    if (numbers[i] - 1 !== numbers[i - 1]) {
       flag = false; break;
     }
   }
-  return flag;
+  if (flag) {
+    return { from: numbers[0], to: numbers[numbers.length - 1] };
+  } else {
+    return { list: numbers };
+  }
 }
 class Filter {
   private numberList = ["1-1", "1-2", "2", "3-1", "3-2", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
   private statsList = ['excludedLineCount', 'lineCount', 'carryCount', 'excludeInclude', 'excludeInclude', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
   private optionList = ['excludedLineCount', 'excludedLines', 'carryCount', 'excludedNumbers', 'includedNumbers', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
-  private rangeList = [[0,1,2,3,4], [0,1,2,3,4], [0,1,2,3,4,5,6], null, null];
+  private rangeList = [[0, 1, 2, 3, 4], [0, 1, 2, 3, 4], [0, 1, 2, 3, 4, 5, 6], null, null];
   private current: number = 0;
   private stats: Stats = new Stats();
   private generator: Generator = new Generator();
 
   private getStats() {
-    let params:Params;
-    if(this.current <= 4) params = {};
-    if(this.current === 5){
+    let params: Params;
+    if (this.current <= 4) params = {};
+    if (this.current === 5) {
       const range = constraintLowCount[this.generator.option.excludedLines.join('')];
       this.rangeList[this.current] = [];
-      for(let i =range[0]; i<=range[1]; i++) this.rangeList.push(i);
+      for (let i = range[0]; i <= range[1]; i++) this.rangeList.push(i);
+      params = compressNumbers
     }
     this.stats.getData(this.statsList[this.current], params);
   }
-  private getGen(){
+  private getGen() {
 
   }
   leap(page: number): void {
