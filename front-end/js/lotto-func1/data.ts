@@ -123,8 +123,15 @@ class Filter {
   private optionList = [null, 'excludedLines', null, 'excludedNumbers', 'includedNumbers', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
   private rangeList = [[0, 1, 2, 3, 4], [0, 1, 2, 3, 4], [0, 1, 2, 3, 4, 5, 6], null, null];
   private current: number = 0;
-  public stats: Stats = new Stats();
-  public generator: Generator = new Generator();
+  private stats: Stats = new Stats();
+  private generator: Generator = new Generator();
+
+  public getLabel():number[]{
+    return this.rangeList[this.current];
+  }
+  public getFilterName():string{
+    return this.numberList[this.current];
+  }
 
   private async setStats(): Promise<void> {
     console.log(this.current);
@@ -201,10 +208,6 @@ class Filter {
     }
   }
 
-  async submit() {
-    await this.generator.generate();
-  }
-
   async init() {
     this.current = 0;
     await this.setStats();
@@ -214,7 +217,7 @@ class Filter {
     return this.stats[this.statsList[this.current]];
   }
 }
-
+/*
 async function initf() {
   const filter = new Filter();
   await filter.init();
@@ -226,10 +229,8 @@ async function initf() {
   await filter.forward(2);
   await filter.forward({ from: 150, to: 180 });
   await filter.forward({ from: 2, to: 3 });
-  console.log('1', filter.generator.option);
   //filter.backward();  filter.backward();
   filter.leap(3);
-  console.log('2', filter.generator.option);
   await filter.forward();
   await filter.forward();
   await filter.forward(3);
@@ -243,5 +244,4 @@ async function initf() {
   // await filter.forward(true);
   // console.log(filter.numbers);
 }
-
-initf();
+*/
