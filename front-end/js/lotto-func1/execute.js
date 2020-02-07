@@ -1,7 +1,8 @@
-async function init() {
+async function lottoFunc1() {
   filterBoxCheck();
   await stats.getData(generator.option.current);
-  chartInit(stats[generator.option.current]);
+  chartData.data = stats[generator.option.current];
+  chartInit();
 }
 
-init();
+lottoFunc1();

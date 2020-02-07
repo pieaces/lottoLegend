@@ -1,137 +1,10 @@
-const chartRadarBox = document.querySelector('.chart-func2-radar');
-const chartRadarDataBox = {
-  labels: ['Africa', 'Asia', 'Europe', 'Latin America', 'North America'],
-  datasets: [
-    {
-      fill: true,
-      borderWidth: 1,
-      backgroundColor: 'rgba(179,181,198,0.2)',
-      borderColor: 'rgba(179,181,198,1)',
-      pointBorderColor: '#fff',
-      pointBackgroundColor: 'rgba(179,181,198,1)',
-      data: [
-        Math.round(Math.random() * 100),
-        Math.round(Math.random() * 100),
-        Math.round(Math.random() * 100),
-        Math.round(Math.random() * 100),
-        Math.round(Math.random() * 100)
-      ]
-    },
-    {
-      fill: true,
-      borderWidth: 1,
-      backgroundColor: 'rgba(255,99,132,0.2)',
-      borderColor: 'rgba(255,99,132,1)',
-      pointBorderColor: '#fff',
-      pointBackgroundColor: 'rgba(255,99,132,1)',
-      pointBorderColor: '#fff',
-      data: [
-        Math.round(Math.random() * 100),
-        Math.round(Math.random() * 100),
-        Math.round(Math.random() * 100),
-        Math.round(Math.random() * 100),
-        Math.round(Math.random() * 100)
-      ]
-    }
-  ]
-};
-
-const chartRadarOptions = {
-  responsive: false,
-  title: {
-    display: false
-  },
-  legend: {
-    display: false
-  }
-};
-
-const chartRadarInstance = new Chart(chartRadarBox, {
-  type: 'radar',
-  data: chartRadarDataBox,
-  options: chartRadarOptions
-});
-
-const chartGaussBox = document.querySelector('.chart-func2-gauss');
-const chartGaussDataBox = {
-  labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-  datasets: [
-    {
-      steppedLine: true,
-      data: [
-        Math.round(Math.random() * 100),
-        Math.round(Math.random() * 100),
-        Math.round(Math.random() * 100),
-        Math.round(Math.random() * 100),
-        Math.round(Math.random() * 100),
-        Math.round(Math.random() * 100),
-        Math.round(Math.random() * 100),
-        Math.round(Math.random() * 100),
-        Math.round(Math.random() * 100),
-        Math.round(Math.random() * 100),
-        Math.round(Math.random() * 100),
-        Math.round(Math.random() * 100)
-      ],
-      borderColor: 'red',
-      fill: false
-    }
-  ]
-};
-
-const chartGaussOptions = {
-  responsive: true,
-  legend: false,
-  title: {
-    display: true,
-    text: 'hi'
-  }
-};
-
-const chartGaussInstance = new Chart(chartGaussBox, {
-  type: 'line',
-  data: chartGaussDataBox,
-  options: chartGaussOptions
-});
-
-const chartBarBox = document.querySelector('.chart-func2-bar');
-
-// Data with datasets options
-const chartBarDataBox = {
-  labels: ['Vanilla', 'Chocolate'],
-  datasets: [
-    {
-      label: 'Ice Cream Sales ',
-      fill: true,
-      backgroundColor: ['moccasin', 'saddlebrown'],
-      data: [Math.round(Math.random() * 100), Math.round(Math.random() * 100)]
-    }
-  ]
-};
-
-// Notice how nested the beginAtZero is
-const chartBarOptions = {
-  legend: false,
-  title: {
-    display: true,
-    text: 'Ice Cream Truck Report'
-  }
-};
-
-// Chart declaration:
-const chartBarInstance = new Chart(chartBarBox, {
-  type: 'bar',
-  data: chartBarDataBox,
-  options: chartBarOptions
-});
-
-const lottoNum = document.querySelectorAll('#func2 .lotto-num-box> div > div');
-const selectNumBox = document.querySelector('#func2 .select-num-box');
-const numExcludeBtn = document.querySelector('#func2 .num-exclude-btn');
-const resetNumBtn = document.querySelector('#func2 .reset-num-btn');
-const winNum = document.querySelectorAll('#func2 .win-num-box > div');
-
-const numTerm = document.querySelector('#func2 .num-term');
-const numFreq = document.querySelector('#func2 .num-freq');
+const lottoNum = document.querySelectorAll('.lotto-num-box> div > div');
+const selectNumBox = document.querySelector('.select-num-box');
+const numExcludeBtn = document.querySelector('.num-exclude-btn');
+const resetNumBtn = document.querySelector('.reset-num-btn');
+const winNum = document.querySelectorAll('.win-num-box > div');
+const numTerm = document.querySelector('.num-term');
+const numFreq = document.querySelector('.num-freq');
 
 function numExclude() {
   const lottoNumDefaultColor = 'rgba(231, 76, 60, 0.2)';
@@ -274,8 +147,8 @@ function numExclude() {
 
   // 번호판 다른 곳 누르면 선택색깔 초기화, numExclude 함수 안의 다른 함수들 이벤트 전파 막아야 함
 
-  let myExclusiveEl = document.querySelectorAll('#func2 *');
-  let myEls = document.querySelectorAll('#fun2 .main-1-3 *');
+  let myExclusiveEl = document.querySelectorAll('body *');
+  let myEls = document.querySelectorAll('.main-1-3 *');
 
   myExclusiveEl = [...myExclusiveEl].filter(parent => {
     let containedByExclusionNode = [...myEls].filter(child => {
@@ -340,10 +213,10 @@ function numFreqOrTermToggle() {
 }
 
 // 함수 실행
-function init() {
+function lottoFunc2() {
   numFreqOrTermToggle();
   setColorWinNum();
   numExclude();
 }
 
-init();
+lottoFunc2();
