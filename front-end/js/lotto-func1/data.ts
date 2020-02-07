@@ -1,3 +1,5 @@
+import fetch from 'node-fetch'
+
 interface Params {
   from?: number;
   to?: number;
@@ -16,17 +18,17 @@ class Stats {
       'x-api-key': 'LZn9Pykicg982PNmTmdiB8pkso4xbGiQ4n4P1z1k' //API KEY
     };
     let url = `https://is6q0wtgml.execute-api.ap-northeast-2.amazonaws.com/dev/stats/${method}`;
+    console.log(url);
     if (params) {
       if (params.from & params.to)
         url += `?from=${params.from}&to=${params.to}`;
       else if (params.list)
         url += `?list=${encodeURI(JSON.stringify(params.list))}`;
     }
-
     const fetchResult = await fetch(url, { method: 'GET', headers });
     const data = JSON.parse(await fetchResult.text());
-
     this[method] = data.data;
+    if (!this.total) this.total = data.total;
   }
 }
 
@@ -49,7 +51,7 @@ interface GeneratorOption {
 }
 
 class Generator {
-  option: GeneratorOption;
+  option: GeneratorOption = {};
 
   async generate() {
     const headers = {
@@ -60,8 +62,10 @@ class Generator {
     delete clone.excludedLineCount;
     delete clone.carryCount;
 
+    const url = 'https://is6q0wtgml.execute-api.ap-northeast-2.amazonaws.com/dev/numbers/generator';
+    console.log(url);
     const fetchResult = await fetch(
-      'https://is6q0wtgml.execute-api.ap-northeast-2.amazonaws.com/dev/numbers/generator', //API 주소
+      url, //API 주소
       {
         headers,
         method: 'POST',
@@ -113,24 +117,30 @@ function paramToNumbers(params: Params): number[] {
 }
 class Filter {
   public count: number;
-  public numbers:number[];
+  public numbers: number[];
   private numberList = ["1-1", "1-2", "2", "3-1", "3-2", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
   private statsList = ['excludedLineCount', 'lineCount', 'carryCount', 'excludeInclude', 'excludeInclude', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
   private optionList = [null, 'excludedLines', null, 'excludedNumbers', 'includedNumbers', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
   private rangeList = [[0, 1, 2, 3, 4], [0, 1, 2, 3, 4], [0, 1, 2, 3, 4, 5, 6], null, null];
   private current: number = 0;
-  private stats: Stats = new Stats();
-  private generator: Generator = new Generator();
+  public stats: Stats = new Stats();
+  public generator: Generator = new Generator();
 
   private async setStats(): Promise<void> {
+    console.log(this.current);
     let params: Params;
     if (this.current <= 4) params = {};
-    if (this.current === 5) {
-      const range = constraintLowCount[this.generator.option.excludedLines.join('')];
+    else if (this.current === 5) {
+      let range: number[];
+      if (this.generator.option.excludedLines) {
+        range = constraintLowCount[this.generator.option.excludedLines.join('')];
+      } else {
+        range = [0, 6];
+      }
       params = { from: range[0], to: range[1] };
       this.rangeList[this.current] = paramToNumbers({ from: range[0], to: range[1] });
     }
-    if (this.current === 6) {
+    else if (this.current === 6) {
       if (this.generator.option.excludedLines) {
         const range = constraintSum[this.generator.option.lowCount.toString() + this.generator.option.excludedLines.join('')];
         params = { from: range[0], to: range[1] };
@@ -145,12 +155,18 @@ class Filter {
       params = numbersToParams(this.rangeList[this.current]);
     }
     await this.stats.getData(this.statsList[this.current], params);
+    console.log(params);
   }
   private async getGen(): Promise<void> {
+    const data = await this.generator.generate()
     const { count, range, numbers } = await this.generator.generate();
-    this.rangeList[this.current] = range;
+    this.rangeList[this.current+1] = range;
     this.count = count;
-    if(numbers) this.numbers = numbers;
+console.log(data);
+    if (numbers) {
+      this.numbers = numbers;
+      console.log(numbers);
+    }
   }
 
   leap(page: number): void {
@@ -166,8 +182,8 @@ class Filter {
       this.current--;
     }
   }
-  async forward(optionData: any): Promise<void> {
-    if (this.current < this.statsList.length - 1) {
+  async forward(optionData: any = undefined): Promise<void> {
+    if (0 <= this.current && this.current < this.statsList.length) {
       const option = this.optionList[this.current];
       if (option) {
         this.generator.option[option] = optionData;
@@ -175,12 +191,39 @@ class Filter {
       if (this.current >= 6) {
         await this.getGen();
       }
+
       this.current++;
       await this.setStats();
     }
+  }
+
+  async init(){
+    await this.setStats();
   }
 
   public getStats() {
     return this.stats[this.statsList[this.current]];
   }
 }
+
+async function initf() {
+  const filter = new Filter();
+  await filter.init();
+  await filter.forward();
+  await filter.forward([2]);
+  await filter.forward();
+  await filter.forward([2, 10]);
+  await filter.forward([9]);
+  await filter.forward(2);
+  await filter.forward({ from: 100, to: 200 });
+  await filter.forward({ from: 2, to: 4 });
+  await filter.forward({ from: 1, to: 3 });
+  await filter.forward({ from: 1, to: 3 });
+  await filter.forward({ from: 10, to: 14 });
+  await filter.forward({ from: 20, to: 38 });
+  await filter.forward({ from: 6, to: 8 });
+  await filter.forward();
+  console.log(filter.numbers);
+}
+
+initf();
