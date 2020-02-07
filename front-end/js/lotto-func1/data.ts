@@ -160,23 +160,25 @@ class Filter {
 
   private async getGen(): Promise<void> {
     const { count, range, numbers } = await this.generator.generate();
-    this.rangeList[this.current+1] = range;
+    this.rangeList[this.current + 1] = range;
     this.count = count;
 
-    if(numbers) console.log(numbers);
+    if (numbers) console.log(numbers);
   }
 
   leap(page: number): void {
-    if (0 <= page && page < this.current) {
-      for (let i = 0; i < this.current - page; i++) {
+    const count = this.current - page;
+    if (count > 0 && page >= 0) {
+      for (let i = 0; i < count; i++) {
+        console.log('i', i);
         this.backward();
       }
     }
   }
   backward(): void {
     if (this.current > 0) {
-      delete this.generator.option[this.optionList[this.current]];
-      this.current--;
+      console.log(this.optionList[this.current]);
+      delete this.generator.option[this.optionList[this.current--]];
     }
   }
   async forward(optionData: any = undefined): Promise<void> {
@@ -189,19 +191,21 @@ class Filter {
       if (this.current >= 6) {
         await this.getGen();
       }
-      if(this.current < this.statsList.length - 1){
-      this.current++;
-      await this.setStats();
+      if (this.current < this.statsList.length - 1) {
+        this.current++;
+        if (!this.stats[this.statsList[this.current]]) {
+          await this.setStats();
+        }
       }
 
     }
   }
 
-  async submit(){
+  async submit() {
     await this.generator.generate();
   }
 
-  async init(){
+  async init() {
     this.current = 0;
     await this.setStats();
   }
@@ -217,18 +221,27 @@ async function initf() {
   await filter.forward();
   await filter.forward([2]);
   await filter.forward();
-  await filter.forward([2, 10,42,44,45]);
+  await filter.forward([2, 10, 42, 44, 45]);
   await filter.forward();
   await filter.forward(2);
   await filter.forward({ from: 150, to: 180 });
   await filter.forward({ from: 2, to: 3 });
-  await filter.forward({ from: 2, to: 3 });
-  await filter.forward({ from: 1, to: 3 });
-  await filter.forward({ from: 10, to: 14 });
-  await filter.forward({ from: 30, to: 38 });
-  await filter.forward({ from: 6, to: 8 });
-  await filter.forward(true);
-  console.log(filter.numbers);
+  console.log('1', filter.generator.option);
+  //filter.backward();  filter.backward();
+  filter.leap(3);
+  console.log('2', filter.generator.option);
+  await filter.forward();
+  await filter.forward();
+  await filter.forward(3);
+  await filter.forward({ from: 150, to: 180 });
+
+  // await filter.forward({ from: 2, to: 3 });
+  // await filter.forward({ from: 1, to: 3 });
+  // await filter.forward({ from: 10, to: 14 });
+  // await filter.forward({ from: 30, to: 38 });
+  // await filter.forward({ from: 6, to: 8 });
+  // await filter.forward(true);
+  // console.log(filter.numbers);
 }
 
 initf();
