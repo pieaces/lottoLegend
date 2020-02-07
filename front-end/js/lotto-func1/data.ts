@@ -77,9 +77,167 @@ class Generator {
   }
 }
 
-const constraintLowCount = require('../../json/lowCount_compressed.json');
-const constraintSum = require('../../json/sum_compressed.json');
-const constraintSumNotExcluded = require('../../json/sum_notExcluded.json');
+const constraintLowCount = {
+  "0": [1, 4],
+  "1": [1, 4],
+  "2": [2, 4],
+  "3": [2, 5],
+  "4": [2, 5],
+  "12": [1, 4],
+  "13": [1, 5],
+  "14": [1, 5],
+  "23": [2, 5],
+  "24": [2, 5],
+  "34": [2, 6],
+  "123": [1, 5],
+  "124": [1, 5],
+  "134": [1, 6],
+  "234": [6, 6],
+  "1234": [6, 6],
+  "": [2, 4],
+  "0234": [6, 6],
+  "034": [1, 6],
+  "024": [1, 5],
+  "023": [1, 5],
+  "04": [1, 5],
+  "03": [1, 5],
+  "02": [1, 4],
+  "0134": [0, 3],
+  "014": [0, 3],
+  "013": [0, 3],
+  "01": [0, 3],
+  "0124": [0, 0],
+  "012": [0, 0],
+  "0123": [0, 0]
+};
+const constraintSum = {
+  "2": [128, 185],
+  "3": [106, 178],
+  "4": [103, 155],
+  "10": [152, 219],
+  "11": [143, 209],
+  "20": [138, 212],
+  "21": [120, 202],
+  "22": [144, 199],
+  "23": [123, 189],
+  "24": [113, 171],
+  "30": [126, 190],
+  "31": [99, 180],
+  "32": [114, 174],
+  "33": [100, 182],
+  "34": [90, 164],
+  "40": [123, 166],
+  "41": [96, 156],
+  "42": [86, 147],
+  "43": [79, 160],
+  "44": [69, 148],
+  "53": [76, 136],
+  "54": [66, 130],
+  "101": [162, 235],
+  "102": [176, 232],
+  "103": [148, 222],
+  "104": [138, 198],
+  "112": [167, 222],
+  "113": [139, 212],
+  "114": [129, 188],
+  "201": [158, 214],
+  "202": [154, 208],
+  "203": [133, 215],
+  "204": [123, 191],
+  "212": [136, 188],
+  "213": [115, 205],
+  "214": [105, 181],
+  "223": [177, 202],
+  "224": [137, 178],
+  "234": [109, 138],
+  "301": [156, 191],
+  "302": [134, 182],
+  "303": [120, 194],
+  "304": [110, 176],
+  "312": [107, 152],
+  "313": [93, 184],
+  "314": [83, 166],
+  "323": [136, 178],
+  "324": [106, 160],
+  "334": [85, 134],
+  "402": [116, 154],
+  "403": [109, 171],
+  "404": [99, 159],
+  "412": [80, 114],
+  "413": [73, 161],
+  "414": [63, 149],
+  "423": [97, 152],
+  "424": [77, 140],
+  "434": [63, 128],
+  "503": [106, 145],
+  "504": [96, 139],
+  "513": [70, 125],
+  "514": [60, 119],
+  "523": [60, 124],
+  "524": [50, 118],
+  "534": [43, 120],
+  "634": [40, 109],
+  "1013": [158, 237],
+  "1014": [148, 207],
+  "1023": [220, 234],
+  "1024": [170, 204],
+  "1034": [135, 154],
+  "1123": [211, 224],
+  "1124": [161, 194],
+  "1134": [126, 144],
+  "2013": [153, 217],
+  "2014": [143, 193],
+  "2023": [187, 211],
+  "2024": [147, 187],
+  "2034": [119, 151],
+  "2123": [169, 191],
+  "2124": [129, 167],
+  "2134": [101, 141],
+  "3013": [150, 195],
+  "3014": [140, 177],
+  "3023": [156, 186],
+  "3024": [126, 168],
+  "3034": [105, 146],
+  "3123": [129, 156],
+  "3124": [99, 138],
+  "3134": [78, 136],
+  "4023": [127, 159],
+  "4024": [107, 147],
+  "4034": [93, 139],
+  "4123": [91, 119],
+  "4124": [71, 107],
+  "4134": [57, 129],
+  "5023": [100, 130],
+  "5024": [90, 124],
+  "5034": [83, 129],
+  "5123": [55, 80],
+  "5124": [45, 74],
+  "5134": [38, 109],
+  "6034": [80, 117],
+  "6134": [35, 87],
+  "6234": [25, 94],
+  "10134": [145, 157],
+  "20134": [139, 153],
+  "30134": [135, 147],
+  "60234": [75, 99],
+  "61234": [21, 39],
+  "00134": [153, 159],
+  "0014": [155, 214],
+  "0013": [165, 244],
+  "001": [168, 242],
+  "00124": [195, 219],
+  "0012": [200, 254],
+  "00123": [255, 255]
+};
+const constraintSumNotExcluded = {
+  "0": [153, 255],
+  "1": [126, 237],
+  "2": [101, 217],
+  "3": [78, 195],
+  "4": [57, 171],
+  "5": [38, 145],
+  "6": [21, 117]
+};
 
 function numbersToParams(numbers: number[]): Params {
   let flag = true;
@@ -95,15 +253,15 @@ function numbersToParams(numbers: number[]): Params {
     return { list: numbers };
   }
 }
-function compartNumbers(param:Params, PACK:number):string[]{
-  const result:string[] = [];
-  let temp:number;
-  for(let i =param.from; i<param.to; i+=PACK){
-    result.push(i+'~'+(i+9));
+function compartNumbers(param: Params, PACK: number): string[] {
+  const result: string[] = [];
+  let temp: number;
+  for (let i = param.from; i < param.to; i += PACK) {
+    result.push(i + '~' + (i + 9));
     temp = i;
   }
-  if(temp === param.to) result.push(temp.toString());
-  else result.push(temp+'~'+param.to);
+  if (temp === param.to) result.push(temp.toString());
+  else result.push(temp + '~' + param.to);
   return result;
 }
 function paramToNumbers(params: Params): number[] {
@@ -118,77 +276,15 @@ function paramToNumbers(params: Params): number[] {
 class Filter {
   public count: number;
   public numbers: number[];
-<<<<<<< HEAD
-  private numberList = [
-    '1-1',
-    '1-2',
-    '2',
-    '3-1',
-    '3-2',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    '10',
-    '11',
-    '12'
-  ];
-  private statsList = [
-    'excludedLineCount',
-    'lineCount',
-    'carryCount',
-    'excludeInclude',
-    'excludeInclude',
-    'lowCount',
-    'sum',
-    'oddCount',
-    'primeCount',
-    '$3Count',
-    'sum$10',
-    'diffMaxMin',
-    'AC',
-    'consecutiveExist'
-  ];
-  private optionList = [
-    null,
-    'excludedLines',
-    null,
-    'excludedNumbers',
-    'includedNumbers',
-    'lowCount',
-    'sum',
-    'oddCount',
-    'primeCount',
-    '$3Count',
-    'sum$10',
-    'diffMaxMin',
-    'AC',
-    'consecutiveExist'
-  ];
-  private rangeList = [
-    [0, 1, 2, 3, 4],
-    [0, 1, 2, 3, 4],
-    [0, 1, 2, 3, 4, 5, 6],
-    null,
-    null
-  ];
-=======
   private numberList = ["1-1", "1-2", "2", "3-1", "3-2", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
   private statsList = ['excludedLineCount', 'lineCount', 'carryCount', 'excludeInclude', 'excludeInclude', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
   private optionList = [null, 'excludedLines', null, 'excludedNumbers', 'includedNumbers', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
   private rangeList: Array<string[] | number[]> = [[0, 1, 2, 3, 4], [0, 1, 2, 3, 4], [0, 1, 2, 3, 4, 5, 6], null, null];
->>>>>>> 79f334e3eb8bc6dfddf9d36825ae89d4895f23f7
   private current: number = 0;
   private stats: Stats = new Stats();
   private generator: Generator = new Generator();
 
-<<<<<<< HEAD
-  public getLabel(): number[] {
-=======
-  public getLabel():Array<string|number>{
->>>>>>> 79f334e3eb8bc6dfddf9d36825ae89d4895f23f7
+  public getLabel(): Array<string | number> {
     return this.rangeList[this.current];
   }
   public getFilterName(): string {
@@ -216,23 +312,10 @@ class Filter {
       if (this.generator.option.excludedLines) {
         const range =
           constraintSum[
-            this.generator.option.lowCount.toString() +
-              this.generator.option.excludedLines.join('')
+          this.generator.option.lowCount.toString() +
+          this.generator.option.excludedLines.join('')
           ];
         params = { from: range[0], to: range[1] };
-<<<<<<< HEAD
-        this.rangeList[this.current] = numbersToPack(
-          paramToNumbers(params),
-          10
-        );
-      } else {
-        const range =
-          constraintSumNotExcluded[this.generator.option.lowCount.toString()];
-        params = { from: range[0], to: range[1] };
-      }
-    } else {
-      params = numbersToParams(this.rangeList[this.current]);
-=======
         this.rangeList[this.current] = compartNumbers(params, 10);
       }
       else {
@@ -242,7 +325,6 @@ class Filter {
     }
     else {
       params = numbersToParams(this.rangeList[this.current] as number[]);
->>>>>>> 79f334e3eb8bc6dfddf9d36825ae89d4895f23f7
     }
     await this.stats.getData(this.statsList[this.current], params);
     console.log(params);
@@ -322,10 +404,6 @@ async function initf() {
   // await filter.forward(true);
   // console.log(filter.numbers);
 }
-<<<<<<< HEAD
-*/
-=======
 
 initf();
 */
->>>>>>> 79f334e3eb8bc6dfddf9d36825ae89d4895f23f7
