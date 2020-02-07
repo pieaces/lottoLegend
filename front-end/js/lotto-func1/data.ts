@@ -1,5 +1,3 @@
-import fetch from 'node-fetch'
-
 interface Params {
   from?: number;
   to?: number;
@@ -62,7 +60,8 @@ class Generator {
     delete clone.excludedLineCount;
     delete clone.carryCount;
 
-    const url = 'https://is6q0wtgml.execute-api.ap-northeast-2.amazonaws.com/dev/numbers/generator';
+    const url =
+      'https://is6q0wtgml.execute-api.ap-northeast-2.amazonaws.com/dev/numbers/generator';
     console.log(url);
     const fetchResult = await fetch(
       url, //API 주소
@@ -86,7 +85,8 @@ function numbersToParams(numbers: number[]): Params {
   let flag = true;
   for (let i = 1; i < numbers.length; i++) {
     if (numbers[i] - 1 !== numbers[i - 1]) {
-      flag = false; break;
+      flag = false;
+      break;
     }
   }
   if (flag) {
@@ -118,18 +118,69 @@ function paramToNumbers(params: Params): number[] {
 class Filter {
   public count: number;
   public numbers: number[];
-  private numberList = ["1-1", "1-2", "2", "3-1", "3-2", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
-  private statsList = ['excludedLineCount', 'lineCount', 'carryCount', 'excludeInclude', 'excludeInclude', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
-  private optionList = [null, 'excludedLines', null, 'excludedNumbers', 'includedNumbers', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
-  private rangeList = [[0, 1, 2, 3, 4], [0, 1, 2, 3, 4], [0, 1, 2, 3, 4, 5, 6], null, null];
+  private numberList = [
+    '1-1',
+    '1-2',
+    '2',
+    '3-1',
+    '3-2',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10',
+    '11',
+    '12'
+  ];
+  private statsList = [
+    'excludedLineCount',
+    'lineCount',
+    'carryCount',
+    'excludeInclude',
+    'excludeInclude',
+    'lowCount',
+    'sum',
+    'oddCount',
+    'primeCount',
+    '$3Count',
+    'sum$10',
+    'diffMaxMin',
+    'AC',
+    'consecutiveExist'
+  ];
+  private optionList = [
+    null,
+    'excludedLines',
+    null,
+    'excludedNumbers',
+    'includedNumbers',
+    'lowCount',
+    'sum',
+    'oddCount',
+    'primeCount',
+    '$3Count',
+    'sum$10',
+    'diffMaxMin',
+    'AC',
+    'consecutiveExist'
+  ];
+  private rangeList = [
+    [0, 1, 2, 3, 4],
+    [0, 1, 2, 3, 4],
+    [0, 1, 2, 3, 4, 5, 6],
+    null,
+    null
+  ];
   private current: number = 0;
   private stats: Stats = new Stats();
   private generator: Generator = new Generator();
 
-  public getLabel():number[]{
+  public getLabel(): number[] {
     return this.rangeList[this.current];
   }
-  public getFilterName():string{
+  public getFilterName(): string {
     return this.numberList[this.current];
   }
 
@@ -140,25 +191,34 @@ class Filter {
     else if (this.current === 5) {
       let range: number[];
       if (this.generator.option.excludedLines) {
-        range = constraintLowCount[this.generator.option.excludedLines.join('')];
+        range =
+          constraintLowCount[this.generator.option.excludedLines.join('')];
       } else {
         range = [0, 6];
       }
       params = { from: range[0], to: range[1] };
-      this.rangeList[this.current] = paramToNumbers({ from: range[0], to: range[1] });
-    }
-    else if (this.current === 6) {
+      this.rangeList[this.current] = paramToNumbers({
+        from: range[0],
+        to: range[1]
+      });
+    } else if (this.current === 6) {
       if (this.generator.option.excludedLines) {
-        const range = constraintSum[this.generator.option.lowCount.toString() + this.generator.option.excludedLines.join('')];
+        const range =
+          constraintSum[
+            this.generator.option.lowCount.toString() +
+              this.generator.option.excludedLines.join('')
+          ];
         params = { from: range[0], to: range[1] };
-        this.rangeList[this.current] = numbersToPack(paramToNumbers(params), 10);
-      }
-      else {
-        const range = constraintSumNotExcluded[this.generator.option.lowCount.toString()];
+        this.rangeList[this.current] = numbersToPack(
+          paramToNumbers(params),
+          10
+        );
+      } else {
+        const range =
+          constraintSumNotExcluded[this.generator.option.lowCount.toString()];
         params = { from: range[0], to: range[1] };
       }
-    }
-    else {
+    } else {
       params = numbersToParams(this.rangeList[this.current]);
     }
     await this.stats.getData(this.statsList[this.current], params);
@@ -204,7 +264,6 @@ class Filter {
           await this.setStats();
         }
       }
-
     }
   }
 

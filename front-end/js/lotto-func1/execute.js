@@ -1,6 +1,7 @@
 async function lottoFunc1() {
   filterBoxCheck();
-  const filter = new Filter();
+
+  await filter.init();
   chartInit();
 }
 

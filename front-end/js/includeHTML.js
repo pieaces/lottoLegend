@@ -5,19 +5,23 @@ function includeHTML() {
     elmnt = z[i];
     file = elmnt.getAttribute('include-html');
     if (file) {
-      const xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          elmnt.innerHTML = this.responseText;
-          elmnt.removeAttribute('include-html');
-          includeHTML();
-        }
-      };
-      xhttp.open('GET', file, true);
-      xhttp.send();
-      return;
+      // const xhttp = new XMLHttpRequest();
+      // xhttp.onreadystatechange = function() {
+      //   if (this.readyState == 4 && this.status == 200) {
+      //     elmnt.innerHTML = this.responseText;
+      //     elmnt.removeAttribute('include-html');
+      //     includeHTML();
+      //   }
+      // };
+      // xhttp.open('GET', file, true);
+      // xhttp.send();
+      return fetch().then(response => response.te);
     }
   }
 }
 
-includeHTML();
+async function initIncludeHTML() {
+  await includeHTML();
+}
+
+initIncludeHTML();

@@ -135,10 +135,12 @@ function setLineChartData(currentObj) {
     3: '$192',
     4: 'all'
   };
-  LineDataBox.datasets[0].data =
-    filter.getStats().actual[lineMap[currentObj.slideCurrent]];
-  LineDataBox.datasets[1].data =
-   filter.getStats().data.ideal[lineMap[currentObj.slideCurrent]];
+  LineDataBox.datasets[0].data = filter.getStats().actual[
+    lineMap[currentObj.slideCurrent]
+  ];
+  LineDataBox.datasets[1].data = filter.getStats().ideal[
+    lineMap[currentObj.slideCurrent]
+  ];
   LineInstance.update();
 }
 
