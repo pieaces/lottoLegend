@@ -1,5 +1,3 @@
-import fetch from 'node-fetch'
-
 interface Params {
   from?: number;
   to?: number;
@@ -217,31 +215,3 @@ class Filter {
     return this.stats[this.statsList[this.current]];
   }
 }
-/*
-async function initf() {
-  const filter = new Filter();
-  await filter.init();
-  await filter.forward();
-  await filter.forward([2]);
-  await filter.forward();
-  await filter.forward([2, 10, 42, 44, 45]);
-  await filter.forward();
-  await filter.forward(2);
-  await filter.forward({ from: 150, to: 180 });
-  await filter.forward({ from: 2, to: 3 });
-  //filter.backward();  filter.backward();
-  filter.leap(3);
-  await filter.forward();
-  await filter.forward();
-  await filter.forward(3);
-  await filter.forward({ from: 150, to: 180 });
-
-  // await filter.forward({ from: 2, to: 3 });
-  // await filter.forward({ from: 1, to: 3 });
-  // await filter.forward({ from: 10, to: 14 });
-  // await filter.forward({ from: 30, to: 38 });
-  // await filter.forward({ from: 6, to: 8 });
-  // await filter.forward(true);
-  // console.log(filter.numbers);
-}
-*/
