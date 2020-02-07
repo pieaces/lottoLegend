@@ -1,3 +1,5 @@
+import fetch from 'node-fetch'
+
 interface Params {
   from?: number;
   to?: number;
@@ -93,16 +95,16 @@ function numbersToParams(numbers: number[]): Params {
     return { list: numbers };
   }
 }
-
-function numbersToPack(numbers: number[], PACK: number): number[] {
-  return numbers.reduce((acc, cur, index) => {
-    if (index % PACK === 0) {
-      acc.push(cur);
-    } else {
-      acc[acc.length - 1] += cur;
-    }
-    return acc;
-  }, []);
+function compartNumbers(param:Params, PACK:number):string[]{
+  const result:string[] = [];
+  let temp:number;
+  for(let i =param.from; i<param.to; i+=PACK){
+    result.push(i+'~'+(i+9));
+    temp = i;
+  }
+  if(temp === param.to) result.push(temp.toString());
+  else result.push(temp+'~'+param.to);
+  return result;
 }
 function paramToNumbers(params: Params): number[] {
   if (params.from && params.to) {
@@ -119,12 +121,12 @@ class Filter {
   private numberList = ["1-1", "1-2", "2", "3-1", "3-2", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
   private statsList = ['excludedLineCount', 'lineCount', 'carryCount', 'excludeInclude', 'excludeInclude', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
   private optionList = [null, 'excludedLines', null, 'excludedNumbers', 'includedNumbers', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
-  private rangeList = [[0, 1, 2, 3, 4], [0, 1, 2, 3, 4], [0, 1, 2, 3, 4, 5, 6], null, null];
+  private rangeList: Array<string[] | number[]> = [[0, 1, 2, 3, 4], [0, 1, 2, 3, 4], [0, 1, 2, 3, 4, 5, 6], null, null];
   private current: number = 0;
   private stats: Stats = new Stats();
   private generator: Generator = new Generator();
 
-  public getLabel():number[]{
+  public getLabel():Array<string|number>{
     return this.rangeList[this.current];
   }
   public getFilterName():string{
@@ -149,7 +151,7 @@ class Filter {
       if (this.generator.option.excludedLines) {
         const range = constraintSum[this.generator.option.lowCount.toString() + this.generator.option.excludedLines.join('')];
         params = { from: range[0], to: range[1] };
-        this.rangeList[this.current] = numbersToPack(paramToNumbers(params), 10);
+        this.rangeList[this.current] = compartNumbers(params, 10);
       }
       else {
         const range = constraintSumNotExcluded[this.generator.option.lowCount.toString()];
@@ -157,7 +159,7 @@ class Filter {
       }
     }
     else {
-      params = numbersToParams(this.rangeList[this.current]);
+      params = numbersToParams(this.rangeList[this.current] as number[]);
     }
     await this.stats.getData(this.statsList[this.current], params);
     console.log(params);
@@ -215,3 +217,26 @@ class Filter {
     return this.stats[this.statsList[this.current]];
   }
 }
+
+async function initf() {
+  const filter = new Filter();
+  await filter.init();
+  await filter.forward();
+  await filter.forward([2]);
+  await filter.forward();
+  await filter.forward([2, 10, 42, 44, 45]);
+  console.log(filter.getStats());
+  // await filter.forward();
+  // await filter.forward(2);
+  // await filter.forward({ from: 150, to: 180 });
+  // await filter.forward({ from: 2, to: 3 });
+  // await filter.forward({ from: 2, to: 3 });
+  // await filter.forward({ from: 1, to: 3 });
+  // await filter.forward({ from: 10, to: 14 });
+  // await filter.forward({ from: 30, to: 38 });
+  // await filter.forward({ from: 6, to: 8 });
+  // await filter.forward(true);
+  // console.log(filter.numbers);
+}
+
+initf();
