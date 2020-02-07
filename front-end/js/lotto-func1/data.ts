@@ -79,7 +79,7 @@ const constraintLowCount = require('../../json/lowCount_compressed.json');
 const constraintSum = require('../../json/sum_compressed.json');
 const constraintSumNotExcluded = require('../../json/sum_notExcluded.json');
 
-function compressNumbers(numbers: number[]):Params {
+function numbersToParams(numbers: number[]): Params {
   let flag = true;
   for (let i = 1; i < numbers.length; i++) {
     if (numbers[i] - 1 !== numbers[i - 1]) {
@@ -90,6 +90,25 @@ function compressNumbers(numbers: number[]):Params {
     return { from: numbers[0], to: numbers[numbers.length - 1] };
   } else {
     return { list: numbers };
+  }
+}
+function numbersToPack(numbers: number[], PACK:number): number[] {
+  return numbers.reduce((acc, cur, index) => {
+    if (index % PACK === 0) {
+      acc.push(cur);
+    } else {
+      acc[acc.length - 1] += cur;
+    }
+    return acc;
+  }, []);
+}
+function makeNumArray(params: Params): number[] {
+  if (params.from && params.to) {
+    const temp = [];
+    for (let i = params.from; i <= params.to; i++) temp.push(i);
+    return temp;
+  } else if (params.list) {
+    return params.list;
   }
 }
 class Filter {
@@ -106,9 +125,19 @@ class Filter {
     if (this.current <= 4) params = {};
     if (this.current === 5) {
       const range = constraintLowCount[this.generator.option.excludedLines.join('')];
-      this.rangeList[this.current] = [];
-      for (let i = range[0]; i <= range[1]; i++) this.rangeList.push(i);
-      params = compressNumbers
+      params = { from: range[0], to: range[1] };
+      this.rangeList[this.current] = makeNumArray({ from: range[0], to: range[1] });
+    }
+    if (this.current === 6) {
+      if (this.generator.option.excludedLines) {
+        const range = constraintSum[this.generator.option.lowCount.toString() + this.generator.option.excludedLines.join('')];
+        params = { from: range[0], to: range[1] };
+        this.rangeList[this.current];
+      }
+      else {
+        const range = constraintSumNotExcluded[this.generator.option.lowCount.toString()];
+        params = { from: range[0], to: range[1] };
+      }
     }
     this.stats.getData(this.statsList[this.current], params);
   }
