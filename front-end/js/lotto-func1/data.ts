@@ -95,16 +95,16 @@ function numbersToParams(numbers: number[]): Params {
     return { list: numbers };
   }
 }
-
-function numbersToPack(numbers: number[], PACK: number): number[] {
-  return numbers.reduce((acc, cur, index) => {
-    if (index % PACK === 0) {
-      acc.push(cur);
-    } else {
-      acc[acc.length - 1] += cur;
-    }
-    return acc;
-  }, []);
+function compartNumbers(param:Params, PACK:number):string[]{
+  const result:string[] = [];
+  let temp:number;
+  for(let i =param.from; i<param.to; i+=PACK){
+    result.push(i+'~'+(i+9));
+    temp = i;
+  }
+  if(temp === param.to) result.push(temp.toString());
+  else result.push(temp+'~'+param.to);
+  return result;
 }
 function paramToNumbers(params: Params): number[] {
   if (params.from && params.to) {
@@ -118,6 +118,7 @@ function paramToNumbers(params: Params): number[] {
 class Filter {
   public count: number;
   public numbers: number[];
+<<<<<<< HEAD
   private numberList = [
     '1-1',
     '1-2',
@@ -173,11 +174,21 @@ class Filter {
     null,
     null
   ];
+=======
+  private numberList = ["1-1", "1-2", "2", "3-1", "3-2", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+  private statsList = ['excludedLineCount', 'lineCount', 'carryCount', 'excludeInclude', 'excludeInclude', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
+  private optionList = [null, 'excludedLines', null, 'excludedNumbers', 'includedNumbers', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
+  private rangeList: Array<string[] | number[]> = [[0, 1, 2, 3, 4], [0, 1, 2, 3, 4], [0, 1, 2, 3, 4, 5, 6], null, null];
+>>>>>>> 79f334e3eb8bc6dfddf9d36825ae89d4895f23f7
   private current: number = 0;
   private stats: Stats = new Stats();
   private generator: Generator = new Generator();
 
+<<<<<<< HEAD
   public getLabel(): number[] {
+=======
+  public getLabel():Array<string|number>{
+>>>>>>> 79f334e3eb8bc6dfddf9d36825ae89d4895f23f7
     return this.rangeList[this.current];
   }
   public getFilterName(): string {
@@ -209,6 +220,7 @@ class Filter {
               this.generator.option.excludedLines.join('')
           ];
         params = { from: range[0], to: range[1] };
+<<<<<<< HEAD
         this.rangeList[this.current] = numbersToPack(
           paramToNumbers(params),
           10
@@ -220,6 +232,17 @@ class Filter {
       }
     } else {
       params = numbersToParams(this.rangeList[this.current]);
+=======
+        this.rangeList[this.current] = compartNumbers(params, 10);
+      }
+      else {
+        const range = constraintSumNotExcluded[this.generator.option.lowCount.toString()];
+        params = { from: range[0], to: range[1] };
+      }
+    }
+    else {
+      params = numbersToParams(this.rangeList[this.current] as number[]);
+>>>>>>> 79f334e3eb8bc6dfddf9d36825ae89d4895f23f7
     }
     await this.stats.getData(this.statsList[this.current], params);
     console.log(params);
@@ -276,6 +299,8 @@ class Filter {
     return this.stats[this.statsList[this.current]];
   }
 }
+const filter = new Filter();
+
 /*
 async function initf() {
   const filter = new Filter();
@@ -284,17 +309,11 @@ async function initf() {
   await filter.forward([2]);
   await filter.forward();
   await filter.forward([2, 10, 42, 44, 45]);
-  await filter.forward();
-  await filter.forward(2);
-  await filter.forward({ from: 150, to: 180 });
-  await filter.forward({ from: 2, to: 3 });
-  //filter.backward();  filter.backward();
-  filter.leap(3);
-  await filter.forward();
-  await filter.forward();
-  await filter.forward(3);
-  await filter.forward({ from: 150, to: 180 });
-
+  console.log(filter.getStats());
+  // await filter.forward();
+  // await filter.forward(2);
+  // await filter.forward({ from: 150, to: 180 });
+  // await filter.forward({ from: 2, to: 3 });
   // await filter.forward({ from: 2, to: 3 });
   // await filter.forward({ from: 1, to: 3 });
   // await filter.forward({ from: 10, to: 14 });
@@ -303,4 +322,10 @@ async function initf() {
   // await filter.forward(true);
   // console.log(filter.numbers);
 }
+<<<<<<< HEAD
 */
+=======
+
+initf();
+*/
+>>>>>>> 79f334e3eb8bc6dfddf9d36825ae89d4895f23f7
