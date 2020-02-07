@@ -5,25 +5,25 @@ function drawBubbleChart() {
   const X = { max: -1, min: 1 };
   const Y = { max: -1, min: 1 };
 
-  for (let i = 0; i < chartData.data.ideal['all'].length; i++) {
-    let x = chartData.data.ideal['all'][i] - chartData.data.actual['all'][i];
-    if (chartData.data.ideal['all'][i] >= chartData.data.actual['all'][i])
-      x /= chartData.data.ideal['all'][i];
-    else x /= chartData.data.actual['all'][i];
-    x *= chartData.data.pos[i];
+  for (let i = 0; i < filter.getStats().ideal['all'].length; i++) {
+    let x = filter.getStats().ideal['all'][i] - filter.getStats().actual['all'][i];
+    if (filter.getStats().ideal['all'][i] >= filter.getStats().actual['all'][i])
+      x /= filter.getStats().ideal['all'][i];
+    else x /= filter.getStats().actual['all'][i];
+    x *= filter.getStats().pos[i];
     let y =
-      chartData.data.ideal['latest'][i] - chartData.data.actual['latest'][i];
-    if (chartData.data.ideal['latest'][i] >= chartData.data.actual['latest'][i])
-      y /= chartData.data.ideal['latest'][i];
-    else y /= chartData.data.actual['latest'][i];
-    y *= chartData.data.pos[i];
+      filter.getStats().ideal['latest'][i] - filter.getStats().actual['latest'][i];
+    if (filter.getStats().ideal['latest'][i] >= filter.getStats().actual['latest'][i])
+      y /= filter.getStats().ideal['latest'][i];
+    else y /= filter.getStats().actual['latest'][i];
+    y *= filter.getStats().pos[i];
 
     if (x > X.max) X.max = x;
     if (x < X.min) X.min = x;
     if (y > Y.max) Y.max = y;
     if (y < Y.min) Y.min = y;
 
-    const data = [String(i), x, y, y, chartData.data.pos[i]];
+    const data = [String(i), x, y, y, filter.getStats().pos[i]];
     dataBubble.push(data);
   }
 
@@ -42,6 +42,6 @@ function drawBubbleChart() {
 function initBubbleChartData() {
   google.charts.load('current', { packages: ['corechart'] });
   google.charts.setOnLoadCallback(function() {
-    drawBubbleChart(chartData.data);
+    drawBubbleChart(filter.getStats());
   });
 }

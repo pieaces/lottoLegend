@@ -5,7 +5,7 @@ const rightLineBtn = document.querySelector('#right-line-chart-btn');
 const main22 = document.querySelector('.main-2-2');
 
 const LineDataBox = {
-  labels: [0, 1, 2, 3, 4, 5, 6],
+  labels: filter.getLabel(),
   datasets: [
     {
       label: '실제값',
@@ -16,7 +16,7 @@ const LineDataBox = {
       data: null
     },
     {
-      label: '이상값',
+      label: '예측값',
       backgroundColor: 'rgba(91, 81,255, 0.2)',
       pointBackgroundColor: 'white',
       borderWidth: 2,
@@ -128,22 +128,22 @@ function lineRightBtnClick(slideNum, currentObj) {
 }
 
 function setLineChartData(currentObj) {
-  const lineMap = new Map([
-    [0, '$12'],
-    [1, '$24'],
-    [2, '$48'],
-    [3, '$192'],
-    [4, 'all']
-  ]);
+  const lineMap = {
+    0: '$12',
+    1: '$24',
+    2: '$48',
+    3: '$192',
+    4: 'all'
+  };
   LineDataBox.datasets[0].data =
-    chartData.data.actual[lineMap.get(currentObj.slideCurrent)];
+    filter.getStats().actual[lineMap[currentObj.slideCurrent]];
   LineDataBox.datasets[1].data =
-    chartData.data.ideal[lineMap.get(currentObj.slideCurrent)];
+   filter.getStats().data.ideal[lineMap[currentObj.slideCurrent]];
   LineInstance.update();
 }
 
 function initLineChartData() {
-  LineDataBox.datasets[0].data = chartData.data.actual['$12'];
-  LineDataBox.datasets[1].data = chartData.data.ideal['$12'];
+  LineDataBox.datasets[0].data = filter.getStats().actual['$12'];
+  LineDataBox.datasets[1].data = filter.getStats().ideal['$12'];
   LineInstance.update();
 }

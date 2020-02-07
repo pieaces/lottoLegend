@@ -4,10 +4,10 @@ const BarNum = document.querySelectorAll('.chart-bar-num > div');
 const BarBox = document.querySelector('#chart-func1-bar');
 const main23 = document.querySelector('.main-2-3');
 const BarDataBox = {
-  labels: [0, 1, 2, 3, 4, 5, 6],
+  labels: filter.getLabel(),
   datasets: [
     {
-      label: '이상값',
+      label: '예측',
       backgroundColor: 'rgba(91, 81,255, 0.2)',
       pointBackgroundColor: 'white',
       borderWidth: 2,
@@ -91,16 +91,16 @@ function barRightBtnClick(slideNum, currentObj) {
 function setBarChartData(slideNum, currentObj) {
   for (let i = 0; i < slideNum - 1; i++) {
     if (currentObj.slideCurrent === i) {
-      BarDataBox.datasets[0].data = chartData.data.ideal['latest'];
+      BarDataBox.datasets[0].data = filter.getStats().ideal['latest'];
       BarInstance.update();
     }
   }
   if (currentObj.slideCurrent === slideNum - 1) {
     const datas = [];
 
-    for (let i = 0; i < chartData.data.ideal['latest'].length; i++) {
+    for (let i = 0; i < filter.getStats().ideal['latest'].length; i++) {
       const data =
-        chartData.data.ideal['latest'][i] - chartData.data.actual['latest'][i];
+        filter.getStats().ideal['latest'][i] - filter.getStats().actual['latest'][i];
       datas.push(data);
     }
     BarDataBox.datasets[0].data = datas;
@@ -110,6 +110,6 @@ function setBarChartData(slideNum, currentObj) {
 }
 
 function initBarChartData() {
-  BarDataBox.datasets[0].data = chartData.data.ideal['latest'];
+  BarDataBox.datasets[0].data = filter.getStats().ideal['latest'];
   BarInstance.update();
 }
