@@ -32,11 +32,9 @@ class Stats {
 }
 
 interface GeneratorOption {
-  excludedLineCount?: number;
   excludedLines?: number[];
-  carryCount?: number;
-  includedNumbers?: number[];
   excludedNumbers?: number[];
+  includedNumbers?: number[];
   lowCount?: number;
   sum?: Range;
   oddCount?: Range;
@@ -46,34 +44,14 @@ interface GeneratorOption {
   diffMaxMin?: Range;
   AC?: Range;
   consecutiveExist?: boolean;
-  current: string;
+
+  excludedLineCount?: number;
+  carryCount?: number;
 }
 
 class Generator {
   option: GeneratorOption;
-  currentFilter: string;
-  methodMap: any = {
-    "1-1": 'excludedLineCount',
-    "1-2": 'lineCount',
-    "2": 'carryCount',
-    "3-1": 'excludedNumbers',
-    "3-2": 'includedNumbers',
-    "4": 'lowCount',
-    "5": 'sum',
-    "6": 'oddCount',
-    "7": 'primeCount',
-    "8": '$3Count',
-    "9": 'sum$10',
-    "10": 'diffMaxMin',
-    "11": 'AC',
-    "12": 'consecutiveExist'
-  };
-  constructor() {
-    this.option = {
-      current: "excludedLineCount"
-    };
-    this.currentFilter = "1-1";
-  }
+
   async generate() {
     const headers = {
       'x-api-key': 'LZn9Pykicg982PNmTmdiB8pkso4xbGiQ4n4P1z1k',
@@ -97,5 +75,60 @@ class Generator {
   }
 }
 
+const constraintLowCount = require('../../json/lowCount_compressed.json');
+const constraintSum = require('../../json/sum_compressed.json');
+const constraintSumNotExcluded = require('../../json/sum_notExcluded.json');
+
+function compressNumbers(numbers: number[]){
+  let flag = true;
+  for(let i =1; i<numbers.length; i++){
+    if(numbers[i] -1 !== numbers[i-1]){
+      flag = false; break;
+    }
+  }
+  return flag;
+}
+class Filter {
+  private numberList = ["1-1", "1-2", "2", "3-1", "3-2", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+  private statsList = ['excludedLineCount', 'lineCount', 'carryCount', 'excludeInclude', 'excludeInclude', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
+  private optionList = ['excludedLineCount', 'excludedLines', 'carryCount', 'excludedNumbers', 'includedNumbers', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
+  private rangeList = [[0,1,2,3,4], [0,1,2,3,4], [0,1,2,3,4,5,6], null, null];
+  private current: number = 0;
+  private stats: Stats = new Stats();
+  private generator: Generator = new Generator();
+
+  private getStats() {
+    let params:Params;
+    if(this.current <= 4) params = {};
+    if(this.current === 5){
+      const range = constraintLowCount[this.generator.option.excludedLines.join('')];
+      this.rangeList[this.current] = [];
+      for(let i =range[0]; i<=range[1]; i++) this.rangeList.push(i);
+    }
+    this.stats.getData(this.statsList[this.current], params);
+  }
+  private getGen(){
+
+  }
+  leap(page: number): void {
+    if (0 <= page && page <= 13) {
+      this.current = page;
+    }
+  }
+
+  forward(): void {
+    if (this.current < this.numberList.length - 1) {
+      this.getGen();
+      this.current++;
+      this.getStats();
+    }
+  }
+  backward(): void {
+    if (this.current > 0) {
+      this.current--;
+    }
+  }
+
+}
 const stats = new Stats();
 const generator = new Generator();
