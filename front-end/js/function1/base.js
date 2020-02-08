@@ -14,7 +14,7 @@ class BarChart extends ChartBase {
   constructor(ele, filter) {
     const option = { legend: false }
     const dataBox = {
-      labels: filter.getLabel(),
+      labels: null,
       datasets: [
         {
           label: '막대',
@@ -30,7 +30,6 @@ class BarChart extends ChartBase {
 
   }
 }
-
 
 class LineChart extends ChartBase {
   constructor(ele, filter) {
@@ -67,7 +66,7 @@ class LineChart extends ChartBase {
       }
     }
     const dataBox = {
-      labels: filter.getLabel(),
+      labels: null,
       datasets: [
         {
           label: '실제값',
@@ -105,54 +104,6 @@ class Slide {
   setData() { }
   setText() {
     this.textBox.textContent = this.current;
-
-  }
-  leftBtnClickable() {
-    this.leftBtn.addEventListener('click', () => {
-      this.numBtn[this.current].classList.remove('chart-slide-current');
-      if (this.current === 0) {
-        this.numBtn[this.size - 1].classList.add('chart-slide-current');
-        this.current = this.size - 1;
-      } else {
-        this.current--;
-        this.numBtn[this.current].classList.add('chart-slide-current');
-      }
-      this.setData();
-      this.setText();
-    });
-  }
-  rightBtnClickable() {
-    this.rightBtn.addEventListener('click', () => {
-      if (this.current === this.size - 1) {
-        this.numBtn[this.size - 1].classList.remove('chart-slide-current');
-        this.current = 0;
-      } else {
-        this.numBtn[this.current].classList.remove('chart-slide-current');
-        this.current++;
-      }
-      this.numBtn[this.current].classList.add('chart-slide-current');
-
-      this.setData();
-      this.setText();
-    });
-  }
-  numBtnClickable() {
-    for (let i = 0; i < this.numBtn.length; i++) {
-      this.numBtn[i].addEventListener('click', () => {
-        this.numBtn[this.current].classList.remove('chart-slide-current');
-        this.current = i;
-        this.numBtn[this.current].classList.add('chart-slide-current');
-
-        this.setData();
-        this.setText();
-      });
-    }
-  }
-
-  init() {
-    this.leftBtnClickable();
-    this.rightBtnClickable();
-    this.numBtnClickable();
   }
 }
 
@@ -181,9 +132,8 @@ class BarSlide extends Slide {
     }
     this.chart.instance.update();
   }
-
   init() {
-    super.init();
+    this.chart.dataBox.labels = filter.getLabel();
     this.chart.dataBox.datasets[0].data = filter.getStats().ideal['latest'];
     this.chart.instance.update();
   }
@@ -209,7 +159,7 @@ class LineSlide extends Slide {
     this.chart.instance.update();
   }
   init() {
-    super.init();
+    this.chart.dataBox.labels = filter.getLabel();
     this.chart.dataBox.datasets[0].data = filter.getStats().actual['$12'];
     this.chart.dataBox.datasets[1].data = filter.getStats().ideal['$12'];
     this.chart.instance.update();

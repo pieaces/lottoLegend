@@ -47,13 +47,17 @@ var Stats = /** @class */ (function () {
                             'x-api-key': 'LZn9Pykicg982PNmTmdiB8pkso4xbGiQ4n4P1z1k' //API KEY
                         };
                         url = "https://is6q0wtgml.execute-api.ap-northeast-2.amazonaws.com/dev/stats/" + method;
-                        console.log(url);
+                        console.log('매개변수', params);
                         if (params) {
-                            if (params.from & params.to)
+                            if (typeof params.from === 'number' && typeof params.to === 'number') {
+                                console.log('존재!');
                                 url += "?from=" + params.from + "&to=" + params.to;
-                            else if (params.list)
+                            }
+                            else if (params.list) {
                                 url += "?list=" + encodeURI(JSON.stringify(params.list));
+                            }
                         }
+                        console.log(url);
                         return [4 /*yield*/, fetch(url, { method: 'GET', headers: headers })];
                     case 1:
                         fetchResult = _c.sent();
@@ -325,13 +329,16 @@ var Filter = /** @class */ (function () {
     Filter.prototype.getFilterName = function () {
         return this.numberList[this.current];
     };
+    Filter.prototype.getCurrent = function () { return this.current; };
+    Filter.prototype.getRange = function () {
+        return this.rangeList[this.current];
+    };
     Filter.prototype.setStats = function () {
         return __awaiter(this, void 0, void 0, function () {
             var params, range, range, range;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log(this.current);
                         if (this.current <= 4)
                             params = {};
                         else if (this.current === 5) {
@@ -364,10 +371,10 @@ var Filter = /** @class */ (function () {
                         else {
                             params = numbersToParams(this.rangeList[this.current]);
                         }
+                        console.log('PARAMS', params);
                         return [4 /*yield*/, this.stats.getData(this.statsList[this.current], params)];
                     case 1:
                         _a.sent();
-                        console.log(params);
                         return [2 /*return*/];
                 }
             });
@@ -394,7 +401,6 @@ var Filter = /** @class */ (function () {
         var count = this.current - page;
         if (count > 0 && page >= 0) {
             for (var i = 0; i < count; i++) {
-                console.log('i', i);
                 this.backward();
             }
         }
@@ -412,7 +418,6 @@ var Filter = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        console.log('forward', this.current);
                         if (!(0 <= this.current && this.current < this.statsList.length)) return [3 /*break*/, 4];
                         option = this.optionList[this.current];
                         if (option) {

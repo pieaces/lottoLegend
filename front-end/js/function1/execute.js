@@ -12,15 +12,37 @@ const main22 = document.querySelector('.main-2-2');
 //
 const bubbleBox = document.querySelector('#chart-func1-bubble');
 //
-
-const filter = new Filter();
+const nextBtn = document.getElementById('nextBtn');
+const optionList = document.getElementById('optionList');
+//
+const filter = new Filter(nextBtn);
 const bar = new BarSlide(barBox, filter, leftBarBtn, rightBarBtn, barNum, main23);
 const line = new LineSlide(lineBox, filter, leftLineBtn, rightLineBtn, lineNum, main22);
+const bubble = new Bubble(bubbleBox, filter);
+
 async function execute() {
   DropDown();
   await filter.init();
+
+  makeClickable(bar);
+  makeClickable(line);
   bar.init();
   line.init();
-  initBubbleChart(bubbleBox, filter.getStats());
+  bubble.init();
+
+  const optionList = [null, [3], null, [10,20,42,43,44], [2], 2, {from:100, to:190}, 
+  {from:2,to:4}, {from:1,to:3}, {from:0,to:3}, {from:10,to:14}, {from:30,to:38}, {from:7, to:10}, true]
+  nextBtn.addEventListener('click', async () => {
+    //optionList method
+    const option = undefined;
+    console.log('옵션: ', optionList[filter.current]);
+    await filter.forward(optionList[filter.current]);
+    console.log('범위: ',filter.getRange());
+    bar.init();
+    line.init();
+    bubble.init();
+    console.log('stats', filter.getStats());
+  });
+
 }
 execute();

@@ -10,8 +10,9 @@ const future = document.querySelector('.future span strong');
 const section = document.querySelector('section');
 const header = document.querySelector('header');
 
-function DropDown() {
+function DropDown(_filter) {
   let flag = true;
+  const filter = _filter;
   filterBox.addEventListener('click', () => {
     if (flag) {
       filterArrow.classList.remove('fa-sort-down');

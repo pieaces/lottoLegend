@@ -16,13 +16,17 @@ class Stats {
       'x-api-key': 'LZn9Pykicg982PNmTmdiB8pkso4xbGiQ4n4P1z1k' //API KEY
     };
     let url = `https://is6q0wtgml.execute-api.ap-northeast-2.amazonaws.com/dev/stats/${method}`;
-    console.log(url);
+    console.log('매개변수',params);
     if (params) {
-      if (params.from & params.to)
+      if (typeof params.from === 'number' && typeof params.to === 'number') {
+        console.log('존재!');
         url += `?from=${params.from}&to=${params.to}`;
-      else if (params.list)
+      }
+      else if (params.list) {
         url += `?list=${encodeURI(JSON.stringify(params.list))}`;
+      }
     }
+    console.log(url);
     const fetchResult = await fetch(url, { method: 'GET', headers });
     const data = JSON.parse(await fetchResult.text());
     this[method] = data.data;
@@ -283,14 +287,6 @@ class Filter {
   private current: number = 0;
   private stats: Stats = new Stats();
   private generator: Generator = new Generator();
-  private nextBtn:HTMLElement;
-
-  constructor(nextBtn:HTMLElement){
-    this.nextBtn = nextBtn;
-    this.nextBtn.addEventListener('click', () =>{
-      
-    })
-  }
 
   public getLabel(): Array<string | number> {
     return this.rangeList[this.current];
@@ -298,9 +294,12 @@ class Filter {
   public getFilterName(): string {
     return this.numberList[this.current];
   }
+  public getCurrent() { return this.current }
+  public getRange() {
+    return this.rangeList[this.current];
+  }
 
   private async setStats(): Promise<void> {
-    console.log(this.current);
     let params: Params;
     if (this.current <= 4) params = {};
     else if (this.current === 5) {
@@ -334,8 +333,8 @@ class Filter {
     else {
       params = numbersToParams(this.rangeList[this.current] as number[]);
     }
+    console.log('PARAMS',params);
     await this.stats.getData(this.statsList[this.current], params);
-    console.log(params);
   }
 
   private async getGen(): Promise<void> {
@@ -350,7 +349,6 @@ class Filter {
     const count = this.current - page;
     if (count > 0 && page >= 0) {
       for (let i = 0; i < count; i++) {
-        console.log('i', i);
         this.backward();
       }
     }
@@ -362,7 +360,6 @@ class Filter {
     }
   }
   async forward(optionData: any = undefined): Promise<void> {
-    console.log('forward', this.current);
     if (0 <= this.current && this.current < this.statsList.length) {
       const option = this.optionList[this.current];
       if (option) {
