@@ -65,7 +65,7 @@ export default async function queryStats(method: Method, params: QueryStatsParam
                             params.from -= 21;
                             params.to -= 21;
                         } else if (method === Method.diffMaxMin) {
-                            params.list.map(value => value - 5);
+                            params.list = params.list.map(value => value - 5);
                         }
 
                         const ideal: Assembly = makeAssembly(item.Ideal.M, params);
@@ -116,7 +116,7 @@ function transformNumbers(list: AWS.DynamoDB.ListAttributeValue, params: QuerySt
         result = list.filter((value, index) => {
             if (params.list.indexOf(index) !== -1) return value;
         }).map(value => Number(value.N));
-    } else if (params.from && params.to) {
+    } else if (typeof params.from === 'number' && typeof params.to === 'number') {
         result = list.slice(params.from, params.to + 1).map((value) => Number(value.N))
     } else {
         result = list.map((value) => Number(value.N));
