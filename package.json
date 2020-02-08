@@ -7,11 +7,12 @@
     "test": "test"
   },
   "dependencies": {
-    "@types/google.visualization": "0.0.51",
+    "@types/node": "^13.7.0",
     "chart.js": "^2.9.3"
   },
   "devDependencies": {
-    "google-charts": "^2.0.0",
+    "@types/chart.js": "^2.9.13",
+    "copy-webpack-plugin": "^5.1.1",
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.5",
     "webpack": "^4.41.5",

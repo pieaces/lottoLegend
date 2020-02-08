@@ -9,7 +9,8 @@ export class ChartBase {
         this.option = option;
         this.instance = new Chart(ele, {
             type: type,
-            data: this.dataBox
+            data: this.dataBox,
+            options: this.option
         });
     }
 }
@@ -23,7 +24,6 @@ export class BarChart extends ChartBase {
             labels: null,
             datasets: [
                 {
-                    label: '막대',
                     backgroundColor: 'rgba(91, 81,255, 0.2)',
                     pointBackgroundColor: 'white',
                     borderWidth: 2,
@@ -74,7 +74,6 @@ export class LineChart extends ChartBase {
             labels: null,
             datasets: [
                 {
-                    label: '실제값',
                     backgroundColor: 'rgba(91, 81,255, 0.2)',
                     pointBackgroundColor: 'white',
                     borderWidth: 2,
@@ -82,7 +81,6 @@ export class LineChart extends ChartBase {
                     data: null
                 },
                 {
-                    label: '예측값',
                     backgroundColor: 'rgba(91, 81,255, 0.2)',
                     pointBackgroundColor: 'white',
                     borderWidth: 2,

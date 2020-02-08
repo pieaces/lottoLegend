@@ -1,8 +1,8 @@
-import DataAPI from "./class/DataAPI";
-import {BarSlide, LineSlide} from './class/Slide/Slide'
-import BubbleChart from "./class/Slide/bubble";
-import DropDown from "./class/Slide/filter";
-import makeClickable from './class/Slide/makeClickable'
+import DataAPI from "./DataAPI";
+import {BarSlide, LineSlide} from './Slide/Slide'
+import BubbleChart from "./Slide/bubble";
+import DropDown from "./Slide/filter";
+import makeClickable from './Slide/makeClickable'
 
 const leftBarBtn:HTMLElement = document.querySelector('#left-bar-chart-btn');
 const rightBarBtn:HTMLElement = document.querySelector('#right-bar-chart-btn');

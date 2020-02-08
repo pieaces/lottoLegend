@@ -1,3 +1,4 @@
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
 
@@ -6,7 +7,7 @@ module.exports = {
     entry: './front-end/functional/execute.ts',
     output: {
         filename: 'functional.js',
-        path: path.resolve(__dirname, 'front-end/js')
+        path: path.resolve(__dirname, 'front-end')
     },
     module: {
         rules: [
@@ -18,12 +19,14 @@ module.exports = {
         ]
     },
     devServer: {
-        contentBase: './dist',
+        contentBase: './front-end',
         overlay: true,
         hot: true
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new CopyWebpackPlugin(['./front-end/function.html']),
+
     ],
     resolve: {
         extensions: ['.ts', '.js', '.json']
