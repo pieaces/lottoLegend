@@ -3,16 +3,12 @@ const filterArrow = document.querySelector('.filter-arrow');
 const filterListBox = document.querySelector('.filter-list');
 const filterList = document.querySelectorAll('.filter-list > li');
 const filterSelectText = document.querySelector('.filter-box > a');
-const body = document.querySelector('body');
 const present = document.querySelector('.present span strong');
 const past = document.querySelector('.past span strong');
 const future = document.querySelector('.future span strong');
-const section = document.querySelector('section');
-const header = document.querySelector('header');
 
-function DropDown(_filter) {
+export default function DropDown(_filter) {
   let flag = true;
-  const filter = _filter;
   filterBox.addEventListener('click', () => {
     if (flag) {
       filterArrow.classList.remove('fa-sort-down');

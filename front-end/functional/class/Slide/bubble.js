@@ -1,16 +1,16 @@
-class Bubble {
-  constructor(ele, filter) {
-    this.ele = ele;
-    this.filter = filter;
+import DataAPI from '../DataAPI'
+
+export default class BubbleChart {
+  constructor(element) {
+    this.element = element;
   }
   drawBubbleChart() {
     const dataBubble = [['ID', '전체적 맥락', '부분적 맥락', '희소성', '확률']];
     const X = { max: -1, min: 1 };
     const Y = { max: -1, min: 1 };
 
-    const statsData = this.filter.getStats();
-    const labels = this.filter.getLabel();
-    console.log(labels);
+    const statsData = DataAPI.getInstance().getStats();
+    const labels = DataAPI.getInstance().getLabels();
     for (let i = 0; i < statsData.ideal['all'].length; i++) {
       let x = statsData.ideal['all'][i] - statsData.actual['all'][i];
       if (statsData.ideal['all'][i] >= statsData.actual['all'][i])
@@ -41,7 +41,7 @@ class Bubble {
       vAxis: { maxValue: Y.max + C, minValue: Y.min - C }
     };
 
-    const chart = new google.visualization.BubbleChart(this.ele);
+    const chart = new google.visualization.BubbleChart(this.element);
     chart.draw(BubbleDataBox, BubbleOptions);
   }
 

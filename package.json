@@ -7,12 +7,21 @@
     "test": "test"
   },
   "dependencies": {
-    "chart.js": "^2.9.3",
-    "node-fetch": "^2.6.0"
+    "@types/google.visualization": "0.0.51",
+    "chart.js": "^2.9.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "google-charts": "^2.0.0",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.5",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.3"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack && webpack-dev-server --mode development",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",

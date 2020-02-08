@@ -1,5 +1,5 @@
 import { BarChart, ChartBase, LineChart } from "./Charts";
-import DataAPI from "../Data/DataAPI";
+import DataAPI from "../DataAPI";
 
 abstract class Slide<T extends ChartBase> {
     current: number;
@@ -7,15 +7,15 @@ abstract class Slide<T extends ChartBase> {
     chart: T;
     leftBtn: HTMLElement;
     rightBtn: HTMLElement;
-    numBtn: HTMLElement;
+    numBtns: NodeListOf<Element>;
     textBox: HTMLElement;
-    constructor(size: number, chart: T, leftBtn: HTMLElement, rightBtn: HTMLElement, numBtn: HTMLElement, textBox: HTMLElement) {
+    constructor(size: number, chart: T, leftBtn: HTMLElement, rightBtn: HTMLElement, numBtns: NodeListOf<Element>, textBox: HTMLElement) {
         this.current = 0;
         this.size = size;
         this.chart = chart;
         this.leftBtn = leftBtn;
         this.rightBtn = rightBtn;
-        this.numBtn = numBtn;
+        this.numBtns = numBtns;
         this.textBox = textBox;
     }
     abstract init(): void;
@@ -28,8 +28,8 @@ abstract class Slide<T extends ChartBase> {
 export class BarSlide extends Slide<BarChart> {
     static readonly SIZE = 3;
 
-    constructor(barCanvas: HTMLCanvasElement, leftBtn: HTMLElement, rightBtn: HTMLElement, numBtn: HTMLElement, textBox: HTMLElement) {
-        super(BarSlide.SIZE, new BarChart(barCanvas), leftBtn, rightBtn, numBtn, textBox);
+    constructor(barCanvas: HTMLCanvasElement, leftBtn: HTMLElement, rightBtn: HTMLElement, numBtns: NodeListOf<Element>, textBox: HTMLElement) {
+        super(BarSlide.SIZE, new BarChart(barCanvas), leftBtn, rightBtn, numBtns, textBox);
     }
     setData() {
         const data = DataAPI.getInstance().getStats();
@@ -62,8 +62,8 @@ export class BarSlide extends Slide<BarChart> {
 export class LineSlide extends Slide<LineChart> {
     static readonly SIZE = 5;
     private lineMap = { 0: '$12', 1: '$24', 2: '$48', 3: '$192', 4: 'all' }
-    constructor(lineCanvas: HTMLCanvasElement, filter: any, leftBtn: HTMLElement, rightBtn: HTMLElement, numBtn: HTMLElement, textBox: HTMLElement) {
-        super(LineSlide.SIZE, new LineChart(lineCanvas), leftBtn, rightBtn, numBtn, textBox);
+    constructor(lineCanvas: HTMLCanvasElement, leftBtn: HTMLElement, rightBtn: HTMLElement, numBtns: NodeListOf<Element>, textBox: HTMLElement) {
+        super(LineSlide.SIZE, new LineChart(lineCanvas), leftBtn, rightBtn, numBtns, textBox);
     }
     setData() {
         const data = DataAPI.getInstance().getStats();

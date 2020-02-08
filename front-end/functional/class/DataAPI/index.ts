@@ -1,8 +1,8 @@
 import Stats, { Params } from "./Stats";
 import Generator from "./Generator";
-const constraintLowCount = require('../../json/lowCont_compressed.json');
-const constraintSum = require('../../json/sum_compressed.json');
-const constraintSumNotExcluded = require('../../json/sum_notExcluded.json');
+const constraintLowCount = require('./json/lowCount_compressed.json');
+const constraintSum = require('./json/sum_compressed.json');
+const constraintSumNotExcluded = require('./json/sum_notExcluded.json');
 
 function numbersToParams(numbers: number[]): Params {
     let flag = true;
