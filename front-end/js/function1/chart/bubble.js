@@ -1,29 +1,29 @@
 const BubbleBox = document.querySelector('#chart-func1-bubble');
 
-function drawBubbleChart() {
+function drawBubbleChart(ele, statData) {
   const dataBubble = [['ID', '전체적 맥락', '부분적 맥락', '희소성', '확률']];
   const X = { max: -1, min: 1 };
   const Y = { max: -1, min: 1 };
 
-  for (let i = 0; i < filter.getStats().ideal['all'].length; i++) {
-    let x = filter.getStats().ideal['all'][i] - filter.getStats().actual['all'][i];
-    if (filter.getStats().ideal['all'][i] >= filter.getStats().actual['all'][i])
-      x /= filter.getStats().ideal['all'][i];
-    else x /= filter.getStats().actual['all'][i];
-    x *= filter.getStats().pos[i];
+  for (let i = 0; i < statData.ideal['all'].length; i++) {
+    let x = statData.ideal['all'][i] - statData.actual['all'][i];
+    if (statData.ideal['all'][i] >= statData.actual['all'][i])
+      x /= statData.ideal['all'][i];
+    else x /= statData.actual['all'][i];
+    x *= statData.pos[i];
     let y =
-      filter.getStats().ideal['latest'][i] - filter.getStats().actual['latest'][i];
-    if (filter.getStats().ideal['latest'][i] >= filter.getStats().actual['latest'][i])
-      y /= filter.getStats().ideal['latest'][i];
-    else y /= filter.getStats().actual['latest'][i];
-    y *= filter.getStats().pos[i];
+      statData.ideal['latest'][i] - statData.actual['latest'][i];
+    if (statData.ideal['latest'][i] >= statData.actual['latest'][i])
+      y /= statData.ideal['latest'][i];
+    else y /= statData.actual['latest'][i];
+    y *= statData.pos[i];
 
     if (x > X.max) X.max = x;
     if (x < X.min) X.min = x;
     if (y > Y.max) Y.max = y;
     if (y < Y.min) Y.min = y;
 
-    const data = [String(i), x, y, y, filter.getStats().pos[i]];
+    const data = [String(i), x, y, y, statData.pos[i]];
     dataBubble.push(data);
   }
 
@@ -39,9 +39,9 @@ function drawBubbleChart() {
   chart.draw(BubbleDataBox, BubbleOptions);
 }
 
-function initBubbleChartData() {
+function initBubbleChart(ele, statData) {
   google.charts.load('current', { packages: ['corechart'] });
   google.charts.setOnLoadCallback(function() {
-    drawBubbleChart(filter.getStats());
+    drawBubbleChart(ele, statData);
   });
 }

@@ -26,44 +26,42 @@ const LineDataBox = {
   ]
 };
 
-const LineOptions = {
-  scales: {
-    xAxes: [
-      {
-        gridLines: {
-          color: 'rgba(200, 200, 200, 0.5)',
-          lineWidth: 1
-        }
-      }
-    ],
-    yAxes: [
-      {
-        gridLines: {
-          color: 'rgba(200, 200, 200, 0.5)',
-          lineWidth: 1
-        }
-      }
-    ]
-  },
-  legend: {
-    display: false
-  },
-
-  tooltips: {
-    titleFontFamily: 'Open Sans',
-    backgroundColor: 'rgba(0,0,0,0.3)',
-    titleFontColor: 'red',
-    caretSize: 5,
-    cornerRadius: 2,
-    xPadding: 10,
-    yPadding: 10
-  }
-};
-
 const LineInstance = new Chart(LineBox, {
   type: 'line',
   data: LineDataBox,
-  options: LineOptions
+  options: {
+    scales: {
+      xAxes: [
+        {
+          gridLines: {
+            color: 'rgba(200, 200, 200, 0.5)',
+            lineWidth: 1
+          }
+        }
+      ],
+      yAxes: [
+        {
+          gridLines: {
+            color: 'rgba(200, 200, 200, 0.5)',
+            lineWidth: 1
+          }
+        }
+      ]
+    },
+    legend: {
+      display: false
+    },
+  
+    tooltips: {
+      titleFontFamily: 'Open Sans',
+      backgroundColor: 'rgba(0,0,0,0.3)',
+      titleFontColor: 'red',
+      caretSize: 5,
+      cornerRadius: 2,
+      xPadding: 10,
+      yPadding: 10
+    }
+  }
 });
 
 function chartLineSlide(slideNum) {
@@ -144,7 +142,7 @@ function setLineChartData(currentObj) {
   LineInstance.update();
 }
 
-function initLineChartData() {
+function initLineChart() {
   LineDataBox.datasets[0].data = filter.getStats().actual['$12'];
   LineDataBox.datasets[1].data = filter.getStats().ideal['$12'];
   LineInstance.update();

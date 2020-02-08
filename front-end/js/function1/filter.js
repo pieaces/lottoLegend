@@ -12,22 +12,6 @@ const header = document.querySelector('header');
 
 function filterBoxCheck() {
   let flag = true;
-  const filterMap = new Map([
-    [0, '1-1'],
-    [1, '1-2'],
-    [2, '2'],
-    [3, '3-1'],
-    [4, '3-2'],
-    [5, '4'],
-    [6, '5'],
-    [7, '6'],
-    [8, '7'],
-    [9, '8'],
-    [10, '9'],
-    [11, '10'],
-    [12, '11'],
-    [13, '12']
-  ]);
   filterBox.addEventListener('click', () => {
     if (flag) {
       filterArrow.classList.remove('fa-sort-down');
@@ -65,13 +49,13 @@ function filterBoxCheck() {
           options.currentFilter === '3-1' ||
           options.currentFilter === '3-2'
         ) {
-          removejscssfile('js/lotto-func1', 'js');
-          removejscssfile('css/lotto-func1', 'css');
-          loadjscssfile('css/lotto-func2.css', 'css');
-          loadjscssfile('js/lotto-func2/chart/bar.js', 'js');
-          loadjscssfile('js/lotto-func2/chart/gauss.js', 'js');
-          loadjscssfile('js/lotto-func2/chart/radar.js', 'js');
-          loadjscssfile('js/lotto-func2/lotto-func2.js', 'js');
+          removejscssfile('js/fuction1', 'js');
+          removejscssfile('css/fuction1', 'css');
+          loadjscssfile('css/function2.css', 'css');
+          loadjscssfile('js/function2/chart/bar.js', 'js');
+          loadjscssfile('js/function2/chart/gauss.js', 'js');
+          loadjscssfile('js/function2/chart/radar.js', 'js');
+          loadjscssfile('js/function2/index.js', 'js');
           section.remove();
           const section = document.createElement('section');
           section.setAttribute('include-html');

@@ -1,8 +1,8 @@
-async function lottoFunc1() {
+async function execute() {
   // await includeHTML();
   filterBoxCheck();
   await filter.init();
   chartInit();
 }
 
-lottoFunc1();
+execute();
