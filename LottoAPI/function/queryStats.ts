@@ -65,9 +65,12 @@ export default async function queryStats(method: Method, params: QueryStatsParam
                             params.from -= 21;
                             params.to -= 21;
                         } else if (method === Method.diffMaxMin) {
-                            params.list = params.list.map(value => value - 5);
+                            if (params.list) {
+                                params.list = params.list.map(value => value - 5);
+                            } else {
+                                params.from -= 5; params.to -= 5;
+                            }
                         }
-
                         const ideal: Assembly = makeAssembly(item.Ideal.M, params);
                         const actual: Assembly = makeAssembly(item.Actual.M, params);
                         let pos: number[] = transformNumbers(item.Pos.L, params);
