@@ -1,25 +1,19 @@
-const leftBarBtn = document.querySelector('#left-bar-chart-btn');
-const rightBarBtn = document.querySelector('#right-bar-chart-btn');
-const BarNum = document.querySelectorAll('.chart-bar-num > div');
-const BarBox = document.querySelector('#chart-func1-bar');
-const main23 = document.querySelector('.main-2-3');
-
-class Chart {
-  constructor(type, ele, dataSets, option, filter) {
-    this.dataSets = dataSets;
+class ChartBase {
+  constructor(type, ele, dataBox, option, filter) {
+    this.dataBox = dataBox;
     this.option = option;
     this.instance = new Chart(ele, {
       type: type,
-      data: this.dataSets
+      data: this.dataBox
     });
     this.filter = filter;
   }
 }
 
-class BarChart extends Chart {
+class BarChart extends ChartBase {
   constructor(ele, filter) {
     const option = { legend: false }
-    const dataSets = {
+    const dataBox = {
       labels: filter.getLabel(),
       datasets: [
         {
@@ -32,12 +26,13 @@ class BarChart extends Chart {
         }
       ]
     };
-    super('bar', ele, dataSets, option, filter);
+    super('bar', ele, dataBox, option, filter);
+
   }
 }
 
 
-class LineChart extends Chart {
+class LineChart extends ChartBase {
   constructor(ele, filter) {
     const option = {
       scales: {
@@ -71,7 +66,7 @@ class LineChart extends Chart {
         yPadding: 10
       }
     }
-    const dataSets = {
+    const dataBox = {
       labels: filter.getLabel(),
       datasets: [
         {
@@ -92,14 +87,12 @@ class LineChart extends Chart {
         }
       ]
     };
-    super('line', ele, dataSets, option, filter);
-
+    super('line', ele, dataBox, option, filter);
   }
 }
 
 class Slide {
   constructor(size, chart, leftBtn, rightBtn, numBtn, textBox) {
-    super();
     this.current = 0;
     this.size = size;
     this.chart = chart;
@@ -108,17 +101,68 @@ class Slide {
     this.numBtn = numBtn;
     this.textBox = textBox;
   }
+  init() { }
   setData() { }
-  setText() { }
+  setText() {
+    this.textBox.textContent = this.current;
+
+  }
+  leftBtnClickable() {
+    this.leftBtn.addEventListener('click', () => {
+      this.numBtn[this.current].classList.remove('chart-slide-current');
+      if (this.current === 0) {
+        this.numBtn[this.size - 1].classList.add('chart-slide-current');
+        this.current = this.size - 1;
+      } else {
+        this.current--;
+        this.numBtn[this.current].classList.add('chart-slide-current');
+      }
+      this.setData();
+      this.setText();
+    });
+  }
+  rightBtnClickable() {
+    this.rightBtn.addEventListener('click', () => {
+      if (this.current === this.size - 1) {
+        this.numBtn[this.size - 1].classList.remove('chart-slide-current');
+        this.current = 0;
+      } else {
+        this.numBtn[this.current].classList.remove('chart-slide-current');
+        this.current++;
+      }
+      this.numBtn[this.current].classList.add('chart-slide-current');
+
+      this.setData();
+      this.setText();
+    });
+  }
+  numBtnClickable() {
+    for (let i = 0; i < this.numBtn.length; i++) {
+      this.numBtn[i].addEventListener('click', () => {
+        this.numBtn[this.current].classList.remove('chart-slide-current');
+        this.current = i;
+        this.numBtn[this.current].classList.add('chart-slide-current');
+
+        this.setData();
+        this.setText();
+      });
+    }
+  }
+
+  init() {
+    this.leftBtnClickable();
+    this.rightBtnClickable();
+    this.numBtnClickable();
+  }
 }
 
 class BarSlide extends Slide {
-  constructor(leftBtn, rightBtn, numBtn, textBox) {
-    super(3, leftBtn, rightBtn, numBtn, textBox);
+  constructor(barEle, filter, leftBtn, rightBtn, numBtn, textBox) {
+    super(3, new BarChart(barEle, filter), leftBtn, rightBtn, numBtn, textBox);
   }
   setData() {
     const data = this.chart.filter.getStats();
-    const rep = this.dataSets.datasets[0];
+    const rep = this.chart.dataBox.datasets[0];
     switch (this.current) {
       case 0:
         rep.data = data.ideal['latest'];
@@ -137,23 +181,22 @@ class BarSlide extends Slide {
     }
     this.chart.instance.update();
   }
-  setText() {
-    for (let i = 0; i < this.size; i++) {
-      if (this.current === i) {
-        this.textBox.textContent = i;
-      }
-    }
+
+  init() {
+    super.init();
+    this.chart.dataBox.datasets[0].data = filter.getStats().ideal['latest'];
+    this.chart.instance.update();
   }
 }
 
 class LineSlide extends Slide {
-  constructor(leftBtn, rightBtn, numBtn, textBox) {
-    super(5, leftBtn, rightBtn, numBtn, textBox);
+  constructor(lineEle, filter, leftBtn, rightBtn, numBtn, textBox) {
+    super(5, new LineChart(lineEle, filter), leftBtn, rightBtn, numBtn, textBox);
   }
   setData() {
     const data = this.chart.filter.getStats();
-    const rep1 = this.dataSets.datasets[0];
-    const rep2 = this.dataSets.datasets[1];
+    const rep1 = this.chart.dataBox.datasets[0];
+    const rep2 = this.chart.dataBox.datasets[1];
     const lineMap = {
       0: '$12',
       1: '$24',
@@ -165,9 +208,10 @@ class LineSlide extends Slide {
     rep2.data = data.ideal[lineMap[this.current]];
     this.chart.instance.update();
   }
-  setText() {
-    if (this.current === i) {
-      this.textBox.textContent = i;
-    }
+  init() {
+    super.init();
+    this.chart.dataBox.datasets[0].data = filter.getStats().actual['$12'];
+    this.chart.dataBox.datasets[1].data = filter.getStats().ideal['$12'];
+    this.chart.instance.update();
   }
 }

@@ -455,7 +455,6 @@ var Filter = /** @class */ (function () {
     };
     return Filter;
 }());
-var filter = new Filter();
 /*
 async function initf() {
   const filter = new Filter();

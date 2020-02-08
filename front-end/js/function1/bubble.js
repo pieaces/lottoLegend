@@ -1,5 +1,3 @@
-const BubbleBox = document.querySelector('#chart-func1-bubble');
-
 function drawBubbleChart(ele, statData) {
   const dataBubble = [['ID', '전체적 맥락', '부분적 맥락', '희소성', '확률']];
   const X = { max: -1, min: 1 };
@@ -35,7 +33,7 @@ function drawBubbleChart(ele, statData) {
     vAxis: { maxValue: Y.max + C, minValue: Y.min - C }
   };
 
-  const chart = new google.visualization.BubbleChart(BubbleBox);
+  const chart = new google.visualization.BubbleChart(ele);
   chart.draw(BubbleDataBox, BubbleOptions);
 }
 

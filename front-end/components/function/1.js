@@ -133,7 +133,7 @@ document.write(`<div class="func1 section1">
         </div>
         <div class="next-btn-container">
           <button type="reset" class="btn circle-btn">초기화</button>
-          <button type="button" class="btn circle-btn">다음</button>
+          <button type="button" class="btn circle-btn" id="nextBtn">다음</button>
         </div>
       </div>
     </div>

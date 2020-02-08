@@ -283,6 +283,14 @@ class Filter {
   private current: number = 0;
   private stats: Stats = new Stats();
   private generator: Generator = new Generator();
+  private nextBtn:HTMLElement;
+
+  constructor(nextBtn:HTMLElement){
+    this.nextBtn = nextBtn;
+    this.nextBtn.addEventListener('click', () =>{
+      
+    })
+  }
 
   public getLabel(): Array<string | number> {
     return this.rangeList[this.current];
@@ -381,7 +389,6 @@ class Filter {
     return this.stats[this.statsList[this.current]];
   }
 }
-const filter = new Filter();
 
 /*
 async function initf() {
