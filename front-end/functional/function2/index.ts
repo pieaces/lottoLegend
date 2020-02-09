@@ -15,6 +15,10 @@ export default class Layout2 {
     static readonly lottoNumDefaultColor = 'rgba(231, 76, 60, 0.2)';
     static readonly lottoNumSelectColor = '#e6e600';
     static readonly lottoNumCheckedColor = 'darkgray';
+    static readonly body = 'body *';
+    static readonly numBoard = '.func2-main-1-4 *';
+    static readonly lottoCheckCurrent = 'func2-lotto-check-current';
+    static readonly selectNumBox = 'func2-select-num-box';
     checkedNumbers = new Array<number>();
     choice = null;
     private updateChart() {
@@ -25,8 +29,8 @@ export default class Layout2 {
         gauss.dataBox.datasets[0].data = data.emergence[this.choice - 1];
     }
     private cancelCheck() {
-        let myExclusiveEl = Array.from(document.querySelectorAll<HTMLElement>('body *'));
-        let myEls = Array.from(document.querySelectorAll<HTMLElement>('.main-1-3 *'));
+        let myExclusiveEl = Array.from(document.querySelectorAll<HTMLElement>(Layout2.body));
+        let myEls = Array.from(document.querySelectorAll<HTMLElement>(Layout2.numBoard));
 
         myExclusiveEl = myExclusiveEl.filter(parent => {
             let containedByExclusionNode = myEls.filter(child => {
@@ -73,13 +77,13 @@ export default class Layout2 {
     }
     numFreqOrTermToggle() {
         numTerm.addEventListener('click', () => {
-            numTerm.classList.add('lotto-check-current');
-            numFreq.classList.remove('lotto-check-current');
+            numTerm.classList.add(Layout2.lottoCheckCurrent);
+            numFreq.classList.remove(Layout2.lottoCheckCurrent);
         });
 
         numFreq.addEventListener('click', () => {
-            numFreq.classList.add('lotto-check-current');
-            numTerm.classList.remove('lotto-check-current');
+            numFreq.classList.add(Layout2.lottoCheckCurrent);
+            numTerm.classList.remove(Layout2.lottoCheckCurrent);
         });
     }
 
@@ -103,7 +107,7 @@ export default class Layout2 {
                         }
                         this.choice = nodeValue;
                         node.style.backgroundColor = Layout2.lottoNumSelectColor;
-                        selectNumBox.children[this.checkedNumbers.length - 1].classList.remove(`select-num-box${this.checkedNumbers.length}`);
+                        selectNumBox.children[this.checkedNumbers.length - 1].classList.remove(`${Layout2.selectNumBox}${this.checkedNumbers.length}`);
                         this.updateChart();
 
                         for (let i = 0; i < selectNumBox.children.length; i++) {
@@ -137,7 +141,7 @@ export default class Layout2 {
                     }
                     for (let i = 0; i < this.checkedNumbers.length; i++) {
                         lottoNumbers[this.checkedNumbers[i] - 1].style.backgroundColor = Layout2.lottoNumDefaultColor;
-                        selectNumBox.children[i].classList.remove(`select-num-box${i + 1}`);
+                        selectNumBox.children[i].classList.remove(`${Layout2.selectNumBox}${i + 1}`);
                     }
                     this.checkedNumbers.splice(0, this.checkedNumbers.length);
                     if (this.choice !== null) {
@@ -157,7 +161,7 @@ export default class Layout2 {
                         this.checkedNumbers.push(this.choice);
                         const numOrder = this.checkedNumbers.indexOf(this.choice);
                         selectNumBox.children[numOrder].classList.add(
-                            `select-num-box${numOrder + 1}`
+                            `${Layout2.selectNumBox}${numOrder + 1}`
                         );
                         selectNumBox.children[numOrder].textContent = this.choice;
                         this.setColorLotto(this.choice, <HTMLElement>selectNumBox.children[numOrder]);
