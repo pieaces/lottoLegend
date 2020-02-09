@@ -66,8 +66,6 @@ async function execute() {
         checkBox.forEach(node => {
             node.classList.remove('func1-num-check-current');
         })
-
-
     })
 
     nextBtn.addEventListener('click', async () => {
@@ -87,6 +85,8 @@ async function execute() {
         checkBox.forEach(node => {
             node.classList.remove('func1-num-check-current');
         })
+
+
 
         await DataAPI.getInstance().forward(optionList[currentFilter]);
 
