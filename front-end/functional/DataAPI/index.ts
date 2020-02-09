@@ -49,8 +49,8 @@ export default class DataAPI {
     private current: number = 0;
     private stats: Stats = new Stats();
     private generator: Generator = new Generator();
+    public readonly SIZE:number = this.numberList.length;
 
-    private constructor() { }
     static getInstance() {
         if (DataAPI.instance == null) DataAPI.instance = new DataAPI();
         return DataAPI.instance;
@@ -58,8 +58,14 @@ export default class DataAPI {
     public getLabels(): Array<string | number> {
         return this.rangeList[this.current];
     }
-    public getFilterName(): string {
+    public getPreviousName(): string {
+        return this.numberList[this.current - 1];
+    }
+    public getCurrentName(): string {
         return this.numberList[this.current];
+    }
+    public getNextName(): string {
+        return this.numberList[this.current + 1];
     }
     public getCurrent() { return this.current }
     public getRange() {

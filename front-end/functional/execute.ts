@@ -1,7 +1,7 @@
 import DataAPI from "./DataAPI";
 import { BarSlide, LineSlide } from './Slide/Slide'
 import BubbleChart from "./Slide/bubble";
-import DropDown from "./Slide/filter";
+import DropDown from "./Slide/dropDown";
 import makeClickable from './Slide/makeClickable'
 
 const leftBarBtn: HTMLElement = document.querySelector('#left-bar-chart-btn');
@@ -48,14 +48,12 @@ async function execute() {
             case 3: case 4:
 
                 break;
-            case 15:
-                break;
             default:
-
+                bar.init();
+                line.init();
+                bubble.init();
         }
-        bar.init();
-        line.init();
-        bubble.init();
+
     });
 }
 execute();
