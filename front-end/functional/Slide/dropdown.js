@@ -1,13 +1,13 @@
-const filterBox = document.querySelector('.filter-box');
-const filterArrow = document.querySelector('.filter-arrow');
-const filterListBox = document.querySelector('.filter-list');
-const filterList = document.querySelectorAll('.filter-list > li');
-const filterSelectText = document.querySelector('.filter-box > a');
-const present = document.querySelector('.present span strong');
-const past = document.querySelector('.past span strong');
-const future = document.querySelector('.future span strong');
+export default function dropdown() {
+    const filterBox = document.querySelector('.filter-box');
+    const filterArrow = document.querySelector('.filter-arrow');
+    const filterListBox = document.querySelector('.filter-list');
+    const filterList = document.querySelectorAll('.filter-list > li');
+    const filterSelectText = document.querySelector('.filter-box > a');
+    const present = document.querySelector('.present span strong');
+    const past = document.querySelector('.past span strong');
+    const future = document.querySelector('.future span strong');
 
-export default function DropDown(_filter) {
     let flag = true;
     filterBox.addEventListener('click', () => {
         if (flag) {

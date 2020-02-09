@@ -1,23 +1,124 @@
-const lottoNumbers = document.querySelectorAll('.lotto-num-box> div > div');
-const selectNumBox = document.querySelector('.select-num-box');
-const applyBtn = document.querySelector('.num-exclude-btn');
-const resetNumBtn = document.querySelector('.reset-num-btn');
-const winNum = document.querySelectorAll('.win-num-box > div');
-const numTerm = document.querySelector('.num-term');
-const numFreq = document.querySelector('.num-freq');
-import bar from './barInstance'
-import gauss from './gaussInstance'
-import radar from './radarInstance'
+
+import { ChartBase } from '../Slide/Charts'
 import DataAPI from '../DataAPI'
 
-function updateChart(){
-    const data = DataAPI.getInstance().getStats().data;
-    const TOTAL = data.total;    
-    bar.dataBox.datasets[0] = [TOTAL*6/45, data.frequency[choice-1]];
-    radar.dataBox.datasets[0] = data.interval[choice-1].list;
-    gauss.dataBox.datasets[0] = data.emergence[choice-1];
-}
+
 function numExclude() {
+    const lottoNumbers = document.querySelectorAll('.lotto-num-box> div > div');
+    const selectNumBox = document.querySelector('.select-num-box');
+    const applyBtn = document.querySelector('.num-exclude-btn');
+    const resetNumBtn = document.querySelector('.reset-num-btn');
+    const winNum = document.querySelectorAll('.win-num-box > div');
+    const numTerm = document.querySelector('.num-term');
+    const numFreq = document.querySelector('.num-freq');
+    function setColorLotto(choice, Box) {
+        if (1 <= choice && choice <= 10) {
+            Box.style.backgroundColor = '#FBC400';
+        } else if (choice <= 20) {
+            Box.style.backgroundColor = '#69C8F2';
+        } else if (choice <= 30) {
+            Box.style.backgroundColor = '#FF7272';
+        } else if (choice <= 40) {
+            Box.style.backgroundColor = '#AAAAAA';
+        } else if (choice <= 45) {
+            Box.style.backgroundColor = '#B0D840';
+        }
+    }
+
+    function setColorWinNum() {
+        for (const node of winNum) {
+            const nodeValue = parseInt(node.textContent);
+            setColorLotto(nodeValue, node);
+        }
+    }
+
+    function numFreqOrTermToggle() {
+        numTerm.addEventListener('click', () => {
+            numTerm.classList.add('lotto-check-current');
+            numFreq.classList.remove('lotto-check-current');
+        });
+
+        numFreq.addEventListener('click', () => {
+            numFreq.classList.add('lotto-check-current');
+            numTerm.classList.remove('lotto-check-current');
+        });
+    }
+
+    const barCanvas = document.querySelector('.chart-func2-bar');
+    const barDataBox = {
+        labels: ['예측값', '실제값'],
+        datasets: [
+            {
+                label: 'Ice Cream Sales ',
+                fill: true,
+                backgroundColor: ['moccasin', 'saddlebrown'],
+                data: null
+            }
+        ]
+    };
+    const barOption = {
+        legend: { display: false },
+    };
+
+    const bar = new ChartBase('bar', barCanvas, barDataBox, barOption);
+    const gaussCanvas = document.querySelector('.chart-func2-gauss');
+    const gaussDataBox = {
+        labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].reverse(),
+        datasets: [
+            {
+                steppedLine: true,
+                borderColor: 'red',
+                fill: false,
+                data: null,
+            }
+        ]
+    };
+    const gaussOption = {
+        responsive: true,
+        legend: { display: false },
+        title: {
+            display: true,
+            text: 'hi'
+        }
+    };
+    const gauss = new ChartBase('line', gaussCanvas, gaussDataBox, gaussOption);
+    const radarCanvas = document.querySelector('.chart-func2-radar');
+    const radarDataBox = {
+        labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        datasets: [
+            {
+                fill: true,
+                borderWidth: 1,
+                backgroundColor: 'rgba(179,181,198,0.2)',
+                borderColor: 'rgba(179,181,198,1)',
+                pointBorderColor: '#fff',
+                pointBackgroundColor: 'rgba(179,181,198,1)',
+                data: null
+            }
+        ]
+    };
+    const radarOption = {
+        responsive: false,
+        title: {
+            display: false
+        },
+        legend: {
+            display: false
+        }
+    };
+
+    const radar = new ChartBase('radar', radarCanvas, radarDataBox, radarOption);
+    function updateChart() {
+        const data = DataAPI.getInstance().getStats();
+        const TOTAL = 897;
+
+        bar.dataBox.datasets[0].data = [TOTAL * 6 / 45, data.frequency[choice - 1]];
+        radar.dataBox.datasets[0].data = data.interval[choice - 1].list;
+        gauss.dataBox.datasets[0].data = data.emergence[choice - 1];
+        bar.update();
+        radar.update();
+        gauss.update();
+    }
     const EXCLUDE_MAX = 10;
     const lottoNumDefaultColor = 'rgba(231, 76, 60, 0.2)';
     const lottoNumSelectColor = '#e6e600';
@@ -138,43 +239,10 @@ function numExclude() {
             }
         });
     }
-}
 
-function setColorLotto(choice, Box) {
-    if (1 <= choice && choice <= 10) {
-        Box.style.backgroundColor = '#FBC400';
-    } else if (choice <= 20) {
-        Box.style.backgroundColor = '#69C8F2';
-    } else if (choice <= 30) {
-        Box.style.backgroundColor = '#FF7272';
-    } else if (choice <= 40) {
-        Box.style.backgroundColor = '#AAAAAA';
-    } else if (choice <= 45) {
-        Box.style.backgroundColor = '#B0D840';
-    }
-}
-
-function setColorWinNum() {
-    for (const node of winNum) {
-        const nodeValue = parseInt(node.textContent);
-        setColorLotto(nodeValue, node);
-    }
-}
-
-function numFreqOrTermToggle() {
-    numTerm.addEventListener('click', () => {
-        numTerm.classList.add('lotto-check-current');
-        numFreq.classList.remove('lotto-check-current');
-    });
-
-    numFreq.addEventListener('click', () => {
-        numFreq.classList.add('lotto-check-current');
-        numTerm.classList.remove('lotto-check-current');
-    });
-}
-
-export default function function2() {
     numFreqOrTermToggle();
     setColorWinNum();
+}
+export default function function2() {
     numExclude();
 }

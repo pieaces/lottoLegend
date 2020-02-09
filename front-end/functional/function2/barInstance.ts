@@ -1,4 +1,4 @@
-import { ChartBase } from "../functional/Slide/Charts";
+import { ChartBase } from "../Slide/Charts";
 
 const canvas: HTMLCanvasElement = document.querySelector('.chart-func2-bar');
 const dataBox = {
