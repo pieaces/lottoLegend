@@ -9,39 +9,43 @@ const boardNext = document.querySelector('.future span strong');
 
 import DataAPI from '../DataAPI'
 
-export default function DropDown() {
-    let flag = true;
-    filterBox.addEventListener('click', () => {
-        if (flag) {
-            filterArrow.classList.remove('fa-sort-down');
-            filterArrow.classList.add('fa-sort-up');
-            filterListBox.style.display = 'block';
+export default class DropDown {
+    flag: boolean = true;
 
+    changeBoard() {
+        const index = DataAPI.getInstance().getCurrent();
+        if (index === 0) {
+            boardPrevious.textContent = '';
+            boardNext.textContent = DataAPI.getInstance().getNextName();
+        } else if (index === DataAPI.getInstance().SIZE - 1) {
+            boardPrevious.textContent = DataAPI.getInstance().getPreviousName();
+            boardNext.textContent = '';
         } else {
-            filterArrow.classList.add('fa-sort-down');
-            filterArrow.classList.remove('fa-sort-up');
-            filterListBox.style.display = 'none';
+            boardPrevious.textContent = DataAPI.getInstance().getPreviousName();
+            boardNext.textContent = DataAPI.getInstance().getNextName();
         }
-        flag = !flag;
-    });
+        boardPresent.textContent = DataAPI.getInstance().getCurrentName();
+    }
 
-    if (flag) {
+    init() {
+        this.changeBoard();
+        filterBox.addEventListener('click', () => {
+            if (this.flag) {
+                filterArrow.classList.remove('fa-sort-down');
+                filterArrow.classList.add('fa-sort-up');
+                filterListBox.style.display = 'block';
+
+            } else {
+                filterArrow.classList.add('fa-sort-down');
+                filterArrow.classList.remove('fa-sort-up');
+                filterListBox.style.display = 'none';
+            }
+            this.flag = !this.flag;
+        });
         filterList.forEach(node => {
             node.addEventListener('click', () => {
                 filterSelectText.textContent = node.textContent;
-
-                const index = DataAPI.getInstance().getCurrent();
-                if (index === 0) {
-                    boardPrevious.textContent = '';
-                    boardNext.textContent = DataAPI.getInstance().getNextName();
-                } else if (index === DataAPI.getInstance().SIZE - 1) {
-                    boardPrevious.textContent = DataAPI.getInstance().getPreviousName();
-                    boardNext.textContent = '';
-                } else {
-                    boardNext.textContent = DataAPI.getInstance().getNextName();
-                    boardPrevious.textContent = DataAPI.getInstance().getPreviousName();
-                }
-                boardPresent.textContent = DataAPI.getInstance().getCurrentName();
+                this.changeBoard();
             });
         });
     }

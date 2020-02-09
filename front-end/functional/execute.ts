@@ -1,7 +1,7 @@
 import DataAPI from "./DataAPI";
 import { BarSlide, LineSlide } from './Slide/Slide'
 import BubbleChart from "./Slide/bubble";
-import dropDown from "./Slide/dropDown";
+import DropDown from "./Slide/dropDown";
 import makeClickable from './Slide/makeClickable'
 import Layout2 from '../functional/function2/index'
 
@@ -31,42 +31,38 @@ const bar = new BarSlide(<HTMLCanvasElement>barCanvas, leftBarBtn, rightBarBtn, 
 const line = new LineSlide(<HTMLCanvasElement>lineCanvas, leftLineBtn, rightLineBtn, lineNum, main21);
 const bubble = new BubbleChart(bubbleBox);
 const layout2 = new Layout2();
-// makeClickable(bar);
-// makeClickable(line);
-
-const checkBox = document.querySelectorAll('.func1-checkbox > div');
-const reset = document.querySelector('#reset');
+const dropDown = new DropDown();
 makeClickable(bar);
 makeClickable(line);
+//
+const checkBox = document.querySelectorAll<HTMLElement>('.func1-checkbox > div');
+const reset = document.querySelector('#reset');
 
 async function execute() {
-    dropDown();
     await DataAPI.getInstance().init();
-    layout2.init();
+    dropDown.init();
     bar.init();
     line.init();
     bubble.init();
+    layout2.init();
 
     const optionList = [null, [3], null, [10, 20, 42, 43, 44], [2], 2, { from: 100, to: 190 },
         { from: 2, to: 4 }, { from: 1, to: 3 }, { from: 0, to: 3 }, { from: 10, to: 14 }, { from: 30, to: 38 }, { from: 7, to: 10 }, true]
 
     checkBox.forEach(node => {
         node.addEventListener('click', () => {
-
-            // if (node.children[0].checked) {
-            //     node.classList.add('func1-num-check-current');
-            // } else {
-            //     node.classList.remove('func1-num-check-current');
-            // }
-        })
-    })
-
-
+            if ((<HTMLInputElement>node.children[0]).checked) {
+                node.classList.add('func1-num-check-current');
+            } else {
+                node.classList.remove('func1-num-check-current');
+            }
+        });
+    });
     reset.addEventListener('click', () => {
         checkBox.forEach(node => {
             node.classList.remove('func1-num-check-current');
-        })
-    })
+        });
+    });
 
     nextBtn.addEventListener('click', async () => {
         //optionList method
@@ -106,7 +102,7 @@ async function execute() {
                 line.init();
                 bubble.init();
         }
-
+        dropDown.changeBoard();
     });
 }
 execute();
