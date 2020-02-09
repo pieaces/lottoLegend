@@ -255,3 +255,8 @@
       display:flex;
       height:100px;
   }
+
+  .chart{
+    width:100% !important;
+    height:100% !important;
+  }
