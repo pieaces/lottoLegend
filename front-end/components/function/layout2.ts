@@ -1,4 +1,4 @@
-document.write(`
+const text = `
 <div class="func2 section1">
   <div class="grid-section-1 container">
     <div class="aside">
@@ -194,5 +194,5 @@ document.write(`
     </div>
   </div>
 </div>
-
-`)
+`;
+export default text;
