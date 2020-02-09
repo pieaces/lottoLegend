@@ -1,6 +1,6 @@
 import { ChartBase } from "../Slide/Charts";
 
-const canvas: HTMLCanvasElement = document.querySelector('.chart-func2-bar');
+const canvas: HTMLCanvasElement = document.querySelector('.func2-chart-bar');
 const dataBox = {
     labels: ['예측값', '실제값'],
     datasets: [

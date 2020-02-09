@@ -1,6 +1,6 @@
 import { ChartBase } from "../Slide/Charts";
 
-const canvas:HTMLCanvasElement = document.querySelector('.chart-func2-radar');
+const canvas: HTMLCanvasElement = document.querySelector('.func2-chart-radar');
 const dataBox = {
     labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     datasets: [

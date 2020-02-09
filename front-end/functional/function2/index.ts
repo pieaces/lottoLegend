@@ -1,10 +1,10 @@
-const lottoNumbers = document.querySelectorAll<HTMLElement>('.lotto-num-box> div > div');
-const selectNumBox = document.querySelector<HTMLElement>('.select-num-box');
-const applyBtn = document.querySelector('.num-exclude-btn');
-const resetNumBtn = document.querySelector('.reset-num-btn');
-const winNums = document.querySelectorAll<HTMLElement>('.win-num-box > div');
-const numTerm = document.querySelector('.num-term');
-const numFreq = document.querySelector('.num-freq');
+const lottoNumbers = document.querySelectorAll<HTMLElement>('.func2-lotto-num-box> div > div');
+const selectNumBox = document.querySelector<HTMLElement>('.func2-select-num-box');
+const applyBtn = document.querySelector('.func2-num-exclude-btn');
+const resetNumBtn = document.querySelector('#reset');
+const winNums = document.querySelectorAll<HTMLElement>('.func2-win-num-box > div');
+const numTerm = document.querySelector('.func2-num-term');
+const numFreq = document.querySelector('.func2-num-freq');
 import bar from './barInstance'
 import gauss from './gaussInstance'
 import radar from './radarInstance'
