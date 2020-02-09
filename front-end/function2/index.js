@@ -1,4 +1,4 @@
-const lottoNum = document.querySelectorAll('.lotto-num-box> div > div');
+const lottoNumbers = document.querySelectorAll('.lotto-num-box> div > div');
 const selectNumBox = document.querySelector('.select-num-box');
 const numExcludeBtn = document.querySelector('.num-exclude-btn');
 const resetNumBtn = document.querySelector('.reset-num-btn');
@@ -10,19 +10,19 @@ function numExclude() {
   const lottoNumDefaultColor = 'rgba(231, 76, 60, 0.2)';
   const lottoNumSelectColor = '#e6e600';
   const lottoNumExcludeColor = 'darkgray';
-  const nums = new Array();
+  const excludedNumbers = new Array();
   const numExcludeCount = 10;
   let num = null;
 
   // 번호판 색깔 설정과 번호판 번호 삭제와 선택번호배열,선택번호 삭제
 
-  for (const node of lottoNum) {
+  for (const node of lottoNumbers) {
     node.addEventListener('click', e => {
       const nodeValue = parseInt(node.textContent);
-      if (nums.indexOf(nodeValue) === -1) {
+      if (excludedNumbers.indexOf(nodeValue) === -1) {
         if (num !== null) {
-          if (nums.indexOf(num) === -1) {
-            lottoNum[num - 1].style.backgroundColor = lottoNumDefaultColor;
+          if (excludedNumbers.indexOf(num) === -1) {
+            lottoNumbers[num - 1].style.backgroundColor = lottoNumDefaultColor;
           }
         }
         num = nodeValue;
@@ -30,34 +30,34 @@ function numExclude() {
       } else {
         if (confirm(`번호 ${nodeValue} 선택취소하시겠습니까?`)) {
           if (num !== null) {
-            lottoNum[num - 1].style.backgroundColor = lottoNumDefaultColor;
+            lottoNumbers[num - 1].style.backgroundColor = lottoNumDefaultColor;
           }
           num = nodeValue;
           node.style.backgroundColor = lottoNumSelectColor;
-          selectNumBox.children[nums.length - 1].classList.remove(
-            `select-num-box${nums.length}`
+          selectNumBox.children[excludedNumbers.length - 1].classList.remove(
+            `select-num-box${excludedNumbers.length}`
           );
           for (let i = 0; i < selectNumBox.children.length; i++) {
-            if (nums.indexOf(nodeValue) !== -1) {
-              selectNumBox.children[nums.indexOf(nodeValue)].textContent = '';
-              nums.splice(nums.indexOf(nodeValue), 1);
+            if (excludedNumbers.indexOf(nodeValue) !== -1) {
+              selectNumBox.children[excludedNumbers.indexOf(nodeValue)].textContent = '';
+              excludedNumbers.splice(excludedNumbers.indexOf(nodeValue), 1);
               break;
             }
           }
 
           for (let i = 0; i < selectNumBox.children.length; i++) {
-            selectNumBox.children[i].textContent = nums[i];
+            selectNumBox.children[i].textContent = excludedNumbers[i];
             selectNumBox.children[i].style.backgroundColor = '';
           }
 
-          for (let i = 0; i < nums.length; i++) {
+          for (let i = 0; i < excludedNumbers.length; i++) {
             setColorLotto(
               parseInt(selectNumBox.children[i].textContent),
               selectNumBox.children[i]
             );
           }
         } else {
-          lottoNum[num - 1].style.backgroundColor = lottoNumDefaultColor;
+          lottoNumbers[num - 1].style.backgroundColor = lottoNumDefaultColor;
           num = null;
         }
       }
@@ -68,23 +68,21 @@ function numExclude() {
   //초기화함수: 선택번호배열,선택번호, 번호판 초기화
 
   resetNumBtn.addEventListener('click', e => {
-    if (nums.length === 0) {
-      alert('초기화 할 번호가 없습니다');
-    } else {
+    if (excludedNumbers.length > 0) {
       if (confirm(`선택번호를 모두 초기화하시겠습니까?`)) {
         for (const node of [...selectNumBox.children]) {
           node.textContent = '';
           node.style.backgroundColor = '';
         }
 
-        for (let i = 0; i < nums.length; i++) {
-          lottoNum[nums[i] - 1].style.backgroundColor = lottoNumDefaultColor;
+        for (let i = 0; i < excludedNumbers.length; i++) {
+          lottoNumbers[excludedNumbers[i] - 1].style.backgroundColor = lottoNumDefaultColor;
           selectNumBox.children[i].classList.remove(`select-num-box${i + 1}`);
         }
 
-        nums.splice(0, nums.length);
+        excludedNumbers.splice(0, excludedNumbers.length);
         if (num !== null) {
-          lottoNum[num - 1].style.backgroundColor = lottoNumDefaultColor;
+          lottoNumbers[num - 1].style.backgroundColor = lottoNumDefaultColor;
           num = null;
         }
       }
@@ -95,12 +93,12 @@ function numExclude() {
   //번호제외함수: 선택번호 배열 추가(중복x), 번호판 색깔 설정, 선택번호 추가
 
   numExcludeBtn.addEventListener('click', e => {
-    if (nums.length < numExcludeCount) {
-      if (nums.indexOf(num) === -1) {
+    if (excludedNumbers.length < numExcludeCount) {
+      if (excludedNumbers.indexOf(num) === -1) {
         if (num !== null) {
-          lottoNum[num - 1].style.backgroundColor = lottoNumExcludeColor;
-          nums.push(num);
-          const numOrder = nums.indexOf(num);
+          lottoNumbers[num - 1].style.backgroundColor = lottoNumExcludeColor;
+          excludedNumbers.push(num);
+          const numOrder = excludedNumbers.indexOf(num);
           selectNumBox.children[numOrder].classList.add(
             `select-num-box${numOrder + 1}`
           );
@@ -168,7 +166,7 @@ function numExclude() {
   for (const node of myExclusiveEl) {
     node.addEventListener('click', e => {
       if (num !== null) {
-        lottoNum[num - 1].style.backgroundColor = lottoNumDefaultColor;
+        lottoNumbers[num - 1].style.backgroundColor = lottoNumDefaultColor;
         num = null;
       }
     });

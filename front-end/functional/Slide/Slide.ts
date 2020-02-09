@@ -3,12 +3,12 @@ import DataAPI from "../DataAPI";
 
 abstract class Slide<T extends ChartBase> {
     current: number;
-    size: number;
-    chart: T;
-    leftBtn: HTMLElement;
-    rightBtn: HTMLElement;
-    numBtns: NodeListOf<Element>;
-    textBox: HTMLElement;
+    readonly size: number;
+    readonly chart: T;
+    readonly leftBtn: HTMLElement;
+    readonly rightBtn: HTMLElement;
+    readonly numBtns: NodeListOf<Element>;
+    readonly textBox: HTMLElement;
     constructor(size: number, chart: T, leftBtn: HTMLElement, rightBtn: HTMLElement, numBtns: NodeListOf<Element>, textBox: HTMLElement) {
         this.current = 0;
         this.size = size;
@@ -50,12 +50,13 @@ export class BarSlide extends Slide<BarChart> {
                 rep.data = temp;
                 break;
         }
-        this.chart.instance.update();
+        this.chart.update();
     }
     init() {
+        this.current = 0;
         this.chart.dataBox.labels = DataAPI.getInstance().getLabels();
         this.chart.dataBox.datasets[0].data = DataAPI.getInstance().getStats().ideal['latest'];
-        this.chart.instance.update();
+        this.chart.update();
     }
 }
 
@@ -71,12 +72,14 @@ export class LineSlide extends Slide<LineChart> {
         const rep2 = this.chart.dataBox.datasets[1];
         rep1.data = data.actual[this.lineMap[this.current]];
         rep2.data = data.ideal[this.lineMap[this.current]];
-        this.chart.instance.update();
+        this.chart.update();
     }
     init() {
+        this.current = 0;
+        const data = DataAPI.getInstance().getStats();
         this.chart.dataBox.labels = DataAPI.getInstance().getLabels();
-        this.chart.dataBox.datasets[0].data = DataAPI.getInstance().getStats().actual['$12'];
-        this.chart.dataBox.datasets[1].data = DataAPI.getInstance().getStats().ideal['$12'];
-        this.chart.instance.update();
+        this.chart.dataBox.datasets[0].data = data.actual['$12'];
+        this.chart.dataBox.datasets[1].data = data.ideal['$12'];
+        this.chart.update();
     }
 }

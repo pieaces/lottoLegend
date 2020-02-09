@@ -1,35 +1,36 @@
 import DataAPI from "./DataAPI";
-import {BarSlide, LineSlide} from './Slide/Slide'
+import { BarSlide, LineSlide } from './Slide/Slide'
 import BubbleChart from "./Slide/bubble";
 import DropDown from "./Slide/filter";
 import makeClickable from './Slide/makeClickable'
 
-const leftBarBtn:HTMLElement = document.querySelector('#left-bar-chart-btn');
-const rightBarBtn:HTMLElement = document.querySelector('#right-bar-chart-btn');
+const leftBarBtn: HTMLElement = document.querySelector('#left-bar-chart-btn');
+const rightBarBtn: HTMLElement = document.querySelector('#right-bar-chart-btn');
 const barNum = document.querySelectorAll('.chart-bar-num > div');
-const barBox:HTMLElement = document.querySelector('#chart-func1-bar');
-const main23:HTMLElement = document.querySelector('.main-2-3');
+const barCanvas: HTMLElement = document.querySelector('#chart-func1-bar');
+const main23: HTMLElement = document.querySelector('.main-2-3');
 //
-const leftLineBtn:HTMLElement = document.querySelector('#left-line-chart-btn');
-const rightLineBtn:HTMLElement = document.querySelector('#right-line-chart-btn');
+const leftLineBtn: HTMLElement = document.querySelector('#left-line-chart-btn');
+const rightLineBtn: HTMLElement = document.querySelector('#right-line-chart-btn');
 const lineNum = document.querySelectorAll('.chart-line-num > div');
-const lineBox:HTMLElement = document.querySelector('#chart-func1-line');
-const main22:HTMLElement = document.querySelector('.main-2-2');
+const lineCanvas: HTMLElement = document.querySelector('#chart-func1-line');
+const main22: HTMLElement = document.querySelector('.main-2-2');
 //
-const bubbleBox:HTMLElement = document.querySelector('#chart-func1-bubble');
+const bubbleBox: HTMLElement = document.querySelector('#chart-func1-bubble');
 //
 const nextBtn = document.getElementById('nextBtn');
 const optionList = document.getElementById('optionList');
 //
-const bar = new BarSlide(<HTMLCanvasElement>barBox, leftBarBtn, rightBarBtn, barNum, main23);
-const line = new LineSlide(<HTMLCanvasElement>lineBox, leftLineBtn, rightLineBtn, lineNum, main22);
+const bar = new BarSlide(<HTMLCanvasElement>barCanvas, leftBarBtn, rightBarBtn, barNum, main23);
+const line = new LineSlide(<HTMLCanvasElement>lineCanvas, leftLineBtn, rightLineBtn, lineNum, main22);
 const bubble = new BubbleChart(bubbleBox);
+makeClickable(bar);
+makeClickable(line);
 
 async function execute() {
     DropDown();
     await DataAPI.getInstance().init();
-    makeClickable(bar);
-    makeClickable(line);
+
     bar.init();
     line.init();
     bubble.init();

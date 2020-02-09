@@ -4,19 +4,22 @@ export class ChartBase {
     dataBox: Chart.ChartData;
     option: Chart.ChartOptions;
     instance: Chart;
-    constructor(type: string, ele: HTMLCanvasElement, dataBox: Chart.ChartData, option: Chart.ChartOptions) {
+    constructor(type: string, canvas: HTMLCanvasElement, dataBox: Chart.ChartData, option: Chart.ChartOptions) {
         this.dataBox = dataBox;
         this.option = option;
-        this.instance = new Chart(ele, {
+        this.instance = new Chart(canvas, {
             type: type,
             data: this.dataBox,
             options: this.option
         });
     }
+    update(){
+        this.instance.update();
+    }
 }
 
 export class BarChart extends ChartBase {
-    constructor(ele: HTMLCanvasElement) {
+    constructor(canvas: HTMLCanvasElement) {
         const option = {
             legend: { display: false }
         }
@@ -32,7 +35,7 @@ export class BarChart extends ChartBase {
                 }
             ]
         };
-        super('bar', ele, dataBox, option);
+        super('bar', canvas, dataBox, option);
     }
 }
 
