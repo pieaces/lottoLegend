@@ -3,6 +3,7 @@ import { BarSlide, LineSlide } from './Slide/Slide'
 import BubbleChart from "./Slide/bubble";
 import dropDown from "./Slide/dropDown";
 import makeClickable from './Slide/makeClickable'
+import Layout2 from '../functional/function2/index'
 
 const func1MainLayout = document.querySelector<HTMLElement>('.func1-main-bottom-container');
 const func2MainLayout = document.querySelector<HTMLElement>('.func2-main-bottom-container');
@@ -29,6 +30,7 @@ const optionBox = document.getElementById('optionList');
 const bar = new BarSlide(<HTMLCanvasElement>barCanvas, leftBarBtn, rightBarBtn, barNum, main23);
 const line = new LineSlide(<HTMLCanvasElement>lineCanvas, leftLineBtn, rightLineBtn, lineNum, main22);
 const bubble = new BubbleChart(bubbleBox);
+const layout2 = new Layout2();
 // makeClickable(bar);
 // makeClickable(line);
 makeClickable(bar);
@@ -37,7 +39,7 @@ makeClickable(line);
 async function execute() {
     dropDown();
     await DataAPI.getInstance().init();
-
+    layout2.init();
     bar.init();
     line.init();
     bubble.init();
