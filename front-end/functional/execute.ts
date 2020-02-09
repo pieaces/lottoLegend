@@ -4,11 +4,6 @@ import BubbleChart from "./Slide/bubble";
 import DropDown from "./Slide/filter";
 import makeClickable from './Slide/makeClickable'
 
-import layout1 from '../components/function/layout1'
-import layout2 from '../components/function/layout2'
-
-const section: HTMLElement = document.querySelector('section');
-//
 const leftBarBtn: HTMLElement = document.querySelector('#left-bar-chart-btn');
 const rightBarBtn: HTMLElement = document.querySelector('#right-bar-chart-btn');
 const barNum = document.querySelectorAll('.chart-bar-num > div');
@@ -33,7 +28,6 @@ makeClickable(bar);
 makeClickable(line);
 
 async function execute() {
-    section.innerHTML = layout1;
     DropDown();
     await DataAPI.getInstance().init();
 
@@ -52,14 +46,12 @@ async function execute() {
 
         switch (currentFilter) {
             case 3: case 4:
-                section.innerHTML = layout2;
-                section.setAttribute('id', 'function2');
+
                 break;
-            case 0: case 1: case 2:
+            case 15:
                 break;
             default:
-                section.innerHTML = layout1;
-                section.removeAttribute('id');
+
         }
         bar.init();
         line.init();
