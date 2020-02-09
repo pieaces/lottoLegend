@@ -22,11 +22,15 @@ export default class Layout2 {
     checkedNumbers = new Array<number>();
     choice = null;
     private updateChart() {
-        const data = DataAPI.getInstance().getStats().data;
-        const TOTAL = data.total;
+        const data = DataAPI.getInstance().getStats();
+        const TOTAL = 897;
+        console.log(data);
         bar.dataBox.datasets[0].data = [TOTAL * 6 / 45, data.frequency[this.choice - 1]];
         radar.dataBox.datasets[0].data = data.interval[this.choice - 1].list;
         gauss.dataBox.datasets[0].data = data.emergence[this.choice - 1];
+        bar.update();
+        radar.update();
+        gauss.update();
     }
     private cancelCheck() {
         let myExclusiveEl = Array.from(document.querySelectorAll<HTMLElement>(Layout2.body));
