@@ -4,6 +4,13 @@
     display: flex;
     justify-content: center;
   }
+
+  .func1-main-mid{
+    height:100px;
+    margin-bottom:10px;
+    background-color: var(--default-color);
+    border:1px solid var(--border-color);
+  }
   
   .func1-main-bottom-container{
     display:block;
@@ -11,12 +18,10 @@
   }
   
   .func1-main-bottom {
-  
     position: relative;
-    
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: 370px 370px 310px;
+    grid-template-rows:  370px 370px 310px;
     grid-gap:10px;
     margin-bottom:10px;
   }
@@ -127,8 +132,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: coral;
-    color: var(--default-color);
+    
+    
     border: 1px solid rgba(0, 0, 0, 0.4);
   }
   
@@ -141,3 +146,7 @@
     opacity: 0;
   }
   
+.func1-num-check-current{
+  background-color: coral;
+  color:var(--default-color);
+}

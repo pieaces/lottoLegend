@@ -1,6 +1,6 @@
-const checkboxContainer = document.querySelectorAll('.func1-checkbox-container > div');
-
-for (const node of checkboxContainer) {
+const checkBox = document.querySelectorAll('.func1-checkbox > div');
+const reset = document.querySelector('#reset');
+for (const node of checkBox) {
     node.addEventListener('click', () => {
         if (node.children[0].checked) {
             node.classList.add('func1-num-check-current');
@@ -9,3 +9,8 @@ for (const node of checkboxContainer) {
         }
     })
 }
+reset.addEventListener('click', () => {
+    for (const node of checkBox) {
+        node.classList.remove('func1-num-check-current');
+    }
+})
