@@ -17,7 +17,7 @@ const main23: HTMLElement = document.querySelector('.func1-main-2-3');
 //
 const leftLineBtn: HTMLElement = document.querySelector('#func1-left-line-chart-btn');
 const rightLineBtn: HTMLElement = document.querySelector('#func1-right-line-chart-btn');
-const lineNum = document.querySelectorAll('.func1-chart-line-num > div');
+const lineNum = document.querySelectorAll<HTMLElement>('.func1-chart-line-num > div');
 const lineCanvas: HTMLElement = document.querySelector('#func1-chart-line');
 const main22: HTMLElement = document.querySelector('.func1-main-2-2');
 //
@@ -50,10 +50,14 @@ async function execute() {
         const option = undefined;
         const currentFilter = DataAPI.getInstance().getCurrent();
 
-        for (const node of lineNum) {
+        lineNum.forEach(node => {
             node.classList.remove('func1-chart-slide-current');
-        }
-        [...lineNum][0].classList.add('func1-chart-slide-current');
+        });
+        Array.from(lineNum)[0].classList.add('func1-chart-slide-current');
+        barNum.forEach(node => {
+            node.classList.remove('func1-chart-slide-current');
+        });
+        Array.from(barNum)[0].classList.add('func1-chart-slide-current');
 
         await DataAPI.getInstance().forward(optionList[currentFilter]);
 
