@@ -1,71 +1,41 @@
 import DataAPI from "./DataAPI";
 import { BarSlide, LineSlide } from './Slide/Slide'
 import BubbleChart from "./Slide/bubble";
-<<<<<<< HEAD
-import DropDown from "./Slide/dropDown";
+import dropDown from "./Slide/dropDown";
 import makeClickable from './Slide/makeClickable'
 
-const leftBarBtn: HTMLElement = document.querySelector('#left-bar-chart-btn');
-const rightBarBtn: HTMLElement = document.querySelector('#right-bar-chart-btn');
-const barNum = document.querySelectorAll('.chart-bar-num > div');
-const barCanvas: HTMLElement = document.querySelector('#chart-func1-bar');
-const main23: HTMLElement = document.querySelector('.main-2-3');
+const func1MainLayout = document.querySelector<HTMLElement>('.func1-main-bottom-container');
+const func2MainLayout = document.querySelector<HTMLElement>('.func2-main-bottom-container');
+const func1CheckBox = document.querySelector<HTMLElement>('.func1-checkbox-container');
+const func2SelectNumBox = document.querySelector<HTMLElement>('.func2-select-num-box-container');
 //
-const leftLineBtn: HTMLElement = document.querySelector('#left-line-chart-btn');
-const rightLineBtn: HTMLElement = document.querySelector('#right-line-chart-btn');
-const lineNum = document.querySelectorAll('.chart-line-num > div');
-const lineCanvas: HTMLElement = document.querySelector('#chart-func1-line');
-const main22: HTMLElement = document.querySelector('.main-2-2');
+const leftBarBtn: HTMLElement = document.querySelector('#func1-left-bar-chart-btn');
+const rightBarBtn: HTMLElement = document.querySelector('#func1-right-bar-chart-btn');
+const barNum = document.querySelectorAll('.func1-chart-bar-num > div');
+const barCanvas: HTMLElement = document.querySelector('#func1-chart-bar');
+const main23: HTMLElement = document.querySelector('.func1-main-2-3');
 //
-const bubbleBox: HTMLElement = document.querySelector('#chart-func1-bubble');
+const leftLineBtn: HTMLElement = document.querySelector('#func1-left-line-chart-btn');
+const rightLineBtn: HTMLElement = document.querySelector('#func1-right-line-chart-btn');
+const lineNum = document.querySelectorAll('.func1-chart-line-num > div');
+const lineCanvas: HTMLElement = document.querySelector('#func1-chart-line');
+const main22: HTMLElement = document.querySelector('.func1-main-2-2');
+//
+const bubbleBox: HTMLElement = document.querySelector('#func1-chart-bubble');
 //
 const nextBtn = document.getElementById('nextBtn');
-const optionList = document.getElementById('optionList');
+const optionBox = document.getElementById('optionList');
 //
 const bar = new BarSlide(<HTMLCanvasElement>barCanvas, leftBarBtn, rightBarBtn, barNum, main23);
 const line = new LineSlide(<HTMLCanvasElement>lineCanvas, leftLineBtn, rightLineBtn, lineNum, main22);
 const bubble = new BubbleChart(bubbleBox);
+// makeClickable(bar);
+// makeClickable(line);
 makeClickable(bar);
 makeClickable(line);
 
 async function execute() {
-=======
-import DropDown from "./Slide/dropdown";
-import makeClickable from './Slide/makeClickable'
-import function2 from './function2'
-import layout1 from '../components/function/layout1'
-import layout2 from '../components/function/layout2'
-
-async function execute() {
-    const section: HTMLElement = document.querySelector('section');
-
-    section.innerHTML = layout1;
-    //
-    const leftBarBtn: HTMLElement = document.querySelector('#left-bar-chart-btn');
-    const rightBarBtn: HTMLElement = document.querySelector('#right-bar-chart-btn');
-    const barNum = document.querySelectorAll('.chart-bar-num > div');
-    const barCanvas: HTMLElement = document.querySelector('#chart-func1-bar');
-    const main23: HTMLElement = document.querySelector('.main-2-3');
-    //
-    const leftLineBtn: HTMLElement = document.querySelector('#left-line-chart-btn');
-    const rightLineBtn: HTMLElement = document.querySelector('#right-line-chart-btn');
-    const lineNum = document.querySelectorAll('.chart-line-num > div');
-    const lineCanvas: HTMLElement = document.querySelector('#chart-func1-line');
-    const main22: HTMLElement = document.querySelector('.main-2-2');
-    //
-    const bubbleBox: HTMLElement = document.querySelector('#chart-func1-bubble');
-    //
-    const nextBtn = document.getElementById('nextBtn');
-    const optionBox = document.getElementById('optionList');
-    //
-    const bar = new BarSlide(<HTMLCanvasElement>barCanvas, leftBarBtn, rightBarBtn, barNum, main23);
-    const line = new LineSlide(<HTMLCanvasElement>lineCanvas, leftLineBtn, rightLineBtn, lineNum, main22);
-    const bubble = new BubbleChart(bubbleBox);
-    makeClickable(bar);
-    makeClickable(line);
-
->>>>>>> front
-    DropDown();
+    dropDown();
     await DataAPI.getInstance().init();
 
     bar.init();
@@ -83,24 +53,16 @@ async function execute() {
 
         switch (currentFilter + 1) {
             case 3: case 4:
-<<<<<<< HEAD
-
+                func1MainLayout.style.display = "none";
+                func2MainLayout.style.display = "block";
+                func1CheckBox.style.display = "none"
+                func2SelectNumBox.style.display = "block"
                 break;
             default:
-=======
-                section.innerHTML = layout2;
-                section.setAttribute('id', 'function2');
-                function2();
-                break;
-            case 1: case 2:
-                bar.init();
-                line.init();
-                bubble.init();
-                break;
-            default:
-                section.innerHTML = layout1;
-                section.removeAttribute('id');
->>>>>>> front
+                func1MainLayout.style.display = "block";
+                func2MainLayout.style.display = "none";
+                func1CheckBox.style.display = "block"
+                func2SelectNumBox.style.display = "none";
                 bar.init();
                 line.init();
                 bubble.init();
