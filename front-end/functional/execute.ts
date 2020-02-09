@@ -49,6 +49,12 @@ async function execute() {
         //optionList method
         const option = undefined;
         const currentFilter = DataAPI.getInstance().getCurrent();
+
+        for (const node of lineNum) {
+            node.classList.remove('func1-chart-slide-current');
+        }
+        [...lineNum][0].classList.add('func1-chart-slide-current');
+
         await DataAPI.getInstance().forward(optionList[currentFilter]);
 
         switch (currentFilter + 1) {
