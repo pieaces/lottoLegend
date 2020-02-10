@@ -1,5 +1,4 @@
 const checkBox = document.querySelectorAll<HTMLElement>('.func1-checkbox > div');
-const reset = document.querySelector('#reset');
 
 export default class CheckBox {
     private addEvent() {
@@ -11,9 +10,6 @@ export default class CheckBox {
                     node.classList.remove('func1-num-check-current');
                 }
             });
-        });
-        reset.addEventListener('click', () => {
-            this.reset();
         });
     }
     reset() {
