@@ -1,15 +1,15 @@
 import DropDown from "../Buttons/DropDown";
 import DataAPI from "../DataAPI";
+import Layout3 from "./Layout3";
 
 const func1MainLayout = document.querySelector<HTMLElement>('.func1-main-bottom-container');
 const func2MainLayout = document.querySelector<HTMLElement>('.func2-main-bottom-container');
 const func1CheckBox = document.querySelector<HTMLElement>('.func1-checkbox-container');
 const func2SelectNumBox = document.querySelector<HTMLElement>('.func2-select-num-box-container');
 
-export default class Base {
+export default class Layout extends Layout3{
     dropDown:DropDown;
 
-    constructor() { }
     on() {
         const currentFilter = DataAPI.getInstance().getCurrent();
         switch (currentFilter) {
@@ -27,7 +27,8 @@ export default class Base {
                 break;
         }
     }
-    protected init(){
+    init(){
+        super.init();
         this.dropDown.init();
     }
 }

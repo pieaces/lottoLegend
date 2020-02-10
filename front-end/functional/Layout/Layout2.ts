@@ -9,9 +9,9 @@ import bar from '../function2/barInstance'
 import gauss from '../function2/gaussInstance'
 import radar from '../function2/radarInstance'
 import DataAPI from '../DataAPI'
-import Base from './Base';
+import Layout1 from './Layout1';
 
-export default class Layout2 extends Base{
+export default class Layout2 extends Layout1{
     static readonly MAX_SIZE = 10;
     static readonly lottoNumDefaultColor = 'rgba(231, 76, 60, 0.2)';
     static readonly lottoNumSelectColor = '#e6e600';
@@ -182,6 +182,7 @@ export default class Layout2 extends Base{
         this.cancelCheck();
     }
     init() {
+        super.init();
         this.numFreqOrTermToggle();
         this.setColorWinNum();
         this.addEvent();
