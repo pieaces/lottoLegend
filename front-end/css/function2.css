@@ -141,23 +141,31 @@
   .func2-left-chart-btn{
     cursor: pointer;
     position: absolute;
-    top: 40%;
-    left: 10%;
+    top: 5%;
+    left: 43%;
     color: var(--main-color);
-    opacity: 0.3;
-    display: none;
+    background-color: black;
+    
     z-index:1;
+    width:20px;
+    height:20px;
   }
 
   .func2-right-chart-btn{
     cursor: pointer;
     position: absolute;
-    top: 40%;
-    left: 82%;
+    top: 5%;
+    left: 52%;
     color: var(--main-color);
-    opacity: 0.3;
-    display: none;
+    background-color: black;
+    
     z-index:1;
+    width:20px;
+    height:20px;
+  }
+
+  .func2-chart-radar{
+    padding-top:30px;
   }
 
   .func2-chart-radar-text{

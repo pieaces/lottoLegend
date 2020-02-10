@@ -49,11 +49,6 @@
     font-size: 1.3rem;
   }
   
-  .func1-chart-slide-current {
-    border: 6px solid var(--lotto-title-color);
-    background-color: var(--default-color);
-  }
-  
   .func1-left-chart-btn {
     cursor: pointer;
     position: absolute;

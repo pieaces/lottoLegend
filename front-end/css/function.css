@@ -261,4 +261,8 @@
     height:100% !important;
   }
 
+  .chart-slide-current {
+    border: 6px solid var(--lotto-title-color);
+    background-color: var(--default-color);
+  }
   
