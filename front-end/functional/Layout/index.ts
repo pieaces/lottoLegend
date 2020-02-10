@@ -1,8 +1,8 @@
 import Layout3 from "./Layout3";
 import DataAPI from "../DataAPI";
-import DropDown from "../Buttons/DropDown";
-import Checkbox from '../Buttons/CheckBox';
-import NextBtn from "../Buttons/NextBtn";
+import DropDown from "../instanceBtns/DropDown";
+import Checkbox from '../instanceBtns/CheckBox';
+import NextBtn from "../instanceBtns/NextBtn";
 
 const layout1 = document.querySelectorAll<HTMLElement>('.func1-layout');
 const layout2 = document.querySelectorAll<HTMLElement>('.func2-layout');
@@ -12,25 +12,36 @@ export default class Layout extends Layout3 {
     dropDown: DropDown = new DropDown();
     checkBox: Checkbox = new Checkbox();
     nextBtn: NextBtn = new NextBtn();
-    on() {
-        const currentFilter = DataAPI.getInstance().getCurrent();
-        switch (currentFilter) {
-            case 3: case 4:
-                layout1.forEach(node =>{
-                    node.style.display = "none";
-                });
-                layout2.forEach(node => {
-                    node.style.display = "block";
-                });
-                break;
-            default:
-                layout1.forEach(node =>{
-                    node.style.display = "block";
-                });
-                layout2.forEach(node => {
-                    node.style.display = "none";
-                });
-                break;
+    private layout1On() {
+        layout1.forEach(node => {
+            node.style.display = "block";
+        });
+        layout2.forEach(node => {
+            node.style.display = "none";
+        });
+    }
+    private layout2On() {
+        layout1.forEach(node => {
+            node.style.display = "none";
+        });
+        layout2.forEach(node => {
+            node.style.display = "block";
+        });
+    }
+    on(layoutVersion: number = 0) {
+        if (layoutVersion === 0) {
+            const currentFilter = DataAPI.getInstance().getCurrent();
+            switch (currentFilter) {
+                case 3: case 4:
+                    this.layout2On();
+                    break;
+                default:
+                    this.layout1On();
+                    break;
+            }
+        } else {
+            if (layoutVersion === 1) this.layout1On();
+            else if (layoutVersion === 2) this.layout2On();
         }
     }
     init() {
