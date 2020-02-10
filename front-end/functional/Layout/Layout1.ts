@@ -13,9 +13,6 @@ export default class Layout1 extends Base {
     constructor() {
         super();
     }
-    on(){
-        super.on(1);
-    }
     init(){
         barSlide.init();
         lineSlide.init();

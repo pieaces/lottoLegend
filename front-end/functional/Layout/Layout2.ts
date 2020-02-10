@@ -22,9 +22,7 @@ export default class Layout2 extends Base{
     static readonly selectNumBox = 'func2-select-num-box';
     checkedNumbers = new Array<number>();
     choice = null;
-    on(){
-        super.on(2);
-    }
+
     private updateChart() {
         const data = DataAPI.getInstance().getStats();
         const TOTAL = DataAPI.getInstance().getTOTAL();
