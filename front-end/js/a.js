@@ -27,10 +27,9 @@ getData();
 
 function DropDownSetColor() {
     let current = 3;
-    const beforeColor = 'darkgray';
-    const currentColor = 'blue';
-    const afterColor = 'red';
-    const fontColor = 'white';
+    const beforeColor = 'white';
+    const currentColor = 'rgb(95, 87, 251)';
+    const afterColor = 'darkgray';
     for (let i = 0; i < c.length; i++) {
         const li = document.createElement('li');
         li.textContent = i;
@@ -38,8 +37,10 @@ function DropDownSetColor() {
             li.style.backgroundColor = beforeColor;
         } else if (i === current) {
             li.style.backgroundColor = currentColor;
+            li.style.color = 'white'
         } else if (i > current) {
             li.style.backgroundColor = afterColor;
+            li.style.color = 'gray'
         }
         filterList.appendChild(li);
     }

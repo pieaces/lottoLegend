@@ -61,6 +61,7 @@ export default class Layout extends Layout3 {
             await DataAPI.getInstance().forward(this.optionList[currentFilter]);
             this.on();
             this.dropDown.changeBoard();
+            super.init();
         })
     }
 }

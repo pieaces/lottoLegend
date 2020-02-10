@@ -39,7 +39,6 @@ export default class Generator {
                 body: JSON.stringify(clone)
             }
         );
-
         const data = JSON.parse(await fetchResult.text());
         return data;
     }
