@@ -12,6 +12,7 @@ export default class Layout extends Layout3 {
     dropDown: DropDown = new DropDown();
     checkBox: Checkbox = new Checkbox();
     nextBtn: NextBtn = new NextBtn();
+
     private layout1On() {
         layout1.forEach(node => {
             node.style.display = "block";
@@ -28,7 +29,7 @@ export default class Layout extends Layout3 {
             node.style.display = "block";
         });
     }
-    on(layoutVersion: number = 0) {
+    on(layoutVersion:number = 0) {
         if (layoutVersion === 0) {
             const currentFilter = DataAPI.getInstance().getCurrent();
             switch (currentFilter) {
@@ -44,7 +45,7 @@ export default class Layout extends Layout3 {
             else if (layoutVersion === 2) this.layout2On();
         }
     }
-    init(layoutVersion:number = 0) {
+    init() {
         super.init();
         this.dropDown.init();
         this.checkBox.init();
@@ -54,7 +55,7 @@ export default class Layout extends Layout3 {
             const currentFilter = DataAPI.getInstance().getCurrent();
 
             await DataAPI.getInstance().forward(this.optionList[currentFilter]);
-            this.on(layoutVersion);
+            this.on();
             this.dropDown.changeBoard();
         })
     }
