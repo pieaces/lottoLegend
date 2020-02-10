@@ -16,6 +16,7 @@ router.get('/:method', async (req, res) => {
             temp.to = req.query.to;
         }
         data = await queryStats(method as Method, temp);
+        res.json({data});
     }
     else {
         if (method === "excludeInclude") {
