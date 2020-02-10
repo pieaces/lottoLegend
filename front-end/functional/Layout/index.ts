@@ -3,7 +3,7 @@ import DataAPI from "../DataAPI";
 import DropDown from "../instanceBtns/DropDown";
 import Checkbox from '../instanceBtns/CheckBox';
 import NextBtn from "../instanceBtns/NextBtn";
-
+import ResetBtn from '../instanceBtns/ResetBtn'
 const layout1 = document.querySelectorAll<HTMLElement>('.func1-layout');
 const layout2 = document.querySelectorAll<HTMLElement>('.func2-layout');
 
@@ -12,6 +12,7 @@ export default class Layout extends Layout3 {
     dropDown: DropDown = new DropDown();
     checkBox: Checkbox = new Checkbox();
     nextBtn: NextBtn = new NextBtn();
+    resetBtn: ResetBtn = new ResetBtn();
 
     private layout1On() {
         layout1.forEach(node => {
@@ -29,15 +30,17 @@ export default class Layout extends Layout3 {
             node.style.display = "block";
         });
     }
-    on(layoutVersion:number = 0) {
+    on(layoutVersion: number = 0) {
         if (layoutVersion === 0) {
             const currentFilter = DataAPI.getInstance().getCurrent();
             switch (currentFilter) {
                 case 3: case 4:
                     this.layout2On();
+                    this.resetBtn.init((e) => { this.reset(e) });
                     break;
                 default:
                     this.layout1On();
+                    this.resetBtn.init(() => { this.checkBox.reset() });
                     break;
             }
         } else {
@@ -49,6 +52,7 @@ export default class Layout extends Layout3 {
         super.init();
         this.dropDown.init();
         this.checkBox.init();
+        this.resetBtn.init(() => { this.checkBox.reset() });
         this.nextBtn.init(async () => {
             this.checkBox.reset();
             const option = undefined;

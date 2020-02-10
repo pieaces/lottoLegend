@@ -1,7 +1,6 @@
 const lottoNumbers = document.querySelectorAll<HTMLElement>('.func2-lotto-num-box> div > div');
 const selectNumBox = document.querySelector<HTMLElement>('.func2-select-num-box');
 const applyBtn = document.querySelector('.func2-num-exclude-btn');
-const resetNumBtn = document.querySelector('#reset');
 const winNums = document.querySelectorAll<HTMLElement>('.func2-win-num-box > div');
 const numTerm = document.querySelector('.func2-num-term');
 const numFreq = document.querySelector('.func2-num-freq');
@@ -13,8 +12,8 @@ import DataAPI from '../DataAPI'
 import Layout1 from './Layout1';
 import RadarSlide from '../Slide/radarSlide';
 
-export default class Layout2 extends Layout1{
-    radarSlide:RadarSlide = radarSlide;
+export default class Layout2 extends Layout1 {
+    radarSlide: RadarSlide = radarSlide;
     static readonly MAX_SIZE = 10;
     static readonly lottoNumDefaultColor = 'rgba(231, 76, 60, 0.2)';
     static readonly lottoNumSelectColor = '#e6e600';
@@ -141,26 +140,6 @@ export default class Layout2 extends Layout1{
                 e.stopPropagation();
             });
         });
-        resetNumBtn.addEventListener('click', e => {
-            if (this.checkedNumbers.length > 0) {
-                if (confirm(`선택번호를 모두 초기화하시겠습니까?`)) {
-                    for (const node of Array.from(selectNumBox.children)) {
-                        node.textContent = '';
-                        (<HTMLElement>node).style.backgroundColor = '';
-                    }
-                    for (let i = 0; i < this.checkedNumbers.length; i++) {
-                        lottoNumbers[this.checkedNumbers[i] - 1].style.backgroundColor = Layout2.lottoNumDefaultColor;
-                        selectNumBox.children[i].classList.remove(`${Layout2.selectNumBox}${i + 1}`);
-                    }
-                    this.checkedNumbers.splice(0, this.checkedNumbers.length);
-                    if (this.choice !== null) {
-                        lottoNumbers[this.choice - 1].style.backgroundColor = Layout2.lottoNumDefaultColor;
-                        this.choice = null;
-                    }
-                }
-            }
-            e.stopPropagation();
-        });
 
         applyBtn.addEventListener('click', e => {
             if (this.checkedNumbers.length < Layout2.MAX_SIZE) {
@@ -183,6 +162,26 @@ export default class Layout2 extends Layout1{
             e.stopPropagation();
         });
         this.cancelCheck();
+    }
+    protected reset(e:Event) {
+        if (this.checkedNumbers.length > 0) {
+            if (confirm(`선택번호를 모두 초기화하시겠습니까?`)) {
+                for (const node of Array.from(selectNumBox.children)) {
+                    node.textContent = '';
+                    (<HTMLElement>node).style.backgroundColor = '';
+                }
+                for (let i = 0; i < this.checkedNumbers.length; i++) {
+                    lottoNumbers[this.checkedNumbers[i] - 1].style.backgroundColor = Layout2.lottoNumDefaultColor;
+                    selectNumBox.children[i].classList.remove(`${Layout2.selectNumBox}${i + 1}`);
+                }
+                this.checkedNumbers.splice(0, this.checkedNumbers.length);
+                if (this.choice !== null) {
+                    lottoNumbers[this.choice - 1].style.backgroundColor = Layout2.lottoNumDefaultColor;
+                    this.choice = null;
+                }
+            }
+        }
+        e.stopPropagation();
     }
     init() {
         super.init();
