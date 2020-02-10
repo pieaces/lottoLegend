@@ -130,6 +130,14 @@
     position: relative;
   }
 
+  .chart-translateX-plus{
+    transform:translateX(-100%);
+  }
+
+  .chart-translateX-minus{
+    transform:translateX(-100%);
+  }
+
   .func2-left-chart-btn{
     cursor: pointer;
     position: absolute;
@@ -138,6 +146,7 @@
     color: var(--main-color);
     opacity: 0.3;
     display: none;
+    z-index:1;
   }
 
   .func2-right-chart-btn{
@@ -148,6 +157,7 @@
     color: var(--main-color);
     opacity: 0.3;
     display: none;
+    z-index:1;
   }
 
   .func2-chart-radar-text{

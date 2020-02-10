@@ -5,9 +5,9 @@ const resetNumBtn = document.querySelector('#reset');
 const winNums = document.querySelectorAll<HTMLElement>('.func2-win-num-box > div');
 const numTerm = document.querySelector('.func2-num-term');
 const numFreq = document.querySelector('.func2-num-freq');
-import bar from '../function2/barInstance'
-import gauss from '../function2/gaussInstance'
-import radar from '../function2/radarInstance'
+import bar from '../instance2/barInstance'
+import gauss from '../instance2/gaussInstance'
+import radar from '../instance2/radarInstance'
 import DataAPI from '../DataAPI'
 import Layout1 from './Layout1';
 

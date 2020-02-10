@@ -1,8 +1,8 @@
 import BarSlide from "../Slide/BarSlide";
 import LineSlide from "../Slide/LineSlide";
-import barSlide from "../function1/barSlide";
-import lineSlide from '../function1/lineSlide'
-import bubbleChart from '../function1/bubbleInstance'
+import barSlide from "../instance1/barSlide";
+import lineSlide from '../instance1/lineSlide'
+import bubbleChart from '../instance1/bubbleInstance'
 
 export default class Layout1 {
     barSlide:BarSlide = barSlide;
