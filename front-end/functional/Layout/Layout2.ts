@@ -5,12 +5,13 @@ const resetNumBtn = document.querySelector('#reset');
 const winNums = document.querySelectorAll<HTMLElement>('.func2-win-num-box > div');
 const numTerm = document.querySelector('.func2-num-term');
 const numFreq = document.querySelector('.func2-num-freq');
-import bar from './barInstance'
-import gauss from './gaussInstance'
-import radar from './radarInstance'
+import bar from '../function2/barInstance'
+import gauss from '../function2/gaussInstance'
+import radar from '../function2/radarInstance'
 import DataAPI from '../DataAPI'
+import Base from './Base';
 
-export default class Layout2 {
+export default class Layout2 extends Base{
     static readonly MAX_SIZE = 10;
     static readonly lottoNumDefaultColor = 'rgba(231, 76, 60, 0.2)';
     static readonly lottoNumSelectColor = '#e6e600';
@@ -21,6 +22,9 @@ export default class Layout2 {
     static readonly selectNumBox = 'func2-select-num-box';
     checkedNumbers = new Array<number>();
     choice = null;
+    on(){
+        super.on(2);
+    }
     private updateChart() {
         const data = DataAPI.getInstance().getStats();
         const TOTAL = 897;

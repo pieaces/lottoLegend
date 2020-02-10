@@ -1,4 +1,5 @@
-import { BarSlide, LineSlide } from "./Slide";
+import BarSlide from "./BarSlide";
+import LineSlide from "./LineSlide";
 
 export default function makeClickable(obj: BarSlide | LineSlide) {
     const chartSlideCurrent = 'func1-chart-slide-current';

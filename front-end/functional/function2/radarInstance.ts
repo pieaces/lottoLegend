@@ -1,4 +1,4 @@
-import { ChartBase } from "../Slide/Charts";
+import ChartBase from "../Chart/Charts";
 
 const canvas: HTMLCanvasElement = document.querySelector('.func2-chart-radar');
 const dataBox = {
