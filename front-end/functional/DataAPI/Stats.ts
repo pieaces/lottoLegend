@@ -19,7 +19,6 @@ export default class Stats {
                 url += `?list=${encodeURI(JSON.stringify(params.list))}`;
             }
         }
-        console.log(url);
         const fetchResult = await fetch(url, { method: 'GET', headers });
         const data = JSON.parse(await fetchResult.text());
         this[method] = data.data;

@@ -40,9 +40,9 @@ function paramToNumbers(params: Params): number[] {
 }
 export default class DataAPI {
     static instance:DataAPI = null;
-    public count: number;
     public numbers: number[];
-    private numberList = ["1-1", "1-2", "2", "3-1", "3-2", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    public filteredCount: number;
+    private numberList = ["1-1: 전멸구간개수", "1-2: 전멸라인", "2: 이월수 개수", "3-1: 제외", "3-2: 포함", "4: 저값 개수", "5: 합계", "6: 홀수 개수", "7: 소수 개수", "8: 3배수 개수", "9: 첫수합", "10: 고저차", "11: AC", "12: 연속수 포함여부"]
     private statsList = ['excludedLineCount', 'lineCount', 'carryCount', 'excludeInclude', 'excludeInclude', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
     private optionList = [null, 'excludedLines', null, 'excludedNumbers', 'includedNumbers', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
     private rangeList: Array<string[] | number[]> = [[0, 1, 2, 3, 4], [0, 1, 2, 3, 4], [0, 1, 2, 3, 4, 5, 6], null, null];
@@ -104,9 +104,8 @@ export default class DataAPI {
     private async getGen(): Promise<void> {
         const { count, range, numbers } = await this.generator.generate();
         this.rangeList[this.current + 1] = range;
-        this.count = count;
-
-        if (numbers) console.log(numbers);
+        if(count) this.filteredCount = count;
+        if (numbers) this.numbers = numbers;
     }
 
     leap(page: number): void {
