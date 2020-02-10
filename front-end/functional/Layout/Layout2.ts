@@ -27,8 +27,8 @@ export default class Layout2 extends Base{
     }
     private updateChart() {
         const data = DataAPI.getInstance().getStats();
-        const TOTAL = 897;
-        console.log(data);
+        const TOTAL = DataAPI.getInstance().getTOTAL();
+        console.log(data, TOTAL);
         bar.dataBox.datasets[0].data = [TOTAL * 6 / 45, data.frequency[this.choice - 1]];
         radar.dataBox.datasets[0].data = data.interval[this.choice - 1].list;
         gauss.dataBox.datasets[0].data = data.emergence[this.choice - 1];
