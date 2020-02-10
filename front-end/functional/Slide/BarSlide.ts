@@ -1,5 +1,5 @@
 import ChartBase from "../Chart/Charts";
-import { Slide } from "./Slide";
+import Slide from "./Slide";
 import DataAPI from "../DataAPI";
 
 export default class BarSlide extends Slide<ChartBase> {

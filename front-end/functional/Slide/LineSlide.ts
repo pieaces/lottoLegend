@@ -1,4 +1,4 @@
-import { Slide } from "./Slide";
+import Slide from "./Slide";
 import ChartBase from "../Chart/Charts";
 import DataAPI from "../DataAPI";
 

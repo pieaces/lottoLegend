@@ -1,7 +1,6 @@
 import ChartBase from "../Chart/Charts";
-import DataAPI from "../DataAPI";
 
-export abstract class Slide<T extends ChartBase> {
+export default abstract class Slide<T extends ChartBase> {
     current: number;
     readonly size: number;
     readonly chart: T;
