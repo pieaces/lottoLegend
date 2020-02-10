@@ -33,10 +33,10 @@ export default class Layout extends Layout3 {
             const currentFilter = DataAPI.getInstance().getCurrent();
             switch (currentFilter) {
                 case 3: case 4:
-
+                    this.layout2On();
                     break;
                 default:
-
+                    this.layout1On();
                     break;
             }
         } else {
