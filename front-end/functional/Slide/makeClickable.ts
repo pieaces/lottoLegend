@@ -7,8 +7,9 @@ interface ClickEvent {
     numBtns?: (() => void)[];
 }
 export default function makeClickable(obj: Slide<ChartBase>, clickEvent: ClickEvent = {}) {
-    const chartSlideCurrent = 'func1-chart-slide-current';
-    if (obj) {
+    console.log(clickEvent);
+    const chartSlideCurrent = 'chart-slide-current';
+    if (obj.leftBtn) {
         obj.leftBtn.addEventListener('click', () => {
             if (!clickEvent.leftBtn) {
                 obj.numBtns[obj.current].classList.remove(chartSlideCurrent);
@@ -26,7 +27,7 @@ export default function makeClickable(obj: Slide<ChartBase>, clickEvent: ClickEv
             }
         });
     }
-    if (obj) {
+    if (obj.rightBtn) {
         obj.rightBtn.addEventListener('click', () => {
             if (!clickEvent.rightBtn) {
                 if (obj.current === obj.size - 1) {
@@ -45,20 +46,22 @@ export default function makeClickable(obj: Slide<ChartBase>, clickEvent: ClickEv
         });
     }
 
-    for (let i = 0; i < obj.numBtns.length; i++) {
-        if (obj.numBtns) {
+    if (obj.numBtns) {
+        for (let i = 0; i < obj.numBtns.length; i++) {
             obj.numBtns[i].addEventListener('click', () => {
+                obj.numBtns[obj.current].classList.remove(chartSlideCurrent);
+                obj.current = i;
+                obj.numBtns[obj.current].classList.add(chartSlideCurrent);
                 if (!clickEvent.numBtns) {
-                    obj.numBtns[obj.current].classList.remove(chartSlideCurrent);
-                    obj.current = i;
-                    obj.numBtns[obj.current].classList.add(chartSlideCurrent);
                     obj.setData();
                     obj.setText();
-                } else {
-                    clickEvent.numBtns[i];
+                }
+                if (clickEvent.numBtns) {
+                    clickEvent.numBtns[i]();
                 }
             });
         }
+
     }
 }
 

@@ -1,3 +1,7 @@
+.hide{
+  visibility: hidden;
+}
+
 .func2-main-bottom-container{
     display:none;
     margin-bottom:10px;
