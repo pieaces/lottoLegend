@@ -130,6 +130,26 @@
     position: relative;
   }
 
+  .func2-left-chart-btn{
+    cursor: pointer;
+    position: absolute;
+    top: 40%;
+    left: 10%;
+    color: var(--main-color);
+    opacity: 0.3;
+    display: none;
+  }
+
+  .func2-right-chart-btn{
+    cursor: pointer;
+    position: absolute;
+    top: 40%;
+    left: 82%;
+    color: var(--main-color);
+    opacity: 0.3;
+    display: none;
+  }
+
   .func2-chart-radar-text{
     position: absolute;
     top:0;
@@ -157,7 +177,6 @@
   }
   
   .func2-select-num-box {
-    
     display: grid;
     grid-template-columns: repeat(9, 1fr);
     margin-left: 20px;
