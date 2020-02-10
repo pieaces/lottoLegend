@@ -44,7 +44,7 @@ export default class Layout extends Layout3 {
             else if (layoutVersion === 2) this.layout2On();
         }
     }
-    init() {
+    init(layoutVersion:number = 0) {
         super.init();
         this.dropDown.init();
         this.checkBox.init();
@@ -54,7 +54,7 @@ export default class Layout extends Layout3 {
             const currentFilter = DataAPI.getInstance().getCurrent();
 
             await DataAPI.getInstance().forward(this.optionList[currentFilter]);
-            this.on();
+            this.on(layoutVersion);
             this.dropDown.changeBoard();
         })
     }
