@@ -266,3 +266,10 @@
     background-color: var(--default-color);
   }
   
+  .hide{
+    visibility: hidden;
+  }
+
+  .slow{
+    transition: all 0.5s;
+  }

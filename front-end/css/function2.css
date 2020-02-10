@@ -1,6 +1,3 @@
-.hide{
-  visibility: hidden;
-}
 
 .func2-main-bottom-container{
     display:none;
@@ -173,6 +170,7 @@
   }
 
   .func2-chart-radar-text{
+
     position: absolute;
     top:0;
     left:100%;
