@@ -1,57 +1,61 @@
-import BarSlide from "./BarSlide";
-import LineSlide from "./LineSlide";
-import RadarSlide from "./radarSlide";
+import Slide from ".";
+import ChartBase from "../Chart/Charts";
 
-type SlideType = BarSlide | LineSlide | RadarSlide;
-export default function makeClickable(obj: SlideType) {
-    console.log(isRadarSlide(obj), obj);
+interface ClickEvent {
+    leftBtn?: () => void;
+    rightBtn?: () => void;
+    numBtns?: (() => void)[];
+}
+export default function makeClickable(obj: Slide<ChartBase>, clickEvent: ClickEvent = {}) {
     const chartSlideCurrent = 'func1-chart-slide-current';
-
-    if (!isRadarSlide(obj)) {
+    if (obj) {
         obj.leftBtn.addEventListener('click', () => {
-            obj.numBtns[obj.current].classList.remove(chartSlideCurrent);
-            if (obj.current === 0) {
-                obj.numBtns[obj.size - 1].classList.add(chartSlideCurrent);
-                obj.current = obj.size - 1;
-            } else {
-                obj.current--;
-                obj.numBtns[obj.current].classList.add(chartSlideCurrent);
-            }
-            obj.setData();
-            obj.setText();
-        });
-
-        obj.rightBtn.addEventListener('click', () => {
-            if (obj.current === obj.size - 1) {
-                obj.numBtns[obj.size - 1].classList.remove(chartSlideCurrent);
-                obj.current = 0;
-            } else {
+            if (!clickEvent.leftBtn) {
                 obj.numBtns[obj.current].classList.remove(chartSlideCurrent);
-                obj.current++;
+                if (obj.current === 0) {
+                    obj.numBtns[obj.size - 1].classList.add(chartSlideCurrent);
+                    obj.current = obj.size - 1;
+                } else {
+                    obj.current--;
+                    obj.numBtns[obj.current].classList.add(chartSlideCurrent);
+                }
+                obj.setData();
+                obj.setText();
+            } else {
+                clickEvent.leftBtn();
             }
-            obj.numBtns[obj.current].classList.add(chartSlideCurrent);
-            obj.setData();
-            obj.setText();
         });
     }
+    if (obj) {
+        obj.rightBtn.addEventListener('click', () => {
+            if (!clickEvent.rightBtn) {
+                if (obj.current === obj.size - 1) {
+                    obj.numBtns[obj.size - 1].classList.remove(chartSlideCurrent);
+                    obj.current = 0;
+                } else {
+                    obj.numBtns[obj.current].classList.remove(chartSlideCurrent);
+                    obj.current++;
+                }
+                obj.numBtns[obj.current].classList.add(chartSlideCurrent);
+                obj.setData();
+                obj.setText();
+            } else {
+                clickEvent.rightBtn();
+            }
+        });
+    }
+
     for (let i = 0; i < obj.numBtns.length; i++) {
         if (obj.numBtns) {
             obj.numBtns[i].addEventListener('click', () => {
-                obj.numBtns[obj.current].classList.remove(chartSlideCurrent);
-                obj.current = i;
-                obj.numBtns[obj.current].classList.add(chartSlideCurrent);
-                if (!isRadarSlide(obj)) {
+                if (!clickEvent.numBtns) {
+                    obj.numBtns[obj.current].classList.remove(chartSlideCurrent);
+                    obj.current = i;
+                    obj.numBtns[obj.current].classList.add(chartSlideCurrent);
                     obj.setData();
                     obj.setText();
                 } else {
-                    if (i === 0) {
-                        radarSlideRestore(obj.chart.canvas, obj.textBox);
-                        console.log('0')
-                    } else if (i === 1) {
-                        radarSlideTransform(obj.chart.canvas, obj.textBox);
-                        
-                        console.log('1')
-                    }
+                    clickEvent.numBtns[i];
                 }
             });
         }
@@ -66,8 +70,4 @@ function radarSlideTransform(radarEle: HTMLElement, textEle: HTMLElement) {
 function radarSlideRestore(radarEle: HTMLElement, textEle: HTMLElement) {
     radarEle.style.transform = '';
     textEle.style.transform = '';
-}
-
-function isRadarSlide(obj: SlideType): obj is RadarSlide {
-    return (obj.chart.type === 'radar');
 }
