@@ -14,15 +14,15 @@ import RadarSlide from '../Slide/radarSlide';
 export default class Layout2 extends Layout1 {
     radarSlide: RadarSlide = radarSlide;
     static readonly MAX_SIZE = 10;
-    static readonly lottoNumDefaultColor = 'rgba(231, 76, 60, 0.2)';
+    static readonly lottoNumDefaultColor = '#00048c';
     static readonly lottoNumSelectColor = '#e6e600';
     static readonly lottoNumCheckedColor = 'darkgray';
     static readonly body = 'body *';
     static readonly numBoard = '.func2-main-1-4 *';
     static readonly lottoCheckCurrent = 'func2-lotto-check-current';
     static readonly selectNumBox = 'func2-select-num-box';
-    private data:any;
-    private TOTAL:number;
+    private data: any;
+    private TOTAL: number;
     checkedNumbers = new Array<number>();
     choice = null;
 
@@ -84,10 +84,10 @@ export default class Layout2 extends Layout1 {
     private setOpacityByFrequency() {
         const max = Math.max(...this.data.frequency);
         lottoNumbers.forEach((node, index) => {
-            node.style.opacity = `${Math.pow(this.data.frequency[index],2)/Math.pow(max,2)}`;
+            node.style.opacity = `${Math.pow(this.data.frequency[index], 2) / Math.pow(max, 2)}`;
         })
     }
-    private setOpacityByTerms(){
+    private setOpacityByTerms() {
         const terms = this.data.howLongNone.map(ele => this.TOTAL - ele.round);
     }
     numFreqOrTermToggle() {
@@ -198,3 +198,22 @@ export default class Layout2 extends Layout1 {
         this.addEvent();
     }
 }
+
+///////////
+
+// if 포함일 때 document.querySelector('.func2-num-exclude-btn').textContent='포함';
+/*
+const a = document.querySelectorAll('.func2-lotto-num-box >div > div');
+
+a.forEach((node: HTMLElement) => {
+    node.style.backgroundColor = '#00048c';
+})
+
+
+
+else 제외 일때 document.querySelector('.func2-num-exclude-btn').textContent = '제외'
+a.forEach((node: HTMLElement) => {
+    node.style.backgroundColor = '#8c0000';
+})
+*/
+//
