@@ -11,14 +11,14 @@ const clickEvent = {
         [() => {
             radarInstance.canvas.style.transform = '';
             textBox.style.transform = '';
-            radarInstance.canvas.classList.remove('hide');
-            textBox.classList.add('hide');
+            radarInstance.canvas.classList.remove('none');
+            textBox.classList.add('none');
         },
         () => {
             radarInstance.canvas.style.transform = 'translateX(-100%)';
             textBox.style.transform = 'translateX(-100%)';
-            radarInstance.canvas.classList.add('hide');
-            textBox.classList.remove('hide');
+            radarInstance.canvas.classList.add('none');
+            textBox.classList.remove('none');
         }]
 }
 makeClickable(radarSlide, clickEvent);

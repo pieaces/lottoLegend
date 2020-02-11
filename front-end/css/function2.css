@@ -204,9 +204,10 @@
     width: 100%;
     height:100%;
     position: relative;
-    align-items: center;
-    
+    align-items: center; 
   }
+
+  
   
   .func2-select-num-box > div {
     display: flex;
@@ -372,7 +373,17 @@
     }
   }
   
-  
+  .func2-chart-full{
+    width:100% !important;
+    height:100% !important;
+    padding:10px;
+  }
+
+  .func2-chart-resize{
+    width:100% !important;
+    height:100% !important;
+    padding:0 70px;
+  }
   
   
   

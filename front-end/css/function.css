@@ -184,18 +184,13 @@ border-left: 10px solid #575755;
       height:100px;
   }
 
-  .chart{
-    width:100% !important;
-    height:100% !important;
-  }
-
   .chart-slide-current {
     background-color: var(--default-color) !important;
     border: 6px solid black;
   }
   
   .none{
-    display:none;
+    display:none !important;
   }
 
   .hide{
