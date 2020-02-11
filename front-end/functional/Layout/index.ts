@@ -6,6 +6,7 @@ import NextBtn from "../instanceBtns/NextBtn";
 import ResetBtn from '../instanceBtns/ResetBtn'
 const layout1 = document.querySelectorAll<HTMLElement>('.func1-layout');
 const layout2 = document.querySelectorAll<HTMLElement>('.func2-layout');
+const section = document.querySelector('.section1');
 
 export default class Layout extends Layout3 {
     optionList = [null, [3], null, [10, 20, 42, 43, 44], [2], 2, { from: 100, to: 190 }, { from: 2, to: 4 }, { from: 1, to: 3 }, { from: 0, to: 3 }, { from: 10, to: 14 }, { from: 30, to: 38 }, { from: 7, to: 10 }, true];
@@ -45,7 +46,6 @@ export default class Layout extends Layout3 {
                     this.checkBox.addEvent();
                     this.resetBtn.removeEvent();
                     this.resetBtn.addEvent(this.checkBox.reset.bind(this.checkBox));
-
                     this.barSlide.init();
                     this.lineSlide.init();
                     this.bubbleChart.init();
@@ -70,30 +70,18 @@ export default class Layout extends Layout3 {
         this.bubbleChart.init();
         this.statsBoard.textContent = JSON.stringify(DataAPI.getInstance().getStats().stats);
         this.nextBtn.addEvent(async () => {
+            section.scrollIntoView({
+                behavior: 'auto'
+            });
             this.checkBox.reset();
-            const option = undefined;
             const currentFilter = DataAPI.getInstance().getCurrent();
-            ////////////////
-            /*
-                        // 1,2번 레이아웃일 때
-                        const funcLayout = document.querySelector('.filter-func-layout');
-                        funcLayout.scrollIntoView({
-                            behavior: 'smooth'
-                          });
-            
-                          //3번 레이아웃일 때
-            
-                          const clearLayout = document.querySelector('.filter-func-clear-layout');
-                          clearLayout.scrollIntoView({
-                              behavior:'smooth'
-                          })
-                          */
-            //////////////////
 
             await DataAPI.getInstance().forward(this.optionList[currentFilter]);
             this.on();
+
             this.dropDown.changeBoard();
             this.dropDown.changeDropDownColor();
+
             super.init();
         })
     }

@@ -3,8 +3,6 @@ const numTermFreqBox = document.querySelectorAll<HTMLElement>('.func2-lotto-chec
 const selectNumBox = document.querySelector<HTMLElement>('.func2-select-num-box');
 const applyBtn = document.querySelector('.func2-num-exclude-btn');
 const winNums = document.querySelectorAll<HTMLElement>('.func2-win-num-box > div');
-const numTerm = document.querySelector('.func2-num-term');
-const numFreq = document.querySelector('.func2-num-freq');
 import bar from '../instance2/barInstance'
 import gauss from '../instance2/gaussInstance'
 import radar from '../instance2/radarInstance'

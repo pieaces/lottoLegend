@@ -20,6 +20,7 @@ export default class DropDown {
     private nodeList: HTMLElement[] = [];
     changeBoard() {
         const index = DataAPI.getInstance().getCurrent();
+        filterSelectText.textContent = DataAPI.getInstance().getCurrentName();
         if (index === 0) {
             boardPrevious.textContent = '';
             boardNext.textContent = DataAPI.getInstance().getNextName();
@@ -48,7 +49,7 @@ export default class DropDown {
             }
             this.flag = !this.flag;
         });
-        this.nodeList.forEach((node, index) => {
+        this.nodeList.forEach((node) => {
             node.addEventListener('click', () => {
                 filterSelectText.textContent = node.textContent;
                 this.changeBoard();
