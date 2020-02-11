@@ -75,7 +75,15 @@ export default class CheckBox {
     }
     init() {
         this.nodeList = [];
-        const labels = DataAPI.getInstance().getLabels();
+        const labels = DataAPI.getInstance().getLabels().map(value => {
+            if(typeof value === 'string'){
+                const index = value.indexOf('~');
+                if(index !== -1){
+                    return value.slice(0,index+1);
+                }
+            }
+            return value;
+        });
         this.labelList = new Array<boolean>(labels.length).fill(false);
         Array.from(checkBoxContainer.children).forEach(node =>{
             node.remove();
