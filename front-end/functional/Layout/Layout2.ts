@@ -21,8 +21,10 @@ export default class Layout2 extends Layout1 {
     static readonly numBoard = '.func2-main-1-4 *';
     static readonly lottoCheckCurrent = 'func2-lotto-check-current';
     static readonly selectNumBox = 'func2-select-num-box';
-    private data:any;
-    private TOTAL:number;
+    private data: any;
+    private TOTAL: number;
+    private frequencies: number[];
+    private terms: number[];
     checkedNumbers = new Array<number>();
     choice = null;
 
@@ -82,13 +84,32 @@ export default class Layout2 extends Layout1 {
         });
     }
     private setOpacityByFrequency() {
-        const max = Math.max(...this.data.frequency);
+        const min = Math.min(...this.data.frequency);
         lottoNumbers.forEach((node, index) => {
-            node.style.opacity = `${Math.pow(this.data.frequency[index],2)/Math.pow(max,2)}`;
+            node.style.opacity = `${Math.pow(min, 2) / Math.pow(this.data.frequency[index], 2)}`;
         })
     }
-    private setOpacityByTerms(){
-        const terms = this.data.howLongNone.map(ele => this.TOTAL - ele.round);
+    private setOpacityByTerms() {
+        const terms = this.data.howLongNone.map(ele => this.TOTAL - ele.round + 1);
+        const max = Math.max(...terms);
+        lottoNumbers.forEach((node, index) => {
+            node.style.opacity = `${Math.pow(terms[index], 1 / 3) / Math.pow(max, 1 / 3)}`;
+        });
+    }
+    private setOpacityByFrequencyTerms() {
+        const frequency = this.data.frequency;
+        const fMin = Math.min(...frequency);
+        const terms = this.data.howLongNone.map(ele => this.TOTAL - ele.round + 1);
+        const tMax = Math.max(...terms);
+        const coef = [];
+        for (let i = 0; i < 45; i++) {
+            const num = Math.pow(fMin, 2) / Math.pow(frequency[i], 2) * Math.pow(terms[i], 1 / 3) / Math.pow(tMax, 1 / 3);
+            coef.push(num);
+        }
+        const max = Math.max(...coef);
+        lottoNumbers.forEach((node, index) => {
+            node.style.opacity = `${coef[index] / max}`;
+        });
     }
     numFreqOrTermToggle() {
         let current = 0;
@@ -97,9 +118,11 @@ export default class Layout2 extends Layout1 {
                 numTermFreqBox[current].classList.remove(Layout2.lottoCheckCurrent);
                 numTermFreqBox[index].classList.add(Layout2.lottoCheckCurrent);
                 current = index;
+                if (current === 0) this.setOpacityByFrequency();
+                else if (current === 1) this.setOpacityByTerms();
+                else if (current === 2) this.setOpacityByFrequencyTerms();
             })
         })
-
     }
     addEvent() {
         lottoNumbers.forEach((node: HTMLElement) => {
