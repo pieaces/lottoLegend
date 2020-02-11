@@ -21,9 +21,9 @@ function numbersToParams(numbers: number[]): Params {
 function compartNumbers(param: Params, PACK: number): string[] {
     const result: string[] = [];
     let temp: number;
-    for (let i = param.from; i < param.to; i += PACK) {
+    for (let i = param.from; i <= param.to - PACK; i += PACK) {
         result.push(i + '~' + (i + 9));
-        temp = i;
+        temp = i+PACK;
     }
     if (temp === param.to) result.push(temp.toString());
     else result.push(temp + '~' + param.to);
