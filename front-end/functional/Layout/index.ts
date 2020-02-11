@@ -36,11 +36,19 @@ export default class Layout extends Layout3 {
             switch (currentFilter) {
                 case 3: case 4:
                     this.layout2On();
-                    this.resetBtn.init((e) => { this.reset(e) });
+                    this.resetBtn.removeEvent();
+                    this.resetBtn.addEvent(this.reset.bind(this));
                     break;
                 default:
                     this.layout1On();
-                    this.resetBtn.init(() => { this.checkBox.reset() });
+                    this.checkBox.init();
+                    this.checkBox.addEvent();
+                    this.resetBtn.removeEvent();
+                    this.resetBtn.addEvent(this.checkBox.reset.bind(this.checkBox));
+
+                    this.barSlide.init();
+                    this.lineSlide.init();
+                    this.bubbleChart.init();
                     break;
             }
         } else {
@@ -51,9 +59,17 @@ export default class Layout extends Layout3 {
     init() {
         super.init();
         this.dropDown.init();
+        this.dropDown.changeDropDownColor();
+        this.dropDown.addEvent();
         this.checkBox.init();
-        this.resetBtn.init(() => { this.checkBox.reset() });
-        this.nextBtn.init(async () => {
+        this.checkBox.addEvent();
+        this.resetBtn.addEvent(this.checkBox.reset.bind(this.checkBox));
+
+        this.barSlide.init();
+        this.lineSlide.init();
+        this.bubbleChart.init();
+
+        this.nextBtn.addEvent(async () => {
             this.checkBox.reset();
             const option = undefined;
             const currentFilter = DataAPI.getInstance().getCurrent();
@@ -61,6 +77,7 @@ export default class Layout extends Layout3 {
             await DataAPI.getInstance().forward(this.optionList[currentFilter]);
             this.on();
             this.dropDown.changeBoard();
+            this.dropDown.changeDropDownColor();
             super.init();
         })
     }

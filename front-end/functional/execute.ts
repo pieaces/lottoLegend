@@ -5,6 +5,5 @@ const layout = new Layout();
 async function execute() {
     await DataAPI.getInstance().init();
     layout.init();
-    layout.on();
 }
 execute();

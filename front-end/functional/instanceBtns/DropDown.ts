@@ -1,7 +1,6 @@
 const filterBox = document.querySelector('.filter-box');
 const filterArrow = document.querySelector('.filter-arrow');
 const filterListBox = document.querySelector<HTMLElement>('.filter-list');
-const filterList = document.querySelectorAll<HTMLElement>('.filter-list > li');
 const filterSelectText = document.querySelector('.filter-box > a');
 const boardPresent = document.querySelector('.present span strong');
 const boardPrevious = document.querySelector('.past span strong');
@@ -9,9 +8,16 @@ const boardNext = document.querySelector('.future span strong');
 
 import DataAPI from '../DataAPI'
 
-export default class DropDown {
-    flag: boolean = true;
 
+export default class DropDown {
+    static readonly PREVIOUS_COLOR = 'white';
+    static readonly CURRENT_COLOR = 'rgb(95, 87, 251)';
+    static readonly AFTER_COLOR = 'darkgray';
+    static readonly PREVIOUS_FONT = 'black';
+    static readonly CURRENT_FONT = 'white';
+    static readonly AFTER_FONT = 'gray';
+    private flag: boolean = true;
+    private nodeList: HTMLElement[] = [];
     changeBoard() {
         const index = DataAPI.getInstance().getCurrent();
         if (index === 0) {
@@ -27,8 +33,8 @@ export default class DropDown {
         boardPresent.textContent = DataAPI.getInstance().getCurrentName();
     }
 
-    init() {
-        this.changeBoard();
+    addEvent() {
+        if(this.nodeList.length === 0) this.init();
         filterBox.addEventListener('click', () => {
             if (this.flag) {
                 filterArrow.classList.remove('fa-sort-down');
@@ -42,11 +48,40 @@ export default class DropDown {
             }
             this.flag = !this.flag;
         });
-        filterList.forEach(node => {
+        this.nodeList.forEach((node, index) => {
             node.addEventListener('click', () => {
                 filterSelectText.textContent = node.textContent;
                 this.changeBoard();
             });
         });
+
     }
+    changeDropDownColor() {
+        const current = DataAPI.getInstance().getCurrent();
+        this.nodeList.forEach((node, index) => {
+            if (index < current) {
+                node.style.backgroundColor = DropDown.PREVIOUS_COLOR;
+                node.style.color = DropDown.PREVIOUS_FONT;
+            } else if (index === current) {
+                node.style.backgroundColor = DropDown.CURRENT_COLOR;
+                node.style.color = DropDown.CURRENT_FONT;
+            } else if (index > current) {
+                node.style.backgroundColor = DropDown.AFTER_COLOR;
+                node.style.color = DropDown.AFTER_FONT;
+            }
+        });
+    }
+    init() {
+        this.nodeList = [];
+        this.changeBoard();
+        const filters = DataAPI.getInstance().getFilterList();
+        filters.forEach((label) => {
+            const li = document.createElement('li');
+            this.nodeList.push(li);
+            li.textContent = label.toString();
+            filterListBox.appendChild(li);
+        });
+        this.changeDropDownColor();
+    }
+
 }

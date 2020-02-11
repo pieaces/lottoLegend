@@ -28,7 +28,6 @@ export default class Layout2 extends Layout1 {
     private updateChart() {
         const data = DataAPI.getInstance().getStats();
         const TOTAL = DataAPI.getInstance().getTOTAL();
-        console.log(data, TOTAL);
         bar.dataBox.datasets[0].data = [TOTAL * 6 / 45, data.frequency[this.choice - 1]];
         radar.dataBox.datasets[0].data = data.interval[this.choice - 1].list;
         gauss.dataBox.datasets[0].data = data.emergence[this.choice - 1];
@@ -184,7 +183,6 @@ export default class Layout2 extends Layout1 {
         e.stopPropagation();
     }
     init() {
-        super.init();
         this.numFreqOrTermToggle();
         this.setColorWinNum();
         this.addEvent();

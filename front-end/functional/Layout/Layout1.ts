@@ -8,10 +8,4 @@ export default class Layout1 {
     barSlide:BarSlide = barSlide;
     lineSlide:LineSlide = lineSlide;
     bubbleChart = bubbleChart;
-
-    init(){
-        barSlide.init();
-        lineSlide.init();
-        bubbleChart.init();
-    }
 }

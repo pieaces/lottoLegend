@@ -43,14 +43,14 @@ export default class DataAPI {
     public numbers: number[];
     private TOTAL:number;
     public filteredCount: number;
-    private numberList = ["1-1: 전멸구간개수", "1-2: 전멸라인", "2: 이월수 개수", "3-1: 제외", "3-2: 포함", "4: 저값 개수", "5: 합계", "6: 홀수 개수", "7: 소수 개수", "8: 3배수 개수", "9: 첫수합", "10: 고저차", "11: AC", "12: 연속수 포함여부"]
+    private filterList = ["1-1: 전멸구간개수", "1-2: 전멸라인", "2: 이월수 개수", "3-1: 제외", "3-2: 포함", "4: 저값 개수", "5: 합계", "6: 홀수 개수", "7: 소수 개수", "8: 3배수 개수", "9: 첫수합", "10: 고저차", "11: AC", "12: 연속수 포함여부"]
     private statsList = ['excludedLineCount', 'lineCount', 'carryCount', 'excludeInclude', 'excludeInclude', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
     private optionList = [null, 'excludedLines', null, 'excludedNumbers', 'includedNumbers', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
     private rangeList: Array<string[] | number[]> = [[0, 1, 2, 3, 4], [0, 1, 2, 3, 4], [0, 1, 2, 3, 4, 5, 6], null, null];
     private current: number = 0;
     private stats: Stats = new Stats();
     private generator: Generator = new Generator();
-    public readonly SIZE:number = this.numberList.length;
+    public readonly SIZE:number = this.filterList.length;
 
     static getInstance() {
         if (DataAPI.instance == null) DataAPI.instance = new DataAPI();
@@ -60,14 +60,17 @@ export default class DataAPI {
     public getLabels(): Array<string | number> {
         return this.rangeList[this.current];
     }
+    public getFilterList(): string[] {
+        return this.filterList;
+    }
     public getPreviousName(): string {
-        return this.numberList[this.current - 1];
+        return this.filterList[this.current - 1];
     }
     public getCurrentName(): string {
-        return this.numberList[this.current];
+        return this.filterList[this.current];
     }
     public getNextName(): string {
-        return this.numberList[this.current + 1];
+        return this.filterList[this.current + 1];
     }
     public getCurrent() { return this.current }
     public getRange() {
