@@ -23,15 +23,15 @@ export default class Layout2 extends Layout1 {
     static readonly numBoard = '.func2-main-1-4 *';
     static readonly lottoCheckCurrent = 'func2-lotto-check-current';
     static readonly selectNumBox = 'func2-select-num-box';
+    private data:any;
+    private TOTAL:number;
     checkedNumbers = new Array<number>();
     choice = null;
 
     private updateChart() {
-        const data = DataAPI.getInstance().getStats();
-        const TOTAL = DataAPI.getInstance().getTOTAL();
-        bar.dataBox.datasets[0].data = [TOTAL * 6 / 45, data.frequency[this.choice - 1]];
-        radar.dataBox.datasets[0].data = data.interval[this.choice - 1].list;
-        gauss.dataBox.datasets[0].data = data.emergence[this.choice - 1];
+        bar.dataBox.datasets[0].data = [this.TOTAL * 6 / 45, this.data.frequency[this.choice - 1]];
+        radar.dataBox.datasets[0].data = this.data.interval[this.choice - 1].list;
+        gauss.dataBox.datasets[0].data = this.data.emergence[this.choice - 1];
         bar.update();
         radar.update();
         gauss.update();
@@ -77,14 +77,21 @@ export default class Layout2 extends Layout1 {
             Box.style.backgroundColor = '#B0D840';
         }
     }
-    setColorWinNum() {
+    private setColorWinNum() {
         winNums.forEach(node => {
             const nodeValue = parseInt(node.textContent);
             this.setColorLotto(nodeValue, node);
         });
     }
-
-    //////////////////
+    private setOpacityByFrequency() {
+        const max = Math.max(...this.data.frequency);
+        lottoNumbers.forEach((node, index) => {
+            node.style.opacity = `${Math.pow(this.data.frequency[index],2)/Math.pow(max,2)}`;
+        })
+    }
+    private setOpacityByTerms(){
+        const terms = this.data.howLongNone.map(ele => this.TOTAL - ele.round);
+    }
     numFreqOrTermToggle() {
         let current = 0;
         numTermFreqBox.forEach((node: HTMLElement, index: number) => {
@@ -96,16 +103,6 @@ export default class Layout2 extends Layout1 {
         })
 
     }
-
-    setOpacityNum() {
-        lottoNumbers.forEach((node: HTMLElement, index: number) => {
-            lottoNumbers[index].style.opacity = `${Math.random()}`;
-        })
-    }
-    //////////////////
-
-
-
     addEvent() {
         lottoNumbers.forEach((node: HTMLElement) => {
             node.addEventListener('click', e => {
@@ -195,9 +192,11 @@ export default class Layout2 extends Layout1 {
         e.stopPropagation();
     }
     init() {
+        this.data = DataAPI.getInstance().getStats2();
+        this.TOTAL = DataAPI.getInstance().getTOTAL();
         this.numFreqOrTermToggle();
         this.setColorWinNum();
+        this.setOpacityByFrequency();
         this.addEvent();
-        this.setOpacityNum();
     }
 }

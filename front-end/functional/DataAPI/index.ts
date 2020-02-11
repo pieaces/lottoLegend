@@ -157,4 +157,7 @@ export default class DataAPI {
     public getStats() {
         return this.data[this.dataList[this.current]];
     }
+    public getStats2(){
+        return this.data['excludeInclude'];
+    }
 }
