@@ -4,3 +4,4 @@ dist
 test
 key.json
 LottoAPI
+functional.js
