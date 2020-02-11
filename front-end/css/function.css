@@ -94,7 +94,7 @@
   .filter-box > i {
     position: absolute;
     top: 35%;
-    right: 10%;
+    right: 7%;
   }
   
   .filter-list {
@@ -123,19 +123,19 @@
   .steps{
     display:flex;
     align-items: center;
-    
+    justify-content: center;
     width:70%;
   }
   
   .past,.present,.future{
-    margin-right:20px;
+    margin-right:13px;
     font-size:0.8rem;
     width:110px;
     height:45px;
     display:flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4), -1px -1px 1px rgba(0, 0, 0, 0.4);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2), -1px -1px 1px rgba(0, 0, 0, 0.2);
   }
 
   .present{
@@ -144,10 +144,10 @@
   }
 
   .triangle{
-    margin-right:10px;
-    border-top: 10px solid transparent;
+    margin-right:5px;
+    border-top: 7px solid transparent;
 border-right: 10px solid transparent;
-border-bottom: 10px solid transparent;
+border-bottom: 7px solid transparent;
 border-left: 10px solid #575755;
   }
   
@@ -186,7 +186,7 @@ border-left: 10px solid #575755;
 
   .chart-slide-current {
     background-color: var(--default-color) !important;
-    border: 6px solid black;
+    border: 6px solid var(--lotto-title-color);
   }
   
   .none{
@@ -199,7 +199,7 @@ border-left: 10px solid #575755;
 
 
   .slow{
-    transition: all 0.5s;
+    transition: all 1s;
   }
 
   

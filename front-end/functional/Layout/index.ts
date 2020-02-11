@@ -35,7 +35,10 @@ export default class Layout extends Layout3 {
         if (layoutVersion === 0) {
             const currentFilter = DataAPI.getInstance().getCurrent();
             switch (currentFilter) {
-                case 3: case 4:
+                case 3:
+                    this.includeVerson();
+                case 4:
+                    this.excludeVersion();
                     this.layout2On();
                     this.resetBtn.removeEvent();
                     this.resetBtn.addEvent(this.reset.bind(this));

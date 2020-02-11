@@ -3,6 +3,7 @@ const numTermFreqBox = document.querySelectorAll<HTMLElement>('.func2-lotto-chec
 const selectNumBox = document.querySelector<HTMLElement>('.func2-select-num-box');
 const applyBtn = document.querySelector('.func2-num-exclude-btn');
 const winNums = document.querySelectorAll<HTMLElement>('.func2-win-num-box > div');
+
 import bar from '../instance2/barInstance'
 import gauss from '../instance2/gaussInstance'
 import radar from '../instance2/radarInstance'
@@ -14,7 +15,7 @@ import RadarSlide from '../Slide/radarSlide';
 export default class Layout2 extends Layout1 {
     radarSlide: RadarSlide = radarSlide;
     static readonly MAX_SIZE = 10;
-    static readonly lottoNumDefaultColor = 'rgba(231, 76, 60, 0.2)';
+    static readonly lottoNumDefaultColor = '#00048c';
     static readonly lottoNumSelectColor = '#e6e600';
     static readonly lottoNumCheckedColor = 'darkgray';
     static readonly body = 'body *';
@@ -23,11 +24,21 @@ export default class Layout2 extends Layout1 {
     static readonly selectNumBox = 'func2-select-num-box';
     private data: any;
     private TOTAL: number;
-    private frequencies: number[];
-    private terms: number[];
     checkedNumbers = new Array<number>();
     choice = null;
 
+    includeVerson(){
+        applyBtn.textContent = '포함'
+        lottoNumbers.forEach((node: HTMLElement) => {
+            node.style.backgroundColor = '#00048c';
+        })
+    }
+    excludeVersion(){
+        applyBtn.textContent = '제외'
+        lottoNumbers.forEach((node: HTMLElement) => {
+            node.style.backgroundColor = '#8c0000';
+        })
+    }
     private updateChart() {
         bar.dataBox.datasets[0].data = [this.TOTAL * 6 / 45, this.data.frequency[this.choice - 1]];
         radar.dataBox.datasets[0].data = this.data.interval[this.choice - 1].list;
@@ -155,7 +166,9 @@ export default class Layout2 extends Layout1 {
                             }
                         }
                         for (let i = 0; i < selectNumBox.children.length; i++) {
-                            selectNumBox.children[i].textContent = this.checkedNumbers[i].toString();
+                            if (this.checkedNumbers.length !== 0) {
+                                selectNumBox.children[i].textContent = this.checkedNumbers[i].toString();
+                            }
                             (<HTMLElement>selectNumBox.children[i]).style.backgroundColor = '';
                         }
                         for (let i = 0; i < this.checkedNumbers.length; i++) {
@@ -177,9 +190,11 @@ export default class Layout2 extends Layout1 {
                         lottoNumbers[this.choice - 1].style.backgroundColor = Layout2.lottoNumCheckedColor;
                         this.checkedNumbers.push(this.choice);
                         const numOrder = this.checkedNumbers.indexOf(this.choice);
+
                         selectNumBox.children[numOrder].classList.add(
                             `${Layout2.selectNumBox}${numOrder + 1}`
                         );
+
                         selectNumBox.children[numOrder].textContent = this.choice;
                         this.setColorLotto(this.choice, <HTMLElement>selectNumBox.children[numOrder]);
                         this.choice = null;
@@ -189,6 +204,7 @@ export default class Layout2 extends Layout1 {
                 alert(`더 이상 번호를 제외할 수 없습니다(최대 개수:${Layout2.MAX_SIZE})`);
             }
             e.stopPropagation();
+
         });
         this.cancelCheck();
     }

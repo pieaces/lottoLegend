@@ -1,7 +1,7 @@
 const filterBox = document.querySelector('.filter-box');
 const filterArrow = document.querySelector('.filter-arrow');
 const filterListBox = document.querySelector<HTMLElement>('.filter-list');
-const filterSelectText = document.querySelector('.filter-box > a');
+const filterSelectText = document.querySelector('.filter-box > span');
 const boardPresent = document.querySelector('.present span strong');
 const boardPrevious = document.querySelector('.past span strong');
 const boardNext = document.querySelector('.future span strong');
@@ -35,17 +35,17 @@ export default class DropDown {
     }
 
     addEvent() {
-        if(this.nodeList.length === 0) this.init();
+        if (this.nodeList.length === 0) this.init();
         filterBox.addEventListener('click', () => {
             if (this.flag) {
                 filterArrow.classList.remove('fa-sort-down');
                 filterArrow.classList.add('fa-sort-up');
-                filterListBox.style.display = 'block';
+                filterListBox.classList.remove('none');
 
             } else {
                 filterArrow.classList.add('fa-sort-down');
                 filterArrow.classList.remove('fa-sort-up');
-                filterListBox.style.display = 'none';
+                filterListBox.classList.add('none');
             }
             this.flag = !this.flag;
         });
