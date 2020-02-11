@@ -1,4 +1,5 @@
 const lottoNumbers = document.querySelectorAll<HTMLElement>('.func2-lotto-num-box> div > div');
+const numTermFreqBox = document.querySelectorAll<HTMLElement>('.func2-lotto-checkbox > div');
 const selectNumBox = document.querySelector<HTMLElement>('.func2-select-num-box');
 const applyBtn = document.querySelector('.func2-num-exclude-btn');
 const winNums = document.querySelectorAll<HTMLElement>('.func2-win-num-box > div');
@@ -82,17 +83,28 @@ export default class Layout2 extends Layout1 {
             this.setColorLotto(nodeValue, node);
         });
     }
-    numFreqOrTermToggle() {
-        numTerm.addEventListener('click', () => {
-            numTerm.classList.add(Layout2.lottoCheckCurrent);
-            numFreq.classList.remove(Layout2.lottoCheckCurrent);
-        });
 
-        numFreq.addEventListener('click', () => {
-            numFreq.classList.add(Layout2.lottoCheckCurrent);
-            numTerm.classList.remove(Layout2.lottoCheckCurrent);
-        });
+    //////////////////
+    numFreqOrTermToggle() {
+        let current = 0;
+        numTermFreqBox.forEach((node: HTMLElement, index: number) => {
+            node.addEventListener('click', () => {
+                numTermFreqBox[current].classList.remove(Layout2.lottoCheckCurrent);
+                numTermFreqBox[index].classList.add(Layout2.lottoCheckCurrent);
+                current = index;
+            })
+        })
+
     }
+
+    setOpacityNum() {
+        lottoNumbers.forEach((node: HTMLElement, index: number) => {
+            lottoNumbers[index].style.opacity = `${Math.random()}`;
+        })
+    }
+    //////////////////
+
+
 
     addEvent() {
         lottoNumbers.forEach((node: HTMLElement) => {
@@ -162,7 +174,7 @@ export default class Layout2 extends Layout1 {
         });
         this.cancelCheck();
     }
-    protected reset(e:Event) {
+    protected reset(e: Event) {
         if (this.checkedNumbers.length > 0) {
             if (confirm(`선택번호를 모두 초기화하시겠습니까?`)) {
                 for (const node of Array.from(selectNumBox.children)) {
@@ -186,5 +198,6 @@ export default class Layout2 extends Layout1 {
         this.numFreqOrTermToggle();
         this.setColorWinNum();
         this.addEvent();
+        this.setOpacityNum();
     }
 }

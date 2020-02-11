@@ -78,7 +78,7 @@
   
   .func2-lotto-checkbox {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     justify-content: center;
     align-items: center;
   }
@@ -146,10 +146,10 @@
     left: 43%;
     color: var(--main-color);
     background-color: black;
-    
     z-index:1;
     width:20px;
     height:20px;
+    border-radius: 50%;
   }
 
   .func2-right-chart-btn{
@@ -159,10 +159,10 @@
     left: 52%;
     color: var(--main-color);
     background-color: black;
-    
     z-index:1;
     width:20px;
     height:20px;
+    border-radius: 50%;
   }
 
   .func2-chart-radar{

@@ -73,6 +73,22 @@ export default class Layout extends Layout3 {
             this.checkBox.reset();
             const option = undefined;
             const currentFilter = DataAPI.getInstance().getCurrent();
+            ////////////////
+            /*
+                        // 1,2번 레이아웃일 때
+                        const funcLayout = document.querySelector('.filter-func-layout');
+                        funcLayout.scrollIntoView({
+                            behavior: 'smooth'
+                          });
+            
+                          //3번 레이아웃일 때
+            
+                          const clearLayout = document.querySelector('.filter-func-clear-layout');
+                          clearLayout.scrollIntoView({
+                              behavior:'smooth'
+                          })
+                          */
+            //////////////////
 
             await DataAPI.getInstance().forward(this.optionList[currentFilter]);
             this.on();
