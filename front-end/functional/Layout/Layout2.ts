@@ -132,7 +132,9 @@ export default class Layout2 extends Layout1 {
                             }
                         }
                         for (let i = 0; i < selectNumBox.children.length; i++) {
-                            selectNumBox.children[i].textContent = this.checkedNumbers[i].toString();
+                            if (this.checkedNumbers.length !== 0) {
+                                selectNumBox.children[i].textContent = this.checkedNumbers[i].toString();
+                            }
                             (<HTMLElement>selectNumBox.children[i]).style.backgroundColor = '';
                         }
                         for (let i = 0; i < this.checkedNumbers.length; i++) {
@@ -154,9 +156,11 @@ export default class Layout2 extends Layout1 {
                         lottoNumbers[this.choice - 1].style.backgroundColor = Layout2.lottoNumCheckedColor;
                         this.checkedNumbers.push(this.choice);
                         const numOrder = this.checkedNumbers.indexOf(this.choice);
+
                         selectNumBox.children[numOrder].classList.add(
                             `${Layout2.selectNumBox}${numOrder + 1}`
                         );
+
                         selectNumBox.children[numOrder].textContent = this.choice;
                         this.setColorLotto(this.choice, <HTMLElement>selectNumBox.children[numOrder]);
                         this.choice = null;
@@ -166,6 +170,7 @@ export default class Layout2 extends Layout1 {
                 alert(`더 이상 번호를 제외할 수 없습니다(최대 개수:${Layout2.MAX_SIZE})`);
             }
             e.stopPropagation();
+
         });
         this.cancelCheck();
     }
