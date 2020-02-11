@@ -29,11 +29,13 @@ export default class BarSlide extends Slide<ChartBase> {
         }
         this.chart.update();
     }
+    setText(){
+        this.textBox.textContent = this.current.toString();
+    }
     init() {
         this.current = 0;
         this.chart.dataBox.labels = DataAPI.getInstance().getLabels();
         this.chart.dataBox.datasets[0].data = DataAPI.getInstance().getStats().ideal['latest'];
         this.chart.update();
-        super.init();
     }
 }

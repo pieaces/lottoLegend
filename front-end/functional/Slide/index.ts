@@ -17,14 +17,7 @@ export default abstract class Slide<T extends ChartBase> {
         this.numBtns = numBtns;
         this.textBox = textBox;
     }
-    init(): void {
-        this.numBtns.forEach(node => {
-            node.classList.remove('func1-chart-slide-current');
-        });
-        Array.from(this.numBtns)[0].classList.add('func1-chart-slide-current');
-    }
+
     abstract setData(): void;
-    setText() {
-        this.textBox.textContent = this.current.toString();
-    }
+    abstract setText(): void;
 }

@@ -3,7 +3,7 @@ export interface Params {
     to?: number;
     list?: number[];
 }
-export default class Stats {
+export default class Data {
     [x: string]: any;
 
     async getData(method: string, params: Params) {
