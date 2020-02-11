@@ -107,7 +107,7 @@
   }
   
   .filter-list > li {
-    font-size: 1.3rem;
+
     height: 100%;
     background-color: var(--default-color);
     display: flex;
