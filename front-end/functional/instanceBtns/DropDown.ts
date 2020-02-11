@@ -10,12 +10,12 @@ import DataAPI from '../DataAPI'
 
 
 export default class DropDown {
-    static readonly PREVIOUS_COLOR = 'white';
-    static readonly CURRENT_COLOR = 'rgb(95, 87, 251)';
-    static readonly AFTER_COLOR = 'darkgray';
-    static readonly PREVIOUS_FONT = 'black';
-    static readonly CURRENT_FONT = 'white';
-    static readonly AFTER_FONT = 'gray';
+    static readonly PREVIOUS_COLOR = '#7e8c8c';
+    static readonly CURRENT_COLOR = 'white';
+    static readonly AFTER_COLOR = '#3da8e3';
+    static readonly PREVIOUS_FONT = 'white';
+    static readonly CURRENT_FONT = 'black';
+    static readonly AFTER_FONT = 'white';
     private flag: boolean = true;
     private nodeList: HTMLElement[] = [];
     changeBoard() {
