@@ -3,7 +3,7 @@ export interface Params {
     to?: number;
     list?: number[];
 }
-export default class Stats {
+export default class Data {
     [x: string]: any;
 
     async getData(method: string, params: Params) {
@@ -19,6 +19,7 @@ export default class Stats {
                 url += `?list=${encodeURI(JSON.stringify(params.list))}`;
             }
         }
+        console.log(url);
         const fetchResult = await fetch(url, { method: 'GET', headers });
         const data = JSON.parse(await fetchResult.text());
         this[method] = data.data;

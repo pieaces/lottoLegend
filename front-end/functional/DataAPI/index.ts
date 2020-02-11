@@ -1,4 +1,4 @@
-import Stats, { Params } from "./Stats";
+import Data, { Params } from "./Stats";
 import Generator from "./Generator";
 const constraintLowCount = require('./json/lowCount_compressed.json');
 const constraintSum = require('./json/sum_compressed.json');
@@ -43,31 +43,36 @@ export default class DataAPI {
     public numbers: number[];
     private TOTAL:number;
     public filteredCount: number;
-    private numberList = ["1-1: 전멸구간개수", "1-2: 전멸라인", "2: 이월수 개수", "3-1: 제외", "3-2: 포함", "4: 저값 개수", "5: 합계", "6: 홀수 개수", "7: 소수 개수", "8: 3배수 개수", "9: 첫수합", "10: 고저차", "11: AC", "12: 연속수 포함여부"]
-    private statsList = ['excludedLineCount', 'lineCount', 'carryCount', 'excludeInclude', 'excludeInclude', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
+    private filterList = ["1-1: 전멸구간개수", "1-2: 전멸라인", "2: 이월수 개수", "3-1: 제외", "3-2: 포함", "4: 저값 개수", "5: 합계", "6: 홀수 개수", "7: 소수 개수", "8: 3배수 개수", "9: 첫수합", "10: 고저차", "11: AC", "12: 연속수 포함여부"]
+    private dataList = ['excludedLineCount', 'lineCount', 'carryCount', 'excludeInclude', 'excludeInclude', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
     private optionList = [null, 'excludedLines', null, 'excludedNumbers', 'includedNumbers', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
     private rangeList: Array<string[] | number[]> = [[0, 1, 2, 3, 4], [0, 1, 2, 3, 4], [0, 1, 2, 3, 4, 5, 6], null, null];
     private current: number = 0;
-    private stats: Stats = new Stats();
+    private data: Data = new Data();
     private generator: Generator = new Generator();
-    public readonly SIZE:number = this.numberList.length;
+    public readonly SIZE:number = this.filterList.length;
 
     static getInstance() {
-        if (DataAPI.instance == null) DataAPI.instance = new DataAPI();
+        if (DataAPI.instance == null) {
+            DataAPI.instance = new DataAPI();
+        }
         return DataAPI.instance;
     }
     public getTOTAL():number { return this.TOTAL;}
     public getLabels(): Array<string | number> {
         return this.rangeList[this.current];
     }
+    public getFilterList(): string[] {
+        return this.filterList;
+    }
     public getPreviousName(): string {
-        return this.numberList[this.current - 1];
+        return this.filterList[this.current - 1];
     }
     public getCurrentName(): string {
-        return this.numberList[this.current];
+        return this.filterList[this.current];
     }
     public getNextName(): string {
-        return this.numberList[this.current + 1];
+        return this.filterList[this.current + 1];
     }
     public getCurrent() { return this.current }
     public getRange() {
@@ -100,7 +105,7 @@ export default class DataAPI {
         else {
             params = numbersToParams(this.rangeList[this.current] as number[]);
         }
-        await this.stats.getData(this.statsList[this.current], params);
+        await this.data.getData(this.dataList[this.current], params);
     }
 
     private async getGen(): Promise<void> {
@@ -125,7 +130,7 @@ export default class DataAPI {
         }
     }
     async forward(optionData: any = undefined): Promise<void> {
-        if (0 <= this.current && this.current < this.statsList.length) {
+        if (0 <= this.current && this.current < this.dataList.length) {
             const option = this.optionList[this.current];
             if (option) {
                 this.generator.option[option] = optionData;
@@ -133,9 +138,9 @@ export default class DataAPI {
             if (this.current >= 6) {
                 await this.getGen();
             }
-            if (this.current < this.statsList.length - 1) {
+            if (this.current < this.dataList.length - 1) {
                 this.current++;
-                if (!this.stats[this.statsList[this.current]]) {
+                if (!this.data[this.dataList[this.current]]) {
                     await this.setStats();
                 }
             }
@@ -145,11 +150,11 @@ export default class DataAPI {
     async init() {
         this.current = 0;
         await this.setStats();
-        await this.stats.getData(this.statsList[3], {});
-        this.TOTAL = this.stats.total;
+        await this.data.getData(this.dataList[3], {});
+        this.TOTAL = this.data.total;
     }
 
     public getStats() {
-        return this.stats[this.statsList[this.current]];
+        return this.data[this.dataList[this.current]];
     }
 }
