@@ -37,8 +37,8 @@ export default class Layout extends Layout3 {
             switch (currentFilter) {
                 case 3: case 4:
                     this.reset();
-                    if(currentFilter === 3) this.includeVerson();
-                    if(currentFilter === 4) this.excludeVersion();
+                    if (currentFilter === 3) this.includeVerson();
+                    if (currentFilter === 4) this.excludeVersion();
                     this.layout2On();
                     this.resetBtn.removeEvent();
                     this.resetBtn.addEvent(this.reset.bind(this));

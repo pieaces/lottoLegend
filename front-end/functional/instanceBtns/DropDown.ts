@@ -10,9 +10,9 @@ import DataAPI from '../DataAPI'
 
 
 export default class DropDown {
-    static readonly PREVIOUS_COLOR = '#7e8c8c';
+    static readonly PREVIOUS_COLOR = '#3da8e3';
     static readonly CURRENT_COLOR = 'white';
-    static readonly AFTER_COLOR = '#3da8e3';
+    static readonly AFTER_COLOR = '#7e8c8c';
     static readonly PREVIOUS_FONT = 'white';
     static readonly CURRENT_FONT = 'black';
     static readonly AFTER_FONT = 'white';
