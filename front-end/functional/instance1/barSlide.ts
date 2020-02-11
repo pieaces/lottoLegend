@@ -12,7 +12,7 @@ const dataBox = {
     labels: null,
     datasets: [
         {
-            backgroundColor: 'rgba(91, 81,255, 0.2)',
+            backgroundColor: '#A0B2C6',
             pointBackgroundColor: 'white',
             borderWidth: 2,
             borderColor: 'rgb(14,99,132)',

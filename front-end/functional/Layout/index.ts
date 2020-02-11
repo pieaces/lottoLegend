@@ -16,18 +16,18 @@ export default class Layout extends Layout3 {
 
     private layout1On() {
         layout1.forEach(node => {
-            node.style.display = "block";
+            node.classList.remove('none');
         });
         layout2.forEach(node => {
-            node.style.display = "none";
+            node.classList.add('none');
         });
     }
     private layout2On() {
         layout1.forEach(node => {
-            node.style.display = "none";
+            node.classList.add('none');
         });
         layout2.forEach(node => {
-            node.style.display = "block";
+            node.classList.remove('none');
         });
     }
     on(layoutVersion: number = 0) {

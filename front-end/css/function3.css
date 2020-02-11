@@ -1,0 +1,103 @@
+
+.func3-main-1-1 {
+  margin-bottom:10px;
+}
+
+.func3-main-1-1  div{
+  border: 1px solid var(--border-color);
+}
+
+.func3-filter-num{
+  
+  text-align: center;
+  background-color: var(--lotto-title-color);
+  color:var(--default-color);
+  padding:10px;
+}
+
+.func3-filter-text{
+  
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(100px,auto));
+}
+
+.func3-filter-text > div{
+  
+text-align: center;
+  padding:10px;
+}
+
+.func3-main-1-2 > div {
+  position: relative;
+  
+}
+
+.func3-all-check-box{
+  height:30px;
+  display:flex;
+  align-items: center;
+  border:1px solid var(--border-color);
+}
+
+.func3-all-check-box > input{
+  width:5%;
+  height:20px;
+}
+
+.func3-all-check-box > div{
+  width:95%;
+}
+
+.func3-num-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: 100px;
+  margin-bottom:10px;
+}
+
+.func3-num-container > div{
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom:1px solid var(--border-color);
+}
+
+.func3-num-container > div input{
+  width:5%;
+  height:20%;
+  display:flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.func3-num-box{
+  display:flex;
+  align-items: center;
+  justify-content: space-around;
+  width:45%;
+}
+
+.func3-num-box > *{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.func3-num-box > div{
+  margin-right:10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--checkbox-color);
+  color: var(--default-color);
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.func3-num-text{
+  width:50%;
+}
+
+.func3-btn-container{
+  height:100px;
+}
+

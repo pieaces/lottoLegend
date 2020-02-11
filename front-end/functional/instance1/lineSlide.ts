@@ -31,32 +31,27 @@ const option = {
     legend: {
         display: false
     },
-    tooltips: {
-        titleFontFamily: 'Open Sans',
-        backgroundColor: 'rgba(0,0,0,0.3)',
-        titleFontColor: 'red',
-        caretSize: 5,
-        cornerRadius: 2,
-        xPadding: 10,
-        yPadding: 10
-    }
+
+
 }
 const dataBox = {
     labels: null,
     datasets: [
         {
-            backgroundColor: 'rgba(91, 81,255, 0.2)',
+
             pointBackgroundColor: 'white',
             borderWidth: 2,
             borderColor: 'rgb(199, 54, 44)',
-            data: null
+            data: null,
+            fill: false
         },
         {
-            backgroundColor: 'rgba(91, 81,255, 0.2)',
+
             pointBackgroundColor: 'white',
             borderWidth: 2,
             borderColor: 'rgb(14,99,132)',
-            data: null
+            data: null,
+            fill: false
         }
     ]
 };
