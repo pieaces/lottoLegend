@@ -10,9 +10,9 @@ router.get('/:method', async (req, res) => {
         const temp: QueryStatsParams = {}
         if (req.query.list) {
             temp.list = JSON.parse(decodeURI(req.query.list));
-        } else if (typeof req.query.from === 'number' && typeof req.query.to === 'number') {
-            temp.from = req.query.from;
-            temp.to = req.query.to;
+        } else if (req.query.from && req.query.to) {
+            temp.from = Number(req.query.from);
+            temp.to = Number(req.query.to);
         }
         data = await queryStats(method as Method, temp);
         res.json({ data });
