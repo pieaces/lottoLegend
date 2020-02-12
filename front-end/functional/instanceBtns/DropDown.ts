@@ -7,6 +7,7 @@ const boardPrevious = document.querySelector('.past span strong');
 const boardNext = document.querySelector('.future span strong');
 
 import DataAPI from '../DataAPI'
+import { Cipher } from 'crypto';
 
 
 export default class DropDown {
@@ -16,6 +17,8 @@ export default class DropDown {
     static readonly PREVIOUS_FONT = 'black';
     static readonly CURRENT_FONT = 'white';
     static readonly AFTER_FONT = 'white';
+    static readonly body = 'body *';
+    static readonly dropDownBox = '.filter-box *';
     private flag: boolean = true;
     private nodeList: HTMLElement[] = [];
     changeBoard() {
@@ -34,9 +37,48 @@ export default class DropDown {
         boardPresent.textContent = DataAPI.getInstance().getCurrentName();
     }
 
+    cancelCheck() {
+        let myExclusiveEl = Array.from(document.querySelectorAll<HTMLElement>(DropDown.body));
+        let myEls = Array.from(document.querySelectorAll<HTMLElement>(DropDown.dropDownBox));
+
+        myExclusiveEl = myExclusiveEl.filter(parent => {
+            let containedByExclusionNode = myEls.filter(child => {
+                if (parent === child) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+            if (containedByExclusionNode.length === 0) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+
+
+        for (const node of myExclusiveEl) {
+            node.addEventListener('click', () => {
+                if (node.className === 'filter-box') {
+
+                } else {
+                    filterListBox.classList.add('none');
+                    filterArrow.classList.add('fa-sort-down');
+                    filterArrow.classList.remove('fa-sort-up');
+                    this.flag = !this.flag;
+                }
+
+
+            });
+        }
+    }
+
     addEvent() {
         if (this.nodeList.length === 0) this.init();
-        filterBox.addEventListener('click', () => {
+
+
+        filterBox.addEventListener('click', (e) => {
+
             if (this.flag) {
                 filterArrow.classList.remove('fa-sort-down');
                 filterArrow.classList.add('fa-sort-up');
@@ -48,6 +90,8 @@ export default class DropDown {
                 filterListBox.classList.add('none');
             }
             this.flag = !this.flag;
+
+            e.stopPropagation();
         });
         this.nodeList.forEach((node) => {
             node.addEventListener('click', () => {
@@ -55,6 +99,10 @@ export default class DropDown {
                 this.changeBoard();
             });
         });
+
+        this.cancelCheck();
+
+
 
     }
     changeDropDownColor() {
@@ -92,6 +140,7 @@ export default class DropDown {
             filterListBox.appendChild(li);
         });
         this.changeDropDownColor();
+
     }
 
 }
