@@ -139,7 +139,7 @@ export default class Layout2 extends Layout1 {
             this.setColorLotto(nodeValue, node);
         });
     }
-    private setOpacity() {
+    setOpacity() {
         let opacities: number[];
         switch (this.boardCurrent) {
             case 0: opacities = this.frequencies;
@@ -261,17 +261,15 @@ export default class Layout2 extends Layout1 {
     init() {
         this.data = DataAPI.getInstance().getStats2();
         this.TOTAL = DataAPI.getInstance().getTOTAL();
-
+        this.setOpacity();
         bar.option.scales.yAxes[0].ticks = {
-            min: Math.floor(Math.min(...DataAPI.getInstance().getStats2().frequency)/10)*10,
-            max: Math.ceil(Math.max(...DataAPI.getInstance().getStats2().frequency)/10)*10
+            min: Math.floor(Math.min(...DataAPI.getInstance().getStats2().frequency) / 10) * 10,
+            max: Math.ceil(Math.max(...DataAPI.getInstance().getStats2().frequency) / 10) * 10
         };
-
         bar.create();
 
         this.numFreqOrTermToggle();
         this.setColorWinNum();
-        this.setOpacity();
         this.addEvent();
     }
 }
