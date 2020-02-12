@@ -124,15 +124,22 @@ export default class CheckBox {
     }
     init() {
         this.nodeList = [];
-        const labels = DataAPI.getInstance().getLabels().map(value => {
-            if(typeof value === 'string'){
-                const index = value.indexOf('~');
-                if(index !== -1){
-                    return value.slice(0,index+1);
+        let labels:(string|number)[];
+        console.log(DataAPI.getInstance().getCurrent(), DataAPI.getInstance().SIZE)
+        if (DataAPI.getInstance().getCurrent() !== DataAPI.getInstance().SIZE - 1) {
+            labels = DataAPI.getInstance().getLabels().map(value => {
+                if (typeof value === 'string') {
+                    const index = value.indexOf('~');
+                    if (index !== -1) {
+                        return value.slice(0, index + 1);
+                    }
                 }
-            }
-            return value;
-        });
+                return value;
+            });
+        }else{
+            console.log('false vs true')
+            labels = ['false', 'true'];
+        }
         this.labelList = new Array<boolean>(labels.length).fill(false);
         Array.from(checkBoxContainer.children).forEach(node =>{
             node.remove();

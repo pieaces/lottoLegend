@@ -40,6 +40,7 @@ export default class Generator {
             }
         );
         const data = JSON.parse(await fetchResult.text());
+        console.log(data);
         return data;
     }
 }
