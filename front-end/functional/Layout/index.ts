@@ -81,6 +81,8 @@ export default class Layout extends Layout3 {
                     this.checkBox.removeAllEvent();
                     if (currentFilter === 3) this.includeVerson();
                     if (currentFilter === 4) this.excludeVersion();
+                    this.setOpacity();
+
                     this.layout2On();
                     this.resetBtn.removeEvent();
                     this.resetBtn.addEvent(this.reset.bind(this));
@@ -133,7 +135,6 @@ export default class Layout extends Layout3 {
             this.checkBox.reset();
             this.dropDown.changeBoard();
             this.dropDown.changeDropDownColor();
-            super.init();
         })
     }
 }
