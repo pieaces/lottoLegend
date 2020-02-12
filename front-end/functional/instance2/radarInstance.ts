@@ -25,4 +25,5 @@ const option = {
 };
 
 const radarInstance = new ChartBase('radar', canvas, dataBox, option);
+radarInstance.create();
 export default radarInstance;

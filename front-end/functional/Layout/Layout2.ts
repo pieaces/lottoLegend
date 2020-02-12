@@ -79,6 +79,7 @@ export default class Layout2 extends Layout1 {
         bar.dataBox.datasets[0].data = [this.TOTAL * 6 / 45, this.data.frequency[this.choice - 1]];
         radar.dataBox.datasets[0].data = this.data.interval[this.choice - 1].list;
         gauss.dataBox.datasets[0].data = this.data.emergence[this.choice - 1];
+
         bar.update();
         radar.update();
         gauss.update();
@@ -138,10 +139,19 @@ export default class Layout2 extends Layout1 {
             this.setColorLotto(nodeValue, node);
         });
     }
-    private setOpacity(coef: number[]) {
+    private setOpacity() {
+        let opacities: number[];
+        switch (this.boardCurrent) {
+            case 0: opacities = this.frequencies;
+                break;
+            case 1: opacities = this.terms;
+                break;
+            case 2: opacities = this.freqTerm;
+                break;
+        }
         lottoNumbers.forEach((node, index) => {
-            node.style.opacity = `${coef[index]}`;
-        })
+            node.style.opacity = `${opacities[index]}`;
+        });
     }
     numFreqOrTermToggle() {
         numTermFreqBox.forEach((node: HTMLElement, index: number) => {
@@ -149,9 +159,7 @@ export default class Layout2 extends Layout1 {
                 numTermFreqBox[this.boardCurrent].classList.remove(Layout2.lottoCheckCurrent);
                 numTermFreqBox[index].classList.add(Layout2.lottoCheckCurrent);
                 this.boardCurrent = index;
-                if (this.boardCurrent === 0) this.setOpacity(this.frequencies);
-                else if (this.boardCurrent === 1) this.setOpacity(this.terms);
-                else if (this.boardCurrent === 2) this.setOpacity(this.freqTerm);
+                this.setOpacity();
             })
         })
     }
@@ -235,10 +243,8 @@ export default class Layout2 extends Layout1 {
         }
         for (let i = 0; i < this.checkedNumbers.length; i++) {
             lottoNumbers[this.checkedNumbers[i] - 1].style.backgroundColor = Layout2.lottoNumDefaultColor;
-            //this.chekedNumbers 배열 안의 숫자들의 opacity 대입 
         }
-
-
+        this.setOpacity();
         this.checkedNumbers = [];
         if (this.choice !== null) {
             this.choice = null;
@@ -255,9 +261,17 @@ export default class Layout2 extends Layout1 {
     init() {
         this.data = DataAPI.getInstance().getStats2();
         this.TOTAL = DataAPI.getInstance().getTOTAL();
+
+        bar.option.scales.yAxes[0].ticks = {
+            min: Math.floor(Math.min(...DataAPI.getInstance().getStats2().frequency)/10)*10,
+            max: Math.ceil(Math.max(...DataAPI.getInstance().getStats2().frequency)/10)*10
+        };
+
+        bar.create();
+
         this.numFreqOrTermToggle();
         this.setColorWinNum();
-        this.setOpacity(this.frequencies);
+        this.setOpacity();
         this.addEvent();
     }
 }
