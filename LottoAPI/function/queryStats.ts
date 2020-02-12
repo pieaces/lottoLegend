@@ -123,12 +123,12 @@ function compressNumbers(numbers: number[], PACK: number): number[] {
 
 function transformNumbers(list: AWS.DynamoDB.ListAttributeValue, params: QueryStatsParams): number[] {
     let result: number[];
-    if (params.list) {
+    if (typeof params.from === 'number' && typeof params.to === 'number') {
+        result = list.slice(params.from, params.to + 1).map((value) => Number(value.N))
+    } else if (params.list) {
         result = list.filter((value, index) => {
             if (params.list.indexOf(index) !== -1) return value;
         }).map(value => Number(value.N));
-    } else if (typeof params.from === 'number' && typeof params.to === 'number') {
-        result = list.slice(params.from, params.to + 1).map((value) => Number(value.N))
     } else {
         result = list.map((value) => Number(value.N));
     }
