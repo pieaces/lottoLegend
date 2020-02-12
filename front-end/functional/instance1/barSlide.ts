@@ -24,6 +24,7 @@ const option = {
     legend: { display: false }
 }
 const barInstance = new ChartBase('bar', barCanvas, dataBox, option);
+barInstance.create();
 const barSlide = new BarSlide(barInstance, leftBarBtn, rightBarBtn, barNum, main22);
 makeClickable(barSlide);
 

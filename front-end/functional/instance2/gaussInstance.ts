@@ -24,4 +24,5 @@ const option = {
 };
 
 const gaussInstance = new ChartBase('line', canvas, dataBox, option);
+gaussInstance.create();
 export default gaussInstance;

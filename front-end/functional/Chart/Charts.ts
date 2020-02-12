@@ -11,8 +11,10 @@ export default class ChartBase {
         this.dataBox = dataBox;
         this.option = option;
         this.canvas = canvas;
-        this.instance = new Chart(canvas, {
-            type: type,
+    }
+    create(){
+        this.instance = new Chart(this.canvas, {
+            type: this.type,
             data: this.dataBox,
             options: this.option
         });

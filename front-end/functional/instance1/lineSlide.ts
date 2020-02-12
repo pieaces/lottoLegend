@@ -9,10 +9,10 @@ const lineCanvas: HTMLCanvasElement = document.querySelector('#func1-chart-line'
 const main21: HTMLElement = document.querySelector('.func1-main-2-1');
 
 
-const option = {
+const option:Chart.ChartOptions = {
     responsive: true,
     tooltips: {
-        // mode:'index', typescript 오류 발생 
+        mode:'index',
         intersect: false,
     },
 
@@ -34,28 +34,8 @@ const option = {
             }
         ]
     },
-
-
-
 }
-/*
-options: {
-    responsive: true,
-    title: {
-        display: true,
-        text: 'Chart.js Line Chart'
-    },
-    tooltips: {
-        mode: 'index',
-        intersect: false,
-    },
-    hover: {
-        mode: 'nearest',
-        intersect: true
-    }
-}
-};
-*/
+
 const dataBox = {
     labels: null,
     datasets: [
@@ -78,6 +58,7 @@ const dataBox = {
     ]
 };
 const lineInstance = new ChartBase('line', lineCanvas, dataBox, option);
+lineInstance.create();
 const lineSlide = new LineSlide(lineInstance, leftLineBtn, rightLineBtn, lineNum, main21);
 makeClickable(lineSlide);
 

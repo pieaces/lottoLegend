@@ -17,8 +17,6 @@ const option = {
     scales: {
         yAxes: [{
             ticks: {
-                min: 0,
-                max: 200,
             }
         }]
     }
