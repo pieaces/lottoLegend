@@ -174,7 +174,6 @@
   }
 
   .func2-chart-radar-text{
-
     position: absolute;
     top:0;
     left:100%;
@@ -222,54 +221,58 @@
   
     position: absolute;
   }
+
+  .animation-none{
+    animation: none !important;
+  }
   
-  .func2-select-num-box1 {
+  .func2-select-num-box > div:nth-child(1) {
     animation: spin 800ms ease-in, moveRightToLeft1 800ms ease-in;
     right: 90%;
   }
   
-  .func2-select-num-box2 {
-    animation: spin 800ms linear, moveRightToLeft2 800ms ease-in;
+  .func2-select-num-box > div:nth-child(2) {
+    animation: spin 800ms ease-in, moveRightToLeft2 800ms ease-in;
     right: 80%;
   }
   
-  .func2-select-num-box3 {
-    animation: spin 800ms linear, moveRightToLeft3 800ms ease-in;
+  .func2-select-num-box > div:nth-child(3) {
+    animation: spin 800ms ease-in, moveRightToLeft3 800ms ease-in;
     right: 70%;
   }
   
-  .func2-select-num-box4 {
-    animation: spin 800ms linear, moveRightToLeft4 800ms ease-in;
+  .func2-select-num-box > div:nth-child(4) {
+    animation: spin 800ms ease-in, moveRightToLeft4 800ms ease-in;
     right: 60%;
   }
   
-  .func2-select-num-box5 {
-    animation: spin 800ms linear, moveRightToLeft5 800ms ease-in;
+  .func2-select-num-box > div:nth-child(5) {
+    animation: spin 800ms ease-in, moveRightToLeft5 800ms ease-in;
     right: 50%;
   }
   
-  .func2-select-num-box6 {
-    animation: spin 800ms linear, moveRightToLeft6 800ms ease-in;
+  .func2-select-num-box > div:nth-child(6) {
+    animation: spin 800ms ease-in, moveRightToLeft6 800ms ease-in;
     right: 40%;
   }
   
-  .func2-select-num-box7 {
-    animation: spin 800ms linear, moveRightToLeft7 800ms ease-in;
+  .func2-select-num-box > div:nth-child(7) {
+    animation: spin 800ms ease-in, moveRightToLeft7 800ms ease-in;
     right: 30%;
   }
   
-  .func2-select-num-box8 {
-    animation: spin 800ms linear, moveRightToLeft8 800ms ease-in;
+  .func2-select-num-box > div:nth-child(8) {
+    animation: spin 800ms ease-in, moveRightToLeft8 800ms ease-in;
     right: 20%;
   }
   
   .func2-select-num-box > div:nth-child(9) {
-    animation: spin 800ms linear, moveRightToLeft9 800ms ease-in;
+    animation: spin 800ms ease-in, moveRightToLeft9 800ms ease-in;
     right: 10%;
   }
   
   .func2-select-num-box > div:nth-child(10) {
-    animation: spin 800ms linear, moveRightToLeft10 800ms ease-in;
+    animation: spin 800ms ease-in, moveRightToLeft10 800ms ease-in;
     right: 0%;
   }
   
@@ -377,7 +380,7 @@
   .func2-chart-full{
     width:100% !important;
     height:100% !important;
-    padding:30px 0 0 0;
+    padding:20px 0 0 0;
   }
 
   .func2-chart-resize{

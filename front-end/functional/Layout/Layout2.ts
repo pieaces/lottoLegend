@@ -157,6 +157,10 @@ export default class Layout2 extends Layout1 {
                             }
                         }
 
+                        for (let i = 0; i < selectNumBox.children.length; i++) {
+                            selectNumBox.children[i].classList.add('animation-none');
+                        }
+
                     } else {
 
 
@@ -171,6 +175,8 @@ export default class Layout2 extends Layout1 {
             if (this.checkedNumbers.length < Layout2.MAX_SIZE) {
                 if (this.checkedNumbers.indexOf(this.choice) === -1) {
                     if (this.choice !== null) {
+
+
                         lottoNumbers[this.choice - 1].style.backgroundColor = Layout2.lottoNumCheckedColor;
                         lottoNumbers[this.choice - 1].style.color = Layout2.lottoNumDefaultFontColor;
                         lottoNumbers[this.choice - 1].style.opacity = '';
@@ -178,6 +184,7 @@ export default class Layout2 extends Layout1 {
                         const numOrder = this.checkedNumbers.indexOf(this.choice);
                         const div = document.createElement('div');
                         const text = document.createTextNode(this.choice);
+
                         div.appendChild(text);
 
                         this.setColorLotto(this.choice, <HTMLElement>div);
