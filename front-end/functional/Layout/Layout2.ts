@@ -15,7 +15,7 @@ import RadarSlide from '../Slide/radarSlide';
 export default class Layout2 extends Layout1 {
     radarSlide: RadarSlide = radarSlide;
     static readonly MAX_SIZE = 10;
-    static readonly lottoNumDefaultColor = '#00048c';
+    static lottoNumDefaultColor = '#00048c';
     static readonly lottoNumSelectColor = '#e6e600';
     static readonly lottoNumCheckedColor = 'darkgray';
     static readonly body = 'body *';
@@ -24,9 +24,12 @@ export default class Layout2 extends Layout1 {
     static readonly selectNumBox = 'func2-select-num-box';
     private data: any;
     private TOTAL: number;
-    checkedNumbers = new Array<number>();
-    choice = null;
-
+    private checkedNumbers = new Array<number>();
+    private choice = null;
+    private boardCurrent = 0;
+    private frequencies:number[] = [];
+    private terms:number[] = [];
+    private freqTerm:number[] = [];
     includeVerson(){
         applyBtn.textContent = '포함'
         lottoNumbers.forEach((node: HTMLElement) => {
@@ -35,6 +38,7 @@ export default class Layout2 extends Layout1 {
     }
     excludeVersion(){
         applyBtn.textContent = '제외'
+        Layout2.lottoNumDefaultColor = '#8c0000';
         lottoNumbers.forEach((node: HTMLElement) => {
             node.style.backgroundColor = '#8c0000';
         })
@@ -70,6 +74,13 @@ export default class Layout2 extends Layout1 {
             node.addEventListener('click', e => {
                 if (this.choice !== null) {
                     lottoNumbers[this.choice - 1].style.backgroundColor = Layout2.lottoNumDefaultColor;
+                    let opacities: number[];
+                    switch(this.boardCurrent){
+                        case 0: opacities = this.frequencies; break;
+                        case 1: opacities = this.terms; break;
+                        case 2: opacities = this.freqTerm; break;
+                    }
+                    lottoNumbers[this.choice - 1].style.opacity = `${opacities[this.choice-1]}`;
                     this.choice = null;
                 }
             });
@@ -94,44 +105,20 @@ export default class Layout2 extends Layout1 {
             this.setColorLotto(nodeValue, node);
         });
     }
-    private setOpacityByFrequency() {
-        const min = Math.min(...this.data.frequency);
+    private setOpacity(coef:number[]) {
         lottoNumbers.forEach((node, index) => {
-            node.style.opacity = `${Math.pow(min, 2) / Math.pow(this.data.frequency[index], 2)}`;
+            node.style.opacity = `${coef[index]}`;
         })
     }
-    private setOpacityByTerms() {
-        const terms = this.data.howLongNone.map(ele => this.TOTAL - ele.round + 1);
-        const max = Math.max(...terms);
-        lottoNumbers.forEach((node, index) => {
-            node.style.opacity = `${Math.pow(terms[index], 1 / 3) / Math.pow(max, 1 / 3)}`;
-        });
-    }
-    private setOpacityByFrequencyTerms() {
-        const frequency = this.data.frequency;
-        const fMin = Math.min(...frequency);
-        const terms = this.data.howLongNone.map(ele => this.TOTAL - ele.round + 1);
-        const tMax = Math.max(...terms);
-        const coef = [];
-        for (let i = 0; i < 45; i++) {
-            const num = Math.pow(fMin, 2) / Math.pow(frequency[i], 2) * Math.pow(terms[i], 1 / 3) / Math.pow(tMax, 1 / 3);
-            coef.push(num);
-        }
-        const max = Math.max(...coef);
-        lottoNumbers.forEach((node, index) => {
-            node.style.opacity = `${coef[index] / max}`;
-        });
-    }
     numFreqOrTermToggle() {
-        let current = 0;
         numTermFreqBox.forEach((node: HTMLElement, index: number) => {
             node.addEventListener('click', () => {
-                numTermFreqBox[current].classList.remove(Layout2.lottoCheckCurrent);
+                numTermFreqBox[this.boardCurrent].classList.remove(Layout2.lottoCheckCurrent);
                 numTermFreqBox[index].classList.add(Layout2.lottoCheckCurrent);
-                current = index;
-                if (current === 0) this.setOpacityByFrequency();
-                else if (current === 1) this.setOpacityByTerms();
-                else if (current === 2) this.setOpacityByFrequencyTerms();
+                this.boardCurrent = index;
+                if (this.boardCurrent === 0) this.setOpacity(this.frequencies);
+                else if (this.boardCurrent === 1) this.setOpacity(this.terms);
+                else if (this.boardCurrent === 2) this.setOpacity(this.freqTerm);
             })
         })
     }
@@ -188,6 +175,7 @@ export default class Layout2 extends Layout1 {
                 if (this.checkedNumbers.indexOf(this.choice) === -1) {
                     if (this.choice !== null) {
                         lottoNumbers[this.choice - 1].style.backgroundColor = Layout2.lottoNumCheckedColor;
+                        lottoNumbers[this.choice - 1].style.opacity = '';
                         this.checkedNumbers.push(this.choice);
                         const numOrder = this.checkedNumbers.indexOf(this.choice);
 
@@ -231,12 +219,27 @@ export default class Layout2 extends Layout1 {
         }
         e.stopPropagation();
     }
+    private initCoef() {
+        const fMin = Math.min(...this.data.frequency);
+        const terms = this.data.howLongNone.map(ele => this.TOTAL - ele.round + 1);
+        const tMax = Math.max(...terms);
+        for (let i = 0; i < 45; i++) {
+            this.frequencies[i] = Math.pow(fMin, 2) / Math.pow(this.data.frequency[i], 2);
+            this.terms[i] = Math.pow(terms[i], 1 / 3) / Math.pow(tMax, 1 / 3);
+            this.freqTerm[i] = this.frequencies[i] * this.terms[i];
+        }
+        const ftMax = Math.max(...this.freqTerm);
+        for (let i = 0; i < 45; i++) {
+            this.freqTerm[i] /= ftMax;
+        }
+    }
     init() {
         this.data = DataAPI.getInstance().getStats2();
         this.TOTAL = DataAPI.getInstance().getTOTAL();
+        this.initCoef();
         this.numFreqOrTermToggle();
         this.setColorWinNum();
-        this.setOpacityByFrequency();
+        this.setOpacity(this.frequencies);
         this.addEvent();
     }
 }
