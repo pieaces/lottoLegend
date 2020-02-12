@@ -48,7 +48,7 @@ router.post('/generator', (req, res) => {
         option.AC = req.body.AC;
         willRangeFinder = Calculate.consecutiveExist;
     }
-    if (typeof req.body.consecutiveExist !== 'undefined') {
+    if (typeof req.body.consecutiveExist !== 'boolean') {
         option.consecutiveExist = req.body.consecutiveExist;
     }
 
