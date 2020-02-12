@@ -7,7 +7,7 @@ import ResetBtn from '../instanceBtns/ResetBtn'
 const layout1 = document.querySelectorAll<HTMLElement>('.func1-layout');
 const layout2 = document.querySelectorAll<HTMLElement>('.func2-layout');
 const section = document.querySelector('.section1');
-
+const infoText = document.querySelector('.func1-checkbox-text');
 export default class Layout extends Layout3 {
     options: any = [];
     //optionList2 = [null, [3], null, [10, 20, 42, 43, 44], [2], 2, { from: 100, to: 190 }, { from: 2, to: 4 }, { from: 1, to: 3 }, { from: 0, to: 3 }, { from: 10, to: 14 }, { from: 30, to: 38 }, { from: 7, to: 10 }, true];
@@ -15,7 +15,7 @@ export default class Layout extends Layout3 {
     checkBox: Checkbox = new Checkbox();
     nextBtn: NextBtn = new NextBtn();
     resetBtn: ResetBtn = new ResetBtn();
-
+    nextAbleLimit:number[] = [1];
     private layout1On() {
         layout1.forEach(node => {
             node.classList.remove('none');
@@ -61,10 +61,10 @@ export default class Layout extends Layout3 {
                     if (currentFilter === 6) {
                         from = Number((<string>from).slice(0, (<string>from).indexOf('~')));
                         to = Number((<string>to).slice((<string>to).indexOf('~') + 1));
-                    } else if(currentFilter === 11 && typeof from === 'string') {
+                    } else if (currentFilter === 11 && typeof from === 'string') {
                         from = Number((<string>from).slice(0, (<string>from).indexOf('~')));
                         to = Number((<string>to).slice((<string>to).indexOf('~') + 1));
-                    }else {
+                    } else {
                         from = Number(from);
                         to = Number(to);
                     }
@@ -93,6 +93,7 @@ export default class Layout extends Layout3 {
                     if (currentFilter === 1) {
                         const trueIndex = this.options[0].indexOf(true);
                         const count = DataAPI.getInstance().getLabels()[trueIndex] as number;
+                        this.nextAbleLimit.push(count);
                         this.checkBox.multiSelectEvent(count);
                     } else if (currentFilter <= 5) {
                         this.checkBox.singleSelectEvent();
@@ -125,16 +126,20 @@ export default class Layout extends Layout3 {
         // this.statsBoard.textContent = JSON.stringify(DataAPI.getInstance().getStats().stats);
 
         this.nextBtn.addEvent(async () => {
-            section.scrollIntoView({
-                behavior: 'auto'
-            });
-            this.setOption();
-            const currentFilter = DataAPI.getInstance().getCurrent();
-            await DataAPI.getInstance().forward(this.options[currentFilter]);
-            this.on();
-            this.checkBox.reset();
-            this.dropDown.changeBoard();
-            this.dropDown.changeDropDownColor();
-        })
+            if (this.checkBox.getCount() === this.nextAbleLimit[DataAPI.getInstance().getCurrent()]) {
+                section.scrollIntoView({
+                    behavior: 'auto'
+                });
+                this.setOption();
+                const currentFilter = DataAPI.getInstance().getCurrent();
+                await DataAPI.getInstance().forward(this.options[currentFilter]);
+                this.on();
+                this.checkBox.reset();
+                this.dropDown.changeBoard();
+                this.dropDown.changeDropDownColor();
+            } else {
+                infoText.textContent = '찍어!'
+            }
+        });
     }
 }

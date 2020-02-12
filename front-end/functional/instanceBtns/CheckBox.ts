@@ -10,7 +10,7 @@ export default class CheckBox {
     getCheckedLabels(): boolean[] {
         return this.labelList;
     }
-    private getCount(): number {
+    getCount(): number {
         let count = 0;
         this.labelList.forEach(value => {
             if (value) count++;

@@ -23,7 +23,6 @@ export default class Data {
         const fetchResult = await fetch(url, { method: 'GET', headers });
         const data = JSON.parse(await fetchResult.text());
         this[method] = data.data;
-        console.log(data.data);
         if (!this.total) this.total = data.total;
     }
 }
