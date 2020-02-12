@@ -10,11 +10,11 @@ import DataAPI from '../DataAPI'
 
 
 export default class DropDown {
-    static readonly PREVIOUS_COLOR = '#3da8e3';
-    static readonly CURRENT_COLOR = 'white';
+    static readonly PREVIOUS_COLOR = 'white';
+    static readonly CURRENT_COLOR = '#3da8e3';
     static readonly AFTER_COLOR = '#7e8c8c';
-    static readonly PREVIOUS_FONT = 'white';
-    static readonly CURRENT_FONT = 'black';
+    static readonly PREVIOUS_FONT = 'black';
+    static readonly CURRENT_FONT = 'white';
     static readonly AFTER_FONT = 'white';
     private flag: boolean = true;
     private nodeList: HTMLElement[] = [];
@@ -63,6 +63,15 @@ export default class DropDown {
             if (index < current) {
                 node.style.backgroundColor = DropDown.PREVIOUS_COLOR;
                 node.style.color = DropDown.PREVIOUS_FONT;
+                node.addEventListener('mouseover', () => {
+                    node.style.backgroundColor = DropDown.CURRENT_COLOR;
+                    node.style.color = DropDown.CURRENT_FONT;
+                })
+                node.addEventListener('mouseout', () => {
+                    node.style.backgroundColor = DropDown.PREVIOUS_COLOR;
+                    node.style.color = DropDown.PREVIOUS_FONT;
+                })
+
             } else if (index === current) {
                 node.style.backgroundColor = DropDown.CURRENT_COLOR;
                 node.style.color = DropDown.CURRENT_FONT;

@@ -10,10 +10,36 @@
     margin-bottom:10px;
     background-color: var(--default-color);
     border:1px solid var(--border-color);
+    display:flex;
+  }
+
+  .func1-stats-container{
+    width:80%;
+    display:flex;
+    align-items: center;
+  }
+
+  .func1-stats-box{
+    flex:1;
+    width:100%;
+    height:100%;
+    text-align: center;
+    display:flex;
+    flex-direction: column;
+  }
+
+  .func1-stats-box >  div{
+    flex:1;
+  }
+
+  .func1-auto-choose-container{
+    width:20%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .func1-main-bottom-container{
-
     margin-bottom:10px;
   }
   
@@ -105,9 +131,13 @@
     grid-column: 8/13;
     grid-row: 3/4;
   }
+
+  .func1-checkbox-text{
+    height:100px;
+    margin-bottom:10px;
+  }
   
   .func1-checkbox-container{
-
     width: 70%;
   }
   

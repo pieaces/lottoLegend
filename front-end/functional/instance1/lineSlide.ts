@@ -10,6 +10,12 @@ const main21: HTMLElement = document.querySelector('.func1-main-2-1');
 
 
 const option = {
+    responsive: true,
+    tooltips: {
+        // mode:'index', typescript 오류 발생 
+        intersect: false,
+    },
+
     scales: {
         xAxes: [
             {
@@ -28,17 +34,33 @@ const option = {
             }
         ]
     },
-    legend: {
-        display: false
-    },
+
 
 
 }
+/*
+options: {
+    responsive: true,
+    title: {
+        display: true,
+        text: 'Chart.js Line Chart'
+    },
+    tooltips: {
+        mode: 'index',
+        intersect: false,
+    },
+    hover: {
+        mode: 'nearest',
+        intersect: true
+    }
+}
+};
+*/
 const dataBox = {
     labels: null,
     datasets: [
         {
-
+            label: '실제값', // 추가
             pointBackgroundColor: 'white',
             borderWidth: 2,
             borderColor: 'rgb(199, 54, 44)',
@@ -46,7 +68,7 @@ const dataBox = {
             fill: false
         },
         {
-
+            label: '예측값', // 추가
             pointBackgroundColor: 'white',
             borderWidth: 2,
             borderColor: 'rgb(14,99,132)',

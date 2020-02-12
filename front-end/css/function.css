@@ -107,7 +107,7 @@
   }
   
   .filter-list > li {
-
+    transition: all 500ms;
     height: 100%;
     background-color: var(--default-color);
     display: flex;
@@ -118,6 +118,11 @@
   
   .filter-list > li:last-child {
     border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  }
+
+  .filter-list-hover{
+    background-color: #3da8e3;
+    color:var(--default-color);
   }
 
   .steps{

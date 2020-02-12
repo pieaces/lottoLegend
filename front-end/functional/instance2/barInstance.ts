@@ -14,6 +14,14 @@ const dataBox = {
 };
 const option = {
     legend: { display: false },
+    scales: {
+        yAxes: [{
+            ticks: {
+                min: 0,
+                max: 200,
+            }
+        }]
+    }
 };
 
 const barInstance = new ChartBase('bar', canvas, dataBox, option);

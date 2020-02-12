@@ -120,7 +120,7 @@ export default class Layout extends Layout3 {
         this.barSlide.init();
         this.lineSlide.init();
         this.bubbleChart.init();
-        this.statsBoard.textContent = JSON.stringify(DataAPI.getInstance().getStats().stats);
+        // this.statsBoard.textContent = JSON.stringify(DataAPI.getInstance().getStats().stats);
 
         this.nextBtn.addEvent(async () => {
             section.scrollIntoView({
