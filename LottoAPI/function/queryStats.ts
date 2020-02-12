@@ -82,7 +82,15 @@ export default async function queryStats(method: Method, params: QueryStatsParam
                             }
                             pos = compressNumbers(pos, PACK);
                         }
-
+                        if (method === Method.diffMaxMin && params.to - params.from > 6) {
+                            const PACK = 2;
+                            for (const v in ideal) {
+                                ideal[v as AssemblyVersion] = compressNumbers(ideal[v as AssemblyVersion], PACK);
+                                actual[v as AssemblyVersion] = compressNumbers(actual[v as AssemblyVersion], PACK);
+                            }
+                            pos = compressNumbers(pos, PACK);
+                        }
+                        
                         const dbData: DBData = { ideal, actual, pos };
                         if (item.Stats) {
                             const stats: Stats = {
