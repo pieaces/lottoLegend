@@ -29,7 +29,7 @@ export default class BarSlide extends Slide<ChartBase> {
         }
         this.chart.update();
     }
-    setText(){
+    setText() {
         this.textBox.textContent = this.current.toString();
     }
     init() {

@@ -28,15 +28,9 @@ export default class Layout2 extends Layout1 {
     protected checkedNumbers = new Array<number>();
     private choice = null;
     private boardCurrent = 0;
-<<<<<<< HEAD
     private frequencies: number[] = [];
     private terms: number[] = [];
     private freqTerm: number[] = [];
-    includeVerson() {
-=======
-    private frequencies:number[] = [];
-    private terms:number[] = [];
-    private freqTerm:number[] = [];
 
     private initCoefVerInclude() {
         const fMin = Math.min(...this.data.frequency);
@@ -52,7 +46,7 @@ export default class Layout2 extends Layout1 {
             this.freqTerm[i] /= ftMax;
         }
     }
-    private initCoefVerExclude(){
+    private initCoefVerExclude() {
         const fMax = Math.max(...this.data.frequency);
         const terms = this.data.howLongNone.map(ele => this.TOTAL - ele.round + 1);
         const tMin = Math.min(...terms);
@@ -66,20 +60,15 @@ export default class Layout2 extends Layout1 {
             this.freqTerm[i] /= ftMax;
         }
     }
-    includeVerson(){
+    includeVerson() {
         this.initCoefVerInclude();
->>>>>>> 91b9973e41f4cf018996980a96f1284bd43d9474
         applyBtn.textContent = '포함'
         lottoNumbers.forEach((node: HTMLElement) => {
             node.style.backgroundColor = '#00048c';
         })
     }
-<<<<<<< HEAD
     excludeVersion() {
-=======
-    excludeVersion(){
         this.initCoefVerExclude();
->>>>>>> 91b9973e41f4cf018996980a96f1284bd43d9474
         applyBtn.textContent = '제외'
         Layout2.lottoNumDefaultColor = '#8c0000';
         lottoNumbers.forEach((node: HTMLElement) => {

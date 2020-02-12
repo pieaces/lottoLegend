@@ -4,7 +4,7 @@ const checkBoxContainer = document.querySelector<HTMLElement>('.func1-checkbox')
 
 export default class CheckBox {
     static readonly checkedStyle = 'func1-num-check-current';
-    private eventHandler:(()=>void)[] = [];
+    private eventHandler: (() => void)[] = [];
     private nodeList: HTMLElement[] = [];
     private labelList: boolean[] = [];
     getCheckedLabels(): boolean[] {
@@ -30,7 +30,7 @@ export default class CheckBox {
         this.nodeList.forEach((node, index, parent) => {
             const event = () => {
                 const trueIndex = this.labelList.indexOf(true);
-                if(trueIndex !== -1){
+                if (trueIndex !== -1) {
                     parent[trueIndex].classList.remove(CheckBox.checkedStyle);
                     this.labelList[trueIndex] = false;
                 }
@@ -41,7 +41,7 @@ export default class CheckBox {
             node.addEventListener('click', event);
         });
     }
-    multiSelectEvent(limit=this.labelList.length){
+    multiSelectEvent(limit = this.labelList.length) {
         this.removeAllEvent();
         this.nodeList.forEach((node, index) => {
             const event = () => {
@@ -49,7 +49,7 @@ export default class CheckBox {
                 if (this.labelList[index]) {
                     node.classList.remove(CheckBox.checkedStyle);
                     this.labelList[index] = false;
-                }else{
+                } else {
                     if (count < limit) {
                         node.classList.add(CheckBox.checkedStyle);
                         this.labelList[index] = true;
@@ -62,7 +62,7 @@ export default class CheckBox {
     }
     rangeSelectEvent() {
         this.removeAllEvent();
-        if(this.nodeList.length === 0){
+        if (this.nodeList.length === 0) {
             this.init();
         }
         let first: number;
@@ -96,7 +96,7 @@ export default class CheckBox {
                         parent[i].classList.remove(CheckBox.checkedStyle);
                         this.labelList[i] = false;
                     }
-    
+
                     min = Math.min(last, index);
                     max = Math.max(last, index);
                     console.log(min, max)
@@ -114,7 +114,7 @@ export default class CheckBox {
     }
     reset() {
         console.log('!')
-        if(this.nodeList.length === 0){
+        if (this.nodeList.length === 0) {
             this.init();
         }
         this.nodeList.forEach(node => {
@@ -124,7 +124,7 @@ export default class CheckBox {
     }
     init() {
         this.nodeList = [];
-        let labels:(string|number)[];
+        let labels: (string | number)[];
         console.log(DataAPI.getInstance().getCurrent(), DataAPI.getInstance().SIZE)
         if (DataAPI.getInstance().getCurrent() !== DataAPI.getInstance().SIZE - 1) {
             labels = DataAPI.getInstance().getLabels().map(value => {
@@ -136,12 +136,12 @@ export default class CheckBox {
                 }
                 return value;
             });
-        }else{
+        } else {
             console.log('false vs true')
             labels = ['false', 'true'];
         }
         this.labelList = new Array<boolean>(labels.length).fill(false);
-        Array.from(checkBoxContainer.children).forEach(node =>{
+        Array.from(checkBoxContainer.children).forEach(node => {
             node.remove();
         })
         labels.forEach(label => {

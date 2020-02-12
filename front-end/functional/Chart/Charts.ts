@@ -5,7 +5,7 @@ export default class ChartBase {
     dataBox: Chart.ChartData;
     option: Chart.ChartOptions;
     instance: Chart;
-    canvas:HTMLCanvasElement;
+    canvas: HTMLCanvasElement;
     constructor(type: string, canvas: HTMLCanvasElement, dataBox: Chart.ChartData, option: Chart.ChartOptions) {
         this.type = type;
         this.dataBox = dataBox;
@@ -17,7 +17,7 @@ export default class ChartBase {
             options: this.option
         });
     }
-    update(){
+    update() {
         this.instance.update();
     }
 }

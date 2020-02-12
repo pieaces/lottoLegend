@@ -1,7 +1,7 @@
 const reset = document.querySelector<HTMLElement>('#reset');
 
 export default class ResetBtn {
-    private eventHandler:(e:Event)=>void;
+    private eventHandler: (e: Event) => void;
 
     addEvent(listner: (e: Event) => void) {
         reset.addEventListener('click', listner);

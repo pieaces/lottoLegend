@@ -9,7 +9,7 @@ const layout2 = document.querySelectorAll<HTMLElement>('.func2-layout');
 const section = document.querySelector('.section1');
 
 export default class Layout extends Layout3 {
-    options:any = [];
+    options: any = [];
     //optionList2 = [null, [3], null, [10, 20, 42, 43, 44], [2], 2, { from: 100, to: 190 }, { from: 2, to: 4 }, { from: 1, to: 3 }, { from: 0, to: 3 }, { from: 10, to: 14 }, { from: 30, to: 38 }, { from: 7, to: 10 }, true];
     dropDown: DropDown = new DropDown();
     checkBox: Checkbox = new Checkbox();
@@ -32,8 +32,8 @@ export default class Layout extends Layout3 {
             node.classList.remove('none');
         });
     }
-    
-    private setOption(){
+
+    private setOption() {
         const currentFilter = DataAPI.getInstance().getCurrent();
         switch (currentFilter) {
             case 3: case 4:
@@ -42,16 +42,16 @@ export default class Layout extends Layout3 {
                 break;
             default:
                 this.options[currentFilter] = this.checkBox.getCheckedLabels().slice();
-                if(currentFilter === 1){
+                if (currentFilter === 1) {
                     const range = DataAPI.getInstance().getLabels();
-                    const option:number[] = [];
+                    const option: number[] = [];
                     this.options[currentFilter].forEach((value, index) => {
-                        if(value){
+                        if (value) {
                             option.push(range[index] as number);
                         }
                     });
                     this.options[currentFilter] = option;
-                }else if(currentFilter === 5){
+                } else if (currentFilter === 5) {
                     this.options[currentFilter] = DataAPI.getInstance().getLabels()[this.options[currentFilter].indexOf(true)];
                 } else if (currentFilter > 5) {
                     const range = DataAPI.getInstance().getLabels()
@@ -64,8 +64,8 @@ export default class Layout extends Layout3 {
                         from = Number(from);
                         to = Number(to);
                     }
-                    this.options[currentFilter] = {from, to}
-                } else if(currentFilter === DataAPI.getInstance().SIZE - 1){
+                    this.options[currentFilter] = { from, to }
+                } else if (currentFilter === DataAPI.getInstance().SIZE - 1) {
                     console.log('true?');
                     this.options[currentFilter] = this.options[currentFilter][0] === 0 ? false : true;
                 }
@@ -78,14 +78,9 @@ export default class Layout extends Layout3 {
             switch (currentFilter) {
                 case 3: case 4:
                     this.reset();
-<<<<<<< HEAD
+                    this.checkBox.removeAllEvent();
                     if (currentFilter === 3) this.includeVerson();
                     if (currentFilter === 4) this.excludeVersion();
-=======
-                    this.checkBox.removeAllEvent();
-                    if(currentFilter === 3) this.includeVerson();
-                    if(currentFilter === 4) this.excludeVersion();
->>>>>>> 91b9973e41f4cf018996980a96f1284bd43d9474
                     this.layout2On();
                     this.resetBtn.removeEvent();
                     this.resetBtn.addEvent(this.reset.bind(this));
@@ -93,13 +88,13 @@ export default class Layout extends Layout3 {
                 default:
                     this.layout1On();
                     this.checkBox.init();
-                    if(currentFilter === 1){
+                    if (currentFilter === 1) {
                         const trueIndex = this.options[0].indexOf(true);
                         const count = DataAPI.getInstance().getLabels()[trueIndex] as number;
                         this.checkBox.multiSelectEvent(count);
-                    }else if(currentFilter <= 5){
+                    } else if (currentFilter <= 5) {
                         this.checkBox.singleSelectEvent();
-                    }else{
+                    } else {
                         this.checkBox.rangeSelectEvent();
                     }
                     this.resetBtn.removeEvent();

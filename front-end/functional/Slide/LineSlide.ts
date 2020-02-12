@@ -17,15 +17,15 @@ export default class LineSlide extends Slide<ChartBase> {
         rep2.data = data.ideal[this.lineMap[this.current]];
         this.chart.update();
     }
-    setText(){
-        const textBox = ['12', '24', '48','192', DataAPI.getInstance().getTOTAL().toString()]
-        let text:string;
+    setText() {
+        const textBox = ['12', '24', '48', '192', DataAPI.getInstance().getTOTAL().toString()]
+        let text: string;
         text += `<h1>${textBox[this.current]}</h1>`;
 
         const ideal = DataAPI.getInstance().getStats().ideal[this.lineMap[this.current]];
         const actual = DataAPI.getInstance().getStats().actual[this.lineMap[this.current]];
 
-        ideal.forEach((value:number, index:number) => {
+        ideal.forEach((value: number, index: number) => {
             const temp = value - actual[index]
             text += (Number(temp.toFixed(2)));
         });

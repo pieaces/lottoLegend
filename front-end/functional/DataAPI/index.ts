@@ -23,7 +23,7 @@ function compartNumbers(param: Params, PACK: number): string[] {
     let temp: number;
     for (let i = param.from; i <= param.to - PACK; i += PACK) {
         result.push(i + '~' + (i + 9));
-        temp = i+PACK;
+        temp = i + PACK;
     }
     if (temp === param.to) result.push(temp.toString());
     else result.push(temp + '~' + param.to);
@@ -39,9 +39,9 @@ function paramToNumbers(params: Params): number[] {
     }
 }
 export default class DataAPI {
-    static instance:DataAPI = null;
+    static instance: DataAPI = null;
     public numbers: number[];
-    private TOTAL:number;
+    private TOTAL: number;
     public filteredCount: number;
     private filterList = ["전멸구간개수", "전멸라인", "이월수 개수", "포함", "제외", "저값 개수", "합계", "홀수 개수", "소수 개수", "3배수 개수", "첫수합", "고저차", "AC", "연속수 포함여부"]
     private dataList = ['excludedLineCount', 'lineCount', 'carryCount', 'excludeInclude', 'excludeInclude', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
@@ -50,7 +50,7 @@ export default class DataAPI {
     private current: number = 0;
     private data: Data = new Data();
     private generator: Generator = new Generator();
-    public readonly SIZE:number = this.filterList.length;
+    public readonly SIZE: number = this.filterList.length;
 
     static getInstance() {
         if (DataAPI.instance == null) {
@@ -58,8 +58,8 @@ export default class DataAPI {
         }
         return DataAPI.instance;
     }
-    public getTOTAL():number { return this.TOTAL;}
-    public getLabels(num=this.current): Array<string | number> {
+    public getTOTAL(): number { return this.TOTAL; }
+    public getLabels(num = this.current): Array<string | number> {
         return this.rangeList[num];
     }
     public getFilterList(): string[] {
@@ -104,7 +104,7 @@ export default class DataAPI {
     private async getGen(): Promise<void> {
         const { count, range, numbers } = await this.generator.generate();
         this.rangeList[this.current + 1] = range;
-        if(count) this.filteredCount = count;
+        if (count) this.filteredCount = count;
         if (numbers) this.numbers = numbers;
     }
 
@@ -150,7 +150,7 @@ export default class DataAPI {
     public getStats() {
         return this.data[this.dataList[this.current]];
     }
-    public getStats2(){
+    public getStats2() {
         return this.data['excludeInclude'];
     }
 }
