@@ -167,22 +167,23 @@ export default class Layout2 extends Layout1 {
         lottoNumbers.forEach((node: HTMLElement) => {
             node.addEventListener('click', e => {
                 const nodeValue = parseInt(node.textContent);
-                if (this.checkedNumbers.indexOf(nodeValue) === -1) {
-                    if (this.choice !== null) {
-                        if (this.checkedNumbers.indexOf(this.choice) === -1) {
+                if (this.checkedNumbers.indexOf(nodeValue) === -1) { //선택한 번호가 박스에 있는 번호와 중복이 안될 때
+                    if (this.choice !== null) { // 다른 곳에 선택한 번호가 있을 때(노란색)
+                        if (this.checkedNumbers.indexOf(this.choice) === -1) { // 선택한 번호가 박스에 있는 번호와 중복이 안될 때
                             lottoNumbers[this.choice - 1].style.backgroundColor = Layout2.lottoNumDefaultColor;
                             lottoNumbers[this.choice - 1].style.color = Layout2.lottoNumDefaultFontColor;
                         }
                     }
+                    // 처음에 선택할 때
                     this.choice = nodeValue;
                     node.style.backgroundColor = Layout2.lottoNumSelectColor;
                     node.style.color = Layout2.lottoNumSelectFontColor;
                     this.updateChart();
-                } else {
+                } else { //선택한 번호가 박스에 있는 번호와 중복이 될 때
                     if (confirm(`번호 ${nodeValue} 선택취소하시겠습니까?`)) {
-                        if (this.choice !== null) {
+                        if (this.choice !== null) {  // 다른 곳에 선택한 번호가 있을 때
                             lottoNumbers[this.choice - 1].style.backgroundColor = Layout2.lottoNumDefaultColor;
-                        }
+                        } //없을 때
                         this.choice = nodeValue;
                         node.style.backgroundColor = Layout2.lottoNumSelectColor;
                         node.style.color = Layout2.lottoNumSelectFontColor;
@@ -202,8 +203,6 @@ export default class Layout2 extends Layout1 {
                         }
 
                     } else {
-
-
                         this.choice = null;
                     }
                 }
