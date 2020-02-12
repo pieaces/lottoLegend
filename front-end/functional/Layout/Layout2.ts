@@ -25,19 +25,61 @@ export default class Layout2 extends Layout1 {
     static readonly lottoCheckCurrent = 'func2-lotto-check-current';
     private data: any;
     private TOTAL: number;
-    private checkedNumbers = new Array<number>();
+    protected checkedNumbers = new Array<number>();
     private choice = null;
     private boardCurrent = 0;
+<<<<<<< HEAD
     private frequencies: number[] = [];
     private terms: number[] = [];
     private freqTerm: number[] = [];
     includeVerson() {
+=======
+    private frequencies:number[] = [];
+    private terms:number[] = [];
+    private freqTerm:number[] = [];
+
+    private initCoefVerInclude() {
+        const fMin = Math.min(...this.data.frequency);
+        const terms = this.data.howLongNone.map(ele => this.TOTAL - ele.round + 1);
+        const tMax = Math.max(...terms);
+        for (let i = 0; i < 45; i++) {
+            this.frequencies[i] = Math.pow(fMin, 2) / Math.pow(this.data.frequency[i], 2);
+            this.terms[i] = Math.pow(terms[i], 1 / 3) / Math.pow(tMax, 1 / 3);
+            this.freqTerm[i] = this.frequencies[i] * this.terms[i];
+        }
+        const ftMax = Math.max(...this.freqTerm);
+        for (let i = 0; i < 45; i++) {
+            this.freqTerm[i] /= ftMax;
+        }
+    }
+    private initCoefVerExclude(){
+        const fMax = Math.max(...this.data.frequency);
+        const terms = this.data.howLongNone.map(ele => this.TOTAL - ele.round + 1);
+        const tMin = Math.min(...terms);
+        for (let i = 0; i < 45; i++) {
+            this.frequencies[i] = Math.pow(this.data.frequency[i], 2) / Math.pow(fMax, 2);
+            this.terms[i] = Math.pow(tMin, 1 / 3) / Math.pow(terms[i], 1 / 3);
+            this.freqTerm[i] = this.frequencies[i] * this.terms[i];
+        }
+        const ftMax = Math.max(...this.freqTerm);
+        for (let i = 0; i < 45; i++) {
+            this.freqTerm[i] /= ftMax;
+        }
+    }
+    includeVerson(){
+        this.initCoefVerInclude();
+>>>>>>> 91b9973e41f4cf018996980a96f1284bd43d9474
         applyBtn.textContent = '포함'
         lottoNumbers.forEach((node: HTMLElement) => {
             node.style.backgroundColor = '#00048c';
         })
     }
+<<<<<<< HEAD
     excludeVersion() {
+=======
+    excludeVersion(){
+        this.initCoefVerExclude();
+>>>>>>> 91b9973e41f4cf018996980a96f1284bd43d9474
         applyBtn.textContent = '제외'
         Layout2.lottoNumDefaultColor = '#8c0000';
         lottoNumbers.forEach((node: HTMLElement) => {
@@ -209,7 +251,7 @@ export default class Layout2 extends Layout1 {
             lottoNumbers[this.checkedNumbers[i] - 1].style.backgroundColor = Layout2.lottoNumDefaultColor;
 
         }
-        this.checkedNumbers.splice(0, this.checkedNumbers.length);
+        this.checkedNumbers = [];
         if (this.choice !== null) {
             lottoNumbers[this.choice - 1].style.backgroundColor = Layout2.lottoNumDefaultColor;
             this.choice = null;
@@ -223,24 +265,9 @@ export default class Layout2 extends Layout1 {
         }
         e.stopPropagation();
     }
-    private initCoef() {
-        const fMin = Math.min(...this.data.frequency);
-        const terms = this.data.howLongNone.map(ele => this.TOTAL - ele.round + 1);
-        const tMax = Math.max(...terms);
-        for (let i = 0; i < 45; i++) {
-            this.frequencies[i] = Math.pow(fMin, 2) / Math.pow(this.data.frequency[i], 2);
-            this.terms[i] = Math.pow(terms[i], 1 / 3) / Math.pow(tMax, 1 / 3);
-            this.freqTerm[i] = this.frequencies[i] * this.terms[i];
-        }
-        const ftMax = Math.max(...this.freqTerm);
-        for (let i = 0; i < 45; i++) {
-            this.freqTerm[i] /= ftMax;
-        }
-    }
     init() {
         this.data = DataAPI.getInstance().getStats2();
         this.TOTAL = DataAPI.getInstance().getTOTAL();
-        this.initCoef();
         this.numFreqOrTermToggle();
         this.setColorWinNum();
         this.setOpacity(this.frequencies);

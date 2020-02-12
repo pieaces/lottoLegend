@@ -43,9 +43,9 @@ export default class DataAPI {
     public numbers: number[];
     private TOTAL:number;
     public filteredCount: number;
-    private filterList = ["1-1: 전멸구간개수", "1-2: 전멸라인", "2: 이월수 개수", "3-1: 포함", "3-2: 제외", "4: 저값 개수", "5: 합계", "6: 홀수 개수", "7: 소수 개수", "8: 3배수 개수", "9: 첫수합", "10: 고저차", "11: AC", "12: 연속수 포함여부"]
+    private filterList = ["전멸구간개수", "전멸라인", "이월수 개수", "포함", "제외", "저값 개수", "합계", "홀수 개수", "소수 개수", "3배수 개수", "첫수합", "고저차", "AC", "연속수 포함여부"]
     private dataList = ['excludedLineCount', 'lineCount', 'carryCount', 'excludeInclude', 'excludeInclude', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
-    private optionList = [null, 'excludedLines', null, 'excludedNumbers', 'includedNumbers', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
+    private optionList = [null, 'excludedLines', null, 'includedNumbers', 'excludedNumbers', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
     private rangeList: Array<string[] | number[]> = [[0, 1, 2, 3, 4], [0, 1, 2, 3, 4], [0, 1, 2, 3, 4, 5, 6], null, null];
     private current: number = 0;
     private data: Data = new Data();
@@ -59,8 +59,8 @@ export default class DataAPI {
         return DataAPI.instance;
     }
     public getTOTAL():number { return this.TOTAL;}
-    public getLabels(): Array<string | number> {
-        return this.rangeList[this.current];
+    public getLabels(num=this.current): Array<string | number> {
+        return this.rangeList[num];
     }
     public getFilterList(): string[] {
         return this.filterList;
@@ -75,9 +75,6 @@ export default class DataAPI {
         return this.filterList[this.current + 1];
     }
     public getCurrent() { return this.current }
-    public getRange() {
-        return this.rangeList[this.current];
-    }
 
     private async setStats(): Promise<void> {
         let params: Params;
@@ -92,15 +89,11 @@ export default class DataAPI {
             params = { from: range[0], to: range[1] };
             this.rangeList[this.current] = paramToNumbers({ from: range[0], to: range[1] });
         } else if (this.current === 6) {
-            if (this.generator.option.excludedLines) {
-                const range = constraintSum[this.generator.option.lowCount.toString() + this.generator.option.excludedLines.join('')];
-                params = { from: range[0], to: range[1] };
-                this.rangeList[this.current] = compartNumbers(params, 10);
-            }
-            else {
-                const range = constraintSumNotExcluded[this.generator.option.lowCount.toString()];
-                params = { from: range[0], to: range[1] };
-            }
+            let range: any;
+            if (this.generator.option.excludedLines) range = constraintSum[this.generator.option.lowCount.toString() + this.generator.option.excludedLines.join('')];
+            else range = constraintSumNotExcluded[this.generator.option.lowCount.toString()];
+            params = { from: range[0], to: range[1] };
+            this.rangeList[this.current] = compartNumbers(params, 10);
         }
         else {
             params = numbersToParams(this.rangeList[this.current] as number[]);

@@ -9,7 +9,8 @@ const layout2 = document.querySelectorAll<HTMLElement>('.func2-layout');
 const section = document.querySelector('.section1');
 
 export default class Layout extends Layout3 {
-    optionList = [null, [3], null, [10, 20, 42, 43, 44], [2], 2, { from: 100, to: 190 }, { from: 2, to: 4 }, { from: 1, to: 3 }, { from: 0, to: 3 }, { from: 10, to: 14 }, { from: 30, to: 38 }, { from: 7, to: 10 }, true];
+    options:any = [];
+    //optionList2 = [null, [3], null, [10, 20, 42, 43, 44], [2], 2, { from: 100, to: 190 }, { from: 2, to: 4 }, { from: 1, to: 3 }, { from: 0, to: 3 }, { from: 10, to: 14 }, { from: 30, to: 38 }, { from: 7, to: 10 }, true];
     dropDown: DropDown = new DropDown();
     checkBox: Checkbox = new Checkbox();
     nextBtn: NextBtn = new NextBtn();
@@ -31,14 +32,60 @@ export default class Layout extends Layout3 {
             node.classList.remove('none');
         });
     }
-    on(layoutVersion: number = 0) {
+    
+    private setOption(){
+        const currentFilter = DataAPI.getInstance().getCurrent();
+        switch (currentFilter) {
+            case 3: case 4:
+                this.options[currentFilter] = this.checkedNumbers.slice();
+                console.log(this.options);
+                break;
+            default:
+                this.options[currentFilter] = this.checkBox.getCheckedLabels().slice();
+                if(currentFilter === 1){
+                    const range = DataAPI.getInstance().getLabels();
+                    const option:number[] = [];
+                    this.options[currentFilter].forEach((value, index) => {
+                        if(value){
+                            option.push(range[index] as number);
+                        }
+                    });
+                    this.options[currentFilter] = option;
+                }else if(currentFilter === 5){
+                    this.options[currentFilter] = DataAPI.getInstance().getLabels()[this.options[currentFilter].indexOf(true)];
+                } else if (currentFilter > 5) {
+                    const range = DataAPI.getInstance().getLabels()
+                    let from = range[this.options[currentFilter].indexOf(true)];
+                    let to = range[this.options[currentFilter].lastIndexOf(true)]
+                    if (currentFilter === 6) {
+                        from = Number((<string>from).slice(0, (<string>from).indexOf('~')));
+                        to = Number((<string>to).slice((<string>to).indexOf('~') + 1));
+                    } else {
+                        from = Number(from);
+                        to = Number(to);
+                    }
+                    this.options[currentFilter] = {from, to}
+                } else if(currentFilter === DataAPI.getInstance().SIZE - 1){
+                    console.log('true?');
+                    this.options[currentFilter] = this.options[currentFilter][0] === 0 ? false : true;
+                }
+                console.log(this.options);
+        }
+    }
+    private on(layoutVersion: number = 0) {
         if (layoutVersion === 0) {
             const currentFilter = DataAPI.getInstance().getCurrent();
             switch (currentFilter) {
                 case 3: case 4:
                     this.reset();
+<<<<<<< HEAD
                     if (currentFilter === 3) this.includeVerson();
                     if (currentFilter === 4) this.excludeVersion();
+=======
+                    this.checkBox.removeAllEvent();
+                    if(currentFilter === 3) this.includeVerson();
+                    if(currentFilter === 4) this.excludeVersion();
+>>>>>>> 91b9973e41f4cf018996980a96f1284bd43d9474
                     this.layout2On();
                     this.resetBtn.removeEvent();
                     this.resetBtn.addEvent(this.reset.bind(this));
@@ -46,7 +93,15 @@ export default class Layout extends Layout3 {
                 default:
                     this.layout1On();
                     this.checkBox.init();
-                    this.checkBox.addEvent();
+                    if(currentFilter === 1){
+                        const trueIndex = this.options[0].indexOf(true);
+                        const count = DataAPI.getInstance().getLabels()[trueIndex] as number;
+                        this.checkBox.multiSelectEvent(count);
+                    }else if(currentFilter <= 5){
+                        this.checkBox.singleSelectEvent();
+                    }else{
+                        this.checkBox.rangeSelectEvent();
+                    }
                     this.resetBtn.removeEvent();
                     this.resetBtn.addEvent(this.checkBox.reset.bind(this.checkBox));
                     this.barSlide.init();
@@ -65,26 +120,24 @@ export default class Layout extends Layout3 {
         this.dropDown.changeDropDownColor();
         this.dropDown.addEvent();
         this.checkBox.init();
-        this.checkBox.addEvent();
+        this.checkBox.singleSelectEvent();
         this.resetBtn.addEvent(this.checkBox.reset.bind(this.checkBox));
-
         this.barSlide.init();
         this.lineSlide.init();
         this.bubbleChart.init();
         this.statsBoard.textContent = JSON.stringify(DataAPI.getInstance().getStats().stats);
+
         this.nextBtn.addEvent(async () => {
             section.scrollIntoView({
                 behavior: 'auto'
             });
-            this.checkBox.reset();
+            this.setOption();
             const currentFilter = DataAPI.getInstance().getCurrent();
-
-            await DataAPI.getInstance().forward(this.optionList[currentFilter]);
+            await DataAPI.getInstance().forward(this.options[currentFilter]);
             this.on();
-
+            this.checkBox.reset();
             this.dropDown.changeBoard();
             this.dropDown.changeDropDownColor();
-
             super.init();
         })
     }
