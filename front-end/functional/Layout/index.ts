@@ -53,6 +53,9 @@ export default class Layout extends Layout3 {
                     this.options[currentFilter] = option;
                 } else if (currentFilter === 5) {
                     this.options[currentFilter] = DataAPI.getInstance().getLabels()[this.options[currentFilter].indexOf(true)];
+                } else if (currentFilter === DataAPI.getInstance().SIZE - 1) {
+                    console.log(this.options[currentFilter]);
+                    this.options[currentFilter] = this.options[currentFilter] ? false : true;
                 } else if (currentFilter > 5) {
                     const range = DataAPI.getInstance().getLabels()
                     let from = range[this.options[currentFilter].indexOf(true)];
@@ -65,9 +68,6 @@ export default class Layout extends Layout3 {
                         to = Number(to);
                     }
                     this.options[currentFilter] = { from, to }
-                } else if (currentFilter === DataAPI.getInstance().SIZE - 1) {
-                    console.log('true?');
-                    this.options[currentFilter] = this.options[currentFilter][0] === 0 ? false : true;
                 }
                 console.log(this.options);
         }
