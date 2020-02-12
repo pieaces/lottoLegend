@@ -8,11 +8,11 @@ router.get('/:method', async (req, res) => {
     let data;
     if (method in Method) {
         const temp: QueryStatsParams = {}
-        if (req.query.list) {
-            temp.list = JSON.parse(decodeURI(req.query.list));
-        } else if ((req.query.from && req.query.to) || (typeof req.query.from === 'number' && typeof req.query.to === 'number')) {
+        if ((req.query.from && req.query.to)) {
             temp.from = Number(req.query.from);
             temp.to = Number(req.query.to);
+        } else if (req.query.list) {
+            temp.list = JSON.parse(decodeURI(req.query.list));
         }
         data = await queryStats(method as Method, temp);
         res.json({ data });

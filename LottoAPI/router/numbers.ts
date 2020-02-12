@@ -48,7 +48,7 @@ router.post('/generator', (req, res) => {
         option.AC = req.body.AC;
         willRangeFinder = Calculate.consecutiveExist;
     }
-    if (typeof req.body.consecutiveExist !== 'boolean') {
+    if (typeof req.body.consecutiveExist === 'boolean') {
         option.consecutiveExist = req.body.consecutiveExist;
     }
 
@@ -59,7 +59,7 @@ router.post('/generator', (req, res) => {
     if(!generator.option.sum){
         res.json("Not Proper Parameters");
     }
-    else if (typeof generator.option.consecutiveExist !== 'undefined') {
+    else if (typeof generator.option.consecutiveExist === 'boolean') {
         res.json({
             numbers: generator.getGeneratedNumbers()
         });
