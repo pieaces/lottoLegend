@@ -6,9 +6,11 @@ const dataBox = {
     datasets: [
         {
             steppedLine: true,
-            borderColor: 'red',
+            borderColor: '#3E3D55',
+            borderWidth: 3,
             fill: false,
             data: null,
+            pointBackgroundColor: "#00C8FF"
         }
     ]
 };

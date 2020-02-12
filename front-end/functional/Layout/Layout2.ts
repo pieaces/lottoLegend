@@ -17,26 +17,27 @@ export default class Layout2 extends Layout1 {
     static readonly MAX_SIZE = 10;
     static lottoNumDefaultColor = '#00048c';
     static readonly lottoNumSelectColor = '#e6e600';
+    static readonly lottoNumDefaultFontColor = 'white';
+    static readonly lottoNumSelectFontColor = 'black';
     static readonly lottoNumCheckedColor = 'darkgray';
     static readonly body = 'body *';
     static readonly numBoard = '.func2-main-1-4 *';
     static readonly lottoCheckCurrent = 'func2-lotto-check-current';
-    static readonly selectNumBox = 'func2-select-num-box';
     private data: any;
     private TOTAL: number;
     private checkedNumbers = new Array<number>();
     private choice = null;
     private boardCurrent = 0;
-    private frequencies:number[] = [];
-    private terms:number[] = [];
-    private freqTerm:number[] = [];
-    includeVerson(){
+    private frequencies: number[] = [];
+    private terms: number[] = [];
+    private freqTerm: number[] = [];
+    includeVerson() {
         applyBtn.textContent = '포함'
         lottoNumbers.forEach((node: HTMLElement) => {
             node.style.backgroundColor = '#00048c';
         })
     }
-    excludeVersion(){
+    excludeVersion() {
         applyBtn.textContent = '제외'
         Layout2.lottoNumDefaultColor = '#8c0000';
         lottoNumbers.forEach((node: HTMLElement) => {
@@ -74,13 +75,14 @@ export default class Layout2 extends Layout1 {
             node.addEventListener('click', e => {
                 if (this.choice !== null) {
                     lottoNumbers[this.choice - 1].style.backgroundColor = Layout2.lottoNumDefaultColor;
+                    lottoNumbers[this.choice - 1].style.color = Layout2.lottoNumDefaultFontColor;
                     let opacities: number[];
-                    switch(this.boardCurrent){
+                    switch (this.boardCurrent) {
                         case 0: opacities = this.frequencies; break;
                         case 1: opacities = this.terms; break;
                         case 2: opacities = this.freqTerm; break;
                     }
-                    lottoNumbers[this.choice - 1].style.opacity = `${opacities[this.choice-1]}`;
+                    lottoNumbers[this.choice - 1].style.opacity = `${opacities[this.choice - 1]}`;
                     this.choice = null;
                 }
             });
@@ -105,7 +107,7 @@ export default class Layout2 extends Layout1 {
             this.setColorLotto(nodeValue, node);
         });
     }
-    private setOpacity(coef:number[]) {
+    private setOpacity(coef: number[]) {
         lottoNumbers.forEach((node, index) => {
             node.style.opacity = `${coef[index]}`;
         })
@@ -130,10 +132,12 @@ export default class Layout2 extends Layout1 {
                     if (this.choice !== null) {
                         if (this.checkedNumbers.indexOf(this.choice) === -1) {
                             lottoNumbers[this.choice - 1].style.backgroundColor = Layout2.lottoNumDefaultColor;
+                            lottoNumbers[this.choice - 1].style.color = Layout2.lottoNumDefaultFontColor;
                         }
                     }
                     this.choice = nodeValue;
                     node.style.backgroundColor = Layout2.lottoNumSelectColor;
+                    node.style.color = Layout2.lottoNumSelectFontColor;
                     this.updateChart();
                 } else {
                     if (confirm(`번호 ${nodeValue} 선택취소하시겠습니까?`)) {
@@ -142,27 +146,20 @@ export default class Layout2 extends Layout1 {
                         }
                         this.choice = nodeValue;
                         node.style.backgroundColor = Layout2.lottoNumSelectColor;
-                        selectNumBox.children[this.checkedNumbers.length - 1].classList.remove(`${Layout2.selectNumBox}${this.checkedNumbers.length}`);
+
                         this.updateChart();
 
                         for (let i = 0; i < selectNumBox.children.length; i++) {
                             if (this.checkedNumbers.indexOf(nodeValue) !== -1) {
-                                selectNumBox.children[this.checkedNumbers.indexOf(nodeValue)].textContent = '';
+                                selectNumBox.children[this.checkedNumbers.indexOf(nodeValue)].remove();
                                 this.checkedNumbers.splice(this.checkedNumbers.indexOf(nodeValue), 1);
                                 break;
                             }
                         }
-                        for (let i = 0; i < selectNumBox.children.length; i++) {
-                            if (this.checkedNumbers.length !== 0) {
-                                selectNumBox.children[i].textContent = this.checkedNumbers[i].toString();
-                            }
-                            (<HTMLElement>selectNumBox.children[i]).style.backgroundColor = '';
-                        }
-                        for (let i = 0; i < this.checkedNumbers.length; i++) {
-                            this.setColorLotto(parseInt(selectNumBox.children[i].textContent), <HTMLElement>selectNumBox.children[i]);
-                        }
+
                     } else {
-                        lottoNumbers[this.choice - 1].style.backgroundColor = Layout2.lottoNumDefaultColor;
+
+
                         this.choice = null;
                     }
                 }
@@ -175,16 +172,16 @@ export default class Layout2 extends Layout1 {
                 if (this.checkedNumbers.indexOf(this.choice) === -1) {
                     if (this.choice !== null) {
                         lottoNumbers[this.choice - 1].style.backgroundColor = Layout2.lottoNumCheckedColor;
+                        lottoNumbers[this.choice - 1].style.color = Layout2.lottoNumDefaultFontColor;
                         lottoNumbers[this.choice - 1].style.opacity = '';
                         this.checkedNumbers.push(this.choice);
                         const numOrder = this.checkedNumbers.indexOf(this.choice);
+                        const div = document.createElement('div');
+                        const text = document.createTextNode(this.choice);
+                        div.appendChild(text);
 
-                        selectNumBox.children[numOrder].classList.add(
-                            `${Layout2.selectNumBox}${numOrder + 1}`
-                        );
-
-                        selectNumBox.children[numOrder].textContent = this.choice;
-                        this.setColorLotto(this.choice, <HTMLElement>selectNumBox.children[numOrder]);
+                        this.setColorLotto(this.choice, <HTMLElement>div);
+                        selectNumBox.appendChild(div);
                         this.choice = null;
                     }
                 }
@@ -196,14 +193,14 @@ export default class Layout2 extends Layout1 {
         });
         this.cancelCheck();
     }
-    protected reset(){
+    protected reset() {
         for (const node of Array.from(selectNumBox.children)) {
             node.textContent = '';
             (<HTMLElement>node).style.backgroundColor = '';
         }
         for (let i = 0; i < this.checkedNumbers.length; i++) {
             lottoNumbers[this.checkedNumbers[i] - 1].style.backgroundColor = Layout2.lottoNumDefaultColor;
-            selectNumBox.children[i].classList.remove(`${Layout2.selectNumBox}${i + 1}`);
+
         }
         this.checkedNumbers.splice(0, this.checkedNumbers.length);
         if (this.choice !== null) {

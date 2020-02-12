@@ -7,10 +7,10 @@ const dataBox = {
         {
             fill: true,
             borderWidth: 1,
-            backgroundColor: 'rgba(179,181,198,0.2)',
-            borderColor: 'rgba(179,181,198,1)',
-            pointBorderColor: '#fff',
-            pointBackgroundColor: 'rgba(179,181,198,1)',
+
+            borderColor: '#72B992',
+            pointBorderColor: '#72B992',
+            pointBackgroundColor: 'white',
             data: null
         }
     ]

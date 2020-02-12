@@ -7,7 +7,7 @@ const dataBox = {
         {
             label: 'Ice Cream Sales ',
             fill: true,
-            backgroundColor: ['moccasin', 'saddlebrown'],
+            backgroundColor: ['#3DA8E3', '#FBCE00'],
             data: null
         }
     ]
