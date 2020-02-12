@@ -98,8 +98,12 @@ export default class DataAPI {
             params = numbersToParams(this.rangeList[this.current] as number[]);
             if(this.current === 11){
                 const range = this.rangeList[this.current];
-                params = {from:range[0] as number, to:range[range.length - 1] as number};
-                this.rangeList[this.current] = compartNumbers(params, 2);
+                console.log('range', range);
+                console.log('params', params);
+                if(range.length > 7){
+                    this.rangeList[this.current] = compartNumbers(params, 2);
+                    params = {from:range[0] as number, to:range[range.length - 1] as number};
+                }
             }
         }
         await this.data.getData(this.dataList[this.current], params);

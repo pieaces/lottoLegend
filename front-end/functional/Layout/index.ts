@@ -61,7 +61,10 @@ export default class Layout extends Layout3 {
                     if (currentFilter === 6) {
                         from = Number((<string>from).slice(0, (<string>from).indexOf('~')));
                         to = Number((<string>to).slice((<string>to).indexOf('~') + 1));
-                    } else {
+                    } else if(currentFilter === 11 && typeof from === 'string') {
+                        from = Number((<string>from).slice(0, (<string>from).indexOf('~')));
+                        to = Number((<string>to).slice((<string>to).indexOf('~') + 1));
+                    }else {
                         from = Number(from);
                         to = Number(to);
                     }

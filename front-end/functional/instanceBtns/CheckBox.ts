@@ -99,7 +99,6 @@ export default class CheckBox {
 
                     min = Math.min(last, index);
                     max = Math.max(last, index);
-                    console.log(min, max)
                     for (let i = min; i <= max; i++) {
                         parent[i].classList.add(CheckBox.checkedStyle);
                         this.labelList[i] = true;
@@ -113,7 +112,6 @@ export default class CheckBox {
         });
     }
     reset() {
-        console.log('!')
         if (this.nodeList.length === 0) {
             this.init();
         }
@@ -125,7 +123,6 @@ export default class CheckBox {
     init() {
         this.nodeList = [];
         let labels: (string | number)[];
-        console.log(DataAPI.getInstance().getCurrent(), DataAPI.getInstance().SIZE)
         if (DataAPI.getInstance().getCurrent() !== DataAPI.getInstance().SIZE - 1) {
             labels = DataAPI.getInstance().getLabels().map(value => {
                 if (typeof value === 'string') {
@@ -137,7 +134,6 @@ export default class CheckBox {
                 return value;
             });
         } else {
-            console.log('false vs true')
             labels = ['false', 'true'];
         }
         this.labelList = new Array<boolean>(labels.length).fill(false);
