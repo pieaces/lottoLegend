@@ -2,6 +2,7 @@ import ChartBase from "../Chart/Charts";
 
 export default abstract class Slide<T extends ChartBase> {
     current: number;
+    readonly CURRENT_CSS = 'chart-slide-current'
     readonly size: number;
     readonly chart: T;
     readonly leftBtn: HTMLElement;
