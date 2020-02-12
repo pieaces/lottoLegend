@@ -38,7 +38,6 @@ export default class Layout extends Layout3 {
         switch (currentFilter) {
             case 3: case 4:
                 this.options[currentFilter] = this.checkedNumbers.slice();
-                console.log(this.options);
                 break;
             default:
                 this.options[currentFilter] = this.checkBox.getCheckedLabels().slice();
@@ -54,7 +53,6 @@ export default class Layout extends Layout3 {
                 } else if (currentFilter === 5) {
                     this.options[currentFilter] = DataAPI.getInstance().getLabels()[this.options[currentFilter].indexOf(true)];
                 } else if (currentFilter === DataAPI.getInstance().SIZE - 1) {
-                    console.log(this.options[currentFilter]);
                     this.options[currentFilter] = this.options[currentFilter] ? false : true;
                 } else if (currentFilter > 5) {
                     const range = DataAPI.getInstance().getLabels()
@@ -69,7 +67,6 @@ export default class Layout extends Layout3 {
                     }
                     this.options[currentFilter] = { from, to }
                 }
-                console.log(this.options);
         }
     }
     private on(layoutVersion: number = 0) {
