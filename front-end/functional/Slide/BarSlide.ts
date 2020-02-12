@@ -33,7 +33,9 @@ export default class BarSlide extends Slide<ChartBase> {
         this.textBox.textContent = this.current.toString();
     }
     init() {
+        this.numBtns[this.current].classList.remove(this.CURRENT_CSS);
         this.current = 0;
+        this.numBtns[this.current].classList.add(this.CURRENT_CSS);
         this.chart.dataBox.labels = DataAPI.getInstance().getLabels();
         this.chart.dataBox.datasets[0].data = DataAPI.getInstance().getStats().ideal['latest'];
         this.chart.update();
