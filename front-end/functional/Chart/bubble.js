@@ -30,7 +30,6 @@ export default class BubbleChart {
             bubble: { textStyle: { fontSize: 11 } },
             chartArea: { width: '50%', height: '75%' }
         };
-        console.log(option);
         const chart = new google.visualization.BubbleChart(this.element);
         chart.draw(dataTable, option);
     }
