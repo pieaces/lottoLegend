@@ -22,7 +22,7 @@ function compartNumbers(param: Params, PACK: number): string[] {
     const result: string[] = [];
     let temp: number;
     for (let i = param.from; i <= param.to - PACK; i += PACK) {
-        result.push(i + '~' + (i + 9));
+        result.push(i + '~' + (i + PACK-1));
         temp = i + PACK;
     }
     if (temp === param.to) result.push(temp.toString());
@@ -94,9 +94,17 @@ export default class DataAPI {
             else range = constraintSumNotExcluded[this.generator.option.lowCount.toString()];
             params = { from: range[0], to: range[1] };
             this.rangeList[this.current] = compartNumbers(params, 10);
-        }
-        else {
+         } else {
             params = numbersToParams(this.rangeList[this.current] as number[]);
+            if(this.current === 11){
+                const range = this.rangeList[this.current];
+                console.log('range', range);
+                console.log('params', params);
+                if(range.length > 7){
+                    this.rangeList[this.current] = compartNumbers(params, 2);
+                    params = {from:range[0] as number, to:range[range.length - 1] as number};
+                }
+            }
         }
         await this.data.getData(this.dataList[this.current], params);
     }
