@@ -1,145 +1,156 @@
 import Layout3 from "./Layout3";
 import DataAPI from "../DataAPI";
 import DropDown from "../instanceBtns/DropDown";
-import Checkbox from '../instanceBtns/CheckBox';
+import Checkbox from "../instanceBtns/CheckBox";
 import NextBtn from "../instanceBtns/NextBtn";
-import ResetBtn from '../instanceBtns/ResetBtn'
-const layout1 = document.querySelectorAll<HTMLElement>('.func1-layout');
-const layout2 = document.querySelectorAll<HTMLElement>('.func2-layout');
-const section = document.querySelector('.section1');
-const infoText = document.querySelector('.func1-checkbox-text');
+import ResetBtn from "../instanceBtns/ResetBtn";
+const layout1 = document.querySelectorAll<HTMLElement>(".func1-layout");
+const layout2 = document.querySelectorAll<HTMLElement>(".func2-layout");
+const section = document.querySelector(".section1");
+const infoText = document.querySelector(".func1-checkbox-text");
 export default class Layout extends Layout3 {
-    options: any = [];
-    //optionList2 = [null, [3], null, [10, 20, 42, 43, 44], [2], 2, { from: 100, to: 190 }, { from: 2, to: 4 }, { from: 1, to: 3 }, { from: 0, to: 3 }, { from: 10, to: 14 }, { from: 30, to: 38 }, { from: 7, to: 10 }, true];
-    dropDown: DropDown = new DropDown();
-    checkBox: Checkbox = new Checkbox();
-    nextBtn: NextBtn = new NextBtn();
-    resetBtn: ResetBtn = new ResetBtn();
-    nextAbleLimit:number[] = [1];
-    private layout1On() {
-        layout1.forEach(node => {
-            node.classList.remove('none');
-        });
-        layout2.forEach(node => {
-            node.classList.add('none');
-        });
-    }
-    private layout2On() {
-        layout1.forEach(node => {
-            node.classList.add('none');
-        });
-        layout2.forEach(node => {
-            node.classList.remove('none');
-        });
-    }
+  options: any = [];
+  //optionList2 = [null, [3], null, [10, 20, 42, 43, 44], [2], 2, { from: 100, to: 190 }, { from: 2, to: 4 }, { from: 1, to: 3 }, { from: 0, to: 3 }, { from: 10, to: 14 }, { from: 30, to: 38 }, { from: 7, to: 10 }, true];
+  dropDown: DropDown = new DropDown();
+  checkBox: Checkbox = new Checkbox();
+  nextBtn: NextBtn = new NextBtn();
+  resetBtn: ResetBtn = new ResetBtn();
+  nextAbleLimit: number[] = [1];
+  private layout1On() {
+    layout1.forEach(node => {
+      node.classList.remove("none");
+    });
+    layout2.forEach(node => {
+      node.classList.add("none");
+    });
+  }
+  private layout2On() {
+    layout1.forEach(node => {
+      node.classList.add("none");
+    });
+    layout2.forEach(node => {
+      node.classList.remove("none");
+    });
+  }
 
-    private setOption() {
-        const currentFilter = DataAPI.getInstance().getCurrent();
-        switch (currentFilter) {
-            case 3: case 4:
-                this.options[currentFilter] = this.checkedNumbers.slice();
-                break;
-            default:
-                this.options[currentFilter] = this.checkBox.getCheckedLabels().slice();
-                if (currentFilter === 1) {
-                    const range = DataAPI.getInstance().getLabels();
-                    const option: number[] = [];
-                    this.options[currentFilter].forEach((value, index) => {
-                        if (value) {
-                            option.push(range[index] as number);
-                        }
-                    });
-                    this.options[currentFilter] = option;
-                } else if (currentFilter === 5) {
-                    this.options[currentFilter] = DataAPI.getInstance().getLabels()[this.options[currentFilter].indexOf(true)];
-                } else if (currentFilter === DataAPI.getInstance().SIZE - 1) {
-                    this.options[currentFilter] = this.options[currentFilter] ? false : true;
-                } else if (currentFilter > 5) {
-                    const range = DataAPI.getInstance().getLabels()
-                    let from = range[this.options[currentFilter].indexOf(true)];
-                    let to = range[this.options[currentFilter].lastIndexOf(true)]
-                    if (currentFilter === 6) {
-                        from = Number((<string>from).slice(0, (<string>from).indexOf('~')));
-                        to = Number((<string>to).slice((<string>to).indexOf('~') + 1));
-                    } else if (currentFilter === 11 && typeof from === 'string') {
-                        from = Number((<string>from).slice(0, (<string>from).indexOf('~')));
-                        to = Number((<string>to).slice((<string>to).indexOf('~') + 1));
-                    } else {
-                        from = Number(from);
-                        to = Number(to);
-                    }
-                    this.options[currentFilter] = { from, to }
-                }
+  private setOption() {
+    const currentFilter = DataAPI.getInstance().getCurrent();
+    switch (currentFilter) {
+      case 3:
+      case 4:
+        this.options[currentFilter] = this.checkedNumbers.slice();
+        break;
+      default:
+        this.options[currentFilter] = this.checkBox.getCheckedLabels().slice();
+        if (currentFilter === 1) {
+          const range = DataAPI.getInstance().getLabels();
+          const option: number[] = [];
+          this.options[currentFilter].forEach((value, index) => {
+            if (value) {
+              option.push(range[index] as number);
+            }
+          });
+          this.options[currentFilter] = option;
+        } else if (currentFilter === 5) {
+          this.options[currentFilter] = DataAPI.getInstance().getLabels()[
+            this.options[currentFilter].indexOf(true)
+          ];
+        } else if (currentFilter === DataAPI.getInstance().SIZE - 1) {
+          this.options[currentFilter] = this.options[currentFilter]
+            ? false
+            : true;
+        } else if (currentFilter > 5) {
+          const range = DataAPI.getInstance().getLabels();
+          let from = range[this.options[currentFilter].indexOf(true)];
+          let to = range[this.options[currentFilter].lastIndexOf(true)];
+          if (currentFilter === 6) {
+            from = Number((<string>from).slice(0, (<string>from).indexOf("~")));
+            to = Number((<string>to).slice((<string>to).indexOf("~") + 1));
+          } else if (currentFilter === 11 && typeof from === "string") {
+            from = Number((<string>from).slice(0, (<string>from).indexOf("~")));
+            to = Number((<string>to).slice((<string>to).indexOf("~") + 1));
+          } else {
+            from = Number(from);
+            to = Number(to);
+          }
+          this.options[currentFilter] = { from, to };
         }
     }
-    private on(layoutVersion: number = 0) {
-        if (layoutVersion === 0) {
-            const currentFilter = DataAPI.getInstance().getCurrent();
-            switch (currentFilter) {
-                case 3: case 4:
-                    this.reset();
-                    this.checkBox.removeAllEvent();
-                    if (currentFilter === 3) this.includeVerson();
-                    if (currentFilter === 4) this.excludeVersion();
-                    this.setOpacity();
+  }
+  private on(layoutVersion: number = 0) {
+    if (layoutVersion === 0) {
+      const currentFilter = DataAPI.getInstance().getCurrent();
+      switch (currentFilter) {
+        case 3:
+        case 4:
+          this.reset();
+          this.checkBox.removeAllEvent();
+          if (currentFilter === 3) this.includeVerson();
+          if (currentFilter === 4) this.excludeVersion();
+          this.setOpacity();
 
-                    this.layout2On();
-                    this.resetBtn.removeEvent();
-                    this.resetBtn.addEvent(this.reset.bind(this));
-                    break;
-                default:
-                    this.layout1On();
-                    this.checkBox.init();
-                    if (currentFilter === 1) {
-                        const trueIndex = this.options[0].indexOf(true);
-                        const count = DataAPI.getInstance().getLabels()[trueIndex] as number;
-                        this.nextAbleLimit.push(count);
-                        this.checkBox.multiSelectEvent(count);
-                    } else if (currentFilter <= 5) {
-                        this.checkBox.singleSelectEvent();
-                    } else {
-                        this.checkBox.rangeSelectEvent();
-                    }
-                    this.resetBtn.removeEvent();
-                    this.resetBtn.addEvent(this.checkBox.reset.bind(this.checkBox));
-                    this.barSlide.init();
-                    this.lineSlide.init();
-                    this.bubbleChart.init();
-                    break;
-            }
-        } else {
-            if (layoutVersion === 1) this.layout1On();
-            else if (layoutVersion === 2) this.layout2On();
-        }
+          this.layout2On();
+          this.resetBtn.removeEvent();
+          this.resetBtn.addEvent(this.reset.bind(this));
+          break;
+        default:
+          this.layout1On();
+          this.checkBox.init();
+          if (currentFilter === 1) {
+            const trueIndex = this.options[0].indexOf(true);
+            const count = DataAPI.getInstance().getLabels()[
+              trueIndex
+            ] as number;
+            this.nextAbleLimit.push(count);
+            this.checkBox.multiSelectEvent(count);
+          } else if (currentFilter <= 5) {
+            this.checkBox.singleSelectEvent();
+          } else {
+            this.checkBox.rangeSelectEvent();
+          }
+          this.resetBtn.removeEvent();
+          this.resetBtn.addEvent(this.checkBox.reset.bind(this.checkBox));
+          this.barSlide.init();
+          this.lineSlide.init();
+          this.bubbleChart.init();
+          break;
+      }
+    } else {
+      if (layoutVersion === 1) this.layout1On();
+      else if (layoutVersion === 2) this.layout2On();
     }
-    init() {
-        super.init();
-        this.dropDown.init();
-        this.dropDown.changeDropDownColor();
-        this.dropDown.addEvent();
-        this.checkBox.init();
-        this.checkBox.singleSelectEvent();
-        this.resetBtn.addEvent(this.checkBox.reset.bind(this.checkBox));
-        this.barSlide.init();
-        this.lineSlide.init();
-        this.bubbleChart.init();
-        // this.statsBoard.textContent = JSON.stringify(DataAPI.getInstance().getStats().stats);
+  }
+  init() {
+    super.init();
+    this.dropDown.init();
+    this.dropDown.changeDropDownColor();
+    this.dropDown.addEvent();
+    this.checkBox.init();
+    this.checkBox.singleSelectEvent();
+    this.resetBtn.addEvent(this.checkBox.reset.bind(this.checkBox));
+    this.barSlide.init();
+    this.lineSlide.init();
+    this.bubbleChart.init();
+    // this.statsBoard.textContent = JSON.stringify(DataAPI.getInstance().getStats().stats);
 
-        this.nextBtn.addEvent(async () => {
-            if (this.checkBox.getCount() === this.nextAbleLimit[DataAPI.getInstance().getCurrent()]) {
-                section.scrollIntoView({
-                    behavior: 'auto'
-                });
-                this.setOption();
-                const currentFilter = DataAPI.getInstance().getCurrent();
-                await DataAPI.getInstance().forward(this.options[currentFilter]);
-                this.on();
-                this.checkBox.reset();
-                this.dropDown.changeBoard();
-                this.dropDown.changeDropDownColor();
-            } else {
-                infoText.textContent = '찍어!'
-            }
-        });
-    }
+    this.nextBtn.addEvent(async () => {
+      //   if (
+      //     this.checkBox.getCount() ===
+      //     this.nextAbleLimit[DataAPI.getInstance().getCurrent()]
+      //   ) {
+      section.scrollIntoView({
+        behavior: "auto"
+      });
+      this.setOption();
+      const currentFilter = DataAPI.getInstance().getCurrent();
+      await DataAPI.getInstance().forward(this.options[currentFilter]);
+      this.on();
+      this.checkBox.reset();
+      this.dropDown.changeBoard();
+      this.dropDown.changeDropDownColor();
+      //   } else {
+      //     infoText.textContent = "찍어!";
+      //   }
+    });
+  }
 }

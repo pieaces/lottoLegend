@@ -61,28 +61,53 @@ export default class Layout2 extends Layout1 {
         }
     }
     includeVerson() {
+
+        this.clearChart();
+
+        this.updateChart();
+
         this.initCoefVerInclude();
         applyBtn.textContent = '포함'
         lottoNumbers.forEach((node: HTMLElement) => {
             node.style.backgroundColor = '#00048c';
         })
+        gauss.dataBox.datasets[0].borderColor = '#3E3D55';
     }
     excludeVersion() {
+
+        this.clearChart();
+
+        this.updateChart();
+
         this.initCoefVerExclude();
         applyBtn.textContent = '제외'
         Layout2.lottoNumDefaultColor = '#8c0000';
         lottoNumbers.forEach((node: HTMLElement) => {
             node.style.backgroundColor = '#8c0000';
         })
+        gauss.dataBox.datasets[0].borderColor = '#8c0000';
+
+
     }
+
     private updateChart() {
+        bar.update();
+        radar.update();
+        gauss.update();
+    }
+
+    private clearChart() {
+        bar.clear();
+        radar.clear();
+        gauss.clear();
+    }
+
+    private updateChartData() {
         bar.dataBox.datasets[0].data = [this.TOTAL * 6 / 45, this.data.frequency[this.choice - 1]];
         radar.dataBox.datasets[0].data = this.data.interval[this.choice - 1].list;
         gauss.dataBox.datasets[0].data = this.data.emergence[this.choice - 1];
 
-        bar.update();
-        radar.update();
-        gauss.update();
+        this.updateChart();
     }
     private cancelCheck() {
         let myExclusiveEl = Array.from(document.querySelectorAll<HTMLElement>(Layout2.body));
@@ -178,17 +203,18 @@ export default class Layout2 extends Layout1 {
                     this.choice = nodeValue;
                     node.style.backgroundColor = Layout2.lottoNumSelectColor;
                     node.style.color = Layout2.lottoNumSelectFontColor;
-                    this.updateChart();
+                    this.updateChartData();
                 } else { //선택한 번호가 박스에 있는 번호와 중복이 될 때
                     if (confirm(`번호 ${nodeValue} 선택취소하시겠습니까?`)) {
                         if (this.choice !== null) {  // 다른 곳에 선택한 번호가 있을 때
                             lottoNumbers[this.choice - 1].style.backgroundColor = Layout2.lottoNumDefaultColor;
+                            lottoNumbers[this.choice - 1].style.color = Layout2.lottoNumDefaultFontColor;
                         } //없을 때
                         this.choice = nodeValue;
                         node.style.backgroundColor = Layout2.lottoNumSelectColor;
                         node.style.color = Layout2.lottoNumSelectFontColor;
 
-                        this.updateChart();
+                        this.updateChartData();
 
                         for (let i = 0; i < selectNumBox.children.length; i++) {
                             if (this.checkedNumbers.indexOf(nodeValue) !== -1) {
