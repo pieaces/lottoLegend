@@ -5,3 +5,7 @@ export default class Layout3 extends Layout2 {
         super.init();
     }
 }
+
+function makeNumBoard() {
+
+}

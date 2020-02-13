@@ -19,7 +19,7 @@ export default class Layout2 extends Layout1 {
     static readonly lottoNumSelectColor = '#e6e600';
     static readonly lottoNumDefaultFontColor = 'white';
     static readonly lottoNumSelectFontColor = 'black';
-    static readonly lottoNumCheckedColor = 'darkgray';
+    static readonly lottoNumCheckedColor = '#2F4F4F';
     static readonly body = 'body *';
     static readonly numBoard = '.func2-main-1-4 *';
     static readonly lottoCheckCurrent = 'func2-lotto-check-current';
@@ -146,7 +146,7 @@ export default class Layout2 extends Layout1 {
             this.setColorLotto(nodeValue, node);
         });
     }
-    private getOpacities():number[]{
+    private getOpacities(): number[] {
         let opacities: number[];
         switch (this.boardCurrent) {
             case 0: opacities = this.frequencies;
@@ -164,7 +164,7 @@ export default class Layout2 extends Layout1 {
             node.style.opacity = `${opacities[index]}`;
         });
     }
-    private getOpacity(index:number){
+    private getOpacity(index: number) {
         let opacities = this.getOpacities();
         return opacities[index];
     }
@@ -184,13 +184,13 @@ export default class Layout2 extends Layout1 {
                 const nodeValue = parseInt(node.textContent);
                 if (this.checkedNumbers.indexOf(nodeValue) === -1) { //선택한 번호가 박스에 있는 번호와 중복이 안될 때
                     if (this.choice !== null) { // 다른 곳에 선택한 번호가 있을 때(노란색)
-                        lottoNumbers[this.choice-1].style.opacity = this.getOpacity(this.choice - 1).toString();
+                        lottoNumbers[this.choice - 1].style.opacity = this.getOpacity(this.choice - 1).toString();
                         if (this.checkedNumbers.indexOf(this.choice) === -1) { // 선택한 번호가 박스에 있는 번호와 중복이 안될 때
                             lottoNumbers[this.choice - 1].style.backgroundColor = Layout2.lottoNumDefaultColor;
                             lottoNumbers[this.choice - 1].style.color = Layout2.lottoNumDefaultFontColor;
                         }
                     }
-                    // 처음에 선택할 때
+                    // 처음에 선택할 때,다른 곳에 선택한 번호가 있을 때(노란색)
                     this.choice = nodeValue;
                     node.style.backgroundColor = Layout2.lottoNumSelectColor;
                     node.style.color = Layout2.lottoNumSelectFontColor;
@@ -201,7 +201,7 @@ export default class Layout2 extends Layout1 {
                         if (this.choice !== null) {  // 다른 곳에 선택한 번호가 있을 때
                             lottoNumbers[this.choice - 1].style.backgroundColor = Layout2.lottoNumDefaultColor;
                             lottoNumbers[this.choice - 1].style.color = Layout2.lottoNumDefaultFontColor;
-                            lottoNumbers[this.choice-1].style.opacity = this.getOpacity(this.choice - 1).toString();
+                            lottoNumbers[this.choice - 1].style.opacity = this.getOpacity(this.choice - 1).toString();
 
                         } //없을 때
                         this.choice = nodeValue;

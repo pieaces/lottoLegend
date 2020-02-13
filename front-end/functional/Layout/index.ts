@@ -126,19 +126,19 @@ export default class Layout extends Layout3 {
         this.nextBtn.addEvent(async () => {
             console.log(this.options);
             const currentFilter = DataAPI.getInstance().getCurrent();
-            if (currentFilter === 1 && this.checkBox.getCount() === this.nextAbleLimit || currentFilter !== 1) {
-                section.scrollIntoView({
-                    behavior: 'auto'
-                });
-                this.setOption();
-                await DataAPI.getInstance().forward(this.options[currentFilter]);
-                this.on();
-                this.checkBox.reset();
-                this.dropDown.changeBoard();
-                this.dropDown.changeDropDownColor();
-            } else {
-                infoText.textContent = '찍어!'
-            }
+            // if (currentFilter === 1 && this.checkBox.getCount() === this.nextAbleLimit || currentFilter !== 1) {
+            section.scrollIntoView({
+                behavior: 'auto'
+            });
+            this.setOption();
+            await DataAPI.getInstance().forward(this.options[currentFilter]);
+            this.on();
+            this.checkBox.reset();
+            this.dropDown.changeBoard();
+            this.dropDown.changeDropDownColor();
+            // } else {
+            //     infoText.textContent = '찍어!'
+            // }
         });
     }
 }

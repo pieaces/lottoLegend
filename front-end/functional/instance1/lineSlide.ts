@@ -9,10 +9,10 @@ const lineCanvas: HTMLCanvasElement = document.querySelector('#func1-chart-line'
 const main21: HTMLElement = document.querySelector('.func1-main-2-1');
 
 
-const option:Chart.ChartOptions = {
+const option: Chart.ChartOptions = {
     responsive: true,
     tooltips: {
-        mode:'index',
+        mode: 'index',
         intersect: false,
     },
 

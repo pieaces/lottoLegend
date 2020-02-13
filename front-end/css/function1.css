@@ -132,6 +132,56 @@
     grid-column: 8/13;
     grid-row:1/2;
   }
+
+  .func1-chart-textbox{
+    height:100%;
+  }
+
+  .func1-chart-title{
+    height:30%;
+    display:flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .func1-chart-title > div{
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+    font-size:0.9rem;
+    width:90px;
+    height:60px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .func1-chart-value{
+    height:30%;
+     display:flex;
+  }
+
+  .func1-chart-value > div{
+    flex:1;
+    height:100%;
+    border: 1px solid var(--border-color);
+  }
+
+  .func1-chart-value > div >div{
+    height:50%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .func1-chart-value > div >div:nth-child(1){
+    border-bottom:1px solid var(--border-color);
+    background-color: #4285F4;
+    color:var(--default-color);
+  }
+
+
+  .func1-chart-text{
+    height:40%;
+  }
   
   .func1-main-2-2 {
     grid-column: 8/13;
