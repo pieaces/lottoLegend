@@ -32,6 +32,8 @@ export default class Layout extends Layout3 {
         });
     }
 
+
+
     private setOption() {
         const currentFilter = DataAPI.getInstance().getCurrent();
         switch (currentFilter) {
@@ -117,6 +119,9 @@ export default class Layout extends Layout3 {
             }
         }
     }
+
+
+
     init() {
         super.init();
         this.dropDown.init();
@@ -166,3 +171,5 @@ export default class Layout extends Layout3 {
         })
     }
 }
+
+

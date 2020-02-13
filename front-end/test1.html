@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="test"></div>
+    <script>
+        const test = document.querySelector('#test');
+        function dynamicMakeNum() {
+            const a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+            const divArray = [];
+
+            for (let i = 1; i <= a.length; i++) {
+                const div = document.createElement('div');
+                div.textContent = String(a[i - 1]);
+                divArray.push(div);
+
+                if (i % 7 === 0 || i === a.length) {
+
+                    const divBox = document.createElement('div');
+                    for (let i = 0; i < divArray.length; i++) {
+                        divBox.appendChild(divArray[i]);
+                    }
+                    test.appendChild(divBox);
+                    divArray.splice(0, divArray.length);
+                }
+
+            }
+
+        }
+        dynamicMakeNum();
+    </script>
+</body>
+
+</html>

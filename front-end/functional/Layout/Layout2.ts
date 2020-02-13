@@ -1,5 +1,6 @@
 const lottoNumbers = document.querySelectorAll<HTMLElement>('.func2-lotto-num-box> div > div');
 const numTermFreqBox = document.querySelectorAll<HTMLElement>('.func2-lotto-checkbox > div');
+const lottoNumBox = document.querySelector<HTMLElement>('.lotto-num-box');
 const selectNumBox = document.querySelector<HTMLElement>('.func2-select-num-box');
 const applyBtn = document.querySelector('.func2-num-exclude-btn');
 const winNums = document.querySelectorAll<HTMLElement>('.func2-win-num-box > div');
@@ -164,9 +165,9 @@ export default class Layout2 extends Layout1 {
     setOpacity() {
         let opacities = this.getOpacities();
         lottoNumbers.forEach((node, index) => {
-            if (!(this.options[1].indexOf(Math.floor((index + 1) / 10)) !== -1 || (this.options[3] && this.options[3].indexOf(index+1) !== -1))) {
+            if (!(this.options[1].indexOf(Math.floor((index + 1) / 10)) !== -1 || (this.options[3] && this.options[3].indexOf(index + 1) !== -1))) {
                 node.style.opacity = `${opacities[index]}`;
-            }else{
+            } else {
                 node.classList.add('nopointer')
             }
         });
@@ -248,7 +249,7 @@ export default class Layout2 extends Layout1 {
             lottoNumbers[i].removeEventListener('click', this.numbersEventList[i]);
         }
         lottoNumbers.forEach((node: HTMLElement, index) => {
-            if (this.options[1].indexOf(Math.floor((index + 1) / 10)) !== -1 || (this.options[3] && this.options[3].indexOf(index+1) !== -1)) {
+            if (this.options[1].indexOf(Math.floor((index + 1) / 10)) !== -1 || (this.options[3] && this.options[3].indexOf(index + 1) !== -1)) {
                 node.style.backgroundColor = Layout2.lottoNumExcludedColor;
                 node.style.color = Layout2.lottoNumDefaultFontColor;
                 node.style.opacity = '';
@@ -309,3 +310,6 @@ function selectEvent(obj: any, node: HTMLElement) {
         }
     }
 }
+
+
+
