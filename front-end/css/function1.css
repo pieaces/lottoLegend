@@ -145,7 +145,7 @@
   }
 
   .func1-chart-title > div{
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--border-color);
     font-size:0.9rem;
     width:90px;
     height:60px;
