@@ -207,4 +207,6 @@ border-left: 10px solid #575755;
     transition: all 1s;
   }
 
-  
+  .nopointer{
+    cursor: default !important;
+  }
