@@ -15,7 +15,7 @@ export default class Layout extends Layout3 {
     checkBox: Checkbox = new Checkbox();
     nextBtn: NextBtn = new NextBtn();
     resetBtn: ResetBtn = new ResetBtn();
-    nextAbleLimit:number[] = [1];
+    nextAbleLimit:number;
     private layout1On() {
         layout1.forEach(node => {
             node.classList.remove('none');
@@ -79,6 +79,7 @@ export default class Layout extends Layout3 {
                 case 3: case 4:
                     this.reset();
                     this.checkBox.removeAllEvent();
+                    
                     if (currentFilter === 3) this.includeVerson();
                     if (currentFilter === 4) this.excludeVersion();
                     this.setOpacity();
@@ -93,7 +94,7 @@ export default class Layout extends Layout3 {
                     if (currentFilter === 1) {
                         const trueIndex = this.options[0].indexOf(true);
                         const count = DataAPI.getInstance().getLabels()[trueIndex] as number;
-                        this.nextAbleLimit.push(count);
+                        this.nextAbleLimit = count;
                         this.checkBox.multiSelectEvent(count);
                     } else if (currentFilter <= 5) {
                         this.checkBox.singleSelectEvent();
@@ -126,12 +127,13 @@ export default class Layout extends Layout3 {
         // this.statsBoard.textContent = JSON.stringify(DataAPI.getInstance().getStats().stats);
 
         this.nextBtn.addEvent(async () => {
-            if (this.checkBox.getCount() === this.nextAbleLimit[DataAPI.getInstance().getCurrent()]) {
+            console.log(this.options);
+            const currentFilter = DataAPI.getInstance().getCurrent();
+            if (currentFilter === 1 && this.checkBox.getCount() === this.nextAbleLimit || currentFilter !== 1) {
                 section.scrollIntoView({
                     behavior: 'auto'
                 });
                 this.setOption();
-                const currentFilter = DataAPI.getInstance().getCurrent();
                 await DataAPI.getInstance().forward(this.options[currentFilter]);
                 this.on();
                 this.checkBox.reset();
