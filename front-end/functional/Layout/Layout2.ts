@@ -19,7 +19,8 @@ export default class Layout2 extends Layout1 {
     static readonly lottoNumSelectColor = '#e6e600';
     static readonly lottoNumDefaultFontColor = 'white';
     static readonly lottoNumSelectFontColor = 'black';
-    static readonly lottoNumCheckedColor = '#2F4F4F';
+    static readonly lottoNumCheckedColor = 'rgb(168, 168, 168)';
+    static readonly lottoNumExcludedColor = 'rgb(234, 234, 234)';
     static readonly body = 'body *';
     static readonly numBoard = '.func2-main-1-4 *';
     static readonly lottoCheckCurrent = 'func2-lotto-check-current';
@@ -62,7 +63,6 @@ export default class Layout2 extends Layout1 {
         }
     }
     includeVerson() {
-        console.log('인클루드')
         this.clearChart();
         this.updateChart();
         this.initCoefVerInclude();
@@ -164,7 +164,11 @@ export default class Layout2 extends Layout1 {
     setOpacity() {
         let opacities = this.getOpacities();
         lottoNumbers.forEach((node, index) => {
-            node.style.opacity = `${opacities[index]}`;
+            if (!(this.options[1].indexOf(Math.floor((index + 1) / 10)) !== -1 || (this.options[3] && this.options[3].indexOf(index+1) !== -1))) {
+                node.style.opacity = `${opacities[index]}`;
+            }else{
+                node.classList.add('nopointer')
+            }
         });
     }
     private getOpacity(index: number) {
@@ -229,7 +233,6 @@ export default class Layout2 extends Layout1 {
     init() {
         this.data = DataAPI.getInstance().getStats2();
         this.TOTAL = DataAPI.getInstance().getTOTAL();
-        this.setOpacity();
         bar.option.scales.yAxes[0].ticks = {
             min: Math.floor(Math.min(...DataAPI.getInstance().getStats2().frequency) / 10) * 10,
             max: Math.ceil(Math.max(...DataAPI.getInstance().getStats2().frequency) / 10) * 10
@@ -245,8 +248,8 @@ export default class Layout2 extends Layout1 {
             lottoNumbers[i].removeEventListener('click', this.numbersEventList[i]);
         }
         lottoNumbers.forEach((node: HTMLElement, index) => {
-            if (this.options[1].indexOf(Math.floor((index + 1) / 10)) !== -1 || (this.options[3] && this.options[3].indexOf(index) !== -1)) {
-                node.style.backgroundColor = Layout2.lottoNumCheckedColor;
+            if (this.options[1].indexOf(Math.floor((index + 1) / 10)) !== -1 || (this.options[3] && this.options[3].indexOf(index+1) !== -1)) {
+                node.style.backgroundColor = Layout2.lottoNumExcludedColor;
                 node.style.color = Layout2.lottoNumDefaultFontColor;
                 node.style.opacity = '';
             } else {
