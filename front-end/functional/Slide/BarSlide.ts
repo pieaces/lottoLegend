@@ -13,15 +13,15 @@ export default class BarSlide extends Slide<ChartBase> {
         const rep = this.chart.dataBox.datasets[0];
         switch (this.current) {
             case 0:
-                rep.data = data.ideal['latest'];
+                rep.data = data.actual['latest'];
                 break;
             case 1:
-                rep.data = data.actual['latest'];
+                rep.data = data.ideal['latest'];
                 break;
             case 2:
                 const temp = [];
                 for (let i = 0; i < data.ideal['latest'].length; i++) {
-                    const datum = data.ideal['latest'][i] - data.actual['latest'][i];
+                    const datum = data.actual['latest'][i] - data.ideal['latest'][i];
                     temp.push(datum);
                 }
                 rep.data = temp;
@@ -37,7 +37,7 @@ export default class BarSlide extends Slide<ChartBase> {
         this.current = 0;
         this.numBtns[this.current].classList.add(this.CURRENT_CSS);
         this.chart.dataBox.labels = DataAPI.getInstance().getLabels();
-        this.chart.dataBox.datasets[0].data = DataAPI.getInstance().getStats().ideal['latest'];
+        this.chart.dataBox.datasets[0].data = DataAPI.getInstance().getStats().actual['latest'];
         this.chart.update();
     }
 }
