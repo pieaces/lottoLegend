@@ -273,7 +273,7 @@ function selectEvent(obj: any, node: HTMLElement) {
         obj.choice = nodeValue;
         node.style.backgroundColor = Layout2.lottoNumSelectColor;
         node.style.color = Layout2.lottoNumSelectFontColor;
-        node.style.opacity = '';
+        //node.style.opacity = '';
         obj.updateChartData();
     } else { //선택한 번호가 박스에 있는 번호와 중복이 될 때
         if (confirm(`번호 ${nodeValue} 선택취소하시겠습니까?`)) {
@@ -286,6 +286,8 @@ function selectEvent(obj: any, node: HTMLElement) {
             obj.choice = nodeValue;
             node.style.backgroundColor = Layout2.lottoNumSelectColor;
             node.style.color = Layout2.lottoNumSelectFontColor;
+            node.style.opacity = obj.getOpacity(obj.choice - 1).toString();
+
             obj.updateChartData();
             for (let i = 0; i < selectNumBox.children.length; i++) {
                 if (obj.checkedNumbers.indexOf(nodeValue) !== -1) {
