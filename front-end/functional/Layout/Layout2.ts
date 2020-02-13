@@ -87,6 +87,12 @@ export default class Layout2 extends Layout1 {
         radar.update();
         gauss.update();
     }
+    private updateChartData() {
+        bar.dataBox.datasets[0].data = [this.TOTAL * 6 / 45, this.data.frequency[this.choice - 1]];
+        radar.dataBox.datasets[0].data = this.data.interval[this.choice - 1].list;
+        gauss.dataBox.datasets[0].data = this.data.emergence[this.choice - 1];
+        this.updateChart();
+    }
     private clearChart() {
         bar.clear();
         radar.clear();
