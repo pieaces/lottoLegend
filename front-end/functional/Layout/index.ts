@@ -74,6 +74,7 @@ export default class Layout extends Layout3 {
     private async on(layoutVersion: number = 0) {
         if (layoutVersion === 0) {
             const currentFilter = DataAPI.getInstance().getCurrent();
+            console.log(currentFilter);
             switch (currentFilter) {
                 case 3: case 4:
                     this.reset();
@@ -83,7 +84,7 @@ export default class Layout extends Layout3 {
                     if (currentFilter === 4) this.excludeVersion();
                     this.setOpacity();
                     this.refreshNumberBoard();
-                    
+
                     this.layout2On();
                     this.resetBtn.removeEvent();
                     this.resetBtn.addEvent(this.reset.bind(this));
@@ -94,11 +95,11 @@ export default class Layout extends Layout3 {
                     if (currentFilter === 1) {
                         const trueIndex = this.options[0].indexOf(true);
                         const count = DataAPI.getInstance().getLabels()[trueIndex] as number;
-                        if(count === 0){
+                        if (count === 0) {
                             await DataAPI.getInstance().forward([]);
                             this.options[1] = [];
                             this.on();
-                        }else{
+                        } else {
                             this.nextAbleLimit = count;
                             this.checkBox.multiSelectEvent(count);
                         }
@@ -138,7 +139,7 @@ export default class Layout extends Layout3 {
                 });
                 this.setOption();
                 await DataAPI.getInstance().forward(this.options[currentFilter]);
-                this.on();
+                await this.on();
                 this.checkBox.reset();
                 this.dropDown.changeBoard();
                 this.dropDown.changeDropDownColor();
@@ -146,5 +147,22 @@ export default class Layout extends Layout3 {
                 infoText.textContent = '찍어!'
             }
         });
+        this.dropDown.nodeList.forEach((node, index) => {
+            node.addEventListener('click', async () => {
+                const current = DataAPI.getInstance().getCurrent();
+                if (index < current) {
+                    section.scrollIntoView({
+                        behavior: 'auto'
+                    });
+                    for (let i = 0; i < current - index; i++) this.options.pop();
+                    DataAPI.getInstance().leap(index);
+                    console.log(DataAPI.getInstance().getCurrent(), index);
+                    await this.on();
+                    this.checkBox.reset();
+                    this.dropDown.changeBoard();
+                    this.dropDown.changeDropDownColor();
+                }
+            })
+        })
     }
 }

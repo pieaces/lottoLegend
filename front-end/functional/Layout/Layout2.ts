@@ -62,10 +62,12 @@ export default class Layout2 extends Layout1 {
         }
     }
     includeVerson() {
+        console.log('인클루드')
         this.clearChart();
         this.updateChart();
         this.initCoefVerInclude();
         applyBtn.textContent = '포함'
+        Layout2.lottoNumDefaultColor = '#00048c';
         lottoNumbers.forEach((node: HTMLElement) => {
             node.style.backgroundColor = '#00048c';
         })

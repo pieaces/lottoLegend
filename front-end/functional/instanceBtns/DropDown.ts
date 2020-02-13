@@ -7,7 +7,6 @@ const boardPrevious = document.querySelector(".past span strong");
 const boardNext = document.querySelector(".future span strong");
 
 import DataAPI from "../DataAPI";
-import { Cipher } from "crypto";
 
 export default class DropDown {
   static readonly PREVIOUS_COLOR = "white";
@@ -19,7 +18,7 @@ export default class DropDown {
   static readonly body = "body *";
   static readonly dropDownBox = ".filter-box *";
   private flag: boolean = true;
-  private nodeList: HTMLElement[] = [];
+  public nodeList: HTMLElement[] = [];
   changeBoard() {
     const index = DataAPI.getInstance().getCurrent();
     filterSelectText.textContent = DataAPI.getInstance().getCurrentName();
