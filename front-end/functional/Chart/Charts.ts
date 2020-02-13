@@ -12,7 +12,7 @@ export default class ChartBase {
         this.option = option;
         this.canvas = canvas;
     }
-    create(){
+    create() {
         this.instance = new Chart(this.canvas, {
             type: this.type,
             data: this.dataBox,
@@ -21,5 +21,8 @@ export default class ChartBase {
     }
     update() {
         this.instance.update();
+    }
+    clear() {
+        this.instance.data.datasets[0].data = null;
     }
 }
