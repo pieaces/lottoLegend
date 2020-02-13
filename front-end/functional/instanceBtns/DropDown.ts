@@ -7,7 +7,6 @@ const boardPrevious = document.querySelector(".past span strong");
 const boardNext = document.querySelector(".future span strong");
 
 import DataAPI from "../DataAPI";
-import { Cipher } from "crypto";
 
 export default class DropDown {
   static readonly PREVIOUS_COLOR = "white";
@@ -19,7 +18,9 @@ export default class DropDown {
   static readonly body = "body *";
   static readonly dropDownBox = ".filter-box *";
   private flag: boolean = true;
-  private nodeList: HTMLElement[] = [];
+  public nodeList: HTMLElement[] = [];
+  private overEventList = [];
+  private outEventList = [];
   changeBoard() {
     const index = DataAPI.getInstance().getCurrent();
     filterSelectText.textContent = DataAPI.getInstance().getCurrentName();
@@ -100,18 +101,29 @@ export default class DropDown {
   }
   changeDropDownColor() {
     const current = DataAPI.getInstance().getCurrent();
+    for (let i = 0; i < this.overEventList.length; i++) {
+      this.nodeList[i].removeEventListener('mouseover', this.overEventList[i]);
+      this.nodeList[i].removeEventListener('mouseout', this.outEventList[i]);
+    }
+    this.overEventList = [];
+    this.outEventList = [];
+
     this.nodeList.forEach((node, index) => {
       if (index < current) {
         node.style.backgroundColor = DropDown.PREVIOUS_COLOR;
         node.style.color = DropDown.PREVIOUS_FONT;
-        node.addEventListener("mouseover", () => {
+
+        this.overEventList[index] = () => {
           node.style.backgroundColor = DropDown.CURRENT_COLOR;
           node.style.color = DropDown.CURRENT_FONT;
-        });
-        node.addEventListener("mouseout", () => {
+        }
+        node.addEventListener("mouseover", this.overEventList[index]);
+        this.outEventList[index] = () => {
           node.style.backgroundColor = DropDown.PREVIOUS_COLOR;
           node.style.color = DropDown.PREVIOUS_FONT;
-        });
+        }
+        node.addEventListener("mouseout", this.outEventList[index]);
+
       } else if (index === current) {
         node.style.backgroundColor = DropDown.CURRENT_COLOR;
         node.style.color = DropDown.CURRENT_FONT;
