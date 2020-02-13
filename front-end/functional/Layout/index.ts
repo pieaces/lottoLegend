@@ -9,7 +9,6 @@ const layout2 = document.querySelectorAll<HTMLElement>(".func2-layout");
 const section = document.querySelector(".section1");
 const infoText = document.querySelector(".func1-checkbox-text");
 export default class Layout extends Layout3 {
-    options: any = [];
     //optionList2 = [null, [3], null, [10, 20, 42, 43, 44], [2], 2, { from: 100, to: 190 }, { from: 2, to: 4 }, { from: 1, to: 3 }, { from: 0, to: 3 }, { from: 10, to: 14 }, { from: 30, to: 38 }, { from: 7, to: 10 }, true];
     dropDown: DropDown = new DropDown();
     checkBox: Checkbox = new Checkbox();
@@ -72,7 +71,7 @@ export default class Layout extends Layout3 {
                 }
         }
     }
-    private on(layoutVersion: number = 0) {
+    private async on(layoutVersion: number = 0) {
         if (layoutVersion === 0) {
             const currentFilter = DataAPI.getInstance().getCurrent();
             switch (currentFilter) {
@@ -83,7 +82,8 @@ export default class Layout extends Layout3 {
                     if (currentFilter === 3) this.includeVerson();
                     if (currentFilter === 4) this.excludeVersion();
                     this.setOpacity();
-
+                    this.refreshNumberBoard();
+                    
                     this.layout2On();
                     this.resetBtn.removeEvent();
                     this.resetBtn.addEvent(this.reset.bind(this));
@@ -94,8 +94,14 @@ export default class Layout extends Layout3 {
                     if (currentFilter === 1) {
                         const trueIndex = this.options[0].indexOf(true);
                         const count = DataAPI.getInstance().getLabels()[trueIndex] as number;
-                        this.nextAbleLimit = count;
-                        this.checkBox.multiSelectEvent(count);
+                        if(count === 0){
+                            await DataAPI.getInstance().forward([]);
+                            this.options[1] = [];
+                            this.on();
+                        }else{
+                            this.nextAbleLimit = count;
+                            this.checkBox.multiSelectEvent(count);
+                        }
                     } else if (currentFilter <= 5) {
                         this.checkBox.singleSelectEvent();
                     } else {

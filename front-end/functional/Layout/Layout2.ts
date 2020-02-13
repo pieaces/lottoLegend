@@ -28,6 +28,7 @@ export default class Layout2 extends Layout1 {
     protected checkedNumbers = new Array<number>();
     private choice = null;
     private boardCurrent = 0;
+    private numbersEventList = [];
     private frequencies: number[] = [];
     private terms: number[] = [];
     private freqTerm: number[] = [];
@@ -91,12 +92,6 @@ export default class Layout2 extends Layout1 {
         radar.clear();
         gauss.clear();
     }
-    private updateChartData() {
-        bar.dataBox.datasets[0].data = [this.TOTAL * 6 / 45, this.data.frequency[this.choice - 1]];
-        radar.dataBox.datasets[0].data = this.data.interval[this.choice - 1].list;
-        gauss.dataBox.datasets[0].data = this.data.emergence[this.choice - 1];
-        this.updateChart();
-    }
     private cancelCheck() {
         let myExclusiveEl = Array.from(document.querySelectorAll<HTMLElement>(Layout2.body));
         let myEls = Array.from(document.querySelectorAll<HTMLElement>(Layout2.numBoard));
@@ -146,7 +141,7 @@ export default class Layout2 extends Layout1 {
             this.setColorLotto(nodeValue, node);
         });
     }
-    private getOpacities():number[]{
+    private getOpacities(): number[] {
         let opacities: number[];
         switch (this.boardCurrent) {
             case 0: opacities = this.frequencies;
@@ -164,7 +159,7 @@ export default class Layout2 extends Layout1 {
             node.style.opacity = `${opacities[index]}`;
         });
     }
-    private getOpacity(index:number){
+    private getOpacity(index: number) {
         let opacities = this.getOpacities();
         return opacities[index];
     }
@@ -179,52 +174,6 @@ export default class Layout2 extends Layout1 {
         })
     }
     addEvent() {
-        lottoNumbers.forEach((node: HTMLElement) => {
-            node.addEventListener('click', e => {
-                const nodeValue = parseInt(node.textContent);
-                if (this.checkedNumbers.indexOf(nodeValue) === -1) { //선택한 번호가 박스에 있는 번호와 중복이 안될 때
-                    if (this.choice !== null) { // 다른 곳에 선택한 번호가 있을 때(노란색)
-                        lottoNumbers[this.choice-1].style.opacity = this.getOpacity(this.choice - 1).toString();
-                        if (this.checkedNumbers.indexOf(this.choice) === -1) { // 선택한 번호가 박스에 있는 번호와 중복이 안될 때
-                            lottoNumbers[this.choice - 1].style.backgroundColor = Layout2.lottoNumDefaultColor;
-                            lottoNumbers[this.choice - 1].style.color = Layout2.lottoNumDefaultFontColor;
-                        }
-                    }
-                    // 처음에 선택할 때
-                    this.choice = nodeValue;
-                    node.style.backgroundColor = Layout2.lottoNumSelectColor;
-                    node.style.color = Layout2.lottoNumSelectFontColor;
-                    node.style.opacity = '';
-                    this.updateChartData();
-                } else { //선택한 번호가 박스에 있는 번호와 중복이 될 때
-                    if (confirm(`번호 ${nodeValue} 선택취소하시겠습니까?`)) {
-                        if (this.choice !== null) {  // 다른 곳에 선택한 번호가 있을 때
-                            lottoNumbers[this.choice - 1].style.backgroundColor = Layout2.lottoNumDefaultColor;
-                            lottoNumbers[this.choice - 1].style.color = Layout2.lottoNumDefaultFontColor;
-                            lottoNumbers[this.choice-1].style.opacity = this.getOpacity(this.choice - 1).toString();
-
-                        } //없을 때
-                        this.choice = nodeValue;
-                        node.style.backgroundColor = Layout2.lottoNumSelectColor;
-                        node.style.color = Layout2.lottoNumSelectFontColor;
-                        this.updateChartData();
-                        for (let i = 0; i < selectNumBox.children.length; i++) {
-                            if (this.checkedNumbers.indexOf(nodeValue) !== -1) {
-                                selectNumBox.children[this.checkedNumbers.indexOf(nodeValue)].remove();
-                                this.checkedNumbers.splice(this.checkedNumbers.indexOf(nodeValue), 1);
-                                break;
-                            }
-                        }
-                        for (let i = 0; i < selectNumBox.children.length; i++) {
-                            selectNumBox.children[i].classList.add('animation-none');
-                        }
-                    } else {
-                        this.choice = null;
-                    }
-                }
-                e.stopPropagation();
-            });
-        });
         applyBtn.addEventListener('click', e => {
             if (this.checkedNumbers.length < Layout2.MAX_SIZE) {
                 if (this.checkedNumbers.indexOf(this.choice) === -1) {
@@ -281,5 +230,69 @@ export default class Layout2 extends Layout1 {
         this.numFreqOrTermToggle();
         this.setColorWinNum();
         this.addEvent();
+    }
+
+    refreshNumberBoard() {
+        for(let i =0; i<this.numbersEventList.length; i++){
+            lottoNumbers[i].removeEventListener('click', this.numbersEventList[i]);
+        }
+        lottoNumbers.forEach((node: HTMLElement, index) => {
+            if (this.options[1].indexOf(Math.floor((index + 1) / 10)) !== -1 || (this.options[3] && this.options[3].indexOf(index) !== -1)) {
+                node.style.backgroundColor = Layout2.lottoNumCheckedColor;
+                node.style.color = Layout2.lottoNumDefaultFontColor;
+                node.style.opacity = '';
+            } else {
+                const event = (e:Event) => {
+                    selectEvent(this, node);
+                    e.stopPropagation();
+                };
+                this.numbersEventList[index] = event;
+                node.addEventListener('click', event);
+            }
+        });
+    }
+}
+
+function selectEvent(obj: any, node: HTMLElement) {
+    const nodeValue = parseInt(node.textContent);
+    if (obj.checkedNumbers.indexOf(nodeValue) === -1) { //선택한 번호가 박스에 있는 번호와 중복이 안될 때
+        if (obj.choice !== null) { // 다른 곳에 선택한 번호가 있을 때(노란색)
+            lottoNumbers[obj.choice - 1].style.opacity = obj.getOpacity(obj.choice - 1).toString();
+            if (obj.checkedNumbers.indexOf(obj.choice) === -1) { // 선택한 번호가 박스에 있는 번호와 중복이 안될 때
+                lottoNumbers[obj.choice - 1].style.backgroundColor = Layout2.lottoNumDefaultColor;
+                lottoNumbers[obj.choice - 1].style.color = Layout2.lottoNumDefaultFontColor;
+            }
+        }
+        // 처음에 선택할 때
+        obj.choice = nodeValue;
+        node.style.backgroundColor = Layout2.lottoNumSelectColor;
+        node.style.color = Layout2.lottoNumSelectFontColor;
+        node.style.opacity = '';
+        obj.updateChartData();
+    } else { //선택한 번호가 박스에 있는 번호와 중복이 될 때
+        if (confirm(`번호 ${nodeValue} 선택취소하시겠습니까?`)) {
+            if (obj.choice !== null) {  // 다른 곳에 선택한 번호가 있을 때
+                lottoNumbers[obj.choice - 1].style.backgroundColor = Layout2.lottoNumDefaultColor;
+                lottoNumbers[obj.choice - 1].style.color = Layout2.lottoNumDefaultFontColor;
+                lottoNumbers[obj.choice - 1].style.opacity = obj.getOpacity(obj.choice - 1).toString();
+
+            } //없을 때
+            obj.choice = nodeValue;
+            node.style.backgroundColor = Layout2.lottoNumSelectColor;
+            node.style.color = Layout2.lottoNumSelectFontColor;
+            obj.updateChartData();
+            for (let i = 0; i < selectNumBox.children.length; i++) {
+                if (obj.checkedNumbers.indexOf(nodeValue) !== -1) {
+                    selectNumBox.children[obj.checkedNumbers.indexOf(nodeValue)].remove();
+                    obj.checkedNumbers.splice(obj.checkedNumbers.indexOf(nodeValue), 1);
+                    break;
+                }
+            }
+            for (let i = 0; i < selectNumBox.children.length; i++) {
+                selectNumBox.children[i].classList.add('animation-none');
+            }
+        } else {
+            obj.choice = null;
+        }
     }
 }

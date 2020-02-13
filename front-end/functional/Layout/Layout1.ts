@@ -6,6 +6,7 @@ import bubbleChart from '../instance1/bubbleInstance'
 
 const statsBoard = document.getElementById('func1-main-stats');
 export default class Layout1 {
+    options: any = [];
     barSlide: BarSlide = barSlide;
     lineSlide: LineSlide = lineSlide;
     bubbleChart = bubbleChart;

@@ -126,7 +126,6 @@ export default class DataAPI {
     }
     backward(): void {
         if (this.current > 0) {
-            console.log(this.optionList[this.current]);
             delete this.generator.option[this.optionList[this.current--]];
         }
     }
