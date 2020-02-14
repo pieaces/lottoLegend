@@ -61,15 +61,15 @@ export default class Layout extends Layout3 {
                 if (currentFilter === 1) {
                     const range = DataAPI.getInstance().getLabels();
                     const option: number[] = [];
-                    this.options[currentFilter].forEach((value, index) => {
+                    this.options[currentFilter].forEach((value:boolean, index:number) => {
                         if (value) {
-                            option.push(range[index] as number);
+                            option.push(index);
                         }
                     });
                     this.options[currentFilter] = option;
                 } else if (currentFilter === 6) {
                     this.options[currentFilter] = DataAPI.getInstance().getLabels()[this.options[currentFilter].indexOf(true)];
-                }else if (currentFilter > 6) {
+                }else if (6 <currentFilter && currentFilter < DataAPI.getInstance().SIZE -1) {
                     const range = DataAPI.getInstance().getLabels()
                     let from = range[this.options[currentFilter].indexOf(true)];
                     let to = range[this.options[currentFilter].lastIndexOf(true)]
@@ -113,18 +113,16 @@ export default class Layout extends Layout3 {
                     this.layout1On();
                     this.checkBox.init();
                     if (currentFilter === 1) {
-                        const trueIndex = this.options[0].indexOf(true);
-                        const count = DataAPI.getInstance().getLabels()[trueIndex] as number;
-                        if (count === 0) {
-                            await DataAPI.getInstance().forward([]);
+                        this.nextAbleLimit = this.options[0].indexOf(true);
+                        console.log('1123', this.nextAbleLimit);
+                        if (this.nextAbleLimit === 0) {
                             this.options[1] = [];
+                            await DataAPI.getInstance().forward(this.options[1]);
                             this.on();
-                        } else if(count === 1){
-                            this.nextAbleLimit = count;
+                        } else if(this.nextAbleLimit === 1){
                             this.checkBox.singleSelectEvent();
                         } else {
-                            this.nextAbleLimit = count;
-                            this.checkBox.multiSelectEvent(count);
+                            this.checkBox.multiSelectEvent(this.nextAbleLimit);
                         }
                     } else if (currentFilter <= 6) {
                         this.checkBox.singleSelectEvent();

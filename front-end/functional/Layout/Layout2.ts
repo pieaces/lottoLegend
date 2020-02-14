@@ -89,7 +89,6 @@ export default class Layout2 extends Layout1 {
         gauss.update();
     }
     private updateChartData() {
-        console.log(DataAPI.getInstance().getTOTAL())
         bar.dataBox.datasets[0].data = [DataAPI.getInstance().getStats2().frequency[this.choice - 1], DataAPI.getInstance().getTOTAL() * 6 / 45];
         radar.dataBox.datasets[0].data = DataAPI.getInstance().getStats2().interval[this.choice - 1].list;
         gauss.dataBox.datasets[0].data = DataAPI.getInstance().getStats2().emergence[this.choice - 1];
@@ -143,6 +142,17 @@ export default class Layout2 extends Layout1 {
             Box.style.backgroundColor = '#B0D840';
         }
     }
+    private doesExcluded(index:number):boolean{
+        if(this.options[1].indexOf(Math.floor((index + 1) / 10)) !== -1 ||
+        !this.options[3] && DataAPI.getInstance().getWinNums()[0].indexOf(index + 1) === -1 ||
+        this.options[3] && DataAPI.getInstance().getWinNums()[0].indexOf(index + 1) !== -1 ||
+        this.options[4] && (DataAPI.getInstance().getWinNums()[0].indexOf(index + 1) !== -1 ||
+        this.options[4] && this.options[4].indexOf(index + 1) !== -1)){
+            return true;
+        }else{
+            return false;
+        }
+    }
     private setColorWinNum() {
         winNums.forEach(node => {
             const nodeValue = parseInt(node.textContent);
@@ -164,10 +174,10 @@ export default class Layout2 extends Layout1 {
     setOpacity() {
         let opacities = this.getOpacities();
         lottoNumbers.forEach((node, index) => {
-            if (!(this.options[1].indexOf(Math.floor((index + 1) / 10)) !== -1 || (this.options[3] && this.options[3].indexOf(index + 1) !== -1))) {
-                node.style.opacity = `${opacities[index]}`;
+            if (this.doesExcluded(index)) {
+                node.classList.add('nopointer');
             } else {
-                node.classList.add('nopointer')
+                node.style.opacity = `${opacities[index]}`;
             }
         });
     }
@@ -246,10 +256,7 @@ export default class Layout2 extends Layout1 {
             lottoNumbers[i].removeEventListener('click', this.numbersEventList[i]);
         }
         lottoNumbers.forEach((node: HTMLElement, index) => {
-            if (this.options[1].indexOf(Math.floor((index + 1) / 10)) !== -1 ||
-            !this.options[3] && DataAPI.getInstance().getWinNums()[0].indexOf(index + 1) === -1 ||
-            this.options[3] && DataAPI.getInstance().getWinNums()[0].indexOf(index + 1) !== -1 ||
-            this.options[4] && (DataAPI.getInstance().getWinNums()[0].indexOf(index + 1) !== -1 || this.options[4].indexOf(index + 1) !== -1)) {
+            if (this.doesExcluded(index)) {
                 node.style.backgroundColor = Layout2.lottoNumExcludedColor;
                 node.style.color = Layout2.lottoNumDefaultFontColor;
                 node.style.opacity = '';
