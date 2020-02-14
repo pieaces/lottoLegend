@@ -71,5 +71,4 @@ router.post('/generator', (req, res) => {
     }
 });
 
-
 export default router;
