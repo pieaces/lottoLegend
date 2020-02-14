@@ -5,7 +5,7 @@ export default class BubbleChart {
         this.element = element;
     }
     drawChart() {
-        const dataBubble = [['ID', '전체 포화도', '최근 포화도', '확률', '확률']];
+        const dataBubble = [['ID', '전체 포화도', '최근 포화도', '종합계수', '확률']];
 
         const statsData = DataAPI.getInstance().getStats();
         const labels = DataAPI.getInstance().getLabels();
@@ -22,12 +22,11 @@ export default class BubbleChart {
             else y /= statsData.actual['latest'][i];
             y *= statsData.pos[i];
 
-            const data = [labels[i].toString(), x, y,statsData.pos[i],statsData.pos[i]];
+            const data = [labels[i].toString(), x, y, Math.pow(2,x)*Math.pow(2,y), statsData.pos[i]];
             dataBubble.push(data);
         }
         const dataTable = google.visualization.arrayToDataTable(dataBubble);
         const option = {
-            title: DataAPI.getInstance().filterList[DataAPI.getInstance().getCurrent()],
             bubble: { textStyle: { fontSize: 11 } },
             chartArea: { width: '50%', height: '75%' },
         };
