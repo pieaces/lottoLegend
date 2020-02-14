@@ -17,7 +17,7 @@ export default class Layout extends Layout3 {
     checkBox: Checkbox = new Checkbox();
     nextBtn: NextBtn = new NextBtn();
     resetBtn: ResetBtn = new ResetBtn();
-    nextAbleLimit: number;
+    nextAbleLimit: number = 1;
     private layout1On() {
         layout1.forEach(node => {
             node.classList.remove('none');
@@ -46,13 +46,13 @@ export default class Layout extends Layout3 {
                 if (currentFilter === 4) {
                     this.options[currentFilter].push(...this.options[3]);
                 } else if (currentFilter === 5) {
-                    const winNum:number[] = DataAPI.getInstance().getWinNums()[0];
-                    for(let i=0; i<this.options[3].length; i++){
+                    const winNum: number[] = DataAPI.getInstance().getWinNums()[0];
+                    for (let i = 0; i < this.options[3].length; i++) {
                         const index = winNum.indexOf(this.options[3][i]);
-                            if(index !== -1){
-                                winNum.splice(index,1);
-                            }
+                        if (index !== -1) {
+                            winNum.splice(index, 1);
                         }
+                    }
                     this.options[currentFilter].push(...winNum);
                 }
                 break;
@@ -61,7 +61,7 @@ export default class Layout extends Layout3 {
                 if (currentFilter === 1) {
                     const range = DataAPI.getInstance().getLabels();
                     const option: number[] = [];
-                    this.options[currentFilter].forEach((value:boolean, index:number) => {
+                    this.options[currentFilter].forEach((value: boolean, index: number) => {
                         if (value) {
                             option.push(index);
                         }
@@ -69,7 +69,7 @@ export default class Layout extends Layout3 {
                     this.options[currentFilter] = option;
                 } else if (currentFilter === 6) {
                     this.options[currentFilter] = DataAPI.getInstance().getLabels()[this.options[currentFilter].indexOf(true)];
-                }else if (6 <currentFilter && currentFilter < DataAPI.getInstance().SIZE -1) {
+                } else if (6 < currentFilter && currentFilter < DataAPI.getInstance().SIZE - 1) {
                     const range = DataAPI.getInstance().getLabels()
                     let from = range[this.options[currentFilter].indexOf(true)];
                     let to = range[this.options[currentFilter].lastIndexOf(true)]
@@ -79,7 +79,7 @@ export default class Layout extends Layout3 {
                     } else if (currentFilter === 12 && typeof from === 'string') {
                         from = Number((<string>from).slice(0, (<string>from).indexOf('~')));
                         to = Number((<string>to).slice((<string>to).indexOf('~') + 1));
-                    }else {
+                    } else {
                         from = Number(from);
                         to = Number(to);
                     }
@@ -88,23 +88,19 @@ export default class Layout extends Layout3 {
                     this.options[currentFilter] = this.options[currentFilter][0] ? false : true;
                 }
         }
-        console.log(this.options);
     }
     private async on(layoutVersion: number = 0) {
         if (layoutVersion === 0) {
             const currentFilter = DataAPI.getInstance().getCurrent();
-            console.log(currentFilter);
             switch (currentFilter) {
                 case 3: case 4: case 5:
                     this.reset();
                     this.checkBox.removeAllEvent();
-
                     if (currentFilter === 3) this.includeVerson();
                     if (currentFilter === 4) this.includeVerson();
                     if (currentFilter === 5) this.excludeVersion();
                     this.setOpacity();
                     this.refreshNumberBoard();
-
                     this.layout2On();
                     this.resetBtn.removeEvent();
                     this.resetBtn.addEvent(this.reset.bind(this));
@@ -114,15 +110,21 @@ export default class Layout extends Layout3 {
                     this.checkBox.init();
                     if (currentFilter === 1) {
                         this.nextAbleLimit = this.options[0].indexOf(true);
-                        console.log('1123', this.nextAbleLimit);
                         if (this.nextAbleLimit === 0) {
                             this.options[1] = [];
                             await DataAPI.getInstance().forward(this.options[1]);
                             this.on();
-                        } else if(this.nextAbleLimit === 1){
+                        } else if (this.nextAbleLimit === 1) {
                             this.checkBox.singleSelectEvent();
                         } else {
                             this.checkBox.multiSelectEvent(this.nextAbleLimit);
+                        }
+                    } else if (currentFilter === 3) {
+                        this.nextAbleLimit = this.options[0].indexOf(true);
+                        if (this.nextAbleLimit === 0) {
+                            this.options[3] = [];
+                            await DataAPI.getInstance().forward(this.options[3]);
+                            this.on();
                         }
                     } else if (currentFilter <= 6) {
                         this.checkBox.singleSelectEvent();
@@ -153,9 +155,11 @@ export default class Layout extends Layout3 {
         // this.statsBoard.textContent = JSON.stringify(DataAPI.getInstance().getStats().stats);
 
         this.nextBtn.addEvent(async () => {
-            console.log(this.options);
             const currentFilter = DataAPI.getInstance().getCurrent();
-            if (currentFilter === 1 && this.checkBox.getCount() === this.nextAbleLimit || currentFilter !== 1) {
+            if (currentFilter === 0 && this.checkBox.getCount() === this.nextAbleLimit ||
+                currentFilter === 1 && this.checkBox.getCount() === this.nextAbleLimit ||
+                currentFilter === 3 && this.checkedNumbers.length === this.nextAbleLimit ||
+                currentFilter !== 0 && currentFilter !== 1 && currentFilter !== 3) {
                 section.scrollIntoView({
                     behavior: 'auto'
                 });
@@ -170,11 +174,9 @@ export default class Layout extends Layout3 {
             } else {
                 alertText.style.opacity = "1";
                 alertText.textContent = "몇개를 찍으셔야 합니다";
-
                 setTimeout(function () {
                     alertText.style.opacity = "0";
                 }, 2000)
-
             }
         });
         this.dropDown.nodeList.forEach((node, index) => {
@@ -196,5 +198,3 @@ export default class Layout extends Layout3 {
         })
     }
 }
-
-
