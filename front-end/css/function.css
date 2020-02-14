@@ -211,18 +211,6 @@ border-left: 10px solid #575755;
     cursor: default !important;
   }
 
-  .fade-out {
-    animation: fadeOut ease 7s;
-  }
-  @keyframes fadeOut {
-    0% {
-      opacity:1;
-    }
-    100% {
-      opacity:0;
-    }
-  }
-
   .loading{
     position: absolute;
     top:0;

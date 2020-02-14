@@ -9,7 +9,7 @@ const layout2 = document.querySelectorAll<HTMLElement>(".func2-layout");
 const section = document.querySelector(".section1");
 const infoText = document.querySelector(".func1-checkbox-text");
 const loading = document.querySelector('.loading');
-const alertText = document.querySelector('.func1-checkbox-alert');
+const alertText = document.querySelector<HTMLElement>('.func1-checkbox-alert');
 
 export default class Layout extends Layout3 {
     //optionList2 = [null, [3], null, [10, 20, 42, 43, 44], [2], 2, { from: 100, to: 190 }, { from: 2, to: 4 }, { from: 1, to: 3 }, { from: 0, to: 3 }, { from: 10, to: 14 }, { from: 30, to: 38 }, { from: 7, to: 10 }, true];
@@ -169,9 +169,14 @@ export default class Layout extends Layout3 {
                 this.dropDown.changeBoard();
                 this.dropDown.changeDropDownColor();
             } else {
-                alertText.textContent = "몇 개?를 찍으셔야 합니다";
-                alertText.classList.add('fade-out');
-                alertText.classList.remove('fade-out');
+
+                alertText.style.opacity = "1";
+                alertText.textContent = "몇개를 찍으셔야 합니다";
+
+                setTimeout(function () {
+                    alertText.style.opacity = "0";
+                }, 2000)
+
             }
         });
         this.dropDown.nodeList.forEach((node, index) => {
