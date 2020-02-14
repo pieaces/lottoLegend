@@ -10,9 +10,8 @@
 <body>
     <div id="test"></div>
     <script>
-        const test = document.querySelector('#test');
-        function dynamicMakeNum() {
-            const a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23];
+        const lottoNumBox = document.querySelector('.func2-lotto-num-box');
+        function makeLottoNumbers() {
             const divArray = [];
 
             for (let i = 1; i <= a.length; i++) {
@@ -26,7 +25,7 @@
                     for (let i = 0; i < divArray.length; i++) {
                         divBox.appendChild(divArray[i]);
                     }
-                    test.appendChild(divBox);
+                    lottoNumBox.appendChild(divBox);
                     divArray.splice(0, divArray.length);
                 }
 

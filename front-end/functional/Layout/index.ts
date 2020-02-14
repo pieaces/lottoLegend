@@ -39,17 +39,21 @@ export default class Layout extends Layout3 {
         const currentFilter = DataAPI.getInstance().getCurrent();
         switch (currentFilter) {
             case 3:
-                this.options[currentFilter] = {
-                    include: this.checkedNumbers.slice(),
-                    exclude: []
-                }
+                this.options[currentFilter] = this.checkedNumbers.slice();
                 break;
             case 4: case 5:
                 this.options[currentFilter] = this.checkedNumbers.slice();
                 if (currentFilter === 4) {
-                    this.options[currentFilter].push(...this.options[3].include);
+                    this.options[currentFilter].push(...this.options[3]);
                 } else if (currentFilter === 5) {
-                    this.options[currentFilter].push(...this.options[3].exclude);
+                    const winNum:number[] = DataAPI.getInstance().getWinNums()[0];
+                    for(let i=0; i<this.options[3].length; i++){
+                        const index = winNum.indexOf(this.options[3][i]);
+                            if(index !== -1){
+                                winNum.splice(index,1);
+                            }
+                        }
+                    this.options[currentFilter].push(...winNum);
                 }
                 break;
             default:
@@ -65,25 +69,26 @@ export default class Layout extends Layout3 {
                     this.options[currentFilter] = option;
                 } else if (currentFilter === 6) {
                     this.options[currentFilter] = DataAPI.getInstance().getLabels()[this.options[currentFilter].indexOf(true)];
-                } else if (currentFilter === DataAPI.getInstance().SIZE - 1) {
-                    this.options[currentFilter] = this.options[currentFilter] ? false : true;
-                } else if (currentFilter > 6) {
+                }else if (currentFilter > 6) {
                     const range = DataAPI.getInstance().getLabels()
                     let from = range[this.options[currentFilter].indexOf(true)];
                     let to = range[this.options[currentFilter].lastIndexOf(true)]
                     if (currentFilter === 7) {
                         from = Number((<string>from).slice(0, (<string>from).indexOf('~')));
                         to = Number((<string>to).slice((<string>to).indexOf('~') + 1));
-                    } else if (currentFilter === 11 && typeof from === 'string') {
+                    } else if (currentFilter === 12 && typeof from === 'string') {
                         from = Number((<string>from).slice(0, (<string>from).indexOf('~')));
                         to = Number((<string>to).slice((<string>to).indexOf('~') + 1));
-                    } else {
+                    }else {
                         from = Number(from);
                         to = Number(to);
                     }
                     this.options[currentFilter] = { from, to }
-                }
+                } else if (currentFilter === DataAPI.getInstance().SIZE - 1) {
+                    this.options[currentFilter] = this.options[currentFilter][0] ? false : true;
+                } 
         }
+        console.log(this.options);
     }
     private async on(layoutVersion: number = 0) {
         if (layoutVersion === 0) {
@@ -95,8 +100,8 @@ export default class Layout extends Layout3 {
                     this.checkBox.removeAllEvent();
 
                     if (currentFilter === 3) this.includeVerson();
-                    if (currentFilter === 4) this.excludeVersion();
-                    if (currentFilter === 5) this.includeVerson();
+                    if (currentFilter === 4) this.includeVerson();
+                    if (currentFilter === 5) this.excludeVersion();
                     this.setOpacity();
                     this.refreshNumberBoard();
 
@@ -150,7 +155,6 @@ export default class Layout extends Layout3 {
             console.log(this.options);
             const currentFilter = DataAPI.getInstance().getCurrent();
             if (currentFilter === 1 && this.checkBox.getCount() === this.nextAbleLimit || currentFilter !== 1) {
-                alertText.classList.remove('fade-out');
                 section.scrollIntoView({
                     behavior: 'auto'
                 });
@@ -165,6 +169,7 @@ export default class Layout extends Layout3 {
             } else {
                 alertText.textContent = "몇 개?를 찍으셔야 합니다";
                 alertText.classList.add('fade-out');
+                alertText.classList.remove('fade-out');
             }
         });
         this.dropDown.nodeList.forEach((node, index) => {

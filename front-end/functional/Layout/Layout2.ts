@@ -27,6 +27,7 @@ export default class Layout2 extends Layout1 {
     static readonly lottoCheckCurrent = 'func2-lotto-check-current';
     private data: any;
     private TOTAL: number;
+    private winNums: number[][];
     protected checkedNumbers = new Array<number>();
     private choice = null;
     private boardCurrent = 0;
@@ -234,6 +235,7 @@ export default class Layout2 extends Layout1 {
     init() {
         this.data = DataAPI.getInstance().getStats2();
         this.TOTAL = DataAPI.getInstance().getTOTAL();
+        this.winNums = DataAPI.getInstance().getWinNums();
         bar.option.scales.yAxes[0].ticks = {
             min: Math.floor(Math.min(...DataAPI.getInstance().getStats2().frequency) / 10) * 10,
             max: Math.ceil(Math.max(...DataAPI.getInstance().getStats2().frequency) / 10) * 10
@@ -249,10 +251,14 @@ export default class Layout2 extends Layout1 {
             lottoNumbers[i].removeEventListener('click', this.numbersEventList[i]);
         }
         lottoNumbers.forEach((node: HTMLElement, index) => {
-            if (this.options[1].indexOf(Math.floor((index + 1) / 10)) !== -1 || (this.options[3] && this.options[3].indexOf(index + 1) !== -1)) {
+            if (this.options[1].indexOf(Math.floor((index + 1) / 10)) !== -1 ||
+            !this.options[3] && this.winNums[0].indexOf(index + 1) === -1 ||
+            this.options[3] && this.winNums[0].indexOf(index + 1) !== -1 ||
+            this.options[4] && (this.winNums[0].indexOf(index + 1) !== -1 || this.options[4].indexOf(index + 1) !== -1)) {
                 node.style.backgroundColor = Layout2.lottoNumExcludedColor;
                 node.style.color = Layout2.lottoNumDefaultFontColor;
                 node.style.opacity = '';
+                node.classList.add('nopointer');
             } else {
                 const event = (e: Event) => {
                     selectEvent(this, node);
@@ -260,6 +266,7 @@ export default class Layout2 extends Layout1 {
                 };
                 this.numbersEventList[index] = event;
                 node.addEventListener('click', event);
+                node.classList.remove('nopointer');
             }
         });
     }
