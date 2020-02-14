@@ -9,6 +9,8 @@ const layout2 = document.querySelectorAll<HTMLElement>(".func2-layout");
 const section = document.querySelector(".section1");
 const infoText = document.querySelector(".func1-checkbox-text");
 const loading = document.querySelector('.loading');
+const alertText = document.querySelector('.func1-checkbox-alert');
+
 export default class Layout extends Layout3 {
     //optionList2 = [null, [3], null, [10, 20, 42, 43, 44], [2], 2, { from: 100, to: 190 }, { from: 2, to: 4 }, { from: 1, to: 3 }, { from: 0, to: 3 }, { from: 10, to: 14 }, { from: 30, to: 38 }, { from: 7, to: 10 }, true];
     dropDown: DropDown = new DropDown();
@@ -32,8 +34,6 @@ export default class Layout extends Layout3 {
             node.classList.remove('none');
         });
     }
-
-
 
     private setOption() {
         const currentFilter = DataAPI.getInstance().getCurrent();
@@ -133,8 +133,6 @@ export default class Layout extends Layout3 {
         }
     }
 
-
-
     init() {
         super.init();
         this.dropDown.init();
@@ -152,6 +150,7 @@ export default class Layout extends Layout3 {
             console.log(this.options);
             const currentFilter = DataAPI.getInstance().getCurrent();
             if (currentFilter === 1 && this.checkBox.getCount() === this.nextAbleLimit || currentFilter !== 1) {
+                alertText.classList.remove('fade-out');
                 section.scrollIntoView({
                     behavior: 'auto'
                 });
@@ -164,7 +163,8 @@ export default class Layout extends Layout3 {
                 this.dropDown.changeBoard();
                 this.dropDown.changeDropDownColor();
             } else {
-                infoText.textContent = '찍어!'
+                alertText.textContent = "몇 개?를 찍으셔야 합니다";
+                alertText.classList.add('fade-out');
             }
         });
         this.dropDown.nodeList.forEach((node, index) => {
