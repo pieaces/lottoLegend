@@ -225,7 +225,7 @@
     width:200px;
     height:100%;
     color:red;
-    transition: all 2s;  
+    transition: all 500ms;  
   }
   
   
