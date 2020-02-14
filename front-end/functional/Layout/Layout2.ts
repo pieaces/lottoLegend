@@ -311,5 +311,42 @@ function selectEvent(obj: any, node: HTMLElement) {
     }
 }
 
+// const winNumContainerBox = document.querySelector('.func2-win-num-container-box');
+//         const a = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+//         const number = 896;
 
+//         function dynamicMakeWinNum(data, number) {
+
+//             for (let i = 0; i < data.length; i++) {
+
+//                 const winNumContainer = document.createElement('div');
+//                 winNumContainer.classList.add('func2-win-num-container');
+
+//                 const winNumTimes = document.createElement('div');
+//                 winNumTimes.classList.add('func2-win-num-times');
+//                 winNumTimes.textContent = number;//회차
+//                 number--;
+//                 winNumContainer.appendChild(winNumTimes);
+
+//                 const winNumBox = document.createElement('div');
+//                 winNumBox.classList.add('func2-win-num-box');
+
+//                 for (let j = 0; j < data[i].length; j++) {
+//                     const winNum = document.createElement('div');
+//                     winNum.textContent = data[i][j];
+//                     winNumBox.appendChild(winNum);
+//                 }
+
+//                 winNumContainer.appendChild(winNumBox);
+//                 winNumContainerBox.appendChild(winNumContainer);
+//             }
+
+
+//             const winNumText = document.createElement('div');
+
+//             winNumContainerBox.appendChild(winNumText);
+
+
+//         }
+//         dynamicMakeWinNum(a, number);
 

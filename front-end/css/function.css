@@ -233,6 +233,7 @@ border-left: 10px solid #575755;
 
   .loading-icon > i{
     font-size:13rem;
+    color:red;
   }
 
   .spin{

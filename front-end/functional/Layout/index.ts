@@ -8,7 +8,8 @@ const layout1 = document.querySelectorAll<HTMLElement>(".func1-layout");
 const layout2 = document.querySelectorAll<HTMLElement>(".func2-layout");
 const section = document.querySelector(".section1");
 const infoText = document.querySelector(".func1-checkbox-text");
-const loading = document.querySelector('.loading');
+const loading = document.querySelector<HTMLElement>('.loading');
+const loadingIcon = document.querySelector<HTMLElement>('.loading-icon > i');
 const alertText = document.querySelector<HTMLElement>('.func1-checkbox-alert');
 
 export default class Layout extends Layout3 {
@@ -34,6 +35,35 @@ export default class Layout extends Layout3 {
             node.classList.remove('none');
         });
     }
+
+    private loadingSetColorRandom(redDensity) {
+        let i = 0;
+        let flag = true;
+        const colorMax = 255;
+        const ID = setInterval(function () {
+
+            if (flag) {
+                loadingIcon.style.color = `rgba(${redDensity + i},0,0)`;
+                i++
+
+                if (redDensity + i >= colorMax) {
+                    flag = false;
+                    i = 0;
+                }
+            }
+            else {
+                loadingIcon.style.color = `rgba(${colorMax - i},0,0)`;
+                i++
+                if (colorMax - i <= redDensity) {
+                    flag = true;
+                    i = 0;
+                }
+            }
+
+        }, 20)
+        return ID;
+    }
+
 
     private setOption() {
         const currentFilter = DataAPI.getInstance().getCurrent();
@@ -144,6 +174,7 @@ export default class Layout extends Layout3 {
         this.barSlide.init();
         this.lineSlide.init();
         this.bubbleChart.init();
+
         // this.statsBoard.textContent = JSON.stringify(DataAPI.getInstance().getStats().stats);
 
         this.nextBtn.addEvent(async () => {
@@ -154,10 +185,17 @@ export default class Layout extends Layout3 {
                     behavior: 'auto'
                 });
                 this.setOption();
+
                 loading.classList.remove('none');
+
+                const ID = this.loadingSetColorRandom(130);
+
                 await DataAPI.getInstance().forward(this.options[currentFilter]);
                 await this.on();
+
                 loading.classList.add('none');
+                clearInterval(ID);
+
                 this.checkBox.reset();
                 this.dropDown.changeBoard();
                 this.dropDown.changeDropDownColor();
@@ -168,7 +206,7 @@ export default class Layout extends Layout3 {
 
                 setTimeout(function () {
                     alertText.style.opacity = "0";
-                }, 2000)
+                }, 1500)
 
             }
         });
