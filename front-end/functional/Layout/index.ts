@@ -7,10 +7,10 @@ import ResetBtn from "../instanceBtns/ResetBtn";
 const layout1 = document.querySelectorAll<HTMLElement>(".func1-layout");
 const layout2 = document.querySelectorAll<HTMLElement>(".func2-layout");
 const section = document.querySelector(".section1");
-const infoText = document.querySelector(".func1-checkbox-text");
+const infoText = document.querySelector(".checkbox-text");
 const loading = document.querySelector<HTMLElement>('.loading');
 const loadingIcon = document.querySelector<HTMLElement>('.loading-icon > i');
-const alertText = document.querySelector<HTMLElement>('.func1-checkbox-alert');
+const alertText = document.querySelector<HTMLElement>('.checkbox-alert');
 
 export default class Layout extends Layout3 {
     //optionList2 = [null, [3], null, [10, 20, 42, 43, 44], [2], 2, { from: 100, to: 190 }, { from: 2, to: 4 }, { from: 1, to: 3 }, { from: 0, to: 3 }, { from: 10, to: 14 }, { from: 30, to: 38 }, { from: 7, to: 10 }, true];
@@ -76,13 +76,13 @@ export default class Layout extends Layout3 {
                 if (currentFilter === 4) {
                     this.options[currentFilter].push(...this.options[3]);
                 } else if (currentFilter === 5) {
-                    const winNum:number[] = DataAPI.getInstance().getWinNums()[0];
-                    for(let i=0; i<this.options[3].length; i++){
+                    const winNum: number[] = DataAPI.getInstance().getWinNums()[0];
+                    for (let i = 0; i < this.options[3].length; i++) {
                         const index = winNum.indexOf(this.options[3][i]);
-                            if(index !== -1){
-                                winNum.splice(index,1);
-                            }
+                        if (index !== -1) {
+                            winNum.splice(index, 1);
                         }
+                    }
                     this.options[currentFilter].push(...winNum);
                 }
                 break;
@@ -91,7 +91,7 @@ export default class Layout extends Layout3 {
                 if (currentFilter === 1) {
                     const range = DataAPI.getInstance().getLabels();
                     const option: number[] = [];
-                    this.options[currentFilter].forEach((value:boolean, index:number) => {
+                    this.options[currentFilter].forEach((value: boolean, index: number) => {
                         if (value) {
                             option.push(index);
                         }
@@ -99,7 +99,7 @@ export default class Layout extends Layout3 {
                     this.options[currentFilter] = option;
                 } else if (currentFilter === 6) {
                     this.options[currentFilter] = DataAPI.getInstance().getLabels()[this.options[currentFilter].indexOf(true)];
-                }else if (6 <currentFilter && currentFilter < DataAPI.getInstance().SIZE -1) {
+                } else if (6 < currentFilter && currentFilter < DataAPI.getInstance().SIZE - 1) {
                     const range = DataAPI.getInstance().getLabels()
                     let from = range[this.options[currentFilter].indexOf(true)];
                     let to = range[this.options[currentFilter].lastIndexOf(true)]
@@ -109,7 +109,7 @@ export default class Layout extends Layout3 {
                     } else if (currentFilter === 12 && typeof from === 'string') {
                         from = Number((<string>from).slice(0, (<string>from).indexOf('~')));
                         to = Number((<string>to).slice((<string>to).indexOf('~') + 1));
-                    }else {
+                    } else {
                         from = Number(from);
                         to = Number(to);
                     }
@@ -149,7 +149,7 @@ export default class Layout extends Layout3 {
                             this.options[1] = [];
                             await DataAPI.getInstance().forward(this.options[1]);
                             this.on();
-                        } else if(this.nextAbleLimit === 1){
+                        } else if (this.nextAbleLimit === 1) {
                             this.checkBox.singleSelectEvent();
                         } else {
                             this.checkBox.multiSelectEvent(this.nextAbleLimit);

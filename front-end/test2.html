@@ -8,11 +8,37 @@
 </head>
 
 <body>
-    <div class="func2-win-num-container-box">
 
+    <table class="func1-table">
+        <tr>
+            <th></th>
+            <th>실제 당첨 개수</th>
+            <th>수학적 예상 개수</th>
+            <th>예측대비 실제 비율</th>
+        </tr>
+
+    </table>
     </div>
     <script>
+        const tableBody = document.querySelector('.func1-table');
+        const tableFilterName = document.querySelector('.func1-table tr > th:nth-child(1)');
+        const a = [[1, 2, 3, 4], [4, 5, 6, 7], [7, 8, 9, 10], [10, 11, 12, 13]];
+        function dynamicMakeTable(a, text) {
+            tableFilterName.textContent = text;
+            for (let i = 0; i < a.length; i++) {
+                const tr = document.createElement('tr');
+                for (let j = 0; j < a.length; j++) {
+                    const td = document.createElement('td');
+                    td.textContent = String(a[j][i]);
+                    tr.appendChild(td);
+                }
+                tableBody.appendChild(tr);
+            }
 
+
+        }
+
+        dynamicMakeTable(a, "홀수개수");
     </script>
 </body>
 

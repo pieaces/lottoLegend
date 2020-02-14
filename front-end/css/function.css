@@ -250,3 +250,24 @@ border-left: 10px solid #575755;
       transform: rotate(-360deg);
     }
   }
+
+  .checkbox-textbox{
+    height:20px;
+    margin-bottom:10px;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .checkbox-text{
+    width:200px;
+    height:100%;
+  }
+
+  .checkbox-alert{
+    width:200px;
+    height:100%;
+    color:red;
+    transition: all 500ms;  
+  }
+  
