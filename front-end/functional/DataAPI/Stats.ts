@@ -24,6 +24,6 @@ export default class Data {
         const data = JSON.parse(await fetchResult.text());
         this[method] = data.data;
         if (data.total) this.total = data.total;
-        if (data.winNums) this.winNums = data.winNums;
+        if (data.winNums) this.winNums = data.winNums
     }
 }

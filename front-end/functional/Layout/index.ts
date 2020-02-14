@@ -120,6 +120,7 @@ export default class Layout extends Layout3 {
                             this.options[1] = [];
                             this.on();
                         } else if(count === 1){
+                            this.nextAbleLimit = count;
                             this.checkBox.singleSelectEvent();
                         } else {
                             this.nextAbleLimit = count;
@@ -169,7 +170,6 @@ export default class Layout extends Layout3 {
                 this.dropDown.changeBoard();
                 this.dropDown.changeDropDownColor();
             } else {
-
                 alertText.style.opacity = "1";
                 alertText.textContent = "몇개를 찍으셔야 합니다";
 

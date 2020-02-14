@@ -25,9 +25,6 @@ export default class Layout2 extends Layout1 {
     static readonly body = 'body *';
     static readonly numBoard = '.func2-main-1-4 *';
     static readonly lottoCheckCurrent = 'func2-lotto-check-current';
-    private data: any;
-    private TOTAL: number;
-    private winNums: number[][];
     protected checkedNumbers = new Array<number>();
     private choice = null;
     private boardCurrent = 0;
@@ -37,11 +34,11 @@ export default class Layout2 extends Layout1 {
     private freqTerm: number[] = [];
 
     private initCoefVerInclude() {
-        const fMin = Math.min(...this.data.frequency);
-        const terms = this.data.howLongNone.map(ele => this.TOTAL - ele.round + 1);
+        const fMin = Math.min(...DataAPI.getInstance().getStats2().frequency);
+        const terms = DataAPI.getInstance().getStats2().howLongNone.map(ele => DataAPI.getInstance().getTOTAL() - ele.round + 1);
         const tMax = Math.max(...terms);
         for (let i = 0; i < 45; i++) {
-            this.frequencies[i] = Math.pow(fMin, 2) / Math.pow(this.data.frequency[i], 2);
+            this.frequencies[i] = Math.pow(fMin, 2) / Math.pow(DataAPI.getInstance().getStats2().frequency[i], 2);
             this.terms[i] = Math.pow(terms[i], 1 / 3) / Math.pow(tMax, 1 / 3);
             this.freqTerm[i] = this.frequencies[i] * this.terms[i];
         }
@@ -51,11 +48,11 @@ export default class Layout2 extends Layout1 {
         }
     }
     private initCoefVerExclude() {
-        const fMax = Math.max(...this.data.frequency);
-        const terms = this.data.howLongNone.map(ele => this.TOTAL - ele.round + 1);
+        const fMax = Math.max(...DataAPI.getInstance().getStats2().frequency);
+        const terms = DataAPI.getInstance().getStats2().howLongNone.map(ele => DataAPI.getInstance().getTOTAL() - ele.round + 1);
         const tMin = Math.min(...terms);
         for (let i = 0; i < 45; i++) {
-            this.frequencies[i] = Math.pow(this.data.frequency[i], 2) / Math.pow(fMax, 2);
+            this.frequencies[i] = Math.pow(DataAPI.getInstance().getStats2().frequency[i], 2) / Math.pow(fMax, 2);
             this.terms[i] = Math.pow(tMin, 1 / 3) / Math.pow(terms[i], 1 / 3);
             this.freqTerm[i] = this.frequencies[i] * this.terms[i];
         }
@@ -92,9 +89,10 @@ export default class Layout2 extends Layout1 {
         gauss.update();
     }
     private updateChartData() {
-        bar.dataBox.datasets[0].data = [this.data.frequency[this.choice - 1], this.TOTAL * 6 / 45];
-        radar.dataBox.datasets[0].data = this.data.interval[this.choice - 1].list;
-        gauss.dataBox.datasets[0].data = this.data.emergence[this.choice - 1];
+        console.log(DataAPI.getInstance().getTOTAL())
+        bar.dataBox.datasets[0].data = [DataAPI.getInstance().getStats2().frequency[this.choice - 1], DataAPI.getInstance().getTOTAL() * 6 / 45];
+        radar.dataBox.datasets[0].data = DataAPI.getInstance().getStats2().interval[this.choice - 1].list;
+        gauss.dataBox.datasets[0].data = DataAPI.getInstance().getStats2().emergence[this.choice - 1];
         this.updateChart();
     }
     private clearChart() {
@@ -233,9 +231,6 @@ export default class Layout2 extends Layout1 {
         e.stopPropagation();
     }
     init() {
-        this.data = DataAPI.getInstance().getStats2();
-        this.TOTAL = DataAPI.getInstance().getTOTAL();
-        this.winNums = DataAPI.getInstance().getWinNums();
         bar.option.scales.yAxes[0].ticks = {
             min: Math.floor(Math.min(...DataAPI.getInstance().getStats2().frequency) / 10) * 10,
             max: Math.ceil(Math.max(...DataAPI.getInstance().getStats2().frequency) / 10) * 10
@@ -252,9 +247,9 @@ export default class Layout2 extends Layout1 {
         }
         lottoNumbers.forEach((node: HTMLElement, index) => {
             if (this.options[1].indexOf(Math.floor((index + 1) / 10)) !== -1 ||
-            !this.options[3] && this.winNums[0].indexOf(index + 1) === -1 ||
-            this.options[3] && this.winNums[0].indexOf(index + 1) !== -1 ||
-            this.options[4] && (this.winNums[0].indexOf(index + 1) !== -1 || this.options[4].indexOf(index + 1) !== -1)) {
+            !this.options[3] && DataAPI.getInstance().getWinNums()[0].indexOf(index + 1) === -1 ||
+            this.options[3] && DataAPI.getInstance().getWinNums()[0].indexOf(index + 1) !== -1 ||
+            this.options[4] && (DataAPI.getInstance().getWinNums()[0].indexOf(index + 1) !== -1 || this.options[4].indexOf(index + 1) !== -1)) {
                 node.style.backgroundColor = Layout2.lottoNumExcludedColor;
                 node.style.color = Layout2.lottoNumDefaultFontColor;
                 node.style.opacity = '';
