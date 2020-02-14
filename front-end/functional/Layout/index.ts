@@ -37,8 +37,19 @@ export default class Layout extends Layout3 {
     private setOption() {
         const currentFilter = DataAPI.getInstance().getCurrent();
         switch (currentFilter) {
-            case 3: case 4:
+            case 3:
+                this.options[currentFilter] = {
+                    include:this.checkedNumbers.slice(),
+                    exclude: []
+                }
+                break;
+            case 4: case 5:
                 this.options[currentFilter] = this.checkedNumbers.slice();
+                if(currentFilter === 4){
+                    this.options[currentFilter].push(...this.options[3].include);
+                }else if(currentFilter === 5){
+                    this.options[currentFilter].push(...this.options[3].exclude);
+                }
                 break;
             default:
                 this.options[currentFilter] = this.checkBox.getCheckedLabels().slice();
@@ -51,15 +62,15 @@ export default class Layout extends Layout3 {
                         }
                     });
                     this.options[currentFilter] = option;
-                } else if (currentFilter === 5) {
+                } else if (currentFilter === 6) {
                     this.options[currentFilter] = DataAPI.getInstance().getLabels()[this.options[currentFilter].indexOf(true)];
                 } else if (currentFilter === DataAPI.getInstance().SIZE - 1) {
                     this.options[currentFilter] = this.options[currentFilter] ? false : true;
-                } else if (currentFilter > 5) {
+                } else if (currentFilter > 6) {
                     const range = DataAPI.getInstance().getLabels()
                     let from = range[this.options[currentFilter].indexOf(true)];
                     let to = range[this.options[currentFilter].lastIndexOf(true)]
-                    if (currentFilter === 6) {
+                    if (currentFilter === 7) {
                         from = Number((<string>from).slice(0, (<string>from).indexOf('~')));
                         to = Number((<string>to).slice((<string>to).indexOf('~') + 1));
                     } else if (currentFilter === 11 && typeof from === 'string') {
@@ -78,12 +89,13 @@ export default class Layout extends Layout3 {
             const currentFilter = DataAPI.getInstance().getCurrent();
             console.log(currentFilter);
             switch (currentFilter) {
-                case 3: case 4:
+                case 3: case 4: case 5:
                     this.reset();
                     this.checkBox.removeAllEvent();
 
                     if (currentFilter === 3) this.includeVerson();
                     if (currentFilter === 4) this.excludeVersion();
+                    if (currentFilter === 5) this.includeVerson();
                     this.setOpacity();
                     this.refreshNumberBoard();
 
@@ -105,7 +117,7 @@ export default class Layout extends Layout3 {
                             this.nextAbleLimit = count;
                             this.checkBox.multiSelectEvent(count);
                         }
-                    } else if (currentFilter <= 5) {
+                    } else if (currentFilter <= 6) {
                         this.checkBox.singleSelectEvent();
                     } else {
                         this.checkBox.rangeSelectEvent();

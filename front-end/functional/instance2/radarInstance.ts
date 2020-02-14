@@ -15,13 +15,14 @@ const dataBox = {
     ]
 };
 const option = {
-    responsive: false,
     title: {
-        display: false
+        display: true,
+        text: '번호별 출현간격',
+        fontSize:12
     },
     legend: {
         display: false
-    }
+    },
 };
 
 const radarInstance = new ChartBase('radar', canvas, dataBox, option);

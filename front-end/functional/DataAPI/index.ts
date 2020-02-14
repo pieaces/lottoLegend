@@ -43,10 +43,10 @@ export default class DataAPI {
     public numbers: number[];
     private TOTAL: number;
     public filteredCount: number;
-    private filterList = ["전멸구간개수", "전멸라인", "이월수 개수", "포함", "제외", "저값 개수", "합계", "홀수 개수", "소수 개수", "3배수 개수", "첫수합", "고저차", "AC", "연속수 포함여부"]
+    private filterList = ["전멸구간개수", "전멸구간", "이월수 개수", "이월수 선택", "포함", "제외", "저값 개수", "합계", "홀수 개수", "소수 개수", "3배수 개수", "첫수합", "고저차", "AC", "연속수 포함여부"]
     private dataList = ['excludedLineCount', 'lineCount', 'carryCount', 'excludeInclude', 'excludeInclude', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
     private optionList = [null, 'excludedLines', null, 'includedNumbers', 'excludedNumbers', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
-    private rangeList: Array<string[] | number[]> = [[0, 1, 2, 3, 4], [0, 1, 2, 3, 4], [0, 1, 2, 3, 4, 5, 6], null, null];
+    private rangeList: Array<string[] | number[]> = [[0, 1, 2, 3, 4], [0, 1, 2, 3, 4], [0, 1, 2, 3, 4, 5, 6], null, null, null];
     private current: number = 0;
     private data: Data = new Data();
     private generator: Generator = new Generator();
@@ -78,8 +78,8 @@ export default class DataAPI {
 
     private async setStats(): Promise<void> {
         let params: Params;
-        if (this.current <= 4) params = {};
-        else if (this.current === 5) {
+        if (this.current <= 5) params = {};
+        else if (this.current === 6) {
             let range: number[];
             if (this.generator.option.excludedLines) {
                 range = constraintLowCount[this.generator.option.excludedLines.join('')];
@@ -88,7 +88,7 @@ export default class DataAPI {
             }
             params = { from: range[0], to: range[1] };
             this.rangeList[this.current] = paramToNumbers({ from: range[0], to: range[1] });
-        } else if (this.current === 6) {
+        } else if (this.current === 7) {
             let range: any;
             if (this.generator.option.excludedLines) range = constraintSum[this.generator.option.lowCount.toString() + this.generator.option.excludedLines.join('')];
             else range = constraintSumNotExcluded[this.generator.option.lowCount.toString()];
@@ -96,7 +96,7 @@ export default class DataAPI {
             this.rangeList[this.current] = compartNumbers(params, 10);
         } else {
             params = numbersToParams(this.rangeList[this.current] as number[]);
-            if (this.current === 11) {
+            if (this.current === 12) {
                 const range = this.rangeList[this.current];
                 console.log('range', range);
                 console.log('params', params);
@@ -135,7 +135,7 @@ export default class DataAPI {
             if (option) {
                 this.generator.option[option] = optionData;
             }
-            if (this.current >= 6) {
+            if (this.current >= 7) {
                 await this.getGen();
             }
             if (this.current < this.dataList.length - 1) {

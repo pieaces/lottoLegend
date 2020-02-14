@@ -155,9 +155,13 @@
     height:20px;
     border-radius: 50%;
   }
-
+  .func2-chart-gauss{
+    width:90% !important;
+    height:82% !important;
+  }
   .func2-chart-radar{
-    padding-top:50px;
+    padding-top:30px;
+    height:93% !important;
   }
 
   .func2-chart-radar-num .chart-slide-current{
@@ -179,6 +183,7 @@
 
   .func2-chart-bar{
     padding:20px;
+    height:106% !important;
   }
   
   .func2-main-1-4 {
@@ -371,12 +376,3 @@
       right: 0%;
     }
   }
-  
-  .func2-chart{
-    width:100% !important;
-    height:100% !important;
-  }
-
-  
-  
-  
