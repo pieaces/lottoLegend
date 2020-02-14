@@ -1,6 +1,8 @@
 import express from 'express';
 import queryStats from '../function/queryStats';
 import { Method, QueryStatsParams } from '../interface/LottoDB';
+import queryLotto from '../function/queryLotto';
+import { LottoNumber } from '../interface/Lotto';
 const router = express.Router();
 
 router.get('/:method', async (req, res) => {
@@ -30,8 +32,23 @@ router.get('/:method', async (req, res) => {
             const today = new Date();
             const between = Number(today) - Number(theDate);
             const plusDate = Math.floor(between / 24 / 3600 / 1000 / 7);
+            let round = 896 + plusDate;
+            let total:number = 0;
 
-            res.json({ data, total: 896 + plusDate });
+            const winNums: LottoNumber[][] = [];
+            while (winNums.length !== 3) {
+                try {
+                    const numbers = await queryLotto(round);
+                    winNums.push(numbers);
+                    if(total !== 0) total = round;
+                } catch (err) {
+                    console.log(err);
+                }finally{
+                    round--;
+                }
+            }
+
+            res.json({ data, total, winNums});
         }
         else res.json('wrong method');
     }
