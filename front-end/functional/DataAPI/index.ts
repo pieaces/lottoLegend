@@ -102,11 +102,11 @@ export default class DataAPI {
                 console.log('range', range);
                 console.log('params', params);
                 if (range.length > 7) {
-                    this.rangeList[this.current] = compartNumbers(params, 2);
                     params = { from: range[0] as number, to: range[range.length - 1] as number };
+                    this.rangeList[this.current] = compartNumbers(params, 2);
                 }
             }
-            if(this.current === this.SIZE -1){
+            else if(this.current === this.SIZE -1){
                 this.rangeList[this.current] = ['제외', '포함'];
             }
         }

@@ -18,7 +18,7 @@ export default class Layout extends Layout3 {
     checkBox: Checkbox = new Checkbox();
     nextBtn: NextBtn = new NextBtn();
     resetBtn: ResetBtn = new ResetBtn();
-    nextAbleLimit: number;
+    nextAbleLimit: number = 1;
     private layout1On() {
         layout1.forEach(node => {
             node.classList.remove('none');
@@ -35,35 +35,6 @@ export default class Layout extends Layout3 {
             node.classList.remove('none');
         });
     }
-
-    private loadingSetColorRandom(redDensity) {
-        let i = 0;
-        let flag = true;
-        const colorMax = 255;
-        const ID = setInterval(function () {
-
-            if (flag) {
-                loadingIcon.style.color = `rgba(${redDensity + i},0,0)`;
-                i++
-
-                if (redDensity + i >= colorMax) {
-                    flag = false;
-                    i = 0;
-                }
-            }
-            else {
-                loadingIcon.style.color = `rgba(${colorMax - i},0,0)`;
-                i++
-                if (colorMax - i <= redDensity) {
-                    flag = true;
-                    i = 0;
-                }
-            }
-
-        }, 20)
-        return ID;
-    }
-
 
     private setOption() {
         const currentFilter = DataAPI.getInstance().getCurrent();
@@ -118,23 +89,26 @@ export default class Layout extends Layout3 {
                     this.options[currentFilter] = this.options[currentFilter][0] ? false : true;
                 }
         }
-        console.log(this.options);
     }
     private async on(layoutVersion: number = 0) {
         if (layoutVersion === 0) {
             const currentFilter = DataAPI.getInstance().getCurrent();
-            console.log(currentFilter);
             switch (currentFilter) {
                 case 3: case 4: case 5:
                     this.reset();
                     this.checkBox.removeAllEvent();
-
-                    if (currentFilter === 3) this.includeVerson();
-                    if (currentFilter === 4) this.includeVerson();
-                    if (currentFilter === 5) this.excludeVersion();
+                    if(currentFilter == 3){ 
+                        this.nextAbleLimit = this.options[currentFilter -1].indexOf(true);
+                        if (this.nextAbleLimit === 0) {
+                            this.options[currentFilter] = [];
+                            await DataAPI.getInstance().forward(this.options[currentFilter]);
+                        }
+                        this.includeVerson();
+                    }
+                    else if (currentFilter === 4) this.includeVerson();
+                    else if (currentFilter === 5) this.excludeVersion();
                     this.setOpacity();
                     this.refreshNumberBoard();
-
                     this.layout2On();
                     this.resetBtn.removeEvent();
                     this.resetBtn.addEvent(this.reset.bind(this));
@@ -143,11 +117,10 @@ export default class Layout extends Layout3 {
                     this.layout1On();
                     this.checkBox.init();
                     if (currentFilter === 1) {
-                        this.nextAbleLimit = this.options[0].indexOf(true);
-                        console.log('1123', this.nextAbleLimit);
+                        this.nextAbleLimit = this.options[currentFilter-1].indexOf(true);
                         if (this.nextAbleLimit === 0) {
-                            this.options[1] = [];
-                            await DataAPI.getInstance().forward(this.options[1]);
+                            this.options[currentFilter] = [];
+                            await DataAPI.getInstance().forward(this.options[currentFilter]);
                             this.on();
                         } else if (this.nextAbleLimit === 1) {
                             this.checkBox.singleSelectEvent();
@@ -184,35 +157,28 @@ export default class Layout extends Layout3 {
         // this.statsBoard.textContent = JSON.stringify(DataAPI.getInstance().getStats().stats);
 
         this.nextBtn.addEvent(async () => {
-            console.log(this.options);
             const currentFilter = DataAPI.getInstance().getCurrent();
-            if (currentFilter === 1 && this.checkBox.getCount() === this.nextAbleLimit || currentFilter !== 1) {
+            if (this.checkBox.getCount() > 0 ||
+                currentFilter === 1 && this.checkBox.getCount() === this.nextAbleLimit ||
+                currentFilter === 3 && this.checkedNumbers.length === this.nextAbleLimit ||
+                currentFilter === 4 || currentFilter === 5) {
                 section.scrollIntoView({
                     behavior: 'auto'
                 });
                 this.setOption();
-
                 loading.classList.remove('none');
-
-                const ID = this.loadingSetColorRandom(130);
-
                 await DataAPI.getInstance().forward(this.options[currentFilter]);
                 await this.on();
-
                 loading.classList.add('none');
-                clearInterval(ID);
-
                 this.checkBox.reset();
                 this.dropDown.changeBoard();
                 this.dropDown.changeDropDownColor();
             } else {
                 alertText.style.opacity = "1";
                 alertText.textContent = "몇개를 찍으셔야 합니다";
-
                 setTimeout(function () {
                     alertText.style.opacity = "0";
                 }, 1500)
-
             }
         });
         this.dropDown.nodeList.forEach((node, index) => {
@@ -234,5 +200,3 @@ export default class Layout extends Layout3 {
         })
     }
 }
-
-
