@@ -219,10 +219,11 @@
     width:200px;
     height:100%;
     color:red;
-    opacity: 0;
+    transition: all 2s;  
   }
   
   
+
   .func1-checkbox-container{
     width: 70%;
   }
