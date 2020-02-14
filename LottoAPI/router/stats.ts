@@ -40,7 +40,7 @@ router.get('/:method', async (req, res) => {
                 try {
                     const numbers = await queryLotto(round);
                     winNums.push(numbers);
-                    if(total !== 0) total = round;
+                    if(total === 0) total = round;
                 } catch (err) {
                     console.log(err);
                 }finally{
