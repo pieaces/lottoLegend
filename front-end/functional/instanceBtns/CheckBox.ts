@@ -152,3 +152,21 @@ export default class CheckBox {
         });
     }
 }
+
+const alertText = document.querySelector('.func1-checkbox-alert');
+
+// if 체크박스가 충족하지 않으면
+
+// alertText.textContent="몇 개?를 찍으셔야 합니다";
+
+// alertText.classList.add('fade-out');
+
+// else
+//  alertText.classList.remove('fade-out');
+
+
+
+
+
+
+

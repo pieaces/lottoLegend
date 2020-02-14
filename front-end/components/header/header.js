@@ -1,4 +1,4 @@
-document.write(`<nav class="top-nav-container">
+document.write(`<header><nav class="top-nav-container">
 <div class="container top-nav">
   <div class="top-nav-right">
     <ul>
@@ -36,5 +36,5 @@ document.write(`<nav class="top-nav-container">
     <p>CanvasLotto만의 시스템을 이용해보시기 바랍니다</p>
   </div>
 </div>
-</nav>
+</nav></header>
 `);

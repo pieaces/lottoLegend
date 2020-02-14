@@ -21,24 +21,33 @@
   }
 
   .func1-stats-box{
-    width:100px;
+    width:110px;
     height:70px;
-    margin:0 25px;
+    margin:0 20px;
     text-align: center;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
   }
 
   .func1-stats-box >  div{
-    
+    height:50%;
+    display:flex;
+  }
+
+  .func1-stats-box >div:nth-child(1){
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  }
+
+  .func1-stats-box > div >div{
+    width:50%;
     display:flex;
     align-items: center;
     justify-content: center;
-
+    
   }
 
-  .func1-stats-box >  div:nth-child(1){
-    height:50%;
-    font-size:0.9rem;
+  .func1-stats-box > div>  div:nth-child(1){
+    
+    font-size:0.8rem;
     background-color: var(--lotto-title-color);
     color:var(--default-color);
   }
@@ -193,10 +202,26 @@
     grid-row: 3/4;
   }
 
-  .func1-checkbox-text{
+  .func1-checkbox-textbox{
     height:20px;
     margin-bottom:10px;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
   }
+
+  .func1-checkbox-text{
+    width:200px;
+    height:100%;
+  }
+
+  .func1-checkbox-alert{
+    width:200px;
+    height:100%;
+    color:red;
+    opacity: 0;
+  }
+  
   
   .func1-checkbox-container{
     width: 70%;

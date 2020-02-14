@@ -1,4 +1,4 @@
-document.write(`<nav class="top-footer-container">
+document.write(`<footer><nav class="top-footer-container">
     <div class="top-footer container">
         <ul>
             <li><a href="#">회사소개</a></li>
@@ -55,4 +55,4 @@ document.write(`<nav class="top-footer-container">
             <p>COPYRIGHTⓒBRAIN CONTENTS ALL RIGHT RESERVED.</p>
         </div>
     </div>
-</nav>`)
+</nav></footer>`)
