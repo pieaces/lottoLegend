@@ -8,6 +8,7 @@ const layout1 = document.querySelectorAll<HTMLElement>(".func1-layout");
 const layout2 = document.querySelectorAll<HTMLElement>(".func2-layout");
 const section = document.querySelector(".section1");
 const infoText = document.querySelector(".func1-checkbox-text");
+const loading = document.querySelector('.loading');
 export default class Layout extends Layout3 {
     //optionList2 = [null, [3], null, [10, 20, 42, 43, 44], [2], 2, { from: 100, to: 190 }, { from: 2, to: 4 }, { from: 1, to: 3 }, { from: 0, to: 3 }, { from: 10, to: 14 }, { from: 30, to: 38 }, { from: 7, to: 10 }, true];
     dropDown: DropDown = new DropDown();
@@ -39,15 +40,15 @@ export default class Layout extends Layout3 {
         switch (currentFilter) {
             case 3:
                 this.options[currentFilter] = {
-                    include:this.checkedNumbers.slice(),
+                    include: this.checkedNumbers.slice(),
                     exclude: []
                 }
                 break;
             case 4: case 5:
                 this.options[currentFilter] = this.checkedNumbers.slice();
-                if(currentFilter === 4){
+                if (currentFilter === 4) {
                     this.options[currentFilter].push(...this.options[3].include);
-                }else if(currentFilter === 5){
+                } else if (currentFilter === 5) {
                     this.options[currentFilter].push(...this.options[3].exclude);
                 }
                 break;
@@ -155,8 +156,10 @@ export default class Layout extends Layout3 {
                     behavior: 'auto'
                 });
                 this.setOption();
+                loading.classList.remove('none');
                 await DataAPI.getInstance().forward(this.options[currentFilter]);
                 await this.on();
+                loading.classList.add('none');
                 this.checkBox.reset();
                 this.dropDown.changeBoard();
                 this.dropDown.changeDropDownColor();

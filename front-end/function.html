@@ -17,9 +17,9 @@
 
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
   <div id="wrapper">
-    <div class="loading">
+    <div class="loading none">
       <div class="loading-icon">
-        <i class="fas fa-sync"></i>
+        <i class="fas fa-sync spin"></i>
       </div>
     </div>
     <script src="components/header/header.js"></script>
@@ -39,392 +39,399 @@
           </div>
         </div>
         <div class="main">
-          <div class="filter-func-layout">
-            <div class="main-top">
-              <div class="filter-box-container">
-                <div class="filter-box">
-                  <span href="#">1</span>
-                  <i class="fas fa-sort-down filter-arrow"></i>
-                  <ul class="filter-list none">
-                  </ul>
-                </div>
-              </div>
-              <div class="steps">
-                <div class="past">
-                  <span> <strong></strong> </span>
-                </div>
-                <div class="triangle"></div>
-                <div class="present">
-                  <span> <strong>1</strong> </span><i></i>
-                </div>
-                <div class="triangle"></div>
-                <div class="future">
-                  <span> <strong>2</strong> </span>
-                </div>
+
+          <div class="main-top">
+            <div class="filter-box-container">
+              <div class="filter-box">
+                <span href="#">1</span>
+                <i class="fas fa-sort-down filter-arrow"></i>
+                <ul class="filter-list none">
+                </ul>
               </div>
             </div>
-            <div id="func1-main-stats" class="func1-main-mid func1-layout">
-              <div class="func1-stats-container">
-                <div class="func1-stats-box">
-                  <div>
-                    <div class="func1-mean-text">
-                      평균
-                    </div>
-                    <div class="func1-mean-value">
-
-                    </div>
-                  </div>
-                  <div>
-                    <div class="func1-stdev-text">
-                      표준편차
-                    </div>
-                    <div class="func1-stdev-value">
-
-                    </div>
-                  </div>
-                </div>
-                <div class="func1-stats-box">
-                  <div>
-                    <div class="func1-max-text">
-                      최댓값
-                    </div>
-                    <div class="func1-max-value">
-
-                    </div>
-                  </div>
-                  <div>
-                    <div class="func1-min-text">
-                      최솟값
-                    </div>
-                    <div class="func1-min-value">
-
-                    </div>
-                  </div>
-                </div>
-                <div class="func1-stats-box">
-
-                </div>
-                <div class="func1-stats-box">
-
-                </div>
+            <div class="steps">
+              <div class="past">
+                <span> <strong></strong> </span>
               </div>
-              <div class="func1-auto-choose-container">
-                <button type="button" class="btn circle-btn func1-auto-choose">
-                  자동 선택
-                </button>
+              <div class="triangle"></div>
+              <div class="present">
+                <span> <strong>1</strong> </span><i></i>
+              </div>
+              <div class="triangle"></div>
+              <div class="future">
+                <span> <strong>2</strong> </span>
               </div>
             </div>
-            <div class="func1-main-bottom-container func1-layout">
-              <div class="func1-main-bottom">
-                <div class="func1-main-1-1">
-                  <div class="func1-chart-slide-num func1-chart-line-num">
-                    <div class="chart-slide-current ">1</div>
+          </div>
+          <div id="func1-main-stats" class="func1-main-mid func1-layout">
+            <div class="func1-stats-container">
+              <div class="func1-stats-box">
+                <div>
+                  <div class="func1-mean-text">
+                    평균
+                  </div>
+                  <div class="func1-mean-value">
+
+                  </div>
+                </div>
+                <div>
+                  <div class="func1-stdev-text">
+                    표준편차
+                  </div>
+                  <div class="func1-stdev-value">
+
+                  </div>
+                </div>
+              </div>
+              <div class="func1-stats-box">
+                <div>
+                  <div class="func1-max-text">
+                    최댓값
+                  </div>
+                  <div class="func1-max-value">
+
+                  </div>
+                </div>
+                <div>
+                  <div class="func1-min-text">
+                    최솟값
+                  </div>
+                  <div class="func1-min-value">
+
+                  </div>
+                </div>
+              </div>
+              <div class="func1-stats-box">
+
+              </div>
+              <div class="func1-stats-box">
+
+              </div>
+            </div>
+            <div class="func1-auto-choose-container">
+              <button type="button" class="btn circle-btn func1-auto-choose">
+                자동 선택
+              </button>
+            </div>
+          </div>
+          <div class="func1-main-bottom-container func1-layout">
+            <div class="func1-main-bottom">
+              <div class="func1-main-1-1">
+                <div class="func1-chart-slide-num func1-chart-line-num">
+                  <div class="chart-slide-current ">1</div>
+                  <div>2</div>
+                  <div>3</div>
+                  <div>4</div>
+                  <div>5</div>
+                </div>
+                <div class="func1-chart-container">
+                  <i id="func1-left-line-chart-btn" class="func1-left-chart-btn fas fa-angle-left fa-4x "></i>
+                  <i id="func1-right-line-chart-btn" class="func1-right-chart-btn fas fa-angle-right fa-4x "></i>
+                  <canvas id="func1-chart-line"></canvas>
+                </div>
+              </div>
+              <div class="func1-main-2-1">
+                <div class="func1-chart-textbox">
+                  <div class="func1-chart-title func1-line-values">
+                    <div>
+                      홀수개수
+                    </div>
+                    <div>
+                      최근 12회차
+                    </div>
+                    <div>
+                      추세
+                    </div>
+                  </div>
+                  <div class="func1-chart-value">
+                    <div>
+                      <div>10</div>
+                      <div>1%</div>
+                    </div>
+                    <div>
+                      <div>10</div>
+                      <div>1%</div>
+                    </div>
+                    <div>
+                      <div>10</div>
+                      <div>1%</div>
+                    </div>
+                    <div>
+                      <div>10</div>
+                      <div>1%</div>
+                    </div>
+
+                    <div>
+                      <div>10</div>
+                      <div>1%</div>
+                    </div>
+
+                  </div>
+                  <div class="func1-chart-text">
+
+                  </div>
+                </div>
+              </div>
+              <div class="func1-main-1-2">
+                <div class="func1-chart-slide-num func1-chart-bar-num">
+                  <div class="chart-slide-current ">1</div>
+                  <div>2</div>
+                  <div>3</div>
+                </div>
+                <div class="func1-chart-container">
+                  <i id="func1-left-bar-chart-btn" class="func1-left-chart-btn fas fa-angle-left fa-4x "></i>
+                  <i id="func1-right-bar-chart-btn" class="func1-right-chart-btn fas fa-angle-right fa-4x "></i>
+                  <canvas id="func1-chart-bar"></canvas>
+                </div>
+              </div>
+              <div class="func1-main-2-2">
+                <div class="func1-chart-textbox">
+                  <div class="func1-chart-title func1-bar-values">
+                    <div>
+                      홀수개수
+                    </div>
+                    <div>
+                      최근 12회차
+                    </div>
+                    <div>
+                      추세
+                    </div>
+                  </div>
+                  <div class="func1-chart-value">
+                    <div>
+                      <div>10</div>
+                      <div>1%</div>
+                    </div>
+                    <div>
+                      <div>10</div>
+                      <div>1%</div>
+                    </div>
+                    <div>
+                      <div>10</div>
+                      <div>1%</div>
+                    </div>
+                    <div>
+                      <div>10</div>
+                      <div>1%</div>
+                    </div>
+
+                    <div>
+                      <div>10</div>
+                      <div>1%</div>
+                    </div>
+
+                  </div>
+                  <div class="func1-chart-text">
+
+                  </div>
+                </div>
+              </div>
+              <div class="func1-main-1-3">
+                <div id="func1-chart-bubble"></div>
+              </div>
+              <div class="func1-main-2-3"></div>
+            </div>
+            <div class="func1-checkbox-textbox">
+              <div class="func1-checkbox-text">
+
+              </div>
+              <div class="func1-checkbox-alert">
+
+              </div>
+            </div>
+          </div>
+          <div class="func2-main-bottom-container func2-layout none">
+            <div class="func2-main-top func2-layout">
+
+            </div>
+            <div class="func2-main-bottom">
+
+              <div class="func2-main-1-2">
+                <div>
+                  <div class="func2-win-num-times">
+                    891
+                  </div>
+                  <div class="func2-win-num-box">
+                    <div>12</div>
+                    <div>23</div>
+                    <div>34</div>
+                    <div>14</div>
+                    <div>25</div>
+                    <div>36</div>
+                  </div>
+                </div>
+                <div>
+                  <div class="func2-win-num-times">
+                    891
+                  </div>
+                  <div class="func2-win-num-box">
+                    <div>1</div>
+                    <div>20</div>
+                    <div>35</div>
+                    <div>42</div>
+                    <div>5</div>
+                    <div>26</div>
+                  </div>
+                </div>
+                <div>
+                  <div class="func2-win-num-times">
+                    891
+                  </div>
+                  <div class="func2-win-num-box">
+                    <div>1</div>
+                    <div>20</div>
+                    <div>35</div>
+                    <div>42</div>
+                    <div>5</div>
+                    <div>26</div>
+                  </div>
+                </div>
+              </div>
+              <div class="func2-main-2-2">
+                <canvas class="func2-chart-gauss func2-chart"></canvas>
+              </div>
+              <div class="func2-main-2-3">
+                <div class="func2-chart-radar-num">
+                  <div class="func2-left-chart-btn chart-slide-current"></div>
+                  <div class="func2-right-chart-btn "></div>
+                </div>
+                <canvas class="func2-chart-radar func2-chart"></canvas>
+                <div class="func2-chart-radar-text none">하이루~</div>
+              </div>
+              <div class="func2-main-2-4">
+                <canvas class="func2-chart-bar func2-chart"></canvas>
+              </div>
+              <div class="func2-main-1-3">
+                <div class="func2-lotto-checkbox">
+                  <div class="func2-num-term func2-lotto-check-current">
+                    번호빈도
+                  </div>
+                  <div class="func2-num-freq">
+                    번호간격
+                  </div>
+                  <div class="func2-num-freq-term">
+                    빈도X간격
+                  </div>
+                </div>
+                <div class="func2-lotto-num-box">
+                  <div>
+                    <div>1</div>
                     <div>2</div>
                     <div>3</div>
                     <div>4</div>
                     <div>5</div>
-                  </div>
-                  <div class="func1-chart-container">
-                    <i id="func1-left-line-chart-btn" class="func1-left-chart-btn fas fa-angle-left fa-4x "></i>
-                    <i id="func1-right-line-chart-btn" class="func1-right-chart-btn fas fa-angle-right fa-4x "></i>
-                    <canvas id="func1-chart-line"></canvas>
-                  </div>
-                </div>
-                <div class="func1-main-2-1">
-                  <div class="func1-chart-textbox">
-                    <div class="func1-chart-title func1-line-values">
-                      <div>
-                        홀수개수
-                      </div>
-                      <div>
-                        최근 12회차
-                      </div>
-                      <div>
-                        추세
-                      </div>
-                    </div>
-                    <div class="func1-chart-value">
-                      <div>
-                        <div>10</div>
-                        <div>1%</div>
-                      </div>
-                      <div>
-                        <div>10</div>
-                        <div>1%</div>
-                      </div>
-                      <div>
-                        <div>10</div>
-                        <div>1%</div>
-                      </div>
-                      <div>
-                        <div>10</div>
-                        <div>1%</div>
-                      </div>
-
-                      <div>
-                        <div>10</div>
-                        <div>1%</div>
-                      </div>
-
-                    </div>
-                    <div class="func1-chart-text">
-
-                    </div>
-                  </div>
-                </div>
-                <div class="func1-main-1-2">
-                  <div class="func1-chart-slide-num func1-chart-bar-num">
-                    <div class="chart-slide-current ">1</div>
-                    <div>2</div>
-                    <div>3</div>
-                  </div>
-                  <div class="func1-chart-container">
-                    <i id="func1-left-bar-chart-btn" class="func1-left-chart-btn fas fa-angle-left fa-4x "></i>
-                    <i id="func1-right-bar-chart-btn" class="func1-right-chart-btn fas fa-angle-right fa-4x "></i>
-                    <canvas id="func1-chart-bar"></canvas>
-                  </div>
-                </div>
-                <div class="func1-main-2-2">
-                  <div class="func1-chart-textbox">
-                    <div class="func1-chart-title func1-bar-values">
-                      <div>
-                        홀수개수
-                      </div>
-                      <div>
-                        최근 12회차
-                      </div>
-                      <div>
-                        추세
-                      </div>
-                    </div>
-                    <div class="func1-chart-value">
-                      <div>
-                        <div>10</div>
-                        <div>1%</div>
-                      </div>
-                      <div>
-                        <div>10</div>
-                        <div>1%</div>
-                      </div>
-                      <div>
-                        <div>10</div>
-                        <div>1%</div>
-                      </div>
-                      <div>
-                        <div>10</div>
-                        <div>1%</div>
-                      </div>
-
-                      <div>
-                        <div>10</div>
-                        <div>1%</div>
-                      </div>
-
-                    </div>
-                    <div class="func1-chart-text">
-
-                    </div>
-                  </div>
-                </div>
-                <div class="func1-main-1-3">
-                  <div id="func1-chart-bubble"></div>
-                </div>
-                <div class="func1-main-2-3"></div>
-              </div>
-              <div class="func1-checkbox-textbox">
-                <div class="func1-checkbox-text">
-
-                </div>
-                <div class="func1-checkbox-alert">
-
-                </div>
-              </div>
-            </div>
-            <div class="func2-main-bottom-container func2-layout none">
-              <div class="func2-main-top func2-layout">
-
-              </div>
-              <div class="func2-main-bottom">
-
-                <div class="func2-main-1-2">
-                  <div>
-                    <div class="func2-win-num-times">
-                      891
-                    </div>
-                    <div class="func2-win-num-box">
-                      <div>12</div>
-                      <div>23</div>
-                      <div>34</div>
-                      <div>14</div>
-                      <div>25</div>
-                      <div>36</div>
-                    </div>
+                    <div>6</div>
+                    <div>7</div>
                   </div>
                   <div>
-                    <div class="func2-win-num-times">
-                      891
-                    </div>
-                    <div class="func2-win-num-box">
-                      <div>1</div>
-                      <div>20</div>
-                      <div>35</div>
-                      <div>42</div>
-                      <div>5</div>
-                      <div>26</div>
-                    </div>
+                    <div>8</div>
+                    <div>9</div>
+                    <div>10</div>
+                    <div>11</div>
+                    <div>12</div>
+                    <div>13</div>
+                    <div>14</div>
                   </div>
                   <div>
-                    <div class="func2-win-num-times">
-                      891
-                    </div>
-                    <div class="func2-win-num-box">
-                      <div>1</div>
-                      <div>20</div>
-                      <div>35</div>
-                      <div>42</div>
-                      <div>5</div>
-                      <div>26</div>
-                    </div>
+                    <div>15</div>
+                    <div>16</div>
+                    <div>17</div>
+                    <div>18</div>
+                    <div>19</div>
+                    <div>20</div>
+                    <div>21</div>
+                  </div>
+                  <div>
+                    <div>22</div>
+                    <div>23</div>
+                    <div>24</div>
+                    <div>25</div>
+                    <div>26</div>
+                    <div>27</div>
+                    <div>28</div>
+                  </div>
+                  <div>
+                    <div>29</div>
+                    <div>30</div>
+                    <div>31</div>
+                    <div>32</div>
+                    <div>33</div>
+                    <div>34</div>
+                    <div>35</div>
+                  </div>
+                  <div>
+                    <div>36</div>
+                    <div>37</div>
+                    <div>38</div>
+                    <div>39</div>
+                    <div>40</div>
+                    <div>41</div>
+                    <div>42</div>
+                  </div>
+                  <div>
+                    <div>43</div>
+                    <div>44</div>
+                    <div>45</div>
+                    <button type="button" class="btn circle-btn func2-num-exclude-btn">
+                      제외
+                    </button>
                   </div>
                 </div>
-                <div class="func2-main-2-2">
-                  <canvas class="func2-chart-gauss func2-chart"></canvas>
-                </div>
-                <div class="func2-main-2-3">
-                  <div class="func2-chart-radar-num">
-                    <div class="func2-left-chart-btn chart-slide-current"></div>
-                    <div class="func2-right-chart-btn "></div>
-                  </div>
-                  <canvas class="func2-chart-radar func2-chart"></canvas>
-                  <div class="func2-chart-radar-text none">하이루~</div>
-                </div>
-                <div class="func2-main-2-4">
-                  <canvas class="func2-chart-bar func2-chart"></canvas>
-                </div>
-                <div class="func2-main-1-3">
-                  <div class="func2-lotto-checkbox">
-                    <div class="func2-num-term func2-lotto-check-current">
-                      번호빈도
-                    </div>
-                    <div class="func2-num-freq">
-                      번호간격
-                    </div>
-                    <div class="func2-num-freq-term">
-                      빈도X간격
-                    </div>
-                  </div>
-                  <div class="func2-lotto-num-box">
-                    <div>
-                      <div>1</div>
-                      <div>2</div>
-                      <div>3</div>
-                      <div>4</div>
-                      <div>5</div>
-                      <div>6</div>
-                      <div>7</div>
-                    </div>
-                    <div>
-                      <div>8</div>
-                      <div>9</div>
-                      <div>10</div>
-                      <div>11</div>
-                      <div>12</div>
-                      <div>13</div>
-                      <div>14</div>
-                    </div>
-                    <div>
-                      <div>15</div>
-                      <div>16</div>
-                      <div>17</div>
-                      <div>18</div>
-                      <div>19</div>
-                      <div>20</div>
-                      <div>21</div>
-                    </div>
-                    <div>
-                      <div>22</div>
-                      <div>23</div>
-                      <div>24</div>
-                      <div>25</div>
-                      <div>26</div>
-                      <div>27</div>
-                      <div>28</div>
-                    </div>
-                    <div>
-                      <div>29</div>
-                      <div>30</div>
-                      <div>31</div>
-                      <div>32</div>
-                      <div>33</div>
-                      <div>34</div>
-                      <div>35</div>
-                    </div>
-                    <div>
-                      <div>36</div>
-                      <div>37</div>
-                      <div>38</div>
-                      <div>39</div>
-                      <div>40</div>
-                      <div>41</div>
-                      <div>42</div>
-                    </div>
-                    <div>
-                      <div>43</div>
-                      <div>44</div>
-                      <div>45</div>
-                      <button type="button" class="btn circle-btn func2-num-exclude-btn">
-                        제외
-                      </button>
-                    </div>
-                  </div>
 
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="showcase-container">
-                <div class="func1-checkbox-container func1-layout">
-                  <div class="func1-checkbox">
-                    <div>
-                      1
-                      <input type="checkbox" name="" id="" class="checkbox" />
-                    </div>
-                    <div>
-                      2
-                      <input type="checkbox" name="" id="" class="checkbox" />
-                    </div>
-                    <div>
-                      3
-                      <input type="checkbox" name="" id="" class="checkbox" />
-                    </div>
-
-                    <div>
-                      4
-                      <input type="checkbox" name="" id="" class="checkbox" />
-                    </div>
-                    <div>
-                      5
-                      <input type="checkbox" name="" id="" class="checkbox" />
-                    </div>
-                    <div>
-                      6
-                      <input type="checkbox" name="" id="" class="checkbox" />
-                    </div>
-                  </div>
-                </div>
-                <div class="func2-select-num-box-container func2-layout none">
-                  <div class="func2-select-num-box">
-
-                  </div>
-                </div>
-                <div class="next-btn-container">
-                  <button type="reset" class="btn circle-btn" id="reset">초기화</button>
-                  <button type="button" class="btn circle-btn" id="nextBtn">다음</button>
-                </div>
               </div>
             </div>
           </div>
-          <div class="filter-func-clear-layout none">
+          <div>
+            <div class="showcase-container">
+              <div class="func1-checkbox-container func1-layout">
+                <div class="func1-checkbox">
+                  <div>
+                    1
+                    <input type="checkbox" name="" id="" class="checkbox" />
+                  </div>
+                  <div>
+                    2
+                    <input type="checkbox" name="" id="" class="checkbox" />
+                  </div>
+                  <div>
+                    3
+                    <input type="checkbox" name="" id="" class="checkbox" />
+                  </div>
+
+                  <div>
+                    4
+                    <input type="checkbox" name="" id="" class="checkbox" />
+                  </div>
+                  <div>
+                    5
+                    <input type="checkbox" name="" id="" class="checkbox" />
+                  </div>
+                  <div>
+                    6
+                    <input type="checkbox" name="" id="" class="checkbox" />
+                  </div>
+                </div>
+              </div>
+              <div class="func2-select-num-box-container func2-layout none">
+                <div class="func2-select-num-box">
+
+                </div>
+              </div>
+              <div class="next-btn-container">
+                <button type="reset" class="btn circle-btn" id="reset">초기화</button>
+                <button type="button" class="btn circle-btn" id="nextBtn">다음</button>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+          <div class="func3-layout-1 none">
             <div class="func3-main-1-1">
               <div class="func3-filter-num">번호의 개수 : 0</div>
               <div class="func3-filter-text">
