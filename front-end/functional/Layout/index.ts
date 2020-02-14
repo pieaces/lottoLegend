@@ -96,9 +96,16 @@ export default class Layout extends Layout3 {
                 case 3: case 4: case 5:
                     this.reset();
                     this.checkBox.removeAllEvent();
-                    if (currentFilter === 3) this.includeVerson();
-                    if (currentFilter === 4) this.includeVerson();
-                    if (currentFilter === 5) this.excludeVersion();
+                    if(currentFilter == 3){ 
+                        this.nextAbleLimit = this.options[currentFilter -1].indexOf(true);
+                        if (this.nextAbleLimit === 0) {
+                            this.options[currentFilter] = [];
+                            await DataAPI.getInstance().forward(this.options[currentFilter]);
+                        }
+                        this.includeVerson();
+                    }
+                    else if (currentFilter === 4) this.includeVerson();
+                    else if (currentFilter === 5) this.excludeVersion();
                     this.setOpacity();
                     this.refreshNumberBoard();
                     this.layout2On();
@@ -109,22 +116,15 @@ export default class Layout extends Layout3 {
                     this.layout1On();
                     this.checkBox.init();
                     if (currentFilter === 1) {
-                        this.nextAbleLimit = this.options[0].indexOf(true);
+                        this.nextAbleLimit = this.options[currentFilter-1].indexOf(true);
                         if (this.nextAbleLimit === 0) {
-                            this.options[1] = [];
-                            await DataAPI.getInstance().forward(this.options[1]);
+                            this.options[currentFilter] = [];
+                            await DataAPI.getInstance().forward(this.options[currentFilter]);
                             this.on();
                         } else if (this.nextAbleLimit === 1) {
                             this.checkBox.singleSelectEvent();
                         } else {
                             this.checkBox.multiSelectEvent(this.nextAbleLimit);
-                        }
-                    } else if (currentFilter === 3) {
-                        this.nextAbleLimit = this.options[0].indexOf(true);
-                        if (this.nextAbleLimit === 0) {
-                            this.options[3] = [];
-                            await DataAPI.getInstance().forward(this.options[3]);
-                            this.on();
                         }
                     } else if (currentFilter <= 6) {
                         this.checkBox.singleSelectEvent();
@@ -156,10 +156,10 @@ export default class Layout extends Layout3 {
 
         this.nextBtn.addEvent(async () => {
             const currentFilter = DataAPI.getInstance().getCurrent();
-            if (currentFilter === 0 && this.checkBox.getCount() === this.nextAbleLimit ||
+            if (this.checkBox.getCount() > 0 ||
                 currentFilter === 1 && this.checkBox.getCount() === this.nextAbleLimit ||
                 currentFilter === 3 && this.checkedNumbers.length === this.nextAbleLimit ||
-                currentFilter !== 0 && currentFilter !== 1 && currentFilter !== 3) {
+                currentFilter === 4 || currentFilter === 5) {
                 section.scrollIntoView({
                     behavior: 'auto'
                 });
