@@ -2,7 +2,7 @@ import ChartBase from "../Chart/Charts";
 
 const canvas: HTMLCanvasElement = document.querySelector('.func2-chart-gauss');
 const dataBox = {
-    labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].reverse(),
+    labels: [886, 887, 888, 889, 890, 891, 892, 893, 894, 895, 896, 897],
     datasets: [
         {
             steppedLine: true,
@@ -19,7 +19,8 @@ const option = {
     legend: { display: false },
     title: {
         display: true,
-        text: 'hi'
+        text: '회차별 출현여부',
+        fontSize:14
     }
 };
 

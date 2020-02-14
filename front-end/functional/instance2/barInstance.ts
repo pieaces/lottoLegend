@@ -2,12 +2,11 @@ import ChartBase from "../Chart/Charts";
 
 const canvas: HTMLCanvasElement = document.querySelector('.func2-chart-bar');
 const dataBox = {
-    labels: ['예측값', '실제값'],
+    labels: ['실제값', '예측값'],
     datasets: [
         {
-            label: 'Ice Cream Sales ',
             fill: true,
-            backgroundColor: ['#3DA8E3', '#FBCE00'],
+            backgroundColor: ['rgb(199, 54, 44)', 'rgb(14,99,132)'],
             data: null
         }
     ]
@@ -19,6 +18,11 @@ const option = {
             ticks: {
             }
         }]
+    },
+    title: {
+        display: true,
+        text: '번호별 출현횟수',
+        fontSize:12
     }
 };
 
