@@ -36,35 +36,6 @@ export default class Layout extends Layout3 {
         });
     }
 
-    private loadingSetColorRandom(redDensity) {
-        let i = 0;
-        let flag = true;
-        const colorMax = 255;
-        const ID = setInterval(function () {
-
-            if (flag) {
-                loadingIcon.style.color = `rgba(${redDensity + i},0,0)`;
-                i++
-
-                if (redDensity + i >= colorMax) {
-                    flag = false;
-                    i = 0;
-                }
-            }
-            else {
-                loadingIcon.style.color = `rgba(${colorMax - i},0,0)`;
-                i++
-                if (colorMax - i <= redDensity) {
-                    flag = true;
-                    i = 0;
-                }
-            }
-
-        }, 20)
-        return ID;
-    }
-
-
     private setOption() {
         const currentFilter = DataAPI.getInstance().getCurrent();
         switch (currentFilter) {
@@ -195,17 +166,11 @@ export default class Layout extends Layout3 {
                     behavior: 'auto'
                 });
                 this.setOption();
-
                 loading.classList.remove('none');
-
-                const ID = this.loadingSetColorRandom(130);
-
+                throw new Error("ㅋㅋ");
                 await DataAPI.getInstance().forward(this.options[currentFilter]);
                 await this.on();
-
                 loading.classList.add('none');
-                clearInterval(ID);
-
                 this.checkBox.reset();
                 this.dropDown.changeBoard();
                 this.dropDown.changeDropDownColor();
@@ -215,7 +180,6 @@ export default class Layout extends Layout3 {
                 setTimeout(function () {
                     alertText.style.opacity = "0";
                 }, 1500)
-
             }
         });
         this.dropDown.nodeList.forEach((node, index) => {
