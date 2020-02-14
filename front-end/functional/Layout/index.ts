@@ -37,8 +37,19 @@ export default class Layout extends Layout3 {
     private setOption() {
         const currentFilter = DataAPI.getInstance().getCurrent();
         switch (currentFilter) {
-            case 3: case 4: case 5:
+            case 3:
+                this.options[currentFilter] = {
+                    include:this.checkedNumbers.slice(),
+                    exclude: []
+                }
+                break;
+            case 4: case 5:
                 this.options[currentFilter] = this.checkedNumbers.slice();
+                if(currentFilter === 4){
+                    this.options[currentFilter].push(...this.options[3].include);
+                }else if(currentFilter === 5){
+                    this.options[currentFilter].push(...this.options[3].exclude);
+                }
                 break;
             default:
                 this.options[currentFilter] = this.checkBox.getCheckedLabels().slice();
