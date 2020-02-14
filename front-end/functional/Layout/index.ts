@@ -167,7 +167,6 @@ export default class Layout extends Layout3 {
                 });
                 this.setOption();
                 loading.classList.remove('none');
-                throw new Error("ㅋㅋ");
                 await DataAPI.getInstance().forward(this.options[currentFilter]);
                 await this.on();
                 loading.classList.add('none');
