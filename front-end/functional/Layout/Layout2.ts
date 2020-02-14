@@ -25,8 +25,6 @@ export default class Layout2 extends Layout1 {
     static readonly body = 'body *';
     static readonly numBoard = '.func2-main-1-4 *';
     static readonly lottoCheckCurrent = 'func2-lotto-check-current';
-    private data: any;
-    private TOTAL: number;
     protected checkedNumbers = new Array<number>();
     private choice = null;
     private boardCurrent = 0;
@@ -36,11 +34,11 @@ export default class Layout2 extends Layout1 {
     private freqTerm: number[] = [];
 
     private initCoefVerInclude() {
-        const fMin = Math.min(...this.data.frequency);
-        const terms = this.data.howLongNone.map(ele => this.TOTAL - ele.round + 1);
+        const fMin = Math.min(...DataAPI.getInstance().getStats2().frequency);
+        const terms = DataAPI.getInstance().getStats2().howLongNone.map(ele => DataAPI.getInstance().getTOTAL() - ele.round + 1);
         const tMax = Math.max(...terms);
         for (let i = 0; i < 45; i++) {
-            this.frequencies[i] = Math.pow(fMin, 2) / Math.pow(this.data.frequency[i], 2);
+            this.frequencies[i] = Math.pow(fMin, 2) / Math.pow(DataAPI.getInstance().getStats2().frequency[i], 2);
             this.terms[i] = Math.pow(terms[i], 1 / 3) / Math.pow(tMax, 1 / 3);
             this.freqTerm[i] = this.frequencies[i] * this.terms[i];
         }
@@ -50,11 +48,11 @@ export default class Layout2 extends Layout1 {
         }
     }
     private initCoefVerExclude() {
-        const fMax = Math.max(...this.data.frequency);
-        const terms = this.data.howLongNone.map(ele => this.TOTAL - ele.round + 1);
+        const fMax = Math.max(...DataAPI.getInstance().getStats2().frequency);
+        const terms = DataAPI.getInstance().getStats2().howLongNone.map(ele => DataAPI.getInstance().getTOTAL() - ele.round + 1);
         const tMin = Math.min(...terms);
         for (let i = 0; i < 45; i++) {
-            this.frequencies[i] = Math.pow(this.data.frequency[i], 2) / Math.pow(fMax, 2);
+            this.frequencies[i] = Math.pow(DataAPI.getInstance().getStats2().frequency[i], 2) / Math.pow(fMax, 2);
             this.terms[i] = Math.pow(tMin, 1 / 3) / Math.pow(terms[i], 1 / 3);
             this.freqTerm[i] = this.frequencies[i] * this.terms[i];
         }
@@ -91,9 +89,9 @@ export default class Layout2 extends Layout1 {
         gauss.update();
     }
     private updateChartData() {
-        bar.dataBox.datasets[0].data = [this.data.frequency[this.choice - 1], this.TOTAL * 6 / 45];
-        radar.dataBox.datasets[0].data = this.data.interval[this.choice - 1].list;
-        gauss.dataBox.datasets[0].data = this.data.emergence[this.choice - 1];
+        bar.dataBox.datasets[0].data = [DataAPI.getInstance().getStats2().frequency[this.choice - 1], DataAPI.getInstance().getTOTAL() * 6 / 45];
+        radar.dataBox.datasets[0].data = DataAPI.getInstance().getStats2().interval[this.choice - 1].list;
+        gauss.dataBox.datasets[0].data = DataAPI.getInstance().getStats2().emergence[this.choice - 1];
         this.updateChart();
     }
     private clearChart() {
@@ -144,6 +142,17 @@ export default class Layout2 extends Layout1 {
             Box.style.backgroundColor = '#B0D840';
         }
     }
+    private doesExcluded(index:number):boolean{
+        if(this.options[1].indexOf(Math.floor((index + 1) / 10)) !== -1 ||
+        !this.options[3] && DataAPI.getInstance().getWinNums()[0].indexOf(index + 1) === -1 ||
+        this.options[3] && DataAPI.getInstance().getWinNums()[0].indexOf(index + 1) !== -1 ||
+        this.options[4] && (DataAPI.getInstance().getWinNums()[0].indexOf(index + 1) !== -1 ||
+        this.options[4] && this.options[4].indexOf(index + 1) !== -1)){
+            return true;
+        }else{
+            return false;
+        }
+    }
     private setColorWinNum() {
         winNums.forEach(node => {
             const nodeValue = parseInt(node.textContent);
@@ -165,10 +174,10 @@ export default class Layout2 extends Layout1 {
     setOpacity() {
         let opacities = this.getOpacities();
         lottoNumbers.forEach((node, index) => {
-            if (!(this.options[1].indexOf(Math.floor((index + 1) / 10)) !== -1 || (this.options[3] && this.options[3].indexOf(index + 1) !== -1))) {
-                node.style.opacity = `${opacities[index]}`;
+            if (this.doesExcluded(index)) {
+                node.classList.add('nopointer');
             } else {
-                node.classList.add('nopointer')
+                node.style.opacity = `${opacities[index]}`;
             }
         });
     }
@@ -232,8 +241,6 @@ export default class Layout2 extends Layout1 {
         e.stopPropagation();
     }
     init() {
-        this.data = DataAPI.getInstance().getStats2();
-        this.TOTAL = DataAPI.getInstance().getTOTAL();
         bar.option.scales.yAxes[0].ticks = {
             min: Math.floor(Math.min(...DataAPI.getInstance().getStats2().frequency) / 10) * 10,
             max: Math.ceil(Math.max(...DataAPI.getInstance().getStats2().frequency) / 10) * 10
@@ -249,10 +256,11 @@ export default class Layout2 extends Layout1 {
             lottoNumbers[i].removeEventListener('click', this.numbersEventList[i]);
         }
         lottoNumbers.forEach((node: HTMLElement, index) => {
-            if (this.options[1].indexOf(Math.floor((index + 1) / 10)) !== -1 || (this.options[3] && this.options[3].indexOf(index + 1) !== -1)) {
+            if (this.doesExcluded(index)) {
                 node.style.backgroundColor = Layout2.lottoNumExcludedColor;
                 node.style.color = Layout2.lottoNumDefaultFontColor;
                 node.style.opacity = '';
+                node.classList.add('nopointer');
             } else {
                 const event = (e: Event) => {
                     selectEvent(this, node);
@@ -260,6 +268,7 @@ export default class Layout2 extends Layout1 {
                 };
                 this.numbersEventList[index] = event;
                 node.addEventListener('click', event);
+                node.classList.remove('nopointer');
             }
         });
     }

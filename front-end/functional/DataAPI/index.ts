@@ -41,12 +41,12 @@ function paramToNumbers(params: Params): number[] {
 export default class DataAPI {
     static instance: DataAPI = null;
     public numbers: number[];
-    private TOTAL: number;
+    private winNums: number[][] = [];
     public filteredCount: number;
     private filterList = ["전멸구간개수", "전멸구간", "이월수 개수", "이월수 선택", "포함", "제외", "저값 개수", "합계", "홀수 개수", "소수 개수", "3배수 개수", "첫수합", "고저차", "AC", "연속수 포함여부"]
     private dataList = ['excludedLineCount', 'lineCount', 'carryCount', 'excludeInclude', 'excludeInclude', 'excludeInclude', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
     private optionList = [null, 'excludedLines', null, null, 'includedNumbers', 'excludedNumbers', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
-    private rangeList: Array<string[] | number[]> = [[0, 1, 2, 3, 4], [0, 1, 2, 3, 4], [0, 1, 2, 3, 4, 5, 6], null, null, null];
+    private rangeList: Array<string[] | number[]> = [[0, 1, 2, 3, 4], ['1~', '10~', '20~', '30~', '40~'], [0, 1, 2, 3, 4, 5, 6], null, null, null];
     private current: number = 0;
     private data: Data = new Data();
     private generator: Generator = new Generator();
@@ -58,7 +58,8 @@ export default class DataAPI {
         }
         return DataAPI.instance;
     }
-    public getTOTAL(): number { return this.TOTAL; }
+    public getTOTAL(): number { return this.data.total; }
+    public getWinNums(): number[][] {return this.data.winNums; }
     public getLabels(num = this.current): Array<string | number> {
         return this.rangeList[num];
     }
@@ -104,6 +105,9 @@ export default class DataAPI {
                     this.rangeList[this.current] = compartNumbers(params, 2);
                     params = { from: range[0] as number, to: range[range.length - 1] as number };
                 }
+            }
+            if(this.current === this.SIZE -1){
+                this.rangeList[this.current] = ['제외', '포함'];
             }
         }
         await this.data.getData(this.dataList[this.current], params);
@@ -151,7 +155,6 @@ export default class DataAPI {
         this.current = 0;
         await this.setStats();
         await this.data.getData(this.dataList[3], {});
-        this.TOTAL = this.data.total;
     }
 
     public getStats() {

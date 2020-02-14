@@ -69,17 +69,21 @@ export default class Layout extends Layout3 {
         const currentFilter = DataAPI.getInstance().getCurrent();
         switch (currentFilter) {
             case 3:
-                this.options[currentFilter] = {
-                    include: this.checkedNumbers.slice(),
-                    exclude: []
-                }
+                this.options[currentFilter] = this.checkedNumbers.slice();
                 break;
             case 4: case 5:
                 this.options[currentFilter] = this.checkedNumbers.slice();
                 if (currentFilter === 4) {
-                    this.options[currentFilter].push(...this.options[3].include);
+                    this.options[currentFilter].push(...this.options[3]);
                 } else if (currentFilter === 5) {
-                    this.options[currentFilter].push(...this.options[3].exclude);
+                    const winNum:number[] = DataAPI.getInstance().getWinNums()[0];
+                    for(let i=0; i<this.options[3].length; i++){
+                        const index = winNum.indexOf(this.options[3][i]);
+                            if(index !== -1){
+                                winNum.splice(index,1);
+                            }
+                        }
+                    this.options[currentFilter].push(...winNum);
                 }
                 break;
             default:
@@ -87,33 +91,34 @@ export default class Layout extends Layout3 {
                 if (currentFilter === 1) {
                     const range = DataAPI.getInstance().getLabels();
                     const option: number[] = [];
-                    this.options[currentFilter].forEach((value, index) => {
+                    this.options[currentFilter].forEach((value:boolean, index:number) => {
                         if (value) {
-                            option.push(range[index] as number);
+                            option.push(index);
                         }
                     });
                     this.options[currentFilter] = option;
                 } else if (currentFilter === 6) {
                     this.options[currentFilter] = DataAPI.getInstance().getLabels()[this.options[currentFilter].indexOf(true)];
-                } else if (currentFilter === DataAPI.getInstance().SIZE - 1) {
-                    this.options[currentFilter] = this.options[currentFilter] ? false : true;
-                } else if (currentFilter > 6) {
+                }else if (6 <currentFilter && currentFilter < DataAPI.getInstance().SIZE -1) {
                     const range = DataAPI.getInstance().getLabels()
                     let from = range[this.options[currentFilter].indexOf(true)];
                     let to = range[this.options[currentFilter].lastIndexOf(true)]
                     if (currentFilter === 7) {
                         from = Number((<string>from).slice(0, (<string>from).indexOf('~')));
                         to = Number((<string>to).slice((<string>to).indexOf('~') + 1));
-                    } else if (currentFilter === 11 && typeof from === 'string') {
+                    } else if (currentFilter === 12 && typeof from === 'string') {
                         from = Number((<string>from).slice(0, (<string>from).indexOf('~')));
                         to = Number((<string>to).slice((<string>to).indexOf('~') + 1));
-                    } else {
+                    }else {
                         from = Number(from);
                         to = Number(to);
                     }
                     this.options[currentFilter] = { from, to }
+                } else if (currentFilter === DataAPI.getInstance().SIZE - 1) {
+                    this.options[currentFilter] = this.options[currentFilter][0] ? false : true;
                 }
         }
+        console.log(this.options);
     }
     private async on(layoutVersion: number = 0) {
         if (layoutVersion === 0) {
@@ -125,8 +130,8 @@ export default class Layout extends Layout3 {
                     this.checkBox.removeAllEvent();
 
                     if (currentFilter === 3) this.includeVerson();
-                    if (currentFilter === 4) this.excludeVersion();
-                    if (currentFilter === 5) this.includeVerson();
+                    if (currentFilter === 4) this.includeVerson();
+                    if (currentFilter === 5) this.excludeVersion();
                     this.setOpacity();
                     this.refreshNumberBoard();
 
@@ -138,15 +143,16 @@ export default class Layout extends Layout3 {
                     this.layout1On();
                     this.checkBox.init();
                     if (currentFilter === 1) {
-                        const trueIndex = this.options[0].indexOf(true);
-                        const count = DataAPI.getInstance().getLabels()[trueIndex] as number;
-                        if (count === 0) {
-                            await DataAPI.getInstance().forward([]);
+                        this.nextAbleLimit = this.options[0].indexOf(true);
+                        console.log('1123', this.nextAbleLimit);
+                        if (this.nextAbleLimit === 0) {
                             this.options[1] = [];
+                            await DataAPI.getInstance().forward(this.options[1]);
                             this.on();
+                        } else if(this.nextAbleLimit === 1){
+                            this.checkBox.singleSelectEvent();
                         } else {
-                            this.nextAbleLimit = count;
-                            this.checkBox.multiSelectEvent(count);
+                            this.checkBox.multiSelectEvent(this.nextAbleLimit);
                         }
                     } else if (currentFilter <= 6) {
                         this.checkBox.singleSelectEvent();
@@ -200,7 +206,6 @@ export default class Layout extends Layout3 {
                 this.dropDown.changeBoard();
                 this.dropDown.changeDropDownColor();
             } else {
-
                 alertText.style.opacity = "1";
                 alertText.textContent = "몇개를 찍으셔야 합니다";
 

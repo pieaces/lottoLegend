@@ -133,8 +133,6 @@ export default class CheckBox {
                 }
                 return value;
             });
-        } else {
-            labels = ['false', 'true'];
         }
         this.labelList = new Array<boolean>(labels.length).fill(false);
         Array.from(checkBoxContainer.children).forEach(node => {
