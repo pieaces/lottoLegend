@@ -86,7 +86,7 @@ export default class Layout extends Layout3 {
                     this.options[currentFilter] = { from, to }
                 } else if (currentFilter === DataAPI.getInstance().SIZE - 1) {
                     this.options[currentFilter] = this.options[currentFilter][0] ? false : true;
-                } 
+                }
         }
         console.log(this.options);
     }
@@ -119,6 +119,8 @@ export default class Layout extends Layout3 {
                             await DataAPI.getInstance().forward([]);
                             this.options[1] = [];
                             this.on();
+                        } else if(count === 1){
+                            this.checkBox.singleSelectEvent();
                         } else {
                             this.nextAbleLimit = count;
                             this.checkBox.multiSelectEvent(count);
