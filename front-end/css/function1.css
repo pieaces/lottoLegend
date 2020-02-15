@@ -10,10 +10,26 @@
     margin-bottom:10px;
     display:flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
   }
 
-  
+  .func1-extract-num{
+    width:85%;
+    height:100%;
+    background-color: var(--default-color);
+    border: 1px solid var(--border-color);
+    display:flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .func1-auto-choose-container{
+    width:15%;
+    height:70px;
+    display:flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
   
   .func1-main-bottom-container{
     margin-bottom:10px;
@@ -241,13 +257,6 @@
     height:120px;
   }
   
-
-  .func1-auto-choose-container{
-    height:70px;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-  }
   
   .func1-checkbox-container{
     width: 70%;

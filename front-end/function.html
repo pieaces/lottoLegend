@@ -63,9 +63,14 @@
               </div>
             </div>
           </div>
-          <div id="func1-main-stats" class="func1-main-mid func1-layout">
-            <div>
+          <div class="func1-main-mid func1-layout">
+            <div class="func1-extract-num hide" id="func1-main-stats">
               추출된 번호 개수 :
+            </div>
+            <div class="func1-auto-choose-container">
+              <button type="button" class="btn circle-btn func1-auto-choose">
+                자동 선택
+              </button>
             </div>
           </div>
           <div class="func1-main-bottom-container func1-layout">
@@ -221,30 +226,26 @@
                 </div>
               </div>
               <div class="func1-main-2-3">
-                <table class="func1-table-2 table">
+                <table class="func1-table-2 table" id="func1-bubble-table">
                   <tr>
-                    <td>평균 : </td>
-                    <td>표준편차 : </td>
+                    <td id="func1-bubble-mean-value">평균 : </td>
+                    <td id="func1-bubble-stdev-value">표준편차 : </td>
                   </tr>
                   <tr>
-                    <td>최댓값 : </td>
-                    <td>최솟값 : </td>
+                    <td id="func1-bubble-max-value">최댓값 : </td>
+                    <td id="func1-bubble-min-value">최솟값 : </td>
 
                   </tr>
                   <tr>
-                    <td>68%</td>
-                    <td>95%</td>
+                    <td id="func1-bubble-s-percent-value">68%</td>
+                    <td id="func1-bubble-b-percent-value">95%</td>
 
                   </tr>
                 </table>
                 <div class="func1-bubble-text">
 
                 </div>
-                <div class="func1-auto-choose-container">
-                  <button type="button" class="btn circle-btn func1-auto-choose">
-                    자동 선택
-                  </button>
-                </div>
+
               </div>
             </div>
 

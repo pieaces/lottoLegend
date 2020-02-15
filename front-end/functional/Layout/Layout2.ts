@@ -349,3 +349,37 @@ function makeWinNum(winNumArr: number[][], total: number) {
     }
 
 }
+
+// const extractNum=document.querySelector('.func1-extract-num');
+
+// if 추출되면 extractNum.classList.remove('hide');
+
+// else extractNum.classList.add('hide');
+
+////////////////////////////////////////
+
+// const meanValue = document.querySelector('#func1-bubble-mean-value');
+
+// meanValue.textContent="";
+
+// const stdevValue = document.querySelector('#func1-bubble-stdev-value');
+
+// stdevValue.textContent="";
+
+// const maxValue = document.querySelector('#func1-bubble-max-value');
+
+// maxValue.textContent="";
+
+// const minValue = document.querySelector('#func1-bubble-min-value');
+
+// minValue.textContent="";
+
+// const smallPercent = document.querySelector('#func1-bubble-s-percent-value');
+
+// smallPercent.textContent="";
+
+// const bigPercent = document.querySelector('#func1-bubble-b-percent-value');
+
+// bigPercent.textContent="";
+
+////////////////////////////
