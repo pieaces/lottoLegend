@@ -64,7 +64,9 @@
             </div>
           </div>
           <div id="func1-main-stats" class="func1-main-mid func1-layout">
-            추출된 번호 개수 :
+            <div>
+              추출된 번호 개수 :
+            </div>
           </div>
           <div class="func1-main-bottom-container func1-layout">
             <div class="func1-main-bottom">
@@ -85,13 +87,16 @@
               <div class="func1-main-2-1">
                 <div class="func1-chart-textbox">
                   <div class="func1-chart-title func1-line-values">
-                    <div>홀수 개수</div>
+                    <div>
+                      <div>1~12</div>
+                      <div>홀수 개수</div>
+                    </div>
                     <div>실제 당첨 개수</div>
                     <div>수학적 예상 개수</div>
                     <div>예측대비 실제 비율</div>
                   </div>
                   <div class="func1-chart-value">
-                    <table class="func1-table-1 table">
+                    <table class="func1-table-1 table" id="func1-line-table">
                       <tr>
                         <td>Peter</td>
                         <td>Griffin</td>
@@ -145,12 +150,12 @@
                 <div class="func1-chart-textbox">
                   <div class="func1-chart-title func1-bar-values">
                     <div>홀수 개수</div>
-                    <div>실제 당첨 개수</div>
-                    <div>수학적 예상 개수</div>
-                    <div>예측대비 실제 비율</div>
+                    <div>
+                      최근 12회차 <span>실제값</span>
+                    </div>
                   </div>
                   <div class="func1-chart-value">
-                    <table class="func1-table-1 table">
+                    <table class="func1-table-1 table" id="func1-bar-table">
                       <tr>
                         <td>Peter</td>
                         <td>Griffin</td>
