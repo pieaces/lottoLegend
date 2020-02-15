@@ -4,6 +4,7 @@ import DropDown from "../instanceBtns/DropDown";
 import Checkbox from "../instanceBtns/CheckBox";
 import NextBtn from "../instanceBtns/NextBtn";
 import ResetBtn from "../instanceBtns/ResetBtn";
+import Question from "../Question"
 const layout1 = document.querySelectorAll<HTMLElement>(".func1-layout");
 const layout2 = document.querySelectorAll<HTMLElement>(".func2-layout");
 const section = document.querySelector(".section1");
@@ -18,6 +19,7 @@ export default class Layout extends Layout3 {
     checkBox: Checkbox = new Checkbox();
     nextBtn: NextBtn = new NextBtn();
     resetBtn: ResetBtn = new ResetBtn();
+    question: Question = new Question();
     nextAbleLimit: number = 1;
     private layout1On() {
         layout1.forEach(node => {
@@ -97,8 +99,8 @@ export default class Layout extends Layout3 {
                 case 3: case 4: case 5:
                     this.reset();
                     this.checkBox.removeAllEvent();
-                    if(currentFilter == 3){ 
-                        this.nextAbleLimit = this.options[currentFilter -1].indexOf(true);
+                    if (currentFilter == 3) {
+                        this.nextAbleLimit = this.options[currentFilter - 1].indexOf(true);
                         if (this.nextAbleLimit === 0) {
                             this.options[currentFilter] = [];
                             await DataAPI.getInstance().forward(this.options[currentFilter]);
@@ -117,7 +119,7 @@ export default class Layout extends Layout3 {
                     this.layout1On();
                     this.checkBox.init();
                     if (currentFilter === 1) {
-                        this.nextAbleLimit = this.options[currentFilter-1].indexOf(true);
+                        this.nextAbleLimit = this.options[currentFilter - 1].indexOf(true);
                         if (this.nextAbleLimit === 0) {
                             this.options[currentFilter] = [];
                             await DataAPI.getInstance().forward(this.options[currentFilter]);
@@ -144,6 +146,7 @@ export default class Layout extends Layout3 {
 
     init() {
         super.init();
+        this.question.init();
         this.dropDown.init();
         this.dropDown.changeDropDownColor();
         this.dropDown.addEvent();

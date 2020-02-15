@@ -271,3 +271,34 @@ border-left: 10px solid #575755;
     transition: all 500ms;  
   }
   
+  .question-container{
+    z-index:1;
+  }
+
+  .question-container > i{
+    font-size:1.5rem;
+    color:var(--main-color);
+  }
+
+  .question-modal{
+    position: absolute;
+    top:0;
+    right:0;
+    width:200px;
+    height:200px;
+    background-color: var(--default-color);
+    border:1px solid rgba(0, 0, 0, 0.4);
+  }
+
+  .question-cancel{
+    height:50px;
+    position: relative;
+  }
+
+  .question-cancel > i{
+    position: absolute;
+    top:30%;
+    right:10%;
+    font-size:1.3rem;
+    color:rgb(140, 140, 140);
+  }
