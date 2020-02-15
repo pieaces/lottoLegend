@@ -6,7 +6,7 @@
   .func2-main-bottom {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: 260px 230px 210px;
+    grid-template-rows: 210px 230px 210px;
     grid-gap: 10px;
   }
   

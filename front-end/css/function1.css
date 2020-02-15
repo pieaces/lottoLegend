@@ -11,70 +11,11 @@
     background-color: var(--default-color);
     border:1px solid var(--border-color);
     display:flex;
-  }
-
-  .func1-stats-container{
-    width:85%;
-    display:flex;
     align-items: center;
     justify-content: center;
   }
 
-  .func1-stats-container> div:nth-child(3){
-    font-size:0.8rem;
-    
-  }
-
-  .func1-stats-container > div:nth-child(3) >div{
-    display:flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .func1-stats-container > div:nth-child(3) > div:nth-child(1){
-    background-color: var(--lotto-title-color);
-    color:var(--default-color);
-  }
-
-  .func1-stats-box{
-    width:140px;
-    height:70px;
-    margin:0 30px;
-    text-align: center;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-  }
-
-  .func1-stats-box >  div{
-    height:50%;
-    display:flex;
-  }
   
-
-  .func1-stats-box >div:nth-child(1){
-    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
-  }
-
-  .func1-stats-box > div >div{
-    width:50%;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    
-  }
-
-  .func1-stats-box > div>  div:nth-child(1){
-    
-    font-size:0.8rem;
-    background-color: var(--lotto-title-color);
-    color:var(--default-color);
-  }
-
-  .func1-auto-choose-container{
-    width:15%;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-  }
   
   .func1-main-bottom-container{
     margin-bottom:10px;
@@ -171,7 +112,8 @@
   }
 
   .func1-chart-title{
-    height:30%;
+    padding-right:8px;
+    height:60px;
     display:flex;
     align-items: center;
     justify-content: space-around;
@@ -179,12 +121,16 @@
 
   .func1-chart-title > div{
     border: 1px solid var(--border-color);
+    word-break: keep-all;
     font-size:0.9rem;
-    width:90px;
-    height:60px;
+    width:25%;
+    height:100%;
     display:flex;
     align-items: center;
+    text-align: center;
     justify-content: center;
+    background-color: var(--main-color);
+    color:var(--default-color);
   }
 
   .func1-chart-value{
@@ -206,41 +152,26 @@
     background-color: rgb(160, 160, 160);
   }
 
-  .func1-table{
-    width:100%; 
-    border-collapse: collapse;
-  }
-
-  
-
-  .func1-table,
-  .func1-table th,
-  .func1-table td{
-    border:1px solid rgba(0, 0, 0, 0.4);
-  }
-
-  .func1-table th{
+  .func1-table-1 th{
     word-break: keep-all;
     font-size:0.8rem;
     background-color: var(--main-color);
     color:var(--default-color);
   }
 
-  .func1-table tr{
+
+
+  .func1-table-1 tr{
     text-align: center;
+    
     height:80px;
   
   }
 
-  .func1-table th,
-  .func1-table tr{
+  .func1-table-1 tr td{
     width:25%;
   }
   
-  
-  
-
-
   .func1-chart-text{
     height:40%;
   }
@@ -254,8 +185,31 @@
     grid-column: 8/13;
     grid-row: 3/4;
   }
+
+  .func1-table-2{
+    height:120px;
+  }
+  
+  .func1-table-2 tr{
+    word-break: keep-all;
+    font-size:0.8rem;
+    text-align: center;
+    width:50%;
+    height:40px;
+  }
+
+  .func1-bubble-text{
+    height:120px;
+  }
   
 
+  .func1-auto-choose-container{
+    height:70px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
   .func1-checkbox-container{
     width: 70%;
   }

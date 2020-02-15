@@ -8,23 +8,25 @@
 </head>
 
 <body>
+    <div class="func1-chart-title func1-line-values">
+        <div></div>
+        <div>실제 당첨 개수</div>
+        <div>수학적 예상 개수</div>
+        <div>예측대비 실제 비율</div>
+    </div>
+    <table class="func1-table-1">
 
-    <table class="func1-table">
-        <tr>
-            <th></th>
-            <th>실제 당첨 개수</th>
-            <th>수학적 예상 개수</th>
-            <th>예측대비 실제 비율</th>
-        </tr>
 
     </table>
     </div>
     <script>
-        const tableBody = document.querySelector('.func1-table > tbody');
-        const tableFilterName = document.querySelector('.func1-table tr > th:nth-child(1)');
+        const lineValueBox = document.querySelector('.func1-line-values > div:nth-child(1)');
+        const barValueBox = document.querySelector('.func1-bar-values > div:nth-child(1)');
+        const tableBody = document.querySelector('.func1-table-1');
+
         const a = [[1, 2, 3, 4], [4, 5, 6, 7], [7, 8, 9, 10], [10, 11, 12, 13]];
-        function dynamicMakeTable(a, text) {
-            tableFilterName.textContent = text;
+        function dynamicMakeTable(a, valueBox, text) {
+            valueBox.textContent = text;
             for (let i = 0; i < a.length; i++) {
                 const tr = document.createElement('tr');
                 for (let j = 0; j < a.length; j++) {
@@ -38,7 +40,8 @@
 
         }
 
-        dynamicMakeTable(a, "홀수개수");
+        dynamicMakeTable(a, lineValueBox, "홀수개수"); // 라인차트옆 표이면 valueBox가 lineValueBox
+        dynamicMakeTable(a, valueBox, "홀수개수"); // 라인차트옆 표이면 valueBox가 barValueBox
     </script>
 </body>
 

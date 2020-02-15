@@ -283,7 +283,7 @@ border-left: 10px solid #575755;
   .question-modal{
     position: absolute;
     top:0;
-    right:0;
+    left:0;
     width:200px;
     height:200px;
     background-color: var(--default-color);
@@ -298,7 +298,19 @@ border-left: 10px solid #575755;
   .question-cancel > i{
     position: absolute;
     top:30%;
-    right:10%;
+    left:10%;
     font-size:1.3rem;
     color:rgb(140, 140, 140);
+  }
+
+
+  .table{
+    width:100%; 
+    border-collapse: collapse;
+  }
+
+  .table,
+  .table th,
+  .table td{
+    border:1px solid rgba(0, 0, 0, 0.4);
   }
