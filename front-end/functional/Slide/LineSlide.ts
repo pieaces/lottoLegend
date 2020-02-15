@@ -42,7 +42,10 @@ export default class LineSlide extends Slide<ChartBase> {
         for (let i = 0; i < ideal.length; i++) {
             percent[i] = (actual[i] - ideal[i]) / ideal[i]*100;
         }
-        data.push(percent.map(num => num.toFixed(2)));
+        data.push(percent.map(num => {
+            if(num === -100 || num === 100) return '-';
+            else return num.toFixed(2);
+        }));
 
         this.table.innerHTML = '';
         for (let i = 0; i < data[0].length; i++) {
