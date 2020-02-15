@@ -36,9 +36,9 @@ export default class BarSlide extends Slide<ChartBase> {
         this.valueBox1.textContent = DataAPI.getInstance().getCurrentName();
 
         switch (this.current) {
-            case 0: this.valueBox2.textContent = '예측값';
+            case 0: this.valueBox2.textContent = '예측값(개수)';
                 break;
-            case 1: this.valueBox2.textContent = '실제값';
+            case 1: this.valueBox2.textContent = '실제값(개수)';
                 break;
             case 2: this.valueBox2.textContent = '예측값 대비 실제값 비율';
                 break;
@@ -48,7 +48,10 @@ export default class BarSlide extends Slide<ChartBase> {
         const data = [];
         data.push(DataAPI.getInstance().getLabels());
         const ideal: number[] = this.chart.dataBox.datasets[0].data as number[];
-        data.push(ideal.map(num => num.toFixed(2)));
+        data.push(ideal.map(num => {
+            if(num === -100 || num === 100) return '-';
+            else return num.toFixed(2);
+        }));
 
         this.table.innerHTML = '';
         for (let i = 0; i < data[0].length; i++) {
@@ -67,6 +70,7 @@ export default class BarSlide extends Slide<ChartBase> {
         this.numBtns[this.current].classList.add(this.CURRENT_CSS);
         this.chart.dataBox.labels = DataAPI.getInstance().getLabels();
         this.chart.dataBox.datasets[0].data = DataAPI.getInstance().getStats().ideal['latest'];
+        this.chart.dataBox.datasets[0].label = '예측값(개수)';
         this.chart.update();
         this.setText();
     }
