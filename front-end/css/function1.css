@@ -20,6 +20,17 @@
     justify-content: center;
   }
 
+  .func1-stats-container> div:nth-child(3){
+    font-size:0.8rem;
+    
+  }
+
+  .func1-stats-container > div:nth-child(3) >div{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .func1-stats-container > div:nth-child(3) > div:nth-child(1){
     background-color: var(--lotto-title-color);
     color:var(--default-color);
@@ -145,8 +156,8 @@
 
   .func1-chart-bubble-question{
     position: absolute;
-    top:90%;
-    left:3%;
+    top:5%;
+    right:5%;
   }
   
   

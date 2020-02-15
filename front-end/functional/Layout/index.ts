@@ -10,7 +10,6 @@ const layout2 = document.querySelectorAll<HTMLElement>(".func2-layout");
 const section = document.querySelector(".section1");
 const infoText = document.querySelector(".checkbox-text");
 const loading = document.querySelector<HTMLElement>('.loading');
-const loadingIcon = document.querySelector<HTMLElement>('.loading-icon > i');
 const alertText = document.querySelector<HTMLElement>('.checkbox-alert');
 
 export default class Layout extends Layout3 {
@@ -204,3 +203,11 @@ export default class Layout extends Layout3 {
         })
     }
 }
+
+// const div=document.querySelector('.func1-stats-container > div:nth-child(3)');
+
+// if 보여줄려면 div.classList.remove('none');
+
+//     div.children[1].textContent="???";
+
+// else 안 보여줄려면div.classList.add('none');
