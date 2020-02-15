@@ -14,9 +14,6 @@ const dataBox = {
         {
             label:'예측값(개수)',
             backgroundColor: '#00B2EA',
-            pointBackgroundColor: 'white',
-            borderWidth: 2,
-            borderColor: '#00B2EA',
             data: null
         }
     ]
