@@ -283,14 +283,12 @@ border-left: 10px solid #575755;
     position: absolute;
     top:0;
     left:0;
-    width:200px;
-    height:200px;
     background-color: var(--default-color);
     border:1px solid rgba(0, 0, 0, 0.4);
   }
 
   .que-cancel{
-    height:50px;
+    height:30px;
     position: relative;
   }
 
@@ -303,9 +301,13 @@ border-left: 10px solid #575755;
   }
 
   .que-text{
+    padding-left: 25px;
     height:150px;
+    font-size:0.9rem;
   }
-
+  .que-text ul{
+    list-style-type: disc;
+  }
   .table{
     width:100%; 
     border-collapse: collapse;

@@ -252,3 +252,8 @@
   background-color: var(--checkbox-color);
   color:var(--default-color);
 }
+
+.func1-chart-bubble-que-modal-text{
+  width:400px;
+  height:330px;
+}
