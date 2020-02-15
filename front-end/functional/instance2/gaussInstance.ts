@@ -2,7 +2,6 @@ import ChartBase from "../Chart/Charts";
 
 const canvas: HTMLCanvasElement = document.querySelector('.func2-chart-gauss');
 const dataBox = {
-    labels: [886, 887, 888, 889, 890, 891, 892, 893, 894, 895, 896, 897],
     datasets: [
         {
             steppedLine: true,

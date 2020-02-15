@@ -92,6 +92,10 @@ export default class Layout2 extends Layout1 {
         bar.dataBox.datasets[0].data = [DataAPI.getInstance().getStats2().frequency[this.choice - 1], DataAPI.getInstance().getTOTAL() * 6 / 45];
         radar.dataBox.datasets[0].data = DataAPI.getInstance().getStats2().interval[this.choice - 1].list;
         gauss.dataBox.datasets[0].data = DataAPI.getInstance().getStats2().emergence[this.choice - 1];
+        const temp:string[] = [];
+        const total = DataAPI.getInstance().getTOTAL();
+        for(let i =11; i>=0; i--)temp.push((total-i).toString());
+        gauss.dataBox.labels = temp;
         this.updateChart();
     }
     private clearChart() {
