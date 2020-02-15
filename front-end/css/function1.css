@@ -147,6 +147,10 @@
     word-break: keep-all;
   }
 
+  #func1-line-table tr td{
+    width:25%;
+  }
+
   .func1-chart-value{
     height:70%;
      overflow-y: scroll;
@@ -181,10 +185,6 @@
     height:80px;
   
   }
-
-  .func1-table-1 tr td{
-    width:25%;
-  }
   
   .func1-chart-text{
     height:40%;
@@ -194,11 +194,17 @@
     grid-column: 8/13;
     grid-row: 2/3;
   }
-  
-  .func1-main-2-3{
-    grid-column: 8/13;
-    grid-row: 3/4;
+
+  #func1-bar-table tr > td:nth-child(1){
+    width:25%;
   }
+
+  #func1-bar-table tr > td:nth-child(2){
+    width:75%;
+
+  }
+  
+ 
 
   .func1-bar-values > div:nth-child(1){
     width:25%;
@@ -206,6 +212,11 @@
 
   .func1-bar-values > div:nth-child(2){
     width:75%;
+  }
+
+  .func1-main-2-3{
+    grid-column: 8/13;
+    grid-row: 3/4;
   }
 
   .func1-table-2{
@@ -219,6 +230,12 @@
     width:50%;
     height:40px;
   }
+
+  .func1-table-2 tr td{
+    width:50%;
+  }
+
+  
 
   .func1-bubble-text{
     height:120px;

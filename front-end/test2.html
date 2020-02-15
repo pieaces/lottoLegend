@@ -8,7 +8,17 @@
 </head>
 
 <body>
+    <div class="func1-chart-title func1-bar-values">
+        <div>홀수 개수</div>
+        <div>
+            최근 12회차 <span>실제값</span>
+        </div>
+    </div>
+    <div class="func1-chart-value">
+        <table class="func1-table-1 table" id="func1-bar-table">
 
+        </table>
+    </div>
 
     <script>
         const lineValueBox1 = document.querySelector('.func1-line-values > div:nth-child(1)>div:nth-child(2)');
@@ -18,11 +28,11 @@
         const lineTable = document.querySelector('#func1-line-table');
         const barTable = document.querySelector('#func1-bar-table');
 
-        const a = [[1, 2, 3, 4], [4, 5, 6, 7], [7, 8, 9, 10], [10, 11, 12, 13]];
+        const a = [[1, 2, 3, 4], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14, 15]];
         function dynamicMakeTable(a, table, valueBox1, valueBox2, text1, text2) {
             valueBox1.textContent = text1;
             valueBox2.textContent = text2;
-            for (let i = 0; i < a.length; i++) {
+            for (let i = 0; i < a[0].length; i++) {
                 const tr = document.createElement('tr');
                 for (let j = 0; j < a.length; j++) {
                     const td = document.createElement('td');
