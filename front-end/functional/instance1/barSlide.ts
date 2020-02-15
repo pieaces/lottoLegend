@@ -6,7 +6,10 @@ const leftBarBtn: HTMLElement = document.querySelector('#func1-left-bar-chart-bt
 const rightBarBtn: HTMLElement = document.querySelector('#func1-right-bar-chart-btn');
 const barNum = document.querySelectorAll('.func1-chart-bar-num > div');
 const barCanvas: HTMLCanvasElement = document.querySelector('#func1-chart-bar');
-const main22: HTMLElement = document.querySelector('.func1-main-2-2');
+
+const barValueBox1 = document.querySelector<HTMLElement>('.func1-bar-values > div:nth-child(1)');
+const barValueBox2 = document.querySelector<HTMLElement>('.func1-bar-values > div:nth-child(2)> span');
+const barTable = document.querySelector<HTMLElement>('#func1-bar-table');
 
 const dataBox = {
     labels: null,
@@ -22,7 +25,7 @@ const option = {
 }
 const barInstance = new ChartBase('bar', barCanvas, dataBox, option);
 barInstance.create();
-const barSlide = new BarSlide(barInstance, leftBarBtn, rightBarBtn, barNum, main22);
+const barSlide = new BarSlide(barInstance, leftBarBtn, rightBarBtn, barNum, barTable, barValueBox1, barValueBox2);
 makeClickable(barSlide);
 
 export default barSlide;

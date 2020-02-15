@@ -6,8 +6,10 @@ const leftLineBtn: HTMLElement = document.querySelector('#func1-left-line-chart-
 const rightLineBtn: HTMLElement = document.querySelector('#func1-right-line-chart-btn');
 const lineNum = document.querySelectorAll<HTMLElement>('.func1-chart-line-num > div');
 const lineCanvas: HTMLCanvasElement = document.querySelector('#func1-chart-line');
-const main21: HTMLElement = document.querySelector('.func1-main-2-1');
 
+const lineValueBox1 = document.querySelector<HTMLElement>('.func1-line-values > div:nth-child(1)>div:nth-child(2)');
+const lineValueBox2 = document.querySelector<HTMLElement>('.func1-line-values > div:nth-child(1)>div:nth-child(1)');
+const lineTable = document.querySelector<HTMLElement>('#func1-line-table');
 
 const option: Chart.ChartOptions = {
     responsive: true,
@@ -15,7 +17,6 @@ const option: Chart.ChartOptions = {
         mode: 'index',
         intersect: false,
     },
-
     scales: {
         xAxes: [
             {
@@ -35,7 +36,6 @@ const option: Chart.ChartOptions = {
         ]
     },
 }
-
 const dataBox = {
     labels: null,
     datasets: [
@@ -59,7 +59,7 @@ const dataBox = {
 };
 const lineInstance = new ChartBase('line', lineCanvas, dataBox, option);
 lineInstance.create();
-const lineSlide = new LineSlide(lineInstance, leftLineBtn, rightLineBtn, lineNum, main21);
+const lineSlide = new LineSlide(lineInstance, leftLineBtn, rightLineBtn, lineNum, lineTable, lineValueBox1, lineValueBox2);
 makeClickable(lineSlide);
 
 export default lineSlide

@@ -11,6 +11,6 @@ export default class RadarSlide extends Slide<ChartBase>{
         throw new Error("Method not implemented.");
     }
     setText() {
-        this.textBox.textContent = this.current.toString();
+        //this.textBox.textContent = this.current.toString();
     }
 }

@@ -8,15 +8,19 @@ export default abstract class Slide<T extends ChartBase> {
     readonly leftBtn: HTMLElement;
     readonly rightBtn: HTMLElement;
     readonly numBtns: NodeListOf<Element>;
-    readonly textBox?: HTMLElement;
-    constructor(size: number, chart: T, leftBtn: HTMLElement, rightBtn: HTMLElement, numBtns: NodeListOf<Element>, textBox?: HTMLElement) {
+    readonly table?: HTMLElement;
+    readonly valueBox1?: HTMLElement;
+    readonly valueBox2?: HTMLElement;
+    constructor(size: number, chart: T, leftBtn: HTMLElement, rightBtn: HTMLElement, numBtns: NodeListOf<Element>, table?: HTMLElement, valueBox1?:HTMLElement, valueBox2?:HTMLElement) {
         this.current = 0;
         this.size = size;
         this.chart = chart;
         this.leftBtn = leftBtn;
         this.rightBtn = rightBtn;
         this.numBtns = numBtns;
-        this.textBox = textBox;
+        this.table = table;
+        this.valueBox1 = valueBox1;
+        this.valueBox2 = valueBox2;
     }
 
     abstract setData(): void;
