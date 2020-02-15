@@ -135,7 +135,7 @@
 
   .func1-chart-title > div{
     border: 1px solid var(--border-color);
-    font-size:0.9rem;
+    font-size:0.8rem;
     height:100%;
     display:flex;
     flex-direction: column;
@@ -198,7 +198,7 @@
   .func1-table-1 tr{
     text-align: center;
     
-    height:80px;
+    height:35px;
   
   }
   
