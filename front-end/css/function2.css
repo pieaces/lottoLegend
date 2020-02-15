@@ -66,6 +66,12 @@
     grid-template-rows: 1fr 7fr;
     position: relative;
   }
+
+  .func2-numboard-question{
+    position: absolute;
+    top:90%;
+    right:35%;
+  }
   
   .func2-lotto-checkbox {
     margin:0 2px;
