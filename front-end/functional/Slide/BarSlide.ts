@@ -14,14 +14,17 @@ export default class BarSlide extends Slide<ChartBase> {
         switch (this.current) {
             case 0:
                 rep.data = data.actual['latest'];
+                rep.label = '예측값(개수)';
                 break;
             case 1:
                 rep.data = data.ideal['latest'];
+                rep.label = '실제값(개수)'
                 break;
             case 2:
+                rep.label = '예측값 대비 실제값 비율(%)';
                 const temp = [];
                 for (let i = 0; i < data.ideal['latest'].length; i++) {
-                    const datum = data.actual['latest'][i] - data.ideal['latest'][i];
+                    const datum = (data.actual['latest'][i] - data.ideal['latest'][i])/data.ideal['latest'][i]*100;
                     temp.push(datum);
                 }
                 rep.data = temp;

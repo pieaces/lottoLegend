@@ -12,6 +12,7 @@ const dataBox = {
     labels: null,
     datasets: [
         {
+            label:'예측값(개수)',
             backgroundColor: '#00B2EA',
             pointBackgroundColor: 'white',
             borderWidth: 2,
@@ -21,7 +22,6 @@ const dataBox = {
     ]
 };
 const option = {
-    legend: { display: false }
 }
 const barInstance = new ChartBase('bar', barCanvas, dataBox, option);
 barInstance.create();

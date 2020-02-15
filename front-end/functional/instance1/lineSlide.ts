@@ -40,18 +40,18 @@ const dataBox = {
     labels: null,
     datasets: [
         {
-            label: '실제값', // 추가
+            label: '예측값(개수)',
             pointBackgroundColor: 'white',
             borderWidth: 2,
-            borderColor: 'rgb(199, 54, 44)',
+            borderColor: 'rgb(14,99,132)',
             data: null,
             fill: false
         },
         {
-            label: '예측값', // 추가
+            label: '실제값(개수)',
             pointBackgroundColor: 'white',
             borderWidth: 2,
-            borderColor: 'rgb(14,99,132)',
+            borderColor: 'rgb(199, 54, 44)',
             data: null,
             fill: false
         }
