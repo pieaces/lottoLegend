@@ -8,10 +8,10 @@ import Question from "../Question"
 const layout1 = document.querySelectorAll<HTMLElement>(".func1-layout");
 const layout2 = document.querySelectorAll<HTMLElement>(".func2-layout");
 const section = document.querySelector(".section1");
-const infoText = document.querySelector(".checkbox-text");
+const infoText = document.querySelector<HTMLElement>(".checkbox-text");
 const loading = document.querySelector<HTMLElement>('.loading');
 const alertText = document.querySelector<HTMLElement>('.checkbox-alert');
-
+const checkTextBox = document.querySelector<HTMLElement>('.checkbox-textbox');
 export default class Layout extends Layout3 {
     //optionList2 = [null, [3], null, [10, 20, 42, 43, 44], [2], 2, { from: 100, to: 190 }, { from: 2, to: 4 }, { from: 1, to: 3 }, { from: 0, to: 3 }, { from: 10, to: 14 }, { from: 30, to: 38 }, { from: 7, to: 10 }, true];
     dropDown: DropDown = new DropDown();
@@ -94,19 +94,26 @@ export default class Layout extends Layout3 {
     private async on(layoutVersion: number = 0) {
         if (layoutVersion === 0) {
             const currentFilter = DataAPI.getInstance().getCurrent();
+            infoText.textContent = DataAPI.getInstance().infoList[currentFilter];
             switch (currentFilter) {
                 case 3: case 4: case 5:
                     this.reset();
                     this.checkBox.removeAllEvent();
                     if (currentFilter == 3) {
                         this.nextAbleLimit = this.options[currentFilter - 1].indexOf(true);
+                        infoText.innerHTML = `전멸구간을 제외한 전회차 번호입니다. 이월될 수를 선택해주세요.(${this.nextAbleLimit}개)<br>(나머지는 자동제외됩니다.)`;
+                        checkTextBox.style.height = '40px';
                         if (this.nextAbleLimit === 0) {
                             this.options[currentFilter] = [];
                             await DataAPI.getInstance().forward(this.options[currentFilter]);
                         }
                         this.includeVerson();
                     }
-                    else if (currentFilter === 4) this.includeVerson();
+                    else if (currentFilter === 4) {
+                        this.nextAbleLimit = 1;
+                        this.includeVerson();
+                        checkTextBox.style.height = '20px';
+                    }
                     else if (currentFilter === 5) this.excludeVersion();
                     this.setOpacity();
                     this.refreshNumberBoard();
@@ -129,6 +136,7 @@ export default class Layout extends Layout3 {
                             this.checkBox.multiSelectEvent(this.nextAbleLimit);
                         }
                     } else if (currentFilter <= 6) {
+                         if(currentFilter === 2) this.nextAbleLimit = 1;
                         this.checkBox.singleSelectEvent();
                     } else {
                         this.checkBox.rangeSelectEvent();
@@ -155,14 +163,13 @@ export default class Layout extends Layout3 {
         this.barSlide.init();
         this.lineSlide.init();
         this.bubbleChart.init();
+        infoText.textContent = DataAPI.getInstance().infoList[0];
         this.setStatsBoard(DataAPI.getInstance().getStats().stats);
-
-        // this.statsBoard.textContent = JSON.stringify(DataAPI.getInstance().getStats().stats);
 
         this.nextBtn.addEvent(async () => {
             const currentFilter = DataAPI.getInstance().getCurrent();
-            if (this.checkBox.getCount() > 0 ||
-                currentFilter === 1 && this.checkBox.getCount() === this.nextAbleLimit ||
+
+            if (this.checkBox.getCount() >= this.nextAbleLimit ||
                 currentFilter === 3 && this.checkedNumbers.length === this.nextAbleLimit ||
                 currentFilter === 4 || currentFilter === 5) {
                 section.scrollIntoView({
@@ -178,7 +185,8 @@ export default class Layout extends Layout3 {
                 this.dropDown.changeDropDownColor();
             } else {
                 alertText.style.opacity = "1";
-                alertText.textContent = "몇개를 찍으셔야 합니다";
+                if(currentFilter <= 6) alertText.textContent = `${this.nextAbleLimit}개 선택해셔야합니다..`;
+                if(currentFilter > 6) alertText.textContent = `${this.nextAbleLimit}개 이상 선택하셔야합니다.`;
                 setTimeout(function () {
                     alertText.style.opacity = "0";
                 }, 1500)

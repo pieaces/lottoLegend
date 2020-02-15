@@ -38,6 +38,8 @@ function paramToNumbers(params: Params): number[] {
         return params.list;
     }
 }
+const infoFront = '현재 필터에서 가능한 모든 ';
+const infoBack = '하나 또는 범위를 선택해주세요.';
 export default class DataAPI {
     static instance: DataAPI = null;
     public numbers: number[];
@@ -47,6 +49,16 @@ export default class DataAPI {
     private dataList = ['excludedLineCount', 'lineCount', 'carryCount', 'excludeInclude', 'excludeInclude', 'excludeInclude', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
     private optionList = [null, 'excludedLines', null, null, 'includedNumbers', 'excludedNumbers', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
     private rangeList: Array<string[] | number[]> = [[0, 1, 2, 3, 4], ['1~', '10~', '20~', '30~', '40~'], [0, 1, 2, 3, 4, 5, 6], null, null, null];
+    public infoList = ['전멸구간 개수를 선택해주세요.', '전멸구간 번호대를 선택해주세요', '전회차에서 이월될 개수를 선택해주세요.', '전회차에서 이월될 수를 선택해주세요(나머지는 자동으로 제외됩니다.)',
+    '포함될 수를 선택해주세요.(생략가능)', '제외될 수를 선택해주세요.(생략가능)', '저값(1~22) 개수를 선택해주세요.',
+        infoFront + '번호합계입니다. ' + infoBack,
+        infoFront + '홀수개수입니다. ' + infoBack,
+        infoFront + '소수개수입니다. ' + infoBack,
+        infoFront + '첫수합(십의자리 합)입니다. ' + infoBack,
+        infoFront + '고저차(가장 큰값 - 작은값)입니다. ' + infoBack,
+        infoFront + 'AC(Arithmetic Complexity' + infoBack,
+        '연속번호 포함여부를 선택해주세요.',
+    ]
     private current: number = 0;
     private data: Data = new Data();
     private generator: Generator = new Generator();
