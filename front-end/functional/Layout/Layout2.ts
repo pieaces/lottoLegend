@@ -1,9 +1,8 @@
 const lottoNumbers = document.querySelectorAll<HTMLElement>('.func2-lotto-num-box> div > div');
 const numTermFreqBox = document.querySelectorAll<HTMLElement>('.func2-lotto-checkbox > div');
-const lottoNumBox = document.querySelector<HTMLElement>('.lotto-num-box');
 const selectNumBox = document.querySelector<HTMLElement>('.func2-select-num-box');
 const applyBtn = document.querySelector('.func2-num-exclude-btn');
-const winNums = document.querySelectorAll<HTMLElement>('.func2-win-num-box > div');
+const winNumContainerBox = document.querySelector('.func2-win-num-container-box');
 
 import bar from '../instance2/barInstance'
 import gauss from '../instance2/gaussInstance'
@@ -158,6 +157,7 @@ export default class Layout2 extends Layout1 {
         }
     }
     private setColorWinNum() {
+        const winNums = document.querySelectorAll<HTMLElement>('.func2-win-num-box > div');
         winNums.forEach(node => {
             const nodeValue = parseInt(node.textContent);
             this.setColorLotto(nodeValue, node);
@@ -249,6 +249,7 @@ export default class Layout2 extends Layout1 {
             min: Math.floor(Math.min(...DataAPI.getInstance().getStats2().frequency) / 10) * 10,
             max: Math.ceil(Math.max(...DataAPI.getInstance().getStats2().frequency) / 10) * 10
         };
+        makeWinNum(DataAPI.getInstance().getWinNums(), DataAPI.getInstance().getTOTAL());
         bar.create();
         this.numFreqOrTermToggle();
         this.setColorWinNum();
@@ -323,43 +324,29 @@ function selectEvent(obj: any, node: HTMLElement) {
         }
     }
 }
+function makeWinNum(winNumArr:number[][], total:number) {
+    for (let i = 0; i < winNumArr.length; i++) {
+        const winNumContainer = document.createElement('div');
+        winNumContainer.classList.add('func2-win-num-container');
 
-// const winNumContainerBox = document.querySelector('.func2-win-num-container-box');
-//         const a = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
-//         const number = 896;
+        const winNumTimes = document.createElement('div');
+        winNumTimes.classList.add('func2-win-num-times');
+        winNumTimes.textContent = total.toString();
+        total--;
+        winNumContainer.appendChild(winNumTimes);
 
-//         function dynamicMakeWinNum(data, number) {
+        const winNumBox = document.createElement('div');
+        winNumBox.classList.add('func2-win-num-box');
 
-//             for (let i = 0; i < data.length; i++) {
+        for (let j = 0; j < winNumArr[i].length; j++) {
+            const winNum = document.createElement('div');
+            winNum.textContent = winNumArr[i][j].toString();
+            winNumBox.appendChild(winNum);
+        }
 
-//                 const winNumContainer = document.createElement('div');
-//                 winNumContainer.classList.add('func2-win-num-container');
-
-//                 const winNumTimes = document.createElement('div');
-//                 winNumTimes.classList.add('func2-win-num-times');
-//                 winNumTimes.textContent = number;//회차
-//                 number--;
-//                 winNumContainer.appendChild(winNumTimes);
-
-//                 const winNumBox = document.createElement('div');
-//                 winNumBox.classList.add('func2-win-num-box');
-
-//                 for (let j = 0; j < data[i].length; j++) {
-//                     const winNum = document.createElement('div');
-//                     winNum.textContent = data[i][j];
-//                     winNumBox.appendChild(winNum);
-//                 }
-
-//                 winNumContainer.appendChild(winNumBox);
-//                 winNumContainerBox.appendChild(winNumContainer);
-//             }
-
-
-//             const winNumText = document.createElement('div');
-
-//             winNumContainerBox.appendChild(winNumText);
-
-
-//         }
-//         dynamicMakeWinNum(a, number);
-
+        winNumContainer.appendChild(winNumBox);
+        winNumContainerBox.appendChild(winNumContainer);
+    }
+    const winNumText = document.createElement('div');
+    winNumContainerBox.appendChild(winNumText);
+}
