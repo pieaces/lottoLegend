@@ -7,8 +7,8 @@ const rightLineBtn: HTMLElement = document.querySelector('#func1-right-line-char
 const lineNum = document.querySelectorAll<HTMLElement>('.func1-chart-line-num > div');
 const lineCanvas: HTMLCanvasElement = document.querySelector('#func1-chart-line');
 
-const lineValueBox1 = document.querySelector<HTMLElement>('.func1-line-values > div:nth-child(1)>div:nth-child(2)');
-const lineValueBox2 = document.querySelector<HTMLElement>('.func1-line-values > div:nth-child(1)>div:nth-child(1)');
+const lineValueBox1 = document.querySelector<HTMLElement>('#func1-line-filter-name');
+const lineValueBox2 = document.querySelector<HTMLElement>('#func1-line-times');
 const lineTable = document.querySelector<HTMLElement>('#func1-line-table');
 
 const option: Chart.ChartOptions = {

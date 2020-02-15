@@ -7,15 +7,15 @@ const rightBarBtn: HTMLElement = document.querySelector('#func1-right-bar-chart-
 const barNum = document.querySelectorAll('.func1-chart-bar-num > div');
 const barCanvas: HTMLCanvasElement = document.querySelector('#func1-chart-bar');
 
-const barValueBox1 = document.querySelector<HTMLElement>('.func1-bar-values > div:nth-child(1)');
-const barValueBox2 = document.querySelector<HTMLElement>('.func1-bar-values > div:nth-child(2)> span');
+const barValueBox1 = document.querySelector<HTMLElement>('#func1-bar-filter-name');
+const barValueBox2 = document.querySelector<HTMLElement>('#func1-bar-value-name');
 const barTable = document.querySelector<HTMLElement>('#func1-bar-table');
 
 const dataBox = {
     labels: null,
     datasets: [
         {
-            label:'예측값(개수)',
+            label: '예측값(개수)',
             backgroundColor: '#00B2EA',
             data: null
         }
