@@ -164,7 +164,7 @@ export default class Layout extends Layout3 {
         this.lineSlide.init();
         this.bubbleChart.init();
         infoText.textContent = DataAPI.getInstance().infoList[0];
-        this.setStatsBoard(DataAPI.getInstance().getStats().stats);
+        //this.setStatsBoard(DataAPI.getInstance().getStats().stats);
 
         this.nextBtn.addEvent(async () => {
             const currentFilter = DataAPI.getInstance().getCurrent();
