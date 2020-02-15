@@ -270,16 +270,16 @@ border-left: 10px solid #575755;
     transition: all 500ms;  
   }
   
-  .question-container{
+  .que-container{
     z-index:1;
   }
 
-  .question-container > i{
+  .que-container > i{
     font-size:1.5rem;
     color:var(--main-color);
   }
 
-  .question-modal{
+  .que-modal{
     position: absolute;
     top:0;
     left:0;
@@ -289,12 +289,12 @@ border-left: 10px solid #575755;
     border:1px solid rgba(0, 0, 0, 0.4);
   }
 
-  .question-cancel{
+  .que-cancel{
     height:50px;
     position: relative;
   }
 
-  .question-cancel > i{
+  .que-cancel > i{
     position: absolute;
     top:4%;
     left:1%;
@@ -302,6 +302,9 @@ border-left: 10px solid #575755;
     color:rgb(140, 140, 140);
   }
 
+  .que-text{
+    height:150px;
+  }
 
   .table{
     width:100%; 
