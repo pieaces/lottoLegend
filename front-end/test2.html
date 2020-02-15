@@ -8,25 +8,20 @@
 </head>
 
 <body>
-    <div class="func1-chart-title func1-line-values">
-        <div></div>
-        <div>실제 당첨 개수</div>
-        <div>수학적 예상 개수</div>
-        <div>예측대비 실제 비율</div>
-    </div>
-    <table class="func1-table-1">
 
 
-    </table>
-    </div>
     <script>
-        const lineValueBox = document.querySelector('.func1-line-values > div:nth-child(1)');
-        const barValueBox = document.querySelector('.func1-bar-values > div:nth-child(1)');
-        const tableBody = document.querySelector('.func1-table-1');
+        const lineValueBox1 = document.querySelector('.func1-line-values > div:nth-child(1)>div:nth-child(2)');
+        const lineValueBox2 = document.querySelector('.func1-line-values > div:nth-child(1)>div:nth-child(1)');
+        const barValueBox1 = document.querySelector('.func1-bar-values > div:nth-child(1)');
+        const barValueBox2 = document.querySelector('.func1-bar-values > div:nth-child(2)> span');
+        const lineTable = document.querySelector('#func1-line-table');
+        const barTable = document.querySelector('#func1-bar-table');
 
         const a = [[1, 2, 3, 4], [4, 5, 6, 7], [7, 8, 9, 10], [10, 11, 12, 13]];
-        function dynamicMakeTable(a, valueBox, text) {
-            valueBox.textContent = text;
+        function dynamicMakeTable(a, table, valueBox1, valueBox2, text1, text2) {
+            valueBox1.textContent = text1;
+            valueBox2.textContent = text2;
             for (let i = 0; i < a.length; i++) {
                 const tr = document.createElement('tr');
                 for (let j = 0; j < a.length; j++) {
@@ -34,14 +29,14 @@
                     td.textContent = String(a[j][i]);
                     tr.appendChild(td);
                 }
-                tableBody.appendChild(tr);
+                table.appendChild(tr);
             }
 
 
         }
 
-        dynamicMakeTable(a, lineValueBox, "홀수개수"); // 라인차트옆 표이면 valueBox가 lineValueBox
-        dynamicMakeTable(a, valueBox, "홀수개수"); // 라인차트옆 표이면 valueBox가 barValueBox
+        dynamicMakeTable(a, lineTable, lineValueBox1, lineValueBox2, "홀수개수", "1~12"); // 라인차트옆 표이면 valueBox가 lineValueBox
+        dynamicMakeTable(a, barTable, barValueBox1, barValueBox2, "홀수개수", "실제값"); // 바차트옆 표이면 valueBox가 barValueBox
     </script>
 </body>
 
