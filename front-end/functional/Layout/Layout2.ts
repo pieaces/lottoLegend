@@ -91,9 +91,9 @@ export default class Layout2 extends Layout1 {
         bar.dataBox.datasets[0].data = [DataAPI.getInstance().getStats2().frequency[this.choice - 1], DataAPI.getInstance().getTOTAL() * 6 / 45];
         radar.dataBox.datasets[0].data = DataAPI.getInstance().getStats2().interval[this.choice - 1].list;
         gauss.dataBox.datasets[0].data = DataAPI.getInstance().getStats2().emergence[this.choice - 1];
-        const temp:string[] = [];
+        const temp: string[] = [];
         const total = DataAPI.getInstance().getTOTAL();
-        for(let i =11; i>=0; i--)temp.push((total-i).toString());
+        for (let i = 11; i >= 0; i--)temp.push((total - i).toString());
         gauss.dataBox.labels = temp;
         this.updateChart();
     }
@@ -145,14 +145,14 @@ export default class Layout2 extends Layout1 {
             Box.style.backgroundColor = '#B0D840';
         }
     }
-    private doesExcluded(index:number):boolean{
-        if(this.options[1].indexOf(Math.floor((index + 1) / 10)) !== -1 ||
-        !this.options[3] && DataAPI.getInstance().getWinNums()[0].indexOf(index + 1) === -1 ||
-        this.options[3] && DataAPI.getInstance().getWinNums()[0].indexOf(index + 1) !== -1 ||
-        this.options[4] && (DataAPI.getInstance().getWinNums()[0].indexOf(index + 1) !== -1 ||
-        this.options[4] && this.options[4].indexOf(index + 1) !== -1)){
+    private doesExcluded(index: number): boolean {
+        if (this.options[1].indexOf(Math.floor((index + 1) / 10)) !== -1 ||
+            !this.options[3] && DataAPI.getInstance().getWinNums()[0].indexOf(index + 1) === -1 ||
+            this.options[3] && DataAPI.getInstance().getWinNums()[0].indexOf(index + 1) !== -1 ||
+            this.options[4] && (DataAPI.getInstance().getWinNums()[0].indexOf(index + 1) !== -1 ||
+                this.options[4] && this.options[4].indexOf(index + 1) !== -1)) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -324,7 +324,7 @@ function selectEvent(obj: any, node: HTMLElement) {
         }
     }
 }
-function makeWinNum(winNumArr:number[][], total:number) {
+function makeWinNum(winNumArr: number[][], total: number) {
     for (let i = 0; i < winNumArr.length; i++) {
         const winNumContainer = document.createElement('div');
         winNumContainer.classList.add('func2-win-num-container');
@@ -347,6 +347,5 @@ function makeWinNum(winNumArr:number[][], total:number) {
         winNumContainer.appendChild(winNumBox);
         winNumContainerBox.appendChild(winNumContainer);
     }
-    const winNumText = document.createElement('div');
-    winNumContainerBox.appendChild(winNumText);
+
 }

@@ -296,8 +296,8 @@ border-left: 10px solid #575755;
 
   .question-cancel > i{
     position: absolute;
-    top:30%;
-    left:10%;
+    top:4%;
+    left:1%;
     font-size:1.3rem;
     color:rgb(140, 140, 140);
   }
