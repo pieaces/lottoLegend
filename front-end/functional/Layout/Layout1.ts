@@ -9,17 +9,27 @@ const stdev = document.querySelector<HTMLElement>('.func1-stdev-value');
 const min = document.querySelector<HTMLElement>('.func1-min-value');
 const max = document.querySelector<HTMLElement>('.func1-max-value');
 const filteredCount = document.querySelector<HTMLElement>('func1-filtered-value');
-const statsBoard = document.querySelector<HTMLElement>('.func1-stats-box ');
 
-interface Stats{
-    mean?:number;
-    stdev?:number;
-    max?:number;
-    min?:number;
-    filteredCount?:number;
+const meanValue = document.querySelector('#func1-bubble-mean-value');
+const stdevValue = document.querySelector('#func1-bubble-stdev-value');
+const minValue = document.querySelector('#func1-bubble-min-value');
+const maxValue = document.querySelector('#func1-bubble-max-value');
+const smallPercent = document.querySelector('#func1-bubble-s-percent-value');
+const bigPercent = document.querySelector('#func1-bubble-b-percent-value');
+
+
+
+interface Stats {
+    mean: number;
+    stdev: number;
+    max: number;
+    min: number;
 }
-function isNumber(num): num is number{
-    return typeof num === 'number'
+function range(mean: number, stdev: number, multiple: number): [number, number] {
+    return [mean - stdev * multiple, mean + stdev * multiple];
+}
+function rangeString(range: [number, number], min:number, max:number):string {
+    return (range[0] < min ? min : range[0]).toFixed(2) + '~' + (range[1] > max ? max : range[1]).toFixed(2)
 }
 export default class Layout1 {
     options: any = [];
@@ -27,15 +37,23 @@ export default class Layout1 {
     lineSlide: LineSlide = lineSlide;
     bubbleChart = bubbleChart;
 
-    public setStatsBoard(stats:Stats){
-        console.log(stats);
-        if(isNumber(stats.mean)) mean.textContent = stats.mean.toFixed(2);
-        if(isNumber(stats.stdev)) stdev.textContent = stats.stdev.toFixed(2);
-        if(isNumber(stats.max)) max.textContent = stats.max.toFixed(2);
-        if(isNumber(stats.min)) min.textContent = stats.min.toFixed(2);
-        if(isNumber(stats.filteredCount)) {
-            filteredCount.textContent = stats.filteredCount.toFixed(2);
-            statsBoard;
-        }
+    public setStatsBoard(stats: Stats) {
+        meanValue.textContent = stats.mean.toFixed(2);
+        stdevValue.textContent = stats.stdev.toFixed(2);
+        maxValue.textContent = stats.max.toFixed(2);
+        minValue.textContent = stats.min.toFixed(2);
+        const sRange = range(stats.mean, stats.stdev, 1);
+        const bRange = range(stats.mean, stats.stdev, 2);
+        smallPercent.textContent = rangeString(sRange, stats.min, stats.max);
+        bigPercent.textContent = rangeString(bRange, stats.min, stats.max);
+    }
+
+    public clearStatsBoard() {
+        meanValue.textContent = "";
+        stdevValue.textContent = "";
+        maxValue.textContent = "";
+        minValue.textContent = "";
+        smallPercent.textContent = "";
+        bigPercent.textContent = "";
     }
 }

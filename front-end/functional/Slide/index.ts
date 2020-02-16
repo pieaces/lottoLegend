@@ -3,6 +3,8 @@ import ChartBase from "../Chart/Charts";
 export default abstract class Slide<T extends ChartBase> {
     current: number;
     readonly CURRENT_CSS = 'chart-slide-current'
+    static readonly EXPECTED_TEXT = '예상개수';
+    static readonly ACTUAL_TEXT = '실제개수';
     readonly size: number;
     readonly chart: T;
     readonly leftBtn: HTMLElement;
