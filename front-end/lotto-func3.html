@@ -66,17 +66,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
         </div>
 
       </div>
@@ -86,7 +75,8 @@
     const a = [[2, 4, 5, 3, 6, 15], [1, 2, 3, 4, 5, 6]];
     const numContainer = document.querySelector('.func3-num-container');
 
-    function makeNum(a, text) {
+    function makeNum(a, numContainer, text) {
+
       for (let i = 0; i < a.length; i++) {
         const containerBox = document.createElement('div');
         const checkBox = document.createElement('input')
@@ -108,10 +98,11 @@
         container.appendChild(numBox);
         container.appendChild(numText);
         containerBox.appendChild(container);
+        numContainer.appendChild(containerBox);
       }
     }
 
-    makeNum(a, numContainer);
+    makeNum(a, numContainer, "하이루");
   </script>
   <script src="components/footer/footer.js"></script>
   </div>
