@@ -110,8 +110,10 @@ export default class Layout extends LayoutToggle(Layout3) {
                     this.resetBtn.removeEvent();
                     this.resetBtn.addEvent(this.reset.bind(this));
                     break;
-                case DataAPI.getInstance().SIZE-1:
+                case DataAPI.getInstance().SIZE:
+                    this.makeNumBoard(DataAPI.getInstance().getGeneratedNums());    
                     this.layout3_1On();
+                    break;
                 default:
                     this.layout1On();
                     this.checkBox.init();
@@ -155,6 +157,7 @@ export default class Layout extends LayoutToggle(Layout3) {
             behavior: 'auto'
         });
         loading.classList.remove('none');
+        console.log(DataAPI.getInstance().getGeneratedNums());
         await DataAPI.getInstance().forward(this.options[current]);
         await this.on();
         loading.classList.add('none');

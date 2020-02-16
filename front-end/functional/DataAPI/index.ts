@@ -134,12 +134,14 @@ export default class DataAPI {
             else if (this.current === this.SIZE - 1) {
                 if (this.rangeList[this.current].length === 2) {
                     this.rangeList[this.current] = ['제외', '포함'];
-                }else{
+                }else if(this.rangeList[this.current].length === 1){
                     if(this.rangeList[this.current][1]){
                         this.rangeList[this.current] = ['포함'];
                     }else{
                         this.rangeList[this.current] = ['제외'];
                     }
+                }else{
+                    this.rangeList[this.current] = [];
                 }
             }
         }
@@ -175,8 +177,8 @@ export default class DataAPI {
             if (this.current >= 7) {
                 await this.getGen();
             }
-            if (this.current < this.dataList.length - 1) {
-                this.current++;
+            this.current++;
+            if (this.current <= this.dataList.length - 1) {
                 if (!this.data[this.dataList[this.current]]) {
                     await this.setStats();
                 }
