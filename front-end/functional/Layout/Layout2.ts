@@ -407,3 +407,6 @@ function makeWinNum(winNumArr: number[][], total: number) {
 // const bigPercent = document.querySelector('#func2-radar-b-percent-value');
 
 // bigPercent.textContent="";
+
+///////////////////////////////////////////////////
+
