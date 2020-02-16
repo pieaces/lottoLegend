@@ -122,15 +122,21 @@ export default class DataAPI {
             params = numbersToParams(this.rangeList[this.current] as number[]);
             if (this.current === 12) {
                 const range = this.rangeList[this.current];
-                console.log('range', range);
-                console.log('params', params);
                 if (range.length > 7) {
                     params = { from: range[0] as number, to: range[range.length - 1] as number };
                     this.rangeList[this.current] = compartNumbers(params, 2);
                 }
             }
-            else if(this.current === this.SIZE -1){
-                this.rangeList[this.current] = ['제외', '포함'];
+            else if (this.current === this.SIZE - 1) {
+                if (this.rangeList[this.current].length === 2) {
+                    this.rangeList[this.current] = ['제외', '포함'];
+                }else{
+                    if(this.rangeList[this.current][1]){
+                        this.rangeList[this.current] = ['포함'];
+                    }else{
+                        this.rangeList[this.current] = ['제외'];
+                    }
+                }
             }
         }
         await this.data.getData(this.dataList[this.current], params);

@@ -239,7 +239,10 @@ export default class Layout extends Layout3 {
                     rand = Math.random();
                     this.options[current] = DataAPI.getInstance().getLabels()[Math.floor(rand*DataAPI.getInstance().getLabels().length)];
                     break;
-                case 7:case 8:case 9:case 10:
+                case DataAPI.getInstance().SIZE - 1:
+                    this.options[current] = true;
+                    break;
+                default:
                     index = 0;
                     pos = DataAPI.getInstance().getStats().pos;
                     temp = pos[0]
@@ -248,11 +251,10 @@ export default class Layout extends Layout3 {
                             index = i; temp = pos[i];
                         }
                     }
-
                     const range = DataAPI.getInstance().getLabels()
                     let from = range[index];
                     let to = range[index]
-                    if (current === 7) {
+                    if (current === 7 || current === 12) {
                         from = Number((<string>from).slice(0, (<string>from).indexOf('~')));
                         to = Number((<string>to).slice((<string>to).indexOf('~') + 1));
                     }else{
@@ -261,14 +263,6 @@ export default class Layout extends Layout3 {
                     }
 
                     this.options[current] = { from, to }
-                    break;
-                case 11:
-                    break;
-                case 12:
-                    break;
-                case 13:
-                    break;
-                case 14:
                     break;
             }
             this.next(current);
