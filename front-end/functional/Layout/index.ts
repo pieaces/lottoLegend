@@ -133,7 +133,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                     } else if (currentFilter <= 6) {
                         if (currentFilter === 0) {
                             this.dropDown.nodeList[currentFilter + 1].textContent = DataAPI.getInstance().getNextName();
-
+                            this.nextAbleLimit = 1;
                         } else if (currentFilter === 2) {
                             this.dropDown.nodeList[currentFilter + 1].textContent = DataAPI.getInstance().getNextName();
                             this.nextAbleLimit = 1;
