@@ -12,17 +12,14 @@ const infoText = document.querySelector<HTMLElement>(".checkbox-text");
 const loading = document.querySelector<HTMLElement>('.loading');
 const alertText = document.querySelector<HTMLElement>('.checkbox-alert');
 const checkTextBox = document.querySelector<HTMLElement>('.checkbox-textbox');
-export default class Layout extends Layout3 {
-    //optionList2 = [null, [3], null, [10, 20, 42, 43, 44], [2], 2, { from: 100, to: 190 }, { from: 2, to: 4 }, { from: 1, to: 3 }, { from: 0, to: 3 }, { from: 10, to: 14 }, { from: 30, to: 38 }, { from: 7, to: 10 }, true];
+export default class Layout extends LayoutToggle(Layout3) {
     dropDown: DropDown = new DropDown();
     checkBox: Checkbox = new Checkbox();
     nextBtn: NextBtn = new NextBtn();
     autoBtn: AutoBtn = new AutoBtn();
     resetBtn: ResetBtn = new ResetBtn();
     question: Question = new Question();
-    layoutToggle: LayoutToggle = new LayoutToggle();
     nextAbleLimit: number = 1;
-
 
     private setOption() {
         const currentFilter = DataAPI.getInstance().getCurrent();
@@ -105,12 +102,12 @@ export default class Layout extends Layout3 {
                     else if (currentFilter === 5) this.excludeVersion();
                     this.setOpacity();
                     this.refreshNumberBoard();
-                    this.layoutToggle.layout2On();
+                    this.layout2On();
                     this.resetBtn.removeEvent();
                     this.resetBtn.addEvent(this.reset.bind(this));
                     break;
                 default:
-                    this.layoutToggle.layout1On();
+                    this.layout1On();
                     this.checkBox.init();
                     if (currentFilter === 1) {
                         this.clearStatsBoard();
@@ -126,12 +123,15 @@ export default class Layout extends Layout3 {
                             this.checkBox.multiSelectEvent(this.nextAbleLimit);
                         }
                     } else if (currentFilter <= 6) {
-                    } else if (currentFilter === 2) {
-                        this.dropDown.nodeList[currentFilter + 1].textContent = DataAPI.getInstance().getNextName();
-                        this.nextAbleLimit = 1;
+                        if(currentFilter === 0){
+                            this.dropDown.nodeList[currentFilter+1].textContent = DataAPI.getInstance().getNextName();
+
+                        }else if (currentFilter === 2){
+                            this.dropDown.nodeList[currentFilter+1].textContent = DataAPI.getInstance().getNextName();
+                            this.nextAbleLimit = 1;
+                        }
                         this.checkBox.singleSelectEvent();
                     } else {
-                        this.setStatsBoard(DataAPI.getInstance().getStats().stats);
                         this.checkBox.rangeSelectEvent();
                     }
                     this.resetBtn.removeEvent();

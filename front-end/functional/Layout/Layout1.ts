@@ -4,20 +4,12 @@ import barSlide from "../instance1/barSlide";
 import lineSlide from '../instance1/lineSlide'
 import bubbleChart from '../instance1/bubbleInstance'
 
-const mean = document.querySelector<HTMLElement>('.func1-mean-value');
-const stdev = document.querySelector<HTMLElement>('.func1-stdev-value');
-const min = document.querySelector<HTMLElement>('.func1-min-value');
-const max = document.querySelector<HTMLElement>('.func1-max-value');
-const filteredCount = document.querySelector<HTMLElement>('func1-filtered-value');
-
 const meanValue = document.querySelector('#func1-bubble-mean-value');
 const stdevValue = document.querySelector('#func1-bubble-stdev-value');
 const minValue = document.querySelector('#func1-bubble-min-value');
 const maxValue = document.querySelector('#func1-bubble-max-value');
 const smallPercent = document.querySelector('#func1-bubble-s-percent-value');
 const bigPercent = document.querySelector('#func1-bubble-b-percent-value');
-
-
 
 interface Stats {
     mean: number;
