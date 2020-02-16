@@ -50,21 +50,7 @@
                 <span>모두</span>
               </div>
               <div class="func3-num-container">
-                <div>
-                  <input type="checkbox" name="" id="" />
-                  <div>
-                    <div class="func3-num-box">
-                      <div>1</div>
-                      <div>2</div>
-                      <div>3</div>
-                      <div>4</div>
-                      <div>5</div>
-                      <div>6</div>
-                    </div>
-                    <div class="func3-num-text">
-                    </div>
-                  </div>
-                </div>
+
               </div>
               <div class="func3-btn-container">
                 <button type="button" class="btn circle-btn">저장</button>
@@ -97,11 +83,35 @@
     </div>
   </div>
   <script>
-    const a = [2, 4, 5, 3, 6, 15];
-    const
-    function makeNum(a, text) {
+    const a = [[2, 4, 5, 3, 6, 15], [1, 2, 3, 4, 5, 6]];
+    const numContainer = document.querySelector('.func3-num-container');
 
+    function makeNum(a, text) {
+      for (let i = 0; i < a.length; i++) {
+        const containerBox = document.createElement('div');
+        const checkBox = document.createElement('input')
+        checkBox.setAttribute('type', 'checkbox');
+        containerBox.appendChild(checkBox);
+
+        const container = document.createElement('div');
+        const numBox = document.createElement('div');
+        numBox.classList.add('func3-num-box');
+        for (let j = 0; j < a[0].length; j++) {
+          const num = document.createElement('div');
+          num.textContent = String(a[i][j]);
+          numBox.appendChild(num);
+        }
+
+        const numText = document.createElement('div');
+        numText.textContent = text;
+
+        container.appendChild(numBox);
+        container.appendChild(numText);
+        containerBox.appendChild(container);
+      }
     }
+
+    makeNum(a, numContainer);
   </script>
   <script src="components/footer/footer.js"></script>
   </div>
