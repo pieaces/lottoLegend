@@ -91,6 +91,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                             this.dropDown.nodeList[currentFilter].textContent = '-';
                             this.options[currentFilter] = [];
                             await DataAPI.getInstance().forward(this.options[currentFilter]);
+                            infoText.innerHTML = DataAPI.getInstance().infoList[currentFilter];
                         }
                         this.includeVerson();
                     }
