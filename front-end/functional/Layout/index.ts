@@ -79,6 +79,9 @@ export default class Layout extends LayoutToggle(Layout3) {
         if (layoutVersion === 0) {
             const currentFilter = DataAPI.getInstance().getCurrent();
             infoText.textContent = DataAPI.getInstance().infoList[currentFilter];
+            if(DataAPI.getInstance().filteredCount < 50){
+                this.layout3_1On();
+            }
             switch (currentFilter) {
                 case 3: case 4: case 5:
                     this.reset();
@@ -107,6 +110,8 @@ export default class Layout extends LayoutToggle(Layout3) {
                     this.resetBtn.removeEvent();
                     this.resetBtn.addEvent(this.reset.bind(this));
                     break;
+                case DataAPI.getInstance().SIZE-1:
+                    this.layout3_1On();
                 default:
                     this.layout1On();
                     this.checkBox.init();
