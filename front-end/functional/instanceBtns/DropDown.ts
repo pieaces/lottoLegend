@@ -103,7 +103,7 @@ export default class DropDown {
         this.outEventList = [];
 
         this.nodeList.forEach((node, index) => {
-            if (index < current) {
+            if (index < current && node.textContent !== '-') {
                 node.style.backgroundColor = DropDown.PREVIOUS_COLOR;
                 node.style.color = DropDown.PREVIOUS_FONT;
 

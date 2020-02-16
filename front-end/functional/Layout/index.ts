@@ -106,6 +106,7 @@ export default class Layout extends Layout3 {
                         infoText.innerHTML = `전멸구간을 제외한 전회차 번호입니다. 이월될 수를 선택해주세요.(${this.nextAbleLimit}개)<br>(나머지는 자동제외됩니다.)`;
                         checkTextBox.style.height = '40px';
                         if (this.nextAbleLimit === 0) {
+                            this.dropDown.nodeList[currentFilter].textContent = '-';
                             this.options[currentFilter] = [];
                             await DataAPI.getInstance().forward(this.options[currentFilter]);
                         }
@@ -129,6 +130,7 @@ export default class Layout extends Layout3 {
                     if (currentFilter === 1) {
                         this.nextAbleLimit = this.options[currentFilter - 1].indexOf(true);
                         if (this.nextAbleLimit === 0) {
+                            this.dropDown.nodeList[currentFilter].textContent = '-';
                             this.options[currentFilter] = [];
                             await DataAPI.getInstance().forward(this.options[currentFilter]);
                             this.on();
@@ -138,7 +140,13 @@ export default class Layout extends Layout3 {
                             this.checkBox.multiSelectEvent(this.nextAbleLimit);
                         }
                     } else if (currentFilter <= 6) {
-                        if (currentFilter === 2) this.nextAbleLimit = 1;
+                        if(currentFilter === 0){
+                            this.dropDown.nodeList[currentFilter+1].textContent = DataAPI.getInstance().getNextName();
+
+                        }else if (currentFilter === 2){
+                            this.dropDown.nodeList[currentFilter+1].textContent = DataAPI.getInstance().getNextName();
+                            this.nextAbleLimit = 1;
+                        }
                         this.checkBox.singleSelectEvent();
                     } else {
                         this.checkBox.rangeSelectEvent();
@@ -267,30 +275,20 @@ export default class Layout extends Layout3 {
         });
         this.dropDown.nodeList.forEach((node, index) => {
             node.addEventListener('click', async () => {
-                if (confirm(`'${DataAPI.getInstance().getFilterList()[index]}'(으)로 되돌아가시겠습니까?`)) {
-                    const current = DataAPI.getInstance().getCurrent();
-                    if (index < current) {
-                        section.scrollIntoView({
-                            behavior: 'auto'
-                        });
-                        for (let i = 0; i < current - index; i++) this.options.pop();
-                        DataAPI.getInstance().leap(index);
-                        await this.on();
-                        this.checkBox.reset();
-                        this.dropDown.changeBoard();
-                        this.dropDown.changeDropDownColor();
-                    }
+                const current = DataAPI.getInstance().getCurrent();
+                if (index < current && node.textContent !== '-' && confirm(`'${DataAPI.getInstance().getFilterList()[index]}'(으)로 되돌아가시겠습니까?`)) {
+                    section.scrollIntoView({
+                        behavior: 'auto'
+                    });
+                    for (let i = 0; i < current - index; i++) this.options.pop();
+                    DataAPI.getInstance().leap(index);
+                    await this.on();
+                    this.checkBox.reset();
+                    this.dropDown.changeBoard();
+                    this.dropDown.changeDropDownColor();
                 }
             })
         });
 
     }
 }
-
-// const div=document.querySelector('.func1-stats-container > div:nth-child(3)');
-
-// if 보여줄려면 div.classList.remove('none');
-
-//     div.children[1].textContent="???";
-
-// else 안 보여줄려면div.classList.add('none');
