@@ -3,6 +3,7 @@ import DataAPI from "../DataAPI";
 import DropDown from "../instanceBtns/DropDown";
 import Checkbox from "../instanceBtns/CheckBox";
 import NextBtn from "../instanceBtns/NextBtn";
+import AutoBtn from "../instanceBtns/AutoBtn"
 import ResetBtn from "../instanceBtns/ResetBtn";
 import Question from "../Question"
 const layout1 = document.querySelectorAll<HTMLElement>(".func1-layout");
@@ -17,6 +18,7 @@ export default class Layout extends Layout3 {
     dropDown: DropDown = new DropDown();
     checkBox: Checkbox = new Checkbox();
     nextBtn: NextBtn = new NextBtn();
+    autoBtn: AutoBtn = new AutoBtn();
     resetBtn: ResetBtn = new ResetBtn();
     question: Question = new Question();
     nextAbleLimit: number = 1;
@@ -151,6 +153,19 @@ export default class Layout extends Layout3 {
         }
     }
 
+    private async next(current:number) {
+        section.scrollIntoView({
+            behavior: 'auto'
+        });
+        loading.classList.remove('none');
+        await DataAPI.getInstance().forward(this.options[current]);
+        await this.on();
+        loading.classList.add('none');
+        this.checkBox.reset();
+        this.dropDown.changeBoard();
+        this.dropDown.changeDropDownColor();
+        console.log(this.options);
+    }
     init() {
         super.init();
         this.question.init();
@@ -168,21 +183,11 @@ export default class Layout extends Layout3 {
 
         this.nextBtn.addEvent(async () => {
             const currentFilter = DataAPI.getInstance().getCurrent();
-
             if (this.checkBox.getCount() >= this.nextAbleLimit ||
                 currentFilter === 3 && this.checkedNumbers.length === this.nextAbleLimit ||
                 currentFilter === 4 || currentFilter === 5) {
-                section.scrollIntoView({
-                    behavior: 'auto'
-                });
                 this.setOption();
-                loading.classList.remove('none');
-                await DataAPI.getInstance().forward(this.options[currentFilter]);
-                await this.on();
-                loading.classList.add('none');
-                this.checkBox.reset();
-                this.dropDown.changeBoard();
-                this.dropDown.changeDropDownColor();
+                this.next(currentFilter);
             } else {
                 alertText.style.opacity = "1";
                 if (currentFilter <= 6) alertText.textContent = `${this.nextAbleLimit}개 선택해셔야합니다..`;
@@ -191,6 +196,74 @@ export default class Layout extends Layout3 {
                     alertText.style.opacity = "0";
                 }, 1500)
             }
+        });
+        this.autoBtn.addEvent(async () => {
+            const current = DataAPI.getInstance().getCurrent();
+            let index:number;
+            let rand:number;
+            let pos:number[];
+            let temp:any;
+            let set:Set<number>
+            switch (current) {
+                case 0:
+                    rand = Math.random();
+                    if(rand > 0.5) this.options[current] = [false, true, false, false, false];
+                    else if(rand > 0.2) this.options[current] = [false, false, true, false, false];
+                    else this.options[current] = [true, false, false, false, false];
+                    break;
+                case 1:
+                    index = this.options[0].indexOf(true);
+                    set = new Set<number>();
+                    while (set.size < index) {
+                        set.add(Math.floor(Math.random() * 5))
+                    };
+                    this.options[current] = Array.from(set);
+                    this.options[current].sort((a:number, b:number) => a - b);
+                    break;
+                case 2:
+                    rand = Math.random();
+                    if(rand > 0.6) this.options[current] = [false, true, false, false, false, false, false];
+                    else if(rand > 0.2) this.options[current] = [true, false, false, false, false, false, false];
+                    else this.options[current] = [false, false, true, false, false, false, false]
+                    break;
+                case 3:case 4:case 5: break;
+                case 6:
+                    rand = Math.random();
+                    this.options[current] = DataAPI.getInstance().getLabels()[Math.floor(rand*DataAPI.getInstance().getLabels().length)];
+                    break;
+                case 7:case 8:case 9:case 10:
+                    index = 0;
+                    pos = DataAPI.getInstance().getStats().pos;
+                    temp = pos[0]
+                    for(let i = 1; i<pos.length; i++){
+                        if(temp < pos[i]){
+                            index = i; temp = pos[i];
+                        }
+                    }
+
+                    const range = DataAPI.getInstance().getLabels()
+                    let from = range[index];
+                    let to = range[index]
+                    if (current === 7) {
+                        from = Number((<string>from).slice(0, (<string>from).indexOf('~')));
+                        to = Number((<string>to).slice((<string>to).indexOf('~') + 1));
+                    }else{
+                        from = Number(from);
+                        to = Number(to);
+                    }
+
+                    this.options[current] = { from, to }
+                    break;
+                case 11:
+                    break;
+                case 12:
+                    break;
+                case 13:
+                    break;
+                case 14:
+                    break;
+            }
+            this.next(current);
         });
         this.dropDown.nodeList.forEach((node, index) => {
             node.addEventListener('click', async () => {
@@ -208,7 +281,8 @@ export default class Layout extends Layout3 {
                     this.dropDown.changeDropDownColor();
                 }
             })
-        })
+        });
+
     }
 }
 
