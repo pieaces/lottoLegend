@@ -4,7 +4,6 @@ import DataAPI from "../DataAPI";
 
 export default class BarSlide extends Slide<ChartBase> {
     static readonly SIZE = 3;
-
     constructor(barInstance: ChartBase, leftBtn: HTMLElement, rightBtn: HTMLElement, numBtns: NodeListOf<Element>, table?: HTMLElement, valueBox1?: HTMLElement, valueBox2?: HTMLElement) {
         super(BarSlide.SIZE, barInstance, leftBtn, rightBtn, numBtns, table, valueBox1, valueBox2);
     }
@@ -14,14 +13,14 @@ export default class BarSlide extends Slide<ChartBase> {
         switch (this.current) {
             case 0:
                 rep.data = data.ideal['latest'];
-                rep.label = '예측값(개수)';
+                rep.label = Slide.EXPECTED_TEXT;
                 break;
             case 1:
                 rep.data = data.actual['latest'];
-                rep.label = '실제값(개수)'
+                rep.label = Slide.ACTUAL_TEXT
                 break;
             case 2:
-                rep.label = '예측값 대비 실제값 비율(%)';
+                rep.label = '예상개수 대비 실제개수 비율(%)';
                 const temp = [];
                 for (let i = 0; i < data.ideal['latest'].length; i++) {
                     const datum = (data.actual['latest'][i] - data.ideal['latest'][i]) / data.ideal['latest'][i] * 100;
@@ -36,13 +35,12 @@ export default class BarSlide extends Slide<ChartBase> {
         this.valueBox1.textContent = DataAPI.getInstance().getCurrentName();
 
         switch (this.current) {
-            case 0: this.valueBox2.textContent = '예측값(개수)';
+            case 0: this.valueBox2.textContent = Slide.EXPECTED_TEXT;
                 break;
-            case 1: this.valueBox2.textContent = '실제값(개수)';
+            case 1: this.valueBox2.textContent = Slide.ACTUAL_TEXT;
                 break;
-            case 2: this.valueBox2.textContent = '예측값 대비 실제값 비율';
+            case 2: this.valueBox2.textContent = '예상개수 대비 실제개수 비율(%)';
                 break;
-
         }
 
         const data = [];
@@ -70,7 +68,7 @@ export default class BarSlide extends Slide<ChartBase> {
         this.numBtns[this.current].classList.add(this.CURRENT_CSS);
         this.chart.dataBox.labels = DataAPI.getInstance().getLabels();
         this.chart.dataBox.datasets[0].data = DataAPI.getInstance().getStats().ideal['latest'];
-        this.chart.dataBox.datasets[0].label = '예측값(개수)';
+        this.chart.dataBox.datasets[0].label = Slide.EXPECTED_TEXT;
         this.chart.update();
         this.setText();
     }

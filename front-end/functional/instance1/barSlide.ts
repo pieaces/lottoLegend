@@ -1,6 +1,7 @@
 import BarSlide from "../Slide/BarSlide";
 import makeClickable from "../Slide/makeClickable";
 import ChartBase from "../Chart/Charts";
+import Slide from "../Slide";
 
 const leftBarBtn: HTMLElement = document.querySelector('#func1-left-bar-chart-btn');
 const rightBarBtn: HTMLElement = document.querySelector('#func1-right-bar-chart-btn');
@@ -15,7 +16,7 @@ const dataBox = {
     labels: null,
     datasets: [
         {
-            label: '예측값(개수)',
+            label: Slide.EXPECTED_TEXT,
             backgroundColor: '#00B2EA',
             data: null
         }

@@ -1,6 +1,7 @@
 import ChartBase from "../Chart/Charts";
 import LineSlide from "../Slide/LineSlide";
 import makeClickable from "../Slide/makeClickable";
+import Slide from "../Slide";
 
 const leftLineBtn: HTMLElement = document.querySelector('#func1-left-line-chart-btn');
 const rightLineBtn: HTMLElement = document.querySelector('#func1-right-line-chart-btn');
@@ -40,7 +41,7 @@ const dataBox = {
     labels: null,
     datasets: [
         {
-            label: '예측값(개수)',
+            label: Slide.EXPECTED_TEXT,
             pointBackgroundColor: 'white',
             borderWidth: 2,
             borderColor: 'rgb(14,99,132)',
@@ -48,7 +49,7 @@ const dataBox = {
             fill: false
         },
         {
-            label: '실제값(개수)',
+            label: Slide.ACTUAL_TEXT,
             pointBackgroundColor: 'white',
             borderWidth: 2,
             borderColor: 'rgb(199, 54, 44)',
