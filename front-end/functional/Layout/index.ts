@@ -91,10 +91,11 @@ export default class Layout extends LayoutToggle(Layout3) {
                         infoText.innerHTML = `전멸구간을 제외한 전회차 번호입니다. 이월될 수를 선택해주세요.(${this.nextAbleLimit}개)<br>(나머지는 자동제외됩니다.)`;
                         checkTextBox.style.height = '40px';
                         if (this.nextAbleLimit === 0) {
+
                             this.dropDown.nodeList[currentFilter].textContent = '-';
                             this.options[currentFilter] = [];
                             await DataAPI.getInstance().forward(this.options[currentFilter]);
-                            infoText.innerHTML = DataAPI.getInstance().infoList[currentFilter];
+                            infoText.innerHTML = DataAPI.getInstance().infoList[currentFilter+1];
                         }
                         this.includeVerson();
                     }
@@ -242,11 +243,13 @@ export default class Layout extends LayoutToggle(Layout3) {
                     }
                     const range = DataAPI.getInstance().getLabels()
                     let from = range[index];
-                    let to = range[index]
-                    if (current === 7 || current === 12) {
+                    let to = range[index];
+                    if (current === 7 || current === 12 && typeof from === 'string') {
+                        console.log(from, to);
                         from = Number((<string>from).slice(0, (<string>from).indexOf('~')));
                         to = Number((<string>to).slice((<string>to).indexOf('~') + 1));
-                    } else {
+                        console.log(from, to);
+                    }else {
                         from = Number(from);
                         to = Number(to);
                     }
