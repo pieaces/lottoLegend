@@ -10,7 +10,6 @@ import Question from "../Question"
 const section = document.querySelector(".section1");
 const infoText = document.querySelector<HTMLElement>(".checkbox-text");
 const loading = document.querySelector<HTMLElement>('.loading');
-const alertText = document.querySelector<HTMLElement>('.checkbox-alert');
 const checkTextBox = document.querySelector<HTMLElement>('.checkbox-textbox');
 export default class Layout extends LayoutToggle(Layout3) {
     dropDown: DropDown = new DropDown();
@@ -88,8 +87,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                     this.checkBox.removeAllEvent();
                     if (currentFilter == 3) {
                         this.nextAbleLimit = this.options[currentFilter - 1].indexOf(true);
-                        infoText.innerHTML = `전멸구간을 제외한 전회차 번호입니다. 이월될 수를 선택해주세요.(${this.nextAbleLimit}개)<br>(나머지는 자동제외됩니다.)`;
-                        checkTextBox.style.height = '40px';
+                        infoText.innerHTML = `전멸구간을 제외한 전회차 번호입니다. 이월될 수를 선택해주세요.(${this.nextAbleLimit}개) (나머지는 자동제외됩니다.)`;
                         if (this.nextAbleLimit === 0) {
 
                             this.dropDown.nodeList[currentFilter].textContent = '-';
@@ -102,9 +100,10 @@ export default class Layout extends LayoutToggle(Layout3) {
                     else if (currentFilter === 4) {
                         this.nextAbleLimit = 1;
                         this.includeVerson();
-                        checkTextBox.style.height = '20px';
                     }
-                    else if (currentFilter === 5) this.excludeVersion();
+                    else if (currentFilter === 5) {
+                        this.excludeVersion();
+                    }
                     this.setOpacity();
                     this.refreshNumberBoard();
                     this.layout2On();
@@ -187,12 +186,14 @@ export default class Layout extends LayoutToggle(Layout3) {
                 this.setOption();
                 this.next(currentFilter);
             } else {
-                alertText.style.opacity = "1";
-                if (currentFilter <= 6) alertText.textContent = `${this.nextAbleLimit}개 선택해셔야합니다..`;
-                if (currentFilter > 6) alertText.textContent = `${this.nextAbleLimit}개 이상 선택하셔야합니다.`;
+                const text = checkTextBox.textContent;
+                checkTextBox.classList.add('checkbox-alert');
+                if (currentFilter <= 6) checkTextBox.textContent = `딱 ${this.nextAbleLimit}개 선택해주세요~`;
+                if (currentFilter > 6) checkTextBox.textContent = `최소 ${this.nextAbleLimit}개 이상 산텍헤주세요~`;
                 setTimeout(function () {
-                    alertText.style.opacity = "0";
-                }, 1500)
+                    checkTextBox.classList.remove('checkbox-alert');
+                    checkTextBox.textContent = text;
+                }, 1000)
             }
         });
         this.autoBtn.addEvent(async () => {

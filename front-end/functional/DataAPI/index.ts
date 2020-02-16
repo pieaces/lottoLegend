@@ -53,6 +53,7 @@ export default class DataAPI {
         infoFront + '번호합계입니다. ' + infoBack,
         infoFront + '홀수개수입니다. ' + infoBack,
         infoFront + '소수개수입니다. ' + infoBack,
+        infoFront + '3배수개수입니다. ' + infoBack,
         infoFront + '첫수합(십의자리 합)입니다. ' + infoBack,
         infoFront + '고저차(가장 큰값 - 작은값)입니다. ' + infoBack,
         infoFront + 'AC(Arithmetic Complexity' + infoBack,
