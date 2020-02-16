@@ -50,6 +50,7 @@ export default function LayoutToggle<TBase extends Constructor>(Base: TBase) {
         }
 
         layout3_1On() {
+
             layout1.forEach(node => {
                 node.classList.add('none');
             });
@@ -60,6 +61,7 @@ export default function LayoutToggle<TBase extends Constructor>(Base: TBase) {
                 node.classList.add('none');
             });
             layout3_1.forEach(node => {
+
                 if (node.classList.contains(layout3_1Class)) {
                     node.classList.remove('none');
                 } else {

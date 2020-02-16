@@ -19,6 +19,7 @@ export default class Layout3 extends Layout2 {
             }
 
             const numText = document.createElement('div');
+            numText.classList.add('func3-num-text');
 
             container.appendChild(numBox);
             container.appendChild(numText);

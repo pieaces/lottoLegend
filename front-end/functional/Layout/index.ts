@@ -79,7 +79,7 @@ export default class Layout extends LayoutToggle(Layout3) {
         if (layoutVersion === 0) {
             const currentFilter = DataAPI.getInstance().getCurrent();
             infoText.textContent = DataAPI.getInstance().infoList[currentFilter];
-            if(DataAPI.getInstance().filteredCount < 50){
+            if (DataAPI.getInstance().filteredCount < 50) {
                 this.layout3_1On();
             }
             switch (currentFilter) {
@@ -95,7 +95,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                             this.dropDown.nodeList[currentFilter].textContent = '-';
                             this.options[currentFilter] = [];
                             await DataAPI.getInstance().forward(this.options[currentFilter]);
-                            infoText.innerHTML = DataAPI.getInstance().infoList[currentFilter+1];
+                            infoText.innerHTML = DataAPI.getInstance().infoList[currentFilter + 1];
                         }
                         this.includeVerson();
                     }
@@ -111,7 +111,8 @@ export default class Layout extends LayoutToggle(Layout3) {
                     this.resetBtn.removeEvent();
                     this.resetBtn.addEvent(this.reset.bind(this));
                     break;
-                case DataAPI.getInstance().SIZE-1:
+                case DataAPI.getInstance().SIZE - 1:
+
                     this.layout3_1On();
                 default:
                     this.layout1On();
@@ -130,11 +131,11 @@ export default class Layout extends LayoutToggle(Layout3) {
                             this.checkBox.multiSelectEvent(this.nextAbleLimit);
                         }
                     } else if (currentFilter <= 6) {
-                        if(currentFilter === 0){
-                            this.dropDown.nodeList[currentFilter+1].textContent = DataAPI.getInstance().getNextName();
+                        if (currentFilter === 0) {
+                            this.dropDown.nodeList[currentFilter + 1].textContent = DataAPI.getInstance().getNextName();
 
-                        }else if (currentFilter === 2){
-                            this.dropDown.nodeList[currentFilter+1].textContent = DataAPI.getInstance().getNextName();
+                        } else if (currentFilter === 2) {
+                            this.dropDown.nodeList[currentFilter + 1].textContent = DataAPI.getInstance().getNextName();
                             this.nextAbleLimit = 1;
                         }
                         this.checkBox.singleSelectEvent();
@@ -249,7 +250,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                         from = Number((<string>from).slice(0, (<string>from).indexOf('~')));
                         to = Number((<string>to).slice((<string>to).indexOf('~') + 1));
                         console.log(from, to);
-                    }else {
+                    } else {
                         from = Number(from);
                         to = Number(to);
                     }
