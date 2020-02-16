@@ -144,7 +144,7 @@
   .func2-left-chart-btn{
     cursor: pointer;
     position: absolute;
-    top: 5%;
+    top: 2%;
     left: 43%;
     color: var(--main-color);
     background-color: darkgray;
@@ -157,7 +157,7 @@
   .func2-right-chart-btn{
     cursor: pointer;
     position: absolute;
-    top: 5%;
+    top: 2%;
     left: 52%;
     color: var(--main-color);
     background-color: darkgray;
@@ -177,20 +177,20 @@
     height:93% !important;
   }
 
-  .func2-chart-radar-num{
-    height:30%;
-  }
+  
 
   .func2-chart-radar-num .chart-slide-current{
     border: 6px solid darkgray !important;
   }
 
   .func2-chart-radar-text{
-    position: absolute;
-    top:0;
-    left:100%;
+
     width:100%;
     height:100%;
+  }
+
+  #func2-radar-table{
+    margin-top:30px;
   }
   
   .func2-main-2-4 {
