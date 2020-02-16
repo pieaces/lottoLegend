@@ -28,7 +28,7 @@ interface Stats {
 function range(mean: number, stdev: number, multiple: number): [number, number] {
     return [mean - stdev * multiple, mean + stdev * multiple];
 }
-function rangeString(range: [number, number], min:number, max:number):string {
+function rangeString(range: [number, number], min: number, max: number): string {
     return (range[0] < min ? min : range[0]).toFixed(2) + '~' + (range[1] > max ? max : range[1]).toFixed(2)
 }
 export default class Layout1 {

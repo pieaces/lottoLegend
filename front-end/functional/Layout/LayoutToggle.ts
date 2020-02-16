@@ -10,7 +10,6 @@ export default class LayoutToggle {
     static readonly layout3_2Class = 'func3-layout-2'
 
     layout1On() {
-
         layout2.forEach(node => {
             node.classList.add('none');
         });

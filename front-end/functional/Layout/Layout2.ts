@@ -356,7 +356,7 @@ function makeWinNum(winNumArr: number[][], total: number) {
 
 // else extractNum.classList.add('hide');
 
-////////////////////////////////////////
+//////////////////////////////////////// bubble
 
 // const meanValue = document.querySelector('#func1-bubble-mean-value');
 
@@ -382,4 +382,28 @@ function makeWinNum(winNumArr: number[][], total: number) {
 
 // bigPercent.textContent="";
 
-////////////////////////////
+//////////////////////////// radar
+
+// const meanValue = document.querySelector('#func2-radar-mean-value');
+
+// meanValue.textContent="";
+
+// const stdevValue = document.querySelector('#func2-radar-stdev-value');
+
+// stdevValue.textContent="";
+
+// const maxValue = document.querySelector('#func2-radar-max-value');
+
+// maxValue.textContent="";
+
+// const minValue = document.querySelector('#func2-radar-min-value');
+
+// minValue.textContent="";
+
+// const smallPercent = document.querySelector('#func2-radar-s-percent-value');
+
+// smallPercent.textContent="";
+
+// const bigPercent = document.querySelector('#func2-radar-b-percent-value');
+
+// bigPercent.textContent="";
