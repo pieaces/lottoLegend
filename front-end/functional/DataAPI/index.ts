@@ -49,10 +49,11 @@ export default class DataAPI {
     private optionList = [null, 'excludedLines', null, null, 'includedNumbers', 'excludedNumbers', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
     private rangeList: Array<string[] | number[]> = [[0, 1, 2, 3, 4], ['1~', '10~', '20~', '30~', '40~'], [0, 1, 2, 3, 4, 5, 6], null, null, null];
     public infoList = ['전멸구간 개수를 선택해주세요.', '전멸구간 번호대를 선택해주세요', '전회차에서 이월될 개수를 선택해주세요.', '전회차에서 이월될 수를 선택해주세요(나머지는 자동으로 제외됩니다.)',
-    '포함될 수를 선택해주세요.(생략가능)', '제외될 수를 선택해주세요.(생략가능)', '저값(1~22) 개수를 선택해주세요.',
+        '포함될 수를 선택해주세요.(생략가능)', '제외될 수를 선택해주세요.(생략가능)', '저값(1~22) 개수를 선택해주세요.',
         infoFront + '번호합계입니다. ' + infoBack,
         infoFront + '홀수개수입니다. ' + infoBack,
         infoFront + '소수개수입니다. ' + infoBack,
+        infoFront + '3배수개수입니다. ' + infoBack,
         infoFront + '첫수합(십의자리 합)입니다. ' + infoBack,
         infoFront + '고저차(가장 큰값 - 작은값)입니다. ' + infoBack,
         infoFront + 'AC(Arithmetic Complexity' + infoBack,
@@ -70,8 +71,8 @@ export default class DataAPI {
         return DataAPI.instance;
     }
     public getTOTAL(): number { return this.data.total; }
-    public getWinNums(): number[][] {return this.data.winNums; }
-    public getGeneratedNums(){
+    public getWinNums(): number[][] { return this.data.winNums; }
+    public getGeneratedNums() {
         return this.numbers;
     }
     public getLabels(num = this.current): Array<string | number> {
@@ -93,19 +94,19 @@ export default class DataAPI {
 
     private async setStats(): Promise<void> {
         let params: Params;
-        if(this.current === 2){
+        if (this.current === 2) {
             let count = 0;
-            this.getWinNums()[0].forEach(num =>{
-                if(this.generator.option.excludedLines.indexOf(Math.floor(num/10)) !== -1){
+            this.getWinNums()[0].forEach(num => {
+                if (this.generator.option.excludedLines.indexOf(Math.floor(num / 10)) !== -1) {
                     count++;
                 }
             })
-            const temp:number[] = [];
-            for(let i =0; i<=6-count; i++){
+            const temp: number[] = [];
+            for (let i = 0; i <= 6 - count; i++) {
                 temp.push(i);
             }
             this.rangeList[this.current] = temp;
-        }else if (this.current <= 5) params = {};
+        } else if (this.current <= 5) params = {};
         else if (this.current === 6) {
             let range: number[];
             if (this.generator.option.excludedLines) {
@@ -133,12 +134,14 @@ export default class DataAPI {
             else if (this.current === this.SIZE - 1) {
                 if (this.rangeList[this.current].length === 2) {
                     this.rangeList[this.current] = ['제외', '포함'];
-                }else{
-                    if(this.rangeList[this.current][1]){
+                } else if (this.rangeList[this.current].length === 1) {
+                    if (this.rangeList[this.current][1]) {
                         this.rangeList[this.current] = ['포함'];
-                    }else{
+                    } else {
                         this.rangeList[this.current] = ['제외'];
                     }
+                } else {
+                    this.rangeList[this.current] = [];
                 }
             }
         }
@@ -174,8 +177,8 @@ export default class DataAPI {
             if (this.current >= 7) {
                 await this.getGen();
             }
-            if (this.current < this.dataList.length - 1) {
-                this.current++;
+            this.current++;
+            if (this.current <= this.dataList.length - 1) {
                 if (!this.data[this.dataList[this.current]]) {
                     await this.setStats();
                 }

@@ -264,10 +264,8 @@ border-left: 10px solid #575755;
   }
 
   .checkbox-alert{
-    width:200px;
-    height:100%;
-    color:red;
-    transition: all 500ms;  
+    color:#d82828;
+    font-weight: 500;
   }
   
   .que-container{
