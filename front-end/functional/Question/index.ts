@@ -1,8 +1,8 @@
 import QuestionBase from "./QuestionBase"
 
-const bubbleQueBox = document.querySelector<HTMLElement>('.func1-chart-bubble-que >i');
-const bubbleModal = document.querySelector<HTMLElement>('.func1-chart-bubble-que-modal');
-const bubbleQueCancelIcon = document.querySelector<HTMLElement>('.func1-chart-bubble-que-cancel > i');
+const bubbleQueBox = document.querySelector<HTMLElement>('.func1-bubble-que >i');
+const bubbleModal = document.querySelector<HTMLElement>('.func1-bubble-que-modal');
+const bubbleQueCancelIcon = document.querySelector<HTMLElement>('.func1-bubble-que-cancel > i');
 
 const numBoardQueBox = document.querySelector<HTMLElement>('.func2-numboard-que >i');
 const numBoardModal = document.querySelector<HTMLElement>('.func2-numboard-que-modal');
