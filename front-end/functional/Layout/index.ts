@@ -128,6 +128,7 @@ export default class Layout extends Layout3 {
                     this.layout1On();
                     this.checkBox.init();
                     if (currentFilter === 1) {
+                        this.clearStatsBoard();
                         this.nextAbleLimit = this.options[currentFilter - 1].indexOf(true);
                         if (this.nextAbleLimit === 0) {
                             this.dropDown.nodeList[currentFilter].textContent = '-';
@@ -140,6 +141,7 @@ export default class Layout extends Layout3 {
                             this.checkBox.multiSelectEvent(this.nextAbleLimit);
                         }
                     } else if (currentFilter <= 6) {
+                        this.setStatsBoard(DataAPI.getInstance().getStats().stats);
                         if(currentFilter === 0){
                             this.dropDown.nodeList[currentFilter+1].textContent = DataAPI.getInstance().getNextName();
 
@@ -149,6 +151,7 @@ export default class Layout extends Layout3 {
                         }
                         this.checkBox.singleSelectEvent();
                     } else {
+                        this.setStatsBoard(DataAPI.getInstance().getStats().stats);
                         this.checkBox.rangeSelectEvent();
                     }
                     this.resetBtn.removeEvent();
@@ -187,7 +190,7 @@ export default class Layout extends Layout3 {
         this.lineSlide.init();
         this.bubbleChart.init();
         infoText.textContent = DataAPI.getInstance().infoList[0];
-        //this.setStatsBoard(DataAPI.getInstance().getStats().stats);
+        this.setStatsBoard(DataAPI.getInstance().getStats().stats);
 
         this.nextBtn.addEvent(async () => {
             const currentFilter = DataAPI.getInstance().getCurrent();
