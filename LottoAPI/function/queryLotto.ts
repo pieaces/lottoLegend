@@ -23,9 +23,11 @@ export default async function queryLotto(round: number): Promise<LottoNumber[]> 
             }
             else {
                 const item = data.Items[0];
-                if(typeof item === 'undefined') throw new Error(`Not Exist ${round} item`);
-                const numbers = item.Numbers.NS.map(value => Number(value)).sort((a,b)=>a-b);
-                resolve(numbers as LottoNumber[])
+                if (typeof item === 'undefined') reject(`Not Exist ${round} item`);
+                else {
+                    const numbers = item.Numbers.NS.map(value => Number(value)).sort((a, b) => a - b);
+                    resolve(numbers as LottoNumber[]);
+                }
             }
         });
     });
