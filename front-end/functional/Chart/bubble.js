@@ -9,7 +9,7 @@ export default class BubbleChart {
 
         const statsData = DataAPI.getInstance().getStats();
         const labels = DataAPI.getInstance().getLabels();
-        for (let i = 0; i < statsData.ideal['all'].length; i++) {
+        for (let i = 0; i < labels.length; i++) {
             let x = statsData.ideal['all'][i] - statsData.actual['all'][i];
             if (statsData.ideal['all'][i] >= statsData.actual['all'][i])
                 x /= statsData.ideal['all'][i];
