@@ -318,3 +318,35 @@ border-left: 10px solid #575755;
   .table td{
     border:1px solid rgba(0, 0, 0, 0.4);
   }
+
+  .table-1{
+    height:100%;
+  }
+
+  .table-1 th{
+    word-break: keep-all;
+    font-size:0.8rem;
+    background-color: var(--main-color);
+    color:var(--default-color);
+  }
+
+  .table-1 tr{
+    text-align: center;
+    height:30px;
+  }
+
+  .table-2{
+    height:120px;
+  }
+  
+  .table-2 tr{
+    word-break: keep-all;
+    font-size:0.8rem;
+    text-align: center;
+    width:50%;
+    height:40px;
+  }
+
+  .table-2 tr td{
+    width:50%;
+  }

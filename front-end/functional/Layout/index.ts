@@ -138,7 +138,7 @@ export default class Layout extends Layout3 {
                             this.checkBox.multiSelectEvent(this.nextAbleLimit);
                         }
                     } else if (currentFilter <= 6) {
-                         if(currentFilter === 2) this.nextAbleLimit = 1;
+                        if (currentFilter === 2) this.nextAbleLimit = 1;
                         this.checkBox.singleSelectEvent();
                     } else {
                         this.checkBox.rangeSelectEvent();
@@ -190,8 +190,8 @@ export default class Layout extends Layout3 {
                 this.next(currentFilter);
             } else {
                 alertText.style.opacity = "1";
-                if(currentFilter <= 6) alertText.textContent = `${this.nextAbleLimit}개 선택해셔야합니다..`;
-                if(currentFilter > 6) alertText.textContent = `${this.nextAbleLimit}개 이상 선택하셔야합니다.`;
+                if (currentFilter <= 6) alertText.textContent = `${this.nextAbleLimit}개 선택해셔야합니다..`;
+                if (currentFilter > 6) alertText.textContent = `${this.nextAbleLimit}개 이상 선택하셔야합니다.`;
                 setTimeout(function () {
                     alertText.style.opacity = "0";
                 }, 1500)
