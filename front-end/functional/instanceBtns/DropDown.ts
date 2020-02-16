@@ -90,14 +90,6 @@ export default class DropDown {
 
             e.stopPropagation();
         });
-        this.nodeList.forEach((node, index) => {
-            node.addEventListener("click", () => {
-                if (confirm(`'${DataAPI.getInstance().getFilterList()[index]}'(으)로 되돌아가시겠습니까?`)) {
-                    filterSelectText.textContent = node.textContent;
-                    this.changeBoard();
-                }
-            });
-        });
 
         this.cancelCheck();
     }

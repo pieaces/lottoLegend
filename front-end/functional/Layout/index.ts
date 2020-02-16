@@ -267,18 +267,19 @@ export default class Layout extends Layout3 {
         });
         this.dropDown.nodeList.forEach((node, index) => {
             node.addEventListener('click', async () => {
-                const current = DataAPI.getInstance().getCurrent();
-                if (index < current) {
-                    section.scrollIntoView({
-                        behavior: 'auto'
-                    });
-                    for (let i = 0; i < current - index; i++) this.options.pop();
-                    DataAPI.getInstance().leap(index);
-                    console.log(DataAPI.getInstance().getCurrent(), index);
-                    await this.on();
-                    this.checkBox.reset();
-                    this.dropDown.changeBoard();
-                    this.dropDown.changeDropDownColor();
+                if (confirm(`'${DataAPI.getInstance().getFilterList()[index]}'(으)로 되돌아가시겠습니까?`)) {
+                    const current = DataAPI.getInstance().getCurrent();
+                    if (index < current) {
+                        section.scrollIntoView({
+                            behavior: 'auto'
+                        });
+                        for (let i = 0; i < current - index; i++) this.options.pop();
+                        DataAPI.getInstance().leap(index);
+                        await this.on();
+                        this.checkBox.reset();
+                        this.dropDown.changeBoard();
+                        this.dropDown.changeDropDownColor();
+                    }
                 }
             })
         });
