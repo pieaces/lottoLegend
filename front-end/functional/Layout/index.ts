@@ -1,4 +1,5 @@
 import Layout3 from "./Layout3";
+import LayoutToggle from "./LayoutToggle";
 import DataAPI from "../DataAPI";
 import DropDown from "../instanceBtns/DropDown";
 import Checkbox from "../instanceBtns/CheckBox";
@@ -6,8 +7,6 @@ import NextBtn from "../instanceBtns/NextBtn";
 import AutoBtn from "../instanceBtns/AutoBtn"
 import ResetBtn from "../instanceBtns/ResetBtn";
 import Question from "../Question"
-const layout1 = document.querySelectorAll<HTMLElement>(".func1-layout");
-const layout2 = document.querySelectorAll<HTMLElement>(".func2-layout");
 const section = document.querySelector(".section1");
 const infoText = document.querySelector<HTMLElement>(".checkbox-text");
 const loading = document.querySelector<HTMLElement>('.loading');
@@ -21,23 +20,9 @@ export default class Layout extends Layout3 {
     autoBtn: AutoBtn = new AutoBtn();
     resetBtn: ResetBtn = new ResetBtn();
     question: Question = new Question();
+    layoutToggle: LayoutToggle = new LayoutToggle();
     nextAbleLimit: number = 1;
-    private layout1On() {
-        layout1.forEach(node => {
-            node.classList.remove('none');
-        });
-        layout2.forEach(node => {
-            node.classList.add('none');
-        });
-    }
-    private layout2On() {
-        layout1.forEach(node => {
-            node.classList.add('none');
-        });
-        layout2.forEach(node => {
-            node.classList.remove('none');
-        });
-    }
+
 
     private setOption() {
         const currentFilter = DataAPI.getInstance().getCurrent();
@@ -120,12 +105,12 @@ export default class Layout extends Layout3 {
                     else if (currentFilter === 5) this.excludeVersion();
                     this.setOpacity();
                     this.refreshNumberBoard();
-                    this.layout2On();
+                    this.layoutToggle.layout2On();
                     this.resetBtn.removeEvent();
                     this.resetBtn.addEvent(this.reset.bind(this));
                     break;
                 default:
-                    this.layout1On();
+                    this.layoutToggle.layout1On();
                     this.checkBox.init();
                     if (currentFilter === 1) {
                         this.nextAbleLimit = this.options[currentFilter - 1].indexOf(true);
@@ -140,11 +125,11 @@ export default class Layout extends Layout3 {
                             this.checkBox.multiSelectEvent(this.nextAbleLimit);
                         }
                     } else if (currentFilter <= 6) {
-                        if(currentFilter === 0){
-                            this.dropDown.nodeList[currentFilter+1].textContent = DataAPI.getInstance().getNextName();
+                        if (currentFilter === 0) {
+                            this.dropDown.nodeList[currentFilter + 1].textContent = DataAPI.getInstance().getNextName();
 
-                        }else if (currentFilter === 2){
-                            this.dropDown.nodeList[currentFilter+1].textContent = DataAPI.getInstance().getNextName();
+                        } else if (currentFilter === 2) {
+                            this.dropDown.nodeList[currentFilter + 1].textContent = DataAPI.getInstance().getNextName();
                             this.nextAbleLimit = 1;
                         }
                         this.checkBox.singleSelectEvent();
@@ -161,7 +146,7 @@ export default class Layout extends Layout3 {
         }
     }
 
-    private async next(current:number) {
+    private async next(current: number) {
         section.scrollIntoView({
             behavior: 'auto'
         });
@@ -207,16 +192,16 @@ export default class Layout extends Layout3 {
         });
         this.autoBtn.addEvent(async () => {
             const current = DataAPI.getInstance().getCurrent();
-            let index:number;
-            let rand:number;
-            let pos:number[];
-            let temp:any;
-            let set:Set<number>
+            let index: number;
+            let rand: number;
+            let pos: number[];
+            let temp: any;
+            let set: Set<number>
             switch (current) {
                 case 0:
                     rand = Math.random();
-                    if(rand > 0.5) this.options[current] = [false, true, false, false, false];
-                    else if(rand > 0.2) this.options[current] = [false, false, true, false, false];
+                    if (rand > 0.5) this.options[current] = [false, true, false, false, false];
+                    else if (rand > 0.2) this.options[current] = [false, false, true, false, false];
                     else this.options[current] = [true, false, false, false, false];
                     break;
                 case 1:
@@ -226,18 +211,18 @@ export default class Layout extends Layout3 {
                         set.add(Math.floor(Math.random() * 5))
                     };
                     this.options[current] = Array.from(set);
-                    this.options[current].sort((a:number, b:number) => a - b);
+                    this.options[current].sort((a: number, b: number) => a - b);
                     break;
                 case 2:
                     rand = Math.random();
-                    if(rand > 0.6) this.options[current] = [false, true, false, false, false, false, false];
-                    else if(rand > 0.2) this.options[current] = [true, false, false, false, false, false, false];
+                    if (rand > 0.6) this.options[current] = [false, true, false, false, false, false, false];
+                    else if (rand > 0.2) this.options[current] = [true, false, false, false, false, false, false];
                     else this.options[current] = [false, false, true, false, false, false, false]
                     break;
-                case 3:case 4:case 5: break;
+                case 3: case 4: case 5: break;
                 case 6:
                     rand = Math.random();
-                    this.options[current] = DataAPI.getInstance().getLabels()[Math.floor(rand*DataAPI.getInstance().getLabels().length)];
+                    this.options[current] = DataAPI.getInstance().getLabels()[Math.floor(rand * DataAPI.getInstance().getLabels().length)];
                     break;
                 case DataAPI.getInstance().SIZE - 1:
                     this.options[current] = true;
@@ -246,8 +231,8 @@ export default class Layout extends Layout3 {
                     index = 0;
                     pos = DataAPI.getInstance().getStats().pos;
                     temp = pos[0]
-                    for(let i = 1; i<pos.length; i++){
-                        if(temp < pos[i]){
+                    for (let i = 1; i < pos.length; i++) {
+                        if (temp < pos[i]) {
                             index = i; temp = pos[i];
                         }
                     }
@@ -257,7 +242,7 @@ export default class Layout extends Layout3 {
                     if (current === 7 || current === 12) {
                         from = Number((<string>from).slice(0, (<string>from).indexOf('~')));
                         to = Number((<string>to).slice((<string>to).indexOf('~') + 1));
-                    }else{
+                    } else {
                         from = Number(from);
                         to = Number(to);
                     }
