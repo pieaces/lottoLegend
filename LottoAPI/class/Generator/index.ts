@@ -1,6 +1,5 @@
 import Check from './Check';
 import Calculate from '../Calculate'
-
 import { LottoNumber } from '../../interface/Lotto';
 import { GeneratorOption, ZeroToFour } from '../../interface/Generator'
 
@@ -28,12 +27,10 @@ export default class Generator extends Check {
                 list.push(i as LottoNumber);
             }
         }
-
         const LIST_SIZE = list.length;
         const INCLUDE_SIZE = this.option.includedNumbers ? this.option.includedNumbers.length : 0;
         const BOX_SIZE = 6 - INCLUDE_SIZE;
         const LOW_COUNT = this.option.includedNumbers ? this.option.lowCount - Calculate.lowCount(this.option.includedNumbers) : this.option.lowCount;
-
         const indexBox = new Array<number>(BOX_SIZE); //list의 index를 value로 취함.
         const indexDnb = new Array<number>(BOX_SIZE);
         const indexUpb = new Array<number>(BOX_SIZE);
@@ -44,8 +41,10 @@ export default class Generator extends Check {
             indexBox[i] = i;
             indexDnb[i] = i;
         }
-        indexBox[LOW_COUNT] = highIndex;
-        indexDnb[LOW_COUNT] = highIndex;
+        if(LOW_COUNT < BOX_SIZE){
+            indexBox[LOW_COUNT] = highIndex;
+            indexDnb[LOW_COUNT] = highIndex;
+        }
         for (let i = LOW_COUNT + 1; i < BOX_SIZE; i++) {
             indexBox[i] = indexBox[i - 1] + 1;
             indexDnb[i] = indexBox[i];
