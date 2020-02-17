@@ -59,7 +59,7 @@ router.post('/generator', (req, res) => {
     if(!generator.option.sum){
         res.json("Not Proper Parameters");
     }
-    else if (typeof generator.option.consecutiveExist === 'boolean') {
+    else if (typeof generator.option.consecutiveExist === 'boolean' || generator.count <= 50) {
         res.json({
             numbers: generator.getGeneratedNumbers()
         });
