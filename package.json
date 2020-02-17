@@ -8,7 +8,9 @@
   },
   "dependencies": {
     "@types/node": "^13.7.0",
-    "chart.js": "^2.9.3"
+    "chart.js": "^2.9.3",
+    "js-loader": "^0.1.1",
+    "suneditor": "^2.25.0"
   },
   "devDependencies": {
     "@types/chart.js": "^2.9.13",
