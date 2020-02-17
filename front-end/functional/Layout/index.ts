@@ -78,7 +78,7 @@ export default class Layout extends LayoutToggle(Layout3) {
         if (layoutVersion === 0) {
             const currentFilter = DataAPI.getInstance().getCurrent();
             infoText.textContent = DataAPI.getInstance().infoList[currentFilter];
-            if (DataAPI.getInstance().filteredCount < 50) {
+            if (DataAPI.getInstance().numbers) {
                 this.layout3_1On();
             } else {
                 switch (currentFilter) {

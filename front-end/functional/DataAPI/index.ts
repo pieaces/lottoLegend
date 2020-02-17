@@ -42,7 +42,7 @@ const infoFront = '현재 필터에서 가능한 모든 ';
 const infoBack = '하나 또는 범위를 선택해주세요.';
 export default class DataAPI {
     static instance: DataAPI = null;
-    private numbers: number[][];
+    public numbers: number[][];
     public filteredCount: number;
     private filterList = ["전멸구간 개수", "전멸구간 선택", "이월수 개수", "이월수 선택", "포함", "제외", "저값 개수", "합계", "홀수 개수", "소수 개수", "3배수 개수", "첫수합", "고저차", "AC", "연속수 포함여부"]
     private dataList = ['excludedLineCount', 'lineCount', 'carryCount', 'excludeInclude', 'excludeInclude', 'excludeInclude', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
