@@ -15,13 +15,21 @@ export default async function read(): Promise<Post[]> {
             else {
                 const item = data.Items;
                 const posts: Post[] = item.map(item => {
-                    return {
+                    const post: Post = {
                         title: item.Title.S,
                         writerName: item.WriterName.S,
                         contents: item.Contents.S,
-                        date: item.ReportingDate.S,
+                        reportingDate: item.ReportingDate.S,
                         hits: Number(item.Hits.N)
+                    };
+                    if (item.Comments) {
+                        post.comments = {
+                            writerName: item.Comments.M.writerName.S,
+                            contents: item.Comments.M.contents.S,
+                            reportingDate: item.Comments.M.reportingDate.S
+                        }
                     }
+                    return post
                 });
                 resolve(posts);
             }
