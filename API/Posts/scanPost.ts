@@ -6,7 +6,8 @@ const dynamoDB = new AWS.DynamoDB();
 
 export default async function read(): Promise<Post[]> {
     var params = {
-        TableName: "Posts"
+        TableName: "Posts",
+        Limit:3
     };
     return await new Promise((resolve, reject) => {
         dynamoDB.scan(params, (err, data) => {

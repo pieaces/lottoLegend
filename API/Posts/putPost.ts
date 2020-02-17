@@ -37,7 +37,7 @@ export default async function putPost(post: Post): Promise<boolean> {
             "Contents": {
                 S: post.contents
             },
-            "ReportingDate": {
+            "Timestamp": {
                 S: ISOFormat(new Date())
             },
             "Hits": {

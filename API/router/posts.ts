@@ -14,4 +14,7 @@ router.post('/', async (req, res) => {
     res.json(bool);
 });
 
+router.get('/', async (req, res) => {
+    
+})
 export default router;

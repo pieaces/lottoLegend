@@ -6,7 +6,7 @@ const dynamoDB = new AWS.DynamoDB();
 
 export default async function queryPost(id: string): Promise<Post> {
     const queryParams = {
-        ProjectionExpression: 'Title, WriterName, Contents, ReportingDate, Hits, Comments, ',
+        ProjectionExpression: 'Title, WriterName, Contents, Timestamp, Hits, Comments, ',
         TableName: "Posts",
         ExpressionAttributeNames: {
             "#Id": "Id"
