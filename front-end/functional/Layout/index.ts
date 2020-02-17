@@ -110,7 +110,6 @@ export default class Layout extends LayoutToggle(Layout3) {
                         this.resetBtn.addEvent(this.reset.bind(this));
                         break;
                     case DataAPI.getInstance().SIZE:
-                        this.makeNumBoard(DataAPI.getInstance().getGeneratedNums());
                         this.layout3_1On();
                         break;
                     default:

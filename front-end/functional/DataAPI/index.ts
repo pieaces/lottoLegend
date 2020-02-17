@@ -4,7 +4,7 @@ const constraintLowCount = require('./json/lowCount_compressed.json');
 const constraintSum = require('./json/sum_compressed.json');
 const constraintSumNotExcluded = require('./json/sum_notExcluded.json');
 
-function numbersToParams(numbers: number[]): Params {
+function numbersToParams(numbers: number[] = []): Params {
     let flag = true;
     for (let i = 1; i < numbers.length; i++) {
         if (numbers[i] - 1 !== numbers[i - 1]) {
@@ -151,9 +151,11 @@ export default class DataAPI {
 
     private async getGen(): Promise<void> {
         const { count, range, numbers } = await this.generator.generate();
-        this.rangeList[this.current + 1] = range;
-        if (count) this.filteredCount = count;
-        if (numbers) this.numbers = numbers;
+        if (count){
+            this.filteredCount = count;
+            this.rangeList[this.current + 1] = range;
+        }
+        else if (numbers) this.numbers = numbers;
     }
 
     leap(page: number): void {
