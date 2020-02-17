@@ -1,11 +1,12 @@
 import AWS from 'aws-sdk';
 import Post from './interface';
+import getPost from './getPost';
 //AWS.config.update(require('./key.json'));
 const dynamoDB = new AWS.DynamoDB();
 
 export default async function queryPost(id: string): Promise<Post> {
     const queryParams = {
-        ProjectionExpression: 'Title, WriterName, ReportingDate, Contents, Comments, Hits',
+        ProjectionExpression: 'Title, WriterName, Contents, ReportingDate, Hits, Comments, ',
         TableName: "Posts",
         ExpressionAttributeNames: {
             "#Id": "Id"
@@ -23,20 +24,7 @@ export default async function queryPost(id: string): Promise<Post> {
             }
             else {
                 const item = data.Items[0];
-                const post: Post = {
-                    title: item.Title.S,
-                    writerName: item.WriterName.S,
-                    contents: item.Contents.S,
-                    reportingDate: item.ReportingDate.S,
-                    hits: Number(item.Hits.N)
-                }
-                if (item.Comments) {
-                    post.comments = {
-                        writerName: item.Comments.M.writerName.S,
-                        contents: item.Comments.M.contents.S,
-                        reportingDate: item.Comments.M.reportingDate.S
-                    }
-                }
+                const post = getPost(item);
                 resolve(post);
             }
         });

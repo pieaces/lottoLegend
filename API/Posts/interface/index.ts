@@ -4,7 +4,7 @@ export default interface Post {
     contents: string;
     writerId?: string;
     writerName: string;
-    comments?: Comment
     reportingDate?: string;
     hits?: number;
+    comments?: Comment
 }

@@ -1,5 +1,6 @@
 import AWS from 'aws-sdk';
 import Post from './interface';
+import getPost from './getPost';
 // AWS.config.update(require('./key.json'));
 const dynamoDB = new AWS.DynamoDB();
 
@@ -13,23 +14,9 @@ export default async function read(): Promise<Post[]> {
                 reject('scanPost 에러: ' + err);
             }
             else {
-                const item = data.Items;
-                const posts: Post[] = item.map(item => {
-                    const post: Post = {
-                        title: item.Title.S,
-                        writerName: item.WriterName.S,
-                        contents: item.Contents.S,
-                        reportingDate: item.ReportingDate.S,
-                        hits: Number(item.Hits.N)
-                    };
-                    if (item.Comments) {
-                        post.comments = {
-                            writerName: item.Comments.M.writerName.S,
-                            contents: item.Comments.M.contents.S,
-                            reportingDate: item.Comments.M.reportingDate.S
-                        }
-                    }
-                    return post
+                const items = data.Items;
+                const posts: Post[] = items.map(item => {
+                    return getPost(item);
                 });
                 resolve(posts);
             }

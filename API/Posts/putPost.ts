@@ -2,7 +2,7 @@ import AWS from 'aws-sdk';
 import uuidv from 'uuid/v1';
 import Post from './interface';
 
-// AWS.config.update(require('./key.json'));
+AWS.config.update(require('../key.json'));
 const dynamodb = new AWS.DynamoDB();
 
 export default async function putPost(post: Post): Promise<boolean> {
