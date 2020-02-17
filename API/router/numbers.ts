@@ -1,7 +1,7 @@
 import express from 'express';
-import Generator from '../class/Generator';
-import Calculate from '../class/Calculate';
-import { GeneratorOption } from '../interface/Generator';
+import Generator from '../../Lotto/class/Generator';
+import Calculate from '../../Lotto/class/Calculate';
+import { GeneratorOption } from '../../Lotto/interface/Generator';
 const router = express.Router();
 
 router.post('/generator', (req, res) => {
