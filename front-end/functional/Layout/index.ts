@@ -78,76 +78,75 @@ export default class Layout extends LayoutToggle(Layout3) {
         if (layoutVersion === 0) {
             const currentFilter = DataAPI.getInstance().getCurrent();
             infoText.textContent = DataAPI.getInstance().infoList[currentFilter];
-            if (DataAPI.getInstance().filteredCount < 50) {
+            if (DataAPI.getInstance().numbers) {
                 this.layout3_1On();
-            }
-            switch (currentFilter) {
-                case 3: case 4: case 5:
-                    this.reset();
-                    this.checkBox.removeAllEvent();
-                    if (currentFilter == 3) {
-                        this.nextAbleLimit = this.options[currentFilter - 1].indexOf(true);
-                        infoText.innerHTML = `전멸구간을 제외한 전회차 번호입니다. 이월될 수를 선택해주세요.(${this.nextAbleLimit}개) (나머지는 자동제외됩니다.)`;
-                        if (this.nextAbleLimit === 0) {
-
-                            this.dropDown.nodeList[currentFilter].textContent = '-';
-                            this.options[currentFilter] = [];
-                            await DataAPI.getInstance().forward(this.options[currentFilter]);
-                            infoText.innerHTML = DataAPI.getInstance().infoList[currentFilter + 1];
+            } else {
+                switch (currentFilter) {
+                    case 3: case 4: case 5:
+                        this.reset();
+                        this.checkBox.removeAllEvent();
+                        if (currentFilter == 3) {
+                            this.nextAbleLimit = this.options[currentFilter - 1].indexOf(true);
+                            infoText.innerHTML = `전멸구간을 제외한 전회차 번호입니다. 이월될 수를 선택해주세요.(${this.nextAbleLimit}개) (나머지는 자동제외됩니다.)`;
+                            if (this.nextAbleLimit === 0) {
+                                this.dropDown.nodeList[currentFilter].textContent = '-';
+                                this.options[currentFilter] = [];
+                                await DataAPI.getInstance().forward(this.options[currentFilter]);
+                                infoText.innerHTML = DataAPI.getInstance().infoList[currentFilter + 1];
+                            }
+                            this.includeVerson();
                         }
-                        this.includeVerson();
-                    }
-                    else if (currentFilter === 4) {
-                        this.nextAbleLimit = 1;
-                        this.includeVerson();
-                    }
-                    else if (currentFilter === 5) {
-                        this.excludeVersion();
-                    }
-                    this.setOpacity();
-                    this.refreshNumberBoard();
-                    this.layout2On();
-                    this.resetBtn.removeEvent();
-                    this.resetBtn.addEvent(this.reset.bind(this));
-                    break;
-                case DataAPI.getInstance().SIZE:
-                    this.makeNumBoard(DataAPI.getInstance().getGeneratedNums());
-                    this.layout3_1On();
-                    break;
-                default:
-                    this.layout1On();
-                    this.checkBox.init();
-                    if (currentFilter === 1) {
-                        this.clearStatsBoard();
-                        this.nextAbleLimit = this.options[currentFilter - 1].indexOf(true);
-                        if (this.nextAbleLimit === 0) {
-                            this.dropDown.nodeList[currentFilter].textContent = '-';
-                            this.options[currentFilter] = [];
-                            await DataAPI.getInstance().forward(this.options[currentFilter]);
-                            this.on();
-                        } else if (this.nextAbleLimit === 1) {
+                        else if (currentFilter === 4) {
+                            this.nextAbleLimit = 1;
+                            this.includeVerson();
+                        }
+                        else if (currentFilter === 5) {
+                            this.excludeVersion();
+                        }
+                        this.setOpacity();
+                        this.refreshNumberBoard();
+                        this.layout2On();
+                        this.resetBtn.removeEvent();
+                        this.resetBtn.addEvent(this.reset.bind(this));
+                        break;
+                    case DataAPI.getInstance().SIZE:
+                        this.layout3_1On();
+                        break;
+                    default:
+                        this.layout1On();
+                        this.checkBox.init();
+                        if (currentFilter === 1) {
+                            this.clearStatsBoard();
+                            this.nextAbleLimit = this.options[currentFilter - 1].indexOf(true);
+                            if (this.nextAbleLimit === 0) {
+                                this.dropDown.nodeList[currentFilter].textContent = '-';
+                                this.options[currentFilter] = [];
+                                await DataAPI.getInstance().forward(this.options[currentFilter]);
+                                this.on();
+                            } else if (this.nextAbleLimit === 1) {
+                                this.checkBox.singleSelectEvent();
+                            } else {
+                                this.checkBox.multiSelectEvent(this.nextAbleLimit);
+                            }
+                        } else if (currentFilter <= 6) {
+                            if (currentFilter === 0) {
+                                this.dropDown.nodeList[currentFilter + 1].textContent = DataAPI.getInstance().getNextName();
+                                this.nextAbleLimit = 1;
+                            } else if (currentFilter === 2) {
+                                this.dropDown.nodeList[currentFilter + 1].textContent = DataAPI.getInstance().getNextName();
+                                this.nextAbleLimit = 1;
+                            }
                             this.checkBox.singleSelectEvent();
                         } else {
-                            this.checkBox.multiSelectEvent(this.nextAbleLimit);
+                            this.checkBox.rangeSelectEvent();
                         }
-                    } else if (currentFilter <= 6) {
-                        if (currentFilter === 0) {
-                            this.dropDown.nodeList[currentFilter + 1].textContent = DataAPI.getInstance().getNextName();
-                            this.nextAbleLimit = 1;
-                        } else if (currentFilter === 2) {
-                            this.dropDown.nodeList[currentFilter + 1].textContent = DataAPI.getInstance().getNextName();
-                            this.nextAbleLimit = 1;
-                        }
-                        this.checkBox.singleSelectEvent();
-                    } else {
-                        this.checkBox.rangeSelectEvent();
-                    }
-                    this.resetBtn.removeEvent();
-                    this.resetBtn.addEvent(this.checkBox.reset.bind(this.checkBox));
-                    this.barSlide.init();
-                    this.lineSlide.init();
-                    this.bubbleChart.init();
-                    break;
+                        this.resetBtn.removeEvent();
+                        this.resetBtn.addEvent(this.checkBox.reset.bind(this.checkBox));
+                        this.barSlide.init();
+                        this.lineSlide.init();
+                        this.bubbleChart.init();
+                        break;
+                }
             }
         }
     }
@@ -231,7 +230,9 @@ export default class Layout extends LayoutToggle(Layout3) {
                 case 3: case 4: case 5: break;
                 case 6:
                     rand = Math.random();
-                    this.options[current] = DataAPI.getInstance().getLabels()[Math.floor(rand * DataAPI.getInstance().getLabels().length)];
+                    index = Math.floor(rand * DataAPI.getInstance().getLabels().length);
+                    console.log(index, DataAPI.getInstance().getLabels())
+                    this.options[current] = DataAPI.getInstance().getLabels()[index];
                     break;
                 case DataAPI.getInstance().SIZE - 1:
                     this.options[current] = true;

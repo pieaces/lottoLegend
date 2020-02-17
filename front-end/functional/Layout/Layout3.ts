@@ -2,7 +2,7 @@ import Layout2 from "./Layout2";
 
 const numContainer = document.querySelector('.func3-num-container');
 export default class Layout3 extends Layout2 {
-    makeNumBoard(numsArr: number[][]) {
+    static makeNumBoard(numsArr: number[][]) {
         for (let i = 0; i < numsArr.length; i++) {
             const containerBox = document.createElement('div');
             const checkBox = document.createElement('input')

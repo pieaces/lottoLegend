@@ -1,3 +1,6 @@
+import Layout3 from "./Layout3";
+import DataAPI from "../DataAPI";
+
 const layout1 = document.querySelectorAll<HTMLElement>(".func1-layout");
 const layout2 = document.querySelectorAll<HTMLElement>(".func2-layout");
 const layout3_1 = document.querySelectorAll<HTMLElement>('.func3-layout-1');
@@ -50,7 +53,7 @@ export default function LayoutToggle<TBase extends Constructor>(Base: TBase) {
         }
 
         layout3_1On() {
-
+            Layout3.makeNumBoard(DataAPI.getInstance().getGeneratedNums());
             layout1.forEach(node => {
                 node.classList.add('none');
             });
