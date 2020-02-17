@@ -3,6 +3,7 @@ import awsServerlessExpressMiddleware from 'aws-serverless-express/middleware';
 
 import statsRouter from './router/stats';
 import numbersRouter from './router/numbers';
+import postsRouter from './router/posts';
 
 const app = express();
 app.use(awsServerlessExpressMiddleware.eventContext());
@@ -17,6 +18,7 @@ app.use((req, res, next) => {
 
 app.use('/stats', statsRouter);
 app.use('/numbers', numbersRouter);
+app.use('/posts', postsRouter);
 
 app.listen(3000, () => {
     console.log("LottoApi 서버 가동");
