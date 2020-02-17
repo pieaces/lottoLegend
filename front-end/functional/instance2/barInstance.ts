@@ -22,7 +22,7 @@ const option = {
     title: {
         display: true,
         text: '번호별 출현횟수',
-        fontSize:12
+        fontSize: 12
     }
 };
 

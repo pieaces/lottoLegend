@@ -19,15 +19,15 @@ const option = {
     scales: {
         yAxes: [{
             ticks: {
-                min:0,
-                max:1
+                min: 0,
+                max: 1
             }
         }]
     },
     title: {
         display: true,
         text: '회차별 출현여부',
-        fontSize:14
+        fontSize: 14
     }
 };
 
