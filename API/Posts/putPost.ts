@@ -1,15 +1,10 @@
 import AWS from 'aws-sdk';
 import uuidv from 'uuid/v1';
+import Post from './interface';
 
 // AWS.config.update(require('./key.json'));
 const dynamodb = new AWS.DynamoDB();
 
-export interface Post {
-    title: string;
-    contents: string;
-    writerId: string;
-    writerName: string;
-}
 export default async function putPost(post: Post): Promise<boolean> {
     const d = new Date();
     const params = {
@@ -31,6 +26,9 @@ export default async function putPost(post: Post): Promise<boolean> {
             },
             "ReportingDate": {
                 S: `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()} ${d.getHours()}:${d.getMinutes()}`
+            },
+            "Hits": {
+                N: '0'
             }
         },
         TableName: "Posts"

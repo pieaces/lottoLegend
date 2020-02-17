@@ -1,5 +1,6 @@
 import express from 'express';
-import putPost, { Post } from '../Posts/putPost'
+import putPost  from '../Posts/putPost'
+import Post from '../Posts/interface';
 
 const router = express.Router();
 router.post('/', async (req, res) => {
