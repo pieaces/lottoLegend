@@ -3,13 +3,6 @@
     margin-bottom:10px;
   }
   
-  .func2-main-bottom {
-    /* display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: 210px 230px 210px;
-    grid-gap: 10px; */
-  }
-  
   .func2-main-bottom > div {
     background-color: var(--default-color);
     border: 1px solid var(--border-color);
