@@ -1,12 +1,12 @@
 import AWS from 'aws-sdk';
 import Post from './interface';
 import getPost from './getPost';
-// AWS.config.update(require('./key.json'));
+AWS.config.update(require('../key.json'));
 const dynamoDB = new AWS.DynamoDB();
 
 export default async function read(): Promise<Post[]> {
     var params = {
-        TableName: "LottoData"
+        TableName: "Posts"
     };
     return await new Promise((resolve, reject) => {
         dynamoDB.scan(params, (err, data) => {

@@ -5,8 +5,21 @@ import Post from './interface';
 AWS.config.update(require('../key.json'));
 const dynamodb = new AWS.DynamoDB();
 
+function twoPosition(num: number) {
+    if (num < 10) return '0' + num;
+    return num;
+}
+function ISOFormat(d: Date) {
+    const year = d.getFullYear();
+    const month = d.getMonth() + 1;
+    const date = d.getDate();
+    const hours = d.getHours();
+    const minutes = d.getMinutes();
+    const seconds = d.getSeconds();
+    return `${year}-${twoPosition(month)}-${twoPosition(date)}T${twoPosition(hours)}:${twoPosition(minutes)}:${twoPosition(seconds)}Z`;
+    //2020-02-17T19:37:34Z
+}
 export default async function putPost(post: Post): Promise<boolean> {
-    const d = new Date();
     const params = {
         Item: {
             "Id": {
@@ -25,7 +38,7 @@ export default async function putPost(post: Post): Promise<boolean> {
                 S: post.contents
             },
             "ReportingDate": {
-                S: `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()} ${d.getHours()}:${d.getMinutes()}`
+                S: ISOFormat(new Date())
             },
             "Hits": {
                 N: '0'
