@@ -35,15 +35,15 @@ const path = require('path');
 
 module.exports = {
     mode: 'development',
-    entry: './front-end/js/q&a-q.js',
+    entry: './front-end/js/qA-q.js',
     output: {
-        filename: 'q&a-q.js',
+        filename: 'qA-q.js',
         path: path.resolve(__dirname, 'front-end')
     },
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.ts$/,
                 use: ['ts-loader'],
                 exclude: /node_modules/
             }
@@ -56,7 +56,7 @@ module.exports = {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new CopyWebpackPlugin(['./front-end/q&a-q.html']),
+        new CopyWebpackPlugin(['./front-end/qA-q.html']),
 
     ],
     resolve: {

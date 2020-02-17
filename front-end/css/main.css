@@ -7,8 +7,7 @@
 /* grid-section-1 */
 
 .grid-section-1 {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  
   padding:10px 0;
 }
 
@@ -17,22 +16,13 @@
   border: 1px solid var(--border-color);
 }
 
-/* aside */
-
-.aside {
-  grid-column: 1/5;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 250px 100px 200px 300px 300px 400px;
-}
-
 /* main */
 
 .main {
   grid-column: 1/13;
-  display: grid;
+  /* display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: 220px 100px 600px 200px;
+  grid-template-rows: 220px 100px 600px 200px; */
   grid-column-gap: 6px;
   grid-row-gap: 7px;
 }

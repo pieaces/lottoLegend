@@ -1,8 +1,8 @@
 /* grid-section-1 */
 
 .grid-section-1 {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  display: flex;
+  
   margin-bottom: 20px;
   grid-gap: 30px;
 }
@@ -14,14 +14,12 @@
 /* aside */
 
 .aside {
-  grid-column: 1/4;
+  width:18%;
   padding-top: 100px;
+  margin-right:20px;
 }
 
 .aside-top {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(2, 100px);
   margin-bottom: 10px;
   font-size: 1.4rem;
   font-weight: bold;
@@ -31,7 +29,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--main-color);
 }
 
 .aside-1-1 > a,
@@ -43,32 +40,28 @@
   width: 100%;
 }
 
-.aside-1-1 > a {
+.aside-1-2 > a {
   color: var(--default-color);
 }
 
 .aside-1-2 {
   cursor: pointer;
+  background-color: var(--main-color);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.aside-bottom {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 100px repeat(3, 200px);
-}
+
 
 /* main */
 
 .main {
-  grid-column: 4/13;
-  display: grid;
-  grid-template-rows: 100px 200px 100px 700px;
+  width:82%;
 }
 
-.main-1-1 {
+.main-title {
+  height:100px;
   display: flex;
   align-items: center;
   font-weight: bold;
@@ -76,40 +69,37 @@
   border-bottom: 1px solid black;
 }
 
-.main-1-2 {
+.main-info {
+  height:200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding-left: 30px;
 }
 
-.main-1-2 > h2 {
+.main-info > h2 {
   padding-bottom: 10px;
   font-size: 2.5rem;
 }
 
-.main-1-3 {
+.search-box {
+  height:100px;
   display: flex;
   align-items: center;
 }
 
-.main-1-3 > input,
-.main-1-3 > select {
+.search-box > input,
+.search-box > select {
   margin-right: 10px;
   height: 40px;
 }
 
 /* board */
 
-.main-1-4 {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 50px 500px 100px;
-}
-
 /* board-header */
 
 .board-header {
+  height:50px;
   border-top: 1px solid black;
   background-color: var(--box-color);
   display: flex;
@@ -145,6 +135,7 @@
 /* board-section */
 
 .board-section {
+  height:500px;
   display: flex;
   flex-direction: column;
 }

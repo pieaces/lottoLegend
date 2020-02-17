@@ -1,0 +1,152 @@
+/* grid-section-1 */
+
+.grid-section-1 {
+  display: flex;
+  
+  margin-bottom: 20px;
+}
+
+.aside div {
+  border: 1px solid var(--border-color);
+}
+
+/* aside */
+
+.aside {
+  width:18%;
+  padding-top: 100px;
+  margin-right:20px;
+}
+
+.aside-top {
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.aside-1-1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.aside-1-1 > a,
+.aside-1-2 > a {
+  line-height: 6rem;
+  text-align: center;
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+}
+
+.aside-1-2 > a {
+  color: var(--default-color);
+}
+
+.aside-1-2 {
+  cursor: pointer;
+  background-color: var(--main-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+/* main */
+
+.main {
+  width:82%;
+}
+  
+  
+  .main-title {
+    height:200px;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    border-bottom: 1px solid black;
+  }
+  
+  .text-title {
+    height:50px;
+    display: flex;
+    align-items: center;
+border-bottom: 1px solid rgba(0,0,0,0.2);
+  }
+  
+  .text-info {
+    margin-bottom:10px;
+    padding:10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+  }
+  
+  .text-info > div{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .author-time{
+      margin-right:20px;
+  }
+
+  .comment-container-box{
+      padding:15px;
+      border: 1px solid rgba(0,0,0,0.3);
+      margin-bottom:10px;
+  }
+
+  .comment-write-container{
+      height:100px;
+    display:flex;
+    border:1px solid rgba(0,0,0,0.2);
+    margin-bottom:10px;
+}
+
+  .comment-write-container >div:nth-child(1){
+      width:20%;
+      display:flex;
+      align-items: center;
+      justify-content: center;
+  }
+
+  .comment-write-container >div:nth-child(2){
+    width:80%;
+}
+
+.comment-list-title{
+    height:50px;
+    display:flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,0.3);
+}
+
+.comment-title{
+    display:flex;
+    align-items: center;
+    height:40px;
+}
+
+.comment-author{
+    margin-right:20px;
+}
+
+#comment-write-text{
+    resize: none;
+    width:100%;
+    height:100%;
+    border:1px solid rgba(0,0,0,0.2);
+}
+
+  
+
+.comment-submit-box{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
