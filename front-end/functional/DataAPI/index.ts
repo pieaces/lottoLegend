@@ -30,7 +30,7 @@ function compartNumbers(param: Params, PACK: number): string[] {
     return result;
 }
 function paramToNumbers(params: Params): number[] {
-    if (params.from && params.to) {
+    if (typeof params.from === 'number' && typeof params.to === 'number') {
         const temp = [];
         for (let i = params.from; i <= params.to; i++) temp.push(i);
         return temp;
