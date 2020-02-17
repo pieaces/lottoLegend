@@ -1,8 +1,8 @@
 import express from 'express';
-import queryStats from '../../Lotto/function/queryStats';
-import { Method, QueryStatsParams } from '../../Lotto/interface/LottoDB';
-import queryLotto from '../../Lotto/function/queryLotto';
-import { LottoNumber } from '../../Lotto/interface/Lotto';
+import queryStats from '../Lotto/function/queryStats';
+import { Method, QueryStatsParams } from '../Lotto/interface/LottoDB';
+import queryLotto from '../Lotto/function/queryLotto';
+import { LottoNumber } from '../Lotto/interface/Lotto';
 const router = express.Router();
 
 router.get('/:method', async (req, res) => {
