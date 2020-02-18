@@ -41,9 +41,9 @@ export default abstract class DB {
     protected async _get(option: GetOption) {
         let sql: string;
         if (option.projection) {
-            sql = `SELECT ${option.projection.map(item => 'A.' + item).join(',')} FROM ${this.tableName} AS A`;
+            sql = `SELECT ${option.projection.join(',')} FROM ${this.tableName}`;
         } else {
-            sql = `SELECT * FROM ${this.tableName} AS A`
+            sql = `SELECT * FROM ${this.tableName}`
         }
         const values = [];
         if (option.condition) {
