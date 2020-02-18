@@ -26,7 +26,6 @@
 
 .func3-main-1-2 > div {
   position: relative;
-  
 }
 
 .func3-all-check-box{
@@ -46,12 +45,11 @@
 }
 
 .func3-num-container {
-  height:160px;
   margin-bottom:10px;
 }
 
 .func3-num-container > div{
-  
+  height:160px;
   display:flex;
   align-items: center;
   border-bottom:1px solid var(--border-color);

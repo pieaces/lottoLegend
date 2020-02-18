@@ -1,4 +1,4 @@
-const autoBtn = document.querySelector<HTMLElement>('.func1-auto-choose');
+const autoBtn = document.querySelector<HTMLElement>('.auto-choose');
 
 export default class AutoBtn {
     addEvent(listener: () => void) {

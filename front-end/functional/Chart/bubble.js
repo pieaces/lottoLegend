@@ -22,13 +22,15 @@ export default class BubbleChart {
             else y /= statsData.actual['latest'][i];
             y *= statsData.pos[i];
 
-            const data = [labels[i].toString(), x, y, Math.pow(2,x)*Math.pow(2,y), statsData.pos[i]];
+            const data = [labels[i].toString(), x, y, Math.pow(2, x) * Math.pow(2, y), statsData.pos[i]];
             dataBubble.push(data);
         }
         const dataTable = google.visualization.arrayToDataTable(dataBubble);
         const option = {
             bubble: { textStyle: { fontSize: 11 } },
             chartArea: { width: '50%', height: '75%' },
+
+
         };
         const chart = new google.visualization.BubbleChart(this.element);
         chart.draw(dataTable, option);

@@ -1,23 +1,14 @@
 
-  .func2-main-bottom-container{
-    margin-bottom:10px;
-  }
-  
-  .func2-main-bottom > div {
-    background-color: var(--default-color);
-    border: 1px solid var(--border-color);
-  }
-
   .func2-main-1-box{
     height:210px;
     display:flex;
     margin-bottom: 10px;
   }
   
-  
-  .func2-main-1-2 {
+  .func2-left-container {
     width:50%;
     margin-right:10px;
+    position: relative;
   }
 
   .func2-win-num-container-box{
@@ -55,18 +46,16 @@
     background-color: var(--main-color);
   }
 
-  .func2-main-2-2 {
-    width:50%;
+  .func2-chart-gauss{
+    padding:20px;
+    width:100% !important;
+    height:100% !important;
   }
-  
-  .func2-main-1-3 {
-    width:50%;
-    margin-right:10px;
-    /* display: grid;
-    grid-row-gap: 10px;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 7fr; */
-    position: relative;
+
+  .func2-main-2-box{
+    display:flex;
+    height:460px;
+    margin-bottom: 10px;
   }
 
   .func2-numboard-que{
@@ -74,14 +63,15 @@
     top:90%;
     right:35%;
   }
+
+  .func2-numboard-que-modal-text{
+    width:200px;
+    height:250px;
+  }
   
   .func2-lotto-checkbox {
     height:50px;
     margin-bottom:10px;
-    /* display: grid;
-    grid-template-columns: repeat(3, 1fr); */
-    /* justify-content: center;
-    align-items: center; */
     display:flex;
   }
   
@@ -124,27 +114,39 @@
     margin-left: 90px;
   }
 
-  .func2-main-2-box{
-    display:flex;
-    height:430px;
-  }
-
-  .func2-main-2-1-box{
+  .func2-right-container{
     width:50%;
   }
   
-  .func2-main-2-3 {
+  .func2-chart-radar-container {
+    width:100%;
     height:50%;
     margin-bottom:10px;
     position: relative;
   }
 
-  .chart-translateX-plus{
-    transform:translateX(-100%);
+  
+
+  .func2-chart-radar{
+    height:93% !important;
+    padding: 0 0 20px 0;
   }
 
-  .chart-translateX-minus{
-    transform:translateX(-100%);
+  .func2-chart-radar-text{
+    height:200px;
+  }
+
+  .func2-chart-radar-num{
+    height:30px;
+  }
+
+  .func2-chart-radar-num .chart-slide-current{
+    border: 6px solid darkgray !important;
+  }
+
+  #func2-radar-table{
+    margin-top:10px;
+    height:100%;
   }
 
   .func2-left-chart-btn{
@@ -172,31 +174,8 @@
     height:20px;
     border-radius: 50%;
   }
-
-  .func2-chart-gauss{
-    padding:20px;
-    width:100% !important;
-    height:100% !important;
-  }
-  .func2-chart-radar{
-    padding-top:30px;
-    height:93% !important;
-  }
-
   
-
-  .func2-chart-radar-num .chart-slide-current{
-    border: 6px solid darkgray !important;
-  }
-
-  #func2-radar-table{
-    margin-top:30px;
-    height:200px;
-  }
-  
-  .func2-main-2-4 {
-    /* grid-column: 7/13;
-    grid-row: 3/4; */
+  .func2-chart-bar-container {
     height:50%;
   }
 
@@ -205,16 +184,8 @@
     height:106% !important;
   }
   
-  .func2-main-1-4 {
-    grid-column: 1/13;
-    grid-row: 4/5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
   
-  .func2-select-num-box-container{
-    
+  .func2-select-num-box-container{  
     width: 70%;
   }
   
@@ -237,7 +208,6 @@
     border-radius: 50%;
     margin-right: 10px;
     color: var(--default-color);
-  
     position: absolute;
   }
 
@@ -383,9 +353,4 @@
     100% {
       right: 0%;
     }
-  }
-
-  .func2-numboard-que-modal-text{
-    width:200px;
-    height:250px;
   }

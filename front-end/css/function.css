@@ -49,14 +49,11 @@
   }
   
   
-  .main-top {
-    background-color: var(--default-color);
-    border: 1px solid var(--border-color);
+  .filter-box-container-box {
     height:100px;
     margin-bottom:10px;
     display: flex;
     align-items: center;
-    
   }
 
   .filter-box-container {
@@ -173,8 +170,6 @@ border-left: 10px solid #575755;
   }
 
   .showcase-container{
-    background-color: var(--default-color);
-    border: 1px solid var(--border-color);
       display:flex;
       height:100px;
   }
@@ -311,6 +306,7 @@ border-left: 10px solid #575755;
   }
 
   .table-1{
+    width:380px;
     height:100%;
   }
 
@@ -326,9 +322,6 @@ border-left: 10px solid #575755;
     height:30px;
   }
 
-  .table-2{
-    height:120px;
-  }
   
   .table-2 tr{
     word-break: keep-all;
@@ -341,3 +334,29 @@ border-left: 10px solid #575755;
   .table-2 tr td{
     width:50%;
   }
+
+  
+.auto-choose-container-box{
+  height:40px;
+  margin-bottom:10px;
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.extract-num{
+  width:58%;
+  height:100%;
+  padding-left:5px;
+  display:flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.auto-choose-container{
+  width:15%;
+  height:70px;
+  display:flex;
+  align-items: center;
+  justify-content: flex-end;
+}
