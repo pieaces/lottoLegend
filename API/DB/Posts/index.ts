@@ -1,5 +1,4 @@
-import DB from ".."
-import { RowDataPacket } from "mysql2";
+import DB, { OrderOption } from ".."
 import {Comment} from '../Comments/index'
 
 interface Post{
@@ -17,21 +16,20 @@ export default class Posts extends DB {
         super();
         this.tableName = 'Posts';
     }
-    async scan<Post>():Promise<Post[]> {
-        const LIMIT = 10;
-        const [rows] =
-            await this.promisePool.execute(
-                `SELECT P.id, P.title, P.writerId, P.writerName, P.created, P.hits FROM Posts AS P ORDER BY created DESC LIMIT ${LIMIT}`);
-        this.end();
-        return rows as Post[];
+    async scan() {
+        const option = {
+            projection: ['id', 'title', 'writerId', 'writerName', 'created', 'hits'],
+            order: {created: OrderOption.DESC},
+            limit:10
+        }
+        return await super._get(option);
     }
-    async get<Post>(id: number) {
-        const [rows] =
-            await this.promisePool.execute(
-                'SELECT P.id, P.title, P.writerId, P.writerName, P.contents, P.created, P.hits, C.id AS `commentId`, C.writerId as `commentWriterId`, C.writerName as `commentWriterName`, C.contents as `commentContents`, C.created as `commentCreatred` FROM Posts AS P LEFT JOIN Comments AS C ON P.id = C.id WHERE P.id = ?',
-                [id]);
-        this.end();
-        return (<RowDataPacket>rows)[0] as Post;
+    async get(id: number) {
+        const option = {
+            projection: ['id', 'title', 'writerId', 'writerName', 'contents', 'created', 'hits'],
+            condition: { id }
+        }
+        return await super._get(option);
     }
     async post(title: string, writerId: string, writerName: string, contents: string) {
         const post = {

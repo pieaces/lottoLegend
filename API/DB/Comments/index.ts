@@ -1,4 +1,4 @@
-import DB from ".."
+import DB, { OrderOption } from ".."
 
 export interface Comment{
     id:number;
@@ -13,13 +13,14 @@ export default class Comments extends DB {
         super();
         this.tableName = 'Comments';
     }
-    get<T>(id: number): never {
-        throw new Error("Method not implemented.");
+    async getByPost(post:number){
+        const option = {
+            projection:['id', 'writerId', 'writerName', 'contents', 'created'],
+            condition:{post},
+            order:{created:OrderOption.ASC}
+        };
+        super._get(option);
     }
-    scan<T>(): never {
-        throw new Error("Method not implemented.");
-    }
-
     async post(post:number, writerId: string, writerName: string, contents: string) {
         const comment = {
             post, writerId, writerName, contents

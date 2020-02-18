@@ -1,16 +1,25 @@
 import mysql from 'mysql2'
 const key = require('../db_key');
 
-export interface KeyValue{
-    key:string;
-    value:number|string;
+interface KeyValue {
+    key: string;
+    value: number | string;
 }
-interface Params{
+interface Params {
     [key: string]: number | string;
 }
+
+export enum OrderOption {
+    DESC, ASC
+}
+interface GetOption {
+    projection?: string[];
+    condition?: Params;
+    order?: { [key: string]: OrderOption };
+    limit?: number | [number, number];
+}
 export default abstract class DB {
-    
-    protected tableName:string;
+    protected tableName: string;
     pool: mysql.Pool = mysql.createPool({
         connectionLimit: 10,
         host: key.host,
@@ -20,9 +29,46 @@ export default abstract class DB {
     });
     promisePool = this.pool.promise();
 
-    abstract async scan<T>():Promise<T[]>;
-    abstract async get<T>(id: number):Promise<T>;
-
+    /**
+     * mariaDB Query
+     * @example _get({['id', 'title'], {id:2}, {created:'DESC', id:'ASC'}, 3|[1,4]})
+     * @param projection - string[]
+     * @param condition - { [key:string]: number|string }
+     * @param order - { [key: string]: OrderOption }
+     * @param limit - number | [number,number]
+     * @returns rows
+    */
+    async _get(option: GetOption) {
+        let sql: string;
+        if (option.projection) {
+            sql = `SELECT ${option.projection.map(item => 'A.' + item).join(',')} FROM ${this.tableName} AS A`;
+        } else {
+            sql = `SELECT * FROM ${this.tableName} AS A`
+        }
+        const values = [];
+        if (option.condition) {
+            const keys = Object.keys(option.condition);
+            const _values = Object.values(option.condition);
+            sql += ` WHERE ${keys.map(key => key + '=?').join(' and ')}`
+            values.push(..._values);
+        }
+        if (option.order) {
+            const entries = Object.entries(option.order);
+            sql += ` ORDER BY ${entries.map(entry => `${entry[0]} ${entry[1]}`).join(',')}`;
+        }
+        if (option.limit) {
+            if (typeof option.limit === 'number') {
+                sql += ` LIMIT ${option.limit}`
+            } else {
+                sql += ` LIMIT ${option.limit[0], option.limit[1]}`
+            }
+        }
+        const [rows] =
+            await this.promisePool.execute(
+                sql, values);
+        this.end();
+        return rows;
+    }
     protected async _post(params: Params) {
         const keys = Object.keys(params);
         const values = Object.values(params);
