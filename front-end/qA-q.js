@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "237171b9ac50b7052417";
+/******/ 	var hotCurrentHash = "fc509ae13fc37f875b1a";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -261,7 +261,6 @@
 /******/ 			var chunkId = "main";
 /******/ 			// eslint-disable-next-line no-lone-blocks
 /******/ 			{
-/******/ 				/*globals chunkId */
 /******/ 				hotEnsureUpdateChunk(chunkId);
 /******/ 			}
 /******/ 			if (
@@ -804,7 +803,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var suneditor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! suneditor */ \"./node_modules/suneditor/src/suneditor.js\");\n/* harmony import */ var suneditor_src_plugins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! suneditor/src/plugins */ \"./node_modules/suneditor/src/plugins/index.js\");\n/* harmony import */ var suneditor_src_lang__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! suneditor/src/lang */ \"./node_modules/suneditor/src/lang/index.js\");\n\r\n\r\n\r\n\r\n// How to import plugins\r\n\r\n\r\n\r\n// How to import language files (default: en)\r\n\r\n\r\n\r\nsuneditor__WEBPACK_IMPORTED_MODULE_0__[\"default\"].create('sample', {\r\n  plugins: suneditor_src_plugins__WEBPACK_IMPORTED_MODULE_1__[\"default\"],\r\n  buttonList: [\r\n    ['undo', 'redo'],\r\n    ['font', 'fontSize', 'formatBlock'],\r\n    '/', // Line break\r\n    ['bold', 'underline', 'italic', 'strike'],\r\n    ['fontColor', 'hiliteColor'],\r\n    ['paragraphStyle'],\r\n\r\n    ['align', 'horizontalRule', 'list', 'lineHeight'],\r\n    ['table', 'image'],\r\n    ['fullScreen'],\r\n    ['print']\r\n\r\n  ],\r\n  width: '100%',\r\n  minHeight: '360',\r\n  maxHeight: '360',\r\n  lang: suneditor_src_lang__WEBPACK_IMPORTED_MODULE_2__[\"default\"].ko,\r\n});\n\n//# sourceURL=webpack:///./front-end/js/qA-q.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var suneditor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! suneditor */ \"./node_modules/suneditor/src/suneditor.js\");\n/* harmony import */ var suneditor_src_plugins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! suneditor/src/plugins */ \"./node_modules/suneditor/src/plugins/index.js\");\n/* harmony import */ var suneditor_src_lang__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! suneditor/src/lang */ \"./node_modules/suneditor/src/lang/index.js\");\n\r\n\r\n\r\n\r\n// How to import plugins\r\n\r\n\r\n\r\n// How to import language files (default: en)\r\n\r\n\r\n\r\nconst editor = suneditor__WEBPACK_IMPORTED_MODULE_0__[\"default\"].create('sample', {\r\n  plugins: suneditor_src_plugins__WEBPACK_IMPORTED_MODULE_1__[\"default\"],\r\n  buttonList: [\r\n    ['undo', 'redo'],\r\n    ['font', 'fontSize', 'formatBlock'],\r\n    '/', // Line break\r\n    ['bold', 'underline', 'italic', 'strike'],\r\n    ['fontColor', 'hiliteColor'],\r\n    ['paragraphStyle'],\r\n\r\n    ['align', 'horizontalRule', 'list', 'lineHeight'],\r\n    ['table', 'image'],\r\n    ['fullScreen'],\r\n    ['print']\r\n\r\n  ],\r\n  width: '100%',\r\n  minHeight: '360',\r\n  maxHeight: '360',\r\n  lang: suneditor_src_lang__WEBPACK_IMPORTED_MODULE_2__[\"default\"].ko,\r\n});\r\n\r\nconst queBtn = document.querySelector('#que-btn');\r\n\r\nqueBtn.addEventListener('click', () => {\r\n  console.log(editor.getContents(true));\r\n})\r\n\r\n\n\n//# sourceURL=webpack:///./front-end/js/qA-q.js?");
 
 /***/ }),
 
