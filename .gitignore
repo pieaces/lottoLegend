@@ -2,5 +2,6 @@ node_modules
 package-lock.json
 dist
 test
-key.json
+aws_key.json
+db_key.json
 front-end
