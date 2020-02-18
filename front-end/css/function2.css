@@ -60,7 +60,7 @@
 
   .func2-numboard-que{
     position: absolute;
-    top:90%;
+    top:82%;
     right:35%;
   }
 
@@ -111,7 +111,7 @@
   }
   
   .func2-num-exclude-btn {
-    margin-left: 90px;
+    margin-left: 113px;
   }
 
   .func2-right-container{
@@ -128,16 +128,16 @@
   
 
   .func2-chart-radar{
-    height:93% !important;
+    height:85% !important;
     padding: 0 0 20px 0;
   }
 
   .func2-chart-radar-text{
-    height:200px;
+    height:85%;
   }
 
   .func2-chart-radar-num{
-    height:30px;
+    height:15%;
   }
 
   .func2-chart-radar-num .chart-slide-current{
@@ -145,7 +145,6 @@
   }
 
   #func2-radar-table{
-    margin-top:10px;
     height:100%;
   }
 
