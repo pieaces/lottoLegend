@@ -9,16 +9,12 @@ const radarSlide = new RadarSlide(radarInstance, null, null, radarBtns, textBox)
 const clickEvent = {
     numBtns:
         [() => {
-            // radarInstance.canvas.style.transform = '';
-            // textBox.style.transform = '';
             radarInstance.canvas.classList.remove('none');
 
             textBox.classList.add('none');
 
         },
         () => {
-            // radarInstance.canvas.style.transform = 'translateX(-100%)';
-            // textBox.style.transform = 'translateX(-100%)';
             radarInstance.canvas.classList.add('none');
 
             textBox.classList.remove('none');

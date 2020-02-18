@@ -10,7 +10,7 @@ import plugins from 'suneditor/src/plugins'
 import lang from 'suneditor/src/lang'
 
 
-suneditor.create('sample', {
+const editor = suneditor.create('sample', {
   plugins: plugins,
   buttonList: [
     ['undo', 'redo'],
@@ -31,3 +31,10 @@ suneditor.create('sample', {
   maxHeight: '360',
   lang: lang.ko,
 });
+
+const queBtn = document.querySelector('#que-btn');
+
+queBtn.addEventListener('click', () => {
+  console.log(editor.getContents(true));
+})
+
