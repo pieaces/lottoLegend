@@ -12,9 +12,9 @@ exports.handler = async (event: any, context: any, callback: any) => {
     }
     let body: any;
 
-    //const exp_posts = /^\/posts$/; ^:시작, \/:/를 표현, $끝, /:시작과 끝을 명시
+    const exp_posts = /^\/posts$/; //^:시작, \/:/를 표현, $끝, /:시작과 끝을 명시
     //const exp_posts$id = /^\/posts\/[\d]+$/; [\d]:숫자, +:1회이상의 
-    if (resource.indexOf('/posts')) {
+    if (exp_posts.test(resource)) {
         const db = new Posts();
         if (resource === '/posts') {
             switch (method) {
