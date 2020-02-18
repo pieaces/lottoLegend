@@ -5,3 +5,5 @@ test
 aws_key.json
 db_key.json
 front-end
+*.pem
+*.ppk

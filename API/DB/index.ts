@@ -9,6 +9,7 @@ interface Params{
     [key: string]: number | string;
 }
 export default abstract class DB {
+    
     protected tableName:string;
     pool: mysql.Pool = mysql.createPool({
         connectionLimit: 10,

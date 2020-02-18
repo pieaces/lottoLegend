@@ -1,4 +1,4 @@
-import DB from "../DB"
+import DB from ".."
 import { RowDataPacket } from "mysql2";
 import {Comment} from '../Comments/index'
 
@@ -17,10 +17,11 @@ export default class Posts extends DB {
         super();
         this.tableName = 'Posts';
     }
-    async scan<Post>() {
+    async scan<Post>():Promise<Post[]> {
+        const LIMIT = 10;
         const [rows] =
             await this.promisePool.execute(
-                'SELECT P.postId, P.title, P.writerId, P.writerName, P.created, P.hits FROM Posts AS P ORDER BY created DESC LIMIT 10');
+                `SELECT P.postId, P.title, P.writerId, P.writerName, P.created, P.hits FROM Posts AS P ORDER BY created DESC LIMIT ${LIMIT}`);
         this.end();
         return rows as Post[];
     }

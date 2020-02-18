@@ -1,5 +1,5 @@
 import express from 'express';
-import Posts from '../Posts';
+import Posts from '../DB/Posts';
 
 const router = express.Router();
 router.post('/', async (req, res) => {
@@ -10,6 +10,8 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/', async (req, res) => {
-    
+    const db = new Posts();
+    const posts = await db.scan();
+    res.json(posts);
 })
 export default router;

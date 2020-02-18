@@ -1,4 +1,4 @@
-import DB from "../DB"
+import DB from ".."
 import { RowDataPacket } from "mysql2";
 
 export interface Comment{
