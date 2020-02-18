@@ -1,9 +1,8 @@
 import DB from ".."
-import { RowDataPacket } from "mysql2";
 
 export interface Comment{
-    commentId:number;
-    postId:number;
+    id:number;
+    post:number;
     writerId:string;
     writerName:string;
     contents:string;
@@ -21,20 +20,20 @@ export default class Comments extends DB {
         throw new Error("Method not implemented.");
     }
 
-    async put(postId:number, writerId: string, writerName: string, contents: string) {
-        const post = {
-            postId, writerId, writerName, contents
+    async put(post:number, writerId: string, writerName: string, contents: string) {
+        const comment = {
+            post, writerId, writerName, contents
         };
-        const insertId = await super._put(post);
+        const insertId = await super._put(comment);
         return insertId;
     }
 
     async update(id: number, contents: string) {
-        const changedRows = await super._update({ key: 'commentId', value: id }, { contents });
+        const changedRows = await super._update({ key: 'id', value: id }, { contents });
         return changedRows;
     }
     async delete(id: number) {
-        const affectedRows = await super._delete({ key: 'commentId', value: id });
+        const affectedRows = await super._delete({ key: 'id', value: id });
         return affectedRows;
     }
 }

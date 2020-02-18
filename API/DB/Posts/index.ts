@@ -3,14 +3,14 @@ import { RowDataPacket } from "mysql2";
 import {Comment} from '../Comments/index'
 
 interface Post{
-    postId:number;
+    id:number;
     title:string;
     writerId:string;
     writerName:string;
     contents:string;
     created:Date,
     hits:number;
-    commentId:Comment | null;
+    comment:Comment | null;
 }
 export default class Posts extends DB {
     constructor(){
@@ -21,14 +21,14 @@ export default class Posts extends DB {
         const LIMIT = 10;
         const [rows] =
             await this.promisePool.execute(
-                `SELECT P.postId, P.title, P.writerId, P.writerName, P.created, P.hits FROM Posts AS P ORDER BY created DESC LIMIT ${LIMIT}`);
+                `SELECT P.id, P.title, P.writerId, P.writerName, P.created, P.hits FROM Posts AS P ORDER BY created DESC LIMIT ${LIMIT}`);
         this.end();
         return rows as Post[];
     }
     async get<Post>(id: number) {
         const [rows] =
             await this.promisePool.execute(
-                'SELECT P.postId, P.title, P.writerId, P.writerName, P.contents, P.created, P.hits, C.commentId, C.writerId as `commentWriterId`, C.writerName as `commentWriterName`, C.contents as `commentContents`, C.created as `commentCreatred` FROM Posts AS P LEFT JOIN Comments AS C ON P.postId = C.commentId WHERE P.postId = ?',
+                'SELECT P.id, P.title, P.writerId, P.writerName, P.contents, P.created, P.hits, C.id, C.writerId as `commentWriterId`, C.writerName as `commentWriterName`, C.contents as `commentContents`, C.created as `commentCreatred` FROM Posts AS P LEFT JOIN Comments AS C ON P.id = C.id WHERE P.id = ?',
                 [id]);
         this.end();
         return (<RowDataPacket>rows)[0] as Post;
@@ -42,11 +42,11 @@ export default class Posts extends DB {
     }
 
     async update(id: number, contents: string) {
-        const changedRows = await super._update({ key: 'postId', value: id }, { contents });
+        const changedRows = await super._update({ key: 'id', value: id }, { contents });
         return changedRows;
     }
     async delete(id: number) {
-        const affectedRows = await super._delete({ key: 'postId', value: id });
+        const affectedRows = await super._delete({ key: 'id', value: id });
         return affectedRows;
     }
 }
