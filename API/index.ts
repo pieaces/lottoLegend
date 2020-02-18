@@ -31,7 +31,7 @@ exports.handler = async (event: any, context: any, callback: any) => {
     } else if (resource === '/posts/{id}') {
         switch (method) {
             case 'GET':
-                const id = JSON.parse(event.pathParameters).id;
+                const id = event.pathParameters.id;
                 const post = await db.get(id);
                 body = post;
                 break;
