@@ -29,8 +29,8 @@ export default class Comments extends DB {
         return insertId;
     }
 
-    async update(id: number, contents: string) {
-        const changedRows = await super._update({ key: 'id', value: id }, { contents });
+    async patch(id: number, contents: string) {
+        const changedRows = await super._patch({ key: 'id', value: id }, { contents });
         return changedRows;
     }
     async delete(id: number) {

@@ -10,7 +10,7 @@ interface Params {
 }
 
 export enum OrderOption {
-    DESC, ASC
+    DESC="DESC", ASC="ASC"
 }
 interface GetOption {
     projection?: string[];
@@ -78,7 +78,7 @@ export default abstract class DB {
         return ((<mysql.OkPacket>OkPacket).insertId);
     }
 
-    protected async _update(id: KeyValue, params: Params) {
+    protected async _patch(id: KeyValue, params: Params) {
         const entries = Object.entries(params);
         const sql = `UPDATE ${this.tableName} SET ${entries.reduce((acc, cur) => acc + cur[0] + '=?', '')} WHERE ${id.key}=?`;
         console.log(sql);
