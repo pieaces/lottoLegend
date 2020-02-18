@@ -12,7 +12,10 @@ exports.handler = async (event: any, context: any, callback: any) => {
     let body: any;
 
     const db = new Posts();
-    if (resource === '/posts') {
+
+    const exp_posts = /^\/posts$/;
+    const exp_posts$id = /^\/posts\/[\d]+$/;
+    if (exp_posts.test(resource)) {
         switch (method) {
             case 'GET':
                 const posts = await db.scan();
@@ -26,6 +29,16 @@ exports.handler = async (event: any, context: any, callback: any) => {
             default:
                 statusCode = 400;
         }
+    } else if (exp_posts$id.test(resource)) {
+        switch (method) {
+            case 'GET':
+                const id = event.queryStringParameters && event.queryStringParameters.name;
+                if (id) {
+                    const post = await db.get(id);
+                    body = post;
+                }
+            break;
+        }
     } else {
         statusCode = 400;
     }
@@ -36,4 +49,3 @@ exports.handler = async (event: any, context: any, callback: any) => {
     };
     return response;
 };
-    //if (event.queryStringParameters && event.queryStringParameters.name) name = event.queryStringParameters.name;
