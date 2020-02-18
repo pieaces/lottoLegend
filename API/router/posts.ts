@@ -1,17 +1,12 @@
 import express from 'express';
-import putPost  from '../Posts/putPost'
-import Post from '../Posts/interface';
+import Posts from '../Posts';
 
 const router = express.Router();
 router.post('/', async (req, res) => {
-    const post: Post = {
-        title: req.body.title,
-        writerId: 'devId',
-        writerName: 'devName',
-        contents: req.body.contents
-    };
-    const bool = await putPost(post);
-    res.json(bool);
+    const db = new Posts();
+    const {title, writerId, writerName, contents} = req.body;
+    const insertId = await db.put(title, writerId, writerName, contents);
+    res.json(true);
 });
 
 router.get('/', async (req, res) => {

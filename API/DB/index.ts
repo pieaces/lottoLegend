@@ -1,7 +1,15 @@
 import mysql from 'mysql2'
 const key = require('../db_key');
 
-export default class DB {
+export interface KeyValue{
+    key:string;
+    value:number|string;
+}
+interface Params{
+    [key: string]: number | string;
+}
+export default abstract class DB {
+    protected tableName:string;
     pool: mysql.Pool = mysql.createPool({
         connectionLimit: 10,
         host: key.host,
@@ -10,16 +18,35 @@ export default class DB {
         database: key.database
     });
     promisePool = this.pool.promise();
-    async put(params:object) {
+
+    abstract async scan<T>():Promise<T[]>;
+    abstract async get<T>(id: number):Promise<T>;
+
+    protected async _put(params: Params) {
         const keys = Object.keys(params);
         const values = Object.values(params);
-        const [rows] = await this.promisePool.execute(
-            `INSERT INTO Comments(${keys.join(',')}) VALUES(${new Array(values.length).fill('?').join(',')})`,
-            values);
-        console.log(rows);
+        const sql = `INSERT INTO ${this.tableName}(${keys.join(',')}) VALUES(${new Array(values.length).fill('?').join(',')})`;
+        const [OkPacket] = await this.promisePool.execute(sql, values);
         this.end();
+        return ((<mysql.OkPacket>OkPacket).insertId);
     }
 
+    protected async _update(id: KeyValue, params: Params) {
+        const entries = Object.entries(params);
+        const sql = `UPDATE ${this.tableName} SET ${entries.reduce((acc, cur) => acc + cur[0] + '=?', '')} WHERE ${id.key}=?`;
+        console.log(sql);
+        const [OkPacket] = await this.promisePool.execute(sql, [...entries.map(entry => entry[1]), id.value]);
+        this.end();
+        console.log(sql, OkPacket);
+        return ((<mysql.OkPacket>OkPacket).changedRows);
+    }
+
+    protected async _delete(params: KeyValue) {
+        const sql = `DELETE FROM ${this.tableName} WHERE ${params.key}=?`;
+        const [OkPacket] = await this.promisePool.execute(sql, [params.value]);
+        this.end();
+        return ((<mysql.OkPacket>OkPacket).affectedRows);
+    }
     end() {
         this.pool.end(err => {
             if (err) console.log('DB pool 비정상종료', err);
@@ -27,33 +54,3 @@ export default class DB {
         });
     }
 }
-
-/*
-// query database using promises
-let [rows, fields] = await promisePool.execute({
-    sql:'SELECT * FROM Posts ORDER BY created DESC LIMIT 2'
-}, []);
-console.log(rows);
-pool.end(err => console.log('조ㅗㅇ료', err));
-*/
-/*
-pool.query('SELECT * FROM Posts ORDER BY created DESC LIMIT 2', function (error, results, fields) {
-    if (error) throw error;
-    console.log('Posts: ', results);
-    pool.end(()=>{
-        console.log('종료');
-    });
-});
-*/
-
-/*
-pool.query(
-    'insert into Posts(title, writerId, writerName, contents) values(?, ?, ?, ?)',
-    ['자유글입니다2.', 'pieaces521', '재성', '잘 해내겠죠?...?'],
-    (err, result, fields) => {
-        if (err) throw err;
-        console.log(result, fields);
-        pool.end();
-    }
-);
-*/
