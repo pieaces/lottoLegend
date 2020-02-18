@@ -28,7 +28,7 @@ export default class Posts extends DB {
     async get<Post>(id: number) {
         const [rows] =
             await this.promisePool.execute(
-                'SELECT P.id, P.title, P.writerId, P.writerName, P.contents, P.created, P.hits, C.id, C.writerId as `commentWriterId`, C.writerName as `commentWriterName`, C.contents as `commentContents`, C.created as `commentCreatred` FROM Posts AS P LEFT JOIN Comments AS C ON P.id = C.id WHERE P.id = ?',
+                'SELECT P.id, P.title, P.writerId, P.writerName, P.contents, P.created, P.hits, C.id AS `commentId`, C.writerId as `commentWriterId`, C.writerName as `commentWriterName`, C.contents as `commentContents`, C.created as `commentCreatred` FROM Posts AS P LEFT JOIN Comments AS C ON P.id = C.id WHERE P.id = ?',
                 [id]);
         this.end();
         return (<RowDataPacket>rows)[0] as Post;
