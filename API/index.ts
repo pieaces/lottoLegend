@@ -19,7 +19,7 @@ exports.handler = async (event: any, context: any, callback: any) => {
                 body = posts;
                 break;
             case 'POST':
-                const { title, writerId, writerName, contents } = event.body;
+                const { title, writerId, writerName, contents } = JSON.parse(event.body);
                 const insertId = await db.post(title, writerId, writerName, contents);
                 body = insertId;
                 break;
