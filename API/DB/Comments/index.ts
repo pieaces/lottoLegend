@@ -20,11 +20,11 @@ export default class Comments extends DB {
         throw new Error("Method not implemented.");
     }
 
-    async put(post:number, writerId: string, writerName: string, contents: string) {
+    async post(post:number, writerId: string, writerName: string, contents: string) {
         const comment = {
             post, writerId, writerName, contents
         };
-        const insertId = await super._put(comment);
+        const insertId = await super._post(comment);
         return insertId;
     }
 

@@ -20,7 +20,7 @@ exports.handler = async (event: any, context: any, callback: any) => {
                 break;
             case 'POST':
                 const { title, writerId, writerName, contents } = event.body;
-                const insertId = await db.put(title, writerId, writerName, contents);
+                const insertId = await db.post(title, writerId, writerName, contents);
                 body = insertId;
                 break;
             default:

@@ -23,7 +23,7 @@ export default abstract class DB {
     abstract async scan<T>():Promise<T[]>;
     abstract async get<T>(id: number):Promise<T>;
 
-    protected async _put(params: Params) {
+    protected async _post(params: Params) {
         const keys = Object.keys(params);
         const values = Object.values(params);
         const sql = `INSERT INTO ${this.tableName}(${keys.join(',')}) VALUES(${new Array(values.length).fill('?').join(',')})`;

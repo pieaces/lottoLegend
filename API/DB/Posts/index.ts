@@ -33,11 +33,11 @@ export default class Posts extends DB {
         this.end();
         return (<RowDataPacket>rows)[0] as Post;
     }
-    async put(title: string, writerId: string, writerName: string, contents: string) {
+    async post(title: string, writerId: string, writerName: string, contents: string) {
         const post = {
             title, writerId, writerName, contents
         };
-        const insertId = await super._put(post);
+        const insertId = await super._post(post);
         return insertId;
     }
 
