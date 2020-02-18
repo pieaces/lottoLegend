@@ -12,10 +12,9 @@ exports.handler = async (event: any, context: any, callback: any) => {
     let body: any;
 
     const db = new Posts();
-
-    const exp_posts = /^\/posts$/;
-    const exp_posts$id = /^\/posts\/[\d]+$/;
-    if (exp_posts.test(resource)) {
+    //const exp_posts = /^\/posts$/; ^:시작, \/:/를 표현, $끝, /:시작과 끝을 명시
+    //const exp_posts$id = /^\/posts\/[\d]+$/; [\d]:숫자, +:1회이상의 반복
+    if (resource === '/posts') {
         switch (method) {
             case 'GET':
                 const posts = await db.scan();
@@ -29,15 +28,13 @@ exports.handler = async (event: any, context: any, callback: any) => {
             default:
                 statusCode = 400;
         }
-    } else if (exp_posts$id.test(resource)) {
+    } else if (resource === '/posts/{id}') {
         switch (method) {
             case 'GET':
-                const id = event.queryStringParameters && event.queryStringParameters.name;
-                if (id) {
-                    const post = await db.get(id);
-                    body = post;
-                }
-            break;
+                const id = JSON.parse(event.pathParameters).id;
+                const post = await db.get(id);
+                body = post;
+                break;
         }
     } else {
         statusCode = 400;
