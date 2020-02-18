@@ -19,7 +19,7 @@ export default class Comments extends DB {
             condition:{post},
             order:{created:OrderOption.ASC}
         };
-        super._get(option);
+        return await super._get(option);
     }
     async post(post:number, writerId: string, writerName: string, contents: string) {
         const comment = {

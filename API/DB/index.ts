@@ -63,9 +63,7 @@ export default abstract class DB {
                 sql += ` LIMIT ${option.limit[0], option.limit[1]}`
             }
         }
-        const [rows] =
-            await this.promisePool.execute(
-                sql, values);
+        const [rows] = await this.promisePool.execute(sql, values);
         this.end();
         return rows;
     }
