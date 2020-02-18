@@ -38,7 +38,7 @@ export default abstract class DB {
      * @param limit - number | [number,number]
      * @returns rows
     */
-    async _get(option: GetOption) {
+    protected async _get(option: GetOption) {
         let sql: string;
         if (option.projection) {
             sql = `SELECT ${option.projection.map(item => 'A.' + item).join(',')} FROM ${this.tableName} AS A`;
