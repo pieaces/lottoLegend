@@ -13,6 +13,7 @@ exports.handler = async (event: any, context: any, callback: any) => {
     let body: any;
 
     const exp_posts = /^\/posts/; //^:시작, \/:/를 표현, $끝, /:시작과 끝을 명시
+    const exp_posts$comments = /^\/posts\/{postId}\/comments/
     //const exp_posts$id = /^\/posts\/[\d]+$/; //[\d]:숫자, +:1회이상의 
     if (exp_posts.test(resource)) {
         const db = new Posts();
@@ -45,19 +46,34 @@ exports.handler = async (event: any, context: any, callback: any) => {
                     body = affectedRows;
                     break;
             }
-        } else if (resource === '/posts/{postId}/comments') {
+        } else if (exp_posts$comments.test(resource)) {
             const db = new Comments();
             const postId = event.pathParameters.postId;
-            switch (method) {
-                case 'GET':
-                    const comments = await db.getByPost(postId);
-                    body = comments;
-                    break;
-                case 'POST':
-                    const { writerId, writerName, contents } = JSON.parse(event.body);
-                    const insertId = await db.post(postId, writerId, writerName, contents);
-                    body = insertId;
-                    break;
+            if (resource === '/posts/{postId}/comments') {
+                switch (method) {
+                    case 'GET':
+                        const comments = await db.getByPost(postId);
+                        body = comments;
+                        break;
+                    case 'POST':
+                        const { writerId, writerName, contents } = JSON.parse(event.body);
+                        const insertId = await db.post(postId, writerId, writerName, contents);
+                        body = insertId;
+                        break;
+                }
+            } else if (resource === '/posts/{postId}/comments/{commentId}') {
+                const commentId = event.pathParameters.commentId;
+                switch (method) {
+                    case 'PATCH':
+                        const { contents } = JSON.parse(event.body)
+                        const changedRows = await db.patch(commentId, contents)
+                        body = changedRows;
+                        break;
+                    case 'DELETE':
+                        const affectedRows = await db.delete(commentId);
+                        body = affectedRows;
+                        break;
+                }
             }
         }
     }
