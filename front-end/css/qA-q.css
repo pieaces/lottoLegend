@@ -59,10 +59,6 @@
   width:82%;
 }
 
-.main > div {
-  margin-bottom:30px;
-}
-
 .main-title {
   height:200px;
   display: flex;
@@ -70,7 +66,26 @@
   font-weight: bold;
   font-size: 1.5rem;
   border-bottom: 1px solid black;
+  margin-bottom:10px;
 }
+
+.comment-title{
+  height:50px;
+  display:flex;
+  align-items: center;
+}
+
+.comment-title > div:nth-child(1){
+  width:20%;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.comment-title > input{
+  width:80%;
+}
+
 
 .textarea-box {
   height:500px;

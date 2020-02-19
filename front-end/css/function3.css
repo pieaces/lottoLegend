@@ -1,9 +1,9 @@
 
-.func3-main-1-1 {
+.func3-num-count {
   margin-bottom:10px;
 }
 
-.func3-main-1-1  div{
+.func3-num-count  div{
   border: 1px solid var(--border-color);
 }
 
@@ -24,7 +24,12 @@
   padding:10px;
 }
 
-.func3-main-1-2 > div {
+.func3-num-container-box{
+  background-color: var(--default-color);
+  border-color: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.func3-num-container-box > div {
   position: relative;
 }
 
@@ -32,7 +37,7 @@
   height:30px;
   display:flex;
   align-items: center;
-  border:1px solid var(--border-color);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
 }
 
 .func3-all-check-box > input{
