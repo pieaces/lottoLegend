@@ -9,7 +9,7 @@ export default function counterLotto():Promise<number> {
     return new Promise((resolve, reject) => {
         dynamoDB.scan(params, (err, data) => {
             if (err) {
-                reject("counter 오류: " + err)
+                reject("counterLotto 오류: " + err)
             }
             else {
                 resolve(data.Count);

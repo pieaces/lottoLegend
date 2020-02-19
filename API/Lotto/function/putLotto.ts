@@ -31,8 +31,8 @@ export default async function putLotto(round: number): Promise<boolean> {
             };
 
             dynamodb.putItem(params, function (err, data) {
-                if (err) console.log('LottoData - write 과정 에러', err);
-                else console.log('LottoData - write success');
+                if (err) console.log('putLotto 에러', err);
+                else console.log('putLotto 성공');
             });
             return true;
         })

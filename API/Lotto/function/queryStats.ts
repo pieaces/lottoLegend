@@ -20,7 +20,7 @@ export default async function queryStats(method: Method, params: QueryStatsParam
     return await new Promise((resolve, reject) => {
         dynamoDB.query(queryParams, function (err, data) {
             if (err) {
-                console.log('LottoStat - read 과정 에러', err);
+                console.log('queryStats 에러', err);
                 reject(err);
             }
             else {

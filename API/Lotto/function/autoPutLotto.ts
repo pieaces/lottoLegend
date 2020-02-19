@@ -10,6 +10,7 @@ export default async function autoPutLotto() {
 
     const total = 896 + plusDate;
     const count = await counterLotto();
+    console.log(`현재:${count}, 로또전체:${total}`);
     if (count < total) {
         const bool = await putLotto(total);
         if (bool) {

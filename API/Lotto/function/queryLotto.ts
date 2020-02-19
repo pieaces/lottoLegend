@@ -18,7 +18,7 @@ export default async function queryLotto(round: number): Promise<LottoNumber[]> 
     return await new Promise((resolve, reject) => {
         dynamoDB.query(queryParams, function (err, data) {
             if (err) {
-                reject('LottoData - query 과정 에러' + err);
+                reject('queryLotto 에러' + err);
             }
             else {
                 const item = data.Items[0];

@@ -13,6 +13,7 @@ export default class LottoStatDB extends LottoProcess {
 
     async scanLotto() {
         const lottoData: LData[] = await scanLotto();
+        console.log('로또스캔 성공');
         this.data = List<LData>(lottoData);
         this.TOTAL_SIZE = this.data.size;
         this.mode = this.TOTAL_SIZE;
@@ -67,7 +68,7 @@ export default class LottoStatDB extends LottoProcess {
                     console.log(`${params.TableName} - ${params.Item.Name.S} putStat함수 에러`, err);
                 }
                 else {
-                    console.log(`write DB: ${params.TableName} - ${params.Item.Name.S}`);
+                    console.log(`통계값 작성: ${params.TableName} - ${params.Item.Name.S}`);
                 }
             });
         }
@@ -85,6 +86,6 @@ export default class LottoStatDB extends LottoProcess {
         for (const name in Method) {
             await this.putStat(name as Method);
         }
-        console.log('DB 작성 완료');
+        console.log('통계값 DB 작성 완료');
     }
 }
