@@ -1,8 +1,6 @@
 import axios from 'axios'
-
 import { LData } from '../interface/Lotto';
 import AWS from 'aws-sdk';
-// AWS.config.update(require('./key.json'));
 const dynamodb = new AWS.DynamoDB();
 
 export default async function putLotto(round: number): Promise<boolean> {

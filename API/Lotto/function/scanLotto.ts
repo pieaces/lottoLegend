@@ -1,7 +1,5 @@
 import { LData, LottoNumber } from '../interface/Lotto';
-
 import AWS from 'aws-sdk';
-// AWS.config.update(require('./key.json'));
 const dynamoDB = new AWS.DynamoDB();
 
 export default async function read(): Promise<LData[]> {

@@ -1,5 +1,4 @@
 import LottoMap from "./LottoMap";
-
 import { Assembly, DBData, LottoDate, Method } from "../../interface/LottoDB";
 import { LottoNumber } from "../../interface/Lotto";
 

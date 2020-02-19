@@ -1,14 +1,11 @@
 import LottoProcess from './LottoProcess';
 import { List } from 'immutable';
-
 import dynamoDBJson, { dynamoData } from '../../function/dynamoDBJson'
 import queryStats from '../../function/queryStats'
 import scanLotto from '../../function/scanLotto'
-
 import { Method } from '../../interface/LottoDB';
 import { LData, Params, LottoNumber } from '../../interface/Lotto';
 import AWS from 'aws-sdk';
-//AWS.config.update(require('../../function/key.json'));
 const dynamoDB = new AWS.DynamoDB();
 
 export default class LottoStatDB extends LottoProcess {
@@ -62,7 +59,7 @@ export default class LottoStatDB extends LottoProcess {
             }
             const params = {
                 Item,
-                TableName: "LottoStat"
+                TableName: "LottoStats"
             };
 
             dynamoDB.putItem(params, function (err, data) {

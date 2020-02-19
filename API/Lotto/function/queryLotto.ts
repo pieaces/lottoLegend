@@ -1,6 +1,5 @@
 import AWS from 'aws-sdk';
 import { LottoNumber } from '../interface/Lotto';
-//AWS.config.update(require('./key.json'));
 const dynamoDB = new AWS.DynamoDB();
 
 export default async function queryLotto(round: number): Promise<LottoNumber[]> {

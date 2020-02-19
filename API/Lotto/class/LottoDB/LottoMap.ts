@@ -1,5 +1,4 @@
 import Lotto from "../Lotto";
-
 import { Method } from "../../interface/LottoDB";
 import { Stats } from "../../interface/Statistics";
 import { Params, Mode } from "../../interface/Lotto";

@@ -1,9 +1,6 @@
-import awsServerlessExpress from 'aws-serverless-express';
-import app from './app';
+import autoPutLotto from "./Lotto/function/autoPutLotto";
 
-const server = awsServerlessExpress.createServer(app);
-
-exports.handler = (event:any, context:any) => {
-  console.log(`EVENT: ${JSON.stringify(event)}`);
-  awsServerlessExpress.proxy(server, event, context);
+exports.handler = async () => {
+    await autoPutLotto();
+    console.log('데이터 자동화 시스템 종료');
 };
