@@ -24,5 +24,4 @@ export default async function autoPutLotto() {
     } else {
         console.log(`업데이트가 필요없는 최신상태(count:${count}, total:${total})`);
     }
-    console.log('시스템 종료');
 }
