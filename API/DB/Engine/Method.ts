@@ -1,5 +1,5 @@
-import mysql from 'mysql2'
-const key = require('../db_key');
+import Engine from '.';
+import {OkPacket} from 'mysql2'
 
 interface KeyValue {
     key: string;
@@ -18,17 +18,9 @@ interface GetOption {
     order?: { [key: string]: OrderOption };
     limit?: number | [number, number];
 }
-export default abstract class DB {
+export default class Method {
+    engine:Engine = Engine.getInstance();
     protected tableName: string;
-    pool: mysql.Pool = mysql.createPool({
-        connectionLimit: 10,
-        host: key.host,
-        user: key.user,
-        password: key.password,
-        database: key.database
-    });
-    promisePool = this.pool.promise();
-
     /**
      * mariaDB Query
      * @example _get({['id', 'title'], {id:2}, {created:'DESC', id:'ASC'}, 3|[1,4]})
@@ -63,7 +55,7 @@ export default abstract class DB {
                 sql += ` LIMIT ${option.limit[0], option.limit[1]}`
             }
         }
-        const [rows] = await this.promisePool.execute(sql, values);
+        const [rows] = await this.engine.promisePool.execute(sql, values);
         this.end();
         return rows;
     }
@@ -71,29 +63,29 @@ export default abstract class DB {
         const keys = Object.keys(params);
         const values = Object.values(params);
         const sql = `INSERT INTO ${this.tableName}(${keys.join(',')}) VALUES(${new Array(values.length).fill('?').join(',')})`;
-        const [OkPacket] = await this.promisePool.execute(sql, values);
+        const [OkPacket] = await this.engine.promisePool.execute(sql, values);
         this.end();
-        return ((<mysql.OkPacket>OkPacket).insertId);
+        return ((<OkPacket>OkPacket).insertId);
     }
 
     protected async _patch(id: KeyValue, params: Params) {
         const entries = Object.entries(params);
         const sql = `UPDATE ${this.tableName} SET ${entries.reduce((acc, cur) => acc + cur[0] + '=?', '')} WHERE ${id.key}=?`;
         console.log(sql);
-        const [OkPacket] = await this.promisePool.execute(sql, [...entries.map(entry => entry[1]), id.value]);
+        const [OkPacket] = await this.engine.promisePool.execute(sql, [...entries.map(entry => entry[1]), id.value]);
         this.end();
         console.log(sql, OkPacket);
-        return ((<mysql.OkPacket>OkPacket).changedRows);
+        return ((<OkPacket>OkPacket).changedRows);
     }
 
     protected async _delete(params: KeyValue) {
         const sql = `DELETE FROM ${this.tableName} WHERE ${params.key}=?`;
-        const [OkPacket] = await this.promisePool.execute(sql, [params.value]);
+        const [OkPacket] = await this.engine.promisePool.execute(sql, [params.value]);
         this.end();
-        return ((<mysql.OkPacket>OkPacket).affectedRows);
+        return ((<OkPacket>OkPacket).affectedRows);
     }
     end() {
-        this.pool.end(err => {
+        this.engine.pool.end(err => {
             if (err) console.log('DB pool 비정상종료', err);
             else console.log('DB pool 정상종료');
         });

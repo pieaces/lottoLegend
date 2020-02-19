@@ -1,4 +1,4 @@
-import DB, { OrderOption } from ".."
+import DB, { OrderOption } from "../Engine/Method"
 
 export interface Comment{
     id:number;

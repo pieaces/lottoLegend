@@ -1,4 +1,4 @@
-import DB, { OrderOption } from ".."
+import DB, { OrderOption } from "../Engine/Method"
 import {Comment} from '../Comments/index'
 
 interface Post{
