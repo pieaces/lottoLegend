@@ -29,11 +29,20 @@ exports.handler = async (event: any, context: any, callback: any) => {
                     break;
             }
         } else if (resource === '/posts/{postId}') {
+            const postId = event.pathParameters.postId;
             switch (method) {
                 case 'GET':
-                    const postId = event.pathParameters.postId;
                     const post = await db.get(postId);
                     body = post;
+                    break;
+                case 'PATCH':
+                    const { contents } = JSON.parse(event.body)
+                    const changedRows = await db.patch(postId, contents)
+                    body = changedRows;
+                    break;
+                case 'DELETE':
+                    const affectedRows = await db.delete(postId);
+                    body = affectedRows;
                     break;
             }
         } else if (resource === '/posts/{postId}/comments') {
