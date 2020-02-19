@@ -56,7 +56,7 @@ export default class Method {
             }
         }
         const [rows] = await this.engine.promisePool.execute(sql, values);
-        this.end();
+        //this.end();
         return rows;
     }
     protected async _post(params: Params) {
@@ -64,24 +64,22 @@ export default class Method {
         const values = Object.values(params);
         const sql = `INSERT INTO ${this.tableName}(${keys.join(',')}) VALUES(${new Array(values.length).fill('?').join(',')})`;
         const [OkPacket] = await this.engine.promisePool.execute(sql, values);
-        this.end();
+        //this.end();
         return ((<OkPacket>OkPacket).insertId);
     }
 
     protected async _patch(id: KeyValue, params: Params) {
         const entries = Object.entries(params);
         const sql = `UPDATE ${this.tableName} SET ${entries.reduce((acc, cur) => acc + cur[0] + '=?', '')} WHERE ${id.key}=?`;
-        console.log(sql);
         const [OkPacket] = await this.engine.promisePool.execute(sql, [...entries.map(entry => entry[1]), id.value]);
-        this.end();
-        console.log(sql, OkPacket);
+        //this.end();
         return ((<OkPacket>OkPacket).changedRows);
     }
 
     protected async _delete(params: KeyValue) {
         const sql = `DELETE FROM ${this.tableName} WHERE ${params.key}=?`;
         const [OkPacket] = await this.engine.promisePool.execute(sql, [params.value]);
-        this.end();
+        //this.end();
         return ((<OkPacket>OkPacket).affectedRows);
     }
     end() {
