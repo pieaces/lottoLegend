@@ -12,17 +12,17 @@ export default async function autoPutLotto() {
     const count = await counterLotto();
     console.log(`현재:${count}, 로또전체:${total}`);
     if (count < total) {
-        const bool = await putLotto(total);
-        if (bool) {
-            console.log(`${total}회 로또 데이터 자동화 입력 완료`);
+        try {
+            await putLotto(total);
+
             const lottoDB = new LottoDB();
-            lottoDB.putALLStats()
-                .then(() => console.log('통계처리 자동화 완료'))
-                .catch(err => console.log('통계처리 자동화 입력 실패', err));
-        } else {
-            console.log(`${total}회 로또 데이터 자동화 입력 실패!`);
+            await lottoDB.putALLStats();
+            console.log('통계처리 자동화 완료');
+        } catch (err) {
+            console.log('자동화 실패', err);
         }
-    }else{
+    } else {
         console.log(`업데이트가 필요없는 최신상태(count:${count}, total:${total})`);
     }
+    console.log('시스템 종료');
 }
