@@ -2,11 +2,11 @@ import { LData, LottoNumber } from '../interface/Lotto';
 import AWS from 'aws-sdk';
 const dynamoDB = new AWS.DynamoDB();
 
-export default async function read(): Promise<LData[]> {
+export default function read(): Promise<LData[]> {
     var params = {
         TableName: "LottoData"
     };
-    return await new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         dynamoDB.scan(params, (err, data) => {
             if (err) {
                 console.log('LottoData - read 과정 에러', err);

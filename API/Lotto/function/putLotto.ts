@@ -32,7 +32,10 @@ export default async function putLotto(round: number):Promise<void> {
     return new Promise((resolve, reject) => {
         dynamodb.putItem(params, function (err, data) {
             if (err) reject('putLotto 에러: ' + err);
-            else console.log('putLotto 성공');
+            else {
+                console.log('putLotto 성공');
+                resolve();
+            }
         });
     });
 }

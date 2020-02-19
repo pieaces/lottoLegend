@@ -3,7 +3,7 @@ import { Method, DBData, Assembly, AssemblyVersion, QueryStatsParams } from '../
 import AWS from 'aws-sdk';
 const dynamoDB = new AWS.DynamoDB();
 
-export default async function queryStats(method: Method, params: QueryStatsParams): Promise<any[] | DBData> {
+export default function queryStats(method: Method, params: QueryStatsParams): Promise<any[] | DBData> {
     const queryParams = {
         TableName: "LottoStats",
         KeyConditionExpression: "#Name = :Name",
@@ -17,11 +17,10 @@ export default async function queryStats(method: Method, params: QueryStatsParam
         }
     };
 
-    return await new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         dynamoDB.query(queryParams, function (err, data) {
             if (err) {
-                console.log('queryStats 에러', err);
-                reject(err);
+                reject('queryStats 에러: ' + err);
             }
             else {
                 const item = data.Items[0];
@@ -88,7 +87,7 @@ export default async function queryStats(method: Method, params: QueryStatsParam
                             }
                             pos = compressNumbers(pos, PACK);
                         }
-                        
+
                         const dbData: DBData = { ideal, actual, pos };
                         if (item.Stats) {
                             const stats: Stats = {

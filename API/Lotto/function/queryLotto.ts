@@ -2,7 +2,7 @@ import AWS from 'aws-sdk';
 import { LottoNumber } from '../interface/Lotto';
 const dynamoDB = new AWS.DynamoDB();
 
-export default async function queryLotto(round: number): Promise<LottoNumber[]> {
+export default function queryLotto(round: number): Promise<LottoNumber[]> {
     const queryParams = {
         ProjectionExpression: 'Numbers',
         TableName: "LottoData",
@@ -15,7 +15,7 @@ export default async function queryLotto(round: number): Promise<LottoNumber[]> 
         }
     };
 
-    return await new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         dynamoDB.query(queryParams, function (err, data) {
             if (err) {
                 reject('queryLotto 에러' + err);

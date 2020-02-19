@@ -19,7 +19,8 @@ export default class LottoStatDB extends LottoProcess {
         this.mode = this.TOTAL_SIZE;
         this.hasLotto = true;
     }
-    async putStat(method: Method): Promise<void> {
+
+    putStat(method: Method): Promise<void> {
         if (this.hasLotto) {
             let Item: any = { "Name": { S: method } };
             let data: dynamoData;
@@ -58,19 +59,23 @@ export default class LottoStatDB extends LottoProcess {
                     }
                     break;
             }
+
             const params = {
                 Item,
                 TableName: "LottoStats"
             };
+            return new Promise((resolve, reject) => {
+                dynamoDB.putItem(params, function (err, data) {
+                    if (err) {
+                        reject(`${params.TableName} - ${params.Item.Name.S} putStat 에러:` + err);
+                    }
+                    else {
+                        console.log(`통계값 작성: ${params.TableName} - ${params.Item.Name.S}`);
+                        resolve();
+                    }
+                });
+            })
 
-            dynamoDB.putItem(params, function (err, data) {
-                if (err) {
-                    console.log(`${params.TableName} - ${params.Item.Name.S} putStat함수 에러`, err);
-                }
-                else {
-                    console.log(`통계값 작성: ${params.TableName} - ${params.Item.Name.S}`);
-                }
-            });
         }
     }
 
