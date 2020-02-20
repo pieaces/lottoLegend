@@ -1,5 +1,5 @@
 import Engine from '.';
-import {OkPacket} from 'mysql2'
+import {OkPacket, RowDataPacket} from 'mysql2'
 
 interface KeyValue {
     key: string;
@@ -57,7 +57,7 @@ export default class Method {
         }
         const [rows] = await this.engine.promisePool.execute(sql, values);
         //this.end();
-        return rows;
+        return <RowDataPacket[]>rows;
     }
     protected async _post(params: Params) {
         const keys = Object.keys(params);

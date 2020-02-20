@@ -9,13 +9,13 @@ export default class PostsContents extends DB {
     async get(id: number) {
         const option = {
             projection: ['contents'],
-            condition: { id }
+            condition: { post: id }
         }
         return await super._get(option);
     }
-    async post(contents: string): Promise<void> {
+    async post(postId:number, contents: string): Promise<void> {
         const post = {
-            contents
+            post:postId, contents
         };
         await super._post(post);
     }

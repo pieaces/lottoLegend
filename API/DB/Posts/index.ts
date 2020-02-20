@@ -1,5 +1,6 @@
 import DB, { OrderOption } from "../Engine/Method"
 import {Comment} from '../Comments/index'
+import PostsContents from "../PostsContents";
 
 interface Post{
     id:number;
@@ -12,6 +13,7 @@ interface Post{
     comment:Comment | null;
 }
 export default class Posts extends DB {
+    postsContents:PostsContents = new PostsContents();
     constructor(){
         super();
         this.tableName = 'Posts';
@@ -25,22 +27,29 @@ export default class Posts extends DB {
         return await super._get(option);
     }
     async get(id: number) {
-        const option = {
-            projection: ['id', 'title', 'writerId', 'writerName', 'contents', 'created', 'hits'],
+        const option:any = {
+            projection: ['id', 'title', 'writerId', 'writerName', 'created', 'hits'],
             condition: { id }
         }
-        return await super._get(option);
+        let rows = await super._get(option);
+        const post = rows[0];
+        rows = await this.postsContents.get(id);
+        const contents = rows[0];
+        post.contents = contents;
+
+        return post;
     }
     async post(title: string, writerId: string, writerName: string, contents: string) {
         const post = {
-            title, writerId, writerName, contents
+            title, writerId, writerName
         };
         const insertId = await super._post(post);
+        await this.postsContents.post(insertId, contents);
         return insertId;
     }
 
     async patch(id: number, contents: string) {
-        const changedRows = await super._patch({ key: 'id', value: id }, { contents });
+        const changedRows = await this.postsContents.patch(id, contents);
         return changedRows;
     }
     async delete(id: number) {
