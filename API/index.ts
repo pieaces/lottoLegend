@@ -11,72 +11,68 @@ exports.handler = async (event: any, context: any, callback: any) => {
         //"Access-Control-Allow-Credentials" : true // Required for cookies, authorization headers with HTTPS
     }
     let body: any;
-
-    const exp_posts = /^\/posts/; //^:시작, \/:/를 표현, $끝, /:시작과 끝을 명시
-    const exp_posts$comments = /^\/posts\/{postId}\/comments/
-    //const exp_posts$id = /^\/posts\/[\d]+$/; //[\d]:숫자, +:1회이상의 
-    if (exp_posts.test(resource)) {
+    //const exp_posts$comments = /^\/posts\/{postId}\/comments/
+    if (resource === '/posts') {
         const db = new Posts();
-        if (resource === '/posts') {
-            switch (method) {
-                case 'GET':
-                    const posts = await db.scan();
-                    body = posts;
-                    break;
-                case 'POST':
-                    const { title, writerId, writerName, contents } = JSON.parse(event.body);
-                    const insertId = await db.post(title, writerId, writerName, contents);
-                    body = insertId;
-                    break;
-            }
-        } else if (resource === '/posts/{postId}') {
-            const postId = event.pathParameters.postId;
-            switch (method) {
-                case 'GET':
-                    const post = await db.get(postId);
-                    body = post;
-                    break;
-                case 'PATCH':
-                    const { contents } = JSON.parse(event.body)
-                    const changedRows = await db.patch(postId, contents)
-                    body = changedRows;
-                    break;
-                case 'DELETE':
-                    const affectedRows = await db.delete(postId);
-                    body = affectedRows;
-                    break;
-            }
-        } else if (exp_posts$comments.test(resource)) {
-            const db = new Comments();
-            const postId = event.pathParameters.postId;
-            if (resource === '/posts/{postId}/comments') {
-                switch (method) {
-                    case 'GET':
-                        const comments = await db.getByPost(postId);
-                        body = comments;
-                        break;
-                    case 'POST':
-                        const { writerId, writerName, contents } = JSON.parse(event.body);
-                        const insertId = await db.post(postId, writerId, writerName, contents);
-                        body = insertId;
-                        break;
-                }
-            } else if (resource === '/posts/{postId}/comments/{commentId}') {
-                const commentId = event.pathParameters.commentId;
-                switch (method) {
-                    case 'PATCH':
-                        const { contents } = JSON.parse(event.body)
-                        const changedRows = await db.patch(commentId, contents)
-                        body = changedRows;
-                        break;
-                    case 'DELETE':
-                        const affectedRows = await db.delete(commentId);
-                        body = affectedRows;
-                        break;
-                }
-            }
+        switch (method) {
+            case 'GET':
+                const posts = await db.scan();
+                body = posts;
+                break;
+            case 'POST':
+                const { title, writerId, writerName, contents } = JSON.parse(event.body);
+                const insertId = await db.post(title, writerId, writerName, contents);
+                body = insertId;
+                break;
+        }
+    } else if (resource === '/posts/{postId}') {
+        const db = new Posts();
+        const postId = event.pathParameters.postId;
+        switch (method) {
+            case 'GET':
+                const post = await db.get(postId);
+                body = post;
+                break;
+            case 'PATCH':
+                const { contents } = JSON.parse(event.body)
+                const changedRows = await db.patch(postId, contents)
+                body = changedRows;
+                break;
+            case 'DELETE':
+                const affectedRows = await db.delete(postId);
+                body = affectedRows;
+                break;
+        }
+    } else if (resource === '/posts/{postId}/comments') {
+        const db = new Comments();
+        const postId = event.pathParameters.postId;
+        switch (method) {
+            case 'GET':
+                const comments = await db.getByPost(postId);
+                body = comments;
+                break;
+            case 'POST':
+                const { writerId, writerName, contents } = JSON.parse(event.body);
+                const insertId = await db.post(postId, writerId, writerName, contents);
+                body = insertId;
+                break;
+        }
+    } else if (resource === '/posts/{postId}/comments/{commentId}') {
+        const db = new Comments();
+        const commentId = event.pathParameters.commentId;
+        switch (method) {
+            case 'PATCH':
+                const { contents } = JSON.parse(event.body)
+                const changedRows = await db.patch(commentId, contents)
+                body = changedRows;
+                break;
+            case 'DELETE':
+                const affectedRows = await db.delete(commentId);
+                body = affectedRows;
+                break;
         }
     }
+
     const response = {
         statusCode,
         headers,
