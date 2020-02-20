@@ -33,11 +33,43 @@ const path = require('path');
 //     }
 // };
 
+// module.exports = {
+//     mode: 'development',
+//     entry: './front-end/js/qA-q.js',
+//     output: {
+//         filename: 'qA-q.js',
+//         path: path.resolve(__dirname, 'front-end')
+//     },
+//     module: {
+//         rules: [
+//             {
+//                 test: /\.ts$/,
+//                 use: ['ts-loader'],
+//                 exclude: /node_modules/
+//             }
+//         ]
+//     },
+//     devServer: {
+//         contentBase: './front-end',
+//         overlay: true,
+//         hot: true
+//     },
+//     plugins: [
+//         new webpack.HotModuleReplacementPlugin(),
+//         new CopyWebpackPlugin(['./front-end/qA-q.html']),
+
+//     ],
+//     resolve: {
+//         extensions: ['.ts', '.js', '.json']
+//     }
+// };
+
+
 module.exports = {
     mode: 'development',
-    entry: './front-end/js/qA-q.js',
+    entry: './front-end/statistics/execute.js',
     output: {
-        filename: 'qA-q.js',
+        filename: 'statistics.js',
         path: path.resolve(__dirname, 'front-end')
     },
     module: {
@@ -56,7 +88,7 @@ module.exports = {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new CopyWebpackPlugin(['./front-end/qA-q.html']),
+        new CopyWebpackPlugin(['./front-end/statistics.html']),
 
     ],
     resolve: {

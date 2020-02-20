@@ -2,13 +2,7 @@
 
 .grid-section-1 {
   display: flex;
-  
   margin-bottom: 20px;
-
-}
-
-.aside div {
-  border: 1px solid var(--border-color);
 }
 
 /* aside */
@@ -19,20 +13,22 @@
   margin-right:20px;
 }
 
-.aside-top {
+.anchor-container {
+  border: 1px solid var(--border-color);
   margin-bottom: 10px;
   font-size: 1.4rem;
   font-weight: bold;
 }
 
-.aside-1-1 {
+.often-ask-box {
+  background-color: var(--main-color);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.aside-1-1 > a,
-.aside-1-2 > a {
+.often-ask-box > a,
+.q-a-box > a {
   line-height: 6rem;
   text-align: center;
   display: inline-block;
@@ -40,13 +36,12 @@
   width: 100%;
 }
 
-.aside-1-2 > a {
+.often-ask-box > a {
   color: var(--default-color);
 }
 
-.aside-1-2 {
+.q-a-box {
   cursor: pointer;
-  background-color: var(--main-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -58,15 +53,6 @@
 
 .main {
   width:82%;
-}
-
-.main-title {
-  height:100px;
-  display: flex;
-  align-items: center;
-  font-weight: bold;
-  font-size: 1.5rem;
-  border-bottom: 1px solid black;
 }
 
 .main-info {
@@ -135,7 +121,7 @@
 /* board-section */
 
 .board-section {
-  height:500px;
+  
   display: flex;
   flex-direction: column;
 }
@@ -143,7 +129,7 @@
 /* board-box */
 
 .board-box {
-  flex: 1;
+  height:50px;
   display: flex;
   border: 1px solid var(--border-color);
 }
@@ -152,4 +138,28 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.page-num-container{
+  height:100px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-num-container > div{
+  margin-right:5px;
+  border:1px solid rgba(0,0,0,0.4);
+  width:30px;
+  height:30px;
+  font-size:0.75rem;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.page-current{
+  background-color: var(--main-color);
+  color:var(--default-color);
 }

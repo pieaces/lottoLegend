@@ -6,10 +6,6 @@
   margin-bottom: 20px;
 }
 
-.aside div {
-  border: 1px solid var(--border-color);
-}
-
 /* aside */
 
 .aside {
@@ -18,20 +14,21 @@
   margin-right:20px;
 }
 
-.aside-top {
+.anchor-container {
+  border: 1px solid var(--border-color);
   margin-bottom: 10px;
   font-size: 1.4rem;
   font-weight: bold;
 }
 
-.aside-1-1 {
+.often-ask-box {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.aside-1-1 > a,
-.aside-1-2 > a {
+.often-ask-box > a,
+.q-a-box > a {
   line-height: 6rem;
   text-align: center;
   display: inline-block;
@@ -39,17 +36,18 @@
   width: 100%;
 }
 
-.aside-1-2 > a {
+.q-a-box > a {
   color: var(--default-color);
 }
 
-.aside-1-2 {
+.q-a-box {
   cursor: pointer;
   background-color: var(--main-color);
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 
 
 
@@ -70,14 +68,14 @@
   }
   
   .text-title {
-    height:50px;
+    height:80px;
     display: flex;
     align-items: center;
 border-bottom: 1px solid rgba(0,0,0,0.2);
   }
   
   .text-info {
-    margin-bottom:10px;
+    
     padding:10px 0;
     display: flex;
     align-items: center;
@@ -91,6 +89,10 @@ border-bottom: 1px solid rgba(0,0,0,0.2);
     justify-content: center;
   }
 
+  .text-content{
+    min-height:600px;
+  }
+
   .author-time{
       margin-right:20px;
   }
@@ -102,7 +104,7 @@ border-bottom: 1px solid rgba(0,0,0,0.2);
   }
 
   .comment-write-container{
-      height:100px;
+      height:180px;
     display:flex;
     border:1px solid rgba(0,0,0,0.2);
     margin-bottom:10px;
@@ -113,6 +115,7 @@ border-bottom: 1px solid rgba(0,0,0,0.2);
       display:flex;
       align-items: center;
       justify-content: center;
+      border-right:1px solid rgba(0,0,0,0.3) 
   }
 
   .comment-write-container >div:nth-child(2){
@@ -129,24 +132,34 @@ border-bottom: 1px solid rgba(0,0,0,0.2);
 .comment-title{
     display:flex;
     align-items: center;
-    height:40px;
+    height:30px;
 }
 
 .comment-author{
     margin-right:20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.comment-time{
+  font-size:0.8rem;
+  color:#999;
+}
+
+.comment-content{
+  font-size: 0.9rem;
 }
 
 #comment-write-text{
     resize: none;
     width:100%;
-    height:100%;
+    height:65%;
     border:1px solid rgba(0,0,0,0.2);
 }
 
-  
-
 .comment-submit-box{
-    display:flex;
-    align-items: center;
-    justify-content: center;
+  height:35%;
+  display:flex;
+  align-items: center;
+  justify-content: flex-end;
 }

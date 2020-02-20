@@ -294,17 +294,7 @@ border-left: 10px solid #575755;
   .que-text ul > li{
     padding-bottom: 5px;
   }
-  .table{
-    width:100%; 
-    border-collapse: collapse;
-  }
-
-  .table,
-  .table th,
-  .table td{
-    border:1px solid rgba(0, 0, 0, 0.4);
-  }
-
+  
   .table-1{
     width:100%;
     height:100%;

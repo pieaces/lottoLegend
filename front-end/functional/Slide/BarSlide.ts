@@ -47,7 +47,7 @@ export default class BarSlide extends Slide<ChartBase> {
         data.push(DataAPI.getInstance().getLabels());
         const ideal: number[] = this.chart.dataBox.datasets[0].data as number[];
         data.push(ideal.map(num => {
-            if(num === -100 || num === 100) return '-';
+            if (num === -100 || num === 100) return '-';
             else return num.toFixed(2);
         }));
 
