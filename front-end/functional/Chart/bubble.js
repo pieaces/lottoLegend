@@ -1,4 +1,5 @@
 import DataAPI from '../DataAPI'
+google.charts.load('current', { packages: ['corechart'] });
 
 export default class BubbleChart {
     constructor(element) {
@@ -37,7 +38,6 @@ export default class BubbleChart {
     }
 
     init() {
-        google.charts.load('current', { packages: ['corechart'] });
         google.charts.setOnLoadCallback(() => {
             this.drawChart();
         });
