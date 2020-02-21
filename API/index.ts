@@ -2,6 +2,7 @@ import Posts from "./DB/Posts";
 import Comments from "./DB/Comments";
 
 exports.handler = async (event: any, context: any, callback: any) => {
+    console.log(event);
     const method: string = event.httpMethod;
     const resource: string = event.resource;
 
