@@ -6,22 +6,20 @@ export default async function queryLotto(round: number): Promise<LottoNumber[]> 
     const queryParams = {
         ProjectionExpression: 'Numbers',
         TableName: "LottoData",
-        KeyConditionExpression: "#Round = :round ",
-        ExpressionAttributeNames: {
-            "#Round": "Round"
-        },
-        ExpressionAttributeValues: {
-            ":round": { N: round.toString() },
+        Key:{
+            "Round": {
+                N: round.toString()
+            }
         }
     };
 
     return await new Promise((resolve, reject) => {
-        dynamoDB.query(queryParams, function (err, data) {
+        dynamoDB.getItem(queryParams, function (err, data) {
             if (err) {
                 reject('LottoData - query 과정 에러' + err);
             }
             else {
-                const item = data.Items[0];
+                const item = data.Item;
                 if (typeof item === 'undefined') reject(`Not Exist ${round} item`);
                 else {
                     const numbers = item.Numbers.NS.map(value => Number(value)).sort((a, b) => a - b);

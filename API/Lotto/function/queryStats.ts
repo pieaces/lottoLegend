@@ -7,25 +7,22 @@ const dynamoDB = new AWS.DynamoDB();
 export default async function queryStats(method: Method, params: QueryStatsParams): Promise<any[] | DBData> {
     const queryParams = {
         TableName: "LottoStats",
-        KeyConditionExpression: "#Name = :Name",
-        ExpressionAttributeNames: {
-            "#Name": "Name"
-        },
-        ExpressionAttributeValues: {
-            ":Name": {
+        Key:{
+            "Name": {
                 S: method
             }
         }
     };
 
     return await new Promise((resolve, reject) => {
-        dynamoDB.query(queryParams, function (err, data) {
+        dynamoDB.getItem(queryParams, function (err, data) {
             if (err) {
                 console.log('LottoStats - read 과정 에러', err);
                 reject(err);
             }
             else {
-                const item = data.Items[0];
+                const item = data.Item;
+                console.log(data);
                 let list: Array<any>;
                 switch (method) {
                     case Method.frequency:
