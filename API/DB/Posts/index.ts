@@ -35,7 +35,7 @@ export default class Posts extends DB {
         const post = rows[0];
         rows = await this.postsContents.get(id);
         const contents = rows[0];
-        post.contents = contents;
+        if(post) post.contents = contents;
 
         return post;
     }
