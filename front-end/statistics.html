@@ -15,6 +15,11 @@
 
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrapper">
+        <div class="loading none">
+            <div class="loading-icon">
+                <i class="fas fa-sync spin"></i>
+            </div>
+        </div>
         <script src="components/header/header.js"></script>
         <div class="section1">
             <div class="grid-section-1 container">
@@ -41,7 +46,7 @@
                                 <div>4</div>
                                 <div>5</div>
                             </div>
-                            <div class="func1-chart-box">
+                            <div>
                                 <i id="func1-left-line-chart-btn"
                                     class="func1-left-chart-btn fas fa-angle-left fa-4x "></i>
                                 <i id="func1-right-line-chart-btn"
@@ -68,12 +73,14 @@
                         </div>
                     </div>
                     <div class="func1-main-1-box">
-                        <div class="func1-chart-container func1-chart-bar-container box-color">
+                        <div class="func1-chart-container func1-chart-bar-container-box box-color">
 
-                            <div class="func1-chart-box func1-chart-bar-box ">
-                                <canvas id="func1-chart-bar"></canvas>
+                            <div class="func1-chart-bar-container">
+                                <div class="func1-chart-bar-box ">
+                                    <canvas id="func1-chart-bar"></canvas>
+                                </div>
                             </div>
-                            <canvas id="func1-chart-bar-axis" height="300" width="0"></canvas>
+                            <canvas id="func1-chart-bar-axis" height="200" width="0"></canvas>
                         </div>
 
                         <div class="func1-chart-textbox-container box-color">
