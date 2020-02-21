@@ -22,7 +22,6 @@ export default async function queryStats(method: Method, params: QueryStatsParam
             }
             else {
                 const item = data.Item;
-                console.log(data);
                 let list: Array<any>;
                 switch (method) {
                     case Method.frequency:
