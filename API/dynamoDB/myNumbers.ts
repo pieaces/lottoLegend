@@ -1,4 +1,5 @@
-import {dynamoDB, TableName} from '.'
+import { dynamoDB, TableName } from '.'
+import { numsAvailability } from './userInfo';
 
 function numsArrToList(numsArr: number[][]): AWS.DynamoDB.ListAttributeValue {
     return numsArr.map(numbers => {
@@ -7,8 +8,23 @@ function numsArrToList(numsArr: number[][]): AWS.DynamoDB.ListAttributeValue {
         }
     });
 }
-
-export function updateNumbers(userName: string, round: number, numsArr: number[][]): Promise<void> {
+class Code {
+    constructor(public error: boolean, public message?: string) { }
+}
+export async function updateNumbers(userName: string, round: number, numsArr: number[][]): Promise<Code> {
+    const availability = await numsAvailability(userName);
+    let size;
+    try {
+        size = (await getNumbers(userName, round)).size;
+    } catch (err) {
+        if (err === 'MyNumbers has to be created') {
+            await createNumbers(userName, round);
+            size = (await getNumbers(userName, round)).size;
+        }
+    }
+    if (numsArr.length > availability - size) {
+        return new Code(true, `현재 요금제에서 저장 가능한 최대 크기는 ${availability}개입니다. 현재 저장 가능 개수는 ${availability - size}개입니다.`);
+    }
     const params = {
         TableName,
         ExpressionAttributeNames: {
@@ -31,20 +47,15 @@ export function updateNumbers(userName: string, round: number, numsArr: number[]
             }
         },
         ConditionExpression: "attribute_exists(#Map.#Round)",
-        UpdateExpression: `SET #Map.#Round.#Numbers = list_append(#Map.#Round.#Numbers, :element), #Map.#Round.#Size = #Map.#Round.#Size + :plus`
+        UpdateExpression: `SET #Map.#Round.#Numbers = list_append(#Map.#Round.#Numbers, :element) ADD #Map.#Round.#Size :plus`
     };
-
     return new Promise((resolve, reject) => {
         dynamoDB.updateItem(params, async (err) => {
             if (err) {
-                if (err.code === 'ConditionalCheckFailedException') {
-                    await createNumbers(userName, round);
-                    await updateNumbers(userName, round, numsArr);
-                    resolve();
-                }
                 reject(err);
+            } else {
+                resolve(new Code(false));
             }
-            else resolve();
         });
     });
 }
@@ -84,7 +95,7 @@ function createNumbers(userName: string, round: number): Promise<void> {
     });
 }
 
-export function deleteNumber(userName: string, round: number, index: number):Promise<void>{
+export function deleteNumber(userName: string, round: number, index: number): Promise<void> {
     const params = {
         TableName,
         ExpressionAttributeNames: {
@@ -130,13 +141,15 @@ export function getNumbers(userName: string, round: number): Promise<{ numsArr: 
             }
             else {
                 const item = data.Item;
-                if (item) {
+                if ('MyNumbers' in item) {
                     const result = item.MyNumbers.M && item.MyNumbers.M[round.toString()].M;
                     const size = Number(result && result.size.N);
                     const numsArr = result && result.numbers.L?.map(obj => {
                         return obj.L?.map(ele => Number(ele.N))
                     });
                     resolve({ numsArr, size });
+                } else {
+                    reject('MyNumbers has to be created');
                 }
             }
         });
