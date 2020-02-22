@@ -7,7 +7,11 @@ const router = express.Router();
 router.post('/', (req, res) => {
     const option: GeneratorOption = {};
     let willRangeFinder: (numbers: number[])=> number = null;
-
+    const idToken = req.header('x-id-token');
+    if(!idToken) {
+        console.log("Intruder Alert");
+        return res.json('잘못된 접근입니다.');
+    }
     if (req.body.excludedLines) {
         option.excludedLines = req.body.excludedLines;
     }

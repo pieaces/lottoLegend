@@ -2,7 +2,7 @@ import express from 'express';
 import awsServerlessExpressMiddleware from 'aws-serverless-express/middleware';
 
 import statsRouter from './router/stats';
-import numbersRouter from './router/numbers';
+import numbersRouter from './router/generator';
 
 const app = express();
 app.use(awsServerlessExpressMiddleware.eventContext());
