@@ -1,4 +1,4 @@
-import autoPutLotto from "./Lotto/function/autoPutLotto";
+import autoPutLotto from "./Lotto/dynamo/autoPutLotto";
 
 exports.handler = async () => {
     await autoPutLotto();

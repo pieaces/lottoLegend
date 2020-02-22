@@ -1,5 +1,5 @@
 import fs from 'fs'
-import Calculate from '../class/Calculate'
+import Calculate from '../Lotto/class/Calculate'
 
 function constraintJSON(method: (box: number[]) => number) {
     const exceptedLines = (box: number[]) => {

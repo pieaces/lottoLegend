@@ -1,7 +1,6 @@
 import { Stats } from '../interface/Statistics';
 import { Method, DBData, Assembly, AssemblyVersion, QueryStatsParams } from '../interface/LottoDB';
-import AWS from 'aws-sdk';
-const dynamoDB = new AWS.DynamoDB();
+import dynamoDB from '.'
 
 export default function queryStats(method: Method, params: QueryStatsParams): Promise<any[] | DBData> {
     const queryParams = {

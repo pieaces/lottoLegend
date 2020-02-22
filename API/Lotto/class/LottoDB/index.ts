@@ -1,12 +1,11 @@
 import LottoProcess from './LottoProcess';
 import { List } from 'immutable';
-import dynamoDBJson, { dynamoData } from '../../function/dynamoDBJson'
-import queryStats from '../../function/queryStats'
-import scanLotto from '../../function/scanLotto'
+import dynamoDBJson, { dynamoData } from '../../dynamo/jsonParser'
+import queryStats from '../../dynamo/queryStats'
+import scanLotto from '../../dynamo/scanLotto'
 import { Method } from '../../interface/LottoDB';
 import { LData, Params, LottoNumber } from '../../interface/Lotto';
-import AWS from 'aws-sdk';
-const dynamoDB = new AWS.DynamoDB();
+import dynamoDB from '../../dynamo'
 
 export default class LottoStatDB extends LottoProcess {
     protected hasLotto = false;

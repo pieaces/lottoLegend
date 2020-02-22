@@ -1,6 +1,6 @@
 import putLotto from './putLotto'
 import LottoDB from '../class/LottoDB'
-import counterLotto from './counterLotto';
+import counterLotto from './dataCounter';
 
 export default async function autoPutLotto() {
     const theDate = new Date('2020-02-01:20:50');

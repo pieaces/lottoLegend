@@ -1,6 +1,6 @@
 import fs from 'fs'
-import Probability from '../class/Statistics/Probability'
-import Calculate from '../class/Calculate'
+import Probability from '../Lotto/class/Statistics/Probability'
+import Calculate from '../Lotto/class/Calculate'
 
 const C = Probability.C;
 const pqc = Probability.pqc;

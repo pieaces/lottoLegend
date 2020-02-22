@@ -1,7 +1,6 @@
-import AWS from 'aws-sdk';
-const dynamoDB = new AWS.DynamoDB();
+import dynamoDB from '.'
 
-export default function counterLotto():Promise<number> {
+export default function dataCounter():Promise<number> {
     var params = {
         TableName: "LottoData"
     };

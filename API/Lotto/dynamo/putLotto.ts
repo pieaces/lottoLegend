@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { LData } from '../interface/Lotto';
-import AWS from 'aws-sdk';
-const dynamodb = new AWS.DynamoDB();
+import dynamoDB from '.'
 
 export default async function putLotto(round: number):Promise<void> {
     const result = await (axios.get('http://www.nlotto.co.kr/common.do?method=getLottoNumber&drwNo=' + round));
@@ -30,7 +29,7 @@ export default async function putLotto(round: number):Promise<void> {
     };
 
     return new Promise((resolve, reject) => {
-        dynamodb.putItem(params, function (err, data) {
+        dynamoDB.putItem(params, function (err, data) {
             if (err) reject('putLotto 에러: ' + err);
             else {
                 console.log('putLotto 성공');

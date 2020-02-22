@@ -1,6 +1,5 @@
-import AWS from 'aws-sdk';
 import { LottoNumber } from '../interface/Lotto';
-const dynamoDB = new AWS.DynamoDB();
+import dynamoDB from '.'
 
 export default function queryLotto(round: number): Promise<LottoNumber[]> {
     const queryParams = {
