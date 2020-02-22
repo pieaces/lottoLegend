@@ -3,7 +3,7 @@ import LottoDB from '../class/LottoDB'
 import counterLotto from './dataCounter';
 
 export default async function autoPutLotto() {
-    const theDate = new Date('2020-02-01:20:50');
+    const theDate = new Date('2020-02-01:11:45');
     const today = new Date();
     const between = Number(today) - Number(theDate);
     const plusDate = Math.floor(between / 24 / 3600 / 1000 / 7);
