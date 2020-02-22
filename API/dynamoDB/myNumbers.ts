@@ -10,7 +10,7 @@ function numsArrToList(numsArr: number[][]): AWS.DynamoDB.ListAttributeValue {
     });
 }
 
-export function update(userName: string, round: number, numsArr: number[][]): Promise<void> {
+export function updateNumbers(userName: string, round: number, numsArr: number[][]): Promise<void> {
     const params = {
         TableName,
         ExpressionAttributeNames: {
@@ -33,7 +33,6 @@ export function update(userName: string, round: number, numsArr: number[][]): Pr
             }
         },
         ConditionExpression: "attribute_exists(#Map.#Round)",
-        ReturnValues: "ALL_NEW",
         UpdateExpression: `SET #Map.#Round.#Numbers = list_append(#Map.#Round.#Numbers, :element), #Map.#Round.#Size = #Map.#Round.#Size + :plus`
     };
 
@@ -41,8 +40,8 @@ export function update(userName: string, round: number, numsArr: number[][]): Pr
         dynamoDB.updateItem(params, async (err) => {
             if (err) {
                 if (err.code === 'ConditionalCheckFailedException') {
-                    await create(userName, round);
-                    await update(userName, round, numsArr);
+                    await createNumbers(userName, round);
+                    await updateNumbers(userName, round, numsArr);
                     resolve();
                 }
                 reject(err);
@@ -52,7 +51,7 @@ export function update(userName: string, round: number, numsArr: number[][]): Pr
     });
 }
 
-function create(userName: string, round: number): Promise<void> {
+function createNumbers(userName: string, round: number): Promise<void> {
     const params = {
         TableName,
         ExpressionAttributeNames: {
@@ -76,7 +75,6 @@ function create(userName: string, round: number): Promise<void> {
                 S: userName
             }
         },
-        ReturnValues: "ALL_NEW",
         UpdateExpression: `SET #Map.#Round = if_not_exists(#Map.#Round, :map)`
     };
 
@@ -88,8 +86,31 @@ function create(userName: string, round: number): Promise<void> {
     });
 }
 
+export function deleteNumber(userName: string, round: number, index: number):Promise<void>{
+    const params = {
+        TableName,
+        ExpressionAttributeNames: {
+            "#Map": 'MyNumbers',
+            "#Round": round.toString(),
+            "#Numbers": 'numbers'
+        },
+        Key: {
+            "UserName": {
+                S: userName
+            }
+        },
+        UpdateExpression: `REMOVE #Map.#Round.#Numbers[${index}]`
+    };
 
-export function getMyNumbers(userName: string, round: number): Promise<{ numsArr: number[][], size: number }> {
+    return new Promise((resolve, reject) => {
+        dynamoDB.updateItem(params, (err) => {
+            if (err) reject(err);
+            resolve();
+        });
+    });
+}
+
+export function getNumbers(userName: string, round: number): Promise<{ numsArr: number[][], size: number }> {
     const params = {
         TableName,
         ExpressionAttributeNames: {

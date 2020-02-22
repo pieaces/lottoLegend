@@ -1,5 +1,6 @@
 import Posts from "./mariaDB/Posts";
 import Comments from "./mariaDB/Comments";
+import {updateNumbers, getNumbers, deleteNumber} from './dynamoDB'
 
 exports.handler = async (event: any, context: any, callback: any) => {
     console.log(event);
@@ -92,7 +93,21 @@ exports.handler = async (event: any, context: any, callback: any) => {
                     break;
             }
         }
-        case '/users/numbers/{round}': {
+        case '/users/{userName}numbers/{round}': {
+            const userName = event.pathParameters.userName;
+            const round = event.pathParameters.round;
+            switch (method) {
+                case 'GET':
+                    const {numsArr} = await getNumbers(userName, round);
+                    body = numsArr;
+                    break;
+                case 'POST':
+                    break;
+                case 'DELETE':
+                    const index = Number(event.queryStringParameters && event.queryStringParameters.index);
+                    await deleteNumber(userName, round, index);
+                    break;
+            }
         }
     }
 
