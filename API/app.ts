@@ -16,7 +16,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/stats', statsRouter);
-app.use('/numbers', numbersRouter);
+app.use('/generator', numbersRouter);
 
 app.listen(3000, () => {
     console.log("LottoApi 서버 가동");

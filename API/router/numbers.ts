@@ -4,7 +4,7 @@ import Calculate from '../Lotto/class/Calculate';
 import { GeneratorOption } from '../Lotto/interface/Generator';
 const router = express.Router();
 
-router.post('/generator', (req, res) => {
+router.post('/', (req, res) => {
     const option: GeneratorOption = {};
     let willRangeFinder: (numbers: number[])=> number = null;
 
