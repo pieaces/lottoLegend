@@ -2,6 +2,16 @@ import express from 'express';
 import Generator from '../Lotto/class/Generator';
 import Calculate from '../Lotto/class/Calculate';
 import { GeneratorOption } from '../Lotto/interface/Generator';
+import jwt from 'jsonwebtoken';
+import jwkToPem from 'jwk-to-pem';
+const pem = jwkToPem({
+    "alg": "RS256",
+    "e": "AQAB",
+    "kid": "mv27gjWoWPX6h3VfMR2y2WsKGIAwdQ9jXRgn4cnMrYo=",
+    "kty": "RSA",
+    "n": "lqR6rfxpx4fNjalDjNrG1qQCo0sd7uLgIEwCRqg7bgvY6mbKPFhY0EbQGmgKl8-_p1Zx48r4XJ5zeKmbcpBBHrY57fQOsZGQonXSFH4FQDRMVMFVHwExokvGLnk83mJpuHikO1b-IMmsUlRwm6NE_Jgu7Yg4ErHPNcx3kBYfFjHO7h0J3jZ6HM_5uW8QPLh9Mvt_ZDxr37ElctecSXiWoKr7ySbsTt_W5qFxMHLkd9mwVO_CC3k5pBpLXsn5VKRAiM51X_aaQ1MMGTZ4f-0KFZr3jChn7-7BKouJoGO43x1FdkexdiBjRIWGzTszFXeziTNFY1R9uTtzrFdgeqMJ3w",
+    "use": "sig"
+});
 const router = express.Router();
 
 router.post('/', (req, res) => {
@@ -9,9 +19,15 @@ router.post('/', (req, res) => {
     let willRangeFinder: (numbers: number[])=> number = null;
     const idToken = req.header('x-id-token');
     if(!idToken) {
-        console.log("Intruder Alert");
+        console.log("Intruder Alert! - No Token!");
         return res.json('잘못된 접근입니다.');
     }
+    jwt.verify(idToken, pem, { algorithms: ['RS256'] }, (err, decodedToken) => {
+        if(err){
+            console.log('Intruder Alert! - Expired Token!');
+            return res.json('잘못된 접근입니다.');
+        }
+    });
     if (req.body.excludedLines) {
         option.excludedLines = req.body.excludedLines;
     }
