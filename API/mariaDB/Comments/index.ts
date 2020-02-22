@@ -21,6 +21,16 @@ export default class Comments extends DB {
         };
         return await super._get(option);
     }
+    async getWriterId(commentId:number): Promise<string>{
+        const option = {
+            projection:['writerId'],
+            condition:{id:commentId},
+        };
+        const rows = await super._get(option);
+        const comment = rows[0];
+
+        return comment.commentId;
+    }
     async post(post:number, writerId: string, writerName: string, contents: string) {
         const comment = {
             post, writerId, writerName, contents

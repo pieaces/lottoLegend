@@ -1,5 +1,6 @@
 import { dynamoDB, TableName } from '.'
 import { numsAvailability } from './userInfo';
+import { Response } from '../class';
 
 function numsArrToList(numsArr: number[][]): AWS.DynamoDB.ListAttributeValue {
     return numsArr.map(numbers => {
@@ -8,10 +9,8 @@ function numsArrToList(numsArr: number[][]): AWS.DynamoDB.ListAttributeValue {
         }
     });
 }
-class Code {
-    constructor(public error: boolean, public message?: string) { }
-}
-export async function updateNumbers(userName: string, round: number, numsArr: number[][]): Promise<Code> {
+
+export async function updateNumbers(userName: string, round: number, numsArr: number[][]): Promise<Response> {
     const availability = await numsAvailability(userName);
     let size;
     try {
@@ -23,7 +22,7 @@ export async function updateNumbers(userName: string, round: number, numsArr: nu
         }
     }
     if (numsArr.length > availability - size) {
-        return new Code(true, `현재 요금제에서 저장 가능한 최대 크기는 ${availability}개입니다. 현재 저장 가능 개수는 ${availability - size}개입니다.`);
+        return new Response(true, `현재 요금제에서 저장 가능한 최대 크기는 ${availability}개입니다. 현재 저장 가능 개수는 ${availability - size}개입니다.`);
     }
     const params = {
         TableName,
@@ -54,7 +53,7 @@ export async function updateNumbers(userName: string, round: number, numsArr: nu
             if (err) {
                 reject(err);
             } else {
-                resolve(new Code(false));
+                resolve(new Response(false));
             }
         });
     });

@@ -20,7 +20,7 @@ export default class Posts extends DB {
     }
     async scan() {
         const option = {
-            projection: ['id', 'title', 'writerId', 'writerName', 'created', 'hits'],
+            projection: ['id', 'title', 'writerName', 'created', 'hits'],
             order: {created: OrderOption.DESC},
             limit:10
         }
@@ -28,7 +28,7 @@ export default class Posts extends DB {
     }
     async get(id: number) {
         const option:any = {
-            projection: ['id', 'title', 'writerId', 'writerName', 'created', 'hits'],
+            projection: ['title', 'writerId', 'writerName', 'created', 'hits'],
             condition: { id }
         }
         let rows = await super._get(option);
@@ -38,6 +38,16 @@ export default class Posts extends DB {
         if(post) post.contents = contents;
 
         return post;
+    }
+    async getWriterId(id: number): Promise<string>{
+        const option:any = {
+            projection: ['writerId'],
+            condition: { id }
+        }
+        let rows = await super._get(option);
+        const post = rows[0];
+
+        return post.writerId;
     }
     async post(title: string, writerId: string, writerName: string, contents: string) {
         const post = {
