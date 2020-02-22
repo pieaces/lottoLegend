@@ -1,9 +1,8 @@
 node_modules
-package-lock.json
+front-end
 dist
 test
-aws_key.json
-db_key.json
-front-end
+key.ts
+package-lock.json
 *.pem
 *.ppk

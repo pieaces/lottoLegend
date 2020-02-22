@@ -1,7 +1,5 @@
-import AWS from 'aws-sdk'
-const dynamoDB = new AWS.DynamoDB();
+import {dynamoDB, TableName} from '.'
 
-const TableName = "LottoUsers";
 function numsArrToList(numsArr: number[][]): AWS.DynamoDB.ListAttributeValue {
     return numsArr.map(numbers => {
         return {

@@ -1,6 +1,6 @@
 import Posts from "./mariaDB/Posts";
 import Comments from "./mariaDB/Comments";
-import {updateNumbers, getNumbers, deleteNumber} from './dynamoDB'
+import {updateNumbers, getNumbers, deleteNumber} from './dynamoDB/myNumbers'
 
 exports.handler = async (event: any, context: any, callback: any) => {
     console.log(event);
