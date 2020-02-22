@@ -7,13 +7,13 @@
     "test": "test"
   },
   "dependencies": {
-    "@types/node": "^13.7.0",
+    "aws-amplify": "^2.2.5",
     "chart.js": "^2.9.3",
-    "js-loader": "^0.1.1",
     "suneditor": "^2.25.0"
   },
   "devDependencies": {
     "@types/chart.js": "^2.9.13",
+    "@types/node": "^13.7.4",
     "babel-loader": "^8.0.6",
     "copy-webpack-plugin": "^5.1.1",
     "ts-loader": "^6.2.1",
