@@ -1,19 +1,42 @@
 import Posts from "./mariaDB/Posts";
 import Comments from "./mariaDB/Comments";
 import {updateNumbers, getNumbers, deleteNumber} from './dynamoDB/myNumbers'
+import jwt from 'jsonwebtoken';
+import jwkToPem from 'jwk-to-pem';
+const pem = jwkToPem({
+    "alg": "RS256",
+    "e": "AQAB",
+    "kid": "mv27gjWoWPX6h3VfMR2y2WsKGIAwdQ9jXRgn4cnMrYo=",
+    "kty": "RSA",
+    "n": "lqR6rfxpx4fNjalDjNrG1qQCo0sd7uLgIEwCRqg7bgvY6mbKPFhY0EbQGmgKl8-_p1Zx48r4XJ5zeKmbcpBBHrY57fQOsZGQonXSFH4FQDRMVMFVHwExokvGLnk83mJpuHikO1b-IMmsUlRwm6NE_Jgu7Yg4ErHPNcx3kBYfFjHO7h0J3jZ6HM_5uW8QPLh9Mvt_ZDxr37ElctecSXiWoKr7ySbsTt_W5qFxMHLkd9mwVO_CC3k5pBpLXsn5VKRAiM51X_aaQ1MMGTZ4f-0KFZr3jChn7-7BKouJoGO43x1FdkexdiBjRIWGzTszFXeziTNFY1R9uTtzrFdgeqMJ3w",
+    "use": "sig" 
+});
 
 exports.handler = async (event: any, context: any, callback: any) => {
     console.log(event);
     const method: string = event.httpMethod;
     const resource: string = event.resource;
-    let statusCode = 200;
     const headers = {
         "Access-Control-Allow-Origin": "*", // Required for CORS support to work
         //"Access-Control-Allow-Credentials" : true // Required for cookies, authorization headers with HTTPS
     }
 
+    let userInfo;
+    if (event.headers['x-id-token']) {
+        jwt.verify(event.headers['x-id-token'], pem, { algorithms: ['RS256'] }, (err, decodedToken) => {
+            if (err) {
+                console.log('Intruder Alert!', err);
+                const response = {
+                    statusCode: 400,
+                    headers,
+                };
+                return response;
+            }
+            userInfo = decodedToken;
+        });
+    }
+
     let body: any;
-    //const exp_posts$comments = /^\/posts\/{postId}\/comments/
     switch (resource) {
         case '/posts': {
             const db = new Posts();
@@ -63,21 +86,6 @@ exports.handler = async (event: any, context: any, callback: any) => {
                     break;
             }
         }
-        case '/posts/{postId}/comments': {
-            const db = new Comments();
-            const postId = event.pathParameters.postId;
-            switch (method) {
-                case 'GET':
-                    const comments = await db.getByPost(postId);
-                    body = comments;
-                    break;
-                case 'POST':
-                    const { writerId, writerName, contents } = JSON.parse(event.body);
-                    const insertId = await db.post(postId, writerId, writerName, contents);
-                    body = insertId;
-                    break;
-            }
-        }
         case '/posts/{postId}/comments/{commentId}': {
             const db = new Comments();
             const commentId = event.pathParameters.commentId;
@@ -97,11 +105,15 @@ exports.handler = async (event: any, context: any, callback: any) => {
             const userName = event.pathParameters.userName;
             const round = event.pathParameters.round;
             switch (method) {
-                case 'GET':
-                    const {numsArr} = await getNumbers(userName, round);
+                case 'GET': {
+                    const { numsArr } = await getNumbers(userName, round);
                     body = numsArr;
+                }
                     break;
-                case 'POST':
+                case 'PATCH': {
+                    const { numsArr } = JSON.parse(event.body)
+                    body = await updateNumbers(userName, round, numsArr)
+                }
                     break;
                 case 'DELETE':
                     const index = Number(event.queryStringParameters && event.queryStringParameters.index);
@@ -112,7 +124,7 @@ exports.handler = async (event: any, context: any, callback: any) => {
     }
 
     const response = {
-        statusCode,
+        statusCode: 200,
         headers,
         body: JSON.stringify(body),
     };
