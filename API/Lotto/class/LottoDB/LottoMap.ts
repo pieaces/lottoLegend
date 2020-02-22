@@ -45,20 +45,6 @@ export default class LottoMap extends Lotto{
             }
         ],
         [
-            Method.sum55, {
-                ideal: this.expectedSum55,
-                actual: this.gatherSum55,
-                stats: this.statsSum
-            }
-        ],
-        [
-            Method.sum77, {
-                ideal: this.expectedSum77,
-                actual: this.gatherSum77,
-                stats: this.statsSum
-            }
-        ],
-        [
             Method.oddCount, {
                 ideal: this.expectedOddCount,
                 actual: this.gatherOddCount,

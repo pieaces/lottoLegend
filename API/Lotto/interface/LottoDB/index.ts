@@ -40,8 +40,6 @@ export enum Method {
     carryCount = "carryCount",
     lowCount = "lowCount",
     sum = "sum",
-    sum55 = "sum55",
-    sum77 = "sum77",
     oddCount = "oddCount",
     primeCount = "primeCount",
     $3Count = "$3Count",

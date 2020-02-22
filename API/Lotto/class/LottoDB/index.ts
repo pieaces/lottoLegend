@@ -87,7 +87,9 @@ export default class LottoStatDB extends LottoProcess {
         if (!this.hasLotto) {
             await this.scanLotto();
         }
+        let count = 0;
         for (const name in Method) {
+            console.log(count++);
             await this.putStat(name as Method);
         }
         console.log('통계값 DB 작성 완료');
