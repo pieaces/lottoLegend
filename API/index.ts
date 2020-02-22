@@ -1,5 +1,5 @@
-import Posts from "./DB/Posts";
-import Comments from "./DB/Comments";
+import Posts from "./mariaDB/Posts";
+import Comments from "./mariaDB/Comments";
 
 exports.handler = async (event: any, context: any, callback: any) => {
     console.log(event);

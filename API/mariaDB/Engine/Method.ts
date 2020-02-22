@@ -1,4 +1,4 @@
-import Engine from '.';
+import Engine from '../Engine';
 import {OkPacket, RowDataPacket} from 'mysql2'
 
 interface KeyValue {
