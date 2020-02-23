@@ -1,4 +1,6 @@
-
+.section1{
+  background-color: var(--default-color);
+}
 
 .anchor-container {
   border: 1px solid var(--border-color);

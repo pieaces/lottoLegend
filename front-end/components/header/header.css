@@ -194,7 +194,7 @@
   }
   }
 
-  @media (min-width: 320px) and (max-width: 767px) {
+  @media (min-width: 0px) and (max-width: 767px) {
   
 
     .top-nav-container {
@@ -245,7 +245,7 @@
       }
     }
     
-    @media (min-width: 320px) and (max-width: 480px) {
+    @media (min-width: 0px) and (max-width: 480px) {
 
       .mid-nav > h1 > a {
         font-size: 1.5rem;

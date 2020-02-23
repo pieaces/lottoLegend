@@ -153,7 +153,7 @@ select:focus {
 @media (min-width: 768px) and (max-width: 1024px) {
   
   .container {
-    width: 768px;
+    width: 700px;
   }
   
 }
@@ -161,19 +161,19 @@ select:focus {
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
   
   .container {
-    width: 768px;
+    width: 700px;
   }
   
 }
 @media (min-width: 481px) and (max-width: 767px) {
   
   .container {
-    width: 481px;
+    width: 400px;
   }
   
 }
 
-@media (min-width: 320px) and (max-width: 480px) {
+@media (min-width: 0px) and (max-width: 480px) {
   
   .container {
     width: 320px;

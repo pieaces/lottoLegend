@@ -134,7 +134,7 @@
     width:75%;
   }
 
-  @media (min-width: 320px) and (max-width: 767px) {
+  @media (min-width: 0px) and (max-width: 767px) {
     .func1-main-1-box{
       display:block;
       height:auto;
@@ -168,7 +168,7 @@
     }
   }
   
-  @media (min-width: 320px) and (max-width: 480px) {
+  @media (min-width: 0px) and (max-width: 480px) {
     .func1-chart-container {
       height:320px;
     }
