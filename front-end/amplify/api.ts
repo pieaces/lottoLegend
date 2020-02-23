@@ -4,11 +4,18 @@ Amplify.configure(awsconfig);
 
 const apiName = 'lotto';
 
-export async function getAPI(path: string) {
+export async function getAuthAPI(path: string) {
     const myInit = {
         headers: {
             'X-Id-Token' : (await Auth.currentSession()).getIdToken().getJwtToken()
         },
+        response: true,
+    }
+
+    return await API.get(apiName, path, myInit);
+}
+export async function getUnAuthAPI(path: string) {
+    const myInit = {
         response: true,
     }
 
