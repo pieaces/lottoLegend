@@ -46,8 +46,8 @@ commentWriteText.addEventListener("input", event => {
     const maxLength = target.getAttribute("maxlength");
     const currentLength = (target.value.replace(/(\s*)/g, "")).length;
 
-    if (currentLength >= maxLength) {
-        return console.log("100글자를 넘을 수 없습니다");
+    if (currentLength > maxLength) {
+        alert("150글자를 넘을 수 없습니다");
     }
     charCurrentCount.textContent = currentLength;
 
