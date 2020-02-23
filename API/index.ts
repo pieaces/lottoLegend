@@ -1,5 +1,4 @@
 import AWS from 'aws-sdk'
-import dataUriToBuffer from 'data-uri-to-buffer';
 import Jimp from 'jimp';
 const s3 = new AWS.S3();
 const headers = {
@@ -33,17 +32,18 @@ exports.handler = async (event: any) => {
 
     const imagePathList: AWS.S3.PutObjectOutput[] = [];
     const { imageList } = JSON.parse(event.body);
-    imageList.forEach(async (image: { name: string; src: string; }) => {
-        const fileName = attachTimestamp(image.name);
-        const decoded = dataUriToBuffer(image.src);
 
-        const buffer = await Jimp.read(decoded)
+    for(let i =0; i<imageList.length; i++){
+        const image = imageList[i];
+        const fileName = attachTimestamp(image.name);
+
+        const buffer = await Jimp.read(Buffer.from(image.src.replace(/^data:image\/png;base64,/, ""), 'base64'))
             .then(image => image.resize(Jimp.AUTO, 300))
             .then(image => image.quality(70))
             .then(image => image.getBufferAsync(Jimp.AUTO.toString()));
 
         imagePathList.push(await putImage(buffer, fileName));
-    });
+    }
 
     const response = {
         statusCode:200,
