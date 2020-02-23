@@ -28,14 +28,16 @@
   }
   
   .anchor-box >ul {
-    list-style-type: none;
     font-size: 1.1rem;
   }
   
   .anchor-box > ul >li{
     padding: 20px;
     text-align: center;
-    border-bottom: 1px solid #c3c3c3;
+  }
+
+  .anchor-box > ul >li:nth-child(1){
+    border-bottom: 1px solid var(--border-color);
   }
   
   .anchor-box > ul >li >a:hover{
