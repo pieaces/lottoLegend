@@ -7,7 +7,6 @@
     "test": "test"
   },
   "dependencies": {
-    "aws-amplify": "^2.2.5",
     "chart.js": "^2.9.3",
     "suneditor": "^2.25.0"
   },
