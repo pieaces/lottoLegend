@@ -4,7 +4,7 @@ import plugins from 'suneditor/src/plugins'
 // How to import language files (default: en)
 import { ko } from 'suneditor/src/lang'
 import { postAPI, getAPI, postUnAuthAPI } from '../amplify/api';
-
+console.log('?!@');
 const editor = suneditor.create('sample', {
   plugins: plugins,
   buttonList: [
@@ -195,13 +195,13 @@ const titleInput = document.getElementById('title');
 submitBtn.onclick = async () => {
   const title = titleInput.value;
   const contents = editor.getContents();
-  const imageList = imageList.map(image => {
+  const params = imageList.map(image => {
     return {
       name:image.name,
       src:image.src
     };
   });
-  const data = await postUnAuthAPI('/images', imageList);
+  const data = await postUnAuthAPI('/images', {imageList:params});
   console.log(data);
   // const result = await postAPI('/posts',{
   //   title, contents

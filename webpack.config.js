@@ -1,11 +1,15 @@
 const webpack = require('webpack');
 const path = require('path');
 
+// 확장자명 유의해서 쓸것! ts냐, js냐?
+const file = 'post.js'
+////
+const name = file.slice(0, file.indexOf('.'));
 module.exports = {
     mode: 'development',
-    entry: `./front-end/src/post.js`,
+    entry: `./front-end/src/${file}`,
     output: {
-        filename: `post.js`,
+        filename: `${name}.js`,
         path: path.resolve(__dirname, 'front-end/js')
     },
     module: {
