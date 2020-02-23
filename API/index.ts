@@ -37,7 +37,7 @@ exports.handler = async (event: any) => {
         const image = imageList[i];
         const fileName = attachTimestamp(image.name);
 
-        const buffer = await Jimp.read(Buffer.from(image.src.replace(/^data:image\/png;base64,/, ""), 'base64'))
+        const buffer = await Jimp.read(image.buffer)
             .then(image => image.resize(Jimp.AUTO, 300))
             .then(image => image.quality(70))
             .then(image => image.getBufferAsync(Jimp.AUTO.toString()));
