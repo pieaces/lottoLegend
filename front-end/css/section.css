@@ -55,7 +55,16 @@
   .main {
     width:82%;
   }
-
+  
+  .main-title {
+    height: 77px;
+    padding-left: 10px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    border-bottom: 2px solid #afafaf;
+  }
   @media (min-width: 768px) and (max-width: 1024px) {
   
     .anchor-box {

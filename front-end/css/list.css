@@ -39,16 +39,7 @@
 
 /* main */
 
-
-.main-info {
-  height:200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-left: 30px;
-}
-
-.main-info > h2 {
+.main-title > h2 {
   padding-bottom: 10px;
   font-size: 2.5rem;
 }
