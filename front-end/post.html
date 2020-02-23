@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="css/init.css">
     <link rel="stylesheet" href="./components/header/header.css" />
     <link rel="stylesheet" href="./components/footer/footer.css" />
-    <link rel="stylesheet" href="css/qA-q.css">
+    <link rel="stylesheet" href="css/post.css">
     <link href="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/css/suneditor.min.css" rel="stylesheet">
     <!-- <script src="https://cdn.jsdelivr.net/npm/suneditor@latest/dist/suneditor.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/suneditor@latest/src/lang/ko.js"></script> -->
@@ -26,18 +26,18 @@
                             <a href="oftenAsk.html">자주묻는 질문</a>
                         </div>
                         <div class="q-a-box">
-                            <a href="qA.html">Q & A</a>
+                            <a href="list.html">Q & A</a>
                         </div>
 
                     </div>
                 </div>
                 <div class="main">
                     <div class="main-title">
-                        Q & A 글쓰기
+                        글쓰기
                     </div>
                     <div class="comment-title">
                         <div>제목</div>
-                        <input type="text">
+                        <input type="text" id="title">
                     </div>
                     <div class="textarea-box">
                         <textarea id="sample"></textarea>
@@ -49,7 +49,6 @@
                                     <span class="label">
                                         파일 업로드
                                     </span>
-
                                     <input type="file" id="files-upload" accept="image/*" multiple="multiple" />
                                     <button class="btn" id="image-remove" disabled>파일 삭제</button>
                                     <span id="image-size">0KB</span>
@@ -62,8 +61,11 @@
                         </div>
                     </div>
                     <div class="submit-btn-box">
-                        <button type="submit" class="btn submit-btn" id="que-btn">
+                        <button type="submit" class="btn" id="submit-btn">
                             작성완료
+                        </button>
+                        <button type="submit" class="btn" id="cancel-btn">
+                            취소
                         </button>
                     </div>
                 </div>
@@ -71,7 +73,7 @@
         </section>
 
         <script src="components/footer/footer.js"></script>
-        <script src="./js/qA-q.js"></script>
+        <script src="./js/post.js"></script>
         <script src="https://kit.fontawesome.com/e14b8c39aa.js" crossorigin="anonymous"></script>
 </body>
 
