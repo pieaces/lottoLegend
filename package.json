@@ -7,14 +7,13 @@
     "test": "test"
   },
   "dependencies": {
-    "aws-amplify": "^2.2.5",
+    "@aws-amplify/api": "^2.1.5",
+    "@aws-amplify/auth": "^2.1.5",
+    "@aws-amplify/core": "^2.2.4",
     "chart.js": "^2.9.3",
     "suneditor": "^2.25.0"
   },
   "devDependencies": {
-    "@aws-amplify/api": "^2.1.5",
-    "@aws-amplify/auth": "^2.1.5",
-    "@aws-amplify/core": "^2.2.4",
     "@types/chart.js": "^2.9.13",
     "@types/node": "^13.7.4",
     "ts-loader": "^6.2.1",

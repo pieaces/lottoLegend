@@ -3,8 +3,8 @@ import suneditor from 'suneditor'
 import plugins from 'suneditor/src/plugins'
 // How to import language files (default: en)
 import { ko } from 'suneditor/src/lang'
-import { postAPI, getAPI, postUnAuthAPI } from '../amplify/api';
-console.log('?!@');
+import {  postUnAuthAPI } from '../amplify/api';
+
 const editor = suneditor.create('sample', {
   plugins: plugins,
   buttonList: [
