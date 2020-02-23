@@ -6,11 +6,13 @@
 /* main */
     
   .main-title {
-    height:150px;
+    height: 77px;
+    padding-left: 10px;
+    font-weight: bold;
     display: flex;
     align-items: center;
-    font-size: 1.4rem;
-    border-bottom: 1px solid black;
+    font-size: 1.2rem;
+    border-bottom: 2px solid #afafaf;
   }
   
   .text-title {
@@ -22,6 +24,7 @@
 
   .text-title > h1{
     font-size:1.2rem;
+    padding-left: 10px;
   }
   
   .text-info {
@@ -36,6 +39,7 @@
     display:flex;
     align-items: center;
     justify-content: center;
+    margin-left: 10px;
   }
 
   .author-name > span{
@@ -44,7 +48,7 @@
   }
 
   .text-content{
-    min-height:300px;
+    min-height:250px;
   }
 
   .author-time{
@@ -54,9 +58,12 @@
   .author-time > span{
     font-size:0.8rem;
 }
-
+.anchor-box ul{
+  list-style-type: none
+}
 .author-lookup{
   font-size:0.8rem;
+  margin-right: 10px;
 }
 
   .comment-container-box{
