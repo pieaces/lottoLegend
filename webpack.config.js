@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const fileName = 'post';
+const fileName = 'read';
 const extraction = 'js';
 
 module.exports = {

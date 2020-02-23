@@ -98,17 +98,17 @@
 .comment-title{
     height:50px;
     display:flex;
-    flex-direction: column;
-    justify-content: center;
+    align-items: center;
 }
 
 .comment-author{
-    margin-right:20px;
+    margin-right:3px;
     font-weight: bold;
     font-size: 13px;
 }
 
 .comment-time{
+  padding-top:3px;
   font-size:12px;
   color:#999;
 }
@@ -125,6 +125,17 @@
     border:1px solid rgba(0,0,0,0.2);
     font-size:1rem;
     padding:20px 20px 20px 20px;
+}
+
+.char-count-box{
+  position: absolute;
+  top:80%;
+  left:1%;
+  width:65px;
+  height:35px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .comment-btn{
