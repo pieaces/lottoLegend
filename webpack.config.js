@@ -1,8 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const fileName = 'list';
-const extraction = 'ts';
+const fileName = 'post';
+const extraction = 'js';
 
 module.exports = {
     mode: 'development',

@@ -22,11 +22,20 @@ export async function getUnAuthAPI(path: string) {
     return await API.get(apiName, path, myInit);
 }
 
-export async function postAPI(path: string = '/posts', body:any) {
+export async function postAuthAPI(path: string = '/posts', body:any) {
     const myInit = {
         headers: {
             'X-Id-Token' : (await Auth.currentSession()).getIdToken().getJwtToken()
         },
+        body,
+        response: true,
+    }
+
+    return await API.post(apiName, path, myInit);
+}
+
+export async function postUnAuthAPI(path: string = '/posts', body:any) {
+    const myInit = {
         body,
         response: true,
     }
