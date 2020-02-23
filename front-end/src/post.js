@@ -195,6 +195,8 @@ const titleInput = document.getElementById('title');
 submitBtn.onclick = async () => {
   const title = titleInput.value;
   const contents = editor.getContents();
-  const result = await getAPI('/posts');
+  const result = await postAPI('/posts',{
+    title, contents
+  });
   console.log(result);
 }

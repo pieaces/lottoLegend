@@ -18,7 +18,6 @@ export async function getAPI(path: string) {
 export async function postAPI(path: string = '/posts', body:any) {
     const myInit = {
         headers: {
-            'Access-Control-Allow-Origin':'*',
             'X-Id-Token' : (await Auth.currentSession()).getIdToken().getJwtToken()
         },
         body,
