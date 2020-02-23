@@ -58,13 +58,14 @@
 }
 
 .main-title {
-  height:200px;
+  height: 100px;
   display: flex;
   align-items: center;
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 2rem;
   border-bottom: 1px solid black;
-  margin-bottom:10px;
+  margin-bottom: 10px;
+  padding: 20px;
 }
 
 .comment-title{
@@ -72,7 +73,12 @@
   display:flex;
   align-items: center;
 }
-
+#title-label{
+  background: #f1f1f1;
+    height: 38px;
+    width: 75px;
+    margin-right: 10px;
+}
 .comment-title > div:nth-child(1){
   width:10%;
   display:flex;
