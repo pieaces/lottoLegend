@@ -1,5 +1,5 @@
 .func1-main-1-box{
-    height:330px;
+    height:360px;
     display:flex;
     margin-bottom:10px;
   }
@@ -33,7 +33,7 @@
   .func1-left-chart-btn {
     cursor: pointer;
     position: absolute;
-    top: 75%;
+    top: 80%;
     left: 40%;
     color: var(--main-color);
     opacity: 0.3;
@@ -42,7 +42,7 @@
   .func1-right-chart-btn {
     cursor: pointer;
     position: absolute;
-    top: 75%;
+    top: 80%;
     right: 36%;
     color: var(--main-color);
     opacity: 0.3;
@@ -57,16 +57,17 @@
   }
 
   .func1-chart-title{
+    background-color: #e6e6e6;
     word-break: keep-all;
-    padding-right:8px;
+    margin-right:8px;
     height:20%;
     display:flex;
     align-items: center;
     justify-content: space-around;
+    font-weight: bold;
   }
 
   .func1-chart-title > div{
-    border: 1px solid var(--border-color);
     font-size:0.8rem;
     height:100%;
     display:flex;
@@ -74,8 +75,6 @@
     align-items: center;
     text-align: center;
     justify-content: center;
-    background-color: var(--main-color);
-    color:var(--default-color);
   }
 
   .func1-chart-title >div:nth-child(1) >div{
@@ -86,9 +85,6 @@
     justify-content: center;
   }
 
-  .func1-chart-title >div:nth-child(1) >div:nth-child(1){
-    border-bottom:1px solid rgba(0, 0, 0, 0.2);
-  }
 
   
 

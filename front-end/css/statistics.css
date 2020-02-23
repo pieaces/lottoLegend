@@ -1,15 +1,15 @@
     
-  .aside-top {
+  .aside-menu {
     margin-bottom: 10px;
     font-size: 1.4rem;
-    font-weight: bold;
+    font-weight: 300;
     height:200px;
   }
   
-  .aside-1-1 {
+  .aside-menu-text {
+    border: 1px solid var(--border-color);
+    background-color: var(--default-color);
     height: 100%;
-    background-color: var(--main-color);
-    color: var(--default-color);
     display: flex;
     align-items: center;
     justify-content: center;
