@@ -1,14 +1,11 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const fileName = 'read';
-const extraction = 'js';
-
 module.exports = {
     mode: 'development',
-    entry: `./front-end/src/${fileName}.${extraction}`,
+    entry: `./front-end/src/post.js`,
     output: {
-        filename: `${fileName}.js`,
+        filename: `post.js`,
         path: path.resolve(__dirname, 'front-end/js')
     },
     module: {
