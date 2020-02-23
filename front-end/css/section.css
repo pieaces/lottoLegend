@@ -1,0 +1,40 @@
+
+/* section1 */
+
+.section1 {
+  background-color: var(--box-color);
+}
+
+/* grid-section-1 */
+
+.grid-section-1 {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  /* aside */
+  
+  .aside {
+    width:18%;
+    padding-top: 100px;
+    margin-right:20px;
+  }
+
+  .main {
+    width:82%;
+  }
+
+  @media (min-width: 320px) and (max-width: 767px) {
+    .grid-section-1{
+      display:block;
+    }
+
+    .aside{
+      padding-top:10px;
+      width:100%;
+    }
+
+    .main{
+      width:100%;
+    }
+  }

@@ -1,6 +1,6 @@
-/* init css */
-
 @import url('https://fonts.googleapis.com/css?family=Roboto|Nanum+Gothic&display=swap');
+
+/* init css */
 
 :root {
   --default-color: white;
@@ -60,15 +60,6 @@ select:focus {
   outline: none;
 }
 
-.square-btn {
-  background-color: var(--main-color);
-  color: var(--default-color);
-  width: 80px;
-  height: 40px;
-  font-size: 1rem;
-}
-
-/* container */
 
 #wrapper {
   width: 100%;
@@ -77,9 +68,7 @@ select:focus {
 }
 
 .container {
-  margin: 0 auto;
   width: 960px;
-  height: 100%;
 }
 
 .box-color{
@@ -117,7 +106,6 @@ select:focus {
   justify-content: center;
 }
 
-
 .loading-icon > i{
   font-size:6rem;
   color:#882525;
@@ -144,4 +132,51 @@ select:focus {
 
 .hide{
   visibility: hidden;
+}
+.square-btn {
+  background-color: var(--main-color);
+  color: var(--default-color);
+  width: 80px;
+  height: 40px;
+  font-size: 1rem;
+}
+
+/* container */
+
+.container {
+  margin: 0 auto;
+  width: 960px;
+  height: 100%;
+}
+
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+  .container {
+    width: 768px;
+  }
+  
+}
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  
+  .container {
+    width: 768px;
+  }
+  
+}
+@media (min-width: 481px) and (max-width: 767px) {
+  
+  .container {
+    width: 481px;
+  }
+  
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  
+  .container {
+    width: 320px;
+  }
+  
 }

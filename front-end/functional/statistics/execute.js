@@ -4,7 +4,6 @@ import lineSlide from "./chartInstance/lineInstance"
 const loading = document.querySelector('.loading');
 
 async function execute() {
-
     loading.classList.remove('none');
     await DataAPI.getInstance().init();
     lineSlide.setData();

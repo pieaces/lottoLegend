@@ -1,17 +1,4 @@
-/* grid-section-1 */
 
-.grid-section-1 {
-  display: flex;
-  margin-bottom: 20px;
-}
-
-/* aside */
-
-.aside {
-  width:18%;
-  padding-top: 100px;
-  margin-right:20px;
-}
 
 .anchor-container {
   border: 1px solid var(--border-color);
@@ -50,9 +37,6 @@
 
 /* main */
 
-.main {
-  width:82%;
-}
 
 .main-info {
   height:200px;

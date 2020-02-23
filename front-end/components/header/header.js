@@ -12,7 +12,10 @@ document.write(`<header><nav class="top-nav-container">
 <nav class="mid-nav-container">
 <div class="container mid-nav">
   <h1><a href="index.html">CanvasLotto</a></h1>
-  <ul>
+  <div class="hamburger-box">
+  <input type="checkbox" name="" id="hamburger">
+  <i class="fas fa-bars"></i></div>
+  <ul class="mid-nav-menu">
     <li><a href="#">CanvasLotto 시스템</a></li>
     <li><a href="lotto-func1.html">번호 생성</a></li>
     <li><a href="#">통계 게시판</a></li>

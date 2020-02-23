@@ -18,14 +18,17 @@ document.write(`<footer><nav class="top-footer-container">
             <p>
                 사실을
                 <br />
-                토대로 한 통계
+                토대로 한
+                <br/> 통계
             </p>
         </div>
         <div>
-            <p>고객만족을 <br />위한 최고의 서비스</p>
+            <p>고객만족을 <br />위한 최고의
+            <br/> 서비스</p>
         </div>
         <div>
-            <p>다른 사이트에서 <br />찾아볼 수 없는 새로운 시스템</p>
+            <p>다른 사이트에서 <br />찾아볼 수 없는 
+            <br/>새로운 시스템</p>
         </div>
     </div>
 </nav>
