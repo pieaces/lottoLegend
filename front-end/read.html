@@ -55,11 +55,11 @@
                     </div>
                     <div class="text-content"></div>
                     <div class="comment-write-text-box">
-                        <textarea placeholder="소중한 댓글을 남겨주세요" class="comment-write-text" id="comment-write-text"
-                            maxlength="150" maxRows="3"></textarea>
+                        <textarea placeholder="소중한 댓글을 남겨주세요" class="comment-write-text"
+                            id="comment-write-text"></textarea>
                         <div class="char-count-box">
                             <span id="char-current-count">0</span>/
-                            <span id="char-max-count"></span>
+                            <span id="char-max-count">150</span>
                         </div>
                         <button type="button" class="btn square-btn comment-btn">댓글등록</button>
                     </div>
@@ -100,6 +100,26 @@
     </section>
 
     <script src="components/footer/footer.js"></script>
+    <script>
+        // const charMaxCount = document.querySelector('#char-max-count');
+        // const charCurrentCount = document.querySelector('#char-current-count');
+        // const txtArea = document.querySelector('#comment-write-text');
+
+        // function limitTxtAreaCount(target, event) {
+        //     const maxlength = 150;
+
+        //     const currentLength = (target.value.replace(/\s/gi, '')).length;
+
+        //     if (currentLength > maxlength) {
+        //         alert(`${maxlength}자를 넘을 수 없습니다`);
+        //         target.value = target.value.slice(0, target.value.length - 1);
+        //         return false;
+        //     } else {
+        //         charCurrentCount.textContent = currentLength;
+        //         return true;
+        //     }
+        // };
+    </script>
     <script src="js/read.js"></script>
     <script src="https://kit.fontawesome.com/e14b8c39aa.js" crossorigin="anonymous"></script>
 </body>

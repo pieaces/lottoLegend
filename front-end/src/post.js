@@ -44,7 +44,6 @@ let totalSize = 0;
 
 editor.onImageUpload = function (targetImgElement, index, state, imageInfo, remainingFilesCount) {
   if (state === 'delete') {
-
     const deleteIndex = findIndex(imageList, index);
     totalSize -= imageList[deleteIndex].size;
     let size = (totalSize / 1000).toFixed(1) * 1;
