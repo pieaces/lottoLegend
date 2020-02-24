@@ -1,4 +1,3 @@
-
 const id = document.querySelector('#id');
 const nickname = document.querySelector('#nickname');
 const password = document.querySelector('#password');
@@ -7,13 +6,22 @@ const phoneNumber = document.querySelector('#phone-number');
 const signupBtn = document.querySelector('#signup');
 const authSubmitBtn = document.querySelector('#auth-submit');
 const authTime = document.querySelector('#auth-time');
+const authNum = document.querySelector('#auth-num');
+const alertId = document.querySelector('#alert-id');
+const alertNickname = document.querySelector('#alert-nickname');
+const alertPassword = document.querySelector('#alert-password');
+const alertPasswordCheck = document.querySelector('#alert-password-check');
+const alertPhoneNumber = document.querySelector('#alert-phone-number');
+const alertAuthNumber = document.querySelector('#alert-auth-number');
 
-
-function checkId() {  //id 공백체크
+function checkId() {
     if (id.value.replace(/\s/gi, "") === "") {
-        console.log("id가 공백");
+        id.classList.add('alert-input');
+        alertId.textContent = "아이디를 입력해주세요";
         return false;
     } else {
+        id.classList.remove('alert-input');
+        alertId.textContent = "";
         return true;
     }
 }
@@ -21,21 +29,34 @@ function checkId() {  //id 공백체크
 function checkPassword() {
     const regPassword = /^[a-z0-9]{8,12}$/;  //소문자 + 숫자 8~12
     if (!regPassword.test(password.value)) {
-        console.log("비밀번호 조건에 안 맞음");
+        password.classList.add('alert-input');
+        alertPassword.textContent = "8~12자(소문자+숫자)를 입력해주세요";
         return false;
     }
+    password.classList.remove('alert-input');
+    alertPassword.textContent = "";
+    return true;
+}
+
+function checkPasswordEqual() {
     if (password.value !== passwordCheck.value) {
-        console.log("비밀번호와 비밀번호 확인이 일치하지 않음");
+        passwordCheck.classList.add('alert-input');
+        alertPasswordCheck.textContent = "비밀번호와 비밀번호확인 입력값이 일치하지 않습니다";
         return false;
     }
+    passwordCheck.classList.remove('alert-input');
+    alertPasswordCheck.textContent = "";
     return true;
 }
 
 function checkNickname() {
     if (nickname.value.replace(/\s/gi, "") === "") {
-        console.log("닉네임이 공백");
+        nickname.classList.add('alert-input');
+        alertNickname.textContent = "닉네임을 입력해주세요";
         return false;
     } else {
+        nickname.classList.remove('alert-input');
+        alertNickname.textContent = "";
         return true;
     }
 }
@@ -43,9 +64,12 @@ function checkNickname() {
 function checkPhoneNumber() {
     const regPhoneNumber = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
     if (!regPhoneNumber.test(phoneNumber.value)) {
-        console.log("휴대폰번호 조건 안 맞음");
+        phoneNumber.classList.add("alert-input");
+        alertPhoneNumber.textContent = "예) 010-xxxx-xxxx";
         return false;
     } else {
+        phoneNumber.classList.remove("alert-input");
+        alertPhoneNumber.textContent = "";
         return true;
     }
 }
@@ -89,9 +113,13 @@ function startTimer() {
 
 function checkAuth() {
     //보낸 문자와 입력창에있는 문자가 다르면 
-    // alert('인증번호가 다릅니다');
+    authNum.classList.add('alert-input');
+    alertAuthNumber.textContent = "인증번호가 다릅니다";
     //return false;
-    //일치하면 return true;
+    //일치하면 
+    authNum.classList.remove('alert-input');
+    alertAuthNumber.textContent = "";
+    // return true;
 }
 
 function checkAll() {
@@ -100,6 +128,8 @@ function checkAll() {
     } else if (!checkNickname()) {
         return false;
     } else if (!checkPassword()) {
+        return false;
+    } else if (!checkPasswordEqual()) {
         return false;
     } else if (!checkPhoneNumber()) {
         return false;

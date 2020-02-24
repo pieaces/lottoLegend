@@ -1,16 +1,10 @@
 
-/* grid-section-1 */
-
-.grid-section-1 {
-  padding:10px 0;
-}
-
-.main  div {
-  background-color: var(--default-color);
-  border: 1px solid var(--border-color);
-}
 
 /* main */
+
+.main{
+  padding:10px 0;
+}
 
 .main-1-1 {
   display:flex;

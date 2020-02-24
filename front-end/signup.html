@@ -22,33 +22,45 @@
             </div>
         </header>
         <section class="section">
-            <div class="container signup-container">
-                <div class="signup-box">
-                    <label for="id">아이디</label>
-                    <input type="text" name="" id="id">
+            <div class="container signup-container-box">
+                <div class="signup-container">
+                    <div class="signup-box">
+                        <label for="id">아이디</label>
+                        <input type="text" name="" id="id">
+                        <div id="alert-id" class="alert-box"></div>
+                    </div>
+                    <div class="signup-box">
+                        <label for="nickname">닉네임</label>
+                        <input type="text" name="" id="nickname">
+                        <div id="alert-nickname" class="alert-box"></div>
+                    </div>
+                    <div class="signup-box">
+                        <label for="password">비밀번호</label>
+                        <input type="password" name="" id="password">
+                        <div id="alert-password" class="alert-box"></div>
+                    </div>
+                    <div class="signup-box">
+                        <label for="password-check">비밀번호 확인</label>
+                        <input type="password" name="" id="password-check">
+                        <div id="alert-password-check" class="alert-box"></div>
+                    </div>
+                    <div class="signup-box">
+                        <label for="phone-number">휴대폰번호</label>
+                        <input type="text" name="" id="phone-number">
+                        <div id="alert-phone-number" class="alert-box"></div>
+                        <button type="button" class="btn square-btn signup-btn" id="auth-submit">인증번호 전송</button>
+                    </div>
 
-                    <label for="nickname">닉네임</label>
-                    <input type="text" name="" id="nickname">
 
-                    <label for="password">비밀번호</label>
-                    <input type="password" name="" id="password">
-
-                    <label for="password-check">비밀번호 확인</label>
-                    <input type="password" name="" id="password-check">
-
-                    <label for="phone-number">휴대폰번호</label>
-                    <input type="text" name="" id="phone-number">
-                    <button type="button" class="btn square-btn" id="auth-submit">인증번호 전송</button t>
-
-                    <div class="auth-check-container">
+                    <div class="signup-box">
                         <div class="auth-check-box">
                             <label for="auth">인증번호</label>
                             <span id="auth-time" class="auth-time"></span>
                         </div>
                         <input type="text" name="" id="auth-num">
-
+                        <div id="alert-auth-number" class="alert-box"></div>
                     </div>
-                    <button type="button" class="btn square-btn" id="signup">가입하기</button t>
+                    <button type="button" class="btn square-btn signup-btn" id="signup">가입하기</button t>
                 </div>
             </div>
         </section>

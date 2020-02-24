@@ -33,7 +33,7 @@
   .func1-left-chart-btn {
     cursor: pointer;
     position: absolute;
-    top: 80%;
+    top: 70%;
     left: 40%;
     color: var(--main-color);
     opacity: 0.3;
@@ -42,7 +42,7 @@
   .func1-right-chart-btn {
     cursor: pointer;
     position: absolute;
-    top: 80%;
+    top: 70%;
     right: 36%;
     color: var(--main-color);
     opacity: 0.3;

@@ -1,43 +1,5 @@
 
-
-.aside-top {
-  height:200px;
-  margin-bottom: 10px;
-  font-size: 1.4rem;
-  font-weight: bold;
-}
-
-.aside-title {
-  height: 100%;
-  background-color: var(--main-color);
-  color: var(--default-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.aside-menu >ul {
-  padding:15px 15px 15px 30px;
-  list-style-type: disc;
-}
-
-.aside-menu > ul > li {
-  margin-bottom: 5px;
-  font-size:0.9rem;
-  color:#999;
-}
-
-.aside-menu > ul > li > a {
-  font-size:inherit;
-  color:inherit;
-}
-
 /* main */
-
-.main {
-
-  padding-top: 10px;
-}
 
 /* main-top */
 .mypage-main {
@@ -115,6 +77,8 @@
 
 .lotto-service-btn{
   font-size:0.9rem;
+  width:90px;
+  height:40px;
   background-color: var(--lotto-title-color) !important;
 }
 

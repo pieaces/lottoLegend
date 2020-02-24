@@ -1,41 +1,6 @@
-.section1{
-  background-color: var(--default-color);
+.section1 {
+  background-color: transparent;
 }
-
-.anchor-container {
-  border: 1px solid var(--border-color);
-  margin-bottom: 10px;
-  font-size: 1.4rem;
-  font-weight: bold;
-}
-
-.often-ask-box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.often-ask-box > a,
-.q-a-box > a {
-  line-height: 6rem;
-  text-align: center;
-  display: inline-block;
-  height: 100%;
-  width: 100%;
-}
-
-.q-a-box > a {
-  color: var(--default-color);
-}
-
-.q-a-box {
-  cursor: pointer;
-  background-color: var(--main-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 
 /* main */
 
@@ -138,4 +103,9 @@
 .page-current{
   background-color: var(--main-color);
   color:var(--default-color);
+}
+
+.search-btn{
+  width:60px;
+  height:40px;
 }

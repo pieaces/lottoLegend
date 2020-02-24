@@ -22,39 +22,50 @@ html {
 
 /* signup */
 
-.signup-container {
+.signup-container-box {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.signup-box {
+.signup-container {
   width: 500px;
   display: flex;
   flex-direction: column;
 }
 
-.signup-box input, .signup-box button {
+.signup-box input {
   height: 50px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
-.signup-box  label {
+.signup-container  button{
+margin-bottom:50px;
+}
+
+.signup-container  label {
   font-weight: bold;
   padding: 10px 0;
 }
 
-.square-btn {
-  background-color: var(--main-color);
-  color: var(--default-color);
-  width:100%;
-  height: 60px;
-  font-size: 1.3rem;
-}
-
-.auth-check-container{
+.signup-box{
   display:flex;
   flex-direction: column;
+}
+
+.alert-box{
+  height:50px;
+  color:red;
+}
+
+.alert-input{
+  border-color: red !important;
+  color:red;
+}
+
+.signup-btn {
+  height: 60px;
+  font-size: 1.3rem;
 }
 
 .auth-check-box{

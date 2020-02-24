@@ -1,39 +1,6 @@
-
-.anchor-container {
-  border: 1px solid var(--border-color);
-  margin-bottom: 10px;
-  font-size: 1.4rem;
-  font-weight: bold;
+.section1 {
+  background-color: transparent;
 }
-
-.often-ask-box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.often-ask-box > a,
-.q-a-box > a {
-  line-height: 6rem;
-  text-align: center;
-  display: inline-block;
-  height: 100%;
-  width: 100%;
-}
-
-.q-a-box > a {
-  color: var(--default-color);
-}
-
-.q-a-box {
-  cursor: pointer;
-  background-color: var(--main-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-
 
 /* main */
 
@@ -53,6 +20,7 @@
   display:flex;
   align-items: center;
 }
+
 #title-label{
   background: #f1f1f1;
     height: 38px;
@@ -74,17 +42,6 @@
 .textarea-box {
   display: flex;
   justify-content: center;
-}
-
-.submit-btn-box {
-  height:100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.submit-btn-box > .btn{
-  width:100px;
-  height:40px;
 }
 
 .image-list{
@@ -114,6 +71,7 @@
 
 .button-wrapper {
   display:flex;
+  align-items: center;
   position: relative;
   width: 100%;
   text-align: center;
@@ -162,4 +120,10 @@
   justify-content: center;
   border:1px solid rgba(0,0,0,0.4);
   font-size:0.9rem;
+}
+
+.post-btn{
+  width:100px;
+  height:40px;
+  margin-left:300px;
 }
