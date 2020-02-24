@@ -1,15 +1,11 @@
 import AWS from 'aws-sdk'
-import Jimp from 'jimp';
+import sharp from 'sharp'
 const s3 = new AWS.S3();
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
     //"Access-Control-Allow-Credentials" : true // Required for cookies, authorization headers with HTTPS
 }
 
-function attachTimestamp(fileName: string): string {
-    const date = new Date();
-    return `${date.toISOString()}-${fileName}`;
-}
 function putImage(buffer: Buffer, fileName: string): Promise<AWS.S3.PutObjectOutput> {
     var params = {
         Body: buffer,
@@ -17,38 +13,36 @@ function putImage(buffer: Buffer, fileName: string): Promise<AWS.S3.PutObjectOut
         Key: "images/" + fileName
     };
     return new Promise((resolve, reject) => {
-        s3.putObject(params, function (err, data) {
+        s3.putObject(params, function (err) {
             if (err) reject(err);
             else {
-                resolve(data);
+                resolve();
             }
         });
     });
 }
-
+console.log('START');
 exports.handler = async (event: any) => {
-    console.log(event);
+    console.log('imageProcessing');
     let body: any;
 
-    const imagePathList: AWS.S3.PutObjectOutput[] = [];
     const { imageList } = JSON.parse(event.body);
 
     for(let i =0; i<imageList.length; i++){
         const image = imageList[i];
-        const fileName = attachTimestamp(image.name);
 
-        const buffer = await Jimp.read(image.buffer)
-            .then(image => image.resize(Jimp.AUTO, 300))
-            .then(image => image.quality(70))
-            .then(image => image.getBufferAsync(Jimp.AUTO.toString()));
-
-        imagePathList.push(await putImage(buffer, fileName));
+        const buffer = await sharp(Buffer.from(image.src, 'base64'))
+            .resize(500)
+            .jpeg({ quality: 70 })
+            .toBuffer();
+            
+        await putImage(buffer, image.name);
     }
 
     const response = {
         statusCode:200,
         headers,
-        body: JSON.stringify(imagePathList),
+        body: "true",
     };
     return response;
 };

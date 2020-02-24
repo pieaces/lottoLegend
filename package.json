@@ -10,10 +10,10 @@
     "license": "ISC",
     "devDependencies": {
         "@types/node": "^13.1.6",
+        "@types/sharp": "^0.24.0",
         "aws-sdk": "^2.610.0"
     },
     "dependencies": {
-        "data-uri-to-buffer": "^3.0.0",
-        "jimp": "^0.9.3"
+        "sharp": "^0.24.1"
     }
 }
