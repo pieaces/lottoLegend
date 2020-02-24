@@ -36,7 +36,7 @@ exports.handler = async (event: any) => {
             .jpeg({ quality: 70 })
             .toBuffer();
             
-        await putImage(buffer, image.username, image.name);
+        await putImage(buffer, image.path, image.name);
     }
 
     const response = {
