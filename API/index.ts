@@ -31,7 +31,7 @@ exports.handler = async (event: any) => {
     for(let i =0; i<imageList.length; i++){
         const image = imageList[i];
 
-        const buffer = await sharp(Buffer.from(image.src, 'base64'))
+        const buffer = await sharp(Buffer.from(image.src.split(",")[1], 'base64'))
             .resize(500)
             .jpeg({ quality: 70 })
             .toBuffer();
