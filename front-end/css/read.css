@@ -44,8 +44,8 @@
   }
 
   .author-name > span{
-    font-weight:bold;
-    font-size:0.9rem;
+    font-weight: bold;
+    font-size: 1rem;
   }
 
   .text-content{
@@ -53,18 +53,19 @@
   }
 
   .author-time{
-      padding-right:10px;
+      padding-right:20px;
   }
 
   .author-time > span{
-    font-size:0.8rem;
+    font-size: 1rem;
+    color: #5a5a5a;
 }
 .anchor-box ul{
   list-style-type: none
 }
 .author-lookup{
-  font-size:0.8rem;
-  margin-right: 10px;
+  font-size: 0.9rem;
+  margin-right: 20px;
 }
 
   .comment-container-box{
@@ -78,15 +79,16 @@
 
 .comment-write-text-box{
   position: relative;
-  height:200px;
+  height: 100px;
 }
 
 .comment-list-title{
-  font-size:1.2rem;
-    height:50px;
-    display:flex;
-    align-items: center;
-    border-bottom: 1px solid rgba(0,0,0,0.3);
+  font-size: 1.1rem;
+  padding: 5px;
+  height: 50px;
+  display:flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(0,0,0,0.3);
 }
 
 .comment-list-title >span{
@@ -122,7 +124,7 @@
     height:100%;
     border:1px solid rgba(0,0,0,0.2);
     font-size:1rem;
-    padding:20px 20px 50px 20px;
+    padding:20px 20px 20px 20px;
 }
 
 .char-count-box{
@@ -138,10 +140,10 @@
 
 .comment-btn{
   position: absolute;
-  top:80%;
-  right:3%;
+  top: 51%;
+  right: 2%;
   border-radius: 3px;
-  width:65px;
-  height:35px;
-  font-size:14px;
+  width: 65px;
+  height: 35px;
+  font-size: 14px;
 }
