@@ -6,11 +6,11 @@ const headers = {
     //"Access-Control-Allow-Credentials" : true // Required for cookies, authorization headers with HTTPS
 }
 
-function putImage(buffer: Buffer, fileName: string): Promise<AWS.S3.PutObjectOutput> {
+function putImage(buffer: Buffer, directory:string, fileName: string): Promise<AWS.S3.PutObjectOutput> {
     var params = {
         Body: buffer,
         Bucket: "canvas-lotto",
-        Key: "images/" + fileName
+        Key: `images/${directory}/${fileName}`
     };
     return new Promise((resolve, reject) => {
         s3.putObject(params, function (err) {
@@ -36,7 +36,7 @@ exports.handler = async (event: any) => {
             .jpeg({ quality: 70 })
             .toBuffer();
             
-        await putImage(buffer, image.name);
+        await putImage(buffer, image.username, image.name);
     }
 
     const response = {
