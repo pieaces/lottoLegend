@@ -42,7 +42,6 @@ let totalSize = 0;
 
 editor.onImageUpload = function (targetImgElement, index, state, imageInfo, remainingFilesCount) {
   if (state === 'delete') {
-
     const deleteIndex = findIndex(imageList, index);
     totalSize -= imageList[deleteIndex].size;
     let size = (totalSize / 1000).toFixed(1) * 1;
@@ -195,7 +194,7 @@ const titleInput = document.getElementById('title');
 submitBtn.onclick = async () => {
   const title = titleInput.value;
   const contents = editor.getContents();
-  const result = await postAPI('/posts',{
+  const result = await postAPI('/posts', {
     title, contents
   });
   console.log(result);

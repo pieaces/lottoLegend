@@ -34,20 +34,31 @@ html {
   flex-direction: column;
 }
 
-.signup-box input,
-select {
+.signup-box input, .signup-box button {
   height: 50px;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
 }
 
-.signup-box > label {
+.signup-box  label {
   font-weight: bold;
   padding: 10px 0;
 }
 
-.signup-btn {
+.square-btn {
   background-color: var(--main-color);
   color: var(--default-color);
+  width:100%;
   height: 60px;
   font-size: 1.3rem;
+}
+
+.auth-check-container{
+  display:flex;
+  flex-direction: column;
+}
+
+.auth-check-box{
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
 }

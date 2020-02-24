@@ -24,30 +24,38 @@
         <section class="section">
             <div class="container signup-container">
                 <div class="signup-box">
-                    <label for="email">이메일</label>
-                    <input type="email" name="" id="email">
-
-
-                    <label for="password">비밀번호 확인</label>
-                    <input type="password" name="" id="password">
-
-                    <label for="password">비밀번호 재확인</label>
-                    <input type="password" name="" id="password">
+                    <label for="id">아이디</label>
+                    <input type="text" name="" id="id">
 
                     <label for="nickname">닉네임</label>
                     <input type="text" name="" id="nickname">
 
-                    <label for="birth">생년월일</label>
+                    <label for="password">비밀번호</label>
+                    <input type="password" name="" id="password">
 
-                    <input type="date" name="" id="birth" placeholder="일">
+                    <label for="password-check">비밀번호 확인</label>
+                    <input type="password" name="" id="password-check">
 
-                    <button type="button" class="btn signup-btn">가입하기</button t>
+                    <label for="phone-number">휴대폰번호</label>
+                    <input type="text" name="" id="phone-number">
+                    <button type="button" class="btn square-btn" id="auth-submit">인증번호 전송</button t>
+
+                    <div class="auth-check-container">
+                        <div class="auth-check-box">
+                            <label for="auth">인증번호</label>
+                            <span id="auth-time" class="auth-time"></span>
+                        </div>
+                        <input type="text" name="" id="auth-num">
+
+                    </div>
+                    <button type="button" class="btn square-btn" id="signup">가입하기</button t>
                 </div>
             </div>
         </section>
 
     </div>
     <script src="https://kit.fontawesome.com/e14b8c39aa.js" crossorigin="anonymous"></script>
+    <script src="js/signup.js"></script>
 </body>
 
 </html>
