@@ -1,8 +1,10 @@
-import Amplify from '@aws-amplify/core'
 import Auth from '@aws-amplify/auth'
-import awsconfig from './aws-exports';
-Amplify.configure(awsconfig);
 
+async function getUserName(){
+    return await Auth.currentSession()
+    .then(session => session.getIdToken())
+    .then(idToken => idToken.payload['cognito:username']);
+}
 async function signIn(username: string, password: string) {
     await Auth.signIn({
         username, // Required, the username
@@ -50,4 +52,4 @@ async function anyfunction() {
         console.log(err);
     }
 }
-export { signIn, signOut, signUp, confirmSignUp, resendSignUp, anyfunction };
+export { signIn, signOut, signUp, confirmSignUp, resendSignUp, anyfunction, getUserName };

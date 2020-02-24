@@ -1,10 +1,12 @@
+import amplifyInit from '../amplify/core'
+amplifyInit();
 import suneditor from 'suneditor'
 // How to import plugins
 import plugins from 'suneditor/src/plugins'
 // How to import language files (default: en)
 import { ko } from 'suneditor/src/lang'
 import {  postUnAuthAPI } from '../amplify/api';
-
+import { getUserName} from '../amplify/auth'
 const editor = suneditor.create('sample', {
   plugins: plugins,
   buttonList: [
@@ -192,15 +194,22 @@ function deleteCheckedImages() {
 const submitBtn = document.getElementById('submit-btn');
 const titleInput = document.getElementById('title');
 
+function attachTimestamp(name){
+  const index = name.indexOf('.');
+  return `${name.slice(0, index)}_${new Date().toISOString()}${name.slice(index)}`;
+}
 submitBtn.onclick = async () => {
   const title = titleInput.value;
   const contents = editor.getContents();
+  const username = await getUserName()
   const params = imageList.map(image => {
     return {
-      name:image.name,
-      src:image.src
+      path: username,
+      name: attachTimestamp(image.name),
+      src: image.src
     };
   });
+  console.log(username);
   const data = await postUnAuthAPI('/images', {imageList:params});
   console.log(data);
   // const result = await postAPI('/posts',{
