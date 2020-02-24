@@ -24,25 +24,19 @@ function putImage(buffer: Buffer, directory:string, fileName: string): Promise<A
 console.log('START');
 exports.handler = async (event: any) => {
     console.log('imageProcessing');
-    let body: any;
-
     const { imageList } = JSON.parse(event.body);
 
     for(let i =0; i<imageList.length; i++){
         const image = imageList[i];
-
         const buffer = await sharp(Buffer.from(image.src.split(",")[1], 'base64'))
             .resize(500)
             .jpeg({ quality: 70 })
             .toBuffer();
-            
         await putImage(buffer, image.path, image.name);
     }
 
-    const response = {
+    return {
         statusCode:200,
         headers,
-        body: "true",
     };
-    return response;
 };
