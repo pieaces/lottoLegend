@@ -2,6 +2,7 @@ import Layout2 from "./Layout2";
 
 const numContainer = document.querySelector('.func3-num-container');
 export default class Layout3 extends Layout2 {
+
     static makeNumBoard(numsArr: number[][]) {
         for (let i = 0; i < numsArr.length; i++) {
             const containerBox = document.createElement('div');
@@ -15,6 +16,7 @@ export default class Layout3 extends Layout2 {
             for (let j = 0; j < numsArr[0].length; j++) {
                 const num = document.createElement('div');
                 num.textContent = String(numsArr[i][j]);
+                // .setColorLotto(numsArr[i][j],num);
                 numBox.appendChild(num);
             }
 
@@ -31,3 +33,17 @@ export default class Layout3 extends Layout2 {
         super.init();
     }
 }
+
+// const allCheckBox=<HTMLInputElement>document.querySelector('#func3-all-check');
+// const checkboxes=document.querySelectorAll('.func3-num-container > div > input');
+
+// if(allCheckBox.checked){
+//     checkboxes.forEach(<HTMLInputElement>(node)=>{
+//         node.checked=true;
+//     })
+
+// }else{
+//     checkboxes.forEach(<HTMLInputElement>(node)=>{
+//         node.checked=false;
+//     })
+// }
