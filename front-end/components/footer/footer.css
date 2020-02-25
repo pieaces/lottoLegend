@@ -17,7 +17,7 @@
 
 .top-footer > ul > li {
   padding: 0 10px;
-  font-size: 0.8rem;
+  font-size: 14px;
 }
 
 /* mid-footer */
@@ -40,7 +40,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 15px;
   padding: 20px;
 }
 
@@ -78,10 +78,6 @@
 }
 
 @media (min-width: 0px) and (max-width: 767px) {
-  .top-footer > ul > li {
-    padding:0 3px;
-    font-size: 0.6rem;
-  }
 
 .bottom-footer {
   display: block;
@@ -99,18 +95,35 @@
 
 }
 
-
-@media (min-width: 0px) and (max-width: 480px) {
-  .top-footer > ul { 
-    display:block; 
-  }
+@media (min-width: 481px) and (max-width: 767px) {
 
   .top-footer > ul > li {
-    display:inline-block;
+    font-size: 12px;
   }
-  
+
+
   .mid-footer > div {
-    font-size: 0.7rem;
+    font-size: 13px;
+  }
+
+  .bottom-footer > h1 {
+    font-size:22px;
+  }
+
+}
+
+
+@media (min-width: 0px) and (max-width: 480px) {
+
+  .top-footer > ul > li {
+    font-size: 10px;
+  }
+  .mid-footer > div {
+    font-size: 11px;
+  }
+
+  .bottom-footer > h1 {
+    font-size:20px;
   }
 
   

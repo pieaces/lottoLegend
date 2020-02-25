@@ -73,3 +73,17 @@ margin-bottom:50px;
   align-items: center;
   justify-content: space-between;
 }
+
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .logo {
+    font-size: 1.7rem;
+  }
+
+}
+
+@media (min-width: 0px) and  (max-width: 480px) {
+  .logo {
+    font-size: 1.3rem;
+  }
+}

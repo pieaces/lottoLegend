@@ -44,7 +44,7 @@ html {
 .login-box > input {
   margin-bottom: 20px;
   height: 50px;
-  font-size: 0.9rem;
+  font-size: 16px;
 }
 
 .login-box > input:nth-child(2) {
@@ -86,4 +86,58 @@ html {
 
 .login-btn{
   height:50px;
+  font-size:16px;
+}
+
+@media (min-width: 0px) and (max-width: 767px) {
+  .login-box {
+    padding: 30px;
+  }
+
+  .login-btn{
+    height:45px;
+  }
+
+}
+
+
+@media (min-width: 481px) and (max-width: 767px) {
+
+  .logo {
+    font-size: 1.7rem;
+  }
+
+  .login-btn{
+    font-size:15px;
+  }
+
+  .login-service {
+    font-size:15px;
+    height:80px;
+  }
+
+  .login-box > input {
+    font-size: 15px;
+  }
+
+}
+
+@media (min-width: 0px) and  (max-width: 480px) {
+
+ .logo {
+    font-size: 1.5rem;
+  }
+    
+  .login-btn{
+    font-size:14px;
+  }
+
+  .login-service {
+    font-size:14px;
+    height:60px;
+  }
+
+  .login-box > input {
+    font-size: 14px;
+  }
 }
