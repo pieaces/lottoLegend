@@ -12,14 +12,14 @@ document.write(`
         <div class="button-wrapper">
             <div class="img-btn-box">
                 <span class="label">
-                    파일 업로드
+                    사진 업로드
                 </span>
                 <input type="file" id="files-upload" accept="image/*" multiple="multiple" />
-                <button class="btn" id="image-remove" disabled>파일 삭제</button>
-                <span id="image-size">0KB</span>
+                <button class="btn" id="image-remove" disabled>사진 삭제</button>
+                <span id="image-size">0MB</span> <span id="post-alert">최대 4MB까지 업로드 가능합니다.</span>
             </div>
             <button type="submit" class="btn square-btn post-btn" id="submit-btn">
-                작성완료
+                완료
             </button>
         </div>
     </div>

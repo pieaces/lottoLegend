@@ -24,11 +24,6 @@
   height:100%;
 }
 
-.textarea-box {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
 #image-wrapper{
   height: 150px;
 }
@@ -117,6 +112,9 @@
 #post-alert{
   width: 320px;
   font-size: 0.8rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 .post-btn{
   width:100px;
