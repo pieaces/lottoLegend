@@ -3,7 +3,7 @@ amplifyInit();
 import suneditor from 'suneditor'
 import plugins from 'suneditor/src/plugins'
 import { ko } from 'suneditor/src/lang'
-import {  postUnAuthAPI } from '../amplify/api';
+import {  postUnAuthAPI, postAuthAPI } from '../amplify/api';
 import { getUserName} from '../amplify/auth'
 const editor = suneditor.create('sample', {
   plugins: plugins,
@@ -21,7 +21,7 @@ const editor = suneditor.create('sample', {
   maxHeight: '360',
   imageWidth: '300',
   imageHeight: '300',
-  imageUploadSizeLimit: 4*1024*1024,
+  imageUploadSizeLimit: 4 * 1024 * 1024,
   lang: ko
 })
 
@@ -190,26 +190,28 @@ function deleteCheckedImages() {
 const submitBtn = document.getElementById('submit-btn');
 const titleInput = document.getElementById('title');
 
-function attachTimestamp(name){
+function attachTimestamp(name) {
   const index = name.indexOf('.');
-  return `${name.slice(0, index)}_${new Date().toISOString()}${name.slice(index)}`;
+  const now = new Date();
+  return `${name.slice(0, index)}_${now.getFullYear()}-${now.getMonth()}-${now.getDate()}${name.slice(index)}`;
 }
 submitBtn.onclick = async () => {
   const title = titleInput.value;
-  const contents = editor.getContents();
-  const username = await getUserName()
+  const userName = await getUserName()
   const images = imageList.map(image => {
+    const dataURL = image.src;
+    const fileName = attachTimestamp(image.name);
+    image.element.setAttribute('src', `https://canvas-lotto.s3.ap-northeast-2.amazonaws.com/images/${userName}/${fileName}`);
     return {
-      userName: username,
-      fileName: attachTimestamp(image.name),
-      dataURL: image.src
+      userName,
+      fileName,
+      dataURL
     };
   });
-  console.log(username);
-  const data = await postUnAuthAPI('/images', images);
-  console.log(data);
-  // const result = await postAPI('/posts',{
-  //   title, contents
-  // });
-  //console.log(result);
+  const contents = editor.getContents();
+  await postUnAuthAPI('/images', images);
+  const result = await postAuthAPI('/posts',{
+    title, contents
+  });
+  console.log(result);
 }
