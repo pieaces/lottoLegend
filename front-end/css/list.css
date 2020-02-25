@@ -6,6 +6,7 @@
   height:100px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .search-box > input,
@@ -105,7 +106,7 @@
 }
 
 .post-btn{
-  margin-left:400px;
+  margin-left:351px;
   width:70px;
   height:40px;
   background-color: var(--main-color);
