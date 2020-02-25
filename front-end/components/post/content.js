@@ -1,7 +1,7 @@
 document.write(`
 <div class="comment-title">
 <div class="title-label">제목</div>
-<input type="text" class="title">
+<input type="text" class="title" id="title-text">
 </div>
 <div class="textarea-box">
 <textarea id="sample"></textarea>

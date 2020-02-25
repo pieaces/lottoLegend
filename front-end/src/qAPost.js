@@ -187,7 +187,7 @@ function deleteCheckedImages() {
 }
 //
 const submitBtn = document.getElementById('submit-btn');
-const titleInput = document.getElementById('title');
+const titleInput = document.getElementById('title-text');
 
 function attachTimestamp(name) {
   const index = name.indexOf('.');
