@@ -11,7 +11,7 @@ document.write(`<header><nav class="top-nav-container">
 </nav>
 <nav class="mid-nav-container">
 <div class="container mid-nav">
-  <h1><a href="index.html">CanvasLotto</a></h1>
+  <h1><a href="main.html">CanvasLotto</a></h1>
   <div class="hamburger-box">
   <input type="checkbox" name="" id="hamburger">
   <i class="fas fa-bars"></i></div>
@@ -19,8 +19,8 @@ document.write(`<header><nav class="top-nav-container">
     <li><a href="#">CanvasLotto 시스템</a></li>
     <li><a href="function.html">번호 생성</a></li>
     <li><a href="statistics.html">통계 게시판</a></li>
-    <li><a href="#">자유게시판</a></li>
-    <li><a href="oftenAsk.html">고객문의</a></li>
+    <li><a href="freeBoardList.html">커뮤니티</a></li>
+    <li><a href="oftenAskList.html">고객문의</a></li>
   </ul>
 </div>
 </nav>
