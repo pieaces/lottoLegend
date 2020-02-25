@@ -13,9 +13,9 @@ export default class PostsContents extends DB {
         }
         return await super._get(option);
     }
-    async post(postId:number, contents: string): Promise<void> {
+    async post(postId:number, text: string): Promise<void> {
         const post = {
-            post:postId, contents
+            post:postId, text
         };
         await super._post(post);
     }
