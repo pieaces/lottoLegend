@@ -14,6 +14,7 @@ const editor = suneditor.create('sample', {
     ['paragraphStyle'],
     ['table', 'list', 'horizontalRule'],
   ],
+  width: '100%',
   height: 'auto',
   minHeight: '200',
   maxHeight: '360',
