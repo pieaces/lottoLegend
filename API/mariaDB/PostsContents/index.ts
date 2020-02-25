@@ -8,7 +8,7 @@ export default class PostsContents extends DB {
 
     async get(id: number) {
         const option = {
-            projection: ['contents'],
+            projection: ['text'],
             condition: { post: id }
         }
         return await super._get(option);
