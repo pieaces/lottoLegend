@@ -50,6 +50,10 @@
   width:66%;
 }
 
+.login-box >div:nth-child(1)>input:nth-child(1){
+  margin-bottom:5px;
+}
+
 .login-box > div:nth-child(2){
   width:33%;
 }
@@ -59,6 +63,7 @@
   color: var(--default-color);
   width: 100%;
   font-size: 1rem;
+  margin-left:5px;
 }
 
 .login-service {

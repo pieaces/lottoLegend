@@ -2,7 +2,7 @@ document.write(`<header><nav class="top-nav-container">
 <div class="container top-nav">
   <div class="top-nav-right">
     <ul>
-      <li><a href="login.html">로그인</a></li>
+      <li><a href="signIn.html">로그인</a></li>
       <li><a href="signup.html">회원가입</a></li>
       <li><a href="mypage.html">마이페이지</a></li>
     </ul>
@@ -17,10 +17,10 @@ document.write(`<header><nav class="top-nav-container">
   <i class="fas fa-bars"></i></div>
   <ul class="mid-nav-menu">
     <li><a href="#">CanvasLotto 시스템</a></li>
-    <li><a href="lotto-func1.html">번호 생성</a></li>
-    <li><a href="#">통계 게시판</a></li>
+    <li><a href="function.html">번호 생성</a></li>
+    <li><a href="statistics.html">통계 게시판</a></li>
     <li><a href="#">자유게시판</a></li>
-    <li><a href="q&a.html">Q&A</a></li>
+    <li><a href="oftenAsk.html">고객문의</a></li>
   </ul>
 </div>
 </nav>

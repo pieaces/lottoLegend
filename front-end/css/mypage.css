@@ -2,10 +2,7 @@
 /* main */
 
 /* main-top */
-.mypage-main {
-  height:400px;
-  padding-top: 10px;
-}
+
 
 .mypage-box-1{
   height:200px;
@@ -80,31 +77,4 @@
   width:90px;
   height:40px;
   background-color: var(--lotto-title-color) !important;
-}
-
-.mypage-num-table{
-  width:100%;
-}
-
-.mypage-num-table tr{
-  height:60px;
-}
-
-.mypage-num-table tr:nth-child(1){
-  background-color: lightgray;
-}
-
-.mypage-num-table  td{
-  text-align: center;
-}
-
-.num-list > div{
-  margin-right:20px;
-  width:35px;
-  height:35px;
-  border-radius: 50%;
-  display:inline-block;
-  line-height: 2.2;
-  background-color: var(--main-color);
-  color:var(--default-color);
 }

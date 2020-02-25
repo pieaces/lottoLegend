@@ -5,10 +5,10 @@ document.write(`<footer><nav class="top-footer-container">
             <li><a href="#">이용약관</a></li>
             <li><a href="#">개인정보처리방침</a></li>
             <li><a href="#">CanvasLotto 시스템</a></li>
-            <li><a href="#">번호 생성</a></li>
-            <li><a href="#">통계 게시판</a></li>
+            <li><a href="function.html">번호 생성</a></li>
+            <li><a href="statistics.html">통계 게시판</a></li>
             <li><a href="#">자유 게시판</a></li>
-            <li><a href="#">고객센터</a></li>
+            <li><a href="oftenAsk.html">고객센터</a></li>
         </ul>
     </div>
 </nav>

@@ -1,20 +1,6 @@
-.section1 {
-  background-color: transparent;
-}
-
 
 /* main */
     
-  .main-title {
-    height: 77px;
-    padding-left: 10px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    font-size: 1.2rem;
-    border-bottom: 2px solid #afafaf;
-  }
-  
   .text-title {
     height:60px;
     display: flex;
