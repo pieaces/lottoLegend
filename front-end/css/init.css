@@ -8,7 +8,6 @@
   --lotto-title-color: #a5484c;
   --lotto-num-color: rgba(231, 76, 60, 0.2);
   --box-color: #f8f9fb;
-  --footer-color: #003d33;
   --border-color: rgba(0, 0, 0, 0.1);
   --checkbox-color:#d7af0d;
 }
@@ -67,8 +66,12 @@ select:focus {
   position: relative;
 }
 
+/* container */
+
 .container {
+  margin: 0 auto;
   width: 960px;
+  height: 100%;
 }
 
 .box-color{
@@ -133,21 +136,13 @@ select:focus {
 .hide{
   visibility: hidden;
 }
+
 .square-btn {
   background-color: var(--main-color);
   color: var(--default-color);
   width: 100%;
   font-size: 1rem;
 }
-
-/* container */
-
-.container {
-  margin: 0 auto;
-  width: 960px;
-  height: 100%;
-}
-
 
 @media (min-width: 768px) and (max-width: 1024px) {
   
