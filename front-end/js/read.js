@@ -48,7 +48,6 @@ function limitTxtAreaCount(target) {
         const currentLength = (target.value.replace(/\s/gi, '')).length;
 
         if (currentLength > maxlength) {
-            alert(`${maxlength}자를 넘을 수 없습니다`);
             target.value = target.value.slice(0, target.value.length - 1);
             return false;
         } else {
