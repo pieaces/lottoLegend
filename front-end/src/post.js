@@ -1,9 +1,7 @@
 import amplifyInit from '../amplify/core'
 amplifyInit();
 import suneditor from 'suneditor'
-// How to import plugins
 import plugins from 'suneditor/src/plugins'
-// How to import language files (default: en)
 import { ko } from 'suneditor/src/lang'
 import {  postUnAuthAPI } from '../amplify/api';
 import { getUserName} from '../amplify/auth'
@@ -15,9 +13,7 @@ const editor = suneditor.create('sample', {
     ['bold', 'underline', 'italic', 'strike'],
     ['fontColor', 'hiliteColor'],
     ['paragraphStyle'],
-    ['align', 'list', 'horizontalRule'],
-    ['table'],
-
+    ['table', 'list', 'horizontalRule'],
   ],
   width: '100%',
   height: 'auto',
@@ -25,6 +21,7 @@ const editor = suneditor.create('sample', {
   maxHeight: '360',
   imageWidth: '300',
   imageHeight: '300',
+  imageUploadSizeLimit: 4*1024*1024,
   lang: ko
 })
 
@@ -46,8 +43,8 @@ editor.onImageUpload = function (targetImgElement, index, state, imageInfo, rema
   if (state === 'delete') {
     const deleteIndex = findIndex(imageList, index);
     totalSize -= imageList[deleteIndex].size;
-    let size = (totalSize / 1000).toFixed(1) * 1;
-    size = size.toFixed(1) + 'KB';
+    let size = (totalSize / 1024 / 1024).toFixed(2) * 1;
+    size = size.toFixed(2) + 'MB';
     imageSize.innerText = size;
 
     const imageLi = imageTable.querySelectorAll('li');
@@ -86,20 +83,20 @@ function setImageList() {
 
   for (let i = 0, image, fixSize; i < imageList.length; i++) {
     image = imageList[i];
-    fixSize = (image.size / 1000).toFixed(1) * 1
+    fixSize = (image.size / 1024 / 1024).toFixed(2) * 1
 
     list += `<li id="img_${image.index}">
       <div class="image-container" data-image-index="${image.index}">
           <div class="image-wrapper"><img src="${image.src}" ></div>
       </div>
-      <a href="javascript:void(0)" data-image-index="${image.index}" class="image-size">${fixSize}KB</a>
+      <a href="javascript:void(0)" data-image-index="${image.index}" class="image-size">${fixSize}MB</a>
       
   </li>`
 
     size += fixSize;
   }
 
-  imageSize.innerText = size.toFixed(1) + 'KB';
+  imageSize.innerText = size.toFixed(2) + 'MB';
   imageTable.innerHTML = list;
 
   const imageContainer = document.querySelectorAll('.image-container');
@@ -201,15 +198,15 @@ submitBtn.onclick = async () => {
   const title = titleInput.value;
   const contents = editor.getContents();
   const username = await getUserName()
-  const params = imageList.map(image => {
+  const images = imageList.map(image => {
     return {
-      path: username,
-      name: attachTimestamp(image.name),
-      src: image.src
+      userName: username,
+      fileName: attachTimestamp(image.name),
+      dataURL: image.src
     };
   });
   console.log(username);
-  const data = await postUnAuthAPI('/images', {imageList:params});
+  const data = await postUnAuthAPI('/images', images);
   console.log(data);
   // const result = await postAPI('/posts',{
   //   title, contents
