@@ -1,6 +1,8 @@
+import configure from '../amplify/configure'
 import {getUnAuthAPI} from '../amplify/api'
-
 const boardSection = document.querySelector('.board-section');
+
+configure();
 getUnAuthAPI('/posts')
 .then(results => {
     console.log(results.data);
@@ -20,7 +22,7 @@ function makeBoard(objArr:any[]) {
 
         const boardTitle = document.createElement('div');
         boardTitle.classList.add('board-title');
-        boardTitle.textContent = objArr[i].title;
+        boardTitle.innerHTML = `<a href="./qARead.html?id=${objArr[i].id}">${objArr[i].title}</a>`;
 
         boardBox.appendChild(boardTitle);
 

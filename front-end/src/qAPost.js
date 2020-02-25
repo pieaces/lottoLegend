@@ -1,5 +1,4 @@
-import amplifyInit from '../amplify/core'
-amplifyInit();
+import configure from '../amplify/configure'
 import suneditor from 'suneditor'
 import plugins from 'suneditor/src/plugins'
 import { ko } from 'suneditor/src/lang'
@@ -25,6 +24,7 @@ const editor = suneditor.create('sample', {
   lang: ko
 })
 
+configure();
 const imageWrapper = document.getElementById('image-wrapper');
 const imageSize = document.getElementById('image-size');
 const imageRemove = document.getElementById('image-remove');
