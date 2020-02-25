@@ -24,10 +24,6 @@
   height:100%;
 }
 
-
-
-
-
 .textarea-box {
   width: 100%;
   display: flex;
@@ -125,4 +121,15 @@
 .post-btn{
   width:100px;
   height:40px;
+}
+
+@media (min-width: 0px) and (max-width: 767px) {
+  .button-wrapper {
+    display:block;
+
+  }
+
+  .img-btn-box{
+    margin-bottom:10px;
+  }
 }

@@ -4,16 +4,31 @@
 
 .search-container {
   width: 100%;
-  height:100px;
+  padding:20px 0;
   display:flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.search-container > input,
-.search-container > select {
+.search-box > input,
+.search-box > select {
   margin-right: 10px;
   height: 40px;
+}
+
+.search-btn{
+  width:60px;
+  height:40px;
+}
+
+.post-btn{
+  width:70px;
+  height:40px;
+  background-color: var(--main-color);
+  color:var(--default-color);
+  display:flex;
+  align-items: center;
+  justify-content: center;
 }
 
 
@@ -82,6 +97,7 @@
   display:flex;
   align-items: center;
   justify-content: center;
+  font-size:12px;
 }
 
 .page-num-container > div{
@@ -90,7 +106,6 @@
   border:1px solid rgba(0,0,0,0.4);
   width:30px;
   height:30px;
-  font-size:0.75rem;
   display:flex;
   align-items: center;
   justify-content: center;
@@ -102,17 +117,131 @@
   color:var(--default-color);
 }
 
-.search-btn{
-  width:60px;
-  height:40px;
+@media (min-width: 768px) and (max-width: 1024px) {
+  .search-btn{
+    font-size:15px;
+  }
+  
+  .post-btn{
+    font-size:15px;
+  }
+  
+
 }
 
-.post-btn{
-  width:70px;
-  height:40px;
-  background-color: var(--main-color);
-  color:var(--default-color);
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  .search-btn{
+    font-size:15px;
+  }
+  
+  .post-btn{
+    font-size:15px;
+  }
+
+}
+
+@media (min-width: 0px) and (max-width: 767px) {
+
+  .search-container {
+    display:block;
+    padding:0;
+  }
+
+  .search-box{
+    padding:10px 0;
+    display:flex;
+  }
+
+  .search-box > input,
+.search-box > select {
+  margin-right: 10px;
+  height: 40px;
+  flex:1;
+}
+
+.search-btn{
+  flex:1;
+}
+
+.post-btn-box{
   display:flex;
   align-items: center;
   justify-content: center;
+  padding:10px 0;
+}
+
+.board-title {
+  flex: 4;
+}
+
+}
+
+
+@media (min-width: 481px) and (max-width: 767px) {
+
+  .search-btn{
+    font-size:14px;
+    height:38px;
+  }
+  
+  .post-btn{
+    font-size:14px;
+    height:38px;
+  }
+
+  .search-box > input,
+.search-box > select {
+  height: 38px;
+}
+.board-header {
+font-size:14px;
+}
+
+.page-num-container{
+  font-size:11px;
+}
+
+.page-num-container > div{
+  width:28px;
+  height:28px;
+}
+
+}
+
+@media (min-width: 0px) and  (max-width: 480px) {
+  .search-btn{
+    font-size:13px;
+    height:35px;
+  }
+  
+  .post-btn{
+    font-size:13px;
+    height:35px;
+  }
+
+  .search-box > input,
+  .search-box > select {
+    height: 35px;
+    padding:5px;
+  }
+
+  .board-header {
+  font-size:12px;
+  }
+
+  
+  .board-title {
+    flex: 4;
+  }
+
+  .page-num-container{
+    font-size:10px;
+  }
+  
+  .page-num-container > div{
+    width:26px;
+    height:26px;
+  }
+  
+  
 }

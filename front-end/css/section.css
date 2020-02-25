@@ -14,13 +14,11 @@
   }
 
   .anchor-box {
-    border: 1px solid var(--border-color);
     margin-bottom: 10px;
-    font-size: 1rem;
   }
   
   .anchor-box >ul {
-    font-size: 1rem;
+    font-size: 16px;
     height:100px;
     display:flex;
     flex-direction: column;
@@ -50,7 +48,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.7rem;
+    font-size: 20px;
   }
 
   .main {
@@ -64,24 +62,36 @@
     font-weight: bold;
     display: flex;
     align-items: center;
-    font-size: 1.2rem;
+    font-size: 18px;
     border-bottom: 2px solid #afafaf;
   }
   
   @media (min-width: 768px) and (max-width: 1024px) {
-  
-    .anchor-box {
-      height:180px;
+
+    .anchor-title{  
+      height: 100px;
+      font-size: 18px;
+    }
+
+    .anchor-box >ul {
+      font-size: 14px;
+      height:80px;
+
     }
     
   }
   
   @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-    
-    .anchor-box {
-      height:180px;
+    .anchor-title{  
+      height: 100px;
+      font-size: 18px;
     }
-    
+
+    .anchor-box >ul {
+      font-size: 14px;
+      height:80px;
+
+    }
   }
 
   @media(min-width: 0px) and (max-width: 767px) {
@@ -99,4 +109,20 @@
     }
   }
 
- 
+  @media (min-width: 481px) and (max-width: 767px) {
+    .main-title {
+     
+      font-size: 16px;
+     
+    }
+
+
+  }
+  
+  @media (min-width: 0px) and  (max-width: 480px) {
+    .main-title {
+   
+      font-size: 15px;
+     
+    }
+  }
