@@ -6,6 +6,7 @@ const title = document.getElementById('content-title');
 const author = document.getElementById('author-name');
 const created = document.getElementById('author-time');
 const hits = document.getElementById('author-lookup');
+const contents = document.getElementById('text-content');
 
 const id = getQueryStringObject().id;
 getUnAuthAPI('/posts/' + id)
@@ -16,7 +17,8 @@ getUnAuthAPI('/posts/' + id)
         author.textContent = post.writerName;
         created.textContent = post.created;
         hits.textContent = post.hits;
-        console.log(post.comments);
+        contents.innerHTML = post.contents.text;
+        console.log(post);
     });
 
 function getQueryStringObject(): any {
