@@ -8,15 +8,14 @@
   },
   "dependencies": {
     "@aws-amplify/api": "^2.1.5",
-    "aws-amplify": "^2.2.5",
+    "@aws-amplify/auth": "^2.1.5",
+    "@aws-amplify/core": "^2.2.4",
     "chart.js": "^2.9.3",
     "suneditor": "^2.25.0"
   },
   "devDependencies": {
     "@types/chart.js": "^2.9.13",
     "@types/node": "^13.7.4",
-    "babel-loader": "^8.0.6",
-    "copy-webpack-plugin": "^5.1.1",
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.5",
     "webpack": "^4.41.5",

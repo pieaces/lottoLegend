@@ -1,6 +1,6 @@
-import Amplify, { API, Auth } from 'aws-amplify';
-import awsconfig from './aws-exports';
-Amplify.configure(awsconfig);
+
+import Auth from '@aws-amplify/auth'
+import API from '@aws-amplify/api'
 
 const apiName = 'lotto';
 
