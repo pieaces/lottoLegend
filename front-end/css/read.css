@@ -79,10 +79,16 @@
   font-weight: bold;
 }
 
-.comment-title{
-  height: 30px;
+.comment-title-box{
+  height: 40px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+
+.comment-title{
+  display:flex;
+
 }
 
 .comment-author{
@@ -131,10 +137,27 @@
   position: absolute;
   top: 70%;
   right: 1%;
+}
+
+.text-update-container{
+  padding:10px 0;
+  display:flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.read-btn{
   border-radius: 3px;
   width: 46px;
   height: 28px;
   font-size: 14px;
+}
+
+.comment-update-btn{
+  border-radius: 3px;
+  width: 38px;
+  height: 24px;
+  font-size: 12px;
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
