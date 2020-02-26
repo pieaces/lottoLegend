@@ -57,7 +57,8 @@ exports.handler = async (event: any, context: any, callback: any) => {
                 case 'GET':
                     const category:string = event.pathParameters.category;
                     const posts = await db.scan(category);
-                    body = posts;
+                    const count = await db.getCount();
+                    body = {posts, count};
                     break;
                 case 'POST':
                     if (logedIn) {

@@ -28,8 +28,12 @@ export default class Posts extends DB {
         }
         return await super._get(option);
     }
+    async getCount(): Promise<number>{
+        const rows = await this.query(`SELECT COUNT(*) FROM ${this.tableName}`);
+        return rows[0]['count(*)'];
+    }
     async get(id: number) {
-        const rows = await this.query(`SELECT title, writerId, writerName, created, hits, text FROM Posts INNER JOIN PostsContents ON Posts.id = PostsContents.post WHERE Posts.id=?`, [id]);
+        const rows = await this.query(`SELECT title, writerId, writerName, created, hits, text FROM ${this.tableName} INNER JOIN PostsContents ON ${this.tableName}.id = PostsContents.post WHERE ${this.tableName}.id=?`, [id]);
         const post = rows[0];
         const comments = await this.comments.getByPost(id);
         if(comments) post.comments = comments;
@@ -37,7 +41,7 @@ export default class Posts extends DB {
         return post;
     }
     async addHits(id:number): Promise<void>{
-        await this.query(`UPDATE Posts set hits = hits + 1 WHERE id=1`, []);
+        await this.query(`UPDATE ${this.tableName} set hits = hits + 1 WHERE id=1`, []);
     }
     async getWriterId(id: number): Promise<string>{
         const option:any = {
