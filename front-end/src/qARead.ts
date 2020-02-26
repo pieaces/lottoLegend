@@ -20,7 +20,7 @@ let currentUser:string;
 const id = getQueryStringObject().id;
 init();
 
-commentSubmit.onclick = async function(){
+commentSubmit.onclick = async function () {
     if (Number(charCurrentCount.textContent) > 0 && currentUser) {
         try {
             const commentId = await postAuthAPI(`/posts/${id}/comments`, { contents: txtArea.value });
@@ -31,7 +31,7 @@ commentSubmit.onclick = async function(){
         }
         console.log(txtArea.value);
     } else {
-        if(!currentUser){
+        if (!currentUser) {
             alert('로그인이 필요합니다.');
         }
         else alert('1글자 이상 입력해주세요.');
@@ -56,7 +56,7 @@ async function init() {
     }
 }
 
-function makeComments(objArr:any) {
+function makeComments(objArr: any) {
     for (let i = 0; i < objArr.length; i++) {
         const commentBox = document.createElement('div');
         commentBox.classList.add('commentBox');
@@ -78,11 +78,31 @@ function makeComments(objArr:any) {
         commentTitle.appendChild(commentAuthor);
         commentTitle.appendChild(commentTime);
 
+        const updateBtnBox = document.createElement('div');
+        updateBtnBox.classList.add('text-update-btn-box');
+        updateBtnBox.classList.add('hide');
+
+        const updateBtn = document.createElement('button');
+        updateBtn.setAttribute('type', 'button');
+        updateBtn.classList.add('btn', 'square-btn', 'comment-update-btn');
+        updateBtn.id = "update-btn";
+        updateBtn.textContent = "수정";
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.setAttribute('type', 'button');
+        deleteBtn.classList.add('btn', 'square-btn', 'comment-update-btn');
+        deleteBtn.id = "delete-btn";
+        deleteBtn.textContent = "삭제";
+
+        updateBtnBox.appendChild(updateBtn);
+        updateBtnBox.appendChild(deleteBtn);
+
         const commentContent = document.createElement('div');
         commentContent.classList.add('comment-content');
         commentContent.textContent = objArr[i].contents;
 
         commentBox.appendChild(commentTitle);
+        commentBox.appendChild(updateBtnBox);
         commentBox.appendChild(commentContent);
 
         commentContainerBox.appendChild(commentBox);
