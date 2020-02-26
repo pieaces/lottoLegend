@@ -73,7 +73,7 @@
 /* board-section */
 
 .board-section {
-  
+  min-height: 250px;
   display: flex;
   flex-direction: column;
 }

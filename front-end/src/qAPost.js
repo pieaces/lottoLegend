@@ -1,12 +1,9 @@
-import amplifyInit from '../amplify/core'
-amplifyInit();
+import configure from '../amplify/configure'
 import suneditor from 'suneditor'
-// How to import plugins
 import plugins from 'suneditor/src/plugins'
-// How to import language files (default: en)
 import { ko } from 'suneditor/src/lang'
-import { postUnAuthAPI } from '../amplify/api';
-import { getUserName } from '../amplify/auth'
+import {  postUnAuthAPI, postAuthAPI } from '../amplify/api';
+import { getUserName} from '../amplify/auth'
 const editor = suneditor.create('sample', {
   plugins: plugins,
   buttonList: [
@@ -15,18 +12,19 @@ const editor = suneditor.create('sample', {
     ['bold', 'underline', 'italic', 'strike'],
     ['fontColor', 'hiliteColor'],
     ['paragraphStyle'],
-    ['align', 'list', 'horizontalRule'],
-    ['table'],
-
+    ['table', 'list', 'horizontalRule'],
   ],
+  width: '100%',
   height: 'auto',
   minHeight: '200',
   maxHeight: '360',
   imageWidth: '300',
   imageHeight: '300',
+  imageUploadSizeLimit: 4 * 1024 * 1024,
   lang: ko
 })
 
+configure();
 const imageWrapper = document.getElementById('image-wrapper');
 const imageSize = document.getElementById('image-size');
 const imageRemove = document.getElementById('image-remove');
@@ -45,8 +43,8 @@ editor.onImageUpload = function (targetImgElement, index, state, imageInfo, rema
   if (state === 'delete') {
     const deleteIndex = findIndex(imageList, index);
     totalSize -= imageList[deleteIndex].size;
-    let size = (totalSize / 1000).toFixed(1) * 1;
-    size = size.toFixed(1) + 'KB';
+    let size = (totalSize / 1024 / 1024).toFixed(2) * 1;
+    size = size.toFixed(2) + 'MB';
     imageSize.innerText = size;
 
     const imageLi = imageTable.querySelectorAll('li');
@@ -85,20 +83,20 @@ function setImageList() {
 
   for (let i = 0, image, fixSize; i < imageList.length; i++) {
     image = imageList[i];
-    fixSize = (image.size / 1000).toFixed(1) * 1
+    fixSize = (image.size / 1024 / 1024).toFixed(2) * 1
 
     list += `<li id="img_${image.index}">
       <div class="image-container" data-image-index="${image.index}">
           <div class="image-wrapper"><img src="${image.src}" ></div>
       </div>
-      <a href="javascript:void(0)" data-image-index="${image.index}" class="image-size">${fixSize}KB</a>
+      <a href="javascript:void(0)" data-image-index="${image.index}" class="image-size">${fixSize}MB</a>
       
   </li>`
 
     size += fixSize;
   }
 
-  imageSize.innerText = size.toFixed(1) + 'KB';
+  imageSize.innerText = size.toFixed(2) + 'MB';
   imageTable.innerHTML = list;
 
   const imageContainer = document.querySelectorAll('.image-container');
@@ -190,28 +188,30 @@ function deleteCheckedImages() {
 }
 //
 const submitBtn = document.getElementById('submit-btn');
-const titleInput = document.getElementById('title');
+const titleInput = document.getElementById('title-text');
 
 function attachTimestamp(name) {
   const index = name.indexOf('.');
-  return `${name.slice(0, index)}_${new Date().toISOString()}${name.slice(index)}`;
+  const now = new Date();
+  return `${name.slice(0, index)}_${now.getFullYear()}-${now.getMonth()}-${now.getDate()}${name.slice(index)}`;
 }
 submitBtn.onclick = async () => {
   const title = titleInput.value;
-  const contents = editor.getContents();
-  const username = await getUserName()
-  const params = imageList.map(image => {
+  const userName = await getUserName()
+  const images = imageList.map(image => {
+    const dataURL = image.src;
+    const fileName = attachTimestamp(image.name);
+    image.element.setAttribute('src', `https://canvas-lotto.s3.ap-northeast-2.amazonaws.com/images/${userName}/${fileName}`);
     return {
-      path: username,
-      name: attachTimestamp(image.name),
-      src: image.src
+      userName,
+      fileName,
+      dataURL
     };
   });
-  console.log(username);
-  const data = await postUnAuthAPI('/images', { imageList: params });
-  console.log(data);
-  // const result = await postAPI('/posts',{
-  //   title, contents
-  // });
-  //console.log(result);
+  const contents = editor.getContents();
+  await postUnAuthAPI('/images', images);
+  const result = await postAuthAPI('/posts',{
+    title, contents
+  });
+  console.log(result);
 }
