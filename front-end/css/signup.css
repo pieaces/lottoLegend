@@ -32,15 +32,11 @@ html {
   width: 500px;
   display: flex;
   flex-direction: column;
+  margin-bottom:50px;
 }
 
 .signup-box input {
   height: 50px;
-  margin-bottom: 10px;
-}
-
-.signup-container  button{
-margin-bottom:50px;
 }
 
 .signup-container  label {
@@ -51,11 +47,14 @@ margin-bottom:50px;
 .signup-box{
   display:flex;
   flex-direction: column;
+  margin-bottom:20px;
 }
 
 .alert-box{
   height:50px;
   color:red;
+  display:flex;
+  align-items: center;
 }
 
 .alert-input{
@@ -63,9 +62,33 @@ margin-bottom:50px;
   color:red;
 }
 
+.auth-box{
+  display:flex;
+}
+
+.auth-box >div{
+  display:flex;
+  flex-direction: column;
+}
+
+.auth-left-box{
+  flex:2;
+  margin-right:10px;
+}
+
+.auth-right-box{
+  flex:1;
+}
+
+
 .signup-btn {
-  height: 60px;
+  height: 50px;
   font-size: 1.3rem;
+}
+
+.auth-btn {
+  height: 50px;
+  font-size: 1.1rem;
 }
 
 .auth-check-box{
