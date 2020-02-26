@@ -52,7 +52,7 @@ export default class Method {
             if (typeof option.limit === 'number') {
                 sql += ` LIMIT ${option.limit}`
             } else {
-                sql += ` LIMIT ${option.limit[0], option.limit[1]}`
+                sql += ` LIMIT ${option.limit[0]}, ${option.limit[1]}`
             }
         }
         const [rows] = await this.engine.promisePool.execute(sql, values);

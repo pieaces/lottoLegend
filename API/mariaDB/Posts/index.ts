@@ -19,18 +19,19 @@ export default class Posts extends DB {
         super();
         this.tableName = 'Posts';
     }
-    async scan(category:string = "free") {
+    async scan(category:string = "free", index:number=1) {
+        const MAX = 10;
         const option = {
             projection: ['id', 'title', 'writerName', 'created', 'hits'],
             condition: { category },
             order: {created: OrderOption.DESC},
-            limit:10
+            limit:[MAX*(index-1), MAX*index] as [number, number]
         }
         return await super._get(option);
     }
     async getCount(): Promise<number>{
         const rows = await this.query(`SELECT COUNT(*) FROM ${this.tableName}`);
-        return rows[0]['count(*)'];
+        return rows[0]['COUNT(*)'];
     }
     async get(id: number) {
         const rows = await this.query(`SELECT title, writerId, writerName, created, hits, text FROM ${this.tableName} INNER JOIN PostsContents ON ${this.tableName}.id = PostsContents.post WHERE ${this.tableName}.id=?`, [id]);
