@@ -20,22 +20,26 @@ let currentUser:string;
 init();
 
 commentSubmit.onclick = async function(){
-    if(Number(charCurrentCount.textContent) > 0){
-        try{
-        const commentId = await postAuthAPI(`/posts/${id}/comments`, {contents:txtArea.value});
-        console.log(commentId);
-        makeComments([{id:commentId, writerName:await getNickName(), created:new Date().toISOString(), contents:txtArea.value}]);
-        commentNum.textContent = (Number(commentNum.textContent) + 1).toString();
-        }catch(err){
+    if (Number(charCurrentCount.textContent) > 0 && currentUser) {
+        try {
+            const commentId = await postAuthAPI(`/posts/${id}/comments`, { contents: txtArea.value });
+            makeComments([{ id: commentId.data, writerName: await getNickName(), created: new Date().toISOString(), contents: txtArea.value }]);
+            commentNum.textContent = (Number(commentNum.textContent) + 1).toString();
+        } catch (err) {
             alert('System-error');
         }
         console.log(txtArea.value);
-    }else{
-
+    } else {
+        if(!currentUser){
+            alert('로그인이 필요합니다.');
+        }
+        else alert('1글자 이상 입력해주세요.');
     }
 }
 async function init(){
+    try{
     currentUser = await getUserName();
+    }catch(err){}
     const post = (await getUnAuthAPI('/posts/' + id)).data;
     title.textContent = post.title;
     author.textContent = post.writerName;
