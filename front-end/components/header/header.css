@@ -4,7 +4,7 @@
 /* top-nav */
 
 .top-nav-container {
-  height: 45px;
+  height: 4.5rem;
 }
 
 .top-nav {
@@ -13,26 +13,13 @@
   justify-content: flex-end;
 }
 
-.top-nav-left > ul {
-  display: flex;
-}
-
-.top-nav-left > ul > li {
-  padding: 0 10px;
-  font-size: 0.8rem;
-}
-
-.top-nav-left > ul > li:not(:last-child) {
-  border-right: 1px solid var(--border-color);
-}
-
 .top-nav-right > ul {
   display: flex;
 }
 
 .top-nav-right > ul > li {
-  padding: 0 10px;
-  font-size: 0.8rem;
+  padding: 0 1rem;
+  font-size: 1.3rem;
 }
 
 .top-nav-right > ul > li:not(:last-child) {
@@ -43,7 +30,7 @@
 
 .mid-nav-container {
   width:100%;
-  height: 120px;
+  height: 12rem;
   background-color: var(--main-color);
   color: var(--default-color);
 }
@@ -56,32 +43,32 @@
 
 .mid-nav > h1 > a {
   color: var(--default-color);
-  font-size: 2.5rem;
+  font-size: 3rem;
 }
 
 .mid-nav-menu {
   display: flex;
   align-items: center;
+  font-size:1.8rem;
 }
 
 .mid-nav-menu > li {
-  padding: 0 20px;
+  padding: 0 2rem;
 }
 
 .mid-nav-menu > li > a {
   color: var(--default-color);
-  font-size: 1.2rem;
 }
 
 .hamburger-box{
   display:none;
-  width:30px;
-  height:30px;
+  width:3rem;
+  height:3rem;
   position: relative;
 }
 
 .hamburger-box > i{
-  font-size:30px;
+  font-size:3rem;
 }
 
 #hamburger{
@@ -96,7 +83,7 @@
 /* bottom-nav */
 
 .bottom-nav-container {
-  height: 60px;
+  height: 6rem;
   border-bottom: 1px solid var(--border-color);
 }
 
@@ -106,18 +93,25 @@
   justify-content: space-between;
 }
 
+.bottom-nav-left{
+  font-size:1.3rem;
+}
+
 .bottom-nav-left > ul {
   display: flex;
 }
 
 .bottom-nav-left > ul > li {
-  padding: 0 10px;
-  font-size: 0.7rem;
+  padding: 0 1rem;
 }
 
 .bottom-nav-left > ul > li:nth-child(1) {
   color: var(--default-color);
   background-color: red;
+}
+
+.bottom-nav-right{
+  font-size:1.6rem;
 }
 
 .bottom-nav-right > p {
@@ -127,139 +121,33 @@
 
   
   @media (min-width: 768px) and (max-width: 1024px) {
-    
-    .top-nav-right > ul > li {
-      padding: 0 10px;
-      font-size: 0.7rem;
-    }
 
-    .mid-nav > h1 > a {
-      font-size: 2rem;
-    }
-
-    .mid-nav-menu > li {
-      padding: 0 10px;
-    }
-
-    .mid-nav-menu > li > a {
-      font-size: 1rem;
-    }
-
-    
-.bottom-nav-container {
-  height: 50px;
-}
-
-    .bottom-nav-left > ul > li {
-      font-size: 0.6rem;
-      padding: 0 5px;
-    }
-
-    .bottom-nav-right > p {
-        font-size:0.9rem;
-    }
     
   }
   
   @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-    
-    .top-nav-right > ul > li {
-      padding: 0 10px;
-      font-size: 0.7rem;
-    }
-
-    .mid-nav > h1 > a {
-      font-size: 2rem;
-    }
-
-    .mid-nav-menu > li {
-      padding: 0 10px;
-    }
-
-    .mid-nav-menu > li > a {
-      font-size: 1rem;
-    }
-
-    .bottom-nav-container {
-      height: 50px;
-    }
-
-    .bottom-nav-left > ul > li {
-      padding: 0 5px;
-      font-size: 0.6rem;
-    }
-
-    .bottom-nav-right > p {
-      font-size:0.9rem;
-  }
+ 
   }
 
   @media (min-width: 0px) and (max-width: 767px) {
   
 
-    .top-nav-container {
-      height: 30px;
-    }
-    
-    
-    .top-nav-right > ul > li {
-      font-size: 0.6rem;
-    }
-    
-    
-    .mid-nav-container {
-      height: 70px;
-    }
     
     .mid-nav-menu{
       display:none;
     }
     
-    .mid-nav-menu > li {
-      padding: 0 20px;
-    }
-    
-    .mid-nav-menu > li > a {
-      font-size: 1.2rem;
-    }
-    
+   
     .bottom-nav-container {
       display:none;
     }
-    
-    }
 
-    @media (min-width: 481px) and (max-width: 767px) {
-      .mid-nav > h1 > a {
-        font-size: 1.8rem;
-      }
-
-      .hamburger-box{
-        display:block;
-        width:30px;
-        height:30px;
-      }
-      
-      .hamburger-box > i{
-        font-size:30px;
-      }
+    .hamburger-box{
+      display:block;
+     
     }
     
-    @media (min-width: 0px) and (max-width: 480px) {
-
-      .mid-nav > h1 > a {
-        font-size: 1.5rem;
-      }
-
-      .hamburger-box{
-        display:block;
-        width:20px;
-        height:20px;
-      }
-      
-      .hamburger-box > i{
-        font-size:20px;
-      }
-      
     }
+
+  
   

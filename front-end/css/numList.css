@@ -1,19 +1,19 @@
 .num-table-box{
-    padding:10px 0;
+    padding:1rem 0;
   }
   
   .num-table{
-    padding:10px 0;
+    padding:1rem 0;
     width:100%;
   }
   
   .num-table tr,
   .num-table th{
-    padding:0 5px;
+    padding:0 0.5rem;
   }
   
   .num-table tr{
-    height:60px;
+    height:6rem;
   }
   
   .num-table tr:nth-child(1){
@@ -25,9 +25,9 @@
   }
   
   .num-list > div{
-    margin:10px;
-    width:35px;
-    height:35px;
+    margin:1rem;
+    width:3.5rem;
+    height:3.5rem;
     border-radius: 50%;
     display:inline-block;
     line-height: 2.2;

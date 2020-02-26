@@ -2,7 +2,7 @@
   /* main */
   
   .main {
-    padding-top: 10px;
+    padding-top: 1rem;
   }
 
   .func1-chart-bar-container{
@@ -14,8 +14,8 @@
 
   .func1-chart-bar-box{
     position: relative;
-    width:1000px;
-    height: 200px 
+    width:100rem;
+    height: 20rem; 
   }
 
   .func1-chart-bar-container-box >canvas{
@@ -32,14 +32,14 @@
 
   .table-1 th{
     word-break: keep-all;
-    font-size:0.8rem;
     background-color: var(--main-color);
     color:var(--default-color);
   }
 
   .table-1 tr{
+    font-size:1.4rem;
     text-align: center;
-    height:30px;
+    height:3rem;
   }
 
   .chart-slide-current {
@@ -47,15 +47,3 @@
     border: 6px solid var(--lotto-title-color);
   }
 
-
-    @media (min-width: 481px) and (max-width: 767px) {
-      .aside-top {
-        height:70px;
-      }
-    }
-    
-    @media (min-width: 0px) and  (max-width: 480px) {
-      .aside-top {
-        height:60px;
-      }
-    }
