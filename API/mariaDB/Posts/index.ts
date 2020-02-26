@@ -54,9 +54,9 @@ export default class Posts extends DB {
 
         return post.writerId;
     }
-    async post(title: string, writerId: string, writerName: string, contents: string) {
+    async post(category:string, title: string, writerId: string, writerName: string, contents: string) {
         const post = {
-            title, writerId, writerName
+            category, title, writerId, writerName
         };
         const insertId = await super._post(post);
         await this.postsContents.post(insertId, contents);

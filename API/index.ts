@@ -63,8 +63,8 @@ exports.handler = async (event: any, context: any, callback: any) => {
                     break;
                 case 'POST':
                     if (logedIn) {
-                        const { title, contents } = JSON.parse(event.body);
-                        const insertId = await db.post(title, currentId, currentName, contents);
+                        const { category, title, contents } = JSON.parse(event.body);
+                        const insertId = await db.post(category, title, currentId, currentName, contents);
                         body = insertId;
                     } else {
                         statusCode = 400;
