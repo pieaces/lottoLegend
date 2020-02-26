@@ -7,6 +7,8 @@ const signupBtn = document.querySelector('#signup');
 const authSubmitBtn = document.querySelector('#auth-submit');
 const authTime = document.querySelector('#auth-time');
 const authNum = document.querySelector('#auth-num');
+const authCheckContainer = document.querySelector('.auth-check-container');
+const authCheck = document.querySelector('#auth-check');
 const alertId = document.querySelector('#alert-id');
 const alertNickname = document.querySelector('#alert-nickname');
 const alertPassword = document.querySelector('#alert-password');
@@ -80,13 +82,20 @@ let timerId;
 
 function authSubmit() {
 
-    //문자전송함수 실행
+
     return function () {
+        if (checkPhoneNumber()) {
+            authCheckContainer.classList.remove('none');
+            authNum.classList.remove('alert-input');
+            alertAuthNumber.textContent = "";
+            clearTimeout(timerId);
 
-        clearInterval(timerId);
-
-        authTime.innerHTML = `5:00`
-        startTimer();
+            authTime.innerHTML = `00:05`
+            startTimer();
+            //문자전송함수 실행
+        } else {
+            authCheckContainer.classList.add('none');
+        }
     };
 
 }
@@ -100,15 +109,21 @@ function startTimer() {
     if (s == 59) { m = m - 1 }
     if (m < 0) {
         authTime.innerHTML =
-            00 + ":" + 00;
+            `00:00`
+        authNum.classList.add('alert-input');
+        alertAuthNumber.textContent = "시간이 초과되었습니다";
         clearTimeout(timerId);
     } else {
-
+        authTime.innerHTML =
+            m + ":" + s;
+        timerId = setTimeout(startTimer, 1000);
     }
+}
 
-    authTime.innerHTML =
-        m + ":" + s;
-    timerId = setTimeout(startTimer, 1000);
+function checkSecond(sec) {
+    if (sec < 10 && sec >= 0) { sec = "0" + sec };
+    if (sec < 0) { sec = "59" };
+    return sec;
 }
 
 function checkAuth() {
@@ -118,9 +133,19 @@ function checkAuth() {
     //return false;
     //일치하면 
     authNum.classList.remove('alert-input');
-    alertAuthNumber.textContent = "";
+    alertAuthNumber.textContent = "인증되었습니다";
     // return true;
 }
+
+const authCheckFlag = false;
+
+authCheck.addEventListener('click', () => {
+    if (authCheckFlag) {
+
+    } else {
+        authCheckFlag = checkAuth();
+    }
+})
 
 function checkAll() {
     if (!checkId()) {
@@ -133,10 +158,9 @@ function checkAll() {
         return false;
     } else if (!checkPhoneNumber()) {
         return false;
-    } else if (!checkAuth()) {
-        return false;
-    }
-    else {
+    } else if (!authCheckFlag) {
+        return false
+    } else {
         return true;
     }
 }
@@ -152,9 +176,3 @@ signupBtn.addEventListener('click', () => {
     }
 })
 
-
-function checkSecond(sec) {
-    if (sec < 10 && sec >= 0) { sec = "0" + sec };
-    if (sec < 0) { sec = "59" };
-    return sec;
-}
