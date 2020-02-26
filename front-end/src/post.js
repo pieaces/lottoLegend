@@ -2,8 +2,8 @@ import configure from '../amplify/configure'
 import suneditor from 'suneditor'
 import plugins from 'suneditor/src/plugins'
 import { ko } from 'suneditor/src/lang'
-import {  postUnAuthAPI, postAuthAPI } from '../amplify/api';
-import { getUserName} from '../amplify/auth'
+import { postUnAuthAPI, postAuthAPI } from '../amplify/api';
+import { getUserName } from '../amplify/auth'
 const editor = suneditor.create('sample', {
   plugins: plugins,
   buttonList: [
@@ -12,14 +12,13 @@ const editor = suneditor.create('sample', {
     ['bold', 'underline', 'italic', 'strike'],
     ['fontColor', 'hiliteColor'],
     ['paragraphStyle'],
-    ['table', 'list', 'horizontalRule'],
+    ['table', 'align', 'list', 'horizontalRule'],
   ],
   width: '100%',
   height: 'auto',
-  minHeight: '200',
-  maxHeight: '360',
-  imageWidth: '300',
-  imageHeight: '300',
+  minHeight: '480',
+  imageWidth: '360',
+  imageHeight: '360',
   imageUploadSizeLimit: 4 * 1024 * 1024,
   lang: ko
 })
@@ -196,23 +195,40 @@ function attachTimestamp(name) {
   return `${name.slice(0, index)}_${now.getFullYear()}-${now.getMonth()}-${now.getDate()}${name.slice(index)}`;
 }
 const category = document.getElementById('wrapper').getAttribute('data-category');
+const loading = document.querySelector('.loading');
 submitBtn.onclick = async () => {
   const title = titleInput.value;
-  const userName = await getUserName()
-  const images = imageList.map(image => {
-    const dataURL = image.src;
-    const fileName = attachTimestamp(image.name);
-    image.element.setAttribute('src', `https://canvas-lotto.s3.ap-northeast-2.amazonaws.com/images/${userName}/${fileName}`);
-    return {
-      userName,
-      fileName,
-      dataURL
-    };
-  });
-  const contents = editor.getContents();
-  await postUnAuthAPI('/images', images);
-  const result = await postAuthAPI('/posts',{
-    category, title, contents
-  });
-  console.log(result);
+  const userName = await getUserName();
+  loading.classList.remove('none');
+  try {
+    const images = imageList.map(image => {
+      const dataURL = image.src;
+      const fileName = attachTimestamp(image.name);
+      image.element.setAttribute('src', `https://canvas-lotto.s3.ap-northeast-2.amazonaws.com/images/${userName}/${fileName}`);
+      return {
+        userName,
+        fileName,
+        dataURL
+      };
+    });
+    const contents = editor.getContents();
+    await postUnAuthAPI('/images', images);
+    const insertId = await postAuthAPI('/posts', {
+      category, title, contents
+    });
+    let htmlFileName;
+    switch (category) {
+      case 'free': htmlFileName = 'freeBoard';
+        break;
+      case 'excl': htmlFileName = 'excludeNum';
+        break;
+      case 'incl': htmlFileName = 'includeNum';
+        break;
+      case 'qna': htmlFileName = 'qA';
+        break;
+    }
+    location.href = `./${htmlFileName}Read.html?id=${insertId}`;
+  } catch (err) {
+    alert('네트워크 오류가 발생하였습니다. 작업이 정상적으로 완료되지 않았습니다.');
+  }
 }

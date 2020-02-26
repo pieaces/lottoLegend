@@ -37,23 +37,25 @@ html {
 
 .signup-box input {
   height: 50px;
+  border: 1px solid #b9b9b9;
+  margin-bottom: 10px;
 }
 
-.signup-container  label {
+.signup-container label {
   font-weight: bold;
   padding: 10px 0;
 }
 
 .signup-box{
-  display:flex;
+  display: flex;
   flex-direction: column;
-  margin-bottom:20px;
+  margin-bottom: 10px;
 }
 
 .alert-box{
-  height:50px;
-  color:red;
-  display:flex;
+  height: 20px;
+  color: red;
+  display: flex;
   align-items: center;
 }
 
@@ -79,7 +81,21 @@ html {
 .auth-right-box{
   flex:1;
 }
+.bar{
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.phone-input:first-child{
+  width:60px;
+}
+.phone-input:not(:first-child){
+  margin-left: 20px;
 
+}
+.phone-input{
+  width:75px;
+  margin-right: 20px;
+}
 
 .signup-btn {
   height: 50px;

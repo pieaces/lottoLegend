@@ -37,7 +37,18 @@ function makeBoard(objArr: any[]) {
 
         const boardTitle = document.createElement('div');
         boardTitle.classList.add('board-title');
-        boardTitle.innerHTML = `<a href="./qARead.html?id=${objArr[i].id}">${objArr[i].title}</a>`;
+        let htmlFileName:string;
+        switch(category){
+            case 'free': htmlFileName = 'freeBoard';
+            break;
+            case 'excl': htmlFileName = 'excludeNum';
+            break;
+            case 'incl': htmlFileName = 'includeNum';
+            break;
+            case 'qna': htmlFileName = 'qA';
+            break;
+        }
+        boardTitle.innerHTML = `<a href="./${htmlFileName}Read.html?id=${objArr[i].id}">${objArr[i].title}</a>`;
 
         boardBox.appendChild(boardTitle);
 

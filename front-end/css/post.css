@@ -1,3 +1,34 @@
+.sun-editor .se-toolbar{
+  position:initial;
+}
+.loading{
+  position: absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:2;
+  background-color: rgba(145,145,145,0.3);
+  box-shadow: 10px 0px 1px 1px rgba(0, 0, 0, 0.4) inset, -10px -10px -1px -1px rgba(0, 0, 0, 0.4) ;
+}
+
+.loading-icon{
+  width:100%;
+  height:100vh;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-icon > i{
+  font-size:6rem;
+  color:#882525;
+}
+
+.spin{
+  animation: spin 3s linear;
+  animation-iteration-count: infinite;
+}
 
 
 /* main */

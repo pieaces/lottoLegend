@@ -26,29 +26,31 @@
                 <div class="signup-container">
                     <div class="signup-box">
                         <label for="id">아이디</label>
-                        <input type="text" name="" id="id">
+                        <input type="text" id="id">
                         <div id="alert-id" class="alert-box"></div>
                     </div>
                     <div class="signup-box">
                         <label for="nickname">닉네임</label>
-                        <input type="text" name="" id="nickname">
+                        <input type="text" id="nickname">
                         <div id="alert-nickname" class="alert-box"></div>
                     </div>
                     <div class="signup-box">
                         <label for="password">비밀번호</label>
-                        <input type="password" name="" id="password">
+                        <input type="password" id="password">
                         <div id="alert-password" class="alert-box"></div>
                     </div>
                     <div class="signup-box">
                         <label for="password-check">비밀번호 확인</label>
-                        <input type="password" name="" id="password-check">
+                        <input type="password" id="password-check">
                         <div id="alert-password-check" class="alert-box"></div>
                     </div>
                     <div class="signup-box">
                         <div class="auth-box">
                             <div class="auth-left-box">
-                                <label for="phone-number">휴대폰번호</label>
-                                <input type="text" name="" id="phone-number">
+                                <label>휴대폰번호</label>
+                                <span>
+                                    <input type="text" id="phone-number1" class="phone-input"><span class="bar">-</span><input type="text" id="phone-number2" class="phone-input"><span class="bar">-</span><input type="text" id="phone-number3" class="phone-input">
+                                </span>
                             </div>
                             <div class="auth-right-box">
                                 <label for="auth-submit">인증번호 전송</label>
@@ -68,7 +70,7 @@
                                     <label for="auth">인증번호</label>
                                     <span id="auth-time" class="auth-time"></span>
                                 </div>
-                                <input type="text" name="" id="auth-num">
+                                <input type="text" id="auth-num">
                             </div>
                             <div class="auth-right-box">
                                 <label for="auth">인증번호 확인</label>
@@ -87,7 +89,7 @@
 
     </div>
     <script src="https://kit.fontawesome.com/e14b8c39aa.js" crossorigin="anonymous"></script>
-    <script src="js/signup.js"></script>
+    <script src="js/signUp.js"></script>
 </body>
 
 </html>
