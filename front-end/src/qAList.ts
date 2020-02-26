@@ -15,7 +15,7 @@ getUnAuthAPI('/posts', {category:'free', index})
                 div.textContent = (i + 1).toString();
                 div.classList.add('page-current');
             } else {
-                div.innerHTML = `<a href="?index=${(i + 1)}">${(i + 1)}</a>`;
+                div.innerHTML = `<a class="page-anchor" href="?index=${(i + 1)}">${(i + 1)}</a>`;
                 div.classList.add('leap-n');
             }
             pageNumContainer.appendChild(div);
