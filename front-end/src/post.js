@@ -195,6 +195,7 @@ function attachTimestamp(name) {
   const now = new Date();
   return `${name.slice(0, index)}_${now.getFullYear()}-${now.getMonth()}-${now.getDate()}${name.slice(index)}`;
 }
+const category = document.getElementById('wrapper').getAttribute('data-category');
 submitBtn.onclick = async () => {
   const title = titleInput.value;
   const userName = await getUserName()
@@ -211,7 +212,7 @@ submitBtn.onclick = async () => {
   const contents = editor.getContents();
   await postUnAuthAPI('/images', images);
   const result = await postAuthAPI('/posts',{
-    title, contents
+    category, title, contents
   });
   console.log(result);
 }

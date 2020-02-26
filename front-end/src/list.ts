@@ -5,8 +5,9 @@ const boardSection = document.querySelector('.board-section');
 const pageNumContainer = document.querySelector('.page-num-container');
 configure();
 
+const category = document.getElementById('wrapper').getAttribute('data-category');
 const index = Number(getQueryStringObject().index) || 1;
-getUnAuthAPI('/posts', {category:'free', index})
+getUnAuthAPI('/posts', {category, index})
     .then(({ posts, count }) => {
         makeBoard(posts);
         for (let i = 0; i < Math.ceil(count / 10); i++) {
