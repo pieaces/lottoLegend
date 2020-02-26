@@ -29,8 +29,8 @@ export default class Posts extends DB {
         }
         return await super._get(option);
     }
-    async getCount(): Promise<number>{
-        const rows = await this.query(`SELECT COUNT(*) FROM ${this.tableName}`);
+    async getCount(category:string): Promise<number>{
+        const rows = await this.query(`SELECT COUNT(*) FROM ${this.tableName} WHERE category=?`, [category]);
         return rows[0]['COUNT(*)'];
     }
     async get(id: number) {
