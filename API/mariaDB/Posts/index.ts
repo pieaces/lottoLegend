@@ -35,6 +35,9 @@ export default class Posts extends DB {
 
         return post;
     }
+    async addHits(id:number): Promise<void>{
+        await this.query(`UPDATE Posts set hits = hist + 1 WHERE id=1`, []);
+    }
     async getWriterId(id: number): Promise<string>{
         const option:any = {
             projection: ['writerId'],
