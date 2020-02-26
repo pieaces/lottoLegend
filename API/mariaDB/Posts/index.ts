@@ -42,7 +42,7 @@ export default class Posts extends DB {
         return post;
     }
     async addHits(id:number): Promise<void>{
-        await this.query(`UPDATE ${this.tableName} set hits = hits + 1 WHERE id=1`, []);
+        await this.query(`UPDATE ${this.tableName} set hits = hits + 1 WHERE id=?`, [id]);
     }
     async getWriterId(id: number): Promise<string>{
         const option:any = {
