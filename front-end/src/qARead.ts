@@ -20,9 +20,9 @@ getUnAuthAPI('/posts/' + id)
         author.textContent = post.writerName;
         created.textContent = post.created;
         hits.textContent = post.hits;
-        contents.innerHTML = post.contents.text;
+        contents.innerHTML = post.text;
         if(post.comments){
-            
+            makeComments(post.comments);
         }
     });
 
@@ -40,7 +40,7 @@ function getQueryStringObject(): any {
     return result;
 }
 
-function InputCommentData(objArr) {
+function makeComments(objArr:any) {
     commentNum.textContent = objArr.length;
     for (let i = 0; i < objArr.length; i++) {
         const commentBox = document.createElement('div');
@@ -78,14 +78,16 @@ function limitTxtAreaCount(target) {
     const charCurrentCount = document.querySelector('#char-current-count');
 
     return function () {
-        const currentLength = (target.value.replace(/\s/gi, '')).length;
+        const currentLength = (target.value).length;
 
         if (currentLength > maxlength) {
+            charCurrentCount.classList.add('comment-limit-alert');
             target.value = target.value.slice(0, target.value.length - 1);
             return false;
         } else {
+            charCurrentCount.classList.remove('comment-limit-alert');
             charCurrentCount.textContent = currentLength;
             return true;
         }
     }
-};
+}
