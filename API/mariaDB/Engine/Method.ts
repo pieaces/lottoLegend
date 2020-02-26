@@ -1,5 +1,5 @@
 import Engine from '../Engine';
-import {OkPacket, RowDataPacket} from 'mysql2'
+import { OkPacket, RowDataPacket } from 'mysql2'
 
 interface KeyValue {
     key: string;
@@ -10,7 +10,7 @@ interface Params {
 }
 
 export enum OrderOption {
-    DESC="DESC", ASC="ASC"
+    DESC = "DESC", ASC = "ASC"
 }
 interface GetOption {
     projection?: string[];
@@ -19,7 +19,7 @@ interface GetOption {
     limit?: number | [number, number];
 }
 export default class Method {
-    engine:Engine = Engine.getInstance();
+    engine: Engine = Engine.getInstance();
     protected tableName: string;
     /**
      * mariaDB Query
@@ -80,5 +80,10 @@ export default class Method {
         const sql = `DELETE FROM ${this.tableName} WHERE ${params.key}=?`;
         const [OkPacket] = await this.engine.promisePool.execute(sql, [params.value]);
         return ((<OkPacket>OkPacket).affectedRows);
+    }
+
+    protected async query(sql: string, values: any[] = []):Promise<RowDataPacket[]> {
+        const [rows] = await this.engine.promisePool.execute(sql, values);
+        return <RowDataPacket[]>rows;
     }
 }

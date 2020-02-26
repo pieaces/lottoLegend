@@ -6,3 +6,4 @@ key.ts
 package-lock.json
 *.pem
 *.ppk
+.vscode

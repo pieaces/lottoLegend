@@ -1,5 +1,5 @@
 import DB, { OrderOption } from "../Engine/Method"
-import {Comment} from '../Comments/index'
+import Comments, {Comment} from '../Comments/index'
 import PostsContents from "../PostsContents";
 
 interface Post{
@@ -13,6 +13,7 @@ interface Post{
     comment:Comment | null;
 }
 export default class Posts extends DB {
+    comments:Comments = new Comments();
     postsContents:PostsContents = new PostsContents();
     constructor(){
         super();
@@ -27,15 +28,10 @@ export default class Posts extends DB {
         return await super._get(option);
     }
     async get(id: number) {
-        const option:any = {
-            projection: ['title', 'writerId', 'writerName', 'created', 'hits'],
-            condition: { id }
-        }
-        let rows = await super._get(option);
+        const rows = await this.query(`SELECT title, writerId, writerName, created, hits, text FROM Posts INNER JOIN PostsContents ON Posts.id = PostsContents.post WHERE Posts.id=?`, [id]);
         const post = rows[0];
-        rows = await this.postsContents.get(id);
-        const contents = rows[0];
-        if(post) post.contents = contents;
+        const comments = await this.comments.getByPost(id);
+        if(comments) post.comments = comments;
 
         return post;
     }
