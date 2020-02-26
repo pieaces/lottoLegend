@@ -125,6 +125,14 @@
   .post-btn{
     font-size:15px;
   }
+
+  .board-header {
+    font-size:15px;
+    }
+    
+    .page-num-container{
+      font-size:11px;
+    }
   
 
 }
@@ -137,6 +145,14 @@
   .post-btn{
     font-size:15px;
   }
+
+  .board-header {
+    font-size:15px;
+    }
+    
+    .page-num-container{
+      font-size:11px;
+    }
 
 }
 
@@ -198,7 +214,7 @@ font-size:14px;
 }
 
 .page-num-container{
-  font-size:11px;
+  font-size:10px;
 }
 
 .page-num-container > div{
@@ -227,6 +243,7 @@ font-size:14px;
 
   .board-header {
   font-size:12px;
+  height:40px;
   }
 
   
@@ -235,7 +252,7 @@ font-size:14px;
   }
 
   .page-num-container{
-    font-size:10px;
+    font-size:9px;
   }
   
   .page-num-container > div{
