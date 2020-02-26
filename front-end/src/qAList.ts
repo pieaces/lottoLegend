@@ -1,12 +1,12 @@
 import configure from '../amplify/configure'
-import {getUnAuthAPI} from '../amplify/api'
+import { getUnAuthAPI } from '../amplify/api'
 import getQueryStringObject from './getQueryStringObject';
 const boardSection = document.querySelector('.board-section');
 const pageNumContainer = document.querySelector('.page-num-container');
 configure();
 
 const index = Number(getQueryStringObject().index) || 1;
-getUnAuthAPI('/posts', {category:'free', index})
+getUnAuthAPI('/posts', { category: 'free', index })
     .then(({ posts, count }) => {
         makeBoard(posts);
         for (let i = 0; i < Math.ceil(count / 10); i++) {
@@ -15,15 +15,15 @@ getUnAuthAPI('/posts', {category:'free', index})
                 div.textContent = (i + 1).toString();
                 div.classList.add('page-current');
             } else {
-                div.innerHTML = `<a class="page-anchor" href="?index=${(i + 1)}">${(i + 1)}</a>`;
+                div.innerHTML = `<a  class="page-anchor" href="?index=${(i + 1)}">${(i + 1)}</a>`;
                 div.classList.add('leap-n');
             }
             pageNumContainer.appendChild(div);
         }
         //<div id="leap-last" class="hide">맨끝</div>
-})
+    })
 
-function makeBoard(objArr:any[]) {
+function makeBoard(objArr: any[]) {
     for (let i = 0; i < objArr.length; i++) {
         const boardBox = document.createElement('div');
         boardBox.classList.add('board-box');
@@ -48,7 +48,7 @@ function makeBoard(objArr:any[]) {
 
         const boardDate = document.createElement('div');
         boardDate.classList.add('board-date');
-        boardDate.textContent = objArr[i].created.slice(0,10);
+        boardDate.textContent = objArr[i].created.slice(0, 10);
 
         boardBox.appendChild(boardDate);
 
