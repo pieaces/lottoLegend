@@ -1,6 +1,7 @@
 import configure from '../amplify/configure'
 import { getUnAuthAPI, postAuthAPI } from '../amplify/api';
 import { getUserName, getNickName } from '../amplify/auth';
+import getQueryStringObject from './getQueryStringObject';
 configure();
 
 const title = document.getElementById('content-title');
@@ -15,8 +16,8 @@ const txtArea = document.querySelector<HTMLInputElement>('#comment-write-text');
 const charCurrentCount = document.querySelector('#char-current-count');
 const commentSubmit = document.getElementById('comment-submit');
 
-const id = getQueryStringObject().id;
 let currentUser:string;
+const id = getQueryStringObject().id;
 init();
 
 commentSubmit.onclick = async function(){
@@ -36,34 +37,23 @@ commentSubmit.onclick = async function(){
         else alert('1글자 이상 입력해주세요.');
     }
 }
-async function init(){
-    try{
-    currentUser = await getUserName();
-    }catch(err){}
-    const post = (await getUnAuthAPI('/posts/' + id)).data;
-    title.textContent = post.title;
-    author.textContent = post.writerName;
-    author.setAttribute('data-writer', post.writerId);
-    created.textContent = post.created;
-    hits.textContent = post.hits;
-    contentsInput.innerHTML = post.text;
-    if(post.comments){
-        makeComments(post.comments);
+async function init() {
+    try {
+        currentUser = await getUserName();
+    } catch (err) { }
+    if (id) {
+        const post = await getUnAuthAPI('/posts/' + id);
+        console.log(post);
+        title.textContent = post.title;
+        author.textContent = post.writerName;
+        author.setAttribute('data-writer', post.writerId);
+        created.textContent = post.created;
+        hits.textContent = post.hits;
+        contentsInput.innerHTML = post.text;
+        if (post.comments) {
+            makeComments(post.comments);
+        }
     }
-}
-
-function getQueryStringObject(): any {
-    const urlDecoded = window.location.search.substr(1).split('&');
-    if (urlDecoded.length === 0) return {};
-    const result = {};
-    for (let i = 0; i < urlDecoded.length; i++) {
-        var p = urlDecoded[i].split('=', 2);
-        if (p.length == 1)
-            result[p[0]] = "";
-        else
-            result[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
-    }
-    return result;
 }
 
 function makeComments(objArr:any) {

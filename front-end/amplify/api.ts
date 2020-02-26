@@ -9,14 +9,15 @@ export async function getAuthAPI(path: string) {
         headers: {
             'X-Id-Token' : (await Auth.currentSession()).getIdToken().getJwtToken()
         },
-        response: true,
+        //response: true,
     }
 
     return await API.get(apiName, path, myInit);
 }
-export async function getUnAuthAPI(path: string) {
+export async function getUnAuthAPI(path: string, queryStringParameters:any = {}) {
     const myInit = {
-        response: true,
+        queryStringParameters,
+        //response: true,
     }
 
     return await API.get(apiName, path, myInit);
@@ -28,7 +29,7 @@ export async function postAuthAPI(path: string = '/posts', body:any) {
             'X-Id-Token' : (await Auth.currentSession()).getIdToken().getJwtToken()
         },
         body,
-        response: true,
+        //response: true,
     }
 
     return await API.post(apiName, path, myInit);
@@ -37,7 +38,7 @@ export async function postAuthAPI(path: string = '/posts', body:any) {
 export async function postUnAuthAPI(path: string = '/posts', body:any) {
     const myInit = {
         body,
-        response: true,
+        //response: true,
     }
 
     return await API.post(apiName, path, myInit);

@@ -1,12 +1,14 @@
 import configure from '../amplify/configure'
 import {getUnAuthAPI} from '../amplify/api'
+import getQueryStringObject from './getQueryStringObject';
 const boardSection = document.querySelector('.board-section');
 
 configure();
-getUnAuthAPI('/posts')
-.then(results => {
-    console.log(results.data);
-    makeBoard(results.data);
+
+const index = getQueryStringObject().index || 1;
+getUnAuthAPI('/posts', {category:'free'})
+.then(({posts, count}) => {
+    makeBoard(posts);
 })
 
 function makeBoard(objArr:any[]) {
