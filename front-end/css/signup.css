@@ -6,19 +6,20 @@
   margin-bottom:5rem;
 }
 
-.signup-box  > input {
+.signup-box  input {
+  width:20rem;
   height: 4rem;
 }
 
-.signup-box  > label {
-  width:9rem;
+.signup-box   label {
+  width:15rem;
   display:flex;
   align-items: center;
 }
 
-.signup-container label {
+.signup-box label {
   font-weight: bold;
-  padding: 1rem 1rem;
+  padding: 1rem 0;
 }
 
 .signup-box{
@@ -30,7 +31,7 @@ align-items: center;
 
 .alert-box{
   padding:0 0 0 1rem;
-  height:5rem;
+  height:4rem;
   color:red;
   display:flex;
   align-items: center;
@@ -41,27 +42,6 @@ align-items: center;
   color:red;
 }
 
-.auth-box{
-  display:flex;
-}
-
-.auth-box >div{
-  display:flex;
-  flex-direction: column;
-}
-
-.auth-left-box{
-  flex:2;
-  margin-right:1rem;
-}
-
-.auth-right-box{
-  flex:1;
-}
-.bar{
-  font-size: 1.5em;
-  font-weight: bold;
-}
 .phone-input:first-child{
   width:60px;
 }
@@ -80,15 +60,37 @@ align-items: center;
 }
 
 .auth-btn {
-  height: 5rem;
+  height: 4rem;
   font-size: 1.1rem;
 }
 
+.auth-input-container{
+  display:flex;
+
+}
+
+.auth-check-container{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .auth-check-box{
+  width:10rem;
+}
+
+
+.auth-time-box{
   display:flex;
   align-items: center;
   justify-content: space-between;
 }
+
+.auth-time-box > label{
+  font-weight: bold;
+  padding:1rem 0;
+}
+
 
 
 @media (min-width: 481px) and (max-width: 767px) {
