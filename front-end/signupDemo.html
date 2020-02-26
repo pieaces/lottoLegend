@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="./css/init.css" />
+    <link rel="stylesheet" href="./css/section.css">
+    <link rel="stylesheet" href="./components/header/header.css" />
+    <link rel="stylesheet" href="./components/footer/footer.css" />
+    <link rel="stylesheet" href="css/signup.css">
+
+    <title>CanvasLotto</title>
+</head>
+
+<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
+    <div id="wrapper">
+        <div class="hamburger-menu">
+            <div class="hamburger-menu-header">
+                <div class="hamburger-my-info">
+
+                </div>
+            </div>
+        </div>
+        <script src="components/header/header.js"></script>
+        <div class="section1">
+            <div class="grid-section-1 container">
+                <div class="aside">
+                    <div class="anchor-box">
+                        <div class="anchor-title">
+                            회원가입
+                        </div>
+                    </div>
+                </div>
+                <div class="main">
+                    <div class="main-title">
+                        회원가입
+                    </div>
+                    <div class="container">
+                        <div class="signup-container">
+                            <div class="signup-box">
+                                <label for="id">아이디</label>
+                                <input type="text" name="" id="id">
+                                <div id="alert-id" class="alert-box"></div>
+                            </div>
+                            <div class="signup-box">
+                                <label for="nickname">닉네임</label>
+                                <input type="text" name="" id="nickname">
+                                <div id="alert-nickname" class="alert-box"></div>
+                            </div>
+                            <div class="signup-box">
+                                <label for="password">비밀번호</label>
+                                <input type="password" name="" id="password">
+                                <div id="alert-password" class="alert-box"></div>
+                            </div>
+                            <div class="signup-box">
+                                <label for="password-check">비밀번호 확인</label>
+                                <input type="password" name="" id="password-check">
+                                <div id="alert-password-check" class="alert-box"></div>
+                            </div>
+                            <div class="signup-box">
+                                <div class="auth-box">
+                                    <div class="auth-left-box">
+                                        <label for="phone-number">휴대폰번호</label>
+                                        <input type="text" name="" id="phone-number">
+                                    </div>
+                                    <div class="auth-right-box">
+                                        <label for="auth-submit">인증번호 전송</label>
+                                        <button type="button" class="btn square-btn auth-btn" id="auth-submit">
+                                            전송</button>
+                                    </div>
+                                </div>
+                                <div id="alert-phone-number" class="alert-box"></div>
+
+                            </div>
+
+
+                            <div class="signup-box auth-check-container ">
+                                <div class="auth-box">
+                                    <div class="auth-left-box">
+                                        <div class="auth-check-box">
+                                            <label for="auth">인증번호</label>
+                                            <span id="auth-time" class="auth-time"></span>
+                                        </div>
+                                        <input type="text" name="" id="auth-num">
+                                    </div>
+                                    <div class="auth-right-box">
+                                        <label for="auth">인증번호 확인</label>
+                                        <button type="button" class="btn square-btn auth-btn" id="auth-check">
+                                            확인</button>
+                                    </div>
+                                </div>
+                                <div id="alert-auth-number" class="alert-box"></div>
+                            </div>
+                            <div class="signup-box">
+                                <button type="button" class="btn square-btn signup-btn" id="signup">가입하기</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="components/footer/footer.js"></script>
+    </div>
+    <script src="js/signup.js"></script>
+    <script src="https://kit.fontawesome.com/e14b8c39aa.js" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

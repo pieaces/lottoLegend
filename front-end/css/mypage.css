@@ -5,9 +5,9 @@
 
 
 .mypage-box-1{
-  height:200px;
+  height:20rem;
   display:flex;
-  margin-bottom:30px;
+  margin-bottom:3rem;
 }
 
 .mypage-box-1 >div{
@@ -15,7 +15,7 @@
 }
 
 .mypage-info-container-box{
-  margin-right:10px;
+  margin-right:1rem;
   position: relative;
 }
 
@@ -23,18 +23,18 @@
   position: absolute;
   top:50%;
   right:5%;
-  width:100px;
-  height:40px;
+  width:10rem;
+  height:4rem;
   background-color: var(--main-color);
   color:var(--default-color);
-  padding:3px;
+  padding:0.3rem;
 }
 
 .mypage-title{
-  height:40px;
+  height:4rem;
   display:flex;
   align-items: center;
-  padding-left:20px;
+  padding-left:2rem;
   border-bottom: 1px solid rgba(0,0,0,0.2);
   font-weight: bold;
   background-color: var(--main-color);
@@ -42,39 +42,39 @@
 }
 
 .mypage-info-greetings{
-  height:50px;
+  height:5rem;
   display:flex;
   align-items: center;
-  padding-left:30px;
+  padding-left:3rem;
 }
 
 .mypage-info-box{
-  height:110px;
+  height:11rem;
   display:flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .mypage-info-box > div{
-  padding-left:30px;
+  padding-left:3rem;
   flex:1;
   font-size:0.9rem;
 }
 
 .mypage-lotto-service-container{
-  height:160px;
+  height:16rem;
   display:flex;
   align-items: center;
   justify-content: center;
 }
 
 .mypage-lotto-service-container> button:nth-child(1){
-  margin-right:10px;
+  margin-right:1rem;
 }
 
 .lotto-service-btn{
   font-size:0.9rem;
-  width:90px;
-  height:40px;
+  width:9rem;
+  height:4rem;
   background-color: var(--lotto-title-color) !important;
 }

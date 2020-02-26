@@ -1,6 +1,6 @@
 
 .func3-num-count {
-  margin-bottom:10px;
+  margin-bottom:1rem;
 }
 
 .func3-num-count  div{
@@ -11,14 +11,14 @@
   text-align: center;
   background-color: var(--lotto-title-color);
   color:var(--default-color);
-  padding:10px;
+  padding:1rem;
 }
 
 
 .func3-filter-text > div{
  display:inline-block; 
   text-align: center;
-  padding:10px;
+  padding:1rem;
   width:20%;
 }
 
@@ -31,7 +31,7 @@
 }
 
 .func3-all-check-box{
-  height:30px;
+  height:3rem;
   display:flex;
   align-items: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
@@ -39,7 +39,7 @@
 
 .func3-all-check-box > input{
   width:5%;
-  height:20px;
+  height:2rem;
 }
 
 .func3-all-check-box > div{
@@ -47,11 +47,11 @@
 }
 
 .func3-num-container {
-  margin-bottom:10px;
+  margin-bottom:1rem;
 }
 
 .func3-num-container > div{
-  height:160px;
+  height:16rem;
   display:flex;
   align-items: center;
   border-bottom:1px solid var(--border-color);
@@ -59,7 +59,7 @@
 
 .func3-num-container > div input{
   width:5%;
-  height:20px;
+  height:2rem;
   
   display:flex;
   align-items: center;
@@ -86,9 +86,9 @@ height:100%;
 }
 
 .func3-num-box > div{
-  margin-right:10px;
-  width: 40px;
-  height: 40px;
+  margin-right:1rem;
+  width: 4rem;
+  height: 4rem;
   border-radius: 50%;
   background-color: var(--checkbox-color);
   color: var(--default-color);
@@ -102,6 +102,6 @@ height:100%;
 .func3-btn-container{
   display:flex;
   align-items: center;
-  height:100px;
+  height:10rem;
 }
 

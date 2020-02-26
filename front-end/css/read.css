@@ -2,19 +2,19 @@
 /* main */
     
 .text-title {
-  height:60px;
+  height:6rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid rgba(0,0,0,0.2);
 }
 .text-title > h1{
-  font-size:18px;
-  padding-left: 10px;
+  font-size:1.8rem;
+  padding-left: 1rem;
 }
 
 .text-info {
-  padding:10px 0;
+  padding:1rem 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -25,36 +25,34 @@
   display:flex;
   align-items: center;
   justify-content: center;
-  margin-left: 10px;
+  margin-left: 1rem;
 }
 .author-name > span{
   font-weight: bold;
-  font-size: 16px;
+  font-size: 1.6rem;
 }
 #text-content{
-  min-height:250px;
-  margin-bottom: 100px;
+  min-height:25rem;
 }
 .author-time{
-    padding-right:20px;
+    padding-right:2rem;
 }
 .author-time > span{
-  font-size: 16px;
+  font-size: 1.6rem;
   color: #5a5a5a;
 }
 
 .author-lookup{
-  font-size: 15px;
-  margin-right: 20px;
+  font-size: 1.5rem;
+  margin-right: 2rem;
 }
 
 .commentBox{
-  padding: 8px;
+  padding: 0.8rem;
   border-bottom: 1px dotted #656565;
 }
 .comment-container-box{
-    margin-bottom:10px;
-    min-height: 250px;
+    margin-bottom:1rem;
 }
 .comment-container-box > .comment-box{
   border-bottom: 1px solid rgba(0,0,0,0.2);
@@ -63,15 +61,15 @@
 
 .comment-write-text-box{
   position: relative;
-  height: 120px;
+  height: 12rem;
   border: 1px solid rgba(0,0,0,0.2);
-  padding: 15px 15px 40px 15px;
+  padding: 1.5rem 1.5rem 4rem 1.5rem;
 }
 
 .comment-list-title{
-  font-size: 17px;
-  padding: 5px;
-  height: 50px;
+  font-size: 1.7rem;
+  padding: 0.5rem;
+  height: 5rem;
   display:flex;
   align-items: center;
   border-bottom: 1px solid rgba(0,0,0,0.3);
@@ -82,7 +80,7 @@
 }
 
 .comment-title-box{
-  height: 40px;
+  height: 4rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -94,22 +92,22 @@
 }
 
 .comment-author{
-  margin-right:3px;
+  margin-right:0.3rem;
   font-weight: bold;
-  font-size: 13px;
+  font-size: 1.3rem;
 }
 
 .comment-time{
-  font-size:12px;
+  font-size:1.2rem;
   color:#999;
-  margin-top: 2px;
-  margin-left: 3px;
+  margin-top: 0.2rem;
+  margin-left: 0.3rem;
 }
 
 .comment-content{
   font-size: 0.9rem;
-  margin-top: 2px;
-  padding-bottom: 10px;
+  margin-top: 0.2rem;
+  padding-bottom: 1rem;
 }
 
 .comment-write-text{
@@ -117,15 +115,15 @@
     width:100%;
     height:100%;
     border: none;
-    font-size:16px;
+    font-size:1.6rem;
 }
 
 .char-count-box{
   position: absolute;
   top: 75%;
   right: 7%;
-  width: 60px;
-  height: 20px;
+  width: 6rem;
+  height: 2rem;
   display: flex;
   align-items: center;
   font-size: 0.9rem;
@@ -142,7 +140,7 @@
 }
 
 .text-update-container{
-  padding:10px 0;
+  padding:1rem 0;
   display:flex;
   align-items: center;
   justify-content: flex-end;
@@ -150,37 +148,22 @@
 
 .read-btn{
   border-radius: 3px;
-  width: 46px;
-  height: 28px;
-  font-size: 14px;
+  width: 4.6rem;
+  height: 2.8rem;
+  font-size: 1.4rem;
 }
 
 .comment-update-btn{
   border-radius: 3px;
-  width: 38px;
-  height: 24px;
-  font-size: 12px;
-}
-
-@media (min-width: 768px) and (max-width: 1024px) {
-  .char-count-box{
-    right:20%;
-  }
-  
-}
-
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-  
-  .char-count-box{
-    right:15%;
-  }
+  width: 3.8rem;
+  height: 2.4rem;
+  font-size: 1.2rem;
 }
 
 
 @media (min-width: 481px) and (max-width: 767px) {
 
   .char-count-box{
-    right:20%;
     font-size: 15px;
   }
   .text-title > h1{
@@ -219,7 +202,7 @@
 @media (min-width: 0px) and  (max-width: 480px) {
   
   .char-count-box{
-    right:22%;
+
     font-size: 14px;
   }
 

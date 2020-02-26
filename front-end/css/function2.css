@@ -1,13 +1,13 @@
 
   .func2-main-1-box{
-    height:210px;
+    height:21rem;
     display:flex;
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
   }
   
   .func2-left-container {
     width:50%;
-    margin-right:10px;
+    margin-right:1rem;
     position: relative;
   }
 
@@ -17,7 +17,7 @@
   }
 
   .func2-win-num-container{
-    height:70px;
+    height:7rem;
     display:flex;
     align-items: center;
     justify-content: space-around;
@@ -26,7 +26,7 @@
   .func2-win-num-times {
     background-color: var(--main-color);
     color: var(--default-color);
-    padding: 5px;
+    padding: 0.5rem;
     
   }
   
@@ -38,24 +38,24 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 35px;
-    height: 35px;
+    width: 3.5rem;
+    height: 3.5rem;
     border-radius: 50%;
-    margin-right: 10px;
+    margin-right: 1rem;
     color: var(--default-color);
     background-color: var(--main-color);
   }
 
   .func2-chart-gauss{
-    padding:20px;
+    padding:2rem;
     width:100% !important;
     height:100% !important;
   }
 
   .func2-main-2-box{
     display:flex;
-    height:460px;
-    margin-bottom: 10px;
+    height:46rem;
+    margin-bottom: 1rem;
   }
 
   .func2-numboard-que{
@@ -65,13 +65,13 @@
   }
 
   .func2-numboard-que-modal-text{
-    width:200px;
-    height:250px;
+    width:20rem;
+    height:25rem;
   }
   
   .func2-lotto-checkbox {
-    height:50px;
-    margin-bottom:10px;
+    height:5rem;
+    margin-bottom:1rem;
     display:flex;
   }
   
@@ -95,7 +95,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height:50px;
+    height:5rem;
   }
   
   .func2-lotto-num-box > div > div {
@@ -103,15 +103,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 35px;
-    height: 35px;
+    width: 3.5rem;
+    height: 3.5rem;
     border-radius: 50%;
-    margin-right: 13px;
+    margin-right: 1.3rem;
     color: var(--default-color);
   }
   
   .func2-num-exclude-btn {
-    margin-left: 113px;
+    margin-left: 1.13rem;
   }
 
   .func2-right-container{
@@ -121,7 +121,7 @@
   .func2-chart-radar-container {
     width:100%;
     height:50%;
-    margin-bottom:10px;
+    margin-bottom:1rem;
     position: relative;
   }
 
@@ -129,7 +129,7 @@
 
   .func2-chart-radar{
     height:85% !important;
-    padding: 0 0 20px 0;
+    padding: 0 0 2rem 0;
   }
 
   .func2-chart-radar-text{
@@ -156,8 +156,8 @@
     color: var(--main-color);
     background-color: darkgray;
     z-index:1;
-    width:20px;
-    height:20px;
+    width:2rem;
+    height:2rem;
     border-radius: 50%;
   }
 
@@ -169,8 +169,8 @@
     color: var(--main-color);
     background-color: darkgray;
     z-index:1;
-    width:20px;
-    height:20px;
+    width:2rem;
+    height:2rem;
     border-radius: 50%;
   }
   
@@ -179,18 +179,18 @@
   }
 
   .func2-chart-bar{
-    padding:20px;
+    padding:2rem;
     height:106% !important;
   }
   
   
   .func2-select-num-box-container{  
-    width: 70%;
+    width: 7rem;
   }
   
   .func2-select-num-box {
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 2rem;
+    margin-right: 2rem;
     width: 100%;
     height:100%;
     position: relative;
@@ -202,10 +202,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 35px;
-    height: 35px;
+    width: 3.5rem;
+    height: 3.5rem;
     border-radius: 50%;
-    margin-right: 10px;
+    margin-right: 1rem;
     color: var(--default-color);
     position: absolute;
   }

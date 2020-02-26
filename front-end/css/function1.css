@@ -2,9 +2,9 @@
 
   
   .func1-main-2-box{
-    height:310px;
+    height:31rem;
     display:flex;
-    margin-bottom:10px;
+    margin-bottom:1rem;
   }
 
   #func1-chart-bubble{
@@ -14,7 +14,7 @@
   
 
   .func1-bubble-textbox-container{
-    padding-right: 8px;
+    padding-right: 0.8rem;
   }
 
   .func1-bubble-que{
@@ -28,8 +28,8 @@
   }
 
   .func1-bubble-que-modal-text{
-    width:400px;
-    height:330px;
+    width:40rem;
+    height:33rem;
   }
   
   #func1-bubble-table{
@@ -49,8 +49,8 @@
   
   .func1-checkbox > div {
     position: relative;
-    width: 40px;
-    height: 40px;
+    width: 4rem;
+    height: 4rem;
     border-radius: 50%;
     display: flex;
     align-items: center;

@@ -1,61 +1,38 @@
-html {
-  background-color: var(--box-color);
-}
-
-/* header */
-
-#header {
-  height: 150px;
-}
-
-.logo {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-}
-
-.logo > a {
-  color: var(--main-color);
-}
-
 /* signup */
 
-.signup-container-box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .signup-container {
-  width: 500px;
   display: flex;
   flex-direction: column;
-  margin-bottom:50px;
+  margin-bottom:5rem;
 }
 
-.signup-box input {
-  height: 50px;
-  border: 1px solid #b9b9b9;
-  margin-bottom: 10px;
+.signup-box  > input {
+  height: 4rem;
+}
+
+.signup-box  > label {
+  width:9rem;
+  display:flex;
+  align-items: center;
 }
 
 .signup-container label {
   font-weight: bold;
-  padding: 10px 0;
+  padding: 1rem 1rem;
 }
 
 .signup-box{
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
+  padding:1rem 0;
+display:flex;
+align-items: center;
+  margin-bottom:2rem;
 }
 
 .alert-box{
-  height: 20px;
-  color: red;
-  display: flex;
+  padding:0 0 0 1rem;
+  height:5rem;
+  color:red;
+  display:flex;
   align-items: center;
 }
 
@@ -75,7 +52,7 @@ html {
 
 .auth-left-box{
   flex:2;
-  margin-right:10px;
+  margin-right:1rem;
 }
 
 .auth-right-box{
@@ -98,12 +75,12 @@ html {
 }
 
 .signup-btn {
-  height: 50px;
+  height: 5rem;
   font-size: 1.3rem;
 }
 
 .auth-btn {
-  height: 50px;
+  height: 5rem;
   font-size: 1.1rem;
 }
 
