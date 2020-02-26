@@ -12,7 +12,5 @@ document.write(`
 </div>
 </div>
 <div class="page-num-container">
-<div>맨앞</div>
-<div class="page-current">1</div>
-<div>맨끝</div>
+<div id="leap-first" class="hide">맨앞</div>
 </div>`);

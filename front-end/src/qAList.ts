@@ -2,13 +2,25 @@ import configure from '../amplify/configure'
 import {getUnAuthAPI} from '../amplify/api'
 import getQueryStringObject from './getQueryStringObject';
 const boardSection = document.querySelector('.board-section');
-
+const pageNumContainer = document.querySelector('.page-num-container');
 configure();
 
-const index = getQueryStringObject().index || 1;
-getUnAuthAPI('/posts', {category:'free'})
-.then(({posts, count}) => {
-    makeBoard(posts);
+const index = Number(getQueryStringObject().index) || 1;
+getUnAuthAPI('/posts', {category:'free', index})
+    .then(({ posts, count }) => {
+        makeBoard(posts);
+        for (let i = 0; i < Math.ceil(count / 10); i++) {
+            const div = document.createElement('div');
+            if (i + 1 === index) {
+                div.textContent = (i + 1).toString();
+                div.classList.add('page-current');
+            } else {
+                div.innerHTML = `<a href="?index=${(i + 1)}">${(i + 1)}</a>`;
+                div.classList.add('leap-n');
+            }
+            pageNumContainer.appendChild(div);
+        }
+        //<div id="leap-last" class="hide">맨끝</div>
 })
 
 function makeBoard(objArr:any[]) {

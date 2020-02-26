@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "6e732ed61c4fccb25431";
+/******/ 	var hotCurrentHash = "804ff0c50053e2c00c00";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -831,6 +831,18 @@ eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod)
 
 /***/ }),
 
+/***/ "./front-end/src/getQueryStringObject.ts":
+/*!***********************************************!*\
+  !*** ./front-end/src/getQueryStringObject.ts ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nfunction getQueryStringObject() {\r\n    var urlDecoded = window.location.search.substr(1).split('&');\r\n    if (urlDecoded.length === 0)\r\n        return {};\r\n    var result = {};\r\n    for (var i = 0; i < urlDecoded.length; i++) {\r\n        var p = urlDecoded[i].split('=', 2);\r\n        if (p.length == 1)\r\n            result[p[0]] = \"\";\r\n        else\r\n            result[p[0]] = decodeURIComponent(p[1].replace(/\\+/g, \" \"));\r\n    }\r\n    return result;\r\n}\r\nexports.default = getQueryStringObject;\r\n\n\n//# sourceURL=webpack:///./front-end/src/getQueryStringObject.ts?");
+
+/***/ }),
+
 /***/ "./front-end/src/qAList.ts":
 /*!*********************************!*\
   !*** ./front-end/src/qAList.ts ***!
@@ -839,7 +851,7 @@ eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod)
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nvar configure_1 = __importDefault(__webpack_require__(/*! ../amplify/configure */ \"./front-end/amplify/configure.ts\"));\r\nvar api_1 = __webpack_require__(/*! ../amplify/api */ \"./front-end/amplify/api.ts\");\r\nvar boardSection = document.querySelector('.board-section');\r\nconfigure_1.default();\r\napi_1.getUnAuthAPI('/posts', { category: 'free' })\r\n    .then(function (posts) {\r\n    makeBoard(posts);\r\n});\r\nfunction makeBoard(objArr) {\r\n    for (var i = 0; i < objArr.length; i++) {\r\n        var boardBox = document.createElement('div');\r\n        boardBox.classList.add('board-box');\r\n        var boardNum = document.createElement('div');\r\n        boardNum.classList.add('board-num');\r\n        boardNum.textContent = objArr[i].id;\r\n        boardBox.appendChild(boardNum);\r\n        var boardTitle = document.createElement('div');\r\n        boardTitle.classList.add('board-title');\r\n        boardTitle.innerHTML = \"<a href=\\\"./qARead.html?id=\" + objArr[i].id + \"\\\">\" + objArr[i].title + \"</a>\";\r\n        boardBox.appendChild(boardTitle);\r\n        var boardAuthor = document.createElement('div');\r\n        boardAuthor.classList.add('board-author');\r\n        boardAuthor.textContent = objArr[i].writerName;\r\n        boardBox.appendChild(boardAuthor);\r\n        var boardDate = document.createElement('div');\r\n        boardDate.classList.add('board-date');\r\n        boardDate.textContent = objArr[i].created.slice(0, 10);\r\n        boardBox.appendChild(boardDate);\r\n        var boardViews = document.createElement('div');\r\n        boardViews.classList.add('board-views');\r\n        boardViews.textContent = objArr[i].hits;\r\n        boardBox.appendChild(boardViews);\r\n        boardSection.appendChild(boardBox);\r\n    }\r\n}\r\n\n\n//# sourceURL=webpack:///./front-end/src/qAList.ts?");
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nvar configure_1 = __importDefault(__webpack_require__(/*! ../amplify/configure */ \"./front-end/amplify/configure.ts\"));\r\nvar api_1 = __webpack_require__(/*! ../amplify/api */ \"./front-end/amplify/api.ts\");\r\nvar getQueryStringObject_1 = __importDefault(__webpack_require__(/*! ./getQueryStringObject */ \"./front-end/src/getQueryStringObject.ts\"));\r\nvar boardSection = document.querySelector('.board-section');\r\nvar pageNumContainer = document.querySelector('.page-num-container');\r\nconfigure_1.default();\r\nvar index = Number(getQueryStringObject_1.default().index) || 1;\r\nconsole.log(index);\r\napi_1.getUnAuthAPI('/posts', { category: 'free' })\r\n    .then(function (_a) {\r\n    var posts = _a.posts, count = _a.count;\r\n    makeBoard(posts);\r\n    for (var i = 0; i < Math.ceil(count / 10); i++) {\r\n        var div = document.createElement('div');\r\n        if (i + 1 === index) {\r\n            console.log('!!');\r\n            div.textContent = (i + 1).toString();\r\n            div.classList.add('page-current');\r\n        }\r\n        else {\r\n            div.innerHTML = \"<a href=\\\"?index=\" + (i + 1) + \"\\\">\" + (i + 1) + \"</a>\";\r\n            div.classList.add('leap-n');\r\n        }\r\n        pageNumContainer.appendChild(div);\r\n    }\r\n    //<div id=\"leap-last\" class=\"hide\">맨끝</div>\r\n});\r\nfunction makeBoard(objArr) {\r\n    for (var i = 0; i < objArr.length; i++) {\r\n        var boardBox = document.createElement('div');\r\n        boardBox.classList.add('board-box');\r\n        var boardNum = document.createElement('div');\r\n        boardNum.classList.add('board-num');\r\n        boardNum.textContent = objArr[i].id;\r\n        boardBox.appendChild(boardNum);\r\n        var boardTitle = document.createElement('div');\r\n        boardTitle.classList.add('board-title');\r\n        boardTitle.innerHTML = \"<a href=\\\"./qARead.html?id=\" + objArr[i].id + \"\\\">\" + objArr[i].title + \"</a>\";\r\n        boardBox.appendChild(boardTitle);\r\n        var boardAuthor = document.createElement('div');\r\n        boardAuthor.classList.add('board-author');\r\n        boardAuthor.textContent = objArr[i].writerName;\r\n        boardBox.appendChild(boardAuthor);\r\n        var boardDate = document.createElement('div');\r\n        boardDate.classList.add('board-date');\r\n        boardDate.textContent = objArr[i].created.slice(0, 10);\r\n        boardBox.appendChild(boardDate);\r\n        var boardViews = document.createElement('div');\r\n        boardViews.classList.add('board-views');\r\n        boardViews.textContent = objArr[i].hits;\r\n        boardBox.appendChild(boardViews);\r\n        boardSection.appendChild(boardBox);\r\n    }\r\n}\r\n\n\n//# sourceURL=webpack:///./front-end/src/qAList.ts?");
 
 /***/ }),
 
