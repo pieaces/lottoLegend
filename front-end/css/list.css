@@ -117,6 +117,14 @@
   color:var(--default-color);
 }
 
+.page-anchor{
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  display: inline-block;
+  line-height: 2.4;
+}
+
 @media (min-width: 768px) and (max-width: 1024px) {
   .search-btn{
     font-size:15px;
@@ -221,13 +229,6 @@ font-size:14px;
   width:28px;
   height:28px;
 }
-.page-anchor{
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  display: inline-block;
-  justify-content: center;
-}
 }
 
 @media (min-width: 0px) and  (max-width: 480px) {
@@ -265,6 +266,5 @@ font-size:14px;
     width:26px;
     height:26px;
   }
-  
   
 }
