@@ -1,30 +1,52 @@
 import configure from '../amplify/configure'
-import { getUnAuthAPI } from '../amplify/api';
+import { getUnAuthAPI, postAuthAPI } from '../amplify/api';
+import { getUserName, getNickName } from '../amplify/auth';
 configure();
 
 const title = document.getElementById('content-title');
 const author = document.getElementById('author-name');
 const created = document.getElementById('author-time');
 const hits = document.getElementById('author-lookup');
-const contents = document.getElementById('text-content');
+const contentsInput = document.getElementById('text-content');
 
 const commentContainerBox = document.querySelector('.comment-container-box');
 const commentNum = document.querySelector('#comment-num');
+const txtArea = document.querySelector<HTMLInputElement>('#comment-write-text');
+const charCurrentCount = document.querySelector('#char-current-count');
+const commentSubmit = document.getElementById('comment-submit');
 
 const id = getQueryStringObject().id;
-getUnAuthAPI('/posts/' + id)
-    .then(result => {
-        console.log(result);
-        const post = result.data;
-        title.textContent = post.title;
-        author.textContent = post.writerName;
-        created.textContent = post.created;
-        hits.textContent = post.hits;
-        contents.innerHTML = post.text;
-        if(post.comments){
-            makeComments(post.comments);
+let currentUser:string;
+init();
+
+commentSubmit.onclick = async function(){
+    if(Number(charCurrentCount.textContent) > 0){
+        try{
+        const commentId = await postAuthAPI(`/posts/${id}/comments`, {contents:txtArea.value});
+        console.log(commentId);
+        makeComments([{id:commentId, writerName:await getNickName(), created:new Date().toISOString(), contents:txtArea.value}]);
+        commentNum.textContent = (Number(commentNum.textContent) + 1).toString();
+        }catch(err){
+            alert('System-error');
         }
-    });
+        console.log(txtArea.value);
+    }else{
+
+    }
+}
+async function init(){
+    currentUser = await getUserName();
+    const post = (await getUnAuthAPI('/posts/' + id)).data;
+    title.textContent = post.title;
+    author.textContent = post.writerName;
+    author.setAttribute('data-writer', post.writerId);
+    created.textContent = post.created;
+    hits.textContent = post.hits;
+    contentsInput.innerHTML = post.text;
+    if(post.comments){
+        makeComments(post.comments);
+    }
+}
 
 function getQueryStringObject(): any {
     const urlDecoded = window.location.search.substr(1).split('&');
@@ -41,7 +63,6 @@ function getQueryStringObject(): any {
 }
 
 function makeComments(objArr:any) {
-    commentNum.textContent = objArr.length;
     for (let i = 0; i < objArr.length; i++) {
         const commentBox = document.createElement('div');
         commentBox.classList.add('commentBox');
@@ -53,6 +74,8 @@ function makeComments(objArr:any) {
         const commentAuthor = document.createElement('div');
         commentAuthor.classList.add('comment-author');
         commentAuthor.textContent = objArr[i].writerName;
+        //
+        commentAuthor.setAttribute('data-writer', objArr[i].writerId);
 
         const commentTime = document.createElement('div');
         commentTime.classList.add('comment-time');
@@ -70,12 +93,11 @@ function makeComments(objArr:any) {
 
         commentContainerBox.appendChild(commentBox);
     }
+    commentNum.textContent = objArr.length;
 }
-const txtArea = document.querySelector('#comment-write-text');
 txtArea.addEventListener('input', limitTxtAreaCount(txtArea))
 function limitTxtAreaCount(target) {
     const maxlength = 150;
-    const charCurrentCount = document.querySelector('#char-current-count');
 
     return function () {
         const currentLength = (target.value).length;

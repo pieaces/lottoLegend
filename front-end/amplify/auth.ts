@@ -5,6 +5,11 @@ async function getUserName(){
     .then(session => session.getIdToken())
     .then(idToken => idToken.payload['cognito:username']);
 }
+async function getNickName(){
+    return await Auth.currentSession()
+    .then(session => session.getIdToken())
+    .then(idToken => idToken.payload.nickname);
+}
 async function signIn(username: string, password: string) {
     await Auth.signIn({
         username, // Required, the username
@@ -52,4 +57,4 @@ async function anyfunction() {
         console.log(err);
     }
 }
-export { signIn, signOut, signUp, confirmSignUp, resendSignUp, anyfunction, getUserName };
+export { signIn, signOut, signUp, confirmSignUp, resendSignUp, anyfunction, getUserName, getNickName };

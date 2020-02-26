@@ -52,6 +52,7 @@
   }
 
   .main {
+    min-height: 750px;
     width:82%;
     padding:10px 0;
   }
