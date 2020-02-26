@@ -19,9 +19,10 @@ export default class Posts extends DB {
         super();
         this.tableName = 'Posts';
     }
-    async scan() {
+    async scan(category:string = "free") {
         const option = {
             projection: ['id', 'title', 'writerName', 'created', 'hits'],
+            condition: { category },
             order: {created: OrderOption.DESC},
             limit:10
         }
@@ -36,7 +37,7 @@ export default class Posts extends DB {
         return post;
     }
     async addHits(id:number): Promise<void>{
-        await this.query(`UPDATE Posts set hits = hist + 1 WHERE id=1`, []);
+        await this.query(`UPDATE Posts set hits = hits + 1 WHERE id=1`, []);
     }
     async getWriterId(id: number): Promise<string>{
         const option:any = {

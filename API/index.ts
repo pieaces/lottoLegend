@@ -55,7 +55,8 @@ exports.handler = async (event: any, context: any, callback: any) => {
             const db = new Posts();
             switch (method) {
                 case 'GET':
-                    const posts = await db.scan();
+                    const category:string = event.pathParameters.category;
+                    const posts = await db.scan(category);
                     body = posts;
                     break;
                 case 'POST':
