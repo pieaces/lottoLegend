@@ -1,5 +1,5 @@
-import configure from '../js/amplify/configure'
-import { signUp, confirmSignUp } from "../js/amplify/auth";
+import configure from './amplify/configure'
+import { signUp, confirmSignUp } from "./amplify/auth";
 
 configure();
 const signupContainerBox = document.querySelector('.signup-container-box');
