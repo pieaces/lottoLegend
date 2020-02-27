@@ -14,7 +14,9 @@
 .signup-box   label {
   width:15rem;
   display:flex;
+  justify-content: center;
   align-items: center;
+  border-right:1px solid var(--border-color);
 }
 
 .signup-box label {

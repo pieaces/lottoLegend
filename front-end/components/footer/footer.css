@@ -87,45 +87,8 @@
 
 .bottom-footer > h1 {
   margin:0;
-}
-
-.bottom-footer > div > p {
-  font-size: 0.6rem;
-  
+  padding:1rem 0;
 }
 
 }
 
-@media (min-width: 481px) and (max-width: 767px) {
-
-  .top-footer > ul > li {
-    font-size: 12px;
-  }
-
-
-  .mid-footer > div {
-    font-size: 13px;
-  }
-
-  .bottom-footer > h1 {
-    font-size:22px;
-  }
-
-}
-
-
-@media (min-width: 0px) and (max-width: 480px) {
-
-  .top-footer > ul > li {
-    font-size: 10px;
-  }
-  .mid-footer > div {
-    font-size: 11px;
-  }
-
-  .bottom-footer > h1 {
-    font-size:20px;
-  }
-
-  
-}

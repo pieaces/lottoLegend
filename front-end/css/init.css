@@ -181,7 +181,7 @@ select:focus {
 
 @media (min-width: 0px) and (max-width: 480px) {
   html{
-    font-size:10px;
+    font-size:8px;
   }
 
   .container {
