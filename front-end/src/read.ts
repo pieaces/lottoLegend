@@ -1,6 +1,6 @@
-import configure from '../amplify/configure'
-import { getUnAuthAPI, postAuthAPI } from '../amplify/api';
-import { getUserName, getNickName } from '../amplify/auth';
+import configure from '../js/amplify/configure'
+import { getUnAuthAPI, postAuthAPI } from '../js/amplify/api';
+import { getUserName, getNickName } from '../js/amplify/auth';
 import getQueryStringObject from './getQueryStringObject';
 configure();
 

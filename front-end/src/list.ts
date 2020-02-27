@@ -1,5 +1,5 @@
-import configure from '../amplify/configure'
-import { getUnAuthAPI } from '../amplify/api'
+import configure from '../js/amplify/configure'
+import { getUnAuthAPI } from '../js/amplify/api'
 import getQueryStringObject from './getQueryStringObject';
 const boardSection = document.querySelector('.board-section');
 const pageNumContainer = document.querySelector('.page-num-container');
@@ -7,7 +7,7 @@ configure();
 
 const category = document.getElementById('wrapper').getAttribute('data-category');
 const index = Number(getQueryStringObject().index) || 1;
-getUnAuthAPI('/posts', {category, index})
+getUnAuthAPI('/posts', { category, index })
     .then(({ posts, count }) => {
         makeBoard(posts);
         for (let i = 0; i < Math.ceil(count / 10); i++) {
@@ -37,16 +37,16 @@ function makeBoard(objArr: any[]) {
 
         const boardTitle = document.createElement('div');
         boardTitle.classList.add('board-title');
-        let htmlFileName:string;
-        switch(category){
+        let htmlFileName: string;
+        switch (category) {
             case 'free': htmlFileName = 'freeBoard';
-            break;
+                break;
             case 'excl': htmlFileName = 'excludeNum';
-            break;
+                break;
             case 'incl': htmlFileName = 'includeNum';
-            break;
+                break;
             case 'qna': htmlFileName = 'qA';
-            break;
+                break;
         }
         boardTitle.innerHTML = `<a href="./${htmlFileName}Read.html?id=${objArr[i].id}">${objArr[i].title}</a>`;
 

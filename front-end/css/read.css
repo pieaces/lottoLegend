@@ -31,9 +31,10 @@
   font-weight: bold;
   font-size: 1.6rem;
 }
-#text-content{
+.text-content{
+  font-size:1.6rem !important;
   min-height:25rem;
-  margin-bottom: 100px;
+  margin-bottom: 5rem;
 }
 .author-time{
     padding-right:2rem;
@@ -70,7 +71,7 @@
   position: relative;
   height: 12rem;
   border: 1px solid rgba(0,0,0,0.2);
-  padding: 1.5rem 1.5rem 4rem 1.5rem;
+  padding: 1.5rem 1.5rem 4.5rem 1.5rem;
 }
 
 .comment-list-title{
@@ -101,18 +102,18 @@
 .comment-author{
   margin-right:0.3rem;
   font-weight: bold;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
 }
 
 .comment-time{
-  font-size:1.2rem;
+  font-size:1.3rem;
   color:#999;
   margin-top: 0.2rem;
   margin-left: 0.3rem;
 }
 
 .comment-content{
-  font-size: 0.9rem;
+  font-size: 1.4rem;
   margin-top: 0.2rem;
   padding-bottom: 1rem;
 }
@@ -127,13 +128,13 @@
 
 .char-count-box{
   position: absolute;
-  top: 75%;
-  right: 7%;
+  top: 80%;
+  right: 10%;
   width: 6rem;
-  height: 2rem;
+  height: 2.8rem;
   display: flex;
   align-items: center;
-  font-size: 0.9rem;
+  font-size: 1.4rem;
   justify-content: center;
 }
 .comment-limit-alert{
@@ -142,7 +143,7 @@
 }
 .comment-btn{
   position: absolute;
-  top: 70%;
+  top: 80%;
   right: 1%;
 }
 
@@ -152,8 +153,6 @@
   align-items: center;
   justify-content: flex-end;
 }
-
-
 
 .read-btn{
   border-radius: 3px;
@@ -173,75 +172,12 @@
 
 @media (min-width: 481px) and (max-width: 767px) {
 
-  .char-count-box{
-    font-size: 15px;
-  }
-  .text-title > h1{
-    font-size:17px;
-  }
-
-  .author-time > span{
-    font-size: 15px;
-}
-
-.author-name > span{
-  font-size: 15px;
-}
-
-.author-lookup{
-  font-size: 14px;
-}
-
-
-.comment-btn{
-  font-size: 13px;
-}
-
-.comment-list-title{
-  font-size: 16px;
-}
-
-.comment-write-text{
-  font-size:15px;
-
-}
 
   
 }
 
 @media (min-width: 0px) and  (max-width: 480px) {
   
-  .char-count-box{
 
-    font-size: 14px;
-  }
-
-  .text-title > h1{
-    font-size:16px;
-  }
-
-  .author-time > span{
-    font-size: 14px;
-}
-
-.author-name > span{
-  font-size: 14px;
-}
-
-.author-lookup{
-  font-size: 13px;
-}
-
-.comment-btn{
-  font-size: 12px;
-}
-.comment-list-title{
-  font-size: 15px;
-}
-
-.comment-write-text{
-  font-size:14px;
-
-}
   
 }

@@ -1,5 +1,5 @@
-import configure from '../amplify/configure'
-import { signIn } from '../amplify/auth'
+import configure from '../js/amplify/configure'
+import { signIn } from '../js/amplify/auth'
 
 configure();
 const loginBtn = document.getElementById('login-btn');

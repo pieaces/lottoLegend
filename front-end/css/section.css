@@ -21,10 +21,11 @@
     font-size: 1.6rem;
     display:flex;
     flex-direction: column;
+    border:1px solid var(--border-color);
   }
   
   .anchor-box > ul >li{
-    height:3rem;
+    height:3.5rem;
     display:flex;
     align-items: center;
     justify-content: center;

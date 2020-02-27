@@ -31,7 +31,6 @@
 /* main */
 
 .comment-title{
-  padding:0.5rem 0;
   height:5rem;
   display:flex;
   align-items: center;
@@ -49,7 +48,6 @@
 
 .title{
   width:90%;
-  height:100%;
 }
 
 #image-wrapper{
