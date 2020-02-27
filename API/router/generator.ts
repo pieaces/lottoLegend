@@ -4,6 +4,7 @@ import Calculate from '../Lotto/class/Calculate';
 import { GeneratorOption } from '../Lotto/interface/Generator';
 import jwt from 'jsonwebtoken';
 import jwkToPem from 'jwk-to-pem';
+import { getRank, Plan } from '../dynamoDB/getRank';
 const pem = jwkToPem({
     "alg": "RS256",
     "e": "AQAB",
@@ -22,9 +23,15 @@ router.post('/', (req, res) => {
         console.log("Intruder Alert! - No Token!");
         return res.json('잘못된 접근입니다.');
     }
-    jwt.verify(idToken, pem, { algorithms: ['RS256'] }, (err, decodedToken) => {
+    jwt.verify(idToken, pem, { algorithms: ['RS256'] }, async (err, decodedToken:any) => {
         if(err){
             console.log('Intruder Alert! - Expired Token!');
+            return res.json('잘못된 접근입니다.');
+        }
+        const userName = decodedToken["cognito:username"];
+        const rank = await getRank(userName);
+        if(rank !== Plan.premium) {
+            console.log('Intruder Alert! - Not Premium!');
             return res.json('잘못된 접근입니다.');
         }
     });

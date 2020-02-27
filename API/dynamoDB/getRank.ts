@@ -1,7 +1,18 @@
+import AWS from 'aws-sdk'
+const dynamoDB = new AWS.DynamoDB();
+
+export enum Plan {
+    "default" = "a",
+    "basic" = "b",
+    "premium" = "c"
+}
 export function getRank(userName:string):Promise<string>{
     const params = {
         TableName:'lottoUsers',
-        ExpressionAttributeNames,
+        ExpressionAttributeNames: {
+            "#Plan": 'Plan',
+            '#Until': 'Until'
+        },
         ProjectionExpression: '#Plan, #Until',
         Key: {
             "UserName": {
