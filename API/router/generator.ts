@@ -1,7 +1,7 @@
 import express from 'express';
 import Generator from '../Lotto/class/Generator';
 import Calculate from '../Lotto/class/Calculate';
-import { GeneratorOption } from '../Lotto/interface/Generator';
+import { GeneratorOption } from '../Lotto/interface';
 import jwt from 'jsonwebtoken';
 import jwkToPem from 'jwk-to-pem';
 import { getRank, Plan } from '../dynamoDB/getRank';
