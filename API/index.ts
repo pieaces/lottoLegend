@@ -1,6 +1,6 @@
 import Posts from "./mariaDB/Posts";
 import Comments from "./mariaDB/Comments";
-import { updateNumbers, getAllNumbers, getNumbersByClass, deleteNumber, Method } from './dynamoDB/myNumbers'
+import { updateNumbers, getAllNumbers, getNumbersByClass, deleteNumber, Method, getIncOrExcNumbers } from './dynamoDB/myNumbers'
 import jwt from 'jsonwebtoken';
 import jwkToPem from 'jwk-to-pem';
 import { Response } from "./class";
@@ -157,16 +157,16 @@ exports.handler = async (event: any, context: any, callback: any) => {
         rank = default, basic, premium, all
         method = auto, manual, include, exclude
         */
-        case '/users/{userName}/numbers/{round}/{rank}/{method}':{
+        case '/users/{userName}/numbers/{rank}/{method}':{
             const userName = event.pathParameters.userName;
             const round = event.pathParameters.round;
-            const rank = event.pathParameters.rank;
             const pickMethod = event.pathParameters.method;
             if (logedIn) {
                 const response = isIdentical(currentId, userName);
                 if (!response.error) {
                     switch (method) {
                         case 'GET': {
+                            const rank = event.queryStringParameters.rank;
                             if(rank === 'all'){
                                 const { numsArr } = await getAllNumbers(userName, round);
                                 body = numsArr;
@@ -174,7 +174,8 @@ exports.handler = async (event: any, context: any, callback: any) => {
                                 const { numsArr } = await getNumbersByClass(userName, round, Plan[rank]+Method[pickMethod]);
                                 body = numsArr;
                             }else{
-                                
+                                const numbers = await getIncOrExcNumbers(userName, round, pickMethod);
+                                body = numbers;
                             }
                         }
                             break;
