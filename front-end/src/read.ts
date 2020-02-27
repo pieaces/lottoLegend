@@ -16,7 +16,7 @@ const txtArea = document.querySelector<HTMLInputElement>('#comment-write-text');
 const charCurrentCount = document.querySelector('#char-current-count');
 const commentSubmit = document.getElementById('comment-submit');
 
-let currentUser:string;
+let currentUser: string;
 const id = getQueryStringObject().id;
 init();
 
@@ -58,9 +58,12 @@ async function init() {
 
 function makeComments(objArr: any) {
     for (let i = 0; i < objArr.length; i++) {
+        const commentContainer = document.createElement('div');
+        commentContainer.classList.add('comment-container');
+        commentContainer.setAttribute('data-id', objArr[i].id);
+
         const commentBox = document.createElement('div');
-        commentBox.classList.add('commentBox');
-        commentBox.setAttribute('data-id', objArr[i].id);
+        commentBox.classList.add('comment-box');
 
         const commentTitle = document.createElement('div');
         commentTitle.classList.add('comment-title');
@@ -80,7 +83,7 @@ function makeComments(objArr: any) {
 
         const updateBtnBox = document.createElement('div');
         updateBtnBox.classList.add('text-update-btn-box');
-        updateBtnBox.classList.add('hide');
+        // updateBtnBox.classList.add('hide');
 
         const updateBtn = document.createElement('button');
         updateBtn.setAttribute('type', 'button');
@@ -97,15 +100,17 @@ function makeComments(objArr: any) {
         updateBtnBox.appendChild(updateBtn);
         updateBtnBox.appendChild(deleteBtn);
 
+        commentBox.appendChild(commentTitle);
+        commentBox.appendChild(updateBtnBox);
+
         const commentContent = document.createElement('div');
         commentContent.classList.add('comment-content');
         commentContent.textContent = objArr[i].contents;
 
-        commentBox.appendChild(commentTitle);
-        commentBox.appendChild(updateBtnBox);
-        commentBox.appendChild(commentContent);
+        commentContainer.appendChild(commentBox);
+        commentContainer.appendChild(commentContent);
 
-        commentContainerBox.appendChild(commentBox);
+        commentContainerBox.appendChild(commentContainer);
     }
     commentNum.textContent = objArr.length;
 }

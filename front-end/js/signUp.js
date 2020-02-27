@@ -4,10 +4,10 @@ const password = document.querySelector('#password');
 const passwordCheck = document.querySelector('#password-check');
 const phoneNumber = document.querySelector('#phone-number');
 const signupBtn = document.querySelector('#signup');
-const authSubmitBtn = document.querySelector('#auth-submit');
 const authTime = document.querySelector('#auth-time');
 const authNum = document.querySelector('#auth-num');
 const authCheckContainer = document.querySelector('.auth-check-container');
+const authInputContainer = document.querySelector('.auth-input-container');
 const authCheck = document.querySelector('#auth-check');
 const alertId = document.querySelector('#alert-id');
 const alertNickname = document.querySelector('#alert-nickname');
@@ -15,6 +15,7 @@ const alertPassword = document.querySelector('#alert-password');
 const alertPasswordCheck = document.querySelector('#alert-password-check');
 const alertPhoneNumber = document.querySelector('#alert-phone-number');
 const alertAuthNumber = document.querySelector('#alert-auth-number');
+
 
 function checkId() {
     if (id.value.replace(/\s/gi, "") === "") {
@@ -76,29 +77,8 @@ function checkPhoneNumber() {
     }
 }
 
-authSubmitBtn.addEventListener('click', authSubmit());
 
 let timerId;
-
-function authSubmit() {
-
-
-    return function () {
-        if (checkPhoneNumber()) {
-            authCheckContainer.classList.remove('none');
-            authNum.classList.remove('alert-input');
-            alertAuthNumber.textContent = "";
-            clearTimeout(timerId);
-
-            authTime.innerHTML = `00:05`
-            startTimer();
-            //문자전송함수 실행
-        } else {
-            authCheckContainer.classList.add('none');
-        }
-    };
-
-}
 
 function startTimer() {
     const presentTime = authTime.innerHTML;
@@ -111,6 +91,7 @@ function startTimer() {
         authTime.innerHTML =
             `00:00`
         authNum.classList.add('alert-input');
+        alertAuthNumber.style.color = 'red';
         alertAuthNumber.textContent = "시간이 초과되었습니다";
         clearTimeout(timerId);
     } else {
@@ -129,22 +110,24 @@ function checkSecond(sec) {
 function checkAuth() {
     //보낸 문자와 입력창에있는 문자가 다르면 
     authNum.classList.add('alert-input');
+    alertAuthNumber.style.color = 'red';
     alertAuthNumber.textContent = "인증번호가 다릅니다";
     //return false;
     //일치하면 
     authNum.classList.remove('alert-input');
+    alertAuthNumber.style.color = 'blue';
     alertAuthNumber.textContent = "인증되었습니다";
+    authTime.innerHTML =
+        `00:00`
+    clearTimeout(timerId);
     // return true;
 }
 
-const authCheckFlag = false;
+let authCheckFlag = false;
 
 authCheck.addEventListener('click', () => {
-    if (authCheckFlag) {
 
-    } else {
-        authCheckFlag = checkAuth();
-    }
+    authCheckFlag = checkAuth();
 })
 
 function checkAll() {
@@ -158,20 +141,30 @@ function checkAll() {
         return false;
     } else if (!checkPhoneNumber()) {
         return false;
-    } else if (!authCheckFlag) {
-        return false
     } else {
         return true;
     }
 }
 
 
+
 signupBtn.addEventListener('click', () => {
     if (checkAll()) {
-        //가입완료
-        alert('가입완료');
+        if (authCheckFlag) {
+            alert('가입완료');
+        }
+        alert('전송시작');
+        //문자전송함수 실행
+        authCheckContainer.classList.remove('hide');
+        authInputContainer.classList.remove('hide');
+        authNum.classList.remove('alert-input');
+        alertAuthNumber.textContent = "";
+        clearTimeout(timerId);
+
+        authTime.innerHTML = `00:05`
+        startTimer();
+
     } else {
-        //가입실패
         alert('가입실패');
     }
 })

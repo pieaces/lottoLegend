@@ -16,7 +16,7 @@ document.write(`           <div class="text-title">
 </div>
 </div>
 <div class="text-update-container">
-<div class="text-update-btn-box hide">
+<div class="text-update-btn-box">
     <button type="button" class="btn square-btn read-btn" id="update-btn">수정</button>
     <button type="button" class="btn square-btn read-btn" id="delete-btn">삭제</button>
 </div>
@@ -35,5 +35,7 @@ document.write(`           <div class="text-title">
 </div>
 <div class="comment-container-box">
 <div class="comment-list-title"><span id="comment-num"></span>개의 댓글</div>
+
+
 </div>
 `);
