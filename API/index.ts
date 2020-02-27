@@ -5,6 +5,10 @@ import jwt from 'jsonwebtoken';
 import jwkToPem from 'jwk-to-pem';
 import { Response } from "./class";
 import getCurrentRound from "./funtion/getCurrentRound";
+
+import { StatsMethod, QueryStatsParams } from "./interface/LottoDB";
+import { queryStats, queryLotto } from "./dynamoDB/queryStats";
+import { LottoNumber } from "./interface/Lotto";
 const pem = jwkToPem({
     "alg": "RS256",
     "e": "AQAB",
@@ -51,7 +55,55 @@ exports.handler = async (event: any, context: any, callback: any) => {
 
     let statusCode: number = 200;
     let body: any;
+
     switch (resource) {
+        case '/stats/{method}': {
+            const method = event.pathParameters.method;
+            let data;
+            if (method in StatsMethod) {
+                const temp: QueryStatsParams = {}
+                const from = event.queryStringParameters.from
+                const to = event.queryStringParameters.to;
+                const list = event.queryStringParameters.list
+                if ((from && to)) {
+                    temp.from = Number(from);
+                    temp.to = Number(to);
+                } else if (list) {
+                    temp.list = JSON.parse(decodeURI(list));
+                }
+                data = await queryStats(method as StatsMethod, temp);
+                body = { data };
+            } else {
+                if (method === "excludeInclude") {
+                    let temp: any = {};
+                    temp.emergence = await queryStats("emergence" as StatsMethod, {});
+                    temp.interval = await queryStats("interval" as StatsMethod, {});
+                    temp.howLongNone = await queryStats("howLongNone" as StatsMethod, {});
+                    temp.frequency = await queryStats("frequency" as StatsMethod, {});
+        
+                    data = temp;
+                    let round = getCurrentRound(new Date().toString());
+                    let total:number = 0;
+        
+                    const winNums: LottoNumber[][] = [];
+                    while (winNums.length !== 3) {
+                        try {
+                            const numbers = await queryLotto(round);
+                            winNums.push(numbers);
+                            if(total === 0) total = round;
+                        } catch (err) {
+                            console.log(err);
+                        }finally{
+                            round--;
+                        }
+                    }
+        
+                    body = { data, total, winNums};
+                }
+                else body = 'wrong method';
+            }
+        }
+            break;
         case '/posts': {
             const db = new Posts();
             switch (method) {
@@ -82,10 +134,10 @@ exports.handler = async (event: any, context: any, callback: any) => {
                 case 'GET':
                     await db.addHits(postId);
                     const post = await db.get(postId);
-                    if(post.category  === "incl"){
+                    if (post.category === "incl") {
                         post.incl = await getIncOrExcNumbers(post.writerId, getCurrentRound(post.created), IncOrExc.include);
                     }
-                    else if(post.category  === "excl"){
+                    else if (post.category === "excl") {
                         post.excl = await getIncOrExcNumbers(post.writerId, getCurrentRound(post.created), IncOrExc.exclude);
                     }
                     body = post;
@@ -173,6 +225,7 @@ exports.handler = async (event: any, context: any, callback: any) => {
                     switch (method) {
                         case 'GET':
                             body = await getNumbersByRound(userName, round);
+                            break;
                     }
                 } else {
                     statusCode = 400;
@@ -216,6 +269,7 @@ exports.handler = async (event: any, context: any, callback: any) => {
                 body = "로그인되지 않은 사용자입니다."
             }
         }
+            break;
         case '/users/{userName}/numbers/mass/{round}/{rank}/{method}/{index}': {
             const userName = event.pathParameters.userName;
             const round = event.pathParameters.round;
@@ -239,6 +293,7 @@ exports.handler = async (event: any, context: any, callback: any) => {
                 body = "로그인되지 않은 사용자입니다."
             }
         }
+            break;
         case '/users/{userName}/numbers/piece/{round}/{choice}': {
             const userName = event.pathParameters.userName;
             const round = event.pathParameters.round;
@@ -256,9 +311,11 @@ exports.handler = async (event: any, context: any, callback: any) => {
                             const { numbers } = JSON.parse(event.body);
                             await updateIncOrExcNumbers(userName, round, numbers, choice);
                         }
+                            break;
                         case 'DELETE': {
                             await deleteNumbers(userName, round, choice);
                         }
+                            break;
                     }
                 } else {
                     statusCode = 400;
