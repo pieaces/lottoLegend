@@ -47,7 +47,7 @@ async function init() {
         title.textContent = post.title;
         author.textContent = post.writerName;
         author.setAttribute('data-writer', post.writerId);
-        created.textContent = post.created;
+        created.textContent = isoStringToDate(post.created);
         hits.textContent = post.hits;
         contentsInput.innerHTML = post.text;
         if (post.comments) {
@@ -73,7 +73,7 @@ function makeComments(objArr: any) {
 
         const commentTime = document.createElement('div');
         commentTime.classList.add('comment-time');
-        commentTime.textContent = objArr[i].created;
+        commentTime.textContent = isoStringToDate(objArr[i].created);
 
         commentTitle.appendChild(commentAuthor);
         commentTitle.appendChild(commentTime);
@@ -110,7 +110,7 @@ function makeComments(objArr: any) {
     commentNum.textContent = objArr.length;
 }
 txtArea.addEventListener('input', limitTxtAreaCount(txtArea))
-function limitTxtAreaCount(target) {
+function limitTxtAreaCount(target:HTMLInputElement) {
     const maxlength = 150;
 
     return function () {
@@ -122,8 +122,12 @@ function limitTxtAreaCount(target) {
             return false;
         } else {
             charCurrentCount.classList.remove('comment-limit-alert');
-            charCurrentCount.textContent = currentLength;
+            charCurrentCount.textContent = currentLength.toString();
             return true;
         }
     }
+}
+
+function isoStringToDate(isoString:string): string{
+    return isoString.slice(0,10) + ' ' + isoString.slice(11,16);
 }

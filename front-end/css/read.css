@@ -33,6 +33,7 @@
 }
 #text-content{
   min-height:25rem;
+  margin-bottom: 100px;
 }
 .author-time{
     padding-right:2rem;
@@ -53,6 +54,7 @@
 }
 .comment-container-box{
     margin-bottom:1rem;
+    min-height: 200px;
 }
 .comment-container-box > .comment-box{
   border-bottom: 1px solid rgba(0,0,0,0.2);
