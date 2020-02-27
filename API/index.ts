@@ -1,6 +1,6 @@
 import Posts from "./mariaDB/Posts";
 import Comments from "./mariaDB/Comments";
-import { updateNumbers, getAllNumbers, getNumbersByClass, deleteNumber, Method, getIncOrExcNumbers } from './dynamoDB/myNumbers'
+import { updateNumbers, getAllNumbers, getNumbersByClass, deleteNumber, SelectMethod, getIncOrExcNumbers } from './dynamoDB/myNumbers'
 import jwt from 'jsonwebtoken';
 import jwkToPem from 'jwk-to-pem';
 import { Response } from "./class";
@@ -154,24 +154,52 @@ exports.handler = async (event: any, context: any, callback: any) => {
         }
             break;
         /*
-        rank = default, basic, premium, all
+        rank = default, basic, premium
         method = auto, manual, include, exclude
+        numbers/mass|piece/
         */
-        case '/users/{userName}/numbers/{rank}/{method}':{
+        case '/users/{userName}/numbers/mass/{round}': {
             const userName = event.pathParameters.userName;
             const round = event.pathParameters.round;
+            if (logedIn) {
+                const response = isIdentical(currentId, userName);
+                if (!response.error) {
+                    switch (method) {
+                        case 'GET':
+                            const { numsArr } = await getAllNumbers(userName, round);
+                            body = numsArr;
+                    }
+                }
+            }
+        }
+        case '/users/{userName}/numbers/mass/{round}/{rank}':
+        case '/users/{userName}/numbers/mass/{round}/{rank}/{method}': {
+            const userName = event.pathParameters.userName;
+            const round = event.pathParameters.round;
+            const rank = event.pathParameters.rank;
+            if (logedIn) {
+                const response = isIdentical(currentId, userName);
+                if (!response.error) {
+                    switch (method) {
+                        case 'GET':
+                            const { numsArr } = await getAllNumbers(userName, getCurrentRound());
+                            body = numsArr;
+                    }
+                }
+            }
+        }
+        case '/users/{userName}/numbers/{round}/{rank}/{method}':{
+            const userName = event.pathParameters.userName;
+            const round = event.pathParameters.round;
+            const rank = event.pathParameters.rank;
             const pickMethod = event.pathParameters.method;
             if (logedIn) {
                 const response = isIdentical(currentId, userName);
                 if (!response.error) {
                     switch (method) {
                         case 'GET': {
-                            const rank = event.queryStringParameters.rank;
-                            if(rank === 'all'){
-                                const { numsArr } = await getAllNumbers(userName, round);
-                                body = numsArr;
-                            }else if(pickMethod === 'auto' || pickMethod === 'manual'){
-                                const { numsArr } = await getNumbersByClass(userName, round, Plan[rank]+Method[pickMethod]);
+                            if(pickMethod === 'auto' || pickMethod === 'manual'){
+                                const { numsArr } = await getNumbersByClass(userName, round, Plan[rank]+SelectMethod[pickMethod]);
                                 body = numsArr;
                             }else{
                                 const numbers = await getIncOrExcNumbers(userName, round, pickMethod);
@@ -208,3 +236,11 @@ exports.handler = async (event: any, context: any, callback: any) => {
     };
     return response;
 };
+
+function getCurrentRound():number{
+    const theDate = new Date('2020-02-01:11:45');
+    const today = new Date();
+    const between = Number(today) - Number(theDate);
+    const plusDate = Math.floor(between / 24 / 3600 / 1000 / 7);
+    return 896 + plusDate;
+}

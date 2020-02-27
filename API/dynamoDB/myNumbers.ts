@@ -2,10 +2,14 @@ import { dynamoDB, TableName } from '.'
 import { getRank, Plan } from './userInfo';
 import { Response } from '../class';
 
-export enum Method {
+export enum SelectMethod {
     "auto" = 'a',
-    "manual" = 'm',
+    "manual" = 'm'
 }
+interface NumsArrAllMethodReturn{
+    [key:string]:{ numsArr: number[][], size: number }
+}
+interface NumsArrOneMethodReturn{ numsArr: number[][], size: number }
 const planValue = {
     [Plan.default]: 5,
     [Plan.basic]: 10,
@@ -33,7 +37,7 @@ export async function autoUpdateNumbers(userName: string, round: number, numsArr
             "#Map": 'MyNumbers',
             "#Round": round.toString(),
             "#Numbers": 'numbers',
-            "#Class": rank + Method.auto,
+            "#Class": rank + SelectMethod.auto,
             "#Size": 'size'
         },
         ExpressionAttributeValues: {
@@ -64,14 +68,14 @@ export async function autoUpdateNumbers(userName: string, round: number, numsArr
     });
 }
 
-export async function updateNumbers(userName: string, round: number, numsArr: number[][], plan: Plan, method: Method): Promise<Response> {
+export async function updateNumbers(userName: string, round: number, numsArr: number[][], plan: Plan, method: SelectMethod): Promise<Response> {
     let size: number;
     try {
-        size = (await getNumbersByClass(userName, round, plan + method)).size;
+        size = (await getNumbersByClass(userName, round, plan, method) as NumsArrOneMethodReturn).size;
     } catch (err) {
-        if (err === 'MyNumbers has to be created') {
+        if (err === 'That round has to be created') {
             await createNumbers(userName, round);
-            size = (await getNumbersByClass(userName, round, plan + method)).size;
+            size = (await getNumbersByClass(userName, round, plan, method) as NumsArrOneMethodReturn).size;
         }
     }
     if (numsArr.length > planValue[plan] - size) {
@@ -123,7 +127,7 @@ function createNumbers(userName: string, round: number): Promise<void> {
         ExpressionAttributeValues: {
             ':map': {
                 M: {
-                    [Plan.default + Method.manual]: {
+                    [Plan.default + SelectMethod.manual]: {
                         M: {
                             numbers: {
                                 L: new Array()
@@ -133,7 +137,7 @@ function createNumbers(userName: string, round: number): Promise<void> {
                             }
                         }
                     },
-                    [Plan.default + Method.auto]: {
+                    [Plan.default + SelectMethod.auto]: {
                         M: {
                             numbers: {
                                 L: new Array()
@@ -143,7 +147,7 @@ function createNumbers(userName: string, round: number): Promise<void> {
                             }
                         }
                     },
-                    [Plan.basic + Method.auto]: {
+                    [Plan.basic + SelectMethod.auto]: {
                         M: {
                             numbers: {
                                 L: new Array()
@@ -153,7 +157,7 @@ function createNumbers(userName: string, round: number): Promise<void> {
                             }
                         }
                     },
-                    [Plan.premium + Method.manual]: {
+                    [Plan.premium + SelectMethod.manual]: {
                         M: {
                             numbers: {
                                 L: new Array()
@@ -163,7 +167,7 @@ function createNumbers(userName: string, round: number): Promise<void> {
                             }
                         }
                     },
-                    [Plan.premium + Method.auto]: {
+                    [Plan.premium + SelectMethod.auto]: {
                         M: {
                             numbers: {
                                 L: new Array()
@@ -216,15 +220,32 @@ export function deleteNumber(userName: string, round: number, index: number): Pr
     });
 }
 
-export function getNumbersByClass(userName: string, round: number, classification: string): Promise<{ numsArr: number[][], size: number }> {
+export function getNumbersByClass(userName: string, round: number, rank: Plan, method?:SelectMethod):Promise<NumsArrAllMethodReturn | NumsArrOneMethodReturn> {
+    function mapToObject(item:any, method:SelectMethod){
+        const result = item.MyNumbers.M && item.MyNumbers.M[round.toString()].M[rank + method].M;
+        const size = Number(result && result.size.N);
+        const numsArr = result && result.numbers.L?.map((obj: { L: any[]; }) => {
+            return obj.L?.map(ele => Number(ele.N))
+        });
+        return({ numsArr, size });
+    }
+    const ExpressionAttributeNames:{[key:string]:string} = {
+        "#Map": 'MyNumbers',
+        "#Round": round.toString(),
+        "#Class": rank+method,
+    }
+    let ProjectionExpression = '#Map.#Round.#Class';
+    if(method){
+        ExpressionAttributeNames['#Class'] = rank + method;
+    }else{
+        ExpressionAttributeNames['#Class'] = rank + SelectMethod.auto;
+        ExpressionAttributeNames['#Class2'] = rank + SelectMethod.manual;
+        ProjectionExpression += ', #Map.#Round.#Class2';
+    }
     const params = {
         TableName,
-        ExpressionAttributeNames: {
-            "#Map": 'MyNumbers',
-            "#Round": round.toString(),
-            "#Class": classification
-        },
-        ProjectionExpression: '#Map.#Round.#Class',
+        ExpressionAttributeNames,
+        ProjectionExpression,
         Key: {
             "UserName": {
                 S: userName
@@ -240,21 +261,25 @@ export function getNumbersByClass(userName: string, round: number, classificatio
             else {
                 const item = data.Item;
                 if ('MyNumbers' in item) {
-                    const result = item.MyNumbers.M && item.MyNumbers.M[round.toString()].M[classification].M;
-                    const size = Number(result && result.size.N);
-                    const numsArr = result && result.numbers.L?.map(obj => {
-                        return obj.L?.map(ele => Number(ele.N))
-                    });
-                    resolve({ numsArr, size });
+                    if (method) {
+                        resolve(mapToObject(item, method));
+                    }else{
+                        const result:any = {};
+
+                        Object.values(SelectMethod).forEach(method =>{
+                            result[rank + method]=mapToObject(item, method);
+                        });
+                        resolve(result);
+                    }
                 } else {
-                    reject('MyNumbers has to be created');
+                    reject('That round has to be created');
                 }
             }
         });
     });
 }
 
-export function getAllNumbers(userName: string, round: number): Promise<{ [key: string]: { numsArr: number[][], size: number } }> {
+export function getNumbersByRound(userName: string, round: number): Promise<{ [key: string]: { numsArr: number[][], size: number } }> {
     const params = {
         TableName,
         ExpressionAttributeNames: {
@@ -288,7 +313,7 @@ export function getAllNumbers(userName: string, round: number): Promise<{ [key: 
                     });
                     resolve(result);
                 } else {
-                    reject('MyNumbers has to be created');
+                    reject('That round has to be created');
                 }
             }
         });
