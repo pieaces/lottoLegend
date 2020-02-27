@@ -17,7 +17,7 @@
 .search-box > input,
 .search-box > select {
   margin-right: 1rem;
-  height: 40px;;
+  height: 4rem;;
 }
 
 .search-btn{
@@ -34,7 +34,6 @@
   align-items: center;
   justify-content: center;
 }
-
 
 /* board */
 
