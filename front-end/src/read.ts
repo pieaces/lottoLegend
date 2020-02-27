@@ -50,6 +50,10 @@ async function init() {
         console.log(currentUser, post.writerId);
         if(currentUser === post.writerId){
             contentsUpdateBtn.classList.remove('hide');
+            const category = document.querySelector<HTMLElement>('#wrapper').getAttribute('data-category');
+            let board:string;
+            board = category + 'BoardPost.html';
+            document.querySelector<HTMLElement>('#content-update-btn').setAttribute('onclick', `location.href='${board}?id=${id}'`);
         }
         created.textContent = isoStringToDate(post.created);
         hits.textContent = post.hits;
@@ -90,13 +94,11 @@ function makeComments(objArr: any) {
         const updateBtn = document.createElement('button');
         updateBtn.setAttribute('type', 'button');
         updateBtn.classList.add('btn', 'square-btn', 'comment-update-btn');
-        updateBtn.id = "update-btn";
         updateBtn.textContent = "수정";
 
         const deleteBtn = document.createElement('button');
         deleteBtn.setAttribute('type', 'button');
         deleteBtn.classList.add('btn', 'square-btn', 'comment-update-btn');
-        deleteBtn.id = "delete-btn";
         deleteBtn.textContent = "삭제";
 
         updateBtnBox.appendChild(updateBtn);
