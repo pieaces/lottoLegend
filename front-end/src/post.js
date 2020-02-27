@@ -1,9 +1,9 @@
-import configure from '../js/amplify/configure'
+import configure from './amplify/configure'
 import suneditor from 'suneditor'
 import plugins from 'suneditor/src/plugins'
 import { ko } from 'suneditor/src/lang'
-import { postUnAuthAPI, postAuthAPI } from '../js/amplify/api';
-import { getUserName } from '../js/amplify/auth'
+import { postUnAuthAPI, postAuthAPI } from './amplify/api';
+import { getUserName } from './amplify/auth'
 const editor = suneditor.create('sample', {
   plugins: plugins,
   buttonList: [
