@@ -152,12 +152,10 @@ exports.handler = async (event: any, context: any, callback: any) => {
             }
         }
             break;
-        case '/users/{userName}/numbers/{round}/open/include':
-        case '/users/{userName}/numbers/{round}/open/exclude':
-        case '/users/{userName}/numbers/{round}/open/auto':
-        case '/users/{userName}/numbers/{round}/basic/auto':
-        case '/users/{userName}/numbers/{round}/premium/auto':
-        case '/users/{userName}/numbers/{round}/premium/manual':{
+        case '/users/{userName}/numbers/{round}/default/include':
+        case '/users/{userName}/numbers/{round}/default/exclude':
+        case '/users/{userName}/numbers/{round}/{rank}/auto':
+        case '/users/{userName}/numbers/{round}/{rank}/manual':{
             const userName = event.pathParameters.userName;
             const round = event.pathParameters.round;
             if (logedIn) {

@@ -18,6 +18,13 @@ function numsArrToAWSList(numsArr: number[][]): any {
         }
     });
 }
+function numbersToAWSList(numbers: number[]): any{
+    return numbers.map(num =>{
+        return {
+            N: num.toString()
+        }
+    });
+}
 export async function autoUpdateNumbers(userName: string, round: number, numsArr: number[][]): Promise<void> {
     const rank = await getRank(userName);
     const params = {
@@ -283,6 +290,41 @@ export function getAllNumbers(userName: string, round: number): Promise<{[key:st
                 } else {
                     reject('MyNumbers has to be created');
                 }
+            }
+        });
+    });
+}
+
+enum IncOrExc{
+    "include"="IncludedNumbers",
+    "exclude"="ExcludedNumbers"
+}
+
+export async function updateIncOrExcNumbers(userName: string, round: number, numbers: number[], choice:IncOrExc): Promise<Response> {
+    const params = {
+        TableName,
+        ExpressionAttributeNames: {
+            "#Choice": choice,
+            "#Round": round.toString(),
+        },
+        ExpressionAttributeValues: {
+            ":element": {
+                L: numbersToAWSList(numbers)
+            }
+        },
+        Key: {
+            "UserName": {
+                S: userName
+            }
+        },
+        UpdateExpression: `SET #Choice.#Round = :element`
+    };
+    return new Promise((resolve, reject) => {
+        dynamoDB.updateItem(params, async (err) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(new Response(false));
             }
         });
     });
