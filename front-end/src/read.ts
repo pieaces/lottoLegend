@@ -15,6 +15,7 @@ const commentNum = document.querySelector('#comment-num');
 const txtArea = document.querySelector<HTMLInputElement>('#comment-write-text');
 const charCurrentCount = document.querySelector('#char-current-count');
 const commentSubmit = document.getElementById('comment-submit');
+const contentsUpdateBtn = document.querySelector<HTMLElement>('.text-update-container ');
 
 let currentUser: string;
 const id = getQueryStringObject().id;
@@ -46,7 +47,10 @@ async function init() {
         console.log(post);
         title.textContent = post.title;
         author.textContent = post.writerName;
-        author.setAttribute('data-writer', post.writerId);
+        console.log(currentUser, post.writerId);
+        if(currentUser === post.writerId){
+            contentsUpdateBtn.classList.remove('hide');
+        }
         created.textContent = isoStringToDate(post.created);
         hits.textContent = post.hits;
         contentsInput.innerHTML = post.text;
@@ -71,8 +75,6 @@ function makeComments(objArr: any) {
         const commentAuthor = document.createElement('div');
         commentAuthor.classList.add('comment-author');
         commentAuthor.textContent = objArr[i].writerName;
-        //
-        commentAuthor.setAttribute('data-writer', objArr[i].writerId);
 
         const commentTime = document.createElement('div');
         commentTime.classList.add('comment-time');
@@ -83,7 +85,7 @@ function makeComments(objArr: any) {
 
         const updateBtnBox = document.createElement('div');
         updateBtnBox.classList.add('text-update-btn-box');
-        updateBtnBox.classList.add('hide');
+        if(!(currentUser === objArr[i].writerId)) updateBtnBox.classList.add('hide');
 
         const updateBtn = document.createElement('button');
         updateBtn.setAttribute('type', 'button');

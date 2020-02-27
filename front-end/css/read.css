@@ -149,6 +149,7 @@
 
 .text-update-container{
   padding:1rem 0;
+  padding-bottom: 0px;
   display:flex;
   align-items: center;
   justify-content: flex-end;
