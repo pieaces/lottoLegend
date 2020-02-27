@@ -12,6 +12,11 @@
   --checkbox-color:#d7af0d;
 }
 
+*{
+  margin: 0;
+  padding: 0;
+}
+
 html{
   font-size:10px;
   box-sizing: border-box;
@@ -41,7 +46,7 @@ ul {
 input,
 select {
   border: 1px solid rgb(190,190,190);
-  padding:1rem;
+  padding:0 1rem;
   outline: none;
 }
 

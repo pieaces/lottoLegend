@@ -10,10 +10,14 @@
   justify-content: space-between;
 }
 
+.search-box{
+  height:4rem;
+}
+
 .search-box > input,
 .search-box > select {
   margin-right: 1rem;
-  height: 4rem;
+  height: 40px;;
 }
 
 .search-btn{
