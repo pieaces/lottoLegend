@@ -1,11 +1,11 @@
 import Base from "./Base";
 import Calculate from "../Calculate";
 
-import { LottoNumber } from "../../interface/Lotto";
-import { GeneratorOption, Range } from "../../interface/Generator";
-const constraintLowCount = require('../../json/Generator/lowCount_compressed.json');
-const constraintSum = require('../../json/Generator/sum_compressed.json');
-const constraintSumNotExcluded = require('../../json/Generator/sum_notExcluded.json');
+import { LottoNumber } from "../../interface";
+import { GeneratorOption, Range } from "../../interface";
+import constraintLowCount from '../../data/lowCount'
+import constraintSum from '../../data/sum'
+import constraintSumNotExcluded from '../../data/sum_notExcluded'
 
 export default class Confirmer extends Base {
     constructor(option: GeneratorOption) {

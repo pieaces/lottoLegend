@@ -1,7 +1,6 @@
 import express from 'express';
 import awsServerlessExpressMiddleware from 'aws-serverless-express/middleware';
 
-import statsRouter from './router/stats';
 import numbersRouter from './router/generator';
 
 const app = express();
@@ -15,7 +14,6 @@ app.use((req, res, next) => {
     next()
 });
 
-app.use('/stats', statsRouter);
 app.use('/generator', numbersRouter);
 
 app.listen(3000, () => {

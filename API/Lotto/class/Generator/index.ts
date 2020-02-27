@@ -1,7 +1,7 @@
 import Check from './Check';
 import Calculate from '../Calculate'
-import { LottoNumber } from '../../interface/Lotto';
-import { GeneratorOption, ZeroToFour } from '../../interface/Generator'
+import { LottoNumber } from '../../interface';
+import { GeneratorOption, ZeroToFour } from '../../interface'
 
 export default class Generator extends Check {
     protected generatedNumbers: Array<LottoNumber[]> = [];

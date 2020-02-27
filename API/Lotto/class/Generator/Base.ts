@@ -1,4 +1,4 @@
-import { GeneratorOption } from "../../interface/Generator";
+import { GeneratorOption } from "../../interface";
 
 export default class Base{
     option: GeneratorOption;
