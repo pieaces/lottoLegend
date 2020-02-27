@@ -2,14 +2,14 @@ import { dynamoDB, TableName } from '.'
 import { getRank, Plan } from './userInfo';
 import { Response } from '../class';
 
-enum Way {
+export enum Method {
     "auto" = 'a',
     "manual" = 'm',
 }
 const planValue = {
-    [Plan.default]:5,
-    [Plan.basic]:10,
-    [Plan.premium]:20
+    [Plan.default]: 5,
+    [Plan.basic]: 10,
+    [Plan.premium]: 20
 }
 function numsArrToAWSList(numsArr: number[][]): any {
     return numsArr.map(numbers => {
@@ -18,8 +18,8 @@ function numsArrToAWSList(numsArr: number[][]): any {
         }
     });
 }
-function numbersToAWSList(numbers: number[]): any{
-    return numbers.map(num =>{
+function numbersToAWSList(numbers: number[]): any {
+    return numbers.map(num => {
         return {
             N: num.toString()
         }
@@ -33,7 +33,7 @@ export async function autoUpdateNumbers(userName: string, round: number, numsArr
             "#Map": 'MyNumbers',
             "#Round": round.toString(),
             "#Numbers": 'numbers',
-            "#Class": rank + Way.auto,
+            "#Class": rank + Method.auto,
             "#Size": 'size'
         },
         ExpressionAttributeValues: {
@@ -64,14 +64,14 @@ export async function autoUpdateNumbers(userName: string, round: number, numsArr
     });
 }
 
-export async function updateNumbers(userName: string, round: number, numsArr: number[][], plan:Plan, way: Way): Promise<Response> {
+export async function updateNumbers(userName: string, round: number, numsArr: number[][], plan: Plan, method: Method): Promise<Response> {
     let size: number;
     try {
-        size = (await getNumbersByClass(userName, round, plan + way)).size;
+        size = (await getNumbersByClass(userName, round, plan + method)).size;
     } catch (err) {
         if (err === 'MyNumbers has to be created') {
             await createNumbers(userName, round);
-            size = (await getNumbersByClass(userName, round, plan + way)).size;
+            size = (await getNumbersByClass(userName, round, plan + method)).size;
         }
     }
     if (numsArr.length > planValue[plan] - size) {
@@ -83,7 +83,7 @@ export async function updateNumbers(userName: string, round: number, numsArr: nu
             "#Map": 'MyNumbers',
             "#Round": round.toString(),
             "#Numbers": 'numbers',
-            "#Class": plan + way,
+            "#Class": plan + method,
             "#Size": 'size'
         },
         ExpressionAttributeValues: {
@@ -123,7 +123,7 @@ function createNumbers(userName: string, round: number): Promise<void> {
         ExpressionAttributeValues: {
             ':map': {
                 M: {
-                    [Plan.default + Way.manual]: {
+                    [Plan.default + Method.manual]: {
                         M: {
                             numbers: {
                                 L: new Array()
@@ -133,7 +133,7 @@ function createNumbers(userName: string, round: number): Promise<void> {
                             }
                         }
                     },
-                    [Plan.default + Way.auto]: {
+                    [Plan.default + Method.auto]: {
                         M: {
                             numbers: {
                                 L: new Array()
@@ -143,7 +143,7 @@ function createNumbers(userName: string, round: number): Promise<void> {
                             }
                         }
                     },
-                    [Plan.basic + Way.auto]: {
+                    [Plan.basic + Method.auto]: {
                         M: {
                             numbers: {
                                 L: new Array()
@@ -153,7 +153,7 @@ function createNumbers(userName: string, round: number): Promise<void> {
                             }
                         }
                     },
-                    [Plan.premium + Way.manual]: {
+                    [Plan.premium + Method.manual]: {
                         M: {
                             numbers: {
                                 L: new Array()
@@ -163,7 +163,7 @@ function createNumbers(userName: string, round: number): Promise<void> {
                             }
                         }
                     },
-                    [Plan.premium + Way.auto]: {
+                    [Plan.premium + Method.auto]: {
                         M: {
                             numbers: {
                                 L: new Array()
@@ -254,7 +254,7 @@ export function getNumbersByClass(userName: string, round: number, classificatio
     });
 }
 
-export function getAllNumbers(userName: string, round: number): Promise<{[key:string]: {numsArr: number[][], size: number} }> {
+export function getAllNumbers(userName: string, round: number): Promise<{ [key: string]: { numsArr: number[][], size: number } }> {
     const params = {
         TableName,
         ExpressionAttributeNames: {
@@ -279,8 +279,8 @@ export function getAllNumbers(userName: string, round: number): Promise<{[key:st
                 if ('MyNumbers' in item) {
                     const obj = item.MyNumbers.M && item.MyNumbers.M[round.toString()].M;
                     let entries = Object.entries(obj);
-                    const result:any = {};
-                    entries.forEach(entry =>{
+                    const result: any = {};
+                    entries.forEach(entry => {
                         result[entry[0]] = {
                             numsArr: entry[1].M.numbers.L.map(item => item.L.map(value => Number(value.N))),
                             size: Number(entry[1].M.size.N)
@@ -295,12 +295,11 @@ export function getAllNumbers(userName: string, round: number): Promise<{[key:st
     });
 }
 
-enum IncOrExc{
-    "include"="IncludedNumbers",
-    "exclude"="ExcludedNumbers"
+enum IncOrExc {
+    "include" = "IncludedNumbers",
+    "exclude" = "ExcludedNumbers"
 }
-
-export async function updateIncOrExcNumbers(userName: string, round: number, numbers: number[], choice:IncOrExc): Promise<Response> {
+export async function updateIncOrExcNumbers(userName: string, round: number, numbers: number[], choice: IncOrExc): Promise<Response> {
     const params = {
         TableName,
         ExpressionAttributeNames: {
@@ -325,6 +324,38 @@ export async function updateIncOrExcNumbers(userName: string, round: number, num
                 reject(err);
             } else {
                 resolve(new Response(false));
+            }
+        });
+    });
+}
+
+export function getIncOrExcNumbers(userName: string, round: number, choice: IncOrExc): Promise<number[]> {
+    const params = {
+        TableName,
+        ExpressionAttributeNames: {
+            "#Choice": choice,
+            "#Round": round.toString()
+        },
+        ProjectionExpression: '#Choice.#Round',
+        Key: {
+            "UserName": {
+                S: userName
+            }
+        }
+    };
+
+    return new Promise((resolve, reject) => {
+        dynamoDB.getItem(params, (err, data) => {
+            if (err) {
+                reject(err);
+            }
+            else {
+                const item = data.Item;
+                if (choice in item) {
+                    const result = item[choice].M && item[choice].M[round.toString()].L;
+                    resolve(result.map(item => Number(item.N)));
+                }
+                resolve([]);
             }
         });
     });

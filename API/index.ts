@@ -1,9 +1,10 @@
 import Posts from "./mariaDB/Posts";
 import Comments from "./mariaDB/Comments";
-import { updateNumbers, getNumbers, deleteNumber } from './dynamoDB/myNumbers'
+import { updateNumbers, getAllNumbers, getNumbersByClass, deleteNumber, Method } from './dynamoDB/myNumbers'
 import jwt from 'jsonwebtoken';
 import jwkToPem from 'jwk-to-pem';
 import { Response } from "./class";
+import { Plan } from "./dynamoDB/userInfo";
 const pem = jwkToPem({
     "alg": "RS256",
     "e": "AQAB",
@@ -152,22 +153,29 @@ exports.handler = async (event: any, context: any, callback: any) => {
             }
         }
             break;
-        case '/users/{userName}/numbers/{round}/default/include':
-        case '/users/{userName}/numbers/{round}/default/exclude':
-        case '/users/{userName}/numbers/{round}/{rank}/auto':
-        case '/users/{userName}/numbers/{round}/{rank}/manual':{
+        /*
+        rank = default, basic, premium, all
+        method = auto, manual, include, exclude
+        */
+        case '/users/{userName}/numbers/{round}/{rank}/{method}':{
             const userName = event.pathParameters.userName;
             const round = event.pathParameters.round;
+            const rank = event.pathParameters.rank;
+            const pickMethod = event.pathParameters.method;
             if (logedIn) {
                 const response = isIdentical(currentId, userName);
                 if (!response.error) {
-                    switch(resource){
-
-                    }
                     switch (method) {
                         case 'GET': {
-                            const { numsArr } = await getNumbers(userName, round);
-                            body = numsArr;
+                            if(rank === 'all'){
+                                const { numsArr } = await getAllNumbers(userName, round);
+                                body = numsArr;
+                            }else if(pickMethod === 'auto' || pickMethod === 'manual'){
+                                const { numsArr } = await getNumbersByClass(userName, round, Plan[rank]+Method[pickMethod]);
+                                body = numsArr;
+                            }else{
+                                
+                            }
                         }
                             break;
                         case 'POST': {
