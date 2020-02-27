@@ -1,35 +1,35 @@
 import DB, { OrderOption } from "../Engine/Method"
-import Comments, {Comment} from '../Comments/index'
+import Comments, { Comment } from '../Comments/index'
 import PostsContents from "../PostsContents";
 
-interface Post{
-    id:number;
-    title:string;
-    writerId:string;
-    writerName:string;
-    contents:string;
-    created:Date,
-    hits:number;
-    comment:Comment | null;
+interface Post {
+    id: number;
+    title: string;
+    writerId: string;
+    writerName: string;
+    contents: string;
+    created: Date,
+    hits: number;
+    comment: Comment | null;
 }
 export default class Posts extends DB {
-    comments:Comments = new Comments();
-    postsContents:PostsContents = new PostsContents();
-    constructor(){
+    comments: Comments = new Comments();
+    postsContents: PostsContents = new PostsContents();
+    constructor() {
         super();
         this.tableName = 'Posts';
     }
-    async scan(category:string = "free", index:number=1) {
+    async scan(category: string = "free", index: number = 1) {
         const MAX = 10;
         const option = {
             projection: ['id', 'title', 'writerName', 'created', 'hits'],
             condition: { category },
-            order: {created: OrderOption.DESC},
-            limit:[MAX*(index-1), MAX*index] as [number, number]
+            order: { created: OrderOption.DESC },
+            limit: [MAX * (index - 1), MAX * index] as [number, number]
         }
         return await super._get(option);
     }
-    async getCount(category:string): Promise<number>{
+    async getCount(category: string): Promise<number> {
         const rows = await this.query(`SELECT COUNT(*) FROM ${this.tableName} WHERE category=?`, [category]);
         return rows[0]['COUNT(*)'];
     }
@@ -37,15 +37,15 @@ export default class Posts extends DB {
         const rows = await this.query(`SELECT category, title, writerId, writerName, created, hits, text FROM ${this.tableName} INNER JOIN PostsContents ON ${this.tableName}.id = PostsContents.post WHERE ${this.tableName}.id=?`, [id]);
         const post = rows[0];
         const comments = await this.comments.getByPost(id);
-        if(comments) post.comments = comments;
+        if (comments) post.comments = comments;
 
         return post;
     }
-    async addHits(id:number): Promise<void>{
+    async addHits(id: number): Promise<void> {
         await this.query(`UPDATE ${this.tableName} set hits = hits + 1 WHERE id=?`, [id]);
     }
-    async getWriterId(id: number): Promise<string>{
-        const option:any = {
+    async getWriterId(id: number): Promise<string> {
+        const option: any = {
             projection: ['writerId'],
             condition: { id }
         }
@@ -54,7 +54,7 @@ export default class Posts extends DB {
 
         return post.writerId;
     }
-    async post(category:string, title: string, writerId: string, writerName: string, contents: string) {
+    async post(category: string, title: string, writerId: string, writerName: string, contents: string) {
         const post = {
             category, title, writerId, writerName
         };
@@ -63,7 +63,8 @@ export default class Posts extends DB {
         return insertId;
     }
 
-    async patch(id: number, contents: string) {
+    async patch(id: number, title: string, contents: string) {
+        await this._patch({ key: 'id', value: id }, { title })
         const changedRows = await this.postsContents.patch(id, contents);
         return changedRows;
     }

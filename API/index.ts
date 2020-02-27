@@ -145,8 +145,8 @@ exports.handler = async (event: any, context: any, callback: any) => {
                 case 'PATCH': {
                     const response = isIdentical(currentId, (await db.getWriterId(postId)));
                     if (!response.error) {
-                        const { contents } = JSON.parse(event.body)
-                        const changedRows = await db.patch(postId, contents)
+                        const { title, contents } = JSON.parse(event.body)
+                        const changedRows = await db.patch(postId, title, contents)
                         body = changedRows;
                     } else {
                         statusCode = 400;
