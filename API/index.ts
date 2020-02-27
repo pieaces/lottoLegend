@@ -152,19 +152,27 @@ exports.handler = async (event: any, context: any, callback: any) => {
             }
         }
             break;
-        case '/users/{userName}numbers/{round}': {
+        case '/users/{userName}/numbers/{round}/open/include':
+        case '/users/{userName}/numbers/{round}/open/exclude':
+        case '/users/{userName}/numbers/{round}/open/auto':
+        case '/users/{userName}/numbers/{round}/basic/auto':
+        case '/users/{userName}/numbers/{round}/premium/auto':
+        case '/users/{userName}/numbers/{round}/premium/manual':{
             const userName = event.pathParameters.userName;
             const round = event.pathParameters.round;
             if (logedIn) {
                 const response = isIdentical(currentId, userName);
                 if (!response.error) {
+                    switch(resource){
+
+                    }
                     switch (method) {
                         case 'GET': {
                             const { numsArr } = await getNumbers(userName, round);
                             body = numsArr;
                         }
                             break;
-                        case 'PATCH': {
+                        case 'POST': {
                             const { numsArr } = JSON.parse(event.body)
                             body = await updateNumbers(userName, round, numsArr)
                         }

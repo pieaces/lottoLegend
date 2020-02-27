@@ -1,20 +1,16 @@
 import { dynamoDB, TableName } from '.'
 
-enum Plan {
-    "basic" = "basic",
-    "premium" = "premium"
+export enum Plan {
+    "default" = "a",
+    "basic" = "b",
+    "premium" = "c"
 }
-const planValues = {
-    default: 10,
-    [Plan.basic]: 12,
-    [Plan.premium]: 24
-};
 const ExpressionAttributeNames = {
     "#Plan": 'Plan',
     '#Until': 'Until'
 };
 
-export function numsAvailability(userName:string):Promise<number>{
+export function getRank(userName:string):Promise<string>{
     const params = {
         TableName,
         ExpressionAttributeNames,
@@ -32,7 +28,7 @@ export function numsAvailability(userName:string):Promise<number>{
             }
             else {
                 const item = data.Item;
-                let availability = planValues.default;
+                let rank = Plan.default;
                 if ('Plan' in item && 'Until' in item) {
                     const plan = item.Plan.S;
                     const now = Number(new Date());
@@ -40,15 +36,17 @@ export function numsAvailability(userName:string):Promise<number>{
                     if (now <= until) {
                         switch (plan) {
                             case Plan.basic:
-                                availability = planValues[Plan.basic];
+                                rank = Plan.basic;
+                                //availability = planValues[Plan.basic];
                                 break;
                             case Plan.premium:
-                                availability = planValues[Plan.premium];
+                                rank = Plan.premium;
+                                //availability = planValues[Plan.premium];
                                 break;
                         }
                     }
                 }
-                resolve(availability);
+                resolve(rank);
             }
         });
     });
