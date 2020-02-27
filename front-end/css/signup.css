@@ -37,6 +37,13 @@ align-items: center;
   align-items: center;
 }
 
+.auth-alert-box{
+  padding:0 0 0 1rem;
+  height:4rem;
+  display:flex;
+  align-items: center;
+}
+
 .alert-input{
   border-color: red !important;
   color:red;
@@ -55,8 +62,15 @@ align-items: center;
 }
 
 .signup-btn {
-  height: 5rem;
+  width:14rem;
+  height: 4rem;
   font-size: 1.3rem;
+}
+
+.signup-btn-box{
+  display:flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .auth-btn {

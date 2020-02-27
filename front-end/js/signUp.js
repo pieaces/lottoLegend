@@ -91,7 +91,7 @@ function startTimer() {
         authTime.innerHTML =
             `00:00`
         authNum.classList.add('alert-input');
-        alertAuthNumber.classList.add('alert-box');
+        alertAuthNumber.style.color = 'red';
         alertAuthNumber.textContent = "시간이 초과되었습니다";
         clearTimeout(timerId);
     } else {
@@ -110,13 +110,16 @@ function checkSecond(sec) {
 function checkAuth() {
     //보낸 문자와 입력창에있는 문자가 다르면 
     authNum.classList.add('alert-input');
-    alertAuthNumber.classList.add('alert-box');
+    alertAuthNumber.style.color = 'red';
     alertAuthNumber.textContent = "인증번호가 다릅니다";
     //return false;
     //일치하면 
     authNum.classList.remove('alert-input');
-    alertAuthNumber.classList.remove('alert-box');
+    alertAuthNumber.style.color = 'blue';
     alertAuthNumber.textContent = "인증되었습니다";
+    authTime.innerHTML =
+        `00:00`
+    clearTimeout(timerId);
     // return true;
 }
 
@@ -127,15 +130,6 @@ authCheck.addEventListener('click', () => {
     authCheckFlag = checkAuth();
 })
 
-function authSubmit() {
-    if (checkPhoneNumber()) {
-
-    } else {
-        authCheckContainer.classList.add('none');
-        authInputContainer.classList.add('none');
-    }
-
-}
 function checkAll() {
     if (!checkId()) {
         return false;
@@ -161,8 +155,8 @@ signupBtn.addEventListener('click', () => {
         }
         alert('전송시작');
         //문자전송함수 실행
-        authCheckContainer.classList.remove('none');
-        authInputContainer.classList.remove('none');
+        authCheckContainer.classList.remove('hide');
+        authInputContainer.classList.remove('hide');
         authNum.classList.remove('alert-input');
         alertAuthNumber.textContent = "";
         clearTimeout(timerId);
@@ -171,9 +165,6 @@ signupBtn.addEventListener('click', () => {
         startTimer();
 
     } else {
-        clearTimeout(timerId);
-        authCheckContainer.classList.add('none');
-        authInputContainer.classList.add('none');
         alert('가입실패');
     }
 })
