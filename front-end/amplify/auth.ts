@@ -1,19 +1,19 @@
 import Auth from '@aws-amplify/auth'
 
-async function getUserName(){
+async function getUserName() {
     return await Auth.currentSession()
-    .then(session => session.getIdToken())
-    .then(idToken => idToken.payload['cognito:username']);
+        .then(session => session.getIdToken())
+        .then(idToken => idToken.payload['cognito:username']);
 }
-async function getNickName(){
+async function getNickName() {
     return await Auth.currentSession()
-    .then(session => session.getIdToken())
-    .then(idToken => idToken.payload.nickname);
+        .then(session => session.getIdToken())
+        .then(idToken => idToken.payload.nickname);
 }
 async function signIn(username: string, password: string) {
     await Auth.signIn({
-        username, // Required, the username
-        password, // Optional, the password
+        username,
+        password,
     }).then(user => console.log(user))
         .catch(err => console.log(err));
 }
@@ -24,7 +24,7 @@ async function signOut() {
         .catch(err => console.log(err));
 }
 async function signUp(username: string, phone: string, password: string, nickname: string) {
-    await Auth.signUp({
+    return await Auth.signUp({
         username,
         password,
         attributes: {
@@ -32,14 +32,14 @@ async function signUp(username: string, phone: string, password: string, nicknam
             nickname
         },
     })
-        .then(data => console.log(data))
-        .catch(err => console.log(err));
+        .then(data => data)
+        .catch(err => err);
 }
 
 async function confirmSignUp(username: string, code: string) {
-    await Auth.confirmSignUp(username, code)
-        .then(data => console.log(data))
-        .catch(err => console.log(err));
+    return await Auth.confirmSignUp(username, code)
+        .then(data => data)
+        .catch(err => err);
 }
 
 async function resendSignUp(username: string) {
@@ -48,13 +48,4 @@ async function resendSignUp(username: string) {
     });
 }
 
-async function anyfunction() {
-    try {
-        const tokens = await Auth.currentSession();
-        const idToken = tokens.getIdToken().getJwtToken();
-        return idToken;
-    } catch (err) {
-        console.log(err);
-    }
-}
-export { signIn, signOut, signUp, confirmSignUp, resendSignUp, anyfunction, getUserName, getNickName };
+export { signIn, signOut, signUp, confirmSignUp, resendSignUp, getUserName, getNickName };
