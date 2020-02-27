@@ -15,7 +15,7 @@ document.write(`           <div class="text-title">
     </div>
 </div>
 </div>
-<div class="text-update-container">
+<div class="text-update-container hide">
 <div class="text-update-btn-box">
     <button type="button" class="btn square-btn read-btn" id="update-btn">수정</button>
     <button type="button" class="btn square-btn read-btn" id="delete-btn">삭제</button>

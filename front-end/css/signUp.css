@@ -57,18 +57,6 @@
   color:red;
 }
 
-.phone-input:first-child{
-  width:60px;
-}
-.phone-input:not(:first-child){
-  margin-left: 20px;
-
-}
-.phone-input{
-  width:75px;
-  margin-right: 20px;
-}
-
 .signup-btn {
   width:14rem;
   height: 4rem;
@@ -90,11 +78,6 @@
   font-size: 1.1rem;
 }
 
-.auth-input-container{
-  display:flex;
-
-}
-
 .auth-check-container{
   display:flex;
   align-items: center;
@@ -105,17 +88,6 @@
   width:10rem;
 }
 
-
-.auth-time-box{
-  display:flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.auth-time-box > label{
-  font-weight: bold;
-  padding:1rem 0;
-}
 
 
 

@@ -83,7 +83,7 @@ function makeComments(objArr: any) {
 
         const updateBtnBox = document.createElement('div');
         updateBtnBox.classList.add('text-update-btn-box');
-        // updateBtnBox.classList.add('hide');
+        updateBtnBox.classList.add('hide');
 
         const updateBtn = document.createElement('button');
         updateBtn.setAttribute('type', 'button');
@@ -115,7 +115,7 @@ function makeComments(objArr: any) {
     commentNum.textContent = objArr.length;
 }
 txtArea.addEventListener('input', limitTxtAreaCount(txtArea))
-function limitTxtAreaCount(target:HTMLInputElement) {
+function limitTxtAreaCount(target: HTMLInputElement) {
     const maxlength = 150;
 
     return function () {
@@ -133,6 +133,6 @@ function limitTxtAreaCount(target:HTMLInputElement) {
     }
 }
 
-function isoStringToDate(isoString:string): string{
-    return isoString.slice(0,10) + ' ' + isoString.slice(11,16);
+function isoStringToDate(isoString: string): string {
+    return isoString.slice(0, 10) + ' ' + isoString.slice(11, 16);
 }

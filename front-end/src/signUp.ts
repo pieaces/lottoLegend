@@ -2,11 +2,14 @@ import configure from '../amplify/configure'
 import { signUp, confirmSignUp } from "../amplify/auth";
 
 configure();
+const signupContainerBox = document.querySelector('.signup-container-box');
+const authCheckWrapper = document.querySelector('.auth-check-wrapper');
 const id = document.querySelector<HTMLInputElement>('#id');
 const nickname = document.querySelector<HTMLInputElement>('#nickname');
 const password = document.querySelector<HTMLInputElement>('#password');
 const passwordCheck = document.querySelector<HTMLInputElement>('#password-check');
-const phoneNumber = document.querySelector<HTMLInputElement>('#phone-number');
+const phoneNumberMid = document.querySelector<HTMLInputElement>('#phone-number-mid');
+const phoneNumberEnd = document.querySelector<HTMLInputElement>('#phone-number-end');
 const signupBtn = document.querySelector('#signup');
 const authNum = document.querySelector<HTMLInputElement>('#auth-num');
 const authCheckContainer = document.querySelector('.auth-check-container');
@@ -67,15 +70,18 @@ function checkNickname() {
 }
 
 function checkPhoneNumber() {
-    const regPhoneNumber = /^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/;
-    if (!regPhoneNumber.test(phoneNumber.value)) {
-        phoneNumber.classList.add("alert-input");
-        alertPhoneNumber.textContent = "휴대폰 번호를 입력해주세요.";
-        return false;
-    } else {
-        phoneNumber.classList.remove("alert-input");
+    const regPhoneNumberMid = /^([0-9]{3,4})$/;
+    const regPhoneNumberEnd = /^([0-9]{4})$/;
+    if (regPhoneNumberMid.test(phoneNumberMid.value) && regPhoneNumberEnd.test(phoneNumberEnd.value)) {
+        phoneNumberMid.classList.remove("alert-input");
+        phoneNumberEnd.classList.remove("alert-input");
         alertPhoneNumber.textContent = "";
         return true;
+    } else {
+        phoneNumberMid.classList.add("alert-input");
+        phoneNumberEnd.classList.add("alert-input");
+        alertPhoneNumber.textContent = "휴대폰 번호를 입력해주세요.";
+        return false;
     }
 }
 
@@ -97,17 +103,15 @@ function checkAll() {
 
 signupBtn.addEventListener('click', async () => {
     if (checkAll()) {
-        const result:any = await signUp(id.value, '+82'.concat(phoneNumber.value.slice(1)), password.value, nickname.value);
+        const result: any = await signUp(id.value, '+82'.concat(phoneNumberMid.value.slice(1)), password.value, nickname.value);
         console.log(result);
-        if(result.code === "UsernameExistsException"){
+        if (result.code === "UsernameExistsException") {
             console.log('이미 존재하는 아이디')
-        }else if(result.user){
+        } else if (result.user) {
             console.log('인증번호 전송');
         }
-        authCheckContainer.classList.remove('hide');
-        authInputContainer.classList.remove('hide');
-        authNum.classList.remove('alert-input');
-        alertAuthNumber.textContent = "";
+        signupContainerBox.classList.add('none');
+        authCheckWrapper.classList.remove('none');
     } else {
         alert('가입실패');
     }
@@ -116,11 +120,11 @@ signupBtn.addEventListener('click', async () => {
 authCheck.addEventListener('click', async () => {
     const result = await confirmSignUp(id.value, authNum.value);
     console.log(result);
-    if(result === "SUCCESS"){
+    if (result === "SUCCESS") {
         console.log('인증성공');
-    }else if(result.code === "LimitExceededException"){
+    } else if (result.code === "LimitExceededException") {
         console.log('과도한 요청을 금지합니다. 잠시 기다린 후 다시 시도해주세요.')
-    }else if(result.code === "CodeMismatchException"){
+    } else if (result.code === "CodeMismatchException") {
         console.log('인증실패');
     }
 });
