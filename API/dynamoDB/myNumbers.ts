@@ -127,16 +127,6 @@ function createNumbers(userName: string, round: number): Promise<void> {
         ExpressionAttributeValues: {
             ':map': {
                 M: {
-                    [Plan.default + SelectMethod.manual]: {
-                        M: {
-                            numbers: {
-                                L: new Array()
-                            },
-                            size: {
-                                N: '0'
-                            }
-                        }
-                    },
                     [Plan.default + SelectMethod.auto]: {
                         M: {
                             numbers: {

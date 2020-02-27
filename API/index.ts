@@ -4,6 +4,7 @@ import { updateNumbers, getNumbersByClass, deleteNumsArr, deleteNumbers, getIncO
 import jwt from 'jsonwebtoken';
 import jwkToPem from 'jwk-to-pem';
 import { Response } from "./class";
+import getCurrentRound from "./funtion/getCurrentRound";
 const pem = jwkToPem({
     "alg": "RS256",
     "e": "AQAB",
@@ -278,11 +279,3 @@ exports.handler = async (event: any, context: any, callback: any) => {
     };
     return response;
 };
-
-function getCurrentRound(currentDate:string): number {
-    const theDate = new Date('2020-02-01:11:45');
-    const today = new Date(currentDate);
-    const between = Number(today) - Number(theDate);
-    const plusDate = Math.floor(between / 24 / 3600 / 1000 / 7);
-    return 896 + plusDate;
-}
