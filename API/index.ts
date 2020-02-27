@@ -1,10 +1,9 @@
 import Posts from "./mariaDB/Posts";
 import Comments from "./mariaDB/Comments";
-import { updateNumbers, getAllNumbers, getNumbersByClass, deleteNumber, SelectMethod, getIncOrExcNumbers } from './dynamoDB/myNumbers'
+import { updateNumbers, getNumbersByClass, deleteNumsArr, deleteNumbers, getIncOrExcNumbers, getNumbersByRound, updateIncOrExcNumbers, IncOrExc } from './dynamoDB/myNumbers'
 import jwt from 'jsonwebtoken';
 import jwkToPem from 'jwk-to-pem';
 import { Response } from "./class";
-import { Plan } from "./dynamoDB/userInfo";
 const pem = jwkToPem({
     "alg": "RS256",
     "e": "AQAB",
@@ -56,11 +55,11 @@ exports.handler = async (event: any, context: any, callback: any) => {
             const db = new Posts();
             switch (method) {
                 case 'GET':
-                    const category:string = event.queryStringParameters.category;
-                    const index:number = Number(event.queryStringParameters.index);
+                    const category: string = event.queryStringParameters.category;
+                    const index: number = Number(event.queryStringParameters.index);
                     const posts = await db.scan(category, index);
                     const count = await db.getCount(category);
-                    body = {posts, count};
+                    body = { posts, count };
                     break;
                 case 'POST':
                     if (logedIn) {
@@ -80,8 +79,14 @@ exports.handler = async (event: any, context: any, callback: any) => {
             const postId = event.pathParameters.postId;
             switch (method) {
                 case 'GET':
-                    await db.addHits(postId);    
+                    await db.addHits(postId);
                     const post = await db.get(postId);
+                    if(post.category  === "incl"){
+                        post.incl = await getIncOrExcNumbers(post.writerId, getCurrentRound(post.created), IncOrExc.include);
+                    }
+                    else if(post.category  === "excl"){
+                        post.excl = await getIncOrExcNumbers(post.writerId, getCurrentRound(post.created), IncOrExc.exclude);
+                    }
                     body = post;
                     break;
                 case 'PATCH': {
@@ -166,56 +171,93 @@ exports.handler = async (event: any, context: any, callback: any) => {
                 if (!response.error) {
                     switch (method) {
                         case 'GET':
-                            const { numsArr } = await getAllNumbers(userName, round);
-                            body = numsArr;
+                            body = await getNumbersByRound(userName, round);
                     }
+                } else {
+                    statusCode = 400;
+                    body = response.message;
                 }
+            } else {
+                statusCode = 400;
+                body = "로그인되지 않은 사용자입니다."
             }
         }
+            break;
         case '/users/{userName}/numbers/mass/{round}/{rank}':
         case '/users/{userName}/numbers/mass/{round}/{rank}/{method}': {
             const userName = event.pathParameters.userName;
             const round = event.pathParameters.round;
             const rank = event.pathParameters.rank;
+            const selectMethod = event.pathParameters.method;
             if (logedIn) {
                 const response = isIdentical(currentId, userName);
                 if (!response.error) {
                     switch (method) {
                         case 'GET':
-                            const { numsArr } = await getAllNumbers(userName, getCurrentRound());
-                            body = numsArr;
+                            if (selectMethod) {
+                                const { numsArr } = await getNumbersByClass(userName, round, rank, selectMethod);
+                                body = numsArr;
+                            } else {
+                                body = await getNumbersByClass(userName, round, rank);
+                            }
+                            break;
+                        case 'POST':
+                            const { numsArr } = JSON.parse(event.body)
+                            body = await updateNumbers(userName, round, numsArr, rank, selectMethod);
+                            break;
                     }
+                } else {
+                    statusCode = 400;
+                    body = response.message;
                 }
+            } else {
+                statusCode = 400;
+                body = "로그인되지 않은 사용자입니다."
             }
         }
-        case '/users/{userName}/numbers/{round}/{rank}/{method}':{
+        case '/users/{userName}/numbers/mass/{round}/{rank}/{method}/{index}': {
             const userName = event.pathParameters.userName;
             const round = event.pathParameters.round;
             const rank = event.pathParameters.rank;
-            const pickMethod = event.pathParameters.method;
+            const selectMethod = event.pathParameters.method;
+            const index = event.pathParameters.index;
+            if (logedIn) {
+                const response = isIdentical(currentId, userName);
+                if (!response.error) {
+                    switch (method) {
+                        case 'DELETE':
+                            await deleteNumsArr(userName, round, rank, selectMethod, index);
+                            break;
+                    }
+                } else {
+                    statusCode = 400;
+                    body = response.message;
+                }
+            } else {
+                statusCode = 400;
+                body = "로그인되지 않은 사용자입니다."
+            }
+        }
+        case '/users/{userName}/numbers/piece/{round}/{choice}': {
+            const userName = event.pathParameters.userName;
+            const round = event.pathParameters.round;
+            const choice = event.pathParameters.choice;
             if (logedIn) {
                 const response = isIdentical(currentId, userName);
                 if (!response.error) {
                     switch (method) {
                         case 'GET': {
-                            if(pickMethod === 'auto' || pickMethod === 'manual'){
-                                const { numsArr } = await getNumbersByClass(userName, round, Plan[rank]+SelectMethod[pickMethod]);
-                                body = numsArr;
-                            }else{
-                                const numbers = await getIncOrExcNumbers(userName, round, pickMethod);
-                                body = numbers;
-                            }
+                            const numbers = await getIncOrExcNumbers(userName, round, choice);
+                            body = numbers;
                         }
                             break;
                         case 'POST': {
-                            const { numsArr } = JSON.parse(event.body)
-                            body = await updateNumbers(userName, round, numsArr)
+                            const { numbers } = JSON.parse(event.body);
+                            await updateIncOrExcNumbers(userName, round, numbers, choice);
                         }
-                            break;
-                        case 'DELETE':
-                            const index = Number(event.queryStringParameters && event.queryStringParameters.index);
-                            await deleteNumber(userName, round, index);
-                            break;
+                        case 'DELETE': {
+                            await deleteNumbers(userName, round, choice);
+                        }
                     }
                 } else {
                     statusCode = 400;
@@ -237,9 +279,9 @@ exports.handler = async (event: any, context: any, callback: any) => {
     return response;
 };
 
-function getCurrentRound():number{
+function getCurrentRound(currentDate:string): number {
     const theDate = new Date('2020-02-01:11:45');
-    const today = new Date();
+    const today = new Date(currentDate);
     const between = Number(today) - Number(theDate);
     const plusDate = Math.floor(between / 24 / 3600 / 1000 / 7);
     return 896 + plusDate;
