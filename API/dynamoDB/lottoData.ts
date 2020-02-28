@@ -189,11 +189,12 @@ export async function queryPieceStats(round: number): Promise<any> {
                 reject(err);
             }
             else {
-                const result = data;
+                const result:any = data.Item.stats.M;
+                for(const key in result){
+                    result[key] = Number(result[key].N);
+                }
                 resolve(result);
             }
         });
     });
 }
-
-queryPieceStats(891).then(value => console.log(value));
