@@ -132,15 +132,21 @@ exports.handler = async (event: any, context: any, callback: any) => {
             const postId = event.pathParameters.postId;
             switch (method) {
                 case 'GET':
-                    await db.addHits(postId);
-                    const post = await db.get(postId);
-                    if (post.category === "incl") {
-                        post.incl = await getIncOrExcNumbers(post.writerId, getCurrentRound(post.created), IncOrExc.include);
+                    const flag = event.queryStringParameters.flag;
+                    if (!flag) {
+                        await db.addHits(postId);
+                        const post = await db.get(postId);
+                        if (post.category === "incl") {
+                            post.incl = await getIncOrExcNumbers(post.writerId, getCurrentRound(post.created), IncOrExc.include);
+                        }
+                        else if (post.category === "excl") {
+                            post.excl = await getIncOrExcNumbers(post.writerId, getCurrentRound(post.created), IncOrExc.exclude);
+                        }
+                        body = post;
+                    }else{
+                        const post = await db.getTitleContents(postId);
+                        body = post;
                     }
-                    else if (post.category === "excl") {
-                        post.excl = await getIncOrExcNumbers(post.writerId, getCurrentRound(post.created), IncOrExc.exclude);
-                    }
-                    body = post;
                     break;
                 case 'PATCH': {
                     const response = isIdentical(currentId, (await db.getWriterId(postId)));
