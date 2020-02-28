@@ -11,6 +11,8 @@
 }
 
 .search-box{
+  display:flex;
+  align-items: center;
   height:4rem;
 }
 

@@ -16,18 +16,6 @@
 
 .mypage-info-container-box{
   margin-right:1rem;
-  position: relative;
-}
-
-.info-change-btn{
-  position: absolute;
-  top:50%;
-  right:5%;
-  width:10rem;
-  height:4rem;
-  background-color: var(--main-color);
-  color:var(--default-color);
-  padding:0.3rem;
 }
 
 .mypage-title{

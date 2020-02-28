@@ -36,6 +36,14 @@
   .anchor-box > ul >li:last-child{
     border-bottom: none;
   }
+
+  .anchor-box > ul >li >a{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items: center;
+    justify-content:center
+  }
   
   .anchor-box > ul >li >a:hover{
     opacity: 0.7;

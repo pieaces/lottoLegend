@@ -34,7 +34,7 @@
 .text-content{
   font-size:1.6rem !important;
   min-height:25rem;
-  margin-bottom: 5rem;
+  margin-bottom: 10rem !important;
 }
 .author-time{
     padding-right:2rem;
@@ -50,11 +50,12 @@
 }
 
 .comment-container{
-  padding: 0.8rem;
+  font-size:1.3rem;
+  padding: 1rem;
   border-bottom: 1px dotted #656565;
 }
 .comment-container-box{
-    margin-bottom:1rem;
+    margin-bottom:10rem;
     min-height: 200px;
 }
 .comment-container-box > .comment-container{
@@ -96,26 +97,22 @@
 
 .comment-title{
   display:flex;
-  padding:1rem 0;
+  padding:0.8rem 0;
 }
 
 .comment-author{
   margin-right:0.3rem;
   font-weight: bold;
-  font-size: 1.5rem;
 }
 
 .comment-time{
-  font-size:1.3rem;
   color:#999;
   margin-top: 0.2rem;
   margin-left: 0.3rem;
 }
 
 .comment-content{
-  font-size: 1.4rem;
   margin-top: 0.2rem;
-  padding-bottom: 1rem;
 }
 
 .comment-write-text{
@@ -128,7 +125,7 @@
 
 .char-count-box{
   position: absolute;
-  top: 80%;
+  top: 70%;
   right: 10%;
   width: 6rem;
   height: 2.8rem;
@@ -143,7 +140,7 @@
 }
 .comment-btn{
   position: absolute;
-  top: 80%;
+  top: 70%;
   right: 1%;
 }
 
