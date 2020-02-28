@@ -14,7 +14,7 @@ export async function getAuthAPI(path: string) {
 
     return await API.get(apiName, path, myInit);
 }
-export async function getUnAuthAPI(path: string, queryStringParameters: any = {}) {
+export async function getUnAuthAPI(path: string, queryStringParameters?: any) {
     const myInit = {
         queryStringParameters,
         //response: true,
