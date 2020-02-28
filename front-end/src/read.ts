@@ -1,7 +1,7 @@
 import configure from './amplify/configure'
-import { getUnAuthAPI, postAuthAPI } from './amplify/api';
+import { getUnAuthAPI, postAuthAPI, deleteAuthAPI } from './amplify/api';
 import { getUserName, getNickName } from './amplify/auth';
-import getQueryStringObject from './getQueryStringObject';
+import { getQueryStringObject, alertMessage, getCategoryHtml } from './functions';
 configure();
 
 const title = document.getElementById('content-title');
@@ -54,6 +54,16 @@ async function init() {
             let board:string;
             board = category + 'BoardPost.html';
             document.querySelector<HTMLElement>('#content-update-btn').setAttribute('onclick', `location.href='${board}?id=${id}'`);
+            document.querySelector<HTMLElement>('#delete-btn').addEventListener('click', async () =>{
+                if(confirm('삭제하면 복구가 불가능합니다. 괜찮겠어요?')){
+                    try{
+                    await deleteAuthAPI('/posts/'+id);
+                    location.href = `./${getCategoryHtml(category, 'List')}`;
+                    }catch(err){
+                        alertMessage();
+                    }
+                }
+            })
         }
         created.textContent = isoStringToDate(post.created);
         hits.textContent = post.hits;

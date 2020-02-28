@@ -4,7 +4,7 @@ import plugins from 'suneditor/src/plugins'
 import { ko } from 'suneditor/src/lang'
 import { postUnAuthAPI, postAuthAPI, getUnAuthAPI, patchAuthAPI } from './amplify/api';
 import { getUserName } from './amplify/auth'
-import getQueryStringObject from './getQueryStringObject'
+import {getQueryStringObject} from './functions'
 import getCategoryHtml from './category';
 
 const editor = suneditor.create('sample', {
@@ -78,8 +78,8 @@ submitBtn.onclick = async () => {
         category, title, contents
       });
     } else {
-      console.log('진입')
-      leapId = await patchAuthAPI(`/posts/${post}`, {
+      leapId = post;
+      await patchAuthAPI(`/posts/${post}`, {
         title, contents
       });
     }

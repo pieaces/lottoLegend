@@ -1,6 +1,6 @@
 import configure from './amplify/configure'
 import { getUnAuthAPI } from './amplify/api'
-import getQueryStringObject from './getQueryStringObject';
+import {getQueryStringObject} from './functions';
 const boardSection = document.querySelector('.board-section');
 const pageNumContainer = document.querySelector('.page-num-container');
 configure();
