@@ -26,6 +26,7 @@ export interface DBData {
     actual: Assembly;
     pos: number[];
     stats?: Stats;
+    piece?: number[];
 }
 
 export interface DataMap {

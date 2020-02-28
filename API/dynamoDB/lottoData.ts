@@ -2,6 +2,7 @@ import { Stats } from '../interface/Statistics';
 import { StatsMethod, DBData, Assembly, AssemblyVersion, QueryStatsParams } from '../interface/LottoDB';
 import { LottoNumber } from '../interface/Lotto';
 import {dynamoDB} from '.'
+import { SelectMethod } from './myNumbers';
 export async function queryLotto(round: number): Promise<LottoNumber[]> {
     const queryParams = {
         ProjectionExpression: 'Numbers',
@@ -29,16 +30,20 @@ export async function queryLotto(round: number): Promise<LottoNumber[]> {
         });
     });
 }
-export async function queryMassStats(method: StatsMethod, params: QueryStatsParams={}): Promise<any[] | DBData> {
-    const queryParams = {
+queryStats(StatsMethod.oddCount).then(value => console.log(value));
+
+export async function queryStats(method: StatsMethod, params: QueryStatsParams={}, ProjectionExpression?:string, ExpressionAttributeNames?:any): Promise<any[] | DBData> {
+    const queryParams:any = {
         TableName: "LottoStats",
+        ProjectionExpression: `Ideal, Actual, Pos, Stats`,
         Key:{
             "Name": {
                 S: method
             }
         }
     };
-
+    if(ProjectionExpression) queryParams.ProjectionExpression = ProjectionExpression;
+    if(ExpressionAttributeNames) queryParams.ExpressionAttributeNames = ExpressionAttributeNames;
     return await new Promise((resolve, reject) => {
         dynamoDB.getItem(queryParams, function (err, data) {
             if (err) {
@@ -121,6 +126,10 @@ export async function queryMassStats(method: StatsMethod, params: QueryStatsPara
                             }
                             dbData.stats = stats;
                         }
+                        if (item.Piece) {
+                            const piece = item.Piece.L.map(item => Number(item.N));
+                            dbData.piece = piece;
+                        }
                         resolve(dbData);
                         break;
                 }
@@ -142,17 +151,18 @@ function compressNumbers(numbers: number[], PACK: number): number[] {
 }
 
 function transformNumbers(list: AWS.DynamoDB.ListAttributeValue, params: QueryStatsParams): number[] {
-    let result: number[];
-    if (typeof params.from === 'number' && typeof params.to === 'number') {
-        result = list.slice(params.from, params.to + 1).map((value) => Number(value.N))
-    } else if (params.list) {
-        result = list.filter((value, index) => {
-            if (params.list.indexOf(index) !== -1) return value;
-        }).map(value => Number(value.N));
-    } else {
-        result = list.map((value) => Number(value.N));
+    let result: number[] = [];
+    if (list) {
+        if (typeof params.from === 'number' && typeof params.to === 'number') {
+            result = list.slice(params.from, params.to + 1).map((value) => Number(value.N))
+        } else if (params.list) {
+            result = list.filter((value, index) => {
+                if (params.list.indexOf(index) !== -1) return value;
+            }).map(value => Number(value.N));
+        } else {
+            result = list.map((value) => Number(value.N));
+        }
     }
-
     return result;
 }
 
@@ -160,41 +170,13 @@ function makeAssembly(obj: AWS.DynamoDB.MapAttributeValue, params: QueryStatsPar
     let result: Assembly;
 
     result = {
-        $12: transformNumbers(obj.$12.L, params),
-        $24: transformNumbers(obj.$24.L, params),
-        $48: transformNumbers(obj.$48.L, params),
-        $192: transformNumbers(obj.$192.L, params),
-        all: transformNumbers(obj.all.L, params),
-        latest: transformNumbers(obj.latest.L, params),
+        $12: transformNumbers(obj.$12 && obj.$12.L, params),
+        $24: transformNumbers(obj.$24 && obj.$24.L, params),
+        $48: transformNumbers(obj.$48 && obj.$48.L, params),
+        $192: transformNumbers(obj.$192 && obj.$192.L, params),
+        all: transformNumbers(obj.all && obj.all.L, params),
+        latest: transformNumbers(obj.latest && obj.latest.L, params),
     };
 
     return result;
-}
-
-
-export async function queryPieceStats(round: number): Promise<any> {
-    const queryParams = {
-        TableName: "LottoData",
-        ProjectionExpression: `stats`,
-        Key:{
-            "Round": {
-                N: round.toString()
-            }
-        }
-    };
-
-    return await new Promise((resolve, reject) => {
-        dynamoDB.getItem(queryParams, function (err, data) {
-            if (err) {
-                reject(err);
-            }
-            else {
-                const result:any = data.Item.stats.M;
-                for(const key in result){
-                    result[key] = Number(result[key].N);
-                }
-                resolve(result);
-            }
-        });
-    });
 }

@@ -7,7 +7,7 @@ import { Response } from "./class";
 import getCurrentRound from "./funtion/getCurrentRound";
 
 import { StatsMethod, QueryStatsParams } from "./interface/LottoDB";
-import { queryMassStats, queryPieceStats, queryLotto } from "./dynamoDB/lottoData";
+import { queryStats, queryLotto } from "./dynamoDB/lottoData";
 import { LottoNumber } from "./interface/Lotto";
 const pem = jwkToPem({
     "alg": "RS256",
@@ -29,7 +29,7 @@ function isIdentical(currentId: string, writerId: string): Response {
         return new Response(true, '작성자가 아닙니다.');
     }
 }
-exports.handler = async (event: any, context: any, callback: any) => {
+exports.handler = async (event: any) => {
     console.log(event);
     const method: string = event.httpMethod;
     const resource: string = event.resource;
@@ -71,15 +71,15 @@ exports.handler = async (event: any, context: any, callback: any) => {
                 } else if (list) {
                     temp.list = JSON.parse(decodeURI(list));
                 }
-                data = await queryMassStats(method as StatsMethod, temp);
+                data = await queryStats(method as StatsMethod, temp);
                 body = { data };
             } else {
                 if (method === "excludeInclude") {
                     let temp: any = {};
-                    temp.emergence = await queryMassStats("emergence" as StatsMethod, {});
-                    temp.interval = await queryMassStats("interval" as StatsMethod, {});
-                    temp.howLongNone = await queryMassStats("howLongNone" as StatsMethod, {});
-                    temp.frequency = await queryMassStats("frequency" as StatsMethod, {});
+                    temp.emergence = await queryStats("emergence" as StatsMethod, {});
+                    temp.interval = await queryStats("interval" as StatsMethod, {});
+                    temp.howLongNone = await queryStats("howLongNone" as StatsMethod, {});
+                    temp.frequency = await queryStats("frequency" as StatsMethod, {});
         
                     data = temp;
                     let round = getCurrentRound(new Date().toString());
@@ -97,7 +97,6 @@ exports.handler = async (event: any, context: any, callback: any) => {
                             round--;
                         }
                     }
-        
                     body = { data, total, winNums};
                 }
                 else body = 'wrong method';
@@ -106,8 +105,7 @@ exports.handler = async (event: any, context: any, callback: any) => {
             break;
         case '/stats/piece/{method}': {
             const method = event.pathParameters.method;
-                const data = await queryMassStats(method as StatsMethod);
-                body = { data };
+            body = await queryStats(method as StatsMethod, {}, 'Ideal.#All, Actual.#All, Pos, Stats, Piece', { "#All": 'all' });
         }
             break;
         case '/posts': {
