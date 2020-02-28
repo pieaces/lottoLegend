@@ -24,6 +24,7 @@ export default class Data {
         const url = `/stats/${method}`;
         console.log(url);
         const result = await getUnAuthAPI(url, queryParams);
+        console.log(result);
         this[method] = result.data;
         if (result.total) this.total = result.total;
         if (result.winNums) this.winNums = result.winNums
