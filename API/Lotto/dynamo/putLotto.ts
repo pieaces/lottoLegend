@@ -44,44 +44,48 @@ export default async function putLotto(round: number):Promise<void> {
             "BonusNum": {
                 N: lotto.bonusNum.toString()
             },
-            [Method.excludedLineCount]:{
-                N: Calculate.excludedLineCount(lotto.numbers).toString()
-            },
-            [Method.lowCount]:{
-                N: Calculate.lowCount(lotto.numbers).toString()
-            },
-            [Method.excludedLineCount]:{
-                N: Calculate.excludedLineCount(lotto.numbers).toString()
-            },
-            [Method.sum]:{
-                N: Calculate.sum(lotto.numbers).toString()
-            },
-            [Method.oddCount]:{
-                N: Calculate.oddCount(lotto.numbers).toString()
-            },
-            [Method.primeCount]:{
-                N: Calculate.primeCount(lotto.numbers).toString()
-            },
-            [Method.$3Count]:{
-                N: Calculate.$3Count(lotto.numbers).toString()
-            },
-            [Method.sum$10]:{
-                N: Calculate.sum$10(lotto.numbers).toString()
-            },
-            [Method.diffMaxMin]:{
-                N: Calculate.diffMaxMin(lotto.numbers).toString()
-            },
-            [Method.AC]:{
-                N: Calculate.AC(lotto.numbers).toString()
-            },
-            [Method.consecutiveExist]:{
-                N: Calculate.consecutiveExist(lotto.numbers).toString()
+            "stats": {
+                M: {
+                    [Method.excludedLineCount]: {
+                        N: Calculate.excludedLineCount(lotto.numbers).toString()
+                    },
+                    [Method.lowCount]: {
+                        N: Calculate.lowCount(lotto.numbers).toString()
+                    },
+                    [Method.excludedLineCount]: {
+                        N: Calculate.excludedLineCount(lotto.numbers).toString()
+                    },
+                    [Method.sum]: {
+                        N: Calculate.sum(lotto.numbers).toString()
+                    },
+                    [Method.oddCount]: {
+                        N: Calculate.oddCount(lotto.numbers).toString()
+                    },
+                    [Method.primeCount]: {
+                        N: Calculate.primeCount(lotto.numbers).toString()
+                    },
+                    [Method.$3Count]: {
+                        N: Calculate.$3Count(lotto.numbers).toString()
+                    },
+                    [Method.sum$10]: {
+                        N: Calculate.sum$10(lotto.numbers).toString()
+                    },
+                    [Method.diffMaxMin]: {
+                        N: Calculate.diffMaxMin(lotto.numbers).toString()
+                    },
+                    [Method.AC]: {
+                        N: Calculate.AC(lotto.numbers).toString()
+                    },
+                    [Method.consecutiveExist]: {
+                        N: Calculate.consecutiveExist(lotto.numbers).toString()
+                    },
+                }
             },
         },
         TableName: "LottoData"
     };
     if (round > 1) {
-        params.Item[Method.carryCount] = {
+        params.Item.stats.M[Method.carryCount] = {
             N: carryCounter([beforeLotto.numbers, lotto.numbers]).toString()
         };
     }
