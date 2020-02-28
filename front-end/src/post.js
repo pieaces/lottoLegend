@@ -2,9 +2,10 @@ import configure from './amplify/configure'
 import suneditor from 'suneditor'
 import plugins from 'suneditor/src/plugins'
 import { ko } from 'suneditor/src/lang'
-import { postUnAuthAPI, postAuthAPI, getUnAuthAPI } from './amplify/api';
+import { postUnAuthAPI, postAuthAPI, getUnAuthAPI, patchAuthAPI } from './amplify/api';
 import { getUserName } from './amplify/auth'
 import getQueryStringObject from './getQueryStringObject'
+import getCategoryHtml from './category';
 
 const editor = suneditor.create('sample', {
   plugins: plugins,
@@ -27,11 +28,15 @@ const editor = suneditor.create('sample', {
 
 configure();
 const post = getQueryStringObject().id;
-if (post) {
-  getUnAuthAPI(`/posts/${post}`).then(post =>{
-    console.log(post);
-  });
+const submitBtn = document.getElementById('submit-btn');
+const titleInput = document.getElementById('title-text');
+function attachTimestamp(name) {
+  const index = name.indexOf('.');
+  const now = new Date();
+  return `${name.slice(0, index)}_${now.getFullYear()}-${now.getMonth()}-${now.getDate()}:${now.getHours()}:${now.getMinutes()}${name.slice(index)}`;
 }
+const category = document.getElementById('wrapper').getAttribute('data-category');
+const loading = document.querySelector('.loading');
 
 const imageWrapper = document.getElementById('image-wrapper');
 const imageSize = document.getElementById('image-size');
@@ -46,13 +51,58 @@ let imageList = [];
 let selectedImages = [];
 let totalSize = 0;
 
+submitBtn.onclick = async () => {
+  const title = titleInput.value;
+  const userName = await getUserName();
+  loading.classList.remove('none');
+  try {
+    const images = [];
+    const imageElements = [];
+    imageList.forEach(image => {
+      if (image.element.getAttribute('src').indexOf('https://canvas-lotto.s3.ap-northeast-2.amazonaws.com/images') === -1) {
+        const dataURL = image.src;
+        const fileName = attachTimestamp(image.name);
+        imageElements.push([image.element, `https://canvas-lotto.s3.ap-northeast-2.amazonaws.com/images/${userName}/${fileName}`]);
+        images.push({userName, fileName, dataURL});
+      }
+    });
+    await postUnAuthAPI('/images', images);
+    imageElements.forEach(image =>{
+      image[0].setAttribute('src', image[1]);
+    });
+    const contents = editor.getContents();
+    console.log(contents);
+    let leapId;
+    if (!post) {
+      leapId = await postAuthAPI('/posts', {
+        category, title, contents
+      });
+    } else {
+      console.log('진입')
+      leapId = await patchAuthAPI(`/posts/${post}`, {
+        title, contents
+      });
+    }
+    location.href = `./${getCategoryHtml(category, 'Read')}?id=${leapId}`;
+  } catch (err) {
+    alert('네트워크 오류가 발생하였습니다. 작업이 정상적으로 완료되지 않았습니다.');
+  }
+}
+if (post) {
+  getUnAuthAPI(`/posts/${post}`, { flag: 1 }).then(post => {
+    titleInput.value = post.title;
+    editor.setContents(post.contents);
+  });
+} else {
+
+}
+
 editor.onImageUpload = function (targetImgElement, index, state, imageInfo, remainingFilesCount) {
   if (state === 'delete') {
     const deleteIndex = findIndex(imageList, index);
     totalSize -= imageList[deleteIndex].size;
-    let size = (totalSize / 1024 / 1024).toFixed(2) * 1;
-    size = size.toFixed(2) + 'MB';
-    imageSize.innerText = size;
+    const size = (totalSize / 1024 / 1024).toFixed(2);
+    imageSize.innerText = size + 'MB';
 
     const imageLi = imageTable.querySelectorAll('li');
 
@@ -65,7 +115,7 @@ editor.onImageUpload = function (targetImgElement, index, state, imageInfo, rema
   } else {
     if (state === 'create') {
       const image = editor.getImagesInfo()[findIndex(editor.getImagesInfo(), index)]
-      totalSize += image.size;
+      totalSize += Number(image.size);
       imageList.push(image)
     } else { // update }
     }
@@ -192,51 +242,4 @@ function deleteCheckedImages() {
     }
   }
   selectedImages = [];
-}
-//
-const submitBtn = document.getElementById('submit-btn');
-const titleInput = document.getElementById('title-text');
-
-function attachTimestamp(name) {
-  const index = name.indexOf('.');
-  const now = new Date();
-  return `${name.slice(0, index)}_${now.getFullYear()}-${now.getMonth()}-${now.getDate()}${name.slice(index)}`;
-}
-const category = document.getElementById('wrapper').getAttribute('data-category');
-const loading = document.querySelector('.loading');
-submitBtn.onclick = async () => {
-  const title = titleInput.value;
-  const userName = await getUserName();
-  loading.classList.remove('none');
-  try {
-    const images = imageList.map(image => {
-      const dataURL = image.src;
-      const fileName = attachTimestamp(image.name);
-      image.element.setAttribute('src', `https://canvas-lotto.s3.ap-northeast-2.amazonaws.com/images/${userName}/${fileName}`);
-      return {
-        userName,
-        fileName,
-        dataURL
-      };
-    });
-    const contents = editor.getContents();
-    await postUnAuthAPI('/images', images);
-    const insertId = await postAuthAPI('/posts', {
-      category, title, contents
-    });
-    let htmlFileName;
-    switch (category) {
-      case 'free': htmlFileName = 'freeBoard';
-        break;
-      case 'excl': htmlFileName = 'excludeNum';
-        break;
-      case 'incl': htmlFileName = 'includeNum';
-        break;
-      case 'qna': htmlFileName = 'qA';
-        break;
-    }
-    location.href = `./${htmlFileName}Read.html?id=${insertId}`;
-  } catch (err) {
-    alert('네트워크 오류가 발생하였습니다. 작업이 정상적으로 완료되지 않았습니다.');
-  }
 }
