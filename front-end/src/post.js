@@ -4,7 +4,7 @@ import plugins from 'suneditor/src/plugins'
 import { ko } from 'suneditor/src/lang'
 import { postUnAuthAPI, postAuthAPI, getUnAuthAPI, patchAuthAPI } from './amplify/api';
 import { getUserName } from './amplify/auth'
-import {getQueryStringObject} from './functions'
+import { getQueryStringObject } from './functions'
 import getCategoryHtml from './category';
 
 const editor = suneditor.create('sample', {
@@ -63,11 +63,11 @@ submitBtn.onclick = async () => {
         const dataURL = image.src;
         const fileName = attachTimestamp(image.name);
         imageElements.push([image.element, `https://canvas-lotto.s3.ap-northeast-2.amazonaws.com/images/${userName}/${fileName}`]);
-        images.push({userName, fileName, dataURL});
+        images.push({ userName, fileName, dataURL });
       }
     });
     await postUnAuthAPI('/images', images);
-    imageElements.forEach(image =>{
+    imageElements.forEach(image => {
       image[0].setAttribute('src', image[1]);
     });
     const contents = editor.getContents();
@@ -144,7 +144,7 @@ function setImageList() {
 
     list += `<li id="img_${image.index}">
       <div class="image-container" data-image-index="${image.index}">
-          <div class="image-wrapper"><img src="${image.src}" ></div>
+          <div class="image-box"><img src="${image.src}" ></div>
       </div>
       <a href="javascript:void(0)" data-image-index="${image.index}" class="image-size">${fixSize}MB</a>
       
