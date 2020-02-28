@@ -57,7 +57,7 @@ async function init() {
         }
         created.textContent = isoStringToDate(post.created);
         hits.textContent = post.hits;
-        contentsInput.innerHTML = post.text;
+        contentsInput.innerHTML = post.contents;
         if (post.comments) {
             makeComments(post.comments);
         }

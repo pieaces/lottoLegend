@@ -2,7 +2,7 @@ import configure from './amplify/configure'
 import suneditor from 'suneditor'
 import plugins from 'suneditor/src/plugins'
 import { ko } from 'suneditor/src/lang'
-import { postUnAuthAPI, postAuthAPI } from './amplify/api';
+import { postUnAuthAPI, postAuthAPI, getUnAuthAPI } from './amplify/api';
 import { getUserName } from './amplify/auth'
 import getQueryStringObject from './getQueryStringObject'
 
@@ -27,14 +27,16 @@ const editor = suneditor.create('sample', {
 
 configure();
 const post = getQueryStringObject().id;
-if(post){
-  console.log(post);
+if (post) {
+  getUnAuthAPI(`/posts/${post}`).then(post =>{
+    console.log(post);
+  });
 }
+
 const imageWrapper = document.getElementById('image-wrapper');
 const imageSize = document.getElementById('image-size');
 const imageRemove = document.getElementById('image-remove');
 const imageTable = document.getElementById('image-list');
-
 
 imageRemove.addEventListener('click', () => {
   deleteCheckedImages();
