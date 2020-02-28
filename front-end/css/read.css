@@ -69,7 +69,6 @@
 }
 
 .comment-write-text-box{
-  position: relative;
   height: 12rem;
   border: 1px solid rgba(0,0,0,0.2);
   padding: 1.5rem 1.5rem 4.5rem 1.5rem;
@@ -123,10 +122,13 @@
     font-size:1.6rem;
 }
 
+.comment-write-btn-box{
+  display:flex;
+  align-items: center;
+  justify-content:flex-end
+}
+
 .char-count-box{
-  position: absolute;
-  top: 70%;
-  right: 10%;
   width: 6rem;
   height: 2.8rem;
   display: flex;
@@ -137,11 +139,6 @@
 .comment-limit-alert{
   color: #ff2f2f;
   font-weight: bold;
-}
-.comment-btn{
-  position: absolute;
-  top: 70%;
-  right: 1%;
 }
 
 .text-update-container{
