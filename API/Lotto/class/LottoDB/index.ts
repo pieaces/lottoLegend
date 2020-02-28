@@ -58,7 +58,7 @@ export default class LottoStatDB extends LottoProcess {
                         Item["Stats"] = dynamoDBJson(dbData.stats);
                     }
                     if(method !== Method.lineCount && method !== Method.carryCount){
-                        Item["piece"] = {
+                        Item["Piece"] = {
                             L: this.getLNumbers().map(numbers => {
                                 return {
                                     N: this.methodMap.get(method).cal(numbers).toString()
@@ -66,7 +66,7 @@ export default class LottoStatDB extends LottoProcess {
                             })
                         };
                     }else if(method === Method.carryCount){
-                        Item["piece"] = {
+                        Item["Piece"] = {
                             L: Analyze.carryCount(this.getLNumbers()).map(num =>{
                                 return {
                                     N: num.toString()
