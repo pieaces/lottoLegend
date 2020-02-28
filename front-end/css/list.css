@@ -42,6 +42,7 @@
 /* board-header */
 
 .board-header {
+  font-size:1.5rem;
   height:5rem;
   border-top: 1px solid black;
   background-color: var(--box-color);
@@ -86,6 +87,7 @@
 /* board-box */
 
 .board-box {
+  font-size:1.4rem;
   height:5rem;
   display: flex;
   border: 1px solid var(--border-color);
