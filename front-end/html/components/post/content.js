@@ -1,9 +1,4 @@
 document.write(`
-<div class="loading none">
-<div class="loading-icon filter-loading">
-  <i class="fas fa-sync spin"></i>
-</div>
-</div>
 <div class="comment-title">
 <div class="title-label">제목</div>
 <input type="text" class="title" id="title-text">
