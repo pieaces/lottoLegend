@@ -59,7 +59,7 @@ export default class LottoStatDB extends LottoProcess {
                     }
                     if(method !== Method.lineCount && method !== Method.carryCount){
                         Item["Piece"] = {
-                            L: this.getLNumbers().map(numbers => {
+                            L: this.getLNumbers(-50).map(numbers => {
                                 return {
                                     N: this.methodMap.get(method).cal(numbers).toString()
                                 }
@@ -67,7 +67,7 @@ export default class LottoStatDB extends LottoProcess {
                         };
                     }else if(method === Method.carryCount){
                         Item["Piece"] = {
-                            L: Analyze.carryCount(this.getLNumbers()).map(num =>{
+                            L: Analyze.carryCount(this.getLNumbers(-50)).map(num =>{
                                 return {
                                     N: num.toString()
                                 }
@@ -112,6 +112,3 @@ export default class LottoStatDB extends LottoProcess {
         console.log('통계값 DB 작성 완료');
     }
 }
-
-const lot = new LottoStatDB();
-lot.putALLStats();
