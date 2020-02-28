@@ -26,8 +26,8 @@ commentSubmit.onclick = async function () {
     if (Number(charCurrentCount.textContent) > 0 && currentUser) {
         try {
             const commentId = await postAuthAPI(`/posts/${id}/comments`, { contents: txtArea.value });
-            txtArea.value = "";
             makeComments([{ id: commentId, writerId: currentUser, writerName: await getNickName(), created: new Date().toISOString(), contents: txtArea.value }]);
+            txtArea.value = "";
         } catch (err) {
             alertMessage();
         }
