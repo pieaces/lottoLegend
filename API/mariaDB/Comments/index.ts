@@ -27,9 +27,8 @@ export default class Comments extends DB {
             condition:{id:commentId},
         };
         const rows = await super._get(option);
-        const comment = rows[0];
-
-        return comment.commentId;
+        
+        return rows[0].writerId;
     }
     async post(post:number, writerId: string, writerName: string, contents: string) {
         const comment = {
