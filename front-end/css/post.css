@@ -24,9 +24,14 @@
   width:90%;
 }
 
-#image-wrapper{
-  height: 15rem;
+.textarea-box{
+  margin-bottom:5rem;
 }
+
+#image-wrapper{
+  margin-bottom:10rem;
+}
+
 .image-list{
   margin-top:1rem;
 }
@@ -68,7 +73,7 @@
   position: relative;
   width: 100%;
   text-align: center;
-  margin-bottom:1rem;
+  margin-bottom:5rem;
 }
 
 .img-btn-box{
@@ -91,7 +96,7 @@
   font-size:1.2rem;
 }
 
-#files-upload {
+.files-upload {
     display: inline-block;
     position: absolute;
     z-index: 1;
@@ -103,14 +108,14 @@
     cursor: pointer;
 }
 
-#image-remove{
+.image-remove{
   width: 10rem;
     height: 5rem;
     background-color: #d9534f;
     color:var(--default-color)
 }
 
-#image-size{
+.image-total-size{
   width:10rem;
   height:5rem;
   display: flex;
@@ -119,7 +124,7 @@
   border:1px solid rgba(0,0,0,0.4);
   font-size:0.9rem;
 }
-#post-alert{
+.post-alert{
   width: 32rem;
   font-size: 0.8rem;
   justify-content: center;

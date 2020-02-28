@@ -39,7 +39,7 @@ const category = document.getElementById('wrapper').getAttribute('data-category'
 const loading = document.querySelector('.loading');
 
 const imageWrapper = document.getElementById('image-wrapper');
-const imageSize = document.getElementById('image-size');
+const imageTotalSize = document.getElementById('image-total-size');
 const imageRemove = document.getElementById('image-remove');
 const imageTable = document.getElementById('image-list');
 
@@ -102,7 +102,7 @@ editor.onImageUpload = function (targetImgElement, index, state, imageInfo, rema
     const deleteIndex = findIndex(imageList, index);
     totalSize -= imageList[deleteIndex].size;
     const size = (totalSize / 1024 / 1024).toFixed(2);
-    imageSize.innerText = size + 'MB';
+    imageTotalSize.innerText = size + 'MB';
 
     const imageLi = imageTable.querySelectorAll('li');
 
@@ -153,7 +153,7 @@ function setImageList() {
     size += fixSize;
   }
 
-  imageSize.innerText = size.toFixed(2) + 'MB';
+  imageTotalSize.innerText = size.toFixed(2) + 'MB';
   imageTable.innerHTML = list;
 
   const imageContainer = document.querySelectorAll('.image-container');
