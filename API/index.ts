@@ -62,9 +62,9 @@ exports.handler = async (event: any, context: any, callback: any) => {
             let data;
             if (method in StatsMethod) {
                 const temp: QueryStatsParams = {}
-                const from = event.queryStringParameters.from
-                const to = event.queryStringParameters.to;
-                const list = event.queryStringParameters.list
+                const from = event.queryStringParameters && event.queryStringParameters.from
+                const to = event.queryStringParameters && event.queryStringParameters.to;
+                const list = event.queryStringParameters && event.queryStringParameters.list
                 if ((from && to)) {
                     temp.from = Number(from);
                     temp.to = Number(to);
