@@ -6,6 +6,7 @@ import scanLotto from '../../dynamo/scanLotto'
 import { Method } from '../../interface/LottoDB';
 import { LData, Params, LottoNumber } from '../../interface/Lotto';
 import dynamoDB from '../../dynamo'
+import Analyze from '../Analyze';
 
 export default class LottoStatDB extends LottoProcess {
     protected hasLotto = false;
@@ -56,6 +57,23 @@ export default class LottoStatDB extends LottoProcess {
                     if (dbData.stats) {
                         Item["Stats"] = dynamoDBJson(dbData.stats);
                     }
+                    if(method !== Method.lineCount && method !== Method.carryCount){
+                        Item["piece"] = {
+                            L: this.getLNumbers().map(numbers => {
+                                return {
+                                    N: this.methodMap.get(method).cal(numbers).toString()
+                                }
+                            })
+                        };
+                    }else if(method === Method.carryCount){
+                        Item["piece"] = {
+                            L: Analyze.carryCount(this.getLNumbers()).map(num =>{
+                                return {
+                                    N: num.toString()
+                                }
+                            })
+                        };
+                    }
                     break;
             }
 
@@ -73,8 +91,7 @@ export default class LottoStatDB extends LottoProcess {
                         resolve();
                     }
                 });
-            })
-
+            });
         }
     }
 
@@ -95,3 +112,6 @@ export default class LottoStatDB extends LottoProcess {
         console.log('통계값 DB 작성 완료');
     }
 }
+
+const lot = new LottoStatDB();
+lot.putALLStats();

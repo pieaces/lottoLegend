@@ -3,20 +3,12 @@ import { LData } from '../interface/Lotto';
 import dynamoDB from '.'
 import { Method } from '../interface/LottoDB';
 import Calculate from '../class/Calculate';
+import Analyze from '../class/Analyze';
 
 function lottoDataParser(data:any):LData{
     const numbers = [data.drwtNo1, data.drwtNo2, data.drwtNo3, data.drwtNo4, data.drwtNo5, data.drwtNo6]
     const lotto: LData = { round: data.drwNo, numbers, date: data.drwNoDate, bonusNum: data.bnusNo };
     return lotto;
-}
-function carryCounter(data:[number[], number[]]): number{
-    const before = data[0];
-    const after = data[1];
-    let count = 0;
-    before.forEach(num =>{
-        if(after.indexOf(num) !== -1) count++;
-    });
-    return count;
 }
 
 export default async function putLotto(round: number):Promise<void> {
@@ -86,7 +78,7 @@ export default async function putLotto(round: number):Promise<void> {
     };
     if (round > 1) {
         params.Item.stats.M[Method.carryCount] = {
-            N: carryCounter([beforeLotto.numbers, lotto.numbers]).toString()
+            N: Analyze.carryCount([beforeLotto.numbers, lotto.numbers])[0].toString()
         };
     }
     return new Promise((resolve, reject) => {
