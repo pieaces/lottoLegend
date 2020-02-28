@@ -5,7 +5,7 @@ import { ko } from 'suneditor/src/lang'
 import { postUnAuthAPI, postAuthAPI, getUnAuthAPI, patchAuthAPI } from './amplify/api';
 import { getUserName } from './amplify/auth'
 import { getQueryStringObject } from './functions'
-import getCategoryHtml from './category';
+import { getCategoryHtml } from './functions';
 
 const editor = suneditor.create('sample', {
   plugins: plugins,
