@@ -78,7 +78,6 @@ function makeComments(objArr: any) {
     for (let i = 0; i < objArr.length; i++) {
         const commentContainer = document.createElement('div');
         commentContainer.classList.add('comment-container');
-        commentContainer.setAttribute('data-id', objArr[i].id);
 
         const commentBox = document.createElement('div');
         commentBox.classList.add('comment-box');
@@ -99,7 +98,6 @@ function makeComments(objArr: any) {
 
         const updateBtnBox = document.createElement('div');
         updateBtnBox.classList.add('text-update-btn-box');
-        if(!(currentUser === objArr[i].writerId)) updateBtnBox.classList.add('hide');
 
         const updateBtn = document.createElement('button');
         updateBtn.setAttribute('type', 'button');
@@ -111,6 +109,16 @@ function makeComments(objArr: any) {
         deleteBtn.classList.add('btn', 'square-btn', 'comment-update-btn');
         deleteBtn.textContent = "삭제";
 
+        if(!(currentUser === objArr[i].writerId)) updateBtnBox.classList.add('hide');
+        else{
+            updateBtn.addEventListener('click', () =>{
+
+            });
+            deleteBtn.addEventListener('click', async () =>{
+                await deleteAuthAPI(`/posts/${id}/comments/${objArr[i].id}`);
+                commentContainer.remove();
+            });
+        }
         updateBtnBox.appendChild(updateBtn);
         updateBtnBox.appendChild(deleteBtn);
 
