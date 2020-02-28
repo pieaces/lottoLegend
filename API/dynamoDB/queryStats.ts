@@ -2,7 +2,6 @@ import { Stats } from '../interface/Statistics';
 import { StatsMethod, DBData, Assembly, AssemblyVersion, QueryStatsParams } from '../interface/LottoDB';
 import { LottoNumber } from '../interface/Lotto';
 import {dynamoDB} from '.'
-
 export async function queryLotto(round: number): Promise<LottoNumber[]> {
     const queryParams = {
         ProjectionExpression: 'Numbers',
@@ -30,7 +29,7 @@ export async function queryLotto(round: number): Promise<LottoNumber[]> {
         });
     });
 }
-export async function queryStats(method: StatsMethod, params: QueryStatsParams): Promise<any[] | DBData> {
+export async function queryStats(method: StatsMethod, params: QueryStatsParams={}): Promise<any[] | DBData> {
     const queryParams = {
         TableName: "LottoStats",
         Key:{
