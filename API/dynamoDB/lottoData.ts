@@ -16,7 +16,7 @@ export async function queryLotto(round: number): Promise<LottoNumber[]> {
     return await new Promise((resolve, reject) => {
         dynamoDB.getItem(queryParams, function (err, data) {
             if (err) {
-                reject('LottoData - query 과정 에러' + err);
+                reject('queryLotto 에러' + err);
             }
             else {
                 const item = data.Item;
@@ -29,7 +29,7 @@ export async function queryLotto(round: number): Promise<LottoNumber[]> {
         });
     });
 }
-export async function queryStats(method: StatsMethod, params: QueryStatsParams={}): Promise<any[] | DBData> {
+export async function queryMassStats(method: StatsMethod, params: QueryStatsParams={}): Promise<any[] | DBData> {
     const queryParams = {
         TableName: "LottoStats",
         Key:{
@@ -42,7 +42,7 @@ export async function queryStats(method: StatsMethod, params: QueryStatsParams={
     return await new Promise((resolve, reject) => {
         dynamoDB.getItem(queryParams, function (err, data) {
             if (err) {
-                console.log('LottoStats - read 과정 에러', err);
+                console.log('queryMassStats 에러', err);
                 reject(err);
             }
             else {
@@ -170,3 +170,30 @@ function makeAssembly(obj: AWS.DynamoDB.MapAttributeValue, params: QueryStatsPar
 
     return result;
 }
+
+
+export async function queryPieceStats(round: number): Promise<any> {
+    const queryParams = {
+        TableName: "LottoData",
+        ProjectionExpression: `stats`,
+        Key:{
+            "Round": {
+                N: round.toString()
+            }
+        }
+    };
+
+    return await new Promise((resolve, reject) => {
+        dynamoDB.getItem(queryParams, function (err, data) {
+            if (err) {
+                reject(err);
+            }
+            else {
+                const result = data;
+                resolve(result);
+            }
+        });
+    });
+}
+
+queryPieceStats(891).then(value => console.log(value));

@@ -57,3 +57,6 @@ export enum StatsMethod {
 export interface QueryStatsParams extends Params {
     list?: number[];
 }
+
+const a = Object.values(StatsMethod);
+console.log(a);
