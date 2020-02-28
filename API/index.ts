@@ -132,7 +132,7 @@ exports.handler = async (event: any, context: any, callback: any) => {
             const postId = event.pathParameters.postId;
             switch (method) {
                 case 'GET':
-                    const flag = event.queryStringParameters.flag;
+                    const flag = event.queryStringParameters && event.queryStringParameters.flag;
                     if (!flag) {
                         await db.addHits(postId);
                         const post = await db.get(postId);
