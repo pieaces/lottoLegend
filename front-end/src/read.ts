@@ -1,7 +1,7 @@
 import configure from './amplify/configure'
 import { getUnAuthAPI, postAuthAPI, deleteAuthAPI } from './amplify/api';
 import { getUserName, getNickName } from './amplify/auth';
-import { getQueryStringObject, alertMessage, getCategoryHtml } from './functions';
+import { getQueryStringObject, alertMessage, getCategoryHtml, removeConfirm, isoStringToDate, Affix } from './functions';
 configure();
 
 const title = document.getElementById('content-title');
@@ -18,6 +18,7 @@ const commentSubmit = document.getElementById('comment-submit');
 const contentsUpdateBtn = document.querySelector<HTMLElement>('.text-update-container ');
 
 let currentUser: string;
+let commentCount = 0;
 const id = getQueryStringObject().id;
 init();
 
@@ -25,10 +26,10 @@ commentSubmit.onclick = async function () {
     if (Number(charCurrentCount.textContent) > 0 && currentUser) {
         try {
             const commentId = await postAuthAPI(`/posts/${id}/comments`, { contents: txtArea.value });
-            makeComments([{ id: commentId.data, writerName: await getNickName(), created: new Date().toISOString(), contents: txtArea.value }]);
-            commentNum.textContent = (Number(commentNum.textContent) + 1).toString();
+            txtArea.value = "";
+            makeComments([{ id: commentId, writerId: currentUser, writerName: await getNickName(), created: new Date().toISOString(), contents: txtArea.value }]);
         } catch (err) {
-            alert('System-error');
+            alertMessage();
         }
         console.log(txtArea.value);
     } else {
@@ -47,19 +48,18 @@ async function init() {
         console.log(post);
         title.textContent = post.title;
         author.textContent = post.writerName;
-        console.log(currentUser, post.writerId);
-        if(currentUser === post.writerId){
+        if (currentUser === post.writerId) {
             contentsUpdateBtn.classList.remove('hide');
             const category = document.querySelector<HTMLElement>('#wrapper').getAttribute('data-category');
-            let board:string;
+            let board: string;
             board = category + 'BoardPost.html';
             document.querySelector<HTMLElement>('#content-update-btn').setAttribute('onclick', `location.href='${board}?id=${id}'`);
-            document.querySelector<HTMLElement>('#delete-btn').addEventListener('click', async () =>{
-                if(confirm('삭제하면 복구가 불가능합니다. 괜찮겠어요?')){
-                    try{
-                    await deleteAuthAPI('/posts/'+id);
-                    location.href = `./${getCategoryHtml(category, 'List')}`;
-                    }catch(err){
+            document.querySelector<HTMLElement>('#delete-btn').addEventListener('click', async () => {
+                if (removeConfirm()) {
+                    try {
+                        await deleteAuthAPI('/posts/' + id);
+                        location.href = `./${getCategoryHtml(category, Affix.List)}`;
+                    } catch (err) {
                         alertMessage();
                     }
                 }
@@ -98,28 +98,30 @@ function makeComments(objArr: any) {
 
         const updateBtnBox = document.createElement('div');
         updateBtnBox.classList.add('text-update-btn-box');
-
-        const updateBtn = document.createElement('button');
-        updateBtn.setAttribute('type', 'button');
-        updateBtn.classList.add('btn', 'square-btn', 'comment-update-btn');
-        updateBtn.textContent = "수정";
+        // const updateBtn = document.createElement('button');
+        // updateBtn.setAttribute('type', 'button');
+        // updateBtn.classList.add('btn', 'square-btn', 'comment-update-btn');
+        // updateBtn.textContent = "수정";
 
         const deleteBtn = document.createElement('button');
         deleteBtn.setAttribute('type', 'button');
         deleteBtn.classList.add('btn', 'square-btn', 'comment-update-btn');
         deleteBtn.textContent = "삭제";
 
-        if(!(currentUser === objArr[i].writerId)) updateBtnBox.classList.add('hide');
-        else{
-            updateBtn.addEventListener('click', () =>{
-
-            });
-            deleteBtn.addEventListener('click', async () =>{
-                await deleteAuthAPI(`/posts/${id}/comments/${objArr[i].id}`);
-                commentContainer.remove();
+        if (!(currentUser === objArr[i].writerId)) updateBtnBox.classList.add('hide');
+        else {
+            // updateBtn.addEventListener('click', () =>{
+            // });
+            deleteBtn.addEventListener('click', async () => {
+                if (removeConfirm()) {
+                    await deleteAuthAPI(`/posts/${id}/comments/${objArr[i].id}`);
+                    commentContainer.remove();
+                    commentCount--;
+                    commentNum.textContent = commentCount.toString();
+                }
             });
         }
-        updateBtnBox.appendChild(updateBtn);
+        //updateBtnBox.appendChild(updateBtn);
         updateBtnBox.appendChild(deleteBtn);
 
         commentBox.appendChild(commentTitle);
@@ -134,7 +136,8 @@ function makeComments(objArr: any) {
 
         commentContainerBox.appendChild(commentContainer);
     }
-    commentNum.textContent = objArr.length;
+    commentCount += objArr.length;
+    commentNum.textContent = commentCount.toString();
 }
 txtArea.addEventListener('input', limitTxtAreaCount(txtArea))
 function limitTxtAreaCount(target: HTMLInputElement) {
@@ -153,8 +156,4 @@ function limitTxtAreaCount(target: HTMLInputElement) {
             return true;
         }
     }
-}
-
-function isoStringToDate(isoString: string): string {
-    return isoString.slice(0, 10) + ' ' + isoString.slice(11, 16);
 }

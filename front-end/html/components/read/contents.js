@@ -35,7 +35,5 @@ document.write(`           <div class="text-title">
 </div>
 <div class="comment-container-box">
 <div class="comment-list-title"><span id="comment-num"></span>개의 댓글</div>
-
-
 </div>
 `);

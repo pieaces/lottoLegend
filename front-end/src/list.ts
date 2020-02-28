@@ -1,6 +1,6 @@
 import configure from './amplify/configure'
 import { getUnAuthAPI } from './amplify/api'
-import {getQueryStringObject} from './functions';
+import {getQueryStringObject, isoStringToDate, getCategoryHtml, Affix} from './functions';
 const boardSection = document.querySelector('.board-section');
 const pageNumContainer = document.querySelector('.page-num-container');
 configure();
@@ -38,17 +38,8 @@ function makeBoard(objArr: any[]) {
         const boardTitle = document.createElement('div');
         boardTitle.classList.add('board-title');
         let htmlFileName: string;
-        switch (category) {
-            case 'free': htmlFileName = 'freeBoard';
-                break;
-            case 'excl': htmlFileName = 'excludeNum';
-                break;
-            case 'incl': htmlFileName = 'includeNum';
-                break;
-            case 'qna': htmlFileName = 'qA';
-                break;
-        }
-        boardTitle.innerHTML = `<a href="./${htmlFileName}Read.html?id=${objArr[i].id}">${objArr[i].title}</a>`;
+        
+        boardTitle.innerHTML = `<a href="./${getCategoryHtml(category, Affix.Read)}?id=${objArr[i].id}">${objArr[i].title}</a>`;
 
         boardBox.appendChild(boardTitle);
 
@@ -60,7 +51,7 @@ function makeBoard(objArr: any[]) {
 
         const boardDate = document.createElement('div');
         boardDate.classList.add('board-date');
-        boardDate.textContent = objArr[i].created.slice(0, 10);
+        boardDate.textContent = isoStringToDate(objArr[i].created).slice(0, 10);
 
         boardBox.appendChild(boardDate);
 

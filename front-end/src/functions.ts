@@ -1,3 +1,6 @@
+export function removeConfirm(){
+    return confirm('삭제하면 복구가 불가능합니다. 괜찮겠어요?');
+}
 export function alertMessage(){
     alert('네트워크 오류가 발생하였습니다. 작업이 정상적으로 완료되지 않았습니다.');
 }
@@ -16,7 +19,12 @@ export function getQueryStringObject(): any {
     return result;
 }
 
-export function getCategoryHtml(category: string, affix:string) {
+export enum Affix{
+    "List"="Read",
+    "Post"="Post",
+    "Read"="Read"
+}
+export function getCategoryHtml(category: string, affix:Affix) {
     let htmlFile:string;
     switch (category) {
         case 'free':
@@ -42,4 +50,11 @@ export function getCategoryHtml(category: string, affix:string) {
             break;
     }
     return htmlFile + affix + '.html';
+}
+
+export function isoStringToDate(isoString: string): string {
+    const date = new Date(isoString);
+    date.setHours(date.getHours()+9);
+    const iso = date.toISOString();
+    return iso.slice(0, 10) + ' ' + iso.slice(11, 16);
 }
