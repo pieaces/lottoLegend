@@ -19,8 +19,8 @@ export default class PostsContents extends DB {
         };
         await super._post(post);
     }
-    async patch(id: number, contents: string) {
-        const changedRows = await super._patch({ key: 'post', value: id }, { contents });
+    async patch(id: number, text: string) {
+        const changedRows = await super._patch({ key: 'post', value: id }, { text });
         return changedRows;
     }
 }
