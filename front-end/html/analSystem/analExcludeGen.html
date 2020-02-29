@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="../../css/init.css" />
+    <link rel="stylesheet" href="../../css/section.css">
+    <link rel="stylesheet" href="../../css/filter/function.css">
+    <link rel="stylesheet" href="../../css/filter/function1Chart.css">
+    <link rel="stylesheet" href="../../css/filter/function1.css" />
+    <link rel="stylesheet" href="../../css/filter/function2.css">
+    <link rel="stylesheet" href="../../css/filter/function3.css">
+    <link rel="stylesheet" href="../../css//header.css" />
+    <link rel="stylesheet" href="../../css//footer.css" />
+    <link rel="stylesheet" href="../../css//analSystem/analRecExc.css">
+    <title>CanvasLotto</title>
+</head>
+
+<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
+    <div id="wrapper">
+        <div class="loading none">
+            <div class="loading-icon filter-loading">
+                <i class="fas fa-sync spin"></i>
+            </div>
+        </div>
+        <script src="../components/header/header.js"></script>
+        <div class="section1">
+            <div class="grid-section-1 container">
+                <div class="aside">
+                    <div class="anchor-box">
+                        <script src="../components/aside/anal.js"></script>
+                    </div>
+
+                </div>
+                <div class="main">
+                    <div class="main-title">
+                        제외수 생성기
+                    </div>
+                    <div class="func2-layout ">
+                        <div class="func2-main-1-box">
+                            <div class="func2-left-container box-color">
+                                <div class="func2-win-num-container-box">
+                                </div>
+                            </div>
+                            <div class="func2-right-container box-color">
+                                <canvas class="func2-chart-gauss func2-chart"></canvas>
+                            </div>
+                        </div>
+                        <div class="func2-main-2-box">
+                            <div class="func2-left-container box-color">
+                                <div class="que-container func2-numboard-que">
+                                    <i class="far fa-question-circle"></i>
+                                    <div class="que-modal func2-numboard-que-modal none">
+                                        <div class="que-cancel func2-numboard-que-cancel">
+                                            <i class="fas fa-times"></i>
+                                        </div>
+                                        <div class="que-text func2-numboard-que-modal-text">
+                                            <ul>
+                                                <li></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="func2-lotto-checkbox">
+                                    <div class="func2-num-term func2-lotto-check-current">
+                                        번호빈도
+                                    </div>
+                                    <div class="func2-num-freq">
+                                        번호간격
+                                    </div>
+                                    <div class="func2-num-freq-term">
+                                        빈도X간격
+                                    </div>
+                                </div>
+                                <div class="func2-lotto-num-box">
+                                    <div>
+                                        <div>1</div>
+                                        <div>2</div>
+                                        <div>3</div>
+                                        <div>4</div>
+                                        <div>5</div>
+                                        <div>6</div>
+                                        <div>7</div>
+                                    </div>
+                                    <div>
+                                        <div>8</div>
+                                        <div>9</div>
+                                        <div>10</div>
+                                        <div>11</div>
+                                        <div>12</div>
+                                        <div>13</div>
+                                        <div>14</div>
+                                    </div>
+                                    <div>
+                                        <div>15</div>
+                                        <div>16</div>
+                                        <div>17</div>
+                                        <div>18</div>
+                                        <div>19</div>
+                                        <div>20</div>
+                                        <div>21</div>
+                                    </div>
+                                    <div>
+                                        <div>22</div>
+                                        <div>23</div>
+                                        <div>24</div>
+                                        <div>25</div>
+                                        <div>26</div>
+                                        <div>27</div>
+                                        <div>28</div>
+                                    </div>
+                                    <div>
+                                        <div>29</div>
+                                        <div>30</div>
+                                        <div>31</div>
+                                        <div>32</div>
+                                        <div>33</div>
+                                        <div>34</div>
+                                        <div>35</div>
+                                    </div>
+                                    <div>
+                                        <div>36</div>
+                                        <div>37</div>
+                                        <div>38</div>
+                                        <div>39</div>
+                                        <div>40</div>
+                                        <div>41</div>
+                                        <div>42</div>
+                                    </div>
+                                    <div>
+                                        <div>43</div>
+                                        <div>44</div>
+                                        <div>45</div>
+                                        <button type="button" class="btn circle-btn func2-num-exclude-btn">
+                                            제외
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="func2-right-container">
+                                <div class="func2-chart-radar-container box-color">
+                                    <div class="func2-chart-radar-num">
+                                        <div class="func2-left-chart-btn chart-slide-current"></div>
+                                        <div class="func2-right-chart-btn "></div>
+                                    </div>
+                                    <canvas class="func2-chart-radar func2-chart"></canvas>
+                                    <div class="func2-chart-radar-text none">
+                                        <table class="table-2 table" id="func2-radar-table">
+                                            <tr>
+                                                <td>평균 : <span id="func2-radar-mean-value"></span> </td>
+                                                <td>표준편차 : <span id="func2-radar-stdev-value"></span> </td>
+                                            </tr>
+                                            <tr>
+                                                <td>최댓값 : <span id="func2-radar-max-value"></span> </td>
+                                                <td>최솟값 : <span id="func2-radar-min-value"></span> </td>
+                                            </tr>
+                                            <tr>
+                                                <td id="func2-bubble-lately-times">68%</td>
+                                                <td id="func2-bubble-lately-day">95%</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="func2-chart-bar-container box-color">
+                                    <canvas class="func2-chart-bar func2-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="checkbox-textbox func2-layout ">
+                            <div class="checkbox-text">
+                            </div>
+                        </div>
+                        <div class="showcase-container func2-layout box-color">
+
+                            <div class="func2-select-num-box-container func2-layout ">
+                                <div class="func2-select-num-box">
+                                </div>
+                            </div>
+                            <div class="next-btn-container func2-layout ">
+                                <button type="reset" class="btn circle-btn" id="reset">초기화</button>
+                                <button type="button" class="btn circle-btn" id="nextBtn">다음</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="../components/footer/footer.js"></script>
+    </div>
+
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="../../js/headerHover.js"></script>
+    <script src="../../js/functional.js"></script>
+    <script src="https://kit.fontawesome.com/e14b8c39aa.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
