@@ -8,7 +8,7 @@ export enum Plan {
 }
 export function getRank(userName:string):Promise<string>{
     const params = {
-        TableName:'lottoUsers',
+        TableName:'LottoUsers',
         ExpressionAttributeNames: {
             "#Plan": 'Plan',
             '#Until': 'Until'
