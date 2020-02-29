@@ -1,4 +1,13 @@
 
+.anchor-box > ul >li:nth-child(2){
+  background-color: rgb(220,220,220);
+  font-weight: bold;  
+}
+
+.anchor-box > ul >li:nth-child(2) >a:hover{
+  opacity: 1 !important;
+}
+
   /* main */
   
   .main {
@@ -29,5 +38,9 @@
   }
 
 .chart-title{
-  height:4rem;
+  font-size:1.4rem;
+  height:3rem;
+  display:flex;
+  align-items: center;
+  justify-content: center;
 }

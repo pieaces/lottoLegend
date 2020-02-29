@@ -16,23 +16,19 @@ document.write(` <header>
             <ul>
 
             </ul>
-            <ul>
-
-            </ul>
-            <ul>
-                <li> <a href="../analSystem/analIntroduce.html">소개</a> </li>
-                <li> <a href="../analSystem/analRecExc.html">추천/제외수</a> </li>
-                <li> <a href="../analSystem/analPre.html">프리미엄필터</a> </li>
-                <li> <a href="../analSystem/analPreExp.html">프리미엄필터 체험</a> </li>
-            </ul>
+           
+            
             <ul></ul>
             <ul>
-                <li> <a href="../infoBoard/infoList.html">공지사항</a> </li>
-                <li> <a href="../winBoard/winList.html">당첨인증 게시판</a> </li>
+            <li> <a href="../analBoard/analList.html">분석 Tip</a> </li>
+                <li> <a href="../statistics/statistics.html">통계</a> </li>
                 <li> <a href="../includeBoard/includeNumList.html">포함번호 게시판</a> </li>
                 <li> <a href="../excludeBoard/excludeNumList.html">제외번호 게시판</a> </li>
-                <li> <a href="../analBoard/analList.html">분석 게시판</a> </li>
+            </ul>
+            <ul>
+                <li> <a href="../infoBoard/infoList.html">공지사항</a> </li>
                 <li> <a href="../freeBoard/freeBoardList.html">자유게시판</a> </li>
+                <li> <a href="../winBoard/winList.html">당첨인증 게시판</a> </li>
             </ul>
             <ul>
 
@@ -56,12 +52,9 @@ document.write(` <header>
             <li><a href="#">캔버스로또 시스템</a>
 
             </li>
-            <li><a href="../analSystem/analIntroduce.html">분석 시스템
-                </a>
-
-            </li>
-            <li><a href="../statistics/statistics.html">통계 게시판</a></li>
-            <li><a href="../freeBoard/freeBoardList.html">커뮤니티</a></li>
+            <li> <a href="../analBoard/analList.html">분석 시스템</a> </li>
+            
+            <li> <a href="../infoBoard/infoList.html">커뮤니티</a> </li>
             <li><a href="../inqBoard/oftenAskList.html">고객문의</a></li>
         </ul>
     </div>
