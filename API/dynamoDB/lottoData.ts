@@ -105,7 +105,7 @@ export async function queryStats(method: StatsMethod, params: QueryStatsParams={
                             }
                             pos = compressNumbers(pos, PACK);
                         }
-                        if (method === StatsMethod.diffMaxMin && (params && params.to - params.from > 6 || !params)) {
+                        if (method === StatsMethod.diffMaxMin && (params && params.to - params.from > 6)) {
                             const PACK = 2;
                             for (const v in ideal) {
                                 ideal[v as AssemblyVersion] = compressNumbers(ideal[v as AssemblyVersion], PACK);
