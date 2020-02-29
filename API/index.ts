@@ -59,17 +59,41 @@ exports.handler = async (event: any) => {
 
     switch (resource) {
         case '/stats/mass/{method}': {
-            const rank = await getRank(currentId);
-            if(rank !== Plan.premium){
-                return{
-                    statusCode:200,
-                    headers,
-                    body:JSON.stringify(new Response(true, 'Not Premium'))
-                }
-            }
             const method = event.pathParameters.method;
             let data;
-            if (method in StatsMethod) {
+            if (method === "excludeInclude") {
+                let temp: any = {};
+                temp.emergence = await queryStats("emergence" as StatsMethod, {});
+                temp.interval = await queryStats("interval" as StatsMethod, {});
+                temp.howLongNone = await queryStats("howLongNone" as StatsMethod, {});
+                temp.frequency = await queryStats("frequency" as StatsMethod, {});
+
+                data = temp;
+                let round = getCurrentRound(new Date().toString());
+                let total: number = 0;
+
+                const winNums: LottoNumber[][] = [];
+                while (winNums.length !== 3) {
+                    try {
+                        const numbers = await queryLotto(round);
+                        winNums.push(numbers);
+                        if (total === 0) total = round;
+                    } catch (err) {
+                        console.log(err);
+                    } finally {
+                        round--;
+                    }
+                }
+                body = { data, total, winNums };
+            } else if (method in StatsMethod) {
+                const rank = await getRank(currentId);
+                if (rank !== Plan.premium) {
+                    return {
+                        statusCode: 200,
+                        headers,
+                        body: JSON.stringify(new Response(true, 'Not Premium'))
+                    }
+                }
                 const temp: QueryStatsParams = {}
                 const from = event.queryStringParameters && event.queryStringParameters.from
                 const to = event.queryStringParameters && event.queryStringParameters.to;
@@ -83,32 +107,7 @@ exports.handler = async (event: any) => {
                 data = await queryStats(method as StatsMethod, temp);
                 body = { data };
             } else {
-                if (method === "excludeInclude") {
-                    let temp: any = {};
-                    temp.emergence = await queryStats("emergence" as StatsMethod, {});
-                    temp.interval = await queryStats("interval" as StatsMethod, {});
-                    temp.howLongNone = await queryStats("howLongNone" as StatsMethod, {});
-                    temp.frequency = await queryStats("frequency" as StatsMethod, {});
-        
-                    data = temp;
-                    let round = getCurrentRound(new Date().toString());
-                    let total:number = 0;
-        
-                    const winNums: LottoNumber[][] = [];
-                    while (winNums.length !== 3) {
-                        try {
-                            const numbers = await queryLotto(round);
-                            winNums.push(numbers);
-                            if(total === 0) total = round;
-                        } catch (err) {
-                            console.log(err);
-                        }finally{
-                            round--;
-                        }
-                    }
-                    body = { data, total, winNums};
-                }
-                else body = 'wrong method';
+                body = 'wrong method';
             }
         }
             break;
@@ -156,7 +155,7 @@ exports.handler = async (event: any) => {
                             post.excl = await getIncOrExcNumbers(post.writerId, getCurrentRound(post.created), IncOrExc.exclude);
                         }
                         body = post;
-                    }else{
+                    } else {
                         const post = await db.getTitleContents(postId);
                         body = post;
                     }
