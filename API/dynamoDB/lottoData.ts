@@ -33,7 +33,10 @@ export async function queryLotto(round: number): Promise<LottoNumber[]> {
 export async function queryStats(method: StatsMethod, params: QueryStatsParams={}, ProjectionExpression?:string, ExpressionAttributeNames?:any): Promise<any[] | DBData> {
     const queryParams:any = {
         TableName: "LottoStats",
-        ProjectionExpression: `Ideal, Actual, Pos, Stats`,
+        ExpressionAttributeNames: {
+            "#List": 'List'
+        },
+        ProjectionExpression: `Ideal, Actual, Pos, Stats, #List`,
         Key:{
             "Name": {
                 S: method
