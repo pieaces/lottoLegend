@@ -1,8 +1,7 @@
 document.write(` <div class="anchor-title">
-분석 게시판
+분석실
 </div ><ul>
-<li> <a href="../analBoard/analList.html">분석 Tip</a> </li>
-<li> <a href="../statistics/statistics.html">통계</a> </li>
-<li> <a href="../includeBoard/includeNumList.html">포함번호</a> </li>
-<li> <a href="../excludeBoard/excludeNumList.html">제외번호</a> </li>
+<li> <a href="../statistics/statistics.html">통계자료</a> </li>
+<li> <a href="../analBoard/analList.html">분석 Tip 공유</a> </li>
+<li> <a href="../incExcBoard/incExcNumList.html">포함/제외수 공유</a> </li>
 </ul>`);
