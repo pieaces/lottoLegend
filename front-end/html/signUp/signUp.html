@@ -37,101 +37,103 @@
                     <div class="main-title">
                         회원가입
                     </div>
+                    <form class="signup-form">
+                        <div class="signup-container-box">
+                            <div class="signup-container">
+                                <div class="signup-box">
+                                    <div class="signup-title-box">
+                                        <div class="signup-title">아이디</div>
+                                    </div>
+                                    <div class="signup-input-box">
+                                        <input type="text" name="" id="id" required>
+                                        <div class="signup-info-box">
+                                            아이디는 공백이 허용되지 않습니다
+                                        </div>
+                                    </div>
 
-                    <div class="signup-container-box">
-                        <div class="signup-container">
-                            <div class="signup-box">
-                                <div class="signup-title-box">
-                                    <div class="signup-title">아이디</div>
                                 </div>
-                                <div class="signup-input-box">
-                                    <input type="text" name="" id="id">
-                                    <div class="signup-info-box">
-                                        아이디는 공백이 허용되지 않습니다
+
+                            </div>
+                            <div class="signup-container">
+                                <div class="signup-box">
+                                    <div class="signup-title-box">
+                                        <div class="signup-title">닉네임</div>
+                                    </div>
+                                    <div class="signup-input-box">
+                                        <input type="text" name="" id="nickname" required>
+                                        <div class="signup-info-box">
+                                            닉네임은 공백이 허용되지 않습니다
+                                        </div>
                                     </div>
                                 </div>
 
                             </div>
-                            <div id="alert-id" class="alert-box"></div>
-                        </div>
-                        <div class="signup-container">
-                            <div class="signup-box">
-                                <div class="signup-title-box">
-                                    <div class="signup-title">닉네임</div>
-                                </div>
-                                <div class="signup-input-box">
-                                    <input type="text" name="" id="nickname">
-                                    <div class="signup-info-box">
-                                        닉네임은 공백이 허용되지 않습니다
+                            <div class="signup-container">
+                                <div class="signup-box">
+                                    <div class="signup-title-box">
+                                        <div class="signup-title">비밀번호</div>
                                     </div>
-                                </div>
-                            </div>
-                            <div id="alert-nickname" class="alert-box"></div>
-                        </div>
-                        <div class="signup-container">
-                            <div class="signup-box">
-                                <div class="signup-title-box">
-                                    <div class="signup-title">비밀번호</div>
-                                </div>
-                                <div class="signup-input-box">
-                                    <input type="password" name="" id="password">
-                                    <div class="signup-info-box">
-                                        8~12자리 한글 또는 영어(소문자)+숫자로 입력해주세요
+                                    <div class="signup-input-box">
+                                        <input type="password" name="" id="password"
+                                            pattern="^(?=.*[a-z])(?=.*[0-9]).{8,12}$" required>
+                                        <div class="signup-info-box">
+                                            8~12자리 한글 또는 영어(소문자)+숫자로 입력해주세요
+                                        </div>
                                     </div>
+
                                 </div>
 
                             </div>
-                            <div id="alert-password" class="alert-box"></div>
-                        </div>
-                        <div class="signup-container">
-                            <div class="signup-box">
-                                <div class="signup-title-box">
-                                    <div class="signup-title">비밀번호 확인</div>
-                                </div>
-                                <div class="signup-input-box">
-                                    <input type="password" name="" id="password-check">
-                                    <div class="signup-info-box">
-                                        비밀번호와 똑같이 입력해주세요
+                            <div class="signup-container">
+                                <div class="signup-box">
+                                    <div class="signup-title-box">
+                                        <div class="signup-title">비밀번호 확인</div>
                                     </div>
+                                    <div class="signup-input-box">
+                                        <input type="password" name="" id="password-check" required>
+                                        <div class="signup-info-box">
+                                            비밀번호와 똑같이 입력해주세요
+                                        </div>
+                                    </div>
+
                                 </div>
 
                             </div>
-                            <div id="alert-password-check" class="alert-box"></div>
-                        </div>
-                        <div class="signup-container">
-                            <div class="signup-box">
-                                <div class="signup-title-box">
-                                    <div class="signup-title">휴대폰번호</div>
-                                </div>
-                                <div class="signup-input-box signup-phone-box">
-                                    <select name="job">
-                                        <option value="010">010</option>
-                                        <option value="011">011</option>
-                                        <option value="016">016</option>
-                                        <option value="017">017</option>
-                                        <option value="017">018</option>
-                                        <option value="017">019</option>
-                                    </select>
-                                    <div class="dash">
-                                        -
+                            <div class="signup-container">
+                                <div class="signup-box">
+                                    <div class="signup-title-box">
+                                        <div class="signup-title">휴대폰번호</div>
                                     </div>
-                                    <input type="text" name="" id="phone-number-mid">
-                                    <div class="dash">
-                                        -
+                                    <div class="signup-input-box signup-phone-box">
+                                        <select name="job">
+                                            <option value="010">010</option>
+                                            <option value="011">011</option>
+                                            <option value="016">016</option>
+                                            <option value="017">017</option>
+                                            <option value="017">018</option>
+                                            <option value="017">019</option>
+                                        </select>
+                                        <div class="dash">
+                                            -
+                                        </div>
+                                        <input type="text" name="" id="phone-number-mid" required>
+                                        <div class="dash">
+                                            -
+                                        </div>
+                                        <input type="text" name="" id="phone-number-end" required>
                                     </div>
-                                    <input type="text" name="" id="phone-number-end">
-                                </div>
 
+
+                                </div>
 
                             </div>
-                            <div id="alert-phone-number" class="alert-box"></div>
-                        </div>
 
 
-                        <div class="signup-btn-box">
-                            <button type="button" class="btn square-btn signup-btn" id="signup">가입하기</button>
+                            <div class="signup-btn-box">
+                                <button type="submit" class="btn square-btn signup-btn" id="signup">가입하기</button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                     <div class="auth-check-wrapper none">
                         <div class="signup-container">
                             <div class="signup-box">
@@ -157,6 +159,7 @@
         </div>
         <script src="../components/footer/footer.js"></script>
     </div>
+    <script src="../../js/headerHover.js"></script>
     <script src="../../js/signUp.js"></script>
     <script src="https://kit.fontawesome.com/e14b8c39aa.js" crossorigin="anonymous"></script>
 
