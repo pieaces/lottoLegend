@@ -11,7 +11,7 @@
   }
 
   .func1-chart-slide-num {
-    height:10rem;
+    height:8rem;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -29,9 +29,16 @@
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
   }
   .func1-chart-box {
-    height:22rem;
+    height:20rem;
     position: relative;
     display: flex;
+    justify-content: center;
+  }
+
+  .func1-chart-slide-btn-box{
+    height:5rem;
+    display:flex;
+    align-items: center;
     justify-content: center;
   }
   
@@ -118,6 +125,7 @@
     background-color: rgb(160, 160, 160);
   }
 
+  
   
 
   #func1-bar-table tr > td:nth-child(1){
