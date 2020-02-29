@@ -33,29 +33,30 @@ exports.handler = async (event: any) => {
 
     let currentId: string, currentName: string;
     if (event.headers['x-id-token']) {
-        jwt.verify(event.headers['x-id-token'], pem, { algorithms: ['RS256'] }, async (err: any, decodedToken: any) => {
-            if (err) {
-                console.log('Intruder Alert! - Expired Token', err);
-                const response = {
-                    statusCode: 400,
-                    headers,
-                };
-                return response;
-            }
-            logedIn = true;
-            const userInfo = decodedToken as { 'cognito:username': string, nickname: string };
-            currentId = userInfo["cognito:username"];
-            currentName = userInfo.nickname;
-            const rank = await getRank(currentId);
-            if (rank !== Plan.premium) {
-                console.log('Intruder Alert! - Not Premium!');
-                const response = {
-                    statusCode: 400,
-                    headers,
-                };
-                return response;
-            }
-        });
+        let decodedToken: any;
+        try {
+            decodedToken = jwt.verify(event.headers['x-id-token'], pem, { algorithms: ['RS256'] });
+        } catch (err) {
+            console.log('Intruder Alert! - Expired Token', err);
+            const response = {
+                statusCode: 400,
+                headers,
+            };
+            return response;
+        }
+        logedIn = true;
+        const userInfo = decodedToken as { 'cognito:username': string, nickname: string };
+        currentId = userInfo["cognito:username"];
+        currentName = userInfo.nickname;
+        const rank = await getRank(currentId);
+        if (rank !== Plan.premium) {
+            console.log('Intruder Alert! - Not Premium!');
+            const response = {
+                statusCode: 400,
+                headers,
+            };
+            return response;
+        }
     }
 
     let statusCode: number = 200;
