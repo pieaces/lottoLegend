@@ -105,7 +105,7 @@ exports.handler = async (event: any) => {
             break;
         case '/stats/piece/{method}': {
             const method = event.pathParameters.method;
-            body = await queryStats(method as StatsMethod, {}, 'Ideal.#All, Actual.#All, Pos, Stats, Piece', { "#All": 'all' });
+            body = await queryStats(method as StatsMethod, null, 'Ideal.#All, Actual.#All, Pos, Stats, Piece', { "#All": 'all' });
         }
             break;
         case '/posts': {

@@ -87,7 +87,7 @@ export async function queryStats(method: StatsMethod, params: QueryStatsParams={
                         if (method === StatsMethod.sum && params.from) {
                             params.from -= 21;
                             params.to -= 21;
-                        } else if (method === StatsMethod.diffMaxMin && params.from) {
+                        } else if (method === StatsMethod.diffMaxMin && params) {
                             if (params.list) {
                                 params.list = params.list.map(value => value - 5);
                             } else {
@@ -105,7 +105,7 @@ export async function queryStats(method: StatsMethod, params: QueryStatsParams={
                             }
                             pos = compressNumbers(pos, PACK);
                         }
-                        if (method === StatsMethod.diffMaxMin && params.to - params.from > 6) {
+                        if (method === StatsMethod.diffMaxMin && (params && params.to - params.from > 6 || !params)) {
                             const PACK = 2;
                             for (const v in ideal) {
                                 ideal[v as AssemblyVersion] = compressNumbers(ideal[v as AssemblyVersion], PACK);
@@ -148,12 +148,12 @@ function compressNumbers(numbers: number[], PACK: number): number[] {
     return result;
 }
 
-function transformNumbers(list: AWS.DynamoDB.ListAttributeValue, params: QueryStatsParams): number[] {
+function transformNumbers(list: AWS.DynamoDB.ListAttributeValue, params?: QueryStatsParams): number[] {
     let result: number[] = [];
     if (list) {
-        if (typeof params.from === 'number' && typeof params.to === 'number') {
+        if (params && typeof params.from === 'number' && typeof params.to === 'number') {
             result = list.slice(params.from, params.to + 1).map((value) => Number(value.N))
-        } else if (params.list) {
+        } else if (params && params.list) {
             result = list.filter((value, index) => {
                 if (params.list.indexOf(index) !== -1) return value;
             }).map(value => Number(value.N));
@@ -164,10 +164,8 @@ function transformNumbers(list: AWS.DynamoDB.ListAttributeValue, params: QuerySt
     return result;
 }
 
-function makeAssembly(obj: AWS.DynamoDB.MapAttributeValue, params: QueryStatsParams): Assembly {
-    let result: Assembly;
-
-    result = {
+function makeAssembly(obj: AWS.DynamoDB.MapAttributeValue, params?: QueryStatsParams): Assembly {
+    const result: Assembly = {
         $12: transformNumbers(obj.$12 && obj.$12.L, params),
         $24: transformNumbers(obj.$24 && obj.$24.L, params),
         $48: transformNumbers(obj.$48 && obj.$48.L, params),
