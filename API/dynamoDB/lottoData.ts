@@ -2,7 +2,6 @@ import { Stats } from '../interface/Statistics';
 import { StatsMethod, DBData, Assembly, AssemblyVersion, QueryStatsParams } from '../interface/LottoDB';
 import { LottoNumber } from '../interface/Lotto';
 import {dynamoDB} from '.'
-import { SelectMethod } from './myNumbers';
 export async function queryLotto(round: number): Promise<LottoNumber[]> {
     const queryParams = {
         ProjectionExpression: 'Numbers',
@@ -30,7 +29,6 @@ export async function queryLotto(round: number): Promise<LottoNumber[]> {
         });
     });
 }
-queryStats(StatsMethod.oddCount).then(value => console.log(value));
 
 export async function queryStats(method: StatsMethod, params: QueryStatsParams={}, ProjectionExpression?:string, ExpressionAttributeNames?:any): Promise<any[] | DBData> {
     const queryParams:any = {
@@ -86,10 +84,10 @@ export async function queryStats(method: StatsMethod, params: QueryStatsParams={
                         resolve(list);
                         break;
                     default:
-                        if (method === StatsMethod.sum) {
+                        if (method === StatsMethod.sum && params.from) {
                             params.from -= 21;
                             params.to -= 21;
-                        } else if (method === StatsMethod.diffMaxMin) {
+                        } else if (method === StatsMethod.diffMaxMin && params.from) {
                             if (params.list) {
                                 params.list = params.list.map(value => value - 5);
                             } else {
