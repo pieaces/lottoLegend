@@ -20,21 +20,27 @@ document.write(` <header>
             
             <ul></ul>
             <ul>
-            <li> <a href="../analBoard/analList.html">분석 Tip</a> </li>
-                <li> <a href="../statistics/statistics.html">통계</a> </li>
-                <li> <a href="../includeBoard/includeNumList.html">포함번호 게시판</a> </li>
-                <li> <a href="../excludeBoard/excludeNumList.html">제외번호 게시판</a> </li>
+        
+        <li> <a href="../analSystem/analPreExp.html">체험</a> </li>
+        <li> <a href="../analSystem/analFreeGen.html">무료조합 생성기</a> </li>
+        <li> <a href="../analSystem/analIncludeGen.html">포함번호 생성기</a> </li>
+        <li> <a href="../analSystem/analExcludeGen.html">제외번호 생성기</a> </li>
+        <li> <a href="../analSystem/analPre.html">프리미엄 필터</a> </li>
+    
             </ul>
+            <ul>
+            <li> <a href="../analBoard/analList.html">분석 Tip</a> </li>
+                <li> <a href="../analBoard/statistics.html">통계</a> </li>
+                <li> <a href="../includeBoard/includeNumList.html">포함번호</a> </li>
+                <li> <a href="../excludeBoard/excludeNumList.html">제외번호</a> </li></ul>
             <ul>
                 <li> <a href="../infoBoard/infoList.html">공지사항</a> </li>
-                <li> <a href="../freeBoard/freeBoardList.html">자유게시판</a> </li>
                 <li> <a href="../winBoard/winList.html">당첨인증 게시판</a> </li>
+                <li> <a href="../freeBoard/freeBoardList.html">자유게시판</a> </li>
             </ul>
             <ul>
-
                 <li> <a href="../inqBoard/oftenAskList.html">자주 묻는 질문</a> </li>
                 <li> <a href="../inqBoard/qAList.html">Q & A</a> </li>
-
             </ul>
         </div>
     </div>
@@ -52,10 +58,11 @@ document.write(` <header>
             <li><a href="#">캔버스로또 시스템</a>
 
             </li>
-            <li> <a href="../analBoard/analList.html">분석 시스템</a> </li>
+            <li> <a href=""#>분석 시스템</a> </li>
+            <li> <a href="#">분석 게시판</a> </li>
             
-            <li> <a href="../infoBoard/infoList.html">커뮤니티</a> </li>
-            <li><a href="../inqBoard/oftenAskList.html">고객문의</a></li>
+            <li> <a href="#">커뮤니티</a> </li>
+            <li><a href="#">고객문의</a></li>
         </ul>
     </div>
 </nav>
