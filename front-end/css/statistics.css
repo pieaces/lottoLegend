@@ -44,3 +44,45 @@
   align-items: center;
   justify-content: center;
 }
+
+.stats-container{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  padding:1rem 0;
+  margin-bottom:1rem;
+}
+
+
+.stats-box{
+  width:140px;
+  height:70px;
+  margin:0 30px;
+  text-align: center;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.stats-box >  div{
+  height:50%;
+  display:flex;
+}
+
+
+.stats-box >div:nth-child(1){
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.stats-box > div >div{
+  width:50%;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.stats-box > div>  div:nth-child(1){
+  
+  font-size:0.8rem;
+  background-color: var(--lotto-title-color);
+  color:var(--default-color);
+}

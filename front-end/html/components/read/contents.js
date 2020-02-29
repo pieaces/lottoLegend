@@ -26,12 +26,14 @@ document.write(`           <div class="text-title">
 <div class="comment-write-text-box">
 <textarea placeholder="소중한 댓글을 남겨주세요" class="comment-write-text"
     id="comment-write-text"></textarea>
+    <div class="char-count-container">
 <div class="char-count-box">
     <span id="char-current-count">0</span>/
     <span id="char-max-count">150</span>
 </div>
 <button type="button" class="btn square-btn read-btn comment-btn"
     id="comment-submit">등록</button>
+</div>
 </div>
 <div class="comment-container-box">
 <div class="comment-list-title"><span id="comment-num"></span>개의 댓글</div>
