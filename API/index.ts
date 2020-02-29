@@ -38,20 +38,20 @@ exports.handler = async (event: any) => {
 
     let currentId: string, currentName: string;
     if (event.headers['x-id-token']) {
-        jwt.verify(event.headers['x-id-token'], pem, { algorithms: ['RS256'] }, (err, decodedToken) => {
-            if (err) {
-                console.log('Intruder Alert!', err);
-                const response = {
-                    statusCode: 400,
-                    headers,
-                };
-                return response;
-            }
+        try {
+            const decodedToken = jwt.verify(event.headers['x-id-token'], pem, { algorithms: ['RS256'] });
             logedIn = true;
             const userInfo = decodedToken as { 'cognito:username': string, nickname: string };
             currentId = userInfo["cognito:username"];
             currentName = userInfo.nickname;
-        });
+        } catch (err) {
+            console.log('Intruder Alert! - Expired Token', err);
+            const response = {
+                statusCode: 400,
+                headers,
+            };
+            return response;
+        }
     }
 
     let statusCode: number = 200;
