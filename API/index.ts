@@ -9,6 +9,7 @@ import getCurrentRound from "./funtion/getCurrentRound";
 import { StatsMethod, QueryStatsParams } from "./interface/LottoDB";
 import { queryStats, queryLotto } from "./dynamoDB/lottoData";
 import { LottoNumber } from "./interface/Lotto";
+import { getRank, Plan } from "./dynamoDB/userInfo";
 const pem = jwkToPem({
     "alg": "RS256",
     "e": "AQAB",
@@ -58,6 +59,14 @@ exports.handler = async (event: any) => {
 
     switch (resource) {
         case '/stats/mass/{method}': {
+            const rank = await getRank(currentId);
+            if(rank !== Plan.premium){
+                return{
+                    statusCode:200,
+                    headers,
+                    body:JSON.stringify(new Response(true, 'Not Premium'))
+                }
+            }
             const method = event.pathParameters.method;
             let data;
             if (method in StatsMethod) {
