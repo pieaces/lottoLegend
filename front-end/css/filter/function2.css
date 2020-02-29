@@ -27,6 +27,7 @@
   }
 
   .func2-win-num-times {
+    font-size:1.4rem;
     background-color: var(--main-color);
     color: var(--default-color);
     padding: 0.5rem;
@@ -38,6 +39,7 @@
   }
   
   .func2-win-num-box > div {
+    font-size:1.3rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -107,7 +109,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    
+    font-size: 1.3rem ;
     width: 3.5rem;
     height: 3.5rem;
     border-radius: 50%;
