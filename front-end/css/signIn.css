@@ -13,11 +13,11 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 5rem;
 }
 
 .logo > a {
   color: var(--main-color);
+  font-size: 4rem;
 }
 
 .section {
@@ -33,7 +33,7 @@ html {
 }
 
 .login-box {
-  width: 40rem;
+  width: 45rem;
   padding: 5rem;
   display: flex;
   flex-direction: column;
@@ -43,7 +43,7 @@ html {
 
 .login-box > input {
   margin-bottom: 2rem;
-  height: 3rem;
+  height: 5rem;
 }
 
 .login-box > input:nth-child(2) {

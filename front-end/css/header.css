@@ -11,7 +11,6 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  font-size: 1.4rem;
 }
 
 .top-nav-right > ul {
@@ -26,11 +25,16 @@
   border-right: 1px solid var(--border-color);
 }
 
+.top-nav-right > ul > li>a {
+  font-size: 1.4rem;
+}
+
 /* mid-nav */
 
 .mid-nav-container {
+  position: relative;
   width:100%;
-  height: 12rem;
+  height: 10rem;
   background-color: var(--main-color);
   color: var(--default-color);
 }
@@ -38,27 +42,90 @@
 .mid-nav {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-}
-
-.mid-nav > h1 > a {
-  color: var(--default-color);
-  font-size: 3rem;
 }
 
 .mid-nav-menu {
+  width:100%;
+  height:100%;
   display: flex;
   align-items: center;
-  font-size:1.8rem;
 }
 
 .mid-nav-menu > li {
-  padding: 0 2rem;
+  height:100%;
+  flex:1;
 }
 
 .mid-nav-menu > li > a {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height:100%;
   color: var(--default-color);
 }
+
+.mid-nav-menu > li:nth-child(1) > a {
+  font-size:2.5rem;
+}
+
+.mid-nav-menu > li:nth-child(1)~li > a {
+  font-size:1.8rem;
+  font-weight: bold;
+}
+
+.mid-nav-menu > li:nth-child(1) ~ li > a:hover {
+  color:rgb(210,210,210);
+}
+
+.hover-menu-container{
+  z-index:98;
+  position: absolute;
+  top:100%;
+  left:0;
+  width:100%;
+  background-color:var(--default-color);
+  display:flex;
+  border-bottom:1px solid var(--main-color);
+
+}
+
+.hover-menu-box{
+  display:flex;
+}
+
+.hover-menu-box >ul{
+  flex:1;
+  display:flex;
+  flex-direction: column;
+}
+
+.hover-menu-box >ul:nth-child(1) ~ ul{
+  border-left:1px solid rgb(210,210,210);
+}
+
+.hover-menu-box >ul:last-child{
+  border-right:1px solid rgb(210,210,210);
+}
+
+.hover-menu-box > ul > li{
+height:4rem;
+}
+
+.hover-menu-box > ul > li >a{
+  font-size:1.4rem;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width:100%;
+  height:100%;
+  opacity: 0.7;
+  }
+
+  .hover-menu-box > ul > li >a:hover{
+    opacity: 1;
+    }
 
 .hamburger-box{
   display:none;
@@ -93,16 +160,13 @@
   justify-content: space-between;
 }
 
-.bottom-nav-left{
-  font-size:1.3rem;
-}
-
 .bottom-nav-left > ul {
   display: flex;
 }
 
 .bottom-nav-left > ul > li {
   padding: 0 1rem;
+  font-size:1.3rem;
 }
 
 .bottom-nav-left > ul > li:nth-child(1) {
@@ -110,13 +174,10 @@
   background-color: red;
 }
 
-.bottom-nav-right{
-  font-size:1.6rem;
-}
-
 .bottom-nav-right > p {
   display: flex;
   font-weight: bold;
+  font-size:1.6rem;
 }
 
   
