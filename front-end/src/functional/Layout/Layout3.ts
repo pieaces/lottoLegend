@@ -1,7 +1,5 @@
-import Layout2 from "./Layout2";
-
 const numContainer = document.querySelector('.func3-num-container');
-export default class Layout3 extends Layout2 {
+export default class Layout3 {
 
     static makeNumBoard(numsArr: number[][]) {
         for (let i = 0; i < numsArr.length; i++) {
@@ -28,9 +26,6 @@ export default class Layout3 extends Layout2 {
             containerBox.appendChild(container);
             numContainer.appendChild(containerBox);
         }
-    }
-    init() {
-        super.init();
     }
 }
 

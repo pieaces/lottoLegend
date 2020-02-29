@@ -24,7 +24,6 @@ function rangeString(range: [number, number], min: number, max: number): string 
     return (range[0] < min ? min : range[0]).toFixed(2) + '~' + (range[1] > max ? max : range[1]).toFixed(2)
 }
 export default class Layout1 {
-    options: any = [];
     barSlide: BarSlide = barSlide;
     lineSlide: LineSlide = lineSlide;
     bubbleChart = bubbleChart;

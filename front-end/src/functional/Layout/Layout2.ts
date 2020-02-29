@@ -8,11 +8,9 @@ import bar from '../instance2/barInstance'
 import gauss from '../instance2/gaussInstance'
 import radar from '../instance2/radarInstance'
 import radarSlide from '../instance2/radarSlide'
-import DataAPI from '../DataAPI'
-import Layout1 from './Layout1';
 import RadarSlide from '../Slide/radarSlide';
 
-export default class Layout2 extends Layout1 {
+export default class Layout2 {
     radarSlide: RadarSlide = radarSlide;
     static readonly MAX_SIZE = 10;
     static lottoNumDefaultColor = '#00048c';
@@ -24,20 +22,30 @@ export default class Layout2 extends Layout1 {
     static readonly body = 'body *';
     static readonly numBoard = '.func2-main-1-4 *';
     static readonly lottoCheckCurrent = 'func2-lotto-check-current';
-    protected checkedNumbers = new Array<number>();
+    public checkedNumbers = new Array<number>();
     private choice = null;
     private boardCurrent = 0;
     private numbersEventList = [];
     private frequencies: number[] = [];
     private terms: number[] = [];
     private freqTerm: number[] = [];
+    protected layout2Data: any;
+    protected total: number;
+    protected winNumbers: number[][];
+    private options: any[];
+    constructor(options: any[], data: any, winNumbers: number[][], total: number) {
+        this.options = options;
+        this.layout2Data = data;
+        this.winNumbers = winNumbers;
+        this.total = total;
+    }
 
     private initCoefVerInclude() {
-        const fMin = Math.min(...DataAPI.getInstance().getStats2().frequency);
-        const terms = DataAPI.getInstance().getStats2().howLongNone.map(ele => DataAPI.getInstance().getTOTAL() - ele.round + 1);
+        const fMin = Math.min(...this.layout2Data.frequency);
+        const terms = this.layout2Data.howLongNone.map(ele => this.total - ele.round + 1);
         const tMax = Math.max(...terms);
         for (let i = 0; i < 45; i++) {
-            this.frequencies[i] = Math.pow(fMin, 2) / Math.pow(DataAPI.getInstance().getStats2().frequency[i], 2);
+            this.frequencies[i] = Math.pow(fMin, 2) / Math.pow(this.layout2Data.frequency[i], 2);
             this.terms[i] = Math.pow(terms[i], 1 / 3) / Math.pow(tMax, 1 / 3);
             this.freqTerm[i] = this.frequencies[i] * this.terms[i];
         }
@@ -47,11 +55,11 @@ export default class Layout2 extends Layout1 {
         }
     }
     private initCoefVerExclude() {
-        const fMax = Math.max(...DataAPI.getInstance().getStats2().frequency);
-        const terms = DataAPI.getInstance().getStats2().howLongNone.map(ele => DataAPI.getInstance().getTOTAL() - ele.round + 1);
+        const fMax = Math.max(...this.layout2Data.frequency);
+        const terms = this.layout2Data.howLongNone.map(ele => this.total - ele.round + 1);
         const tMin = Math.min(...terms);
         for (let i = 0; i < 45; i++) {
-            this.frequencies[i] = Math.pow(DataAPI.getInstance().getStats2().frequency[i], 2) / Math.pow(fMax, 2);
+            this.frequencies[i] = Math.pow(this.layout2Data.frequency[i], 2) / Math.pow(fMax, 2);
             this.terms[i] = Math.pow(tMin, 1 / 3) / Math.pow(terms[i], 1 / 3);
             this.freqTerm[i] = this.frequencies[i] * this.terms[i];
         }
@@ -88,11 +96,11 @@ export default class Layout2 extends Layout1 {
         gauss.update();
     }
     private updateChartData() {
-        bar.dataBox.datasets[0].data = [DataAPI.getInstance().getStats2().frequency[this.choice - 1], DataAPI.getInstance().getTOTAL() * 6 / 45];
-        radar.dataBox.datasets[0].data = DataAPI.getInstance().getStats2().interval[this.choice - 1].list;
-        gauss.dataBox.datasets[0].data = DataAPI.getInstance().getStats2().emergence[this.choice - 1];
+        bar.dataBox.datasets[0].data = [this.layout2Data.frequency[this.choice - 1], this.total * 6 / 45];
+        radar.dataBox.datasets[0].data = this.layout2Data.interval[this.choice - 1].list;
+        gauss.dataBox.datasets[0].data = this.layout2Data.emergence[this.choice - 1];
         const temp: string[] = [];
-        const total = DataAPI.getInstance().getTOTAL();
+        const total = this.total;
         for (let i = 11; i >= 0; i--)temp.push((total - i).toString());
         gauss.dataBox.labels = temp;
         this.updateChart();
@@ -146,11 +154,12 @@ export default class Layout2 extends Layout1 {
         }
     }
     private doesExcluded(index: number): boolean {
-        if (this.options[1].indexOf(Math.floor((index + 1) / 10)) !== -1 ||
-            !this.options[3] && DataAPI.getInstance().getWinNums()[0].indexOf(index + 1) === -1 ||
-            this.options[3] && DataAPI.getInstance().getWinNums()[0].indexOf(index + 1) !== -1 ||
-            this.options[4] && (DataAPI.getInstance().getWinNums()[0].indexOf(index + 1) !== -1 ||
-                this.options[4] && this.options[4].indexOf(index + 1) !== -1)) {
+        if (this.checkedNumbers.indexOf(index + 1) !== -1 ||
+            this.options[1] && this.options[1].indexOf(Math.floor((index + 1) / 10)) !== -1 || //전멸구간
+            !this.options[3] && this.winNumbers[0].indexOf(index + 1) === -1 || //이월수만 포함하라.
+            this.options[3] && typeof this.options[3] === 'object' && this.winNumbers[0].indexOf(index + 1) !== -1 || //이월수는 제외하라
+            this.options[4] && (this.winNumbers[0].indexOf(index + 1) !== -1 || //제외수
+                this.options[4] && this.options[4].indexOf(index + 1) !== -1)) { //제외수
             return true;
         } else {
             return false;
@@ -223,7 +232,7 @@ export default class Layout2 extends Layout1 {
         });
         this.cancelCheck();
     }
-    protected reset() {
+    public reset() {
         for (const node of Array.from(selectNumBox.children)) {
             node.remove();
         }
@@ -246,10 +255,10 @@ export default class Layout2 extends Layout1 {
     }
     init() {
         bar.option.scales.yAxes[0].ticks = {
-            min: Math.floor(Math.min(...DataAPI.getInstance().getStats2().frequency) / 10) * 10,
-            max: Math.ceil(Math.max(...DataAPI.getInstance().getStats2().frequency) / 10) * 10
+            min: Math.floor(Math.min(...this.layout2Data.frequency) / 10) * 10,
+            max: Math.ceil(Math.max(...this.layout2Data.frequency) / 10) * 10
         };
-        makeWinNum(DataAPI.getInstance().getWinNums(), DataAPI.getInstance().getTOTAL());
+        makeWinNum(this.winNumbers, this.total);
         bar.create();
         this.numFreqOrTermToggle();
         this.setColorWinNum();
@@ -349,64 +358,3 @@ function makeWinNum(winNumArr: number[][], total: number) {
     }
 
 }
-
-// const extractNum=document.querySelector('.func1-extract-num');
-
-// if 추출되면 extractNum.classList.remove('hide');
-
-// else extractNum.classList.add('hide');
-
-//////////////////////////////////////// bubble
-
-// const meanValue = document.querySelector('#func1-bubble-mean-value');
-
-// meanValue.textContent="";
-
-// const stdevValue = document.querySelector('#func1-bubble-stdev-value');
-
-// stdevValue.textContent="";
-
-// const maxValue = document.querySelector('#func1-bubble-max-value');
-
-// maxValue.textContent="";
-
-// const minValue = document.querySelector('#func1-bubble-min-value');
-
-// minValue.textContent="";
-
-// const smallPercent = document.querySelector('#func1-bubble-s-percent-value');
-
-// smallPercent.textContent="";
-
-// const bigPercent = document.querySelector('#func1-bubble-b-percent-value');
-
-// bigPercent.textContent="";
-
-//////////////////////////// radar
-
-// const meanValue = document.querySelector('#func2-radar-mean-value');
-
-// meanValue.textContent="";
-
-// const stdevValue = document.querySelector('#func2-radar-stdev-value');
-
-// stdevValue.textContent="";
-
-// const maxValue = document.querySelector('#func2-radar-max-value');
-
-// maxValue.textContent="";
-
-// const minValue = document.querySelector('#func2-radar-min-value');
-
-// minValue.textContent="";
-
-// const smallPercent = document.querySelector('#func2-radar-s-percent-value');
-
-// smallPercent.textContent="";
-
-// const bigPercent = document.querySelector('#func2-radar-b-percent-value');
-
-// bigPercent.textContent="";
-
-///////////////////////////////////////////////////
-

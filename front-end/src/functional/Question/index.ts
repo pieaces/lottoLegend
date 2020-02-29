@@ -9,12 +9,6 @@ const numBoardModal = document.querySelector<HTMLElement>('.func2-numboard-que-m
 const numBoardQueCancelIcon = document.querySelector<HTMLElement>('.func2-numboard-que-cancel > i');
 
 export default class Question {
-
-    init() {
-        const bubbleQue = new QuestionBase(bubbleQueBox, bubbleModal, bubbleQueCancelIcon);
-        const numBoardQue = new QuestionBase(numBoardQueBox, numBoardModal, numBoardQueCancelIcon);
-
-        bubbleQue.on();
-        numBoardQue.on();
-    }
+    bubbleQue = new QuestionBase(bubbleQueBox, bubbleModal, bubbleQueCancelIcon);
+    numBoardQue = new QuestionBase(numBoardQueBox, numBoardModal, numBoardQueCancelIcon);
 }

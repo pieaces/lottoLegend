@@ -7,6 +7,8 @@ import NextBtn from "../instanceBtns/NextBtn";
 import AutoBtn from "../instanceBtns/AutoBtn"
 import ResetBtn from "../instanceBtns/ResetBtn";
 import Question from "../Question"
+import Layout1 from "./Layout1";
+import Layout2 from "./Layout2";
 const section = document.querySelector(".section1");
 const infoText = document.querySelector<HTMLElement>(".checkbox-text");
 const loading = document.querySelector<HTMLElement>('.loading');
@@ -19,15 +21,18 @@ export default class Layout extends LayoutToggle(Layout3) {
     resetBtn: ResetBtn = new ResetBtn();
     question: Question = new Question();
     nextAbleLimit: number = 1;
-
+    options:any[] = [];
+    layout1:Layout1 = new Layout1();
+    layout2:Layout2 = new Layout2(this.options, DataAPI.getInstance().getStats2(), DataAPI.getInstance().getWinNums(), DataAPI.getInstance().getTOTAL());
+    layout3:Layout3 = new Layout3();
     private setOption() {
         const currentFilter = DataAPI.getInstance().getCurrent();
         switch (currentFilter) {
             case 3:
-                this.options[currentFilter] = this.checkedNumbers.slice();
+                this.options[currentFilter] = this.layout2.checkedNumbers.slice();
                 break;
             case 4: case 5:
-                this.options[currentFilter] = this.checkedNumbers.slice();
+                this.options[currentFilter] = this.layout2.checkedNumbers.slice();
                 if (currentFilter === 4) {
                     this.options[currentFilter].push(...this.options[3]);
                 } else if (currentFilter === 5) {
@@ -83,7 +88,7 @@ export default class Layout extends LayoutToggle(Layout3) {
             } else {
                 switch (currentFilter) {
                     case 3: case 4: case 5:
-                        this.reset();
+                        this.layout2.reset();
                         this.checkBox.removeAllEvent();
                         if (currentFilter == 3) {
                             this.nextAbleLimit = this.options[currentFilter - 1].indexOf(true);
@@ -94,20 +99,20 @@ export default class Layout extends LayoutToggle(Layout3) {
                                 await DataAPI.getInstance().forward(this.options[currentFilter]);
                                 infoText.innerHTML = DataAPI.getInstance().infoList[currentFilter + 1];
                             }
-                            this.includeVerson();
+                            this.layout2.includeVerson();
                         }
                         else if (currentFilter === 4) {
                             this.nextAbleLimit = 1;
-                            this.includeVerson();
+                            this.layout2.includeVerson();
                         }
                         else if (currentFilter === 5) {
-                            this.excludeVersion();
+                            this.layout2.excludeVersion();
                         }
-                        this.setOpacity();
-                        this.refreshNumberBoard();
+                        this.layout2.setOpacity();
+                        this.layout2.refreshNumberBoard();
                         this.layout2On();
                         this.resetBtn.removeEvent();
-                        this.resetBtn.addEvent(this.reset.bind(this));
+                        this.resetBtn.addEvent(this.layout2.reset.bind(this));
                         break;
                     case DataAPI.getInstance().SIZE:
                         this.layout3_1On();
@@ -116,7 +121,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                         this.layout1On();
                         this.checkBox.init();
                         if (currentFilter === 1) {
-                            this.clearStatsBoard();
+                            this.layout1.clearStatsBoard();
                             this.nextAbleLimit = this.options[currentFilter - 1].indexOf(true);
                             if (this.nextAbleLimit === 0) {
                                 this.dropDown.nodeList[currentFilter].textContent = '-';
@@ -142,9 +147,9 @@ export default class Layout extends LayoutToggle(Layout3) {
                         }
                         this.resetBtn.removeEvent();
                         this.resetBtn.addEvent(this.checkBox.reset.bind(this.checkBox));
-                        this.barSlide.init();
-                        this.lineSlide.init();
-                        this.bubbleChart.init();
+                        this.layout1.barSlide.init();
+                        this.layout1.lineSlide.init();
+                        this.layout1.bubbleChart.init();
                         break;
                 }
             }
@@ -166,24 +171,25 @@ export default class Layout extends LayoutToggle(Layout3) {
         console.log(this.options);
     }
     init() {
-        super.init();
-        this.question.init();
+        this.question.bubbleQue.on();
+        this.question.numBoardQue.on();
         this.dropDown.init();
         this.dropDown.changeDropDownColor();
         this.dropDown.addEvent();
         this.checkBox.init();
         this.checkBox.singleSelectEvent();
         this.resetBtn.addEvent(this.checkBox.reset.bind(this.checkBox));
-        this.barSlide.init();
-        this.lineSlide.init();
-        this.bubbleChart.init();
+        this.layout1.barSlide.init();
+        this.layout1.lineSlide.init();
+        this.layout1.bubbleChart.init();
+        this.layout2.init();
         infoText.textContent = DataAPI.getInstance().infoList[0];
-        this.setStatsBoard(DataAPI.getInstance().getStats().stats);
+        this.layout1.setStatsBoard(DataAPI.getInstance().getStats().stats);
 
         this.nextBtn.addEvent(async () => {
             const currentFilter = DataAPI.getInstance().getCurrent();
             if (this.checkBox.getCount() >= this.nextAbleLimit ||
-                currentFilter === 3 && this.checkedNumbers.length === this.nextAbleLimit ||
+                currentFilter === 3 && this.layout2.checkedNumbers.length === this.nextAbleLimit ||
                 currentFilter === 4 || currentFilter === 5) {
                 this.setOption();
                 this.next(currentFilter);
