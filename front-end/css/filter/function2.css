@@ -51,8 +51,8 @@
 
   .func2-chart-gauss{
     padding:2rem;
-    width:100% !important;
-    height:100% !important;
+    width: 98% !important;
+    height: 105% !important;
   }
 
   .func2-main-2-box{
@@ -131,12 +131,12 @@
   
 
   .func2-chart-radar{
-    height:85% !important;
+    height:92% !important;
     padding: 0 0 2rem 0;
   }
 
   .func2-chart-radar-text{
-    height:85%;
+    height: 86%;
   }
 
   .func2-chart-radar-num{
@@ -183,7 +183,7 @@
 
   .func2-chart-bar{
     padding:2rem;
-    height:106% !important;
+    height:100% !important;
   }
   
   

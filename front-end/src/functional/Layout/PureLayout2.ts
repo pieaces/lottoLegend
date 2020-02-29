@@ -253,6 +253,7 @@ export default class Layout2{
         this.addEvent();
         this.refreshNumberBoard();
         this.includeVerson();
+        this.setOpacity();
     }
     refreshNumberBoard() {
         for (let i = 0; i < this.numbersEventList.length; i++) {
