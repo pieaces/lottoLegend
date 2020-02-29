@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import jwkToPem from 'jwk-to-pem';
-import { Response } from "./class";
+import { Response } from "./Response";
 import { GeneratorOption } from './Lotto/interface';
 import { Plan, getRank } from './dynamoDB/getRank';
 import Calculate from './Lotto/class/Calculate';
