@@ -22,17 +22,17 @@ document.write(` <header>
             <ul>
         
         <li> <a href="../analSystem/analPreExp.html">체험</a> </li>
+        <li> <a href="../analSystem/analIncExcGen.html">포함/제외수 생성기</a> </li>
         <li> <a href="../analSystem/analFreeGen.html">무료조합 생성기</a> </li>
-        <li> <a href="../analSystem/analIncludeGen.html">포함번호 생성기</a> </li>
-        <li> <a href="../analSystem/analExcludeGen.html">제외번호 생성기</a> </li>
         <li> <a href="../analSystem/analPre.html">프리미엄 필터</a> </li>
     
             </ul>
             <ul>
-            <li> <a href="../analBoard/analList.html">분석 Tip</a> </li>
-                <li> <a href="../statistics/statistics.html">통계</a> </li>
-                <li> <a href="../includeBoard/includeNumList.html">포함번호</a> </li>
-                <li> <a href="../excludeBoard/excludeNumList.html">제외번호</a> </li></ul>
+    
+                <li> <a href="../statistics/statistics.html">통계자료</a> </li>
+                <li> <a href="../analBoard/analList.html">분석 Tip 공유</a> </li>
+                <li> <a href="../incExcBoard/incExcNumList.html">포함/제외수 공유</a> </li>
+                </ul>
             <ul>
                 <li> <a href="../infoBoard/infoList.html">공지사항</a> </li>
                 <li> <a href="../winBoard/winList.html">당첨인증 게시판</a> </li>
@@ -50,7 +50,7 @@ document.write(` <header>
             <i class="fas fa-bars"></i></div>
         <ul class="mid-nav-menu">
             <li>
-                <a href="main.html">
+                <a href="../main/main.html">
                     캔버스
                     <br>로또
                 </a>
@@ -59,7 +59,7 @@ document.write(` <header>
 
             </li>
             <li> <a href=""#>분석 시스템</a> </li>
-            <li> <a href="#">분석 게시판</a> </li>
+            <li> <a href="#">분석실</a> </li>
             
             <li> <a href="#">커뮤니티</a> </li>
             <li><a href="#">고객문의</a></li>

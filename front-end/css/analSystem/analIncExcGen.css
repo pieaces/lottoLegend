@@ -1,0 +1,23 @@
+.anchor-box > ul >li:nth-child(2){
+    background-color: rgb(220,220,220);
+    font-weight: bold;  
+  }
+
+  .anchor-box > ul >li:nth-child(2) >a:hover{
+    opacity: 1 !important;
+  }
+
+/* inc-exc-layout */
+
+  .include-layout{
+    padding:1rem 0;
+  }
+
+  .exclude-layout{
+    padding:1rem 0;
+  }
+
+  .inc-exc-toggle-container{
+    justify-content: space-between;
+
+  }

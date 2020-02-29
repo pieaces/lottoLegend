@@ -1,8 +1,0 @@
-.anchor-box > ul >li:nth-child(4){
-    background-color: rgb(220,220,220);
-    font-weight: bold;  
-  }
-
-  .anchor-box > ul >li:nth-child(4) >a:hover{
-    opacity: 1 !important;
-  }
