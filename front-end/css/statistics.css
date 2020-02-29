@@ -28,3 +28,6 @@
     border: 6px solid var(--lotto-title-color);
   }
 
+.chart-title{
+  height:4rem;
+}
