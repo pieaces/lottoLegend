@@ -72,43 +72,20 @@ const barOption = {
     }
 };
 
-const table = document.getElementById('func1-line-table');
 loading.classList.remove('none');
 getUnAuthAPI('/stats/piece/' + method)
-    .then(data => {
-        console.log(data);
+    .then(result => {
+        console.log(result);
+        const data = result.data;
         loading.classList.add('none');
         lineDataBox.datasets[0].data = data.ideal.all;
         lineDataBox.datasets[1].data = data.actual.all;
         const lineInstance = new ChartBase('line', lineCanvas, lineDataBox, lineOption);
         lineInstance.create();
 
-        const tableData = [];
-        tableData.push([0,1,2,3,4]);
-        const ideal: number[] = data.ideal.all as number[];
-        const actual: number[] = data.actual.all as number[];
-        tableData.push(ideal.map(num => num.toFixed(2)));
-        tableData.push(actual.map(num => num.toFixed(2)));
-        const percent: number[] = [];
-        for (let i = 0; i < ideal.length; i++) {
-            percent[i] = (actual[i] - ideal[i]) / ideal[i]*100;
-        }
-        tableData.push(percent.map(num => {
-            if(num === -100 || num === 100) return '-';
-            else return num.toFixed(2);
-        }));
-
-        for (let i = 0; i < tableData[0].length; i++) {
-            const tr = document.createElement('tr');
-            for (let j = 0; j < tableData.length; j++) {
-                const td = document.createElement('td');
-                td.textContent = String(tableData[j][i]);
-                tr.appendChild(td);
-            }
-            table.appendChild(tr);
-        }
-
-        barDataBox.labels = new Array(50).fill(1)
+        const barLabels = [];
+        for(let i=result.total; i>result.total-50; i--) barLabels.push(i);
+        barDataBox.labels = barLabels;
         barDataBox.datasets[0].data = data.piece
         const barInstance = new ChartBase('bar', barCanvas, barDataBox, barOption);
         barInstance.create();
