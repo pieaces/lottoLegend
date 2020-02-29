@@ -1,4 +1,4 @@
-import  {getUnAuthAPI} from '../../amplify/api'
+import  {getAuthAPI} from '../../amplify/api'
 export interface Params {
     from?: number;
     to?: number;
@@ -22,7 +22,8 @@ export default class Data {
             }
         }
         const url = `/stats/mass/${method}`;
-        const result = await getUnAuthAPI(url, queryParams);
+        const result = await getAuthAPI(url, queryParams);
+        console.log(result);
         this[method] = result.data;
         if (result.total) this.total = result.total;
         if (result.winNums) this.winNums = result.winNums

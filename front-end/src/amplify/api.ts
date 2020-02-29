@@ -4,11 +4,12 @@ import API from '@aws-amplify/api'
 
 const apiName = 'lotto';
 
-export async function getAuthAPI(path: string) {
+export async function getAuthAPI(path: string, queryStringParameters?: any) {
     const myInit = {
         headers: {
             'X-Id-Token': (await Auth.currentSession()).getIdToken().getJwtToken()
         },
+        queryStringParameters,
         //response: true,
     }
 
