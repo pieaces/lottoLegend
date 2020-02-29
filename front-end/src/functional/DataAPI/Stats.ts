@@ -21,7 +21,7 @@ export default class Data {
                 }
             }
         }
-        const url = `/stats/${method}`;
+        const url = `/stats/mass/${method}`;
         console.log(url);
         const result = await getUnAuthAPI(url, queryParams);
         console.log(result);
