@@ -2,6 +2,7 @@ import configure from './amplify/configure'
 import {getUnAuthAPI} from './amplify/api'
 import Layout2 from "./functional/Layout/Layout2";
 import Question from './functional/Question';
+import ResetBtn from './functional/instanceBtns/ResetBtn';
 
 configure();
 getUnAuthAPI('/stats/mass/excludeInclude')
@@ -14,4 +15,7 @@ getUnAuthAPI('/stats/mass/excludeInclude')
     layout.includeVerson();
     layout.setOpacity();
     layout.refreshNumberBoard();
+    const resetBtn = new ResetBtn();
+
+    resetBtn.addEvent(layout.resetConfirm.bind(layout));
 });

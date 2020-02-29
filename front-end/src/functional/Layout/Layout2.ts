@@ -32,7 +32,7 @@ export default class Layout2 {
     protected layout2Data: any;
     protected total: number;
     protected winNumbers: number[][];
-    private options: any[];
+    public options: any[];
     constructor(options: any[], data: any, winNumbers: number[][], total: number) {
         this.options = options;
         this.layout2Data = data;
@@ -239,13 +239,13 @@ export default class Layout2 {
         for (let i = 0; i < this.checkedNumbers.length; i++) {
             lottoNumbers[this.checkedNumbers[i] - 1].style.backgroundColor = Layout2.lottoNumDefaultColor;
         }
-        this.setOpacity();
         this.checkedNumbers = [];
+        this.setOpacity();
         if (this.choice !== null) {
             this.choice = null;
         }
     }
-    protected resetConfirm(e: Event) {
+    public resetConfirm(e: Event) {
         if (this.checkedNumbers.length > 0) {
             if (confirm(`선택번호를 모두 초기화하시겠습니까?`)) {
                 this.reset();

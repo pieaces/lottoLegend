@@ -1,6 +1,8 @@
-import DataAPI from "./DataAPI";
-import Layout from './Layout'
+import configure from './amplify/configure'
+import DataAPI from "./functional/DataAPI";
+import Layout from './functional/Layout'
 
+configure();
 const loading = document.querySelector<HTMLElement>('.loading');
 const layout = new Layout();
 async function execute() {
