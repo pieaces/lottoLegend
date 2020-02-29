@@ -3,9 +3,9 @@ import ChartBase from './functional/Chart/Charts';
 import { getUnAuthAPI } from './amplify/api';
 import { getQueryStringObject } from './functions';
 const loading = document.querySelector('.loading');
-
+const labels = require('./functional/DataAPI/json/labels.json');
 configure();
-
+const method = getQueryStringObject().method;
 const lineCanvas: HTMLCanvasElement = document.querySelector('#func1-chart-line');
 const lineOption: Chart.ChartOptions = {
     responsive: true,
@@ -33,7 +33,7 @@ const lineOption: Chart.ChartOptions = {
     },
 }
 const lineDataBox = {
-    labels: null,
+    labels: labels[method],
     datasets: [
         {
             label: '예상',
@@ -73,13 +73,11 @@ const barOption = {
 };
 
 const table = document.getElementById('func1-line-table');
-const method = getQueryStringObject().method;
 loading.classList.remove('none');
 getUnAuthAPI('/stats/piece/' + method)
     .then(data => {
         console.log(data);
         loading.classList.add('none');
-        lineDataBox.labels = [0,1,2,3,4];
         lineDataBox.datasets[0].data = data.ideal.all;
         lineDataBox.datasets[1].data = data.actual.all;
         const lineInstance = new ChartBase('line', lineCanvas, lineDataBox, lineOption);
