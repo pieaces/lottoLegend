@@ -14,10 +14,7 @@
     position: relative;
   }
 
-  .func2-win-num-container-box{
-    width:100%;
-    height:100%;
-  }
+  
 
   .func2-win-num-container{
     height:7rem;
@@ -52,9 +49,8 @@
   }
 
   .func2-chart-gauss{
-    padding:2rem;
-    width: 98% !important;
-    height: 105% !important;
+
+    height: 95% !important;
   }
 
   .func2-main-2-box{
@@ -64,9 +60,10 @@
   }
 
   .func2-numboard-que{
+
     position: absolute;
-    top:82%;
-    right:40%;
+    top:41.5rem;
+    left:15rem;
   }
 
   .func2-numboard-que-modal-text{
@@ -76,7 +73,7 @@
   
   .func2-lotto-checkbox {
     height:5rem;
-    margin-bottom:1rem;
+
     display:flex;
   }
   
@@ -88,19 +85,28 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size:1.4rem;
   }
   
   .func2-lotto-check-current {
     background-color: var(--lotto-title-color);
     color: var(--default-color);
   }
+
+  .func2-lotto-num-box{
+    height:41rem;
+    display:flex;
+    flex-direction: column;
+    padding:0.5rem 0;
+  }
   
   
   .func2-lotto-num-box > div{
+    flex:1;
     height:5rem;
-  margin:0 2rem;
   display:flex;
   align-items: center;
+  
   }
   
   .func2-lotto-num-box > div > div {
@@ -116,9 +122,11 @@
     margin: 0 0.5rem;
     color: var(--default-color);
   }
-  
+
   .func2-num-exclude-btn {
-    margin-left: 9rem;
+   position: absolute;
+   top:40.5rem;
+   left:22rem; 
   }
 
   .func2-right-container{
