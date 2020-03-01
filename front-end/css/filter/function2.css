@@ -97,17 +97,7 @@ margin:0 2rem;
     flex-direction: column;
     padding:0.5rem 0;
   }
-  
-  
-  .func2-lotto-num-box > div{
-    flex:1;
-    height:5rem;
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  
-  }
-  
+    
   .func2-lotto-num-box > div > div {
     cursor: pointer;
     display: flex;
