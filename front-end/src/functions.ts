@@ -58,3 +58,12 @@ export function isoStringToDate(isoString: string): string {
     const iso = date.toISOString();
     return iso.slice(0, 10) + ' ' + iso.slice(11, 16);
 }
+
+export function rangeMake(stats:any, mul:number=1, add:number=0): string{
+    let from = stats.mean - stats.stdev*mul;
+    let to = stats.mean + stats.stdev*mul;
+
+    from = from < stats.min ? stats.min : from;
+    to = to > stats.max ? stats.max : to;
+    return `${Math.floor(from) + add} ~ ${Math.ceil(to) + add}`
+}

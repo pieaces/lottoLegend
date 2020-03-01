@@ -1,7 +1,7 @@
 import configure from './amplify/configure'
 import ChartBase from './functional/Chart/Charts';
 import { getUnAuthAPI } from './amplify/api';
-import { getQueryStringObject } from './functions';
+import { getQueryStringObject, rangeMake } from './functions';
 const loading = document.querySelector('.loading');
 const labels = require('./functional/DataAPI/json/labels.json');
 configure();
@@ -77,14 +77,7 @@ const barOption = {
         fontSize: 12
     }
 };
-function range(stats:any, mul:number=1){
-    let from = stats.mean - stats.stdev*mul;
-    let to = stats.mean + stats.stdev*mul;
 
-    from = from < stats.min ? stats.min : from;
-    to = to > stats.max ? stats.max : to;
-    return `${Math.floor(from)} ~ ${Math.ceil(to)}`
-}
 loading.classList.remove('none');
 getUnAuthAPI('/stats/piece/' + method)
     .then(result => {
@@ -92,8 +85,8 @@ getUnAuthAPI('/stats/piece/' + method)
         const data = result.data;
         console.log(data);
         mean.textContent = Number(data.stats.mean).toFixed(2);
-        $68.textContent = `${range(data.stats)}`;
-        $95.textContent = `${range(data.stats, 2)}`;
+        $68.textContent = rangeMake(data.stats);
+        $95.textContent = rangeMake(data.stats, 2);
         loading.classList.add('none');
         lineDataBox.datasets[0].data = data.ideal.all;
         lineDataBox.datasets[1].data = data.actual.all;
