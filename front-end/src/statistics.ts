@@ -77,6 +77,7 @@ getUnAuthAPI('/stats/piece/' + method)
     .then(result => {
         console.log(result);
         const data = result.data;
+        console.log(data);
         loading.classList.add('none');
         lineDataBox.datasets[0].data = data.ideal.all;
         lineDataBox.datasets[1].data = data.actual.all;
