@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../../css/header.css" />
     <link rel="stylesheet" href="../../css/footer.css" />
     <link rel="stylesheet" href="../../css/filter/function1Chart.css">
+    <link rel="stylesheet" href="../../css/analRoom.css">
     <link rel="stylesheet" href="../../css/statistics.css">
     <title>CanvasLotto</title>
 </head>
@@ -33,7 +34,10 @@
             <div class="grid-section-1 container">
                 <div class="aside">
                     <div class="anchor-box">
-                        <script src="../components/aside/analBoard.js"></script>
+                        <div class="anchor-title">
+                            분석실
+                        </div>
+                        <script src="../components/aside/statistics.js"></script>
                     </div>
                 </div>
                 <div class="main">
@@ -101,7 +105,7 @@
                             </div>
                             <div class="chart-title">ㄱㄴㄷㄹㅁㅂㅅㅇ</div>
                             <div class="func1-chart-box">
-                                <canvas id="func1-chart-line"></canvas>
+                                <canvas id="func1-chart-line stats-chart-line"></canvas>
                             </div>
                             <div class="func1-chart-slide-btn-box">
                                 <i id="func1-left-line-chart-btn" class="func1-left-chart-btn fas fa-angle-left "></i>
@@ -116,7 +120,7 @@
                         <div class="func1-chart-container func1-chart-bar-container-box box-color">
                             <div class="func1-chart-bar-container">
 
-                                <canvas id="func1-chart-bar"></canvas>
+                                <canvas id="func1-chart-bar" class="stats-chart-bar"></canvas>
 
                             </div>
 

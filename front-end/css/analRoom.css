@@ -1,0 +1,8 @@
+.arrow-box{
+    position: relative;
+}
+
+.arrow-box > i{
+    position: absolute;
+    right:1rem;
+}
