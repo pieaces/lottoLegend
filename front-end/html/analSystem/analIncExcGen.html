@@ -37,14 +37,6 @@
                 <div class="main">
                     <div class="main-title inc-exc-toggle-container">
                         포함/제외수 생성기
-                        <div class="inc-exc-toggle-box">
-                            <button type="button" class="btn circle-btn" id="inc-btn">
-                                포함수 생성기
-                            </button>
-                            <button type="button" class="btn circle-btn" id="exc-btn">
-                                제외수 생성기
-                            </button>
-                        </div>
                     </div>
                     <div class="include-layout">
                         <div class="func2-main-1-box">
@@ -188,12 +180,12 @@
                             </div>
                             <div class="next-btn-container">
                                 <button type="reset" class="btn circle-btn" id="reset">초기화</button>
-                                <button type="button" class="btn circle-btn" id="nextBtn">다음</button>
+                                <button type="button" class="btn circle-btn" id="exclude-btn">제외수</button>
                             </div>
                         </div>
                     </div>
 
-                    <div class="exclude-layout">
+                    <div class="exclude-layout none">
                         <div class="func2-main-1-box">
                             <div class="func2-left-container box-color">
                                 <div class="func2-win-num-container-box">
@@ -230,6 +222,7 @@
                                     </div>
                                 </div>
                                 <div class="func2-lotto-num-box">
+
                                     <div>
                                         <div>1</div>
                                         <div>2</div>
@@ -288,6 +281,7 @@
                                         <div>43</div>
                                         <div>44</div>
                                         <div>45</div>
+
                                         <button type="button" class="btn circle-btn func2-num-exclude-btn">
                                             제외
                                         </button>
@@ -335,7 +329,7 @@
                             </div>
                             <div class="next-btn-container">
                                 <button type="reset" class="btn circle-btn" id="reset">초기화</button>
-                                <button type="button" class="btn circle-btn" id="nextBtn">다음</button>
+                                <button type="button" class="btn circle-btn" id="include-btn">포함수</button>
                             </div>
                         </div>
                     </div>
@@ -348,7 +342,7 @@
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="../../js/headerHover.js"></script>
-    <script src="../../js/layout2.js"></script>
+    <script src="../../js/analIncExcGen.js"></script>
     <script src="https://kit.fontawesome.com/e14b8c39aa.js" crossorigin="anonymous"></script>
 </body>
 
