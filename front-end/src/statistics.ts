@@ -7,6 +7,13 @@ const labels = require('./functional/DataAPI/json/labels.json');
 configure();
 const method = getQueryStringObject().method;
 const lineCanvas: HTMLCanvasElement = document.querySelector('#func1-chart-line');
+const mean= document.querySelector<HTMLElement>('.stats-mean-value');
+const stdev= document.querySelector<HTMLElement>('.stats-stdev-value');
+const min= document.querySelector<HTMLElement>('.stats-min-value');
+const max= document.querySelector<HTMLElement>('.stats-max-value');
+const $68= document.querySelector<HTMLElement>('.stats-68-value');
+const $95= document.querySelector<HTMLElement>('.stats-95-value');
+
 const lineOption: Chart.ChartOptions = {
     responsive: true,
     tooltips: {
@@ -36,7 +43,7 @@ const lineDataBox = {
     labels: labels[method],
     datasets: [
         {
-            label: '예상',
+            label: '수학적 예측값',
             pointBackgroundColor: 'white',
             borderWidth: 2,
             borderColor: 'rgb(14,99,132)',
@@ -44,7 +51,7 @@ const lineDataBox = {
             fill: false
         },
         {
-            label: '실제',
+            label: '실제 당첨값',
             pointBackgroundColor: 'white',
             borderWidth: 2,
             borderColor: 'rgb(199, 54, 44)',
@@ -67,7 +74,7 @@ const barOption = {
     legend: { display: false },
     title: {
         display: true,
-        text: '번호별 출현횟수',
+        text: '회차별 값',
         fontSize: 12
     }
 };
@@ -78,6 +85,12 @@ getUnAuthAPI('/stats/piece/' + method)
         console.log(result);
         const data = result.data;
         console.log(data);
+        mean.textContent = Number(data.stats.mean).toFixed(2);
+        stdev.textContent = Number(data.stats.stdev).toFixed(2);
+        min.textContent = Number(data.stats.min).toFixed(2);
+        max.textContent = Number(data.stats.max).toFixed(2);
+        $68.textContent = `${Number(data.stats.mean - data.stats.stdev).toFixed(2)} ~ ${Number(data.stats.mean + data.stats.stdev).toFixed(2)}`;
+        $95.textContent = `${Number(data.stats.mean - 2*data.stats.stdev).toFixed(2)} ~ ${Number(data.stats.mean + 2*data.stats.stdev).toFixed(2)}`;
         loading.classList.add('none');
         lineDataBox.datasets[0].data = data.ideal.all;
         lineDataBox.datasets[1].data = data.actual.all;
@@ -85,7 +98,7 @@ getUnAuthAPI('/stats/piece/' + method)
         lineInstance.create();
 
         const barLabels = [];
-        for(let i=result.total; i>result.total-50; i--) barLabels.push(i);
+        for(let i=result.total-49; i<=result.total; i++) barLabels.push(i);
         barDataBox.labels = barLabels;
         barDataBox.datasets[0].data = data.piece
         const barInstance = new ChartBase('bar', barCanvas, barDataBox, barOption);

@@ -17,4 +17,112 @@
     padding:1rem 0;
   }
 
- 
+.inc-exc-toggle-container{
+position: relative;
+}
+
+.knobs,
+.layer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.button {
+    position: absolute;
+    right:5rem;
+    width: 74px;
+    height: 36px;
+    margin: 0 auto 0 auto;
+    overflow: hidden;
+}
+
+.button.r,
+.button.r .layer {
+    border-radius: 100px;
+}
+
+.button.b2 {
+    border-radius: 2px;
+}
+
+.checkbox {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.knobs {
+    z-index: 2;
+}
+
+.layer {
+    width: 100%;
+    background-color: #ebf7fc;
+    transition: 0.3s ease all;
+    z-index: 1;
+}
+
+     /* Button 10 */
+     #inc-exc-toggle-btn .knobs:before,
+     #inc-exc-toggle-btn .knobs:after,
+     #inc-exc-toggle-btn .knobs span {
+         position: absolute;
+         top: 4px;
+         font-size: 10px;
+         font-weight: bold;
+         text-align: center;
+         line-height: 1;
+         padding: 9px 4px;
+         border-radius: 2px;
+         transition: 0.3s ease all;
+     }
+
+     #inc-exc-toggle-btn .knobs:before {
+         content: '';
+         left: 4px;
+         background-color: #03A9F4;
+         width: 20px;
+         height: 10px;
+     }
+
+     #inc-exc-toggle-btn .knobs:after {
+         content: '제외';
+         right: 4px;
+         color: #4e4e4e;
+         width: 20px;
+         height: 10px;
+     }
+
+     #inc-exc-toggle-btn .knobs span {
+         display: inline-block;
+         left: 4px;
+         color: #fff;
+         z-index: 1;
+         width: 28px;
+         height: 28px;
+     }
+
+     #inc-exc-toggle-btn .checkbox:checked+.knobs span {
+         color: #4e4e4e;
+     }
+
+     #inc-exc-toggle-btn .checkbox:checked+.knobs:before {
+         left: 42px;
+         background-color: #F44336;
+     }
+
+     #inc-exc-toggle-btn .checkbox:checked+.knobs:after {
+         color: #fff;
+     }
+
+     #inc-exc-toggle-btn .checkbox:checked~.layer {
+         background-color: #fcebeb;
+     }

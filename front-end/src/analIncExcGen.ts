@@ -1,5 +1,5 @@
 import configure from './amplify/configure'
-import {getUnAuthAPI} from './amplify/api'
+import { getUnAuthAPI } from './amplify/api'
 import Layout2 from "./functional/Layout/Layout2";
 import Question from './functional/Question';
 import ResetBtn from './functional/instanceBtns/ResetBtn';

@@ -17,7 +17,12 @@
 
  
   .func1-chart-container {
+    
     width:100% !important; 
+  }
+
+  .func1-chart-box{
+    height:100%;
   }
 
   .chart-slide-current {
@@ -75,7 +80,7 @@
   color:var(--default-color);
 }
 
-.stats-chart-line{
-  width:90%;
-  height:90%;
+.stats-chart{
+  width:80% !important;
+  height:80% !important;
 }
