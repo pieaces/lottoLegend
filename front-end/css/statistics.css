@@ -11,17 +11,37 @@
 .func1-chart-container{
   width: 100% !important;
   margin: 0 !important;
+  position: relative;
 }
 
 .func1-chart-box{
-  padding:3rem;
+padding:2rem;
   height: 100% !important;
-  display:flex;
-  align-items: center;
-  justify-content: center;
+
   } 
 
+.func1-chart-bar-container{
+  overflow-x: scroll;
+position: relative;
+  width: 100%;
+}
 
+.func1-chart-bar-box{
+  position: absolute;
+  top:2rem;
+  left:2rem;
+  width:120rem;
+  height:30rem;
+}
+
+
+.func1-chart-bar-box > canvas{
+  position: absolute;
+  left: 2rem;
+  top: 50%;
+  pointer-events:none;
+  margin-top:-15rem;
+}
 
 .stats-container{
   display:flex;

@@ -7,9 +7,9 @@ const labels = require('./functional/DataAPI/json/labels.json');
 configure();
 const method = getQueryStringObject().method;
 const lineCanvas: HTMLCanvasElement = document.querySelector('#func1-chart-line');
-const mean= document.querySelector<HTMLElement>('.stats-mean-value');
-const $68= document.querySelector<HTMLElement>('.stats-68-value');
-const $95= document.querySelector<HTMLElement>('.stats-95-value');
+const mean = document.querySelector<HTMLElement>('.stats-mean-value');
+const $68 = document.querySelector<HTMLElement>('.stats-68-value');
+const $95 = document.querySelector<HTMLElement>('.stats-95-value');
 
 const lineOption: Chart.ChartOptions = {
     tooltips: {
@@ -77,9 +77,9 @@ const barOption = {
         fontSize: 12
     }
 };
-function range(stats:any, mul:number=1){
-    let from = stats.mean - stats.stdev*mul;
-    let to = stats.mean + stats.stdev*mul;
+function range(stats: any, mul: number = 1) {
+    let from = stats.mean - stats.stdev * mul;
+    let to = stats.mean + stats.stdev * mul;
 
     from = from < stats.min ? stats.min : from;
     to = to > stats.max ? stats.max : to;
@@ -101,7 +101,7 @@ getUnAuthAPI('/stats/piece/' + method)
         lineInstance.create();
 
         const barLabels = [];
-        for(let i=result.total-49; i<=result.total; i++) barLabels.push(i);
+        for (let i = result.total - 49; i <= result.total; i++) barLabels.push(i);
         barDataBox.labels = barLabels;
         barDataBox.datasets[0].data = data.piece
         const barInstance = new ChartBase('bar', barCanvas, barDataBox, barOption);

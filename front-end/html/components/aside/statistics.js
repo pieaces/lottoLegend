@@ -4,7 +4,7 @@ document.write(`
 <li> <a href="../incExcBoard/incExcNumList.html">포함/제외수 공유</a> </li>
 <li class="arrow-box"> <a href="../statistics/statistics.html">통계자료</a><i
         class="fas fa-sort-up filter-arrow"></i> </li>
-<li> <a href="../statistics/statistics.html">통계 홈</a> </li>
+<li> <a href="#">통계 홈</a> </li>
 <li> <a href="?method=excludedLineCount">전멸구간 개수</a> </li>
 <li> <a href="?method=carryCount">이월 개수</a> </li>
 <li> <a href="?method=lowCount">저값(1~22) 개수</a> </li>
