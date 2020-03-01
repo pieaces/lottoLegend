@@ -17,22 +17,7 @@
     <link rel="stylesheet" href="../../css//analSystem/analIncExcGen.css">
     <title>CanvasLotto</title>
 </head>
-<!-- <span class="que-container func2-numboard-que">
-    <i class="far fa-question-circle"></i>
-    <div class="que-modal func2-numboard-que-modal none">
-        <div class="que-cancel func2-numboard-que-cancel">
-            <i class="fas fa-times"></i>
-        </div>
-        <div class="que-text func2-numboard-que-modal-text">
-            <ul>
-                <li></li>
-            </ul>
-        </div>
-    </div>
-</span>
-<button type="button" class="btn circle-btn func2-num-exclude-btn">
-    제외
-</button> -->
+
 
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrapper">
@@ -53,6 +38,13 @@
                 <div class="main">
                     <div class="main-title inc-exc-toggle-container">
                         포함/제외수 생성기
+                        <div class="button b2" id="inc-exc-toggle-btn">
+                            <input type="checkbox" class="checkbox" id="inc-exc-toggle-check">
+                            <div class="knobs">
+                                <span>포함</span>
+                            </div>
+                            <div class="layer"></div>
+                        </div>
                     </div>
                     <div class="include-layout">
                         <div class="func2-main-1-box">
@@ -214,7 +206,25 @@
                                             <td>
                                                 <div class=" func2-lotto-num">45</div>
                                             </td>
-                                            <td>123</td>
+                                            <td>
+                                                <div class="que-container func2-numboard-que">
+                                                    <i class="far fa-question-circle"></i>
+                                                    <div class="que-modal func2-numboard-que-modal none">
+                                                        <div class="que-cancel func2-numboard-que-cancel">
+                                                            <i class="fas fa-times"></i>
+                                                        </div>
+                                                        <div class="que-text func2-numboard-que-modal-text">
+                                                            <ul>
+                                                                <li></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td colspan="2">
+                                                <button type="button" class="btn circle-btn func2-num-exclude-btn">
+                                                    제외
+                                                </button></td>
                                         </tr>
                                     </table>
 
@@ -262,7 +272,7 @@
                             </div>
                             <div class="next-btn-container">
                                 <button type="reset" class="btn circle-btn" id="reset">초기화</button>
-                                <button type="button" class="btn circle-btn" id="exclude-btn">제외수</button>
+                                <button type="button" class="btn circle-btn" id="make-btn">생성</button>
                             </div>
                         </div>
                     </div>
@@ -420,8 +430,6 @@
         </div>
         <script src="../components/footer/footer.js"></script>
     </div>
-
-
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="../../js/headerHover.js"></script>
     <script src="../../js/layout2.js"></script>
