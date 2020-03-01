@@ -15,21 +15,9 @@
   }
 
 
-  .table-1{
-    width:100%;
-    height:100%;
-  }
-
-  .table-1 th{
-    word-break: keep-all;
-    background-color: var(--main-color);
-    color:var(--default-color);
-  }
-
-  .table-1 tr{
-    font-size:1.4rem;
-    text-align: center;
-    height:3rem;
+ 
+  .func1-chart-container {
+    width:100% !important; 
   }
 
   .chart-slide-current {

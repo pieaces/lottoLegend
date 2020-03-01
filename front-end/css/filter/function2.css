@@ -11,7 +11,7 @@
   .func2-left-container {
     width:50%;
     margin-right:1rem;
-    position: relative;
+    
   }
 
   
@@ -60,10 +60,8 @@
   }
 
   .func2-numboard-que{
-
-    position: absolute;
-    top:41.5rem;
-    left:15rem;
+margin:0 2rem;
+   position: relative;
   }
 
   .func2-numboard-que-modal-text{
@@ -99,16 +97,7 @@
     flex-direction: column;
     padding:0.5rem 0;
   }
-  
-  
-  .func2-lotto-num-box > div{
-    flex:1;
-    height:5rem;
-  display:flex;
-  align-items: center;
-  
-  }
-  
+    
   .func2-lotto-num-box > div > div {
     cursor: pointer;
     display: flex;
@@ -124,9 +113,7 @@
   }
 
   .func2-num-exclude-btn {
-   position: absolute;
-   top:40.5rem;
-   left:22rem; 
+    margin: 0 1.8rem;
   }
 
   .func2-right-container{
