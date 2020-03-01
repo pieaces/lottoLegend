@@ -12,6 +12,7 @@ getUnAuthAPI('/stats/mass/excludeInclude')
     question.numBoardQue.on();
     const layout = new Layout2([null,null,null,true], data.data, data.winNums, data.total);
     layout.init();
+
     layout.includeVerson();
     layout.setOpacity();
     layout.refreshNumberBoard();
