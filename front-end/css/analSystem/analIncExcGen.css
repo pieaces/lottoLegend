@@ -17,12 +17,12 @@
     padding:1rem 0;
   }
 
-.inc-exc-toggle-container{
+.switch-toggle-container{
 position: relative;
 }
 
-.knobs,
-.layer {
+.switch-toggle-knobs,
+.switch-toggle-layer {
     position: absolute;
     top: 0;
     right: 0;
@@ -30,7 +30,7 @@ position: relative;
     left: 0;
 }
 
-.button {
+.switch-toggle-btn {
     position: absolute;
     right:5rem;
     width: 74px;
@@ -39,16 +39,8 @@ position: relative;
     overflow: hidden;
 }
 
-.button.r,
-.button.r .layer {
-    border-radius: 100px;
-}
 
-.button.b2 {
-    border-radius: 2px;
-}
-
-.checkbox {
+.switch-toggle-checkbox {
     position: relative;
     width: 100%;
     height: 100%;
@@ -59,11 +51,11 @@ position: relative;
     z-index: 3;
 }
 
-.knobs {
+.switch-toggle-knobs {
     z-index: 2;
 }
 
-.layer {
+.switch-toggle-layer {
     width: 100%;
     background-color: #ebf7fc;
     transition: 0.3s ease all;
@@ -71,9 +63,9 @@ position: relative;
 }
 
      /* Button 10 */
-     #inc-exc-toggle-btn .knobs:before,
-     #inc-exc-toggle-btn .knobs:after,
-     #inc-exc-toggle-btn .knobs span {
+     #inc-exc-toggle-btn .switch-toggle-knobs:before,
+     #inc-exc-toggle-btn .switch-toggle-knobs:after,
+     #inc-exc-toggle-btn .switch-toggle-knobs span {
          position: absolute;
          top: 4px;
          font-size: 10px;
@@ -85,7 +77,7 @@ position: relative;
          transition: 0.3s ease all;
      }
 
-     #inc-exc-toggle-btn .knobs:before {
+     #inc-exc-toggle-btn .switch-toggle-knobs:before {
          content: '';
          left: 4px;
          background-color: #03A9F4;
@@ -93,7 +85,7 @@ position: relative;
          height: 10px;
      }
 
-     #inc-exc-toggle-btn .knobs:after {
+     #inc-exc-toggle-btn .switch-toggle-knobs:after {
          content: '제외';
          right: 4px;
          color: #4e4e4e;
@@ -101,7 +93,7 @@ position: relative;
          height: 10px;
      }
 
-     #inc-exc-toggle-btn .knobs span {
+     #inc-exc-toggle-btn .switch-toggle-knobs span {
          display: inline-block;
          left: 4px;
          color: #fff;
@@ -110,19 +102,19 @@ position: relative;
          height: 28px;
      }
 
-     #inc-exc-toggle-btn .checkbox:checked+.knobs span {
+     #inc-exc-toggle-btn .switch-toggle-checkbox:checked+.switch-toggle-knobs span {
          color: #4e4e4e;
      }
 
-     #inc-exc-toggle-btn .checkbox:checked+.knobs:before {
+     #inc-exc-toggle-btn .switch-toggle-checkbox:checked+.switch-toggle-knobs:before {
          left: 42px;
          background-color: #F44336;
      }
 
-     #inc-exc-toggle-btn .checkbox:checked+.knobs:after {
+     #inc-exc-toggle-btn .switch-toggle-checkbox:checked+.switch-toggle-knobs:after {
          color: #fff;
      }
 
-     #inc-exc-toggle-btn .checkbox:checked~.layer {
+     #inc-exc-toggle-btn .switch-toggle-checkbox:checked~.switch-toggle-layer {
          background-color: #fcebeb;
      }

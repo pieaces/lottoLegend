@@ -1,3 +1,8 @@
+.stats-box{
+  width:100%;
+  height:25%;
+}
+
 .func2-layout{
   padding: 1rem 0;
 }
@@ -48,9 +53,11 @@
     background-color: var(--main-color);
   }
 
-  .func2-chart-gauss{
-
-    height: 95% !important;
+  .func2-chart-gauss-container{
+    padding:0 2rem;
+    display:flex;
+    align-items: center;
+    height: 100%;
   }
 
   .func2-main-2-box{
@@ -61,13 +68,20 @@
 
   .func2-numboard-que{
    position: relative;
-   display:flex;
-   justify-content: center;
+  text-align: center;
+  width:2.5rem;
+  height:2.5rem;
+  margin:0 auto;    
   }
 
-  .func2-num-exclude-btn{
-    margin: 0 auto;
-  }
+
+.func2-lotto-num-except{
+  display:flex;
+  width: 200%;
+  height:100%;
+  justify-content: center;
+  align-items: center;
+}
 
   .func2-numboard-que-modal-text{
     width:20rem;
@@ -103,20 +117,15 @@
   }
 
   .func2-lotto-num-box{
-    width:100%;
+    width:85%;
     height:100%;
-    
+    margin: 0 auto;
+    table-layout: fixed;
   }
 
-  .func2-lotto-num-box td{
-    text-align: center;
-    
-  }
-    
   .func2-lotto-num {
     margin: 0 auto;
     cursor: pointer;
-    background-color: blue;
     display:flex;
     align-items: center;
     justify-content: center;
@@ -137,14 +146,15 @@
     height:22.5rem;
     margin-bottom:1rem;
     position: relative;
+    display:flex;
   }
 
-  
-
-  .func2-chart-radar{
-    height:92% !important;
-    padding: 0 0 2rem 0;
+  .func2-chart-radar-box{
+    width:70%;
+    display:flex;
+    align-items: center;
   }
+
 
   .func2-chart-radar-text{
     height: 86%;
@@ -190,13 +200,10 @@
   
   .func2-chart-bar-container {
     height:22.5rem;
+    padding: 0 2rem;
+    display:flex;
+    align-items: center;
   }
-
-  .func2-chart-bar{
-    padding:2rem;
-    height:100% !important;
-  }
-  
   
   .func2-select-num-box-container{  
     width: 70%;

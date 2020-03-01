@@ -7,9 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="../../css/init.css" />
     <link rel="stylesheet" href="../../css/section.css">
+    <link rel="stylesheet" href="../../css/statsBox.css">
     <link rel="stylesheet" href="../../css/filter/function.css">
-    <link rel="stylesheet" href="../../css/filter/function1Chart.css">
-    <link rel="stylesheet" href="../../css/filter/function1.css" />
     <link rel="stylesheet" href="../../css/filter/function2.css">
     <link rel="stylesheet" href="../../css/filter/function3.css">
     <link rel="stylesheet" href="../../css//header.css" />
@@ -36,14 +35,14 @@
 
                 </div>
                 <div class="main">
-                    <div class="main-title inc-exc-toggle-container">
+                    <div class="main-title switch-toggle-container">
                         포함/제외수 생성기
-                        <div class="button b2" id="inc-exc-toggle-btn">
-                            <input type="checkbox" class="checkbox" id="inc-exc-toggle-check">
-                            <div class="knobs">
+                        <div class="switch-toggle-btn" id="inc-exc-toggle-btn">
+                            <input type="checkbox" class="switch-toggle-checkbox" id="inc-exc-toggle-check">
+                            <div class="switch-toggle-knobs">
                                 <span>포함</span>
                             </div>
-                            <div class="layer"></div>
+                            <div class="switch-toggle-layer"></div>
                         </div>
                     </div>
                     <div class="include-layout">
@@ -53,7 +52,9 @@
                                 </div>
                             </div>
                             <div class="func2-right-container box-color">
-                                <canvas class="func2-chart-gauss func2-chart"></canvas>
+                                <div class="func2-chart-gauss-container">
+                                    <canvas class="func2-chart-gauss"></canvas>
+                                </div>
                             </div>
                         </div>
                         <div class="func2-main-2-box">
@@ -152,6 +153,29 @@
                                         </tr>
                                         <tr>
                                             <td>
+                                                <div class=" func2-lotto-num"> 22 </div>
+                                            </td>
+                                            <td>
+                                                <div class=" func2-lotto-num"> 23 </div>
+                                            </td>
+                                            <td>
+                                                <div class=" func2-lotto-num"> 24 </div>
+                                            </td>
+                                            <td>
+                                                <div class=" func2-lotto-num"> 25 </div>
+                                            </td>
+                                            <td>
+                                                <div class=" func2-lotto-num"> 26 </div>
+                                            </td>
+                                            <td>
+                                                <div class=" func2-lotto-num"> 27 </div>
+                                            </td>
+                                            <td>
+                                                <div class=" func2-lotto-num"> 28 </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
                                                 <div class=" func2-lotto-num">29</div>
                                             </td>
                                             <td>
@@ -206,7 +230,8 @@
                                             <td>
                                                 <div class=" func2-lotto-num">45</div>
                                             </td>
-                                            <td>
+
+                                            <td colspan="2">
                                                 <div class="que-container func2-numboard-que">
                                                     <i class="far fa-question-circle"></i>
                                                     <div class="que-modal func2-numboard-que-modal none">
@@ -221,10 +246,11 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td colspan="2">
-                                                <button type="button" class="btn circle-btn func2-num-exclude-btn">
+                                            <td colspan="2" class="func2-lotto-num-except">
+                                                <button type="button" class="btn circle-btn" id="func2-num-inc-exc-btn">
                                                     제외
-                                                </button></td>
+                                                </button>
+                                            </td>
                                         </tr>
                                     </table>
 
@@ -233,30 +259,60 @@
                             </div>
                             <div class="func2-right-container">
                                 <div class="func2-chart-radar-container box-color">
-                                    <div class="func2-chart-radar-num">
-                                        <div class="func2-left-chart-btn chart-slide-current"></div>
-                                        <div class="func2-right-chart-btn "></div>
+
+                                    <div class="func2-chart-radar-box">
+                                        <canvas class="func2-chart-radar func2-chart"></canvas>
                                     </div>
-                                    <canvas class="func2-chart-radar func2-chart"></canvas>
-                                    <div class="func2-chart-radar-text none">
-                                        <table class="table-2 table" id="func2-radar-table">
-                                            <tr>
-                                                <td>평균 : <span id="func2-radar-mean-value"></span> </td>
-                                                <td>표준편차 : <span id="func2-radar-stdev-value"></span> </td>
-                                            </tr>
-                                            <tr>
-                                                <td>최댓값 : <span id="func2-radar-max-value"></span> </td>
-                                                <td>최솟값 : <span id="func2-radar-min-value"></span> </td>
-                                            </tr>
-                                            <tr>
-                                                <td id="func2-bubble-lately-times">68%</td>
-                                                <td id="func2-bubble-lately-day">95%</td>
-                                            </tr>
-                                        </table>
+                                    <div class="stats-container">
+                                        <div class="stats-box">
+
+                                            <div class="stats-mean-term-text">
+                                                간격 평균
+                                            </div>
+                                            <div>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="stats-box">
+
+                                            <div class="stats-stdev-term-text">
+                                                간격
+                                                <br />표준편차
+                                            </div>
+                                            <div>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="stats-box">
+
+                                            <div class="stats-last-show-num-text">
+                                                마지막
+                                                <br />출현회차
+                                            </div>
+                                            <div>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="stats-box">
+
+                                            <div class="stats-last-show-date-text">
+                                                마지막
+                                                <br />출현날짜
+                                            </div>
+                                            <div>
+
+                                            </div>
+
+                                        </div>
                                     </div>
+
+
                                 </div>
                                 <div class="func2-chart-bar-container box-color">
-                                    <canvas class="func2-chart-bar func2-chart"></canvas>
+                                    <canvas class="func2-chart-bar"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -277,14 +333,16 @@
                         </div>
                     </div>
 
-                    <div class="exclude-layout none">
+                    <!-- <div class="exclude-layout none">
                         <div class="func2-main-1-box">
                             <div class="func2-left-container box-color">
                                 <div class="func2-win-num-container-box">
                                 </div>
                             </div>
                             <div class="func2-right-container box-color">
-                                <canvas class="func2-chart-gauss func2-chart"></canvas>
+                                <div class="func2-chart-gauss-container">
+                                    <canvas class="func2-chart-gauss"></canvas>
+                                </div>
                             </div>
                         </div>
                         <div class="func2-main-2-box">
@@ -424,7 +482,8 @@
                                 <button type="button" class="btn circle-btn" id="include-btn">포함수</button>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
+
                 </div>
             </div>
         </div>

@@ -8,11 +8,11 @@ configure();
 const method = getQueryStringObject().method;
 const lineCanvas: HTMLCanvasElement = document.querySelector('#func1-chart-line');
 const lineOption: Chart.ChartOptions = {
-    responsive: true,
     tooltips: {
         mode: 'index',
         intersect: false,
     },
+    maintainAspectRatio: false,
     scales: {
         xAxes: [
             {
@@ -33,6 +33,7 @@ const lineOption: Chart.ChartOptions = {
     },
 }
 const lineDataBox = {
+
     labels: labels[method],
     datasets: [
         {
@@ -64,6 +65,7 @@ const barDataBox = {
     ]
 };
 const barOption = {
+    maintainAspectRatio: false,
     legend: { display: false },
     title: {
         display: true,
@@ -84,7 +86,7 @@ getUnAuthAPI('/stats/piece/' + method)
         lineInstance.create();
 
         const barLabels = [];
-        for(let i=result.total; i>result.total-50; i--) barLabels.push(i);
+        for (let i = result.total; i > result.total - 50; i--) barLabels.push(i);
         barDataBox.labels = barLabels;
         barDataBox.datasets[0].data = data.piece
         const barInstance = new ChartBase('bar', barCanvas, barDataBox, barOption);
