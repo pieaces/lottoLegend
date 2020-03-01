@@ -29,9 +29,10 @@ document.write(` <header>
             </ul>
             <ul>
     
-                <li> <a href="../statistics/statistics.html">통계자료</a> </li>
+
                 <li> <a href="../analBoard/analList.html">분석 Tip 공유</a> </li>
                 <li> <a href="../incExcBoard/incExcNumList.html">포함/제외수 공유</a> </li>
+                <li> <a href="../statistics/statistics.html">통계자료</a> </li>
                 </ul>
             <ul>
                 <li> <a href="../infoBoard/infoList.html">공지사항</a> </li>
