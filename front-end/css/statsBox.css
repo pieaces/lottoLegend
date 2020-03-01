@@ -1,0 +1,37 @@
+/* .stats-container{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    padding:1rem 0;
+    margin-bottom:1rem;
+  }
+   */
+
+   .stats-container{
+       width:100%;
+   }
+  
+  .stats-box{
+    display:flex;
+    width:140px;
+    height:60px;
+    text-align: center;
+    border-bottom: 1px solid rgba(0,0,0,0.4);
+  }
+  
+  .stats-box > div{
+    width:50%;
+    display:flex;
+    align-items: center;
+    justify-content: center;  
+  }
+  
+  .stats-box > div:nth-child(1){
+    font-size:1.3rem;
+    background-color: var(--lotto-title-color);
+    color:var(--default-color);
+    
+  }
+  .stats-box > div:nth-child(2){
+    font-size:1.3rem;
+  }

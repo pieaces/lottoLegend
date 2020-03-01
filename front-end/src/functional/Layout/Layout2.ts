@@ -1,9 +1,10 @@
-const lottoNumbers = document.querySelectorAll<HTMLElement>('.func2-lotto-num-box> div > div');
+const lottoNumbers = document.querySelectorAll<HTMLElement>('.func2-lotto-num');
 const numTermFreqBox = document.querySelectorAll<HTMLElement>('.func2-lotto-checkbox > div');
 const selectNumBox = document.querySelector<HTMLElement>('.func2-select-num-box');
-const applyBtn = document.querySelector('.func2-num-exclude-btn');
+const applyBtn = document.querySelector('#func2-num-inc-exc-btn');
 const winNumContainerBox = document.querySelector('.func2-win-num-container-box');
 
+console.log(lottoNumbers);
 import bar from '../instance2/barInstance'
 import gauss from '../instance2/gaussInstance'
 import radar from '../instance2/radarInstance'
@@ -20,7 +21,7 @@ export default class Layout2 {
     static readonly lottoNumCheckedColor = 'rgb(168, 168, 168)';
     static readonly lottoNumExcludedColor = 'rgb(234, 234, 234)';
     static readonly body = 'body *';
-    static readonly numBoard = '.func2-main-1-4 *';
+    static readonly numBoard = '.func2-lotto-num-container *';
     static readonly lottoCheckCurrent = 'func2-lotto-check-current';
     public checkedNumbers = new Array<number>();
     private choice = null;

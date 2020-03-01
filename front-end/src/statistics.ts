@@ -8,18 +8,15 @@ configure();
 const method = getQueryStringObject().method;
 const lineCanvas: HTMLCanvasElement = document.querySelector('#func1-chart-line');
 const mean= document.querySelector<HTMLElement>('.stats-mean-value');
-const stdev= document.querySelector<HTMLElement>('.stats-stdev-value');
-const min= document.querySelector<HTMLElement>('.stats-min-value');
-const max= document.querySelector<HTMLElement>('.stats-max-value');
 const $68= document.querySelector<HTMLElement>('.stats-68-value');
 const $95= document.querySelector<HTMLElement>('.stats-95-value');
 
 const lineOption: Chart.ChartOptions = {
-    responsive: true,
     tooltips: {
         mode: 'index',
         intersect: false,
     },
+    maintainAspectRatio: false,
     scales: {
         xAxes: [
             {
@@ -40,6 +37,7 @@ const lineOption: Chart.ChartOptions = {
     },
 }
 const lineDataBox = {
+
     labels: labels[method],
     datasets: [
         {
@@ -71,6 +69,7 @@ const barDataBox = {
     ]
 };
 const barOption = {
+    maintainAspectRatio: false,
     legend: { display: false },
     title: {
         display: true,
@@ -78,7 +77,14 @@ const barOption = {
         fontSize: 12
     }
 };
+function range(stats:any, mul:number=1){
+    let from = stats.mean - stats.stdev*mul;
+    let to = stats.mean + stats.stdev*mul;
 
+    from = from < stats.min ? stats.min : from;
+    to = to > stats.max ? stats.max : to;
+    return `${Math.floor(from)} ~ ${Math.ceil(to)}`
+}
 loading.classList.remove('none');
 getUnAuthAPI('/stats/piece/' + method)
     .then(result => {
@@ -86,11 +92,8 @@ getUnAuthAPI('/stats/piece/' + method)
         const data = result.data;
         console.log(data);
         mean.textContent = Number(data.stats.mean).toFixed(2);
-        stdev.textContent = Number(data.stats.stdev).toFixed(2);
-        min.textContent = Number(data.stats.min).toFixed(2);
-        max.textContent = Number(data.stats.max).toFixed(2);
-        $68.textContent = `${Number(data.stats.mean - data.stats.stdev).toFixed(2)} ~ ${Number(data.stats.mean + data.stats.stdev).toFixed(2)}`;
-        $95.textContent = `${Number(data.stats.mean - 2*data.stats.stdev).toFixed(2)} ~ ${Number(data.stats.mean + 2*data.stats.stdev).toFixed(2)}`;
+        $68.textContent = `${range(data.stats)}`;
+        $95.textContent = `${range(data.stats, 2)}`;
         loading.classList.add('none');
         lineDataBox.datasets[0].data = data.ideal.all;
         lineDataBox.datasets[1].data = data.actual.all;

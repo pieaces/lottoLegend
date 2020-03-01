@@ -8,79 +8,23 @@
   opacity: 1 !important;
 }
 
-  /* main */
-  
-  .main {
-    padding-top: 1rem;
-  }
+.func1-chart-container{
+  width: 100% !important;
+  margin: 0 !important;
+}
 
-
- 
-  .func1-chart-container {
-    
-    width:100% !important; 
-  }
-
-  .func1-chart-box{
-    height:100%;
-  }
-
-  .chart-slide-current {
-    background-color: var(--default-color) !important;
-    border: 6px solid var(--lotto-title-color);
-  }
-
-.chart-title{
-  font-size:1.4rem;
-  height:3rem;
+.func1-chart-box{
+  padding:3rem;
+  height: 100% !important;
   display:flex;
   align-items: center;
   justify-content: center;
-}
+  } 
+
+
 
 .stats-container{
   display:flex;
-  align-items: center;
-  justify-content: center;
-  padding:1rem 0;
-  margin-bottom:1rem;
-}
-
-
-.stats-box{
-  width:140px;
-  height:70px;
-  margin:0 30px;
-  text-align: center;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-}
-
-.stats-box >  div{
-  height:50%;
-  display:flex;
-}
-
-
-.stats-box >div:nth-child(1){
-  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
-}
-
-.stats-box > div >div{
-  width:50%;
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  
-}
-
-.stats-box > div>  div:nth-child(1){
-  
-  font-size:0.8rem;
-  background-color: var(--lotto-title-color);
-  color:var(--default-color);
-}
-
-.stats-chart{
-  width:80% !important;
-  height:80% !important;
+  justify-content: space-around;
+  padding: 2rem 0;
 }
