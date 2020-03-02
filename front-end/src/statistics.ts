@@ -60,6 +60,7 @@ const lineDataBox = {
 };
 const barCanvas: HTMLCanvasElement = document.querySelector('#func1-chart-bar');
 const barDataBox = {
+
     labels: null,
     datasets: [
         {
@@ -68,9 +69,13 @@ const barDataBox = {
         }
     ]
 };
-const barOption = {
+const barOption: Chart.ChartOptions = {
+    tooltips: {
+        mode: 'index',
+        intersect: false,
+    },
     maintainAspectRatio: false,
-    legend: { display: false },
+
     title: {
         display: true,
         text: '회차별 값',

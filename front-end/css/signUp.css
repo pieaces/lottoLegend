@@ -39,22 +39,20 @@
   text-align: center;
 }
 
-.signup-input-box > input{
+.signup-input-size > input{
   width:15rem;
   height:3.4rem;
 }
 
-.signup-input-box > select{
-  width:10rem;
-  height:4rem;
-}
-
 .signup-phone-box > select{
   width:7rem;
+  height:3.4rem;
+  font-size:1.2rem;
 }
 
 .signup-phone-box > input{
   width:10rem;
+  height:3.4rem;
 }
 
 .signup-info-box{
