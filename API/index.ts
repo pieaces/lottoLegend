@@ -273,10 +273,10 @@ exports.handler = async (event: any) => {
             }
         }
             break;
-        case '/numbers/mass/{round}/{tool}/{method}/{index}': {
+        case '/numbers/mass/{round}/{tool}/{index}': {
             const round = event.pathParameters.round;
             const tool = event.pathParameters.tool;
-            const selectMethod = event.pathParameters.method;
+            const selectMethod = event.queryStringParameters.method;
             const index = event.pathParameters.index;
             if (logedIn) {
                 switch (method) {
