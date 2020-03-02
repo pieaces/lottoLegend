@@ -5,24 +5,24 @@ const loading = document.querySelector('.loading');
 
 const stackCanvas: HTMLCanvasElement = document.querySelector('.stack-chart');
 const stackDataBox = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    labels: ['January'],
     datasets: [{
         label: 'Dataset 1',
         backgroundColor: 'red',
         data: [
-            1, 2, 3, 4, 5, 6
+            1
         ]
     }, {
         label: 'Dataset 1',
-        backgroundColor: 'red',
+        backgroundColor: 'green',
         data: [
-            1, 2, 3, 4, 5, 6
+            1
         ]
     }, {
         label: 'Dataset 1',
-        backgroundColor: 'red',
+        backgroundColor: 'blue',
         data: [
-            1, 2, 3, 4, 5, 6
+            1
         ]
     }]
 
@@ -51,3 +51,4 @@ const stackOption: Chart.ChartOptions = {
 const stackInstance = new ChartBase('bar', stackCanvas, stackDataBox, stackOption);
 stackInstance.create();
 stackInstance.update();
+
