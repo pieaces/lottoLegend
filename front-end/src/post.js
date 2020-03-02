@@ -4,8 +4,7 @@ import plugins from 'suneditor/src/plugins'
 import { ko } from 'suneditor/src/lang'
 import { postUnAuthAPI, postAuthAPI, getUnAuthAPI, patchAuthAPI } from './amplify/api';
 import { getUserName } from './amplify/auth'
-import { getQueryStringObject } from './functions'
-import { getCategoryHtml } from './functions';
+import { networkAlert, getQueryStringObject, getCategoryHtml } from './functions'
 import Swal from 'sweetalert2'
 
 const editor = suneditor.create('sample', {
@@ -94,7 +93,7 @@ submitBtn.onclick = async () => {
       location.href = `./${getCategoryHtml(category, 'Read')}?id=${leapId}`;
     });
   } catch (err) {
-    alert('네트워크 오류가 발생하였습니다. 작업이 정상적으로 완료되지 않았습니다.');
+    networkAlert();
   }
 }
 if (post) {

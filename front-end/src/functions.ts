@@ -1,4 +1,26 @@
+import Swal from 'sweetalert2'
 
+export function networkAlert(){
+Swal.fire({
+    icon: 'error',
+    title: '실패',
+    text: '서버 또는 네트워크 문제가 발생하였습니다.',
+    footer: '<a href="../inqBoard/qAList.html">여기로 문의주시면 신속히 답변드리겠습니다.</a>'
+  });
+}
+
+export function infoAlert(title:string, text:string){
+    return Swal.fire({
+        title,
+        text,
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '예',
+        cancelButtonText: '아니요',
+    })
+}
 export function removeConfirm(){
     return confirm('삭제하면 복구가 불가능합니다. 괜찮겠어요?');
 }
