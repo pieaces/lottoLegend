@@ -1,3 +1,13 @@
+
+.anchor-box > ul >li:nth-child(4){
+    background-color: rgb(220,220,220);
+    font-weight: bold;  
+  }
+  
+  .anchor-box > ul >li:nth-child(4) >a:hover{
+    opacity: 1 !important;
+  }
+
 .stats-home-title{
     height:10rem;
     display:flex;
@@ -41,8 +51,16 @@
 }
 
 .down-btn-box{
-    width:7rem;
+    width:4rem;
+    height:4rem;
+   
 }
+
+.down-btn-box > i{
+    font-size:4rem;
+    color: #333;
+}
+
 
 
 .arrow-btn {
@@ -78,10 +96,9 @@
 
 
 .arrow-before-after-btn:hover {
-  
-        transform: scale(1.05);
-        box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
-      
+    background-color: #333;
+    color:var(--default-color);
+    transition: 0.15s all ease-in-out;
 }
 
 .arrow-down-btn:hover {
@@ -99,7 +116,7 @@
 .arrow-right > i{
     margin-left:0.5rem;
 }
-
+/* 
 .triangle {
     display: flex;
     justify-content: center;
@@ -128,10 +145,11 @@
     filter: drop-shadow(0 0 2px black);
     border-top: solid 40px var(--lotto-title-color);
     color:var(--default-color);
-  }
+  } */
+
 
   .stats-container{
-   height:50rem;
+   height:35rem;
   }
 
   .stack-chart-container{
@@ -161,10 +179,11 @@
     align-items: center;
     justify-content: center;
     font-size: 1.3rem ;
-    width: 2.5rem;
-    height: 4rem;
-    border-radius: 0.5rem;
+    width: 1.5rem;
+    height: 2.5rem;
+    border-radius: 0.4rem;
     border-top: 1px solid rgba(0, 0, 0, 0.4);
     border-bottom: 1px solid rgba(0, 0, 0, 0.4);
     color: black;
+    font-size:1.2rem;
   }
