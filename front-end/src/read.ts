@@ -1,7 +1,7 @@
 import configure from './amplify/configure'
 import { getUnAuthAPI, postAuthAPI, deleteAuthAPI } from './amplify/api';
 import { getUserName, getNickName } from './amplify/auth';
-import { getQueryStringObject, alertMessage, getCategoryHtml, removeConfirm, isoStringToDate, Affix } from './functions';
+import { getQueryStringObject, afterAlert, getCategoryHtml, removeConfirm, isoStringToDate, Affix } from './functions';
 configure();
 
 const title = document.getElementById('content-title');
@@ -29,7 +29,7 @@ commentSubmit.onclick = async function () {
             makeComments([{ id: commentId, writerId: currentUser, writerName: await getNickName(), created: new Date().toISOString(), contents: txtArea.value }]);
             txtArea.value = "";
         } catch (err) {
-            alertMessage();
+            afterAlert();
         }
         console.log(txtArea.value);
     } else {
@@ -60,7 +60,7 @@ async function init() {
                         await deleteAuthAPI('/posts/' + id);
                         location.href = `./${getCategoryHtml(category, Affix.List)}`;
                     } catch (err) {
-                        alertMessage();
+                        afterAlert();
                     }
                 }
             })

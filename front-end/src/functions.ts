@@ -1,7 +1,10 @@
 export function removeConfirm(){
     return confirm('삭제하면 복구가 불가능합니다. 괜찮겠어요?');
 }
-export function alertMessage(){
+export function beforeAlert(){
+    alert('네트워크 상태가 좋지 못합니다.');
+}
+export function afterAlert(){
     alert('네트워크 오류가 발생하였습니다. 작업이 정상적으로 완료되지 않았습니다.');
 }
 
