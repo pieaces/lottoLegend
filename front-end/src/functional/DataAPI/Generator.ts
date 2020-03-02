@@ -22,11 +22,11 @@ export default class Generator {
     option: GeneratorOption = {};
 
     async generate() {
-        const body = JSON.parse(JSON.stringify(this.option));
-        delete body.excludedLineCount;
-        delete body.carryCount;
+        const options = JSON.parse(JSON.stringify(this.option));
+        delete options.excludedLineCount;
+        delete options.carryCount;
       
-        const data = await postAuthAPI('/generator', {body})
+        const data = await postAuthAPI('/generator', {options})
         console.log(data);
         return data;
     }
