@@ -189,3 +189,11 @@ select:focus {
   }
   
 }
+
+.swal2-popup {
+  font-size: 1.3rem !important;
+}
+
+.swal2-footer a{
+  color: #0400ff;
+}

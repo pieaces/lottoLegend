@@ -2,6 +2,8 @@ import configure from './amplify/configure'
 import { getUnAuthAPI, postAuthAPI, deleteAuthAPI } from './amplify/api';
 import { getUserName, getNickName } from './amplify/auth';
 import { getQueryStringObject, afterAlert, getCategoryHtml, removeConfirm, isoStringToDate, Affix } from './functions';
+import Swal from 'sweetalert2'
+
 configure();
 
 const title = document.getElementById('content-title');
@@ -27,10 +29,13 @@ commentSubmit.onclick = async function () {
             const commentId = await postAuthAPI(`/posts/${id}/comments`, { contents: txtArea.value });
             makeComments([{ id: commentId, writerId: currentUser, writerName: await getNickName(), created: new Date().toISOString(), contents: txtArea.value }]);
             txtArea.value = "";
+            Swal.fire({
+                title:'완료',
+                icon:'success'
+            });
         } catch (err) {
             afterAlert();
         }
-        console.log(txtArea.value);
     } else {
         if (!currentUser) {
             alert('로그인이 필요합니다.');
@@ -52,14 +57,37 @@ async function init() {
             const category = document.querySelector<HTMLElement>('#wrapper').getAttribute('data-category');
             document.querySelector<HTMLElement>('#content-update-btn').setAttribute('onclick', `location.href='${getCategoryHtml(category, Affix.Post)}?id=${id}'`);
             document.querySelector<HTMLElement>('#delete-btn').addEventListener('click', async () => {
-                if (removeConfirm()) {
-                    try {
-                        await deleteAuthAPI('/posts/' + id);
-                        location.href = `./${getCategoryHtml(category, Affix.List)}`;
-                    } catch (err) {
-                        afterAlert();
+                Swal.fire({
+                    title: '삭제하시겠습니까?',
+                    text: "한번 삭제하면 되돌릴 수 없습니다",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '삭제',
+                    cancelButtonText: '취소',
+                }).then(async (result) => {
+                    if (result.value) {
+                        try {
+                            await deleteAuthAPI('/posts/' + id);
+                            Swal.fire({
+                                title: '삭제완료',
+                                icon: 'success',
+                                allowOutsideClick: false,
+                                timer: 1500,
+                            }).then(() => {
+                                location.href = `./${getCategoryHtml(category, Affix.List)}`;
+                            });
+                        } catch (err) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: '실패',
+                                text: '서버 또는 네트워크 문제가 발생하였습니다.',
+                                footer: '<a href="../inqBoard/qAList.html">여기로 문의주시면 신속히 답변드리겠습니다.</a>'
+                              })
+                        }
                     }
-                }
+                });
             })
         }
         created.textContent = isoStringToDate(post.created);
@@ -110,12 +138,26 @@ function makeComments(objArr: any) {
             // updateBtn.addEventListener('click', () =>{
             // });
             deleteBtn.addEventListener('click', async () => {
-                if (removeConfirm()) {
+                Swal.fire({
+                    title: '삭제하시겠습니까?',
+                    text: "한번 삭제하면 되돌릴 수 없습니다",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '삭제',
+                    cancelButtonText: '취소',
+                  }).then(async (result) => {
+                    if (result.value) {
                     await deleteAuthAPI(`/posts/${id}/comments/${objArr[i].id}`);
                     commentContainer.remove();
                     commentCount--;
-                    commentNum.textContent = commentCount.toString();
-                }
+                    commentNum.textContent = commentCount.toString();                        
+                      Swal.fire({
+                          title:'삭제완료', icon:'success'
+                      });
+                    }
+                  });
             });
         }
         //updateBtnBox.appendChild(updateBtn);
