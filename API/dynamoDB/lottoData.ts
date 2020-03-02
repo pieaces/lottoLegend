@@ -87,7 +87,7 @@ export async function queryStats(method: StatsMethod, params: QueryStatsParams={
                         resolve(list);
                         break;
                     default:
-                        if (method === StatsMethod.sum && params.from) {
+                        if (method === StatsMethod.sum && params && params.from) {
                             params.from -= 21;
                             params.to -= 21;
                         } else if (method === StatsMethod.diffMaxMin && params) {

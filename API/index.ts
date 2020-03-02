@@ -282,9 +282,9 @@ exports.handler = async (event: any) => {
         case '/numbers/piece': {
             switch (method) {
                 case 'GET': {
-                    const userName = event.queryStringParameters.userName || currentId;
-                    const round = event.queryStringParameters.round || getCurrentRound();
-                    const choice = event.queryStringParameters.choice;
+                    const userName = event.queryStringParameters && event.queryStringParameters.userName || currentId;
+                    const round = event.queryStringParameters && event.queryStringParameters.round || getCurrentRound();
+                    const choice = event.queryStringParameters && event.queryStringParameters.choice;
                     if (choice) {
                         const numbers = await getIncOrExcNumbers(userName, round, choice);
                         body = numbers;
@@ -298,7 +298,7 @@ exports.handler = async (event: any) => {
                 case 'POST':
                     if (logedIn) {
                         const { numbers, choice } = JSON.parse(event.body);
-                        await updateIncOrExcNumbers(currentId, getCurrentRound(), numbers, choice);
+                        await updateIncOrExcNumbers(currentId, getCurrentRound(), numbers.sort((a:number,b:number) => a-b), choice);
                         break;
                     } else {
                         statusCode = 400;
