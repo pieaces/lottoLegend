@@ -32,8 +32,8 @@ document.write(`<div class="filter-box-container-box func1-layout func2-layout b
 </div>
 </div>
 <div class="func1-layout">
-<div class="func1-main-1-box">
-  <div class="func1-chart-container box-color">
+<div class="left-right-container func1-main-box-1">
+  <div class="left-container func1-chart-container box-color">
     <div class="func1-chart-slide-num func1-chart-line-num">
       <div class="chart-slide-current ">1</div>
       <div>2</div>
@@ -50,7 +50,7 @@ document.write(`<div class="filter-box-container-box func1-layout func2-layout b
       <i id="func1-right-line-chart-btn" class="func1-right-chart-btn fas fa-angle-right "></i>
     </div>
   </div>
-  <div class="func1-chart-textbox-container box-color">
+  <div class="right-container func1-chart-textbox-container box-color">
     <div class="func1-chart-textbox">
       <div class="func1-chart-title func1-line-values">
         <div>
@@ -70,8 +70,8 @@ document.write(`<div class="filter-box-container-box func1-layout func2-layout b
 
 
 </div>
-<div class="func1-main-1-box">
-  <div class="func1-chart-container box-color">
+<div class="left-right-container func1-main-box-1">
+  <div class="left-container func1-chart-container box-color">
     <div class="func1-chart-slide-num func1-chart-bar-num">
       <div class="chart-slide-current ">1</div>
       <div>2</div>
@@ -86,7 +86,7 @@ document.write(`<div class="filter-box-container-box func1-layout func2-layout b
       <i id="func1-right-bar-chart-btn" class="func1-right-chart-btn fas fa-angle-right  "></i>
     </div>
   </div>
-  <div class="func1-chart-textbox-container box-color">
+  <div class="right-container func1-chart-textbox-container box-color">
     <div class="func1-chart-textbox">
       <div class="func1-chart-title func1-bar-values">
         <div id="func1-bar-filter-name"></div>
@@ -101,8 +101,8 @@ document.write(`<div class="filter-box-container-box func1-layout func2-layout b
     </div>
   </div>
 </div>
-<div class="func1-main-2-box">
-  <div class="func1-chart-container box-color">
+<div class="left-right-container func1-main-2-box">
+  <div class="left-container func1-chart-container box-color">
     <div class="que-container func1-bubble-que">
       <i class="far fa-question-circle"></i>
       <div class="que-modal func1-bubble-que-modal none">
@@ -133,7 +133,7 @@ document.write(`<div class="filter-box-container-box func1-layout func2-layout b
     <div id="func1-chart-bubble">
     </div>
   </div>
-  <div class="func1-chart-textbox-container box-color">
+  <div class="right-container func1-chart-textbox-container box-color">
     <table class="table-2 table" id="func1-bubble-table">
       <tr>
         <td>평균 : <span id="func1-bubble-mean-value"></span> </td>
@@ -156,19 +156,19 @@ document.write(`<div class="filter-box-container-box func1-layout func2-layout b
 </div>
 </div>
 <div class="func2-layout func3-layout-2 none">
-<div class="func2-main-1-box">
-  <div class="func2-left-container box-color">
+<div class="left-right-container func2-main-1-box">
+  <div class="left-container box-color">
     <div class="func2-win-num-container-box">
     </div>
   </div>
-  <div class="func2-right-container box-color">
+  <div class="right-container box-color">
     <div class="func2-chart-gauss-container">
       <canvas class="func2-chart-gauss"></canvas>
     </div>
   </div>
 </div>
-<div class="func2-main-2-box">
-  <div class="func2-left-container box-color">
+<div class="left-right-container func2-main-2-box">
+  <div class="left-container box-color">
     <div class="func2-lotto-num-container">
       <table class="func2-lotto-num-box">
         <tr>
@@ -357,7 +357,7 @@ document.write(`<div class="filter-box-container-box func1-layout func2-layout b
 
   </div>
 
-  <div class="func2-right-container">
+  <div class="right-container">
     <div class="func2-chart-radar-container box-color">
 
       <div class="func2-chart-radar-container">
