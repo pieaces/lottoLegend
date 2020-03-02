@@ -1,19 +1,29 @@
 import { dynamoDB, TableName } from '.'
-import { getRank, Plan } from './userInfo';
+import { Plan, getPlan } from './userInfo';
 import { Response } from '../class';
 
+enum SelectTool{
+    "free" = 'a',
+    "charge" = 'b'
+}
 export enum SelectMethod {
     "auto" = 'a',
     "manual" = 'm'
 }
+interface SelectClass{
+    tool:SelectTool;
+    method?:SelectMethod;
+}
+
 interface NumsArrAllMethodReturn {
-    [key: string]: { numsArr: number[][], size: number }
+    [key:string]:{numsArr: number[][], size:number}
 }
 interface NumsArrOneMethodReturn { numsArr: number[][], size: number }
-const planValue = {
+const planLimit = {
     [Plan.default]: 5,
     [Plan.basic]: 10,
-    [Plan.premium]: 20
+    [Plan.premium]: 20,
+    [Plan.premiumplus]: 40
 }
 function numsArrToAWSList(numsArr: number[][]): any {
     return numsArr.map(numbers => {
@@ -30,14 +40,13 @@ function numbersToAWSList(numbers: number[]): any {
     });
 }
 export async function autoUpdateNumbers(userName: string, round: number, numsArr: number[][]): Promise<void> {
-    const rank = await getRank(userName);
     const params = {
         TableName,
         ExpressionAttributeNames: {
             "#Map": 'MyNumbers',
             "#Round": round.toString(),
             "#Numbers": 'numbers',
-            "#Class": rank + SelectMethod.auto,
+            "#Class": SelectTool.charge + SelectMethod.auto,
             "#Size": 'size'
         },
         ExpressionAttributeValues: {
@@ -68,18 +77,27 @@ export async function autoUpdateNumbers(userName: string, round: number, numsArr
     });
 }
 
-export async function updateNumbers(userName: string, round: number, numsArr: number[][], plan: Plan, method: SelectMethod): Promise<Response> {
-    let size: number;
+export async function updateNumbers(userName: string, round: number, numsArr: number[][], tool: SelectTool): Promise<Response> {
+    const plan:Plan = await getPlan(userName);
+    const classification = tool + SelectMethod.manual;
+    let size: number = 0;
     try {
-        size = (await getNumbersByClass(userName, round, plan, method) as NumsArrOneMethodReturn).size;
+        const allNumbers = (await getNumbersByRound(userName, round));
+        for(const tool in SelectTool){
+            for(const method in SelectMethod){
+                const classification = tool + method;
+                size += allNumbers[classification].size;
+            }
+        }
     } catch (err) {
         if (err === 'That round has to be created') {
             await createNumbers(userName, round);
-            size = (await getNumbersByClass(userName, round, plan, method) as NumsArrOneMethodReturn).size;
+            size = (await getNumbersByClass(userName, round, {tool, method:SelectMethod.manual}) as NumsArrOneMethodReturn).size;
         }
     }
-    if (numsArr.length > planValue[plan] - size) {
-        return new Response(true, `이 시스템의 저장 가능한 최대 크기는 ${planValue[plan]}개입니다. 현재 저장가능 개수는 ${planValue[plan] - size}개입니다.`);
+    const available = planLimit[plan] - size;
+    if (numsArr.length > available) {
+        return new Response(true, `이 시스템의 저장 가능한 최대 크기는 ${planLimit[plan]}개입니다. 현재 저장가능 개수는 ${available}개입니다.`);
     }
     const params = {
         TableName,
@@ -87,7 +105,7 @@ export async function updateNumbers(userName: string, round: number, numsArr: nu
             "#Map": 'MyNumbers',
             "#Round": round.toString(),
             "#Numbers": 'numbers',
-            "#Class": plan + method,
+            "#Class": classification,
             "#Size": 'size'
         },
         ExpressionAttributeValues: {
@@ -127,7 +145,7 @@ function createNumbers(userName: string, round: number): Promise<void> {
         ExpressionAttributeValues: {
             ':map': {
                 M: {
-                    [Plan.default + SelectMethod.auto]: {
+                    [SelectTool.free + SelectMethod.manual]: {
                         M: {
                             numbers: {
                                 L: new Array()
@@ -137,7 +155,7 @@ function createNumbers(userName: string, round: number): Promise<void> {
                             }
                         }
                     },
-                    [Plan.basic + SelectMethod.auto]: {
+                    [SelectTool.charge + SelectMethod.auto]: {
                         M: {
                             numbers: {
                                 L: new Array()
@@ -147,7 +165,7 @@ function createNumbers(userName: string, round: number): Promise<void> {
                             }
                         }
                     },
-                    [Plan.premium + SelectMethod.manual]: {
+                    [SelectTool.charge + SelectMethod.manual]: {
                         M: {
                             numbers: {
                                 L: new Array()
@@ -157,7 +175,7 @@ function createNumbers(userName: string, round: number): Promise<void> {
                             }
                         }
                     },
-                    [Plan.premium + SelectMethod.auto]: {
+                    [SelectTool.charge + SelectMethod.auto]: {
                         M: {
                             numbers: {
                                 L: new Array()
@@ -186,17 +204,17 @@ function createNumbers(userName: string, round: number): Promise<void> {
     });
 }
 
-export async function deleteNumsArr(userName: string, round: number, rank: Plan, method: SelectMethod, index: number): Promise<void> {
-    const { size } = await getNumbersByClass(userName, round, rank, method);
-    if (index >= size) {
-        throw new RangeError('Abnormal Access:index is out of range.');
+export async function deleteNumsArr(userName: string, round: number, select:SelectClass, index: number): Promise<void> {
+    const { size } = await getNumbersByClass(userName, round, select);
+    if (index >= size || !select.method) {
+        throw new RangeError('Abnormal Access:index is out of range. | method has to be exist.');
     }
     const params = {
         TableName,
         ExpressionAttributeNames: {
             "#Map": 'MyNumbers',
             "#Round": round.toString(),
-            "#Class": rank + method,
+            "#Class": select.tool + select.method,
             "#Numbers": 'numbers',
             "#Size": 'size'
         },
@@ -221,9 +239,9 @@ export async function deleteNumsArr(userName: string, round: number, rank: Plan,
     });
 }
 
-export function getNumbersByClass(userName: string, round: number, rank: Plan, method?: SelectMethod): Promise<NumsArrAllMethodReturn | NumsArrOneMethodReturn> {
-    function mapToObject(item: any, method: SelectMethod) {
-        const result = item.MyNumbers.M && item.MyNumbers.M[round.toString()].M[rank + method].M;
+export function getNumbersByClass(userName: string, round: number, select:SelectClass): Promise<NumsArrAllMethodReturn | NumsArrOneMethodReturn> {
+    function mapToObject(item: any, method:SelectMethod) {
+        const result = item.MyNumbers.M && item.MyNumbers.M[round.toString()].M[select.tool + method].M;
         const size = Number(result && result.size.N);
         const numsArr = result && result.numbers.L?.map((obj: { L: any[]; }) => {
             return obj.L?.map(ele => Number(ele.N))
@@ -233,14 +251,13 @@ export function getNumbersByClass(userName: string, round: number, rank: Plan, m
     const ExpressionAttributeNames: { [key: string]: string } = {
         "#Map": 'MyNumbers',
         "#Round": round.toString(),
-        "#Class": rank + method,
     }
     let ProjectionExpression = '#Map.#Round.#Class';
-    if (method) {
-        ExpressionAttributeNames['#Class'] = rank + method;
+    if (select.method) {
+        ExpressionAttributeNames['#Class'] = select.tool + select.method;
     } else {
-        ExpressionAttributeNames['#Class'] = rank + SelectMethod.auto;
-        ExpressionAttributeNames['#Class2'] = rank + SelectMethod.manual;
+        ExpressionAttributeNames['#Class'] = select.tool + SelectMethod.auto;
+        ExpressionAttributeNames['#Class2'] = select.tool + SelectMethod.manual;
         ProjectionExpression += ', #Map.#Round.#Class2';
     }
     const params = {
@@ -262,13 +279,13 @@ export function getNumbersByClass(userName: string, round: number, rank: Plan, m
             else {
                 const item = data.Item;
                 if ('MyNumbers' in item) {
-                    if (method) {
-                        resolve(mapToObject(item, method));
+                    if (select.method) {
+                        resolve(mapToObject(item, select.method));
                     } else {
                         const result: any = {};
 
                         Object.values(SelectMethod).forEach(method => {
-                            result[rank + method] = mapToObject(item, method);
+                            result[select.tool + method] = mapToObject(item, method);
                         });
                         resolve(result);
                     }
@@ -304,11 +321,11 @@ export function getNumbersByRound(userName: string, round: number): Promise< Num
                 const item = data.Item;
                 if ('MyNumbers' in item) {
                     const obj = item.MyNumbers.M && item.MyNumbers.M[round.toString()].M;
-                    let entries = Object.entries(obj);
+                    let entries = Object.entries<any>(obj);
                     const result: any = {};
                     entries.forEach(entry => {
                         result[entry[0]] = {
-                            numsArr: entry[1].M.numbers.L.map(item => item.L.map(value => Number(value.N))),
+                            numsArr: entry[1].M.numbers.L.map((item:{L:[]}) => item.L.map((value:{N:string}) => Number(value.N))),
                             size: Number(entry[1].M.size.N)
                         }
                     });

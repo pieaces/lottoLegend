@@ -9,7 +9,7 @@ import getCurrentRound from "./funtion/getCurrentRound";
 import { StatsMethod, QueryStatsParams } from "./interface/LottoDB";
 import { queryStats, queryLotto } from "./dynamoDB/lottoData";
 import { LottoNumber } from "./interface/Lotto";
-import { getRank, Plan } from "./dynamoDB/userInfo";
+import { getPlan, Plan } from "./dynamoDB/userInfo";
 const pem = jwkToPem({
     "alg": "RS256",
     "e": "AQAB",
@@ -86,8 +86,8 @@ exports.handler = async (event: any) => {
                 }
                 body = { data, total, winNums };
             } else if (method in StatsMethod) {
-                const rank = await getRank(currentId);
-                if (rank !== Plan.premium) {
+                const plan = await getPlan(currentId);
+                if (plan !== Plan.premium && plan !== Plan.premiumplus) {
                     return {
                         statusCode: 200,
                         headers,
@@ -234,20 +234,13 @@ exports.handler = async (event: any) => {
         method = auto, manual, include, exclude
         numbers/mass|piece/
         */
-        case '/users/{userName}/numbers/mass/{round}': {
-            const userName = event.pathParameters.userName;
+        case '/numbers/mass/{round}': {
             const round = event.pathParameters.round;
             if (logedIn) {
-                const response = isIdentical(currentId, userName);
-                if (!response.error) {
-                    switch (method) {
-                        case 'GET':
-                            body = await getNumbersByRound(userName, round);
-                            break;
-                    }
-                } else {
-                    statusCode = 400;
-                    body = response.message;
+                switch (method) {
+                    case 'GET':
+                        body = await getNumbersByRound(currentId, round);
+                        break;
                 }
             } else {
                 statusCode = 400;
@@ -255,32 +248,24 @@ exports.handler = async (event: any) => {
             }
         }
             break;
-        case '/users/{userName}/numbers/mass/{round}/{rank}':
-        case '/users/{userName}/numbers/mass/{round}/{rank}/{method}': {
-            const userName = event.pathParameters.userName;
+        case '/numbers/mass/{round}/{tool}': {
             const round = event.pathParameters.round;
-            const rank = event.pathParameters.rank;
-            const selectMethod = event.pathParameters.method;
+            const tool = event.pathParameters.tool;
+            const selectMethod = event.queryStringParameters && event.queryStringParameters.method;
             if (logedIn) {
-                const response = isIdentical(currentId, userName);
-                if (!response.error) {
-                    switch (method) {
-                        case 'GET':
-                            if (selectMethod) {
-                                const { numsArr } = await getNumbersByClass(userName, round, rank, selectMethod);
-                                body = numsArr;
-                            } else {
-                                body = await getNumbersByClass(userName, round, rank);
-                            }
-                            break;
-                        case 'POST':
-                            const { numsArr } = JSON.parse(event.body)
-                            body = await updateNumbers(userName, round, numsArr, rank, selectMethod);
-                            break;
-                    }
-                } else {
-                    statusCode = 400;
-                    body = response.message;
+                switch (method) {
+                    case 'GET':
+                        if (selectMethod) {
+                            const { numsArr } = await getNumbersByClass(currentId, round, {tool, method:selectMethod});
+                            body = numsArr;
+                        } else {
+                            body = await getNumbersByClass(currentId, round, {tool, method:selectMethod});
+                        }
+                        break;
+                    case 'POST':
+                        const { numsArr } = JSON.parse(event.body)
+                        body = await updateNumbers(currentId, round, numsArr, tool);
+                        break;
                 }
             } else {
                 statusCode = 400;
@@ -288,23 +273,16 @@ exports.handler = async (event: any) => {
             }
         }
             break;
-        case '/users/{userName}/numbers/mass/{round}/{rank}/{method}/{index}': {
-            const userName = event.pathParameters.userName;
+        case '/numbers/mass/{round}/{tool}/{method}/{index}': {
             const round = event.pathParameters.round;
-            const rank = event.pathParameters.rank;
+            const tool = event.pathParameters.tool;
             const selectMethod = event.pathParameters.method;
             const index = event.pathParameters.index;
             if (logedIn) {
-                const response = isIdentical(currentId, userName);
-                if (!response.error) {
-                    switch (method) {
-                        case 'DELETE':
-                            await deleteNumsArr(userName, round, rank, selectMethod, index);
-                            break;
-                    }
-                } else {
-                    statusCode = 400;
-                    body = response.message;
+                switch (method) {
+                    case 'DELETE':
+                        await deleteNumsArr(currentId, round, {tool, method:selectMethod}, index);
+                        break;
                 }
             } else {
                 statusCode = 400;
@@ -312,41 +290,35 @@ exports.handler = async (event: any) => {
             }
         }
             break;
-        case '/users/{userName}/numbers/piece/{round}/{choice}': {
-            const userName = event.pathParameters.userName;
+        case '/numbers/piece/{round}/{choice}': {
             const round = event.pathParameters.round;
             const choice = event.pathParameters.choice;
-            if (logedIn) {
-                const response = isIdentical(currentId, userName);
-                if (!response.error) {
-                    switch (method) {
-                        case 'GET': {
-                            const numbers = await getIncOrExcNumbers(userName, round, choice);
-                            body = numbers;
-                        }
-                            break;
-                        case 'POST': {
-                            const { numbers } = JSON.parse(event.body);
-                            await updateIncOrExcNumbers(userName, round, numbers, choice);
-                        }
-                            break;
-                        case 'DELETE': {
-                            await deleteNumbers(userName, round, choice);
-                        }
-                            break;
-                    }
-                } else {
-                    statusCode = 400;
-                    body = response.message;
+            switch (method) {
+                case 'GET': {
+                    const userName = event.queryStringParameters.userName;
+                    const numbers = await getIncOrExcNumbers(userName, round, choice);
+                    body = numbers;
                 }
-            } else {
-                statusCode = 400;
-                body = "로그인되지 않은 사용자입니다."
+                    break;
+                case 'POST':
+                    if (logedIn) {
+                        const { numbers } = JSON.parse(event.body);
+                        await updateIncOrExcNumbers(currentId, round, numbers, choice);
+                        break;
+                    } else {
+                        statusCode = 400;
+                        body = "로그인되지 않은 사용자입니다."
+                    }
+                    break;
+                /*
+            case 'DELETE':
+                await deleteNumbers(userName, round, choice);
+                break;
+                */
             }
-        }
             break;
+        }
     }
-
     const response = {
         statusCode,
         headers,

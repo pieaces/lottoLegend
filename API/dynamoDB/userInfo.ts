@@ -3,14 +3,15 @@ import { dynamoDB, TableName } from '.'
 export enum Plan {
     "default" = "a",
     "basic" = "b",
-    "premium" = "c"
+    "premium" = "c",
+    "premiumplus" = "d"
 }
 const ExpressionAttributeNames = {
     "#Plan": 'Plan',
     '#Until': 'Until'
 };
 
-export function getRank(userName:string):Promise<string>{
+export function getPlan(userName:string):Promise<Plan>{
     const params = {
         TableName,
         ExpressionAttributeNames,
@@ -28,25 +29,27 @@ export function getRank(userName:string):Promise<string>{
             }
             else {
                 const item = data.Item;
-                let rank = Plan.default;
+                let plan:Plan = Plan.default;
                 if ('Plan' in item && 'Until' in item) {
-                    const plan = item.Plan.S;
+                    const _plan = item.Plan.S;
                     const now = Number(new Date());
                     const until = Number(new Date(item.Until.S));
                     if (now <= until) {
-                        switch (plan) {
+                        switch (_plan) {
                             case Plan.basic:
-                                rank = Plan.basic;
+                                plan = Plan.basic;
                                 //availability = planValues[Plan.basic];
                                 break;
                             case Plan.premium:
-                                rank = Plan.premium;
+                                plan = Plan.premium;
                                 //availability = planValues[Plan.premium];
                                 break;
+                            case Plan.premiumplus:
+                                plan = Plan.premiumplus
                         }
                     }
                 }
-                resolve(rank);
+                resolve(plan);
             }
         });
     });
