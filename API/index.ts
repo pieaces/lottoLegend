@@ -66,7 +66,7 @@ exports.handler = async (event: any) => {
 
     const option: GeneratorOption = {};
     let willRangeFinder: (numbers: number[]) => number = null;
-    const data = JSON.parse(event.body);
+    const {data} = JSON.parse(event.body);
 
     if (data.excludedLines) {
         option.excludedLines = data.excludedLines;
