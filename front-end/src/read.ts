@@ -51,9 +51,7 @@ async function init() {
         if (currentUser === post.writerId) {
             contentsUpdateBtn.classList.remove('hide');
             const category = document.querySelector<HTMLElement>('#wrapper').getAttribute('data-category');
-            let board: string;
-            board = category + 'BoardPost.html';
-            document.querySelector<HTMLElement>('#content-update-btn').setAttribute('onclick', `location.href='${board}?id=${id}'`);
+            document.querySelector<HTMLElement>('#content-update-btn').setAttribute('onclick', `location.href='${getCategoryHtml(category, Affix.Post)}?id=${id}'`);
             document.querySelector<HTMLElement>('#delete-btn').addEventListener('click', async () => {
                 if (removeConfirm()) {
                     try {
