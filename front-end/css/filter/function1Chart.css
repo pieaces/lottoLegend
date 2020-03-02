@@ -1,13 +1,9 @@
-.func1-main-1-box{
+.func1-main-box-1{
     height:36rem;
-    display:flex;
-    margin-bottom:1rem;
   }
 
   .func1-chart-container {
-    width:50%;
     position: relative;
-    margin-right:1rem;
   }
 
   .func1-chart-slide-num {
@@ -56,10 +52,6 @@
     color: var(--main-color);
     opacity: 0.3;
     font-size:5rem;
-  }
-
-  .func1-chart-textbox-container{
-    width:50%;
   }
 
   .func1-chart-textbox{

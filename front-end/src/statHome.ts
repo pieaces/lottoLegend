@@ -12,18 +12,6 @@ const stackDataBox = {
         data: [
             1, 2, 3, 4, 5, 6
         ]
-    }, {
-        label: 'Dataset 2',
-        backgroundColor: 'blue',
-        data: [
-            2, 3, 4, 5, 6, 7, 8
-        ]
-    }, {
-        label: 'Dataset 3',
-        backgroundColor: 'green',
-        data: [
-            3, 4, 5, 6, 7, 8, 9
-        ]
     }]
 
 };
