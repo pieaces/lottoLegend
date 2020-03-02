@@ -237,33 +237,24 @@ exports.handler = async (event: any) => {
         case '/numbers/mass': {
             if (logedIn) {
                 switch (method) {
-                    case 'GET':
+                    case 'GET': {
                         const round = event.queryStringParameters.round;
-                        body = await getNumbersByRound(currentId, round);
-                        break;
-                }
-            } else {
-                statusCode = 400;
-                body = "로그인되지 않은 사용자입니다."
-            }
-        }
-            break;
-        case '/numbers/mass/{tool}': {
-            const tool = event.pathParameters.tool;
-            const selectMethod = event.queryStringParameters && event.queryStringParameters.method;
-            if (logedIn) {
-                switch (method) {
-                    case 'GET':
-                        const round = event.queryStringParameters.round;
-                        if (selectMethod) {
-                            const { numsArr } = await getNumbersByClass(currentId, round, { tool, method: selectMethod });
-                            body = numsArr;
+                        const tool = event.queryStringParameters.tool;
+                        const selectMethod = event.queryStringParameters.method;
+                        if (!tool) {
+                            body = await getNumbersByRound(currentId, round);
                         } else {
-                            body = await getNumbersByClass(currentId, round, { tool, method: selectMethod });
+                            if (selectMethod) {
+                                const { numsArr } = await getNumbersByClass(currentId, round, { tool, method: selectMethod });
+                                body = numsArr;
+                            } else {
+                                body = await getNumbersByClass(currentId, round, { tool, method: selectMethod });
+                            }
                         }
+                    }
                         break;
                     case 'POST':
-                        const { numsArr } = JSON.parse(event.body)
+                        const { numsArr, tool } = JSON.parse(event.body)
                         body = await updateNumbers(currentId, getCurrentRound(), numsArr, tool);
                         break;
                 }
@@ -273,13 +264,12 @@ exports.handler = async (event: any) => {
             }
         }
             break;
-        case '/numbers/mass/{tool}/{index}': {
-            const tool = event.pathParameters.tool;
-            const selectMethod = event.queryStringParameters.method;
+        case '/numbers/mass/{index}': {
             const index = event.pathParameters.index;
             if (logedIn) {
                 switch (method) {
                     case 'DELETE':
+                        const { selectMethod, tool } = JSON.parse(event.body)
                         await deleteNumsArr(currentId, getCurrentRound(), { tool, method: selectMethod }, index);
                         break;
                 }
@@ -289,19 +279,19 @@ exports.handler = async (event: any) => {
             }
         }
             break;
-        case '/numbers/piece/{choice}': {
-            const choice = event.pathParameters.choice;
+        case '/numbers/piece': {
             switch (method) {
                 case 'GET': {
                     const userName = event.queryStringParameters.userName;
                     const round = event.queryStringParameters.round;
+                    const choice = event.queryStringParameters.choice;
                     const numbers = await getIncOrExcNumbers(userName, round, choice);
                     body = numbers;
                 }
                     break;
                 case 'POST':
                     if (logedIn) {
-                        const { numbers } = JSON.parse(event.body);
+                        const { numbers, choice } = JSON.parse(event.body);
                         await updateIncOrExcNumbers(currentId, getCurrentRound(), numbers, choice);
                         break;
                     } else {
