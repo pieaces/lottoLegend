@@ -14,9 +14,9 @@ enum IncOrExc {
 }
 let incOrexc: IncOrExc = IncOrExc.include;
 configure();
-let numsObj:{include:number[]; exclude:number[]};
-function getCurrentChoiceNumbers(bool:boolean): number[]{
-    if(bool) return numsObj.exclude;
+let numsObj: { include: number[]; exclude: number[] };
+function getCurrentChoiceNumbers(bool: boolean): number[] {
+    if (bool) return numsObj.exclude;
     else return numsObj.include;
 }
 getUnAuthAPI('/stats/mass/excludeInclude')
@@ -24,12 +24,13 @@ getUnAuthAPI('/stats/mass/excludeInclude')
         console.log(data);
         const question = new Question();
         question.numBoardQue.on();
-        const option: any = [null, null, null, true];
-        const layout = new Layout2(option, data.data, data.winNums, data.total);
+        const layout = new Layout2([null, null, null, true], data.data, data.winNums, data.total);
         try {
             numsObj = await getAuthAPI('/numbers/piece');
+            if (numsObj.exclude.length > 0 && confirm('기존에 지정하신 제외수를 반영하시겠습니까?')) {
+                layout.options[5] = numsObj.exclude;
+            }            
             layout.init();
-
             layout.includeVerson();
             layout.setOpacity();
             layout.refreshNumberBoard();
@@ -38,12 +39,20 @@ getUnAuthAPI('/stats/mass/excludeInclude')
 
             toggleBtn.addEventListener('click', () => {
                 if (toggle.checked) {
-                    if(numsObj.include.length > 0 && confirm('기존에 지정하신 포함수를 제외수에 반영하시겠습니까?')){
-                        option[3] = numsObj.include;
+                    if (numsObj.include.length > 0 && confirm('기존에 지정하신 포함수를 반영하시겠습니까?')) {
+                        layout.options[5] = numsObj.include;
+                    }else{
+                        layout.options[5] = [];
                     }
                     incOrexc = IncOrExc.exclude;
                     layout.excludeVersion();
                 } else {
+                    console.log(numsObj.exclude);
+                    if (numsObj.exclude.length > 0 && confirm('기존에 지정하신 제외수를 반영하시겠습니까?')) {
+                        layout.options[5] = numsObj.exclude;
+                    }else{
+                        layout.options[5] = [];
+                    }
                     incOrexc = IncOrExc.include;
                     layout.includeVerson();
                 }
@@ -52,21 +61,21 @@ getUnAuthAPI('/stats/mass/excludeInclude')
                 layout.refreshNumberBoard();
             });
             makeBtn.addEventListener('click', async () => {
-                let flag = false;
                 let numbers = getCurrentChoiceNumbers(toggle.checked);
-                if (numbers.length === 0 || numbers.length > 0 && confirm('이미 포함수를 지정하셨습니다. 덮어쓰기하시겠습니까?')) {
-                    flag = true;
-                }
-                if (flag) {
+                if (layout.checkedNumbers.length===0 && confirm('빈 상태로 초기화하시겠습니까?') || numbers.length === 0 || numbers.length > 0 && confirm('이미 번호를 지정하셨습니다. 덮어쓰기하시겠습니까?')) {
                     try {
-                        await postAuthAPI('/numbers/piece', { numbers:layout.checkedNumbers, choice: incOrexc });
-                        numbers = layout.checkedNumbers;
+                        await postAuthAPI('/numbers/piece', { numbers: layout.checkedNumbers, choice: incOrexc });
+                        if(toggle.checked){
+                            numsObj.exclude = layout.checkedNumbers;
+                        }else {
+                            numsObj.include = layout.checkedNumbers;
+                        }
                         alert("성공적으로 입력되었습니다.");
                     } catch (err) {
                         afterAlert();
                     }
                 }
-            })
+            });
         }
         catch (err) {
             beforeAlert();

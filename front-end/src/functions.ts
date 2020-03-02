@@ -1,6 +1,8 @@
+
 export function removeConfirm(){
     return confirm('삭제하면 복구가 불가능합니다. 괜찮겠어요?');
 }
+
 export function beforeAlert(){
     alert('네트워크 상태가 좋지 못합니다.');
 }
