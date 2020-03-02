@@ -80,9 +80,7 @@ const barOption = {
 
 loading.classList.remove('none');
 getUnAuthAPI('/stats/piece/' + method)
-    .then(result => {
-        console.log(result);
-        const data = result.data;
+    .then(data => {
         console.log(data);
         mean.textContent = Number(data.stats.mean).toFixed(2);
         $68.textContent = rangeMake(data.stats);
@@ -94,7 +92,7 @@ getUnAuthAPI('/stats/piece/' + method)
         lineInstance.create();
 
         const barLabels = [];
-        for (let i = result.total - 49; i <= result.total; i++) barLabels.push(i);
+        for (let i = data.total - 49; i <= data.total; i++) barLabels.push(i);
         barDataBox.labels = barLabels;
         barDataBox.datasets[0].data = data.piece
         const barInstance = new ChartBase('bar', barCanvas, barDataBox, barOption);
