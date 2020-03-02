@@ -51,3 +51,4 @@ const stackOption: Chart.ChartOptions = {
 const stackInstance = new ChartBase('bar', stackCanvas, stackDataBox, stackOption);
 stackInstance.create();
 stackInstance.update();
+
