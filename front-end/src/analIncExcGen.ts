@@ -5,7 +5,12 @@ import Question from './functional/Question';
 import ResetBtn from './functional/instanceBtns/ResetBtn';
 const toggleBtn = document.getElementById('inc-exc-toggle-btn');
 const toggle = document.querySelector<HTMLInputElement>('#inc-exc-toggle-check');
+const makeBtn = document.getElementById('make-btn');
 
+enum IncOrEx {
+    "include" = "include",
+    "exclude" = "Exclude"
+}
 configure();
 getUnAuthAPI('/stats/mass/excludeInclude')
     .then(data => {
@@ -31,4 +36,7 @@ getUnAuthAPI('/stats/mass/excludeInclude')
             layout.setOpacity();
             layout.refreshNumberBoard();
         });
+        makeBtn.addEventListener('click', () => {
+            console.log(layout.checkedNumbers);
+        })
     });
