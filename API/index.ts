@@ -282,11 +282,17 @@ exports.handler = async (event: any) => {
         case '/numbers/piece': {
             switch (method) {
                 case 'GET': {
-                    const userName = event.queryStringParameters.userName;
-                    const round = event.queryStringParameters.round;
+                    const userName = event.queryStringParameters.userName || currentId;
+                    const round = event.queryStringParameters.round || getCurrentRound();
                     const choice = event.queryStringParameters.choice;
-                    const numbers = await getIncOrExcNumbers(userName, round, choice);
-                    body = numbers;
+                    if (choice) {
+                        const numbers = await getIncOrExcNumbers(userName, round, choice);
+                        body = numbers;
+                    } else {
+                        const include = await getIncOrExcNumbers(userName, round, IncOrExc.include);
+                        const exclude = await getIncOrExcNumbers(userName, round, IncOrExc.exclude);
+                        body = { include, exclude };
+                    }
                 }
                     break;
                 case 'POST':
