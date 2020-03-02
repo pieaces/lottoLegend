@@ -59,6 +59,8 @@
     font-size: 2rem;
   }
 
+/* main */
+
   .main {
     min-height: 75rem;
     width:82%;
@@ -73,9 +75,28 @@
     align-items: center;
     font-size: 1.8rem;
     border-bottom: 2px solid #afafaf;
+    margin-bottom: 1rem;
+  }
+
+  /* half-container */
+
+  .left-right-container{
+    display:flex;
+    margin-bottom:1rem;
+    width:100%;
   }
   
+/* left-container */
 
+.left-container{
+  width:50%;
+}
+
+/* right-container */
+
+.right-container{
+  width:50%;
+}
 
   @media(min-width: 0px) and (max-width: 767px) {
     .grid-section-1{

@@ -7,15 +7,10 @@
     opacity: 1 !important;
   }
 
-/* inc-exc-layout */
 
-  .include-layout{
-    padding:1rem 0;
-  }
-
-  .exclude-layout{
-    padding:1rem 0;
-  }
+.inc-exc-layout{
+    padding-top: 1rem;
+}
 
 .switch-toggle-container{
 position: relative;
@@ -62,7 +57,7 @@ position: relative;
     z-index: 1;
 }
 
-     /* Button 10 */
+
      #inc-exc-toggle-btn .switch-toggle-knobs:before,
      #inc-exc-toggle-btn .switch-toggle-knobs:after,
      #inc-exc-toggle-btn .switch-toggle-knobs span {

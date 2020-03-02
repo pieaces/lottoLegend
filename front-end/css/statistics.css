@@ -24,14 +24,17 @@ padding:2rem;
   overflow-x: scroll;
 position: relative;
   width: 100%;
+  padding: 0 !important;
 }
 
 .func1-chart-bar-box{
   position: absolute;
-  top:2rem;
-  left:2rem;
+  top:50%;
+  left:0;
   width:120rem;
   height:30rem;
+  padding:0 2rem;
+  margin-top:-15rem;
 }
 
 
@@ -39,8 +42,8 @@ position: relative;
   position: absolute;
   left: 2rem;
   top: 50%;
-  pointer-events:none;
   margin-top:-15rem;
+  
 }
 
 .stats-container{
