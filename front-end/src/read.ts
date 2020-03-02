@@ -21,7 +21,6 @@ let currentUser: string;
 let commentCount = 0;
 const id = getQueryStringObject().id;
 init();
-
 commentSubmit.onclick = async function () {
     if (Number(charCurrentCount.textContent) > 0 && currentUser) {
         try {

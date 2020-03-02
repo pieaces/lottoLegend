@@ -11,7 +11,8 @@
     "@aws-amplify/auth": "^2.1.5",
     "@aws-amplify/core": "^2.2.4",
     "chart.js": "^2.9.3",
-    "suneditor": "^2.25.0"
+    "suneditor": "^2.25.0",
+    "sweetalert2": "^9.8.2"
   },
   "devDependencies": {
     "@types/chart.js": "^2.9.13",

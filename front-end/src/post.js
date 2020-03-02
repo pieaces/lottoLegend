@@ -6,6 +6,7 @@ import { postUnAuthAPI, postAuthAPI, getUnAuthAPI, patchAuthAPI } from './amplif
 import { getUserName } from './amplify/auth'
 import { getQueryStringObject } from './functions'
 import { getCategoryHtml } from './functions';
+import Swal from 'sweetalert2'
 
 const editor = suneditor.create('sample', {
   plugins: plugins,
@@ -38,7 +39,7 @@ function attachTimestamp(name) {
 const category = document.getElementById('wrapper').getAttribute('data-category');
 const loading = document.querySelector('.loading');
 
-const imageWrapper = document.getElementById('image-wrapper');
+//const imageWrapper = document.getElementById('image-wrapper');
 const imageTotalSize = document.getElementById('image-total-size');
 const imageRemove = document.getElementById('image-remove');
 const imageTable = document.getElementById('image-list');
@@ -71,7 +72,6 @@ submitBtn.onclick = async () => {
       image[0].setAttribute('src', image[1]);
     });
     const contents = editor.getContents();
-    console.log(contents);
     let leapId;
     if (!post) {
       leapId = await postAuthAPI('/posts', {
@@ -83,7 +83,15 @@ submitBtn.onclick = async () => {
         title, contents
       });
     }
-    location.href = `./${getCategoryHtml(category, 'Read')}?id=${leapId}`;
+    loading.classList.add('none');
+    Swal.fire(
+      '완료',
+      '공유해주셔서 감사합니다.',
+      'success'
+    );
+    document.querySelector('.swal2-backdrop-show').addEventListener('click', () =>{
+      location.href = `./${getCategoryHtml(category, 'Read')}?id=${leapId}`;
+    });
   } catch (err) {
     alert('네트워크 오류가 발생하였습니다. 작업이 정상적으로 완료되지 않았습니다.');
   }
