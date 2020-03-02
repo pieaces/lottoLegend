@@ -358,7 +358,7 @@ document.write(`<div class="filter-box-container-box func1-layout func2-layout b
   </div>
 
   <div class="right-container">
-    <div class="func2-chart-radar-container box-color">
+    <div class="func2-chart-radar-container-box box-color">
 
       <div class="func2-chart-radar-container">
         <div class="func2-chart-radar-box">
