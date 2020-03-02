@@ -69,7 +69,7 @@ exports.handler = async (event: any) => {
                 temp.frequency = await queryStats("frequency" as StatsMethod, {});
 
                 data = temp;
-                let round = getCurrentRound(new Date().toString());
+                let round = getCurrentRound();
                 let total: number = 0;
 
                 const winNums: LottoNumber[][] = [];
@@ -234,11 +234,11 @@ exports.handler = async (event: any) => {
         method = auto, manual, include, exclude
         numbers/mass|piece/
         */
-        case '/numbers/mass/{round}': {
-            const round = event.pathParameters.round;
+        case '/numbers/mass': {
             if (logedIn) {
                 switch (method) {
                     case 'GET':
+                        const round = event.queryStringParameters.round;
                         body = await getNumbersByRound(currentId, round);
                         break;
                 }
@@ -248,13 +248,13 @@ exports.handler = async (event: any) => {
             }
         }
             break;
-        case '/numbers/mass/{round}/{tool}': {
-            const round = event.pathParameters.round;
+        case '/numbers/mass/{tool}': {
             const tool = event.pathParameters.tool;
             const selectMethod = event.queryStringParameters && event.queryStringParameters.method;
             if (logedIn) {
                 switch (method) {
                     case 'GET':
+                        const round = event.queryStringParameters.round;
                         if (selectMethod) {
                             const { numsArr } = await getNumbersByClass(currentId, round, { tool, method: selectMethod });
                             body = numsArr;
@@ -264,7 +264,7 @@ exports.handler = async (event: any) => {
                         break;
                     case 'POST':
                         const { numsArr } = JSON.parse(event.body)
-                        body = await updateNumbers(currentId, round, numsArr, tool);
+                        body = await updateNumbers(currentId, getCurrentRound(), numsArr, tool);
                         break;
                 }
             } else {
@@ -273,15 +273,14 @@ exports.handler = async (event: any) => {
             }
         }
             break;
-        case '/numbers/mass/{round}/{tool}/{index}': {
-            const round = event.pathParameters.round;
+        case '/numbers/mass/{tool}/{index}': {
             const tool = event.pathParameters.tool;
             const selectMethod = event.queryStringParameters.method;
             const index = event.pathParameters.index;
             if (logedIn) {
                 switch (method) {
                     case 'DELETE':
-                        await deleteNumsArr(currentId, round, { tool, method: selectMethod }, index);
+                        await deleteNumsArr(currentId, getCurrentRound(), { tool, method: selectMethod }, index);
                         break;
                 }
             } else {
@@ -290,12 +289,12 @@ exports.handler = async (event: any) => {
             }
         }
             break;
-        case '/numbers/piece/{round}/{choice}': {
-            const round = event.pathParameters.round;
+        case '/numbers/piece/{choice}': {
             const choice = event.pathParameters.choice;
             switch (method) {
                 case 'GET': {
                     const userName = event.queryStringParameters.userName;
+                    const round = event.queryStringParameters.round;
                     const numbers = await getIncOrExcNumbers(userName, round, choice);
                     body = numbers;
                 }
@@ -303,7 +302,7 @@ exports.handler = async (event: any) => {
                 case 'POST':
                     if (logedIn) {
                         const { numbers } = JSON.parse(event.body);
-                        await updateIncOrExcNumbers(currentId, round, numbers, choice);
+                        await updateIncOrExcNumbers(currentId, getCurrentRound(), numbers, choice);
                         break;
                     } else {
                         statusCode = 400;
