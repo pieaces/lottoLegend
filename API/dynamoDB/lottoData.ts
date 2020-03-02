@@ -2,6 +2,7 @@ import { Stats } from '../interface/Statistics';
 import { StatsMethod, DBData, Assembly, AssemblyVersion, QueryStatsParams } from '../interface/LottoDB';
 import { LottoNumber } from '../interface/Lotto';
 import {dynamoDB} from '.'
+import getCurrentRound from '../funtion/getCurrentRound';
 export async function queryLotto(round: number): Promise<LottoNumber[]> {
     const queryParams = {
         ProjectionExpression: 'Numbers',
@@ -130,6 +131,7 @@ export async function queryStats(method: StatsMethod, params: QueryStatsParams={
                         if (item.Piece) {
                             const piece = item.Piece.L.map(item => Number(item.N));
                             dbData.piece = piece;
+                            dbData.total = getCurrentRound();
                         }
                         resolve(dbData);
                         break;

@@ -27,6 +27,7 @@ export interface DBData {
     pos: number[];
     stats?: Stats;
     piece?: number[];
+    total?: number;
 }
 
 export interface DataMap {
