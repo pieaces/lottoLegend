@@ -66,50 +66,50 @@ exports.handler = async (event: any) => {
 
     const option: GeneratorOption = {};
     let willRangeFinder: (numbers: number[]) => number = null;
-    const {data} = JSON.parse(event.body);
+    const {options} = JSON.parse(event.body);
 
-    if (data.excludedLines) {
-        option.excludedLines = data.excludedLines;
+    if (options.excludedLines) {
+        option.excludedLines = options.excludedLines;
     }
-    if (data.includedNumbers) {
-        option.includedNumbers = data.includedNumbers;
+    if (options.includedNumbers) {
+        option.includedNumbers = options.includedNumbers;
     }
-    if (data.excludedNumbers) {
-        option.excludedNumbers = data.excludedNumbers;
+    if (options.excludedNumbers) {
+        option.excludedNumbers = options.excludedNumbers;
     }
-    if (data.lowCount) {
-        option.lowCount = data.lowCount;
+    if (options.lowCount) {
+        option.lowCount = options.lowCount;
     }
-    if (data.sum) {
-        option.sum = data.sum;
+    if (options.sum) {
+        option.sum = options.sum;
         willRangeFinder = Calculate.oddCount;
     }
-    if (data.oddCount) {
-        option.oddCount = data.oddCount;
+    if (options.oddCount) {
+        option.oddCount = options.oddCount;
         willRangeFinder = Calculate.primeCount;
     }
-    if (data.primeCount) {
-        option.primeCount = data.primeCount;
+    if (options.primeCount) {
+        option.primeCount = options.primeCount;
         willRangeFinder = Calculate.$3Count;
     }
-    if (data.$3Count) {
-        option.$3Count = data.$3Count;
+    if (options.$3Count) {
+        option.$3Count = options.$3Count;
         willRangeFinder = Calculate.sum$10;
     }
-    if (data.sum$10) {
-        option.sum$10 = data.sum$10;
+    if (options.sum$10) {
+        option.sum$10 = options.sum$10;
         willRangeFinder = Calculate.diffMaxMin;
     }
-    if (data.diffMaxMin) {
-        option.diffMaxMin = data.diffMaxMin;
+    if (options.diffMaxMin) {
+        option.diffMaxMin = options.diffMaxMin;
         willRangeFinder = Calculate.AC;
     }
-    if (data.AC) {
-        option.AC = data.AC;
+    if (options.AC) {
+        option.AC = options.AC;
         willRangeFinder = Calculate.consecutiveExist;
     }
-    if (typeof data.consecutiveExist === 'boolean') {
-        option.consecutiveExist = data.consecutiveExist;
+    if (typeof options.consecutiveExist === 'boolean') {
+        option.consecutiveExist = options.consecutiveExist;
     }
 
     const generator = new Generator(option);
