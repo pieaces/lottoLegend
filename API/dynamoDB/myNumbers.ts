@@ -322,8 +322,8 @@ export function getNumbersByRound(userName: string, round: number): Promise< Num
 }
 
 export enum IncOrExc {
-    "include" = "IncludedNumbers",
-    "exclude" = "ExcludedNumbers"
+    "include" = "Include",
+    "exclude" = "Exclude"
 }
 export async function updateIncOrExcNumbers(userName: string, round: number, numbers: number[], choice: IncOrExc): Promise<Response> {
     const params = {
