@@ -256,10 +256,10 @@ exports.handler = async (event: any) => {
                 switch (method) {
                     case 'GET':
                         if (selectMethod) {
-                            const { numsArr } = await getNumbersByClass(currentId, round, {tool, method:selectMethod});
+                            const { numsArr } = await getNumbersByClass(currentId, round, { tool, method: selectMethod });
                             body = numsArr;
                         } else {
-                            body = await getNumbersByClass(currentId, round, {tool, method:selectMethod});
+                            body = await getNumbersByClass(currentId, round, { tool, method: selectMethod });
                         }
                         break;
                     case 'POST':
@@ -281,7 +281,7 @@ exports.handler = async (event: any) => {
             if (logedIn) {
                 switch (method) {
                     case 'DELETE':
-                        await deleteNumsArr(currentId, round, {tool, method:selectMethod}, index);
+                        await deleteNumsArr(currentId, round, { tool, method: selectMethod }, index);
                         break;
                 }
             } else {
