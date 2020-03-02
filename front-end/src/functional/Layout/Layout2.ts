@@ -244,6 +244,10 @@ export default class Layout2 {
         this.cancelCheck();
     }
     public reset() {
+        mean.textContent = "";
+        $68.textContent = "";
+        $95.textContent = "";
+        last.textContent = "";
         for (const node of Array.from(selectNumBox.children)) {
             node.remove();
         }
