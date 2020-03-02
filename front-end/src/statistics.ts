@@ -103,3 +103,4 @@ getUnAuthAPI('/stats/piece/' + method)
         const barInstance = new ChartBase('bar', barCanvas, barDataBox, barOption);
         barInstance.create();
     });
+
