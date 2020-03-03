@@ -12,7 +12,7 @@ document.write(`
 <li class="arrow-box">
     <h3> <a href="#">통계자료</a><i class="fas fa-sort-up filter-arrow"></i> </h3>
     <ul class="anchor-list-box">
-        <li> <a href="statHome.html">통계 홈</a> </li>
+        <li> <a href="statsHome.html">통계 홈</a> </li>
         <li> <a href="statistics.html?method=excludedLineCount">전멸구간 개수</a> </li>
         <li> <a href="statistics.html?method=carryCount">이월 개수</a> </li>
         <li> <a href="statistics.html?method=lowCount">저값(1~22) 개수</a> </li>
