@@ -1,7 +1,7 @@
 import configure from './amplify/configure'
 import ChartBase from './functional/Chart/Charts';
 import { getUnAuthAPI } from './amplify/api';
-import { getQueryStringObject, rangeMake } from './functions';
+import { getQueryStringObject, rangeMake, getStaticsName } from './functions';
 const loading = document.querySelector('.loading');
 const labels = require('./functional/DataAPI/json/labels.json');
 configure();
@@ -11,6 +11,7 @@ const mean = document.querySelector<HTMLElement>('.stats-mean-value');
 const $68 = document.querySelector<HTMLElement>('.stats-68-value');
 const $95 = document.querySelector<HTMLElement>('.stats-95-value');
 
+document.querySelector<HTMLElement>('.main-title').textContent = getStaticsName(method);
 const lineOption: Chart.ChartOptions = {
     tooltips: {
         mode: 'index',

@@ -1,7 +1,7 @@
 
 .stats-home-title{
-    background: var(--main-color);
-    height:20rem;
+    background: #357aab;
+    height:21rem;
     display:flex;
     align-items: center;
     justify-content: center;
@@ -23,10 +23,6 @@ margin-bottom:1rem;
     justify-content: center;
 }
 
-.win-num-times > span{
-    margin-right:0.5rem;
-}
-
 .win-num-times>span:nth-child(3){
     font-size:1.3rem;
     margin-bottom:-1rem;
@@ -34,10 +30,11 @@ margin-bottom:1rem;
 }
 
 .win-num-round {
-    margin-right:0.5rem;
     font-weight: bold;
 }
-
+#date{
+    margin-left:0.5rem;
+}
 .win-num-container{
     padding:1rem 0;
     display:flex;
@@ -62,7 +59,7 @@ margin-bottom:1rem;
     border-radius: 50%;
     display: flex;
     justify-content: center;
-    text-align: center;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 .win-num:nth-child(1){
