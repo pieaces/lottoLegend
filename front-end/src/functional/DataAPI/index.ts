@@ -133,9 +133,9 @@ export default class DataAPI {
             }
             else if (this.current === this.SIZE - 1) {
                 console.log(this.rangeList[this.current]);
-                if (this.rangeList[this.current].length === 2) {
+                if (this.rangeList[this.current] && this.rangeList[this.current].length === 2) {
                     this.rangeList[this.current] = ['제외', '포함'];
-                } else if (this.rangeList[this.current].length === 1) {
+                } else if (this.rangeList[this.current] && this.rangeList[this.current].length === 1) {
                     if (this.rangeList[this.current][1]) {
                         this.rangeList[this.current] = ['포함'];
                     } else {
