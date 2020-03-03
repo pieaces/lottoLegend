@@ -22,7 +22,8 @@ document.write(` <header>
             <ul>
         
         <li> <a href="../analSystem/analPreExp.html">체험하기</a> </li>
-        <li> <a href="../analSystem/analIncGen.html">추천/제외수</a> </li>
+        <li>  <a href="../analSystem/analIncGen.html">추천수</a>  </li>
+        <li>  <a href="../analSystem/analExcGen.html">제외수</a>  </li>
         <li> <a href="../analSystem/analFreeGen.html">무료조합 생성기</a> </li>
         <li> <a href="../analSystem/analPre.html">프리미엄 필터</a> </li>
     
@@ -30,8 +31,7 @@ document.write(` <header>
             <ul>
     
 
-                <li> <a href="../analBoard/analList.html">분석 Tip 공유</a> </li>
-                <li> <a href="../incExcBoard/incExcNumList.html">포함/제외수 공유</a> </li>
+                <li> <a href="../analBoard/analList.html">공유 게시판</a> </li>
                 <li> <a href="../statistics/statsHome.html">통계자료</a> </li>
                 </ul>
             <ul>
