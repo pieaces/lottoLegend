@@ -11,13 +11,11 @@
   "devDependencies": {
     "@types/jsonwebtoken": "^8.3.7",
     "@types/jwk-to-pem": "^2.0.0",
-    "@types/mysql2": "github:types/mysql2",
     "@types/node": "^13.1.6",
     "aws-sdk": "^2.610.0"
   },
   "dependencies": {
     "jsonwebtoken": "^8.5.1",
-    "jwk-to-pem": "^2.0.3",
-    "mysql2": "^2.1.0"
+    "jwk-to-pem": "^2.0.3"
   }
 }
