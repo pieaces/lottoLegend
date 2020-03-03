@@ -36,7 +36,7 @@ export default async function putLotto(round: number):Promise<void> {
             "BonusNum": {
                 N: lotto.bonusNum.toString()
             },
-            "stats": {
+            "Stats": {
                 M: {
                     [Method.excludedLineCount]: {
                         N: Calculate.excludedLineCount(lotto.numbers).toString()
@@ -77,7 +77,7 @@ export default async function putLotto(round: number):Promise<void> {
         TableName: "LottoData"
     };
     if (round > 1) {
-        params.Item.stats.M[Method.carryCount] = {
+        params.Item.Stats.M[Method.carryCount] = {
             N: Analyze.carryCount([beforeLotto.numbers, lotto.numbers])[0].toString()
         };
     }
