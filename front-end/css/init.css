@@ -22,7 +22,7 @@
 
 html{
   font-size:10px;
-  font-family: 'Nanum Gothic','Roboto', sans-serif;
+  font-family: 'Noto Sans KR','Nanum Gothic','Roboto', sans-serif;
 }
 
 body {
@@ -31,9 +31,9 @@ body {
 }
 
 a {
+  cursor: pointer;
   text-decoration: none;
   color: black;
-  font-family: 'Noto Sans KR', 'Nanum Gothic','Roboto',sans-serif;
 }
 
 h1 {
