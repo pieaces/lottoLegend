@@ -1,5 +1,9 @@
 
+import configure from './amplify/configure'
 import ChartBase from './functional/Chart/Charts';
+import { getUnAuthAPI } from './amplify/api';
+
+configure();
 const stackCanvas: HTMLCanvasElement = document.querySelector('.stack-chart');
 const stackDataBox = {
     labels: ['구간별 당첨횟수'],
@@ -44,7 +48,6 @@ const stackDataBox = {
 };
 
 const stackOption: Chart.ChartOptions = {
-
     legend: { display: false },
     tooltips: {
         mode: 'index',
@@ -61,5 +64,23 @@ const stackOption: Chart.ChartOptions = {
     }
 }
 
+const winBox = document.querySelector<HTMLElement>('.win-num-box');
+getUnAuthAPI('/numbers/win/' + 900)
+    .then(data => {
+        for (let i = 0; i < 6; i++) {
+            const num = document.createElement('div');
+            num.classList.add('win-num');
+            num.textContent = data.numbers[i];
+            winBox.appendChild(num);
+        }
+        const plus = document.createElement('div');
+        plus.classList.add('plus');
+        plus.textContent = '+';
+        winBox.appendChild(plus);
+        const bonus = document.createElement('div');
+        bonus.classList.add('win-num');
+        bonus.textContent = data.bonusNum;
+        winBox.appendChild(bonus);
+    });
 const stackInstance = new ChartBase('bar', stackCanvas, stackDataBox, stackOption);
 stackInstance.create();
