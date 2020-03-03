@@ -2,7 +2,7 @@ import { Stats } from '../interface/Statistics';
 import { StatsMethod, DBData, Assembly, AssemblyVersion, QueryStatsParams } from '../interface/LottoDB';
 import { LottoNumber } from '../interface/Lotto';
 import {dynamoDB} from '.'
-import getCurrentRound from '../funtion/getCurrentRound';
+import {getCurrentRound} from '../funtions';
 export async function queryLotto(round: number): Promise<LottoNumber[]> {
     const queryParams = {
         ProjectionExpression: 'Numbers',

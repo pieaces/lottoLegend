@@ -1,34 +1,18 @@
+import { LottoNumber } from "./interface/Lotto";
+import { StatsMethod, QueryStatsParams } from "./interface/LottoDB";
+import verify from "./auth";
+import { Response } from "./class";
+import {getCurrentRound, isIdentical} from "./funtions";
+
 import Posts from "./mariaDB/Posts";
 import Comments from "./mariaDB/Comments";
-import { updateNumbers, getNumbersByClass, deleteNumsArr, deleteNumbers, getIncOrExcNumbers, getNumbersByRound, updateIncOrExcNumbers, IncOrExc } from './dynamoDB/myNumbers'
-import jwt from 'jsonwebtoken';
-import jwkToPem from 'jwk-to-pem';
-import { Response } from "./class";
-import getCurrentRound from "./funtion/getCurrentRound";
-
-import { StatsMethod, QueryStatsParams } from "./interface/LottoDB";
-import { queryStats, queryLotto } from "./dynamoDB/lottoData";
-import { LottoNumber } from "./interface/Lotto";
 import { getPlan, Plan } from "./dynamoDB/userInfo";
-const pem = jwkToPem({
-    "alg": "RS256",
-    "e": "AQAB",
-    "kid": "mv27gjWoWPX6h3VfMR2y2WsKGIAwdQ9jXRgn4cnMrYo=",
-    "kty": "RSA",
-    "n": "lqR6rfxpx4fNjalDjNrG1qQCo0sd7uLgIEwCRqg7bgvY6mbKPFhY0EbQGmgKl8-_p1Zx48r4XJ5zeKmbcpBBHrY57fQOsZGQonXSFH4FQDRMVMFVHwExokvGLnk83mJpuHikO1b-IMmsUlRwm6NE_Jgu7Yg4ErHPNcx3kBYfFjHO7h0J3jZ6HM_5uW8QPLh9Mvt_ZDxr37ElctecSXiWoKr7ySbsTt_W5qFxMHLkd9mwVO_CC3k5pBpLXsn5VKRAiM51X_aaQ1MMGTZ4f-0KFZr3jChn7-7BKouJoGO43x1FdkexdiBjRIWGzTszFXeziTNFY1R9uTtzrFdgeqMJ3w",
-    "use": "sig"
-});
+import { queryStats, queryLotto } from "./dynamoDB/lottoData";
+import { updateNumbers, getNumbersByClass, deleteNumsArr, getIncOrExcNumbers, getNumbersByRound, updateIncOrExcNumbers, IncOrExc } from './dynamoDB/myNumbers'
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
     //"Access-Control-Allow-Credentials" : true // Required for cookies, authorization headers with HTTPS
-}
-function isIdentical(currentId: string, writerId: string): Response {
-    if (currentId === writerId) {
-        return new Response(false);
-    } else {
-        return new Response(true, '작성자가 아닙니다.');
-    }
 }
 exports.handler = async (event: any) => {
     console.log(event);
@@ -39,9 +23,9 @@ exports.handler = async (event: any) => {
     let currentId: string, currentName: string;
     if (event.headers['x-id-token']) {
         try {
-            const decodedToken = jwt.verify(event.headers['x-id-token'], pem, { algorithms: ['RS256'] });
+            const decodedToken = verify(event.headers['x-id-token']);
             logedIn = true;
-            const userInfo = decodedToken as { 'cognito:username': string, nickname: string };
+            const userInfo = decodedToken;
             currentId = userInfo["cognito:username"];
             currentName = userInfo.nickname;
         } catch (err) {
