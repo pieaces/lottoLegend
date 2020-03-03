@@ -1,38 +1,54 @@
 
 import ChartBase from './functional/Chart/Charts';
-
-const loading = document.querySelector('.loading');
-
 const stackCanvas: HTMLCanvasElement = document.querySelector('.stack-chart');
 const stackDataBox = {
     labels: ['January'],
-    datasets: [{
-        label: 'Dataset 1',
-        backgroundColor: 'red',
-        data: [
-            1
-        ]
-    }, {
-        label: 'Dataset 1',
-        backgroundColor: 'green',
-        data: [
-            1
-        ]
-    }, {
-        label: 'Dataset 1',
-        backgroundColor: 'blue',
-        data: [
-            1
-        ]
-    }]
+    datasets: [
+        {
+            label: '1번대',
+            backgroundColor: '#FBC400',
+            data: [
+                150
+            ]
+        },
+        {
+            label: '10번대',
+            backgroundColor: '#69C8F2',
+            data: [
+                160
+            ]
+        },
+        {
+            label: '20번대',
+            backgroundColor: '#FF7272',
+            data: [
+                140
+            ]
+        },
+        {
+            label: '30번대',
+            backgroundColor: '#AAAAAA',
+            data: [
+                150
+            ]
+        },
+        {
+            label: '40번대',
+            backgroundColor: '#B0D840',
+            data: [
+                110
+            ]
+        }
+    ]
 
 };
 
 const stackOption: Chart.ChartOptions = {
     title: {
         display: true,
-        text: 'Chart.js Bar Chart - Stacked'
+        text: '구간별 당첨횟수'
     },
+    legend: { display: false },
     tooltips: {
         mode: 'index',
         intersect: false
@@ -50,5 +66,3 @@ const stackOption: Chart.ChartOptions = {
 
 const stackInstance = new ChartBase('bar', stackCanvas, stackDataBox, stackOption);
 stackInstance.create();
-stackInstance.update();
-

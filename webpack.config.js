@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 
 // 확장자명 유의해서 쓸것! ts냐, js냐?
-const file = 'statistics.ts'
+const file = 'statHome.ts'
 ////
 const name = file.slice(0, file.indexOf('.'));
 module.exports = {
