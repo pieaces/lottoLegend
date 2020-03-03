@@ -23,9 +23,8 @@ exports.handler = async (event: any) => {
     let currentId: string, currentName: string;
     if (event.headers['x-id-token']) {
         try {
-            const decodedToken = verify(event.headers['x-id-token']);
+            const userInfo = verify(event.headers['x-id-token']);
             logedIn = true;
-            const userInfo = decodedToken;
             currentId = userInfo["cognito:username"];
             currentName = userInfo.nickname;
         } catch (err) {
