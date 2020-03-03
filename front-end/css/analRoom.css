@@ -1,9 +1,16 @@
-.arrow-box{
+.arrow-box>h3{
     position: relative;
 }
 
-.arrow-box > i{
+.arrow-box >h3> i{
     position: absolute;
-    right:1rem;
-    font-size:2.5rem;
+    right:3rem;
+    font-size:2rem;
+}
+
+.arrow-box >h3> i.fa-sort-up{
+    top:1.5rem;
+}
+.arrow-box >h3> i.fa-sort-down{
+    bottom:1.5rem;
 }
