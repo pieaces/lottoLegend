@@ -48,7 +48,10 @@
     justify-content: center;
     text-align: center;
     font-size: 1.6rem;
+    font-weight: 500;
   }
+
+  
 
   .anchor-list-box > li{
     border-bottom:1px dashed rgba(0,0,0,0.2);
