@@ -26,7 +26,7 @@ export default class Generator {
         delete options.excludedLineCount;
         delete options.carryCount;
       
-        const data = await postAuthAPI('/generator', {options})
+        const data = await postAuthAPI('/numbers/mass/premium', {options})
         console.log(data);
         return data;
     }

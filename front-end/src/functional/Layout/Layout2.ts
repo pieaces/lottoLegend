@@ -1,3 +1,11 @@
+import Swal from 'sweetalert2'
+import bar from '../instance2/barInstance'
+import gauss from '../instance2/gaussInstance'
+import radar from '../instance2/radarInstance'
+import radarSlide from '../instance2/radarSlide'
+import RadarSlide from '../Slide/radarSlide';
+import { rangeMake } from '../../functions';
+
 const lottoNumbers = document.querySelectorAll<HTMLElement>('.func2-lotto-num');
 const numTermFreqBox = document.querySelectorAll<HTMLElement>('.func2-lotto-checkbox > div');
 const selectNumBox = document.querySelector<HTMLElement>('.func2-select-num-box');
@@ -9,12 +17,6 @@ const $68= document.querySelector<HTMLElement>('.stats-68-value');
 const $95= document.querySelector<HTMLElement>('.stats-95-value');
 const last= document.querySelector<HTMLElement>('.stats-last-value');
 
-import bar from '../instance2/barInstance'
-import gauss from '../instance2/gaussInstance'
-import radar from '../instance2/radarInstance'
-import radarSlide from '../instance2/radarSlide'
-import RadarSlide from '../Slide/radarSlide';
-import { rangeMake } from '../../functions';
 
 export default class Layout2 {
     radarSlide: RadarSlide = radarSlide;
@@ -237,7 +239,11 @@ export default class Layout2 {
                     }
                 }
             } else {
-                alert(`더 이상 번호를 제외할 수 없습니다(최대 개수:${Layout2.MAX_SIZE})`);
+                Swal.fire({
+                    title:'더이상 제외할 수 없습니다.',
+                    text:`최대개수: ${Layout2.MAX_SIZE}`,
+                    icon:'info',
+                });
             }
             e.stopPropagation();
         });
@@ -262,9 +268,18 @@ export default class Layout2 {
     }
     public resetConfirm(e: Event) {
         if (this.checkedNumbers.length > 0) {
-            if (confirm(`선택번호를 모두 초기화하시겠습니까?`)) {
-                this.reset();
-            }
+            Swal.fire({
+                title:'초기화',
+                text:'현재 입력하신 번호를 초기화할까요?',
+                icon:'info',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '네',
+                cancelButtonText: '아니요',
+            }).then(result => {
+                if(result.value) this.reset();
+            })
         }
         e.stopPropagation();
     }
