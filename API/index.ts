@@ -1,5 +1,5 @@
 import verify from "./auth";
-import {getCurrentRound} from "./funtions";
+import { getCurrentRound } from "./funtions";
 import { updateNumbers, getNumbersByClass, deleteNumsArr, getIncOrExcNumbers, getNumbersByRound, updateIncOrExcNumbers, IncOrExc } from './dynamoDB/myNumbers'
 
 const headers = {
@@ -96,7 +96,7 @@ exports.handler = async (event: any) => {
                 case 'POST':
                     if (logedIn) {
                         const { numbers, choice } = JSON.parse(event.body);
-                        await updateIncOrExcNumbers(currentId, getCurrentRound(), numbers.sort((a:number,b:number) => a-b), choice);
+                        await updateIncOrExcNumbers(currentId, getCurrentRound(), numbers.sort((a: number, b: number) => a - b), choice);
                         break;
                     } else {
                         statusCode = 400;
@@ -104,8 +104,15 @@ exports.handler = async (event: any) => {
                     }
                     break;
             }
-            break;
         }
+            break;
+        case '/numbers/piece': {
+            switch (method) {
+                case 'GET':
+
+            }
+        }
+            break;
     }
     const response = {
         statusCode,

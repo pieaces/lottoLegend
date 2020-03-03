@@ -31,6 +31,37 @@ export async function queryLotto(round: number): Promise<LottoNumber[]> {
     });
 }
 
+export async function queryLottoData(round: number): Promise<any> {
+    const queryParams = {
+        ProjectionExpression: 'BonusNum, Stats, Numbers, LDate',
+        TableName: "LottoData",
+        Key:{
+            "Round": {
+                N: round.toString()
+            }
+        }
+    };
+
+    return await new Promise((resolve, reject) => {
+        dynamoDB.getItem(queryParams, function (err, data) {
+            if (err) {
+                reject('queryLotto 에러' + err);
+            }
+            else {
+                const item = data.Item;
+                if (typeof item === 'undefined') reject(`Not Exist ${round} item`);
+                else {
+                    const result = {
+                        bonusNum: Number(item.BonusNum.N),
+                        
+                    }
+                    resolve(result);
+                }
+            }
+        });
+    });
+}
+queryLottoData(900).then(value => console.log(value));
 export async function queryStats(method: StatsMethod, params: QueryStatsParams={}, ProjectionExpression?:string, ExpressionAttributeNames?:any): Promise<any[] | DBData> {
     const queryParams:any = {
         TableName: "LottoStats",
