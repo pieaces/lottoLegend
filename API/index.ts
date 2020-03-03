@@ -18,25 +18,15 @@ const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
     //"Access-Control-Allow-Credentials" : true // Required for cookies, authorization headers with HTTPS
 }
-function isIdentical(currentId: string, writerId: string): Response {
-    if (currentId === writerId) {
-        return new Response(false);
-    } else {
-        return new Response(true, '작성자가 아닙니다.');
-    }
-}
+
 exports.handler = async (event: any) => {
     console.log(event);
-    const method: string = event.httpMethod;
-    const resource: string = event.resource;
-    let logedIn: boolean = false;
 
     let currentId: string, currentName: string;
     if (event.headers['x-id-token']) {
         let decodedToken: any;
         try {
             decodedToken = jwt.verify(event.headers['x-id-token'], pem, { algorithms: ['RS256'] });
-            logedIn = true;
             const userInfo = decodedToken as { 'cognito:username': string, nickname: string };
             currentId = userInfo["cognito:username"];
             currentName = userInfo.nickname;
@@ -51,7 +41,7 @@ exports.handler = async (event: any) => {
                 return response;
             }
         } catch (err) {
-            console.log('Intruder Alert! - Expired Token', err);
+            console.log('Intruder Alert! - Expired Token || Not LogedIn', err);
             const response = {
                 statusCode: 400,
                 headers,
@@ -62,7 +52,6 @@ exports.handler = async (event: any) => {
 
     let statusCode: number = 200;
     let body: any;
-
 
     const option: GeneratorOption = {};
     let willRangeFinder: (numbers: number[]) => number = null;
