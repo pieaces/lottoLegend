@@ -1,6 +1,7 @@
 import verify from "./auth";
 import { getCurrentRound } from "./funtions";
 import { updateNumbers, getNumbersByClass, deleteNumsArr, getIncOrExcNumbers, getNumbersByRound, updateIncOrExcNumbers, IncOrExc } from './dynamoDB/myNumbers'
+import { queryLottoData } from "./dynamoDB/lottoData";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -106,10 +107,11 @@ exports.handler = async (event: any) => {
             }
         }
             break;
-        case '/numbers/piece': {
+        case '/numbers/win/{round}': {
+            const round = event.pathParameters.round;
             switch (method) {
                 case 'GET':
-
+                    body = await queryLottoData(round);
             }
         }
             break;

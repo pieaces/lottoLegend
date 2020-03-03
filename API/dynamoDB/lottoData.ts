@@ -31,7 +31,7 @@ export async function queryLotto(round: number): Promise<LottoNumber[]> {
     });
 }
 
-export async function queryLottoData(round: number): Promise<any> {
+export async function queryLottoData(round: number): Promise<{numbers:number[], bonusNum:number, date:string, stats:{[key:string]:number}}> {
     const queryParams = {
         ProjectionExpression: 'BonusNum, Stats, Numbers, LDate',
         TableName: "LottoData",
@@ -51,17 +51,23 @@ export async function queryLottoData(round: number): Promise<any> {
                 const item = data.Item;
                 if (typeof item === 'undefined') reject(`Not Exist ${round} item`);
                 else {
-                    const result = {
+                    const result:any = {
+                        numbers: item.Numbers.NS.map((num:string) => Number(num)).sort((a,b)=>a-b),
                         bonusNum: Number(item.BonusNum.N),
-                        
+                        date: item.LDate.S,
+                    };
+                    const stats:any = {};
+                    for(const key in item.Stats.M){
+                        stats[key] = Number(item.Stats.M[key].N)
                     }
+                    result.stats = stats;
                     resolve(result);
                 }
             }
         });
     });
 }
-queryLottoData(900).then(value => console.log(value));
+
 export async function queryStats(method: StatsMethod, params: QueryStatsParams={}, ProjectionExpression?:string, ExpressionAttributeNames?:any): Promise<any[] | DBData> {
     const queryParams:any = {
         TableName: "LottoStats",
