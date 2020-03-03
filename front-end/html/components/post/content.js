@@ -18,7 +18,7 @@ document.write(`
                 <button class="btn image-remove" id="image-remove" disabled>사진 삭제</button>
                 <span class="image-total-size" id="image-total-size">0MB</span> <span class="post-alert" id="post-alert">최대 4MB까지 업로드 가능합니다.</span>
             </div>
-            <button type="submit" class="btn square-btn post-btn" id="submit-btn">
+            <button type="submit" class="btn post-btn" id="submit-btn">
                 완료
             </button>
         </div>

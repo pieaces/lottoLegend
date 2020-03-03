@@ -14,15 +14,16 @@ enum IncOrExc {
 }
 let incOrexc: IncOrExc = IncOrExc.include;
 configure();
-
+const loading = document.querySelector<HTMLElement>('.loading');
+loading.classList.remove('none');
 getUnAuthAPI('/stats/mass/excludeInclude')
     .then(async (data) => {
-        console.log(data);
         const question = new Question();
         question.numBoardQue.on();
         try {
             const { include, exclude } = await getAuthAPI('/numbers/piece');
             const layout = new Layout2([null, null, null, true], data.data, data.winNums, data.total);
+            loading.classList.add('none');
             layout.init();
             layout.includeVerson();
             layout.setOpacity();

@@ -20,7 +20,7 @@
   
   .stats-box > div:nth-child(1){
     font-size:1.3rem;
-    background-color: var(--lotto-title-color);
+    background-color: #1b507b;
     color:var(--default-color);
     
   }

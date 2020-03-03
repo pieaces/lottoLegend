@@ -30,7 +30,7 @@
 .post-btn{
   width:7rem;
   height:4rem;
-  background-color: var(--main-color);
+  background-color: var(--button-color2);
   color:var(--default-color);
   display:flex;
   align-items: center;

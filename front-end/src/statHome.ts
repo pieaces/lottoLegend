@@ -2,7 +2,7 @@
 import ChartBase from './functional/Chart/Charts';
 const stackCanvas: HTMLCanvasElement = document.querySelector('.stack-chart');
 const stackDataBox = {
-    labels: ['January'],
+    labels: ['구간별 당첨횟수'],
     datasets: [
         {
             label: '1번대',
@@ -44,10 +44,7 @@ const stackDataBox = {
 };
 
 const stackOption: Chart.ChartOptions = {
-    title: {
-        display: true,
-        text: '구간별 당첨횟수'
-    },
+
     legend: { display: false },
     tooltips: {
         mode: 'index',

@@ -75,12 +75,7 @@ const barOption: Chart.ChartOptions = {
         intersect: false,
     },
     maintainAspectRatio: false,
-
-    title: {
-        display: true,
-        text: '회차별 값',
-        fontSize: 12
-    }
+    legend:{display:false},
 };
 
 loading.classList.remove('none');

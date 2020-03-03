@@ -131,7 +131,7 @@
   align-items: center;
   display: flex;
 }
-.post-btn{
+#submit-btn{
   width:10rem;
   height:4rem;
 }
