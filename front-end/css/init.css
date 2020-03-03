@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto|Nanum+Gothic|Noto+Sans+KR&display=swap');
-
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,500&display=swap&subset=korean');
 /* init css */
 
 :root {
@@ -7,7 +6,7 @@
   --main-color: #1f71b3;
   --button-color1: #7d9eb9;
   --button-color2: #59758c;
-  --lotto-title-color: #a54871;
+  --lotto-title-color: #a5484c;
   --lotto-num-color: rgba(231, 76, 60, 0.2);
   --box-color: #f8f9fb;
   --border-color: rgba(0, 0, 0, 0.1);
