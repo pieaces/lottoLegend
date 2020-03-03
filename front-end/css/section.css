@@ -31,11 +31,6 @@
     border:1px solid var(--border-color);
   }
 
-  .anchor-list-container > li{
-    border-bottom:1px solid rgba(0,0,0,0.2);
-  }
-
-
   .anchor-list-container > li:last-child{
     border:none;
   }

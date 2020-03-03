@@ -130,16 +130,8 @@ border-left: 1rem solid #575755;
   }
 
   .chart-slide-current {
-    background-color: var(--default-color) !important;
+
     border: 6px solid var(--lotto-title-color);
-  }
-
-  .slow{
-    transition: all 1s;
-  }
-
-  .nopointer{
-    cursor: default !important;
   }
 
   .checkbox-textbox{
@@ -160,7 +152,6 @@ border-left: 1rem solid #575755;
   
   .que-container{
     z-index:3;
-    position: relative;
   }
 
   .que-container > i{
