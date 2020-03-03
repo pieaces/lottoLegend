@@ -18,7 +18,7 @@
   }
 
 .stats-home-title{
-    background: #3f87bd;
+    background: var(--main-color);
     height:20rem;
     display:flex;
     align-items: center;
@@ -26,10 +26,6 @@
     margin-bottom:1rem;
 }
 
-
-.win-num-container-box{
-    width:60rem;
-}
 
 .win-num-times{
     height:4rem;
@@ -129,7 +125,7 @@
 }
 
 .arrow-btn-box{
-    width:5rem;
+    width:8rem;
     height:5rem;
     display:flex;
     align-items: center;

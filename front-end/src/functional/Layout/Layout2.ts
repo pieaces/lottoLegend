@@ -4,20 +4,17 @@ const selectNumBox = document.querySelector<HTMLElement>('.func2-select-num-box'
 const applyBtn = document.querySelector('#func2-num-inc-exc-btn');
 const winNumContainerBox = document.querySelector('.func2-win-num-container-box');
 
-const mean= document.querySelector<HTMLElement>('.stats-mean-value');
-const $68= document.querySelector<HTMLElement>('.stats-68-value');
-const $95= document.querySelector<HTMLElement>('.stats-95-value');
-const last= document.querySelector<HTMLElement>('.stats-last-value');
+const mean = document.querySelector<HTMLElement>('.stats-mean-value');
+const $68 = document.querySelector<HTMLElement>('.stats-68-value');
+const $95 = document.querySelector<HTMLElement>('.stats-95-value');
+const last = document.querySelector<HTMLElement>('.stats-last-value');
 
 import bar from '../instance2/barInstance'
 import gauss from '../instance2/gaussInstance'
 import radar from '../instance2/radarInstance'
-import radarSlide from '../instance2/radarSlide'
-import RadarSlide from '../Slide/radarSlide';
 import { rangeMake } from '../../functions';
 
 export default class Layout2 {
-    radarSlide: RadarSlide = radarSlide;
     static readonly MAX_SIZE = 10;
     static lottoNumDefaultColor = '#00048c';
     static readonly lottoNumSelectColor = '#e6e600';
@@ -102,11 +99,11 @@ export default class Layout2 {
         gauss.update();
     }
     private updateChartData() {
-        const stats = this.layout2Data.interval[this.choice-1].stats;
+        const stats = this.layout2Data.interval[this.choice - 1].stats;
         mean.textContent = (stats.mean).toFixed(2);
         $68.textContent = rangeMake(stats, 1, 1);
         $95.textContent = rangeMake(stats, 2, 1);
-        last.innerHTML = `${this.layout2Data.howLongNone[this.choice - 1].round}회</br>${this.layout2Data.howLongNone[this.choice - 1].date.slice(2,)}`
+        last.innerHTML = `${this.layout2Data.howLongNone[this.choice - 1].round}회</br>${this.layout2Data.howLongNone[this.choice - 1].date.slice(2)}`
         bar.dataBox.datasets[0].data = [this.layout2Data.frequency[this.choice - 1], this.total * 6 / 45];
         radar.dataBox.datasets[0].data = this.layout2Data.interval[this.choice - 1].list;
         gauss.dataBox.datasets[0].data = this.layout2Data.emergence[this.choice - 1];

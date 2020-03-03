@@ -1,5 +1,5 @@
 .stats-container{
-  width:30% !important;
+  width:45% !important;
 }
 
 .stats-box{
@@ -60,7 +60,7 @@
   }
 
   .func2-numboard-que{
-   position: relative;
+
   text-align: center;
   width:2.5rem;
   height:2.5rem;
@@ -83,8 +83,9 @@
   
   .func2-lotto-checkbox {
     height:5rem;
-
+    z-index: 2;
     display:flex;
+    position: relative;
   }
   
   .func2-lotto-checkbox > div {
@@ -105,7 +106,8 @@
 
   .func2-lotto-num-container{
     height:41rem;
-
+    position: relative;
+    z-index:2;
     padding:0.5rem 0;
   }
 
@@ -138,7 +140,7 @@
   }
 
   .func2-chart-radar-container{
-    width:70%;
+    width:55%;
     display:flex;
     align-items: center;
     position: relative;
@@ -156,8 +158,8 @@
     position: absolute;
     top:0;
     left:50%;
-    margin-left:-27rem;
-
+    margin-left:-31.5rem;
+    z-index:1;
   }
 
 
@@ -177,31 +179,6 @@
     height:100%;
   }
 
-  .func2-left-chart-btn{
-    cursor: pointer;
-    position: absolute;
-    top: 2%;
-    left: 43%;
-    color: var(--main-color);
-    background-color: darkgray;
-    z-index:1;
-    width:2rem;
-    height:2rem;
-    border-radius: 50%;
-  }
-
-  .func2-right-chart-btn{
-    cursor: pointer;
-    position: absolute;
-    top: 2%;
-    left: 52%;
-    color: var(--main-color);
-    background-color: darkgray;
-    z-index:1;
-    width:2rem;
-    height:2rem;
-    border-radius: 50%;
-  }
   
   .func2-chart-bar-container {
     height:22.5rem;

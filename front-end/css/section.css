@@ -18,7 +18,7 @@
   }
   
   .anchor-box >ul {
-    font-size: 1.6rem;
+
     display:flex;
     flex-direction: column;
     border:1px solid var(--border-color);
@@ -38,6 +38,8 @@
   }
 
   .anchor-box > ul >li >a{
+    font-size: 1.6rem;
+
     width:100%;
     height:100%;
     display:flex;
@@ -51,11 +53,11 @@
 
   .anchor-li-cheked{
     background-color: rgb(220,220,220);
-    font-weight: bold;  
+
   }
   .anchor-li-cheked:hover{
     background-color: rgb(220,220,220);
-    font-weight: bold;  
+
   }
   .anchor-title{
     background-color: var(--main-color);

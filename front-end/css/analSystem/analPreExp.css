@@ -1,6 +1,6 @@
 .anchor-box > ul >li:nth-child(1){
     background-color: rgb(220,220,220);
-    font-weight: bold;  
+  
   }
 
   .anchor-box > ul >li:nth-child(1) >a:hover{
