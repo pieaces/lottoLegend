@@ -21,13 +21,13 @@ getUnAuthAPI('/stats/mass/excludeInclude')
     .then(async (data) => {
         const question = new Question();
         question.numBoardQue.on();
+        const { include, exclude } = await getAuthAPI('/numbers/piece');
         try {
-            const { include, exclude } = await getAuthAPI('/numbers/piece');
             const layout = new Layout2([null, null, null, true], data.data, data.winNums, data.total);
             loading.classList.add('none');
             layout.init();
             let alertMessage: string[] = [];
-            let numbers:number[];
+            let numbers: number[];
             if (category === "include") {
                 layout.includeVerson();
                 numbers = exclude;

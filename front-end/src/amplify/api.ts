@@ -1,13 +1,14 @@
 
 import Auth from '@aws-amplify/auth'
 import API from '@aws-amplify/api'
+import { getIdToken } from './auth';
 
 const apiName = 'lotto';
 
 export async function getAuthAPI(path: string, queryStringParameters?: any) {
     const myInit = {
         headers: {
-            'X-Id-Token': (await Auth.currentSession()).getIdToken().getJwtToken()
+            'X-Id-Token': await getIdToken()
         },
         queryStringParameters,
         //response: true,
@@ -27,7 +28,7 @@ export async function getUnAuthAPI(path: string, queryStringParameters?: any) {
 export async function postAuthAPI(path: string = '/posts', body: any) {
     const myInit = {
         headers: {
-            'X-Id-Token': (await Auth.currentSession()).getIdToken().getJwtToken()
+            'X-Id-Token': await getIdToken()
         },
         body,
         //response: true,
@@ -48,7 +49,7 @@ export async function postUnAuthAPI(path: string = '/posts', body: any) {
 export async function patchAuthAPI(path: string, body: any) {
     const myInit = {
         headers: {
-            'X-Id-Token': (await Auth.currentSession()).getIdToken().getJwtToken()
+            'X-Id-Token': await getIdToken()
         },
         body,
         //response: true,
@@ -60,7 +61,7 @@ export async function patchAuthAPI(path: string, body: any) {
 export async function deleteAuthAPI(path: string) {
     const myInit = {
         headers: {
-            'X-Id-Token': (await Auth.currentSession()).getIdToken().getJwtToken()
+            'X-Id-Token': await getIdToken()
         }
         //response: true,
     }

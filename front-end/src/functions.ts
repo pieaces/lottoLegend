@@ -8,7 +8,16 @@ Swal.fire({
     footer: '<a href="../inqBoard/qAList.html">여기로 문의주시면 신속히 답변드리겠습니다.</a>'
   });
 }
-
+export function onlyUserAlert(){
+    Swal.fire({
+        icon: 'info',
+        title: '알림',
+        text: '회원전용 서비스입니다.',
+        allowOutsideClick: false,
+      }).then(result => {
+        location.href = `../signIn/signIn.html`;
+      });
+}
 export function infoAlert(title:string, text:string){
     return Swal.fire({
         title,
