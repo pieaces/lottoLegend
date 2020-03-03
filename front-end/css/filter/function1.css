@@ -16,7 +16,7 @@
   }
 
   .func1-bubble-que{
-    position: absolute;
+    position: absolute !important;
     top:5%;
     right:5%;
   }

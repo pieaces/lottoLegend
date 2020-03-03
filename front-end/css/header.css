@@ -71,7 +71,6 @@
 
 .mid-nav-menu > li:nth-child(1)~li > a {
   font-size:1.8rem;
-  font-weight: bold;
 }
 
 .hover-menu-container{
@@ -172,7 +171,6 @@ height:4rem;
 
 .bottom-nav-right > p {
   display: flex;
-  font-weight: bold;
   font-size:1.6rem;
 }
 

@@ -20,8 +20,9 @@
 }
 
 html{
+  font-weight: normal;
   font-size:10px;
-  font-family: 'Noto Sans KR','Nanum Gothic','Roboto', sans-serif;
+  font-family: 'Noto Sans KR','Nanum Gothic', sans-serif;
 }
 
 body {

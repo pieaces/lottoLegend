@@ -75,7 +75,7 @@ const barOption: Chart.ChartOptions = {
         intersect: false,
     },
     maintainAspectRatio: false,
-    legend:{display:false},
+    legend: { display: false },
 };
 
 loading.classList.remove('none');
@@ -99,22 +99,4 @@ getUnAuthAPI('/stats/piece/' + method)
         barInstance.create();
     });
 
-const statAnchor = document.querySelectorAll<HTMLElement>('.anchor-box > ul > li:nth-child(4) ~ li');
-const map = new Map([
-    [0, "excludedLineCount"],
-    [1, "carryCount"],
-    [2, "lowCount"],
-    [3, "sum"],
-    [4, "oddCount"],
-    [5, "primeCount"],
-    [6, "$3Count"],
-    [7, "sum$10"],
-    [8, "diffMaxMin"],
-    [9, "AC"]
-]);
 
-map.forEach((value, key) => {
-    if (value === method) {
-        Array.from(statAnchor)[key].classList.add('anchor-li-cheked');
-    }
-})
