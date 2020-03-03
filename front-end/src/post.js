@@ -4,9 +4,14 @@ import plugins from 'suneditor/src/plugins'
 import { ko } from 'suneditor/src/lang'
 import { postUnAuthAPI, postAuthAPI, getUnAuthAPI, patchAuthAPI } from './amplify/api';
 import { getUserName } from './amplify/auth'
-import { networkAlert, getQueryStringObject, getCategoryHtml } from './functions'
+import { networkAlert, getQueryStringObject, getCategoryHtml, onlyUserAlert } from './functions'
 import Swal from 'sweetalert2'
 
+function attachTimestamp(name) {
+  const index = name.indexOf('.');
+  const now = new Date();
+  return `${name.slice(0, index)}_${now.getFullYear()}-${now.getMonth()}-${now.getDate()}:${now.getHours()}:${now.getMinutes()}${name.slice(index)}`;
+}
 const editor = suneditor.create('sample', {
   plugins: plugins,
   buttonList: [
@@ -27,14 +32,15 @@ const editor = suneditor.create('sample', {
 })
 
 configure();
+let userName;
+getUserName()
+  .then(username => userName = username)
+  .catch(err => onlyUserAlert());
+
 const post = getQueryStringObject().id;
 const submitBtn = document.getElementById('submit-btn');
 const titleInput = document.getElementById('title-text');
-function attachTimestamp(name) {
-  const index = name.indexOf('.');
-  const now = new Date();
-  return `${name.slice(0, index)}_${now.getFullYear()}-${now.getMonth()}-${now.getDate()}:${now.getHours()}:${now.getMinutes()}${name.slice(index)}`;
-}
+
 const category = document.getElementById('wrapper').getAttribute('data-category');
 const loading = document.querySelector('.loading');
 
@@ -53,7 +59,6 @@ let totalSize = 0;
 
 submitBtn.onclick = async () => {
   const title = titleInput.value;
-  const userName = await getUserName();
   loading.classList.remove('none');
   try {
     const images = [];

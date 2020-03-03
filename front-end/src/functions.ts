@@ -8,7 +8,16 @@ Swal.fire({
     footer: '<a href="../inqBoard/qAList.html">여기로 문의주시면 신속히 답변드리겠습니다.</a>'
   });
 }
-
+export function onlyUserAlert(){
+    Swal.fire({
+        icon: 'info',
+        title: '알림',
+        text: '회원전용 서비스입니다.',
+        allowOutsideClick: false,
+      }).then(result => {
+        location.href = `../signIn/signIn.html`;
+      });
+}
 export function infoAlert(title:string, text:string){
     return Swal.fire({
         title,
@@ -76,6 +85,32 @@ export function getCategoryHtml(category: string, affix:Affix) {
     return htmlFile + affix + '.html';
 }
 
+export function getStaticsName(method: string) {
+    let name: string;
+    switch (method) {
+        case 'excludedLineCount': name = '전멸구간 개수'
+            break;
+        case "carryCount": name = '이월 개수'
+            break;
+        case "lowCount": name = '저값(1~22) 개수'
+            break;
+        case "sum": name = '번호 합계'
+            break;
+        case "oddCount": name = '홀수 개수'
+            break;
+        case "primeCount": name = '소수 개수'
+            break;
+        case "$3Count": name = '3배수 개수'
+            break;
+        case "sum$10": name = '첫수(십의자리) 합'
+            break;
+        case "diffMaxMin": name = '고저차'
+            break;
+        case "AC": name = 'AC'
+            break;
+    }
+    return name;
+}
 export function isoStringToDate(isoString: string): string {
     const date = new Date(isoString);
     date.setHours(date.getHours()+9);
