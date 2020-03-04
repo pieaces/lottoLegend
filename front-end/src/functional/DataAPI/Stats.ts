@@ -21,9 +21,9 @@ export default class Data {
                 }
             }
         }
-        const url = `/stats/mass/${method}`;
+        queryParams.method = method;
+        const url = `/stats/mass`;
         const result = await getAuthAPI(url, queryParams);
-        console.log(result);
         this[method] = result.data;
         if (result.total) this.total = result.total;
         if (result.winNums) this.winNums = result.winNums

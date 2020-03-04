@@ -80,7 +80,7 @@ const barOption: Chart.ChartOptions = {
 };
 
 loading.classList.remove('none');
-getUnAuthAPI('/stats/piece/' + method)
+getUnAuthAPI('/stats/piece', {method})
     .then(data => {
         console.log(data);
         mean.textContent = Number(data.stats.mean).toFixed(2);
