@@ -12,7 +12,7 @@ import Layout2 from "./Layout2";
 const section = document.querySelector(".section1");
 const infoText = document.querySelector<HTMLElement>(".checkbox-text");
 const loading = document.querySelector<HTMLElement>('.loading');
-const checkTextBox = document.querySelector<HTMLElement>('.checkbox-textbox');
+const checkTextBox = document.querySelector<HTMLElement>('.checkbox-text');
 export default class Layout extends LayoutToggle(Layout3) {
     dropDown: DropDown = new DropDown();
     checkBox: Checkbox = new Checkbox();
@@ -21,10 +21,10 @@ export default class Layout extends LayoutToggle(Layout3) {
     resetBtn: ResetBtn = new ResetBtn();
     question: Question = new Question();
     nextAbleLimit: number = 1;
-    options:any[] = [];
-    layout1:Layout1 = new Layout1();
-    layout2:Layout2 = new Layout2(this.options, DataAPI.getInstance().getStats2(), DataAPI.getInstance().getWinNums(), DataAPI.getInstance().getTOTAL());
-    layout3:Layout3 = new Layout3();
+    options: any[] = [];
+    layout1: Layout1 = new Layout1();
+    layout2: Layout2 = new Layout2(this.options, DataAPI.getInstance().getStats2(), DataAPI.getInstance().getWinNums(), DataAPI.getInstance().getTOTAL());
+    layout3: Layout3 = new Layout3();
     private setOption() {
         const currentFilter = DataAPI.getInstance().getCurrent();
         switch (currentFilter) {

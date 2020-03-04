@@ -237,9 +237,9 @@ export default class Layout2 {
                 }
             } else {
                 Swal.fire({
-                    title:'더이상 제외할 수 없습니다.',
-                    text:`최대개수: ${Layout2.MAX_SIZE}`,
-                    icon:'info',
+                    title: '더이상 제외할 수 없습니다.',
+                    text: `최대개수: ${Layout2.MAX_SIZE}`,
+                    icon: 'info',
                 });
             }
             e.stopPropagation();
@@ -266,16 +266,16 @@ export default class Layout2 {
     public resetConfirm(e: Event) {
         if (this.checkedNumbers.length > 0) {
             Swal.fire({
-                title:'초기화',
-                text:'현재 입력하신 번호를 초기화할까요?',
-                icon:'info',
+                title: '초기화',
+                text: '현재 입력하신 번호를 초기화할까요?',
+                icon: 'info',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
                 confirmButtonText: '네',
                 cancelButtonText: '아니요',
             }).then(result => {
-                if(result.value) this.reset();
+                if (result.value) this.reset();
             })
         }
         e.stopPropagation();

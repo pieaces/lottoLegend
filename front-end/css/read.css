@@ -32,9 +32,9 @@
   font-size: 1.6rem;
 }
 .text-content{
-  font-size:1.6rem !important;
+  font-size:1.6rem;
   min-height:25rem;
-  margin-bottom: 10rem !important;
+  margin-bottom: 10rem;
 }
 .author-time{
     padding-right:2rem;
