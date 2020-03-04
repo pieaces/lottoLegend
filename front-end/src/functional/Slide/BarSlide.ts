@@ -4,8 +4,8 @@ import DataAPI from "../DataAPI";
 
 export default class BarSlide extends Slide<ChartBase> {
     static readonly SIZE = 3;
-    constructor(barInstance: ChartBase, leftBtn: HTMLElement, rightBtn: HTMLElement, numBtns: NodeListOf<Element>, table?: HTMLElement, valueBox1?: HTMLElement, valueBox2?: HTMLElement) {
-        super(BarSlide.SIZE, barInstance, leftBtn, rightBtn, numBtns, table, valueBox1, valueBox2);
+    constructor(barInstance: ChartBase, numBtns: NodeListOf<Element>, leftBtn: HTMLElement, rightBtn: HTMLElement, table?: HTMLElement, valueBox1?: HTMLElement, valueBox2?: HTMLElement) {
+        super(BarSlide.SIZE, barInstance, numBtns, leftBtn, rightBtn, table, valueBox1, valueBox2);
     }
     setData() {
         const data = DataAPI.getInstance().getStats();

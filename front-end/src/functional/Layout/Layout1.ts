@@ -1,8 +1,8 @@
 import BarSlide from "../Slide/BarSlide";
-import LineSlide from "../Slide/LineSlide";
 import barSlide from "../instance1/barSlide";
-import lineSlide from '../instance1/lineSlide'
+import lineSlide from '../instance1/lineSlide2'
 import bubbleChart from '../instance1/bubbleInstance'
+import LineSlide2 from "../Slide/LineSlide2";
 
 const meanValue = document.querySelector('#func1-bubble-mean-value');
 const stdevValue = document.querySelector('#func1-bubble-stdev-value');
@@ -25,7 +25,7 @@ function rangeString(range: [number, number], min: number, max: number): string 
 }
 export default class Layout1 {
     barSlide: BarSlide = barSlide;
-    lineSlide: LineSlide = lineSlide;
+    lineSlide: LineSlide2 = lineSlide;
     bubbleChart = bubbleChart;
 
     public setStatsBoard(stats: Stats) {

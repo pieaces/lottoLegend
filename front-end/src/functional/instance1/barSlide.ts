@@ -26,7 +26,7 @@ const option = {
 }
 const barInstance = new ChartBase('bar', barCanvas, dataBox, option);
 barInstance.create();
-const barSlide = new BarSlide(barInstance, leftBarBtn, rightBarBtn, barNum, barTable, barValueBox1, barValueBox2);
-makeClickable(barSlide);
+const barSlide = new BarSlide(barInstance, barNum, leftBarBtn, rightBarBtn, barTable, barValueBox1, barValueBox2);
+makeClickable(barSlide, barSlide.setText);
 
 export default barSlide;

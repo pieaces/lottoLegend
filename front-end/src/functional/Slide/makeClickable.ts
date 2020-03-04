@@ -1,46 +1,33 @@
 import Slide from ".";
 import ChartBase from "../Chart/Charts";
 
-interface ClickEvent {
-    leftBtn?: () => void;
-    rightBtn?: () => void;
-    numBtns?: (() => void)[];
-}
-export default function makeClickable(obj: Slide<ChartBase>, clickEvent: ClickEvent = {}) {
+export default function makeClickable(obj: Slide<ChartBase>, setText?: () => void) {
     if (obj.leftBtn) {
         obj.leftBtn.addEventListener('click', () => {
-            if (!clickEvent.leftBtn) {
-                obj.numBtns[obj.current].classList.remove(obj.CURRENT_CSS);
-                if (obj.current === 0) {
-                    obj.numBtns[obj.size - 1].classList.add(obj.CURRENT_CSS);
-                    obj.current = obj.size - 1;
-                } else {
-                    obj.current--;
-                    obj.numBtns[obj.current].classList.add(obj.CURRENT_CSS);
-                }
-                obj.setData();
-                obj.setText();
+            obj.numBtns[obj.current].classList.remove(obj.CURRENT_CSS);
+            if (obj.current === 0) {
+                obj.numBtns[obj.size - 1].classList.add(obj.CURRENT_CSS);
+                obj.current = obj.size - 1;
             } else {
-                clickEvent.leftBtn();
+                obj.current--;
+                obj.numBtns[obj.current].classList.add(obj.CURRENT_CSS);
             }
+            obj.setData();
+            if (setText) setText.call(obj);
         });
     }
     if (obj.rightBtn) {
         obj.rightBtn.addEventListener('click', () => {
-            if (!clickEvent.rightBtn) {
-                if (obj.current === obj.size - 1) {
-                    obj.numBtns[obj.size - 1].classList.remove(obj.CURRENT_CSS);
-                    obj.current = 0;
-                } else {
-                    obj.numBtns[obj.current].classList.remove(obj.CURRENT_CSS);
-                    obj.current++;
-                }
-                obj.numBtns[obj.current].classList.add(obj.CURRENT_CSS);
-                obj.setData();
-                obj.setText();
+            if (obj.current === obj.size - 1) {
+                obj.numBtns[obj.size - 1].classList.remove(obj.CURRENT_CSS);
+                obj.current = 0;
             } else {
-                clickEvent.rightBtn();
+                obj.numBtns[obj.current].classList.remove(obj.CURRENT_CSS);
+                obj.current++;
             }
+            obj.numBtns[obj.current].classList.add(obj.CURRENT_CSS);
+            obj.setData();
+            if (setText) setText.call(obj);
         });
     }
 
@@ -50,15 +37,9 @@ export default function makeClickable(obj: Slide<ChartBase>, clickEvent: ClickEv
                 obj.numBtns[obj.current].classList.remove(obj.CURRENT_CSS);
                 obj.current = i;
                 obj.numBtns[obj.current].classList.add(obj.CURRENT_CSS);
-                if (!clickEvent.numBtns) {
-                    obj.setData();
-                    obj.setText();
-                }
-                if (clickEvent.numBtns) {
-                    clickEvent.numBtns[i]();
-                }
+                obj.setData();
+                if (setText) setText.call(obj);
             });
         }
-
     }
 }

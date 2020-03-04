@@ -1,7 +1,7 @@
 import ChartBase from "../Chart/Charts";
-import LineSlide from "../Slide/LineSlide";
 import makeClickable from "../Slide/makeClickable";
 import Slide from "../Slide";
+import LineSlide2 from "../Slide/LineSlide2";
 
 const leftLineBtn: HTMLElement = document.querySelector('#func1-left-line-chart-btn');
 const rightLineBtn: HTMLElement = document.querySelector('#func1-right-line-chart-btn');
@@ -60,7 +60,7 @@ const dataBox = {
 };
 const lineInstance = new ChartBase('line', lineCanvas, dataBox, option);
 lineInstance.create();
-const lineSlide = new LineSlide(lineInstance, leftLineBtn, rightLineBtn, lineNum, lineTable, lineValueBox1, lineValueBox2);
-makeClickable(lineSlide);
+const lineSlide = new LineSlide2(lineInstance, lineNum, leftLineBtn, rightLineBtn, lineTable, lineValueBox1, lineValueBox2);
+makeClickable(lineSlide, lineSlide.setText);
 
 export default lineSlide

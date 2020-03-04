@@ -1,12 +1,16 @@
 import configure from './amplify/configure'
 import ChartBase from './functional/Chart/Charts';
+import LineSlide from './functional/Slide/LineSlide'
 import { getUnAuthAPI } from './amplify/api';
 import { getQueryStringObject, rangeMake, getStaticsName } from './functions';
+import makeClickable from './functional/Slide/makeClickable';
 const loading = document.querySelector('.loading-box');
 const labels = require('./functional/DataAPI/json/labels.json');
 configure();
+const lineNum = document.querySelectorAll<HTMLElement>('.chart-line-num > div');
+
 const method = getQueryStringObject().method;
-const lineCanvas: HTMLCanvasElement = document.querySelector('#func1-chart-line');
+const lineCanvas: HTMLCanvasElement = document.querySelector('#chart-line');
 const mean = document.querySelector<HTMLElement>('.stats-mean-value');
 const $68 = document.querySelector<HTMLElement>('.stats-68-value');
 const $95 = document.querySelector<HTMLElement>('.stats-95-value');
@@ -59,7 +63,8 @@ const lineDataBox = {
         }
     ]
 };
-const barCanvas: HTMLCanvasElement = document.querySelector('#func1-chart-bar');
+
+const barCanvas: HTMLCanvasElement = document.querySelector('#chart-bar');
 const barDataBox = {
 
     labels: null,
@@ -86,11 +91,11 @@ getUnAuthAPI('/stats/piece', {method})
         mean.textContent = Number(data.stats.mean).toFixed(2);
         $68.textContent = rangeMake(data.stats);
         $95.textContent = rangeMake(data.stats, 2);
-        loading.classList.add('none');
-        lineDataBox.datasets[0].data = data.ideal.all;
-        lineDataBox.datasets[1].data = data.actual.all;
         const lineInstance = new ChartBase('line', lineCanvas, lineDataBox, lineOption);
         lineInstance.create();
+        const lineSlide = new LineSlide(lineInstance, lineNum);
+        lineSlide.init(data);
+        makeClickable(lineSlide);
 
         const barLabels = [];
         for (let i = data.total - 49; i <= data.total; i++) barLabels.push(i);
@@ -98,6 +103,7 @@ getUnAuthAPI('/stats/piece', {method})
         barDataBox.datasets[0].data = data.piece
         const barInstance = new ChartBase('bar', barCanvas, barDataBox, barOption);
         barInstance.create();
+        loading.classList.add('none');
     });
 
 

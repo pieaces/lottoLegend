@@ -1,11 +1,11 @@
 
-.func1-main-box-1{
+.main-box-1{
   margin-bottom:1rem;
   width:100%; 
   height:40rem;
 }
 
-.func1-chart-slide-num {
+.chart-slide-num {
   height:20%;
   display: flex;
   align-items: center;
@@ -13,7 +13,7 @@
   font-size:1.8rem;
 }
 
-.func1-chart-slide-num > div {
+.chart-slide-num > div {
   cursor: pointer;
   width: 5rem;
   height: 5rem;
@@ -28,25 +28,25 @@
   border: 6px solid var(--lotto-title-color);
 }
 
-.func1-chart-container{
+.chart-container{
   width: 100%;
   height: 100%;
   position: relative;
 }
 
-.func1-chart-box{
+.chart-box{
   height: 80%;
   padding:2rem;
   } 
 
-.func1-chart-bar-container{
+.chart-bar-container{
   overflow-x: scroll;
 position: relative;
   width: 100%;
   height:100%;
 }
 
-.func1-chart-bar-box{
+.chart-bar-box{
   position: absolute;
   top:50%;
   left:0;
@@ -57,7 +57,7 @@ position: relative;
 }
 
 
-.func1-chart-bar-box > canvas{
+.chart-bar-box > canvas{
   position: absolute;
   left: 2rem;
   top: 50%;
