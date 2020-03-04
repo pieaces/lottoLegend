@@ -2,6 +2,7 @@
 import configure from './amplify/configure'
 import ChartBase from './functional/Chart/Charts';
 import { getUnAuthAPI } from './amplify/api';
+import Swal from 'sweetalert2'
 
 configure();
 const compartColor = ['#FBC400', '#69C8F2', '#FF7272', '#AAAAAA', '#B0D840'];
@@ -77,7 +78,10 @@ getUnAuthAPI('/numbers/win')
                 winBox.innerHTML = '';
                 write(data);
             } else {
-
+                Swal.fire({
+                    title:'마지막회차입니다.',
+                    icon:'info'
+                });
             }
         });
         leftBtn.addEventListener('click', async () => {
@@ -87,7 +91,10 @@ getUnAuthAPI('/numbers/win')
                 winBox.innerHTML = '';
                 write(data);
             } else {
-
+                Swal.fire({
+                    title:'첫회차입니다.',
+                    icon:'info'
+                });
             }
         });
     });

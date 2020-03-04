@@ -92,6 +92,7 @@ margin-bottom:1rem;
 }
 
 .arrow-btn-box{
+    cursor: pointer;
     width:8rem;
     height:5rem;
     display:flex;
