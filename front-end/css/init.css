@@ -166,11 +166,12 @@ select:focus {
   font-weight:500;
 }
 
-.square-btn {
+.search-btn{
   background-color: var(--button-color1);
   color: var(--default-color);
   font-size: 1.4rem;
 }
+
 .post-btn {
   background-color: var(--button-color2);
   color: var(--default-color);

@@ -452,26 +452,137 @@ document.write(`<div class="filter-box-container-box func1-layout func2-layout b
 </div>
 </div>
 <div class="func3-layout-1 none">
-<div class="func3-num-count">
-  <div class="func3-filter-num">번호의 개수 : 0</div>
-  <div class="func3-filter-text">
-    <div>홀짝:1</div>
-    <div>고저:2</div>
-    <div>AC값:1.5</div>
-    <div>끝수합:10</div>
-  </div>
+<div class="func3-filter-container-box-1 box-color">
+<div class="func3-filter-container">
+    <div class="func3-filter-title">전멸구간</div>
+    <div class="func3-filter-num-box">
+        <div class="func3-select-num-box ">
+            <div class="func3-select-num">1</div>
+            <div class="func3-select-num">2</div>
+            <div class="func3-select-num">3</div>
+            <div class="func3-select-num">4</div>
+            <div class="func3-select-num">5</div>
+            <div class="func3-select-num">6</div>
+            <div class="func3-select-num">7</div>
+            <div class="func3-select-num">8</div>
+            <div class="func3-select-num">9</div>
+            <div class="func3-select-num">10</div>
+        </div>
+
+    </div>
+</div>
+<div class="func3-filter-container">
+    <div class="func3-filter-title">이월수</div>
+    <div class="func3-filter-num-box">
+        <div class="func3-select-num-box">
+            <div class="func3-select-num">1</div>
+            <div class="func3-select-num">2</div>
+            <div class="func3-select-num">3</div>
+            <div class="func3-select-num">4</div>
+            <div class="func3-select-num">5</div>
+            <div class="func3-select-num">6</div>
+            <div class="func3-select-num">7</div>
+            <div class="func3-select-num">8</div>
+            <div class="func3-select-num">9</div>
+            <div class="func3-select-num">10</div>
+        </div>
+    </div>
+</div>
+<div class="func3-filter-container">
+    <div class="func3-filter-title">포함수</div>
+    <div class="func3-filter-num-box">
+        <div class="func3-select-num-box">
+            <div class="func3-select-num">1</div>
+            <div class="func3-select-num">2</div>
+            <div class="func3-select-num">3</div>
+            <div class="func3-select-num">4</div>
+            <div class="func3-select-num">5</div>
+            <div class="func3-select-num">6</div>
+            <div class="func3-select-num">7</div>
+            <div class="func3-select-num">8</div>
+            <div class="func3-select-num">9</div>
+            <div class="func3-select-num">10</div>
+        </div>
+    </div>
+</div>
+<div class="func3-filter-container">
+    <div class="func3-filter-title">제외수</div>
+    <div class="func3-filter-num-box">
+        <div class="func3-select-num-box">
+            <div class="func3-select-num">1</div>
+            <div class="func3-select-num">2</div>
+            <div class="func3-select-num">3</div>
+            <div class="func3-select-num">4</div>
+            <div class="func3-select-num">5</div>
+            <div class="func3-select-num">6</div>
+            <div class="func3-select-num">7</div>
+            <div class="func3-select-num">8</div>
+            <div class="func3-select-num">9</div>
+            <div class="func3-select-num">10</div>
+        </div>
+    </div>
+</div>
+
+</div>
+<div class="func3-filter-container-box-2">
+<table class="table stats-table">
+    <tr>
+        <td>저값 개수</td>
+        <td>번호 합계</td>
+        <td>홀수 개수</td>
+        <td>소수 개수</td>
+        <td>3배수 개수</td>
+        <td>첫수 합</td>
+        <td>고저 차</td>
+        <td>AC</td>
+        <td>연속수 포함</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+        <td>6</td>
+        <td>7</td>
+        <td>8</td>
+        <td>9</td>
+    </tr>
+
+</table>
+
+</div>
+
+<div class="func3-num-wrapper box-color">
+<div class="func3-all-check-box-container">
+    <div class="func3-all-check-box">
+        <input type="checkbox" name="" id="func3-all-check" />
+
+    </div>
+    <span>모두</span>
+    <div class="func3-save-box-1">
+        <button type="button" class="btn save-btn save-btn">저장</button>
+    </div>
 </div>
 <div class="func3-num-container-box">
-  <div class="func3-all-check-box">
-    <input type="checkbox" name="" id="func3-all-check" />
-    <span>모두</span>
-  </div>
-  <div class="func3-num-container">
+    <div class="func3-num-container">
+        <div class="func3-check-box">
+            <input type="checkbox">
+        </div>
+        <div class="func3-num-box">
+            <div>38</div>
+            <div>35</div>
+            <div>3</div>
+            <div>15</div>
+            <div>17</div>
+            <div>19</div>
+        </div>
+    </div>
 
-  </div>
-  <div class="func3-btn-container">
-    <button type="button" class="btn circle-btn">저장</button>
-  </div>
+</div>
+<div class="func3-save-box-2">
+    <button type="button" class="btn save-btn save-btn">저장</button>
+</div>
 </div>
 
 </div>`);
