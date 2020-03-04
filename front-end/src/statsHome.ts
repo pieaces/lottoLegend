@@ -105,8 +105,8 @@ function write(data: any) {
     winAmount.textContent = Math.round(data.winAmount / 100000000).toString();
     date.textContent = data.date;
     const compart:number[] = new Array(5).fill(0);
+    lottoNumTemp.forEach(lotto => lotto.style.background = "");
     for (let i = 0; i < 6; i++) {
-        lottoNumTemp[i] && (lottoNumTemp[i].style.background = "");
         lottoNumTemp[i] = lottoNums[data.numbers[i]-1];
         lottoNumTemp[i].style.background = '#000000e3';
         const num = document.createElement('div');
@@ -123,7 +123,6 @@ function write(data: any) {
     plus.classList.add('plus');
     plus.textContent = '+';
     winBox.appendChild(plus);
-    lottoNumTemp[6] && (lottoNumTemp[6].style.background = "");
     lottoNumTemp[6] = lottoNums[data.bonusNum-1];
     lottoNumTemp[6].style.background = 'yellow';
     const bonus = document.createElement('div');
