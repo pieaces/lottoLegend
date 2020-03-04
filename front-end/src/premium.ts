@@ -10,5 +10,6 @@ async function execute() {
     const layout = new Layout();
     layout.init();
     loading.classList.add('none');
+    loading.children[0].classList.add('filter-loading');
 }
 execute();

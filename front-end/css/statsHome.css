@@ -91,7 +91,6 @@
 }
 
 .arrow-btn-box{
-    cursor: pointer;
     width:8rem;
     height:5rem;
     display:flex;
@@ -100,6 +99,7 @@
     text-align: center;
 }
 .arrow-btn-box > i{
+    cursor: pointer;
     font-size:3.5rem;
     color:var(--default-color);
 }

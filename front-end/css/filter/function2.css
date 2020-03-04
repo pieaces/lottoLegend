@@ -80,30 +80,40 @@
     height:25rem;
   }
   
-  .func2-lotto-checkbox {
+  .func2-lotto-checkbox-container {
     height:5rem;
     z-index: 2;
     display:flex;
     position: relative;
   }
+
+  .func2-lotto-checkbox-container > div:last-child{
+    border-right:none;
+  }
   
-  .func2-lotto-checkbox > div {
+  .func2-lotto-checkbox {
+    /* border-left:1px solid var(--border-color); */
+    border-right:1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
     cursor: pointer;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size:1.4rem;
+    
   }
   
   .func2-lotto-check-current {
-    background-color: #a54864;
-    color: var(--default-color);
+    /* background-color: var(--lotto-title-color); */
+    background-color: var(--table-title-color);
+    border-bottom:none;
+    /* color:var(--default-color); */
   }
 
   .func2-lotto-num-container{
+    background-color: var(--table-title-color);
     height:41rem;
     position: relative;
     z-index:2;

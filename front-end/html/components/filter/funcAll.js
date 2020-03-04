@@ -50,7 +50,7 @@ document.write(`<div class="filter-box-container-box func1-layout func2-layout b
       <i id="func1-right-line-chart-btn" class="func1-right-chart-btn fas fa-angle-right "></i>
     </div>
   </div>
-  <div class="right-container func1-chart-textbox-container box-color">
+  <div class="right-container func1-chart-textbox-container">
     <div class="func1-chart-textbox">
       <div class="func1-chart-title func1-line-values">
         <div>
@@ -169,6 +169,17 @@ document.write(`<div class="filter-box-container-box func1-layout func2-layout b
 </div>
 <div class="left-right-container func2-main-2-box">
   <div class="left-container box-color">
+  <div class="func2-lotto-checkbox-container">
+       <div class="func2-lotto-checkbox func2-num-term func2-lotto-check-current">
+           번호빈도
+       </div>
+       <div class="func2-lotto-checkbox func2-num-freq">
+           번호간격
+       </div>
+       <div class="func2-lotto-checkbox func2-num-freq-term">
+           빈도X간격
+       </div>
+   </div>
     <div class="func2-lotto-num-container">
       <table class="func2-lotto-num-box">
         <tr>

@@ -68,6 +68,11 @@
     color:var(--default-color);
   }
 
+  .filter-loading{
+      margin-top:22.5rem;
+  }
+  
+
   .steps{
     display:flex;
     align-items: center;
@@ -164,6 +169,7 @@ border-left: 1rem solid #575755;
   }
 
   .que-container > i{
+    cursor: pointer;
     font-size:2.5rem;
     color:var(--main-color);
   }

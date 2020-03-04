@@ -79,8 +79,8 @@ getUnAuthAPI('/numbers/win')
                 write(data);
             } else {
                 Swal.fire({
-                    title:'마지막회차입니다.',
-                    icon:'info'
+                    title: '마지막회차입니다.',
+                    icon: 'info'
                 });
             }
         });
@@ -92,43 +92,48 @@ getUnAuthAPI('/numbers/win')
                 write(data);
             } else {
                 Swal.fire({
-                    title:'첫회차입니다.',
-                    icon:'info'
+                    title: '첫회차입니다.',
+                    icon: 'info'
                 });
             }
         });
     });
-const lottoNumTemp:HTMLElement[] = [];
+const lottoNumTemp: HTMLElement[] = [];
 function write(data: any) {
     round.textContent = data.round;
     winner.textContent = data.winner;
     winAmount.textContent = Math.round(data.winAmount / 100000000).toString();
     date.textContent = data.date;
-    const compart:number[] = new Array(5).fill(0);
-    lottoNumTemp.forEach(lotto => lotto.style.background = "");
+    const compart: number[] = new Array(5).fill(0);
+    lottoNumTemp.forEach(lotto => {
+        lotto.style.backgroundColor = ""
+        lotto.style.color = "black";
+    });
     for (let i = 0; i < 6; i++) {
-        lottoNumTemp[i] = lottoNums[data.numbers[i]-1];
-        lottoNumTemp[i].style.background = '#000000e3';
+        lottoNumTemp[i] = lottoNums[data.numbers[i] - 1];
+        lottoNumTemp[i].style.backgroundColor = '#000000e3';
+        lottoNumTemp[i].style.color = 'white';
         const num = document.createElement('div');
         num.classList.add('win-num');
         num.textContent = data.numbers[i];
-        const compartIndex = Math.floor((data.numbers[i]-1) /10);
+        const compartIndex = Math.floor((data.numbers[i] - 1) / 10);
         compart[compartIndex]++;
-        num.style.background = compartColor[compartIndex];
+        num.style.backgroundColor = compartColor[compartIndex];
         winBox.appendChild(num);
     }
-    stackInstance.dataBox.datasets.forEach((data,index) => data.data=[compart[index]]);
+    stackInstance.dataBox.datasets.forEach((data, index) => data.data = [compart[index]]);
     stackInstance.update();
     const plus = document.createElement('div');
     plus.classList.add('plus');
     plus.textContent = '+';
     winBox.appendChild(plus);
-    lottoNumTemp[6] = lottoNums[data.bonusNum-1];
-    lottoNumTemp[6].style.background = 'yellow';
+    lottoNumTemp[6] = lottoNums[data.bonusNum - 1];
+    lottoNumTemp[6].style.backgroundColor = 'yellow';
+    lottoNumTemp[6].style.color = 'black';
     const bonus = document.createElement('div');
     bonus.classList.add('win-num');
     bonus.textContent = data.bonusNum;
-    const compartIndex = Math.floor((data.bonusNum-1) /10);
-    bonus.style.background = compartColor[compartIndex];
+    const compartIndex = Math.floor((data.bonusNum - 1) / 10);
+    bonus.style.backgroundColor = compartColor[compartIndex];
     winBox.appendChild(bonus);
 }

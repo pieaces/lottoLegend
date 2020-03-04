@@ -5,7 +5,7 @@ import radar from '../instance2/radarInstance'
 import { rangeMake } from '../../functions';
 
 const lottoNumbers = document.querySelectorAll<HTMLElement>('.func2-lotto-num');
-const numTermFreqBox = document.querySelectorAll<HTMLElement>('.func2-lotto-checkbox > div');
+const numTermFreqBox = document.querySelectorAll<HTMLElement>('.func2-lotto-checkbox');
 const selectNumBox = document.querySelector<HTMLElement>('.func2-select-num-box');
 const applyBtn = document.querySelector('#func2-num-inc-exc-btn');
 const winNumContainerBox = document.querySelector('.func2-win-num-container-box');

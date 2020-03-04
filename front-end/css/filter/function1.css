@@ -9,11 +9,6 @@
     width:100%;
     height:100%;
   }
-  
-
-  .func1-bubble-textbox-container{
-    padding-right: 0.8rem;
-  }
 
   .func1-bubble-que{
     position: absolute;
@@ -22,6 +17,7 @@
   }
 
   .func1-bubble-text{
+    width:100%;
     height:60%;
   }
 
