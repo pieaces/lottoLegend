@@ -4,7 +4,8 @@ const dynamoDB = new AWS.DynamoDB();
 export enum Plan {
     "default" = "a",
     "basic" = "b",
-    "premium" = "c"
+    "premium" = "c",
+    "premiumplus" = "d"
 }
 export function getRank(userName:string):Promise<string>{
     const params = {
