@@ -1,8 +1,7 @@
 import jwt from 'jsonwebtoken';
 import jwkToPem from 'jwk-to-pem';
-import { Response } from "./Response";
 import { GeneratorOption } from './Lotto/interface';
-import { Plan, getRank } from './dynamoDB/getRank';
+import { Plan, getRank } from './dynamoDB';
 import Calculate from './Lotto/class/Calculate';
 import Generator from './Lotto/class/Generator';
 const pem = jwkToPem({

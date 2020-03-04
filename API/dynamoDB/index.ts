@@ -53,6 +53,12 @@ export function getRank(userName:string):Promise<string>{
     });
 }
 
+
+export enum IncOrExc {
+    "include" = "Include",
+    "exclude" = "Exclude"
+}
+
 export function getIncOrExcNumbers(userName: string, round: number, choice: IncOrExc): Promise<number[]> {
     const params = {
         TableName,
