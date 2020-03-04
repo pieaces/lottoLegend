@@ -137,3 +137,12 @@ function write(data: any) {
     bonus.style.backgroundColor = compartColor[compartIndex];
     winBox.appendChild(bonus);
 }
+
+// const statsTableValueBox = document.querySelectorAll('.stats-table tr >td:nth-child(2)');
+
+// const a = [];
+
+
+// statsTableValueBox.forEach((node, index) => {
+//     node.textContent = a[index];
+// })
