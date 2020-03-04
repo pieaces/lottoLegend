@@ -48,7 +48,7 @@
   border-top: 1px solid black;
   background-color: var(--box-color);
   display: flex;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 .board-header > div {
