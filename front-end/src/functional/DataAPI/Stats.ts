@@ -1,4 +1,4 @@
-import  {getAuthAPI} from '../../amplify/api'
+import  {getUnAuthAPI} from '../../amplify/api'
 export interface Params {
     from?: number;
     to?: number;
@@ -8,7 +8,7 @@ export default class Data {
     [x: string]: any;
 
     async getData(method: string, params: Params) {
-        let queryParams:any;
+        let queryParams:any = {};
         if (params) {
             if (typeof params.from === 'number' && typeof params.to === 'number') {
                 queryParams = {
@@ -23,7 +23,7 @@ export default class Data {
         }
         queryParams.method = method;
         const url = `/stats/mass`;
-        const result = await getAuthAPI(url, queryParams);
+        const result = await getUnAuthAPI(url, queryParams);
         this[method] = result.data;
         if (result.total) this.total = result.total;
         if (result.winNums) this.winNums = result.winNums
