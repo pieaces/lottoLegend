@@ -1,8 +1,9 @@
 import { dynamoDB, TableName } from '.'
 import { Plan, getPlan } from './userInfo';
 import { Response } from '../class';
+import { getCurrentRound } from '../funtions';
 
-enum SelectTool{
+export enum SelectTool{
     "free" = 'a',
     "charge" = 'b'
 }
@@ -425,4 +426,48 @@ export function getIncOrExcNumbers(userName: string, round: number, choice: IncO
             }
         });
     });
+}
+
+export async function freeGenerator(currentId:string) {
+    const currentRound = getCurrentRound();
+    const include = await getIncOrExcNumbers(currentId, currentRound, IncOrExc.include);
+    const exclude = await getIncOrExcNumbers(currentId, currentRound, IncOrExc.exclude);
+    const choice: number[] = [];
+
+    exclude.forEach((num, index) => {
+        for (let i = exclude[index - 1] + 1 || 1; i < num; i++) {
+            choice.push(i);
+        }
+    });
+    for (let i = exclude[exclude.length - 1] + 1; i <= 45; i++) {
+        choice.push(i);
+    }
+
+    const numsArr: number[][] = [];
+    const plan = await getPlan(currentId);
+
+    while (numsArr.length < planLimit[plan]) {
+        const SIZE = choice.length;
+        const numberSet: Set<number> = new Set();
+        while (numberSet.size < 6) {
+            numberSet.add(choice[Math.floor(Math.random() * SIZE)]);
+        }
+        const numbers = [...numberSet].sort((a, b) => a - b);
+
+        let flag = false;
+        for (let i = 0; i < 6; i++) {
+            for (let j = 0; j < include.length; j++) {
+                if (numbers[i] === include[j]) {
+                    flag = true;
+                    break;
+                }
+            }
+        }
+        if (flag) {
+            numsArr.push(numbers);
+        }
+    }
+
+    console.log(numsArr);
+    return numsArr;
 }
