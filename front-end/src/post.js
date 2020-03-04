@@ -42,7 +42,7 @@ const submitBtn = document.getElementById('submit-btn');
 const titleInput = document.getElementById('title-text');
 
 const category = document.getElementById('wrapper').getAttribute('data-category');
-const loading = document.querySelector('.loading');
+const loading = document.querySelector('.loading-box');
 
 //const imageWrapper = document.getElementById('image-wrapper');
 const imageTotalSize = document.getElementById('image-total-size');

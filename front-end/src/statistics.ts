@@ -2,7 +2,7 @@ import configure from './amplify/configure'
 import ChartBase from './functional/Chart/Charts';
 import { getUnAuthAPI } from './amplify/api';
 import { getQueryStringObject, rangeMake, getStaticsName } from './functions';
-const loading = document.querySelector('.loading');
+const loading = document.querySelector('.loading-box');
 const labels = require('./functional/DataAPI/json/labels.json');
 configure();
 const method = getQueryStringObject().method;

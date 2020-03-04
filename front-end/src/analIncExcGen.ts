@@ -15,7 +15,7 @@ enum IncOrExc {
     "exclude" = "Exclude"
 }
 let incOrExc: IncOrExc;
-const loading = document.querySelector<HTMLElement>('.loading');
+const loading = document.querySelector<HTMLElement>('.loading-box');
 loading.classList.remove('none');
 getUnAuthAPI('/stats/mass/excludeInclude')
     .then(async (data) => {
