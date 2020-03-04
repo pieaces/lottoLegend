@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="../../css/section.css">
     <link rel="stylesheet" href="../../css/header.css" />
     <link rel="stylesheet" href="../../css/footer.css" />
-    <link rel="stylesheet" href="../../css/analRoom.css">
     <link rel="stylesheet" href="../../css/statsBox.css">
     <link rel="stylesheet" href="../../css/statsHome.css">
     <title>CanvasLotto</title>
@@ -43,23 +42,24 @@
                     <div class="stats-home-title box-color">
                         <div class="win-num-container-box">
                             <div class="win-num-times">
-                                <span class="win-num-round" id="round">900</span><span>회&nbsp;당첨결과</span> <span
-                                    id="date">2020-02-29</span>
+                                <span class="win-num-round" id="round"></span><span>회&nbsp;당첨결과</span> <span
+                                    id="date"></span>
                             </div>
                             <div class="win-num-container">
-                                <div class="arrow-btn-box">
+                                <div class="arrow-btn-box" id="left-btn">
                                     <!-- <div class='arrow top'></div> -->
                                     <i class="fas fa-angle-left"></i>
                                 </div>
                                 <div class="win-num-box">
                                 </div>
-                                <div class="arrow-btn-box">
+                                <div class="arrow-btn-box" id="right-btn">
                                     <!-- <div class='arrow top'></div> -->
                                     <i class="fas fa-angle-right"></i>
                                 </div>
                             </div>
                             <div class="win-info">
-                                <span>1등 6게임 총 당첨금액 약 201억원</span> <span>(1게임당 당첨금액 약 33억원)</span>
+                                <span class="small-text">1등 총&nbsp;</span><span class="big-text bold" id="winner"></span> <span class="small-text">명&nbsp;</span>
+                                <span  class="small-text">(1인당 당첨금액:&nbsp;약&nbsp;</span><span class="big-text bold" id="winAmount"></span><span class="small-text">억 원)</span>
                             </div>
                         </div>
                     </div>
@@ -93,169 +93,169 @@
                             </div>
 
                         </div>
-                        <div class="func2-lotto-num-container box-color">
-                            <table class="func2-lotto-num-box">
+                        <div class="lotto-num-container box-color">
+                            <table class="lotto-num-box">
                                 <tr>
                                     <td>
-                                        <div class=" func2-lotto-num"> 1
+                                        <div class="lotto-num"> 1
                                         </div>
                                     </td>
                                     <td>
-                                        <div class=" func2-lotto-num"> 2
+                                        <div class="lotto-num"> 2
                                         </div>
                                     </td>
                                     <td>
-                                        <div class=" func2-lotto-num"> 3
+                                        <div class="lotto-num"> 3
                                         </div>
                                     </td>
                                     <td>
-                                        <div class=" func2-lotto-num"> 4
+                                        <div class="lotto-num"> 4
                                         </div>
                                     </td>
                                     <td>
-                                        <div class=" func2-lotto-num"> 5
+                                        <div class="lotto-num"> 5
                                         </div>
                                     </td>
                                     <td>
-                                        <div class=" func2-lotto-num"> 6
+                                        <div class="lotto-num"> 6
                                         </div>
                                     </td>
                                     <td>
-                                        <div class=" func2-lotto-num"> 7
+                                        <div class="lotto-num"> 7
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <div class=" func2-lotto-num"> 8
+                                        <div class="lotto-num"> 8
                                         </div>
                                     </td>
                                     <td>
-                                        <div class=" func2-lotto-num"> 9
+                                        <div class="lotto-num"> 9
                                         </div>
                                     </td>
                                     <td>
-                                        <div class=" func2-lotto-num"> 10</div>
+                                        <div class="lotto-num"> 10</div>
                                     </td>
                                     <td>
-                                        <div class=" func2-lotto-num"> 11</div>
+                                        <div class="lotto-num"> 11</div>
                                     </td>
                                     <td>
-                                        <div class=" func2-lotto-num"> 12</div>
+                                        <div class="lotto-num"> 12</div>
                                     </td>
                                     <td>
-                                        <div class=" func2-lotto-num"> 13</div>
+                                        <div class="lotto-num"> 13</div>
                                     </td>
                                     <td>
-                                        <div class=" func2-lotto-num"> 14</div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class=" func2-lotto-num"> 15 </div>
-                                    </td>
-                                    <td>
-                                        <div class=" func2-lotto-num"> 16 </div>
-                                    </td>
-                                    <td>
-                                        <div class=" func2-lotto-num"> 17 </div>
-                                    </td>
-                                    <td>
-                                        <div class=" func2-lotto-num"> 18 </div>
-                                    </td>
-                                    <td>
-                                        <div class=" func2-lotto-num"> 19 </div>
-                                    </td>
-                                    <td>
-                                        <div class=" func2-lotto-num"> 20 </div>
-                                    </td>
-                                    <td>
-                                        <div class=" func2-lotto-num"> 21 </div>
+                                        <div class="lotto-num"> 14</div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <div class=" func2-lotto-num"> 22 </div>
+                                        <div class="lotto-num"> 15 </div>
                                     </td>
                                     <td>
-                                        <div class=" func2-lotto-num"> 23 </div>
+                                        <div class="lotto-num"> 16 </div>
                                     </td>
                                     <td>
-                                        <div class=" func2-lotto-num"> 24 </div>
+                                        <div class="lotto-num"> 17 </div>
                                     </td>
                                     <td>
-                                        <div class=" func2-lotto-num"> 25 </div>
+                                        <div class="lotto-num"> 18 </div>
                                     </td>
                                     <td>
-                                        <div class=" func2-lotto-num"> 26 </div>
+                                        <div class="lotto-num"> 19 </div>
                                     </td>
                                     <td>
-                                        <div class=" func2-lotto-num"> 27 </div>
+                                        <div class="lotto-num"> 20 </div>
                                     </td>
                                     <td>
-                                        <div class=" func2-lotto-num"> 28 </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class=" func2-lotto-num">29</div>
-                                    </td>
-                                    <td>
-                                        <div class=" func2-lotto-num">30</div>
-                                    </td>
-                                    <td>
-                                        <div class=" func2-lotto-num">31</div>
-                                    </td>
-                                    <td>
-                                        <div class=" func2-lotto-num">32</div>
-                                    </td>
-                                    <td>
-                                        <div class=" func2-lotto-num">33</div>
-                                    </td>
-                                    <td>
-                                        <div class=" func2-lotto-num">34</div>
-                                    </td>
-                                    <td>
-                                        <div class=" func2-lotto-num">35</div>
+                                        <div class="lotto-num"> 21 </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <div class=" func2-lotto-num">36</div>
+                                        <div class="lotto-num"> 22 </div>
                                     </td>
                                     <td>
-                                        <div class=" func2-lotto-num">37</div>
+                                        <div class="lotto-num"> 23 </div>
                                     </td>
                                     <td>
-                                        <div class=" func2-lotto-num">38</div>
+                                        <div class="lotto-num"> 24 </div>
                                     </td>
                                     <td>
-                                        <div class=" func2-lotto-num">39</div>
+                                        <div class="lotto-num"> 25 </div>
                                     </td>
                                     <td>
-                                        <div class=" func2-lotto-num">40</div>
+                                        <div class="lotto-num"> 26 </div>
                                     </td>
                                     <td>
-                                        <div class=" func2-lotto-num">41</div>
+                                        <div class="lotto-num"> 27 </div>
                                     </td>
                                     <td>
-                                        <div class=" func2-lotto-num">42</div>
+                                        <div class="lotto-num"> 28 </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <div class=" func2-lotto-num">43</div>
+                                        <div class="lotto-num">29</div>
                                     </td>
                                     <td>
-                                        <div class=" func2-lotto-num">44</div>
+                                        <div class="lotto-num">30</div>
                                     </td>
                                     <td>
-                                        <div class=" func2-lotto-num">45</div>
+                                        <div class="lotto-num">31</div>
+                                    </td>
+                                    <td>
+                                        <div class="lotto-num">32</div>
+                                    </td>
+                                    <td>
+                                        <div class="lotto-num">33</div>
+                                    </td>
+                                    <td>
+                                        <div class="lotto-num">34</div>
+                                    </td>
+                                    <td>
+                                        <div class="lotto-num">35</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="lotto-num">36</div>
+                                    </td>
+                                    <td>
+                                        <div class="lotto-num">37</div>
+                                    </td>
+                                    <td>
+                                        <div class="lotto-num">38</div>
+                                    </td>
+                                    <td>
+                                        <div class="lotto-num">39</div>
+                                    </td>
+                                    <td>
+                                        <div class="lotto-num">40</div>
+                                    </td>
+                                    <td>
+                                        <div class="lotto-num">41</div>
+                                    </td>
+                                    <td>
+                                        <div class="lotto-num">42</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="lotto-num">43</div>
+                                    </td>
+                                    <td>
+                                        <div class="lotto-num">44</div>
+                                    </td>
+                                    <td>
+                                        <div class="lotto-num">45</div>
                                     </td>
                                 </tr>
                             </table>
                         </div>
-                        <div class=" stack-chart-container box-color">
+                        <div class="stack-chart-container box-color">
                             <div class="stack-chart-box">
                                 <canvas class="stack-chart"></canvas>
                             </div>
@@ -270,9 +270,7 @@
     </div>
     <script src="../components/footer/footer.js"></script>
     </div>
-
     <script src="../../js/headerHover.js"></script>
-
     <script src="../../js/statsHome.js"></script>
     <script src="https://kit.fontawesome.com/e14b8c39aa.js" crossorigin="anonymous"></script>
 </body>
