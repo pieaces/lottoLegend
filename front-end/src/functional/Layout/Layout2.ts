@@ -15,7 +15,6 @@ const $68 = document.querySelector<HTMLElement>('.stats-68-value');
 const $95 = document.querySelector<HTMLElement>('.stats-95-value');
 const last = document.querySelector<HTMLElement>('.stats-last-value');
 
-
 export default class Layout2 {
     static readonly MAX_SIZE = 10;
     static lottoNumDefaultColor = '#00048c';

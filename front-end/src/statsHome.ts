@@ -65,7 +65,10 @@ const rightBtn = document.getElementById('right-btn');
 const leftBtn = document.getElementById('left-btn');
 const stackInstance = new ChartBase('bar', stackCanvas, stackDataBox, stackOption);
 const lottoNums = document.querySelectorAll<HTMLElement>('.lotto-num');
+const statsValues = document.querySelectorAll('.stats-table tr >td:nth-child(2)');
+const loading = document.querySelector('.loading-box');
 
+loading.classList.remove('none');
 getUnAuthAPI('/numbers/win')
     .then(data => {
         const max: number = data.round;
@@ -97,6 +100,7 @@ getUnAuthAPI('/numbers/win')
                 });
             }
         });
+        loading.classList.add('none');
     });
 const lottoNumTemp: HTMLElement[] = [];
 function write(data: any) {
@@ -136,13 +140,14 @@ function write(data: any) {
     const compartIndex = Math.floor((data.bonusNum - 1) / 10);
     bonus.style.backgroundColor = compartColor[compartIndex];
     winBox.appendChild(bonus);
+    statsValues[0].textContent = data.stats.excludedLineCount;
+    statsValues[1].textContent = data.stats.carryCount;
+    statsValues[2].textContent = data.stats.lowCount;
+    statsValues[3].textContent = data.stats.sum;
+    statsValues[4].textContent = data.stats.oddCount;
+    statsValues[5].textContent = data.stats.primeCount;
+    statsValues[6].textContent = data.stats['$3Count'];
+    statsValues[7].textContent = data.stats['sum$10'];
+    statsValues[8].textContent = data.stats.diffMaxMin;
+    statsValues[9].textContent = data.stats.AC;
 }
-
-// const statsTableValueBox = document.querySelectorAll('.stats-table tr >td:nth-child(2)');
-
-// const a = [];
-
-
-// statsTableValueBox.forEach((node, index) => {
-//     node.textContent = a[index];
-// })
