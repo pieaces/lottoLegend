@@ -4,25 +4,28 @@ import dynamoDB from '.'
 import { Method } from '../interface/LottoDB';
 import Calculate from '../class/Calculate';
 import Analyze from '../class/Analyze';
-
-function lottoDataParser(data:any):LData{
+import { setTimeout } from 'timers';
+interface LottoData extends LData {
+    winner: number;
+    winAmount: number;
+}
+function lottoDataParser(data: any): LottoData {
     const numbers = [data.drwtNo1, data.drwtNo2, data.drwtNo3, data.drwtNo4, data.drwtNo5, data.drwtNo6]
-    const lotto: LData = { round: data.drwNo, numbers, date: data.drwNoDate, bonusNum: data.bnusNo };
+    const lotto: LottoData = { round: data.drwNo, numbers, date: data.drwNoDate, bonusNum: data.bnusNo, winner: data.firstPrzwnerCo, winAmount: data.firstWinamnt };
     return lotto;
 }
-
-export default async function putLotto(round: number):Promise<void> {
+export default async function putLotto(round: number): Promise<void> {
     const result = await (axios.get('http://www.nlotto.co.kr/common.do?method=getLottoNumber&drwNo=' + round));
-    const lotto: LData = lottoDataParser(result.data);    
-    let before:any = null;
-    let beforeLotto: LData = null;
-    if(round>1) {
-        before = await (axios.get('http://www.nlotto.co.kr/common.do?method=getLottoNumber&drwNo=' + (round-1)));
+    const lotto: LottoData = lottoDataParser(result.data);
+    let before: any = null;
+    let beforeLotto: LottoData = null;
+    if (round > 1) {
+        before = await (axios.get('http://www.nlotto.co.kr/common.do?method=getLottoNumber&drwNo=' + (round - 1)));
         beforeLotto = lottoDataParser(before.data);
     }
     console.log(`${round}회 읽기 성공`);
 
-    var params:any = {
+    var params: any = {
         Item: {
             "Round": {
                 N: lotto.round.toString()
@@ -35,6 +38,12 @@ export default async function putLotto(round: number):Promise<void> {
             },
             "BonusNum": {
                 N: lotto.bonusNum.toString()
+            },
+            "Winner": {
+                N: lotto.winner.toString()
+            },
+            "WinAmount": {
+                N: lotto.winAmount.toString()
             },
             "Stats": {
                 M: {
@@ -82,7 +91,7 @@ export default async function putLotto(round: number):Promise<void> {
         };
     }
     return new Promise((resolve, reject) => {
-        dynamoDB.putItem(params, function (err:any) {
+        dynamoDB.putItem(params, function (err: any) {
             if (err) reject('putLotto 에러: ' + err);
             else {
                 console.log(`${round}회 putLotto 성공`);
@@ -92,9 +101,15 @@ export default async function putLotto(round: number):Promise<void> {
     });
 }
 
-export async function writeAllLotto(until: number, from:number=1) {
-    for (let i = from; i <= until; i++) {
-        await putLotto(i);
-        console.log('*******')
+export async function writeAllLotto(until: number, from: number = 1): Promise<void> {
+    let round = from;
+    try {
+        while (round <= until) {
+            await putLotto(round++);
+            console.log('*******')
+        }
+    } catch (err) {
+        console.error('-----');
+        setTimeout(()=>writeAllLotto(until, round), 100);
     }
 }
