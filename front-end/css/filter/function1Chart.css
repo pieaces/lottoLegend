@@ -83,6 +83,11 @@
     justify-content: center;
   }
 
+  
+  .func1-chart-title > div:last-child{
+    border-right:none;
+  }
+
   .func1-chart-title >div:nth-child(1) >div{
     width:100%;
     height:50%;

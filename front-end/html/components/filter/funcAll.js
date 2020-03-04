@@ -86,7 +86,7 @@ document.write(`<div class="filter-box-container-box func1-layout func2-layout b
       <i id="func1-right-bar-chart-btn" class="func1-right-chart-btn fas fa-angle-right  "></i>
     </div>
   </div>
-  <div class="right-container func1-chart-textbox-container box-color">
+  <div class="right-container func1-chart-textbox-container">
     <div class="func1-chart-textbox">
       <div class="func1-chart-title func1-bar-values">
         <div id="func1-bar-filter-name"></div>
@@ -133,7 +133,7 @@ document.write(`<div class="filter-box-container-box func1-layout func2-layout b
     <div id="func1-chart-bubble">
     </div>
   </div>
-  <div class="right-container func1-chart-textbox-container box-color">
+  <div class="right-container func1-chart-textbox-container">
     <table class="table-2 table" id="func1-bubble-table">
       <tr>
         <td>평균 : <span id="func1-bubble-mean-value"></span> </td>

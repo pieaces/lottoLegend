@@ -17,9 +17,27 @@
   }
 
   .func1-bubble-text{
-    width:100%;
+    border-left:1px solid var(--border-color);
+    border-right:1px solid var(--border-color);
+    border-bottom:1px solid var(--border-color);
+    width:97%;
     height:60%;
   }
+
+  .func1-bubble-text::-webkit-scrollbar{
+    width:3%;
+    height:10rem; 
+  }
+
+  .func1-bubble-text::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+    background-color: rgb(180, 180, 180);
+  }
+
+  .func1-bubble-text::-webkit-scrollbar-thumb:hover{
+    background-color: rgb(160, 160, 160);
+  }
+
 
   .func1-bubble-que-modal-text{
     width:40rem;
@@ -28,6 +46,8 @@
   
   #func1-bubble-table{
     height:40%;
+    overflow-y: scroll;
+    width:97%;
   }
   
   .func1-checkbox-container{

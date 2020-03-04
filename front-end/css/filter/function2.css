@@ -63,7 +63,7 @@
   text-align: center;
   width:2.5rem;
   height:2.5rem;
-  margin:0 auto;    
+  margin-left:5rem;
   }
 
 
@@ -92,7 +92,6 @@
   }
   
   .func2-lotto-checkbox {
-    /* border-left:1px solid var(--border-color); */
     border-right:1px solid var(--border-color);
     border-bottom: 1px solid var(--border-color);
     cursor: pointer;
@@ -106,10 +105,8 @@
   }
   
   .func2-lotto-check-current {
-    /* background-color: var(--lotto-title-color); */
     background-color: var(--table-title-color);
     border-bottom:none;
-    /* color:var(--default-color); */
   }
 
   .func2-lotto-num-container{

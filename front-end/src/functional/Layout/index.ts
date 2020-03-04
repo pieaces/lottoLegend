@@ -11,7 +11,7 @@ import Layout1 from "./Layout1";
 import Layout2 from "./Layout2";
 const section = document.querySelector(".section1");
 const infoText = document.querySelector<HTMLElement>(".checkbox-text");
-const loading = document.querySelector<HTMLElement>('.loading');
+const loading = document.querySelector<HTMLElement>('.loading-box');
 const checkTextBox = document.querySelector<HTMLElement>('.checkbox-text');
 export default class Layout extends LayoutToggle(Layout3) {
     dropDown: DropDown = new DropDown();
