@@ -31,9 +31,9 @@ export async function queryLotto(round: number): Promise<LottoNumber[]> {
     });
 }
 
-export async function queryLottoData(round: number): Promise<{numbers:number[], bonusNum:number, date:string, stats:{[key:string]:number}}> {
+export async function queryLottoData(round: number): Promise<any> {
     const queryParams = {
-        ProjectionExpression: 'BonusNum, Stats, Numbers, LDate',
+        ProjectionExpression: 'BonusNum, Stats, Numbers, LDate, Winner, WinAmount',
         TableName: "LottoData",
         Key:{
             "Round": {
@@ -55,6 +55,8 @@ export async function queryLottoData(round: number): Promise<{numbers:number[], 
                         numbers: item.Numbers.NS.map((num:string) => Number(num)).sort((a,b)=>a-b),
                         bonusNum: Number(item.BonusNum.N),
                         date: item.LDate.S,
+                        winner: Number(item.Winner.N),
+                        winAmount: Number(item.WinAmount.N)
                     };
                     const stats:any = {};
                     for(const key in item.Stats.M){
