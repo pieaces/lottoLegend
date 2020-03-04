@@ -37,7 +37,7 @@ a {
   color: black;
 }
 
-h1 {
+h1,h2,h3 {
   font-weight: 400;
 }
 
@@ -94,7 +94,7 @@ select:focus {
 .table,
 .table th,
 .table td{
-  border:1px solid rgba(0, 0, 0, 0.4);
+  border:1px solid var(--border-color);
 }
 
 .loading{
@@ -136,8 +136,16 @@ select:focus {
   }
 }
 
+.swal2-popup {
+  font-size: 1.3rem !important; /*유의*/
+}
+
+.swal2-footer a{
+  color: #0400ff;
+}
+
 .none{
-  display:none !important;
+  display:none !important; /*유의*/
 }
 
 .hide{
@@ -147,23 +155,15 @@ select:focus {
 .square-btn {
   background-color: var(--button-color1);
   color: var(--default-color);
-  width: 100%;
   font-size: 1.4rem;
 }
 .post-btn {
   background-color: var(--button-color2);
   color: var(--default-color);
-  width: 100%;
   font-size: 1.4rem;
 }
 
-.swal2-popup {
-  font-size: 1.3rem !important;
-}
 
-.swal2-footer a{
-  color: #0400ff;
-}
 
 @media (min-width: 0px) and (max-width: 1024px) {
   html{

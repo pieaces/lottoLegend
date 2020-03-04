@@ -39,6 +39,7 @@
   }
   
   .func1-checkbox {
+    font-size:1.3rem;
     display: flex;
     height:100%;
     align-items: center;

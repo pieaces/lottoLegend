@@ -135,8 +135,9 @@ margin-bottom:1rem;
   }
 
   .stats-box{
-      width:17rem;
-      height:5rem;
+      font-size:0.8rem;
+      width:10rem;
+      height:3rem;
       margin-bottom:1rem;
       border:1px solid rgba(0, 0, 0, 0.4);
   }

@@ -64,5 +64,5 @@
   font-size:0.9rem;
   width:9rem;
   height:4rem;
-  background-color: var(--lotto-title-color) !important;
+  background-color: var(--lotto-title-color);
 }

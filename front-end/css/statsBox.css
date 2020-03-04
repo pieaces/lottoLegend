@@ -12,11 +12,7 @@
   }
   
   .stats-box > div:nth-child(1){
-    font-size:1.3rem;
     background-color: #1b507b;
     color:var(--default-color);
     
-  }
-  .stats-box > div:nth-child(2){
-    font-size:1.3rem;
   }
