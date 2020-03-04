@@ -107,8 +107,8 @@ exports.handler = async (event: any) => {
             }
         }
             break;
-        case '/numbers/win/{round}': {
-            const round = event.pathParameters.round;
+        case '/numbers/win': {
+            const round = event.queryStringParameters && event.queryStringParameters.round || getCurrentRound();
             switch (method) {
                 case 'GET':
                     body = await queryLottoData(round);

@@ -33,7 +33,7 @@ export async function queryLotto(round: number): Promise<LottoNumber[]> {
 
 export async function queryLottoData(round: number): Promise<any> {
     const queryParams = {
-        ProjectionExpression: 'BonusNum, Stats, Numbers, LDate, Winner, WinAmount',
+        ProjectionExpression: 'BonusNum, Stats, Numbers, LDate, Winner, WinAmount, Round',
         TableName: "LottoData",
         Key:{
             "Round": {
@@ -52,6 +52,7 @@ export async function queryLottoData(round: number): Promise<any> {
                 if (typeof item === 'undefined') reject(`Not Exist ${round} item`);
                 else {
                     const result:any = {
+                        round: Number(item.Round.N),
                         numbers: item.Numbers.NS.map((num:string) => Number(num)).sort((a,b)=>a-b),
                         bonusNum: Number(item.BonusNum.N),
                         date: item.LDate.S,
