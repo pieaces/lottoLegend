@@ -63,6 +63,7 @@ exports.handler = async (event: any) => {
             }
             break;
         case 'stats/piece':
+            body = await queryStats(method as StatsMethod, null, 'Ideal, Actual, Pos, Stats, Piece', {});
     }
     const response = {
         statusCode,
