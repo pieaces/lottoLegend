@@ -152,6 +152,10 @@ select:focus {
   visibility: hidden;
 }
 
+.bold{
+  font-weight:500;
+}
+
 .square-btn {
   background-color: var(--button-color1);
   color: var(--default-color);
