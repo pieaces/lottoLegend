@@ -1,3 +1,4 @@
+import {DynamoDB} from 'aws-sdk'
 import { Stats } from '../interface/Statistics';
 import { StatsMethod, DBData, Assembly, AssemblyVersion, QueryStatsParams } from '../interface/LottoDB';
 import { LottoNumber } from '../interface/Lotto';
@@ -31,13 +32,9 @@ export async function queryLotto(round: number): Promise<LottoNumber[]> {
     });
 }
 
-export async function queryStats(method: StatsMethod, params: QueryStatsParams={}, ProjectionExpression?:string, ExpressionAttributeNames?:any): Promise<any[] | DBData> {
+export async function queryStats(method: StatsMethod, ProjectionExpression:string, ExpressionAttributeNames?:DynamoDB.ExpressionAttributeNameMap, params?: QueryStatsParams, ): Promise<any[] | DBData> {
     const queryParams:any = {
         TableName: "LottoStats",
-        ExpressionAttributeNames: {
-            "#List": 'List'
-        },
-        ProjectionExpression: `Ideal, Actual, Pos, Stats, #List`,
         Key:{
             "Name": {
                 S: method
@@ -153,7 +150,7 @@ function compressNumbers(numbers: number[], PACK: number): number[] {
     return result;
 }
 
-function transformNumbers(list: AWS.DynamoDB.ListAttributeValue, params?: QueryStatsParams): number[] {
+function transformNumbers(list: DynamoDB.ListAttributeValue, params?: QueryStatsParams): number[] {
     let result: number[] = [];
     if (list) {
         if (params && typeof params.from === 'number' && typeof params.to === 'number') {
@@ -169,7 +166,7 @@ function transformNumbers(list: AWS.DynamoDB.ListAttributeValue, params?: QueryS
     return result;
 }
 
-function makeAssembly(obj: AWS.DynamoDB.MapAttributeValue, params?: QueryStatsParams): Assembly {
+function makeAssembly(obj: DynamoDB.MapAttributeValue, params?: QueryStatsParams): Assembly {
     const result: Assembly = {
         $12: transformNumbers(obj.$12 && obj.$12.L, params),
         $24: transformNumbers(obj.$24 && obj.$24.L, params),

@@ -18,12 +18,17 @@ exports.handler = async (event: any) => {
     switch (resource) {
         case '/stats/mass':
             let data: any;
+
+            const ProjectionExpression = `Ideal, Actual, Pos, Stats, #List`;
+            const ExpressionAttributeNames = {
+                "#List": 'List'
+            };
             if (method === "excludeInclude") {
                 let temp: any = {};
-                temp.emergence = await queryStats("emergence" as StatsMethod, {});
-                temp.interval = await queryStats("interval" as StatsMethod, {});
-                temp.howLongNone = await queryStats("howLongNone" as StatsMethod, {});
-                temp.frequency = await queryStats("frequency" as StatsMethod, {});
+                temp.emergence = await queryStats("emergence" as StatsMethod, ProjectionExpression, ExpressionAttributeNames);
+                temp.interval = await queryStats("interval" as StatsMethod, ProjectionExpression, ExpressionAttributeNames);
+                temp.howLongNone = await queryStats("howLongNone" as StatsMethod, ProjectionExpression, ExpressionAttributeNames);
+                temp.frequency = await queryStats("frequency" as StatsMethod, ProjectionExpression, ExpressionAttributeNames);
 
                 data = temp;
                 let round = getCurrentRound();
@@ -53,7 +58,7 @@ exports.handler = async (event: any) => {
                 } else if (list) {
                     temp.list = JSON.parse(decodeURI(list));
                 }
-                data = await queryStats(method as StatsMethod, temp);
+                data = await queryStats(method as StatsMethod, ProjectionExpression, ExpressionAttributeNames, temp);
                 body = { data };
             } else {
                 return {
@@ -63,7 +68,9 @@ exports.handler = async (event: any) => {
             }
             break;
         case 'stats/piece':
-            body = await queryStats(method as StatsMethod, null, 'Ideal, Actual, Pos, Stats, Piece', {});
+            body = await queryStats(method as StatsMethod,
+                'Ideal.#12,Ideal.#24,Ideal.#48,Ideal.#192,Ideal.#all, Actual.#12,Actual.#24,Actual.#48,Actual.#192,Actual.#all, Pos, Stats, Piece',
+                {'#12':'$12','#24':'$24','#48':'$48','#192':'$192', '#all':'all'});
     }
     const response = {
         statusCode,
