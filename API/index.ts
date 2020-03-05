@@ -47,7 +47,10 @@ exports.handler = async (event: any) => {
                     }
                 }
                 body = { data, total, winNums };
-            } else if (method in StatsMethod) {
+            } else if (method === StatsMethod.line){
+                data = await queryStats(method as StatsMethod);
+                body = { data };
+            }else if (method in StatsMethod) {
                 const temp: QueryStatsParams = {}
                 const from = event.queryStringParameters && event.queryStringParameters.from
                 const to = event.queryStringParameters && event.queryStringParameters.to;

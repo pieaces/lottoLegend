@@ -32,7 +32,7 @@ export async function queryLotto(round: number): Promise<LottoNumber[]> {
     });
 }
 
-export async function queryStats(method: StatsMethod, ProjectionExpression:string, ExpressionAttributeNames?:DynamoDB.ExpressionAttributeNameMap, params?: QueryStatsParams, ): Promise<any[] | DBData> {
+export async function queryStats(method: StatsMethod, ProjectionExpression?:string, ExpressionAttributeNames?:DynamoDB.ExpressionAttributeNameMap, params?: QueryStatsParams, ): Promise<any[] | DBData> {
     const queryParams:any = {
         TableName: "LottoStats",
         Key:{
