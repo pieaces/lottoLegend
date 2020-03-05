@@ -145,7 +145,7 @@ height:5rem;
   align-items: center;
   justify-content: center;
   font-size:1.4rem;
-  background-color: var(--table-title-color);
+  /* background-color: var(--table-title-color); */
 }
 
 .func3-num-container > div:last-child{
