@@ -16,7 +16,6 @@ let incOrExc: IncOrExc;
 const loading = document.querySelector<HTMLElement>('.loading-box');
 loading.classList.remove('none');
 init();
-loading.classList.add('none');
 
 async function init() {
     const { include, exclude } = await getAuthAPI('/numbers/piece');
@@ -95,4 +94,5 @@ async function init() {
     } catch (err) {
         networkAlert();
     }
+    loading.classList.add('none');
 }
