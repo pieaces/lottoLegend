@@ -8,6 +8,9 @@ const loading = document.querySelector('.loading-box');
 const labels = require('./functional/DataAPI/json/labels.json');
 configure();
 const lineNum = document.querySelectorAll<HTMLElement>('.chart-line-num > div');
+const leftBtn = document.getElementById('left-line-chart-btn');
+const rightBtn = document.getElementById('right-line-chart-btn');
+const lineTitle = document.querySelector<HTMLElement>('.chart-title');
 
 const method = getQueryStringObject().method;
 const lineCanvas: HTMLCanvasElement = document.querySelector('#chart-line');
@@ -93,9 +96,23 @@ getUnAuthAPI('/stats/piece', {method})
         $95.textContent = rangeMake(data.stats, 2);
         const lineInstance = new ChartBase('line', lineCanvas, lineDataBox, lineOption);
         lineInstance.create();
-        const lineSlide = new LineSlide(lineInstance, lineNum);
+        const lineSlide = new LineSlide(lineInstance, lineNum, leftBtn, rightBtn);
         lineSlide.init(data);
-        makeClickable(lineSlide);
+        const setText:()=>void = function(this:any){
+            switch (this.current) {
+                case 0: lineTitle.textContent = '1~12회차 종합';
+                    break;
+                case 1: lineTitle.textContent = '1~24회차 종합';
+                    break;
+                case 2: lineTitle.textContent = '1~48회차 종합';
+                    break;
+                case 3: lineTitle.textContent = '1~192회차 종합';
+                    break;
+                case 4: lineTitle.textContent = '전회차 종합';
+                    break;
+            }
+        }
+        makeClickable(lineSlide, setText.bind(lineSlide));
 
         const barLabels = [];
         for (let i = data.total - 49; i <= data.total; i++) barLabels.push(i);
