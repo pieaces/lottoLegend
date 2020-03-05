@@ -19,7 +19,8 @@ const last = document.querySelector<HTMLElement>('.stats-last-value');
 type Version = 'include' | 'exclude';
 
 const includeInfo =
-`<span style="font-size: 1rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
+`<span style="font-size: 1.5rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
+
 우리의 모티브는 아래와 같습니다.
 "수백회차가 진행되는 동안, 출현했던 번호만 계속 나온다면,
 <span style="color:black;font-weight:bold;">큰수'법칙'</span>은 충족되지 않을것입니다."
@@ -37,7 +38,8 @@ const includeInfo =
 
 *<span style="color:blue;font-weight:bold;">빈도X간격</span>: 빈도의 계수(고유한수치)와 간격의 계수를 산술처리로 종합하였습니다.`;
 const excludeInfo = 
-`<span style="font-size: 1rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
+`<span style="font-size: 1.5rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
+
 우리의 모티브는 아래와 같습니다.
 "수백회차가 진행되는 동안, 출현했던 번호만 계속 나온다면,
 <span style="color:black;font-weight:bold;">큰수'법칙'</span>은 충족되지 않을것입니다."
@@ -340,7 +342,7 @@ export default class Layout2 {
             text.style.fontWeight = '500';
 
             const modalBox = document.querySelector<HTMLElement>('.swal2-modal');
-            modalBox.style.width = '52rem'
+            modalBox.style.width = '55rem'
             modalBox.style.boxShadow = '0 1px 1px rgba(0,0,0,0.12),0 2px 2px rgba(0,0,0,0.12),0 4px 4px rgba(0,0,0,0.12),0 8px 8px rgba(0,0,0,0.12),0 16px 16px rgba(0,0,0,0.12)';
             document.querySelector<HTMLElement>('.swal2-container').style.background='#ffffff00';
             makeDraggable(document.querySelector<HTMLElement>('.swal2-container'));
