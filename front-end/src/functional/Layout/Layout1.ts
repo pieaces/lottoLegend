@@ -32,7 +32,8 @@ export default class Layout1 {
     constructor() {
         document.querySelector<HTMLElement>('.func1-bubble-que').addEventListener('click', () => {
             Swal.fire({
-                title:`우리의 모티브는 아래와 같습니다.
+                title:`<span style="font-size: 1rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
+                우리의 모티브는 아래와 같습니다.
                 "수백회차가 진행되는 동안, 출현했던 번호만 계속 나온다면,
                 <span style="color:black;font-weight:bold;">큰수'법칙'</span>은 충족되지 않을것입니다."
                 
