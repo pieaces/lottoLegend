@@ -1,33 +1,35 @@
-const numContainer = document.querySelector('.func3-num-container');
+const numContainerBox = document.querySelector('.func3-num-container-box');
 export default class Layout3 {
 
     static makeNumBoard(numsArr: number[][]) {
         for (let i = 0; i < numsArr.length; i++) {
-            const containerBox = document.createElement('div');
+            const numContainer = document.createElement('div');
+            numContainer.classList.add('func3-num-container');
+            const checkboxContainer=document.createElement('div');
+            checkboxContainer.classList.add('func3-check-box');
+
             const checkBox = document.createElement('input')
             checkBox.setAttribute('type', 'checkbox');
-            containerBox.appendChild(checkBox);
+            checkboxContainer.appendChild(checkBox);
 
-            const container = document.createElement('div');
+            numContainer.appendChild(checkboxContainer);
+
             const numBox = document.createElement('div');
             numBox.classList.add('func3-num-box');
             for (let j = 0; j < numsArr[0].length; j++) {
                 const num = document.createElement('div');
                 num.textContent = String(numsArr[i][j]);
-                // .setColorLotto(numsArr[i][j],num);
+                // setColorLotto(numsArr[i][j],num);
                 numBox.appendChild(num);
             }
 
-            const numText = document.createElement('div');
-            numText.classList.add('func3-num-text');
-
-            container.appendChild(numBox);
-            container.appendChild(numText);
-            containerBox.appendChild(container);
-            numContainer.appendChild(containerBox);
+            numContainer.appendChild(numBox);
+          
+            numContainerBox.appendChild(numContainer);
         }
     }
 }
+
 
 // const allCheckBox=<HTMLInputElement>document.querySelector('#func3-all-check');
 // const checkboxes=document.querySelectorAll('.func3-num-container > div > input');

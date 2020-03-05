@@ -319,16 +319,6 @@ document.write(`<div class="filter-box-container-box func1-layout func2-layout b
           <td colspan="2">
             <div class="que-container func2-numboard-que">
               <i class="far fa-question-circle"></i>
-              <div class="que-modal func2-numboard-que-modal none">
-                <div class="que-cancel func2-numboard-que-cancel">
-                  <i class="fas fa-times"></i>
-                </div>
-                <div class="que-text func2-numboard-que-modal-text">
-                  <ul>
-                    <li></li>
-                  </ul>
-                </div>
-              </div>
             </div>
           </td>
           <td colspan="2" class="func2-lotto-num-except">
@@ -348,6 +338,9 @@ document.write(`<div class="filter-box-container-box func1-layout func2-layout b
     <div class="func2-chart-radar-container-box box-color">
 
       <div class="func2-chart-radar-container">
+      <div class="que-container func2-radar-que">
+      <i class="far fa-question-circle"></i>
+    </div>
         <div class="func2-chart-radar-box">
           <canvas class="func2-chart-radar"></canvas>
         </div>
@@ -541,19 +534,7 @@ document.write(`<div class="filter-box-container-box func1-layout func2-layout b
     </div>
 </div>
 <div class="func3-num-container-box">
-    <div class="func3-num-container">
-        <div class="func3-check-box">
-            <input type="checkbox">
-        </div>
-        <div class="func3-num-box">
-            <div>38</div>
-            <div>35</div>
-            <div>3</div>
-            <div>15</div>
-            <div>17</div>
-            <div>19</div>
-        </div>
-    </div>
+   
 
 </div>
 <div class="func3-save-box-2">

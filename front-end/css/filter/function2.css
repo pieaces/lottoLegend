@@ -75,11 +75,6 @@
   justify-content: center;
   align-items: center;
 }
-
-  .func2-numboard-que-modal-text{
-    width:20rem;
-    height:25rem;
-  }
   
   .func2-lotto-checkbox-container {
     height:5rem;
@@ -167,6 +162,14 @@
     left:50%;
     margin-left:-31.5rem;
     z-index:1;
+  }
+
+  .func2-radar-que{
+    position: absolute;
+    top:1rem;
+    left:1rem;
+    width:2.5rem;
+    height:2.5rem;
   }
 
 
