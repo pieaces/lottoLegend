@@ -149,7 +149,7 @@ document.write(`<div class="filter-box-container-box func1-layout func2-layout b
        <div class="func2-lotto-checkbox func2-num-term func2-lotto-check-current">
            번호빈도
        </div>
-       <div class="func2-lotto-checkbox func2-num-freq">
+       <div class="func2-lotto-checkbox func2-num-freq ">
            번호간격
        </div>
        <div class="func2-lotto-checkbox func2-num-freq-term">

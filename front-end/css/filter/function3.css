@@ -1,9 +1,4 @@
-.func3-make-btn-container{
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  height:10rem;
-}
+
 
 .func3-filter-table{
   height:100%;
@@ -20,6 +15,9 @@ text-align: center;
 height:5rem;
 }
 
+.func3-filter-value-container{
+  width:80%;
+}
 
 .func3-filter-value-box {
   width: 100%;
@@ -42,14 +40,6 @@ height:5rem;
   font-size:1.3rem;
 }
 
-
-.func3-filter-num{
-  font-size:1.6rem;
-  text-align: center;
-  background-color: var(--lotto-title-color);
-  color:var(--default-color);
-  padding:1rem;
-}
 
 .func3-filter-container-box-1{
   margin-bottom:1rem;
@@ -80,25 +70,22 @@ height:5rem;
   border-right:1px solid var(--border-color);
 }
 
-.func3-filter-value-container{
-  width:80%;
-}
 
 .func3-all-check-box-container{
+  background-color: var(--table-title-color);
   height:6rem;
   display:flex;
   align-items: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
 }
 
 .func3-all-check-box-container > span{
-  width:10%;
+  width:15%;
   font-size:1.3rem;
   padding-left:0.5rem;
 }
 
 .func3-all-check-box{
-  width:10%;
+  width:8%;
   display:flex;
   align-items: center;
   justify-content: flex-end;
@@ -110,13 +97,15 @@ height:5rem;
 }
 
 .func3-save-box-1{
-  width:80%;
+  width:77%;
   display:flex;
   align-items: center;
   justify-content: flex-end;
 }
 
 .save-btn{
+  border-radius: 3px;
+  margin-right:2rem;
   width:10rem;
   height:3.5rem;
   color:var(--default-color);
@@ -125,20 +114,13 @@ height:5rem;
 }
 
 .func3-check-box{
-  width:10%;
+  width:8%;
   display:flex;
   align-items: center;
   justify-content: flex-end;
 }
 
-.func3-num-container {
-  display:flex;
-  margin-bottom:1rem;
-  background:#357aab;
-  height:11rem;
-}
-
-.func3-num-container > div input{
+.func3-check-box > input{
   width:2rem;
   height:2rem;
   display:flex;
@@ -146,8 +128,33 @@ height:5rem;
   justify-content: space-around;
 }
 
+.func3-num-container{
+  margin:1rem 0;
+}
+
+.func3-num-container > div:nth-child(1){
+  display:flex;
+  height:11rem;
+  background:var(--main-color);
+}
+
+.func3-num-container > div:nth-child(n+2){
+  height:5rem;
+  border-bottom:1px solid var(--border-color);
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  font-size:1.4rem;
+  background-color: var(--table-title-color);
+}
+
+.func3-num-container > div:last-child{
+  border-bottom:none;
+}
+
+
 .func3-num-box{
-  width:90%;
+  width:92%;
   height:100%;
   display:flex;
   align-items: center;
@@ -166,7 +173,7 @@ height:5rem;
   color: var(--default-color);
   width: 5rem;
   height: 5rem;
-  margin: 0.6rem;
+  margin: 1.2rem;
   line-height: 1.7;
   border-radius: 50%;
   display: flex;
@@ -198,21 +205,25 @@ height:5rem;
 }
 
 
-.func3-num-text{
-  height:50%;
-}
-
 .func3-save-box-2{
+  background-color: var(--table-title-color);
   display:flex;
   align-items: center;
   justify-content: flex-end;
+  height:6rem;
+}
+
+.func3-make-btn-container{
+  display:flex;
+  align-items: center;
+  justify-content: center;
   height:10rem;
 }
 
 .make-btn{
   padding-bottom:0.5rem;
   border-radius: 5px;
-  background-color: rgba(3, 155, 229,1);
+  background-color: rgb(237, 59, 59,1);
   width:12rem;
   height:5rem;
   font-size:2rem;
@@ -220,7 +231,7 @@ height:5rem;
 }
 
 .make-btn:hover{
-  background-color: rgba(3, 155, 229,0.95);
+  background-color: rgb(237, 59, 59,0.95);
   transition: ease-in-out all 0.15s;
   box-shadow: inset -3px -5px 0 rgba(0,0,0,0.2),inset 3px 1px 0 rgba(0,0,0,0.2);
 }
