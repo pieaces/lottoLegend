@@ -6,7 +6,6 @@ import Checkbox from "../instanceBtns/CheckBox";
 import NextBtn from "../instanceBtns/NextBtn";
 import AutoBtn from "../instanceBtns/AutoBtn"
 import ResetBtn from "../instanceBtns/ResetBtn";
-import Question from "../Question"
 import Layout1 from "./Layout1";
 import Layout2 from "./Layout2";
 const section = document.querySelector(".section1");
@@ -19,7 +18,6 @@ export default class Layout extends LayoutToggle(Layout3) {
     nextBtn: NextBtn = new NextBtn();
     autoBtn: AutoBtn = new AutoBtn();
     resetBtn: ResetBtn = new ResetBtn();
-    question: Question = new Question();
     nextAbleLimit: number = 1;
     options: any[] = [];
     layout1: Layout1 = new Layout1();
@@ -171,8 +169,6 @@ export default class Layout extends LayoutToggle(Layout3) {
         console.log(this.options);
     }
     init() {
-        this.question.bubbleQue.on();
-        this.question.numBoardQue.on();
         this.dropDown.init();
         this.dropDown.changeDropDownColor();
         this.dropDown.addEvent();

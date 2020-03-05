@@ -1,14 +1,11 @@
 import configure from './amplify/configure'
 import { getUnAuthAPI, postAuthAPI, getAuthAPI } from './amplify/api'
 import Layout2 from "./functional/Layout/Layout2";
-import Question from './functional/Question';
 import ResetBtn from './functional/instanceBtns/ResetBtn';
 import Swal from 'sweetalert2'
-import { infoAlert, networkAlert, onlyUserAlert } from './functions';
-import { getUserName } from './amplify/auth';
+import { infoAlert, networkAlert } from './functions';
 
 configure();
-
 const category = document.querySelector('.main').getAttribute('data-category');
 const makeBtn = document.getElementById('make-btn');
 enum IncOrExc {
@@ -18,9 +15,8 @@ enum IncOrExc {
 let incOrExc: IncOrExc;
 const loading = document.querySelector<HTMLElement>('.loading-box');
 loading.classList.remove('none');
-
-getUserName()
-    .catch(err => onlyUserAlert());
+init();
+loading.classList.add('none');
 
 async function init() {
     const { include, exclude } = await getAuthAPI('/numbers/piece');

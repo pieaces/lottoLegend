@@ -21,7 +21,7 @@ export default class Layout2 {
     static readonly lottoNumSelectColor = '#e6e600';
     static readonly lottoNumDefaultFontColor = 'white';
     static readonly lottoNumSelectFontColor = 'black';
-    static readonly lottoNumCheckedColor = 'rgb(168, 168, 168)';
+    static readonly lottoNumCheckedColor = 'rgb(49, 49, 49)';
     static readonly lottoNumExcludedColor = 'rgb(234, 234, 234)';
     static readonly body = 'body *';
     static readonly numBoard = '.func2-lotto-num-container *';
