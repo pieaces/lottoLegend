@@ -139,13 +139,10 @@ height:5rem;
 }
 
 .func3-num-container > div:nth-child(n+2){
-  height:5rem;
-  border-bottom:1px solid var(--border-color);
   display:flex;
   align-items: center;
   justify-content: center;
   font-size:1.4rem;
-  background-color: var(--table-title-color);
 }
 
 .func3-num-container > div:last-child{
