@@ -53,7 +53,7 @@ export default function LayoutToggle<TBase extends Constructor>(Base: TBase) {
         }
 
         layout3_1On() {
-            Layout3.makeNumBoard(DataAPI.getInstance().getGeneratedNums());
+            //Layout3.makeNumBoard(DataAPI.getInstance().getGeneratedNums());
             layout1.forEach(node => {
                 node.classList.add('none');
             });

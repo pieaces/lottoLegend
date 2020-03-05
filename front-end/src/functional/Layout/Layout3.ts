@@ -1,7 +1,7 @@
 const numContainerBox = document.querySelector('.func3-num-container-box');
 export default class Layout3 {
 
-    static makeNumBoard(dataSet: number[][]) {
+    static makeNumBoard(dataSet: { numbers: number[], winner: number[] }[]) {
         for (let i = 0; i < dataSet.length; i++) {
             const numContainer = document.createElement('div');
             numContainer.classList.add('func3-num-container');
@@ -98,18 +98,3 @@ export default class Layout3 {
         }
     }
 }
-
-
-// const allCheckBox=<HTMLInputElement>document.querySelector('#func3-all-check');
-// const checkboxes=document.querySelectorAll('.func3-num-container > div > input');
-
-// if(allCheckBox.checked){
-//     checkboxes.forEach(<HTMLInputElement>(node)=>{
-//         node.checked=true;
-//     })
-
-// }else{
-//     checkboxes.forEach(<HTMLInputElement>(node)=>{
-//         node.checked=false;
-//     })
-// }

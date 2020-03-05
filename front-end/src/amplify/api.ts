@@ -25,7 +25,7 @@ export async function getUnAuthAPI(path: string, queryStringParameters?: any) {
     return await API.get(apiName, path, myInit);
 }
 
-export async function postAuthAPI(path: string = '/posts', body: any) {
+export async function postAuthAPI(path: string = '/posts', body?: any) {
     const myInit = {
         headers: {
             'X-Id-Token': await getIdToken()
