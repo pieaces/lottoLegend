@@ -3,10 +3,10 @@ import { dynamoDB } from ".";
 import { getCurrentRound } from "../funtions";
 import { getIncOrExcNumbers, IncOrExc } from "./myNumbers";
 
-export async function freeGeneratorA(currentId:string) {
+async function generateNumberA(userName:string) {
     const currentRound = getCurrentRound();
-    const include = await getIncOrExcNumbers(currentId, currentRound, IncOrExc.include);
-    const exclude = await getIncOrExcNumbers(currentId, currentRound, IncOrExc.exclude);
+    const include = await getIncOrExcNumbers(userName, currentRound, IncOrExc.include);
+    const exclude = await getIncOrExcNumbers(userName, currentRound, IncOrExc.exclude);
     const choice: number[] = [];
 
     exclude.forEach((num, index) => {
@@ -44,11 +44,11 @@ export async function freeGeneratorA(currentId:string) {
 
     return numsArr;
 }
-async function abc() {
-    const numsArr = await freeGeneratorA('pieaces');
+export async function generatorA(userName:string) {
+    const numsArr = await generateNumberA(userName);
     numsArr.push([2, 9, 16, 25, 26, 40]);
     numsArr.push([2, 9, 16, 25, 26, 39]);
-    const lottoData = await bcd();
+    const lottoData = await scanLotto();
     const body = numsArr.map(numbers => {
         const winner = new Array<number>(5).fill(0);
 
@@ -92,7 +92,7 @@ async function abc() {
     });
     return body;
 }
-async function bcd(): Promise<{ BonusNum: { N: string }, Numbers: { NS: string[] } }[]> {
+async function scanLotto(): Promise<{ BonusNum: { N: string }, Numbers: { NS: string[] } }[]> {
     const params: AWS.DynamoDB.ScanInput = {
         TableName: 'LottoData',
         ProjectionExpression: 'Numbers, BonusNum'

@@ -1,7 +1,8 @@
 import verify from "./auth";
 import { getCurrentRound } from "./funtions";
-import { updateNumbers, getNumbersByClass, deleteNumsArr, getIncOrExcNumbers, getNumbersByRound, updateIncOrExcNumbers, IncOrExc, freeGeneratorA } from './dynamoDB/myNumbers'
+import { updateNumbers, getNumbersByClass, deleteNumsArr, getIncOrExcNumbers, getNumbersByRound, updateIncOrExcNumbers, IncOrExc } from './dynamoDB/myNumbers'
 import { queryLottoData } from "./dynamoDB/lottoData";
+import { generatorA } from "./dynamoDB/generator";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -118,26 +119,13 @@ exports.handler = async (event: any) => {
         case '/numbers/generator/free/a': {
             switch (method) {
                 case 'POST':
-                    const numsArr = await freeGeneratorA(currentId);
-                    body = numsArr.map(numbers => {
-                        return {
-                            numbers,
-
-                        }
-                    });
+                    body = await generatorA(currentId);
             }
         }
         break;
         case '/numbers/generator/free/b': {
             switch (method) {
                 case 'POST':
-                    const numsArr = await freeGeneratorA(currentId);
-                    body = numsArr.map(numbers => {
-                        return {
-                            numbers,
-
-                        }
-                    });
             }
         }
         break;
