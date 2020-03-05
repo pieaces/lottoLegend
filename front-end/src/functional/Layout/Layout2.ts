@@ -2,8 +2,7 @@ import Swal from 'sweetalert2'
 import bar from '../instance2/barInstance'
 import gauss from '../instance2/gaussInstance'
 import radar from '../instance2/radarInstance'
-import { rangeMake } from '../../functions';
-import makeDraggable from './makeDraggable';
+import { rangeMake, makeModal } from '../../functions';
 
 const lottoNumbers = document.querySelectorAll<HTMLElement>('.func2-lotto-num');
 const numTermFreqBox = document.querySelectorAll<HTMLElement>('.func2-lotto-checkbox');
@@ -17,10 +16,8 @@ const $95 = document.querySelector<HTMLElement>('.stats-95-value');
 const last = document.querySelector<HTMLElement>('.stats-last-value');
 
 type Version = 'include' | 'exclude';
-
 const includeInfo =
-`<span style="font-size: 1.5rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
-
+`<span style="font-size: 1.4rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
 우리의 모티브는 아래와 같습니다.
 "수백회차가 진행되는 동안, 출현했던 번호만 계속 나온다면,
 <span style="color:black;font-weight:bold;">큰수'법칙'</span>은 충족되지 않을것입니다."
@@ -38,8 +35,7 @@ const includeInfo =
 
 *<span style="color:blue;font-weight:bold;">빈도X간격</span>: 빈도의 계수(고유한수치)와 간격의 계수를 산술처리로 종합하였습니다.`;
 const excludeInfo = 
-`<span style="font-size: 1.5rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
-
+`<span style="font-size: 1.4rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
 우리의 모티브는 아래와 같습니다.
 "수백회차가 진행되는 동안, 출현했던 번호만 계속 나온다면,
 <span style="color:black;font-weight:bold;">큰수'법칙'</span>은 충족되지 않을것입니다."
@@ -334,18 +330,23 @@ export default class Layout2 {
         this.setColorWinNum();
         this.addEvent();
         document.querySelector<HTMLElement>('.func2-numboard-que').addEventListener('click', () => {
-            if(this.version === 'include') Swal.fire(includeInfo);
-            else Swal.fire(excludeInfo);
-            const text = document.querySelector<HTMLElement>('.swal2-title');
-            text.style.display='block';
-            text.style.fontSize='1.5rem';
-            text.style.fontWeight = '500';
+            if(this.version === 'include') makeModal(includeInfo, 55);
+            else makeModal(excludeInfo, 55);
+        });
+        document.querySelector<HTMLElement>('.func2-radar-que').addEventListener('click', () => {
+            const radarInfo = 
+`<span style="font-size: 1.4rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
+우리의 모티브는 아래와 같습니다.
+"수백회차가 진행되는 동안, 출현했던 번호만 계속 나온다면,
+<span style="color:black;font-weight:bold;">큰수'법칙'</span>은 충족되지 않을것입니다."
 
-            const modalBox = document.querySelector<HTMLElement>('.swal2-modal');
-            modalBox.style.width = '55rem'
-            modalBox.style.boxShadow = '0 1px 1px rgba(0,0,0,0.12),0 2px 2px rgba(0,0,0,0.12),0 4px 4px rgba(0,0,0,0.12),0 8px 8px rgba(0,0,0,0.12),0 16px 16px rgba(0,0,0,0.12)';
-            document.querySelector<HTMLElement>('.swal2-container').style.background='#ffffff00';
-            makeDraggable(document.querySelector<HTMLElement>('.swal2-container'));
+전체 회차에 대한 번호별 출현간격은
+레이더차트를 이용해 12간격까지 나타내었습니다.
+그리고 그밖의 데이터를 표로 나타내었습니다.
+여기서 전체 68%의 간격, 95%의 간격이라 함은,
+말 그대로 전체회차의 68%, 95%에서 택하신 번호의 간격이
+해당 범위 안에 포함되었음을 뜻합니다.`
+            makeModal(radarInfo, 50);
         })
     }
 

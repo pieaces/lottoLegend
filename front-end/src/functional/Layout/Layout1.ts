@@ -5,6 +5,7 @@ import bubbleChart from '../instance1/bubbleInstance'
 import LineSlide2 from "../Slide/LineSlide2";
 import Swal from "sweetalert2";
 import makeDraggable from "./makeDraggable";
+import { makeModal } from "../../functions";
 
 const meanValue = document.querySelector('#func1-bubble-mean-value');
 const stdevValue = document.querySelector('#func1-bubble-stdev-value');
@@ -25,16 +26,7 @@ function range(mean: number, stdev: number, multiple: number): [number, number] 
 function rangeString(range: [number, number], min: number, max: number): string {
     return (range[0] < min ? min : range[0]).toFixed(2) + '~' + (range[1] > max ? max : range[1]).toFixed(2)
 }
-export default class Layout1 {
-    barSlide: BarSlide = barSlide;
-    lineSlide: LineSlide2 = lineSlide;
-    bubbleChart = bubbleChart;
-    constructor() {
-        document.querySelector<HTMLElement>('.func1-bubble-que').addEventListener('click', () => {
-            Swal.fire({
-                title:
-`<span style="font-size: 1.5rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
-
+const bubbleInfo = `<span style="font-size: 1.4rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
 우리의 모티브는 아래와 같습니다.
 "수백회차가 진행되는 동안, 출현했던 번호만 계속 나온다면,
 <span style="color:black;font-weight:bold;">큰수'법칙'</span>은 충족되지 않을것입니다."
@@ -55,18 +47,14 @@ export default class Layout1 {
 *<span style="color:green;font-weight:bold;">크기</span>: 크기가 클수록 수학적 확률값, 즉 출현확률 자체가 높음을 의미합니다.
 
 <span style="font-size:1.2rem">예시1) 좌하향, 옅은 농도 => 해당 수치가 예상치보다 많이 나왔음을 의미합니다.
-예시1) 우상향, 짙한 농도 => 해당 수치가 예상치보다 적게 나왔음을 의미합니다.</span>`,
-            });
-            const modalBox = document.querySelector<HTMLElement>('.swal2-modal');
-            modalBox.style.width = '60rem'
-            const text = document.querySelector<HTMLElement>('.swal2-title');
-            text.style.display = 'block';
-            text.style.fontSize = '1.5rem';
-            text.style.fontWeight = '500';
-            modalBox.style.boxShadow = '0 1px 1px rgba(0,0,0,0.12),0 2px 2px rgba(0,0,0,0.12),0 4px 4px rgba(0,0,0,0.12),0 8px 8px rgba(0,0,0,0.12),0 16px 16px rgba(0,0,0,0.12)';
-            document.querySelector<HTMLElement>('.swal2-container').style.background='#ffffff00';
-            makeDraggable(document.querySelector<HTMLElement>('.swal2-container'));
-
+예시1) 우상향, 짙한 농도 => 해당 수치가 예상치보다 적게 나왔음을 의미합니다.</span>`;
+export default class Layout1 {
+    barSlide: BarSlide = barSlide;
+    lineSlide: LineSlide2 = lineSlide;
+    bubbleChart = bubbleChart;
+    constructor() {
+        document.querySelector<HTMLElement>('.func1-bubble-que').addEventListener('click', () => {
+            makeModal(bubbleInfo, 60);
         });
     }
     public setStatsBoard(stats: Stats) {

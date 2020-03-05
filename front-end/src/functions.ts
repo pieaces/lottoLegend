@@ -1,4 +1,5 @@
 import Swal from 'sweetalert2'
+import makeDraggable from './functional/Layout/makeDraggable';
 
 export function networkAlert(){
 Swal.fire({
@@ -125,4 +126,17 @@ export function rangeMake(stats:any, mul:number=1, add:number=0): string{
     from = from < stats.min ? stats.min : from;
     to = to > stats.max ? stats.max : to;
     return `${Math.floor(from) + add} ~ ${Math.ceil(to) + add}`
+}
+
+export function makeModal(title: string, width: number) {
+    Swal.fire(title);
+    const modalBox = document.querySelector<HTMLElement>('.swal2-modal');
+    modalBox.style.width = width + 'rem';
+    const text = document.querySelector<HTMLElement>('.swal2-title');
+    text.style.display = 'block';
+    text.style.fontSize = '1.5rem';
+    text.style.fontWeight = '500';
+    modalBox.style.boxShadow = '0 1px 1px rgba(0,0,0,0.12),0 2px 2px rgba(0,0,0,0.12),0 4px 4px rgba(0,0,0,0.12),0 8px 8px rgba(0,0,0,0.12),0 16px 16px rgba(0,0,0,0.12)';
+    document.querySelector<HTMLElement>('.swal2-container').style.background = '#ffffff00';
+    makeDraggable(document.querySelector<HTMLElement>('.swal2-container'));
 }
