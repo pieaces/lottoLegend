@@ -53,7 +53,9 @@ export enum StatsMethod {
     emergence = "emergence",
     interval = "interval",
     howLongNone = "howLongNone",
-    frequency = "frequency"
+    frequency = "frequency",
+//
+    line = "line"
 }
 
 export interface QueryStatsParams extends Params {
