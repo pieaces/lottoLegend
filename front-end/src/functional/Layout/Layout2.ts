@@ -2,7 +2,7 @@ import Swal from 'sweetalert2'
 import bar from '../instance2/barInstance'
 import gauss from '../instance2/gaussInstance'
 import radar from '../instance2/radarInstance'
-import { rangeMake } from '../../functions';
+import { rangeMake, onlyUserAlert } from '../../functions';
 
 const lottoNumbers = document.querySelectorAll<HTMLElement>('.func2-lotto-num');
 const numTermFreqBox = document.querySelectorAll<HTMLElement>('.func2-lotto-checkbox');
@@ -289,6 +289,14 @@ export default class Layout2 {
         this.numFreqOrTermToggle();
         this.setColorWinNum();
         this.addEvent();
+        document.querySelector<HTMLElement>('.que-container').addEventListener('click', () => {
+            Swal.fire(
+                `aa
+                aa`);
+            const text = document.querySelector<HTMLElement>('.swal2-title');
+            text.style.fontSize='2rem';
+            text.style.fontWeight = '500';
+        })
     }
 
     refreshNumberBoard() {
