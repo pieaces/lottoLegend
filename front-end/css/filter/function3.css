@@ -1,3 +1,10 @@
+.func3-make-btn-container{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  height:10rem;
+}
+
 .func3-filter-table{
   height:100%;
 }
@@ -202,3 +209,23 @@ height:5rem;
   height:10rem;
 }
 
+.make-btn{
+  padding-bottom:0.5rem;
+  border-radius: 5px;
+  background-color: rgba(3, 155, 229,1);
+  width:12rem;
+  height:5rem;
+  font-size:2rem;
+  color:var(--default-color);
+}
+
+.make-btn:hover{
+  background-color: rgba(3, 155, 229,0.95);
+  transition: ease-in-out all 0.15s;
+  box-shadow: inset -3px -5px 0 rgba(0,0,0,0.2),inset 3px 1px 0 rgba(0,0,0,0.2);
+}
+
+.make-btn:active{
+  transition: ease-in-out all 0.15s;
+  box-shadow:none;
+}
