@@ -46,8 +46,6 @@ async function generateNumberA(userName:string) {
 }
 export async function generatorA(userName:string) {
     const numsArr = await generateNumberA(userName);
-    numsArr.push([2, 9, 16, 25, 26, 40]);
-    numsArr.push([2, 9, 16, 25, 26, 39]);
     const lottoData = await scanLotto();
     const body = numsArr.map(numbers => {
         const winner = new Array<number>(5).fill(0);
