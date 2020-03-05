@@ -105,30 +105,6 @@ document.write(`<div class="filter-box-container-box func1-layout func2-layout b
   <div class="left-container func1-chart-container box-color">
     <div class="que-container func1-bubble-que">
       <i class="far fa-question-circle"></i>
-      <div class="que-modal func1-bubble-que-modal none">
-        <div class="que-cancel func1-bubble-que-cancel">
-          <i class="fas fa-times"></i>
-        </div>
-        <div class="que-text func1-bubble-que-modal-text">
-          <ul>
-            <li>가로축: 전체포화도:<br>
-              전체회차에 대해 수학적 예상값보다 많거나 적음을 수치화:<br>
-              왼쪽일수록 포화상태(예상값보다 많이 출현)</li>
-            <li>세로축: 최근포화도:<br>
-              최근회차에 대해 수학적 예상값보다 많거나 적음을 수치화:<br>
-              아래쪽일수록 포화상태(예상값보다 많이 출현)</li>
-            <li>농도: 종합포화도:<br>
-              전체포화도와 최근포화도를 종합하여 수치로 표현:<br>
-              농도가 옅을수록 포화상태(예상값보다 많이 출현)</li>
-            <li>크기: 수학적확률<br>
-              크기가 클수록 수학적 확률값이 높음(출현가능성이 높음)</li>
-            <li>요약: 좌하향, 옅은 농도 => 예상치보다 많이 나왔음을 의미함.<br>
-              반면, 우상향, 짙한 농도 => 예상치보다 적게 나왔음을 의미함.<br>
-              큰수 법칙 = 시행횟수가 커질수록, 실제값은 확률값을 따른다.<br></li>
-            <li>크기, 우상향, 짙은농도를 장기적 경향성으로 연결지을 수 있음.</li>
-          </ul>
-        </div>
-      </div>
     </div>
     <div id="func1-chart-bubble">
     </div>

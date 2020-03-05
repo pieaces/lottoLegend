@@ -3,6 +3,7 @@ import bar from '../instance2/barInstance'
 import gauss from '../instance2/gaussInstance'
 import radar from '../instance2/radarInstance'
 import { rangeMake } from '../../functions';
+import makeDraggable from './makeDraggable';
 
 const lottoNumbers = document.querySelectorAll<HTMLElement>('.func2-lotto-num');
 const numTermFreqBox = document.querySelectorAll<HTMLElement>('.func2-lotto-checkbox');
@@ -33,7 +34,7 @@ const includeInfo =
 *<span style="color:blue;font-weight:bold;">번호간격</span>: 마지막 출현회차가 오래될수록 진하게 표현하였습니다.
 마지막 출현회차가 <span style="color:black;"><U>오래전일수록 진하고, 최근일수록 옅습니다.</U></span>
 
-*<span style="color:blue;font-weight:bold;">빈도X간격</span>: 빈도의 계수(고유한수치)와 간격의 계수를 종합하였습니다.`;
+*<span style="color:blue;font-weight:bold;">빈도X간격</span>: 빈도의 계수(고유한수치)와 간격의 계수를 산술처리로 종합하였습니다.`;
 const excludeInfo = 
 `우리의 모티브는 아래와 같습니다.
 "수백회차가 진행되는 동안, 출현했던 번호만 계속 나온다면,
@@ -50,7 +51,7 @@ const excludeInfo =
 *<span style="color:red;font-weight:bold;">번호간격</span>: 마지막 출현회차가 최근일수록 진하게 표현하였습니다.
 마지막 출현회차가 <span style="color:black;"><U>최근일수록 진하고, 오래 전이었을수록 옅습니다.</U></span>
 
-*<span style="color:red;font-weight:bold;">빈도X간격</span>: 빈도의 계수(고유한수치)와 간격의 계수를 종합하였습니다.`;
+*<span style="color:red;font-weight:bold;">빈도X간격</span>: 빈도의 계수(고유한수치)와 간격의 계수를 산술처리로 종합하였습니다.`;
 export default class Layout2 {
     static readonly MAX_SIZE = 10;
     static lottoNumDefaultColor = '#00048c';
@@ -328,14 +329,19 @@ export default class Layout2 {
         this.numFreqOrTermToggle();
         this.setColorWinNum();
         this.addEvent();
-        document.querySelector<HTMLElement>('.que-container').addEventListener('click', () => {
+        document.querySelector<HTMLElement>('.func2-numboard-que').addEventListener('click', () => {
             if(this.version === 'include') Swal.fire(includeInfo);
             else Swal.fire(excludeInfo);
-            document.querySelector<HTMLElement>('.swal2-modal').style.width='52rem'
             const text = document.querySelector<HTMLElement>('.swal2-title');
             text.style.display='block';
             text.style.fontSize='1.5rem';
             text.style.fontWeight = '500';
+
+            const modalBox = document.querySelector<HTMLElement>('.swal2-modal');
+            modalBox.style.width = '52rem'
+            modalBox.style.boxShadow = '0 1px 1px rgba(0,0,0,0.12),0 2px 2px rgba(0,0,0,0.12),0 4px 4px rgba(0,0,0,0.12),0 8px 8px rgba(0,0,0,0.12),0 16px 16px rgba(0,0,0,0.12)';
+            document.querySelector<HTMLElement>('.swal2-container').style.background='#ffffff00';
+            makeDraggable(document.querySelector<HTMLElement>('.swal2-container'));
         })
     }
 
