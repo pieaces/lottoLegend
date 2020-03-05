@@ -1,6 +1,6 @@
 import verify from "./auth";
 import { getCurrentRound } from "./funtions";
-import { updateNumbers, getNumbersByClass, deleteNumsArr, getIncOrExcNumbers, getNumbersByRound, updateIncOrExcNumbers, IncOrExc, freeGenerator, SelectTool } from './dynamoDB/myNumbers'
+import { updateNumbers, getNumbersByClass, deleteNumsArr, getIncOrExcNumbers, getNumbersByRound, updateIncOrExcNumbers, IncOrExc, freeGeneratorA } from './dynamoDB/myNumbers'
 import { queryLottoData } from "./dynamoDB/lottoData";
 
 const headers = {
@@ -115,13 +115,33 @@ exports.handler = async (event: any) => {
             }
         }
             break;
-        case '/numbers/generator/free': {
-            switch(method){
+        case '/numbers/generator/free/a': {
+            switch (method) {
                 case 'POST':
-                    const numsArr = await freeGenerator(currentId);
-                    body = await updateNumbers(currentId, getCurrentRound(), numsArr, SelectTool.free);
+                    const numsArr = await freeGeneratorA(currentId);
+                    body = numsArr.map(numbers => {
+                        return {
+                            numbers,
+
+                        }
+                    });
             }
         }
+        break;
+        case '/numbers/generator/free/b': {
+            switch (method) {
+                case 'POST':
+                    const numsArr = await freeGeneratorA(currentId);
+                    body = numsArr.map(numbers => {
+                        return {
+                            numbers,
+
+                        }
+                    });
+            }
+        }
+        break;
+        
     }
     const response = {
         statusCode,

@@ -428,7 +428,7 @@ export function getIncOrExcNumbers(userName: string, round: number, choice: IncO
     });
 }
 
-export async function freeGenerator(currentId:string) {
+export async function freeGeneratorA(currentId:string) {
     const currentRound = getCurrentRound();
     const include = await getIncOrExcNumbers(currentId, currentRound, IncOrExc.include);
     const exclude = await getIncOrExcNumbers(currentId, currentRound, IncOrExc.exclude);
@@ -444,9 +444,8 @@ export async function freeGenerator(currentId:string) {
     }
 
     const numsArr: number[][] = [];
-    const plan = await getPlan(currentId);
 
-    while (numsArr.length < planLimit[plan]) {
+    while (numsArr.length <= 5) {
         const SIZE = choice.length;
         const numberSet: Set<number> = new Set();
         while (numberSet.size < 6) {
@@ -468,6 +467,5 @@ export async function freeGenerator(currentId:string) {
         }
     }
 
-    console.log(numsArr);
     return numsArr;
 }
