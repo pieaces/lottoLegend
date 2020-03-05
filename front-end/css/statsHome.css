@@ -129,16 +129,20 @@
       height:100%;
   }
 
-  .stats-table  tr >td:nth-child(1){
-    background-color: var(--table-title-color);
-  }
-
-  .stats-table  tr >td{
+  .stats-table  tr > td{
     width:50%;
     font-size:1.4rem;
     text-align: center;
   }
 
+  .stats-table tr > td:nth-child(2){
+    font-weight: 600;
+    font-size: 1.6rem;
+    color: #333333;
+  }
+  .stats-table  tr > td:nth-child(1){
+    background-color: var(--table-title-color);
+  }
 
   .lotto-num-container{
       width:40%;
