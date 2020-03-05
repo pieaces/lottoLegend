@@ -61,14 +61,14 @@ export default class Layout3 {
 
 
             const listFilterTableMap = new Map([
-                [dataSet[i]["lowCount"], "저값개수"],
-                [dataSet[i]["sum"], "번호합계"],
-                [dataSet[i]["oddCount"], "홀수개수"],
-                [dataSet[i]["primeCount"], "소수개수"],
-                [dataSet[i]["$3Count"], "3배수개수"],
-                [dataSet[i]["sum$10"], "첫수 합"],
-                [dataSet[i]["diffMaxMin"], "고저 차"],
-                [dataSet[i]["AC"], "AC"]
+                ["저값개수", dataSet[i]["lowCount"]],
+                ["번호합계", dataSet[i]["sum"]],
+                ["홀수개수", dataSet[i]["oddCount"]],
+                ["소수개수", dataSet[i]["primeCount"]],
+                ["3배수개수", dataSet[i]["$3Count"]],
+                ["첫수 합", dataSet[i]["sum$10"]],
+                ["고저 차", dataSet[i]["diffMaxMin"]],
+                ["AC", dataSet[i]["AC"]]
             ])
 
             const listFilterTableTrTitle = document.createElement('tr');
