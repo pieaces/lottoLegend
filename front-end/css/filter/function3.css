@@ -1,8 +1,6 @@
 
 
-.func3-filter-table{
-  height:100%;
-}
+
 
 .func3-filter-table  tr:nth-child(1) >td{
 background-color: var(--table-title-color);
@@ -13,6 +11,22 @@ background-color: var(--table-title-color);
 font-size:1.4rem;
 text-align: center;
 height:5rem;
+}
+
+.func3-past-win-table tr td:nth-child(1){
+  background-color: var(--table-title-color);
+}
+
+.func3-past-win-table tr>td{
+  width:16.6%;
+  height:5rem;
+  text-align: center;
+}
+
+.func3-list-filter-table tr >td{
+  width:12.5%;
+  height:5rem;
+  text-align: center;
 }
 
 .func3-filter-value-container{
