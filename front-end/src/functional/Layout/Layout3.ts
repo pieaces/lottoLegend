@@ -57,7 +57,7 @@ export default class Layout3 {
 
             const listFilterTable = document.createElement('table');
 
-            listFilterTable.classList.add('table', 'func3-list-table');
+            listFilterTable.classList.add('table', 'func3-list-filter-table');
 
 
             const listFilterTableMap = new Map([
