@@ -143,7 +143,10 @@ const stackOption: Chart.ChartOptions = {
         }],
         yAxes: [{
             stacked: true,
-
+            ticks:{
+                min:0,
+                max:6
+            }
         }]
     }
 };

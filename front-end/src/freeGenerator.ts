@@ -25,8 +25,8 @@ document.querySelector<HTMLElement>('.line-gen-toggle-btn').addEventListener('cl
         lineCheck = true;
         const data = await getUnAuthAPI('/stats/mass', {method:'line'});
         console.log(data)
-        actualInstance.dataBox.datasets.forEach((box, index) => box.data = [data.all[index]/900]);
-        latestInstance.dataBox.datasets.forEach((box, index) => box.data = [data.latest[index]/12]);
+        actualInstance.dataBox.datasets.forEach((box, index) => box.data = [Number((data.all[index]/data.total).toFixed(2))]);
+        latestInstance.dataBox.datasets.forEach((box, index) => box.data = [Number((data.latest[index]/12).toFixed(2))]);
         actualInstance.update();
         latestInstance.update();
     }
