@@ -12,7 +12,74 @@ const excludeCanvas = document.getElementById('exclude');
 const wrapper = document.querySelector<HTMLElement>('.func3-num-wrapper');
 const lineGenerator = document.querySelector<HTMLElement>('.line-gen-stack-chart-container');
 const lineInput = document.querySelector<HTMLElement>('.line-gen-num-table');
+
+const first = document.querySelector<HTMLInputElement>('#first-nums');
+const tenth = document.querySelector<HTMLInputElement>('#tenth-nums');
+const twentieth = document.querySelector<HTMLInputElement>('#twentieth-nums');
+const thirtieth = document.querySelector<HTMLInputElement>('#thirtieth-nums');
+const fortieth = document.querySelector<HTMLInputElement>('#fortieth-nums');
 init();
+
+function sum(){
+    return Number(first.value) + Number(tenth.value) + Number(twentieth.value) + Number(thirtieth.value) + Number(fortieth.value);
+}
+function info(){
+    Swal.fire({
+        title:'알림',
+        text:'합이 6이 넘어갈 수 없습니다.',
+        icon:'info'
+    })
+}
+first.oninput = () => {
+    if (sum() <= 6) {
+        selectionInstance.dataBox.datasets[0].data = [Number(first.value)];
+        selectionInstance.update();
+    }
+    else {
+        first.value = '';
+        info();
+    }
+}
+tenth.oninput = () => {
+    if (sum() <= 6) {
+        selectionInstance.dataBox.datasets[1].data = [Number(tenth.value)];
+        selectionInstance.update();
+    }
+    else {
+        tenth.value = '';
+        info();
+    }
+}
+twentieth.oninput = () => {
+    if (sum() <= 6) {
+        selectionInstance.dataBox.datasets[2].data = [Number(twentieth.value)];
+        selectionInstance.update();
+    }
+    else {
+        twentieth.value = '';
+        info();
+    }
+}
+thirtieth.oninput = () => {
+    if (sum() <= 6) {
+        selectionInstance.dataBox.datasets[3].data = [Number(thirtieth.value)];
+        selectionInstance.update();
+    }
+    else {
+        thirtieth.value = '';
+        info();
+    }
+}
+fortieth.oninput = () => {
+    if (sum() <= 6) {
+        selectionInstance.dataBox.datasets[4].data = [Number(fortieth.value)];
+        selectionInstance.update();
+    }
+    else {
+        fortieth.value = '';
+        info();
+    }
+}
 let lineCheck = false;
 document.querySelector<HTMLElement>('.line-gen-toggle-btn').addEventListener('click', async () =>{
     if(lineCheck){
@@ -27,10 +94,11 @@ document.querySelector<HTMLElement>('.line-gen-toggle-btn').addEventListener('cl
         console.log(data)
         actualInstance.dataBox.datasets.forEach((box, index) => box.data = [Number((data.all[index]/data.total).toFixed(2))]);
         latestInstance.dataBox.datasets.forEach((box, index) => box.data = [Number((data.latest[index]/12).toFixed(2))]);
+        predictInstance.create();
         actualInstance.update();
         latestInstance.update();
     }
-})
+});
 async function init() {
     loading.classList.remove('none');
     const { include, exclude } = await getAuthAPI('/numbers/piece');

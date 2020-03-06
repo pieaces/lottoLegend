@@ -13,27 +13,27 @@ const predictDataBox = {
         {
             label: '1번대',
             backgroundColor: compartColor[0],
-            data: null
+            data: [1.33]
         },
         {
             label: '10번대',
             backgroundColor: compartColor[1],
-            data: null
+            data: [1.33]
         },
         {
             label: '20번대',
             backgroundColor: compartColor[2],
-            data: null
+            data: [1.33]
         },
         {
             label: '30번대',
             backgroundColor: compartColor[3],
-            data: null
+            data: [1.33]
         },
         {
             label: '40번대',
             backgroundColor: compartColor[4],
-            data: null
+            data: [0.67]
         }
     ]
 };
@@ -156,7 +156,6 @@ const actualInstance = new ChartBase('bar', actualCanvas, actualDataBox, stackOp
 const latestInstance = new ChartBase('bar', latestCanvas, latestDataBox, stackOption);
 const selectionInstance = new ChartBase('bar', selectionCanvas, selectionDataBox, stackOption);
 
-predictInstance.create();
 actualInstance.create();
 latestInstance.create();
 selectionInstance.create();
