@@ -1,6 +1,6 @@
 import configure from './amplify/configure'
 import Layout3 from './functional/Layout/Layout3'
-import { postAuthAPI, getAuthAPI } from './amplify/api';
+import { getAuthAPI } from './amplify/api';
 import Swal from 'sweetalert2'
 
 configure();
@@ -42,7 +42,7 @@ async function init() {
         footer.style.fontSize = '2rem';
         footer.style.fontWeight = 'bold';
 
-        dataSet = await postAuthAPI('/numbers/generator/free/a');
+        dataSet = await getAuthAPI('/numbers/generator/free');
         Layout3.makeNumBoard(dataSet);
     });
     loading.classList.add('none');
