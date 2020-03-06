@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../../css/header.css" />
     <link rel="stylesheet" href="../../css/footer.css" />
     <link rel="stylesheet" href="../../css/analLineGen.css">
+    <link rel="stylesheet" href="../../css/filter/func3GenNumBox.css">
     <title>CanvasLotto</title>
 </head>
 
@@ -28,28 +29,128 @@
                         구간별 번호 생성
                     </div>
                     <div class="line-gen-num-container">
-                        <div class="line-gen-num-box">
-                            <label for="first-nums"></label>
-                            <input type="text" id="first-nums">
-                        </div>
-                        <div class="line-gen-num-box">
-                            <label for="first-nums"></label>
-                            <input type="text" id="first-nums">
-                        </div>
-                        <div class="line-gen-num-box">
-                            <label for="first-nums"></label>
-                            <input type="text" id="first-nums">
-                        </div>
-                        <div class="line-gen-num-box">
-                            <label for="first-nums"></label>
-                            <input type="text" id="first-nums">
-                        </div>
-                        <div class="line-gen-num-box">
-                            <label for="first-nums"></label>
-                            <input type="text" id="first-nums">
-                        </div>
-                        <div class="make-btn-box">
+                        <table class="table line-gen-num-table">
+                            <tr>
+                                <td>
+                                    <label for="first-nums">1번대</label>
+                                    <div class="line-gen-num-input-box">
+                                        <input type="text" id="first-nums">
+                                    </div>
+                                </td>
+                                <td>
+                                    <label for="tenth-nums">10번대</label>
+                                    <div class="line-gen-num-input-box">
+                                        <input type="text" id="tenth-nums">
+                                    </div>
+                                </td>
+                                <td>
+                                    <label for="twentieth-nums">20번대</label>
+                                    <div class="line-gen-num-input-box">
+                                        <input type="text" id="twentieth-nums">
+                                    </div>
+                                </td>
+                                <td>
+                                    <label for="thirtieth-nums">30번대</label>
+                                    <div class="line-gen-num-input-box">
+                                        <input type="text" id="thirtieth-nums">
+                                    </div>
+                                </td>
+                                <td>
+                                    <label for="fortieth-nums">40번대</label>
+                                    <div class="line-gen-num-input-box">
+                                        <input type="text" id="fortieth-nums">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="make-btn-box">
+                                        <button type="button" class="btn make-btn" id="make">생성</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
 
+                    </div>
+
+                    <div class="line-gen-stack-chart-container">
+                        <div class="line-gen-stack-chart-box box-color">
+                            <canvas id="predict-canvas"></canvas>
+                        </div>
+                        <div class="line-gen-stack-chart-box box-color">
+                            <canvas id="actual-canvas"></canvas>
+                        </div>
+                        <div class="line-gen-stack-chart-box box-color">
+                            <canvas id="lately-canvas"></canvas>
+                        </div>
+                        <div class="line-gen-stack-chart-box box-color">
+                            <canvas id="selection-canvas"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="func3-num-wrapper">
+                        <div class="func3-all-check-box-container box-color">
+                            <div class="func3-all-check-box">
+                                <input type="checkbox" name="" id="func3-all-check" />
+
+                            </div>
+                            <span>모두</span>
+                            <div class="func3-save-box-1">
+                                <button type="button" class="btn save-btn">저장</button>
+                            </div>
+                        </div>
+                        <div class="func3-num-container-box">
+                            <div class="func3-num-container">
+                                <div>
+                                    <div class="func3-check-box">
+                                        <input type="checkbox">
+                                    </div>
+                                    <div class="func3-num-box">
+                                        <div>1</div>
+                                        <div>2</div>
+                                        <div>3</div>
+                                        <div>4</div>
+                                        <div>5</div>
+                                        <div>6</div>
+                                    </div>
+                                </div>
+                                <div class="func3-past-win-box">
+                                    <table class="table func3-past-win-table">
+                                        <tr>
+                                            <td>역대기록</td>
+                                            <td>2</td>
+                                            <td>3</td>
+                                            <td>4</td>
+                                            <td>5</td>
+                                            <td>6</td>
+
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="func3-filter-num-info">
+                                    <table class="table func3-list-filter-table">
+                                        <tr>
+                                            <td>3</td>
+                                            <td>5</td>
+                                            <td>6</td>
+                                            <td>2</td>
+                                            <td>1</td>
+                                            <td>55</td>
+                                            <td>12</td>
+                                        </tr>
+                                        <tr>
+                                            <td>소수개수</td>
+                                            <td>번호합계</td>
+                                            <td>홀수개수</td>
+                                            <td>3배수개수</td>
+                                            <td>첫수 합</td>
+                                            <td>고저 차</td>
+                                            <td>AC</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="func3-save-box-2 box-color">
+                            <button type="button" class="btn save-btn">저장</button>
                         </div>
                     </div>
                 </div>
@@ -59,6 +160,7 @@
     </div>
 
     <script src="../../js/headerHover.js"></script>
+    <script src="../../js/analLineGen.js"></script>
     <script src="https://kit.fontawesome.com/e14b8c39aa.js" crossorigin="anonymous"></script>
 </body>
 

@@ -13,7 +13,7 @@ export default class Layout3 {
             Box.style.backgroundColor = '#B0D840';
         }
     }
-    
+
     static makeNumBoard(dataSet: { numbers: number[], winner: number[] }[]) {
         numContainerBox.innerHTML = '';
         for (let i = 0; i < dataSet.length; i++) {
@@ -58,8 +58,8 @@ export default class Layout3 {
             for (let j = 0; j < dataSet[i].winner.length; j++) {
                 const td = document.createElement('td');
                 td.textContent = `${j + 1}등 : ${dataSet[i].winner[j]}`;
-                if(dataSet[i].winner[j] === 0){
-                    td.style.color="#a0a0a0";
+                if (dataSet[i].winner[j] === 0) {
+                    td.style.color = "#a0a0a0";
                 }
                 pastWinTableTr.appendChild(td);
             }
