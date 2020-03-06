@@ -107,7 +107,6 @@ async function init() {
     makeBtn.addEventListener('click', async () => {
         let params: any;
         if (!lineCheck || lineCheck && sum() === 6) {
-            params = [Number(first.value), Number(tenth.value), Number(twentieth.value), Number(thirtieth.value), Number(fortieth.value)]
             let dataSet: any;
             wrapper.classList.add('none');
             Swal.fire({
@@ -133,7 +132,12 @@ async function init() {
             footer.style.fontSize = '2rem';
             footer.style.fontWeight = 'bold';
 
-            dataSet = await getAuthAPI('/numbers/generator/free', { lineCount: JSON.stringify(params) });
+            if(lineCheck){
+                params = [Number(first.value), Number(tenth.value), Number(twentieth.value), Number(thirtieth.value), Number(fortieth.value)]
+                dataSet = await getAuthAPI('/numbers/generator/free', { lineCount: JSON.stringify(params) });
+            }else{
+                dataSet = await getAuthAPI('/numbers/generator/free');
+            }
             Layout3.makeNumBoard(dataSet);
         }else{
             Swal.fire({
