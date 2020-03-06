@@ -30,7 +30,8 @@ async function init() {
         const popup = document.querySelector<HTMLElement>('.swal2-popup');
         popup.style.width = "40.45rem";
         popup.style.height = "25rem";
-        document.querySelector<HTMLElement>('.swal2-backdrop-show').style.background = "rgba(0, 0, 0, 0.75)";
+        document.querySelector<HTMLElement>('.swal2-backdrop-show').style.background = "rgba(0, 0, 0, 0.6)";
+        document.querySelector<HTMLElement>('.swal2-backdrop-show').style.boxShadow = "inset 12rem 10rem 23rem #000000, inset -12rem -10rem 23rem #000000";
     })
     loading.classList.add('none');
 }

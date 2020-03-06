@@ -1,0 +1,8 @@
+.line-gen-num-container{
+    height:10rem;
+    display:flex;
+}
+
+.line-gen-num-container >div{
+    width:15rem;
+}
