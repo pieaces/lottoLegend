@@ -1,7 +1,21 @@
 const numContainerBox = document.querySelector('.func3-num-container-box');
 export default class Layout3 {
-
+    static setColorLotto(num: number, Box: HTMLElement) {
+        if (1 <= num && num <= 10) {
+            Box.style.backgroundColor = '#FBC400';
+        } else if (num <= 20) {
+            Box.style.backgroundColor = '#69C8F2';
+        } else if (num <= 30) {
+            Box.style.backgroundColor = '#FF7272';
+        } else if (num <= 40) {
+            Box.style.backgroundColor = '#AAAAAA';
+        } else if (num <= 45) {
+            Box.style.backgroundColor = '#B0D840';
+        }
+    }
+    
     static makeNumBoard(dataSet: { numbers: number[], winner: number[] }[]) {
+        numContainerBox.innerHTML = '';
         for (let i = 0; i < dataSet.length; i++) {
             const numContainer = document.createElement('div');
             numContainer.classList.add('func3-num-container');
@@ -22,7 +36,7 @@ export default class Layout3 {
             for (let j = 0; j < dataSet[i].numbers.length; j++) {
                 const num = document.createElement('div');
                 num.textContent = String(dataSet[i].numbers[j]);
-                // setColorLotto(dataSet[i].numbers[j],num);
+                Layout3.setColorLotto(dataSet[i].numbers[j], num);
                 numBox.appendChild(num);
             }
 
@@ -44,6 +58,9 @@ export default class Layout3 {
             for (let j = 0; j < dataSet[i].winner.length; j++) {
                 const td = document.createElement('td');
                 td.textContent = `${j + 1}등 : ${dataSet[i].winner[j]}`;
+                if(dataSet[i].winner[j] === 0){
+                    td.style.color="#a0a0a0";
+                }
                 pastWinTableTr.appendChild(td);
             }
 
