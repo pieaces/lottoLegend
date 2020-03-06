@@ -29,7 +29,7 @@
                         구간별 번호 생성
                     </div>
                     <div class="line-gen-num-container">
-                        <table class="table line-gen-num-table">
+                        <table class="table line-gen-num-table hide">
                             <tr>
                                 <td>
                                     <div class="line-gen-num-input-container">
@@ -71,17 +71,14 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>
-                                    <div class="line-gen-make-btn-box">
-                                        <button type="button" class="btn make-btn" id="make">생성</button>
-                                    </div>
-                                </td>
+
                             </tr>
                         </table>
-
+                        <div class="line-gen-make-btn-box">
+                            <button type="button" class="btn make-btn" id="make">생성</button>
+                        </div>
                     </div>
-
-                    <div class="line-gen-stack-chart-container">
+                    <div class="line-gen-stack-chart-container hide">
                         <div class="line-gen-stack-chart-box box-color">
                             <canvas id="predict-canvas"></canvas>
                         </div>
