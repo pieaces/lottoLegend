@@ -86,8 +86,9 @@ export async function queryStats(method: StatsMethod, ProjectionExpression?:stri
                         break;
                     case StatsMethod.line:
                         const data = {
-                            all: item.All.L.map(value => value.N),
-                            latest: item.Latest.L.map(value => value.N)
+                            all: item.All.L.map(value => Number(value.N)),
+                            latest: item.Latest.L.map(value => Number(value.N)),
+                            total: getCurrentRound()
                         }
                         resolve(data);
                         break;
