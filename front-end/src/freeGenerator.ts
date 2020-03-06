@@ -1,7 +1,8 @@
 import configure from './amplify/configure'
 import Layout3 from './functional/Layout/Layout3'
-import { getAuthAPI } from './amplify/api';
+import { getAuthAPI, getUnAuthAPI } from './amplify/api';
 import Swal from 'sweetalert2'
+import { predictInstance, actualInstance, selectionInstance, latestInstance } from './analLineGen';
 
 configure();
 const loading = document.querySelector<HTMLElement>('.loading-box');
@@ -9,8 +10,23 @@ const makeBtn = document.getElementById('make');
 const includeCanvas = document.getElementById('include');
 const excludeCanvas = document.getElementById('exclude');
 const wrapper = document.querySelector<HTMLElement>('.func3-num-wrapper');
+const lineGenerator = document.querySelector<HTMLElement>('.line-gen-stack-chart-container');
+const lineInput = document.querySelector<HTMLElement>('.line-gen-num-table');
 init();
-
+let lineCheck = false;
+document.querySelector<HTMLElement>('.line-gen-toggle-btn').addEventListener('click', async () =>{
+    if(lineCheck){
+        lineGenerator.classList.add('hide');
+        lineInput.classList.add('hide');
+        lineCheck = false;
+    }else{
+        lineGenerator.classList.remove('hide');
+        lineInput.classList.remove('hide');
+        lineCheck = true;
+        const data = await getUnAuthAPI('/stats/mass', {method:'line'});
+        console.log(data);
+    }
+})
 async function init() {
     loading.classList.remove('none');
     const { include, exclude } = await getAuthAPI('/numbers/piece');

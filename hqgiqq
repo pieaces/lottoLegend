@@ -1,0 +1,1266 @@
+*   [33m3b2d232[m[33m ([m[1;36mHEAD -> [m[1;32mfront[m[33m)[m Merge branch 'front' of https://github.com/pieaces/lotto-stat into front
+[31m|[m[32m\[m  
+[31m|[m * [33m18f321a[m[33m ([m[1;31morigin/front[m[33m)[m 무료조합기 생성 버튼과 표 분리
+* [32m|[m [33m6d668f9[m freegenerator 변혁
+[32m|[m[32m/[m  
+* [33m778829b[m 구간별 개수 조건 추가
+* [33mee7093c[m 무료조합기, 구간별 번호 생성 통일
+*   [33m9e4dd1d[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[33m|[m[34m\[m  
+[33m|[m * [33m6d4e4e6[m stack 구간별생성기
+* [34m|[m   [33m4dba5c7[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[35m|[m[34m\[m [34m\[m  
+[35m|[m [34m|[m[34m/[m  
+[35m|[m *   [33ma7d4466[m merge~
+[35m|[m [1;31m|[m[1;32m\[m  
+[35m|[m * [1;32m|[m [33mc47876d[m goldbar loading success
+* [1;32m|[m [1;32m|[m [33mb33c444[m 사이드 메뉴 border 수정
+[1;32m|[m [1;32m|[m[1;32m/[m  
+[1;32m|[m[1;32m/[m[1;32m|[m   
+* [1;32m|[m [33mcd67439[m 구간별 번호 생성 페이지 작성
+[1;32m|[m[1;32m/[m  
+* [33m2dc0982[m 모달 배경 디자인 수정
+*   [33ma57fb4e[m Merge branch 'front' of https://github.com/pieaces/lotto-stat into front
+[1;33m|[m[1;34m\[m  
+[1;33m|[m * [33m1a9aa9f[m 구간별 번호 생성 페이지 작성 중
+* [1;34m|[m [33m844d60e[m 무료생성기 완성 및 로딩 적용중
+[1;34m|[m[1;34m/[m  
+* [33m2d2ec65[m 무료생성기 완료
+* [33mfab1653[m 무료생성기 완료
+* [33mc57e27d[m 무료 조합기 동적 재수정
+*   [33m8c5ac71[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[1;35m|[m[1;36m\[m  
+[1;35m|[m * [33m18a3c92[m function3 css 색 입힘
+* [1;36m|[m [33mbb7e4a8[m 무료 조합기 번호목록 동적 생성
+[1;36m|[m[1;36m/[m  
+*   [33m283ee96[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[31m|[m[32m\[m  
+[31m|[m *   [33m5752443[m merge
+[31m|[m [33m|[m[34m\[m  
+[31m|[m * [34m|[m [33mce717a9[m 통계페이지 완성
+* [34m|[m [34m|[m [33m57a75b4[m 무료조합기 동적 생성 중
+[34m|[m [34m|[m[34m/[m  
+[34m|[m[34m/[m[34m|[m   
+* [34m|[m [33maa8c4a8[m 당첨내역,필터 표로 바꿈
+[34m|[m[34m/[m  
+* [33m456a2f7[m 무료 조합기 번호 목록 디자인 수정
+* [33m20ccb63[m modal, radar modal
+* [33m6cce550[m modal text change, array icon margin
+* [33meec7b57[m modal 부연설명
+*   [33mf8c4ecc[m merge
+[35m|[m[36m\[m  
+[35m|[m * [33md61e65d[m 생성 버튼 작성
+[35m|[m * [33md19449b[m 물음표 위치 수정, 무료 조합기 동적 생성
+* [36m|[m [33m9fad4b1[m modal movable
+* [36m|[m [33mc538e02[m 포함, 제외별로 modal text 완료
+* [36m|[m [33m71b5b31[m modal text 입힘
+[36m|[m[36m/[m  
+* [33m858017b[m modal
+* [33m82334a5[m layout2 눌렀을때 색 변경 & questionmodule 삭제
+* [33m1ddbf86[m 제외포함생성기 유저인증
+* [33m106c26c[m statsHome css
+*   [33m012b638[m Merge branch 'front' of https://github.com/pieaces/lotto-stat into front
+[1;31m|[m[1;32m\[m  
+[1;31m|[m *   [33me088dcd[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[1;31m|[m [1;33m|[m[1;34m\[m  
+[1;31m|[m * [1;34m|[m [33m9d57127[m 무료조합기 페이지 작성
+* [1;34m|[m [1;34m|[m [33m8c259b6[m statistics 숫자버튼
+* [1;34m|[m [1;34m|[m [33m954b265[m generator stats 오류 수정
+* [1;34m|[m [1;34m|[m [33m313eded[m stats api 변경에 따른 변ㄱㅇ
+[1;34m|[m [1;34m|[m[1;34m/[m  
+[1;34m|[m[1;34m/[m[1;34m|[m   
+* [1;34m|[m   [33me09718f[m Merge branch 'front' of https://github.com/pieaces/lotto-stat into front
+[1;35m|[m[1;34m\[m [1;34m\[m  
+[1;35m|[m [1;34m|[m[1;34m/[m  
+[1;35m|[m * [33mb4cfe3e[m 통계 자료 차트 슬라이드 추가
+* [1;36m|[m [33md947779[m function2 font-size
+[1;36m|[m[1;36m/[m  
+*   [33maa177c3[m Merge branch 'front' of https://github.com/pieaces/lotto-stat into front
+[31m|[m[32m\[m  
+[31m|[m * [33m434efab[m 무료조합기 배치 수정
+* [32m|[m [33m9aa49cd[m 로딩바 변경
+[32m|[m[32m/[m  
+* [33m099cec8[m 당첨 통계 표 수정
+* [33m0001a61[m 로딩창 재수정
+* [33mee9dc06[m 로딩창 수정
+* [33mf6213aa[m 로딩창 수정
+* [33mf9e5f57[m generator premium url 변경
+* [33mff3ab17[m 물음표 위치 수정, 로딩창 수정
+*   [33ma3bed97[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[33m|[m[34m\[m  
+[33m|[m * [33m9eb1a34[m 무료체험
+* [34m|[m [33md683bcc[m 스크롤 너비 맞추기
+[34m|[m[34m/[m  
+*   [33mdd41115[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[35m|[m[36m\[m  
+[35m|[m * [33m94512fd[m  read css
+* [36m|[m [33maea4768[m 무료 조합기 번호판 삽입
+[36m|[m[36m/[m  
+* [33mf6a62f9[m 번호그림 오류 수정
+* [33m5305eb7[m mouse event
+*   [33med55426[m Merge branch 'front' of https://github.com/pieaces/lotto-stat into front
+[1;31m|[m[1;32m\[m  
+[1;31m|[m *   [33mda0c9db[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[1;31m|[m [1;33m|[m[1;34m\[m  
+[1;31m|[m * [1;34m|[m [33ma7c582a[m 글씨 크기 확대, 표,3번 레이아웃 디자인 수정
+* [1;34m|[m [1;34m|[m [33ma5cad22[m statshome 그림완ㄹ
+[1;34m|[m [1;34m|[m[1;34m/[m  
+[1;34m|[m[1;34m/[m[1;34m|[m   
+* [1;34m|[m   [33mad12e9f[m Merge branch 'front' of https://github.com/pieaces/lotto-stat into front
+[1;35m|[m[1;34m\[m [1;34m\[m  
+[1;35m|[m [1;34m|[m[1;34m/[m  
+[1;35m|[m * [33m583777a[m 당첨 통계 박스 추가,!important 삭제
+* [1;36m|[m [33m579301e[m statshome
+[1;36m|[m[1;36m/[m  
+* [33md3bc8b4[m 메뉴 통합
+*   [33m28cc180[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[31m|[m[32m\[m  
+[31m|[m *   [33m12672fb[m merge
+[31m|[m [33m|[m[34m\[m  
+[31m|[m * [34m|[m [33m6cd5935[m post, statistics 등등 로그인 인증 추가
+[31m|[m * [34m|[m [33m0e992e5[m statistics 명칭 띄우기
+* [34m|[m [34m|[m [33m46ee23f[m 사이드 메뉴(분석 시스템) 수정
+[34m|[m [34m|[m[34m/[m  
+[34m|[m[34m/[m[34m|[m   
+* [34m|[m [33md8aa138[m 사이드 메뉴 구분자 수정
+[34m|[m[34m/[m  
+*   [33m165c523[m merge!
+[35m|[m[36m\[m  
+[35m|[m * [33mbef2505[m 통계 페이지 메인 콘텐츠 3단 분리
+[35m|[m * [33mef2e8d3[m 사이드 메뉴 수정
+* [36m|[m   [33md07a200[m merge
+[1;31m|[m[36m\[m [36m\[m  
+[1;31m|[m [36m|[m[36m/[m  
+[1;31m|[m * [33mb212c95[m 사이드 메뉴 수정
+[1;31m|[m * [33md8be6a8[m 레이더 수정
+* [1;32m|[m [33m2824689[m premium
+* [1;32m|[m [33ma319c70[m 글씨체
+* [1;32m|[m   [33m31fa204[m Merge branch 'front' of https://github.com/pieaces/lotto-stat into front
+[1;33m|[m[1;32m\[m [1;32m\[m  
+[1;33m|[m [1;32m|[m[1;32m/[m  
+[1;33m|[m * [33ma8e1b53[m 통계홈 페이지 수정
+* [1;34m|[m [33m349dcbc[m 포함제외생성기 alert
+* [1;34m|[m [33mbb9e2c4[m 포함수,제외수 생성기 분리
+[1;34m|[m[1;34m/[m  
+* [33ma032472[m 통계홈 페이지 수정
+* [33me46f01a[m 전반적
+* [33m6cc679e[m statshome css 수정
+* [33m8c93f91[m 사이드메뉴 anchor 수정
+*   [33m7141e61[m merge
+[1;35m|[m[1;36m\[m  
+[1;35m|[m * [33med8db87[m anchor 수정 중
+[1;35m|[m * [33mf904cf9[m anchor 수정 중
+* [1;36m|[m [33m348c0b5[m generate 매개변수 이름변경
+* [1;36m|[m [33me3de90f[m 포함 생성기 중간완료
+* [1;36m|[m   [33meab6697[m Merge branch 'front' of https://github.com/pieaces/lotto-stat into front
+[31m|[m[1;36m\[m [1;36m\[m  
+[31m|[m [1;36m|[m[1;36m/[m  
+[31m|[m *   [33m920c758[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[31m|[m [33m|[m[34m\[m  
+[31m|[m * [34m|[m [33m79bfb3e[m 통계 페이지 박스 크기,사이드 메뉴 수정
+* [34m|[m [34m|[m [33m4933851[m sweetalert
+[34m|[m [34m|[m[34m/[m  
+[34m|[m[34m/[m[34m|[m   
+* [34m|[m   [33me96d93f[m merge
+[35m|[m[34m\[m [34m\[m  
+[35m|[m [34m|[m[34m/[m  
+[35m|[m * [33mb46cf68[m 통계홈 페이지 수정, 차트 컨테이너 중복 제거
+* [36m|[m [33mb5219b0[m sweetalert 도입
+[36m|[m[36m/[m  
+* [33mdefe1b0[m merge
+*   [33mc312af7[m merge
+[1;31m|[m[1;32m\[m  
+[1;31m|[m * [33m3f15723[m 통계홈 페이지 작성
+[1;31m|[m * [33me75c7d4[m 통계홈 페이지 title 작성
+* [1;32m|[m [33mf72f60e[m post read category 수정
+* [1;32m|[m [33md2cf762[m statistics 종료
+* [1;32m|[m [33m909128d[m 포함/제외 생성기 완료
+* [1;32m|[m [33meb287f2[m 포함생성기 inclde, exclude 변수 합침
+* [1;32m|[m [33m66e4567[m 포함및 제외수 생성기
+* [1;32m|[m [33m5c98b69[m incorexc enum class 생성
+[1;32m|[m[1;32m/[m  
+* [33m84d484f[m 포함제외생성기 토글완성
+*   [33m4921de8[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[1;33m|[m[1;34m\[m  
+[1;33m|[m * [33mf404bd2[m 포함제외 생숭기
+* [1;34m|[m [33m105f8f4[m 차트 스크롤 수정, 레이더 차트 확대
+[1;34m|[m[1;34m/[m  
+*   [33m6d4a703[m stats merge
+[1;35m|[m[1;36m\[m  
+[1;35m|[m * [33m050a872[m 통계, 포함/제외수 디자인 수정
+* [1;36m|[m   [33ma0738fe[m stats method별 입힙
+[31m|[m[1;36m\[m [1;36m\[m  
+[31m|[m [1;36m|[m[1;36m/[m  
+[31m|[m * [33mfa47799[m 2번 레이아웃 수정, swtich 작성
+[31m|[m * [33m6d8082c[m 차트 수정
+* [32m|[m   [33m421b570[m Merge branch 'front' of https://github.com/pieaces/lotto-stat into front
+[33m|[m[32m\[m [32m\[m  
+[33m|[m [32m|[m[32m/[m  
+[33m|[m * [33mf963aed[m 사이드메뉴 수정
+* [34m|[m [33md848fb4[m statics.ts
+* [34m|[m   [33m8d538f9[m Merge branch 'front' of https://github.com/pieaces/lotto-stat into front
+[35m|[m[34m\[m [34m\[m  
+[35m|[m [34m|[m[34m/[m  
+[35m|[m * [33m478427e[m 통계페이지 차트 수정
+[35m|[m * [33mcc7e610[m 반응형 페이지 작성
+* [36m|[m   [33m3e6c645[m layout2 이름변경
+[1;31m|[m[36m\[m [36m\[m  
+[1;31m|[m [36m|[m[36m/[m  
+[1;31m|[m * [33m025c296[m 반응형 작성 중
+* [1;32m|[m [33mdaf769b[m stats api get id token
+* [1;32m|[m [33m6eb7747[m premium layout 생성 늦게 하기
+* [1;32m|[m [33m3062438[m premium
+[1;32m|[m[1;32m/[m  
+* [33ma4c443c[m layout2.js 포함
+*   [33m63c9da7[m Merge branch 'front' of https://github.com/pieaces/lotto-stat into front
+[1;33m|[m[1;34m\[m  
+[1;33m|[m * [33meb6e508[m 글자크기 수정
+* [1;34m|[m   [33m751141f[m merge
+[1;35m|[m[1;34m\[m [1;34m\[m  
+[1;35m|[m [1;34m|[m[1;34m/[m  
+[1;35m|[m * [33me3c5a16[m 포함 제외수 하나로 합침
+* [1;36m|[m [33ma6f3219[m 포함분석 완료
+[1;36m|[m[1;36m/[m  
+* [33m7ec60d9[m 댓글, 2번 레이아웃 버그 수정, stats-box 작성
+* [33mf3d5ad3[m 2번 레이아웃 버그 수정
+* [33m451f1fd[m 헤더 메뉴,사이드 메뉴 수정
+* [33m15918f9[m 헤더 메뉴, 사이드 메뉴 수정
+*   [33mc824ff0[m Merge branch 'front' of https://github.com/pieaces/lotto-stat into front
+[31m|[m[32m\[m  
+[31m|[m * [33m3407261[m 헤더 메뉴, 사이드 메뉴 수정
+* [32m|[m [33m514ee31[m layout2 분리 완성
+* [32m|[m [33m083ffa9[m layout2 분리
+[32m|[m[32m/[m  
+* [33me03e6c0[m 제외수,포함수 생성기 페이지 생성
+*   [33mad15606[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[33m|[m[34m\[m  
+[33m|[m * [33m2874941[m 분석시스템 재처리
+* [34m|[m [33m4c29156[m 분석 시스템 작업 중
+[34m|[m[34m/[m  
+* [33m31452d6[m 통계페이지 초안작성완료
+*   [33m5afefa3[m merge
+[35m|[m[36m\[m  
+[35m|[m * [33m2da338f[m 회원가입 페이지 작성, 헤더 hover 작성
+* [36m|[m [33m7afdb72[m labels 축약
+* [36m|[m [33me9db712[m labels
+* [36m|[m [33m8ba5a96[m statistics 초기판
+* [36m|[m   [33m8febf9e[m Merge branch 'front' of https://github.com/pieaces/lotto-stat into front
+[1;31m|[m[36m\[m [36m\[m  
+[1;31m|[m [36m|[m[36m/[m  
+[1;31m|[m * [33m7383711[m textarea btn box를 div로 수정
+[1;31m|[m * [33mca99360[m 썸네일 크기 수정
+* [1;32m|[m [33m37a198b[m statistics 초안 완성
+* [1;32m|[m [33m7440197[m statistics 분리
+[1;32m|[m[1;32m/[m  
+*   [33mac599cd[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[1;33m|[m[1;34m\[m  
+[1;33m|[m * [33m5af1129[m post, read 수정
+* [1;34m|[m [33m701c2c5[m 썸네일 크기 수정
+[1;34m|[m[1;34m/[m  
+* [33m77723d6[m list 글자크기 수정
+*   [33med727e7[m 머리가 아프다
+[1;35m|[m[1;36m\[m  
+[1;35m|[m * [33m2b8734f[m post img 크기 수정 중
+* [1;36m|[m [33m92f9e0c[m list, read category 추가 및 댓글카운터오류해결
+* [1;36m|[m [33md8e1276[m comment 삭제 완료
+* [1;36m|[m [33m87b8f15[m post, read 수정,삭제 완료
+* [1;36m|[m [33m369bf5e[m post, api patch 연결
+* [1;36m|[m [33mf3dc099[m read, post 수정
+[1;36m|[m[1;36m/[m  
+* [33m3a65da2[m post, read 수정삭제 연동
+* [33mf656e8e[m read 수정,삭제버튼 보이게하기
+*   [33m60dc23b[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[31m|[m[32m\[m  
+[31m|[m * [33m36018c0[m dist -> js 로 목적지 변경
+* [32m|[m [33mab49981[m dist to js
+[32m|[m[32m/[m  
+* [33m5a44ca6[m 반응형 작성 중
+* [33m2e1cc54[m 폴더 구조 수정
+* [33m09e4850[m 분석 시스템 페이지 작성
+*   [33m3ccb2ac[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[33m|[m[34m\[m  
+[33m|[m * [33mc7b1af8[m signUp 완료
+* [34m|[m [33m92369a6[m 회원가입 작성 중
+* [34m|[m   [33m1502ef3[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[35m|[m[34m\[m [34m\[m  
+[35m|[m [34m|[m[34m/[m  
+[35m|[m * [33m1c7334e[m signUp 교체
+[35m|[m *   [33mb7377d8[m merge
+[35m|[m [1;31m|[m[1;32m\[m  
+[35m|[m * [1;32m|[m [33mf83b28d[m read ts
+* [1;32m|[m [1;32m|[m [33m09f71dd[m 반응형 작성 중
+[1;32m|[m [1;32m|[m[1;32m/[m  
+[1;32m|[m[1;32m/[m[1;32m|[m   
+* [1;32m|[m [33m5c54484[m 회원가입 수정
+* [1;32m|[m [33m425b74c[m 회원가입 작성 중
+* [1;32m|[m [33m30ae321[m 댓글 수정
+* [1;32m|[m [33m90acfa6[m 댓글 수정
+[1;32m|[m[1;32m/[m  
+*   [33mdd520d0[m merge
+[1;33m|[m[1;34m\[m  
+[1;33m|[m * [33mfe9ed86[m 회원가입 수정 중
+* [1;34m|[m [33m85c056a[m category맞게 수정, post 디자인 수정
+* [1;34m|[m [33mcfef041[m src runbuild
+* [1;34m|[m   [33m6295f0a[m merge
+[1;35m|[m[1;34m\[m [1;34m\[m  
+[1;35m|[m [1;34m|[m[1;34m/[m  
+[1;35m|[m * [33m6008747[m a 태그 수정
+* [1;36m|[m [33m4bf6ee3[m post, list, read 연동
+[1;36m|[m[1;36m/[m  
+*   [33mfded7a8[m Merge branch 'front' of https://github.com/pieaces/lotto-stat into front
+[31m|[m[32m\[m  
+[31m|[m * [33m7c112b2[m 반응형 작성 중
+* [32m|[m   [33m2f11bab[m merge conflig resolved
+[33m|[m[32m\[m [32m\[m  
+[33m|[m [32m|[m[32m/[m  
+[33m|[m * [33meaeb42e[m 수정,삭제 버튼 작성
+* [34m|[m [33m5f4c56f[m page-anchor
+* [34m|[m [33m3f0316d[m list index처리 완료
+* [34m|[m [33m2866b0d[m list 작업
+[34m|[m[34m/[m  
+*   [33md4602e6[m 언제끝나나.... merge
+[35m|[m[36m\[m  
+[35m|[m * [33mdf206f8[m 회원가입 수정
+[35m|[m *   [33m49605d1[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[35m|[m [1;31m|[m[1;32m\[m  
+[35m|[m * [1;32m|[m [33m1d96288[m 반응형 작성 중
+[35m|[m * [1;32m|[m   [33m6154a58[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[35m|[m [1;33m|[m[1;34m\[m [1;32m\[m  
+[35m|[m * [1;34m|[m [1;32m|[m [33m3e79a71[m mypage.js 수정
+* [1;34m|[m [1;34m|[m [1;32m|[m [33m992db37[m 댓글 입력 제한
+* [1;34m|[m [1;34m|[m [1;32m|[m [33m0436151[m post 댓글적용 완료
+[1;32m|[m [1;34m|[m[1;32m_[m[1;34m|[m[1;32m/[m  
+[1;32m|[m[1;32m/[m[1;34m|[m [1;34m|[m   
+* [1;34m|[m [1;34m|[m [33m31815cd[m read 수정
+* [1;34m|[m [1;34m|[m [33m74b946e[m comments 파일 옮김
+[1;34m|[m [1;34m|[m[1;34m/[m  
+[1;34m|[m[1;34m/[m[1;34m|[m   
+* [1;34m|[m [33mf5c8691[m board-section 최소높이 지정
+* [1;34m|[m [33mdf23129[m post editor width 문제 해결
+* [1;34m|[m [33m5b3158e[m post text
+* [1;34m|[m [33m338280b[m merge 충돌 해결
+* [1;34m|[m   [33m8029639[m Merge branch 'front' of https://github.com/pieaces/lotto-stat into front
+[1;35m|[m[1;34m\[m [1;34m\[m  
+[1;35m|[m [1;34m|[m[1;34m/[m  
+[1;35m|[m * [33m41ad658[m 반응형 작업 중
+* [1;36m|[m   [33mbb1e49a[m merge
+[31m|[m[1;36m\[m [1;36m\[m  
+[31m|[m [1;36m|[m[1;36m/[m  
+[31m|[m * [33m9ca5c58[m 게시판 번호 올리는 것 작성
+[31m|[m * [33m6819702[m 사이트맵, 전체 디자인 통일
+[31m|[m * [33mc6524d6[m alert 삭제
+* [32m|[m [33ma986319[m read 끝
+* [32m|[m [33mf47542c[m read post
+* [32m|[m   [33m8c4da64[m Merge branch 'front' of https://github.com/pieaces/lotto-stat into front
+[33m|[m[32m\[m [32m\[m  
+[33m|[m [32m|[m[32m/[m  
+[33m|[m * [33mbfdf7a4[m 사이트맵 정리와 번호게시판 작업 중
+* [34m|[m [33m3b3c037[m post 사진등록 및 글등록 완료
+* [34m|[m [33m994320a[m post image 처리 끝
+[34m|[m[34m/[m  
+*   [33m6ed59cf[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[35m|[m[36m\[m  
+[35m|[m *   [33me149e88[m merge 드뎌 끝인가?
+[35m|[m [1;31m|[m[1;32m\[m  
+[35m|[m * [1;32m|[m [33m3cbfff0[m post image 처리
+[35m|[m * [1;32m|[m [33m881089f[m aws-amplify package 분리 절약
+[35m|[m * [1;32m|[m [33m4a12bf7[m package 설정
+[35m|[m * [1;32m|[m [33m77da21e[m package 변경
+[35m|[m * [1;32m|[m [33m2f62589[m webpack 설정 변경
+* [1;32m|[m [1;32m|[m [33m4bb35a3[m 3번 레이아웃 작업 중
+* [1;32m|[m [1;32m|[m [33m21d4a3a[m 사이트맵 수정,로그인 수정,전체 페이지 디자인 통일
+* [1;32m|[m [1;32m|[m [33m51c2333[m 반응형 작업하면서 생긴 디자인 버그 수정
+[1;32m|[m [1;32m|[m[1;32m/[m  
+[1;32m|[m[1;32m/[m[1;32m|[m   
+* [1;32m|[m   [33md5045d9[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[1;33m|[m[1;32m\[m [1;32m\[m  
+[1;33m|[m [1;32m|[m[1;32m/[m  
+[1;33m|[m *   [33m2cd11c9[m merge
+[1;33m|[m [1;35m|[m[1;36m\[m  
+[1;33m|[m * [1;36m|[m [33mb17075c[m post.js 이미지 처리
+[1;33m|[m * [1;36m|[m [33md01c969[m read css 수정
+* [1;36m|[m [1;36m|[m [33m6118a0c[m 회원가입 페이지 작성
+[1;36m|[m [1;36m|[m[1;36m/[m  
+[1;36m|[m[1;36m/[m[1;36m|[m   
+* [1;36m|[m [33mfc5db9a[m read.js 파일 경로 수정
+* [1;36m|[m [33mb0a18ec[m read 페이지 글쓰기 제한 수정
+* [1;36m|[m [33m439cae0[m read 페이지 글자 수 제한
+[1;36m|[m[1;36m/[m  
+* [33m607178a[m read 페이지 텍스트아리아 수정
+* [33m1ee64ed[m read 페이지 디자인 작성
+*   [33m478b188[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[31m|[m[32m\[m  
+[31m|[m * [33m7a18cd4[m list api 연결 amin-info 변경
+* [32m|[m [33ma3f9348[m read page 디자인 수정
+* [32m|[m [33mef69a88[m read page 디자인 수정
+[32m|[m[32m/[m  
+*   [33md65762e[m Merge branch 'front' of https://github.com/pieaces/lotto-stat into front
+[33m|[m[34m\[m  
+[33m|[m * [33m5b356eb[m 글 목록 함수 생성
+* [34m|[m [33m5ccf87e[m read.html 디자인 수정
+[34m|[m[34m/[m  
+*   [33m28fe9b0[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[35m|[m[36m\[m  
+[35m|[m * [33m7a9504b[m post js api연결
+* [36m|[m [33m06b0747[m read page 디자인 수정
+[36m|[m[36m/[m  
+*   [33mea4ee61[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[1;31m|[m[1;32m\[m  
+[1;31m|[m * [33m3b601b5[m post.css - 제목라벨 등 수정
+[1;31m|[m * [33m2faabcb[m post - cancelbtn 삭제
+* [1;32m|[m [33mf5d9b5c[m read 페이지 디자인 수정
+* [1;32m|[m   [33mf7a86a5[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[1;33m|[m[1;32m\[m [1;32m\[m  
+[1;33m|[m [1;32m|[m[1;32m/[m  
+[1;33m|[m * [33mab675bc[m 이름변경 적용
+[1;33m|[m * [33m71fc2bf[m 이름 수정 및 signIn amplify 연결
+* [1;34m|[m [33m37f9c0b[m 반응형 햄버거 작성 중
+[1;34m|[m[1;34m/[m  
+* [33m4aa038c[m 반응형 페이지 시작
+*   [33mc2bdcd8[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[1;35m|[m[1;36m\[m  
+* [1;36m|[m [33m7a31ab8[m 통계 페이지 작성 중
+* [1;36m|[m [33m7d2a4b5[m 통계 페이지 작성 중
+[1;36m|[m [1;36m|[m * [33m174059b[m[33m ([m[1;31morigin/numbers[m[33m, [m[1;32mnumbers[m[33m)[m free 정립
+[1;36m|[m [1;36m|[m * [33m6f1ac54[m include, exclude 없을때 조건 추가
+[1;36m|[m [1;36m|[m * [33ma969020[m push 이상한거 지움
+[1;36m|[m [1;36m|[m * [33ma468e08[m generatorA 생성완료
+[1;36m|[m [1;36m|[m * [33mf9102fe[m generator 이전
+[1;36m|[m [1;36m|[m * [33m4b2eaca[m api 살짝쿵 변경
+[1;36m|[m [1;36m|[m * [33m386f636[m generator free 생성
+[1;36m|[m [1;36m|[m * [33m681c2bc[m win querystring으로 변경
+[1;36m|[m [1;36m|[m * [33m18d6022[m lotto data 변경
+[1;36m|[m [1;36m|[m * [33m0709173[m win api 설정
+[1;36m|[m [1;36m|[m * [33m024d8fe[m getlottoData 생성
+[1;36m|[m [1;36m|[m * [33mf2a7bc6[m numbers
+[1;36m|[m [1;36m|[m [31m|[m * [33me4b6921[m[33m ([m[1;31morigin/stats[m[33m, [m[1;32mstats[m[33m)[m line 추가
+[1;36m|[m [1;36m|[m [31m|[m * [33m215145a[m line 추가
+[1;36m|[m [1;36m|[m [31m|[m * [33m0260d7c[m C:/Program Files/Git/!
+[1;36m|[m [1;36m|[m [31m|[m * [33m1b7c0bd[m stats parameters 조정
+[1;36m|[m [1;36m|[m [31m|[m * [33m9e2b148[m stats 종결
+[1;36m|[m [1;36m|[m [31m|[m * [33me10940c[m piece 합침
+[1;36m|[m [1;36m|[m [31m|[m * [33m770a2f2[m stats switch
+[1;36m|[m [1;36m|[m [31m|[m * [33md055a46[m[33m ([m[1;31morigin/stats-mass[m[33m)[m 불필요 폴더 삭제
+[1;36m|[m [1;36m|[m [31m|[m * [33mba7fba2[m stats-mass
+[1;36m|[m [1;36m|[m [31m|[m * [33m525225d[m stats-mass
+[1;36m|[m [1;36m|[m [31m|[m[31m/[m  
+[1;36m|[m [1;36m|[m [31m|[m * [33mb66aeec[m[33m ([m[1;31morigin/auto[m[33m, [m[1;32mauto[m[33m)[m 라인 추가!
+[1;36m|[m [1;36m|[m [31m|[m * [33m30f592c[m writeall connection error 잡음
+[1;36m|[m [1;36m|[m [31m|[m * [33m3c9a73f[m stats => Stats
+[1;36m|[m [1;36m|[m [31m|[m * [33m2c0b57c[m tsconfig 변경
+[1;36m|[m [1;36m|[m [31m|[m * [33m9aff2ca[m[33m ([m[1;31morigin/post[m[33m)[m piece 최근 50개로 변경
+[1;36m|[m [1;36m|[m [31m|[m * [33m6d29d46[m piece => Piece 이름변경
+[1;36m|[m [1;36m|[m [31m|[m * [33m304b508[m piece 추가
+[1;36m|[m [1;36m|[m [31m|[m * [33maa37d30[m lotto stats 구조 변경
+[1;36m|[m [1;36m|[m [31m|[m * [33m19b81c3[m 각개 통계 입힘
+[1;36m|[m [1;36m|[m [31m|[m * [33me7394e1[m key 삭제
+[1;36m|[m [1;36m|[m [31m|[m * [33m24001ce[m sum55, sm77 제거
+[1;36m|[m [1;36m|[m [31m|[m * [33me3df303[m utc 시간 차이로 인해 -9
+[1;36m|[m [1;36m|[m [31m|[m * [33m8698b81[m dynamo 관련함수들 이름정비 및 import aws 중복제거 1회 생성
+[1;36m|[m [1;36m|[m [31m|[m * [33m6271c04[m stats => post 이름변경
+[1;36m|[m [1;36m|[m [31m|[m * [33ma6b31f5[m autoPutLotto 정상화
+[1;36m|[m [1;36m|[m [31m|[m * [33mc439366[m 중간에 끝나는 오류 원인 해결 = promise resolve 안할 경우 중간에 강제종료되는 듯 함
+[1;36m|[m [1;36m|[m [31m|[m * [33ma028619[m 주석
+[1;36m|[m [1;36m|[m [31m|[m * [33mab388ad[m await 변환
+[1;36m|[m [1;36m|[m [31m|[m * [33mb16cce9[m console 세부 설명
+[1;36m|[m [1;36m|[m [31m|[m * [33m06ae264[m tsconfig dist 조정
+[1;36m|[m [1;36m|[m [31m|[m * [33md76f945[m stats first commit
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m * [33m82e1a6c[m[33m ([m[1;31morigin/generator[m[33m, [m[1;32mgenerator[m[33m)[m generator 분리 독립
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m * [33m87ff48d[m getcurrentround 함수 투입
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m * [33m4d7caa9[m 이름변경
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m * [33ma6ee324[m getincorexc 함수 제작
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m * [33ma3a6bed[m generator api형식으로 변경
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m * [33m5b4430a[m generator
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m * [33m215653b[m get 점검
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m * [33ma9014c4[m options로 body 이름변경
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m * [33m7303e95[m data 분할입힘
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m * [33m491c727[m[33m ([m[1;31morigin/get[m[33m)[m not preium 200
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m * [33m88aaded[m jwt verify async 삭제
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m * [33m06ed04a[m l => L
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m * [33m35c0a4a[m Response 제작
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m * [33mfd7c309[m generator express 버림
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m * [33mb0bd0c2[m interface 경로 수정
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m * [33m99dae2c[m generator 인증 기능 추가
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m * [33m10cfe8e[m getRank 생성
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m * [33m2deb33f[m generator만 남김
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m * [33m33e8cc3[m generator 로그인 여부 확인
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m * [33md628550[m router 경로 변경
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m * [33m1b6dfa7[m dynamo로 관련함수들 묶고 이름적합히 변경
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m * [33mcd162ba[m 의미없는 console 제거
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m * [33m4e3ed10[m query => 단일이므로 getItem으로 변경
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m * [33m63b2b59[m db 이름 LottoStat => LottoStats로 변경
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m * [33m620b0a9[m express -> get 이름변경
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m * [33m68763f2[m get first commit
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m[33m/[m  
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m * [33m401d138[m[33m ([m[1;31morigin/stats-piece[m[33m, [m[1;32mstats-piece[m[33m)[m stats-piece
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m[31m/[m  
+[1;36m|[m [1;36m|[m [31m|[m[31m/[m[33m|[m   
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m * [33m6c73d2f[m[33m ([m[1;31morigin/posts[m[33m, [m[1;32mposts[m[33m)[m tsconfig 수정
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m * [33m91947f6[m posts
+[1;36m|[m [1;36m|[m [31m|[m [33m|[m[31m/[m  
+[1;36m|[m [1;36m|[m [31m|[m[31m/[m[33m|[m   
+[1;36m|[m [1;36m|[m * [33m|[m [33m8fa68f2[m[33m ([m[1;31morigin/API[m[33m, [m[1;32mAPI[m[33m)[m decodedToken 이름변경
+[1;36m|[m [1;36m|[m * [33m|[m [33mca21ec6[m API 다듬기
+[1;36m|[m [1;36m|[m * [33m|[m [33mc7cb9bc[m piece stats total 입력
+[1;36m|[m [1;36m|[m * [33m|[m [33m4eb3c5e[m query 없을때 조건 대비
+[1;36m|[m [1;36m|[m * [33m|[m [33m61c0231[m 포함생성 한번에 만드는 api 분기
+[1;36m|[m [1;36m|[m * [33m|[m [33m6d3cd1a[m api 더 간소화ㅋㅋ
+[1;36m|[m [1;36m|[m * [33m|[m [33m8c5c695[m API 더 축소화(round path에서 제거)
+[1;36m|[m [1;36m|[m * [33m|[m [33m088d593[m api
+[1;36m|[m [1;36m|[m * [33m|[m [33m7cbbbe5[m numbers delete api 수정
+[1;36m|[m [1;36m|[m * [33m|[m [33m3c26fa2[m number api 수정
+[1;36m|[m [1;36m|[m * [33m|[m [33mc68ecbc[m IncOrExc 이름변경
+[1;36m|[m [1;36m|[m * [33m|[m [33m490e8fd[m excludeInclude는 인증 제외
+[1;36m|[m [1;36m|[m * [33m|[m [33m3ea1d4e[m verify token async 삭제
+[1;36m|[m [1;36m|[m * [33m|[m [33mab3214b[m stats mass premium 판별
+[1;36m|[m [1;36m|[m * [33m|[m [33m3ebbd6e[m stats/mass 수정
+[1;36m|[m [1;36m|[m * [33m|[m [33ma5d3acd[m paramsdiffmaxmin 없으면 그대로 나게 하기
+[1;36m|[m [1;36m|[m * [33m|[m [33m0252c1e[m diffmaxmin params null일 때 가정
+[1;36m|[m [1;36m|[m * [33m|[m [33m8473820[m sum all 갖기 문제 해결
+[1;36m|[m [1;36m|[m * [33m|[m [33m134bc72[m aws config 제거
+[1;36m|[m [1;36m|[m * [33m|[m [33mbc603b9[m stats 완성
+[1;36m|[m [1;36m|[m * [33m|[m [33m2a144ad[m stats api 중간
+[1;36m|[m [1;36m|[m * [33m|[m [33m7191b02[m stats 삽입
+[1;36m|[m [1;36m|[m * [33m|[m [33me4a1abb[m querystring 조건 추가
+[1;36m|[m [1;36m|[m * [33m|[m [33mdbe9607[m queryStats default값 부여
+[1;36m|[m [1;36m|[m * [33m|[m [33m4f0ffe1[m comment get writerId 오류 수정
+[1;36m|[m [1;36m|[m * [33m|[m [33m6df32e3[m postscontents text 오류수정
+[1;36m|[m [1;36m|[m * [33m|[m [33m0bd12e3[m flag querystring 조건 조절
+[1;36m|[m [1;36m|[m * [33m|[m [33me8ebfa5[m post flag 적용, 수정용 get
+[1;36m|[m [1;36m|[m * [33m|[m [33mb311e12[m post patch title 추가
+[1;36m|[m [1;36m|[m * [33m|[m [33ma1ff1f7[m stats 이사
+[1;36m|[m [1;36m|[m * [33m|[m [33m9b57bc4[m getcurrentround 함수 외부로 빼기, 무료수동 없앰
+[1;36m|[m [1;36m|[m * [33m|[m [33m405c0d9[m API 일단 완성 프론트 테스트 전
+[1;36m|[m [1;36m|[m * [33m|[m [33m2226b32[m getNumbers by class 완성
+[1;36m|[m [1;36m|[m * [33m|[m [33m3d48cca[m users/get 완료
+[1;36m|[m [1;36m|[m * [33m|[m [33md349cd3[m incorexc get function created
+[1;36m|[m [1;36m|[m * [33m|[m [33mf09711c[m include, exclude dynamodb API 생성완료
+[1;36m|[m [1;36m|[m * [33m|[m [33mae29c43[m dynamodb classification 추가해서 수정
+[1;36m|[m [1;36m|[m * [33m|[m [33m11d39cd[m addhits id 활용
+[1;36m|[m [1;36m|[m * [33m|[m [33m3c9086f[m category getCount에 추가
+[1;36m|[m [1;36m|[m * [33m|[m [33m3c4efda[m category post추가
+[1;36m|[m [1;36m|[m * [33m|[m [33m8c25406[m scan by index
+[1;36m|[m [1;36m|[m * [33m|[m [33m38dfab9[m querystringparemters category
+[1;36m|[m [1;36m|[m * [33m|[m [33mb0bdfee[m getCount 생성
+[1;36m|[m [1;36m|[m * [33m|[m [33ma7b9685[m hist => hits 오타수정
+[1;36m|[m [1;36m|[m * [33m|[m [33mbe5e974[m hits add
+[1;36m|[m [1;36m|[m * [33m|[m [33mb87c6c7[m post - comments 연결
+[1;36m|[m [1;36m|[m * [33m|[m [33m365d673[m text로 전환
+[1;36m|[m [1;36m|[m * [33m|[m [33m0c81a91[m postcontents에서 contest => text
+[1;36m|[m [1;36m|[m * [33m|[m [33m2e3d7cb[m key update 제거
+[1;36m|[m [1;36m|[m * [33m|[m [33ma7b2fa5[m API 완성
+[1;36m|[m [1;36m|[m * [33m|[m [33m359c340[m API idToken decoder 장착
+[1;36m|[m [1;36m|[m * [33m|[m [33m7407f3e[m mynumbers 조건조절 완성 & userinfo 완성
+[1;36m|[m [1;36m|[m * [33m|[m [33mfd6f3dd[m userInfo 제작
+[1;36m|[m [1;36m|[m * [33m|[m [33m0470a23[m mynumbers 관련함수 제작완료
+[1;36m|[m [1;36m|[m * [33m|[m [33m574890e[m API router 생성
+[1;36m|[m [1;36m|[m * [33m|[m [33m06943ac[m users API 관련 함수 제작
+[1;36m|[m [1;36m|[m * [33m|[m [33m4b5bb65[m event 출력
+[1;36m|[m [1;36m|[m * [33m|[m [33m6718431[m end 함수 제거 불필요했음
+[1;36m|[m [1;36m|[m * [33m|[m [33m4b4f479[m 글 없으면 콘텐츠 넣지 않기
+[1;36m|[m [1;36m|[m * [33m|[m [33m4da3f43[m postsContents이식 완료
+[1;36m|[m [1;36m|[m * [33m|[m [33m8594c75[m PostsContents 작성
+[1;36m|[m [1;36m|[m * [33m|[m [33me40b0c2[m router 부분 불필요한 내용 제거
+[1;36m|[m [1;36m|[m * [33m|[m [33maa53c0d[m comments patch, delete 생성
+[1;36m|[m [1;36m|[m * [33m|[m [33m3a0d657[m end 주석처리
+[1;36m|[m [1;36m|[m * [33m|[m [33m8397219[m posts/postId 완성
+[1;36m|[m [1;36m|[m * [33m|[m [33m87b39a7[m db engine instance로 생성
+[1;36m|[m [1;36m|[m * [33m|[m [33m7b04460[m getComments await
+[1;36m|[m [1;36m|[m * [33m|[m [33m87d7db7[m as a 삭제
+[1;36m|[m [1;36m|[m * [33m|[m [33me53cf62[m 정규식 끝점 오류 변경
+[1;36m|[m [1;36m|[m * [33m|[m [33md1344d1[m 조건식 정규표현식으로 변경
+[1;36m|[m [1;36m|[m * [33m|[m [33m2c777e4[m comments api 진입점 생성
+[1;36m|[m [1;36m|[m * [33m|[m [33mdedcc76[m DESC, ASC 옵션 문자열 지정 & update => patch 이름변경
+[1;36m|[m [1;36m|[m * [33m|[m [33m9b50983[m get, scan 함수 공용 함수 _get 생성
+[1;36m|[m [1;36m|[m * [33m|[m [33m08b9922[m pathParameters JSON 없애기
+[1;36m|[m [1;36m|[m * [33m|[m [33m29db684[m join시 id 덮여쓰이는 문제 해결
+[1;36m|[m [1;36m|[m * [33m|[m [33md205f4d[m 정규식 제외, aws에 맞는 형식 조정 pathParameters, resource = 곧이 곧대로 찍힌다는 사실
+[1;36m|[m [1;36m|[m * [33m|[m [33m919aa97[m 정규식 활용 api 완성
+[1;36m|[m [1;36m|[m * [33m|[m [33mab0130e[m JSON.parse로 매개변수 묶기
+[1;36m|[m [1;36m|[m * [33m|[m [33m183ba16[m put => post
+[1;36m|[m [1;36m|[m * [33m|[m [33me3ae84b[m package db에 관계없는 것들 삭제
+[1;36m|[m [1;36m|[m * [33m|[m [33maf3971a[m db lambda에 적합하도록 변경
+[1;36m|[m [1;36m|[m * [33m|[m [33ma2d8638[m pacakage 정리
+[1;36m|[m [1;36m|[m * [33m|[m [33m5af297f[m mariaDB first commit
+[1;36m|[m [1;36m|[m [36m|[m [33m|[m * [33m30700db[m[33m ([m[1;31morigin/images[m[33m, [m[1;32mimages[m[33m)[m directory 추가
+[1;36m|[m [1;36m|[m [36m|[m [33m|[m * [33mee9136f[m image directory 추가
+[1;36m|[m [1;36m|[m [36m|[m [33m|[m * [33m4e2531f[m data-url => buffer 오류 수정
+[1;36m|[m [1;36m|[m [36m|[m [33m|[m * [33m5119832[m jimp 너무 느려서 sharp로 image library 변경
+[1;36m|[m [1;36m|[m [36m|[m [33m|[m * [33mf00b479[m images data-url => buffer 과정 front에 맡기기
+[1;36m|[m [1;36m|[m [36m|[m [33m|[m * [33md15d890[m forEach는 비동기에서 뭔가 막히는듯하다
+[1;36m|[m [1;36m|[m [36m|[m [33m|[m * [33m0b7eac7[m image first commit
+[1;36m|[m [1;36m|[m [36m|[m [33m|[m[33m/[m  
+[1;36m|[m [1;36m|[m [36m|[m * [33mbcfdc7f[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/dev[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m npm fix
+[1;36m|[m [1;36m|[m [36m|[m * [33mff1ab8f[m db delete
+[1;36m|[m [1;36m|[m [36m|[m[36m/[m  
+[1;36m|[m [1;36m|[m * [33mc2cdca1[m postId => id, commentId => id
+[1;36m|[m [1;36m|[m * [33mc5bb92b[m post router 생성
+[1;36m|[m [1;36m|[m * [33m4f3cc11[m DB 폴더 모음
+[1;36m|[m [1;36m|[m * [33m0d9b80f[m db 정착
+[1;36m|[m [1;36m|[m * [33m170eca0[m post mysql화
+[1;36m|[m [1;36m|[m * [33m39b6f25[m 임시
+[1;36m|[m [1;36m|[m * [33m88e454f[m putPost 관련함수 생성(ISOFormat)
+[1;36m|[m [1;36m|[m * [33m9bff56e[m posts API 전격 조정
+[1;36m|[m [1;36m|[m * [33med95d1d[m query, scan, comments
+[1;36m|[m [1;36m|[m * [33mda31b15[m query,scan posts 생성
+[1;36m|[m [1;36m|[m * [33mbc35fe2[m putPost.ts 생성
+[1;36m|[m [1;36m|[m * [33m8644a8f[m posts router 생성
+[1;36m|[m [1;36m|[m * [33ma3aa31f[m 디렉토리 전환 보강
+[1;36m|[m [1;36m|[m * [33mc97ce6b[m API 디렉토리 정리
+[1;36m|[m [1;36m|[m * [33md451712[m generator API 반환조건 변경 = 최소 sum 이상 count<=50
+[1;36m|[m [1;36m|[m *   [33m298b500[m Merge branch 'dev' of github.com:pieaces/lotto-stat into dev
+[1;36m|[m [1;36m|[m [1;32m|[m[1;33m\[m  
+[1;36m|[m [1;36m|[m [1;32m|[m * [33m35d72d2[m generator lowcount 관련 오류 수정
+[1;36m|[m [1;36m|[m [1;32m|[m * [33m2057331[m queryLotto 해당회차 없을시 에러생성 로직 변경
+[1;36m|[m [1;36m|[m [1;32m|[m * [33mc96df55[m aws.config 주석처리
+[1;36m|[m [1;36m|[m [1;32m|[m *   [33m1728825[m Merge branch 'dev' of https://github.com/pieaces/lotto-stat into dev
+[1;36m|[m [1;36m|[m [1;32m|[m [1;34m|[m[1;35m\[m  
+[1;36m|[m [1;36m|[m [1;32m|[m * [1;35m|[m [33mb91fd87[m queryLotto 존재안할 때 넘어가게 오류수정
+[1;36m|[m [1;36m|[m * [1;35m|[m [1;35m|[m [33md079587[m numbers API 반환조건 변경
+[1;36m|[m [1;36m|[m [1;35m|[m [1;35m|[m[1;35m/[m  
+[1;36m|[m [1;36m|[m [1;35m|[m[1;35m/[m[1;35m|[m   
+[1;36m|[m [1;36m|[m * [1;35m|[m [33m77d6cef[m total !== 0 => total === 0
+[1;36m|[m [1;36m|[m [1;35m|[m[1;35m/[m  
+[1;36m|[m [1;36m|[m *   [33ma376145[m Merge branch 'dev' of https://github.com/pieaces/lotto-stat into dev
+[1;36m|[m [1;36m|[m [1;36m|[m[31m\[m  
+[1;36m|[m [1;36m|[m [1;36m|[m * [33m3f8d27d[m API generator boolean type error fix
+[1;36m|[m [1;36m|[m [1;36m|[m * [33m5ec2043[m stats API list, from-to 순서 change
+[1;36m|[m [1;36m|[m [1;36m|[m * [33mbc35956[m diffMaxMin queryStats compress PACK=2
+[1;36m|[m [1;36m|[m [1;36m|[m * [33md32f575[m consecutiveExist API 입력 조건 수정
+[1;36m|[m [1;36m|[m * [31m|[m [33mc2fd86e[m stats API 당첨번호 3회차 출력
+[1;36m|[m [1;36m|[m * [31m|[m [33mfa69106[m queryLotto 생성
+[1;36m|[m [1;36m|[m [31m|[m[31m/[m  
+[1;36m|[m [1;36m|[m * [33mcafc663[m API from, to 안전장치 설정
+[1;36m|[m [1;36m|[m * [33m6980244[m api request querystring from,to 오류해결
+[1;36m|[m [1;36m|[m * [33mf39f940[m autoPutLotto 함수 생성
+[1;36m|[m [1;36m|[m * [33m27a8d2a[m stats API 중괄호 위치 수정
+[1;36m|[m [1;36m|[m * [33me10f37d[m stats API return값 중 total 변경
+[1;36m|[m [1;36m|[m * [33mc2c0521[m statsAPI diffmaxmin from, to 사용가능토록 오류수정
+[1;36m|[m [1;36m|[m * [33mff16c45[m diffMaxMin statsAPI 오류수정(params.list-=5) & params.from,to 존재성 판단 오류 수정
+[1;36m|[m [1;36m|[m * [33m59621a5[m generator API current삭제
+[1;36m|[m [1;36m|[m * [33md00417e[m README 수정
+[1;36m|[m [1;36m|[m * [33ma92a278[m README 수정
+[1;36m|[m [1;36m|[m * [33m523ffc3[m API method 추가(excludeInclude)
+[1;36m|[m [1;36m|[m * [33m89df28e[m README 수정
+[1;36m|[m [1;36m|[m * [33m7f4edc3[m queryStatsParams 지정 & API 오류수정
+[1;36m|[m [1;36m|[m * [33mf74449c[m list decodeURI로 추가
+[1;36m|[m [1;36m|[m * [33ma774869[m 매개변수 추가 & 함수정리
+[1;36m|[m [1;36m|[m * [33mc749e97[m queryStat slice to+1
+[1;36m|[m [1;36m|[m * [33me1ca450[m generator router - consecutive 인식
+[1;36m|[m [1;36m|[m * [33mae5a864[m README 수정
+[1;36m|[m [1;36m|[m * [33m2d2f9d7[m router 분리
+[1;36m|[m [1;36m|[m * [33m2a77379[m simulation 폴더 삭제
+[1;36m|[m [1;36m|[m * [33mf3a62fe[m interface 분리
+[1;36m|[m [1;36m|[m * [33mb215895[m Coef 삭제
+[1;36m|[m [1;36m|[m * [33md6bde3e[m 필요없는 json 파일 삭제
+[1;36m|[m [1;36m|[m * [33m0b59ef7[m stats api 주소변경 & compress시스템으로 변경
+[1;36m|[m [1;36m|[m * [33m6aa92be[m key.json 주석
+[1;36m|[m [1;36m|[m * [33m4a597db[m Coef => Pos
+[1;36m|[m [1;36m|[m * [33mfe5dbc1[m listen 로그 내용
+[1;36m|[m [1;36m|[m * [33m9a3579d[m current
+[1;36m|[m [1;36m|[m * [33mc4f3672[m numbers/generator option 설정방식 수정
+[1;36m|[m [1;36m|[m * [33mdf6b624[m generator 변수명 변경
+[1;36m|[m [1;36m|[m * [33mcb8f060[m rangeFinder 한칸씩 당기기
+[1;36m|[m [1;36m|[m * [33mc1f8779[m rangeSet 배열화해서 보내기
+[1;36m|[m [1;36m|[m * [33mc2a4c7d[m generator consecutiveExist === false 로 변경
+[1;36m|[m [1;36m|[m * [33m613a445[m 시각적으로 직관적인 정리
+[1;36m|[m [1;36m|[m [31m|[m * [33mb27f1e8[m[33m ([m[1;31morigin/feature[m[33m)[m 이미지 작업
+[1;36m|[m [1;36m|[m [31m|[m[1;36m/[m  
+[1;36m|[m [1;36m|[m[1;36m/[m[31m|[m   
+[1;36m|[m * [31m|[m   [33m98e93bd[m Merge branch 'front' of https://github.com/pieaces/lotto-stat into front
+[1;36m|[m [33m|[m[1;36m\[m [31m\[m  
+[1;36m|[m [33m|[m[1;36m/[m [31m/[m  
+[1;36m|[m[1;36m/[m[33m|[m [31m|[m   
+* [33m|[m [31m|[m [33mc2771e2[m q&a js 작성 중
+* [33m|[m [31m|[m [33me4cefc1[m babel 작업 중
+[34m|[m * [31m|[m [33mda34695[m 버블차트 load 한번만 실행 최적화
+[34m|[m[34m/[m [31m/[m  
+* [31m|[m [33m158bf7f[m 글쓰기 페이지 함수 작성 중
+* [31m|[m [33m3d11cd5[m css 클래스명 수정
+* [31m|[m [33ma9f2f36[m gird to flex 완료
+* [31m|[m [33m66f9511[m grid to flex
+* [31m|[m [33mc09ee67[m grid to flex 작업 중
+* [31m|[m [33m23ff253[m grid to flex
+* [31m|[m   [33mb00fec8[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[35m|[m[36m\[m [31m\[m  
+[35m|[m * [31m|[m [33m3f1d3ec[m layout3 개수제한 이하시 보이기
+[35m|[m * [31m|[m [33mcd3f551[m number 제한 생기면 3번레이아웃으로 이동
+[35m|[m * [31m|[m [33m46d49f5[m lowCount json 불러오는 에러 typeof from, to 로 해결
+* [36m|[m [31m|[m [33mc26c5e9[m q&a 페이지 작성중
+[36m|[m[36m/[m [31m/[m  
+* [31m|[m [33m637c432[m leap 전멸구간개수 시 nextablelimit 1로 고정
+* [31m|[m   [33m120adc2[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[1;31m|[m[1;32m\[m [31m\[m  
+[1;31m|[m * [31m|[m [33mc2691f2[m layout3 on
+[1;31m|[m * [31m|[m [33m8f405ca[m alert css
+* [1;32m|[m [31m|[m [33m724f495[m 표 디자인 작업
+* [1;32m|[m [31m|[m   [33m9b573ca[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[1;33m|[m[1;32m\[m [1;32m\[m [31m\[m  
+[1;33m|[m [1;32m|[m[1;32m/[m [31m/[m  
+[1;33m|[m * [31m|[m [33m85ba8f9[m 고저차 auto오류
+* [1;34m|[m [31m|[m [33m19c0ee0[m 3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중3번 레이아웃 작업 중
+* [1;34m|[m [31m|[m   [33m7f21603[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[1;35m|[m[1;34m\[m [1;34m\[m [31m\[m  
+[1;35m|[m [1;34m|[m[1;34m/[m [31m/[m  
+[1;35m|[m * [31m|[m [33ma1adc04[m layout3 연결
+* [1;36m|[m [31m|[m [33mca5c307[m radar 텍스트 작업 중
+[1;36m|[m[1;36m/[m [31m/[m  
+* [31m|[m   [33m2512fff[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[31m|[m[32m\[m [31m\[m  
+[31m|[m * [31m|[m [33m99a8a4e[m info text 이월선택 잘못출현 fix
+[31m|[m * [31m|[m [33m3c33a39[m modal css수정
+* [32m|[m [31m|[m [33m84d2559[m 3번 레이아웃 작업 중
+* [32m|[m [31m|[m   [33mb185f21[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[33m|[m[32m\[m [32m\[m [31m\[m  
+[33m|[m [32m|[m[32m/[m [31m/[m  
+[33m|[m * [31m|[m [33m22a66a4[m merge 충돌 정리
+* [34m|[m [31m|[m [33m3d25b47[m 3번 레이아웃 돔 생성 중
+[34m|[m[34m/[m [31m/[m  
+* [31m|[m [33m885f6d9[m 3번 레이아웃 작업 중
+* [31m|[m [33m31af06e[m 2번 레이아웃 레이더 텍스트 돔 완성
+* [31m|[m   [33m7635d4c[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[35m|[m[36m\[m [31m\[m  
+[35m|[m * [31m|[m [33m1e19b41[m setText 변경
+[35m|[m * [31m|[m [33m2c7ceb4[m 버블차트 통계수치 입력
+* [36m|[m [31m|[m [33m573abc2[m 레이아웃 토글 작성
+[36m|[m[36m/[m [31m/[m  
+* [31m|[m [33m2d0d752[m 자동선택 완성
+* [31m|[m [33m1f22d49[m dropdown 경우의 수 조정(이월수, 전멸구간개수 0개일때 안뜨게 하기)
+* [31m|[m [33mc327a99[m dropDown confirm 알림창 완료
+* [31m|[m [33m2963e3d[m 이월수 개수 label 수정
+* [31m|[m   [33m742a96f[m Merge branch 'front' of https://github.com/pieaces/lotto-stat into front
+[1;31m|[m[1;32m\[m [31m\[m  
+[1;31m|[m * [31m|[m [33m5ec7e26[m 3번 레이아웃 merge 작업 중
+[1;31m|[m * [31m|[m   [33m4acea06[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[1;31m|[m [1;33m|[m[1;34m\[m [31m\[m  
+[1;31m|[m * [1;34m|[m [31m|[m [33mc9272bc[m 3번 레이아웃 작업 중
+* [1;34m|[m [1;34m|[m [31m|[m [33mf378cb9[m question flag 삭제
+[1;34m|[m [1;34m|[m[1;34m/[m [31m/[m  
+[1;34m|[m[1;34m/[m[1;34m|[m [31m|[m   
+* [1;34m|[m [31m|[m [33m0260d0a[m 자동선택 ~10
+* [1;34m|[m [31m|[m [33m5f5dc9c[m 자동선택 0~2까지 완성
+* [1;34m|[m [31m|[m [33m11f9209[m 필터링 결과 박스크기 & question flag 삭제
+[1;34m|[m[1;34m/[m [31m/[m  
+* [31m|[m [33mc5bcacb[m 3번 레이아웃 작업 중
+* [31m|[m [33m9a4040e[m 전멸구간 개수
+* [31m|[m [33mdf30409[m 표 높이 수정
+* [31m|[m   [33m5526127[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[1;35m|[m[1;36m\[m [31m\[m  
+[1;35m|[m * [31m|[m [33mecb0650[m chart text 완성
+* [1;36m|[m [31m|[m [33m0a06938[m 선택자 수정
+* [1;36m|[m [31m|[m   [33m5c85bab[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[31m|[m[1;36m\[m [1;36m\[m [31m\[m  
+[31m|[m [1;36m|[m[1;36m/[m [31m/[m  
+[31m|[m * [31m|[m [33mfb9c893[m chart text
+* [32m|[m [31m|[m [33m970cf5d[m 버블 차트 표 작성
+[32m|[m[32m/[m [31m/[m  
+* [31m|[m [33me0668ae[m 표 작업
+* [31m|[m   [33m2eda709[m 드뎌 끝나간다~!
+[33m|[m[34m\[m [31m\[m  
+[33m|[m * [31m\[m   [33m7146d5d[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[33m|[m [35m|[m[36m\[m [31m\[m  
+[33m|[m * [36m|[m [31m|[m [33m7bf251c[m 표 함수 작성
+* [36m|[m [36m|[m [31m|[m [33m5d3a571[m modal text 입력 및 속성 변경
+[36m|[m [36m|[m[36m/[m [31m/[m  
+[36m|[m[36m/[m[36m|[m [31m|[m   
+* [36m|[m [31m|[m   [33m3cde489[m Merge branch 'front' of github.com:pieaces/lotto-stat into front
+[1;31m|[m[36m\[m [36m\[m [31m\[m  
+[1;31m|[m [36m|[m[36m/[m [31m/[m  
+[1;31m|[m * [31m|[m [33m83022e0[m question text 공간 생성
+* [1;32m|[m [31m|[m [33m199e479[m barchart 불필요 속성 지움
+[1;32m|[m[1;32m/[m [31m/[m  
+* [31m|[m   [33m7fbd746[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[1;33m|[m[1;34m\[m [31m\[m  
+[1;33m|[m * [31m|[m [33ma88df0d[m loading 첫화면에 뜨기
+* [1;34m|[m [31m|[m [33m619110e[m 물음표 x표 위치 동일
+[1;34m|[m[1;34m/[m [31m/[m  
+* [31m|[m [33m2cb2098[m setStatsBoard 주석처리
+* [31m|[m   [33me94586c[m merge
+[1;35m|[m[1;36m\[m [31m\[m  
+[1;35m|[m * [31m\[m   [33m096ad78[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[1;35m|[m [31m|[m[32m\[m [31m\[m  
+[1;35m|[m * [32m|[m [31m|[m [33mb0abc5d[m 표 작업
+* [32m|[m [32m|[m [31m|[m [33mf95fcf6[m infoText 수정
+[32m|[m [32m|[m[32m/[m [31m/[m  
+[32m|[m[32m/[m[32m|[m [31m|[m   
+* [32m|[m [31m|[m [33m289e4e1[m 당첨번호 가져와서 뿌리기
+* [32m|[m [31m|[m [33mafc1c6e[m gauss Labels
+* [32m|[m [31m|[m   [33m44b7286[m merge
+[33m|[m[32m\[m [32m\[m [31m\[m  
+[33m|[m [32m|[m[32m/[m [31m/[m  
+[33m|[m * [31m|[m [33mb4a117c[m 텍스트 박스 수정
+* [34m|[m [31m|[m [33md23dd2d[m statsBoard 생성
+* [34m|[m [31m|[m [33m5b2e59b[m chart label 이름 붙임
+[34m|[m[34m/[m [31m/[m  
+* [31m|[m [33m2d0bdac[m 물음표 작업 중
+* [31m|[m   [33mde56ca5[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[35m|[m[36m\[m [31m\[m  
+[35m|[m * [31m|[m [33md9e5829[m throw error 삭제
+[35m|[m * [31m|[m [33m83ea714[m loading 색, js 수정
+[35m|[m * [31m|[m   [33m92e6a34[m 재성의 커밋 02-14:23:30
+[35m|[m [1;31m|[m[1;32m\[m [31m\[m  
+[35m|[m * [1;32m|[m [31m|[m [33m28d6c56[m 체크박스 조건 수정 fix
+[35m|[m * [1;32m|[m [31m|[m [33m4ef52da[m 고저차 DataAPI compact 오류 & 연속수포함여부 checklist init 오류 fix
+* [1;32m|[m [1;32m|[m [31m|[m [33med00716[m 표 생성 중
+[1;32m|[m [1;32m|[m[1;32m/[m [31m/[m  
+[1;32m|[m[1;32m/[m[1;32m|[m [31m|[m   
+* [1;32m|[m [31m|[m   [33mf10595d[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[1;33m|[m[1;32m\[m [1;32m\[m [31m\[m  
+[1;33m|[m [1;32m|[m[1;32m/[m [31m/[m  
+[1;33m|[m * [31m|[m [33md5aca71[m dataAPI label, 이월수 개수선택 농도오류 fix
+[1;33m|[m * [31m|[m [33mdee572c[m layout2 data, total DataAPI로 통일
+[1;33m|[m * [31m|[m   [33md9672e4[m merge
+[1;33m|[m [1;35m|[m[1;36m\[m [31m\[m  
+[1;33m|[m * [1;36m|[m [31m|[m [33m6694683[m 전멸라인 1개 선택시 singleSelect 전환
+[1;33m|[m * [1;36m|[m [31m|[m [33mbd6a66d[m 이월수 개수 logic
+* [1;36m|[m [1;36m|[m [31m|[m [33m1e7d899[m 로딩 랜덤 칼라 생성, 차트 조절
+[1;36m|[m [1;36m|[m[1;36m/[m [31m/[m  
+[1;36m|[m[1;36m/[m[1;36m|[m [31m|[m   
+* [1;36m|[m [31m|[m [33mf62e61e[m text box 수정
+* [1;36m|[m [31m|[m [33mc0ced43[m 경고창 작업 중
+[1;36m|[m[1;36m/[m [31m/[m  
+* [31m|[m [33m20fc864[m 경고창 js 추가
+* [31m|[m [33md86367b[m loading 모양 변경
+* [31m|[m   [33m64cebe6[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[31m|[m[32m\[m [31m\[m  
+[31m|[m * [31m|[m [33me162201[m gauss 크기 조절
+* [32m|[m [31m|[m [33m818895b[m 로딩 완성
+* [32m|[m [31m|[m   [33mcf93001[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[33m|[m[32m\[m [32m\[m [31m\[m  
+[33m|[m [32m|[m[32m/[m [31m/[m  
+[33m|[m * [31m|[m [33m6facde7[m 이월수 선택 setOption
+[33m|[m * [31m|[m [33mdd01e40[m layout2 css & 이월수 선택 추가
+[33m|[m * [31m|[m [33m02821ac[m bubble chart 종합계수
+* [34m|[m [31m|[m [33mb6194f2[m loading 작업 중
+[34m|[m[34m/[m [31m/[m  
+* [31m|[m   [33m4c81a08[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[35m|[m[36m\[m [31m\[m  
+[35m|[m * [31m|[m [33m72df9b4[m bubble chart 계수 수정
+[35m|[m * [31m|[m   [33ma536c05[m Merge branch 'front' of github.com:pieaces/lotto-stat into front
+[35m|[m [1;31m|[m[1;32m\[m [31m\[m  
+[35m|[m * [1;32m|[m [31m|[m [33md675746[m layout1 slide 실제값, 예상값 순서 변경
+* [1;32m|[m [1;32m|[m [31m|[m [33ma3eb21e[m 동적 번호판 생성
+[1;32m|[m [1;32m|[m[1;32m/[m [31m/[m  
+[1;32m|[m[1;32m/[m[1;32m|[m [31m|[m   
+* [1;32m|[m [31m|[m   [33mee45344[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[1;33m|[m[1;32m\[m [1;32m\[m [31m\[m  
+[1;33m|[m [1;32m|[m[1;32m/[m [31m/[m  
+[1;33m|[m * [31m|[m [33m90a38fc[m nopointer - 번호판, 드롭다운
+* [1;34m|[m [31m|[m [33m1d1484b[m 3번 레이아웃 번호판 생성 중
+[1;34m|[m[1;34m/[m [31m/[m  
+* [31m|[m   [33ma6078e1[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[1;35m|[m[1;36m\[m [31m\[m  
+[1;35m|[m * [31m|[m [33m32e04d6[m dropdown mouseover event 규칙제정
+[1;35m|[m * [31m|[m [33mdaf8e79[m leap 적용
+[1;35m|[m * [31m|[m [33mc38a221[m 취소 노란색 자연스럽게 변경
+[1;35m|[m * [31m|[m [33m8a0d2df[m updateChartData 복구
+[1;35m|[m * [31m|[m [33m5afbdc0[m layout2 전멸번호대 번호들 제외시키기
+* [1;36m|[m [31m|[m [33ma50b23d[m 텍스트 디자인 작업 중
+[1;36m|[m[1;36m/[m [31m/[m  
+* [31m|[m   [33mc334da0[m layout2 농도 오류 수정
+[31m|[m[32m\[m [31m\[m  
+[31m|[m * [31m|[m [33mdf040cd[m 번호판 버그 수정 텍스트 디자인 추가
+* [32m|[m [31m|[m [33m358bddf[m nextLimit 조절
+[32m|[m[32m/[m [31m/[m  
+* [31m|[m [33m55cdfe1[m checkbox 위 text박스 높이 축소
+* [31m|[m   [33m8801eb1[m Merge branch 'front' of github.com:pieaces/lotto-stat into front
+[33m|[m[34m\[m [31m\[m  
+[33m|[m * [31m|[m [33m5e24690[m 번호판 버그 수정
+[33m|[m * [31m|[m   [33m846405b[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[33m|[m [35m|[m[36m\[m [31m\[m  
+[33m|[m * [36m|[m [31m|[m [33m04498e4[m 텍스트 디자인 수정
+* [36m|[m [36m|[m [31m|[m [33mf60bf9b[m 체크박스 개수 다음넘어가기 제한
+[36m|[m [36m|[m[36m/[m [31m/[m  
+[36m|[m[36m/[m[36m|[m [31m|[m   
+* [36m|[m [31m|[m   [33m8e67245[m Merge branch 'front' of github.com:pieaces/lotto-stat into front
+[1;31m|[m[36m\[m [36m\[m [31m\[m  
+[1;31m|[m [36m|[m[36m/[m [31m/[m  
+[1;31m|[m * [31m|[m   [33mf4caba7[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[1;31m|[m [1;33m|[m[1;34m\[m [31m\[m  
+[1;31m|[m * [1;34m|[m [31m|[m [33meda3670[m 드롭박스 다른 곳 눌렀을 때 사라지게 하기
+* [1;34m|[m [1;34m|[m [31m|[m [33meb1a86e[m layout2 복수 event 연결되는 오류 해결
+[1;34m|[m [1;34m|[m[1;34m/[m [31m/[m  
+[1;34m|[m[1;34m/[m[1;34m|[m [31m|[m   
+* [1;34m|[m [31m|[m [33m4bdf874[m layout2 bar max,min 조정
+[1;34m|[m[1;34m/[m [31m/[m  
+* [31m|[m   [33mbf24108[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[1;35m|[m[1;36m\[m [31m\[m  
+[1;35m|[m * [31m|[m [33mf77f53c[m diffMaxMin query수정 오류작업
+[1;35m|[m * [31m|[m [33m024a0d7[m DataAPI diffMaxMin compact
+[1;35m|[m * [31m|[m [33mc7af726[m diffMaxMin compart
+[1;35m|[m * [31m|[m [33m7db9cd8[m 마지막 consecutiveExist front 조건 오류 fix
+[1;35m|[m * [31m|[m [33mc6bcc98[m 마지막 consecutiveExist front 조건 오류 fix
+* [1;36m|[m [31m|[m [33mfb9450d[m 드롭다운 텍스트 작업 중
+[1;36m|[m[1;36m/[m [31m/[m  
+* [31m|[m [33mc6553e7[m 꿀잼파티
+* [31m|[m   [33m114b191[m 꿀잼이로구나~아~! 재쓰보이와 함께
+[31m|[m[32m\[m [31m\[m  
+[31m|[m * [31m|[m [33m91b9973[m checkbox option activate!
+[31m|[m * [31m|[m [33m095356d[m checkbox single multi version & layout2 numbercoef include,exclude version & layout version method
+* [32m|[m [31m|[m [33m0c5c004[m 꿀잼이로구나~
+* [32m|[m [31m|[m [33m53673a3[m 애니메이션 수정
+* [32m|[m [31m|[m   [33mb92370a[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[33m|[m[32m\[m [32m\[m [31m\[m  
+[33m|[m [32m|[m[32m/[m [31m/[m  
+[33m|[m * [31m|[m [33m9dd6e4c[m layout2 번호판 회색농도고정
+[33m|[m * [31m|[m [33m3cd049f[m layout1 - chart numBtn css 동작오류 수정
+[33m|[m * [31m|[m [33m9b0cf03[m .vscode 제외, a.js 삭제
+* [34m|[m [31m|[m   [33m938b0b6[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[35m|[m[34m\[m [34m\[m [31m\[m  
+[35m|[m [34m|[m[34m/[m [31m/[m  
+[35m|[m * [31m|[m [33md0ec9e6[m sum label 제작 오류 수정
+* [36m|[m [31m|[m [33ma090905[m filter 버그 잡는 중
+[36m|[m[36m/[m [31m/[m  
+* [31m|[m   [33maa8ce68[m Merge branch 'front' of github.com:pieaces/lotto-stat into front
+[1;31m|[m[1;32m\[m [31m\[m  
+[1;31m|[m * [31m|[m [33m3b4b912[m filter 작업 중
+* [1;32m|[m [31m|[m [33mcaaac04[m include & exclude 수정 & reset초기화
+* [1;32m|[m [31m|[m   [33m05ea1e0[m merge & layout2 - include, exclude Version 생성
+[1;33m|[m[1;32m\[m [1;32m\[m [31m\[m  
+[1;33m|[m [1;32m|[m[1;32m/[m [31m/[m  
+[1;33m|[m * [31m|[m [33m41c02d2[m 색깔 설정
+[1;33m|[m * [31m|[m   [33m98cebfc[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[1;33m|[m [1;35m|[m[1;36m\[m [31m\[m  
+[1;33m|[m * [1;36m|[m [31m|[m [33m81f8acb[m 필터 작업 중
+* [1;36m|[m [1;36m|[m [31m|[m [33mcf6dd1e[m 빈도,간격, 빈도*간격 완료
+[1;36m|[m [1;36m|[m[1;36m/[m [31m/[m  
+[1;36m|[m[1;36m/[m[1;36m|[m [31m|[m   
+* [1;36m|[m [31m|[m   [33m8000752[m merge
+[31m|[m[1;36m\[m [1;36m\[m [31m\[m  
+[31m|[m [1;36m|[m[1;36m/[m [31m/[m  
+[31m|[m * [31m|[m   [33mb331577[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[31m|[m [33m|[m[34m\[m [31m\[m  
+[31m|[m * [34m|[m [31m|[m [33m2f0b90b[m 필터 레이아웃 작업 중
+* [34m|[m [34m|[m [31m|[m [33m116d414[m 제외 <-> 포함
+* [34m|[m [34m|[m [31m|[m [33m656e9ff[m checkbox labels ~
+[34m|[m [34m|[m[34m/[m [31m/[m  
+[34m|[m[34m/[m[34m|[m [31m|[m   
+* [34m|[m [31m|[m [33m6100014[m nextBtn - scroll
+* [34m|[m [31m|[m [33mf204ea8[m opactiy 적용
+[34m|[m[34m/[m [31m/[m  
+* [31m|[m [33meceaa8c[m 계기판, opacity
+* [31m|[m [33m1161493[m none 추가
+* [31m|[m [33m4f3da3e[m 레이아웃 작업
+* [31m|[m   [33m3d36f57[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[35m|[m[36m\[m [31m\[m  
+[35m|[m * [31m|[m [33m9fb6184[m layout slide text
+[35m|[m * [31m|[m [33m65c8a22[m reset addevent & dropdown & checkbox events add complete
+[35m|[m * [31m|[m [33m85ba07a[m checkbox 완성 & dropdown 색상
+* [36m|[m [31m|[m [33m781286b[m filter 수정
+[36m|[m[36m/[m [31m/[m  
+* [31m|[m   [33mc1c2337[m Merge branch 'front' of github.com:pieaces/lotto-stat into front
+[1;31m|[m[1;32m\[m [31m\[m  
+[1;31m|[m * [31m|[m [33m189e9e0[m 체크박스 드롭다운 함수 작성
+* [1;32m|[m [31m|[m [33mee3a506[m instanceBtns reset 2가지 listner 연결 & checkbox 제작중
+[1;32m|[m[1;32m/[m [31m/[m  
+* [31m|[m [33m760cbbd[m radar slide 완성
+* [31m|[m   [33mdc386a0[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[1;33m|[m[1;34m\[m [31m\[m  
+[1;33m|[m * [31m|[m [33m3d0c806[m radarSlide element이름 변경 - 상쓰보이의 부탁
+[1;33m|[m * [31m|[m [33m8da486c[m radarSlide makeclickable
+* [1;34m|[m [31m|[m [33m6ef9e51[m 토글 수정
+[1;34m|[m[1;34m/[m [31m/[m  
+* [31m|[m [33m28ba691[m radarSlide & makeClickable
+* [31m|[m   [33ma5eed75[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[1;35m|[m[1;36m\[m [31m\[m  
+[1;35m|[m * [31m|[m [33m23c187a[m 정정 devVersion layout 설정완성
+* [1;36m|[m [31m|[m   [33m5582749[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[31m|[m[1;36m\[m [1;36m\[m [31m\[m  
+[31m|[m [1;36m|[m[1;36m/[m [31m/[m  
+[31m|[m * [31m|[m [33m76bdbde[m init - layoutVersion parameter
+* [32m|[m [31m|[m   [33m3600f6c[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[33m|[m[32m\[m [32m\[m [31m\[m  
+[33m|[m [32m|[m[32m/[m [31m/[m  
+[33m|[m * [31m|[m [33ma222d69[m layout1on, layout2on attatch
+[33m|[m * [31m|[m [33mf6d5d5c[m layoutOn dev Version function
+* [34m|[m [31m|[m   [33m03087c5[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[35m|[m[34m\[m [34m\[m [31m\[m  
+[35m|[m [34m|[m[34m/[m [31m/[m  
+[35m|[m * [31m|[m [33m31271e9[m instances 폴더로 변경 restBtn 추가
+* [36m|[m [31m|[m [33m617eb6c[m radart 차트 작업중
+[36m|[m[36m/[m [31m/[m  
+* [31m|[m   [33mc59f11f[m merge
+[1;31m|[m[1;32m\[m [31m\[m  
+[1;31m|[m * [31m\[m   [33m9215e57[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[1;31m|[m [1;33m|[m[1;34m\[m [31m\[m  
+[1;31m|[m * [1;34m|[m [31m|[m [33m219c649[m 클래스 수정
+* [1;34m|[m [1;34m|[m [31m|[m [33m6123e8d[m layout1, layout2 HTMLelement naming
+[1;34m|[m [1;34m|[m[1;34m/[m [31m/[m  
+[1;34m|[m[1;34m/[m[1;34m|[m [31m|[m   
+* [1;34m|[m [31m|[m [33md239ee3[m Layout Seriese Complete
+* [1;34m|[m [31m|[m [33m6a17c23[m Layout on 함수 변경
+[1;34m|[m[1;34m/[m [31m/[m  
+* [31m|[m [33m94a367d[m TOTAL api 변경
+* [31m|[m [33m58e2adb[m filteredCount 속성
+* [31m|[m [33m49ea620[m object-oriendted transfomation
+* [31m|[m   [33meaf55b0[m merge
+[1;35m|[m[1;36m\[m [31m\[m  
+[1;35m|[m * [31m|[m [33m9901257[m DropDown class 생성
+* [1;36m|[m [31m|[m [33m576036c[m 레이더 차트 작업 중
+[1;36m|[m[1;36m/[m [31m/[m  
+* [31m|[m [33m0cfa2b1[m 레이아웃 디자인 수정
+* [31m|[m [33m9bd1b52[m 차트 클래스 추가
+* [31m|[m [33mde9581e[m layout2 data filtering
+* [31m|[m   [33m752a7c9[m Merge branch 'front' of github.com:pieaces/lotto-stat into front
+[31m|[m[32m\[m [31m\[m  
+[31m|[m * [31m|[m [33m27a0de0[m a.js 클래스 수정
+* [32m|[m [31m|[m [33maa03c08[m layout2 execute
+[32m|[m[32m/[m [31m/[m  
+* [31m|[m [33m14b183b[m bar,line num 초기화
+* [31m|[m [33mda86345[m execute.ts 수정
+* [31m|[m [33mc3d3db1[m 레이아웃 1 js 클래스 수정
+* [31m|[m [33m35ee8b8[m 클래스명 수정
+* [31m|[m [33m9a6af44[m layout 변경모드 통합
+* [31m|[m [33mac2d482[m index.js 불필요한 파일 삭제
+* [31m|[m   [33m80b0d18[m merge
+[33m|[m[34m\[m [31m\[m  
+[33m|[m * [31m|[m [33m7b4dc05[m layout2 fullfilled
+* [34m|[m [31m|[m [33m1be14d3[m dropDown ts transformation
+* [34m|[m [31m|[m [33md92d79f[m Layout2 생성
+[34m|[m[34m/[m [31m/[m  
+* [31m|[m [33m02aae42[m layout2 promise
+* [31m|[m [33m41d0381[m function2
+* [31m|[m [33m85bde0d[m bubble chart 사이즈 변경
+* [31m|[m [33m6d03c53[m webpack 기반 ts 이전 완성
+* [31m|[m [33md4e3e34[m typescript로 변경
+* [31m|[m [33m3fa83d0[m 1단계 레이아웃 완성
+* [31m|[m [33m8b995c6[m chart function 이전완료
+* [31m|[m [33m5412eb1[m chart, filter rev
+* [31m|[m [33m703397e[m includeHTML 제거
+* [31m|[m [33me6d8f65[m 파일 분리 수정
+* [31m|[m [33mf1decad[m 필터 수정 중
+* [31m|[m [33mf2a19b1[m 비동기 execute 모아 실행
+* [31m|[m [33m697bb21[m data.ts merge error fix
+* [31m|[m   [33me79af2e[m merge
+[35m|[m[36m\[m [31m\[m  
+[35m|[m * [31m|[m [33m79f334e[m filter 생성
+[35m|[m * [31m|[m [33m39d06ad[m sumPack
+[35m|[m * [31m|[m [33mde3bcf9[m node-fetch 제거
+* [36m|[m [31m|[m [33m848b042[m includeHTML 수정 중
+[36m|[m[36m/[m [31m/[m  
+* [31m|[m [33m37087ab[m data.ts front 이식
+* [31m|[m [33m25bbd66[m get filtername, get label
+* [31m|[m   [33m65c1457[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[1;31m|[m[1;32m\[m [31m\[m  
+[1;31m|[m * [31m|[m [33mdf06307[m leap 오류 수정
+[1;31m|[m * [31m|[m [33m1aa14f5[m Filter 완료
+[1;31m|[m * [31m|[m [33m6d29f6f[m demo
+[1;31m|[m * [31m|[m [33m23b422f[m Filter 완료
+[1;31m|[m * [31m|[m [33md31d745[m numbersToPack 완성
+[1;31m|[m * [31m|[m [33m1247ca3[m compressNumbers 함수
+[1;31m|[m * [31m|[m [33m30bd8fe[m Filter Class
+* [1;32m|[m [31m|[m [33mfa9bd12[m filter 작업 중
+[1;32m|[m[1;32m/[m [31m/[m  
+* [31m|[m [33m937c02f[m  lottofunc.js 제거
+* [31m|[m [33m475014a[m data.js
+* [31m|[m [33m0c1059e[m labels 복구
+* [31m|[m [33mbdf88d0[m methodName => chartData
+* [31m|[m [33m5a2df98[m await 추가
+* [31m|[m [33m43a8ee3[m stats 데이터 입력
+* [31m|[m [33m01ae2ab[m generator option current 설정
+* [31m|[m [33m8fb499e[m generator option.current default value 지정
+* [31m|[m [33mb33a74b[m 데이터 입력
+* [31m|[m [33mb6a39ae[m data.ts transform into js
+* [31m|[m [33ma401fde[m Stats, Generator 객 체 생성
+* [31m|[m [33maed4da0[m data.ts export default 제거 및 node fetch 제거
+* [31m|[m [33m60382da[m lotto-func2 namespace implementation
+* [31m|[m   [33m56f85cf[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[1;33m|[m[1;34m\[m [31m\[m  
+[1;33m|[m * [31m|[m [33m2956136[m data.ts js로 변환
+[1;33m|[m * [31m|[m [33mf18585e[m stats, generator class 완성
+[1;33m|[m * [31m|[m [33m470e47d[m data.ts 생성
+* [1;34m|[m [31m|[m [33mc283e9e[m 필터 변수 생성
+* [1;34m|[m [31m|[m [33m30b7bae[m chart function 이름 수정
+[1;34m|[m[1;34m/[m [31m/[m  
+* [31m|[m [33m0fe3fd3[m 스크립트 파일 경로 수정
+* [31m|[m [33m18c44d6[m execute.js
+* [31m|[m [33m5d9cec0[m 파일 쪼개기
+* [31m|[m [33m7a49c47[m 계기판 수정 중
+* [31m|[m [33m2e6673d[m 계기판, 필터 박스 배치 수정
+* [31m|[m [33m156ab69[m 박스 테두리 굵기 크게
+* [31m|[m [33m109f413[m filter layout 1 design update
+* [31m|[m [33m510173c[m filter layout 1 chart design clear
+* [31m|[m   [33m4e18bb3[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[1;35m|[m[1;36m\[m [31m\[m  
+[1;35m|[m * [31m|[m [33m1ee92bd[m 버블차트 size&opacity
+* [1;36m|[m [31m|[m [33mac670b8[m 계기판 작성중
+[1;36m|[m[1;36m/[m [31m/[m  
+* [31m|[m [33m4fdc523[m filter layout 1 chart left btn removing
+* [31m|[m [33maed807e[m filter layout 1 chart data update
+* [31m|[m [33m24dc3dc[m bubble char x,y 변경
+* [31m|[m [33mdfef28a[m filter layout 1 filter box make
+* [31m|[m [33m9a02a80[m filter layout 1 chart clear
+* [31m|[m [33m027abf3[m filter layout 1 bubble chart clear
+* [31m|[m [33md262af2[m filter layout 1 chart clear
+* [31m|[m [33m5b2f115[m fitler layout 1 chart clear
+* [31m|[m [33mdf2b635[m chart-func1-line 수정
+* [31m|[m [33m3e35d21[m filter layout 1 chart bar clear
+* [31m|[m [33m25f4fae[m setChartData 축약
+* [31m|[m [33mfa3bc1e[m filter layout 1 chart data set
+* [31m|[m [33m38a1147[m chart data set start
+* [31m|[m [33m1e96d42[m filter layout 1 box resize checkbox change
+* [31m|[m [33m79d71f1[m filter layout 1 slide num update
+* [31m|[m [33me8c4166[m filter layout 1 structure update
+* [31m|[m [33m4697b58[m from set to array in filter layout 2 js
+* [31m|[m [33m178cff9[m animation and lotto num color change
+* [31m|[m [33mee71c4f[m filter layout 2 aside width update
+* [31m|[m [33m61233eb[m filter layout 2 aside width update
+* [31m|[m [33mfb07cbf[m filter layout 2 aside width update
+* [31m|[m [33mb368b48[m fiter layout 2 aside width resize
+* [31m|[m   [33m0e105d6[m Merge branch 'front' of https://github.com/pieaces/lottoLegend into front
+[31m|[m[32m\[m [31m\[m  
+[31m|[m * [31m\[m   [33m0e3006b[m Merge branch 'dev' into front
+[31m|[m [33m|[m[34m\[m [31m\[m  
+* [33m|[m [34m|[m [31m|[m [33mc1a0118[m filter layout 2 design update
+[33m|[m[33m/[m [34m/[m [31m/[m  
+* [34m|[m [31m|[m [33m8139a1c[m lotto-func1 refactoring using closure
+* [34m|[m [31m|[m [33mab8b7f2[m filter layout 2 winNum color design add
+* [34m|[m [31m|[m [33mfe3f7f7[m filter layout 2 basic js clear
+* [34m|[m [31m|[m [33m1203add[m lotto num animation add
+* [34m|[m [31m|[m [33m2313702[m filter layout 2 chart update
+* [34m|[m [31m|[m [33m26723d8[m filter layout 2 make
+* [34m|[m [31m|[m [33m739daa7[m chart refactoring update
+* [34m|[m [31m|[m [33mf35eaad[m chart refactoring
+* [34m|[m [31m|[m [33maea0c50[m first chart layout make
+* [34m|[m [31m|[m [33m707d9d1[m chart design update
+* [34m|[m [31m|[m [33m059dda9[m chart data insert
+[34m|[m [34m|[m [31m|[m * [33m2ec6096[m[33m ([m[1;31morigin/userAPI[m[33m)[m Coef => Pos
+[34m|[m [34m|[m [31m|[m * [33me897c5b[m listen 로그 내용
+[34m|[m [34m|[m [31m|[m * [33mfc937a8[m current
+[34m|[m [34m|[m [31m|[m * [33md693dc5[m numbers/generator option 설정방식 수정
+[34m|[m [34m|[m [31m|[m * [33mfec8fe1[m generator 변수명 변경
+[34m|[m [34m|[m [31m|[m * [33m321cae2[m rangeFinder 한칸씩 당기기
+[34m|[m [34m|[m [31m|[m * [33mc419d31[m rangeSet 배열화해서 보내기
+[34m|[m [34m|[m [31m|[m * [33mcbd611f[m generator consecutiveExist === false 로 변경
+[34m|[m [34m|[m [31m|[m * [33me387f06[m userAPI first commit
+[34m|[m [34m|[m [31m|[m[31m/[m  
+[34m|[m [34m|[m * [33mb239df3[m constraintSum notExcludedLines의 경우 추가
+[34m|[m [34m|[m * [33mece75d0[m constraintLowCount
+[34m|[m [34m|[m * [33m4f13525[m package.json 수정 axios -> dev & Generator check unused 구문 제거
+[34m|[m [34m|[m * [33m9e4d8e3[m LottoDynamoDB function 폴더 옮김, stats- total 추가
+[34m|[m [34m|[m * [33m096487d[m app.ts bodyparser 기능 추가
+[34m|[m [34m|[m * [33mb24c006[m generator API 생성
+[34m|[m [34m|[m * [33m136759f[m Update README.MD
+[34m|[m [34m|[m * [33m110ab4e[m API URL 입력
+[34m|[m [34m|[m * [33mc7b4bb0[m README 수정
+[34m|[m [34m|[m * [33mae568b8[m tsconfig.json
+[34m|[m [34m|[m * [33mb6f618c[m app, index 작성 및 package.json 수정
+[34m|[m [34m|[m * [33m4c15524[m API화
+[34m|[m [34m|[m * [33m62b2e13[m AWS.config.update 주석처리 및 front-end 폴더 삭제
+[34m|[m [34m|[m * [33m10ce0de[m querystats Method타입이 아닐 경우 reject & Generator 속성값 직관적인 순서 & README 업데이트
+[34m|[m [34m|[m [35m|[m *   [33m31ba79d[m[33m ([m[1;31morigin/aws[m[33m)[m Merge branch 'master' into aws
+[34m|[m [34m|[m [35m|[m [36m|[m[35m\[m  
+[34m|[m [34m|[m [35m|[m [36m|[m[35m/[m  
+[34m|[m [34m|[m [35m|[m[35m/[m[36m|[m   
+[34m|[m [34m|[m * [36m|[m [33m13c773e[m sum55, sum77 params 입력 안되어있던 것 확인
+[34m|[m [34m|[m [1;31m|[m * [33m0852011[m aws commit
+[34m|[m [34m|[m [1;31m|[m[1;31m/[m  
+[34m|[m [34m|[m * [33mf670dd1[m sum55, sum77 버전 생성
+[34m|[m [34m|[m * [33m2241379[m import 이름오류 수정
+[34m|[m [34m|[m * [33m655f66b[m 이름변경
+[34m|[m [34m|[m * [33m0f9a2cb[m 전반적 대공사
+[34m|[m [34m|[m * [33m79fb2d4[m LottoStatDB 클래스로 함수들 이전
+[34m|[m [34m|[m * [33m8de05bd[m db 정리
+[34m|[m [34m|[m * [33mea9420c[m lottoData db화 함수 작성
+[34m|[m [34m|[m * [33m74fe79a[m db read,write 추가 & LottoData => LottoProcessor로 이름변경 및 versionData latest 추가 & inter제거
+[34m|[m [34m|[m * [33m17a7fbe[m db 파일명 변경
+[34m|[m [34m|[m * [33m36e2f8c[m 2~3번 필터 관련 process 함수 추가
+[34m|[m [34m|[m * [33me7eef10[m Statistics Stats min, max 추가 & Lotto statsInterval max값 추가
+[34m|[m [34m|[m * [33md1aa2e6[m Lotto.ts 함수 순서 보기 좋게 변경
+[34m|[m [34m|[m * [33mbb57282[m sum55 데이터화 => sum 데이터화 로 변경
+[34m|[m [34m|[m * [33m89e1902[m howLongNone 함수 오류수정(lotto data 역순문제)
+[34m|[m [34m|[m * [33m2e6e622[m emergedBoolean 함수 생성
+[34m|[m [34m|[m * [33mb2c71eb[m LottoData Class 생성
+[34m|[m [34m|[m[34m/[m  
+[34m|[m * [33m13fb622[m README 전략 보완 및 inter 함수명 사용하기 편하게 수정
+[34m|[m * [33mc88d463[m 함수 깔끔히 정돈 & db폴더 위치 backend 밑으로 이동
+[34m|[m * [33maf122a0[m Inter Class 정립
+[34m|[m * [33m6d1bfbf[m J.ts
+[34m|[m * [33meac6e0f[m Expectation 믹스인 => class로 변경 & getLData,Numbers slice 가독성을 위해 수정
+[34m|[m * [33mc4cc7b6[m Lotto - Inter Class 추가
+[34m|[m * [33m97b2756[m README 입력 & sum49=>55로 이름변경 & consecutiveExist 예상값   함수작성
+[34m|[m * [33ma0861e7[m main.ts 수정하기 용이하게 변경
+[34m|[m * [33m5b5a3ac[m dynamoDB 관련 내용 추가 &  back-end analyzeHelper 추가 & 기존 test 폴더 simulation으로 이름변경
+[34m|[m * [33m7139de4[m expectedSum49 생성 및 55=>gathersum49 이름변경
+[34m|[m * [33mc000e14[m gather, expectation params 미적용된 일부 적용
+[34m|[m * [33mb188f03[m Gather params 전체 적용 및 main.ts 검사용이하게 수정
+[34m|[m * [33m73eec2d[m lotto mode 범위 재설정
+[34m|[m[34m/[m  
+*   [33m64117b7[m Merge branch 'front' of github.com:pieaces/lotto-stat into front
+[1;32m|[m[1;33m\[m  
+[1;32m|[m * [33m3a824c9[m chart position update
+* [1;33m|[m   [33m8567b95[m Merge branch 'dev' into front
+[1;34m|[m[1;35m\[m [1;33m\[m  
+[1;34m|[m * [1;33m|[m [33m96e5424[m expectation params mode 수정
+[1;34m|[m * [1;33m|[m [33mf5eafed[m expectationMixin params 적용(lineCount, sum0)
+[1;34m|[m [1;33m|[m[1;33m/[m  
+* [1;33m|[m [33m26c818e[m loto-func1 일반 js로 변경
+[1;33m|[m[1;33m/[m  
+* [33m8a4eb87[m expectation 매개변수 수정, front ts 수정
+* [33m2aaf25f[m lotto-func1 setting update
+* [33m56b6475[m front setting
+*   [33me07a80d[m Merge branch 'dev' into front
+[1;36m|[m[31m\[m  
+[1;36m|[m * [33md09a1a4[m expectation json 오차 해결 및 gather 매개변수 설정
+* [31m|[m [33mcfc243d[m lotto-func1 update
+* [31m|[m [33m855d8b4[m lotto-func1 make
+[31m|[m[31m/[m  
+* [33mccb3667[m first commit
+* [33md823b4e[m gather helper 변경
+* [33m436b74d[m gather 반환 범위 조절
+* [33m20cd73d[m README.MD 수정
+* [33mf64230e[m generator 필터 순서 sum0이 diffmaxmin 앞으로, sum함수 성능향상
+* [33m7103a58[m test 시뮬레이션 정돈 & diffmaxmin 최적화 성능향상
+* [33m234627c[m rangeFinder 개념 추가(필터링보조도구)
+* [33mdaefaf4[m 소수,홀수,3배수 범위화
+* [33m6b603f5[m generator 오류 수정
+* [33m283fb5b[m lowCount 강제화
+* [33mb20875a[m Generator property 변경 => option
+* [33m5371913[m generator 전멸라인 버그발견 후 fix & 저값개수 호환 완료
+* [33m510d1c8[m generator 설정 변경
+* [33m82756c3[m generator 함수 성능 획기적 개선 - 저값을 통한 필터
+* [33mf5a1369[m class 이름 변경, Generator switch 기능 추가
+* [33m2f07102[m a little bit
+* [33mf42f815[m generate 함수에 include&exclude 반영
+* [33m78e9e16[m Generateor Class 세분화
+* [33m082d6ac[m consecutiveExclude 전용 filter2 따로 분리
+* [33mfcda267[m include, exclude 전용 filter 따로 분리
+* [33m662e1ba[m v0.8.1 당첨번호 간격 함수, 번호 당첨라운드 함수 생성
+* [33ma1558f1[m v 0.8.0 LottoBase getL function 매개변수명 수정
+* [33m5225384[m v 0.8.0 LottoStat 함수 이름 사용하기 쉽게 변경
+* [33mbe79143[m 0.8.0 primtCount.json 생성
+* [33m1df75fa[m v 0.8.0 lotto.json 디렉토리 변경
+* [33m903d0e8[m v 0.8.0 README.MD 메시지 수정2
+* [33m4f41983[m v 0.8.0 README.MD 메시지 수정
+* [33m93d4293[m v 0.8.0 필터순서 확립
+* [33mf72738f[m v 0.8.0 consecutive 함수 Generator.ts에 적용
+* [33m2b0aeab[m v 0.8.0 Expectation json 생성 & sum함수 생성 & consecutive함수 생성
+* [33me56b9dc[m v 0.8.0 compressed json Generator setter와 모순점(범위지정) 수정
+* [33mca812d3[m v0.8.0 json data 저값과 compressed version에 맞추어 Generator Setter 변경
+* [33m3ac1320[m v 0.8.0 json data 저값 추가 및 compressed version 생성
+* [33m653dd5e[m v 0.8.0 Generator 관련 test 파일 생성
+* [33mb8c6631[m v 0.8.0 Generator Setter 생성 및 관련 json 데이터 구축
+* [33mf9c5fd2[m v 0.7.3 Generator.ts 일의자리 합 제외 번호합 추가 및 관련 json 파일 생성
+* [33m69942f3[m v 0.7.3 Generator.ts 소수개수, 일의자리 합 추가 및 규칙생성
+* [33m406fd5e[m v 0.7.2 Geratable 삭제 GeneratorBase 생성
+* [33mee58d2e[m v 0.7.2 Generator.ts 설정 확장
+* [33m1bea1d3[m v 0.7.1 Generator.ts 전멸라인 초기제외로 성능개선
+* [33m138de4d[m v 0.7.1 Generator.ts 성능향상 및 관련함수들 정비
+* [33m97050c9[m v 0.7.0 역사적인 통합의 날
+* [33mf6245bd[m Generator 주석 수정
+* [33mb9c90ad[m v 1.1.4 Generator 구현
+* [33ma284a86[m v 1.1.4 Generator 생성
+* [33me648a58[m v 1.1.3 expectaitionMixin 완성
+* [33m58ea589[m v 1.1.0 목적성에 맞게 함수 조직화 + expectation value 함수 mixin 추가
+* [33mca7bf9e[m v 1.0.4 LottoData.ts(gatherData) 정리 및 완성
+* [33mc87cac8[m v 1.0.4 Probability.ts 추가
+* [33m4c438e8[m v1.0.4 chart.js 추가
+* [33m4b65406[m v 1.0.3 webpack-dev-server 추가
+* [33m64c7bd9[m v 1.0.3 Lotto 데이터 fetch API를 통해 가져오기 및 webpack 설정완료
+* [33m2df9652[m v 1.0.3 LottoStat 모듈화 세분 및 webpack 설정
+* [33m7f8f57f[m v 1.0.2 모듈화 정립 interval 함수 추가
+* [33md49b775[m v 1.0.2 frequency 함수 추가 및 미사용 파일(function.ts) 삭제
+* [33m1152ad5[m v 1.0.1 클래스 객체지향형 재설계 (기능추가 없음)
+* [33m4691365[m README.MD 수정
+* [33mb4e2304[m v 1.0.0
+* [33m68a0965[m first commit

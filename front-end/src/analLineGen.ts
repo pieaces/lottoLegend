@@ -62,17 +62,11 @@ const stackOption: Chart.ChartOptions = {
 
 const predictInstance = new ChartBase('bar', predictCanvas, stackDataBox, stackOption);
 const actualInstance = new ChartBase('bar', actualCanvas, stackDataBox, stackOption);
-const latelyInstance = new ChartBase('bar', latelyCanvas, stackDataBox, stackOption);
+const latestInstance = new ChartBase('bar', latelyCanvas, stackDataBox, stackOption);
 const selectionInstance = new ChartBase('bar', selectionCanvas, stackDataBox, stackOption);
 
 predictInstance.create();
-predictInstance.update();
-
 actualInstance.create();
-actualInstance.update();
-
-latelyInstance.create();
-latelyInstance.update();
-
+latestInstance.create();
 selectionInstance.create();
-selectionInstance.update();
+export {predictInstance, actualInstance, latestInstance, selectionInstance};
