@@ -104,9 +104,11 @@
                                 </tr>
                             </table>
                         </div>
-                        <div>구간(색상)별 개수 조건 추가</div>
+                        <div class="line-gen-toggle-btn-box">
+                            <button type="button" class="btn line-gen-toggle-btn">구간(색상)별 개수 조건 추가</button>
+                        </div>
                         <div class="line-gen-num-container">
-                            <table class="table line-gen-num-table">
+                            <table class="table line-gen-num-table hide">
                                 <tr>
                                     <td>
                                         <div class="line-gen-num-input-container">
@@ -148,17 +150,15 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td>
-                                        <div class="line-gen-make-btn-box">
-                                            <button type="button" class="btn make-btn" id="make">생성</button>
-                                        </div>
-                                    </td>
+
                                 </tr>
                             </table>
-
+                            <div class="line-gen-make-btn-box">
+                                <button type="button" class="btn make-btn" id="make">생성</button>
+                            </div>
                         </div>
 
-                        <div class="line-gen-stack-chart-container">
+                        <div class="line-gen-stack-chart-container hide">
                             <div class="line-gen-stack-chart-box box-color">
                                 <canvas id="predict-canvas"></canvas>
                             </div>

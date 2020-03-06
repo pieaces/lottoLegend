@@ -159,7 +159,7 @@ select:focus {
 }
 
 .hide{
-  visibility: hidden;
+  visibility: hidden !important; /*유의*/
 }
 
 .bold{
