@@ -4,22 +4,27 @@
 
 .line-gen-num-table tr td{
     width:16.6%;
-    height:12rem;
+    height:5rem;
 }
 
-.line-gen-num-table tr td:nth-child(-n+5) > label{
+.line-gen-num-table tr td:nth-child(-n+5) label{
     background-color: var(--table-title-color);
     font-size:1.4rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    height:40%;
+    width: 50%;
+    height:100%;
     text-align: center;
 }
 
+.line-gen-num-input-container{
+    display:flex;
+    height:100%;
+}
+
 .line-gen-num-input-box{
-    height:60%;
+    width:50%;
     display:flex;
     align-items: center;
     justify-content: center;
@@ -27,23 +32,9 @@
 
 .line-gen-num-input-box > input{
     display: inline-block;
-    width:80%;
-    height:3.4rem;
-}
-
-.make-btn-box{
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height:100%;
-}
-
-.make-btn{
-    padding-bottom:0.5rem;
-    width:80%;
-    height:40%;
-    font-size:2rem;
+    width:60%;
+    height:2.8rem;
+    text-align: center;
 }
 
 .line-gen-stack-chart-container{
@@ -66,4 +57,19 @@
 .line-gen-stack-chart-box > canvas{
     width:100%;
     height:100%;
+}
+
+.line-gen-make-btn-box{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height:100%;
+}
+
+.make-btn{
+    padding-bottom:0.5rem;
+    width:70%;
+    height:70%;
+    font-size:1.8rem;
 }

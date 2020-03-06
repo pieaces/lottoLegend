@@ -60,7 +60,7 @@
     text-align: center;
   }
 
-  .anchor-list-box > li:hover{
+  .anchor-list-box > li>a:hover{
     opacity: 0.7;
   }
 

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../css/section.css">
     <link rel="stylesheet" href="../../css/filter/function.css">
     <link rel="stylesheet" href="../../css/filter/function3.css">
+    <link rel="stylesheet" href="../../css/filter/func3LineGen.css">
     <link rel="stylesheet" href="../../css/filter/func3GenNumBox.css">
     <link rel="stylesheet" href="../../css//header.css" />
     <link rel="stylesheet" href="../../css//footer.css" />
@@ -105,9 +106,74 @@
                             </table>
 
                         </div>
-                        <div class="func3-make-btn-container">
-                            <button type="button" class="btn make-btn" id="make">생성</button>
+                        <div class="line-gen-num-container">
+                            <table class="table line-gen-num-table">
+                                <tr>
+                                    <td>
+                                        <div class="line-gen-num-input-container">
+                                            <label for="first-nums">1번대</label>
+                                            <div class="line-gen-num-input-box">
+                                                <input type="text" id="first-nums">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="line-gen-num-input-container">
+                                            <label for="tenth-nums">10번대</label>
+                                            <div class="line-gen-num-input-box">
+                                                <input type="text" id="tenth-nums">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="line-gen-num-input-container">
+                                            <label for="twentieth-nums">20번대</label>
+                                            <div class="line-gen-num-input-box">
+                                                <input type="text" id="twentieth-nums">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="line-gen-num-input-container">
+                                            <label for="thirtieth-nums">30번대</label>
+                                            <div class="line-gen-num-input-box">
+                                                <input type="text" id="thirtieth-nums">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="line-gen-num-input-container">
+                                            <label for="fortieth-nums">40번대</label>
+                                            <div class="line-gen-num-input-box">
+                                                <input type="text" id="fortieth-nums">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="line-gen-make-btn-box">
+                                            <button type="button" class="btn make-btn" id="make">생성</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
                         </div>
+
+                        <div class="line-gen-stack-chart-container">
+                            <div class="line-gen-stack-chart-box box-color">
+                                <canvas id="predict-canvas"></canvas>
+                            </div>
+                            <div class="line-gen-stack-chart-box box-color">
+                                <canvas id="actual-canvas"></canvas>
+                            </div>
+                            <div class="line-gen-stack-chart-box box-color">
+                                <canvas id="lately-canvas"></canvas>
+                            </div>
+                            <div class="line-gen-stack-chart-box box-color">
+                                <canvas id="selection-canvas"></canvas>
+                            </div>
+                        </div>
+
                         <div class="func3-num-wrapper none">
                             <div class="func3-all-check-box-container box-color">
                                 <div class="func3-all-check-box">
