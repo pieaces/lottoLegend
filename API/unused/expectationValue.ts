@@ -37,6 +37,38 @@ function traversal(pos: number[], method: (numbers: number[]) => number) {
     return pos.map(value => value / C(45, 6));
 }
 
+function lineCount() {
+    const ub = [40, 41, 42, 43, 44, 45];
+    const moveBox = (box: number[]): void => {
+        for (let i = SIZE - 2; i >= 0; i--) {
+            if (box[i] < ub[i]) {
+                box[i]++;
+                for (let j = i + 1; j < SIZE; j++) {
+                    box[j] = box[j - 1] + 1;
+                }
+                break;
+            }
+        }
+    }
+
+    const SIZE = 6;
+    const box = [1, 2, 3, 4, 5, 6];
+
+    const pos = [0,0,0,0,0];
+    while (true) {
+        box.forEach(num => pos[Math.floor((num-1)/10)]++);
+
+        if (box[0] === ub[0]) {
+            break;
+        }
+
+        box[SIZE - 1]++;
+        if (box[SIZE - 1] > ub[SIZE - 1]) {
+            moveBox(box);
+        }
+    }
+    return pos.map(value => value / C(45, 6));
+}
 function excludedLineCount() {
     return traversal(new Array<number>(5).fill(0),
         (box: number[]): number => {
@@ -123,5 +155,3 @@ function execute(method:()=>number[]) {
     fs.writeFileSync(`./back-end/json/Expectation/${method.name}.json`, str);
     console.log('완료');
 }
-
-execute(consecutiveExist);
