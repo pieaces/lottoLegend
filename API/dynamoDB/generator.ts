@@ -3,24 +3,27 @@ import { dynamoDB } from ".";
 import { getCurrentRound } from "../funtions";
 import { getIncOrExcNumbers, IncOrExc } from "./myNumbers";
 
-async function generateNumberA(userName:string) {
+async function generateNumber(userName: string, lineCount?:number[]) {
     const currentRound = getCurrentRound();
     const include = await getIncOrExcNumbers(userName, currentRound, IncOrExc.include);
     const exclude = await getIncOrExcNumbers(userName, currentRound, IncOrExc.exclude);
     const choice: number[] = [];
 
-    exclude.forEach((num, index) => {
-        for (let i = exclude[index - 1] + 1 || 1; i < num; i++) {
+    if (exclude) {
+        exclude.forEach((num, index) => {
+            for (let i = exclude[index - 1] + 1 || 1; i < num; i++) {
+                choice.push(i);
+            }
+        });
+        for (let i = exclude[exclude.length - 1] + 1; i <= 45; i++) {
             choice.push(i);
         }
-    });
-    for (let i = exclude[exclude.length - 1] + 1; i <= 45; i++) {
-        choice.push(i);
+    } else {
+        for (let i = 1; i <= 45; i++) choice.push(i);
     }
 
     const numsArr: number[][] = [];
-
-    while (numsArr.length <= 5) {
+    while (numsArr.length < 5) {
         const SIZE = choice.length;
         const numberSet: Set<number> = new Set();
         while (numberSet.size < 6) {
@@ -28,24 +31,28 @@ async function generateNumberA(userName:string) {
         }
         const numbers = [...numberSet].sort((a, b) => a - b);
 
-        let flag = false;
-        for (let i = 0; i < 6; i++) {
-            for (let j = 0; j < include.length; j++) {
-                if (numbers[i] === include[j]) {
-                    flag = true;
-                    break;
+        if (include) {
+            let flag = false;
+            for (let i = 0; i < 6; i++) {
+                for (let j = 0; j < include.length; j++) {
+                    if (numbers[i] === include[j]) {
+                        flag = true;
+                        break;
+                    }
                 }
             }
-        }
-        if (flag) {
+            if (flag) {
+                numsArr.push(numbers);
+            }
+        } else {
             numsArr.push(numbers);
         }
     }
 
     return numsArr;
 }
-export async function generatorA(userName:string) {
-    const numsArr = await generateNumberA(userName);
+export async function generator(userName: string) {
+    const numsArr = await generateNumber(userName);
     const lottoData = await scanLotto();
     const body = numsArr.map(numbers => {
         const winner = new Array<number>(5).fill(0);
