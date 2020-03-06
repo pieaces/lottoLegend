@@ -68,6 +68,11 @@
 }
 
 
+.make-btn:active{
+  transition: ease-in-out all 0.15s;
+  box-shadow:none;
+}
+
 /*function3 전용 로딩바*/
 .lds-circle {
   display: inline-block;
@@ -78,7 +83,7 @@
   width: 10rem;
   height: 10rem;
   border-radius: 50%;
-  background: #efff6c;
+  background: #fffade;
   animation: lds-circle 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 }
 @keyframes lds-circle {
