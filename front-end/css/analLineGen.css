@@ -1,8 +1,69 @@
 .line-gen-num-container{
-    height:10rem;
-    display:flex;
+    margin-bottom:1rem;
 }
 
-.line-gen-num-container >div{
-    width:15rem;
+.line-gen-num-table tr td{
+    width:16.6%;
+    height:12rem;
+}
+
+.line-gen-num-table tr td:nth-child(-n+5) > label{
+    background-color: var(--table-title-color);
+    font-size:1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height:40%;
+    text-align: center;
+}
+
+.line-gen-num-input-box{
+    height:60%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.line-gen-num-input-box > input{
+    display: inline-block;
+    width:80%;
+    height:3.4rem;
+}
+
+.make-btn-box{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height:100%;
+}
+
+.make-btn{
+    padding-bottom:0.5rem;
+    width:80%;
+    height:40%;
+    font-size:2rem;
+}
+
+.line-gen-stack-chart-container{
+    display:flex;
+    margin-bottom:1rem;
+    height:41rem;
+}
+
+.line-gen-stack-chart-container > div:not(:last-child){
+    margin-right:1rem;
+}
+
+
+.line-gen-stack-chart-box{
+    padding:2rem;
+    width:25%;
+    height:100%;
+}
+
+.line-gen-stack-chart-box > canvas{
+    width:100%;
+    height:100%;
 }

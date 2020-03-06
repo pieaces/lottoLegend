@@ -1,35 +1,3 @@
-.func3-filter-table  tr:nth-child(1) >td{
-  background-color: var(--table-title-color);
-}
-
-.func3-filter-table  tr >td{
-  width:11.11%;
-  font-size:1.4rem;
-  text-align: center;
-  height:5rem;
-}
-
-.func3-past-win-table tr{
-  background-color: aliceblue;
-}
-
-.func3-past-win-table tr>td{
-  width: 16.6%;
-  height: 2rem;
-  text-align: center;
-}
-
-.func3-list-filter-table tr >td{
-  width:12.5%;
-  text-align: center;
-}
-.func3-list-filter-table tr:nth-child(1){
-  background: beige;
-  height:2rem;
-}
-.func3-list-filter-table tr:nth-child(2){
-  height:2.5rem;
-}
 
 .func3-filter-value-container{
   width:80%;
@@ -84,116 +52,6 @@
   border-right:1px solid var(--border-color);
 }
 
-.func3-all-check-box-container{
-  background-color: var(--table-title-color);
-  height:6rem;
-  display:flex;
-  align-items: center;
-}
-
-.func3-all-check-box-container > span{
-  width:15%;
-  font-size:1.3rem;
-  padding-left:0.5rem;
-}
-
-.func3-all-check-box{
-  width:8%;
-  display:flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.func3-all-check-box > input{
-  width:2rem;
-  height:2rem;
-}
-
-.func3-save-box-1{
-  width:77%;
-  display:flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.save-btn{
-  border-radius: 3px;
-  margin-right:2rem;
-  width:10rem;
-  height:3.5rem;
-  color:var(--default-color);
-  font-size:1.4rem;
-  background-color: var(--button-color1);
-}
-
-.func3-check-box{
-  width:8%;
-  display:flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.func3-check-box > input{
-  width:2rem;
-  height:2rem;
-  display:flex;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.func3-num-container{
-  margin:1rem 0;
-}
-
-.func3-num-container > div:nth-child(1){
-  display: flex;
-  height: 7rem;
-  background: #1f71b3;
-}
-
-.func3-num-container > div:nth-child(n+2){
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  font-size:1.4rem;
-}
-
-.func3-num-box{
-  width:92%;
-  height:100%;
-  display:flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.func3-num-box > div{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.func3-num-box > div{
-  font-weight: 500;
-  font-size: 2.8rem;
-  color: var(--default-color);
-  width: 4.5rem;
-  height: 4.5rem;
-  margin: 1.2rem;
-  margin-left: 2rem;
-  line-height: 1.7;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-}
-
-.func3-save-box-2{
-  background-color: var(--table-title-color);
-  display:flex;
-  align-items: center;
-  justify-content: flex-end;
-  height:6rem;
-}
 
 .func3-make-btn-container{
   display:flex;
@@ -204,19 +62,11 @@
 
 .make-btn{
   padding-bottom:0.5rem;
-  border-radius: 5px;
-  background-color: rgb(237, 59, 59,1);
   width:12rem;
   height:5rem;
   font-size:2rem;
-  color:var(--default-color);
 }
 
-.make-btn:hover{
-  background-color: rgb(237, 59, 59,0.95);
-  transition: ease-in-out all 0.15s;
-  box-shadow: inset -3px -5px 0 rgba(0,0,0,0.2),inset 3px 1px 0 rgba(0,0,0,0.2);
-}
 
 .make-btn:active{
   transition: ease-in-out all 0.15s;
