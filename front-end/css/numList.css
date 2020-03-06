@@ -1,5 +1,5 @@
 .num-table-box{
-    padding:1rem 0;
+    margin-bottom:1rem;
   }
   
   .num-table{
@@ -11,16 +11,20 @@
   .num-table th{
     padding:0 0.5rem;
   }
+
+  .num-table th{
+    font-size:1.5rem;
+  }
   
   .num-table tr{
     height:6rem;
   }
   
   .num-table tr:nth-child(1){
-    background-color: lightgray;
+    background-color: var(--table-title-color);
   }
   
-  .num-table  td{
+  .num-table td{
     text-align: center;
   }
   
