@@ -45,12 +45,17 @@ const stackOption: Chart.ChartOptions = {
         intersect: false
     },
     maintainAspectRatio: false,
+
     scales: {
         xAxes: [{
             stacked: true,
         }],
         yAxes: [{
-            stacked: true
+            stacked: true,
+            ticks:{
+                min:0,
+                max:6
+            }
         }]
     }
 };

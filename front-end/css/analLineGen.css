@@ -49,7 +49,7 @@
 .line-gen-stack-chart-container{
     display:flex;
     margin-bottom:1rem;
-    height:41rem;
+    height:20rem;
 }
 
 .line-gen-stack-chart-container > div:not(:last-child){
