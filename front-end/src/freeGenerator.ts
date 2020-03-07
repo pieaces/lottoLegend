@@ -165,7 +165,7 @@ function makeLine(canvas: HTMLElement, numbers: number[]): void {
 
 // saveBtn.forEach((node) => {
 //     node.addEventListener('click', () => {
-//         const checkBoxList = document.querySelectorAll<HTMLInputElement>('.func3-check-box > input');
+//         const checkBoxList = document.querySelectorAll<HTMLInputElement>('.func3-check-box  input');
 //         checkBoxList.forEach((node, index) => {
 //             if (node.checked) {
 //                 console.log("div 번호:" + index);

@@ -2,7 +2,12 @@ document.write(`<div class="anchor-title">
 마이페이지
 </div>
 <ul class="anchor-list-container">
-
+<li>  
+    <ul class="anchor-list-box">
+    <li><a href="../myPage/myPage.html">마이 페이지 홈</a> </li>
+    
+    </ul>
+</li>
 <li>  
 <h3>번호조합리스트</h3>
     <ul class="anchor-list-box">

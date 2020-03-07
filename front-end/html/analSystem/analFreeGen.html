@@ -7,13 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="../../css/init.css" />
     <link rel="stylesheet" href="../../css/section.css">
+    <link rel="stylesheet" href="../../css//header.css" />
+    <link rel="stylesheet" href="../../css//footer.css" />
     <link rel="stylesheet" href="../../css/filter/function.css">
     <link rel="stylesheet" href="../../css/filter/function3.css">
     <link rel="stylesheet" href="../../css/filter/func3LineGen.css">
     <link rel="stylesheet" href="../../css/filter/func3NumBox.css">
     <link rel="stylesheet" href="../../css/filter/func3NumList.css">
-    <link rel="stylesheet" href="../../css//header.css" />
-    <link rel="stylesheet" href="../../css//footer.css" />
+    <link rel="stylesheet" href="../../css/checkbox.css">
     <title>CanvasLotto</title>
 </head>
 
@@ -177,8 +178,10 @@
                         <div class="func3-num-wrapper none">
                             <div class="func3-all-check-box-container box-color">
                                 <div class="func3-all-check-box">
-                                    <input type="checkbox" name="" id="func3-all-check" />
-
+                                    <div class="input-box">
+                                        <input type="checkbox" name="" id="func3-all-check" />
+                                        <div></div>
+                                    </div>
                                 </div>
 
                                 <span>모두</span>
@@ -198,7 +201,26 @@
 
             <script src="../components/footer/footer.js"></script>
         </div>
+        <script>
+            const inputbox = document.querySelectorAll('.input-box> input');
+            for (const node of inputbox) {
+                let flag = false;
+                node.addEventListener('click', () => {
+                    if (node.checked) {
+                        node.parentNode.children[1].textContent = '✔';
+                        node.parentNode.children[1].style.backgroundColor = 'red';
+                        flag = true;
+                    } else {
+                        node.parentNode.children[1].textContent = '';
+                        node.parentNode.children[1].style.backgroundColor = 'lightgray';
+                        flag = false;
+                    }
+                })
+            }
 
+
+
+        </script>
         <script src="../../js/headerHover.js"></script>
         <script src="../../js/freeGenerator.js"></script>
         <script src="https://kit.fontawesome.com/e14b8c39aa.js" crossorigin="anonymous"></script>

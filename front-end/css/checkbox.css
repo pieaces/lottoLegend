@@ -1,0 +1,33 @@
+.input-box {
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+  }
+  
+  .input-box >input{
+    cursor: pointer;
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:2;
+    opacity: 0;
+  }
+  
+  .input-box > div{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 0.5rem;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    z-index:1;
+    background-color: lightgray;
+    font-size:1.6rem;
+    color:var(--default-color);
+  }
+  
