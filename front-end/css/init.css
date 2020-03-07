@@ -6,8 +6,8 @@
   --main-color: #1f71b3;
   --table-title-color:#f6f6f6;
   --side-color: #4086be;
-  --button-color1: #7d9eb9;
-  --button-color2: #59758c;
+  --search-color: #7d9eb9;
+  --post-color: #59758c;
   --lotto-title-color: #a5484c;
   --lotto-num-color: rgba(231, 76, 60, 0.2);
   --box-color: #f8f9fb;
@@ -167,13 +167,13 @@ select:focus {
 }
 
 .search-btn{
-  background-color: var(--button-color1);
+  background-color: var(--search-color);
   color: var(--default-color);
   font-size: 1.4rem;
 }
 
 .post-btn {
-  background-color: var(--button-color2);
+  background-color: var(--post-color);
   color: var(--default-color);
   font-size: 1.4rem;
 }

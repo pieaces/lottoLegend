@@ -51,11 +51,34 @@
   color: var(--default-color);
   width: 4.5rem;
   height: 4.5rem;
-  margin: 1.2rem;
-  margin-left: 2rem;
+  margin: 0 1.2rem;
   line-height: 1.7;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+
+
+.func3-past-win-table tr{
+  background-color: aliceblue;
+}
+
+.func3-past-win-table tr>td{
+  width: 16.6%;
+  height: 2rem;
+  text-align: center;
+}
+
+.func3-list-filter-table tr >td{
+  width:12.5%;
+  text-align: center;
+}
+.func3-list-filter-table tr:nth-child(1){
+  background: beige;
+  height:2rem;
+}
+.func3-list-filter-table tr:nth-child(2){
+  height:2.5rem;
 }

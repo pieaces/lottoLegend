@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="../../css/section.css">
   <link rel="stylesheet" href="../../css/header.css" />
   <link rel="stylesheet" href="../../css/footer.css" />
-  <link rel="stylesheet" href="../../css/numList.css">
   <link rel="stylesheet" href="../../css/myPage.css" />
   <title>CanvasLotto</title>
 </head>
@@ -29,105 +28,302 @@
         </div>
         <div class="main">
 
-          <div class="mypage-box-1">
-            <div class="mypage-info-container-box box-color">
+
+          <div class="left-right-container">
+            <div class="left-container box-color">
 
               <div class="mypage-title">나의 정보</div>
-              <div class="mypage-info-container">
-                <div class="mypage-private-box">
-                  <div class="mypage-info-greetings">luckysso님 <br /> 캔버스로또에 오신 것을 진심으로 환영합니다</div>
-                  <div class="mypage-rank">
-                    회원님의 등급은 <div class="rank rank-first"> 1</div>입니다
-                  </div>
-                  <div class="mypage-notice-box">
-                    <i class="fas fa-bell">
-                      <div class="mypage-notice-num">99</div>
-                    </i>
-
-                  </div>
-
-                </div>
-                <div>
-                  <div class="mypage-info-box">
-                    <div>
-
-                      닉네임 :
-                      <div class="rank rank-first"> 1</div>
-                      <div class="rank rank-second">2</div>
-                      <div class="rank rank-third">3</div>
-                      <div class="rank rank-fourth">4</div>
-                      <div class="rank rank-fifth">5</div>
-                      luckysso
+              <div class="mypage-content-box">
+                <ul class="mypage-info-box">
+                  <li class="mypage-nickname">
+                    닉네임 : luckysso
+                  </li>
+                  <li class="mypage-phone">
+                    휴대폰번호 : 010-9524-2432
+                  </li>
+                  <li class="mypage-service">
+                    서비스 : 일반 20.12.31까지
+                    <button type="button" class="btn service-update-btn">변경</button>
+                  </li>
+                  <li class="mypage-point">
+                    기여점수 :
+                    <span class="rank rank-first"> 1</span> 93점
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="right-container box-color">
+              <div class="mypage-title">지난 회차 결과</div>
+              <div class="mypage-content-box">
+                <ul class="mypage-info-box">
+                  <li class="mypage-win-num-box">
+                    당첨번호 :
+                    <div class="mypage-win-num">
+                      <div>1</div>
+                      <div>2</div>
+                      <div>3</div>
+                      <div>4</div>
+                      <div>5</div>
+                      <div>6</div>
                     </div>
-                    <div>아이디 : luckysso</div>
-                    <div>휴대폰번호 : 010-9524-2432</div>
+                  </li>
+                  <li>
+                    추천 수 : 2개 등장
+                  </li>
+                  <li>
+                    제외 수 : 15개 중 13개 적중
+                  </li>
+                  <li>
+                    등수 : 5등
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="left-right-container">
+            <div class="left-container box-color">
+
+              <div class="mypage-title">이번 회차 나의 추천 번호</div>
+
+            </div>
+            <div class="right-container box-color">
+              <div class="mypage-title">이번 회차 나의 제외 번호</div>
+
+              <div class="func3-num-container-box">
+                <div class="func3-num-container">
+                  <div>
+
+                    <div class="func3-num-box">
+                      <div style="background-color: rgb(251, 196, 0);">3</div>
+                      <div style="background-color: rgb(251, 196, 0);">5</div>
+                      <div style="background-color: rgb(251, 196, 0);">10</div>
+                      <div style="background-color: rgb(105, 200, 242);">13</div>
+                      <div style="background-color: rgb(255, 114, 114);">26</div>
+                      <div style="background-color: rgb(170, 170, 170);">32</div>
+                    </div>
+                  </div>
+                  <div class="func3-past-win-box">
+                    <table class="table func3-past-win-table">
+                      <tr>
+                        <td>역대기록</td>
+                        <td style="color: rgb(160, 160, 160);">1등 : 0</td>
+                        <td style="color: rgb(160, 160, 160);">2등 : 0</td>
+                        <td style="color: rgb(160, 160, 160);">3등 : 0</td>
+                        <td>4등 : 4</td>
+                        <td>5등 : 18</td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="func3-filter-num-info">
+                    <table class="table func3-list-filter-table">
+                      <tr>
+                        <td>저값개수</td>
+                        <td>번호합계</td>
+                        <td>홀수개수</td>
+                        <td>소수개수</td>
+                        <td>3배수개수</td>
+                        <td>첫수 합</td>
+                        <td>고저 차</td>
+                        <td>AC</td>
+                      </tr>
+                      <tr>
+                        <td>4</td>
+                        <td>89</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>1</td>
+                        <td>7</td>
+                        <td>29</td>
+                        <td>10</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="func3-num-container-box">
+                <div class="func3-num-container">
+                  <div>
+
+                    <div class="func3-num-box">
+                      <div style="background-color: rgb(251, 196, 0);">3</div>
+                      <div style="background-color: rgb(251, 196, 0);">5</div>
+                      <div style="background-color: rgb(251, 196, 0);">10</div>
+                      <div style="background-color: rgb(105, 200, 242);">13</div>
+                      <div style="background-color: rgb(255, 114, 114);">26</div>
+                      <div style="background-color: rgb(170, 170, 170);">32</div>
+                    </div>
+                  </div>
+                  <div class="func3-past-win-box">
+                    <table class="table func3-past-win-table">
+                      <tr>
+                        <td>역대기록</td>
+                        <td style="color: rgb(160, 160, 160);">1등 : 0</td>
+                        <td style="color: rgb(160, 160, 160);">2등 : 0</td>
+                        <td style="color: rgb(160, 160, 160);">3등 : 0</td>
+                        <td>4등 : 4</td>
+                        <td>5등 : 18</td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="func3-filter-num-info">
+                    <table class="table func3-list-filter-table">
+                      <tr>
+                        <td>저값개수</td>
+                        <td>번호합계</td>
+                        <td>홀수개수</td>
+                        <td>소수개수</td>
+                        <td>3배수개수</td>
+                        <td>첫수 합</td>
+                        <td>고저 차</td>
+                        <td>AC</td>
+                      </tr>
+                      <tr>
+                        <td>4</td>
+                        <td>89</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>1</td>
+                        <td>7</td>
+                        <td>29</td>
+                        <td>10</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="func3-num-container-box">
+                <div class="func3-num-container">
+                  <div>
+
+                    <div class="func3-num-box">
+                      <div style="background-color: rgb(251, 196, 0);">3</div>
+                      <div style="background-color: rgb(251, 196, 0);">5</div>
+                      <div style="background-color: rgb(251, 196, 0);">10</div>
+                      <div style="background-color: rgb(105, 200, 242);">13</div>
+                      <div style="background-color: rgb(255, 114, 114);">26</div>
+                      <div style="background-color: rgb(170, 170, 170);">32</div>
+                    </div>
+                  </div>
+                  <div class="func3-past-win-box">
+                    <table class="table func3-past-win-table">
+                      <tr>
+                        <td>역대기록</td>
+                        <td style="color: rgb(160, 160, 160);">1등 : 0</td>
+                        <td style="color: rgb(160, 160, 160);">2등 : 0</td>
+                        <td style="color: rgb(160, 160, 160);">3등 : 0</td>
+                        <td>4등 : 4</td>
+                        <td>5등 : 18</td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="func3-filter-num-info">
+                    <table class="table func3-list-filter-table">
+                      <tr>
+                        <td>저값개수</td>
+                        <td>번호합계</td>
+                        <td>홀수개수</td>
+                        <td>소수개수</td>
+                        <td>3배수개수</td>
+                        <td>첫수 합</td>
+                        <td>고저 차</td>
+                        <td>AC</td>
+                      </tr>
+                      <tr>
+                        <td>4</td>
+                        <td>89</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>1</td>
+                        <td>7</td>
+                        <td>29</td>
+                        <td>10</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="func3-num-container-box">
+                <div class="func3-num-container">
+                  <div>
+
+                    <div class="func3-num-box">
+                      <div style="background-color: rgb(251, 196, 0);">3</div>
+                      <div style="background-color: rgb(251, 196, 0);">5</div>
+                      <div style="background-color: rgb(251, 196, 0);">10</div>
+                      <div style="background-color: rgb(105, 200, 242);">13</div>
+                      <div style="background-color: rgb(255, 114, 114);">26</div>
+                      <div style="background-color: rgb(170, 170, 170);">32</div>
+                    </div>
+                  </div>
+                  <div class="func3-past-win-box">
+                    <table class="table func3-past-win-table">
+                      <tr>
+                        <td>역대기록</td>
+                        <td style="color: rgb(160, 160, 160);">1등 : 0</td>
+                        <td style="color: rgb(160, 160, 160);">2등 : 0</td>
+                        <td style="color: rgb(160, 160, 160);">3등 : 0</td>
+                        <td>4등 : 4</td>
+                        <td>5등 : 18</td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class="func3-filter-num-info">
+                    <table class="table func3-list-filter-table">
+                      <tr>
+                        <td>저값개수</td>
+                        <td>번호합계</td>
+                        <td>홀수개수</td>
+                        <td>소수개수</td>
+                        <td>3배수개수</td>
+                        <td>첫수 합</td>
+                        <td>고저 차</td>
+                        <td>AC</td>
+                      </tr>
+                      <tr>
+                        <td>4</td>
+                        <td>89</td>
+                        <td>3</td>
+                        <td>3</td>
+                        <td>1</td>
+                        <td>7</td>
+                        <td>29</td>
+                        <td>10</td>
+                      </tr>
+                    </table>
                   </div>
                 </div>
               </div>
             </div>
-
           </div>
-          <div class="mypage-num-wrapper">
 
-            <div class="func3-num-container-box">
-              <div class="func3-num-container">
-                <div>
-                  <div class="func3-check-box"><input type="checkbox"></div>
-                  <div class="func3-num-box">
-                    <div style="background-color: rgb(251, 196, 0);">3</div>
-                    <div style="background-color: rgb(251, 196, 0);">5</div>
-                    <div style="background-color: rgb(251, 196, 0);">10</div>
-                    <div style="background-color: rgb(105, 200, 242);">13</div>
-                    <div style="background-color: rgb(255, 114, 114);">26</div>
-                    <div style="background-color: rgb(170, 170, 170);">32</div>
-                  </div>
-                </div>
-                <div class="func3-past-win-box">
-                  <table class="table func3-past-win-table">
-                    <tr>
-                      <td>역대기록</td>
-                      <td style="color: rgb(160, 160, 160);">1등 : 0</td>
-                      <td style="color: rgb(160, 160, 160);">2등 : 0</td>
-                      <td style="color: rgb(160, 160, 160);">3등 : 0</td>
-                      <td>4등 : 4</td>
-                      <td>5등 : 18</td>
-                    </tr>
-                  </table>
-                </div>
-                <div class="func3-filter-num-info">
-                  <table class="table func3-list-filter-table">
-                    <tr>
-                      <td>저값개수</td>
-                      <td>번호합계</td>
-                      <td>홀수개수</td>
-                      <td>소수개수</td>
-                      <td>3배수개수</td>
-                      <td>첫수 합</td>
-                      <td>고저 차</td>
-                      <td>AC</td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>89</td>
-                      <td>3</td>
-                      <td>3</td>
-                      <td>1</td>
-                      <td>7</td>
-                      <td>29</td>
-                      <td>10</td>
-                    </tr>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
+
+
       </div>
-    </section>
-    <script src="../components/footer/footer.js"></script>
+
+  </div>
+  </div>
+  </section>
+  <script src="../components/footer/footer.js"></script>
   </div>
   <script src="../../js/headerHover.js"></script>
   <script src="https://kit.fontawesome.com/e14b8c39aa.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
+
+<!--
+  랭크
+  <div class="rank rank-first"> 1</div>
+  <div class="rank rank-second">2</div>
+  <div class="rank rank-third">3</div>
+  <div class="rank rank-fourth">4</div>
+  <div class="rank rank-fifth">5</div> -->
+
+<!-- 알림 
+   <i class="fas fa-bell">
+   <div class="mypage-notice-num">99</div>
+ </i> -->

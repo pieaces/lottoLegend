@@ -52,6 +52,18 @@
   border-right:1px solid var(--border-color);
 }
 
+.func3-filter-table  tr:nth-child(1) >td{
+  background-color: var(--table-title-color);
+}
+
+.func3-filter-table  tr >td{
+  width:11.11%;
+  font-size:1.4rem;
+  text-align: center;
+  height:5rem;
+}
+
+
 
 .func3-make-btn-container{
   display:flex;

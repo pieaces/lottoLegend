@@ -14,7 +14,7 @@
   }
 
   .anchor-title{
-    background-color: var(--main-color);
+    background-color: var(--side-color);
     color: var(--default-color);
     height: 12rem;
     display: flex;
