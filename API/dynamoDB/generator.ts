@@ -1,4 +1,4 @@
-import Calculate from "../Calculate";
+import Calculate from "../Lotto/class/Calculate";
 import { dynamoDB } from ".";
 import { getCurrentRound } from "../funtions";
 import { getIncOrExcNumbers, IncOrExc } from "./Numbers";
@@ -105,7 +105,7 @@ async function generateNumberB(userName: string, lineCount?: number[]) {
     return numsArr;
 }
 
-async function numsArrToData(numsArr:number[][]){
+export async function numsArrToData(numsArr:number[][]){
     const lottoData = await scanLotto();
     return numsArr.map(numbers => {
         const winner = new Array<number>(5).fill(0);

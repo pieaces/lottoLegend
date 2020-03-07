@@ -1,6 +1,11 @@
 //계산: 일차원 데이터 => 영차원 데이터
 export default class Calculate {
     private constructor() { }
+
+    public static getData(numsArray: Array<number[]>, method: (numbers: number[]) => number) {
+        return numsArray.map(numbers => method(numbers));
+    }
+
     static excludedLineCount(numbers: number[]): number {
         const SIZE = 5;
         const set = new Set<number>();
@@ -94,5 +99,14 @@ export default class Calculate {
             if(value <23) count++;
         });
         return count;
+    }
+
+    static consecutiveExist(numbers: number[]): 0|1 {
+        for(let i =1; i<numbers.length; i++){
+            if(numbers[i] -1 === numbers[i-1]){
+                return 1;
+            }
+        }
+        return 0;
     }
 }

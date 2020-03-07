@@ -1,6 +1,6 @@
 import { dynamoDB, TableName } from '..'
 import { Plan, getPlan } from '../userInfo';
-import { Response } from '../../class';
+import { Response } from '../../Response';
 import { numsArrToAWSMapList, AWSListToNumbers, numbersToAWSList } from './functions';
 
 export enum SelectTool{
