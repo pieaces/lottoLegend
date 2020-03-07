@@ -25,9 +25,18 @@ export default class Layout3 {
             const checkboxContainer = document.createElement('div');
             checkboxContainer.classList.add('func3-check-box');
 
+            const inputBox = document.createElement('div');
+            inputBox.classList.add('input-box');
+
             const checkBox = document.createElement('input')
             checkBox.setAttribute('type', 'checkbox');
-            checkboxContainer.appendChild(checkBox);
+            inputBox.appendChild(checkBox);
+
+            const checkText = document.createElement('div');
+
+            inputBox.appendChild(checkText);
+
+            checkboxContainer.appendChild(inputBox);
 
             numBoxWrapper.appendChild(checkboxContainer);
 
@@ -115,3 +124,19 @@ export default class Layout3 {
         }
     }
 }
+
+
+// const inputbox = document.querySelectorAll<HTMLInputElement>('.input-box> input');
+// inputbox.forEach((node)=>{
+//     let flag=false;
+//     node.addEventListener('click',()=>{
+//         if (node.checked) {
+//             node.parentNode.children[1].textContent = '✔';
+//             node.parentNode.children[1].style.backgroundColor = 'red';
+//             flag=true;
+//         }else{
+//             node.parentNode.children[1].textContent = '';
+//             node.parentNode.children[1].style.backgroundColor = 'lightgray';
+//         }
+//     })
+// })
