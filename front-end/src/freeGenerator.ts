@@ -20,14 +20,14 @@ const thirtieth = document.querySelector<HTMLInputElement>('#thirtieth-nums');
 const fortieth = document.querySelector<HTMLInputElement>('#fortieth-nums');
 init();
 
-function sum(){
+function sum() {
     return Number(first.value) + Number(tenth.value) + Number(twentieth.value) + Number(thirtieth.value) + Number(fortieth.value);
 }
-function info(){
+function info() {
     Swal.fire({
-        title:'알림',
-        text:'합이 6이 넘어갈 수 없습니다.',
-        icon:'info'
+        title: '알림',
+        text: '합이 6이 넘어갈 수 없습니다.',
+        icon: 'info'
     })
 }
 first.oninput = () => {
@@ -81,19 +81,19 @@ fortieth.oninput = () => {
     }
 }
 let lineCheck = false;
-document.querySelector<HTMLElement>('.line-gen-toggle-btn').addEventListener('click', async () =>{
-    if(lineCheck){
+document.querySelector<HTMLElement>('.line-gen-toggle-btn').addEventListener('click', async () => {
+    if (lineCheck) {
         lineGenerator.classList.add('hide');
         lineInput.classList.add('hide');
         lineCheck = false;
-    }else{
+    } else {
         lineGenerator.classList.remove('hide');
         lineInput.classList.remove('hide');
         lineCheck = true;
-        const data = await getUnAuthAPI('/stats/mass', {method:'line'});
+        const data = await getUnAuthAPI('/stats/mass', { method: 'line' });
         console.log(data)
-        actualInstance.dataBox.datasets.forEach((box, index) => box.data = [Number((data.all[index]/data.total).toFixed(2))]);
-        latestInstance.dataBox.datasets.forEach((box, index) => box.data = [Number((data.latest[index]/12).toFixed(2))]);
+        actualInstance.dataBox.datasets.forEach((box, index) => box.data = [Number((data.all[index] / data.total).toFixed(2))]);
+        latestInstance.dataBox.datasets.forEach((box, index) => box.data = [Number((data.latest[index] / 12).toFixed(2))]);
         predictInstance.create();
         actualInstance.update();
         latestInstance.update();
@@ -132,18 +132,18 @@ async function init() {
             footer.style.fontSize = '2rem';
             footer.style.fontWeight = 'bold';
 
-            if(lineCheck){
+            if (lineCheck) {
                 params = [Number(first.value), Number(tenth.value), Number(twentieth.value), Number(thirtieth.value), Number(fortieth.value)]
                 dataSet = await getAuthAPI('/numbers/generator/free', { lineCount: JSON.stringify(params) });
-            }else{
+            } else {
                 dataSet = await getAuthAPI('/numbers/generator/free');
             }
             Layout3.makeNumBoard(dataSet);
-        }else{
+        } else {
             Swal.fire({
-                title:'알림',
-                text:'구간개수의 합이 6이 되어야합니다',
-                icon:'info'
+                title: '알림',
+                text: '구간개수의 합이 6이 되어야합니다',
+                icon: 'info'
             })
         }
     });
@@ -159,3 +159,22 @@ function makeLine(canvas: HTMLElement, numbers: number[]): void {
         canvas.appendChild(div);
     });
 }
+
+// const saveBtn = document.querySelectorAll('.save-btn');
+
+
+// saveBtn.forEach((node) => {
+//     node.addEventListener('click', () => {
+//         const checkBoxList = document.querySelectorAll<HTMLInputElement>('.func3-check-box > input');
+//         checkBoxList.forEach((node, index) => {
+//             if (node.checked) {
+//                 console.log("div 번호:" + index);
+//                 // index 0부터
+//             }
+//         })
+//     })
+// })
+
+
+
+
