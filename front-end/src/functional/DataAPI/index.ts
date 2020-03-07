@@ -42,7 +42,7 @@ const infoFront = '현재 필터에서 가능한 모든 ';
 const infoBack = '하나 또는 범위를 선택해주세요.';
 export default class DataAPI {
     static instance: DataAPI = null;
-    public numbers: number[][];
+    public numbersData: any[];
     public filteredCount: number;
     private filterList = ["전멸구간 개수", "전멸구간 선택", "이월수 개수", "이월수 선택", "포함", "제외", "저값 개수", "번호 합계", "홀수 개수", "소수 개수", "3배수 개수", "첫수 합", "고저 차", "AC", "연속수 포함여부"]
     private dataList = ['excludedLineCount', 'lineCount', 'carryCount', 'excludeInclude', 'excludeInclude', 'excludeInclude', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
@@ -72,9 +72,6 @@ export default class DataAPI {
     }
     public getTOTAL(): number { return this.data.total; }
     public getWinNums(): number[][] { return this.data.winNums; }
-    public getGeneratedNums() {
-        return this.numbers;
-    }
     public getLabels(num = this.current): Array<string | number> {
         return this.rangeList[num];
     }
@@ -155,7 +152,7 @@ export default class DataAPI {
             this.filteredCount = count;
             this.rangeList[this.current + 1] = range;
         }
-        if (numbers) this.numbers = numbers;
+        if (numbers) this.numbersData = numbers;
     }
 
     leap(page: number): void {

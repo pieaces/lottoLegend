@@ -426,16 +426,6 @@ document.write(`<div class="filter-box-container-box func1-layout func2-layout b
     <div class="func3-filter-title">전멸구간</div>
     <div class="func3-filter-num-box">
         <div class="func3-select-num-box ">
-            <div class="func3-select-num">1</div>
-            <div class="func3-select-num">2</div>
-            <div class="func3-select-num">3</div>
-            <div class="func3-select-num">4</div>
-            <div class="func3-select-num">5</div>
-            <div class="func3-select-num">6</div>
-            <div class="func3-select-num">7</div>
-            <div class="func3-select-num">8</div>
-            <div class="func3-select-num">9</div>
-            <div class="func3-select-num">10</div>
         </div>
 
     </div>
@@ -461,16 +451,6 @@ document.write(`<div class="filter-box-container-box func1-layout func2-layout b
     <div class="func3-filter-title">포함수</div>
     <div class="func3-filter-num-box">
         <div class="func3-select-num-box">
-            <div class="func3-select-num">1</div>
-            <div class="func3-select-num">2</div>
-            <div class="func3-select-num">3</div>
-            <div class="func3-select-num">4</div>
-            <div class="func3-select-num">5</div>
-            <div class="func3-select-num">6</div>
-            <div class="func3-select-num">7</div>
-            <div class="func3-select-num">8</div>
-            <div class="func3-select-num">9</div>
-            <div class="func3-select-num">10</div>
         </div>
     </div>
 </div>
@@ -478,16 +458,6 @@ document.write(`<div class="filter-box-container-box func1-layout func2-layout b
     <div class="func3-filter-title">제외수</div>
     <div class="func3-filter-num-box">
         <div class="func3-select-num-box">
-            <div class="func3-select-num">1</div>
-            <div class="func3-select-num">2</div>
-            <div class="func3-select-num">3</div>
-            <div class="func3-select-num">4</div>
-            <div class="func3-select-num">5</div>
-            <div class="func3-select-num">6</div>
-            <div class="func3-select-num">7</div>
-            <div class="func3-select-num">8</div>
-            <div class="func3-select-num">9</div>
-            <div class="func3-select-num">10</div>
         </div>
     </div>
 </div>

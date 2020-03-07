@@ -14,6 +14,8 @@ const section = document.querySelector(".section1");
 const infoText = document.querySelector<HTMLElement>(".checkbox-text");
 const loading = document.querySelector<HTMLElement>('.loading-box');
 const checkTextBox = document.querySelector<HTMLElement>('.checkbox-text');
+const filteredCounter = document.querySelector<HTMLElement>('.extract-num');
+
 export default class Layout extends LayoutToggle(Layout3) {
     dropDown: DropDown = new DropDown();
     checkBox: Checkbox = new Checkbox();
@@ -83,9 +85,24 @@ export default class Layout extends LayoutToggle(Layout3) {
         if (layoutVersion === 0) {
             const currentFilter = DataAPI.getInstance().getCurrent();
             infoText.textContent = DataAPI.getInstance().infoList[currentFilter];
-            if (DataAPI.getInstance().numbers) {
-                Swal
-                this.layout3_1On();
+            if(currentFilter>7){
+                filteredCounter.classList.remove('hide');
+            }else{
+                filteredCounter.classList.add('hide');
+            }
+            if (DataAPI.getInstance().numbersData) {
+                Swal.fire({
+                    title:'현재 필터링된 번호가 50개이하입니다.',
+                    text:'남아있는 필터를 중단하고 생성페이지로 이동하시겠습니까?',
+                    icon:'info',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '삭제',
+                    cancelButtonText: '취소',
+                }).then(async (result) => {
+                    if(result.value) this.layout3_1On();
+                });
             } else {
                 switch (currentFilter) {
                     case 3: case 4: case 5:
@@ -162,7 +179,7 @@ export default class Layout extends LayoutToggle(Layout3) {
             behavior: 'auto'
         });
         loading.classList.remove('none');
-        console.log(DataAPI.getInstance().getGeneratedNums());
+        console.log(DataAPI.getInstance().numbersData);
         await DataAPI.getInstance().forward(this.options[current]);
         await this.on();
         loading.classList.add('none');
@@ -273,6 +290,8 @@ export default class Layout extends LayoutToggle(Layout3) {
             node.addEventListener('click', async () => {
                 const current = DataAPI.getInstance().getCurrent();
                 if (index < current && node.textContent !== '-' && confirm(`'${DataAPI.getInstance().getFilterList()[index]}'(으)로 되돌아가시겠습니까?`)) {
+                    DataAPI.getInstance().numbersData = null;
+
                     section.scrollIntoView({
                         behavior: 'auto'
                     });
