@@ -105,14 +105,10 @@ async function generateNumberB(userName: string, lineCount?: number[]) {
     return numsArr;
 }
 
-export async function generator(userName: string, lineCount?: number[]) {
-    let numsArr: number[][];
-    if (!lineCount) numsArr = await generateNumberA(userName);
-    else numsArr = await generateNumberB(userName, lineCount);
+async function numsArrToData(numsArr:number[][]){
     const lottoData = await scanLotto();
-    const body = numsArr.map(numbers => {
+    return numsArr.map(numbers => {
         const winner = new Array<number>(5).fill(0);
-
         lottoData.forEach(lotto => {
             let count = 0;
             numbers.forEach(num => {
@@ -146,9 +142,15 @@ export async function generator(userName: string, lineCount?: number[]) {
             AC: Calculate.AC(numbers)
         }
     });
-
-    return body;
 }
+
+export async function freeGenerator(userName: string, lineCount?: number[]) {
+    let numsArr: number[][];
+    if (!lineCount) numsArr = await generateNumberA(userName);
+    else numsArr = await generateNumberB(userName, lineCount);
+    return (await numsArrToData(numsArr));
+}
+
 async function scanLotto(): Promise<{ BonusNum: { N: string }, Numbers: { NS: string[] } }[]> {
     const params: AWS.DynamoDB.ScanInput = {
         TableName: 'LottoData',

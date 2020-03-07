@@ -2,7 +2,7 @@ import verify from "./auth";
 import { getCurrentRound } from "./funtions";
 import { updateNumbers, getNumbers, deleteMyNumber, getIncOrExcNumbers, updateIncOrExcNumbers, IncOrExc } from './dynamoDB/Numbers'
 import { queryLottoData } from "./dynamoDB/lottoData";
-import { generator } from "./dynamoDB/generator";
+import { freeGenerator } from "./dynamoDB/generator";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -100,7 +100,7 @@ exports.handler = async (event: any) => {
             switch (method) {
                 case 'GET':
                     const lineCount = event.queryStringParameters && event.queryStringParameters.lineCount;
-                    body = await generator(currentId, lineCount);
+                    body = await freeGenerator(currentId, lineCount);
             }
         }
             break;
