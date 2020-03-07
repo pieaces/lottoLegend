@@ -6,6 +6,7 @@ import Calculate from './Lotto/class/Calculate';
 import Generator from './Lotto/class/Generator';
 import { numsArrToData } from './dynamoDB/generator';
 const pem = jwkToPem({
+    [key:string]:string;
     "alg": "RS256",
     "e": "AQAB",
     "kid": "mv27gjWoWPX6h3VfMR2y2WsKGIAwdQ9jXRgn4cnMrYo=",

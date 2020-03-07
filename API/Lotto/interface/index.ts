@@ -10,11 +10,11 @@ export interface GeneratorOption{
     excludedNumbers?: LottoNumber[];
     lowCount?: ZeroToSix;
     sum?: Range;
-    oddCount?: CountRange;
-    primeCount?: CountRange;
-    $3Count?: CountRange;
-    sum$10?: Range;
-    diffMaxMin?: Range;
-    AC?: Range;
+    oddCount?: ZeroToSix[];
+    primeCount?: ZeroToSix[];
+    $3Count?: ZeroToSix[];
+    sum$10?: number[];
+    diffMaxMin?: number[];
+    AC?: number[];
     consecutiveExist?: boolean;
 }
