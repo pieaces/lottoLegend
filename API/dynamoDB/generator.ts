@@ -1,7 +1,7 @@
 import Calculate from "../Calculate";
 import { dynamoDB } from ".";
 import { getCurrentRound } from "../funtions";
-import { getIncOrExcNumbers, IncOrExc } from "./myNumbers";
+import { getIncOrExcNumbers, IncOrExc } from "./Numbers";
 
 function makeChoice(exclude: number[]) {
     const choice: number[] = [];

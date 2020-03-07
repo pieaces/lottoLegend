@@ -1,6 +1,6 @@
 import verify from "./auth";
 import { getCurrentRound } from "./funtions";
-import { updateNumbers, getNumbersByClass, deleteNumsArr, getIncOrExcNumbers, getNumbersByRound, updateIncOrExcNumbers, IncOrExc } from './dynamoDB/myNumbers'
+import { updateNumbers, getNumbers, deleteMyNumber, getIncOrExcNumbers, updateIncOrExcNumbers, IncOrExc } from './dynamoDB/Numbers'
 import { queryLottoData } from "./dynamoDB/lottoData";
 import { generator } from "./dynamoDB/generator";
 
@@ -41,36 +41,16 @@ exports.handler = async (event: any) => {
                         const round = event.queryStringParameters.round;
                         const tool = event.queryStringParameters.tool;
                         const selectMethod = event.queryStringParameters.method;
-                        if (!tool) {
-                            body = await getNumbersByRound(currentId, round);
-                        } else {
-                            if (selectMethod) {
-                                const { numsArr } = await getNumbersByClass(currentId, round, { tool, method: selectMethod });
-                                body = numsArr;
-                            } else {
-                                body = await getNumbersByClass(currentId, round, { tool, method: selectMethod });
-                            }
-                        }
+                        body = await getNumbers(currentId, round, {method: selectMethod, tool});
                     }
                         break;
                     case 'POST':
-                        const { numsArr, tool } = JSON.parse(event.body)
+                        const { numsArr, tool } = JSON.parse(event.body);
                         body = await updateNumbers(currentId, getCurrentRound(), numsArr, tool);
                         break;
-                }
-            } else {
-                statusCode = 400;
-                body = "로그인되지 않은 사용자입니다."
-            }
-        }
-            break;
-        case '/numbers/mass/{index}': {
-            const index = event.pathParameters.index;
-            if (logedIn) {
-                switch (method) {
                     case 'DELETE':
-                        const { selectMethod, tool } = JSON.parse(event.body)
-                        await deleteNumsArr(currentId, getCurrentRound(), { tool, method: selectMethod }, index);
+                        const { numbers } = JSON.parse(event.body);
+                        await deleteMyNumber(currentId, getCurrentRound(), numbers);
                         break;
                 }
             } else {
