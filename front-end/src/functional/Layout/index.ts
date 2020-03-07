@@ -61,7 +61,8 @@ export default class Layout extends LayoutToggle(Layout3) {
                 } else if (currentFilter === 6) {
                     this.options[currentFilter] = DataAPI.getInstance().getLabels()[this.options[currentFilter].indexOf(true)];
                 } else if (currentFilter === 7) {
-                    const range = DataAPI.getInstance().getLabels()
+                    const range = DataAPI.getInstance().getLabels();
+                    const list = [];
                     let from = range[this.options[currentFilter].indexOf(true)];
                     let to = range[this.options[currentFilter].lastIndexOf(true)];
                     from = Number((<string>from).slice(0, (<string>from).indexOf('~')));
