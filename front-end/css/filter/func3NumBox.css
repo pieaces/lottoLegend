@@ -4,6 +4,7 @@
   height:6rem;
   display:flex;
   align-items: center;
+  margin-bottom: 1rem;
 }
 
 .func3-all-check-box-container > span{
@@ -41,66 +42,6 @@
   background-color: var(--button-color1);
 }
 
-.func3-num-container{
-    margin:1rem 0;
-  }
-  
-  .func3-num-container > div:nth-child(1){
-    display: flex;
-    height: 7rem;
-    background: #1f71b3;
-  }
-  
-  .func3-num-container > div:nth-child(n+2){
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    font-size:1.4rem;
-  }
-  
-  .func3-check-box{
-    width:8%;
-    display:flex;
-    align-items: center;
-    justify-content: flex-end;
-  }
-  
-  .func3-check-box > input{
-    width:2rem;
-    height:2rem;
-    display:flex;
-    align-items: center;
-    justify-content: space-around;
-  }
-  
-  .func3-num-box{
-    width:92%;
-    height:100%;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .func3-num-box > div{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .func3-num-box > div{
-    font-weight: 500;
-    font-size: 2.8rem;
-    color: var(--default-color);
-    width: 4.5rem;
-    height: 4.5rem;
-    margin: 1.2rem;
-    margin-left: 2rem;
-    line-height: 1.7;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-  }
   
   .func3-filter-table  tr:nth-child(1) >td{
     background-color: var(--table-title-color);
