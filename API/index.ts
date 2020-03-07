@@ -59,7 +59,7 @@ exports.handler = async (event: any) => {
                     temp.from = Number(from);
                     temp.to = Number(to);
                 } else if (list) {
-                    temp.list = JSON.parse(decodeURI(list));
+                    temp.list = JSON.parse(list);
                 }
                 data = await queryStats(method as StatsMethod, ProjectionExpression, ExpressionAttributeNames, temp);
                 body = { data };
