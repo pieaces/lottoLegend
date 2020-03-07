@@ -121,10 +121,11 @@
 
 .rank-first{
   animation: rank 3s ease-in infinite;
-  color:rgb(75, 45, 114);
-  background: linear-gradient(45deg,  rgb(162, 146, 184) 3%,rgba(255,255,255,1) 56%,rgb(185, 162, 214) 90%);
-  background-size: 200% 200%;
+  color: rgb(255, 221, 1);
+    background: linear-gradient(45deg,  rgb(241, 214, 9) 5%,rgba(255,255,255,1) 50%,rgba(252,235,0,1) 95%);
+    background-size: 200% 200%;
 }
+
 
 @keyframes rank{
 	0% {
@@ -137,16 +138,18 @@
 		background-position: 0% 50%;
 	}
 }
-    
+  
+
+
 .rank-second{
-  color: rgb(255, 221, 1);
-    background: linear-gradient(45deg,  rgb(241, 214, 9) 5%,rgba(255,255,255,1) 50%,rgba(252,235,0,1) 95%);
-}
-
-
-.rank-third{
   color: rgb(133, 133, 133);
   background: linear-gradient(45deg, rgb(136, 136, 136)  0%,rgb(243, 243, 243) 56%,rgba(149, 148, 148, 0.5) 96%);
+}
+
+.rank-third{
+  
+  color:rgb(205, 127, 50);
+  background: linear-gradient(45deg,  rgb(216, 141, 66) 3%,rgba(255,255,255,1) 56%,rgb(212, 138, 64) 95%);
 }
 
 
