@@ -80,8 +80,8 @@
 
                         </div>
 
-                        <div class="func3-filter-container-box-2 none">
-                            <table class="table func3-filter-table">
+                        <div class="func3-filter-container-box-2">
+                            <table class="table func3-filter-table none">
                                 <tr>
                                     <td>저값 개수</td>
                                     <td>번호 합계</td>
@@ -160,7 +160,7 @@
                             </div>
                         </div>
 
-                        <div class="line-gen-stack-chart-container hide">
+                        <div class="line-gen-stack-chart-container none">
                             <div class="line-gen-stack-chart-box box-color">
                                 <canvas id="predict-canvas"></canvas>
                             </div>
@@ -181,7 +181,7 @@
                                     <div class="input-box">
                                         <input type="checkbox" name="" id="func3-all-check" />
                                         <div>
-                                            <img src="../../img/checkbox.png" alt="체크">
+                                            <img class="none" src="../../img/checkbox.png" alt="체크">
                                         </div>
                                     </div>
                                 </div>
@@ -203,26 +203,6 @@
 
             <script src="../components/footer/footer.js"></script>
         </div>
-        <script>
-            const inputbox = document.querySelectorAll('.input-box> input');
-            for (const node of inputbox) {
-                let flag = false;
-                node.addEventListener('click', () => {
-                    if (node.checked) {
-                        node.parentNode.children[1].textContent = '✔';
-                        node.parentNode.children[1].style.backgroundColor = 'red';
-                        flag = true;
-                    } else {
-                        node.parentNode.children[1].textContent = '';
-                        node.parentNode.children[1].style.backgroundColor = 'lightgray';
-                        flag = false;
-                    }
-                })
-            }
-
-
-
-        </script>
         <script src="../../js/headerHover.js"></script>
         <script src="../../js/freeGenerator.js"></script>
         <script src="https://kit.fontawesome.com/e14b8c39aa.js" crossorigin="anonymous"></script>

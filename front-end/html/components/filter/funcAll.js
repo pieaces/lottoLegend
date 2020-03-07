@@ -422,18 +422,19 @@ document.write(`<div class="filter-box-container-box func1-layout func2-layout b
 </div>
 <div class="func3-layout-1 none">
 <div class="func3-filter-container-box-1 box-color">
-<div class="func3-filter-container">
+<div class="func3-filter-container ">
     <div class="func3-filter-title">전멸구간</div>
-    <div class="func3-filter-num-box">
-        <div class="func3-select-num-box ">
+    <div class="func3-filter-value-container">
+        <div class="func3-filter-value-box " id="excludedLineCount-text">
+
         </div>
 
     </div>
 </div>
 <div class="func3-filter-container">
     <div class="func3-filter-title">이월수</div>
-    <div class="func3-filter-num-box">
-        <div class="func3-select-num-box">
+    <div class="func3-filter-value-container">
+        <div class="func3-filter-value-box">
             <div class="func3-select-num">1</div>
             <div class="func3-select-num">2</div>
             <div class="func3-select-num">3</div>
@@ -447,57 +448,126 @@ document.write(`<div class="filter-box-container-box func1-layout func2-layout b
         </div>
     </div>
 </div>
+
 <div class="func3-filter-container">
-    <div class="func3-filter-title">포함수</div>
-    <div class="func3-filter-num-box">
-        <div class="func3-select-num-box">
+    <div class="func3-filter-title">나의 추천수</div>
+    <div class="func3-filter-value-container">
+        <div class="func3-filter-value-box" id="include">
         </div>
     </div>
 </div>
 <div class="func3-filter-container">
-    <div class="func3-filter-title">제외수</div>
-    <div class="func3-filter-num-box">
-        <div class="func3-select-num-box">
+    <div class="func3-filter-title">나의 제외수</div>
+    <div class="func3-filter-value-container">
+        <div class="func3-filter-value-box" id="exclude">
         </div>
     </div>
 </div>
 
 </div>
 <div class="func3-filter-container-box-2">
-<table class="table stats-table">
-    <tr>
-        <td>저값 개수</td>
-        <td>번호 합계</td>
-        <td>홀수 개수</td>
-        <td>소수 개수</td>
-        <td>3배수 개수</td>
-        <td>첫수 합</td>
-        <td>고저 차</td>
-        <td>AC</td>
-        <td>연속수 포함</td>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>2</td>
-        <td>3</td>
-        <td>4</td>
-        <td>5</td>
-        <td>6</td>
-        <td>7</td>
-        <td>8</td>
-        <td>9</td>
-    </tr>
-
-</table>
-
+          <table class="table func3-filter-table">
+              <tr>
+                  <td>저값 개수</td>
+                  <td>번호 합계</td>
+                  <td>홀수 개수</td>
+                  <td>소수 개수</td>
+                  <td>3배수 개수</td>
+                  <td>첫수 합</td>
+                  <td>고저 차</td>
+                  <td>AC</td>
+                  <td>연속수 포함</td>
+              </tr>
+              <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                  <td>5</td>
+                  <td>6</td>
+                  <td>7</td>
+                  <td>8</td>
+                  <td>9</td>
+              </tr>
+          </table>
+   </div>
+   <div class="line-gen-toggle-btn-box">
+   <button type="button" class="btn line-gen-toggle-btn">구간(색상)별 개수 조건 추가</button>
 </div>
+<div class="line-gen-num-container">
+<table class="table line-gen-num-table">
+    <tr>
+        <td>
+            <div class="line-gen-num-input-container">
+                <label for="first-nums">1번대</label>
+                <div class="line-gen-num-input-box">
+                    <input type="number" id="first-nums">
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="line-gen-num-input-container">
+                <label for="tenth-nums">10번대</label>
+                <div class="line-gen-num-input-box">
+                    <input type="number" id="tenth-nums">
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="line-gen-num-input-container">
+                <label for="twentieth-nums">20번대</label>
+                <div class="line-gen-num-input-box">
+                    <input type="number" id="twentieth-nums">
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="line-gen-num-input-container">
+                <label for="thirtieth-nums">30번대</label>
+                <div class="line-gen-num-input-box">
+                    <input type="number" id="thirtieth-nums">
+                </div>
+            </div>
+        </td>
+        <td>
+            <div class="line-gen-num-input-container">
+                <label for="fortieth-nums">40번대</label>
+                <div class="line-gen-num-input-box">
+                    <input type="number" id="fortieth-nums">
+                </div>
+            </div>
+        </td>
 
+    </tr>
+</table>
+<div class="line-gen-make-btn-box">
+    <button type="button" class="btn make-btn" id="make">생성</button>
+</div>
+</div>
+<div class="line-gen-stack-chart-container ">
+<div class="line-gen-stack-chart-box box-color">
+    <canvas id="predict-canvas"></canvas>
+</div>
+<div class="line-gen-stack-chart-box box-color">
+    <canvas id="actual-canvas"></canvas>
+</div>
+<div class="line-gen-stack-chart-box box-color">
+    <canvas id="lately-canvas"></canvas>
+</div>
+<div class="line-gen-stack-chart-box box-color">
+    <canvas id="selection-canvas"></canvas>
+</div>
+</div>
 <div class="func3-num-wrapper box-color">
 <div class="func3-all-check-box-container">
-    <div class="func3-all-check-box">
-        <input type="checkbox" name="" id="func3-all-check" />
-
+<div class="func3-all-check-box">
+<div class="input-box">
+    <input type="checkbox" name="" id="func3-all-check" />
+    <div>
+        <img class="none" src="../../img/checkbox.png" alt="체크">
     </div>
+</div>
+</div>
     <span>모두</span>
     <div class="func3-save-box-1">
         <button type="button" class="btn save-btn save-btn">저장</button>

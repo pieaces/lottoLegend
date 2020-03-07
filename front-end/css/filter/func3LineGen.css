@@ -9,7 +9,7 @@
 .line-gen-toggle-btn{
     width:20rem;
     height:5rem;
-    background-color: var(--button-color1);
+    background-color: var(--update-color);
     color:var(--default-color);
 }
 
