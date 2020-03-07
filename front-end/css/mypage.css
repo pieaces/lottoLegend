@@ -64,7 +64,7 @@
 }
 
 .mypage-notice-box > i:hover{
-  opacity: 0.9;
+  /* opacity: 0.9; */
   animation: swing 0.6s ease;
 }
 
@@ -118,13 +118,6 @@
   text-align: center;
 }
 
-.rank-second{
-  color: rgb(255, 221, 1);
-    background: linear-gradient(45deg,  rgb(241, 214, 9) 5%,rgba(255,255,255,1) 50%,rgba(252,235,0,1) 95%);
-}
-
-
-
 .rank-first{
   animation: rank 3s ease-in infinite;
   color:rgb(75, 45, 114);
@@ -144,6 +137,11 @@
 	}
 }
     
+.rank-second{
+  color: rgb(255, 221, 1);
+    background: linear-gradient(45deg,  rgb(241, 214, 9) 5%,rgba(255,255,255,1) 50%,rgba(252,235,0,1) 95%);
+}
+
 
 .rank-third{
   color: rgb(133, 133, 133);
