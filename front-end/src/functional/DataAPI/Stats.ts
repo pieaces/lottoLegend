@@ -17,7 +17,7 @@ export default class Data {
             }
             else if (params.list) {
                 queryParams = {
-                    list:params.list
+                    list:JSON.stringify(params.list)
                 }
             }
         }

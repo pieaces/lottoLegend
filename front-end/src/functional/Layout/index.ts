@@ -51,7 +51,6 @@ export default class Layout extends LayoutToggle(Layout3) {
             default:
                 this.options[currentFilter] = this.checkBox.getCheckedLabels().slice();
                 if (currentFilter === 1) {
-                    const range = DataAPI.getInstance().getLabels();
                     const option: number[] = [];
                     this.options[currentFilter].forEach((value: boolean, index: number) => {
                         if (value) {
@@ -63,19 +62,31 @@ export default class Layout extends LayoutToggle(Layout3) {
                     this.options[currentFilter] = DataAPI.getInstance().getLabels()[this.options[currentFilter].indexOf(true)];
                 } else if (6 < currentFilter && currentFilter < DataAPI.getInstance().SIZE - 1) {
                     const range = DataAPI.getInstance().getLabels()
-                    let from = range[this.options[currentFilter].indexOf(true)];
-                    let to = range[this.options[currentFilter].lastIndexOf(true)]
                     if (currentFilter === 7) {
+                        let from = range[this.options[currentFilter].indexOf(true)];
+                        let to = range[this.options[currentFilter].lastIndexOf(true)];
                         from = Number((<string>from).slice(0, (<string>from).indexOf('~')));
                         to = Number((<string>to).slice((<string>to).indexOf('~') + 1));
-                    } else if (currentFilter === 12 && typeof from === 'string') {
-                        from = Number((<string>from).slice(0, (<string>from).indexOf('~')));
-                        to = Number((<string>to).slice((<string>to).indexOf('~') + 1));
+                        this.options[currentFilter] = { from, to }
+                    } else if (currentFilter === 12) {
+                        const list = [];
+                        this.options[currentFilter].forEach((value: boolean, index) => {
+                            if (value) {
+                                if (typeof range[index] === 'string') {
+                                    const one = Number((<string>range[index]).slice(0, (<string>range[index]).indexOf('~')));
+                                    const two = Number((<string>range[index]).slice((<string>range[index]).indexOf('~') + 1));
+                                    list.push(one, two);
+                                } else list.push(range[index]);
+                            }
+                        });
+                        this.options[currentFilter] = list;
                     } else {
-                        from = Number(from);
-                        to = Number(to);
+                        const list = [];
+                        this.options[currentFilter].forEach((value: boolean, index) => {
+                            if (value) list.push(range[index]);
+                        });
+                        this.options[currentFilter] = list;
                     }
-                    this.options[currentFilter] = { from, to }
                 } else if (currentFilter === DataAPI.getInstance().SIZE - 1) {
                     this.options[currentFilter] = this.options[currentFilter][0] ? false : true;
                 }
@@ -85,91 +96,91 @@ export default class Layout extends LayoutToggle(Layout3) {
         if (layoutVersion === 0) {
             const currentFilter = DataAPI.getInstance().getCurrent();
             infoText.textContent = DataAPI.getInstance().infoList[currentFilter];
-            if(currentFilter>7){
+            if (currentFilter > 7) {
                 filteredCounter.classList.remove('hide');
-            }else{
+            } else {
                 filteredCounter.classList.add('hide');
             }
             if (DataAPI.getInstance().numbersData) {
                 Swal.fire({
-                    title:'현재 필터링된 번호가 50개이하입니다.',
-                    text:'남아있는 필터를 중단하고 생성페이지로 이동하시겠습니까?',
-                    icon:'info',
+                    title: '현재 필터링된 번호가 50개이하입니다.',
+                    text: '남아있는 필터를 중단하고 생성페이지로 이동하시겠습니까?',
+                    icon: 'info',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
                     confirmButtonText: '삭제',
                     cancelButtonText: '취소',
                 }).then(async (result) => {
-                    if(result.value) this.layout3_1On();
+                    if (result.value) this.layout3_1On();
                 });
-            } else {
-                switch (currentFilter) {
-                    case 3: case 4: case 5:
-                        this.layout2.reset();
-                        this.checkBox.removeAllEvent();
-                        if (currentFilter == 3) {
-                            this.nextAbleLimit = this.options[currentFilter - 1].indexOf(true);
-                            infoText.innerHTML = `전멸구간을 제외한 전회차 번호입니다. 이월될 수를 선택해주세요.(${this.nextAbleLimit}개) (나머지는 자동제외됩니다.)`;
-                            if (this.nextAbleLimit === 0) {
-                                this.dropDown.nodeList[currentFilter].textContent = '-';
-                                this.options[currentFilter] = [];
-                                await DataAPI.getInstance().forward(this.options[currentFilter]);
-                                infoText.innerHTML = DataAPI.getInstance().infoList[currentFilter + 1];
-                            }
-                            this.layout2.includeVerson();
+            }
+
+            switch (currentFilter) {
+                case 3: case 4: case 5:
+                    this.layout2.reset();
+                    this.checkBox.removeAllEvent();
+                    if (currentFilter == 3) {
+                        this.nextAbleLimit = this.options[currentFilter - 1].indexOf(true);
+                        infoText.innerHTML = `전멸구간을 제외한 전회차 번호입니다. 이월될 수를 선택해주세요.(${this.nextAbleLimit}개) (나머지는 자동제외됩니다.)`;
+                        if (this.nextAbleLimit === 0) {
+                            this.dropDown.nodeList[currentFilter].textContent = '-';
+                            this.options[currentFilter] = [];
+                            await DataAPI.getInstance().forward(this.options[currentFilter]);
+                            infoText.innerHTML = DataAPI.getInstance().infoList[currentFilter + 1];
                         }
-                        else if (currentFilter === 4) {
-                            this.nextAbleLimit = 1;
-                            this.layout2.includeVerson();
-                        }
-                        else if (currentFilter === 5) {
-                            this.layout2.excludeVersion();
-                        }
-                        this.layout2.setOpacity();
-                        this.layout2.refreshNumberBoard();
-                        this.layout2On();
-                        this.resetBtn.removeEvent();
-                        this.resetBtn.addEvent(this.layout2.reset.bind(this));
-                        break;
-                    case DataAPI.getInstance().SIZE:
-                        this.layout3_1On();
-                        break;
-                    default:
-                        this.layout1On();
-                        this.checkBox.init();
-                        if (currentFilter === 1) {
-                            this.layout1.clearStatsBoard();
-                            this.nextAbleLimit = this.options[currentFilter - 1].indexOf(true);
-                            if (this.nextAbleLimit === 0) {
-                                this.dropDown.nodeList[currentFilter].textContent = '-';
-                                this.options[currentFilter] = [];
-                                await DataAPI.getInstance().forward(this.options[currentFilter]);
-                                this.on();
-                            } else if (this.nextAbleLimit === 1) {
-                                this.checkBox.singleSelectEvent();
-                            } else {
-                                this.checkBox.multiSelectEvent(this.nextAbleLimit);
-                            }
-                        } else if (currentFilter <= 6) {
-                            if (currentFilter === 0) {
-                                this.dropDown.nodeList[currentFilter + 1].textContent = DataAPI.getInstance().getNextName();
-                                this.nextAbleLimit = 1;
-                            } else if (currentFilter === 2) {
-                                this.dropDown.nodeList[currentFilter + 1].textContent = DataAPI.getInstance().getNextName();
-                                this.nextAbleLimit = 1;
-                            }
+                        this.layout2.includeVerson();
+                    }
+                    else if (currentFilter === 4) {
+                        this.nextAbleLimit = 1;
+                        this.layout2.includeVerson();
+                    }
+                    else if (currentFilter === 5) {
+                        this.layout2.excludeVersion();
+                    }
+                    this.layout2.setOpacity();
+                    this.layout2.refreshNumberBoard();
+                    this.layout2On();
+                    this.resetBtn.removeEvent();
+                    this.resetBtn.addEvent(this.layout2.reset.bind(this));
+                    break;
+                case DataAPI.getInstance().SIZE:
+                    this.layout3_1On();
+                    break;
+                default:
+                    this.layout1On();
+                    this.checkBox.init();
+                    if (currentFilter === 1) {
+                        this.layout1.clearStatsBoard();
+                        this.nextAbleLimit = this.options[currentFilter - 1].indexOf(true);
+                        if (this.nextAbleLimit === 0) {
+                            this.dropDown.nodeList[currentFilter].textContent = '-';
+                            this.options[currentFilter] = [];
+                            await DataAPI.getInstance().forward(this.options[currentFilter]);
+                            this.on();
+                        } else if (this.nextAbleLimit === 1) {
                             this.checkBox.singleSelectEvent();
                         } else {
-                            this.checkBox.rangeSelectEvent();
+                            this.checkBox.multiSelectEvent(this.nextAbleLimit);
                         }
-                        this.resetBtn.removeEvent();
-                        this.resetBtn.addEvent(this.checkBox.reset.bind(this.checkBox));
-                        this.layout1.barSlide.init();
-                        this.layout1.lineSlide.init();
-                        this.layout1.bubbleChart.init();
-                        break;
-                }
+                    } else if (currentFilter <= 6) {
+                        if (currentFilter === 0) {
+                            this.dropDown.nodeList[currentFilter + 1].textContent = DataAPI.getInstance().getNextName();
+                            this.nextAbleLimit = 1;
+                        } else if (currentFilter === 2) {
+                            this.dropDown.nodeList[currentFilter + 1].textContent = DataAPI.getInstance().getNextName();
+                            this.nextAbleLimit = 1;
+                        }
+                        this.checkBox.singleSelectEvent();
+                    } else {
+                        this.checkBox.multiSelectEvent();
+                    }
+                    this.resetBtn.removeEvent();
+                    this.resetBtn.addEvent(this.checkBox.reset.bind(this.checkBox));
+                    this.layout1.barSlide.init();
+                    this.layout1.lineSlide.init();
+                    this.layout1.bubbleChart.init();
+                    break;
             }
         }
     }
@@ -304,6 +315,5 @@ export default class Layout extends LayoutToggle(Layout3) {
                 }
             })
         });
-
     }
 }
