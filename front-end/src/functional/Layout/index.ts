@@ -8,6 +8,8 @@ import AutoBtn from "../instanceBtns/AutoBtn"
 import ResetBtn from "../instanceBtns/ResetBtn";
 import Layout1 from "./Layout1";
 import Layout2 from "./Layout2";
+import Swal from 'sweetalert2'
+
 const section = document.querySelector(".section1");
 const infoText = document.querySelector<HTMLElement>(".checkbox-text");
 const loading = document.querySelector<HTMLElement>('.loading-box');
@@ -82,6 +84,7 @@ export default class Layout extends LayoutToggle(Layout3) {
             const currentFilter = DataAPI.getInstance().getCurrent();
             infoText.textContent = DataAPI.getInstance().infoList[currentFilter];
             if (DataAPI.getInstance().numbers) {
+                Swal
                 this.layout3_1On();
             } else {
                 switch (currentFilter) {

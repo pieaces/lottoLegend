@@ -155,7 +155,7 @@ export default class DataAPI {
             this.filteredCount = count;
             this.rangeList[this.current + 1] = range;
         }
-        else if (numbers) this.numbers = numbers;
+        if (numbers) this.numbers = numbers;
     }
 
     leap(page: number): void {
