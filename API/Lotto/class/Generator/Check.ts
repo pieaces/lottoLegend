@@ -29,7 +29,10 @@ export default class Confirmer extends Base {
     }
     protected checkSum(numbers: LottoNumber[]): boolean {
         const sum = Calculate.sum(numbers);
-        return this.option.sum.from <= sum && sum <= this.option.sum.to;
+        for(let i =0; i<this.option.sum.length; i++){
+            if(this.option.sum[i].from <= sum && sum <= this.option.sum[i].to) return true;
+        }
+        return false;
     }
     protected checkDiffMinMax(numbers: LottoNumber[]): boolean {
         const diffMaxMin = Calculate.diffMaxMin(numbers);

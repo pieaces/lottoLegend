@@ -9,7 +9,7 @@ export interface GeneratorOption{
     includedNumbers?: LottoNumber[];
     excludedNumbers?: LottoNumber[];
     lowCount?: ZeroToSix;
-    sum?: Range;
+    sum?: Range[];
     oddCount?: ZeroToSix[];
     primeCount?: ZeroToSix[];
     $3Count?: ZeroToSix[];
