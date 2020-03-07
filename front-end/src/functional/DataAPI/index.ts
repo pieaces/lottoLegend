@@ -1,4 +1,4 @@
-import Data, { Params } from "./Stats";
+import Stats, { Params } from "./Stats";
 import Generator from "./Generator";
 const constraintLowCount = require('./json/lowCount_compressed.json');
 const constraintSum = require('./json/sum_compressed.json');
@@ -44,11 +44,11 @@ export default class DataAPI {
     static instance: DataAPI = null;
     public numbersData: any[];
     public filteredCount: number;
-    private filterList = ["전멸구간 개수", "전멸구간 선택", "이월수 개수", "이월수 선택", "포함", "제외", "저값 개수", "번호 합계", "홀수 개수", "소수 개수", "3배수 개수", "첫수 합", "고저 차", "AC", "연속수 포함여부"]
-    private dataList = ['excludedLineCount', 'lineCount', 'carryCount', 'excludeInclude', 'excludeInclude', 'excludeInclude', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
-    private optionList = [null, 'excludedLines', null, null, 'includedNumbers', 'excludedNumbers', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
+    static readonly filterList = ["전멸구간 개수", "전멸구간 선택", "이월수 개수", "이월수 선택", "포함", "제외", "저값 개수", "번호 합계", "홀수 개수", "소수 개수", "3배수 개수", "첫수 합", "고저 차", "AC", "연속수 포함여부"]
+    private static readonly dataList = ['excludedLineCount', 'lineCount', 'carryCount', 'excludeInclude', 'excludeInclude', 'excludeInclude', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
+    private static readonly optionList = [null, 'excludedLines', null, null, 'includedNumbers', 'excludedNumbers', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
     private rangeList: Array<string[] | number[]> = [[0, 1, 2, 3, 4], ['1~', '10~', '20~', '30~', '40~'], [0, 1, 2, 3, 4, 5, 6], null, null, null];
-    public infoList = ['전멸구간 개수를 선택해주세요.', '전멸구간 번호대를 선택해주세요', '전회차에서 이월될 개수를 선택해주세요.', '전회차에서 이월될 수를 선택해주세요(나머지는 자동으로 제외됩니다.)',
+    static readonly infoList = ['전멸구간 개수를 선택해주세요.', '전멸구간 번호대를 선택해주세요', '전회차에서 이월될 개수를 선택해주세요.', '전회차에서 이월될 수를 선택해주세요(나머지는 자동으로 제외됩니다.)',
         '포함될 수를 선택해주세요.(생략가능)', '제외될 수를 선택해주세요.(생략가능)', '저값(1~22) 개수를 선택해주세요.',
         infoFront + '번호합계입니다. ' + infoBack,
         infoFront + '홀수개수입니다. ' + infoBack,
@@ -60,9 +60,9 @@ export default class DataAPI {
         '연속번호 포함여부를 선택해주세요.',
     ]
     private current: number = 0;
-    private data: Data = new Data();
-    private generator: Generator = new Generator();
-    public readonly SIZE: number = this.filterList.length;
+    private stats = new Stats();
+    private generator = new Generator();
+    public readonly SIZE: number = DataAPI.filterList.length;
 
     static getInstance() {
         if (DataAPI.instance == null) {
@@ -70,22 +70,19 @@ export default class DataAPI {
         }
         return DataAPI.instance;
     }
-    public getTOTAL(): number { return this.data.total; }
-    public getWinNums(): number[][] { return this.data.winNums; }
+    public getTOTAL(): number { return this.stats.total; }
+    public getWinNums(): number[][] { return this.stats.winNums; }
     public getLabels(num = this.current): Array<string | number> {
         return this.rangeList[num];
     }
-    public getFilterList(): string[] {
-        return this.filterList;
-    }
     public getPreviousName(): string {
-        return this.filterList[this.current - 1];
+        return DataAPI.filterList[this.current - 1];
     }
     public getCurrentName(): string {
-        return this.filterList[this.current];
+        return DataAPI.filterList[this.current];
     }
     public getNextName(): string {
-        return this.filterList[this.current + 1];
+        return DataAPI.filterList[this.current + 1];
     }
     public getCurrent() { return this.current }
 
@@ -129,7 +126,6 @@ export default class DataAPI {
                 }
             }
             else if (this.current === this.SIZE - 1) {
-                console.log(this.rangeList[this.current]);
                 if (this.rangeList[this.current] && this.rangeList[this.current].length === 2) {
                     this.rangeList[this.current] = ['제외', '포함'];
                 } else if (this.rangeList[this.current] && this.rangeList[this.current].length === 1) {
@@ -143,7 +139,7 @@ export default class DataAPI {
                 }
             }
         }
-        await this.data.getData(this.dataList[this.current], params);
+        await this.stats.getData(DataAPI.dataList[this.current], params);
     }
 
     private async getGen(): Promise<void> {
@@ -165,12 +161,12 @@ export default class DataAPI {
     }
     backward(): void {
         if (this.current > 0) {
-            delete this.generator.option[this.optionList[this.current--]];
+            delete this.generator.option[DataAPI.optionList[this.current--]];
         }
     }
     async forward(optionData: any = undefined): Promise<void> {
-        if (0 <= this.current && this.current < this.dataList.length) {
-            const option = this.optionList[this.current];
+        if (0 <= this.current && this.current < DataAPI.dataList.length) {
+            const option = DataAPI.optionList[this.current];
             if (option) {
                 this.generator.option[option] = optionData;
             }
@@ -178,8 +174,8 @@ export default class DataAPI {
                 await this.getGen();
             }
             this.current++;
-            if (this.current <= this.dataList.length - 1) {
-                if (!this.data[this.dataList[this.current]]) {
+            if (this.current <= DataAPI.dataList.length - 1) {
+                if (!this.stats[DataAPI.dataList[this.current]]) {
                     await this.setStats();
                 }
             }
@@ -189,13 +185,13 @@ export default class DataAPI {
     async init() {
         this.current = 0;
         await this.setStats();
-        await this.data.getData(this.dataList[3], {});
+        await this.stats.getData(DataAPI.dataList[3], {});
     }
 
     public getStats() {
-        return this.data[this.dataList[this.current]];
+        return this.stats[DataAPI.dataList[this.current]];
     }
     public getStats2() {
-        return this.data['excludeInclude'];
+        return this.stats['excludeInclude'];
     }
 }

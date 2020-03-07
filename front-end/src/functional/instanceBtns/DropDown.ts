@@ -131,8 +131,7 @@ export default class DropDown {
     init() {
         this.nodeList = [];
         this.changeBoard();
-        const filters = DataAPI.getInstance().getFilterList();
-        filters.forEach(label => {
+        DataAPI.filterList.forEach(label => {
             const li = document.createElement("li");
             this.nodeList.push(li);
             li.textContent = label.toString();

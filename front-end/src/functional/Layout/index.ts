@@ -60,15 +60,16 @@ export default class Layout extends LayoutToggle(Layout3) {
                     this.options[currentFilter] = option;
                 } else if (currentFilter === 6) {
                     this.options[currentFilter] = DataAPI.getInstance().getLabels()[this.options[currentFilter].indexOf(true)];
-                } else if (6 < currentFilter && currentFilter < DataAPI.getInstance().SIZE - 1) {
+                } else if (currentFilter === 7) {
                     const range = DataAPI.getInstance().getLabels()
-                    if (currentFilter === 7) {
-                        let from = range[this.options[currentFilter].indexOf(true)];
-                        let to = range[this.options[currentFilter].lastIndexOf(true)];
-                        from = Number((<string>from).slice(0, (<string>from).indexOf('~')));
-                        to = Number((<string>to).slice((<string>to).indexOf('~') + 1));
-                        this.options[currentFilter] = { from, to }
-                    } else if (currentFilter === 12) {
+                    let from = range[this.options[currentFilter].indexOf(true)];
+                    let to = range[this.options[currentFilter].lastIndexOf(true)];
+                    from = Number((<string>from).slice(0, (<string>from).indexOf('~')));
+                    to = Number((<string>to).slice((<string>to).indexOf('~') + 1));
+                    this.options[currentFilter] = { from, to }
+                } else if (7 < currentFilter && currentFilter < DataAPI.getInstance().SIZE - 1) {
+                    const range = DataAPI.getInstance().getLabels()
+                    if (currentFilter === 12) {
                         const list = [];
                         this.options[currentFilter].forEach((value: boolean, index) => {
                             if (value) {
@@ -95,7 +96,7 @@ export default class Layout extends LayoutToggle(Layout3) {
     private async on(layoutVersion: number = 0) {
         if (layoutVersion === 0) {
             const currentFilter = DataAPI.getInstance().getCurrent();
-            infoText.textContent = DataAPI.getInstance().infoList[currentFilter];
+            infoText.textContent = DataAPI.infoList[currentFilter];
             if (currentFilter > 7) {
                 filteredCounter.classList.remove('hide');
             } else {
@@ -127,7 +128,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                             this.dropDown.nodeList[currentFilter].textContent = '-';
                             this.options[currentFilter] = [];
                             await DataAPI.getInstance().forward(this.options[currentFilter]);
-                            infoText.innerHTML = DataAPI.getInstance().infoList[currentFilter + 1];
+                            infoText.innerHTML = DataAPI.infoList[currentFilter + 1];
                         }
                         this.layout2.includeVerson();
                     }
@@ -210,7 +211,7 @@ export default class Layout extends LayoutToggle(Layout3) {
         this.layout1.lineSlide.init();
         this.layout1.bubbleChart.init();
         this.layout2.init();
-        infoText.textContent = DataAPI.getInstance().infoList[0];
+        infoText.textContent = DataAPI.infoList[0];
         this.layout1.setStatsBoard(DataAPI.getInstance().getStats().stats);
 
         this.nextBtn.addEvent(async () => {
@@ -300,7 +301,7 @@ export default class Layout extends LayoutToggle(Layout3) {
         this.dropDown.nodeList.forEach((node, index) => {
             node.addEventListener('click', async () => {
                 const current = DataAPI.getInstance().getCurrent();
-                if (index < current && node.textContent !== '-' && confirm(`'${DataAPI.getInstance().getFilterList()[index]}'(으)로 되돌아가시겠습니까?`)) {
+                if (index < current && node.textContent !== '-' && confirm(`'${DataAPI.filterList[index]}'(으)로 되돌아가시겠습니까?`)) {
                     DataAPI.getInstance().numbersData = null;
 
                     section.scrollIntoView({
