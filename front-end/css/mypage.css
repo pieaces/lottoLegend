@@ -1,25 +1,10 @@
-
-
-.func3-num-container > div:nth-child(1){
-  display: flex;
-  height: 4rem;
-  background: #1f71b3;
-}
-
-.func3-num-container > div:nth-child(n+2){
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  font-size:1.4rem;
-}
-
-
 .func3-num-box{
   width:100%;
   height:100%;
   display:flex;
   align-items: center;
   justify-content: center;
+  background-color: var(--main-color);
 }
 
 .func3-num-box > div{
@@ -34,42 +19,13 @@
   color: var(--default-color);
   width: 2.5rem;
   height: 2.5rem;
-  margin: 0 1.2rem;
+  margin: 1.3rem;
   line-height: 1.7;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
 }
-
-.func3-past-win-table tr{
-  background-color: aliceblue;
-}
-
-.func3-past-win-table tr>td{
-  font-size:1.1rem;
-  width: 16.6%;
-  height: 2rem;
-  text-align: center;
-}
-
-.func3-list-filter-table tr >td{
-  font-size:1rem;
-  width:12.5%;
-  text-align: center;
-}
-.func3-list-filter-table tr:nth-child(1){
-  background: beige;
-  height:2rem;
-}
-.func3-list-filter-table tr:nth-child(2){
-  height:2rem;
-}
-
-.mypage-info-container{
-  height:100%;
-}
-
 
 .mypage-title{
   font-size:1.5rem;
@@ -99,9 +55,11 @@ align-items: center;
 
 }
 
-.mypage-point{
-  display:flex;
+.mypage-nickname,
+.mypage-service{
+  justify-content: space-between;
 }
+
 
 .service-update-btn{
   width: 4rem;
@@ -109,12 +67,7 @@ align-items: center;
   background-color: var(--default-color);
   color:black;
   border: 1px solid var(--border-color);
-  margin-left:1rem;
-}
 
-.mypage-win-num-box{
-  display: flex;
-  align-items: center;
 }
 
 .mypage-win-num{
