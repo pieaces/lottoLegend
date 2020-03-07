@@ -121,8 +121,8 @@
 
 .rank-first{
   animation: rank 3s ease-in infinite;
-  color: rgb(255, 221, 1);
-    background: linear-gradient(45deg,  rgb(241, 214, 9) 5%,rgba(255,255,255,1) 50%,rgba(252,235,0,1) 95%);
+  color: rgb(218,165,32);
+    background: linear-gradient(45deg,  rgb(208, 255, 0) 10%,rgba(255,255,255,1) 56%,rgb(208, 255, 0) 90%);
     background-size: 200% 200%;
 }
 
@@ -142,8 +142,10 @@
 
 
 .rank-second{
+  animation: rank 3s ease-in infinite;
   color: rgb(133, 133, 133);
   background: linear-gradient(45deg, rgb(136, 136, 136)  0%,rgb(243, 243, 243) 56%,rgba(149, 148, 148, 0.5) 96%);
+  background-size: 200% 200%;
 }
 
 .rank-third{
