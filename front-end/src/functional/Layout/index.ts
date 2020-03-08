@@ -68,7 +68,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                             if (typeof range[index] === 'string') {
                                 const from = Number((<string>range[index]).slice(0, (<string>range[index]).indexOf('~')));
                                 const to = Number((<string>range[index]).slice((<string>range[index]).indexOf('~') + 1));
-                                list.push({from, to});
+                                list.push({ from, to });
                             } else list.push(range[index]);
                         }
                     });
@@ -286,20 +286,22 @@ export default class Layout extends LayoutToggle(Layout3) {
                             index = i; temp = pos[i];
                         }
                     }
-                    const range = DataAPI.getInstance().getLabels()
-                    let from = range[index];
-                    let to = range[index];
-                    if (current === 7 || current === 12 && typeof from === 'string') {
-                        console.log(from, to);
-                        from = Number((<string>from).slice(0, (<string>from).indexOf('~')));
-                        to = Number((<string>to).slice((<string>to).indexOf('~') + 1));
-                        console.log(from, to);
+
+                    const range = DataAPI.getInstance().getLabels();
+                    if (current === 7) {
+                        const from = Number((<string>range[index]).slice(0, (<string>range[index]).indexOf('~')));
+                        const to = Number((<string>range[index]).slice((<string>range[index]).indexOf('~') + 1));
+                        this.options[current] = [{ from, to }];
+                    } else if (current === 12) {
+                        if (typeof range[index] === 'string') {
+                            const one = Number((<string>range[index]).slice(0, (<string>range[index]).indexOf('~')));
+                            const two = Number((<string>range[index]).slice((<string>range[index]).indexOf('~') + 1));
+                            this.options[current] = [one, two];
+                        } else this.options[current] = [range[index]];
                     } else {
-                        from = Number(from);
-                        to = Number(to);
+                        this.options[current] = [range[index]];
                     }
 
-                    this.options[current] = { from, to }
                     break;
             }
             this.next(current);
