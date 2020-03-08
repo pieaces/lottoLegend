@@ -175,20 +175,21 @@
 
   .func2-chart-bar-container {
     height:22.5rem;
-    padding: 0 2rem;
+
     display:flex;
     align-items: center;
   }
   
   .func2-select-num-box-container{  
     width: 70%;
+    margin:2rem 0;
   }
   
   .func2-select-num-box {
     width: 100%;
-    height:100%;
     display:grid;
     grid-template-columns: repeat(10,1fr); 
+    align-items: center;
     /* ie 변환 */
   }
 
@@ -196,6 +197,7 @@
     display:flex;
     align-items: center;
     justify-content: center;
+   padding:0.5rem;
   }
 
   .func2-select-num>div{
