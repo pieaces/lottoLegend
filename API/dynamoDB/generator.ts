@@ -98,7 +98,7 @@ async function generateNumberB(userName: string, lineCount?: number[]) {
                 includeFlag = doesExist(numbers, compart.include[i]);
             }
         }
-        if (includeFlag || include.length > 0) {
+        if (includeFlag || include.length === 0) {
             numsArr.push(numbers.sort((a, b) => a - b));
         }
     }
