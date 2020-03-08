@@ -159,8 +159,19 @@ function makeLine(canvas: HTMLElement, numbers: number[]): void {
     });
 }
 
-// const saveBtn = document.querySelectorAll('.save-btn');
+const inputbox = document.querySelectorAll<HTMLInputElement>('.input-box> input');
 
+inputbox.forEach((node) => {
+    node.addEventListener('click', () => {
+        if (node.checked) {
+            node.parentNode.children[1].children[0].classList.remove('none');
+        } else {
+            node.parentNode.children[1].children[0].classList.add('none');
+        }
+    })
+});
+
+// const saveBtn = document.querySelectorAll('.save-btn');
 
 // saveBtn.forEach((node) => {
 //     node.addEventListener('click', () => {

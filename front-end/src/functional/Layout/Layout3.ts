@@ -124,22 +124,3 @@ export default class Layout3 {
         }
     }
 }
-
-
-// const inputbox = document.querySelectorAll<HTMLInputElement>('.input-box> input');
-
-// inputbox.forEach((node) => {
-//     let flag = false;
-//     node.addEventListener('click', () => {
-//         if (node.checked) {
-//             node.parentNode.children[1].children[0].classList.remove('none');
-//             flag = true;
-//         } else {
-//             node.parentNode.children[1].children[0].classList.add('none');
-//             flag = false;
-//         }
-//     })
-// })
-
-
-
