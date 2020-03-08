@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken';
 import jwkToPem from 'jwk-to-pem';
-import { GeneratorOption } from './Lotto/interface';
 import { Plan, getPlan } from './dynamoDB/userInfo';
 import Calculate from './Lotto/class/Calculate';
 import Generator from './Lotto/class/Generator';
@@ -46,72 +45,27 @@ exports.handler = async (event: any) => {
         };
         return response;
     }
-    const option: GeneratorOption = {};
-    let willRangeFinder: (numbers: number[]) => number = null;
-    const { options } = JSON.parse(event.body);
-
-    if (options.excludedLines) {
-        option.excludedLines = options.excludedLines;
-    }
-    if (options.includedNumbers) {
-        option.includedNumbers = options.includedNumbers;
-    }
-    if (options.excludedNumbers) {
-        option.excludedNumbers = options.excludedNumbers;
-    }
-    if (options.lowCount) {
-        option.lowCount = options.lowCount;
-    }
-    if (options.sum) {
-        option.sum = options.sum;
-        willRangeFinder = Calculate.oddCount;
-    }
-    if (options.oddCount) {
-        option.oddCount = options.oddCount;
-        willRangeFinder = Calculate.primeCount;
-    }
-    if (options.primeCount) {
-        option.primeCount = options.primeCount;
-        willRangeFinder = Calculate.$3Count;
-    }
-    if (options.$3Count) {
-        option.$3Count = options.$3Count;
-        willRangeFinder = Calculate.sum$10;
-    }
-    if (options.sum$10) {
-        option.sum$10 = options.sum$10;
-        willRangeFinder = Calculate.diffMaxMin;
-    }
-    if (options.diffMaxMin) {
-        option.diffMaxMin = options.diffMaxMin;
-        willRangeFinder = Calculate.AC;
-    }
-    if (options.AC) {
-        option.AC = options.AC;
-        willRangeFinder = Calculate.consecutiveExist;
-    }
-    if (typeof options.consecutiveExist === 'boolean') {
-        option.consecutiveExist = options.consecutiveExist;
-    }
+    const { option } = JSON.parse(event.body);
 
     const generator = new Generator(option);
-    generator.rangeFinder = willRangeFinder;
+    if(!option.lowCount){
+        return { statusCode: 400 };
+    }else if(!option.sum) generator.rangeFinder = Calculate.sum;
+    else if(!option.oddCount) generator.rangeFinder = Calculate.oddCount;
+    else if(!option.primeCount) generator.rangeFinder = Calculate.primeCount;
+    else if(!option.$3Count) generator.rangeFinder = Calculate.$3Count;
+    else if(!option.sum$10) generator.rangeFinder = Calculate.sum$10;
+    else if(!option.diffMaxMin) generator.rangeFinder = Calculate.diffMaxMin;
+    else if(!option.AC) generator.rangeFinder = Calculate.AC;
+    else if(typeof option.consecutiveExist !== 'boolean') generator.rangeFinder = Calculate.consecutiveExist;
     generator.generate();
 
-    if (!generator.option.sum) {
-        statusCode = 400;
-    }
-    else if (generator.option.sum && generator.count <= 50) {
-        body = {
-            range: [...generator.rangeSet].sort((a, b) => (a - b)),
-            count: generator.getGeneratedNumbers().length,
-            numbers: await numsArrToData(generator.getGeneratedNumbers())
-        };
-    } else {
-        body = {
-            range: [...generator.rangeSet].sort((a, b) => (a - b)),
-            count: generator.getGeneratedNumbers().length
-        };
+    body = {
+        range: [...generator.rangeSet].sort((a, b) => (a - b)),
+        count: generator.getGeneratedNumbers().length
+    };
+    if (generator.count <= 50) {
+        body.numbers = await numsArrToData(generator.getGeneratedNumbers());
     }
 
     return {
