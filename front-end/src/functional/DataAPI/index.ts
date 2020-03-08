@@ -111,10 +111,7 @@ export default class DataAPI {
             params = { from: range[0], to: range[1] };
             this.rangeList[this.current] = paramToNumbers({ from: range[0], to: range[1] });
         } else if (this.current === 7) {
-            let range: any;
-            if (this.generator.option.excludedLines) range = constraintSum[this.generator.option.lowCount.toString() + this.generator.option.excludedLines.join('')];
-            else range = constraintSumNotExcluded[this.generator.option.lowCount.toString()];
-            params = { from: range[0], to: range[1] };
+            params = { from: <number>this.rangeList[this.current][0], to: <number>this.rangeList[this.current][1] };
             this.rangeList[this.current] = compartNumbers(params, 10);
         } else {
             params = numbersToParams(this.rangeList[this.current] as number[]);
@@ -170,7 +167,7 @@ export default class DataAPI {
             if (option) {
                 this.generator.option[option] = optionData;
             }
-            if (this.current >= 7) {
+            if (this.current >= 6) {
                 await this.getGen();
             }
             this.current++;
