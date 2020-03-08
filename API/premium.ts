@@ -63,6 +63,7 @@ exports.handler = async (event: any) => {
         range: [...generator.rangeSet].sort((a, b) => (a - b)),
         count: generator.count
     };
+    if(!option.oddCount && option.lowCount) body.range = [body.range[0], body.range[body.range.length-1]];
     if (generator.count <= 50) {
         body.numbers = await numsArrToData(generator.getGeneratedNumbers());
     } else if (typeof option.consecutiveExist === 'boolean') {
