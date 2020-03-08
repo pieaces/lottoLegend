@@ -72,13 +72,15 @@ async function generateNumberB(userName: string, lineCount?: number[]) {
 
     let choiceFlag = true;
     let includeFlag = false;
-    for (let i = 0; i < 5; i++) {
-        if (compart.choice[i].length < lineCount[i]) {
-            choiceFlag = false;
-            break;
-        }
-        if (!includeFlag && compart.include[i] && lineCount[i] > 0) {
-            includeFlag = doesExist(compart.choice[i], compart.include[i]);
+    if (include) {
+        for (let i = 0; i < 5; i++) {
+            if (compart.choice[i].length < lineCount[i]) {
+                choiceFlag = false;
+                break;
+            }
+            if (!includeFlag && compart.include[i] && lineCount[i] > 0) {
+                includeFlag = doesExist(compart.choice[i], compart.include[i]);
+            }
         }
     }
     if (!choiceFlag) throw new Error('impossible condition - choice');
