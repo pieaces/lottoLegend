@@ -1,10 +1,14 @@
+.mypage-num-container >div:not(:last-child){
+  border-bottom: 1px dashed var(--border-color);
+}
+
 .mypage-num-box{
     width:100%;
     height:100%;
     display:flex;
     align-items: center;
-    justify-content: space-around;
-    background-color: var(--main-color);
+    justify-content: center;
+  
   }
   
   .mypage-num-box > div{
@@ -15,11 +19,11 @@
   
   .mypage-num-box > div{
     font-weight: 500;
-    font-size: 2.3rem;
+    font-size: 2rem;
     color: var(--default-color);
-    width: 5rem;
-    height: 5rem;
-    margin: 1.3rem 0;
+    width: 3.5rem;
+    height: 3.5rem;
+    margin: 1.1rem 3rem;
     line-height: 1.7;
     border-radius: 50%;
     display: flex;

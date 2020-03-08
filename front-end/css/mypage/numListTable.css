@@ -12,13 +12,14 @@
   }
 
   .mypage-table-num tr > th{
+    padding:0 1rem;
       font-size:1.4rem;
     color:var(--default-color);
   }
   
   .mypage-table-num tr  td{
     text-align: center;
-    font-size:1.3rem;
+    font-size:1.4rem;
   }
 
   .mypage-table-num-list{
