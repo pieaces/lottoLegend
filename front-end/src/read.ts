@@ -167,7 +167,7 @@ function makeComments(objArr: any) {
 
         const commentContent = document.createElement('div');
         commentContent.classList.add('comment-content');
-        commentContent.textContent = objArr[i].contents;
+        commentContent.innerHTML = objArr[i].contents.replace(/\n/g,'<br>').replace(/ /g, '&nbsp;');
 
         commentContainer.appendChild(commentBox);
         commentContainer.appendChild(commentContent);
