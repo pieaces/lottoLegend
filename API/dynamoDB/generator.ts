@@ -86,6 +86,7 @@ async function generateNumberB(userName: string, lineCount?: number[]) {
 
     const numsArr: number[][] = [];
     while (numsArr.length < 5) {
+        let includeFlag = false;
         const numbers: number[] = [];
         for (let i = 0; i < 5; i++) {
             const set = new Set<number>();
@@ -93,11 +94,11 @@ async function generateNumberB(userName: string, lineCount?: number[]) {
                 set.add(compart.choice[i][Math.floor(Math.random() * compart.choice[i].length)]);
             }
             numbers.push(...[...set]);
-            if (!includeFlag && compart.include[i] && lineCount[i] > 0) {
+            if (include.length > 0 && !includeFlag && compart.include[i] && lineCount[i] > 0) {
                 includeFlag = doesExist(numbers, compart.include[i]);
             }
         }
-        if (includeFlag) {
+        if (includeFlag || include.length > 0) {
             numsArr.push(numbers.sort((a, b) => a - b));
         }
     }
