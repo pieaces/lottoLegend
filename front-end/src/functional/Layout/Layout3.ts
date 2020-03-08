@@ -25,22 +25,27 @@ export default class Layout3 {
             const checkboxContainer = document.createElement('div');
             checkboxContainer.classList.add('func3-check-box');
 
-            const inputBox = document.createElement('div');
-            inputBox.classList.add('input-box');
+            const inputBoxContainer = document.createElement('div');
+            inputBoxContainer.classList.add('input-checkbox-container');
 
             const checkBox = document.createElement('input')
             checkBox.setAttribute('type', 'checkbox');
-            inputBox.appendChild(checkBox);
+            inputBoxContainer.appendChild(checkBox);
 
-            const checkImgBox = document.createElement('div');
-            const checkImg = document.createElement('img');
-            checkImg.classList.add('none');
-            checkImg.setAttribute('src', '../../img/checkbox.png');
+            const checkTextBox = document.createElement('div');
+            checkTextBox.classList.add('input-checkbox-text-box');
 
-            checkImgBox.appendChild(checkImg);
-            inputBox.appendChild(checkImgBox);
+            const checkText = document.createElement('div');
+            checkText.classList.add('input-checkbox-text');
+            checkText.classList.add('none');
 
-            checkboxContainer.appendChild(inputBox);
+            checkTextBox.appendChild(checkText);
+
+
+
+            inputBoxContainer.appendChild(checkTextBox);
+
+            checkboxContainer.appendChild(inputBoxContainer);
 
             numBoxWrapper.appendChild(checkboxContainer);
 

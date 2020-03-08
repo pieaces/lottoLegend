@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="../../css/section.css">
     <link rel="stylesheet" href="../../css/header.css" />
     <link rel="stylesheet" href="../../css/footer.css" />
-    <link rel="stylesheet" href="../../css/filter/func3NumList.css">
+    <link rel="stylesheet" href="../../css//mypage/numListSelectbox.css">
+    <link rel="stylesheet" href="../../css/mypage/numList.css">
     <title>CanvasLotto</title>
 </head>
 
@@ -30,159 +31,53 @@
                         나의 제외번호리스트
                     </div>
 
-                    <div class="func3-num-container-box">
-                        <div class="func3-num-container">
-                            <div>
-                                <div class="func3-check-box"><input type="checkbox"></div>
-                                <div class="func3-num-box">
-                                    <div style="background-color: rgb(251, 196, 0);">3</div>
-                                    <div style="background-color: rgb(251, 196, 0);">5</div>
-                                    <div style="background-color: rgb(251, 196, 0);">10</div>
-                                    <div style="background-color: rgb(105, 200, 242);">13</div>
-                                    <div style="background-color: rgb(255, 114, 114);">26</div>
-                                    <div style="background-color: rgb(170, 170, 170);">32</div>
-                                </div>
-                            </div>
-                            <div class="func3-past-win-box">
-                                <table class="table func3-past-win-table">
-                                    <tr>
-                                        <td>역대기록</td>
-                                        <td style="color: rgb(160, 160, 160);">1등 : 0</td>
-                                        <td style="color: rgb(160, 160, 160);">2등 : 0</td>
-                                        <td style="color: rgb(160, 160, 160);">3등 : 0</td>
-                                        <td>4등 : 4</td>
-                                        <td>5등 : 18</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="func3-filter-num-info">
-                                <table class="table func3-list-filter-table">
-                                    <tr>
-                                        <td>저값개수</td>
-                                        <td>번호합계</td>
-                                        <td>홀수개수</td>
-                                        <td>소수개수</td>
-                                        <td>3배수개수</td>
-                                        <td>첫수 합</td>
-                                        <td>고저 차</td>
-                                        <td>AC</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>89</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                        <td>1</td>
-                                        <td>7</td>
-                                        <td>29</td>
-                                        <td>10</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
+                    <div class="mynum-selectbox-container">
+
+
+                        <select name="" id="round">
+                            <option value="전체">전체</option>
+                            <option value="900">900회</option>
+                            <option value="899">899회</option>
+                        </select>
+
                     </div>
-                    <div class="func3-num-container-box">
-                        <div class="func3-num-container">
-                            <div>
-                                <div class="func3-check-box"><input type="checkbox"></div>
-                                <div class="func3-num-box">
-                                    <div style="background-color: rgb(251, 196, 0);">3</div>
-                                    <div style="background-color: rgb(251, 196, 0);">5</div>
-                                    <div style="background-color: rgb(251, 196, 0);">10</div>
-                                    <div style="background-color: rgb(105, 200, 242);">13</div>
-                                    <div style="background-color: rgb(255, 114, 114);">26</div>
-                                    <div style="background-color: rgb(170, 170, 170);">32</div>
-                                </div>
-                            </div>
-                            <div class="func3-past-win-box">
-                                <table class="table func3-past-win-table">
-                                    <tr>
-                                        <td>역대기록</td>
-                                        <td style="color: rgb(160, 160, 160);">1등 : 0</td>
-                                        <td style="color: rgb(160, 160, 160);">2등 : 0</td>
-                                        <td style="color: rgb(160, 160, 160);">3등 : 0</td>
-                                        <td>4등 : 4</td>
-                                        <td>5등 : 18</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="func3-filter-num-info">
-                                <table class="table func3-list-filter-table">
-                                    <tr>
-                                        <td>저값개수</td>
-                                        <td>번호합계</td>
-                                        <td>홀수개수</td>
-                                        <td>소수개수</td>
-                                        <td>3배수개수</td>
-                                        <td>첫수 합</td>
-                                        <td>고저 차</td>
-                                        <td>AC</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>89</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                        <td>1</td>
-                                        <td>7</td>
-                                        <td>29</td>
-                                        <td>10</td>
-                                    </tr>
-                                </table>
-                            </div>
+                    <div class="mypage-num-container">
+                        <div class="mypage-num-box">
+                            <div style="background-color: rgb(251, 196, 0);">3</div>
+                            <div style="background-color: rgb(251, 196, 0);">5</div>
+                            <div style="background-color: rgb(251, 196, 0);">10</div>
+                            <div style="background-color: rgb(105, 200, 242);">13</div>
+                            <div style="background-color: rgb(255, 114, 114);">26</div>
+                            <div style="background-color: rgb(170, 170, 170);">32</div>
                         </div>
-                    </div>
-                    <div class="func3-num-container-box">
-                        <div class="func3-num-container">
-                            <div>
-                                <div class="func3-check-box"><input type="checkbox"></div>
-                                <div class="func3-num-box">
-                                    <div style="background-color: rgb(251, 196, 0);">3</div>
-                                    <div style="background-color: rgb(251, 196, 0);">5</div>
-                                    <div style="background-color: rgb(251, 196, 0);">10</div>
-                                    <div style="background-color: rgb(105, 200, 242);">13</div>
-                                    <div style="background-color: rgb(255, 114, 114);">26</div>
-                                    <div style="background-color: rgb(170, 170, 170);">32</div>
-                                </div>
-                            </div>
-                            <div class="func3-past-win-box">
-                                <table class="table func3-past-win-table">
-                                    <tr>
-                                        <td>역대기록</td>
-                                        <td style="color: rgb(160, 160, 160);">1등 : 0</td>
-                                        <td style="color: rgb(160, 160, 160);">2등 : 0</td>
-                                        <td style="color: rgb(160, 160, 160);">3등 : 0</td>
-                                        <td>4등 : 4</td>
-                                        <td>5등 : 18</td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="func3-filter-num-info">
-                                <table class="table func3-list-filter-table">
-                                    <tr>
-                                        <td>저값개수</td>
-                                        <td>번호합계</td>
-                                        <td>홀수개수</td>
-                                        <td>소수개수</td>
-                                        <td>3배수개수</td>
-                                        <td>첫수 합</td>
-                                        <td>고저 차</td>
-                                        <td>AC</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>89</td>
-                                        <td>3</td>
-                                        <td>3</td>
-                                        <td>1</td>
-                                        <td>7</td>
-                                        <td>29</td>
-                                        <td>10</td>
-                                    </tr>
-                                </table>
-                            </div>
+                        <div class="mypage-num-box">
+                            <div style="background-color: rgb(251, 196, 0);">3</div>
+                            <div style="background-color: rgb(251, 196, 0);">5</div>
+                            <div style="background-color: rgb(251, 196, 0);">10</div>
+                            <div style="background-color: rgb(105, 200, 242);">13</div>
+                            <div style="background-color: rgb(255, 114, 114);">26</div>
+                            <div style="background-color: rgb(170, 170, 170);">32</div>
                         </div>
+                        <div class="mypage-num-box">
+                            <div style="background-color: rgb(251, 196, 0);">3</div>
+                            <div style="background-color: rgb(251, 196, 0);">5</div>
+                            <div style="background-color: rgb(251, 196, 0);">10</div>
+                            <div style="background-color: rgb(105, 200, 242);">13</div>
+                            <div style="background-color: rgb(255, 114, 114);">26</div>
+                            <div style="background-color: rgb(177, 133, 133);">32</div>
+                        </div>
+                        <div class="mypage-num-box">
+                            <div style="background-color: rgb(251, 196, 0);">3</div>
+                            <div style="background-color: rgb(251, 196, 0);">5</div>
+                            <div style="background-color: rgb(251, 196, 0);">10</div>
+                            <div style="background-color: rgb(105, 200, 242);">13</div>
+                            <div style="background-color: rgb(255, 114, 114);">26</div>
+                            <div style="background-color: rgb(170, 170, 170);">32</div>
+                        </div>
+
                     </div>
+
+
                 </div>
         </section>
 

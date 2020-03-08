@@ -1,21 +1,24 @@
-const inputbox = document.querySelectorAll<HTMLInputElement>('.input-box> input');
+const inputbox = document.querySelectorAll<HTMLInputElement>('.input-checkbox-container> input');
 
 export default class CheckBoxToggle {
 
     static init() {
         inputbox.forEach((node) => {
-            console.log(node);
             node.addEventListener('click', () => {
+                const checkTextBox = node.parentNode.children[1] as HTMLElement;
+                const checkText = checkTextBox.children[0];
                 if (node.checked) {
-                    node.parentNode.children[1].children[0].classList.remove('none');
-                    console.log(1);
-                    console.log(node.parentNode.children[1].children[0]);
+                    checkText.classList.remove('none');
+                    checkText.textContent = '✔';
+                    checkTextBox.style.backgroundColor = '#22B8A5';
                 } else {
-                    node.parentNode.children[1].children[0].classList.add('none');
-
+                    checkText.classList.add('none');
+                    checkText.textContent = '';
+                    checkTextBox.style.backgroundColor = 'lightgray';
                 }
             })
-        });
+        })
+
     }
 
 }

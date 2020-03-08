@@ -1,0 +1,28 @@
+.mypage-num-box{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: var(--main-color);
+  }
+  
+  .mypage-num-box > div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .mypage-num-box > div{
+    font-weight: 500;
+    font-size: 2.3rem;
+    color: var(--default-color);
+    width: 5rem;
+    height: 5rem;
+    margin: 1.3rem 0;
+    line-height: 1.7;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  }

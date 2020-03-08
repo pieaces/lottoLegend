@@ -1,10 +1,10 @@
-.input-box {
+.input-checkbox-container {
     position: relative;
-    width: 2rem;
-    height: 2rem;
+    width: 2.5rem;
+    height: 2.5rem;
   }
   
-  .input-box >input{
+  .input-checkbox-container >input{
     cursor: pointer;
     position: absolute;
     top:0;
@@ -15,7 +15,7 @@
     opacity: 0;
   }
   
-  .input-box > div{
+  .input-checkbox-text-box{
     position: absolute;
     display: flex;
     align-items: center;
@@ -27,8 +27,15 @@
     z-index:1;
     background-color: lightgray;
     font-size:1.6rem;
-    color:var(--main-color);
+    color:var(--default-color);
     border-radius: 2px;
     padding-bottom: 0.3rem;
   }
   
+  .input-checkbox-text{
+    font-size:2rem;
+    padding-left:0.1rem;
+    padding-bottom:0.1rem;
+    transform: rotate(12deg);
+
+  }

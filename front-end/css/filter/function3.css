@@ -63,8 +63,6 @@
   height:5rem;
 }
 
-
-
 .func3-make-btn-container{
   display:flex;
   align-items: center;
@@ -100,4 +98,3 @@
     transform: rotateY(3600deg);
   }
 }
-/* */

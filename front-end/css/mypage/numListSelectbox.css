@@ -1,0 +1,16 @@
+.mynum-selectbox-container{
+    height:3.3rem;
+    margin-bottom: 1rem;
+    display:flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.mynum-selectbox-container>select{
+    width:7rem;
+    height:100%;
+}
+
+.mynum-selectbox-container>select:not(:last-child){
+    margin-right:1rem;
+}

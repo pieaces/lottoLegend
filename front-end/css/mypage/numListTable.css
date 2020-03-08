@@ -1,34 +1,32 @@
-
-
-  .num-table tr,
+  .mypage-table-num tr,
   .num-table th{
     padding:0 0.5rem;
   }
   
-  .num-table tr{
+  .mypage-table-num tr{
     height:6rem;
   }
   
-  .num-table tr:nth-child(1){
+  .mypage-table-num tr:nth-child(1){
     background-color: var(--main-color);
   }
 
-  .num-table tr > th{
+  .mypage-table-num tr > th{
       font-size:1.4rem;
     color:var(--default-color);
   }
   
-  .num-table tr  td{
+  .mypage-table-num tr  td{
     text-align: center;
     font-size:1.3rem;
   }
 
-  .num-list{
+  .mypage-table-num-list{
       display:flex;
       justify-content: center;
   }
   
-  .num-list > div{
+  .mypage-table-num-list > div{
       font-size:1.5rem;
       padding-bottom: 0.1rem;
     margin:0 1rem;
