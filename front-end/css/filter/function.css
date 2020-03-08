@@ -237,7 +237,8 @@ border-left: 1rem solid #575755;
 .extract-num{
   width:58%;
   height:100%;
-  padding-left:0.5rem;
+  padding:0 1rem;
+  font-size: 1.4rem;
   display:flex;
   align-items: center;
   justify-content: flex-start;
@@ -245,8 +246,12 @@ border-left: 1rem solid #575755;
 
 .auto-choose-container{
   width:15%;
-  height:7rem;
+  height:100%;
   display:flex;
   align-items: center;
   justify-content: flex-end;
+}
+
+#main-stats{
+  font-weight: bold;
 }

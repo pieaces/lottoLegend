@@ -22,8 +22,8 @@ document.write(`<div class="filter-box-container-box func1-layout func2-layout b
 </div>
 </div>
 <div class="auto-choose-container-box func1-layout func3-layout-2">
-<div class="extract-num hide">
-  추출된 번호 개수 : <span id="main-stats"></span>
+<div class="extract-num box-color hide">
+  추출된 번호 개수 : &nbsp;<span id="main-stats"></span>
 </div>
 <div class="auto-choose-container">
   <button type="button" class="btn circle-btn auto-choose">
