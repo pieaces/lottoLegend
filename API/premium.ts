@@ -12,7 +12,6 @@ const pem = jwkToPem({
     "n": "lqR6rfxpx4fNjalDjNrG1qQCo0sd7uLgIEwCRqg7bgvY6mbKPFhY0EbQGmgKl8-_p1Zx48r4XJ5zeKmbcpBBHrY57fQOsZGQonXSFH4FQDRMVMFVHwExokvGLnk83mJpuHikO1b-IMmsUlRwm6NE_Jgu7Yg4ErHPNcx3kBYfFjHO7h0J3jZ6HM_5uW8QPLh9Mvt_ZDxr37ElctecSXiWoKr7ySbsTt_W5qFxMHLkd9mwVO_CC3k5pBpLXsn5VKRAiM51X_aaQ1MMGTZ4f-0KFZr3jChn7-7BKouJoGO43x1FdkexdiBjRIWGzTszFXeziTNFY1R9uTtzrFdgeqMJ3w",
     "use": "sig"
 });
-
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
     //"Access-Control-Allow-Credentials" : true // Required for cookies, authorization headers with HTTPS
@@ -45,8 +44,8 @@ exports.handler = async (event: any) => {
         };
         return response;
     }
+    
     const { option } = JSON.parse(event.body);
-
     const generator = new Generator(option);
     if(!option.lowCount){
         return { statusCode: 400 };
@@ -62,10 +61,21 @@ exports.handler = async (event: any) => {
 
     body = {
         range: [...generator.rangeSet].sort((a, b) => (a - b)),
-        count: generator.getGeneratedNumbers().length
+        count: generator.count
     };
     if (generator.count <= 50) {
         body.numbers = await numsArrToData(generator.getGeneratedNumbers());
+    } else if (typeof option.consecutiveExist === 'boolean') {
+        if (generator.count >= 75) {
+            const indexSet = new Set<number>();
+            while (indexSet.size < 50) {
+                indexSet.add(Math.floor(Math.random() * generator.count));
+            }
+            const generatedNumbers = generator.getGeneratedNumbers();
+            body.numbers = await numsArrToData(Array.from(indexSet).sort((a, b) => a - b).map(index => generatedNumbers[index]));
+        }else{
+            body.numbers = await numsArrToData(generator.getGeneratedNumbers().slice(0, 50));
+        }
     }
 
     return {
