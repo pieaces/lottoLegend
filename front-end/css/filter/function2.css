@@ -208,7 +208,7 @@
     font-size:1.3rem;  
     width:3.5rem;
     height:3.5rem;
-    animation: circlepulse 1.5s linear;
+    animation: circlepulse 0.1s linear;
   }
 
   
@@ -218,13 +218,13 @@
       opacity: .2;
   }
 
-  20% {
-      transform: scale(1.1);
+  25% {
+      transform: scale(1.4);
       opacity: .3;
   }
 
   50% {
-      transform: scale(1.05);
+      transform: scale(1.25);
       opacity: .6;
   }
 
