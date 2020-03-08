@@ -27,12 +27,8 @@
     z-index:1;
     background-color: lightgray;
     font-size:1.6rem;
-    color:var(--default-color);
+    color:var(--main-color);
     border-radius: 2px;
+    padding-bottom: 0.3rem;
   }
   
-  .input-box > div>img{
-    border-radius: 2px;
-    width: 100%;
-    height:100%;
-}
