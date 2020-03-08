@@ -182,11 +182,13 @@
   
   .func2-select-num-box-container{  
     width: 70%;
-    margin:2rem 0;
+    padding:2rem 0;
+    border-right: 1px solid var(--border-color);
   }
   
   .func2-select-num-box {
     width: 100%;
+    min-height: 4.5rem;
     display:grid;
     grid-template-columns: repeat(10,1fr); 
     align-items: center;

@@ -109,7 +109,6 @@ border-left: 1rem solid #575755;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding:2rem 0;
   }
   
   .next-btn-container > button {
@@ -133,7 +132,6 @@ border-left: 1rem solid #575755;
 
   .showcase-container{
       display:flex;
-    
   }
 
   .chart-slide-current {
