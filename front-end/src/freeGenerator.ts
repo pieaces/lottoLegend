@@ -18,6 +18,7 @@ const tenth = document.querySelector<HTMLInputElement>('#tenth-nums');
 const twentieth = document.querySelector<HTMLInputElement>('#twentieth-nums');
 const thirtieth = document.querySelector<HTMLInputElement>('#thirtieth-nums');
 const fortieth = document.querySelector<HTMLInputElement>('#fortieth-nums');
+
 init();
 
 function sum() {
@@ -138,6 +139,22 @@ async function init() {
                 dataSet = await getAuthAPI('/numbers/generator/free');
             }
             Layout3.makeNumBoard(dataSet);
+
+            const inputbox = document.querySelectorAll<HTMLInputElement>('.input-box> input');
+            inputbox.forEach((node) => {
+                console.log(node);
+                node.addEventListener('click', () => {
+                    if (node.checked) {
+                        node.parentNode.children[1].children[0].classList.remove('none');
+                        console.log(1);
+                        console.log(node.parentNode.children[1].children[0]);
+                    } else {
+                        node.parentNode.children[1].children[0].classList.add('none');
+
+                    }
+                })
+            });
+
         } else {
             Swal.fire({
                 title: '알림',
@@ -158,18 +175,6 @@ function makeLine(canvas: HTMLElement, numbers: number[]): void {
         canvas.appendChild(div);
     });
 }
-
-const inputbox = document.querySelectorAll<HTMLInputElement>('.input-box> input');
-
-inputbox.forEach((node) => {
-    node.addEventListener('click', () => {
-        if (node.checked) {
-            node.parentNode.children[1].children[0].classList.remove('none');
-        } else {
-            node.parentNode.children[1].children[0].classList.add('none');
-        }
-    })
-});
 
 // const saveBtn = document.querySelectorAll('.save-btn');
 

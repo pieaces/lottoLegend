@@ -175,14 +175,13 @@
 
   .func2-chart-bar-container {
     height:22.5rem;
-
     display:flex;
     align-items: center;
   }
   
   .func2-select-num-box-container{  
     width: 70%;
-    padding:2rem 0;
+    padding:1.25rem 0;
     border-right: 1px solid var(--border-color);
   }
   

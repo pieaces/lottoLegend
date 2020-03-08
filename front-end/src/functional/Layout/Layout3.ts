@@ -32,9 +32,13 @@ export default class Layout3 {
             checkBox.setAttribute('type', 'checkbox');
             inputBox.appendChild(checkBox);
 
-            const checkText = document.createElement('div');
+            const checkImgBox = document.createElement('div');
+            const checkImg = document.createElement('img');
+            checkImg.classList.add('none');
+            checkImg.setAttribute('src', '../../img/checkbox.png');
 
-            inputBox.appendChild(checkText);
+            checkImgBox.appendChild(checkImg);
+            inputBox.appendChild(checkImgBox);
 
             checkboxContainer.appendChild(inputBox);
 
