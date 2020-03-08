@@ -155,7 +155,7 @@ const predictInstance = new ChartBase('bar', predictCanvas, predictDataBox, stac
 const actualInstance = new ChartBase('bar', actualCanvas, actualDataBox, stackOption);
 const latestInstance = new ChartBase('bar', latestCanvas, latestDataBox, stackOption);
 const selectionInstance = new ChartBase('bar', selectionCanvas, selectionDataBox, stackOption);
-
+predictInstance.create();
 actualInstance.create();
 latestInstance.create();
 selectionInstance.create();

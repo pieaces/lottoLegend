@@ -83,18 +83,17 @@ fortieth.oninput = () => {
 let lineCheck = false;
 document.querySelector<HTMLElement>('.line-gen-toggle-btn').addEventListener('click', async () => {
     if (lineCheck) {
-        lineGenerator.classList.add('hide');
+        lineGenerator.classList.add('none');
         lineInput.classList.add('hide');
         lineCheck = false;
     } else {
-        lineGenerator.classList.remove('hide');
+        lineGenerator.classList.remove('none');
         lineInput.classList.remove('hide');
         lineCheck = true;
         const data = await getUnAuthAPI('/stats/mass', { method: 'line' });
         console.log(data)
         actualInstance.dataBox.datasets.forEach((box, index) => box.data = [Number((data.all[index] / data.total).toFixed(2))]);
         latestInstance.dataBox.datasets.forEach((box, index) => box.data = [Number((data.latest[index] / 12).toFixed(2))]);
-        predictInstance.create();
         actualInstance.update();
         latestInstance.update();
     }
