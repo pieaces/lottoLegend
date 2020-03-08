@@ -17,7 +17,7 @@ const last = document.querySelector<HTMLElement>('.stats-last-value');
 
 type Version = 'include' | 'exclude';
 const includeInfo =
-`<span style="font-size: 1.4rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
+    `<span style="font-size: 1.4rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
 우리의 모티브는 아래와 같습니다.
 "수백회차가 진행되는 동안, 출현했던 번호만 계속 나온다면,
 <span style="color:black;font-weight:bold;">큰수'법칙'</span>은 충족되지 않을것입니다."
@@ -34,8 +34,8 @@ const includeInfo =
 마지막 출현회차가 <span style="color:black;"><U>오래전일수록 진하고, 최근일수록 옅습니다.</U></span>
 
 *<span style="color:blue;font-weight:bold;">빈도X간격</span>: 빈도의 계수(고유한수치)와 간격의 계수를 산술처리로 종합하였습니다.`;
-const excludeInfo = 
-`<span style="font-size: 1.4rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
+const excludeInfo =
+    `<span style="font-size: 1.4rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
 우리의 모티브는 아래와 같습니다.
 "수백회차가 진행되는 동안, 출현했던 번호만 계속 나온다면,
 <span style="color:black;font-weight:bold;">큰수'법칙'</span>은 충족되지 않을것입니다."
@@ -74,7 +74,7 @@ export default class Layout2 {
     protected total: number;
     protected winNumbers: number[][];
     public options: any[];
-    private version:Version = 'include';
+    private version: Version = 'include';
     constructor(options: any[], data: any, winNumbers: number[][], total: number) {
         this.options = options;
         this.layout2Data = data;
@@ -266,11 +266,16 @@ export default class Layout2 {
                         lottoNumbers[this.choice - 1].style.color = Layout2.lottoNumDefaultFontColor;
                         lottoNumbers[this.choice - 1].style.opacity = '';
                         this.checkedNumbers.push(this.choice);
+                        const selectNum = document.createElement('div');
+                        selectNum.classList.add('func2-select-num');
                         const div = document.createElement('div');
+
                         const text = document.createTextNode(this.choice);
                         div.appendChild(text);
                         this.setColorLotto(this.choice, <HTMLElement>div);
-                        selectNumBox.appendChild(div);
+                        selectNum.appendChild(div);
+
+                        selectNumBox.appendChild(selectNum);
                         this.choice = null;
                     }
                 }
@@ -330,12 +335,12 @@ export default class Layout2 {
         this.setColorWinNum();
         this.addEvent();
         document.querySelector<HTMLElement>('.func2-numboard-que').addEventListener('click', () => {
-            if(this.version === 'include') makeModal(includeInfo, 55);
+            if (this.version === 'include') makeModal(includeInfo, 55);
             else makeModal(excludeInfo, 55);
         });
         document.querySelector<HTMLElement>('.func2-radar-que').addEventListener('click', () => {
-            const radarInfo = 
-`<span style="font-size: 1.4rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
+            const radarInfo =
+                `<span style="font-size: 1.4rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
 우리의 모티브는 아래와 같습니다.
 "수백회차가 진행되는 동안, 출현했던 번호만 계속 나온다면,
 <span style="color:black;font-weight:bold;">큰수'법칙'</span>은 충족되지 않을것입니다."
@@ -410,9 +415,7 @@ function selectEvent(obj: any, node: HTMLElement) {
                     break;
                 }
             }
-            for (let i = 0; i < selectNumBox.children.length; i++) {
-                selectNumBox.children[i].classList.add('animation-none');
-            }
+
         } else {
             obj.choice = null;
         }

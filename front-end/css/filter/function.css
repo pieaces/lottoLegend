@@ -132,7 +132,7 @@ border-left: 1rem solid #575755;
 
   .showcase-container{
       display:flex;
-      height:10rem;
+      min-height:10rem;
   }
 
   .chart-slide-current {
