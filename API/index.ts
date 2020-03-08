@@ -99,7 +99,7 @@ exports.handler = async (event: any) => {
         case '/numbers/generator/free': {
             switch (method) {
                 case 'GET':
-                    const lineCount = event.queryStringParameters && event.queryStringParameters.lineCount;
+                    const lineCount = event.queryStringParameters && JSON.parse(event.queryStringParameters.lineCount);
                     body = await freeGenerator(currentId, lineCount);
             }
         }
