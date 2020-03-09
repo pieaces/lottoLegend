@@ -104,7 +104,7 @@
 }
 
 .comment-time{
-  color:#999;
+  color:var(--faint-color);
   margin-top: 0.2rem;
   margin-left: 0.3rem;
 }
@@ -154,11 +154,14 @@
   justify-content: flex-end;
 }
 
+
 .read-btn{
   border-radius: 3px;
   width: 4.6rem;
   height: 2.8rem;
   font-size: 1.4rem;
+  background-color: var(--read-color);
+  color:var(--default-color);
 }
 
 .comment-update-btn{
@@ -167,6 +170,8 @@
   height: 2.4rem;
   font-size: 1.2rem;
   margin-right:0.3rem;
+  background-color: var(--read-color);
+  color:var(--default-color);
 }
 
 

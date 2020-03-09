@@ -30,8 +30,8 @@ commentSubmit.onclick = async function () {
             makeComments([{ id: commentId, writerId: currentUser, writerName: await getNickName(), created: new Date().toISOString(), contents: txtArea.value }]);
             txtArea.value = "";
             Swal.fire({
-                title:'완료',
-                icon:'success'
+                title: '완료',
+                icon: 'success'
             });
         } catch (err) {
             networkAlert();
@@ -120,12 +120,12 @@ function makeComments(objArr: any) {
         updateBtnBox.classList.add('text-update-btn-box');
         // const updateBtn = document.createElement('button');
         // updateBtn.setAttribute('type', 'button');
-        // updateBtn.classList.add('btn', 'square-btn', 'comment-update-btn');
+        // updateBtn.classList.add('btn','comment-update-btn');
         // updateBtn.textContent = "수정";
 
         const deleteBtn = document.createElement('button');
         deleteBtn.setAttribute('type', 'button');
-        deleteBtn.classList.add('btn', 'square-btn', 'comment-update-btn');
+        deleteBtn.classList.add('btn', 'comment-update-btn');
         deleteBtn.textContent = "삭제";
 
         if (!(currentUser === objArr[i].writerId)) updateBtnBox.classList.add('hide');
@@ -167,7 +167,7 @@ function makeComments(objArr: any) {
 
         const commentContent = document.createElement('div');
         commentContent.classList.add('comment-content');
-        commentContent.innerHTML = objArr[i].contents.replace(/\n/g,'<br>').replace(/ /g, '&nbsp;');
+        commentContent.innerHTML = objArr[i].contents.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;');
 
         commentContainer.appendChild(commentBox);
         commentContainer.appendChild(commentContent);
