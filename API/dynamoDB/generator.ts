@@ -43,7 +43,7 @@ async function generateNumberA(userName: string) {
 
         if (include.length > 1) {
             if (doesExist(numbers, include)) numsArr.push(numbers);
-        } else if (include.length === 0) numsArr.push(numbers);
+        } else numsArr.push(numbers);
     }
 
     return numsArr;
