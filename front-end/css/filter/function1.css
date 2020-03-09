@@ -172,18 +172,29 @@
   }
   
   .func1-checkbox-container{
-    width: 70%;
+    width: 75%;
+    padding:1.25rem 0;
+    border-right:1px solid var(--border-color);
   }
   
-  .func1-checkbox {
+  .func1-checkbox-box {
     font-size:1.3rem;
-    display: flex;
+    display: grid;
     height:100%;
     align-items: center;
-    justify-content: space-around;
+
+   grid-template-columns: repeat(10,1fr);
+   /* ie 변환 */
+  }
+
+  .func1-checkbox-box > div {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    padding:0.5rem;
   }
   
-  .func1-checkbox > div {
+  .func1-checkbox> div {
     position: relative;
     width: 4rem;
     height: 4rem;
@@ -194,12 +205,12 @@
     border: 5px solid rgba(0, 0, 0, 0.4);
   }
 
-  .func1-checkbox > div:hover {
+  .func1-checkbox> div:hover {
     transform: scale(1.05);
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
   }
   
-  .func1-checkbox > div > input {
+  .func1-checkbox> div > input {
     cursor: pointer;
     position: absolute;
     top: 0;

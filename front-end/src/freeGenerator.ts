@@ -13,6 +13,9 @@ const excludeCanvas = document.getElementById('exclude');
 const wrapper = document.querySelector<HTMLElement>('.func3-num-wrapper');
 const lineGenerator = document.querySelector<HTMLElement>('.line-gen-stack-chart-container');
 const lineInput = document.querySelector<HTMLElement>('.line-gen-num-table');
+const textToggleShowBox = document.querySelector<HTMLElement>('.line-gen-text-toggle-show');
+const textToggleHideBox = document.querySelector<HTMLElement>('.line-gen-text-toggle-hide');
+const explainText = document.querySelector<HTMLElement>('.line-gen-text-content');
 
 const first = document.querySelector<HTMLInputElement>('#first-nums');
 const tenth = document.querySelector<HTMLInputElement>('#tenth-nums');
@@ -106,6 +109,7 @@ lineBtn.addEventListener('click', async () => {
 
 async function init() {
     loading.classList.remove('none');
+    lineGenTextToggleInit();
     const { include, exclude, total } = await getAuthAPI('/numbers/piece');
     document.querySelector<HTMLElement>('.line-gen-round').textContent = total + '회';
     makeLine(includeCanvas, include);
@@ -156,6 +160,31 @@ async function init() {
         }
     });
     loading.classList.add('none');
+}
+
+function lineGenTextToggleInit() {
+    let flag = false;
+
+    textToggleShowBox.addEventListener('click', lineGenTextToggle)
+
+    textToggleHideBox.addEventListener('click', lineGenTextToggle)
+
+    function lineGenTextToggle() {
+        if (!flag) {
+            explainText.classList.remove('none');
+            textToggleHideBox.classList.remove('none');
+            textToggleShowBox.style.borderBottom = "1px solid rgba(0,0,0,0.1)";
+            textToggleHideBox.style.borderTop = "1px solid rgba(0,0,0,0.1)";
+            flag = true;
+        } else {
+            explainText.classList.add('none');
+            textToggleHideBox.classList.add('none');
+            textToggleShowBox.style.borderBottom = "";
+            textToggleHideBox.style.borderTop = "";
+            flag = false;
+        }
+    }
+
 }
 
 function makeLine(canvas: HTMLElement, numbers: number[]): void {
