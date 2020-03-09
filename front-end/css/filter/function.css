@@ -174,14 +174,10 @@ border-left: 1rem solid #575755;
     color:var(--main-color);
   }
 
-  
-  
   .table-1{
     height:100%;
 
   }
-
-
 
   .table-1 th{
     word-break: keep-all;
@@ -199,7 +195,6 @@ border-left: 1rem solid #575755;
     font-size:1.3rem;
   }
 
-  
   .table-2 tr{
     word-break: keep-all;
     font-size:0.8rem;
@@ -216,7 +211,6 @@ border-left: 1rem solid #575755;
     font-size:1.3rem;
   }
 
-  
 .auto-choose-container-box{
   height:4rem;
   margin-bottom:1rem;
@@ -243,6 +237,13 @@ border-left: 1rem solid #575755;
   justify-content: flex-end;
 }
 
-#main-stats{
+#main-counter{
+  font-size: 2rem;
   font-weight: bold;
+}
+#sub-counter{
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #ff8c8c;
+  margin-left: 1rem;
 }

@@ -13,8 +13,9 @@ import Swal from 'sweetalert2'
 const section = document.querySelector(".section1");
 const infoText = document.querySelector<HTMLElement>(".checkbox-text");
 const loading = document.querySelector<HTMLElement>('.loading-box');
-const filteredCounter = document.querySelector<HTMLElement>('.extract-num');
-
+const filteredCounterBox = document.querySelector<HTMLElement>('.extract-num');
+const filteredCounter = document.getElementById('main-counter');
+const filteredSubCounter = document.getElementById('sub-counter');
 
 export default class Layout extends LayoutToggle(Layout3) {
     dropDown: DropDown = new DropDown();
@@ -117,9 +118,13 @@ export default class Layout extends LayoutToggle(Layout3) {
         const currentFilter = DataAPI.getInstance().getCurrent();
         infoText.textContent = DataAPI.infoList[currentFilter];
         if (currentFilter > 7) {
-            filteredCounter.classList.remove('hide');
+            filteredCounterBox.classList.remove('hide');
+            if(currentFilter > 8){
+                filteredSubCounter.textContent = (DataAPI.getInstance().filteredCount - Number(filteredCounter.textContent)).toString();
+            }
+            filteredCounter.textContent = DataAPI.getInstance().filteredCount.toString();
         } else {
-            filteredCounter.classList.add('hide');
+            filteredCounterBox.classList.add('hide');
         }
         switch (currentFilter) {
             case 3: case 4: case 5:

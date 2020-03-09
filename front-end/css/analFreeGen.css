@@ -17,6 +17,7 @@
 }
 
 .line-gen-text-content{
+    cursor: auto;
     padding:2rem;
     height:46rem;
     font-size: 1.4rem;
