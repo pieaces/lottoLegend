@@ -1,7 +1,6 @@
 import Stats, { Params } from "./Stats";
 import Generator from "./Generator";
 const constraintLowCount = require('./json/lowCount_compressed.json');
-
 function numbersToParams(numbers: number[] = []): Params {
     let flag = true;
     for (let i = 1; i < numbers.length; i++) {
@@ -168,7 +167,7 @@ export default class DataAPI {
             if (option) {
                 this.generator.option[option] = optionData;
             }
-            if (this.current >= 6) {
+            if (this.current >= 7 || this.current === 6 && (this.generator.option.includedNumbers.length !== 0)) {
                 await this.getGen();
             }
             this.current++;

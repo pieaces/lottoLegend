@@ -113,13 +113,13 @@ border-left: 1rem solid #575755;
   }
   
   .next-btn-container {
-    width: 30%;
+    width: 25%;
     display: flex;
     align-items: center;
     justify-content: center;
   }
   
-  .next-btn-container > button {
+  .next-btn-container > button:not(:last-child) {
     margin-right: 1rem;
   }
   
@@ -140,7 +140,7 @@ border-left: 1rem solid #575755;
 
   .showcase-container{
       display:flex;
-      min-height: 7rem;
+      min-height: 8rem;
   }
 
   .chart-slide-current {

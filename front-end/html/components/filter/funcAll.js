@@ -406,9 +406,9 @@ document.write(`<div class="filter-box-container-box func1-layout func2-layout b
 </div>
 <div class="showcase-container func1-layout func2-layout func3-layout-2 box-color">
   <div class="func1-checkbox-container func1-layout">
-    <div class="func1-checkbox">
+  <div class="func1-checkbox">
 
-    </div>
+  <div>0<input class="checkbox"></div><div>1<input class="checkbox"></div><div>2<input class="checkbox"></div><div>3<input class="checkbox"></div><div>4<input class="checkbox"></div></div>
   </div>
   <div class="func2-select-num-box-container func2-layout none">
     <div class="func2-select-num-box">
