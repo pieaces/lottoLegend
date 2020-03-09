@@ -125,6 +125,9 @@ export default class Layout extends LayoutToggle(Layout3) {
 
             switch (currentFilter) {
                 case 3: case 4: case 5:
+                    const numFreq = document.querySelector('.func2-num-freq');
+                    const numFreqTerm = document.querySelector('.func2-num-freq-term');
+
                     this.layout2.reset();
                     this.checkBox.removeAllEvent();
                     if (currentFilter == 3) {
@@ -135,14 +138,22 @@ export default class Layout extends LayoutToggle(Layout3) {
                             this.options[currentFilter] = [];
                             await DataAPI.getInstance().forward(this.options[currentFilter]);
                             infoText.innerHTML = DataAPI.infoList[currentFilter + 1];
+                        }else{
+                            numFreq.classList.add('none');
+                            numFreqTerm.classList.add('none');                            
                         }
                         this.layout2.includeVerson();
+                        this.layout2.carryVersion();
                     }
                     else if (currentFilter === 4) {
+                        numFreq.classList.remove('none');
+                        numFreqTerm.classList.remove('none');
                         this.nextAbleLimit = 1;
                         this.layout2.includeVerson();
                     }
                     else if (currentFilter === 5) {
+                        numFreq.classList.remove('none');
+                        numFreqTerm.classList.remove('none');
                         this.layout2.excludeVersion();
                     }
                     this.layout2.setOpacity();
@@ -157,7 +168,11 @@ export default class Layout extends LayoutToggle(Layout3) {
                 default:
                     this.layout1On();
                     this.checkBox.init();
-                    if (currentFilter === 1) {
+                    if (currentFilter === 0) {
+                        this.dropDown.nodeList[currentFilter + 1].textContent = DataAPI.getInstance().getNextName();
+                        this.nextAbleLimit = 1;
+                        this.checkBox.singleSelectEvent();
+                    } else if (currentFilter === 1) {
                         this.layout1.clearStatsBoard();
                         this.nextAbleLimit = this.options[currentFilter - 1].indexOf(true);
                         if (this.nextAbleLimit === 0) {
@@ -170,14 +185,11 @@ export default class Layout extends LayoutToggle(Layout3) {
                         } else {
                             this.checkBox.multiSelectEvent(this.nextAbleLimit);
                         }
+                    } else if (currentFilter === 2) {
+                        this.dropDown.nodeList[currentFilter + 1].textContent = DataAPI.getInstance().getNextName();
+                        this.nextAbleLimit = 1;
+                        this.checkBox.singleSelectEvent();
                     } else if (currentFilter <= 6) {
-                        if (currentFilter === 0) {
-                            this.dropDown.nodeList[currentFilter + 1].textContent = DataAPI.getInstance().getNextName();
-                            this.nextAbleLimit = 1;
-                        } else if (currentFilter === 2) {
-                            this.dropDown.nodeList[currentFilter + 1].textContent = DataAPI.getInstance().getNextName();
-                            this.nextAbleLimit = 1;
-                        }
                         this.checkBox.singleSelectEvent();
                     } else {
                         this.checkBox.multiSelectEvent();
