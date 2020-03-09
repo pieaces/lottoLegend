@@ -17,15 +17,17 @@ function numbersToParams(numbers: number[] = []): Params {
     }
 }
 function compartNumbers(param: Params, PACK: number): string[] {
-    const result: string[] = [];
-    let temp: number;
-    for (let i = param.from; i <= param.to - PACK; i += PACK) {
-        result.push(i + '~' + (i + PACK - 1));
-        temp = i + PACK;
-    }
-    if (temp === param.to) result.push(temp.toString());
-    else result.push(temp + '~' + param.to);
-    return result;
+    if (param.to - param.from >= 10) {
+        const result: string[] = [];
+        let temp: number;
+        for (let i = param.from; i <= param.to - PACK; i += PACK) {
+            result.push(i + '~' + (i + PACK - 1));
+            temp = i + PACK;
+        }
+        if (temp === param.to) result.push(temp.toString());
+        else result.push(temp + '~' + param.to);
+        return result;
+    } else return [`${param.from}~${param.to}`];
 }
 function paramToNumbers(params: Params): number[] {
     if (typeof params.from === 'number' && typeof params.to === 'number') {

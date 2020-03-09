@@ -100,117 +100,114 @@ export default class Layout extends LayoutToggle(Layout3) {
         }
     }
     private async on(layoutVersion: number = 0) {
-        if (layoutVersion === 0) {
-            const currentFilter = DataAPI.getInstance().getCurrent();
-            infoText.textContent = DataAPI.infoList[currentFilter];
-            if (currentFilter > 7) {
-                filteredCounter.classList.remove('hide');
-            } else {
-                filteredCounter.classList.add('hide');
-            }
-            if (DataAPI.getInstance().numbersData) {
-                Swal.fire({
-                    title: '현재 필터링된 번호가 50개이하입니다.',
-                    text: '남아있는 필터를 중단하고 생성페이지로 이동하시겠습니까?',
-                    icon: 'info',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: '삭제',
-                    cancelButtonText: '취소',
-                }).then(async (result) => {
-                    if (result.value) this.layout3_1On();
-                });
-            }
+        const currentFilter = DataAPI.getInstance().getCurrent();
+        infoText.textContent = DataAPI.infoList[currentFilter];
+        if (currentFilter > 7) {
+            filteredCounter.classList.remove('hide');
+        } else {
+            filteredCounter.classList.add('hide');
+        }
+        switch (currentFilter) {
+            case 3: case 4: case 5:
+                const numFreq = document.querySelector('.func2-num-freq');
+                const numFreqTerm = document.querySelector('.func2-num-freq-term');
 
-            switch (currentFilter) {
-                case 3: case 4: case 5:
-                    const numFreq = document.querySelector('.func2-num-freq');
-                    const numFreqTerm = document.querySelector('.func2-num-freq-term');
-
-                    this.layout2.reset();
-                    this.checkBox.removeAllEvent();
-                    if (currentFilter == 3) {
-                        this.nextAbleLimit = this.options[currentFilter - 1].indexOf(true);
-                        infoText.innerHTML = `전멸구간을 제외한 전회차 번호입니다. 이월될 수를 선택해주세요.(${this.nextAbleLimit}개) (나머지는 자동제외됩니다.)`;
-                        if (this.nextAbleLimit === 0) {
-                            this.dropDown.nodeList[currentFilter].textContent = '-';
-                            this.options[currentFilter] = [];
-                            await DataAPI.getInstance().forward(this.options[currentFilter]);
-                            infoText.innerHTML = DataAPI.infoList[currentFilter + 1];
-                        }else{
-                            numFreq.classList.add('none');
-                            numFreqTerm.classList.add('none');                            
-                        }
-                        this.layout2.includeVerson();
-                        this.layout2.carryVersion();
+                this.layout2.reset();
+                this.checkBox.removeAllEvent();
+                if (currentFilter == 3) {
+                    this.nextAbleLimit = this.options[currentFilter - 1].indexOf(true);
+                    infoText.innerHTML = `전멸구간을 제외한 전회차 번호입니다. 이월될 수를 선택해주세요.(${this.nextAbleLimit}개) (나머지는 자동제외됩니다.)`;
+                    if (this.nextAbleLimit === 0) {
+                        this.dropDown.nodeList[currentFilter].textContent = '-';
+                        this.options[currentFilter] = [];
+                        await DataAPI.getInstance().forward(this.options[currentFilter]);
+                        infoText.innerHTML = DataAPI.infoList[currentFilter + 1];
+                    } else {
+                        numFreq.classList.add('none');
+                        numFreqTerm.classList.add('none');
                     }
-                    else if (currentFilter === 4) {
-                        numFreq.classList.remove('none');
-                        numFreqTerm.classList.remove('none');
-                        this.nextAbleLimit = 1;
-                        this.layout2.includeVerson();
-                    }
-                    else if (currentFilter === 5) {
-                        numFreq.classList.remove('none');
-                        numFreqTerm.classList.remove('none');
-                        this.layout2.excludeVersion();
-                    }
-                    this.layout2.setOpacity();
-                    this.layout2.refreshNumberBoard();
-                    this.layout2On();
-                    this.resetBtn.removeEvent();
-                    this.resetBtn.addEvent(this.layout2.resetConfirm.bind(this.layout2));
-                    break;
-                case DataAPI.getInstance().SIZE:
-                    this.layout3_1On();
-                    break;
-                default:
-                    this.layout1On();
-                    this.checkBox.init();
-                    if (currentFilter === 0) {
-                        this.dropDown.nodeList[currentFilter + 1].textContent = DataAPI.getInstance().getNextName();
-                        this.nextAbleLimit = 1;
-                        this.checkBox.singleSelectEvent();
-                    } else if (currentFilter === 1) {
-                        this.layout1.clearStatsBoard();
-                        this.nextAbleLimit = this.options[currentFilter - 1].indexOf(true);
-                        if (this.nextAbleLimit === 0) {
-                            this.dropDown.nodeList[currentFilter].textContent = '-';
-                            this.options[currentFilter] = [];
-                            await DataAPI.getInstance().forward(this.options[currentFilter]);
-                            this.on();
-                        } else if (this.nextAbleLimit === 1) {
-                            this.checkBox.singleSelectEvent();
-                        } else {
-                            this.checkBox.multiSelectEvent(this.nextAbleLimit);
-                        }
-                    } else if (currentFilter === 2) {
-                        this.dropDown.nodeList[currentFilter + 1].textContent = DataAPI.getInstance().getNextName();
-                        this.nextAbleLimit = 1;
-                        this.checkBox.singleSelectEvent();
-                    } else if (currentFilter <= 6) {
+                    this.layout2.includeVerson();
+                    this.layout2.carryVersion();
+                }
+                else if (currentFilter === 4) {
+                    numFreq.classList.remove('none');
+                    numFreqTerm.classList.remove('none');
+                    this.nextAbleLimit = 1;
+                    this.layout2.includeVerson();
+                }
+                else if (currentFilter === 5) {
+                    numFreq.classList.remove('none');
+                    numFreqTerm.classList.remove('none');
+                    this.layout2.excludeVersion();
+                }
+                this.layout2.setOpacity();
+                this.layout2.refreshNumberBoard();
+                this.layout2On();
+                this.resetBtn.removeEvent();
+                this.resetBtn.addEvent(this.layout2.resetConfirm.bind(this.layout2));
+                break;
+            case DataAPI.getInstance().SIZE:
+                this.layout3_1On();
+                break;
+            default:
+                this.layout1On();
+                this.checkBox.init();
+                if (currentFilter === 0) {
+                    this.dropDown.nodeList[currentFilter + 1].textContent = DataAPI.getInstance().getNextName();
+                    this.nextAbleLimit = 1;
+                    this.checkBox.singleSelectEvent();
+                } else if (currentFilter === 1) {
+                    this.layout1.clearStatsBoard();
+                    this.nextAbleLimit = this.options[currentFilter - 1].indexOf(true);
+                    if (this.nextAbleLimit === 0) {
+                        this.dropDown.nodeList[currentFilter].textContent = '-';
+                        this.options[currentFilter] = [];
+                        await DataAPI.getInstance().forward(this.options[currentFilter]);
+                        this.on();
+                    } else if (this.nextAbleLimit === 1) {
                         this.checkBox.singleSelectEvent();
                     } else {
-                        this.checkBox.multiSelectEvent();
+                        this.checkBox.multiSelectEvent(this.nextAbleLimit);
                     }
-                    this.resetBtn.removeEvent();
-                    this.resetBtn.addEvent(this.checkBox.reset.bind(this.checkBox));
-                    this.layout1.barSlide.init();
-                    this.layout1.lineSlide.init();
-                    this.layout1.bubbleChart.init();
-                    break;
-            }
+                } else if (currentFilter === 2) {
+                    this.dropDown.nodeList[currentFilter + 1].textContent = DataAPI.getInstance().getNextName();
+                    this.nextAbleLimit = 1;
+                    this.checkBox.singleSelectEvent();
+                } else if (currentFilter <= 6) {
+                    this.checkBox.singleSelectEvent();
+                } else {
+                    this.checkBox.multiSelectEvent();
+                }
+                this.resetBtn.removeEvent();
+                this.resetBtn.addEvent(this.checkBox.reset.bind(this.checkBox));
+                this.layout1.barSlide.init();
+                this.layout1.lineSlide.init();
+                this.layout1.bubbleChart.init();
+                break;
         }
     }
 
     private async next(current: number) {
+
+        loading.classList.remove('none');
+        await DataAPI.getInstance().forward(this.options[current]);
+        if (DataAPI.getInstance().getCurrent() < DataAPI.getInstance().SIZE - 1 && DataAPI.getInstance().numbersData) {
+            Swal.fire({
+                title: '현재 필터링된 번호가 50개이하입니다.',
+                text: '남아있는 필터를 중단하고 생성페이지로 이동하시겠습니까?',
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '삭제',
+                cancelButtonText: '취소',
+            }).then(async (result) => {
+                if (result.value) this.layout3_1On();
+            });
+        }
         section.scrollIntoView({
             behavior: 'auto'
-        });
-        loading.classList.remove('none');
-        console.log(DataAPI.getInstance().numbersData);
-        await DataAPI.getInstance().forward(this.options[current]);
+        });        
         await this.on();
         loading.classList.add('none');
         this.checkBox.reset();
@@ -283,7 +280,6 @@ export default class Layout extends LayoutToggle(Layout3) {
                 case 6:
                     rand = Math.random();
                     index = Math.floor(rand * DataAPI.getInstance().getLabels().length);
-                    console.log(index, DataAPI.getInstance().getLabels())
                     this.options[current] = DataAPI.getInstance().getLabels()[index];
                     break;
                 case DataAPI.getInstance().SIZE - 1:
@@ -350,8 +346,8 @@ export default class Layout extends LayoutToggle(Layout3) {
                 }
             })
         });
-        document.querySelector<HTMLElement>('.past').addEventListener('click', () =>{
-            if(DataAPI.getInstance().getCurrent() > 0){
+        document.querySelector<HTMLElement>('.past').addEventListener('click', () => {
+            if (DataAPI.getInstance().getCurrent() > 0) {
 
             }
         })
