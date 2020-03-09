@@ -47,7 +47,7 @@ exports.handler = async (event: any) => {
     
     const { option } = JSON.parse(event.body);
     const generator = new Generator(option);
-    if(!option.lowCount){
+    if(typeof option.lowCount !== 'number'){
         return { statusCode: 400 };
     }else if(!option.sum) generator.rangeFinder = Calculate.sum;
     else if(!option.oddCount) generator.rangeFinder = Calculate.oddCount;
@@ -63,7 +63,7 @@ exports.handler = async (event: any) => {
         range: [...generator.rangeSet].sort((a, b) => (a - b)),
         count: generator.count
     };
-    if(!option.oddCount && option.lowCount) body.range = [body.range[0], body.range[body.range.length-1]];
+    if(!option.sum && option.lowCount) body.range = [body.range[0], body.range[body.range.length-1]];
     if (generator.count <= 50) {
         body.numbers = await numsArrToData(generator.getGeneratedNumbers());
     } else if (typeof option.consecutiveExist === 'boolean') {
