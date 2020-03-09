@@ -7,6 +7,9 @@ configure();
 
 const category = document.getElementById('wrapper').getAttribute('data-category');
 const index = Number(getQueryStringObject().index) || 1;
+const loading = document.querySelector('.loading-box');
+
+loading.classList.remove('none');
 getUnAuthAPI('/posts', { category, index })
     .then(({ posts, count }) => {
         makeBoard(posts);
@@ -22,6 +25,7 @@ getUnAuthAPI('/posts', { category, index })
             pageNumContainer.appendChild(div);
         }
         //<div id="leap-last" class="hide">맨끝</div>
+        loading.classList.add('none');
     })
 
 function makeBoard(objArr: any[]) {

@@ -149,7 +149,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                     this.layout2.refreshNumberBoard();
                     this.layout2On();
                     this.resetBtn.removeEvent();
-                    this.resetBtn.addEvent(this.layout2.reset.bind(this));
+                    this.resetBtn.addEvent(this.layout2.resetConfirm.bind(this.layout2));
                     break;
                 case DataAPI.getInstance().SIZE:
                     this.layout3_1On();
@@ -309,20 +309,39 @@ export default class Layout extends LayoutToggle(Layout3) {
         this.dropDown.nodeList.forEach((node, index) => {
             node.addEventListener('click', async () => {
                 const current = DataAPI.getInstance().getCurrent();
-                if (index < current && node.textContent !== '-' && confirm(`'${DataAPI.filterList[index]}'(으)로 되돌아가시겠습니까?`)) {
-                    DataAPI.getInstance().numbersData = null;
+                if (index < current && node.textContent !== '-') {
+                    Swal.fire({
+                        title: '알림',
+                        text: `'${DataAPI.filterList[index]}'(으)로 되돌아가시겠습니까?`,
+                        icon: 'info',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: '네',
+                        cancelButtonText: '아니요',
+                    }).then(async (result) => {
+                        if (result.value) {
+                            DataAPI.getInstance().numbersData = null;
 
-                    section.scrollIntoView({
-                        behavior: 'auto'
-                    });
-                    for (let i = 0; i < current - index; i++) this.options.pop();
-                    DataAPI.getInstance().leap(index);
-                    await this.on();
-                    this.checkBox.reset();
-                    this.dropDown.changeBoard();
-                    this.dropDown.changeDropDownColor();
+                            section.scrollIntoView({
+                                behavior: 'auto'
+                            });
+                            for (let i = 0; i < current - index; i++) this.options.pop();
+                            DataAPI.getInstance().leap(index);
+                            await this.on();
+                            this.checkBox.reset();
+                            this.dropDown.changeBoard();
+                            this.dropDown.changeDropDownColor();
+                        }
+                    })
+
                 }
             })
         });
+        document.querySelector<HTMLElement>('.past').addEventListener('click', () =>{
+            if(DataAPI.getInstance().getCurrent() > 0){
+
+            }
+        })
     }
 }
