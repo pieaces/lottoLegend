@@ -15,6 +15,7 @@ const infoText = document.querySelector<HTMLElement>(".checkbox-text");
 const loading = document.querySelector<HTMLElement>('.loading-box');
 const filteredCounter = document.querySelector<HTMLElement>('.extract-num');
 
+
 export default class Layout extends LayoutToggle(Layout3) {
     dropDown: DropDown = new DropDown();
     checkBox: Checkbox = new Checkbox();
@@ -26,6 +27,20 @@ export default class Layout extends LayoutToggle(Layout3) {
     layout1: Layout1 = new Layout1();
     layout2: Layout2 = new Layout2(this.options, DataAPI.getInstance().getStats2(), DataAPI.getInstance().getWinNums(), DataAPI.getInstance().getTOTAL());
     layout3: Layout3 = new Layout3();
+    private resetSlideNum() {
+        const slideNum = document.querySelectorAll<HTMLElement>('.func1-chart-slide-num');
+        slideNum.forEach((node) => {
+            Array.from(node.children).forEach((node, index) => {
+                console.log(node);
+                if (index === 0) {
+                    node.classList.add('chart-slide-current');
+                } else {
+                    node.className = "";
+                }
+            })
+        })
+
+    }
     private setOption() {
         const currentFilter = DataAPI.getInstance().getCurrent();
         switch (currentFilter) {
@@ -208,7 +223,7 @@ export default class Layout extends LayoutToggle(Layout3) {
         }
         section.scrollIntoView({
             behavior: 'auto'
-        });        
+        });
         await this.on();
         loading.classList.add('none');
         this.checkBox.reset();
@@ -235,8 +250,10 @@ export default class Layout extends LayoutToggle(Layout3) {
             if (this.checkBox.getCount() >= this.nextAbleLimit ||
                 currentFilter === 3 && this.layout2.checkedNumbers.length === this.nextAbleLimit ||
                 currentFilter === 4 || currentFilter === 5) {
+
                 this.setOption();
                 this.next(currentFilter);
+                this.resetSlideNum();
             } else {
                 let alertMessage:string;
                 if (currentFilter <= 6) alertMessage = `정확히 ${this.nextAbleLimit}개 선택해주세요`;
@@ -333,6 +350,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                     break;
             }
             this.next(current);
+            this.resetSlideNum();
         });
         this.dropDown.nodeList.forEach((node, index) => {
             node.addEventListener('click', async () => {

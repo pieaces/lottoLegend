@@ -173,7 +173,66 @@ select:focus {
   font-weight:500;
 }
 
+.rank{
+  margin-right: 1rem;
+  font-weight: 500;
+  font-size: 1.5rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 4px;
+}
 
+.rank-first{
+  animation: rank 3s ease-in infinite;
+  color: rgb(153, 84, 195);
+  background: linear-gradient(45deg, rgb(208, 255, 0) 10%,rgba(255,255,255,1) 56%,rgb(208, 255, 0) 90%);
+  background-size: 200% 200%;
+  border: 0.1rem solid #e6c87c;
+}
+
+
+@keyframes rank{
+    0% {
+        background-position: 0% 50%;
+  }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+  
+
+
+.rank-second{
+  animation: rank 3s ease-in infinite;
+  color: rgb(133, 133, 133);
+  background: linear-gradient(45deg, rgb(136, 136, 136)  0%,rgb(243, 243, 243) 56%,rgba(149, 148, 148, 0.5) 96%);
+  background-size: 200% 200%;
+  border: 0.1rem solid #cebfb9;
+}
+
+.rank-third{
+  
+  color:rgb(205, 127, 50);
+  background: linear-gradient(45deg,  rgb(216, 141, 66) 3%,rgba(255,255,255,1) 56%,rgb(212, 138, 64) 95%);
+}
+
+
+.rank-fourth{
+  color:rgb(112, 99, 97);
+  background: linear-gradient(45deg,  rgba(127, 108, 104,1) 3%,rgb(209, 188, 184) 56%,rgb(112, 96, 92) 96%); 
+}
+
+.rank-fifth{
+  color:rgb(98, 85, 82);
+  background: linear-gradient(45deg,  rgb(104, 90, 88) 3%,rgb(143, 121, 117) 56%,rgb(107, 93, 91) 96%); 
+}
 
 @media (min-width: 0px) and (max-width: 1024px) {
   html{
