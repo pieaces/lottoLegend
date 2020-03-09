@@ -6,14 +6,14 @@
   --main-color: #1f71b3;
   --table-title-color:#f6f6f6;
   --side-color: #4086be;
-  --search-color: #7d9eb9;
-  --post-color: #59758c;
+  --button-color1: #7d9eb9;
+  --button-color2: #59758c;
+  --button-color3:#66c2ff;
   --lotto-title-color: #a5484c;
-  --lotto-num-color: rgba(231, 76, 60, 0.2);
   --box-color: #f8f9fb;
   --border-color: rgba(0, 0, 0, 0.1);
   --checkbox-color:#d7af0d;
-  --update-color:#617897;
+  --faint-color:#999;
 }
 
 *{
@@ -54,13 +54,13 @@ ul {
 }
 
 
-input[type='text'],
+input,
 select {
   border: 1px solid rgb(190,190,190);
   padding:0 1rem;
 }
 
-input[type='text']:focus,
+input:focus,
 select:focus {
   border: 1px solid var(--main-color);
 }
@@ -152,14 +152,6 @@ select:focus {
   }
 }
 
-.swal2-popup {
-  font-size: 1.3rem !important; /*유의*/
-}
-
-.swal2-footer a{
-  color: #0400ff;
-}
-
 .none{
   display:none !important; /*유의*/
 }
@@ -168,38 +160,19 @@ select:focus {
   visibility: hidden !important; /*유의*/
 }
 
+.swal2-popup {
+  font-size: 1.3rem !important; /*유의*/
+}
+
+.swal2-footer a{
+  color: #0400ff;
+}
+
+
 .bold{
   font-weight:500;
 }
 
-.search-btn{
-  background-color: var(--search-color);
-  color: var(--default-color);
-  font-size: 1.4rem;
-}
-
-.post-btn {
-  background-color: var(--post-color);
-  color: var(--default-color);
-  font-size: 1.4rem;
-}
-
-.make-btn{
-  border-radius: 5px;
-  background-color: rgb(237, 59, 59,1);
-  color:var(--default-color);
-}
-
-.make-btn:hover{
-  background-color: rgb(237, 59, 59,0.95);
-  transition: ease-in-out all 0.15s;
-  box-shadow: inset -3px -5px 0 rgba(0,0,0,0.2),inset 3px 1px 0 rgba(0,0,0,0.2);
-}
-
-.make-btn:active{
-  transition: ease-in-out all 0.15s;
-  box-shadow:none;
-}
 
 
 @media (min-width: 0px) and (max-width: 1024px) {

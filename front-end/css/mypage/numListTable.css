@@ -8,13 +8,13 @@
   }
   
   .mypage-table-num tr:nth-child(1){
-    background-color: var(--main-color);
+    background-color: var(--table-title-color);
   }
 
   .mypage-table-num tr > th{
     padding:0 1rem;
       font-size:1.4rem;
-    color:var(--default-color);
+
   }
   
   .mypage-table-num tr  td{
@@ -39,4 +39,9 @@
     justify-content: center;
     background-color: var(--main-color);
     color:var(--default-color);
+  }
+
+  .mypage-table-num-toggle{
+    width:6rem;
+    height:2.5rem;
   }

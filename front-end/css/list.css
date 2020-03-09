@@ -22,20 +22,24 @@
   height: 4rem;;
 }
 
+
 .search-btn{
+  font-size:1.4rem;
+  background-color: var(--button-color1);
+  color: var(--default-color);
   width:6rem;
   height:4rem;
 }
 
 .post-btn{
+  font-size:1.4rem;
   width:7rem;
   height:4rem;
-  background-color: var(--button-color2);
-  color:var(--default-color);
   display:flex;
   align-items: center;
   justify-content: center;
-  font-size:1.4rem;
+  background-color: var(--button-color2);
+  color: var(--default-color);
 }
 
 /* board */

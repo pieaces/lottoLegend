@@ -36,7 +36,7 @@
   display:flex;
   align-items: center;
   padding-left:2rem;
-  border-bottom: 1px solid rgba(0,0,0,0.2);
+  border-bottom: 1px solid var(--border-color);
   font-weight: 500;
   background-color: var(--table-title-color);
 }
@@ -51,33 +51,66 @@
   height: 20rem;
 }
 
+.mypage-nickname,
+.mypage-service  {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+
 .mypage-info-box > li{
 font-size: 1.4rem;
 height:25%;
 display: flex;
 align-items: center;
-
 }
 
-.mypage-nickname,
-.mypage-service{
-  justify-content: space-between;
+.mypage-info-box > li >div{
+ height:100%; 
+ display: flex;
+ align-items: center;
 }
 
+  
+
+.mypage-info-box > li>div >span:nth-child(1){
+
+  width:8rem;
+  }
+  .mypage-info-box > li>div >span:nth-child(2){
+
+    width:3rem;
+    }
+    .mypage-info-box > li>div >span:nth-child(3){
+      font-weight: 500;
+      }
+
+      .mypage-info-box > li>div >span:nth-child(3) > span{
+        font-weight: 500;
+        font-size:1.2rem;
+        color:rgb(170,170,170);
+        }
+
+      .mypage-info-box > li>div >span:nth-child(4){
+        font-weight: 5old;
+        }
 
 .service-update-btn{
   width: 4rem;
   height:2.5rem;
-  background-color: var(--default-color);
   color:black;
-  border: 1px solid var(--border-color);
+}
 
+.mypage-point > div{
+  display:flex;
 }
 
 .mypage-win-num{
   display: flex;
   justify-content: center;
-  padding:0 1rem;
+  align-items: center;
 }
 
 .mypage-win-num > div{
@@ -90,6 +123,10 @@ align-items: center;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.mypage-table-num-box{
+  margin-top:1rem;
 }
 
 
@@ -127,7 +164,7 @@ align-items: center;
 }
 
 .rank{
-  margin: 0 0.5rem;
+  margin-right: 1rem;
   font-weight: 500;
   font-size: 1.5rem;
   width: 2.2rem;
