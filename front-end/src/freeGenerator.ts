@@ -82,12 +82,15 @@ fortieth.oninput = () => {
     }
 }
 let lineCheck = false;
-document.querySelector<HTMLElement>('.line-gen-toggle-btn').addEventListener('click', async () => {
+const lineBtn = document.querySelector<HTMLElement>('.line-gen-toggle-btn');
+lineBtn.addEventListener('click', async () => {
     if (lineCheck) {
+        lineBtn.style.background = '';
         lineGenerator.classList.add('none');
         lineInput.classList.add('hide');
         lineCheck = false;
     } else {
+        lineBtn.style.background = '#617897';
         lineGenerator.classList.remove('none');
         lineInput.classList.remove('hide');
         lineCheck = true;
@@ -102,7 +105,8 @@ document.querySelector<HTMLElement>('.line-gen-toggle-btn').addEventListener('cl
 
 async function init() {
     loading.classList.remove('none');
-    const { include, exclude } = await getAuthAPI('/numbers/piece');
+    const { include, exclude, total } = await getAuthAPI('/numbers/piece');
+    document.querySelector<HTMLElement>('.line-gen-round').textContent = total + '회';
     makeLine(includeCanvas, include);
     makeLine(excludeCanvas, exclude);
     makeBtn.addEventListener('click', async () => {

@@ -16,7 +16,7 @@ document.write(`<div class="anchor-title">
     <li>
         <h3>번호 조합기</h3>
         <ul class="anchor-list-box">
-        <li>  <a href="../analSystem/analFreeGen.html">무료조합기</a>  </li>
+        <li>  <a href="../analSystem/analFreeGen.html">기본 필터</a>  </li>
         <li>  <a href="../analSystem/analPre.html">프리미엄 필터</a>  </li>
         </ul>
     </li>
