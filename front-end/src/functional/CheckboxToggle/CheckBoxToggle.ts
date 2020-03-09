@@ -1,8 +1,9 @@
-const inputbox = document.querySelectorAll<HTMLInputElement>('.input-checkbox-container> input');
+
 
 export default class CheckBoxToggle {
 
     static init() {
+        const inputbox = document.querySelectorAll<HTMLInputElement>('.input-checkbox-container> input');
         inputbox.forEach((node) => {
             node.addEventListener('click', () => {
                 const checkTextBox = node.parentNode.children[1] as HTMLElement;
@@ -17,8 +18,8 @@ export default class CheckBoxToggle {
                     checkTextBox.style.backgroundColor = 'lightgray';
                 }
             })
-        })
+
+        });
 
     }
-
 }

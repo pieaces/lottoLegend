@@ -6,15 +6,13 @@
   --main-color: #1f71b3;
   --table-title-color:#f6f6f6;
   --side-color: #4086be;
-  --search-color: #7d9eb9;
-  --write-color: #59758c;
+  --button-color1: #7d9eb9;
+  --button-color2: #59758c;
+  --button-color3:#66c2ff;
   --lotto-title-color: #a5484c;
-  --lotto-num-color: rgba(231, 76, 60, 0.2);
   --box-color: #f8f9fb;
   --border-color: rgba(0, 0, 0, 0.1);
   --checkbox-color:#d7af0d;
-  --update-color:#617897;
-  --read-color:#66c2ff;
   --faint-color:#999;
 }
 
