@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="../../css/section.css">
   <link rel="stylesheet" href="../../css/header.css" />
   <link rel="stylesheet" href="../../css/footer.css" />
+  <link rel="stylesheet" href="../../css/rank.css">
   <link rel="stylesheet" href="../../css/mypage/mypage.css" />
   <link rel="stylesheet" href="../../css/mypage/numListTable.css">
   <title>CanvasLotto</title>
@@ -42,13 +43,13 @@
                     <div>
                       <span>닉네임</span>
                       <span>:</span>
-                      <span>luckysso</span>
+                      <span id="nickname">luckysso</span>
                     </div>
                     <button type="button" class="btn box-color service-update-btn">변경</button>
                   </li>
                   <li class="mypage-phone">
                     <div>
-                      <span>휴대폰번호</span>
+                      <span id="phone-number">휴대폰번호</span>
                       <span>:</span>
                       <span>010-9524-2432</span>
                     </div>
@@ -57,7 +58,7 @@
                     <div>
                       <span>서비스</span>
                       <span>:</span>
-                      <span>일반 <span>20.12.31까지</span></span>
+                      <span id="service">일반 <span id="service-expiry-date">20.12.31까지</span></span>
                     </div>
 
                     <button type="button" class="btn box-color service-update-btn">변경</button>
@@ -66,8 +67,8 @@
                     <div>
                       <span>기여점수</span>
                       <span>:</span>
-                      <span class="rank rank-first"> 1</span>
-                      <span>93점</span>
+                      <span><span class="rank rank-first"> 1</span></span>
+                      <span id="point">93점</span>
                     </div>
                   </li>
                 </ul>

@@ -29,13 +29,16 @@ export default class Layout extends LayoutToggle(Layout3) {
     layout2: Layout2 = new Layout2(this.options, DataAPI.getInstance().getStats2(), DataAPI.getInstance().getWinNums(), DataAPI.getInstance().getTOTAL());
     layout3: Layout3 = new Layout3();
     private resetSlideNum() {
-        const slideNum = document.querySelectorAll('.func1-chart-slide-num > div');
-        slideNum.forEach((node, index) => {
-            if (index === 1) {
-                node.classList.add('chart-slide-current');
-            } else {
-                node.className = "";
-            }
+        const slideNum = document.querySelectorAll<HTMLElement>('.func1-chart-slide-num');
+        slideNum.forEach((node) => {
+            Array.from(node.children).forEach((node, index) => {
+                console.log(node);
+                if (index === 0) {
+                    node.classList.add('chart-slide-current');
+                } else {
+                    node.className = "";
+                }
+            })
         })
 
     }
@@ -246,9 +249,10 @@ export default class Layout extends LayoutToggle(Layout3) {
             if (this.checkBox.getCount() >= this.nextAbleLimit ||
                 currentFilter === 3 && this.layout2.checkedNumbers.length === this.nextAbleLimit ||
                 currentFilter === 4 || currentFilter === 5) {
-                this.resetSlideNum();
+
                 this.setOption();
                 this.next(currentFilter);
+                this.resetSlideNum();
             } else {
                 const text = checkTextBox.textContent;
                 checkTextBox.classList.add('checkbox-alert');
@@ -326,6 +330,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                     break;
             }
             this.next(current);
+            this.resetSlideNum();
         });
         this.dropDown.nodeList.forEach((node, index) => {
             node.addEventListener('click', async () => {

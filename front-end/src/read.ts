@@ -108,6 +108,12 @@ function makeComments(objArr: any) {
         const commentTitle = document.createElement('div');
         commentTitle.classList.add('comment-title');
 
+
+        // 랭크 삽입
+        const rank = document.createElement('span');
+        rank.textContent = '1';
+        rank.classList.add('rank', 'rank-first');
+
         const commentAuthor = document.createElement('div');
         commentAuthor.classList.add('comment-author');
         commentAuthor.textContent = objArr[i].writerName;
@@ -116,6 +122,7 @@ function makeComments(objArr: any) {
         commentTime.classList.add('comment-time');
         commentTime.textContent = isoStringToDate(objArr[i].created);
 
+        commentTitle.appendChild(rank);
         commentTitle.appendChild(commentAuthor);
         commentTitle.appendChild(commentTime);
 
@@ -198,3 +205,4 @@ function limitTxtAreaCount(target: HTMLInputElement) {
         }
     }
 }
+// <span class="rank rank-first"> 1</span>
