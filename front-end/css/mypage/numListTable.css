@@ -1,10 +1,13 @@
-  .mypage-table-num tr,
-  .num-table th{
-    padding:0 0.5rem;
-  }
+
   
-  .mypage-table-num tr{
+  .mypage-table-num > tbody>tr:nth-child(1){
     height:6rem;
+  }
+
+  .mypage-table-num,
+  .mypage-table-num > tbody>tr:nth-child(n+3),
+  .mypage-table-num > tbody>tr:nth-child(n+3)>td{
+    border:none;
   }
   
   .mypage-table-num tr:nth-child(1){
@@ -17,9 +20,13 @@
 
   }
   
-  .mypage-table-num tr  td{
+  .mypage-table-num tr>  td{
     text-align: center;
     font-size:1.4rem;
+  }
+
+  .mypage-table-num-list-box{
+    height:6rem;
   }
 
   .mypage-table-num-list{

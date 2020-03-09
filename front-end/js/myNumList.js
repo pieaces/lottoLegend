@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "90eb4cc1605a274e5819";
+/******/ 	var hotCurrentHash = "e6e9588de0156783f518";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -803,7 +803,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nvar numToggle = document.getElementsByClassName('mypage-table-num-toggle');\r\nconsole.log(numToggle);\r\n\n\n//# sourceURL=webpack:///./front-end/src/myNumList.ts?");
+eval("\r\nvar numToggleBtn = document.querySelector('.mypage-table-num-toggle');\r\nvar pastWinBox = document.querySelector('.func3-past-win-table');\r\nvar filterNumInfo = document.querySelector('.func3-list-filter-table');\r\nnumToggleBtn.addEventListener('click', numToggle());\r\nfunction numToggle() {\r\n    var flag = false;\r\n    return function () {\r\n        if (!flag) {\r\n            pastWinBox.classList.remove('none');\r\n            filterNumInfo.classList.remove('none');\r\n            flag = true;\r\n        }\r\n        else {\r\n            pastWinBox.classList.add('none');\r\n            filterNumInfo.classList.add('none');\r\n            flag = false;\r\n        }\r\n    };\r\n}\r\n\n\n//# sourceURL=webpack:///./front-end/src/myNumList.ts?");
 
 /***/ })
 

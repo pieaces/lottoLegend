@@ -1,3 +1,7 @@
+.mypage-num-container{
+  margin-bottom: 1rem;
+}
+
 .mypage-num-container >div:not(:last-child){
   border-bottom: 1px dashed var(--border-color);
 }
