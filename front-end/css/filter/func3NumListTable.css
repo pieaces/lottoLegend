@@ -1,10 +1,17 @@
+.func3-past-win-table,
+.func3-past-win-table td,
+.func3-past-win-table tr{
+  border-top:none;
+  border-bottom:none;
+}
+
 .func3-past-win-table tr{
     background-color: aliceblue;
+    height: 2.5rem;
   }
   
   .func3-past-win-table tr>td{
     width: 16.6%;
-    height: 2.5rem;
     text-align: center;
     font-size:1.3rem;
   }

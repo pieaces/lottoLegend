@@ -1,0 +1,17 @@
+.mypage-num-result-box{
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+}
+
+
+#mypage-num-result-value,
+#mypage-num-result-value-percent{
+    font-weight: bold;
+}
+
+#mypage-num-result-value-percent{
+    color: red;
+}
