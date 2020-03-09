@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "716db6922d3dd9755e66";
+/******/ 	var hotCurrentHash = "66165d87a92efe62bc77";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1114,7 +1114,7 @@ eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod)
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nvar Charts_1 = __importDefault(__webpack_require__(/*! ../Chart/Charts */ \"./front-end/src/functional/Chart/Charts.ts\"));\r\nvar canvas = document.querySelector('.func2-chart-radar');\r\nvar dataBox = {\r\n    labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],\r\n    datasets: [\r\n        {\r\n            fill: true,\r\n            borderWidth: 1,\r\n            borderColor: '#72B992',\r\n            pointBorderColor: '#72B992',\r\n            pointBackgroundColor: 'white',\r\n            data: null\r\n        }\r\n    ]\r\n};\r\nvar option = {\r\n    title: {\r\n        display: true,\r\n        text: '번호별 출현간격',\r\n        fontSize: 12\r\n    },\r\n    legend: {\r\n        display: false\r\n    },\r\n};\r\nvar radarInstance = new Charts_1.default('radar', canvas, dataBox, option);\r\nradarInstance.create();\r\nexports.default = radarInstance;\r\n\n\n//# sourceURL=webpack:///./front-end/src/functional/instance2/radarInstance.ts?");
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nvar Charts_1 = __importDefault(__webpack_require__(/*! ../Chart/Charts */ \"./front-end/src/functional/Chart/Charts.ts\"));\r\nvar canvas = document.querySelector('.func2-chart-radar');\r\nvar dataBox = {\r\n    labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],\r\n    datasets: [\r\n        {\r\n            label: '출현간격',\r\n            fill: true,\r\n            borderWidth: 1,\r\n            borderColor: '#72B992',\r\n            pointBorderColor: '#72B992',\r\n            pointBackgroundColor: 'white',\r\n            data: null\r\n        }\r\n    ]\r\n};\r\nvar option = {\r\n    title: {\r\n        display: true,\r\n        text: '번호별 출현간격',\r\n        fontSize: 12\r\n    },\r\n    legend: {\r\n        display: false\r\n    },\r\n};\r\nvar radarInstance = new Charts_1.default('radar', canvas, dataBox, option);\r\nradarInstance.create();\r\nexports.default = radarInstance;\r\n\n\n//# sourceURL=webpack:///./front-end/src/functional/instance2/radarInstance.ts?");
 
 /***/ }),
 
