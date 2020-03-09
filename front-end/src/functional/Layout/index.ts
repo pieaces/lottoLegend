@@ -16,6 +16,7 @@ const loading = document.querySelector<HTMLElement>('.loading-box');
 const checkTextBox = document.querySelector<HTMLElement>('.checkbox-text');
 const filteredCounter = document.querySelector<HTMLElement>('.extract-num');
 
+
 export default class Layout extends LayoutToggle(Layout3) {
     dropDown: DropDown = new DropDown();
     checkBox: Checkbox = new Checkbox();
@@ -27,6 +28,17 @@ export default class Layout extends LayoutToggle(Layout3) {
     layout1: Layout1 = new Layout1();
     layout2: Layout2 = new Layout2(this.options, DataAPI.getInstance().getStats2(), DataAPI.getInstance().getWinNums(), DataAPI.getInstance().getTOTAL());
     layout3: Layout3 = new Layout3();
+    private resetSlideNum() {
+        const slideNum = document.querySelectorAll('.func1-chart-slide-num > div');
+        slideNum.forEach((node, index) => {
+            if (index === 1) {
+                node.classList.add('chart-slide-current');
+            } else {
+                node.className = "";
+            }
+        })
+
+    }
     private setOption() {
         const currentFilter = DataAPI.getInstance().getCurrent();
         switch (currentFilter) {
@@ -207,7 +219,7 @@ export default class Layout extends LayoutToggle(Layout3) {
         }
         section.scrollIntoView({
             behavior: 'auto'
-        });        
+        });
         await this.on();
         loading.classList.add('none');
         this.checkBox.reset();
@@ -234,6 +246,7 @@ export default class Layout extends LayoutToggle(Layout3) {
             if (this.checkBox.getCount() >= this.nextAbleLimit ||
                 currentFilter === 3 && this.layout2.checkedNumbers.length === this.nextAbleLimit ||
                 currentFilter === 4 || currentFilter === 5) {
+                this.resetSlideNum();
                 this.setOption();
                 this.next(currentFilter);
             } else {
