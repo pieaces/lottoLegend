@@ -191,7 +191,7 @@ export default class Layout extends LayoutToggle(Layout3) {
 
         loading.classList.remove('none');
         await DataAPI.getInstance().forward(this.options[current]);
-        if (DataAPI.getInstance().getCurrent() < DataAPI.getInstance().SIZE - 1 && DataAPI.getInstance().numbersData) {
+        if (DataAPI.getInstance().getCurrent() < DataAPI.getInstance().SIZE && DataAPI.getInstance().numbersData) {
             Swal.fire({
                 title: '현재 필터링된 번호가 50개이하입니다.',
                 text: '남아있는 필터를 중단하고 생성페이지로 이동하시겠습니까?',
@@ -257,8 +257,8 @@ export default class Layout extends LayoutToggle(Layout3) {
             switch (current) {
                 case 0:
                     rand = Math.random();
-                    if (rand > 0.5) this.options[current] = [false, true, false, false, false];
-                    else if (rand > 0.2) this.options[current] = [false, false, true, false, false];
+                    if (rand > 0.4) this.options[current] = [false, true, false, false, false];
+                    else if (rand > 0.15) this.options[current] = [false, false, true, false, false];
                     else this.options[current] = [true, false, false, false, false];
                     break;
                 case 1:
@@ -272,9 +272,9 @@ export default class Layout extends LayoutToggle(Layout3) {
                     break;
                 case 2:
                     rand = Math.random();
-                    if (rand > 0.6) this.options[current] = [false, true, false, false, false, false, false];
-                    else if (rand > 0.2) this.options[current] = [true, false, false, false, false, false, false];
-                    else this.options[current] = [false, false, true, false, false, false, false]
+                    if (rand > 0.5) this.options[current] = [false, true, false, false,];
+                    else if (rand > 0.25) this.options[current] = [true, false, false, false];
+                    else this.options[current] = [false, false, true, false];
                     break;
                 case 3: case 4: case 5: break;
                 case 6:
@@ -297,9 +297,24 @@ export default class Layout extends LayoutToggle(Layout3) {
 
                     const range = DataAPI.getInstance().getLabels();
                     if (current === 7) {
+                        this.options[current] = [];
                         const from = Number((<string>range[index]).slice(0, (<string>range[index]).indexOf('~')));
                         const to = Number((<string>range[index]).slice((<string>range[index]).indexOf('~') + 1));
-                        this.options[current] = [{ from, to }];
+                        this.options[current].push({ from, to });
+                        rand = Math.random();
+                        for (let i = 0; i < Math.floor(rand * pos.length/2); i++) {
+                            const index = Math.floor(Math.random()*pos.length);
+                            const from = Number((<string>range[index]).slice(0, (<string>range[index]).indexOf('~')));
+                            const to = Number((<string>range[index]).slice((<string>range[index]).indexOf('~') + 1));
+                            let flag = true;
+                            for(let j= 0; j<this.options[current].length; j++){
+                                if(this.options[current][j].from === from){
+                                    flag = false;
+                                    break;
+                                }
+                            }
+                            if(flag) this.options[current].push({ from, to });
+                        }
                     } else if (current === 12) {
                         if (typeof range[index] === 'string') {
                             const one = Number((<string>range[index]).slice(0, (<string>range[index]).indexOf('~')));
@@ -308,8 +323,12 @@ export default class Layout extends LayoutToggle(Layout3) {
                         } else this.options[current] = [range[index]];
                     } else {
                         this.options[current] = [range[index]];
+                        rand = Math.random();
+                        for (let i = 0; i < Math.floor(rand * pos.length); i++) {
+                            const index = Math.floor(Math.random() * pos.length);
+                            if(this.options[current].indexOf(range[index]) === -1) this.options[current].push(range[index]);
+                        }
                     }
-
                     break;
             }
             this.next(current);
