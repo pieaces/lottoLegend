@@ -13,7 +13,6 @@ import Swal from 'sweetalert2'
 const section = document.querySelector(".section1");
 const infoText = document.querySelector<HTMLElement>(".checkbox-text");
 const loading = document.querySelector<HTMLElement>('.loading-box');
-const checkTextBox = document.querySelector<HTMLElement>('.checkbox-text');
 const filteredCounter = document.querySelector<HTMLElement>('.extract-num');
 
 export default class Layout extends LayoutToggle(Layout3) {
@@ -99,7 +98,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                 }
         }
     }
-    private async on(layoutVersion: number = 0) {
+    private async on() {
         const currentFilter = DataAPI.getInstance().getCurrent();
         infoText.textContent = DataAPI.infoList[currentFilter];
         if (currentFilter > 7) {
@@ -133,12 +132,12 @@ export default class Layout extends LayoutToggle(Layout3) {
                     numFreq.classList.remove('none');
                     numFreqTerm.classList.remove('none');
                     this.nextAbleLimit = 1;
-                    this.layout2.includeVerson();
+                    this.layout2.includeVerson(5-this.options[3].length);
                 }
                 else if (currentFilter === 5) {
                     numFreq.classList.remove('none');
                     numFreqTerm.classList.remove('none');
-                    this.layout2.excludeVersion();
+                    this.layout2.excludeVersion(40);
                 }
                 this.layout2.setOpacity();
                 this.layout2.refreshNumberBoard();
@@ -175,6 +174,8 @@ export default class Layout extends LayoutToggle(Layout3) {
                     this.checkBox.singleSelectEvent();
                 } else if (currentFilter <= 6) {
                     this.checkBox.singleSelectEvent();
+                } else if(currentFilter === DataAPI.getInstance().SIZE - 1){
+                    this.checkBox.singleSelectEvent();
                 } else {
                     this.checkBox.multiSelectEvent();
                 }
@@ -199,8 +200,8 @@ export default class Layout extends LayoutToggle(Layout3) {
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: '삭제',
-                cancelButtonText: '취소',
+                confirmButtonText: '네',
+                cancelButtonText: '아니요',
             }).then(async (result) => {
                 if (result.value) this.layout3_1On();
             });
@@ -237,14 +238,14 @@ export default class Layout extends LayoutToggle(Layout3) {
                 this.setOption();
                 this.next(currentFilter);
             } else {
-                const text = checkTextBox.textContent;
-                checkTextBox.classList.add('checkbox-alert');
-                if (currentFilter <= 6) checkTextBox.textContent = `딱 ${this.nextAbleLimit}개 선택해주세요~`;
-                if (currentFilter > 6) checkTextBox.textContent = `최소 ${this.nextAbleLimit}개 이상 산텍헤주세요~`;
-                setTimeout(function () {
-                    checkTextBox.classList.remove('checkbox-alert');
-                    checkTextBox.textContent = text;
-                }, 1000)
+                let alertMessage:string;
+                if (currentFilter <= 6) alertMessage = `정확히 ${this.nextAbleLimit}개 선택해주세요`;
+                if (currentFilter > 6) alertMessage = `최소 ${this.nextAbleLimit}개 이상 산텍헤주세요`;
+                Swal.fire({
+                    title: '알림',
+                    text: alertMessage,
+                    icon: 'info',
+                })
             }
         });
         this.autoBtn.addEvent(async () => {

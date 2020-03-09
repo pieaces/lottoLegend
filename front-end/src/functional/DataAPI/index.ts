@@ -1,6 +1,9 @@
 import Stats, { Params } from "./Stats";
 import Generator from "./Generator";
 const constraintLowCount = require('./json/lowCount_compressed.json');
+const constraintSum = require('./json/sum_compressed.json');
+const constraintSumNotExcluded = require('./json/sum_notExcluded.json');
+
 function numbersToParams(numbers: number[] = []): Params {
     let flag = true;
     for (let i = 1; i < numbers.length; i++) {
@@ -43,12 +46,12 @@ export default class DataAPI {
     static instance: DataAPI = null;
     public numbersData: any[];
     public filteredCount: number;
-    static readonly filterList = ["전멸구간 개수", "전멸구간 선택", "이월수 개수", "이월수 선택", "포함", "제외", "저값 개수", "번호 합계", "홀수 개수", "소수 개수", "3배수 개수", "첫수 합", "고저 차", "AC", "연속수 포함여부"]
+    static readonly filterList = ["전멸구간 개수", "전멸구간 선택", "이월수 개수", "이월수 선택", "고정수", "제외수", "저값 개수", "번호 합계", "홀수 개수", "소수 개수", "3배수 개수", "첫수 합", "고저 차", "AC", "연속수 포함여부"]
     private static readonly dataList = ['excludedLineCount', 'lineCount', 'carryCount', 'excludeInclude', 'excludeInclude', 'excludeInclude', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
     private static readonly optionList = [null, 'excludedLines', null, null, 'includedNumbers', 'excludedNumbers', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
     private rangeList: Array<string[] | number[]> = [[0, 1, 2, 3, 4], ['1~', '10~', '20~', '30~', '40~'], null, null, null, null];
     static readonly infoList = ['전멸구간 개수를 선택해주세요.', '전멸구간 번호대를 선택해주세요', '전회차에서 이월될 개수를 선택해주세요.', '전회차에서 이월될 수를 선택해주세요(나머지는 자동으로 제외됩니다.)',
-        '포함될 수를 선택해주세요.(생략가능)', '제외될 수를 선택해주세요.(생략가능)', '저값(1~22) 개수를 선택해주세요.',
+        '고정시킬 수를 선택해주세요.(생략가능)', '제외될 수를 선택해주세요.(생략가능)', '저값 개수를 선택해주세요.',
         infoFront + '번호합계입니다. ' + infoBack,
         infoFront + '홀수개수입니다. ' + infoBack,
         infoFront + '소수개수입니다. ' + infoBack,
@@ -111,8 +114,16 @@ export default class DataAPI {
             params = { from: range[0], to: range[1] };
             this.rangeList[this.current] = paramToNumbers({ from: range[0], to: range[1] });
         } else if (this.current === 7) {
-            params = { from: <number>this.rangeList[this.current][0], to: <number>this.rangeList[this.current][1] };
-            this.rangeList[this.current] = compartNumbers(params, 10);
+            if (this.generator.option.includedNumbers.length === 0) {
+                let range: any;
+                if (this.generator.option.excludedLines) range = constraintSum[this.generator.option.lowCount.toString() + this.generator.option.excludedLines.join('')];
+                else range = constraintSumNotExcluded[this.generator.option.lowCount.toString()];
+                params = { from: range[0], to: range[1] };
+                this.rangeList[this.current] = compartNumbers(params, 10);
+            } else {
+                params = { from: <number>this.rangeList[this.current][0], to: <number>this.rangeList[this.current][1] };
+                this.rangeList[this.current] = compartNumbers(params, 10);
+            }
         } else {
             params = numbersToParams(this.rangeList[this.current] as number[]);
             if (this.current === 12) {
