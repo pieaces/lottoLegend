@@ -2,7 +2,7 @@ import configure from './amplify/configure'
 import Layout3 from './functional/Layout/Layout3'
 import { getAuthAPI, getUnAuthAPI } from './amplify/api';
 import Swal from 'sweetalert2'
-import { predictInstance, actualInstance, selectionInstance, latestInstance } from './analLineGen';
+import { actualInstance, selectionInstance, latestInstance } from './analLineGen';
 
 configure();
 const loading = document.querySelector<HTMLElement>('.loading-box');
@@ -82,12 +82,15 @@ fortieth.oninput = () => {
     }
 }
 let lineCheck = false;
-document.querySelector<HTMLElement>('.line-gen-toggle-btn').addEventListener('click', async () => {
+const lineBtn = document.querySelector<HTMLElement>('.line-gen-toggle-btn');
+lineBtn.addEventListener('click', async () => {
     if (lineCheck) {
+        lineBtn.style.background = '';
         lineGenerator.classList.add('none');
         lineInput.classList.add('hide');
         lineCheck = false;
     } else {
+        lineBtn.style.background = '#617897';
         lineGenerator.classList.remove('none');
         lineInput.classList.remove('hide');
         lineCheck = true;
@@ -99,9 +102,11 @@ document.querySelector<HTMLElement>('.line-gen-toggle-btn').addEventListener('cl
         latestInstance.update();
     }
 });
+
 async function init() {
     loading.classList.remove('none');
-    const { include, exclude } = await getAuthAPI('/numbers/piece');
+    const { include, exclude, total } = await getAuthAPI('/numbers/piece');
+    document.querySelector<HTMLElement>('.line-gen-round').textContent = total + '회';
     makeLine(includeCanvas, include);
     makeLine(excludeCanvas, exclude);
     makeBtn.addEventListener('click', async () => {
@@ -155,11 +160,7 @@ async function init() {
                         checkTextBox.style.backgroundColor = 'lightgray';
                     }
                 })
-            })
-
-
-
-
+            });
         } else {
             Swal.fire({
                 title: '알림',
@@ -182,7 +183,6 @@ function makeLine(canvas: HTMLElement, numbers: number[]): void {
 }
 
 // const saveBtn = document.querySelectorAll('.save-btn');
-
 // saveBtn.forEach((node) => {
 //     node.addEventListener('click', () => {
 //         const checkBoxList = document.querySelectorAll<HTMLInputElement>('.func3-check-box  input');

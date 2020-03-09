@@ -125,6 +125,9 @@ export default class Layout extends LayoutToggle(Layout3) {
 
             switch (currentFilter) {
                 case 3: case 4: case 5:
+                    const numFreq = document.querySelector('.func2-num-freq');
+                    const numFreqTerm = document.querySelector('.func2-num-freq-term');
+
                     this.layout2.reset();
                     this.checkBox.removeAllEvent();
                     if (currentFilter == 3) {
@@ -135,21 +138,29 @@ export default class Layout extends LayoutToggle(Layout3) {
                             this.options[currentFilter] = [];
                             await DataAPI.getInstance().forward(this.options[currentFilter]);
                             infoText.innerHTML = DataAPI.infoList[currentFilter + 1];
+                        }else{
+                            numFreq.classList.add('none');
+                            numFreqTerm.classList.add('none');                            
                         }
                         this.layout2.includeVerson();
+                        this.layout2.carryVersion();
                     }
                     else if (currentFilter === 4) {
+                        numFreq.classList.remove('none');
+                        numFreqTerm.classList.remove('none');
                         this.nextAbleLimit = 1;
                         this.layout2.includeVerson();
                     }
                     else if (currentFilter === 5) {
+                        numFreq.classList.remove('none');
+                        numFreqTerm.classList.remove('none');
                         this.layout2.excludeVersion();
                     }
                     this.layout2.setOpacity();
                     this.layout2.refreshNumberBoard();
                     this.layout2On();
                     this.resetBtn.removeEvent();
-                    this.resetBtn.addEvent(this.layout2.reset.bind(this));
+                    this.resetBtn.addEvent(this.layout2.resetConfirm.bind(this.layout2));
                     break;
                 case DataAPI.getInstance().SIZE:
                     this.layout3_1On();
@@ -157,7 +168,11 @@ export default class Layout extends LayoutToggle(Layout3) {
                 default:
                     this.layout1On();
                     this.checkBox.init();
-                    if (currentFilter === 1) {
+                    if (currentFilter === 0) {
+                        this.dropDown.nodeList[currentFilter + 1].textContent = DataAPI.getInstance().getNextName();
+                        this.nextAbleLimit = 1;
+                        this.checkBox.singleSelectEvent();
+                    } else if (currentFilter === 1) {
                         this.layout1.clearStatsBoard();
                         this.nextAbleLimit = this.options[currentFilter - 1].indexOf(true);
                         if (this.nextAbleLimit === 0) {
@@ -170,14 +185,11 @@ export default class Layout extends LayoutToggle(Layout3) {
                         } else {
                             this.checkBox.multiSelectEvent(this.nextAbleLimit);
                         }
+                    } else if (currentFilter === 2) {
+                        this.dropDown.nodeList[currentFilter + 1].textContent = DataAPI.getInstance().getNextName();
+                        this.nextAbleLimit = 1;
+                        this.checkBox.singleSelectEvent();
                     } else if (currentFilter <= 6) {
-                        if (currentFilter === 0) {
-                            this.dropDown.nodeList[currentFilter + 1].textContent = DataAPI.getInstance().getNextName();
-                            this.nextAbleLimit = 1;
-                        } else if (currentFilter === 2) {
-                            this.dropDown.nodeList[currentFilter + 1].textContent = DataAPI.getInstance().getNextName();
-                            this.nextAbleLimit = 1;
-                        }
                         this.checkBox.singleSelectEvent();
                     } else {
                         this.checkBox.multiSelectEvent();
@@ -309,20 +321,39 @@ export default class Layout extends LayoutToggle(Layout3) {
         this.dropDown.nodeList.forEach((node, index) => {
             node.addEventListener('click', async () => {
                 const current = DataAPI.getInstance().getCurrent();
-                if (index < current && node.textContent !== '-' && confirm(`'${DataAPI.filterList[index]}'(으)로 되돌아가시겠습니까?`)) {
-                    DataAPI.getInstance().numbersData = null;
+                if (index < current && node.textContent !== '-') {
+                    Swal.fire({
+                        title: '알림',
+                        text: `'${DataAPI.filterList[index]}'(으)로 되돌아가시겠습니까?`,
+                        icon: 'info',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: '네',
+                        cancelButtonText: '아니요',
+                    }).then(async (result) => {
+                        if (result.value) {
+                            DataAPI.getInstance().numbersData = null;
 
-                    section.scrollIntoView({
-                        behavior: 'auto'
-                    });
-                    for (let i = 0; i < current - index; i++) this.options.pop();
-                    DataAPI.getInstance().leap(index);
-                    await this.on();
-                    this.checkBox.reset();
-                    this.dropDown.changeBoard();
-                    this.dropDown.changeDropDownColor();
+                            section.scrollIntoView({
+                                behavior: 'auto'
+                            });
+                            for (let i = 0; i < current - index; i++) this.options.pop();
+                            DataAPI.getInstance().leap(index);
+                            await this.on();
+                            this.checkBox.reset();
+                            this.dropDown.changeBoard();
+                            this.dropDown.changeDropDownColor();
+                        }
+                    })
+
                 }
             })
         });
+        document.querySelector<HTMLElement>('.past').addEventListener('click', () =>{
+            if(DataAPI.getInstance().getCurrent() > 0){
+
+            }
+        })
     }
 }

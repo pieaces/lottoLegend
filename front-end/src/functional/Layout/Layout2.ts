@@ -15,7 +15,20 @@ const $68 = document.querySelector<HTMLElement>('.stats-68-value');
 const $95 = document.querySelector<HTMLElement>('.stats-95-value');
 const last = document.querySelector<HTMLElement>('.stats-last-value');
 
-type Version = 'include' | 'exclude';
+type Version = 'include' | 'exclude' | 'carry';
+const carryInfo =
+    `<span style="font-size: 1.4rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
+우리의 모티브는 아래와 같습니다.
+"수백회차가 진행되는 동안, 출현했던 번호만 계속 나온다면,
+<span style="color:black;font-weight:bold;">큰수'법칙'</span>은 충족되지 않을것입니다."
+
+흔히 <span style="color:blue">콜드수</span>라 불리는 로또용어가 있는데,
+이는 <span style="color:blue">최근 미출현 번호</span>를 의미합니다.
+기존에는 이것을 숫자로 분리표현하여 종합적으로 보기 힘들었습니다.
+우리는 이를 <span style="color:black;font-weight:bold;">농도</span>로 표현함으로써 <span style="color:black;font-weight:bold;">종합적이고 직관적 판단</span>이 가능해졌습니다.
+
+*<span style="color:blue;font-weight:bold;">번호빈도</span>: 엄밀한 수학적 예상값을 채우지 못할수록 진하게 표현하였습니다.
+확률적 값에 비해 <span style="color:black;"><U>적게 출현할수록 진하고, 많이 출현할수록 옅습니다.</U></span>`;
 const includeInfo =
     `<span style="font-size: 1.4rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
 우리의 모티브는 아래와 같습니다.
@@ -109,6 +122,9 @@ export default class Layout2 {
         for (let i = 0; i < 45; i++) {
             this.freqTerm[i] /= ftMax;
         }
+    }
+    carryVersion(){
+        this.version = 'carry';
     }
     includeVerson() {
         this.version = 'include';
@@ -336,7 +352,8 @@ export default class Layout2 {
         this.addEvent();
         document.querySelector<HTMLElement>('.func2-numboard-que').addEventListener('click', () => {
             if (this.version === 'include') makeModal(includeInfo, 55);
-            else makeModal(excludeInfo, 55);
+            else if(this.version === 'exclude') makeModal(excludeInfo, 55);
+            else makeModal(carryInfo, 55);
         });
         document.querySelector<HTMLElement>('.func2-radar-que').addEventListener('click', () => {
             const radarInfo =

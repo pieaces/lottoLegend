@@ -1,7 +1,7 @@
 import configure from './amplify/configure'
 import { getUnAuthAPI, postAuthAPI, deleteAuthAPI } from './amplify/api';
 import { getUserName, getNickName } from './amplify/auth';
-import { getQueryStringObject, afterAlert, getCategoryHtml, removeConfirm, isoStringToDate, Affix, networkAlert } from './functions';
+import { getQueryStringObject, getCategoryHtml, isoStringToDate, Affix, networkAlert } from './functions';
 import Swal from 'sweetalert2'
 
 configure();
@@ -18,6 +18,7 @@ const txtArea = document.querySelector<HTMLInputElement>('#comment-write-text');
 const charCurrentCount = document.querySelector('#char-current-count');
 const commentSubmit = document.getElementById('comment-submit');
 const contentsUpdateBtn = document.querySelector<HTMLElement>('.text-update-container ');
+const loading = document.querySelector('.loading-box');
 
 let currentUser: string;
 let commentCount = 0;
@@ -48,6 +49,7 @@ async function init() {
         currentUser = await getUserName();
     } catch (err) { }
     if (id) {
+        loading.classList.remove('none');
         const post = await getUnAuthAPI('/posts/' + id);
         console.log(post);
         title.textContent = post.title;
@@ -91,6 +93,7 @@ async function init() {
         if (post.comments) {
             makeComments(post.comments);
         }
+        loading.classList.add('none');
     }
 }
 

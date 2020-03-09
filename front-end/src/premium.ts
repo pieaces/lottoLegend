@@ -15,17 +15,6 @@ async function execute() {
 }
 execute();
 
-/*2번 레이아웃에서 번호빈도만 보여주는 함수 */
-
-// const numFreq=document.querySelector('.func2-num-freq');
-// const numFreqTerm=document.querySelector('.func2-num-freq-term');
-// 번호빈도만 보여줄때
-// numFreq.classList.add('none');
-// numFreqTerm.classList.add('none');
-//다 보여줄때
-// numFreq.classList.remove('none');
-// numFreqTerm.classList.remove('none');
-
 /*전멸구간 텍스트 삽입 */
 
 // const excludedLineCountText=document.querySelector('#excludedLineCount-text');
