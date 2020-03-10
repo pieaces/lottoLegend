@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <div id="wrapper">
+    <div id="wrapper" data-choice="Include">
         <script src="../components/header/header.js"></script>
         <section class="section1">
             <div class="grid-section-1 container">
@@ -36,51 +36,17 @@
 
 
                         <select name="" id="round">
-                            <option value="전체">전체</option>
-                            <option value="900">900회</option>
-                            <option value="899">899회</option>
+
                         </select>
 
                     </div>
-                    <div class="mypage-num-container box-color">
-                        <div class="mypage-num-box ">
-                            <div style="background-color: rgb(251, 196, 0);">3</div>
-                            <div style="background-color: rgb(251, 196, 0);">5</div>
-                            <div style="background-color: rgb(251, 196, 0);">10</div>
-                            <div style="background-color: rgb(105, 200, 242);">13</div>
-                            <div style="background-color: rgb(255, 114, 114);">26</div>
-                            <div style="background-color: rgb(170, 170, 170);">32</div>
-                        </div>
-                        <div class="mypage-num-box">
-                            <div style="background-color: rgb(251, 196, 0);">3</div>
-                            <div style="background-color: rgb(251, 196, 0);">5</div>
-                            <div style="background-color: rgb(251, 196, 0);">10</div>
-                            <div style="background-color: rgb(105, 200, 242);">13</div>
-                            <div style="background-color: rgb(255, 114, 114);">26</div>
-                            <div style="background-color: rgb(170, 170, 170);">32</div>
-                        </div>
-                        <div class="mypage-num-box">
-                            <div style="background-color: rgb(251, 196, 0);">3</div>
-                            <div style="background-color: rgb(251, 196, 0);">5</div>
-                            <div style="background-color: rgb(251, 196, 0);">10</div>
-                            <div style="background-color: rgb(105, 200, 242);">13</div>
-                            <div style="background-color: rgb(255, 114, 114);">26</div>
-                            <div style="background-color: rgb(177, 133, 133);">32</div>
-                        </div>
-                        <div class="mypage-num-box">
-                            <div style="background-color: rgb(251, 196, 0);">3</div>
-                            <div style="background-color: rgb(251, 196, 0);">5</div>
-                            <div style="background-color: rgb(251, 196, 0);">10</div>
-                            <div style="background-color: rgb(105, 200, 242);">13</div>
-                            <div style="background-color: rgb(255, 114, 114);">26</div>
-                            <div style="background-color: rgb(170, 170, 170);">32</div>
-                        </div>
+                    <div class="mypage-num-container">
+
 
                     </div>
                     <div class="mypage-num-result-box box-color">
-                        결과 : <span id="mypage-num-result-total">15</span>개 중 <span
-                            id="mypage-num-result-value">2</span>개
-                        출현 ( <span id="mypage-num-result-value-percent">90</span> %)
+                        결과 : <span id="mypage-num-result-total"></span>개 중 <span id="mypage-num-result-value"></span>개
+                        출현 ( <span id="mypage-num-result-value-percent"></span> %)
                     </div>
                 </div>
             </div>
@@ -89,6 +55,7 @@
         <script src="../components/footer/footer.js"></script>
     </div>
     <script src="../../js/headerHover.js"></script>
+    <script src="../../js/myIncExcNumList.js"></script>
     <script src="https://kit.fontawesome.com/e14b8c39aa.js" crossorigin="anonymous"></script>
 </body>
 
