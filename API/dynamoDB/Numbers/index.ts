@@ -148,7 +148,7 @@ export function getNumberSize(userName: string, round: number): Promise<number>{
         })
     })
 }
-export function getNumbers(userName: string, round: number, select?:SelectClass): Promise<{numbers:number[], method:string, tool:string, date:string}[]> {
+export function getNumbers(userName: string, round: number, select?:SelectClass): Promise<{numbers:number[], method:string, tool:string, date:string, win?:number}[]> {
     const ExpressionAttributeNames: { [key: string]: string } = {
         "#Map": 'Numbers',
         "#Round": round.toString(),
@@ -184,12 +184,13 @@ export function getNumbers(userName: string, round: number, select?:SelectClass)
                             }
                             return true;
                         } else return true;
-                    }).map((item, index) => {
+                    }).map((item) => {
                         return {
                             numbers: AWSListToNumbers(item.M.numbers.L),
                             date: item.M.date.S,
                             method: item.M.method.S,
                             tool: item.M.tool.S,
+                            win: item.M.win && Number(item.M.win.N)
                         }
                     }));
                 }else resolve([]);
@@ -287,3 +288,46 @@ export function getIncOrExcNumbers(userName: string, round: number, choice: IncO
         });
     });
 }
+
+
+export function getIncOrExcRounds(userName: string, choice: IncOrExc): Promise<string[]> {
+    const params = {
+        TableName,
+        ExpressionAttributeNames: {
+            "#Choice": choice,
+        },
+        ProjectionExpression: '#Choice',
+        Key: {
+            "UserName": {
+                S: userName
+            }
+        }
+    };
+
+    return new Promise((resolve, reject) => {
+        dynamoDB.getItem(params, (err, data) => {
+            if (err) {
+                reject(err);
+            }
+            else {
+                const rounds = Object.keys(data.Item[choice].M);
+                resolve(rounds);
+            }
+        });
+    });
+}
+
+dynamoDB.getItem({
+    TableName: 'LottoUsers',
+    ExpressionAttributeNames: {
+        "#Map": 'Numbers',
+    },
+    ProjectionExpression: '#Map',
+    Key: {
+        "UserName": {
+            S: 'pieaces'
+        }
+    }
+}, (err, data) => {
+    const rounds = Object.keys(data.Item.Numbers.M);
+})

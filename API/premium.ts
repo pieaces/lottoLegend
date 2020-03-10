@@ -3,7 +3,7 @@ import jwkToPem from 'jwk-to-pem';
 import { Plan, getPlan } from './dynamoDB/userInfo';
 import Calculate from './Lotto/class/Calculate';
 import Generator from './Lotto/class/Generator';
-import { numsArrToData } from './dynamoDB/generator';
+import { numbersToData, scanLotto } from './dynamoDB/generator';
 const pem = jwkToPem({
     "alg": "RS256",
     "e": "AQAB",
@@ -65,17 +65,19 @@ exports.handler = async (event: any) => {
     };
     if(!option.sum && option.lowCount) body.range = [body.range[0], body.range[body.range.length-1]];
     if (generator.count <= 50) {
-        body.numbers = await numsArrToData(generator.getGeneratedNumbers());
+        const lottoData = await scanLotto();
+        body.numbers = generator.getGeneratedNumbers().map(numbers => numbersToData(numbers, lottoData));
     } else if (typeof option.consecutiveExist === 'boolean') {
+        const lottoData = await scanLotto();
         if (generator.count >= 75) {
             const indexSet = new Set<number>();
             while (indexSet.size < 50) {
                 indexSet.add(Math.floor(Math.random() * generator.count));
             }
             const generatedNumbers = generator.getGeneratedNumbers();
-            body.numbers = await numsArrToData(Array.from(indexSet).sort((a, b) => a - b).map(index => generatedNumbers[index]));
+            body.numbers = Array.from(indexSet).sort((a, b) => a - b).map(index => generatedNumbers[index]).map(numbers => numbersToData(numbers, lottoData));
         }else{
-            body.numbers = await numsArrToData(generator.getGeneratedNumbers().slice(0, 50));
+            body.numbers = generator.getGeneratedNumbers().slice(0, 50).map(numbers => numbersToData(numbers, lottoData));
         }
     }
 

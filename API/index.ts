@@ -1,8 +1,8 @@
 import verify from "./auth";
 import { getCurrentRound } from "./funtions";
-import { updateNumbers, getNumbers, deleteMyNumber, getIncOrExcNumbers, updateIncOrExcNumbers, IncOrExc } from './dynamoDB/Numbers'
+import { updateNumbers, getNumbers, deleteMyNumber, getIncOrExcNumbers, updateIncOrExcNumbers, IncOrExc, getIncOrExcRounds } from './dynamoDB/Numbers'
 import { queryLottoData } from "./dynamoDB/lottoData";
-import { freeGenerator } from "./dynamoDB/generator";
+import { freeGenerator, numbersToData, scanLotto } from "./dynamoDB/generator";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -41,7 +41,16 @@ exports.handler = async (event: any) => {
                         const round = event.queryStringParameters.round;
                         const tool = event.queryStringParameters.tool;
                         const selectMethod = event.queryStringParameters.method;
-                        body = await getNumbers(currentId, round, {method: selectMethod, tool});
+                        const numbersData = await getNumbers(currentId, round, {method: selectMethod, tool});
+                        const lottoData = await scanLotto();
+                        body = numbersData.map(async (data, index) => {
+                            const result:any = numbersToData(data.numbers, lottoData);
+                            result.method = numbersData[index].method;
+                            result.tool = numbersData[index].tool;
+                            result.date = numbersData[index].date;
+                            if(numbersData[index].win) result.win = numbersData[index].win;
+                            return result;
+                        });
                     }
                         break;
                     case 'POST':
@@ -67,7 +76,8 @@ exports.handler = async (event: any) => {
                     const choice = event.queryStringParameters && event.queryStringParameters.choice;
                     if (choice) {
                         const numbers = await getIncOrExcNumbers(userName, round, choice);
-                        body = numbers;
+                        const rounds = await getIncOrExcRounds(userName, choice);
+                        body = { numbers, rounds};
                     } else {
                         const include = await getIncOrExcNumbers(userName, round, IncOrExc.include);
                         const exclude = await getIncOrExcNumbers(userName, round, IncOrExc.exclude);

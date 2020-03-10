@@ -92,53 +92,57 @@ async function generateNumberB(userName: string, lineCount?: number[]) {
     return numsArr;
 }
 
-export async function numsArrToData(numsArr:number[][]){
-    const lottoData = await scanLotto();
-    return numsArr.map(numbers => {
-        const winner = new Array<number>(5).fill(0);
-        lottoData.forEach(lotto => {
-            let count = 0;
-            numbers.forEach(num => {
-                if (lotto.Numbers.NS.indexOf(num.toString()) !== -1) count++;
-            });
-            switch (count) {
-                case 3:
-                    winner[4]++;
-                    break;
-                case 4:
-                    winner[3]++;
-                    break;
-                case 5:
-                    if (numbers.indexOf(Number(lotto.BonusNum.N)) !== -1) winner[1]++;
-                    else winner[2]++;
-                    break;
-                case 6:
-                    winner[0]++;
-            }
+export function numbersToData(numbers:number[], lottoData:{BonusNum:{N:string}, Numbers:{NS:string[]}}[]): {
+    numbers:number[], winner:number[],
+    lowCount:number, sum:number, oddCount:number, primeCount:number, $3Count:number, sum$10:number, diffMaxMin:number, AC:number}
+    {
+    const winner = new Array<number>(5).fill(0);
+    lottoData.forEach(lotto => {
+        let count = 0;
+        numbers.forEach(num => {
+            if (lotto.Numbers.NS.indexOf(num.toString()) !== -1) count++;
         });
-        return {
-            numbers,
-            winner,
-            lowCount: Calculate.lowCount(numbers),
-            sum: Calculate.sum(numbers),
-            oddCount: Calculate.oddCount(numbers),
-            primeCount: Calculate.primeCount(numbers),
-            $3Count: Calculate.$3Count(numbers),
-            sum$10: Calculate.sum$10(numbers),
-            diffMaxMin: Calculate.diffMaxMin(numbers),
-            AC: Calculate.AC(numbers)
+        switch (count) {
+            case 3:
+                winner[4]++;
+                break;
+            case 4:
+                winner[3]++;
+                break;
+            case 5:
+                if (numbers.indexOf(Number(lotto.BonusNum.N)) !== -1) winner[1]++;
+                else winner[2]++;
+                break;
+            case 6:
+                winner[0]++;
         }
     });
+    return {
+        numbers,
+        winner,
+        lowCount: Calculate.lowCount(numbers),
+        sum: Calculate.sum(numbers),
+        oddCount: Calculate.oddCount(numbers),
+        primeCount: Calculate.primeCount(numbers),
+        $3Count: Calculate.$3Count(numbers),
+        sum$10: Calculate.sum$10(numbers),
+        diffMaxMin: Calculate.diffMaxMin(numbers),
+        AC: Calculate.AC(numbers)
+    }
 }
 
 export async function freeGenerator(userName: string, lineCount?: number[]) {
     let numsArr: number[][];
     if (!lineCount) numsArr = await generateNumberA(userName);
     else numsArr = await generateNumberB(userName, lineCount);
-    return (await numsArrToData(numsArr));
+    const lottoData = await scanLotto();
+
+    return numsArr.map(async (numbers) => {
+        return (await numbersToData(numbers, lottoData));
+    });
 }
 
-async function scanLotto(): Promise<{ BonusNum: { N: string }, Numbers: { NS: string[] } }[]> {
+export async function scanLotto(): Promise<{ BonusNum: { N: string }, Numbers: { NS: string[] } }[]> {
     const params: AWS.DynamoDB.ScanInput = {
         TableName: 'LottoData',
         ProjectionExpression: 'Numbers, BonusNum'
