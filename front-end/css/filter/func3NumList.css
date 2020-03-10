@@ -3,13 +3,13 @@
   margin-bottom: 1rem;
 }
 
-.func3-num-container > div:nth-child(1){
+.func3-num-box-wrapper{
   display: flex;
   height: 7rem;
   background: #1f71b3;
 }
 
-.func3-num-container > div:nth-child(n+2){
+.func3-past-filter-box>div{
   display:flex;
   align-items: center;
   justify-content: center;

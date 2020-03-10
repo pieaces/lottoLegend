@@ -1,4 +1,4 @@
-
+/* 
   
   .mypage-table-num > tbody>tr:nth-child(1){
     height:6rem;
@@ -27,6 +27,7 @@
 
   .mypage-table-num-list-box{
     height:6rem;
+    position: relative;
   }
 
   .mypage-table-num-list{
@@ -52,4 +53,59 @@
   .mypage-table-num-toggle{
     width:6rem;
     height:2.5rem;
+  } */
+
+  .mypage-table-header{
+    height:6rem;
+    display:flex;
+    background-color: var(--table-title-color);
+    border-top:1px solid var(--border-color);
+    border-left:1px solid var(--border-color);
+    border-right:1px solid var(--border-color);
   }
+
+  .mypage-table-header > div,
+  .mypage-table-content>div
+  {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+  .mypage-table-content{
+    height:5rem;
+    display:flex;
+    border-top:1px solid var(--border-color);
+    border-left:1px solid var(--border-color);
+    border-right:1px solid var(--border-color);
+  }
+
+  .mynum-table-checkbox,
+ .mynum-table-round,
+.mynum-table-date,
+.mynum-table-auto,
+.mynum-table-num-info, 
+.mynum-table-num{
+border-right:1px solid var(--border-color);
+}
+
+.mynum-table-checkbox,
+ .mynum-table-round,
+.mynum-table-date,
+.mynum-table-auto,
+.mynum-table-num-info, 
+.mynum-table-iswin
+{
+    flex:1;
+  }
+
+  .mynum-table-num{
+    flex:4;
+  }
+
+  .mypage-table-num-toggle{
+    width:6rem;
+    height:2.5rem;
+  } 
+  

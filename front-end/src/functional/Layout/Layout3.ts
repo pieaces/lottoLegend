@@ -24,6 +24,8 @@ export default class Layout3 {
 
             const numBoxWrapper = document.createElement('div');
 
+            numBoxWrapper.classList.add('func3-num-box-wrapper');
+
             const checkboxContainer = document.createElement('div');
             checkboxContainer.classList.add('func3-check-box');
 
@@ -62,6 +64,9 @@ export default class Layout3 {
 
             numContainer.appendChild(numBoxWrapper);
 
+            const tableBox = document.createElement('div');
+            tableBox.classList.add('func3-past-filter-box')
+
             const pastWinBox = document.createElement('div');
             pastWinBox.classList.add('func3-past-win-box');
             const pastWinTable = document.createElement('table');
@@ -85,7 +90,7 @@ export default class Layout3 {
             pastWinTable.appendChild(pastWinTableTr);
             pastWinBox.appendChild(pastWinTable);
 
-            numContainer.appendChild(pastWinBox);
+            tableBox.appendChild(pastWinBox);
 
             const filterNumInfo = document.createElement('div');
             filterNumInfo.classList.add('func3-filter-num-info');
@@ -127,7 +132,9 @@ export default class Layout3 {
             listFilterTable.appendChild(listFilterTableTrValue);
 
             filterNumInfo.appendChild(listFilterTable);
-            numContainer.appendChild(filterNumInfo);
+
+            tableBox.appendChild(filterNumInfo);
+            numContainer.appendChild(tableBox);
 
             numContainerBox.appendChild(numContainer);
 
