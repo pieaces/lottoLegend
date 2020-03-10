@@ -142,7 +142,9 @@ export function getNumberSize(userName: string, round: number): Promise<number>{
             }
         }, (err, data) => {
             if(err) reject(err);
-            resolve(data.Item.Numbers.M[round.toString()].L.length);
+            const item = data.Item;
+            if('Numbers' in item) resolve(item.Numbers.M[round.toString()].L.length);
+            else resolve(0);
         })
     })
 }
