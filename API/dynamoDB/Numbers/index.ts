@@ -142,7 +142,7 @@ export function getNumberSize(userName: string, round: number): Promise<number>{
             }
         }, (err, data) => {
             if(err) reject(err);
-            resolve(data.Item.Numbers.M.round.L.length);
+            resolve(data.Item.Numbers.M[round.toString()].L.length);
         })
     })
 }
@@ -171,7 +171,7 @@ export function getNumbers(userName: string, round: number, select?:SelectClass)
             }
             else {
                 if ('Numbers' in data.Item) {
-                    const numbersData = data.Item.Numbers.M.round.L;
+                    const numbersData = data.Item.Numbers.M[round.toString()].L;
                     resolve(numbersData.filter(item => {
                         if (select) {
                             if (select.method && item.M.method.S !== select.method) {
