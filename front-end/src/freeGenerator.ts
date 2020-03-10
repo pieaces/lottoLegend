@@ -1,7 +1,7 @@
 import configure from './amplify/configure'
 import Layout3 from './functional/Layout/Layout3'
 import { getAuthAPI, getUnAuthAPI } from './amplify/api';
-import CheckBoxToggle from './functional/CheckboxToggle/CheckBoxToggle';
+// import CheckBoxToggle from './functional/CheckboxToggle/CheckBoxToggle';
 import Swal from 'sweetalert2'
 import { actualInstance, selectionInstance, latestInstance } from './analLineGen';
 
@@ -28,7 +28,7 @@ init();
 function sum() {
     return Number(first.value) + Number(tenth.value) + Number(twentieth.value) + Number(thirtieth.value) + Number(fortieth.value);
 }
-function alertEffect(){
+function alertEffect() {
     lineInputTable.style.border = "2px solid rgb(237, 59, 59)";
 }
 function info() {
@@ -119,7 +119,7 @@ async function init() {
     Layout3.makeLine(includeCanvas, include);
     Layout3.makeLine(excludeCanvas, exclude);
     makeBtn.addEventListener('click', async () => {
-            if (!lineCheck || lineCheck && sum() === 6) {
+        if (!lineCheck || lineCheck && sum() === 6) {
             let dataSet: any;
             wrapper.classList.add('none');
             Swal.fire({
@@ -163,20 +163,20 @@ async function init() {
                         includeFlag = doesExist(compart.choice[i], compart.include[i]);
                     }
                 }
-                if (!choiceFlag){
+                if (!choiceFlag) {
                     alertEffect();
                     Swal.fire({
-                        title:'오류',
-                        text:'현재의 제외번호로는 조합될 수 없는 구간개수 조건입니다.',
-                        icon:'error'
+                        title: '오류',
+                        text: '현재의 제외번호로는 조합될 수 없는 구간개수 조건입니다.',
+                        icon: 'error'
                     });
                 }
-                else if (include.length > 0 && !includeFlag){
+                else if (include.length > 0 && !includeFlag) {
                     alertEffect();
                     Swal.fire({
-                        title:'오류',
-                        text:'현재의 추천번호가 절대 나올 수 없는 구간개수 조건입니다.',
-                        icon:'error'
+                        title: '오류',
+                        text: '현재의 추천번호가 절대 나올 수 없는 구간개수 조건입니다.',
+                        icon: 'error'
                     });
                 }
                 else {
@@ -189,7 +189,8 @@ async function init() {
                 dataSet = await getAuthAPI('/numbers/generator/free');
                 Layout3.makeNumBoard(dataSet);
             }
-            CheckBoxToggle.init();
+            // CheckBoxToggle.init();
+            // CheckBoxToggle.allCheck();
         } else {
             alertEffect();
             Swal.fire({

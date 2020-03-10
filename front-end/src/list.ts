@@ -33,12 +33,6 @@ function makeBoard(objArr: any[]) {
         const boardBox = document.createElement('div');
         boardBox.classList.add('board-box');
 
-        const boardNum = document.createElement('div');
-        boardNum.classList.add('board-num');
-        boardNum.textContent = objArr[i].id;
-
-        boardBox.appendChild(boardNum);
-
         const boardTitle = document.createElement('div');
         boardTitle.classList.add('board-title');
         let htmlFileName: string;
@@ -64,6 +58,13 @@ function makeBoard(objArr: any[]) {
         boardViews.textContent = objArr[i].hits;
 
         boardBox.appendChild(boardViews);
+
+        const boardReco = document.createElement('div');
+        boardReco.classList.add('board-reco');
+        boardReco.textContent = objArr[i].hits;
+
+        boardBox.appendChild(boardReco);
+
         boardSection.appendChild(boardBox);
     }
 }

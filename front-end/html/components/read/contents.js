@@ -17,12 +17,17 @@ document.write(`           <div class="text-title">
 </div>
 <div class="text-update-container hide">
 <div class="text-update-btn-box">
-    <button type="button" class="btn  read-btn" id="content-update-btn" onclick="">수정</button>
-    <button type="button" class="btn  read-btn" id="delete-btn">삭제</button>
+    <button type="button" class="btn read-btn" id="content-update-btn" onclick="">수정</button>
+    <button type="button" class="btn read-btn" id="delete-btn">삭제</button>
 </div>
 </div>
 
 <div id="text-content" class="text-content sun-editor-editable"></div>
+<div class="reco-btn-box">
+<button type="button" class="btn reco-btn" id="reco-btn">
+추천
+</button>
+</div>
 <div class="comment-write-text-box">
 <textarea placeholder="소중한 댓글을 남겨주세요" class="comment-write-text"
     id="comment-write-text"></textarea>

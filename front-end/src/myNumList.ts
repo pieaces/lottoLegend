@@ -1,5 +1,5 @@
 // import Layout3 from './functional/Layout/Layout3'
-import CheckBoxToggle from './functional/CheckboxToggle/CheckBoxToggle';
+// import CheckBoxToggle from './functional/CheckboxToggle/CheckBoxToggle';
 // const numToggleBtn = document.querySelector('.mypage-table-num-toggle');
 // const pastWinBox = document.querySelector('.func3-past-win-table');
 // const filterNumInfo = document.querySelector('.func3-list-filter-table');
@@ -189,3 +189,4 @@ import CheckBoxToggle from './functional/CheckboxToggle/CheckBoxToggle';
 
 // makeTable();
 // CheckBoxToggle.init(); 표가 다 로드되고 실행
+// CheckBoxToggle.allCheck();

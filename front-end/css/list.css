@@ -61,16 +61,12 @@
   justify-content: center;
 }
 
-.board-num {
-  flex: 1;
-}
-
 .board-title {
-  flex: 6;
+  flex: 4;
 }
 
 .board-author {
-  flex: 1;
+  flex: 2;
 }
 
 .board-date {
@@ -78,6 +74,10 @@
 }
 
 .board-views {
+  flex: 1;
+}
+
+.board-reco {
   flex: 1;
 }
 
