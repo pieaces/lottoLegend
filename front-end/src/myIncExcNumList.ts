@@ -21,7 +21,7 @@ async function init() {
     const data = await getAuthAPI('/numbers/piece', { choice });
     console.log(data);
     makePage(data);
-    makeSelectBox([1, 2, 3]);
+    makeSelectBox(data.rounds);
 
     selectBox.onChange();
 }
@@ -50,7 +50,7 @@ function makePage(data: { numbers: number[], answer?: number }) {
     }
 }
 
-function makeSelectBox(numbers: number[]) {
+function makeSelectBox(numbers: string[]) {
     const option = document.createElement('option');
 
     option.setAttribute('value', "전체");
