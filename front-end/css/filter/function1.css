@@ -181,7 +181,7 @@
   .func1-checkbox-box {
     font-size:1.3rem;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     height:8rem;
    /* ie 변환 */
   }
