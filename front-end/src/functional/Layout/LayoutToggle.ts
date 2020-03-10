@@ -1,5 +1,6 @@
 import Layout3 from "./Layout3";
 import DataAPI from "../DataAPI";
+import CheckBoxToggle from "../instanceBtns/CheckBoxToggle";
 // import CheckboxToggle from '../CheckboxToggle/CheckBoxToggle'
 
 const layout1 = document.querySelectorAll<HTMLElement>(".func1-layout");
@@ -61,8 +62,9 @@ export default function LayoutToggle<TBase extends Constructor>(Base: TBase) {
 
         layout3_1On() {
             Layout3.makeNumBoard(DataAPI.getInstance().numbersData);
-            // CheckboxToggle.init();
-            // CheckboxToggle.allCheck();
+            const checkBoxToggle = new CheckBoxToggle();
+            checkBoxToggle.init();
+            checkBoxToggle.allCheck();
             // Layout3.makeLine(carrycountCanvas, "이월수 개수 데이터");
             // excLineCountText.textContent="전멸구간 텍스트";
             // Layout3.makeLine(includeCanvas, "추천 데이터");

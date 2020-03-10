@@ -16,9 +16,11 @@ export default class Layout3 {
 
     static makeNumBoard(dataSet: { numbers: number[], winner: number[] }[]) {
         numContainerBox.innerHTML = '';
+        console.log(dataSet);
         for (let i = 0; i < dataSet.length; i++) {
             const numContainer = document.createElement('div');
             numContainer.classList.add('func3-num-container');
+            numContainer.setAttribute('data-numbers', JSON.stringify(dataSet[i].numbers));
 
             const numBoxWrapper = document.createElement('div');
 

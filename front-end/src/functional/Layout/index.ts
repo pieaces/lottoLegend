@@ -9,6 +9,7 @@ import ResetBtn from "../instanceBtns/ResetBtn";
 import Layout1 from "./Layout1";
 import Layout2 from "./Layout2";
 import Swal from 'sweetalert2'
+import SaveBtn, { Tool } from "../instanceBtns/SaveBtn";
 
 const section = document.querySelector(".section1");
 const infoText = document.querySelector<HTMLElement>(".checkbox-text");
@@ -252,6 +253,7 @@ export default class Layout extends LayoutToggle(Layout3) {
         document.querySelector<HTMLElement>('.line-gen-toggle-btn-box').classList.add('none');
         document.querySelector<HTMLElement>('.line-gen-num-container').classList.add('none');
         document.querySelector<HTMLElement>('.line-gen-stack-chart-container').classList.add('none');
+        SaveBtn.init(Tool.charge);
         this.nextBtn.addEvent(async () => {
             const currentFilter = DataAPI.getInstance().getCurrent();
             if (this.checkBox.getCount() >= this.nextAbleLimit ||

@@ -558,27 +558,28 @@ document.write(`<div class="filter-box-container-box func1-layout func2-layout b
     <canvas id="selection-canvas"></canvas>
 </div>
 </div>
-<div class="func3-num-wrapper">
-<div class="func3-all-check-box-container">
-<div class="func3-all-check-box">
-<div class="input-box">
-    <input type="checkbox" name="" id="func3-all-check" />
-    <div>
-        <img class="none" src="../../img/checkbox.png" alt="체크">
+<div class="func3-num-wrapper none">
+<div class="func3-all-check-box-container box-color">
+    <div class="func3-all-check-box">
+        <div class="input-checkbox-container">
+            <input type="checkbox" id="all-check" />
+            <div class="input-checkbox-text-box">
+                <div class="input-checkbox-text none">
+                    ✔
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-</div>
+
     <span>모두</span>
     <div class="func3-save-box-1">
-        <button type="button" class="btn save-btn save-btn">저장</button>
+        <button type="button" class="btn save-btn">저장</button>
     </div>
 </div>
 <div class="func3-num-container-box">
-   
-
 </div>
-<div class="func3-save-box-2">
-    <button type="button" class="btn save-btn save-btn">저장</button>
+<div class="func3-save-box-2 box-color">
+    <button type="button" class="btn save-btn">저장</button>
 </div>
 </div>
 
