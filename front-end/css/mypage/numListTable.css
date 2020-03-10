@@ -1,35 +1,6 @@
-/* 
+
   
-  .mypage-table-num > tbody>tr:nth-child(1){
-    height:6rem;
-  }
-
-  .mypage-table-num,
-  .mypage-table-num > tbody>tr:nth-child(n+3),
-  .mypage-table-num > tbody>tr:nth-child(n+3)>td{
-    border:none;
-  }
   
-  .mypage-table-num tr:nth-child(1){
-    background-color: var(--table-title-color);
-  }
-
-  .mypage-table-num tr > th{
-    padding:0 1rem;
-      font-size:1.4rem;
-
-  }
-  
-  .mypage-table-num tr>  td{
-    text-align: center;
-    font-size:1.4rem;
-  }
-
-  .mypage-table-num-list-box{
-    height:6rem;
-    position: relative;
-  }
-
   .mypage-table-num-list{
       display:flex;
       justify-content: center;
@@ -53,7 +24,7 @@
   .mypage-table-num-toggle{
     width:6rem;
     height:2.5rem;
-  } */
+  }
 
   .mypage-table-header{
     height:6rem;
@@ -74,7 +45,7 @@
 
 
   .mypage-table-content{
-    height:5rem;
+    height:6rem;
     display:flex;
     border-top:1px solid var(--border-color);
     border-left:1px solid var(--border-color);
@@ -101,10 +72,11 @@ border-right:1px solid var(--border-color);
   }
 
   .mynum-table-num{
-    flex:4;
+    flex:5;
   }
 
   .mypage-table-num-toggle{
+    background-color: var(--default-color);
     width:6rem;
     height:2.5rem;
   } 
