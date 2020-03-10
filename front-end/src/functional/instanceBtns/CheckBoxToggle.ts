@@ -1,12 +1,13 @@
 
 
 export default class CheckBoxToggle {
+    inputbox: NodeListOf<Element>;
+    constructor() {
+        this.inputbox = document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input');
+    }
 
-    static init() {
-
-        const inputbox = document.querySelectorAll<HTMLInputElement>('.input-checkbox-container>input');
-        inputbox.forEach((node) => {
-
+    addEvent() {
+        this.inputbox.forEach((node: any) => {
             node.addEventListener('click', () => {
                 const checkTextBox = node.nextElementSibling as HTMLElement;
                 const checkText = checkTextBox.children[0];
@@ -20,34 +21,30 @@ export default class CheckBoxToggle {
                     checkTextBox.style.backgroundColor = 'lightgray';
                 }
             })
-
         });
 
-    }
-
-    static allCheck() {
         const allCheckBox = document.querySelector<HTMLInputElement>('#all-check');
-        const inputbox = document.querySelectorAll<HTMLInputElement>('.input-checkbox-container>input');
+
         allCheckBox.addEventListener('click', () => {
             if (allCheckBox.checked) {
-                inputbox.forEach(node => {
+                this.inputbox.forEach((node: any) => {
                     const checkTextBox = node.nextElementSibling as HTMLElement;
                     const checkText = checkTextBox.children[0];
                     checkText.classList.remove('none');
                     checkText.textContent = '✔';
                     checkTextBox.style.backgroundColor = '#22B8A5';
-
-                })
+                    node.checked = true;
+                });
             } else {
-                inputbox.forEach(node => {
+                this.inputbox.forEach((node: any) => {
                     const checkTextBox = node.nextElementSibling as HTMLElement;
                     const checkText = checkTextBox.children[0];
                     checkText.classList.add('none');
                     checkText.textContent = '';
                     checkTextBox.style.backgroundColor = 'lightgray';
-                })
+                    node.checked = false;
+                });
             }
         });
-
     }
 }

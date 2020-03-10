@@ -1,13 +1,13 @@
 import configure from './amplify/configure'
 import Layout3 from './functional/Layout/Layout3'
-import { getAuthAPI, getUnAuthAPI } from './amplify/api';
-import CheckBoxToggle from './functional/CheckboxToggle/CheckBoxToggle';
+import { getAuthAPI, getUnAuthAPI, postAuthAPI } from './amplify/api';
 import Swal from 'sweetalert2'
 import { actualInstance, selectionInstance, latestInstance } from './analLineGen';
+import SaveBtn, { Tool } from './functional/instanceBtns/SaveBtn';
+import CheckBoxToggle from './functional/instanceBtns/CheckBoxToggle';
 
 configure();
 const loading = document.querySelector<HTMLElement>('.loading-box');
-const makeBtn = document.getElementById('make');
 const includeCanvas = document.getElementById('include');
 const excludeCanvas = document.getElementById('exclude');
 const wrapper = document.querySelector<HTMLElement>('.func3-num-wrapper');
@@ -118,7 +118,9 @@ async function init() {
     document.querySelector<HTMLElement>('.line-gen-round').textContent = total + '회';
     Layout3.makeLine(includeCanvas, include);
     Layout3.makeLine(excludeCanvas, exclude);
-    makeBtn.addEventListener('click', async () => {
+    SaveBtn.init(Tool.free);
+
+    document.getElementById('make').addEventListener('click', async () => {
         if (!lineCheck || lineCheck && sum() === 6) {
             let dataSet: any;
             wrapper.classList.add('none');
@@ -183,14 +185,16 @@ async function init() {
                     lineInputTable.style.border = "";
                     dataSet = await getAuthAPI('/numbers/generator/free', { lineCount: JSON.stringify(lineCount) });
                     Layout3.makeNumBoard(dataSet);
+                    const checkBoxToggle = new CheckBoxToggle();
+                    checkBoxToggle.addEvent();
                 }
             } else {
                 lineInputTable.style.border = "";
                 dataSet = await getAuthAPI('/numbers/generator/free');
                 Layout3.makeNumBoard(dataSet);
+                const checkBoxToggle = new CheckBoxToggle();
+                checkBoxToggle.addEvent();
             }
-            CheckBoxToggle.init();
-            CheckBoxToggle.allCheck();
         } else {
             alertEffect();
             Swal.fire({
@@ -223,25 +227,8 @@ function lineGenTextToggleInit() {
         }
     }
     textToggleShowBox.addEventListener('click', lineGenTextToggle);
-
     textToggleHideBox.addEventListener('click', lineGenTextToggle);
-
 }
-
-
-// const saveBtn = document.querySelectorAll('.save-btn');
-// saveBtn.forEach((node) => {
-//     node.addEventListener('click', () => {
-//         const checkBoxList = document.querySelectorAll<HTMLInputElement>('.func3-check-box  input');
-//         checkBoxList.forEach((node, index) => {
-//             if (node.checked) {
-//                 console.log("div 번호:" + index);
-//                 // index 0부터
-//             }
-//         })
-//     })
-// })
-
 
 function doesExist(one: number[], other: number[]) {
     let flag = false;
@@ -281,5 +268,3 @@ function makeChoice(exclude) {
             choice.push(i);
     return choice;
 }
-
-
