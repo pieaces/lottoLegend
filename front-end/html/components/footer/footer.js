@@ -30,8 +30,7 @@ document.write(`<footer><nav class="top-footer-container">
 </nav>
 <nav class="bottom-footer-container">
     <div class="bottom-footer container">
-        <h1>캔버스
-        로또</h1>
+        <h1>로또끝</h1>
         <div>
             <p>
                 당사의 분석시스템은 누적패턴을 분석/필터링한 정보제공만을

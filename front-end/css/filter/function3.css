@@ -12,15 +12,22 @@
   border:none;
 }
 
+
+
 .func3-filter-container{
   display:flex;
   min-height:6rem;
-  border-bottom:1px solid var(--border-color);
+  /* border-bottom:1px solid var(--border-color); */
 }
 
+.func3-filter-container > .func3-filter-title{
+  border-top: 1px solid var(--border-color);
+ 
+}
 
 .func3-filter-value-container{
   width:80%;
+  border-bottom: 1px solid var(--border-color);
 }
 #excludedLineCount-text{
   padding-left:1rem;
@@ -33,6 +40,9 @@
   height:100%;
   font-size: 1.7rem;
   padding-top:1rem;
+}
+.func3-filter-container-box-1 > div:last-child >div:nth-child(2){
+  border-bottom: none;
 }
 
 .func3-select-num-box{

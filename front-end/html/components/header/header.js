@@ -51,8 +51,7 @@ document.write(` <header>
         <ul class="mid-nav-menu">
             <li>
                 <a href="../main/main.html">
-                    캔버스
-                    <br>로또
+                  로또끝
                 </a>
             </li>
             <li><a href="#">캔버스로또 시스템</a>
