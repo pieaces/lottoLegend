@@ -71,7 +71,7 @@ exports.handler = async (event: any) => {
                     } else {
                         const include = await getIncOrExcNumbers(userName, round, IncOrExc.include);
                         const exclude = await getIncOrExcNumbers(userName, round, IncOrExc.exclude);
-                        body = { include, exclude };
+                        body = { include, exclude, total:round };
                     }
                 }
                     break;
