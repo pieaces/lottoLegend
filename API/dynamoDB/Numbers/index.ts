@@ -62,7 +62,7 @@ export async function updateNumbers(userName: string, round: number, numsArr: nu
     const available = planLimit[plan] - size;
 
     if (numsArr.length > available) {
-        return new Response(true, `현재 서비스의 가용공간은 총 ${planLimit[plan]}개이며, 남은 공간은 ${available}개입니다.`);
+        return new Response(true, `현재 가입하신 서비스의 가용공간은 총 ${planLimit[plan]}개입니다.<br>사용중인 공간은 ${size}개이고, 남은 공간은 ${available}개입니다.`);
     }
     const params = {
         TableName,
