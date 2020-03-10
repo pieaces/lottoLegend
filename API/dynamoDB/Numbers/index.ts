@@ -290,7 +290,7 @@ export function getIncOrExcNumbers(userName: string, round: number, choice: IncO
 }
 
 
-export function getIncOrExcRounds(userName: string, choice: IncOrExc): Promise<string[]> {
+export function getIncOrExcRounds(userName: string, choice: IncOrExc): Promise<number[]> {
     const params = {
         TableName,
         ExpressionAttributeNames: {
@@ -310,24 +310,9 @@ export function getIncOrExcRounds(userName: string, choice: IncOrExc): Promise<s
                 reject(err);
             }
             else {
-                const rounds = Object.keys(data.Item[choice].M);
+                const rounds = Object.keys(data.Item[choice].M).map(value => Number(value));
                 resolve(rounds);
             }
         });
     });
 }
-
-dynamoDB.getItem({
-    TableName: 'LottoUsers',
-    ExpressionAttributeNames: {
-        "#Map": 'Numbers',
-    },
-    ProjectionExpression: '#Map',
-    Key: {
-        "UserName": {
-            S: 'pieaces'
-        }
-    }
-}, (err, data) => {
-    const rounds = Object.keys(data.Item.Numbers.M);
-})
