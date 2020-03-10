@@ -1,7 +1,7 @@
 import configure from './amplify/configure'
 import Layout3 from './functional/Layout/Layout3'
 import { getAuthAPI } from './amplify/api';
-import SelectBox from './functional/instanceBtns/SelectBox';
+
 configure();
 const numContainer = document.querySelector('.mypage-num-container');
 const numResultTotal = document.querySelector('#mypage-num-result-total');
@@ -9,7 +9,7 @@ const numResultValue = document.querySelector('#mypage-num-result-value');
 const numResultPercent = document.querySelector('#mypage-num-result-value-percent');
 const resultBox = document.querySelector('.mypage-num-result-box');
 const round = document.querySelector<HTMLSelectElement>('#round');
-const selectBox = new SelectBox(round);
+
 
 const loading = document.querySelector('.loading-box');
 loading.classList.remove('none');
@@ -21,9 +21,11 @@ async function init() {
     const data = await getAuthAPI('/numbers/piece', { choice });
     console.log(data);
     makePage(data);
-    makeSelectBox(data.rounds);
+    makeSelectBox(data.round);
 
-    selectBox.onChange();
+    round.addEventListener('change', () => {
+        console.log(round.options[round.options.selectedIndex].value);
+    })
 }
 function makePage(data: { numbers: number[], answer?: number }) {
     const I = Math.ceil(data.numbers.length / 5);
@@ -51,11 +53,6 @@ function makePage(data: { numbers: number[], answer?: number }) {
 }
 
 function makeSelectBox(numbers: string[]) {
-    const option = document.createElement('option');
-
-    option.setAttribute('value', "전체");
-    option.textContent = "전체";
-    round.appendChild(option);
 
     for (let i = 0; i < numbers.length; i++) {
         const option = document.createElement('option');
