@@ -2,6 +2,10 @@
     margin-bottom:1rem;
 }
 
+.mypage-table-num-box > .mypage-table-content:last-child{
+    border-bottom: 1px solid var(--border-color);
+}
+
 .mypage-num-delete-btn-box{
     height:10rem;
     display:flex;
