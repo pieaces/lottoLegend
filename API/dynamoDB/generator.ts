@@ -1,6 +1,5 @@
 import Calculate from "../Lotto/class/Calculate";
-import { dynamoDB } from ".";
-import { getCurrentRound } from "../funtions";
+import { getCurrentRound, scanLotto } from "../funtions";
 import { getIncOrExcNumbers, IncOrExc } from "./Numbers";
 
 function makeChoice(exclude: number[]) {
@@ -138,19 +137,6 @@ export async function freeGenerator(userName: string, lineCount?: number[]) {
     const lottoData = await scanLotto();
 
     return numsArr.map(async (numbers) => {
-        return (await numbersToData(numbers, lottoData));
+        return numbersToData(numbers, lottoData);
     });
-}
-
-export async function scanLotto(): Promise<{ BonusNum: { N: string }, Numbers: { NS: string[] } }[]> {
-    const params: AWS.DynamoDB.ScanInput = {
-        TableName: 'LottoData',
-        ProjectionExpression: 'Numbers, BonusNum'
-    };
-    return new Promise((resolve, reject) => {
-        dynamoDB.scan(params, (err, data: any) => {
-            if (err) reject(err);
-            resolve(data.Items);
-        });
-    })
 }

@@ -3,7 +3,8 @@ import jwkToPem from 'jwk-to-pem';
 import { Plan, getPlan } from './dynamoDB/userInfo';
 import Calculate from './Lotto/class/Calculate';
 import Generator from './Lotto/class/Generator';
-import { numbersToData, scanLotto } from './dynamoDB/generator';
+import { numbersToData } from './dynamoDB/generator';
+import { scanLotto } from './funtions';
 const pem = jwkToPem({
     "alg": "RS256",
     "e": "AQAB",

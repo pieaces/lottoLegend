@@ -1,8 +1,8 @@
 import verify from "./auth";
-import { getCurrentRound } from "./funtions";
+import { getCurrentRound, scanLotto, getLotto } from "./funtions";
 import { updateNumbers, getNumbers, deleteMyNumber, getIncOrExcNumbers, updateIncOrExcNumbers, IncOrExc, getIncOrExcRounds } from './dynamoDB/Numbers'
 import { queryLottoData } from "./dynamoDB/lottoData";
-import { freeGenerator, numbersToData, scanLotto } from "./dynamoDB/generator";
+import { freeGenerator, numbersToData } from "./dynamoDB/generator";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -76,8 +76,14 @@ exports.handler = async (event: any) => {
                     const choice = event.queryStringParameters && event.queryStringParameters.choice;
                     if (choice) {
                         const numbers = await getIncOrExcNumbers(userName, round, choice);
-                        const rounds = await getIncOrExcRounds(userName, choice);
-                        body = { numbers, rounds};
+                        body = {numbers};
+                        if(!event.queryStringParameters.round){
+                            const rounds = await getIncOrExcRounds(userName, choice);
+                            body.rounds = rounds;
+                        }
+                        if(round !== getCurrentRound()){
+                            body.answer = await getLotto(round);
+                        }
                     } else {
                         const include = await getIncOrExcNumbers(userName, round, IncOrExc.include);
                         const exclude = await getIncOrExcNumbers(userName, round, IncOrExc.exclude);
