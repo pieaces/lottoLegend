@@ -24,13 +24,22 @@ export default class SaveBtn{
             });
             loading.classList.remove('none');
             try {
-                await postAuthAPI('/numbers/mass', { numsArr, tool });
+                const code = await postAuthAPI('/numbers/mass', { numsArr, tool });
                 loading.classList.add('none');
+                if(code.error){
+                    Swal.fire({
+                        title: '실패',
+                        text: code.message,
+                        icon:'error',
+                    });
+                }else{
                 Swal.fire({
                     title: '완료',
-                    footer: '정상적으로 입력되었습니다',
+                    text: '정상적으로 입력되었습니다',
+                    icon:'success',
                     timer: 1500,
                 });
+            }
             } catch (err) {
                 loading.classList.add('none');
                 networkAlert();
