@@ -1,7 +1,7 @@
 import configure from './amplify/configure'
 import Layout3 from './functional/Layout/Layout3'
 import { getAuthAPI, getUnAuthAPI } from './amplify/api';
-// import CheckBoxToggle from './functional/CheckboxToggle/CheckBoxToggle';
+import CheckBoxToggle from './functional/CheckboxToggle/CheckBoxToggle';
 import Swal from 'sweetalert2'
 import { actualInstance, selectionInstance, latestInstance } from './analLineGen';
 
@@ -189,8 +189,8 @@ async function init() {
                 dataSet = await getAuthAPI('/numbers/generator/free');
                 Layout3.makeNumBoard(dataSet);
             }
-            // CheckBoxToggle.init();
-            // CheckBoxToggle.allCheck();
+            CheckBoxToggle.init();
+            CheckBoxToggle.allCheck();
         } else {
             alertEffect();
             Swal.fire({

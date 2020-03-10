@@ -1,13 +1,15 @@
 
+const inputbox = document.getElementsByClassName('input-checkbox-container');
+
 export default class CheckBoxToggle {
 
     static init() {
-        const inputbox = document.querySelectorAll<HTMLInputElement>('.input-checkbox-container> input');
-        inputbox.forEach((node) => {
-            node.addEventListener('click', () => {
-                const checkTextBox = node.parentNode.children[1] as HTMLElement;
+        Array.from(inputbox).forEach((node) => {
+            const checkbox = node.children[0] as HTMLInputElement;
+            checkbox.addEventListener('click', () => {
+                const checkTextBox = node.children[1] as HTMLElement;
                 const checkText = checkTextBox.children[0];
-                if (node.checked) {
+                if (checkbox.checked) {
                     checkText.classList.remove('none');
                     checkText.textContent = '✔';
                     checkTextBox.style.backgroundColor = '#22B8A5';
@@ -23,12 +25,11 @@ export default class CheckBoxToggle {
     }
 
     static allCheck() {
-        const inputbox = document.querySelectorAll<HTMLInputElement>('.input-checkbox-container> input');
         const allCheckBox = document.querySelector<HTMLInputElement>('#all-check');
         allCheckBox.addEventListener('click', () => {
             if (allCheckBox.checked) {
-                inputbox.forEach(node => {
-                    const checkTextBox = node.parentNode.children[1] as HTMLElement;
+                Array.from(inputbox).forEach(node => {
+                    const checkTextBox = node.children[1] as HTMLElement;
                     const checkText = checkTextBox.children[0];
                     checkText.classList.remove('none');
                     checkText.textContent = '✔';
@@ -36,8 +37,8 @@ export default class CheckBoxToggle {
 
                 })
             } else {
-                inputbox.forEach(node => {
-                    const checkTextBox = node.parentNode.children[1] as HTMLElement;
+                Array.from(inputbox).forEach(node => {
+                    const checkTextBox = node.children[1] as HTMLElement;
                     const checkText = checkTextBox.children[0];
                     checkText.classList.add('none');
                     checkText.textContent = '';

@@ -188,5 +188,5 @@
 
 
 // makeTable();
-// CheckBoxToggle.init(); 표가 다 로드되고 실행
+// CheckBoxToggle.init(); 
 // CheckBoxToggle.allCheck();
