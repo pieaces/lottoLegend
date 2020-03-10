@@ -1,6 +1,6 @@
 import DataAPI from "../DataAPI";
 
-const checkBoxContainer = document.querySelector<HTMLElement>('.func1-checkbox-box');
+const checkBoxContainer = document.querySelector<HTMLElement>('.func1-checkbox-container');
 
 export default class CheckBox {
     static readonly checkedStyle = 'func1-num-check-current';
@@ -123,7 +123,7 @@ export default class CheckBox {
     init() {
         this.nodeList = [];
         let labels: (string | number)[];
-
+        const divArr: HTMLElement[] = [];
         labels = DataAPI.getInstance().getLabels().map(value => {
             if (typeof value === 'string') {
                 const index = value.indexOf('~');
@@ -138,7 +138,12 @@ export default class CheckBox {
         Array.from(checkBoxContainer.children).forEach(node => {
             node.remove();
         })
-        labels.forEach(label => {
+        labels.forEach((label, index) => {
+            if (index % 10 === 0) {
+                const divContainer = document.createElement('div');
+                divContainer.classList.add('func1-checkbox-box');
+                divArr.push(divContainer);
+            }
             const divBox = document.createElement('div');
             divBox.classList.add('func1-checkbox');
             this.nodeList.push(divBox);
@@ -151,18 +156,27 @@ export default class CheckBox {
             checkbox.classList.add('checkbox');
             div.appendChild(checkbox);
             divBox.appendChild(div);
-            checkBoxContainer.appendChild(divBox);
+            divArr[parseInt(String(index / 10))].appendChild(divBox);
+
+            divArr.forEach((node) => {
+                checkBoxContainer.appendChild(node);
+            })
+
         });
     }
 }
 
-// labels.forEach(label => {
-//     const div = document.createElement('div');
-//     this.nodeList.push(div);
-//     const checkbox = document.createElement('input');
-//     const num = document.createTextNode(label.toString());
-//     div.appendChild(num);
-//     checkbox.classList.add('checkbox');
-//     div.appendChild(checkbox);
-//     checkBoxContainer.appendChild(div);
-// });
+// 최근버전
+// const divBox = document.createElement('div');
+// divBox.classList.add('func1-checkbox');
+// this.nodeList.push(divBox);
+
+// const div = document.createElement('div');
+
+// const checkbox = document.createElement('input');
+// const num = document.createTextNode(label.toString());
+// div.appendChild(num);
+// checkbox.classList.add('checkbox');
+// div.appendChild(checkbox);
+// divBox.appendChild(div);
+// checkBoxContainer.appendChild(divBox);

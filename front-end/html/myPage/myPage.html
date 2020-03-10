@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="../../css/section.css">
   <link rel="stylesheet" href="../../css/header.css" />
   <link rel="stylesheet" href="../../css/footer.css" />
-  <link rel="stylesheet" href="../../css/rank.css">
   <link rel="stylesheet" href="../../css/mypage/mypage.css" />
   <link rel="stylesheet" href="../../css/mypage/numListTable.css">
   <title>CanvasLotto</title>
@@ -45,34 +44,31 @@
                       <span>:</span>
                       <span id="nickname">luckysso</span>
                     </div>
-                    <button type="button" class="btn box-color service-update-btn">변경</button>
+                    <button type="button" class="btn box-color service-update-btn" id="nickname-update">변경</button>
                   </li>
                   <li class="mypage-phone">
                     <div>
-                      <span id="phone-number">휴대폰번호</span>
+                      <span>휴대폰번호</span>
                       <span>:</span>
-                      <span>010-9524-2432</span>
+                      <span id="phone-number">010-9524-2432</span>
                     </div>
                   </li>
                   <li class="mypage-service">
                     <div>
                       <span>서비스</span>
                       <span>:</span>
-                      <span id="service">일반 <span id="service-expiry-date">20.12.31까지</span></span>
+                      <span id="service">일반</span>
+                      <span id="service-expiry-date">20.12.31까지</span>
                     </div>
 
-                    <button type="button" class="btn box-color service-update-btn">변경</button>
+                    <button type="button" class="btn box-color service-update-btn" id="service-update">변경</button>
                   </li>
                   <li class="mypage-point">
                     <div>
                       <span>기여점수</span>
                       <span>:</span>
-                      <span class="rank rank-first">1</span>
-                      <span class="rank rank-second">2</span>
-                      <span class="rank rank-third">3</span>
-                      <span class="rank rank-fourth">4</span>
-                      <span class="rank rank-fifth">5</span>
-                      <span>93점</span>
+                      <span class="rank"></span>
+                      <span id="point">93점</span>
                     </div>
                   </li>
                 </ul>
@@ -100,7 +96,7 @@
                     <div>
                       <span> 추천 수</span>
                       <span>:</span>
-                      <span>2개 등장</span>
+                      <span id="inc-num">2</span><span>개 등장</span>
 
                     </div>
                   </li>
@@ -108,14 +104,14 @@
                     <div>
                       <span>제외 수</span>
                       <span>:</span>
-                      <span>15개 중 13개 적중</span>
+                      <span id="exc-num-total">15</span>개 중 <span id="exc-num">13</span>개 적중</span>
                     </div>
                   </li>
                   <li>
                     <div>
                       <span>등수</span>
                       <span>:</span>
-                      <span>5등</span>
+                      <span id="lotto-rank">5</span>등
                     </div>
                   </li>
 
@@ -209,11 +205,11 @@
             </div>
           </div>
           <div class="mypage-num-list-container">
-            <div class="mypage-title box-color">이번 회차 나의 추천 번호</div>
+            <div class="mypage-title box-color">이번 회차 나의 번호</div>
             <div class="mypage-table-num-box">
               <table class="table mypage-table-num">
                 <tr>
-                  <th><input type="checkbox" name="" id=""></th>
+
                   <th>회차</th>
                   <th>발급일</th>
                   <th>구분</th>
@@ -221,7 +217,7 @@
                   <th>당첨결과</th>
                 </tr>
                 <tr class="mypage-table-num-list-box">
-                  <td><input type="checkbox" name="" id=""></td>
+
                   <td>895</td>
                   <td>2020-02-25</td>
                   <td>무료조합</td>

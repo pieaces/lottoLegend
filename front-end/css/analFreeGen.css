@@ -12,6 +12,8 @@
     font-size:1.4rem;
 }
 
+
+
 .line-gen-text-toggle:hover{
     background-color: var(--table-title-color);
 }

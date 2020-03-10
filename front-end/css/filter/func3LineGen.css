@@ -17,6 +17,10 @@
     letter-spacing: 0.1rem;
 }
 
+.line-gen-toggle-btn-box{
+    margin-bottom:1rem;
+}
+
 .line-gen-toggle-btn{
     width:20rem;
     height:5rem;
