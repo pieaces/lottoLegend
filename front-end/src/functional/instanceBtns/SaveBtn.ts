@@ -16,10 +16,11 @@ export default class SaveBtn{
             const checkBoxList = document.querySelectorAll<HTMLInputElement>('.func3-check-box input');
             const numsArr:number[][] = [];
             const numbersContainer = document.querySelectorAll<HTMLElement>('.func3-num-container');
+            const indexArr:number[] = [];
             checkBoxList.forEach((node, index) => {
                 if (node.checked) {
                     numsArr.push(JSON.parse(numbersContainer[index].getAttribute('data-numbers')));
-                    numbersContainer[index].remove();
+                    indexArr.push(index);
                 }
             });
             loading.classList.remove('none');
@@ -28,10 +29,11 @@ export default class SaveBtn{
                 loading.classList.add('none');
                 if(code.error){
                     Swal.fire({
-                        title: '실패',
-                        text: code.message,
+                        title: '개수 제한',
+                        text: ' ',
                         icon:'error',
                     });
+                    document.getElementById('swal2-content').innerHTML = code.message;
                 }else{
                 Swal.fire({
                     title: '완료',
@@ -39,6 +41,7 @@ export default class SaveBtn{
                     icon:'success',
                     timer: 1500,
                 });
+                indexArr.forEach(index => numbersContainer[index].remove());
             }
             } catch (err) {
                 loading.classList.add('none');

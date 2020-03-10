@@ -186,16 +186,14 @@ async function init() {
                     dataSet = await getAuthAPI('/numbers/generator/free', { lineCount: JSON.stringify(lineCount) });
                     Layout3.makeNumBoard(dataSet);
                     const checkBoxToggle = new CheckBoxToggle();
-                    checkBoxToggle.init();
-                    checkBoxToggle.allCheck();
+                    checkBoxToggle.addEvent();
                 }
             } else {
                 lineInputTable.style.border = "";
                 dataSet = await getAuthAPI('/numbers/generator/free');
                 Layout3.makeNumBoard(dataSet);
                 const checkBoxToggle = new CheckBoxToggle();
-                checkBoxToggle.init();
-                checkBoxToggle.allCheck();
+                checkBoxToggle.addEvent();
             }
         } else {
             alertEffect();

@@ -5,7 +5,8 @@ export default class CheckBoxToggle {
     constructor() {
         this.inputbox = document.getElementsByClassName('input-checkbox-container');
     }
-    init() {
+
+    addEvent() {
         Array.from(this.inputbox).forEach((node) => {
             const checkbox = node.children[0] as HTMLInputElement;
             checkbox.addEventListener('click', () => {
@@ -22,9 +23,6 @@ export default class CheckBoxToggle {
                 }
             })
         });
-    }
-
-    allCheck() {
         const allCheckBox = document.querySelector<HTMLInputElement>('#all-check');
         allCheckBox.addEventListener('click', () => {
             if (allCheckBox.checked) {

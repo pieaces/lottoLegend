@@ -63,8 +63,7 @@ export default function LayoutToggle<TBase extends Constructor>(Base: TBase) {
         layout3_1On() {
             Layout3.makeNumBoard(DataAPI.getInstance().numbersData);
             const checkBoxToggle = new CheckBoxToggle();
-            checkBoxToggle.init();
-            checkBoxToggle.allCheck();
+            checkBoxToggle.addEvent();
             // Layout3.makeLine(carrycountCanvas, "이월수 개수 데이터");
             // excLineCountText.textContent="전멸구간 텍스트";
             // Layout3.makeLine(includeCanvas, "추천 데이터");
