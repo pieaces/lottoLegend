@@ -1,208 +1,209 @@
-import configure from './amplify/configure'
-import Layout3 from './functional/Layout/Layout3'
-import { getAuthAPI } from './amplify/api';
-import CheckBoxToggle from './functional/instanceBtns/CheckBoxToggle';
+// import configure from './amplify/configure'
+// import Layout3 from './functional/Layout/Layout3'
+// import { getAuthAPI } from './amplify/api';
+// import CheckBoxToggle from './functional/instanceBtns/CheckBoxToggle';
 
 
-configure();
-const numToggleBtn = document.querySelector('.mypage-table-num-toggle');
-const pastWinBox = document.querySelector('.func3-past-win-table');
-const filterNumInfo = document.querySelector('.func3-list-filter-table');
-const tableBody = document.querySelector('.mypage-table-num >tbody');
+// configure();
+// const numToggleBtn = document.querySelector('.mypage-table-num-toggle');
+// const pastWinBox = document.querySelector('.func3-past-win-table');
+// const filterNumInfo = document.querySelector('.func3-list-filter-table');
+// const tableBody = document.querySelector('.mypage-table-num >tbody');
 
-init();
+// init();
 
-async function init() {
-    const dataSet = await getAuthAPI('/numbers/generator/free');
-    makeTable(dataSet);
-    const checkBoxToggle = new CheckBoxToggle();
-    checkBoxToggle.addEvent();
-}
-
-function makeTable(dataSet: { numbers: number[], winner: number[] }[]) {
-
-    for (let i = 0; i < dataSet.length; i++) {
-        const tr = document.createElement('tr');
-        tr.classList.add('mypage-table-num-list-box');
-
-        makeCheckBox(tr);
-
-        // 데이터 부분 시작
-        const numberInfoMap = new Map([
-            [0, dataSet[i]["round"]],
-            [1, dataSet[i]["date"]],
-            [2, dataSet[i]["auto"]],
-            [3, dataSet[i]["isWin"]],
-        ])
-        // 데이터 부분 끝
-
-        numberInfoMap.forEach((value, key) => {
-            if (key <= 2) {
-                const td = document.createElement('td');
-                td.textContent = value;
-                tr.appendChild(td);
-            }
-        })
-
-        const tdNumList = document.createElement('td');
-        const numBox = document.createElement('div');
-        numBox.classList.add('mypage-table-num-list');
-
-        for (let j = 0; j < dataSet[i].numbers.length; j++) {
-            const num = document.createElement('div');
-            num.textContent = dataSet[i].numbers[j].toString();
-            Layout3.setColorLotto(dataSet[i].numbers[j], num);
-            numBox.appendChild(num);
-        }
-        tdNumList.appendChild(numBox);
-        tr.appendChild(tdNumList);
-
-        const tdNumInfo = document.createElement('td');
-        const numInfoBtn = document.createElement('button');
-        numInfoBtn.classList.add('btn', 'box-color', 'mypage-table-num-toggle');
-        numInfoBtn.textContent = "번호정보";
-        tr.appendChild(tdNumInfo);
-
-        // 데이터 부분 시작
-        const tdWin = document.createElement('td');
-        //tdWin.textContent = dataSet[i].isWin;
-        tr.appendChild(tdWin);
-        // 데이터 부분 끝
+// async function init() {
+//     const dataSet = await getAuthAPI('/numbers/generator/free');
+//     makeTable(dataSet);
+//     CheckBoxToggle.init();
+//     CheckBoxToggle.allCheck();
+// }
 
 
-        tableBody.appendChild(tr);
+// function makeTable(dataSet: { numbers: number[], winner: number[] }[]) {
 
-        makePastWinTable(dataSet[i].winner);
-        makeFilterTable(dataSet, i, tableBody);
+//     for (let i = 0; i < dataSet.length; i++) {
+//         const tr = document.createElement('tr');
+//         tr.classList.add('mypage-table-num-list-box');
 
-    }
+//         makeCheckBox(tr);
 
-    function makeFilterTable(dataSet: { numbers: number[], winner: number[] }[], currentVar, target) {
+//         // 데이터 부분 시작
+//         const numberInfoMap = new Map([
+//             [0, dataSet[i]["round"]],
+//             [1, dataSet[i]["date"]],
+//             [2, dataSet[i]["auto"]],
+//             [3, dataSet[i]["isWin"]],
+//         ])
+//         // 데이터 부분 끝
 
-        const listFilterTableMap = new Map([
-            ["저값개수", dataSet[currentVar]["lowCount"]],
-            ["번호합계", dataSet[currentVar]["sum"]],
-            ["홀수개수", dataSet[currentVar]["oddCount"]],
-            ["소수개수", dataSet[currentVar]["primeCount"]],
-            ["3배수개수", dataSet[currentVar]["$3Count"]],
-            ["첫수 합", dataSet[currentVar]["sum$10"]],
-            ["고저 차", dataSet[currentVar]["diffMaxMin"]],
-            ["AC", dataSet[currentVar]["AC"]]
-        ])
+//         numberInfoMap.forEach((value, key) => {
+//             if (key <= 2) {
+//                 const td = document.createElement('td');
+//                 td.textContent = value;
+//                 tr.appendChild(td);
+//             }
+//         })
 
-        const filterTableBox = document.createElement('tr');
-        filterTableBox.classList.add('func3-list-filter-table-box');
+//         const tdNumList = document.createElement('td');
+//         const numBox = document.createElement('div');
+//         numBox.classList.add('mypage-table-num-list');
 
-        const tdBox = document.createElement('td');
-        tdBox.setAttribute('colspan', '7');
+//         for (let j = 0; j < dataSet[i].numbers.length; j++) {
+//             const num = document.createElement('div');
+//             num.textContent = dataSet[i].numbers[j].toString();
+//             Layout3.setColorLotto(dataSet[i].numbers[j], num);
+//             numBox.appendChild(num);
+//         }
+//         tdNumList.appendChild(numBox);
+//         tr.appendChild(tdNumList);
 
-        const listFilterTable = document.createElement('table');
+//         const tdNumInfo = document.createElement('td');
+//         const numInfoBtn = document.createElement('button');
+//         numInfoBtn.classList.add('btn', 'box-color', 'mypage-table-num-toggle');
+//         numInfoBtn.textContent = "번호정보";
+//         tr.appendChild(tdNumInfo);
 
-        listFilterTable.classList.add('table', 'func3-list-filter-table');
+//         // 데이터 부분 시작
+//         const tdWin = document.createElement('td');
+//         tdWin.textContent = dataSet[i].isWin;
+//         tr.appendChild(tdWin);
+//         // 데이터 부분 끝
 
-        const tbody = document.createElement('tbody');
 
-        const listFilterTableTrTitle = document.createElement('tr');
+//         tableBody.appendChild(tr);
 
-        listFilterTableMap.forEach((value, key) => {
-            const td = document.createElement('td');
-            td.textContent = key;
-            listFilterTableTrTitle.appendChild(td);
-        })
+//         makePastWinTable(dataSet[i].winner);
+//         makeFilterTable(dataSet, i, tableBody);
 
-        tbody.appendChild(listFilterTableTrTitle);
+//     }
 
-        const listFilterTableTrValue = document.createElement('tr');
+//     function makeFilterTable(dataSet: { numbers: number[], winner: number[] }[], currentVar, target) {
 
-        listFilterTableMap.forEach((value, key) => {
-            const td = document.createElement('td');
-            td.textContent = value;
-            listFilterTableTrValue.appendChild(td);
-        })
+//         const listFilterTableMap = new Map([
+//             ["저값개수", dataSet[currentVar]["lowCount"]],
+//             ["번호합계", dataSet[currentVar]["sum"]],
+//             ["홀수개수", dataSet[currentVar]["oddCount"]],
+//             ["소수개수", dataSet[currentVar]["primeCount"]],
+//             ["3배수개수", dataSet[currentVar]["$3Count"]],
+//             ["첫수 합", dataSet[currentVar]["sum$10"]],
+//             ["고저 차", dataSet[currentVar]["diffMaxMin"]],
+//             ["AC", dataSet[currentVar]["AC"]]
+//         ])
 
-        tbody.appendChild(listFilterTableTrValue);
+//         const filterTableBox = document.createElement('tr');
+//         filterTableBox.classList.add('func3-list-filter-table-box');
 
-        listFilterTable.appendChild(tbody);
-        tdBox.appendChild(listFilterTable);
-        filterTableBox.appendChild(tdBox);
-        target.appendChild(filterTableBox);
-    }
+//         const tdBox = document.createElement('td');
+//         tdBox.setAttribute('colspan', '7');
 
-    function makeCheckBox(tr: HTMLElement) {
-        const tdCheckBox = document.createElement('td');
+//         const listFilterTable = document.createElement('table');
 
-        const checkBoxContainer = document.createElement('div');
-        checkBoxContainer.classList.add('input-checkbox-container');
+//         listFilterTable.classList.add('table', 'func3-list-filter-table');
 
-        const checkBox = document.createElement('input');
-        checkBox.setAttribute('type', 'checkbox');
-        checkBoxContainer.appendChild(checkBox);
+//         const tbody = document.createElement('tbody');
 
-        const checkBoxTextBox = document.createElement('div');
-        checkBoxTextBox.classList.add('input-checkbox-text-box');
+//         const listFilterTableTrTitle = document.createElement('tr');
 
-        const checkBoxText = document.createElement('div');
-        checkBoxText.classList.add('input-checkbox-text', 'none');
+//         listFilterTableMap.forEach((value, key) => {
+//             const td = document.createElement('td');
+//             td.textContent = key;
+//             listFilterTableTrTitle.appendChild(td);
+//         })
 
-        checkBoxTextBox.appendChild(checkBoxText);
-        checkBoxContainer.appendChild(checkBoxTextBox);
-        tdCheckBox.appendChild(checkBoxContainer);
-        tr.appendChild(tdCheckBox);
-    }
+//         tbody.appendChild(listFilterTableTrTitle);
 
-    function makePastWinTable(pastWinNum: number[]) {
-        const trBox = document.createElement('tr');
-        trBox.classList.add('func3-past-win-table-box');
+//         const listFilterTableTrValue = document.createElement('tr');
 
-        const tdBox = document.createElement('td');
-        tdBox.setAttribute('colspan', '7');
+//         listFilterTableMap.forEach((value, key) => {
+//             const td = document.createElement('td');
+//             td.textContent = value;
+//             listFilterTableTrValue.appendChild(td);
+//         })
 
-        const table = document.createElement('table');
-        table.classList.add('table', 'func3-past-win-table');
+//         tbody.appendChild(listFilterTableTrValue);
 
-        const tbody = document.createElement('tbody');
+//         listFilterTable.appendChild(tbody);
+//         tdBox.appendChild(listFilterTable);
+//         filterTableBox.appendChild(tdBox);
+//         target.appendChild(filterTableBox);
+//     }
 
-        const tr = document.createElement('tr');
+//     function makeCheckBox(tr: HTMLElement) {
+//         const tdCheckBox = document.createElement('td');
 
-        const tdText = document.createElement('td');
-        tdText.textContent = "역대기록";
+//         const checkBoxContainer = document.createElement('div');
+//         checkBoxContainer.classList.add('input-checkbox-container');
 
-        tr.appendChild(tdText);
+//         const checkBox = document.createElement('input');
+//         checkBox.setAttribute('type', 'checkbox');
+//         checkBoxContainer.appendChild(checkBox);
 
-        for (let i = 0; i < pastWinNum.length; i++) {
-            const td = document.createElement('td');
-            td.textContent = pastWinNum[i].toString();
-            tr.appendChild(td);
-        }
+//         const checkBoxTextBox = document.createElement('div');
+//         checkBoxTextBox.classList.add('input-checkbox-text-box');
 
-        tbody.appendChild(tr);
-        table.appendChild(tbody);
-        tdBox.appendChild(table);
-        trBox.appendChild(tdBox);
-        tableBody.appendChild(trBox);
+//         const checkBoxText = document.createElement('div');
+//         checkBoxText.classList.add('input-checkbox-text', 'none');
 
-    }
-}
+//         checkBoxTextBox.appendChild(checkBoxText);
+//         checkBoxContainer.appendChild(checkBoxTextBox);
+//         tdCheckBox.appendChild(checkBoxContainer);
+//         tr.appendChild(tdCheckBox);
+//     }
 
-numToggleBtn.addEventListener('click', numToggle());
+//     function makePastWinTable(pastWinNum: number[]) {
+//         const trBox = document.createElement('tr');
+//         trBox.classList.add('func3-past-win-table-box');
 
-function numToggle() {
-    let flag = false;
-    return function () {
-        if (!flag) {
+//         const tdBox = document.createElement('td');
+//         tdBox.setAttribute('colspan', '7');
 
-            pastWinBox.classList.remove('none');
-            filterNumInfo.classList.remove('none');
-            flag = true;
-        }
-        else {
+//         const table = document.createElement('table');
+//         table.classList.add('table', 'func3-past-win-table');
 
-            pastWinBox.classList.add('none');
-            filterNumInfo.classList.add('none');
-            flag = false;
-        }
-    }
-}
+//         const tbody = document.createElement('tbody');
+
+//         const tr = document.createElement('tr');
+
+//         const tdText = document.createElement('td');
+//         tdText.textContent = "역대기록";
+
+//         tr.appendChild(tdText);
+
+//         for (let i = 0; i < pastWinNum.length; i++) {
+//             const td = document.createElement('td');
+//             td.textContent = pastWinNum[i].toString();
+//             tr.appendChild(td);
+//         }
+
+//         tbody.appendChild(tr);
+//         table.appendChild(tbody);
+//         tdBox.appendChild(table);
+//         trBox.appendChild(tdBox);
+//         tableBody.appendChild(trBox);
+
+//     }
+// }
+
+// numToggleBtn.addEventListener('click', numToggle());
+
+// function numToggle() {
+//     let flag = false;
+//     return function () {
+//         if (!flag) {
+
+//             pastWinBox.classList.remove('none');
+//             filterNumInfo.classList.remove('none');
+//             flag = true;
+//         }
+//         else {
+
+//             pastWinBox.classList.add('none');
+//             filterNumInfo.classList.add('none');
+//             flag = false;
+//         }
+//     }
+// }
 
 
 
