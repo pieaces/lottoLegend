@@ -19,7 +19,7 @@ function numbersToParams(numbers: number[] = []): Params {
     }
 }
 function compartNumbers(param: Params, PACK: number): string[] {
-    if (param.to - param.from >= 10) {
+    if (param.to - param.from >= PACK) {
         const result: string[] = [];
         let temp: number;
         for (let i = param.from; i <= param.to - PACK; i += PACK) {

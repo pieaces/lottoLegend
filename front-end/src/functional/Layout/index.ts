@@ -167,7 +167,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                 this.resetBtn.addEvent(this.layout2.resetConfirm.bind(this.layout2));
                 break;
             case DataAPI.getInstance().SIZE:
-                this.layout3_1On();
+                this.layout3_1On(this.options);
                 break;
             default:
                 this.layout1On();
@@ -224,7 +224,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                 confirmButtonText: '네',
                 cancelButtonText: '아니요',
             }).then(async (result) => {
-                if (result.value) this.layout3_1On();
+                if (result.value) this.layout3_1On(this.options);
             });
         }
         section.scrollIntoView({
