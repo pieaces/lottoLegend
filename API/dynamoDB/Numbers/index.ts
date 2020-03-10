@@ -290,7 +290,7 @@ export function getIncOrExcNumbers(userName: string, round: number, choice: IncO
 }
 
 
-export function getIncOrExcRounds(userName: string, choice: IncOrExc): Promise<number[]> {
+export function getIncOrExcRounds(userName: string, choice: IncOrExc): Promise<string[]> {
     const params = {
         TableName,
         ExpressionAttributeNames: {
@@ -310,7 +310,7 @@ export function getIncOrExcRounds(userName: string, choice: IncOrExc): Promise<n
                 reject(err);
             }
             else {
-                const rounds = Object.keys(data.Item[choice].M).map(value => Number(value));
+                const rounds = Object.keys(data.Item[choice].M).reverse();
                 resolve(rounds);
             }
         });
