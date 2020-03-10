@@ -41,8 +41,6 @@ export default class Layout3 {
 
             checkTextBox.appendChild(checkText);
 
-
-
             inputBoxContainer.appendChild(checkTextBox);
 
             checkboxContainer.appendChild(inputBoxContainer);
@@ -130,6 +128,27 @@ export default class Layout3 {
             numContainer.appendChild(filterNumInfo);
 
             numContainerBox.appendChild(numContainer);
+
+            if (i !== 0 && (i + 1) % 5 === 0) {
+                const div = document.createElement('div');
+                div.classList.add('func3-num-list-boundary');
+                numContainerBox.appendChild(div);
+            }
         }
     }
+    static makeLine(canvas: HTMLElement, numbers: number[]): void {
+        numbers.forEach(num => {
+            const divBox = document.createElement('div');
+            divBox.classList.add('func3-select-num-box');
+
+            const div = document.createElement('div');
+            div.classList.add('func3-select-num');
+            div.textContent = num.toString();
+            Layout3.setColorLotto(num, div);
+
+            divBox.appendChild(div);
+            canvas.appendChild(divBox);
+        });
+    }
+
 }

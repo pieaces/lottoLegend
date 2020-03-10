@@ -558,7 +558,7 @@ document.write(`<div class="filter-box-container-box func1-layout func2-layout b
     <canvas id="selection-canvas"></canvas>
 </div>
 </div>
-<div class="func3-num-wrapper box-color">
+<div class="func3-num-wrapper">
 <div class="func3-all-check-box-container">
 <div class="func3-all-check-box">
 <div class="input-box">

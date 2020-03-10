@@ -32,7 +32,7 @@ export default class Layout extends LayoutToggle(Layout3) {
         const slideNum = document.querySelectorAll<HTMLElement>('.func1-chart-slide-num');
         slideNum.forEach((node) => {
             Array.from(node.children).forEach((node, index) => {
-                console.log(node);
+
                 if (index === 0) {
                     node.classList.add('chart-slide-current');
                 } else {
@@ -152,7 +152,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                     numFreq.classList.remove('none');
                     numFreqTerm.classList.remove('none');
                     this.nextAbleLimit = 1;
-                    this.layout2.includeVerson(5-this.options[3].length);
+                    this.layout2.includeVerson(5 - this.options[3].length);
                 }
                 else if (currentFilter === 5) {
                     numFreq.classList.remove('none');
@@ -194,7 +194,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                     this.checkBox.singleSelectEvent();
                 } else if (currentFilter <= 6) {
                     this.checkBox.singleSelectEvent();
-                } else if(currentFilter === DataAPI.getInstance().SIZE - 1){
+                } else if (currentFilter === DataAPI.getInstance().SIZE - 1) {
                     this.checkBox.singleSelectEvent();
                 } else {
                     this.checkBox.multiSelectEvent();
@@ -249,7 +249,9 @@ export default class Layout extends LayoutToggle(Layout3) {
         this.layout2.init();
         infoText.textContent = DataAPI.infoList[0];
         this.layout1.setStatsBoard(DataAPI.getInstance().getStats().stats);
-
+        document.querySelector<HTMLElement>('.line-gen-toggle-btn-box').classList.add('none');
+        document.querySelector<HTMLElement>('.line-gen-num-container').classList.add('none');
+        document.querySelector<HTMLElement>('.line-gen-stack-chart-container').classList.add('none');
         this.nextBtn.addEvent(async () => {
             const currentFilter = DataAPI.getInstance().getCurrent();
             if (this.checkBox.getCount() >= this.nextAbleLimit ||
@@ -260,7 +262,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                 this.next(currentFilter);
                 this.resetSlideNum();
             } else {
-                let alertMessage:string;
+                let alertMessage: string;
                 if (currentFilter <= 6) alertMessage = `정확히 ${this.nextAbleLimit}개 선택해주세요`;
                 if (currentFilter > 6) alertMessage = `최소 ${this.nextAbleLimit}개 이상 산텍헤주세요`;
                 Swal.fire({
@@ -325,18 +327,18 @@ export default class Layout extends LayoutToggle(Layout3) {
                         const to = Number((<string>range[index]).slice((<string>range[index]).indexOf('~') + 1));
                         this.options[current].push({ from, to });
                         rand = Math.random();
-                        for (let i = 0; i < Math.floor(rand * pos.length/2); i++) {
-                            const index = Math.floor(Math.random()*pos.length);
+                        for (let i = 0; i < Math.floor(rand * pos.length / 2); i++) {
+                            const index = Math.floor(Math.random() * pos.length);
                             const from = Number((<string>range[index]).slice(0, (<string>range[index]).indexOf('~')));
                             const to = Number((<string>range[index]).slice((<string>range[index]).indexOf('~') + 1));
                             let flag = true;
-                            for(let j= 0; j<this.options[current].length; j++){
-                                if(this.options[current][j].from === from){
+                            for (let j = 0; j < this.options[current].length; j++) {
+                                if (this.options[current][j].from === from) {
                                     flag = false;
                                     break;
                                 }
                             }
-                            if(flag) this.options[current].push({ from, to });
+                            if (flag) this.options[current].push({ from, to });
                         }
                     } else if (current === 12) {
                         if (typeof range[index] === 'string') {
@@ -349,7 +351,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                         rand = Math.random();
                         for (let i = 0; i < Math.floor(rand * pos.length); i++) {
                             const index = Math.floor(Math.random() * pos.length);
-                            if(this.options[current].indexOf(range[index]) === -1) this.options[current].push(range[index]);
+                            if (this.options[current].indexOf(range[index]) === -1) this.options[current].push(range[index]);
                         }
                     }
                     break;

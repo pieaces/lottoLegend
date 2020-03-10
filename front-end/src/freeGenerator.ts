@@ -116,8 +116,8 @@ async function init() {
     lineGenTextToggleInit();
     const { include, exclude, total } = await getAuthAPI('/numbers/piece');
     document.querySelector<HTMLElement>('.line-gen-round').textContent = total + '회';
-    makeLine(includeCanvas, include);
-    makeLine(excludeCanvas, exclude);
+    Layout3.makeLine(includeCanvas, include);
+    Layout3.makeLine(excludeCanvas, exclude);
     makeBtn.addEventListener('click', async () => {
             if (!lineCheck || lineCheck && sum() === 6) {
             let dataSet: any;
@@ -204,34 +204,29 @@ async function init() {
 
 function lineGenTextToggleInit() {
     let flag = false;
-    textToggleShowBox.addEventListener('click', lineGenTextToggle)
-    textToggleHideBox.addEventListener('click', lineGenTextToggle)
     function lineGenTextToggle() {
         if (!flag) {
             explainText.classList.remove('none');
             textToggleHideBox.classList.remove('none');
-            textToggleShowBox.style.borderBottom = "1px solid rgba(0,0,0,0.1)";
+            textToggleShowBox.classList.add('none');
             textToggleHideBox.style.borderTop = "1px solid rgba(0,0,0,0.1)";
+
             flag = true;
         } else {
             explainText.classList.add('none');
             textToggleHideBox.classList.add('none');
-            textToggleShowBox.style.borderBottom = "";
+            textToggleShowBox.classList.remove('none');
             textToggleHideBox.style.borderTop = "";
+
             flag = false;
         }
     }
+    textToggleShowBox.addEventListener('click', lineGenTextToggle);
+
+    textToggleHideBox.addEventListener('click', lineGenTextToggle);
+
 }
 
-function makeLine(canvas: HTMLElement, numbers: number[]): void {
-    numbers.forEach(num => {
-        const div = document.createElement('div');
-        div.classList.add('func3-select-num');
-        div.textContent = num.toString();
-        Layout3.setColorLotto(num, div);
-        canvas.appendChild(div);
-    });
-}
 
 // const saveBtn = document.querySelectorAll('.save-btn');
 // saveBtn.forEach((node) => {

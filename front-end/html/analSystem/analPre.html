@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../../css/init.css" />
     <link rel="stylesheet" href="../../css/section.css">
     <link rel="stylesheet" href="../../css/statsBox.css">
+    <link rel="stylesheet" href="../../css/checkbox.css">
     <link rel="stylesheet" href="../../css/filter/function.css">
     <link rel="stylesheet" href="../../css/filter/function1.css" />
     <link rel="stylesheet" href="../../css/filter/function2.css">
@@ -449,10 +450,7 @@
                         </div>
                         <div class="showcase-container func1-layout func2-layout func3-layout-2 box-color">
                             <div class="func1-checkbox-container func1-layout">
-                                <div class="func1-checkbox-box">
 
-
-                                </div>
                             </div>
                             <div class="func2-select-num-box-container func2-layout none">
                                 <div class="func2-select-num-box">
@@ -478,17 +476,9 @@
                             <div class="func3-filter-container">
                                 <div class="func3-filter-title">이월수</div>
                                 <div class="func3-filter-value-container">
-                                    <div class="func3-filter-value-box">
-                                        <div class="func3-select-num">1</div>
-                                        <div class="func3-select-num">2</div>
-                                        <div class="func3-select-num">3</div>
-                                        <div class="func3-select-num">4</div>
-                                        <div class="func3-select-num">5</div>
-                                        <div class="func3-select-num">6</div>
-                                        <div class="func3-select-num">7</div>
-                                        <div class="func3-select-num">8</div>
-                                        <div class="func3-select-num">9</div>
-                                        <div class="func3-select-num">10</div>
+                                    <div class="func3-filter-value-box" id="carrycount">
+
+
                                     </div>
                                 </div>
                             </div>
@@ -523,15 +513,15 @@
                                     <td>연속수 포함</td>
                                 </tr>
                                 <tr>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                    <td>6</td>
-                                    <td>7</td>
-                                    <td>8</td>
-                                    <td>9</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                             </table>
                         </div>
@@ -602,13 +592,15 @@
                                 <canvas id="selection-canvas"></canvas>
                             </div>
                         </div>
-                        <div class="func3-num-wrapper box-color">
+                        <div class="func3-num-wrapper">
                             <div class="func3-all-check-box-container">
                                 <div class="func3-all-check-box">
-                                    <div class="input-box">
+                                    <div class="input-checkbox-container">
                                         <input type="checkbox" name="" id="func3-all-check" />
-                                        <div>
-                                            <img class="none" src="../../img/checkbox.png" alt="체크">
+                                        <div class="input-checkbox-text-box">
+                                            <div class="input-checkbox-text none">
+                                                ✔
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

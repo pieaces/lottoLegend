@@ -1,6 +1,6 @@
 import configure from './amplify/configure'
 import { getUnAuthAPI } from './amplify/api'
-import {getQueryStringObject, isoStringToDate, getCategoryHtml, Affix} from './functions';
+import { getQueryStringObject, isoStringToDate, getCategoryHtml, Affix } from './functions';
 const boardSection = document.querySelector('.board-section');
 const pageNumContainer = document.querySelector('.page-num-container');
 configure();
@@ -42,7 +42,7 @@ function makeBoard(objArr: any[]) {
         const boardTitle = document.createElement('div');
         boardTitle.classList.add('board-title');
         let htmlFileName: string;
-        
+
         boardTitle.innerHTML = `<a href="./${getCategoryHtml(category, Affix.Read)}?id=${objArr[i].id}">${objArr[i].title}</a>`;
 
         boardBox.appendChild(boardTitle);

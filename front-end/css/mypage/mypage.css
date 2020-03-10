@@ -10,6 +10,21 @@
   justify-content: center;
 }
 
+#service{
+  margin-right:1rem;
+}
+
+#service-expiry-date{
+  font-weight: 500;
+  font-size: 1.3rem;
+  color: rgb(113, 113, 113);
+}
+
+#inc-num,
+#exc-num{
+  font-weight: bold;
+}
+
 .mypage-num-box > div{
   display: flex;
   align-items: center;
@@ -79,12 +94,7 @@ align-items: center;
 .mypage-info-box > li>div >span:nth-child(2){
   width:3rem;
 }
-.mypage-info-box > li>div >span:nth-child(3) > span{
-  font-weight: 500;
-  font-size: 1.3rem;
-  color: rgb(113, 113, 113);
-  margin-left: 1rem;
-}
+
 
 .service-update-btn{
   width: 4rem;
