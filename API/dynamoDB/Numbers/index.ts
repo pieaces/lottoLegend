@@ -58,7 +58,7 @@ export async function autoUpdateNumbers(userName: string, round: number, numsArr
 
 export async function updateNumbers(userName: string, round: number, numsArr: number[][], tool: SelectTool): Promise<Response> {
     const plan: Plan = await getPlan(userName);
-    let size = (await getNumbers(userName, round, {method:SelectMethod.manual, tool})).length;
+    const size = (await getNumberSize(userName, round));
     const available = planLimit[plan] - size;
 
     if (numsArr.length > available) {
@@ -126,7 +126,26 @@ export async function deleteMyNumber(userName: string, round: number, numbers:nu
         });
     });
 }
-
+export function getNumberSize(userName: string, round: number): Promise<number>{
+    return new Promise((resolve, reject) => {
+        dynamoDB.getItem({
+            TableName: 'LottoUsers',
+            ExpressionAttributeNames: {
+                "#Map": 'Numbers',
+                "#Round": round.toString(),
+            },
+            ProjectionExpression: '#Map.#Round',
+            Key: {
+                "UserName": {
+                    S: userName
+                }
+            }
+        }, (err, data) => {
+            if(err) reject(err);
+            resolve(data.Item.Numbers.M.round.L.length);
+        })
+    })
+}
 export function getNumbers(userName: string, round: number, select?:SelectClass): Promise<{numbers:number[], method:string, tool:string, date:string}[]> {
     const ExpressionAttributeNames: { [key: string]: string } = {
         "#Map": 'Numbers',
@@ -152,7 +171,7 @@ export function getNumbers(userName: string, round: number, select?:SelectClass)
             }
             else {
                 if ('Numbers' in data.Item) {
-                    const numbersData = data.Item.Numbers.M[round].L;
+                    const numbersData = data.Item.Numbers.M.round.L;
                     resolve(numbersData.filter(item => {
                         if (select) {
                             if (select.method && item.M.method.S !== select.method) {
