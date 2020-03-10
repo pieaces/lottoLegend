@@ -1,10 +1,17 @@
 import Layout3 from "./Layout3";
 import DataAPI from "../DataAPI";
+import CheckboxToggle from '../CheckboxToggle/CheckBoxToggle'
 
 const layout1 = document.querySelectorAll<HTMLElement>(".func1-layout");
 const layout2 = document.querySelectorAll<HTMLElement>(".func2-layout");
 const layout3_1 = document.querySelectorAll<HTMLElement>('.func3-layout-1');
 const layout3_2 = document.querySelectorAll<HTMLElement>('.func3-layout-2');
+
+const excLineCountText = document.getElementById('excludedLineCount-text');
+const carrycountCanvas = document.getElementById('carrycount');
+const includeCanvas = document.getElementById('include');
+const excludeCanvas = document.getElementById('exclude');
+const filterTableValues = document.querySelectorAll('.func3-filter-table > tr:nth-child(2)>td');
 
 type Constructor<T = {}> = new (...args: any[]) => T;
 const layout1Class = 'func1-layout'
@@ -54,6 +61,15 @@ export default function LayoutToggle<TBase extends Constructor>(Base: TBase) {
 
         layout3_1On() {
             Layout3.makeNumBoard(DataAPI.getInstance().numbersData);
+            CheckboxToggle.init();
+            // Layout3.makeLine(carrycountCanvas, "이월수 개수 데이터");
+            // excLineCountText.textContent="전멸구간 텍스트";
+            // Layout3.makeLine(includeCanvas, "추천 데이터");
+            // Layout3.makeLine(excludeCanvas, "제외 데이터");
+            // filterTableValues.forEach((node, index) => {
+            // node.textContent = numbers[index];
+            // numbers는 필터 데이터 배열
+            // })
             layout1.forEach(node => {
                 node.classList.add('none');
             });
