@@ -1,6 +1,6 @@
 import configure from './amplify/configure'
 import Layout3 from './functional/Layout/Layout3'
-import { getAuthAPI, getUnAuthAPI, postAuthAPI } from './amplify/api';
+import { getAuthAPI, getUnAuthAPI } from './amplify/api';
 import Swal from 'sweetalert2'
 import { actualInstance, selectionInstance, latestInstance } from './analLineGen';
 import SaveBtn, { Tool } from './functional/instanceBtns/SaveBtn';

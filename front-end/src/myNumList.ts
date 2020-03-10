@@ -1,7 +1,7 @@
 import configure from './amplify/configure'
 import Layout3 from './functional/Layout/Layout3'
-import { getAuthAPI, getUnAuthAPI } from './amplify/api';
-import CheckBoxToggle from './functional/CheckboxToggle/CheckBoxToggle';
+import { getAuthAPI } from './amplify/api';
+import CheckBoxToggle from './functional/instanceBtns/CheckBoxToggle';
 
 
 configure();
@@ -15,10 +15,9 @@ init();
 async function init() {
     const dataSet = await getAuthAPI('/numbers/generator/free');
     makeTable(dataSet);
-    CheckBoxToggle.init();
-    CheckBoxToggle.allCheck();
+    const checkBoxToggle = new CheckBoxToggle();
+    checkBoxToggle.addEvent();
 }
-
 
 function makeTable(dataSet: { numbers: number[], winner: number[] }[]) {
 
@@ -66,7 +65,7 @@ function makeTable(dataSet: { numbers: number[], winner: number[] }[]) {
 
         // 데이터 부분 시작
         const tdWin = document.createElement('td');
-        tdWin.textContent = dataSet[i].isWin;
+        //tdWin.textContent = dataSet[i].isWin;
         tr.appendChild(tdWin);
         // 데이터 부분 끝
 
