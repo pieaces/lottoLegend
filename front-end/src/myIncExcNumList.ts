@@ -24,7 +24,7 @@ async function init() {
     if (data.rounds.length > 0) {
         makePage(data);
         makeSelectBox(data.rounds);
-    }else{
+    } else {
         alert('없다');
     }
     // 당첨번호 데이터 입력
@@ -61,7 +61,6 @@ function makePage(data: { numbers: number[], answer?: number[] }) {
             numBox.appendChild(num);
         }
         numContainer.appendChild(numBox);
-        numContainer.classList.add('box-color');
     }
     numResultTotal.textContent = data.numbers.length.toString();
     if (data.answer) {

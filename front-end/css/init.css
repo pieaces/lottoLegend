@@ -54,15 +54,19 @@ ul {
 }
 
 
-input,
-select {
+input {
   border: 1px solid rgb(190,190,190);
   padding:0 1rem;
 }
 
-input:focus,
-select:focus {
+input:focus {
   border: 1px solid var(--main-color);
+}
+
+select{
+  border: 1px solid var(--main-color);
+  border-radius: 3px;
+  padding-left: 0.5rem;
 }
 
 

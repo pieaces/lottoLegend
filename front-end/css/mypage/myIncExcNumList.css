@@ -1,8 +1,69 @@
+
+.mypage-num-title{
+  height:5rem;
+  color:var(--default-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: 0.3rem;
+}
+
+.mypage-inc-num-title{
+  background-color: rgb(104, 177, 226);
+}
+
+.mypage-exc-num-title{
+  background-color: var(--lotto-title-color);
+}
+
+.mypage-num-wrapper{
+  border: 1px solid var(--border-color);
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.3);
+  margin-bottom: 1rem;
+}
+
+.mypage-num-container > div.mypage-num-box:not(:last-child){
+  border-bottom: 1px solid var(--border-color);
+}
+.mypage-num-box{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fdfcfc;
+  }
+  
+  .mypage-num-box > div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .mypage-num-box > div{
+    font-weight: 500;
+    font-size: 2rem;
+    background-color: var(--main-color);
+    color: var(--default-color);
+    width: 3.5rem;
+    height: 3.5rem;
+    margin:1rem;
+    line-height: 1.7;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  }
+
 .func2-win-num-container{
   height:7rem;
   display:flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 2rem;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
 }
 
 .func2-win-num-text {
@@ -27,3 +88,4 @@
   background-color: var(--main-color);
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
 }
+
