@@ -23,10 +23,12 @@ init();
 async function init() {
     loading.classList.remove('none');
     const data = await getAuthAPI('/numbers/piece', { choice });
-    console.log(data);
-    makePage(data);
-    makeSelectBox(data.rounds);
-
+    if (data.rounds.length > 0) {
+        makePage(data);
+        makeSelectBox(data.rounds);
+    }else{
+        alert('없다');
+    }
     // 당첨번호 데이터 입력
     // const winNum = [1, 2, 3, 4, 5, 6]; //당첨번호배열
     // const roundNum = 900; //회차
