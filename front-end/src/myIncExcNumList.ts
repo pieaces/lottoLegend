@@ -1,76 +1,76 @@
 import configure from './amplify/configure'
-import Layout3 from './functional/Layout/Layout3'
-import { getAuthAPI } from './amplify/api';
+import { getAuthAPI } from './amplify/api'
+import IncExcNumList from './functional/IncExcNumList/base';
+import incObj from './functional/IncExcNumList/IncNumList';
+import excObj from './functional/IncExcNumList/ExcNumList';
 
 configure();
-const numContainer = document.querySelector('.mypage-num-container');
-const numResultTotal = document.querySelector('#mypage-num-result-total');
-const numResultValue = document.querySelector('#mypage-num-result-value');
-const numResultPercent = document.querySelector('#mypage-num-result-value-percent');
-const resultBox = document.querySelector('.mypage-num-result-box');
+
 const roundSelectBox = document.querySelector<HTMLSelectElement>('#round-select-box');
-const roundText = document.querySelector('#round-text');
-const winNumBox = document.querySelectorAll<HTMLElement>('.func2-win-num-box > div');
-
-
 const loading = document.querySelector('.loading-box');
 
-const choice = document.getElementById('wrapper').getAttribute('data-choice');
 init();
 
 async function init() {
-    loading.classList.remove('none');
-    const data = await getAuthAPI('/numbers/piece', { choice });
-    if (data.rounds.length > 0) {
-        makePage(data);
-        makeSelectBox(data.rounds);
-    } else {
-        alert('없다');
-    }
-    // 당첨번호 데이터 입력
-    // const winNum = [1, 2, 3, 4, 5, 6]; //당첨번호배열
-    // const roundNum = 900; //회차
+    /* 실제
+    // const incData = await getAuthAPI('/numbers/piece', { choice: "Include" });
+    // const excData = await getAuthAPI('/numbers/piece', { choice: "Exclude" });
+    */
 
-    // roundText.textContent = roundNum.toString();
-    // winNumBox.forEach((node, index) => {
-    //     node.textContent = winNum[index].toString();
-    //     Layout3.setColorLotto(winNum[index], node);
-    // })
+    //테스트용
+    const incData = {
+        numbers: [
+            1, 2, 3, 4, 5, 6
+        ],
+        answer: [5, 16, 23, 31, 32, 33],
+        rounds: [
+            "990", "998", "997"
+        ]
+    }
+    const excData = {
+        numbers: [
+            2, 3, 4, 5, 6, 7
+        ],
+        answer: [1, 3, 4, 5, 6, 7],
+        rounds: [
+            "990", "888", "887"
+        ]
+    }
+    //
+
+    const incNumList = new IncExcNumList(incData, "Include", incObj);
+    const excNumList = new IncExcNumList(excData, "Exclude", excObj);
+
+
+    const roundsAll = Array.from(new Set([...incData.rounds, ...excData.rounds]))
+
+
+    if (incData.rounds.length) {
+        incNumList.makePage();
+    }
+    if (excData.rounds.length) {
+        excNumList.makePage();
+    }
+    if (incData.rounds.length || excData.rounds.length) {
+        makeSelectBox(roundsAll);
+        roundSelectBox.addEventListener('change', async () => {
+            loading.classList.remove('none');
+            /* 실제
+            const incData = await getAuthAPI('/numbers/piece', { choice: "Include", round: roundSelectBox.options[roundSelectBox.options.selectedIndex].value });
+            const excData = await getAuthAPI('/numbers/piece', { choice: "Exclude", round: roundSelectBox.options[roundSelectBox.options.selectedIndex].value });
+            */
+
+            const incNumList = new IncExcNumList(incData, "Include", incObj);
+            const excNumList = new IncExcNumList(excData, "Exclude", excObj);
+            incNumList.makePage();
+            excNumList.makePage();
+            loading.classList.add('none');
+        });
+    }
+
     loading.classList.add('none');
-}
 
-roundSelectBox.addEventListener('change', async () => {
-    loading.classList.remove('none');
-    const data = await getAuthAPI('/numbers/piece', { choice, round: roundSelectBox.options[roundSelectBox.options.selectedIndex].value });
-    makePage(data);
-    loading.classList.add('none');
-});
 
-function makePage(data: { numbers: number[], answer?: number[] }) {
-    numContainer.innerHTML = '';
-    const DIVIDE = 5;
-    const I = Math.ceil(data.numbers.length / DIVIDE);
-    for (let i = 0; i < I; i++) {
-        const numBox = document.createElement('div');
-        numBox.classList.add('mypage-num-box');
-        for (let j = 0; j < DIVIDE; j++) {
-            if (!data.numbers[DIVIDE * i + j]) break;
-            const num = document.createElement('div');
-            num.textContent = data.numbers[DIVIDE * i + j].toString();
-            Layout3.setColorLotto(data.numbers[DIVIDE * i + j], num);
-            numBox.appendChild(num);
-        }
-        numContainer.appendChild(numBox);
-    }
-    numResultTotal.textContent = data.numbers.length.toString();
-    if (data.answer) {
-        const numCount = whatCount(data.numbers, data.answer);
-        resultBox.classList.remove('none');
-        numResultValue.textContent = numCount.toString();
-        numResultPercent.textContent = (numCount / data.numbers.length * 100).toFixed(2);
-    } else {
-        resultBox.classList.add('none');
-    }
 }
 
 function makeSelectBox(rounds: string[]) {
@@ -80,17 +80,4 @@ function makeSelectBox(rounds: string[]) {
         option.textContent = rounds[i];
         roundSelectBox.appendChild(option);
     }
-}
-
-function whatCount(numbers: number[], answer: number[]) {
-    let count = 0;
-
-    numbers.forEach(num => {
-        if (choice === 'Include') {
-            if (answer.indexOf(num) !== -1) count++;
-        } else if (choice === 'Exclude') {
-            if (answer.indexOf(num) === -1) count++;
-        }
-    });
-    return count;
 }

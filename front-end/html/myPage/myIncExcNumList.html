@@ -59,7 +59,7 @@
                                 <div class="mypage-num-title mypage-inc-num-title">
                                     추천번호리스트
                                 </div>
-                                <div class="mypage-num-container">
+                                <div class="mypage-num-container inc-num-container">
                                     <div class="mypage-num-box">
                                         <div>1</div>
                                         <div>3</div>
@@ -93,7 +93,7 @@
                                 <div class="mypage-num-title mypage-exc-num-title">
                                     제외번호리스트
                                 </div>
-                                <div class="mypage-num-container">
+                                <div class="mypage-num-container  exc-num-container">
                                     <div class="mypage-num-box">
                                         <div>1</div>
                                         <div>3</div>
@@ -123,11 +123,23 @@
 
                         </div>
                     </div>
-                    <div class="mypage-num-result-box box-color">
-                        결과 : <span id="mypage-num-result-total"></span>개 중&nbsp;<span
-                            id="mypage-num-result-value"></span>개
-                        출현성공 ( <span id="mypage-num-result-value-percent"></span> %)
+                    <div class="left-right-container">
+                        <div class="left-container">
+                            <div class="mypage-num-result-box exc-num-result-box box-color">
+                                결과 : <span id="inc-num-result-total"></span>개 중&nbsp;<span
+                                    id="inc-num-result-value"></span>개
+                                출현성공 ( <span id="inc-num-result-percent"></span> %)
+                            </div>
+                        </div>
+                        <div class="right-container">
+                            <div class="mypage-num-result-box inc-num-result-box box-color">
+                                결과 : <span id="exc-num-result-total"></span>개 중&nbsp;<span
+                                    id="exc-num-result-value"></span>개
+                                출현성공 ( <span id="exc-num-result-percent"></span> %)
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </section>
