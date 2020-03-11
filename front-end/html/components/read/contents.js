@@ -11,7 +11,8 @@ document.write(`           <div class="text-title">
 <div>
 
     <div class="author-lookup">
-        조회 : <span id="author-lookup"></span>회
+        조회 : <span id="author-lookup" class="text-box"></span>회
+        추천 : <span id="recommendation" class="text-box"></span>
     </div>
 </div>
 </div>
@@ -26,7 +27,7 @@ document.write(`           <div class="text-title">
 <div class="comment-container-box">
 <div class="comment-list-title">
 <div>
-<span id="comment-num"></span>개의 댓글 
+댓글(<span id="comment-num"></span>개)
 </div>
 <button type="button" class="btn reco-btn" id="reco-btn">
 추천
