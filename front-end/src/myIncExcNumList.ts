@@ -12,31 +12,38 @@ const round = document.querySelector<HTMLSelectElement>('#round');
 
 
 const loading = document.querySelector('.loading-box');
-loading.classList.remove('none');
+
 const choice = document.getElementById('wrapper').getAttribute('data-choice');
 init();
-loading.classList.add('none');
 
 async function init() {
+    loading.classList.remove('none');
     const data = await getAuthAPI('/numbers/piece', { choice });
     console.log(data);
     makePage(data);
-    makeSelectBox(data.round);
+    makeSelectBox(data.rounds);
 
-    round.addEventListener('change', () => {
-        console.log(round.options[round.options.selectedIndex].value);
-    })
+    round.addEventListener('change', async () => {
+        loading.classList.remove('none');
+        const data = await getAuthAPI('/numbers/piece', { choice, round: round.options[round.options.selectedIndex].value });
+        makePage(data);
+        loading.classList.add('none');
+    });
+    loading.classList.add('none');
+
 }
-function makePage(data: { numbers: number[], answer?: number }) {
-    const I = Math.ceil(data.numbers.length / 5);
+function makePage(data: { numbers: number[], answer?: number[] }) {
+    numContainer.innerHTML = '';
+    const DIVIDE = 5;
+    const I = Math.ceil(data.numbers.length / DIVIDE);
     for (let i = 0; i < I; i++) {
         const numBox = document.createElement('div');
         numBox.classList.add('mypage-num-box');
-        for (let j = 0; j < 5; j++) {
-            if (!data.numbers[I * i + j]) break;
+        for (let j = 0; j < DIVIDE; j++) {
+            if (!data.numbers[DIVIDE * i + j]) break;
             const num = document.createElement('div');
-            num.textContent = data.numbers[I * i + j].toString();
-            Layout3.setColorLotto(data.numbers[I * i + j], num);
+            num.textContent = data.numbers[DIVIDE * i + j].toString();
+            Layout3.setColorLotto(data.numbers[DIVIDE * i + j], num);
             numBox.appendChild(num);
         }
         numContainer.appendChild(numBox);
@@ -44,20 +51,33 @@ function makePage(data: { numbers: number[], answer?: number }) {
     }
     numResultTotal.textContent = data.numbers.length.toString();
     if (data.answer) {
+        const numCount = whatCount(data.numbers, data.answer);
         resultBox.classList.remove('none');
-        numResultValue.textContent = data.answer.toString();
-        numResultPercent.textContent = (data.answer / data.numbers.length).toFixed(2);
+        numResultValue.textContent = numCount.toString();
+        numResultPercent.textContent = (numCount / data.numbers.length * 100).toFixed(2);
     } else {
         resultBox.classList.add('none');
     }
 }
 
-function makeSelectBox(numbers: string[]) {
-
-    for (let i = 0; i < numbers.length; i++) {
+function makeSelectBox(rounds: string[]) {
+    for (let i = 0; i < rounds.length; i++) {
         const option = document.createElement('option');
-        option.setAttribute('value', `${numbers[i]}`);
-        option.textContent = `${numbers[i]}`;
+        option.setAttribute('value', rounds[i]);
+        option.textContent = rounds[i];
         round.appendChild(option);
     }
+}
+
+function whatCount(numbers: number[], answer: number[]) {
+    let count = 0;
+
+    numbers.forEach(num => {
+        if (choice === 'Include') {
+            if (answer.indexOf(num) !== -1) count++;
+        } else if (choice === 'Exclude') {
+            if (answer.indexOf(num) === -1) count++;
+        }
+    });
+    return count;
 }
