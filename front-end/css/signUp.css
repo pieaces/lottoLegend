@@ -65,6 +65,8 @@
   width:14rem;
   height: 4rem;
   font-size: 1.5rem;
+  background-color: var(--main-color);
+  color:var(--default-color);
 }
 
 .signup-btn-box{
