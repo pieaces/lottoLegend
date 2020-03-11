@@ -25,7 +25,7 @@ export default class Posts extends DB {
             projection: ['id', 'title', 'writerName', 'created', 'hits'],
             condition: { category },
             order: { created: OrderOption.DESC },
-            limit: [MAX * (index - 1), MAX * index] as [number, number]
+            limit: [MAX * (index - 1), MAX] as [number, number]
         }
         return await super._get(option);
     }
