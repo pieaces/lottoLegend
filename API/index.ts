@@ -151,7 +151,7 @@ exports.handler = async (event: any) => {
             }
         }
             break;
-        case '/recommend/{postId}': {
+        case 'posts/{postId}recommend': {
             switch (method) {
                 case 'PATCH':
                     if (logedIn) {
