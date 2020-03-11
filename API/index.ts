@@ -75,13 +75,15 @@ exports.handler = async (event: any) => {
                     const round = event.queryStringParameters && event.queryStringParameters.round || getCurrentRound();
                     const choice = event.queryStringParameters && event.queryStringParameters.choice;
                     if (choice) {
-                        const numbers = await getIncOrExcNumbers(userName, round, choice);
-                        body = {numbers};
+                        body = {};
                         if(!event.queryStringParameters.round){
-                            const rounds = await getIncOrExcRounds(userName, choice);
-                            body.rounds = rounds;
+                            body.rounds = await getIncOrExcRounds(userName, choice);
+                            body.numbers = await getIncOrExcNumbers(userName, Number(body.rounds[body.rounds.length-1]), choice);
+                        }else{
+                            body.numbers = await getIncOrExcNumbers(userName, round, choice);
                         }
-                        if(round !== getCurrentRound()){
+
+                        if(round <= getCurrentRound()){
                             body.answer = await getLotto(round);
                         }
                     } else {
