@@ -1,4 +1,4 @@
-import {Response} from '../class'
+import Response from '../Response'
 
 export function getCurrentRound(currentDate?: string): number {
     const theDate = new Date('2020-02-01:11:45');

@@ -1,6 +1,7 @@
 import DB, { OrderOption } from "../Engine/Method"
 import Comments, { Comment } from '../Comments/index'
 import PostsContents from "../PostsContents";
+import { updateRecommendUsers } from "../../dynamoDB/recommend";
 
 interface Post {
     id: number;
@@ -34,7 +35,7 @@ export default class Posts extends DB {
         return rows[0]['COUNT(*)'];
     }
     async get(id: number) {
-        const rows = await this.query(`SELECT category, title, writerId, writerName, created, hits, text as 'contents' FROM ${this.tableName} INNER JOIN PostsContents ON ${this.tableName}.id = PostsContents.post WHERE ${this.tableName}.id=?`, [id]);
+        const rows = await this.query(`SELECT category, title, writerId, writerName, created, hits, recommendation text as 'contents' FROM ${this.tableName} INNER JOIN PostsContents ON ${this.tableName}.id = PostsContents.post WHERE ${this.tableName}.id=?`, [id]);
         const post = rows[0];
         const comments = await this.comments.getByPost(id);
         if (comments) post.comments = comments;
@@ -69,10 +70,17 @@ export default class Posts extends DB {
         return insertId;
     }
 
-    async patch(id: number, title: string, contents: string) {
+    async updateContents(id: number, title: string, contents: string) {
         await this._patch({ key: 'id', value: id }, { title })
         const changedRows = await this.postsContents.patch(id, contents);
         return changedRows;
+    }
+    async updateRecommends(id: number, userName:string) {
+        let operand = 1;
+        const response = await updateRecommendUsers(id, userName);
+        if(response.error) operand = -1;
+        const sql = `UPDATE ${this.tableName} SET recommendation = recommendation + ? WHERE num = ?`;
+        return this.engine.promisePool.execute(sql, [operand, id]);
     }
     async delete(id: number) {
         const affectedRows = await super._delete({ key: 'id', value: id });

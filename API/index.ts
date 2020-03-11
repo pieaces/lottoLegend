@@ -4,6 +4,7 @@ import { getCurrentRound, isIdentical } from "./funtions";
 import Posts from "./mariaDB/Posts";
 import Comments from "./mariaDB/Comments";
 import { getIncOrExcNumbers, IncOrExc } from './dynamoDB/myNumbers'
+import { getRecommendUsers } from "./dynamoDB/recommend";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -61,7 +62,7 @@ exports.handler = async (event: any) => {
             break;
         case '/posts/{postId}': {
             const db = new Posts();
-            const postId = event.pathParameters.postId;
+            const postId = Number(event.pathParameters.postId);
             switch (method) {
                 case 'GET':
                     const flag = event.queryStringParameters && event.queryStringParameters.flag;
@@ -79,12 +80,13 @@ exports.handler = async (event: any) => {
                         const post = await db.getTitleContents(postId);
                         body = post;
                     }
+                    body.recommend = (await getRecommendUsers(postId)).indexOf(currentId) !== -1;
                     break;
                 case 'PATCH': {
                     const response = isIdentical(currentId, (await db.getWriterId(postId)));
                     if (!response.error) {
                         const { title, contents } = JSON.parse(event.body)
-                        const changedRows = await db.patch(postId, title, contents)
+                        const changedRows = await db.updateContents(postId, title, contents)
                         body = changedRows;
                     } else {
                         statusCode = 400;
@@ -108,7 +110,7 @@ exports.handler = async (event: any) => {
             break;
         case '/posts/{postId}/comments': {
             const db = new Comments();
-            const postId = event.pathParameters.postId;
+            const postId = Number(event.pathParameters.postId);
             switch (method) {
                 case 'GET':
                     const comments = await db.getByPost(postId);
@@ -129,7 +131,7 @@ exports.handler = async (event: any) => {
             break;
         case '/posts/{postId}/comments/{commentId}': {
             const db = new Comments();
-            const commentId = event.pathParameters.commentId;
+            const commentId = Number(event.pathParameters.commentId);
             const response = isIdentical(currentId, (await db.getWriterId(commentId)));
             if (!response.error) {
                 switch (method) {
@@ -146,6 +148,21 @@ exports.handler = async (event: any) => {
             } else {
                 statusCode = 400;
                 body = response.message;
+            }
+        }
+            break;
+        case '/recommend/{postId}': {
+            switch (method) {
+                case 'PATCH':
+                    if (logedIn) {
+                        const db = new Posts();
+                        const postId = Number(event.pathParameters.postId);
+                        await db.updateRecommends(postId, currentId);
+                    } else {
+                        statusCode = 400;
+                        body = "로그인되지 않은 사용자입니다."
+                    }
+                    break;
             }
         }
             break;
