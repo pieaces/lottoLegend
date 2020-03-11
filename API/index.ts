@@ -5,6 +5,7 @@ import Posts from "./mariaDB/Posts";
 import Comments from "./mariaDB/Comments";
 import { getIncOrExcNumbers, IncOrExc } from './dynamoDB/myNumbers'
 import { getRecommendUsers } from "./dynamoDB/recommend";
+import { getRank } from "./dynamoDB/userInfo";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -81,6 +82,7 @@ exports.handler = async (event: any) => {
                         body = post;
                     }
                     body.recommend = (await getRecommendUsers(postId)).indexOf(currentId) !== -1;
+                    body.rank = (await getRank(body.writerId));
                     break;
                 case 'PATCH': {
                     const response = isIdentical(currentId, (await db.getWriterId(postId)));
