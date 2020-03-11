@@ -289,7 +289,6 @@ export function getIncOrExcNumbers(userName: string, round: number, choice: IncO
     });
 }
 
-
 export function getIncOrExcRounds(userName: string, choice: IncOrExc): Promise<string[]> {
     const params = {
         TableName,
