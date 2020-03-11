@@ -1,6 +1,6 @@
 
 .stats-home-title{
-    background: #357aab;
+    background: var(--main-color);
     height:21rem;
     display:flex;
     align-items: center;

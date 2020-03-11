@@ -98,10 +98,18 @@ async function init() {
             recommendBtn.classList.add('recommend');
         }
         recommendBtn.addEventListener('click', async () =>{
+            loading.classList.remove('none')
             await patchAuthAPI(`/posts/${id}/recommend`);
             recommendStatus = !recommendStatus;
-            if(recommendStatus) recommendBtn.classList.add('recommend');
-            else recommendBtn.classList.remove('recommend');
+            if(recommendStatus) {
+                recommendBtn.classList.add('recommend');
+                recommendation.textContent = (Number(recommendation.textContent)+1).toString();
+            }
+            else {
+                recommendBtn.classList.remove('recommend');
+                recommendation.textContent = (Number(recommendation.textContent)-1).toString();
+            }
+            loading.classList.add('none')
         })
         contentsInput.innerHTML = post.contents;
         
