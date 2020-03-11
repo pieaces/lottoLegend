@@ -31,7 +31,7 @@ commentSubmit.onclick = async function () {
     if (Number(charCurrentCount.textContent) > 0 && currentUser) {
         try {
             const commentId = await postAuthAPI(`/posts/${id}/comments`, { contents: txtArea.value });
-            makeComments([{ id: commentId, userName: currentUser, nickName: await getNickName(), created: new Date().toISOString(), contents: txtArea.value }]);
+            makeComments([{ id: commentId, userName: currentUser, nickName: await getNickName(), rank:'', created: new Date().toISOString(), contents: txtArea.value }]);
             txtArea.value = "";
             Swal.fire({
                 title: '완료',
@@ -47,7 +47,7 @@ commentSubmit.onclick = async function () {
         else alert('1글자 이상 입력해주세요.');
     }
 }
-function rankToClass(rank:number, object:HTMLElement){
+function rankToClass(rank:number|string, object:HTMLElement){
     switch(rank){
         case 1: object.classList.add('rank-first');
         break;
@@ -59,6 +59,7 @@ function rankToClass(rank:number, object:HTMLElement){
         break;
         case 5: object.classList.add('rank-fifth');
         break;
+        default: object.id = 'heart';
     }
 }
 async function init() {
