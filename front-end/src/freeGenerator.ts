@@ -195,6 +195,7 @@ async function init() {
             } else {
                 lineInputTable.style.border = "";
                 dataSet = await getAuthAPI('/numbers/generator/free');
+
                 const numBoard = new NumBoard(dataSet);
                 numBoard.makeNumBoard();
                 const checkBoxToggle = new CheckBoxToggle();
