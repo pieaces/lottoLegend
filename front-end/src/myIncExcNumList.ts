@@ -38,8 +38,7 @@ async function init() {
     //     node.textContent = winNum[index].toString();
     //     Layout3.setColorLotto(winNum[index], node);
     // })
-
-
+    loading.classList.add('none');
 }
 
 roundSelectBox.addEventListener('change', async () => {
@@ -48,8 +47,6 @@ roundSelectBox.addEventListener('change', async () => {
     makePage(data);
     loading.classList.add('none');
 });
-
-loading.classList.add('none');
 
 function makePage(data: { numbers: number[], answer?: number[] }) {
     numContainer.innerHTML = '';
