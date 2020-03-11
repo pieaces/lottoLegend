@@ -8,179 +8,186 @@ configure();
 const numToggleBtn = document.querySelectorAll('.mypage-table-num-toggle');
 
 
-// init();
+init();
 
-// async function init() {
-//     const dataSet = await getAuthAPI('/numbers/generator/free');
-//     // makeTable(dataSet);
-//     // CheckBoxToggle.init();
-//     // CheckBoxToggle.allCheck();
-// }
-
-
-// function makeTable(dataSet: { numbers: number[], winner: number[] }[]) {
-
-//     for (let i = 0; i < dataSet.length; i++) {
-//         const tr = document.createElement('tr');
-//         tr.classList.add('mypage-table-num-list-box');
-
-//         makeCheckBox(tr);
-
-//         // 데이터 부분 시작
-//         const numberInfoArr = new Array([
-//             dataSet[i]["round"],
-//             dataSet[i]["date"],
-//             dataSet[i]["auto"],
-//         ])
-//         // 데이터 부분 끝
-
-//         for (let i = 0; i < numberInfoArr.length; i++) {
-//             const td = document.createElement('td');
-//             td.textContent = numberInfoArr[i].toString();
-//             tr.appendChild(td);
-//         }
+async function init() {
+    const dataSet = await getAuthAPI('/numbers/generator/free');
+    makeTable(dataSet);
+    const checkBoxToggle = new CheckBoxToggle();
+    checkBoxToggle.addEvent();
+}
 
 
+function makeTable(dataSet: { numbers: number[], winner: number[] }[]) {
 
-//         const tdNumList = document.createElement('td');
-//         const numBox = document.createElement('div');
-//         numBox.classList.add('mypage-table-num-list');
+    for (let i = 0; i < dataSet.length; i++) {
+        const tableContent = document.createElement('div');
+        tableContent.classList.add('mypage-table-content');
 
-//         for (let j = 0; j < dataSet[i].numbers.length; j++) {
-//             const num = document.createElement('div');
-//             num.textContent = dataSet[i].numbers[j].toString();
-//             Layout3.setColorLotto(dataSet[i].numbers[j], num);
-//             numBox.appendChild(num);
-//         }
-//         tdNumList.appendChild(numBox);
-//         tr.appendChild(tdNumList);
+        const tableCheckBox = document.createElement('div');
 
-//         const tdNumInfo = document.createElement('td');
-//         const numInfoBtn = document.createElement('button');
-//         numInfoBtn.classList.add('btn', 'box-color', 'mypage-table-num-toggle');
-//         numInfoBtn.textContent = "번호정보";
-//         tr.appendChild(tdNumInfo);
-
-//         // 데이터 부분 시작
-//         const tdWin = document.createElement('td');
-//         tdWin.textContent = dataSet[i].isWin;
-//         tr.appendChild(tdWin);
-//         // 데이터 부분 끝
+        tableCheckBox.classList.add('mynum-table-checkbox');
 
 
-//         tableBody.appendChild(tr);
+        const checkBoxContainer = document.createElement('div');
+        checkBoxContainer.classList.add('input-checkbox-container');
 
-//         makePastWinTable(dataSet[i].winner);
-//         makeFilterTable(dataSet, i, tableBody);
+        const checkBox = document.createElement('input');
+        checkBox.setAttribute('type', 'checkbox');
+        checkBoxContainer.appendChild(checkBox);
 
-//     }
+        const checkBoxTextBox = document.createElement('div');
+        checkBoxTextBox.classList.add('input-checkbox-text-box');
 
-//     function makeFilterTable(dataSet: { numbers: number[], winner: number[] }[], currentVar, target) {
+        const checkBoxText = document.createElement('div');
+        checkBoxText.classList.add('input-checkbox-text', 'none');
 
-//         const listFilterTableMap = new Map([
-//             ["저값개수", dataSet[currentVar]["lowCount"]],
-//             ["번호합계", dataSet[currentVar]["sum"]],
-//             ["홀수개수", dataSet[currentVar]["oddCount"]],
-//             ["소수개수", dataSet[currentVar]["primeCount"]],
-//             ["3배수개수", dataSet[currentVar]["$3Count"]],
-//             ["첫수 합", dataSet[currentVar]["sum$10"]],
-//             ["고저 차", dataSet[currentVar]["diffMaxMin"]],
-//             ["AC", dataSet[currentVar]["AC"]]
-//         ])
+        checkBoxTextBox.appendChild(checkBoxText);
+        checkBoxContainer.appendChild(checkBoxTextBox);
+        tableCheckBox.appendChild(checkBoxContainer);
+        tableContent.appendChild(tableCheckBox);
 
-//         const filterTableBox = document.createElement('tr');
-//         filterTableBox.classList.add('func3-list-filter-table-box');
+        const tableRound = document.createElement('div');
+        tableRound.classList.add('mynum-table-round');
+        tableRound.textContent = dataSet[i]["round"];
 
-//         const tdBox = document.createElement('td');
-//         tdBox.setAttribute('colspan', '7');
+        tableContent.appendChild(tableRound);
 
-//         const listFilterTable = document.createElement('table');
+        const tableDate = document.createElement('div');
+        tableDate.classList.add('mynum-table-date');
+        tableDate.textContent = dataSet[i]["date"];
 
-//         listFilterTable.classList.add('table', 'func3-list-filter-table');
+        tableContent.appendChild(tableDate);
 
-//         const tbody = document.createElement('tbody');
+        const tableAuto = document.createElement('div');
+        tableAuto.classList.add('mynum-table-auto');
+        tableAuto.textContent = dataSet[i]["auto"];
 
-//         const listFilterTableTrTitle = document.createElement('tr');
+        tableContent.appendChild(tableAuto);
 
-//         listFilterTableMap.forEach((value, key) => {
-//             const td = document.createElement('td');
-//             td.textContent = key;
-//             listFilterTableTrTitle.appendChild(td);
-//         })
+        const tableNum = document.createElement('div');
 
-//         tbody.appendChild(listFilterTableTrTitle);
+        tableNum.classList.add('mynum-table-num');
 
-//         const listFilterTableTrValue = document.createElement('tr');
+        const tableNumList = document.createElement('div');
 
-//         listFilterTableMap.forEach((value, key) => {
-//             const td = document.createElement('td');
-//             td.textContent = value;
-//             listFilterTableTrValue.appendChild(td);
-//         })
+        tableNumList.classList.add('mypage-table-num-list');
 
-//         tbody.appendChild(listFilterTableTrValue);
+        for (let j = 0; j < dataSet[i].numbers.length; i++) {
+            const div = document.createElement('div');
+            div.textContent = dataSet[i].numbers[j].toString();
+            Layout3.setColorLotto(dataSet[i].numbers[j], div);
+            tableNumList.appendChild(div);
+        }
 
-//         listFilterTable.appendChild(tbody);
-//         tdBox.appendChild(listFilterTable);
-//         filterTableBox.appendChild(tdBox);
-//         target.appendChild(filterTableBox);
-//     }
+        tableNum.appendChild(tableNumList);
+        tableContent.appendChild(tableNum);
 
-//     function makeCheckBox(tr: HTMLElement) {
-//         const tdCheckBox = document.createElement('td');
+        const numInfo = document.createElement('div');
+        numInfo.classList.add('mynum-table-num-info');
 
-//         const checkBoxContainer = document.createElement('div');
-//         checkBoxContainer.classList.add('input-checkbox-container');
+        const tableToggleBtn = document.createElement('button');
+        tableToggleBtn.setAttribute('type', 'button');
+        tableToggleBtn.classList.add('btn', 'mypage-table-num-toggle', 'box-color');
+        tableToggleBtn.textContent = "번호정보";
 
-//         const checkBox = document.createElement('input');
-//         checkBox.setAttribute('type', 'checkbox');
-//         checkBoxContainer.appendChild(checkBox);
+        numInfo.appendChild(tableToggleBtn);
+        tableContent.appendChild(numInfo);
 
-//         const checkBoxTextBox = document.createElement('div');
-//         checkBoxTextBox.classList.add('input-checkbox-text-box');
+        const tableIsWin = document.createElement('div');
+        tableIsWin.classList.add('mynum-table-iswin');
+        tableIsWin.textContent = dataSet[i]["iswin"];
 
-//         const checkBoxText = document.createElement('div');
-//         checkBoxText.classList.add('input-checkbox-text', 'none');
+        tableContent.appendChild(tableIsWin);
 
-//         checkBoxTextBox.appendChild(checkBoxText);
-//         checkBoxContainer.appendChild(checkBoxTextBox);
-//         tdCheckBox.appendChild(checkBoxContainer);
-//         tr.appendChild(tdCheckBox);
-//     }
 
-//     function makePastWinTable(pastWinNum: number[]) {
-//         const trBox = document.createElement('tr');
-//         trBox.classList.add('func3-past-win-table-box');
+    }
 
-//         const tdBox = document.createElement('td');
-//         tdBox.setAttribute('colspan', '7');
+    function makeFilterTable(dataSet: { numbers: number[], winner: number[] }[], currentVar, target) {
 
-//         const table = document.createElement('table');
-//         table.classList.add('table', 'func3-past-win-table');
+        const listFilterTableMap = new Map([
+            ["저값개수", dataSet[currentVar]["lowCount"]],
+            ["번호합계", dataSet[currentVar]["sum"]],
+            ["홀수개수", dataSet[currentVar]["oddCount"]],
+            ["소수개수", dataSet[currentVar]["primeCount"]],
+            ["3배수개수", dataSet[currentVar]["$3Count"]],
+            ["첫수 합", dataSet[currentVar]["sum$10"]],
+            ["고저 차", dataSet[currentVar]["diffMaxMin"]],
+            ["AC", dataSet[currentVar]["AC"]]
+        ])
 
-//         const tbody = document.createElement('tbody');
+        const filterTableBox = document.createElement('tr');
+        filterTableBox.classList.add('func3-list-filter-table-box');
 
-//         const tr = document.createElement('tr');
+        const tdBox = document.createElement('td');
+        tdBox.setAttribute('colspan', '7');
 
-//         const tdText = document.createElement('td');
-//         tdText.textContent = "역대기록";
+        const listFilterTable = document.createElement('table');
 
-//         tr.appendChild(tdText);
+        listFilterTable.classList.add('table', 'func3-list-filter-table');
 
-//         for (let i = 0; i < pastWinNum.length; i++) {
-//             const td = document.createElement('td');
-//             td.textContent = pastWinNum[i].toString();
-//             tr.appendChild(td);
-//         }
+        const tbody = document.createElement('tbody');
 
-//         tbody.appendChild(tr);
-//         table.appendChild(tbody);
-//         tdBox.appendChild(table);
-//         trBox.appendChild(tdBox);
-//         tableBody.appendChild(trBox);
+        const listFilterTableTrTitle = document.createElement('tr');
 
-//     }
-// }
+        listFilterTableMap.forEach((value, key) => {
+            const td = document.createElement('td');
+            td.textContent = key;
+            listFilterTableTrTitle.appendChild(td);
+        })
+
+        tbody.appendChild(listFilterTableTrTitle);
+
+        const listFilterTableTrValue = document.createElement('tr');
+
+        listFilterTableMap.forEach((value, key) => {
+            const td = document.createElement('td');
+            td.textContent = value;
+            listFilterTableTrValue.appendChild(td);
+        })
+
+        tbody.appendChild(listFilterTableTrValue);
+
+        listFilterTable.appendChild(tbody);
+        tdBox.appendChild(listFilterTable);
+        filterTableBox.appendChild(tdBox);
+        target.appendChild(filterTableBox);
+    }
+
+
+    function makePastWinTable(pastWinNum: number[]) {
+        const trBox = document.createElement('tr');
+        trBox.classList.add('func3-past-win-table-box');
+
+        const tdBox = document.createElement('td');
+        tdBox.setAttribute('colspan', '7');
+
+        const table = document.createElement('table');
+        table.classList.add('table', 'func3-past-win-table');
+
+        const tbody = document.createElement('tbody');
+
+        const tr = document.createElement('tr');
+
+        const tdText = document.createElement('td');
+        tdText.textContent = "역대기록";
+
+        tr.appendChild(tdText);
+
+        for (let i = 0; i < pastWinNum.length; i++) {
+            const td = document.createElement('td');
+            td.textContent = pastWinNum[i].toString();
+            tr.appendChild(td);
+        }
+
+        tbody.appendChild(tr);
+        table.appendChild(tbody);
+        tdBox.appendChild(table);
+        trBox.appendChild(tdBox);
+        tableBody.appendChild(trBox);
+
+    }
+}
 
 numToggleBtn.forEach((node) => {
     node.addEventListener('click', numToggle(node));
@@ -188,14 +195,18 @@ numToggleBtn.forEach((node) => {
 
 function numToggle(node) {
     let flag = false;
-    const table = node.parentNode.parentNode.nextElementSibling;
+    const tableContent = node.parentNode.parentNode;
+    const table = tableContent.nextElementSibling;
     return function () {
         if (!flag) {
             table.classList.remove('none');
+
+            tableContent.style.borderBottom = "none";
             flag = true;
         }
         else {
             table.classList.add('none');
+            tableContent.style.borderBottom = "1px solid rgba(0,0,0,0.1)";
             flag = false;
         }
     }

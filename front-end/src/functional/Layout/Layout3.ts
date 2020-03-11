@@ -14,6 +14,78 @@ export default class Layout3 {
         }
     }
 
+    static makePastTable(dataSet: { numbers: number[], winner: number[] }[], currentVar, target) {
+        const pastWinBox = document.createElement('div');
+        pastWinBox.classList.add('func3-past-win-box');
+        const pastWinTable = document.createElement('table');
+        pastWinTable.classList.add('table', 'func3-past-win-table');
+        const pastWinTableTr = document.createElement('tr');
+
+        const pastWinTableTdFirst = document.createElement('td');
+        pastWinTableTdFirst.textContent = "역대기록";
+
+        pastWinTableTr.appendChild(pastWinTableTdFirst);
+
+        for (let j = 0; j < dataSet[currentVar].winner.length; j++) {
+            const td = document.createElement('td');
+            td.textContent = `${j + 1}등 : ${dataSet[currentVar].winner[j]}`;
+            if (dataSet[currentVar].winner[j] === 0) {
+                td.style.color = "#a0a0a0";
+            }
+            pastWinTableTr.appendChild(td);
+        }
+
+        pastWinTable.appendChild(pastWinTableTr);
+        pastWinBox.appendChild(pastWinTable);
+
+        target.appendChild(pastWinBox);
+    }
+
+    static makeFilterTable(dataSet: { numbers: number[], winner: number[] }[], currentVar, target) {
+        const filterNumInfo = document.createElement('div');
+        filterNumInfo.classList.add('func3-filter-num-info');
+
+        const listFilterTable = document.createElement('table');
+
+        listFilterTable.classList.add('table', 'func3-list-filter-table');
+
+
+        const listFilterTableMap = new Map([
+            ["저값개수", dataSet[currentVar]["lowCount"]],
+            ["번호합계", dataSet[currentVar]["sum"]],
+            ["홀수개수", dataSet[currentVar]["oddCount"]],
+            ["소수개수", dataSet[currentVar]["primeCount"]],
+            ["3배수개수", dataSet[currentVar]["$3Count"]],
+            ["첫수 합", dataSet[currentVar]["sum$10"]],
+            ["고저 차", dataSet[currentVar]["diffMaxMin"]],
+            ["AC", dataSet[currentVar]["AC"]]
+        ])
+
+        const listFilterTableTrTitle = document.createElement('tr');
+
+        listFilterTableMap.forEach((value, key) => {
+            const td = document.createElement('td');
+            td.textContent = key;
+            listFilterTableTrTitle.appendChild(td);
+        })
+
+        listFilterTable.appendChild(listFilterTableTrTitle);
+
+        const listFilterTableTrValue = document.createElement('tr');
+
+        listFilterTableMap.forEach((value, key) => {
+            const td = document.createElement('td');
+            td.textContent = value;
+            listFilterTableTrValue.appendChild(td);
+        })
+
+        listFilterTable.appendChild(listFilterTableTrValue);
+
+        filterNumInfo.appendChild(listFilterTable);
+
+        target.appendChild(filterNumInfo);
+    }
+
     static makeNumBoard(dataSet: { numbers: number[], winner: number[] }[]) {
         numContainerBox.innerHTML = '';
         console.log(dataSet);
@@ -67,73 +139,9 @@ export default class Layout3 {
             const tableBox = document.createElement('div');
             tableBox.classList.add('func3-past-filter-box')
 
-            const pastWinBox = document.createElement('div');
-            pastWinBox.classList.add('func3-past-win-box');
-            const pastWinTable = document.createElement('table');
-            pastWinTable.classList.add('table', 'func3-past-win-table');
-            const pastWinTableTr = document.createElement('tr');
+            this.makePastTable(dataSet, i, tableBox);
+            this.makeFilterTable(dataSet, i, tableBox);
 
-            const pastWinTableTdFirst = document.createElement('td');
-            pastWinTableTdFirst.textContent = "역대기록";
-
-            pastWinTableTr.appendChild(pastWinTableTdFirst);
-
-            for (let j = 0; j < dataSet[i].winner.length; j++) {
-                const td = document.createElement('td');
-                td.textContent = `${j + 1}등 : ${dataSet[i].winner[j]}`;
-                if (dataSet[i].winner[j] === 0) {
-                    td.style.color = "#a0a0a0";
-                }
-                pastWinTableTr.appendChild(td);
-            }
-
-            pastWinTable.appendChild(pastWinTableTr);
-            pastWinBox.appendChild(pastWinTable);
-
-            tableBox.appendChild(pastWinBox);
-
-            const filterNumInfo = document.createElement('div');
-            filterNumInfo.classList.add('func3-filter-num-info');
-
-            const listFilterTable = document.createElement('table');
-
-            listFilterTable.classList.add('table', 'func3-list-filter-table');
-
-
-            const listFilterTableMap = new Map([
-                ["저값개수", dataSet[i]["lowCount"]],
-                ["번호합계", dataSet[i]["sum"]],
-                ["홀수개수", dataSet[i]["oddCount"]],
-                ["소수개수", dataSet[i]["primeCount"]],
-                ["3배수개수", dataSet[i]["$3Count"]],
-                ["첫수 합", dataSet[i]["sum$10"]],
-                ["고저 차", dataSet[i]["diffMaxMin"]],
-                ["AC", dataSet[i]["AC"]]
-            ])
-
-            const listFilterTableTrTitle = document.createElement('tr');
-
-            listFilterTableMap.forEach((value, key) => {
-                const td = document.createElement('td');
-                td.textContent = key;
-                listFilterTableTrTitle.appendChild(td);
-            })
-
-            listFilterTable.appendChild(listFilterTableTrTitle);
-
-            const listFilterTableTrValue = document.createElement('tr');
-
-            listFilterTableMap.forEach((value, key) => {
-                const td = document.createElement('td');
-                td.textContent = value;
-                listFilterTableTrValue.appendChild(td);
-            })
-
-            listFilterTable.appendChild(listFilterTableTrValue);
-
-            filterNumInfo.appendChild(listFilterTable);
-
-            tableBox.appendChild(filterNumInfo);
             numContainer.appendChild(tableBox);
 
             numContainerBox.appendChild(numContainer);
