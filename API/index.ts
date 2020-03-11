@@ -77,12 +77,12 @@ exports.handler = async (event: any) => {
                             post.excl = await getIncOrExcNumbers(post.userName, getCurrentRound(post.created), IncOrExc.exclude);
                         }
                         body = post;
+                        body.recommend = (await getRecommendUsers(postId)).indexOf(currentId) !== -1;
+                        body.rank = (await getRank(body.userName));                        
                     } else {
                         const post = await db.getTitleContents(postId);
                         body = post;
                     }
-                    body.recommend = (await getRecommendUsers(postId)).indexOf(currentId) !== -1;
-                    body.rank = (await getRank(body.userName));
                     break;
                 case 'PATCH': {
                     const response = isIdentical(currentId, (await db.getUserName(postId)));
@@ -153,7 +153,7 @@ exports.handler = async (event: any) => {
             }
         }
             break;
-        case 'posts/{postId}recommend': {
+        case '/posts/{postId}/recommend': {
             switch (method) {
                 case 'PATCH':
                     if (logedIn) {

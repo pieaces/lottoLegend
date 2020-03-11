@@ -21,7 +21,7 @@ export default class Posts extends DB {
     }
     async scan(category: string = "free", index: number = 1) {
         const MAX = 10;
-        const sql = `SELECT id, title, Users.userName AS 'userName', Users.nickName AS 'nickName', Users.rank created, hits, recommendation FROM Posts INNER JOIN Users ON Posts.userName = Users.userName WHERE category = ? ORDER BY created DESC LIMIT ?, ?`;
+        const sql = `SELECT id, title, Users.nickName AS 'nickName', Users.rank AS 'rank', created, hits, recommendation FROM Posts INNER JOIN Users ON Posts.userName = Users.userName WHERE category = ? ORDER BY created DESC LIMIT ?, ?`;
         return await this.query(sql, [category, MAX*(index-1), MAX]);
     }
     async getCount(category: string): Promise<number> {
@@ -73,7 +73,7 @@ export default class Posts extends DB {
         let operand = 1;
         const response = await updateRecommendUsers(id, userName);
         if(response.error) operand = -1;
-        const sql = `UPDATE ${this.tableName} SET recommendation = recommendation + ? WHERE num = ?`;
+        const sql = `UPDATE ${this.tableName} SET recommendation = recommendation + ? WHERE id = ?`;
         return this.engine.promisePool.execute(sql, [operand, id]);
     }
     async delete(id: number) {
