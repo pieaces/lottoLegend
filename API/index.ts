@@ -6,6 +6,7 @@ import Comments from "./mariaDB/Comments";
 import { getIncOrExcNumbers, IncOrExc } from './dynamoDB/myNumbers'
 import { getRecommendUsers } from "./dynamoDB/recommend";
 import { getRank } from "./dynamoDB/userInfo";
+import Users from "./mariaDB/Users";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -122,7 +123,9 @@ exports.handler = async (event: any) => {
                     if (logedIn) {
                         const { contents } = JSON.parse(event.body);
                         const insertId = await db.post(postId, currentId, contents);
-                        body = insertId;
+                        const users = new Users();
+                        const {rank} = await users.getRank(currentId);
+                        body = {commentId:insertId, rank};
                     } else {
                         statusCode = 400;
                         body = "로그인되지 않은 사용자입니다."
