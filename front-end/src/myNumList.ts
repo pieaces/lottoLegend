@@ -138,12 +138,12 @@ function numToggle(node) {
     return function () {
         if (!flag) {
             table.classList.remove('none');
-            tableContent.style.borderBottom = "none";
+            // tableContent.style.borderBottom = "none";
             flag = true;
         }
         else {
             table.classList.add('none');
-            tableContent.style.borderBottom = "1px solid rgba(0,0,0,0.1)";
+            // tableContent.style.borderBottom = "1px solid rgba(0,0,0,0.1)";
             flag = false;
         }
     }
