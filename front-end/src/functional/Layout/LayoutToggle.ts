@@ -1,4 +1,6 @@
+
 import Layout3 from "./Layout3";
+import NumBoard from "./NumBoard";
 import DataAPI from "../DataAPI";
 import CheckBoxToggle from "../instanceBtns/CheckBoxToggle";
 // import CheckboxToggle from '../CheckboxToggle/CheckBoxToggle'
@@ -61,7 +63,8 @@ export default function LayoutToggle<TBase extends Constructor>(Base: TBase) {
         }
 
         layout3_1On(data: any) {
-            Layout3.makeNumBoard(DataAPI.getInstance().numbersData);
+            const numBoard = new NumBoard(DataAPI.getInstance().numbersData);
+            numBoard.makeNumBoard();
             const checkBoxToggle = new CheckBoxToggle();
             checkBoxToggle.addEvent();
             console.log(data);

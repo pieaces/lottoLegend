@@ -1,24 +1,61 @@
 import configure from './amplify/configure'
 import Layout3 from './functional/Layout/Layout3'
+import NumBoard from "./functional/Layout/NumBoard";
 import { getAuthAPI } from './amplify/api';
 import CheckBoxToggle from './functional/instanceBtns/CheckBoxToggle';
-
+import DataAPI from "./functional/DataAPI";
 
 configure();
-const numToggleBtn = document.querySelectorAll('.mypage-table-num-toggle');
 
+const tableNumBox = document.querySelector('.mypage-table-num-box');
 
 init();
 
 async function init() {
-    const dataSet = await getAuthAPI('/numbers/generator/free');
+    const dataSet = [{
+        numbers: [1, 2, 3, 4, 5, 6],
+        winner: [2, 3, 4, 5],
+        round: 1,
+        date: 10,
+        auto: "자동",
+        iswin: "당첨!"
+    },
+    {
+        numbers: [1, 2, 3, 4, 5, 6],
+        winner: [2, 3, 4, 5],
+        round: 1,
+        date: 10,
+        auto: "자동",
+        iswin: "당첨!"
+    },
+    {
+        numbers: [1, 2, 3, 4, 5, 6],
+        winner: [2, 3, 4, 5],
+        round: 1,
+        date: 10,
+        auto: "자동",
+        iswin: "당첨!"
+    }
+    ];
+
     makeTable(dataSet);
+
+    const pastFilterTable = document.querySelectorAll('.func3-past-filter-box');
+    pastFilterTable.forEach((node) => {
+        node.classList.add('none');
+    })
+
+    const numToggleBtn = document.querySelectorAll('.mypage-table-num-toggle');
+    numToggleBtn.forEach((node) => {
+        node.addEventListener('click', numToggle(node));
+    })
+
     const checkBoxToggle = new CheckBoxToggle();
     checkBoxToggle.addEvent();
 }
 
 
-function makeTable(dataSet: { numbers: number[], winner: number[] }[]) {
+function makeTable(dataSet) {
 
     for (let i = 0; i < dataSet.length; i++) {
         const tableContent = document.createElement('div');
@@ -28,23 +65,8 @@ function makeTable(dataSet: { numbers: number[], winner: number[] }[]) {
 
         tableCheckBox.classList.add('mynum-table-checkbox');
 
+        Layout3.makeInputCheckBox(tableCheckBox);
 
-        const checkBoxContainer = document.createElement('div');
-        checkBoxContainer.classList.add('input-checkbox-container');
-
-        const checkBox = document.createElement('input');
-        checkBox.setAttribute('type', 'checkbox');
-        checkBoxContainer.appendChild(checkBox);
-
-        const checkBoxTextBox = document.createElement('div');
-        checkBoxTextBox.classList.add('input-checkbox-text-box');
-
-        const checkBoxText = document.createElement('div');
-        checkBoxText.classList.add('input-checkbox-text', 'none');
-
-        checkBoxTextBox.appendChild(checkBoxText);
-        checkBoxContainer.appendChild(checkBoxTextBox);
-        tableCheckBox.appendChild(checkBoxContainer);
         tableContent.appendChild(tableCheckBox);
 
         const tableRound = document.createElement('div');
@@ -73,7 +95,7 @@ function makeTable(dataSet: { numbers: number[], winner: number[] }[]) {
 
         tableNumList.classList.add('mypage-table-num-list');
 
-        for (let j = 0; j < dataSet[i].numbers.length; i++) {
+        for (let j = 0; j < dataSet[i].numbers.length; j++) {
             const div = document.createElement('div');
             div.textContent = dataSet[i].numbers[j].toString();
             Layout3.setColorLotto(dataSet[i].numbers[j], div);
@@ -100,98 +122,14 @@ function makeTable(dataSet: { numbers: number[], winner: number[] }[]) {
 
         tableContent.appendChild(tableIsWin);
 
+        tableNumBox.appendChild(tableContent);
+
+        const numBoard = new NumBoard(dataSet);
+        numBoard.makePastFilterTable(i, tableNumBox);
 
     }
 
-    function makeFilterTable(dataSet: { numbers: number[], winner: number[] }[], currentVar, target) {
-
-        const listFilterTableMap = new Map([
-            ["저값개수", dataSet[currentVar]["lowCount"]],
-            ["번호합계", dataSet[currentVar]["sum"]],
-            ["홀수개수", dataSet[currentVar]["oddCount"]],
-            ["소수개수", dataSet[currentVar]["primeCount"]],
-            ["3배수개수", dataSet[currentVar]["$3Count"]],
-            ["첫수 합", dataSet[currentVar]["sum$10"]],
-            ["고저 차", dataSet[currentVar]["diffMaxMin"]],
-            ["AC", dataSet[currentVar]["AC"]]
-        ])
-
-        const filterTableBox = document.createElement('tr');
-        filterTableBox.classList.add('func3-list-filter-table-box');
-
-        const tdBox = document.createElement('td');
-        tdBox.setAttribute('colspan', '7');
-
-        const listFilterTable = document.createElement('table');
-
-        listFilterTable.classList.add('table', 'func3-list-filter-table');
-
-        const tbody = document.createElement('tbody');
-
-        const listFilterTableTrTitle = document.createElement('tr');
-
-        listFilterTableMap.forEach((value, key) => {
-            const td = document.createElement('td');
-            td.textContent = key;
-            listFilterTableTrTitle.appendChild(td);
-        })
-
-        tbody.appendChild(listFilterTableTrTitle);
-
-        const listFilterTableTrValue = document.createElement('tr');
-
-        listFilterTableMap.forEach((value, key) => {
-            const td = document.createElement('td');
-            td.textContent = value;
-            listFilterTableTrValue.appendChild(td);
-        })
-
-        tbody.appendChild(listFilterTableTrValue);
-
-        listFilterTable.appendChild(tbody);
-        tdBox.appendChild(listFilterTable);
-        filterTableBox.appendChild(tdBox);
-        target.appendChild(filterTableBox);
-    }
-
-
-    function makePastWinTable(pastWinNum: number[]) {
-        const trBox = document.createElement('tr');
-        trBox.classList.add('func3-past-win-table-box');
-
-        const tdBox = document.createElement('td');
-        tdBox.setAttribute('colspan', '7');
-
-        const table = document.createElement('table');
-        table.classList.add('table', 'func3-past-win-table');
-
-        const tbody = document.createElement('tbody');
-
-        const tr = document.createElement('tr');
-
-        const tdText = document.createElement('td');
-        tdText.textContent = "역대기록";
-
-        tr.appendChild(tdText);
-
-        for (let i = 0; i < pastWinNum.length; i++) {
-            const td = document.createElement('td');
-            td.textContent = pastWinNum[i].toString();
-            tr.appendChild(td);
-        }
-
-        tbody.appendChild(tr);
-        table.appendChild(tbody);
-        tdBox.appendChild(table);
-        trBox.appendChild(tdBox);
-        tableBody.appendChild(trBox);
-
-    }
 }
-
-numToggleBtn.forEach((node) => {
-    node.addEventListener('click', numToggle(node));
-})
 
 function numToggle(node) {
     let flag = false;
@@ -200,7 +138,6 @@ function numToggle(node) {
     return function () {
         if (!flag) {
             table.classList.remove('none');
-
             tableContent.style.borderBottom = "none";
             flag = true;
         }
