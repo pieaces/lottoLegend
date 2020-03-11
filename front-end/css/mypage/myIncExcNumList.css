@@ -1,50 +1,29 @@
-.win-num-box{
-    width:100%;
-    height:8rem;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--main-color);
-    margin-bottom:1rem;
-  }
-  
-  .win-num-box > div{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .win-num-box > div{
-    font-weight: 500;
-    font-size: 2.8rem;
-    color: var(--default-color);
-    width: 4.5rem;
-    height: 4.5rem;
-    margin: 0 2rem;
-    line-height: 1.7;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-  }
-
-  .win-num-times{
-      background-color: var(--main-color);
-    height:4rem;
-    font-size:2.5rem;
-    color:var(--default-color);
-    display:flex;
-    align-items: center;
-    justify-content: center;
+.func2-win-num-container{
+  height:7rem;
+  display:flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.win-date{
-    font-size:1.3rem;
-    margin-bottom:-1rem;
-    opacity: 0.7;
-    margin-left:0.5rem;
+.func2-win-num-text {
+  font-size:1.4rem;
 }
 
-.win-num-round {
-    font-weight: bold;
+.func2-win-num-box {
+  display: flex;
+  margin-left:3rem;
+}
+
+.func2-win-num-box > div {
+  font-size:1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  margin-right: 2rem;
+  color: var(--default-color);
+  background-color: var(--main-color);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
 }

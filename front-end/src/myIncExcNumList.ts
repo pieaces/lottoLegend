@@ -10,9 +10,7 @@ const numResultPercent = document.querySelector('#mypage-num-result-value-percen
 const resultBox = document.querySelector('.mypage-num-result-box');
 const roundSelectBox = document.querySelector<HTMLSelectElement>('#round-select-box');
 const roundText = document.querySelector('#round-text');
-const winNumBox = document.querySelectorAll<HTMLElement>('.win-num-box > div');
-const winNumDate = document.querySelector('#win-date');
-
+const winNumBox = document.querySelectorAll<HTMLElement>('.func2-win-num-box > div');
 
 
 const loading = document.querySelector('.loading-box');
@@ -30,10 +28,8 @@ async function init() {
     // 당첨번호 데이터 입력
     // const winNum = [1, 2, 3, 4, 5, 6]; //당첨번호배열
     // const roundNum = 900; //회차
-    // const roundDate = "2020-03-07";
 
     // roundText.textContent = roundNum.toString();
-    // winNumDate.textContent = roundDate;
     // winNumBox.forEach((node, index) => {
     //     node.textContent = winNum[index].toString();
     //     Layout3.setColorLotto(winNum[index], node);
