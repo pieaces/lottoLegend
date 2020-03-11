@@ -12,6 +12,7 @@ const created = document.getElementById('author-time');
 const hits = document.getElementById('author-lookup');
 const recommendation = document.getElementById('recommendation');
 const contentsInput = document.getElementById('text-content');
+const postRank = document.getElementById('postRank');
 
 const commentContainerBox = document.querySelector('.comment-container-box');
 const commentNum = document.querySelector('#comment-num');
@@ -30,7 +31,7 @@ commentSubmit.onclick = async function () {
     if (Number(charCurrentCount.textContent) > 0 && currentUser) {
         try {
             const commentId = await postAuthAPI(`/posts/${id}/comments`, { contents: txtArea.value });
-            makeComments([{ id: commentId, writerId: currentUser, writerName: await getNickName(), created: new Date().toISOString(), contents: txtArea.value }]);
+            makeComments([{ id: commentId, userName: currentUser, nickName: await getNickName(), created: new Date().toISOString(), contents: txtArea.value }]);
             txtArea.value = "";
             Swal.fire({
                 title: '완료',
@@ -46,6 +47,20 @@ commentSubmit.onclick = async function () {
         else alert('1글자 이상 입력해주세요.');
     }
 }
+function rankToClass(rank:number, object:HTMLElement){
+    switch(rank){
+        case 1: object.classList.add('rank-first');
+        break;
+        case 2: object.classList.add('rank-second');
+        break;
+        case 3: object.classList.add('rank-third');
+        break;
+        case 4: object.classList.add('rank-fourth');
+        break;
+        case 5: object.classList.add('rank-fifth');
+        break;
+    }
+}
 async function init() {
     loading.classList.remove('none');
     try {
@@ -55,8 +70,10 @@ async function init() {
         const post = currentUser ? await getAuthAPI('/posts/' + id) : await getUnAuthAPI('/posts/' + id);
         console.log(post);
         title.textContent = post.title;
-        author.textContent = post.writerName;
-        if (currentUser === post.writerId) {
+        author.textContent = post.nickName;
+        postRank.textContent = post.rank;
+        rankToClass(post.rank, postRank);
+        if (currentUser === post.userName) {
             contentsUpdateBtn.classList.remove('hide');
             const category = document.querySelector<HTMLElement>('#wrapper').getAttribute('data-category');
             document.querySelector<HTMLElement>('#content-update-btn').setAttribute('onclick', `location.href='${getCategoryHtml(category, Affix.Post)}?id=${id}'`);
@@ -122,6 +139,7 @@ async function init() {
 
 function makeComments(objArr: any) {
     for (let i = 0; i < objArr.length; i++) {
+        console.log(objArr[i]);
         const commentContainer = document.createElement('div');
         commentContainer.classList.add('comment-container');
 
@@ -131,21 +149,19 @@ function makeComments(objArr: any) {
         const commentTitle = document.createElement('div');
         commentTitle.classList.add('comment-title');
 
-
-        // 랭크 삽입
-        const rank = document.createElement('span');
-        rank.textContent = '1';
-        rank.classList.add('rank', 'rank-first');
-
+        const rankElement = document.createElement('span');
+        rankElement.textContent = objArr[i].rank;
+        rankElement.classList.add('rank');
+        rankToClass(objArr[i].rank, rankElement);
         const commentAuthor = document.createElement('div');
         commentAuthor.classList.add('comment-author');
-        commentAuthor.textContent = objArr[i].writerName;
+        commentAuthor.textContent = objArr[i].nickName;
 
         const commentTime = document.createElement('div');
         commentTime.classList.add('comment-time');
         commentTime.textContent = isoStringToDate(objArr[i].created);
 
-        commentTitle.appendChild(rank);
+        commentTitle.appendChild(rankElement);
         commentTitle.appendChild(commentAuthor);
         commentTitle.appendChild(commentTime);
 
@@ -161,7 +177,7 @@ function makeComments(objArr: any) {
         deleteBtn.classList.add('btn', 'comment-update-btn');
         deleteBtn.textContent = "삭제";
 
-        if (!(currentUser === objArr[i].writerId)) updateBtnBox.classList.add('hide');
+        if (!(currentUser === objArr[i].userName)) updateBtnBox.classList.add('hide');
         else {
             // updateBtn.addEventListener('click', () =>{
             // });

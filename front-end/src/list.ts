@@ -35,7 +35,6 @@ function makeBoard(objArr: any[]) {
 
         const boardTitle = document.createElement('div');
         boardTitle.classList.add('board-title');
-        let htmlFileName: string;
 
         boardTitle.innerHTML = `<a href="./${getCategoryHtml(category, Affix.Read)}?id=${objArr[i].id}">${objArr[i].title}</a>`;
 
@@ -43,7 +42,20 @@ function makeBoard(objArr: any[]) {
 
         const boardAuthor = document.createElement('div');
         boardAuthor.classList.add('board-author');
-        boardAuthor.textContent = objArr[i].writerName;
+        let rankString: string;
+        switch (objArr[i].rank) {
+            case 1: rankString = 'first';
+            break;
+            case 2: rankString = 'second';
+            break;
+            case 3: rankString = 'third';
+            break;
+            case 4: rankString = 'fourth';
+            break;
+            case 5: rankString = 'fifth';
+            break;
+        }
+        boardAuthor.innerHTML = `<span class="rank rank-${rankString}">${objArr[i].rank}</span>${objArr[i].nickName}`;
 
         boardBox.appendChild(boardAuthor);
 
