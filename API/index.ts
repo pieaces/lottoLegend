@@ -51,7 +51,7 @@ exports.handler = async (event: any) => {
                 case 'POST':
                     if (logedIn) {
                         const { category, title, contents } = JSON.parse(event.body);
-                        const insertId = await db.post(category, title, currentId, currentName, contents);
+                        const insertId = await db.post(category, title, currentId, contents);
                         body = insertId;
                     } else {
                         statusCode = 400;
@@ -71,10 +71,10 @@ exports.handler = async (event: any) => {
                         await db.addHits(postId);
                         const post = await db.get(postId);
                         if (post.category === "incl") {
-                            post.incl = await getIncOrExcNumbers(post.writerId, getCurrentRound(post.created), IncOrExc.include);
+                            post.incl = await getIncOrExcNumbers(post.userName, getCurrentRound(post.created), IncOrExc.include);
                         }
                         else if (post.category === "excl") {
-                            post.excl = await getIncOrExcNumbers(post.writerId, getCurrentRound(post.created), IncOrExc.exclude);
+                            post.excl = await getIncOrExcNumbers(post.userName, getCurrentRound(post.created), IncOrExc.exclude);
                         }
                         body = post;
                     } else {
@@ -82,10 +82,10 @@ exports.handler = async (event: any) => {
                         body = post;
                     }
                     body.recommend = (await getRecommendUsers(postId)).indexOf(currentId) !== -1;
-                    body.rank = (await getRank(body.writerId));
+                    body.rank = (await getRank(body.userName));
                     break;
                 case 'PATCH': {
-                    const response = isIdentical(currentId, (await db.getWriterId(postId)));
+                    const response = isIdentical(currentId, (await db.getUserName(postId)));
                     if (!response.error) {
                         const { title, contents } = JSON.parse(event.body)
                         const changedRows = await db.updateContents(postId, title, contents)
@@ -97,7 +97,7 @@ exports.handler = async (event: any) => {
                 }
                     break;
                 case 'DELETE': {
-                    const response = isIdentical(currentId, (await db.getWriterId(postId)));
+                    const response = isIdentical(currentId, (await db.getUserName(postId)));
                     if (!response.error) {
                         const affectedRows = await db.delete(postId);
                         body = affectedRows;
@@ -121,7 +121,7 @@ exports.handler = async (event: any) => {
                 case 'POST':
                     if (logedIn) {
                         const { contents } = JSON.parse(event.body);
-                        const insertId = await db.post(postId, currentId, currentName, contents);
+                        const insertId = await db.post(postId, currentId, contents);
                         body = insertId;
                     } else {
                         statusCode = 400;
@@ -134,7 +134,7 @@ exports.handler = async (event: any) => {
         case '/posts/{postId}/comments/{commentId}': {
             const db = new Comments();
             const commentId = Number(event.pathParameters.commentId);
-            const response = isIdentical(currentId, (await db.getWriterId(commentId)));
+            const response = isIdentical(currentId, (await db.getUserName(commentId)));
             if (!response.error) {
                 switch (method) {
                     case 'PATCH':

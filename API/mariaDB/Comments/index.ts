@@ -1,9 +1,9 @@
-import DB, { OrderOption } from "../Engine/Method"
+import DB from "../Engine/Method"
 
 export interface Comment{
     id:number;
     post:number;
-    writerId:string;
+    userName:string;
     writerName:string;
     contents:string;
     created:Date;
@@ -14,25 +14,21 @@ export default class Comments extends DB {
         this.tableName = 'Comments';
     }
     async getByPost(post:number){
-        const option = {
-            projection:['id', 'writerId', 'writerName', 'contents', 'created'],
-            condition:{post},
-            order:{created:OrderOption.ASC}
-        };
-        return await super._get(option);
+        const sql = `SELECT id, Users.userName AS 'userName', Users.nickName AS 'nickName', contents, created FROM Comments INNER JOIN Users ON Comments.userName = Users.userName WHERE post=? ORDER BY created ASC`;
+        return await this.query(sql, [post]);
     }
-    async getWriterId(commentId:number): Promise<string>{
+    async getUserName(commentId:number): Promise<string>{
         const option = {
-            projection:['writerId'],
+            projection:['userName'],
             condition:{id:commentId},
         };
         const rows = await super._get(option);
         
-        return rows[0].writerId;
+        return rows[0].userName;
     }
-    async post(post:number, writerId: string, writerName: string, contents: string) {
+    async post(post:number, userName: string, contents: string) {
         const comment = {
-            post, writerId, writerName, contents
+            post, userName, contents
         };
         const insertId = await super._post(comment);
         return insertId;

@@ -1,4 +1,4 @@
-import DB, { OrderOption } from "../Engine/Method"
+import DB from "../Engine/Method"
 import Comments, { Comment } from '../Comments/index'
 import PostsContents from "../PostsContents";
 import { updateRecommendUsers } from "../../dynamoDB/recommend";
@@ -6,8 +6,7 @@ import { updateRecommendUsers } from "../../dynamoDB/recommend";
 interface Post {
     id: number;
     title: string;
-    writerId: string;
-    writerName: string;
+    userName: string;
     contents: string;
     created: Date,
     hits: number;
@@ -22,20 +21,15 @@ export default class Posts extends DB {
     }
     async scan(category: string = "free", index: number = 1) {
         const MAX = 10;
-        const option = {
-            projection: ['id', 'title', 'writerName', 'created', 'hits'],
-            condition: { category },
-            order: { created: OrderOption.DESC },
-            limit: [MAX * (index - 1), MAX] as [number, number]
-        }
-        return await super._get(option);
+        const sql = `SELECT id, title, Users.userName AS 'userName', Users.nickName AS 'nickName', Users.rank created, hits, recommendation FROM Posts INNER JOIN Users ON Posts.userName = Users.userName WHERE category = ? ORDER BY created DESC LIMIT ?, ?`;
+        return await this.query(sql, [category, MAX*(index-1), MAX]);
     }
     async getCount(category: string): Promise<number> {
         const rows = await this.query(`SELECT COUNT(*) FROM ${this.tableName} WHERE category=?`, [category]);
         return rows[0]['COUNT(*)'];
     }
     async get(id: number) {
-        const rows = await this.query(`SELECT category, title, writerId, writerName, created, hits, recommendation, text as 'contents' FROM ${this.tableName} INNER JOIN PostsContents ON ${this.tableName}.id = PostsContents.post WHERE ${this.tableName}.id=?`, [id]);
+        const rows = await this.query(`SELECT category, title, Users.userName AS 'userName', Users.nickName AS 'nickName', created, hits, recommendation, text as 'contents' FROM ${this.tableName} INNER JOIN PostsContents ON ${this.tableName}.id = PostsContents.post INNER JOIN Users On ${this.tableName}.userName = Users.userName WHERE ${this.tableName}.id=?`, [id]);
         const post = rows[0];
         const comments = await this.comments.getByPost(id);
         if (comments) post.comments = comments;
@@ -51,19 +45,19 @@ export default class Posts extends DB {
     async addHits(id: number): Promise<void> {
         await this.query(`UPDATE ${this.tableName} set hits = hits + 1 WHERE id=?`, [id]);
     }
-    async getWriterId(id: number): Promise<string> {
+    async getUserName(id: number): Promise<string> {
         const option: any = {
-            projection: ['writerId'],
+            projection: ['userName'],
             condition: { id }
         }
         let rows = await super._get(option);
         const post = rows[0];
 
-        return post.writerId;
+        return post.userName;
     }
-    async post(category: string, title: string, writerId: string, writerName: string, contents: string) {
+    async post(category: string, title: string, userName: string, contents: string) {
         const post = {
-            category, title, writerId, writerName
+            category, title, userName
         };
         const insertId = await super._post(post);
         await this.postsContents.post(insertId, contents);
