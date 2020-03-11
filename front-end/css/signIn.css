@@ -1,40 +1,14 @@
-html {
-  background-color: var(--box-color);
-}
-
-/* header */
-
-#header {
-  height: 15rem;
-}
-
-.logo {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.logo > a {
-  color: var(--main-color);
-  font-size: 4rem;
-}
-
-.section {
-  height: 60rem;
-}
-
-/* login box */
 
 .login-container {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
+  padding:5rem 0;
 }
 
 .login-box {
-  width: 45rem;
-  padding: 5rem;
+  width: 35rem;
+  padding:3rem 2rem;
   display: flex;
   flex-direction: column;
   background-color: var(--default-color);
@@ -43,7 +17,7 @@ html {
 
 .login-box > input {
   margin-bottom: 2rem;
-  height: 5rem;
+  height: 4rem;
 }
 
 .login-box > input:nth-child(2) {
@@ -61,26 +35,8 @@ html {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  height: 10rem;
+  height: 5rem;
   font-size:1.4rem;
-}
-
-.login-diff {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.login-diff-btn {
-  width: 22rem;
-  height: 6rem;
-  background-color: var(--default-color);
-  border: 1px solid var(--border-color);
-}
-
-.login-diff-btn > i {
-  padding-right: 1rem;
-  color: var(--main-color);
 }
 
 .login-btn{

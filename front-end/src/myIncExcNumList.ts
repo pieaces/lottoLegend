@@ -8,7 +8,11 @@ const numResultTotal = document.querySelector('#mypage-num-result-total');
 const numResultValue = document.querySelector('#mypage-num-result-value');
 const numResultPercent = document.querySelector('#mypage-num-result-value-percent');
 const resultBox = document.querySelector('.mypage-num-result-box');
-const round = document.querySelector<HTMLSelectElement>('#round');
+const roundSelectBox = document.querySelector<HTMLSelectElement>('#round-select-box');
+const roundText = document.querySelector('#round-text');
+const winNumBox = document.querySelectorAll<HTMLElement>('.win-num-box > div');
+const winNumDate = document.querySelector('#win-date');
+
 
 
 const loading = document.querySelector('.loading-box');
@@ -23,13 +27,29 @@ async function init() {
     makePage(data);
     makeSelectBox(data.rounds);
 
-    round.addEventListener('change', async () => {
-        loading.classList.remove('none');
-        const data = await getAuthAPI('/numbers/piece', { choice, round: round.options[round.options.selectedIndex].value });
-        makePage(data);
-        loading.classList.add('none');
-    });
+    // 당첨번호 데이터 입력
+    // const winNum = [1, 2, 3, 4, 5, 6]; //당첨번호배열
+    // const roundNum = 900; //회차
+    // const roundDate = "2020-03-07";
+
+    // roundText.textContent = roundNum.toString();
+    // winNumDate.textContent = roundDate;
+    // winNumBox.forEach((node, index) => {
+    //     node.textContent = winNum[index].toString();
+    //     Layout3.setColorLotto(winNum[index], node);
+    // })
+
+
+}
+
+roundSelectBox.addEventListener('change', async () => {
+    loading.classList.remove('none');
+    const data = await getAuthAPI('/numbers/piece', { choice, round: roundSelectBox.options[roundSelectBox.options.selectedIndex].value });
+    makePage(data);
     loading.classList.add('none');
+});
+
+loading.classList.add('none');
 
 }
 function makePage(data: { numbers: number[], answer?: number[] }) {
@@ -65,7 +85,7 @@ function makeSelectBox(rounds: string[]) {
         const option = document.createElement('option');
         option.setAttribute('value', rounds[i]);
         option.textContent = rounds[i];
-        round.appendChild(option);
+        roundSelectBox.appendChild(option);
     }
 }
 
