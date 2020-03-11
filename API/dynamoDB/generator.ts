@@ -136,7 +136,7 @@ export async function freeGenerator(userName: string, lineCount?: number[]) {
     else numsArr = await generateNumberB(userName, lineCount);
     const lottoData = await scanLotto();
 
-    return numsArr.map(async (numbers) => {
+    return numsArr.map((numbers) => {
         return numbersToData(numbers, lottoData);
     });
 }

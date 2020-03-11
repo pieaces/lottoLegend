@@ -199,41 +199,6 @@ export function getNumbers(userName: string, round: number, select?:SelectClass)
     });
 }
 
-
-export enum IncOrExc {
-    "include" = "Include",
-    "exclude" = "Exclude"
-}
-export async function updateIncOrExcNumbers(userName: string, round: number, numbers: number[], choice: IncOrExc): Promise<Response> {
-    const params = {
-        TableName,
-        ExpressionAttributeNames: {
-            "#Choice": choice,
-            "#Round": round.toString(),
-        },
-        ExpressionAttributeValues: {
-            ":element": {
-                L: numbersToAWSList(numbers)
-            }
-        },
-        Key: {
-            "UserName": {
-                S: userName
-            }
-        },
-        UpdateExpression: `SET #Choice.#Round = :element`
-    };
-    return new Promise((resolve, reject) => {
-        dynamoDB.updateItem(params, async (err) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(new Response(false));
-            }
-        });
-    });
-}
-
 export async function deleteNumbers(userName: string, round: number, choice:IncOrExc): Promise<void> {
     const params = {
         TableName,
@@ -257,45 +222,87 @@ export async function deleteNumbers(userName: string, round: number, choice:IncO
     });
 }
 
-export function getIncOrExcNumbers(userName: string, round: number, choice: IncOrExc): Promise<number[]> {
+export enum IncOrExc {
+    "include" = "include",
+    "exclude" = "exclude"
+}
+
+export async function updateIncOrExcNumbers(userName: string, round: number, numbers: number[], choice: IncOrExc): Promise<Response> {
     const params = {
-        TableName,
+        TableName: 'LottoUsers',
         ExpressionAttributeNames: {
+            "#Map": 'IncludeExclude',
             "#Choice": choice,
-            "#Round": round.toString()
+            "#Round": round.toString(),
         },
-        ProjectionExpression: '#Choice.#Round',
+        ExpressionAttributeValues: {
+            ":element": {
+                L: numbersToAWSList(numbers)
+            }
+        },
+        ConditionExpression: 'attribute_exists(#Map.#Round)',
         Key: {
             "UserName": {
                 S: userName
             }
-        }
+        },
+        UpdateExpression: `SET #Map.#Round.#Choice = :element`
     };
-
     return new Promise((resolve, reject) => {
-        dynamoDB.getItem(params, (err, data) => {
+        dynamoDB.updateItem(params, async (err: any) => {
             if (err) {
-                reject(err);
-            }
-            else {
-                const item = data.Item;
-                if (choice in item) {
-                    const result = item[choice].M && item[choice].M[round.toString()].L;
-                    resolve(result.map(item => Number(item.N)));
-                }
-                resolve([]);
+                if (err.code === 'ConditionalCheckFailedException') {
+                    await createIncOrExcNumbers(userName, round);
+                    updateIncOrExcNumbers(userName, round, numbers, choice);
+                } else reject(err);
+            } else {
+                resolve(new Response(false));
             }
         });
     });
 }
 
-export function getIncOrExcRounds(userName: string, choice: IncOrExc): Promise<string[]> {
+async function createIncOrExcNumbers(userName: string, round: number): Promise<Response> {
     const params = {
-        TableName,
+        TableName: 'LottoUsers',
         ExpressionAttributeNames: {
-            "#Choice": choice,
+            "#Map": 'IncludeExclude',
+            "#Round": round.toString(),
         },
-        ProjectionExpression: '#Choice',
+        ExpressionAttributeValues: {
+            ":empty_map": {
+                M: {
+                }
+            },
+        },
+        Key: {
+            "UserName": {
+                S: userName
+            }
+        },
+        ConditionExpression: 'attribute_not_exists(#Map.#Round)',
+        UpdateExpression: `SET #Map.#Round = :empty_map`
+    };
+    return new Promise((resolve, reject) => {
+        dynamoDB.updateItem(params, async (err: any) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(new Response(false));
+            }
+        });
+    });
+}
+
+export function getIncOrExcNumbers(userName: string, round: number, choice: IncOrExc): Promise<number[]> {
+    const params = {
+        TableName:'LottoUsers',
+        ExpressionAttributeNames: {
+            "#Map": 'IncludeExclude',
+            "#Choice": choice,
+            "#Round": round.toString()
+        },
+        ProjectionExpression: '#Map.#Round.#Choice',
         Key: {
             "UserName": {
                 S: userName
@@ -304,12 +311,74 @@ export function getIncOrExcRounds(userName: string, choice: IncOrExc): Promise<s
     };
 
     return new Promise((resolve, reject) => {
-        dynamoDB.getItem(params, (err, data) => {
+        dynamoDB.getItem(params, (err:any, data:any) => {
             if (err) {
                 reject(err);
             }
             else {
-                const rounds = Object.keys(data.Item[choice].M).reverse();
+                const item = data.Item;
+                if('IncludeExclude' in item){
+                    resolve(item.IncludeExclude.M[round].M[choice].L.map((item:{N:string}) => Number(item.N)));
+                } else resolve([]);
+            }
+        });
+    });
+}
+export function getIncAndExcNumbers(userName: string, round: number): Promise<{include?:number[], exclude?:number[]}> {
+    const params = {
+        TableName:'LottoUsers',
+        ExpressionAttributeNames: {
+            "#Map": 'IncludeExclude',
+            "#Round": round.toString()
+        },
+        ProjectionExpression: '#Map.#Round',
+        Key: {
+            "UserName": {
+                S: userName
+            }
+        }
+    };
+
+    return new Promise((resolve, reject) => {
+        dynamoDB.getItem(params, (err:any, data:any) => {
+            if (err) {
+                reject(err);
+            }
+            else {
+                const item = data.Item;
+                if('IncludeExclude' in item){
+                    const joint = item.IncludeExclude.M[round].M;
+                    const include = joint.include && joint.include.L.map((item:{N:string}) => Number(item.N));
+                    const exclude = joint.exclude && joint.exclude.L.map((item:{N:string}) => Number(item.N));
+
+                    resolve({include, exclude});
+                } else resolve({});
+            }
+        });
+    });
+}
+
+export function getIncOrExcRounds(userName: string): Promise<string[]> {
+    const params = {
+        TableName:'LottoUsers',
+        ExpressionAttributeNames: {
+            "#Map": 'IncludeExclude',
+        },
+        ProjectionExpression: '#Map',
+        Key: {
+            "UserName": {
+                S: userName
+            }
+        }
+    };
+
+    return new Promise((resolve, reject) => {
+        dynamoDB.getItem(params, (err:any, data:any) => {
+            if (err) {
+                reject(err);
+            }
+            else {
+                const rounds = Object.keys(data.Item.IncludeExclude.M).reverse();
                 resolve(rounds);
             }
         });

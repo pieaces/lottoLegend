@@ -1,6 +1,6 @@
 import verify from "./auth";
 import { getCurrentRound, scanLotto, getLotto } from "./funtions";
-import { updateNumbers, getNumbers, deleteMyNumber, getIncOrExcNumbers, updateIncOrExcNumbers, IncOrExc, getIncOrExcRounds } from './dynamoDB/Numbers'
+import { updateNumbers, getNumbers, deleteMyNumber, getIncOrExcNumbers, updateIncOrExcNumbers, IncOrExc, getIncOrExcRounds, getIncAndExcNumbers } from './dynamoDB/Numbers'
 import { queryLottoData } from "./dynamoDB/lottoData";
 import { freeGenerator, numbersToData } from "./dynamoDB/generator";
 
@@ -41,21 +41,21 @@ exports.handler = async (event: any) => {
                         const round = event.queryStringParameters.round;
                         const tool = event.queryStringParameters.tool;
                         const selectMethod = event.queryStringParameters.method;
-                        const numbersData = await getNumbers(currentId, round, {method: selectMethod, tool});
+                        const numbersData = await getNumbers(currentId, round, { method: selectMethod, tool });
                         const lottoData = await scanLotto();
                         body = numbersData.map(async (data, index) => {
-                            const result:any = numbersToData(data.numbers, lottoData);
+                            const result: any = numbersToData(data.numbers, lottoData);
                             result.method = numbersData[index].method;
                             result.tool = numbersData[index].tool;
                             result.date = numbersData[index].date;
-                            if(numbersData[index].win) result.win = numbersData[index].win;
+                            if (numbersData[index].win) result.win = numbersData[index].win;
                             return result;
                         });
                     }
                         break;
                     case 'POST':
                         const { numsArr, tool } = JSON.parse(event.body);
-                        body = await updateNumbers(currentId, getCurrentRound(), numsArr, tool);
+                        body = await updateNumbers(currentId, getCurrentRound()+1, numsArr, tool);
                         break;
                     case 'DELETE':
                         const { numbers } = JSON.parse(event.body);
@@ -72,31 +72,28 @@ exports.handler = async (event: any) => {
             switch (method) {
                 case 'GET': {
                     const userName = event.queryStringParameters && event.queryStringParameters.userName || currentId;
-                    const round = event.queryStringParameters && event.queryStringParameters.round || getCurrentRound();
+                    const round = getCurrentRound() + 1;
                     const choice = event.queryStringParameters && event.queryStringParameters.choice;
-                    if (choice) {
-                        body = {};
-                        if(!event.queryStringParameters.round){
-                            body.rounds = await getIncOrExcRounds(userName, choice);
-                            body.numbers = await getIncOrExcNumbers(userName, Number(body.rounds[0]), choice);
-                        }else{
-                            body.numbers = await getIncOrExcNumbers(userName, round, choice);
-                        }
+                    const flag = event.queryStringParameters && event.queryStringParameters.flag;
 
-                        if(round <= getCurrentRound()){
-                            body.answer = await getLotto(round);
-                        }
+                    if (flag) {
+                        body = await getIncAndExcNumbers(userName, round);
+                        body.total = round;
                     } else {
-                        const include = await getIncOrExcNumbers(userName, round, IncOrExc.include);
-                        const exclude = await getIncOrExcNumbers(userName, round, IncOrExc.exclude);
-                        body = { include, exclude, total:round };
+                        body = {};
+                        if (choice) {
+                            body.numbers = await getIncOrExcNumbers(userName, round, choice);
+                        } else {
+                            body.rounds = await getIncOrExcRounds(userName);
+                            body = await getIncAndExcNumbers(userName, Number(body.rounds[0]));
+                        }
                     }
                 }
                     break;
                 case 'POST':
                     if (logedIn) {
                         const { numbers, choice } = JSON.parse(event.body);
-                        await updateIncOrExcNumbers(currentId, getCurrentRound(), numbers.sort((a: number, b: number) => a - b), choice);
+                        await updateIncOrExcNumbers(currentId, getCurrentRound()+1, numbers.sort((a: number, b: number) => a - b), choice);
                         break;
                     } else {
                         statusCode = 400;
@@ -106,6 +103,27 @@ exports.handler = async (event: any) => {
             }
         }
             break;
+        case '/numbers/piece/{round}': {
+            switch (method) {
+                case 'GET': {
+                    const userName = event.queryStringParameters && event.queryStringParameters.userName || currentId;
+                    const round = Number(event.pathParameters.round);
+                    const choice = event.queryStringParameters && event.queryStringParameters.choice;
+                    body = {};
+                    if (choice) {
+                        body.numbers = await getIncOrExcNumbers(userName, round, choice);
+                    } else {
+                        body = await getIncAndExcNumbers(userName, round);
+                    }
+
+                    if (round <= getCurrentRound()) {
+                        body.answer = await getLotto(round);
+                    }
+                }
+                    break;
+            }
+        }
+                break;
         case '/numbers/win': {
             const round = event.queryStringParameters && event.queryStringParameters.round || getCurrentRound();
             switch (method) {
