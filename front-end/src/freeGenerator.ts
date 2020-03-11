@@ -116,15 +116,14 @@ lineBtn.addEventListener('click', async () => {
 async function init() {
     loading.classList.remove('none');
     lineGenTextToggleInit();
-    const { include, exclude, total } = await getAuthAPI('/numbers/piece');
+    const { include, exclude, total } = await getAuthAPI('/numbers/piece', {flag:true});
     document.querySelector<HTMLElement>('.line-gen-round').textContent = total + '회';
-    Layout3.makeLine(includeCanvas, include);
-    Layout3.makeLine(excludeCanvas, exclude);
+    include && Layout3.makeLine(includeCanvas, include);
+    exclude && Layout3.makeLine(excludeCanvas, exclude);
     SaveBtn.init(Tool.free);
 
     document.getElementById('make').addEventListener('click', async () => {
         if (!lineCheck || lineCheck && sum() === 6) {
-            let dataSet: any;
             wrapper.classList.add('none');
             Swal.fire({
                 title: `<div class="lds-circle"><div></div></div>`,
@@ -185,8 +184,8 @@ async function init() {
                 }
                 else {
                     lineInputTable.style.border = "";
-                    dataSet = await getAuthAPI('/numbers/generator/free', { lineCount: JSON.stringify(lineCount) });
-
+                    const dataSet = await getAuthAPI('/numbers/generator/free', { lineCount: JSON.stringify(lineCount) });
+                    console.log(dataSet);
                     const numBoard = new NumBoard(dataSet);
                     numBoard.makeNumBoard();
                     const checkBoxToggle = new CheckBoxToggle();
@@ -194,7 +193,8 @@ async function init() {
                 }
             } else {
                 lineInputTable.style.border = "";
-                dataSet = await getAuthAPI('/numbers/generator/free');
+                const dataSet = await getAuthAPI('/numbers/generator/free');
+                console.log(dataSet);
 
                 const numBoard = new NumBoard(dataSet);
                 numBoard.makeNumBoard();

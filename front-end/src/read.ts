@@ -30,8 +30,8 @@ init();
 commentSubmit.onclick = async function () {
     if (Number(charCurrentCount.textContent) > 0 && currentUser) {
         try {
-            const commentId = await postAuthAPI(`/posts/${id}/comments`, { contents: txtArea.value });
-            makeComments([{ id: commentId, userName: currentUser, nickName: await getNickName(), rank:'', created: new Date().toISOString(), contents: txtArea.value }]);
+            const {commentId, rank} = await postAuthAPI(`/posts/${id}/comments`, { contents: txtArea.value });
+            makeComments([{ id: commentId, userName: currentUser, nickName: await getNickName(), rank, created: new Date().toISOString(), contents: txtArea.value }]);
             txtArea.value = "";
             Swal.fire({
                 title: '완료',
