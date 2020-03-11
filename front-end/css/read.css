@@ -44,6 +44,10 @@
   color:var(--default-color);
   font-weight: 600;
 }
+.recommend{
+  background-color: "#5a5a5a";
+  color: "black";
+}
 
 .author-time{
     padding-right:2rem;

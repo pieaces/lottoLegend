@@ -1,5 +1,5 @@
 import configure from './amplify/configure'
-import { getUnAuthAPI, postAuthAPI, deleteAuthAPI } from './amplify/api';
+import { getUnAuthAPI, postAuthAPI, deleteAuthAPI, getAuthAPI, patchAuthAPI } from './amplify/api';
 import { getUserName, getNickName } from './amplify/auth';
 import { getQueryStringObject, getCategoryHtml, isoStringToDate, Affix, networkAlert } from './functions';
 import Swal from 'sweetalert2'
@@ -10,6 +10,7 @@ const title = document.getElementById('content-title');
 const author = document.getElementById('author-name');
 const created = document.getElementById('author-time');
 const hits = document.getElementById('author-lookup');
+const recommendation = document.getElementById('recommendation');
 const contentsInput = document.getElementById('text-content');
 
 const commentContainerBox = document.querySelector('.comment-container-box');
@@ -17,7 +18,8 @@ const commentNum = document.querySelector('#comment-num');
 const txtArea = document.querySelector<HTMLInputElement>('#comment-write-text');
 const charCurrentCount = document.querySelector('#char-current-count');
 const commentSubmit = document.getElementById('comment-submit');
-const contentsUpdateBtn = document.querySelector<HTMLElement>('.text-update-container ');
+const contentsUpdateBtn = document.querySelector<HTMLElement>('.text-update-container');
+const recommendBtn = document.getElementById('reco-btn');
 const loading = document.querySelector('.loading-box');
 
 let currentUser: string;
@@ -45,12 +47,12 @@ commentSubmit.onclick = async function () {
     }
 }
 async function init() {
+    loading.classList.remove('none');
     try {
         currentUser = await getUserName();
-    } catch (err) { }
+    } catch (err) {}
     if (id) {
-        loading.classList.remove('none');
-        const post = await getUnAuthAPI('/posts/' + id);
+        const post = currentUser ? await getAuthAPI('/posts/' + id) : await getUnAuthAPI('/posts/' + id);
         console.log(post);
         title.textContent = post.title;
         author.textContent = post.writerName;
@@ -89,7 +91,20 @@ async function init() {
         }
         created.textContent = isoStringToDate(post.created);
         hits.textContent = post.hits;
+        recommendation.textContent = post.recommendation;
+
+        let recommendStatus = post.recommend;
+        if(recommendStatus) {
+            recommendBtn.classList.add('recommend');
+        }
+        recommendBtn.addEventListener('click', async () =>{
+            await patchAuthAPI(`/posts/${id}/recommend`);
+            recommendStatus = !recommendStatus;
+            if(recommendStatus) recommendBtn.classList.add('recommend');
+            else recommendBtn.classList.remove('recommend');
+        })
         contentsInput.innerHTML = post.contents;
+        
         if (post.comments) {
             makeComments(post.comments);
         }

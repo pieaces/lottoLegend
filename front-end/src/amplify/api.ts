@@ -46,7 +46,7 @@ export async function postUnAuthAPI(path: string = '/posts', body: any) {
     return await API.post(apiName, path, myInit);
 }
 
-export async function patchAuthAPI(path: string, body: any) {
+export async function patchAuthAPI(path: string, body?: any) {
     const myInit = {
         headers: {
             'X-Id-Token': await getIdToken()
