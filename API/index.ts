@@ -78,7 +78,7 @@ exports.handler = async (event: any) => {
                         body = {};
                         if(!event.queryStringParameters.round){
                             body.rounds = await getIncOrExcRounds(userName, choice);
-                            body.numbers = await getIncOrExcNumbers(userName, Number(body.rounds[body.rounds.length-1]), choice);
+                            body.numbers = await getIncOrExcNumbers(userName, Number(body.rounds[0]), choice);
                         }else{
                             body.numbers = await getIncOrExcNumbers(userName, round, choice);
                         }
