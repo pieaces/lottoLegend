@@ -51,7 +51,6 @@ roundSelectBox.addEventListener('change', async () => {
 
 loading.classList.add('none');
 
-}
 function makePage(data: { numbers: number[], answer?: number[] }) {
     numContainer.innerHTML = '';
     const DIVIDE = 5;
