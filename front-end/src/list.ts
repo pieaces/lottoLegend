@@ -61,7 +61,7 @@ function makeBoard(objArr: any[]) {
 
         const boardReco = document.createElement('div');
         boardReco.classList.add('board-reco');
-        boardReco.textContent = objArr[i].hits;
+        boardReco.textContent = objArr[i].recommendation;
 
         boardBox.appendChild(boardReco);
 
