@@ -24,6 +24,13 @@ document.write(`           <div class="text-title">
 </div>
 
 <div id="text-content" class="text-content sun-editor-editable"></div>
+<div class="comment-list-title">
+<div>
+댓글(<span id="comment-num"></span>개)
+</div>
+<button type="button" class="btn reco-btn" id="reco-btn">
+추천
+</button></div>
 <div class="comment-write-text-box">
 <textarea placeholder="소중한 댓글을 남겨주세요" class="comment-write-text"
     id="comment-write-text"></textarea>
@@ -37,13 +44,7 @@ document.write(`           <div class="text-title">
 </div>
 </div>
 <div class="comment-container-box">
-<div class="comment-list-title">
-<div>
-댓글(<span id="comment-num"></span>개)
-</div>
-<button type="button" class="btn reco-btn" id="reco-btn">
-추천
-</button></div>
+
 
 </div>
 
