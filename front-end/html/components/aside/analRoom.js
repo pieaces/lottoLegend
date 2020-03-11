@@ -3,6 +3,11 @@ document.write(`    <div class="anchor-title">
 </div>
 <ul class="anchor-list-container">
 <li>
+        <ul class="anchor-list-box">
+        <li>  <a href="#">예상번호게시판</a>  </li>
+        </ul>
+</li>
+<li>
     <h3> 공유 게시판</h3>
     <ul class="anchor-list-box">
         <li> <a href="../analBoard/analList.html">분석 Tip 공유</a> </li>
