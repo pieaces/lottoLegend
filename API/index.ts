@@ -1,6 +1,6 @@
 import verify from "./auth";
 import { getCurrentRound, scanLotto, getLotto } from "./funtions";
-import { updateNumbers, getNumbers, deleteMyNumber, getIncOrExcNumbers, updateIncOrExcNumbers, IncOrExc, getIncOrExcRounds, getIncAndExcNumbers } from './dynamoDB/Numbers'
+import { updateNumbers, getNumbers, deleteMyNumber, getIncOrExcNumbers, updateIncOrExcNumbers, IncOrExc, getIncOrExcRounds, getIncAndExcNumbers, isMyNumberData } from './dynamoDB/Numbers'
 import { queryLottoData } from "./dynamoDB/lottoData";
 import { freeGenerator, numbersToData } from "./dynamoDB/generator";
 
@@ -34,26 +34,44 @@ exports.handler = async (event: any) => {
     let statusCode: number = 200;
     let body: any;
     switch (resource) {
-        case '/numbers/mass': {
+        case '/numbers/mass':
+        case '/numbers/mass/{round}': {
             if (logedIn) {
                 switch (method) {
                     case 'GET': {
-                        const round = event.queryStringParameters.round;
-                        const tool = event.queryStringParameters.tool;
-                        const selectMethod = event.queryStringParameters.method;
+                        const round =  event.pathParameters && event.pathParameters.round;
+                        const tool = event.queryStringParameters && event.queryStringParameters.tool;
+                        const selectMethod = event.queryStringParameters && event.queryStringParameters.method;
                         const numbersData = await getNumbers(currentId, round, { method: selectMethod, tool });
                         const lottoData = await scanLotto();
-                        body = numbersData.map(async (data, index) => {
-                            const result: any = numbersToData(data.numbers, lottoData);
-                            result.method = numbersData[index].method;
-                            result.tool = numbersData[index].tool;
-                            result.date = numbersData[index].date;
-                            if (numbersData[index].win) {
-                                result.win = numbersData[index].win;
-                                result.ballBool = numbersData[index].ballBool;
+                        if (isMyNumberData(numbersData)) {
+                            body = numbersData.map((data) => {
+                                const result: any = numbersToData(data.numbers, lottoData);
+                                result.method = data.method;
+                                result.tool = data.tool;
+                                result.date = data.date;
+                                if (data.win) {
+                                    result.win = data.win;
+                                    result.ballBool = data.ballBool;
+                                }
+                                return result;
+                            });
+                        }else{
+                            for(const key in numbersData){
+                                numbersData[key] = numbersData[key].map((data) => {
+                                    const result: any = numbersToData(data.numbers, lottoData);
+                                    result.method = data.method;
+                                    result.tool = data.tool;
+                                    result.date = data.date;
+                                    if (data.win) {
+                                        result.win = data.win;
+                                        result.ballBool = data.ballBool;
+                                    }
+                                    return result;
+                                });
                             }
-                            return result;
-                        });
+                            body = numbersData;
+                        }
                     }
                         break;
                     case 'POST':
