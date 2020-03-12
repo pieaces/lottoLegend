@@ -1,4 +1,4 @@
-import Layout3 from './Layout3'
+import { makeInputCheckBox, setColorLotto } from './functions';
 
 const numContainerBox = document.querySelector('.func3-num-container-box');
 export default class NumBoard {
@@ -13,7 +13,6 @@ export default class NumBoard {
         const pastWinTable = document.createElement('table');
         pastWinTable.classList.add('table', 'func3-past-win-table');
         const pastWinTableTr = document.createElement('tr');
-
         const pastWinTableTdFirst = document.createElement('td');
         pastWinTableTdFirst.textContent = "역대기록";
 
@@ -27,21 +26,16 @@ export default class NumBoard {
             }
             pastWinTableTr.appendChild(td);
         }
-
         pastWinTable.appendChild(pastWinTableTr);
         pastWinBox.appendChild(pastWinTable);
-
         target.appendChild(pastWinBox);
     }
 
     private makeFilterTable(currentVar, target) {
         const filterNumInfo = document.createElement('div');
         filterNumInfo.classList.add('func3-filter-num-info');
-
         const listFilterTable = document.createElement('table');
-
         listFilterTable.classList.add('table', 'func3-list-filter-table');
-
 
         const listFilterTableMap = new Map([
             ["저값개수", this.dataSet[currentVar]["lowCount"]],
@@ -53,29 +47,21 @@ export default class NumBoard {
             ["고저 차", this.dataSet[currentVar]["diffMaxMin"]],
             ["AC", this.dataSet[currentVar]["AC"]]
         ])
-
         const listFilterTableTrTitle = document.createElement('tr');
-
         listFilterTableMap.forEach((value, key) => {
             const td = document.createElement('td');
             td.textContent = key;
             listFilterTableTrTitle.appendChild(td);
         })
-
         listFilterTable.appendChild(listFilterTableTrTitle);
-
         const listFilterTableTrValue = document.createElement('tr');
-
         listFilterTableMap.forEach((value, key) => {
             const td = document.createElement('td');
             td.textContent = value;
             listFilterTableTrValue.appendChild(td);
-        })
-
+        });
         listFilterTable.appendChild(listFilterTableTrValue);
-
         filterNumInfo.appendChild(listFilterTable);
-
         target.appendChild(filterNumInfo);
     }
 
@@ -89,12 +75,9 @@ export default class NumBoard {
         target.appendChild(tableBox);
     }
 
-
     makeNumBoard() {
         numContainerBox.innerHTML = '';
-
         for (let i = 0; i < this.dataSet.length; i++) {
-
             const numContainer = document.createElement('div');
             numContainer.classList.add('func3-num-container');
             numContainer.setAttribute('data-numbers', JSON.stringify(this.dataSet[i].numbers));
@@ -106,7 +89,7 @@ export default class NumBoard {
             const checkboxContainer = document.createElement('div');
             checkboxContainer.classList.add('func3-check-box');
 
-            Layout3.makeInputCheckBox(checkboxContainer);
+            checkboxContainer.append(makeInputCheckBox());
 
             numBoxWrapper.appendChild(checkboxContainer);
 
@@ -115,7 +98,7 @@ export default class NumBoard {
             for (let j = 0; j < this.dataSet[i].numbers.length; j++) {
                 const num = document.createElement('div');
                 num.textContent = String(this.dataSet[i].numbers[j]);
-                Layout3.setColorLotto(this.dataSet[i].numbers[j], num);
+                setColorLotto(this.dataSet[i].numbers[j], num);
                 numBox.appendChild(num);
             }
 
@@ -134,6 +117,4 @@ export default class NumBoard {
             }
         }
     }
-
-
 }

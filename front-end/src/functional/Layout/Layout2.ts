@@ -3,6 +3,7 @@ import bar from '../instance2/barInstance'
 import gauss from '../instance2/gaussInstance'
 import radar from '../instance2/radarInstance'
 import { rangeMake, makeModal } from '../../functions';
+import { setColorLotto } from './functions';
 
 const lottoNumbers = document.querySelectorAll<HTMLElement>('.func2-lotto-num');
 const numTermFreqBox = document.querySelectorAll<HTMLElement>('.func2-lotto-checkbox');
@@ -207,19 +208,6 @@ export default class Layout2 {
             });
         }
     }
-    private setColorLotto(num: number, Box: HTMLElement) {
-        if (1 <= num && num <= 10) {
-            Box.style.backgroundColor = '#FBC400';
-        } else if (num <= 20) {
-            Box.style.backgroundColor = '#69C8F2';
-        } else if (num <= 30) {
-            Box.style.backgroundColor = '#FF7272';
-        } else if (num <= 40) {
-            Box.style.backgroundColor = '#AAAAAA';
-        } else if (num <= 45) {
-            Box.style.backgroundColor = '#B0D840';
-        }
-    }
     private doesExcluded(index: number): boolean {
         if (this.checkedNumbers.indexOf(index + 1) !== -1 ||
             this.options[1] && this.options[1].indexOf(Math.floor((index + 1) / 10)) !== -1 || //전멸구간
@@ -236,7 +224,7 @@ export default class Layout2 {
         const winNums = document.querySelectorAll<HTMLElement>('.func2-win-num-box > div');
         winNums.forEach(node => {
             const nodeValue = parseInt(node.textContent);
-            this.setColorLotto(nodeValue, node);
+            setColorLotto(nodeValue, node);
         });
     }
     private getOpacities(): number[] {
@@ -289,7 +277,7 @@ export default class Layout2 {
 
                     const text = document.createTextNode(this.choice);
                     div.appendChild(text);
-                    this.setColorLotto(this.choice, <HTMLElement>div);
+                    setColorLotto(this.choice, <HTMLElement>div);
                     selectNum.appendChild(div);
 
                     selectNumBox.appendChild(selectNum);

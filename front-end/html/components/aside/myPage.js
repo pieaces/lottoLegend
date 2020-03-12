@@ -9,10 +9,10 @@ document.write(`<div class="anchor-title">
     </ul>
 </li>
 <li>  
-<h3>번호조합리스트</h3>
+<h3>번호목록</h3>
     <ul class="anchor-list-box">
     <li><a href="../myPage/myNumList.html">나의 번호리스트</a> </li>
-    <li><a href="../myPage/myIncExcNumList.html">추천/제외 번호리스트</a> </li>
+    <li><a href="../myPage/myIncExcNumList.html">나의 추천/제외 번호</a> </li>
     </ul>
 </li>
 <li> 

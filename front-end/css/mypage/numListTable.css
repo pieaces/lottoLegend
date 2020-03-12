@@ -63,22 +63,25 @@ border-right:1px solid var(--border-color);
 }
 
 .mynum-table-checkbox,
- .mynum-table-round,
+.mynum-table-round,
 .mynum-table-date,
 .mynum-table-auto,
 .mynum-table-num-info, 
 .mynum-table-iswin
 {
-    flex:1;
-  }
+  flex:1;
+}
 
-  .mynum-table-num{
-    flex:5;
-  }
+.mynum-table-num{
+  flex:5;
+}
 
-  .mypage-table-num-toggle{
-    background-color: var(--default-color);
-    width:6rem;
-    height:2.5rem;
-  } 
-  
+.mypage-table-num-toggle{
+  background-color: var(--default-color);
+  width:6rem;
+  height:2.5rem;
+} 
+
+.func3-past-filter-box{
+  border-bottom: 1rem solid gray;
+}

@@ -1,5 +1,5 @@
 import Layout3 from '../functional/Layout/Layout3';
-
+import { setColorLotto } from '../functional/Layout/functions';
 type IncExc = "include" | "exclude";
 
 export default class IncExcNumList {
@@ -12,7 +12,7 @@ export default class IncExcNumList {
         this.choice = choice;
         this.elmentObj = elementObj;
     }
-    static setAnswer(answer:number[]){
+    static setAnswer(answer: number[]) {
         IncExcNumList.answer = answer;
     }
     private whatCount(numbers: number[], answer: number[]) {
@@ -31,29 +31,47 @@ export default class IncExcNumList {
     makePage() {
         const { numContainer, resultTotal, resultValue, resultPercent, resultBox } = this.elmentObj;
         numContainer.innerHTML = '';
-        const DIVIDE = 5;
-        const I = Math.ceil(this.numbers.length / DIVIDE);
-        for (let i = 0; i < I; i++) {
-            const numBox = document.createElement('div');
-            numBox.classList.add('mypage-num-box');
-            for (let j = 0; j < DIVIDE; j++) {
-                if (!this.numbers[DIVIDE * i + j]) break;
-                const num = document.createElement('div');
-                num.textContent = this.numbers[DIVIDE * i + j].toString();
-                Layout3.setColorLotto(this.numbers[DIVIDE * i + j], num);
-                numBox.appendChild(num);
+        if (this.numbers) {
+            console.log(this.numbers);
+            const DIVIDE = 5;
+            const I = Math.ceil(this.numbers.length / DIVIDE);
+            for (let i = 0; i < I; i++) {
+                const numBox = document.createElement('div');
+                numBox.classList.add('mypage-num-box');
+                for (let j = 0; j < DIVIDE; j++) {
+                    if (!this.numbers[DIVIDE * i + j]) break;
+                    const num = document.createElement('div');
+                    num.textContent = this.numbers[DIVIDE * i + j].toString();
+                    setColorLotto(this.numbers[DIVIDE * i + j], num);
+                    numBox.appendChild(num);
+                }
+                numContainer.appendChild(numBox);
             }
-            numContainer.appendChild(numBox);
-        }
-        resultTotal.textContent = this.numbers.length.toString();
-        if (IncExcNumList.answer) {
-            const numCount = this.whatCount(this.numbers, IncExcNumList.answer);
-            resultBox.classList.remove('none');
-            resultValue.textContent = numCount.toString();
-            resultPercent.textContent = (numCount / this.numbers.length * 100).toFixed(2);
-        } else {
+            resultTotal.textContent = this.numbers.length.toString();
+            if (IncExcNumList.answer) {
+                const numCount = this.whatCount(this.numbers, IncExcNumList.answer);
+                resultBox.classList.remove('none');
+                resultValue.textContent = numCount.toString();
+                resultPercent.textContent = (numCount / this.numbers.length * 100).toFixed(2);
+                makeWinNum(IncExcNumList.answer);
+            } else {
+                winNumBox.forEach(node => setDefaultColor(node));
+                resultBox.classList.add('none');
+            }
+        }else{
             resultBox.classList.add('none');
         }
     }
 }
 
+const winNumBox = document.querySelectorAll<HTMLElement>('.func2-win-num-box > div');
+function makeWinNum(answer: number[]) {
+    winNumBox.forEach((node, index) => {
+        node.textContent = answer[index].toString();
+        setColorLotto(answer[index], node);
+    });
+}
+function setDefaultColor(node: HTMLElement) {
+    node.style.background = "";
+    node.textContent = "";
+}

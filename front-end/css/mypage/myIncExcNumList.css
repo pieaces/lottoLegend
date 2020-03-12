@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 500;
   letter-spacing: 0.3rem;
 }
@@ -19,7 +19,6 @@
 }
 
 .mypage-num-wrapper{
-  border: 1px solid var(--border-color);
   box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.3);
   margin-bottom: 1rem;
 }
@@ -63,7 +62,6 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 2rem;
-  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.2);
 }
 
 .func2-win-num-text {
@@ -85,7 +83,7 @@
   border-radius: 50%;
   margin-right: 2rem;
   color: var(--default-color);
-  background-color: var(--main-color);
+  background-color: #ffffff;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
 }
 
