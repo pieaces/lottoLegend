@@ -92,6 +92,7 @@ function makeTable(dataSet) {
         tableContent.appendChild(tableIsWin);
         tableNumBox.appendChild(tableContent);
 
-        makePastFilterTable(dataSet);
+        const infoTd = makePastFilterTable(dataSet);
+        infoTd.classList.add('margin-bottom');
     }
 }

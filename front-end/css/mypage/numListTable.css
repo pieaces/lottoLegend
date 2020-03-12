@@ -27,6 +27,7 @@
   }
 
   .mypage-table-header{
+    font-size:1.3rem;
     height:6rem;
     display:flex;
     background-color: var(--table-title-color);
@@ -82,6 +83,6 @@ border-right:1px solid var(--border-color);
   height:2.5rem;
 } 
 
-.func3-past-filter-box{
-  border-bottom: 1rem solid gray;
+.margin-bottom{
+  margin-bottom: 3rem;
 }
