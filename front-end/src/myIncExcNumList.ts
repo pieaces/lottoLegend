@@ -27,7 +27,7 @@ async function init() {
             const { include, exclude, answer } = await getAuthAPI('/numbers/piece/' + roundSelectBox.options[roundSelectBox.options.selectedIndex].value);
             incNumList.numbers = include;
             excNumList.numbers = exclude;
-            
+
             IncExcNumList.setAnswer(answer);
             incNumList.makePage();
             excNumList.makePage();

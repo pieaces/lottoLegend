@@ -30,7 +30,7 @@ init();
 commentSubmit.onclick = async function () {
     if (Number(charCurrentCount.textContent) > 0 && currentUser) {
         try {
-            const {commentId, rank} = await postAuthAPI(`/posts/${id}/comments`, { contents: txtArea.value });
+            const { commentId, rank } = await postAuthAPI(`/posts/${id}/comments`, { contents: txtArea.value });
             makeComments([{ id: commentId, userName: currentUser, nickName: await getNickName(), rank, created: new Date().toISOString(), contents: txtArea.value }]);
             txtArea.value = "";
             Swal.fire({
@@ -47,18 +47,18 @@ commentSubmit.onclick = async function () {
         else alert('1글자 이상 입력해주세요.');
     }
 }
-function rankToClass(rank:number|string, object:HTMLElement){
-    switch(rank){
+function rankToClass(rank: number | string, object: HTMLElement) {
+    switch (rank) {
         case 1: object.classList.add('rank-first');
-        break;
+            break;
         case 2: object.classList.add('rank-second');
-        break;
+            break;
         case 3: object.classList.add('rank-third');
-        break;
+            break;
         case 4: object.classList.add('rank-fourth');
-        break;
+            break;
         case 5: object.classList.add('rank-fifth');
-        break;
+            break;
         default: object.id = 'heart';
     }
 }
@@ -66,7 +66,7 @@ async function init() {
     loading.classList.remove('none');
     try {
         currentUser = await getUserName();
-    } catch (err) {}
+    } catch (err) { }
     if (id) {
         const post = currentUser ? await getAuthAPI('/posts/' + id) : await getUnAuthAPI('/posts/' + id);
         console.log(post);
@@ -112,25 +112,25 @@ async function init() {
         recommendation.textContent = post.recommendation;
 
         let recommendStatus = post.recommend;
-        if(recommendStatus) {
+        if (recommendStatus) {
             recommendBtn.classList.add('recommend');
         }
-        recommendBtn.addEventListener('click', async () =>{
+        recommendBtn.addEventListener('click', async () => {
             loading.classList.remove('none')
             await patchAuthAPI(`/posts/${id}/recommend`);
             recommendStatus = !recommendStatus;
-            if(recommendStatus) {
+            if (recommendStatus) {
                 recommendBtn.classList.add('recommend');
-                recommendation.textContent = (Number(recommendation.textContent)+1).toString();
+                recommendation.textContent = (Number(recommendation.textContent) + 1).toString();
             }
             else {
                 recommendBtn.classList.remove('recommend');
-                recommendation.textContent = (Number(recommendation.textContent)-1).toString();
+                recommendation.textContent = (Number(recommendation.textContent) - 1).toString();
             }
             loading.classList.add('none')
         })
         contentsInput.innerHTML = post.contents;
-        
+
         if (post.comments) {
             makeComments(post.comments);
         }
@@ -245,4 +245,3 @@ function limitTxtAreaCount(target: HTMLInputElement) {
         }
     }
 }
-// <span class="rank rank-first"> 1</span>
