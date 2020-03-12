@@ -3,6 +3,7 @@ import { getUnAuthAPI, postAuthAPI, deleteAuthAPI, getAuthAPI, patchAuthAPI } fr
 import { getUserName, getNickName } from './amplify/auth';
 import { getQueryStringObject, getCategoryHtml, isoStringToDate, Affix, networkAlert } from './functions';
 import Swal from 'sweetalert2'
+import { setColorLotto } from "./functional/Layout/functions";
 
 configure();
 
@@ -22,6 +23,7 @@ const commentSubmit = document.getElementById('comment-submit');
 const contentsUpdateBtn = document.querySelector<HTMLElement>('.text-update-container');
 const recommendBtn = document.getElementById('reco-btn');
 const loading = document.querySelector('.loading-box');
+
 
 let currentUser: string;
 let commentCount = 0;
@@ -244,4 +246,20 @@ function limitTxtAreaCount(target: HTMLInputElement) {
             return true;
         }
     }
+}
+
+function makeNum(number: number[]) {
+    const numContainer = document.querySelector('.inc-exc-num-container');
+    let numBox;
+    for (let i = 0; i < number.length; i++) {
+        numBox = document.createElement('div');
+        numBox.classList.add('inc-exc-num-box');
+
+        const num = document.createElement('div');
+        num.classList.add('inc-exc-select-num');
+        setColorLotto(number[i], num);
+
+        numBox.appendChild(num);
+    }
+    numContainer.appendChild(numBox);
 }
