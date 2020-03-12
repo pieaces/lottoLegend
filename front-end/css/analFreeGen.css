@@ -12,8 +12,6 @@
     font-size:1.4rem;
 }
 
-
-
 .line-gen-text-toggle:hover{
     background-color: var(--table-title-color);
 }
@@ -21,8 +19,21 @@
 .line-gen-text-content{
     cursor: auto;
     padding:2rem;
-    height:46rem;
+    height:49rem;
     font-size: 1.4rem;
     line-height: 1.8;
 }
 
+.code-block{
+    display: block;
+    padding: 8px;
+    margin: 0 0 10px;
+    line-height: 1.45;
+    color: #666;
+    background-color: #f9f9f9;
+    border: 1px solid #e1e1e1;
+    border-radius: 2px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: visible;
+}
