@@ -5,41 +5,23 @@ import { setColorLotto, makeInputCheckBox, makePastFilterTable } from './functio
 
 configure();
 const tableNumBox = document.querySelector('.mypage-table-num-box');
+const loading = document.querySelector('.loading-box');
 
 init();
 async function init() {
-    const dataSet = [{
-        numbers: [1, 2, 3, 4, 5, 6],
-        winner: [0, 0, 1, 1, 20],
-        round: 1,
-        date: 10,
-        auto: "자동",
-        iswin: "당첨!"
-    },
-    {
-        numbers: [1, 2, 3, 4, 5, 6],
-        winner: [0,2, 3, 4, 5],
-        round: 1,
-        date: 10,
-        auto: "자동",
-        iswin: "당첨!"
-    },
-    {
-        numbers: [1, 2, 3, 4, 5, 6],
-        winner: [0,2, 3, 4, 5],
-        round: 1,
-        date: 10,
-        auto: "자동",
-        iswin: "당첨!"
-    }
-    ];
+    loading.classList.remove('none');
+    const data = await getAuthAPI('/numbers/mass');
+    const rounds = Object.keys(data);
+    rounds.reverse().forEach(round =>{
+        makeTable(data[round], round);
+    })
 
-    makeTable(dataSet);
+    loading.classList.add('none');
     const checkBoxToggle = new CheckBoxToggle();
     checkBoxToggle.addEvent();
 }
 
-function makeTable(dataSet:any[]) {
+function makeTable(dataSet:any[], round:number|string) {
     for (let i = 0; i < dataSet.length; i++) {
         const tableContent = document.createElement('div');
         tableContent.classList.add('mypage-table-content');
@@ -54,21 +36,35 @@ function makeTable(dataSet:any[]) {
 
         const tableRound = document.createElement('div');
         tableRound.classList.add('mynum-table-round');
-        tableRound.textContent = dataSet[i]["round"];
+        tableRound.textContent = round.toString();
 
         tableContent.appendChild(tableRound);
 
         const tableDate = document.createElement('div');
         tableDate.classList.add('mynum-table-date');
-        tableDate.textContent = dataSet[i]["date"];
+        tableDate.textContent = dataSet[i].date.slice(0,10);
 
         tableContent.appendChild(tableDate);
 
-        const tableAuto = document.createElement('div');
-        tableAuto.classList.add('mynum-table-auto');
-        tableAuto.textContent = dataSet[i]["auto"];
+        const tableDivision = document.createElement('div');
+        tableDivision.classList.add('mynum-table-division');
+        let division: string;
+        switch (dataSet[i].tool) {
+            case 'a': division = "무료";
+                break;
+            case 'b': division = "프리미엄"
+                switch (dataSet[i].method) {
+                    case 'a': division += " 자동"
+                        break;
+                    case 'm': division += " 수동"
+                        break;
+                }
+                break;
+        }
 
-        tableContent.appendChild(tableAuto);
+        tableDivision.textContent = division;
+
+        tableContent.appendChild(tableDivision);
 
         const tableNum = document.createElement('div');
         tableNum.classList.add('mynum-table-num');
@@ -88,8 +84,13 @@ function makeTable(dataSet:any[]) {
 
         const tableIsWin = document.createElement('div');
         tableIsWin.classList.add('mynum-table-iswin');
-        tableIsWin.textContent = dataSet[i]["iswin"];
+        if(dataSet[i].win){
+            tableIsWin.textContent = dataSet[i].win;
+        }else{
+            tableIsWin.textContent = '추첨전';
+        }
         tableContent.appendChild(tableIsWin);
+
         tableNumBox.appendChild(tableContent);
 
         const infoTd = makePastFilterTable(dataSet[i]);
