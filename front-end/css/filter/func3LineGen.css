@@ -22,6 +22,7 @@
     height:5rem;
     background-color: #bdc7d4;
     color:var(--default-color);
+    font-size:1.5rem;
 }
 
 .line-gen-num-container{
