@@ -2,19 +2,58 @@ import configure from './amplify/configure'
 import { getAuthAPI } from './amplify/api';
 import CheckBoxToggle from './functional/instanceBtns/CheckBoxToggle';
 import { setColorLotto, makeInputCheckBox, makePastFilterTable } from './functional/Layout/functions';
+import Selectr, { IOptions } from 'mobius1-selectr';
 
 configure();
 const tableNumBox = document.querySelector('.mypage-table-num-box');
 const loading = document.querySelector('.loading-box');
+
+const roundSelectBox = document.querySelector<HTMLSelectElement>('#round-select-box');
+const toolSelectBox = document.querySelector<HTMLSelectElement>('#tool-select-box');
+const methodSelectBox = document.querySelector<HTMLSelectElement>('#method-select-box');
 
 init();
 async function init() {
     loading.classList.remove('none');
     const data = await getAuthAPI('/numbers/mass');
     const rounds = Object.keys(data);
+
+    const roundConfig:IOptions = {
+        data: [{
+            text:'전체', value:'all'
+        }]
+    };
     rounds.reverse().forEach(round =>{
         makeTable(data[round], round);
-    })
+        roundConfig.data.push({ text: round, value: round });
+    });
+    const toolConfig: IOptions = {
+        data: [
+            { text: '무료', value: 'free' },
+            { text: '유료', value: 'charge' }
+        ],
+        searchable:false
+    };
+    const methodConfig: IOptions = {
+        data: [
+            { text: '자동', value: 'auto' },
+            { text: '수동', value: 'manual' }
+        ],
+        searchable:false
+    };
+
+    const roundSelect = new Selectr(roundSelectBox, roundConfig);
+    roundSelect.on('selectr.change', async (option) => {
+        console.log(option.value);
+    });
+    const toolSelect = new Selectr(toolSelectBox, toolConfig);
+    toolSelect.on('selectr.change', async (option) => {
+        console.log(option.value);
+    });    
+    const methodSelect = new Selectr(methodSelectBox, methodConfig);
+    methodSelect.on('selectr.change', async (option) => {
+        console.log(option.value);
+    });
 
     loading.classList.add('none');
     const checkBoxToggle = new CheckBoxToggle();
@@ -52,7 +91,7 @@ function makeTable(dataSet:any[], round:number|string) {
         switch (dataSet[i].tool) {
             case 'a': division = "무료";
                 break;
-            case 'b': division = "프리미엄"
+            case 'b': division = "유료"
                 switch (dataSet[i].method) {
                     case 'a': division += " 자동"
                         break;
