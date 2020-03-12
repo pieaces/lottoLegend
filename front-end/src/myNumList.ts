@@ -1,9 +1,7 @@
 import configure from './amplify/configure'
-import Layout3 from './functional/Layout/Layout3'
-import NumBoard from "./functional/Layout/NumBoard";
 import { getAuthAPI } from './amplify/api';
 import CheckBoxToggle from './functional/instanceBtns/CheckBoxToggle';
-import { setColorLotto, makeInputCheckBox } from './functional/Layout/functions';
+import { setColorLotto, makeInputCheckBox, makePastFilterTable } from './functional/Layout/functions';
 
 configure();
 const tableNumBox = document.querySelector('.mypage-table-num-box');
@@ -94,7 +92,6 @@ function makeTable(dataSet) {
         tableContent.appendChild(tableIsWin);
         tableNumBox.appendChild(tableContent);
 
-        const numBoard = new NumBoard(dataSet);
-        numBoard.makePastFilterTable(i, tableNumBox);
+        makePastFilterTable(dataSet);
     }
 }

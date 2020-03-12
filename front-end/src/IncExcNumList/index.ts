@@ -1,5 +1,4 @@
-import Layout3 from '../functional/Layout/Layout3';
-import { setColorLotto } from '../functional/Layout/functions';
+import { setColorLotto, setDefaultColor } from '../functional/Layout/functions';
 type IncExc = "include" | "exclude";
 
 export default class IncExcNumList {
@@ -70,8 +69,4 @@ function makeWinNum(answer: number[]) {
         node.textContent = answer[index].toString();
         setColorLotto(answer[index], node);
     });
-}
-function setDefaultColor(node: HTMLElement) {
-    node.style.background = "";
-    node.textContent = "";
 }
