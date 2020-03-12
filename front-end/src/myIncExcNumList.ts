@@ -45,3 +45,4 @@ function makeSelectBox(rounds: string[]) {
         roundSelectBox.appendChild(option);
     }
 }
+
