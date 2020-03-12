@@ -39,7 +39,7 @@ async function init() {
     checkBoxToggle.addEvent();
 }
 
-function makeTable(dataSet) {
+function makeTable(dataSet:any[]) {
     for (let i = 0; i < dataSet.length; i++) {
         const tableContent = document.createElement('div');
         tableContent.classList.add('mypage-table-content');
@@ -92,7 +92,7 @@ function makeTable(dataSet) {
         tableContent.appendChild(tableIsWin);
         tableNumBox.appendChild(tableContent);
 
-        const infoTd = makePastFilterTable(dataSet);
-        infoTd.classList.add('margin-bottom');
+        const infoTd = makePastFilterTable(dataSet[i]);
+        tableNumBox.appendChild(infoTd);
     }
 }

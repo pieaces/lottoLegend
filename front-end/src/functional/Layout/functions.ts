@@ -84,17 +84,18 @@ function makeFilterTable(data:Stats) {
         ["AC", data["AC"]]
     ])
     const listFilterTableTrTitle = document.createElement('tr');
+    const listFilterTableTrValue = document.createElement('tr');
+
     listFilterTableMap.forEach((value, key) => {
         const keyTd = document.createElement('td');
         keyTd.textContent = key;
         listFilterTableTrTitle.appendChild(keyTd);
 
         const valueTd = document.createElement('td');
-        valueTd.textContent = value.toString();
+        valueTd.textContent = value && value.toString();
         listFilterTableTrValue.appendChild(valueTd);
     })
     listFilterTable.appendChild(listFilterTableTrTitle);
-    const listFilterTableTrValue = document.createElement('tr');
     listFilterTable.appendChild(listFilterTableTrValue);
     filterNumInfo.appendChild(listFilterTable);
     return filterNumInfo;
