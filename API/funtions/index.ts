@@ -44,7 +44,7 @@ export async function getLotto(round: number): Promise<number[]> {
         dynamoDB.getItem(params, (err: any, data: any) => {
             if (err) reject(err);
             if (data.Item) resolve(data.Item.Numbers.NS.map((item: string) => Number(item)).sort((a: number, b: number) => a - b));
-            else resolve([]);
+            else resolve();
         });
     });
 }
