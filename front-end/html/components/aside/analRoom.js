@@ -11,7 +11,8 @@ document.write(`    <div class="anchor-title">
     <h3> 공유 게시판</h3>
     <ul class="anchor-list-box">
         <li> <a href="../analBoard/analList.html">분석 Tip 공유</a> </li>
-        <li><a href="../incExcBoard/incExcNumList.html">추천/제외수 공유</a></li>
+        <li><a href="../incNumBoard/incNumList.html">추천수 공유</a></li>
+        <li><a href="../excNumBoard/excNumList.html">제외수 공유</a></li>
     </ul>
 </li>
 <li class="arrow-box">
