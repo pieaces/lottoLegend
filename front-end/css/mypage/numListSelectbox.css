@@ -1,14 +1,10 @@
 .mynum-selectbox-container{
+    width:15rem;
     height:3.3rem;
     margin-bottom: 1rem;
     display:flex;
     align-items: center;
     justify-content: flex-start;
-}
-
-.mynum-selectbox-container>select{
-    width:6rem;
-    height:100%;
 }
 
 .mynum-selectbox-container>select:not(:last-child){
@@ -17,4 +13,14 @@
 
 .mynum-selectbox-text{
     font-size:1.5rem;
+}
+
+.selectr-input-clear{
+    display:none !important;
+}
+
+.selectr-input{
+    width: calc(100% - 40px);
+    margin:10px;
+    padding-right:1.3rem;
 }
