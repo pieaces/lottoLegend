@@ -1,5 +1,44 @@
 /* signup */
 
+.signup-terms-use-container{
+  display:flex;
+  justify-content:center;
+  padding:5rem 0;
+}
+
+.signup-terms-use-box{
+  width:50rem;
+}
+
+.signup-terms-use-check-container{
+  display:flex;
+  margin-bottom:1rem;
+}
+.signup-terms-use-all-check{
+  display:flex;
+  margin-bottom:3rem;
+}
+.signup-checkbox-container{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  width:2.5rem;
+  margin-right:1rem;
+}
+
+.signup-terms-use-check-text{
+  font-size:1.4rem;
+}
+.signup-terms-use-textarea{
+  padding:1rem;
+  font-size:1.3rem;
+  height:25rem;
+  border:1px solid var(--border-color);
+  overflow-y: scroll;
+}
+.signup-terms-use-tab-box{
+  margin-bottom:3rem;
+}
 .signup-container-box {
 
   margin-bottom:5rem;
