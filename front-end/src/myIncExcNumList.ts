@@ -4,7 +4,7 @@ import IncExcNumList from './IncExcNumList';
 import incObj from './IncExcNumList/IncNumList';
 import excObj from './IncExcNumList/ExcNumList';
 configure();
-import Selectr from 'mobius1-selectr';
+import Selectr, { IOptions } from 'mobius1-selectr';
 
 const roundSelectBox = document.querySelector<HTMLSelectElement>('#round-select-box');
 const loading = document.querySelector('.loading-box');
@@ -22,10 +22,18 @@ async function init() {
     excNumList.makePage();
 
     if (rounds) {
-        makeSelectBox(rounds);
-        roundSelectBox.addEventListener('change', async () => {
+        const config:IOptions = {
+            data: rounds.map((round:string) => {
+                return {
+                    text: round,
+                    value: round
+                }
+            }),
+        };
+        const selector = new Selectr(roundSelectBox, config);
+        selector.on('selectr.change', async (option) => {
             loading.classList.remove('none');
-            const { include, exclude, answer } = await getAuthAPI('/numbers/piece/' + roundSelectBox.options[roundSelectBox.options.selectedIndex].value);
+            const { include, exclude, answer } = await getAuthAPI('/numbers/piece/' + option.value);
             incNumList.numbers = include;
             excNumList.numbers = exclude;
 
@@ -37,35 +45,3 @@ async function init() {
     }
     loading.classList.add('none');
 }
-
-function makeSelectBox(rounds: string[]) {
-
-    for (let i = 0; i < rounds.length; i++) {
-        const option = document.createElement('option');
-        option.setAttribute('value', rounds[i]);
-        option.textContent = rounds[i];
-        roundSelectBox.appendChild(option);
-    }
-}
-
-// function makeSelectBox(rounds: string[]) {
-//     const data = [];
-//     for (let i = 0; i < rounds.length; i++) {
-//         const obj = {
-//             value: rounds[i].toString(),
-//             text: rounds[i].toString()
-//         }
-//         data.push(obj);
-//     }
-//     const configs = {
-//         default: {
-//             data: data
-//         }
-//     };
-//     const selectorDefault = new Selectr(roundSelectBox, configs.default);
-
-// }
-
-
-
-
