@@ -59,7 +59,12 @@
 
 .author-lookup{
   font-size: 1.5rem;
+  font-family: 'Nanum Gothic';
   margin-right: 2rem;
+}
+
+.author-lookup-text-box{
+  font-weight: 700;
 }
 
 .comment-container{

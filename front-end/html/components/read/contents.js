@@ -11,8 +11,8 @@ document.write(`           <div class="text-title">
 <div>
 
     <div class="author-lookup">
-        조회 : <span id="author-lookup" class="text-box"></span>회
-        추천 : <span id="recommendation" class="text-box"></span>
+        조회 : <span id="author-lookup" class="author-lookup-text-box"></span>회 &nbsp;
+        추천 : <span id="recommendation" class="author-lookup-text-box"></span>
     </div>
 </div>
 </div>

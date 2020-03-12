@@ -1,5 +1,16 @@
+.inc-exc-num-wrapper-box{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inc-exc-num-wrapper{
+  width:50%;
+}
+
 .inc-exc-num-container{
 width: 100%;
+font-size:0px;
 }
 
 .inc-exc-num-box {
@@ -11,7 +22,7 @@ width: 100%;
 
 .inc-exc-num-box{
     display: inline-block;
-    width: 10%;
+    width: 20%;
     padding-bottom:1rem;
   }
   

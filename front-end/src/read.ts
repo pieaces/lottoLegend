@@ -248,18 +248,22 @@ function limitTxtAreaCount(target: HTMLInputElement) {
     }
 }
 
+
 function makeNum(number: number[]) {
     const numContainer = document.querySelector('.inc-exc-num-container');
-    let numBox;
+
     for (let i = 0; i < number.length; i++) {
-        numBox = document.createElement('div');
+        const numBox = document.createElement('div');
         numBox.classList.add('inc-exc-num-box');
 
         const num = document.createElement('div');
         num.classList.add('inc-exc-select-num');
+        num.textContent = number[i].toString();
         setColorLotto(number[i], num);
 
         numBox.appendChild(num);
+        numContainer.appendChild(numBox);
     }
-    numContainer.appendChild(numBox);
+
 }
+
