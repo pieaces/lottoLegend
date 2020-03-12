@@ -1,9 +1,5 @@
 .inc-exc-num-container{
-
-}
-
-.inc-exc-num-box{
-  
+width: 100%;
 }
 
 .inc-exc-num-box {
@@ -19,7 +15,7 @@
     padding-bottom:1rem;
   }
   
-  .func3-select-num {
+  .inc-exc-select-num {
     display: flex;
     align-items: center;
     justify-content: center;
