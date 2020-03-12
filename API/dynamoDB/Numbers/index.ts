@@ -148,7 +148,7 @@ export function getNumberSize(userName: string, round: number): Promise<number>{
         })
     })
 }
-export function getNumbers(userName: string, round: number, select?:SelectClass): Promise<{numbers:number[], method:string, tool:string, date:string, win?:number}[]> {
+export function getNumbers(userName: string, round: number, select?:SelectClass): Promise<{numbers:number[], method:string, tool:string, date:string, win?:number, ballBool?:boolean[]}[]> {
     const ExpressionAttributeNames: { [key: string]: string } = {
         "#Map": 'Numbers',
         "#Round": round.toString(),
@@ -190,7 +190,8 @@ export function getNumbers(userName: string, round: number, select?:SelectClass)
                             date: item.M.date.S,
                             method: item.M.method.S,
                             tool: item.M.tool.S,
-                            win: item.M.win && Number(item.M.win.N)
+                            win: item.M.win && Number(item.M.win.N),
+                            ballBool: item.M.ballBool && item.M.ballBool.L.map(item => Boolean(item.BOOL))
                         }
                     }));
                 }else resolve([]);

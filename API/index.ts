@@ -48,7 +48,10 @@ exports.handler = async (event: any) => {
                             result.method = numbersData[index].method;
                             result.tool = numbersData[index].tool;
                             result.date = numbersData[index].date;
-                            if (numbersData[index].win) result.win = numbersData[index].win;
+                            if (numbersData[index].win) {
+                                result.win = numbersData[index].win;
+                                result.ballBool = numbersData[index].ballBool;
+                            }
                             return result;
                         });
                     }
