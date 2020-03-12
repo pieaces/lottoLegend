@@ -1,0 +1,44 @@
+.inc-exc-num-container{
+
+}
+
+.inc-exc-num-box{
+  
+}
+
+.inc-exc-num-box {
+    width: 100%;
+    height:100%;
+    font-size: 1.7rem;
+    padding-top:1rem;
+  }
+
+.inc-exc-num-box{
+    display: inline-block;
+    width: 10%;
+    padding-bottom:1rem;
+  }
+  
+  .func3-select-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    color: var(--default-color);
+    background-color: blue;
+    font-size:1.3rem;
+    margin:0 auto;
+  }
+
+.inc-exc-num-title{
+    height:5rem;
+    background-color: var(--table-title-color);
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-size:2rem;
+    border-bottom: 1px solid var(--border-color);
+}
