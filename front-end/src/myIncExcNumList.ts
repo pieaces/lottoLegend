@@ -23,7 +23,9 @@ async function init() {
 
     if (rounds) {
         makeSelectBox(rounds);
+
         roundSelectBox.addEventListener('change', async () => {
+            console.log(roundSelectBox.options[roundSelectBox.options.selectedIndex].value);
             loading.classList.remove('none');
             const { include, exclude, answer } = await getAuthAPI('/numbers/piece/' + roundSelectBox.options[roundSelectBox.options.selectedIndex].value);
             incNumList.numbers = include;

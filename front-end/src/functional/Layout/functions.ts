@@ -15,7 +15,7 @@ export function setDefaultColor(node: HTMLElement) {
     node.style.background = "";
     node.textContent = "";
 }
-export function makeInputCheckBox():HTMLDivElement {
+export function makeInputCheckBox(): HTMLDivElement {
     const inputBoxContainer = document.createElement('div');
     inputBoxContainer.classList.add('input-checkbox-container');
 
@@ -36,7 +36,7 @@ export function makeInputCheckBox():HTMLDivElement {
     return inputBoxContainer;
 }
 
-function makePastTable(winner:number[]) {
+function makePastTable(winner: number[]) {
     const pastWinBox = document.createElement('div');
     pastWinBox.classList.add('func3-past-win-box');
     const pastWinTable = document.createElement('table');
@@ -60,14 +60,14 @@ function makePastTable(winner:number[]) {
     return pastWinBox;
 }
 
-interface Stats{
-    lowCount:number, sum:number, oddCount:number, primeCount:number, $3Count:number, sum$10:number, diffMaxMin:number, AC:number
+interface Stats {
+    lowCount: number, sum: number, oddCount: number, primeCount: number, $3Count: number, sum$10: number, diffMaxMin: number, AC: number
 }
-export interface TableData extends Stats{
+export interface TableData extends Stats {
     winner: number[];
     numbers: number[];
 }
-function makeFilterTable(data:Stats) {
+function makeFilterTable(data: Stats) {
     const filterNumInfo = document.createElement('div');
     filterNumInfo.classList.add('func3-filter-num-info');
     const listFilterTable = document.createElement('table');
@@ -101,7 +101,7 @@ function makeFilterTable(data:Stats) {
     return filterNumInfo;
 }
 
-export function makePastFilterTable(data:TableData):HTMLDivElement {
+export function makePastFilterTable(data: TableData): HTMLDivElement {
     const tableBox = document.createElement('div');
     tableBox.classList.add('func3-past-filter-box')
     tableBox.appendChild(makePastTable(data.winner));
