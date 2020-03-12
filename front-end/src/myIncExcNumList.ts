@@ -5,6 +5,7 @@ import incObj from './IncExcNumList/IncNumList';
 import excObj from './IncExcNumList/ExcNumList';
 configure();
 
+const winNumBox = document.querySelectorAll('.func2-win-num-box > div');
 const roundSelectBox = document.querySelector<HTMLSelectElement>('#round-select-box');
 const loading = document.querySelector('.loading-box');
 
@@ -12,7 +13,7 @@ init();
 
 async function init() {
     loading.classList.remove('none');
-    const {include, exclude, rounds, answer} = await getAuthAPI('/numbers/piece');
+    const { include, exclude, rounds, answer } = await getAuthAPI('/numbers/piece');
     const incNumList = new IncExcNumList(include, "include", incObj);
     const excNumList = new IncExcNumList(exclude, "exclude", excObj);
     IncExcNumList.setAnswer(answer);
@@ -26,7 +27,7 @@ async function init() {
         makeSelectBox(rounds);
         roundSelectBox.addEventListener('change', async () => {
             loading.classList.remove('none');
-            const {include, exclude, answer} = await getAuthAPI('/numbers/piece/' + roundSelectBox.options[roundSelectBox.options.selectedIndex].value);
+            const { include, exclude, answer } = await getAuthAPI('/numbers/piece/' + roundSelectBox.options[roundSelectBox.options.selectedIndex].value);
             incNumList.numbers = include;
             excNumList.numbers = exclude;
             IncExcNumList.setAnswer(answer);
@@ -45,4 +46,10 @@ function makeSelectBox(rounds: string[]) {
         option.textContent = rounds[i];
         roundSelectBox.appendChild(option);
     }
+}
+
+function makeWinNum(winner: String[]) {
+    winNumBox.forEach((node, index) => {
+        node.textContent = winner[index].toString();
+    })
 }
