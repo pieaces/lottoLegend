@@ -1,4 +1,4 @@
-import { setColorLotto, setDefaultColor } from "../functions";
+import { setColorLotto, setDefaultColor } from "../../functions";
 
 type IncExc = "include" | "exclude";
 export default class IncludeExclude {
@@ -12,7 +12,7 @@ export default class IncludeExclude {
         this.elmentObj = elementObj;
     }
     static setAnswer(answer: number[]) {
-        IncExcNumList.answer = answer;
+        IncludeExclude.answer = answer;
     }
     private whatCount(numbers: number[], answer: number[]) {
         let count = 0;
@@ -47,12 +47,12 @@ export default class IncludeExclude {
                 numContainer.appendChild(numBox);
             }
             resultTotal.textContent = this.numbers.length.toString();
-            if (IncExcNumList.answer) {
-                const numCount = this.whatCount(this.numbers, IncExcNumList.answer);
+            if (IncludeExclude.answer) {
+                const numCount = this.whatCount(this.numbers, IncludeExclude.answer);
                 resultBox.classList.remove('none');
                 resultValue.textContent = numCount.toString();
                 resultPercent.textContent = (numCount / this.numbers.length * 100).toFixed(2);
-                makeWinNum(IncExcNumList.answer);
+                makeWinNum(IncludeExclude.answer);
             } else {
                 winNumBox.forEach(node => setDefaultColor(node));
                 resultBox.classList.add('none');

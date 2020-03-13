@@ -1,4 +1,5 @@
-import { makeInputCheckBox, setColorLotto, makePastFilterTable, TableData } from './functions';
+import { makeInputCheckBox, makePastFilterTable, TableData } from './functions';
+import { setColorLotto } from '../../../functions';
 
 const numContainerBox = document.querySelector('.func3-num-container-box');
 export default class NumBoard {

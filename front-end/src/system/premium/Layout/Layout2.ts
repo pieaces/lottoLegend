@@ -2,7 +2,7 @@ import Swal from 'sweetalert2'
 import bar from '../instance2/barInstance'
 import gauss from '../instance2/gaussInstance'
 import radar from '../instance2/radarInstance'
-import { makeModal } from '../../../functions';
+import { makeModal, rangeMake, setColorLotto } from '../../../functions';
 
 const lottoNumbers = document.querySelectorAll<HTMLElement>('.func2-lotto-num');
 const numTermFreqBox = document.querySelectorAll<HTMLElement>('.func2-lotto-checkbox');
