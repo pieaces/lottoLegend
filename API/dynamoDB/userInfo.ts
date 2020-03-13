@@ -1,4 +1,6 @@
-import { dynamoDB } from ".";
+import dynamoDB from ".";
+import { GetItemOutput } from "aws-sdk/clients/dynamodb";
+import { AWSError } from "aws-sdk/lib/error";
 
 export function getRank(userName: string): Promise<number> {
     const params = {
@@ -15,7 +17,7 @@ export function getRank(userName: string): Promise<number> {
     };
 
     return new Promise((resolve, reject) => {
-        dynamoDB.getItem(params, (err: any, data: any) => {
+        dynamoDB.getItem(params, (err: AWSError, data: GetItemOutput) => {
             if (err) {
                 reject(err);
             }

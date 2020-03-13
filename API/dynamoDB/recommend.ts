@@ -1,5 +1,7 @@
-import { dynamoDB } from ".";
+import dynamoDB from ".";
 import Response from '../Response'
+import { UpdateItemOutput, GetItemOutput } from "aws-sdk/clients/dynamodb";
+import { AWSError } from "aws-sdk/lib/error";
 
 export async function updateRecommendUsers(post: number, userName: string):Promise<Response> {
     const recommendUsers = await getRecommendUsers(post);
@@ -30,7 +32,7 @@ export async function updateRecommendUsers(post: number, userName: string):Promi
     };
 
     return new Promise((resolve, reject) => {
-        dynamoDB.updateItem(params, (err: any, data: any) => {
+        dynamoDB.updateItem(params, (err: AWSError, data: UpdateItemOutput) => {
             if (err) reject(err);
             resolve(new Response(false));
         });
@@ -52,7 +54,7 @@ async function removeRecommendUser(post: number, index:number):Promise<void> {
     };
 
     return new Promise((resolve, reject) => {
-        dynamoDB.updateItem(params, (err: any) => {
+        dynamoDB.updateItem(params, (err: AWSError) => {
             if (err) reject(err);
             resolve();
         });
@@ -71,12 +73,12 @@ export function getRecommendUsers(post: number): Promise<string[]> {
     };
 
     return new Promise((resolve, reject) => {
-        dynamoDB.getItem(params, (err: any, data: any) => {
+        dynamoDB.getItem(params, (err: AWSError, data: GetItemOutput) => {
             if (err) {
                 reject(err);
             }
             if (data.Item) {
-                resolve(data.Item.RecommendUsers.L.map((item: { S: string }) => item.S));
+                resolve(data.Item.RecommendUsers.L.map(item => item.S));
             }else resolve([]);
         });
     });

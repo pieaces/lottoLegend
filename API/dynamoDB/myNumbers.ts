@@ -1,4 +1,6 @@
-import { dynamoDB, TableName } from '.'
+import dynamoDB from '.'
+import { AWSError } from 'aws-sdk/lib/error';
+import { GetItemOutput } from 'aws-sdk/clients/dynamodb';
 
 export enum IncOrExc {
     "include" = "Include",
@@ -7,7 +9,7 @@ export enum IncOrExc {
 
 export function getIncOrExcNumbers(userName: string, round: number, choice: IncOrExc): Promise<number[]> {
     const params = {
-        TableName,
+        TableName: 'LottoUsers',
         ExpressionAttributeNames: {
             "#Choice": choice,
             "#Round": round.toString()
@@ -21,7 +23,7 @@ export function getIncOrExcNumbers(userName: string, round: number, choice: IncO
     };
 
     return new Promise((resolve, reject) => {
-        dynamoDB.getItem(params, (err, data) => {
+        dynamoDB.getItem(params, (err:AWSError, data:GetItemOutput) => {
             if (err) {
                 reject(err);
             }
