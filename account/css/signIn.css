@@ -4,13 +4,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding:5rem;
+  padding:5rem 0;
 }
 
 .login-box {
+  width:100%;
   box-shadow: 1px 2px 8px rgba(0,0,0,.1),-2px -1px 8px rgba(0,0,0,.1);
   border-radius: .75em;
-  width: 60rem;
 }
 
 .login-content-container{
@@ -19,7 +19,6 @@
 
 
 .login-title-text{
-
   color : #333;
   font-size      : 6rem;   
   letter-spacing : 1.3rem;   
@@ -30,7 +29,6 @@
   display:flex;
   align-items: center;
   justify-content:center;
-  
 }
 
 .login-input-container{
@@ -40,7 +38,7 @@
 }
 
 .login-input-container > input {
-
+    width:70%;
     height: 4.5rem;
   margin-bottom: 3rem;
   padding-left:2rem;
