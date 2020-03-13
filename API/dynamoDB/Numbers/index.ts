@@ -97,7 +97,7 @@ export async function updateNumbers(userName: string, round: number, numsArr: nu
 }
 
 export async function deleteMyNumber(userName: string, round: number, numbers:number[]): Promise<void> {
-    const data = (<MyNumberData[]>await getNumbers(userName, round)).map(item => item.numbers);
+    const data = (await getNumbers(userName, round))[round.toString()].map(item => item.numbers);
     let index:number;
     for(let i =0; i<data.length; i++){
         if(JSON.stringify(data[i]) === JSON.stringify(numbers)){
@@ -157,10 +157,8 @@ export interface MyNumberData {
     win?: number;
     ballBool?: boolean[];
 }
-export function isMyNumberData(obj:MyNumberData[] | {[round:string]:MyNumberData[]}): obj is MyNumberData[]{
-    return ('numbers' in obj);
-}
-export function getNumbers(userName: string, round?: number, select?:SelectClass): Promise<MyNumberData[] | {[round:string]:MyNumberData[]}> {
+
+export function getNumbers(userName: string, round?: number, select?:SelectClass): Promise<{[round:string]:MyNumberData[]}> {
     const ExpressionAttributeNames: { [key: string]: string } = {
         "#Map": 'Numbers'
     }
@@ -189,7 +187,7 @@ export function getNumbers(userName: string, round?: number, select?:SelectClass
             else {
                 if (round && 'Numbers' in data.Item) {
                     const numbersData = data.Item.Numbers.M[round.toString()].L;
-                    resolve(numbersData.filter((item:{M:any}) => {
+                    const result = numbersData.filter((item:{M:any}) => {
                         if (select) {
                             if (select.method && item.M.method.S !== select.method) {
                                 return false;
@@ -208,11 +206,22 @@ export function getNumbers(userName: string, round?: number, select?:SelectClass
                             win: item.M.win && Number(item.M.win.N),
                             ballBool: item.M.ballBool && item.M.ballBool.L.map((item:{BOOL:boolean}) => item.BOOL)
                         }
-                    }));
+                    });
+                    resolve({[round.toString()]:result});
                 }else if(!round && 'Numbers' in data.Item){
                     const jointData = data.Item.Numbers.M;
                     for(const key in jointData){
-                        jointData[key] = jointData[key].L.map((item:{M:any}) => {
+                        jointData[key] = jointData[key].L.filter((item:{M:any}) => {
+                            if (select) {
+                                if (select.method && item.M.method.S !== select.method) {
+                                    return false;
+                                }
+                                if (select.tool && item.M.tool.S !== select.tool) {
+                                    return false;
+                                }
+                                return true;
+                            } else return true;
+                        }).map((item:{M:any}) => {
                             return {
                                 numbers: AWSListToNumbers(item.M.numbers.L),
                                 date: item.M.date.S,
@@ -224,7 +233,7 @@ export function getNumbers(userName: string, round?: number, select?:SelectClass
                         });
                     }
                     resolve(jointData);
-                }else resolve([]);
+                }else resolve({});
             }
         });
     });

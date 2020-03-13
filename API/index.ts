@@ -1,6 +1,6 @@
 import verify from "./auth";
 import { getCurrentRound, scanLotto, getLotto } from "./funtions";
-import { updateNumbers, getNumbers, deleteMyNumber, getIncOrExcNumbers, updateIncOrExcNumbers, IncOrExc, getIncOrExcRounds, getIncAndExcNumbers, isMyNumberData } from './dynamoDB/Numbers'
+import { updateNumbers, getNumbers, deleteMyNumber, updateIncOrExcNumbers, getIncOrExcRounds, getIncAndExcNumbers } from './dynamoDB/Numbers'
 import { queryLottoData } from "./dynamoDB/lottoData";
 import { freeGenerator, numbersToData } from "./dynamoDB/generator";
 
@@ -44,8 +44,9 @@ exports.handler = async (event: any) => {
                         const selectMethod = event.queryStringParameters && event.queryStringParameters.method;
                         const numbersData = await getNumbers(currentId, round, { method: selectMethod, tool });
                         const lottoData = await scanLotto();
-                        if (isMyNumberData(numbersData)) {
-                            body = numbersData.map((data) => {
+
+                        for (const key in numbersData) {
+                            numbersData[key] = numbersData[key].map((data) => {
                                 const result: any = numbersToData(data.numbers, lottoData);
                                 result.method = data.method;
                                 result.tool = data.tool;
@@ -56,22 +57,8 @@ exports.handler = async (event: any) => {
                                 }
                                 return result;
                             });
-                        }else{
-                            for(const key in numbersData){
-                                numbersData[key] = numbersData[key].map((data) => {
-                                    const result: any = numbersToData(data.numbers, lottoData);
-                                    result.method = data.method;
-                                    result.tool = data.tool;
-                                    result.date = data.date;
-                                    if (data.win) {
-                                        result.win = data.win;
-                                        result.ballBool = data.ballBool;
-                                    }
-                                    return result;
-                                });
-                            }
-                            body = numbersData;
                         }
+                        body = numbersData;
                     }
                         break;
                     case 'POST':
