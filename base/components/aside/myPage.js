@@ -11,7 +11,7 @@ document.write(`<div class="anchor-title">
 <li>  
 <h3>번호목록</h3>
     <ul class="anchor-list-box">
-    <li><a href="numberList.html">나의 번호리스트</a> </li>
+    <li><a href="numbersList.html">나의 번호리스트</a> </li>
     <li><a href="IncludeExclude.html">나의 추천/제외 번호</a> </li>
     </ul>
 </li>
