@@ -1,7 +1,7 @@
 import configure from '../amplify/configure'
 import { getUnAuthAPI, postAuthAPI, deleteAuthAPI, getAuthAPI, patchAuthAPI } from '../amplify/api';
 import { getUserName, getNickName } from '../amplify/auth';
-import { getQueryStringObject, getCategoryHtml, isoStringToDate, Affix, networkAlert, setColorLotto } from '../functions';
+import { getQueryStringObject, getCategoryHtml, isoStringToDate, networkAlert, setColorLotto } from '../functions';
 import Swal from 'sweetalert2'
 
 configure();
@@ -86,7 +86,7 @@ async function init() {
             if(category === 'incl' || category === 'excl'){
                 makeNum([1,3,5,7,9,10,13,15,19,24,29,35,41,42,44,45]);
             }
-            document.querySelector<HTMLElement>('#content-update-btn').setAttribute('onclick', `location.href='${getCategoryHtml(category, Affix.Post)}?id=${id}'`);
+            document.querySelector<HTMLElement>('#content-update-btn').setAttribute('onclick', `location.href='/${getCategoryHtml(category, 'post')}?id=${id}'`);
             document.querySelector<HTMLElement>('#delete-btn').addEventListener('click', async () => {
                 Swal.fire({
                     title: '삭제하시겠습니까?',
@@ -107,7 +107,7 @@ async function init() {
                                 allowOutsideClick: false,
                                 timer: 1500,
                             }).then(() => {
-                                location.href = `./${getCategoryHtml(category, Affix.List)}`;
+                                location.href = `/${getCategoryHtml(category, 'list')}`;
                             });
                         } catch (err) {
                             networkAlert();

@@ -2,16 +2,16 @@ const webpack = require('webpack');
 const path = require('path');
 
 // 확장자명 유의해서 쓸것! ts냐, js냐?
-const file = 'board/list.ts'
+const file = 'board/read.ts'
 ////
 const directory = file.slice(0, file.lastIndexOf('/'));
 const name = file.slice(file.lastIndexOf('/')+1, file.indexOf('.'));
 module.exports = {
     mode: 'development',
-    entry: `./front-end/src/${file}`,
+    entry: `./src/${file}`,
     output: {
         filename: `${name}.js`,
-        path: path.resolve(__dirname, `front-end/html/${directory}/js`)
+        path: path.resolve(__dirname, `${directory}/js`)
     },
     module: {
         rules: [

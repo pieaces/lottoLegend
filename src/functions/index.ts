@@ -34,37 +34,33 @@ export function getQueryStringObject(): any {
     return result;
 }
 
-export enum Affix{
-    "List"="List",
-    "Post"="Post",
-    "Read"="Read"
-}
+export type Affix = "list"|"post"|"read";
 export function getCategoryHtml(category: string, affix:Affix) {
-    let htmlFile:string;
+    let directory:string;
     switch (category) {
         case 'free':
-            htmlFile = 'freeBoard'
+            directory = 'free'
             break;
         case 'incl':
-            htmlFile = 'incNum'
+            directory = 'include'
             break;
         case 'excl':
-            htmlFile = 'excNum'
+            directory = 'exclude'
             break;
         case 'info':
-            htmlFile = 'info'
+            directory = 'notice'
             break;
         case 'anal':
-            htmlFile = 'anal'
+            directory = 'analysis'
             break;
         case 'win':
-            htmlFile = 'win'
+            directory = 'win'
             break;
         case 'qna':
-            htmlFile = 'qA'
+            directory = 'qna'
             break;
     }
-    return htmlFile + affix + '.html';
+    return `board/${directory}/${affix}.html`;
 }
 
 export function isoStringToDate(isoString: string): string {

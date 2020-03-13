@@ -36,7 +36,7 @@ function makeBoard(objArr: any[]) {
         const boardTitle = document.createElement('div');
         boardTitle.classList.add('board-title');
 
-        boardTitle.innerHTML = `<a href="./${getCategoryHtml(category, Affix.Read)}?id=${objArr[i].id}">${objArr[i].title}</a>`;
+        boardTitle.innerHTML = `<a href="/${getCategoryHtml(category, 'read')}?id=${objArr[i].id}">${objArr[i].title}</a>`;
 
         boardBox.appendChild(boardTitle);
 

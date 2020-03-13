@@ -96,7 +96,7 @@ submitBtn.onclick = async () => {
       allowOutsideClick: false,
       timer: 1500,
     }).then(() => {
-      location.href = `./${getCategoryHtml(category, 'Read')}?id=${leapId}`;
+      location.href = `/${getCategoryHtml(category, 'Read')}?id=${leapId}`;
     });
   } catch (err) {
     networkAlert();
