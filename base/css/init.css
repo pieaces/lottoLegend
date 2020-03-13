@@ -115,24 +115,36 @@ select{
   background-color: rgba(145,145,145,0.3);
 }
 
+
+.loading-box{
+  background-color: rgba(145,145,145,0.3);
+  position: absolute;
+  top:0;
+  left:0;
+  z-index:99;
+  width:100%;
+  height:100%;
+}
 .loading{
-  display:flex;
-  align-items: center;
-  justify-content: center;
   position: fixed;
   top:0;
   left:0;
   width:100%;
   height:100vh;
+  display:flex;
+  align-items: center;
+  justify-content: center;
 }
 .loading div {
+  box-sizing: border-box;
   display: block;
   position: absolute;
   width: 10rem;
   height: 10rem;
-  border: 2rem solid #19598c transparent transparent transparent;;
+  border: 2rem solid #19598c;
   border-radius: 50%;
   animation: loading 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #19598c transparent transparent transparent;
 }
 .loading div:nth-child(1) {
   animation-delay: -0.45s;
@@ -168,18 +180,18 @@ select{
   color: #0400ff;
 }
 
+
 .rank{
+  margin-right: 0.5rem;
+  font-weight: 500;
+  font-size: 1.5rem;
+  width: 1.8rem;
+  height: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 1.8rem;
-  height: 2rem;
-  margin-right: 0.5rem;
-  border-radius: 4px;
-  font-weight: 500;
-  font-size: 1.5rem;
   text-align: center;
- 
+  border-radius: 4px;
 }
 
 @keyframes rank{
@@ -195,38 +207,38 @@ select{
 }
 
 .rank-first{
-  border: 0.1rem solid #d387ff;
+  animation: rank 3s ease-in infinite;
+  color: rgb(153, 84, 195);
   background: linear-gradient(45deg, #f3cc00 10%,rgba(255,255,255,1) 56%, gold 90%);
   background-size: 200% 200%;
-  color: rgb(153, 84, 195);
-  animation: rank 3s ease-in infinite;
+  border: 0.1rem solid #d387ff;
 }
 
 .rank-second{
-  border: 0.1rem solid #89b1ff;
+  animation: rank 3s ease-in infinite;
+  color: rgb(0, 173, 165);
   background: linear-gradient(45deg, rgb(136, 136, 136) 0%,rgb(243, 243, 243) 56%,rgba(149, 148, 148, 0.5) 96%);
   background-size: 200% 200%;
-  color: rgb(0, 173, 165);
-  animation: rank 3s ease-in infinite;
+  border: 0.1rem solid #89b1ff;
 }
 
 .rank-third{
+  animation: rank 3s ease-in infinite;
+  color: rgb(187, 117, 47);
   background: linear-gradient(45deg, rgb(216, 141, 66) 3%,rgb(226, 226, 226) 56%,rgb(212, 138, 64) 95%);
   background-size: 200% 200%;
   border: 0.1rem solid #cebfb9;
-  color: rgb(187, 117, 47);
-  animation: rank 3s ease-in infinite;
 }
 
 
 .rank-fourth{
-  background: linear-gradient(45deg,  rgba(127, 108, 104,1) 3%,rgb(209, 188, 184) 56%,rgb(112, 96, 92) 96%); 
   color:rgb(112, 99, 97);
+  background: linear-gradient(45deg,  rgba(127, 108, 104,1) 3%,rgb(209, 188, 184) 56%,rgb(112, 96, 92) 96%); 
 }
 
 .rank-fifth{
-  background: linear-gradient(45deg,  rgb(104, 90, 88) 3%,rgb(143, 121, 117) 56%,rgb(107, 93, 91) 96%); 
   color:rgb(98, 85, 82);
+  background: linear-gradient(45deg,  rgb(104, 90, 88) 3%,rgb(143, 121, 117) 56%,rgb(107, 93, 91) 96%); 
 }
 
 
@@ -272,4 +284,3 @@ select{
   }
   
 }
-
