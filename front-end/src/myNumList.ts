@@ -11,6 +11,8 @@ const loading = document.querySelector('.loading-box');
 const roundSelectBox = document.querySelector<HTMLSelectElement>('#round-select-box');
 const toolSelectBox = document.querySelector<HTMLSelectElement>('#tool-select-box');
 const methodSelectBox = document.querySelector<HTMLSelectElement>('#method-select-box');
+const numInfoToggleBtn = document.querySelector('.mynum-toggle-btn');
+const pastFilterBox = document.getElementsByClassName('func3-past-filter-box');
 
 init();
 async function init() {
@@ -18,12 +20,12 @@ async function init() {
     const data = await getAuthAPI('/numbers/mass');
     const rounds = Object.keys(data);
 
-    const roundConfig:IOptions = {
+    const roundConfig: IOptions = {
         data: [{
-            text:'전체', value:'all'
+            text: '전체', value: 'all'
         }]
     };
-    rounds.reverse().forEach(round =>{
+    rounds.reverse().forEach(round => {
         makeTable(data[round], round);
         roundConfig.data.push({ text: round, value: round });
     });
@@ -32,14 +34,14 @@ async function init() {
             { text: '무료', value: 'free' },
             { text: '유료', value: 'charge' }
         ],
-        searchable:false
+        searchable: false
     };
     const methodConfig: IOptions = {
         data: [
             { text: '자동', value: 'auto' },
             { text: '수동', value: 'manual' }
         ],
-        searchable:false
+        searchable: false
     };
 
     const roundSelect = new Selectr(roundSelectBox, roundConfig);
@@ -49,7 +51,7 @@ async function init() {
     const toolSelect = new Selectr(toolSelectBox, toolConfig);
     toolSelect.on('selectr.change', async (option) => {
         console.log(option.value);
-    });    
+    });
     const methodSelect = new Selectr(methodSelectBox, methodConfig);
     methodSelect.on('selectr.change', async (option) => {
         console.log(option.value);
@@ -58,9 +60,28 @@ async function init() {
     loading.classList.add('none');
     const checkBoxToggle = new CheckBoxToggle();
     checkBoxToggle.addEvent();
+
+    numInfoToggleBtn.addEventListener('click', numInfoToggle());
 }
 
-function makeTable(dataSet:any[], round:number|string) {
+function numInfoToggle() {
+    let flag = false;
+    return function () {
+        if (!flag) {
+            for (let i = 0; i < pastFilterBox.length; i++) {
+                pastFilterBox[i].classList.remove('none');
+            }
+            flag = true;
+        } else {
+            for (let i = 0; i < pastFilterBox.length; i++) {
+                pastFilterBox[i].classList.add('none');
+            }
+            flag = false;
+        }
+    }
+}
+
+function makeTable(dataSet: any[], round: number | string) {
     for (let i = 0; i < dataSet.length; i++) {
         const tableContent = document.createElement('div');
         tableContent.classList.add('mypage-table-content');
@@ -81,7 +102,7 @@ function makeTable(dataSet:any[], round:number|string) {
 
         const tableDate = document.createElement('div');
         tableDate.classList.add('mynum-table-date');
-        tableDate.textContent = dataSet[i].date.slice(0,10);
+        tableDate.textContent = dataSet[i].date.slice(0, 10);
 
         tableContent.appendChild(tableDate);
 
@@ -123,16 +144,20 @@ function makeTable(dataSet:any[], round:number|string) {
 
         const tableIsWin = document.createElement('div');
         tableIsWin.classList.add('mynum-table-iswin');
-        if(dataSet[i].win){
+        if (dataSet[i].win) {
             tableIsWin.textContent = dataSet[i].win;
-        }else{
+        } else {
             tableIsWin.textContent = '추첨전';
         }
         tableContent.appendChild(tableIsWin);
 
         tableNumBox.appendChild(tableContent);
 
+
+
         const infoTd = makePastFilterTable(dataSet[i]);
+        infoTd.classList.add('none');
         tableNumBox.appendChild(infoTd);
     }
+
 }

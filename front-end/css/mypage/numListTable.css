@@ -34,7 +34,6 @@
     border-top:1px solid var(--border-color);
     border-left:1px solid var(--border-color);
     border-right:1px solid var(--border-color);
-    margin-bottom: 0.5rem;
   }
 
   .mypage-table-header > div,
@@ -45,18 +44,21 @@
     justify-content: center;
   }
 
+  .mypage-table-num-box > div.mypage-table-content{
+    background-color: blue;
+  }
 
   .mypage-table-content{
     height:6rem;
     display:flex;
-    border-top:2px solid rgb(108, 121, 210);
+    border-top:1px solid var(--border-color);
     border-left:1px solid var(--border-color);
     border-right:1px solid var(--border-color);
     font-size: 1.2rem;
   }
 
-  .mynum-table-checkbox,
- .mynum-table-round,
+.mynum-table-checkbox,
+.mynum-table-round,
 .mynum-table-date,
 .mynum-table-division,
 .mynum-table-num-info, 
