@@ -13,6 +13,12 @@ const toolSelectBox = document.querySelector<HTMLSelectElement>('#tool-select-bo
 const methodSelectBox = document.querySelector<HTMLSelectElement>('#method-select-box');
 
 init();
+function makeTableByData(data:any):void{
+    const rounds = Object.keys(data);
+    rounds.reverse().forEach(round =>{
+        makeTable(data[round], round);
+    });
+}
 async function init() {
     loading.classList.remove('none');
     const data = await getAuthAPI('/numbers/mass');
@@ -29,30 +35,76 @@ async function init() {
     });
     const toolConfig: IOptions = {
         data: [
-            { text: '무료', value: 'free' },
-            { text: '유료', value: 'charge' }
+            { text: '전체', value: 'all'},
+            { text: '무료', value: 'a' },
+            { text: '유료', value: 'b' }
         ],
         searchable:false
     };
     const methodConfig: IOptions = {
         data: [
-            { text: '자동', value: 'auto' },
-            { text: '수동', value: 'manual' }
+            { text: '전체', value: 'all'},
+            { text: '자동', value: 'a' },
+            { text: '수동', value: 'm' }
         ],
         searchable:false
     };
 
     const roundSelect = new Selectr(roundSelectBox, roundConfig);
-    roundSelect.on('selectr.change', async (option) => {
-        console.log(option.value);
-    });
     const toolSelect = new Selectr(toolSelectBox, toolConfig);
-    toolSelect.on('selectr.change', async (option) => {
-        console.log(option.value);
-    });    
     const methodSelect = new Selectr(methodSelectBox, methodConfig);
+
+    let currentRound:number = 0;
+    let tool:string = null;
+    let method:string= null;
+
+    roundSelect.on('selectr.change', async (option) => {
+        loading.classList.remove('none');
+        let data:any;
+        if(option.value === 'all'){
+            data = await getAuthAPI('/numbers/mass/', {tool, method});
+            currentRound = null;
+        }else{
+            data = (await getAuthAPI('/numbers/mass/'+ option.value, {tool, method}));
+            currentRound = Number(option.value);
+        }
+        tableNumBox.innerHTML = '';
+        makeTableByData(data);
+        loading.classList.add('none');
+    });
+    toolSelect.on('selectr.change', async (option) => {
+        loading.classList.remove('none');
+        let data:any;
+        if(option.value === 'all'){
+            data = (await getAuthAPI('/numbers/mass/' + (currentRound? currentRound : ''), {method}));
+            methodSelect.enable();
+            tool = null;
+        }else if(option.value === 'a'){
+            data = (await getAuthAPI('/numbers/mass/' + (currentRound? currentRound : ''), {tool:option.value}));
+            methodSelect.disable();
+            tool = option.value;
+        }else if(option.value === 'b'){
+            data = (await getAuthAPI('/numbers/mass/' + (currentRound? currentRound : ''), {tool:option.value, method}));
+            methodSelect.enable();
+            tool = option.value;
+        }
+        tableNumBox.innerHTML = '';
+        makeTableByData(data);
+        loading.classList.add('none');
+    });
     methodSelect.on('selectr.change', async (option) => {
-        console.log(option.value);
+        loading.classList.remove('none');
+        let data:any;
+        if(option.value === 'all'){
+            data = (await getAuthAPI('/numbers/mass/'+(currentRound? currentRound : ''), {tool}));
+            method = null;
+        }else{
+            data = (await getAuthAPI('/numbers/mass/'+(currentRound? currentRound : ''), {tool, method:option.value}));
+            method = option.value;
+        }
+        tableNumBox.innerHTML = '';
+        makeTableByData(data);
+        loading.classList.add('none');
     });
 
     loading.classList.add('none');
