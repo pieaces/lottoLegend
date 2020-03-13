@@ -1,4 +1,4 @@
-import  {getUnAuthAPI} from '../../amplify/api'
+import  {getUnAuthAPI} from '../../../amplify/api'
 export interface Params {
     from?: number;
     to?: number;

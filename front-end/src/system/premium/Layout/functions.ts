@@ -1,20 +1,3 @@
-export function setColorLotto(num: number, Box: HTMLElement) {
-    if (1 <= num && num <= 10) {
-        Box.style.backgroundColor = '#FBC400';
-    } else if (num <= 20) {
-        Box.style.backgroundColor = '#69C8F2';
-    } else if (num <= 30) {
-        Box.style.backgroundColor = '#FF7272';
-    } else if (num <= 40) {
-        Box.style.backgroundColor = '#AAAAAA';
-    } else if (num <= 45) {
-        Box.style.backgroundColor = '#B0D840';
-    }
-}
-export function setDefaultColor(node: HTMLElement) {
-    node.style.background = "";
-    node.textContent = "";
-}
 export function makeInputCheckBox(): HTMLDivElement {
     const inputBoxContainer = document.createElement('div');
     inputBoxContainer.classList.add('input-checkbox-container');

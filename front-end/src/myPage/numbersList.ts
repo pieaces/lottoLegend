@@ -1,8 +1,9 @@
-import configure from './amplify/configure'
-import { getAuthAPI } from './amplify/api';
-import CheckBoxToggle from './functional/instanceBtns/CheckBoxToggle';
-import { setColorLotto, makeInputCheckBox, makePastFilterTable } from './functional/Layout/functions';
+import configure from '../amplify/configure'
+import { getAuthAPI } from '../amplify/api';
+import CheckBoxToggle from '../system/premium/instanceBtns/CheckBoxToggle';
+import { makeInputCheckBox, makePastFilterTable } from '../system/premium/Layout/functions';
 import Selectr, { IOptions } from 'mobius1-selectr';
+import { setColorLotto } from '../functions';
 
 configure();
 const tableNumBox = document.querySelector('.mypage-table-num-box');

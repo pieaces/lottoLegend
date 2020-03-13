@@ -5,7 +5,7 @@ import bubbleChart from '../instance1/bubbleInstance'
 import LineSlide2 from "../Slide/LineSlide2";
 import Swal from "sweetalert2";
 import makeDraggable from "./makeDraggable";
-import { makeModal } from "../../functions";
+import { makeModal } from "../../../functions";
 
 const meanValue = document.querySelector('#func1-bubble-mean-value');
 const stdevValue = document.querySelector('#func1-bubble-stdev-value');

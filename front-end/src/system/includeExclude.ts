@@ -1,9 +1,9 @@
-import configure from './amplify/configure'
-import { getUnAuthAPI, postAuthAPI, getAuthAPI } from './amplify/api'
-import Layout2 from "./functional/Layout/Layout2";
-import ResetBtn from './functional/instanceBtns/ResetBtn';
+import configure from '../amplify/configure'
+import { getUnAuthAPI, postAuthAPI, getAuthAPI } from '../amplify/api'
+import Layout2 from "./premium/Layout/Layout2";
+import ResetBtn from './premium/instanceBtns/ResetBtn';
 import Swal from 'sweetalert2'
-import { infoAlert, networkAlert } from './functions';
+import { networkAlert } from '../functions';
 
 configure();
 const category = document.querySelector('.main').getAttribute('data-category');
@@ -17,6 +17,18 @@ const loading = document.querySelector<HTMLElement>('.loading-box');
 loading.classList.remove('none');
 init();
 
+function infoAlert(title:string, text:string){
+    return Swal.fire({
+        title,
+        text,
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '예',
+        cancelButtonText: '아니요',
+    })
+}
 async function init() {
     const { include, exclude } = await getAuthAPI('/numbers/piece', {flag:true});
     console.log(include, exclude)

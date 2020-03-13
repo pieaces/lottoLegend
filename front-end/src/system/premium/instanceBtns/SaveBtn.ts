@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
-import { networkAlert } from "../../functions";
-import { postAuthAPI } from "../../amplify/api";
+import { networkAlert } from "../../../functions";
+import { postAuthAPI } from "../../../amplify/api";
 
 const saveBtns = document.querySelectorAll<HTMLElement>('.save-btn');
 const loading = document.querySelector<HTMLElement>('.loading-box');

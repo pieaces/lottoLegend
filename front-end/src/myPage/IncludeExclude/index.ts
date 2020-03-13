@@ -1,7 +1,7 @@
-import { setColorLotto, setDefaultColor } from '../functional/Layout/functions';
-type IncExc = "include" | "exclude";
+import { setColorLotto, setDefaultColor } from "../functions";
 
-export default class IncExcNumList {
+type IncExc = "include" | "exclude";
+export default class IncludeExclude {
     static answer: number[];
     numbers: number[];
     choice: IncExc;

@@ -1,9 +1,10 @@
-import configure from './amplify/configure'
-import ChartBase from './functional/Chart/Charts';
-import LineSlide from './functional/Slide/LineSlide'
-import { getUnAuthAPI } from './amplify/api';
-import { getQueryStringObject, rangeMake, getStaticsName } from './functions';
-import makeClickable from './functional/Slide/makeClickable';
+import configure from '../amplify/configure'
+import ChartBase from '../system/premium/Chart/Charts';
+import LineSlide from '../system/premium/Slide/LineSlide'
+import { getUnAuthAPI } from '../amplify/api';
+import { getQueryStringObject, rangeMake } from '../functions';
+import makeClickable from '../system/premium/Slide/makeClickable';
+import { getStaticsName } from './functions';
 const loading = document.querySelector('.loading-box');
 const labels = require('./functional/DataAPI/json/labels.json');
 configure();

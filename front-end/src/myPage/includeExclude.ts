@@ -1,8 +1,8 @@
-import configure from './amplify/configure'
-import { getAuthAPI } from './amplify/api'
-import IncExcNumList from './IncExcNumList';
-import incObj from './IncExcNumList/IncNumList';
-import excObj from './IncExcNumList/ExcNumList';
+import configure from '../amplify/configure'
+import { getAuthAPI } from '../amplify/api'
+import IncludeExclude from './IncludeExclude/index';
+import incObj from './IncludeExclude/include';
+import excObj from './IncludeExclude/exclude';
 configure();
 import Selectr, { IOptions } from 'mobius1-selectr';
 
@@ -15,9 +15,9 @@ async function init() {
     loading.classList.remove('none');
     const { include, exclude, rounds, answer } = await getAuthAPI('/numbers/piece');
     console.log(include, answer);
-    const incNumList = new IncExcNumList(include, "include", incObj);
-    const excNumList = new IncExcNumList(exclude, "exclude", excObj);
-    IncExcNumList.setAnswer(answer);
+    const incNumList = new IncludeExclude(include, "include", incObj);
+    const excNumList = new IncludeExclude(exclude, "exclude", excObj);
+    IncludeExclude.setAnswer(answer);
     incNumList.makePage();
     excNumList.makePage();
 
@@ -37,7 +37,7 @@ async function init() {
             incNumList.numbers = include;
             excNumList.numbers = exclude;
 
-            IncExcNumList.setAnswer(answer);
+            IncludeExclude.setAnswer(answer);
             incNumList.makePage();
             excNumList.makePage();
             loading.classList.add('none');

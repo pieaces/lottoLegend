@@ -1,4 +1,4 @@
-import { setColorLotto } from "./functions";
+import { setColorLotto } from "../../../functions";
 
 export default class Layout3 {
     static makeLine(canvas: HTMLElement, numbers: number[]): void {

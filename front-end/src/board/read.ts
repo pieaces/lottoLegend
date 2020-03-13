@@ -1,9 +1,8 @@
-import configure from './amplify/configure'
-import { getUnAuthAPI, postAuthAPI, deleteAuthAPI, getAuthAPI, patchAuthAPI } from './amplify/api';
-import { getUserName, getNickName } from './amplify/auth';
-import { getQueryStringObject, getCategoryHtml, isoStringToDate, Affix, networkAlert } from './functions';
+import configure from '../amplify/configure'
+import { getUnAuthAPI, postAuthAPI, deleteAuthAPI, getAuthAPI, patchAuthAPI } from '../amplify/api';
+import { getUserName, getNickName } from '../amplify/auth';
+import { getQueryStringObject, getCategoryHtml, isoStringToDate, Affix, networkAlert, setColorLotto } from '../functions';
 import Swal from 'sweetalert2'
-import { setColorLotto } from "./functional/Layout/functions";
 
 configure();
 

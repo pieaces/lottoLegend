@@ -1,5 +1,5 @@
 import Swal from 'sweetalert2'
-import makeDraggable from './functional/Layout/makeDraggable';
+import makeDraggable from '../system/premium/Layout/makeDraggable';
 
 export function networkAlert(){
 Swal.fire({
@@ -18,28 +18,6 @@ export function onlyUserAlert(){
       }).then(result => {
         location.href = `../signIn/signIn.html`;
       });
-}
-export function infoAlert(title:string, text:string){
-    return Swal.fire({
-        title,
-        text,
-        icon: 'info',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: '예',
-        cancelButtonText: '아니요',
-    })
-}
-export function removeConfirm(){
-    return confirm('삭제하면 복구가 불가능합니다. 괜찮겠어요?');
-}
-
-export function beforeAlert(){
-    alert('네트워크 상태가 좋지 못합니다.');
-}
-export function afterAlert(){
-    alert('네트워크 오류가 발생하였습니다. 작업이 정상적으로 완료되지 않았습니다.');
 }
 
 export function getQueryStringObject(): any {
@@ -89,46 +67,11 @@ export function getCategoryHtml(category: string, affix:Affix) {
     return htmlFile + affix + '.html';
 }
 
-export function getStaticsName(method: string) {
-    let name: string;
-    switch (method) {
-        case 'excludedLineCount': name = '전멸구간 개수'
-            break;
-        case "carryCount": name = '이월 개수'
-            break;
-        case "lowCount": name = '저값(1~22) 개수'
-            break;
-        case "sum": name = '번호 합계'
-            break;
-        case "oddCount": name = '홀수 개수'
-            break;
-        case "primeCount": name = '소수 개수'
-            break;
-        case "$3Count": name = '3배수 개수'
-            break;
-        case "sum$10": name = '첫수(십의자리) 합'
-            break;
-        case "diffMaxMin": name = '고저차'
-            break;
-        case "AC": name = 'AC'
-            break;
-    }
-    return name;
-}
 export function isoStringToDate(isoString: string): string {
     const date = new Date(isoString);
     date.setHours(date.getHours()+9);
     const iso = date.toISOString();
     return iso.slice(0, 10) + ' ' + iso.slice(11, 16);
-}
-
-export function rangeMake(stats:any, mul:number=1, add:number=0): string{
-    let from = stats.mean - stats.stdev*mul;
-    let to = stats.mean + stats.stdev*mul;
-
-    from = from < stats.min ? stats.min : from;
-    to = to > stats.max ? stats.max : to;
-    return `${Math.floor(from) + add} ~ ${Math.ceil(to) + add}`
 }
 
 export function makeModal(title: string, width: number) {
@@ -142,4 +85,30 @@ export function makeModal(title: string, width: number) {
     modalBox.style.boxShadow = '0 1px 1px rgba(0,0,0,0.12),0 2px 2px rgba(0,0,0,0.12),0 4px 4px rgba(0,0,0,0.12),0 8px 8px rgba(0,0,0,0.12),0 16px 16px rgba(0,0,0,0.12)';
     document.querySelector<HTMLElement>('.swal2-container').style.background = '#ffffff00';
     makeDraggable(document.querySelector<HTMLElement>('.swal2-container'));
+}
+
+export function rangeMake(stats:any, mul:number=1, add:number=0): string{
+    let from = stats.mean - stats.stdev*mul;
+    let to = stats.mean + stats.stdev*mul;
+
+    from = from < stats.min ? stats.min : from;
+    to = to > stats.max ? stats.max : to;
+    return `${Math.floor(from) + add} ~ ${Math.ceil(to) + add}`
+}
+export function setColorLotto(num: number, Box: HTMLElement) {
+    if (1 <= num && num <= 10) {
+        Box.style.backgroundColor = '#FBC400';
+    } else if (num <= 20) {
+        Box.style.backgroundColor = '#69C8F2';
+    } else if (num <= 30) {
+        Box.style.backgroundColor = '#FF7272';
+    } else if (num <= 40) {
+        Box.style.backgroundColor = '#AAAAAA';
+    } else if (num <= 45) {
+        Box.style.backgroundColor = '#B0D840';
+    }
+}
+export function setDefaultColor(node: HTMLElement) {
+    node.style.background = "";
+    node.textContent = "";
 }

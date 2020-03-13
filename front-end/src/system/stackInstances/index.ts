@@ -1,4 +1,4 @@
-import ChartBase from './functional/Chart/Charts';
+import ChartBase from '../premium/Chart/Charts';
 
 const compartColor = ['#FBC400', '#69C8F2', '#FF7272', '#AAAAAA', '#B0D840'];
 

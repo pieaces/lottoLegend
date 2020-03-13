@@ -1,7 +1,7 @@
 
-import configure from './amplify/configure'
-import ChartBase from './functional/Chart/Charts';
-import { getUnAuthAPI } from './amplify/api';
+import configure from '../amplify/configure'
+import ChartBase from '../system/premium/Chart/Charts';
+import { getUnAuthAPI } from '../amplify/api';
 import Swal from 'sweetalert2'
 
 configure();

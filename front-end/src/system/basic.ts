@@ -1,11 +1,11 @@
-import configure from './amplify/configure'
-import Layout3 from './functional/Layout/Layout3'
-import NumBoard from './functional/Layout/NumBoard';
-import { getAuthAPI, getUnAuthAPI } from './amplify/api';
+import configure from '../amplify/configure'
+import Layout3 from './premium/Layout/Layout3'
+import NumBoard from './premium/Layout/NumBoard';
+import { getAuthAPI, getUnAuthAPI } from '../amplify/api';
 import Swal from 'sweetalert2'
-import { actualInstance, selectionInstance, latestInstance } from './analLineGen';
-import SaveBtn, { Tool } from './functional/instanceBtns/SaveBtn';
-import CheckBoxToggle from './functional/instanceBtns/CheckBoxToggle';
+import { actualInstance, selectionInstance, latestInstance } from './stackInstances';
+import SaveBtn, { Tool } from './premium/instanceBtns/SaveBtn';
+import CheckBoxToggle from './premium/instanceBtns/CheckBoxToggle';
 
 configure();
 

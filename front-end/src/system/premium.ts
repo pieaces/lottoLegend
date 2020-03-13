@@ -1,6 +1,6 @@
-import configure from './amplify/configure'
-import DataAPI from "./functional/DataAPI";
-import Layout from './functional/Layout'
+import configure from '../amplify/configure'
+import DataAPI from "./premium/DataAPI";
+import Layout from './premium/Layout'
 
 configure();
 const loading = document.querySelector<HTMLElement>('.loading-box');

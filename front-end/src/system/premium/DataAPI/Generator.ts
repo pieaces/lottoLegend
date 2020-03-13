@@ -1,4 +1,4 @@
-import { postAuthAPI } from "../../amplify/api";
+import { postAuthAPI } from "../../../amplify/api";
 
 interface GeneratorOption {
     excludedLines?: number[];
