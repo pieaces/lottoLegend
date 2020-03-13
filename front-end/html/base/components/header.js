@@ -3,7 +3,7 @@ document.write(` <header>
     <div class="container top-nav">
         <div class="top-nav-right">
             <ul>
-                <li><a href="../signIn/signIn.html">로그인</a></li>
+                <li><a href="../signIn.html">로그인</a></li>
                 <li><a href="../signUp/signUp.html">회원가입</a></li>
                 <li><a href="../myPage/myPage.html">마이페이지</a></li>
             </ul>
@@ -14,27 +14,19 @@ document.write(` <header>
     <div class="hover-menu-container none">
         <div class="hover-menu-box container">
             <ul>
-
             </ul>
-           
-            
             <ul></ul>
             <ul>
-        
         <li> <a href="../analSystem/analPreExp.html">체험하기</a> </li>
         <li> <a href="../analSystem/analIncGen.html">추천/제외수 생성기</a> </li>
         <li> <a href="../analSystem/analFreeGen.html">번호 조합기</a> </li>
-
-    
             </ul>
             <ul>
-    
-
                 <li> <a href="../analBoard/analList.html">공유 게시판</a> </li>
                 <li> <a href="../statistics/statsHome.html">통계자료</a> </li>
                 </ul>
             <ul>
-                <li> <a href="../infoBoard/infoList.html">공지사항</a> </li>
+                <li> <a href="../../board/list.html">공지사항</a> </li>
                 <li> <a href="../winBoard/winList.html">당첨인증 게시판</a> </li>
                 <li> <a href="../freeBoard/freeBoardList.html">자유게시판</a> </li>
             </ul>

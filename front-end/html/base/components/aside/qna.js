@@ -4,12 +4,12 @@ document.write(` <div class="anchor-title">
 <ul class="anchor-list-container">
 <li>
     <ul class="anchor-list-box">
-    <li><a href="../inqBoard/oftenAskList.html">자주 묻는 질문</a></li>
+    <li><a href="oftenAskList.html">자주 묻는 질문</a></li>
     </ul> 
 </li>
 <li>
     <ul class="anchor-list-box">
-    <li> <a href="../inqBoard/qAList.html">Q & A</a> </li>
+    <li> <a href="list.html">Q & A</a> </li>
     </ul> 
 </li>
 </ul>

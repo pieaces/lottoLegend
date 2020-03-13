@@ -5,48 +5,49 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="../../css/init.css" />
-    <link rel="stylesheet" href="../../css/section.css">
-    <link rel="stylesheet" href="../../css/statsBox.css">
-    <link rel="stylesheet" href="../../css/filter/function.css">
-    <link rel="stylesheet" href="../../css/filter/function2.css">
-    <link rel="stylesheet" href="../../css/filter/function3.css">
-    <link rel="stylesheet" href="../../css/filter/func3NumBox.css">
-    <link rel="stylesheet" href="../../css/filter/func3NumList.css">
-    <link rel="stylesheet" href="../../css/filter/func3NumListTable.css">
-    <link rel="stylesheet" href="../../css//header.css" />
-    <link rel="stylesheet" href="../../css//footer.css" />
+    <link rel="stylesheet" href="../base/css/init.css" />
+    <link rel="stylesheet" href="../base/css/section.css">
+    <link rel="stylesheet" href="../base/css/header.css" />
+    <link rel="stylesheet" href="../base/css/footer.css" />
+    <link rel="stylesheet" href="../base/css/statsBox.css">
+    <link rel="stylesheet" href="css/function.css">
+    <link rel="stylesheet" href="css/function2.css">
+    <link rel="stylesheet" href="css/function3.css">
+    <link rel="stylesheet" href="css/func3NumBox.css">
+    <link rel="stylesheet" href="css/func3NumList.css">
+    <link rel="stylesheet" href="css/func3NumListTable.css">
+
     <title>CanvasLotto</title>
 </head>
 
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrapper">
-        <script src="../components/header/header.js"></script>
+        <script src="../base/components/header.js"></script>
         <div class="section1">
             <div class="grid-section-1 container">
                 <div class="aside">
                     <div class="anchor-box">
-                        <script src="../components/aside/analSystem.js"></script>
+                        <script src="../base/components/aside/system.js"></script>
                     </div>
                 </div>
                 <div class="main" data-category="include">
                     <div class="main-title switch-toggle-container">
                         추천수 생성기
                     </div>
-                    <script src="../components/analIncGen/contentTop.js"></script>
+                    <script src="components/IncExcTop.js"></script>
                     <button type="button" class="btn circle-btn" id="func2-num-inc-exc-btn">
                         제외
                     </button>
-                    <script src="../components/analIncGen/contentBottom.js"></script>
+                    <script src="components/IncExcBottom.js"></script>
                 </div>
             </div>
         </div>
     </div>
-    <script src="../components/footer/footer.js"></script>
+    <script src="../base/components/footer.js"></script>
     </div>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="../../js/headerHover.js"></script>
-    <script src="../../js/analIncExcGen.js"></script>
+    <script src="../base/js/headerHover.js"></script>
+    <script src="js/includeExclude.js"></script>
     <script src="https://kit.fontawesome.com/e14b8c39aa.js" crossorigin="anonymous"></script>
 </body>
 
