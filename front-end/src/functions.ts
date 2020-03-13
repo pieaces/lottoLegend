@@ -67,8 +67,11 @@ export function getCategoryHtml(category: string, affix:Affix) {
         case 'free':
             htmlFile = 'freeBoard'
             break;
-        case 'inex':
-            htmlFile = 'incExcNum'
+        case 'incl':
+            htmlFile = 'incNum'
+            break;
+        case 'excl':
+            htmlFile = 'excNum'
             break;
         case 'info':
             htmlFile = 'info'

@@ -70,7 +70,12 @@ async function init() {
         currentUser = await getUserName();
     } catch (err) { }
     if (id) {
-        const post = currentUser ? await getAuthAPI('/posts/' + id) : await getUnAuthAPI('/posts/' + id);
+        let post: any;
+        try {
+            post = currentUser ? await getAuthAPI('/posts/' + id) : await getUnAuthAPI('/posts/' + id);
+        } catch (err) {
+            networkAlert();
+        }
         console.log(post);
         title.textContent = post.title;
         author.textContent = post.nickName;
@@ -79,6 +84,9 @@ async function init() {
         if (currentUser === post.userName) {
             contentsUpdateBtn.classList.remove('hide');
             const category = document.querySelector<HTMLElement>('#wrapper').getAttribute('data-category');
+            if(category === 'incl' || category === 'excl'){
+                makeNum([1,3,5,7,9,10,13,15,19,24,29,35,41,42,44,45]);
+            }
             document.querySelector<HTMLElement>('#content-update-btn').setAttribute('onclick', `location.href='${getCategoryHtml(category, Affix.Post)}?id=${id}'`);
             document.querySelector<HTMLElement>('#delete-btn').addEventListener('click', async () => {
                 Swal.fire({
@@ -251,7 +259,6 @@ function limitTxtAreaCount(target: HTMLInputElement) {
 
 function makeNum(number: number[]) {
     const numContainer = document.querySelector('.inc-exc-num-container');
-
     for (let i = 0; i < number.length; i++) {
         const numBox = document.createElement('div');
         numBox.classList.add('inc-exc-num-box');
@@ -264,6 +271,5 @@ function makeNum(number: number[]) {
         numBox.appendChild(num);
         numContainer.appendChild(numBox);
     }
-
 }
 
