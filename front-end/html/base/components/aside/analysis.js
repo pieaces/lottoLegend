@@ -10,15 +10,15 @@ document.write(`    <div class="anchor-title">
 <li>
     <h3> 공유 게시판</h3>
     <ul class="anchor-list-box">
-        <li> <a href="../analBoard/analList.html">분석 Tip 공유</a> </li>
-        <li><a href="../incNumBoard/incNumList.html">추천수 공유</a></li>
-        <li><a href="../excNumBoard/excNumList.html">제외수 공유</a></li>
+        <li> <a href="../board/analysis/list.html">분석 Tip 공유</a> </li>
+        <li><a href="../board/include/list.html">추천수 공유</a></li>
+        <li><a href="../board/exclude/list.html">제외수 공유</a></li>
     </ul>
 </li>
 <li class="arrow-box">
     <h3> 통계자료</h3>
     <ul class="anchor-list-box">
-        <li> <a href="../statistics/statsHome.html">당첨번호 통계</a> </li>
+        <li> <a href="../statistics/winNumbers.html">당첨번호 통계</a> </li>
         <li> <a href="../statistics/statistics.html?method=excludedLineCount">전멸구간 개수</a> </li>
         <li> <a href="../statistics/statistics.html?method=carryCount">이월 개수</a> </li>
         <li> <a href="../statistics/statistics.html?method=lowCount">저값(1~22) 개수</a> </li>
