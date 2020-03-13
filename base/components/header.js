@@ -3,9 +3,9 @@ document.write(` <header>
     <div class="container top-nav">
         <div class="top-nav-right">
             <ul>
-                <li><a href="../signIn.html">로그인</a></li>
-                <li><a href="../signUp/signUp.html">회원가입</a></li>
-                <li><a href="../myPage/myPage.html">마이페이지</a></li>
+                <li><a href="/account/signIn.html">로그인</a></li>
+                <li><a href="/account/signUp.html">회원가입</a></li>
+                <li><a href="/myPage/home.html">마이페이지</a></li>
             </ul>
         </div>
     </div>
@@ -17,22 +17,22 @@ document.write(` <header>
             </ul>
             <ul></ul>
             <ul>
-        <li> <a href="../analSystem/analPreExp.html">체험하기</a> </li>
-        <li> <a href="../analSystem/analIncGen.html">추천/제외수 생성기</a> </li>
-        <li> <a href="../analSystem/analFreeGen.html">번호 조합기</a> </li>
+        <li> <a href="/system/experience.html">체험하기</a> </li>
+        <li> <a href="/system/include.html">추천/제외수 생성기</a> </li>
+        <li> <a href="/system/basic.html">번호 조합기</a> </li>
             </ul>
             <ul>
-                <li> <a href="../analBoard/analList.html">공유 게시판</a> </li>
-                <li> <a href="../statistics/statsHome.html">통계자료</a> </li>
+                <li> <a href="/board/analysis/list.html">공유 게시판</a> </li>
+                <li> <a href="/statistics/winNumbers.html">통계자료</a> </li>
                 </ul>
             <ul>
-                <li> <a href="../../board/list.html">공지사항</a> </li>
-                <li> <a href="../winBoard/winList.html">당첨인증 게시판</a> </li>
-                <li> <a href="../freeBoard/freeBoardList.html">자유게시판</a> </li>
+                <li> <a href="/board/notice/list.html">공지사항</a> </li>
+                <li> <a href="/board/win/list.html">당첨인증 게시판</a> </li>
+                <li> <a href="/board/free/list.html">자유게시판</a> </li>
             </ul>
             <ul>
-                <li> <a href="../inqBoard/oftenAskList.html">자주 묻는 질문</a> </li>
-                <li> <a href="../inqBoard/qAList.html">Q & A</a> </li>
+                <li> <a href="/board/qna/oftenAskList.html">자주 묻는 질문</a> </li>
+                <li> <a href="/board/qna/list.html">Q & A</a> </li>
             </ul>
         </div>
     </div>
@@ -42,7 +42,7 @@ document.write(` <header>
             <i class="fas fa-bars"></i></div>
         <ul class="mid-nav-menu">
             <li>
-                <a href="../main/main.html">
+                <a href="/main/main.html">
                   로또끝
                 </a>
             </li>
