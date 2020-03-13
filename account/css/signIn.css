@@ -10,12 +10,21 @@
 .login-box {
   box-shadow: 1px 2px 8px rgba(0,0,0,.1),-2px -1px 8px rgba(0,0,0,.1);
   border-radius: .75em;
-  width: 35rem;
+  width: 60rem;
 }
 
+.login-content-container{
+  height:18rem;
+}
+
+
 .login-title-text{
-  height:12rem;
-  font-size:2.2rem;
+
+  color : #333;
+  font-size      : 6rem;   
+  letter-spacing : 1.3rem;   
+  line-height    : 2.76rem;  
+  height:18rem;
   font-weight: bold;
   font-family: 'Nanum-gothic';
   display:flex;
@@ -24,22 +33,32 @@
   
 }
 
-.login-content-box{
-  padding:0.5rem 3rem 2rem 3rem;
+.login-input-container{
   display:flex;
   flex-direction: column;
+  align-items: center;
 }
 
-.login-content-box > input {
+.login-input-container > input {
+
+    height: 4.5rem;
   margin-bottom: 3rem;
-  height: 4.5rem;
+  padding-left:2rem;
 }
+
 
 .login-btn {
-  background-color: rgb(90, 90, 175);
+  border-radius: 3px;
+  background-color: rgb(98, 152, 199);
   color: var(--default-color);
   height: 6rem;
   font-size:1.6rem;
+}
+
+.login-service-container{
+  padding-right:2rem;
+  display:flex;
+  flex-direction: column;
 }
 
 .login-service {

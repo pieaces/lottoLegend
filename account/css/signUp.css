@@ -1,5 +1,9 @@
 /* signup */
 
+.anchor-list-container >li:nth-child(1){
+  background-color:#ececec;
+}
+
 .signup-terms-use-container{
   display:flex;
   justify-content:center;
@@ -43,8 +47,21 @@
   overflow-y: scroll;
 }
 
-.signup-container-box {
+.signup-terms-use-btn-box{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.terms-use-btn{
+  width:10rem;
+  height:4.5rem;
+  background-color: var(--main-color);
+  color:var(--default-color);
+  font-size: 1.5rem;
+}
+
+.signup-container-box {
   margin-bottom:5rem;
 }
 

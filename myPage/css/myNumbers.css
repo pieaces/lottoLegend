@@ -22,11 +22,16 @@
 }
 
 .mynum-toggle-btn{
-    background-color: var(--main-color);
+    background-color: var(--button-color3);
     color:var(--default-color);
-    width:8rem;
-    height:3.3rem;
+    width:10rem;
+    height:3.5rem;
     border: 1px solid var(--border-color);
+    border-radius: 3px;
+}
+
+.mynum-toggle-btn:hover{
+ background-color: rgb(138, 196, 243);
 }
 
 .func3-num-list-boundary{

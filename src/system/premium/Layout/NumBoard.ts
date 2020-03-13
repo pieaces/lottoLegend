@@ -7,6 +7,7 @@ export default class NumBoard {
     constructor(dataSet: TableData[]) {
         this.dataSet = dataSet;
     }
+
     makeNumBoard() {
         numContainerBox.innerHTML = '';
         for (let i = 0; i < this.dataSet.length; i++) {
@@ -33,7 +34,7 @@ export default class NumBoard {
             numContainerBox.appendChild(numContainer);
             if (i !== 0 && (i + 1) % 5 === 0) {
                 const div = document.createElement('div');
-                div.classList.add('func3-num-list-boundary');
+                div.classList.add('num-list-boundary');
                 numContainerBox.appendChild(div);
             }
         }

@@ -118,7 +118,7 @@ async function init() {
 }
 
 function numInfoToggle() {
-    let flag = false;
+    let flag = true;
     return function () {
         if (!flag) {
             for (let i = 0; i < pastFilterBox.length; i++) {
@@ -207,10 +207,15 @@ function makeTable(dataSet: any[], round: number | string) {
         tableNumBox.appendChild(tableContent);
 
 
-
         const infoTd = makePastFilterTable(dataSet[i]);
-        infoTd.classList.add('none');
         tableNumBox.appendChild(infoTd);
+
+        if (i !== 0 && (i + 1) % 5 === 0) {
+            tableContent.style.borderBottom = "1px solid rgba(0,0,0,0.1)";
+            const div = document.createElement('div');
+            div.classList.add('num-list-boundary');
+            tableNumBox.appendChild(div);
+        }
     }
 
 }
