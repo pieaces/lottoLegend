@@ -1,4 +1,6 @@
-import { dynamoDB, TableName } from '.'
+import dynamoDB from '.'
+import { AWSError } from 'aws-sdk/lib/error';
+import { GetItemOutput, GetItemInput, UpdateItemInput } from 'aws-sdk/clients/dynamodb';
 
 export enum Plan {
     "default" = "a",
@@ -12,8 +14,8 @@ const ExpressionAttributeNames = {
 };
 
 export function getPlan(userName:string):Promise<Plan>{
-    const params = {
-        TableName,
+    const params:GetItemInput = {
+        TableName: 'LottoUsers',
         ExpressionAttributeNames,
         ProjectionExpression: '#Plan, #Until',
         Key: {
@@ -23,7 +25,7 @@ export function getPlan(userName:string):Promise<Plan>{
         }
     };
     return new Promise((resolve, reject) => {
-        dynamoDB.getItem(params, (err, data) => {
+        dynamoDB.getItem(params, (err:AWSError, data:GetItemOutput) => {
             if (err) {
                 reject(err);
             }
@@ -59,8 +61,8 @@ export function makePlan(userName: string, plan: Plan, period: number): Promise<
     time.setMonth(time.getMonth() + period);
     const until = time.toISOString();
 
-    const params = {
-        TableName,
+    const params:UpdateItemInput = {
+        TableName: 'LottoUsers',
         ExpressionAttributeNames,
         ExpressionAttributeValues: {
             ':value': {
@@ -79,7 +81,7 @@ export function makePlan(userName: string, plan: Plan, period: number): Promise<
     };
 
     return new Promise((resolve, reject) => {
-        dynamoDB.updateItem(params, (err) => {
+        dynamoDB.updateItem(params, (err:AWSError) => {
             if (err) reject(err);
             resolve();
         });

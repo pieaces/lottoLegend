@@ -1,10 +1,13 @@
 import { Stats } from '../interface/Statistics';
 import { StatsMethod, DBData, Assembly, AssemblyVersion, QueryStatsParams } from '../interface/LottoDB';
 import { LottoNumber } from '../interface/Lotto';
-import {dynamoDB} from '.'
+import dynamoDB from '.'
 import {getCurrentRound} from '../funtions';
+import { GetItemOutput, ListAttributeValue, MapAttributeValue, GetItemInput } from 'aws-sdk/clients/dynamodb';
+import { AWSError } from 'aws-sdk/lib/error';
+
 export async function queryLotto(round: number): Promise<LottoNumber[]> {
-    const queryParams = {
+    const params:GetItemInput = {
         ProjectionExpression: 'Numbers',
         TableName: "LottoData",
         Key:{
@@ -15,7 +18,7 @@ export async function queryLotto(round: number): Promise<LottoNumber[]> {
     };
 
     return await new Promise((resolve, reject) => {
-        dynamoDB.getItem(queryParams, function (err, data) {
+        dynamoDB.getItem(params, function (err:AWSError, data:GetItemOutput) {
             if (err) {
                 reject('queryLotto 에러' + err);
             }
@@ -32,7 +35,7 @@ export async function queryLotto(round: number): Promise<LottoNumber[]> {
 }
 
 export async function queryLottoData(round: number): Promise<any> {
-    const queryParams = {
+    const params: GetItemInput = {
         ProjectionExpression: 'BonusNum, Stats, Numbers, LDate, Winner, WinAmount, Round',
         TableName: "LottoData",
         Key:{
@@ -43,7 +46,7 @@ export async function queryLottoData(round: number): Promise<any> {
     };
 
     return await new Promise((resolve, reject) => {
-        dynamoDB.getItem(queryParams, function (err, data) {
+        dynamoDB.getItem(params, function (err:AWSError, data:GetItemOutput) {
             if (err) {
                 reject('queryLotto 에러' + err);
             }
@@ -72,7 +75,7 @@ export async function queryLottoData(round: number): Promise<any> {
 }
 
 export async function queryStats(method: StatsMethod, params: QueryStatsParams={}, ProjectionExpression?:string, ExpressionAttributeNames?:any): Promise<any[] | DBData> {
-    const queryParams:any = {
+    const queryParams:GetItemInput = {
         TableName: "LottoStats",
         ExpressionAttributeNames: {
             "#List": 'List'
@@ -87,7 +90,7 @@ export async function queryStats(method: StatsMethod, params: QueryStatsParams={
     if(ProjectionExpression) queryParams.ProjectionExpression = ProjectionExpression;
     if(ExpressionAttributeNames) queryParams.ExpressionAttributeNames = ExpressionAttributeNames;
     return await new Promise((resolve, reject) => {
-        dynamoDB.getItem(queryParams, function (err, data) {
+        dynamoDB.getItem(queryParams, function (err:AWSError, data:GetItemOutput) {
             if (err) {
                 console.log('queryMassStats 에러', err);
                 reject(err);
@@ -193,7 +196,7 @@ function compressNumbers(numbers: number[], PACK: number): number[] {
     return result;
 }
 
-function transformNumbers(list: AWS.DynamoDB.ListAttributeValue, params?: QueryStatsParams): number[] {
+function transformNumbers(list: ListAttributeValue, params?: QueryStatsParams): number[] {
     let result: number[] = [];
     if (list) {
         if (params && typeof params.from === 'number' && typeof params.to === 'number') {
@@ -209,7 +212,7 @@ function transformNumbers(list: AWS.DynamoDB.ListAttributeValue, params?: QueryS
     return result;
 }
 
-function makeAssembly(obj: AWS.DynamoDB.MapAttributeValue, params?: QueryStatsParams): Assembly {
+function makeAssembly(obj: MapAttributeValue, params?: QueryStatsParams): Assembly {
     const result: Assembly = {
         $12: transformNumbers(obj.$12 && obj.$12.L, params),
         $24: transformNumbers(obj.$24 && obj.$24.L, params),

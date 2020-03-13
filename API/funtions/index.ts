@@ -1,5 +1,7 @@
 import { Response } from '../Response'
-import { dynamoDB } from '../dynamoDB';
+import dynamoDB from '../dynamoDB';
+import { ScanInput, ScanOutput, GetItemInput, GetItemOutput } from 'aws-sdk/clients/dynamodb';
+import { AWSError } from 'aws-sdk/lib/error';
 
 export function getCurrentRound(currentDate?: string): number {
     const theDate = new Date('2020-02-01:11:50');
@@ -18,20 +20,20 @@ export function isIdentical(currentId: string, writerId: string): Response {
 }
 
 export async function scanLotto(): Promise<{ BonusNum: { N: string }, Numbers: { NS: string[] } }[]> {
-    const params = {
+    const params:ScanInput = {
         TableName: 'LottoData',
         ProjectionExpression: 'Numbers, BonusNum'
     };
     return new Promise((resolve, reject) => {
-        dynamoDB.scan(params, (err, data: any) => {
+        dynamoDB.scan(params, (err:AWSError, data: ScanOutput) => {
             if (err) reject(err);
-            resolve(data.Items);
+            resolve(data.Items as { BonusNum: { N: string }, Numbers: { NS: string[] } }[]);
         });
     });
 }
 
 export async function getLotto(round: number): Promise<number[]> {
-    const params = {
+    const params:GetItemInput = {
         TableName: 'LottoData',
         ProjectionExpression: 'Numbers',
         Key: {
@@ -41,7 +43,7 @@ export async function getLotto(round: number): Promise<number[]> {
         }
     };
     return new Promise((resolve, reject) => {
-        dynamoDB.getItem(params, (err: any, data: any) => {
+        dynamoDB.getItem(params, (err: AWSError, data: GetItemOutput) => {
             if (err) reject(err);
             if (data.Item) resolve(data.Item.Numbers.NS.map((item: string) => Number(item)).sort((a: number, b: number) => a - b));
             else resolve();

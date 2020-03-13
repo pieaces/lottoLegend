@@ -1,6 +1,6 @@
 import Calculate from "../Lotto/class/Calculate";
 import { getCurrentRound, scanLotto } from "../funtions";
-import { getIncOrExcNumbers, IncOrExc } from "./Numbers";
+import { getIncOrExcNumbers } from "./Numbers";
 
 function makeChoice(exclude: number[]) {
     const choice: number[] = [];
@@ -27,8 +27,8 @@ function doesExist(one: number[], other: number[]) {
 }
 async function generateNumberA(userName: string) {
     const currentRound = getCurrentRound();
-    const include = await getIncOrExcNumbers(userName, currentRound, IncOrExc.include);
-    const exclude = await getIncOrExcNumbers(userName, currentRound, IncOrExc.exclude);
+    const include = await getIncOrExcNumbers(userName, currentRound, 'include');
+    const exclude = await getIncOrExcNumbers(userName, currentRound, 'exclude');
     const choice: number[] = makeChoice(exclude);
 
     const numsArr: number[][] = [];
@@ -60,8 +60,8 @@ function compartByLine(numbers: number[]) {
 }
 async function generateNumberB(userName: string, lineCount?: number[]) {
     const currentRound = getCurrentRound();
-    const include = await getIncOrExcNumbers(userName, currentRound, IncOrExc.include);
-    const exclude = await getIncOrExcNumbers(userName, currentRound, IncOrExc.exclude);
+    const include = await getIncOrExcNumbers(userName, currentRound, 'include');
+    const exclude = await getIncOrExcNumbers(userName, currentRound, 'exclude');
     const choice: number[] = makeChoice(exclude);
 
     const compart = {

@@ -1,5 +1,4 @@
-import AWS from 'aws-sdk'
-const dynamoDB = new AWS.DynamoDB();
-const TableName = "LottoUsers";
+import DynamoDB from "aws-sdk/clients/dynamodb";
+const dynamoDB = new DynamoDB();
 
-export {dynamoDB, TableName};
+export default dynamoDB;
