@@ -13,6 +13,7 @@ interface Post {
     comment: Comment | null;
 }
 export default class Posts extends DB {
+    static readonly SCAN_MAX = 10;
     comments: Comments = new Comments();
     postsContents: PostsContents = new PostsContents();
     constructor() {
@@ -20,9 +21,8 @@ export default class Posts extends DB {
         this.tableName = 'Posts';
     }
     async scan(category: string = "free", index: number = 1) {
-        const MAX = 10;
         const sql = `SELECT id, title, Users.nickName AS 'nickName', Users.rank AS 'rank', created, hits, recommendation FROM Posts INNER JOIN Users ON Posts.userName = Users.userName WHERE category = ? ORDER BY created DESC LIMIT ?, ?`;
-        return await this.query(sql, [category, MAX*(index-1), MAX]);
+        return await this.query(sql, [category, Posts.SCAN_MAX * (index - 1), Posts.SCAN_MAX]);
     }
     async getCount(category: string): Promise<number> {
         const rows = await this.query(`SELECT COUNT(*) FROM ${this.tableName} WHERE category=?`, [category]);
@@ -69,15 +69,39 @@ export default class Posts extends DB {
         const changedRows = await this.postsContents.patch(id, contents);
         return changedRows;
     }
-    async updateRecommends(id: number, userName:string) {
+    async updateRecommends(id: number, userName: string) {
         let operand = 1;
         const response = await updateRecommendUsers(id, userName);
-        if(response.error) operand = -1;
+        if (response.error) operand = -1;
         const sql = `UPDATE ${this.tableName} SET recommendation = recommendation + ? WHERE id = ?`;
         return this.engine.promisePool.execute(sql, [operand, id]);
     }
     async delete(id: number) {
         const affectedRows = await super._delete({ key: 'id', value: id });
         return affectedRows;
+    }
+
+    async search(category: string = "free", index: number = 1, title: string, text?: string) {
+        let match = `MATCH(title) AGAINST('?' IN BOOLEAN MODE)`;//against('+사진*+테스트*' in boolean mode)
+        const values: (string | number)[] = [category, title];
+        if (text) {
+            match += ` + MATCH(text) AGAINST('?' IN BOOLEAN MODE)`;
+            values.push(text);
+        }
+        values.push(Posts.SCAN_MAX * (index - 1), Posts.SCAN_MAX);
+        const sql = `SELECT id, title, Users.nickName AS 'nickName', Users.rank AS 'rank', created, hits, recommendation FROM ${this.tableName} INNER JOIN PostsContents ON ${this.tableName}.id=PostsContents.post INNER JOIN Users ON ${this.tableName}.userName=Users.userName WHERE category=? AND ${match} ORDER BY created DESC LIMIT ?, ?`
+
+        return await this.query(sql, values);
+    }
+    async getCountBySearch(category: string = "free", title: string, text?: string): Promise<number> {
+        let match = `MATCH(title) AGAINST('?' IN BOOLEAN MODE)`;//against('+사진*+테스트*' in boolean mode)
+        const values = [category, title];
+        if (text) {
+            match += ` + MATCH(text) AGAINST('?' IN BOOLEAN MODE)`;
+            values.push(text);
+        }
+        const sql = `SELECT COUNT(*) FROM ${this.tableName} INNER JOIN PostsContents ON ${this.tableName}.id=PostsContents.post WHERE category=? AND ${match}`
+        const rows = await this.query(sql, values);
+        return rows[0]['COUNT(*)'];
     }
 }

@@ -171,6 +171,21 @@ exports.handler = async (event: any) => {
             }
         }
             break;
+        case '/search': {
+            const db = new Posts();
+            switch (method) {
+                case 'GET':
+                    const category: string = event.queryStringParameters.category;
+                    const title:string = event.queryStringParameters.title;
+                    const text:(string|undefined) = event.queryStringParameters.text;
+                    const index = Number(event.queryStringParameters.index);
+                    const posts = await db.search(category, index, title, text);
+                    const count = await db.getCountBySearch(category, title, text);
+                    body = { posts, count };
+                    break;
+            }
+        }
+            break;
     }
     const response = {
         statusCode,
