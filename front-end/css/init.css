@@ -64,9 +64,7 @@ input:focus {
 }
 
 select{
-  border: 1px solid var(--main-color);
   border-radius: 3px;
-  padding-left: 0.5rem;
 }
 
 

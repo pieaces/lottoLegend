@@ -11,11 +11,13 @@ const loading = document.querySelector('.loading-box');
 const roundSelectBox = document.querySelector<HTMLSelectElement>('#round-select-box');
 const toolSelectBox = document.querySelector<HTMLSelectElement>('#tool-select-box');
 const methodSelectBox = document.querySelector<HTMLSelectElement>('#method-select-box');
+const numInfoToggleBtn = document.querySelector('.mynum-toggle-btn');
+const pastFilterBox = document.getElementsByClassName('func3-past-filter-box');
 
 init();
-function makeTableByData(data:any):void{
+function makeTableByData(data: any): void {
     const rounds = Object.keys(data);
-    rounds.reverse().forEach(round =>{
+    rounds.reverse().forEach(round => {
         makeTable(data[round], round);
     });
 }
@@ -24,48 +26,48 @@ async function init() {
     const data = await getAuthAPI('/numbers/mass');
     const rounds = Object.keys(data);
 
-    const roundConfig:IOptions = {
+    const roundConfig: IOptions = {
         data: [{
-            text:'전체', value:'all'
+            text: '전체', value: 'all'
         }]
     };
-    rounds.reverse().forEach(round =>{
+    rounds.reverse().forEach(round => {
         makeTable(data[round], round);
         roundConfig.data.push({ text: round, value: round });
     });
     const toolConfig: IOptions = {
         data: [
-            { text: '전체', value: 'all'},
+            { text: '전체', value: 'all' },
             { text: '무료', value: 'a' },
             { text: '유료', value: 'b' }
         ],
-        searchable:false
+        searchable: false
     };
     const methodConfig: IOptions = {
         data: [
-            { text: '전체', value: 'all'},
+            { text: '전체', value: 'all' },
             { text: '자동', value: 'a' },
             { text: '수동', value: 'm' }
         ],
-        searchable:false
+        searchable: false
     };
 
     const roundSelect = new Selectr(roundSelectBox, roundConfig);
     const toolSelect = new Selectr(toolSelectBox, toolConfig);
     const methodSelect = new Selectr(methodSelectBox, methodConfig);
 
-    let currentRound:number = 0;
-    let tool:string = null;
-    let method:string= null;
+    let currentRound: number = 0;
+    let tool: string = null;
+    let method: string = null;
 
     roundSelect.on('selectr.change', async (option) => {
         loading.classList.remove('none');
-        let data:any;
-        if(option.value === 'all'){
-            data = await getAuthAPI('/numbers/mass/', {tool, method});
+        let data: any;
+        if (option.value === 'all') {
+            data = await getAuthAPI('/numbers/mass/', { tool, method });
             currentRound = null;
-        }else{
-            data = (await getAuthAPI('/numbers/mass/'+ option.value, {tool, method}));
+        } else {
+            data = (await getAuthAPI('/numbers/mass/' + option.value, { tool, method }));
             currentRound = Number(option.value);
         }
         tableNumBox.innerHTML = '';
@@ -74,17 +76,17 @@ async function init() {
     });
     toolSelect.on('selectr.change', async (option) => {
         loading.classList.remove('none');
-        let data:any;
-        if(option.value === 'all'){
-            data = (await getAuthAPI('/numbers/mass/' + (currentRound? currentRound : ''), {method}));
+        let data: any;
+        if (option.value === 'all') {
+            data = (await getAuthAPI('/numbers/mass/' + (currentRound ? currentRound : ''), { method }));
             methodSelect.enable();
             tool = null;
-        }else if(option.value === 'a'){
-            data = (await getAuthAPI('/numbers/mass/' + (currentRound? currentRound : ''), {tool:option.value}));
+        } else if (option.value === 'a') {
+            data = (await getAuthAPI('/numbers/mass/' + (currentRound ? currentRound : ''), { tool: option.value }));
             methodSelect.disable();
             tool = option.value;
-        }else if(option.value === 'b'){
-            data = (await getAuthAPI('/numbers/mass/' + (currentRound? currentRound : ''), {tool:option.value, method}));
+        } else if (option.value === 'b') {
+            data = (await getAuthAPI('/numbers/mass/' + (currentRound ? currentRound : ''), { tool: option.value, method }));
             methodSelect.enable();
             tool = option.value;
         }
@@ -94,12 +96,12 @@ async function init() {
     });
     methodSelect.on('selectr.change', async (option) => {
         loading.classList.remove('none');
-        let data:any;
-        if(option.value === 'all'){
-            data = (await getAuthAPI('/numbers/mass/'+(currentRound? currentRound : ''), {tool}));
+        let data: any;
+        if (option.value === 'all') {
+            data = (await getAuthAPI('/numbers/mass/' + (currentRound ? currentRound : ''), { tool }));
             method = null;
-        }else{
-            data = (await getAuthAPI('/numbers/mass/'+(currentRound? currentRound : ''), {tool, method:option.value}));
+        } else {
+            data = (await getAuthAPI('/numbers/mass/' + (currentRound ? currentRound : ''), { tool, method: option.value }));
             method = option.value;
         }
         tableNumBox.innerHTML = '';
@@ -110,9 +112,28 @@ async function init() {
     loading.classList.add('none');
     const checkBoxToggle = new CheckBoxToggle();
     checkBoxToggle.addEvent();
+
+    numInfoToggleBtn.addEventListener('click', numInfoToggle());
 }
 
-function makeTable(dataSet:any[], round:number|string) {
+function numInfoToggle() {
+    let flag = false;
+    return function () {
+        if (!flag) {
+            for (let i = 0; i < pastFilterBox.length; i++) {
+                pastFilterBox[i].classList.remove('none');
+            }
+            flag = true;
+        } else {
+            for (let i = 0; i < pastFilterBox.length; i++) {
+                pastFilterBox[i].classList.add('none');
+            }
+            flag = false;
+        }
+    }
+}
+
+function makeTable(dataSet: any[], round: number | string) {
     for (let i = 0; i < dataSet.length; i++) {
         const tableContent = document.createElement('div');
         tableContent.classList.add('mypage-table-content');
@@ -133,7 +154,7 @@ function makeTable(dataSet:any[], round:number|string) {
 
         const tableDate = document.createElement('div');
         tableDate.classList.add('mynum-table-date');
-        tableDate.textContent = dataSet[i].date.slice(0,10);
+        tableDate.textContent = dataSet[i].date.slice(0, 10);
 
         tableContent.appendChild(tableDate);
 
@@ -175,16 +196,20 @@ function makeTable(dataSet:any[], round:number|string) {
 
         const tableIsWin = document.createElement('div');
         tableIsWin.classList.add('mynum-table-iswin');
-        if(dataSet[i].win){
+        if (dataSet[i].win) {
             tableIsWin.textContent = dataSet[i].win;
-        }else{
+        } else {
             tableIsWin.textContent = '추첨전';
         }
         tableContent.appendChild(tableIsWin);
 
         tableNumBox.appendChild(tableContent);
 
+
+
         const infoTd = makePastFilterTable(dataSet[i]);
+        infoTd.classList.add('none');
         tableNumBox.appendChild(infoTd);
     }
+
 }

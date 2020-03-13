@@ -1,34 +1,49 @@
-.mynum-selectbox-container{
-    width: 12rem;
-    height: 3.3rem;
+.mynum-selectbox-wrapper{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 1rem;
+}
+
+.mynum-selectbox-container{
+    display:flex;
+}
+
+.mynum-selectbox-box{
+    width: 12rem;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     font-size: 1.5rem;
     text-align: center;
-}
-
-.mynum-selectbox-container>select:not(:last-child){
-    margin-right:1rem;
+    margin-right:0.5rem;
 }
 
 .mynum-selectbox-text{
-    font-size:1.5rem;
+    font-size:1.7rem;
+    width:3rem;
+    display:flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.selectr-input-clear{
-    display:none !important;
+.selectr-selected{
+    height:4rem;
+}
+
+.selectr-input-container.active .selectr-input-clear{
+    display:none;
 }
 
 .selectr-input{
-    width: calc(100% - 40px);
-    margin:10px;
-    padding-right:1.3rem;
+    width: calc(100%-1rem);
+    height:4rem;
+    padding:1rem;
+    margin:1rem 1rem;
 }
 
 .selectr-options {
-    max-height: 40rem !important;
+    max-height: 40rem;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
 }
@@ -36,3 +51,4 @@
 .selectr-options::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
 }
+
