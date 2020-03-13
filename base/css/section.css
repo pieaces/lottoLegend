@@ -9,17 +9,17 @@
   
   .aside {
     width: 18%;
-    padding-top: 7rem;
     margin-right: 2rem;
+    padding-top: 7rem;
   }
 
   .anchor-title{
-    background-color: var(--side-color);
-    color: var(--default-color);
-    height: 12rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 12rem;
+    background-color: var(--side-color);
+    color: var(--default-color);
     font-size: 2rem;
   }
 
@@ -32,28 +32,27 @@
     border-right:1px solid var(--border-color);
   }
 
+  .anchor-list-box > li{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height:3.5rem;
+    border-bottom:1px solid var(--border-color);
+    text-align: center;
+  }
+
   .anchor-list-container > li:last-child{
     border:none;
   }
   
   .anchor-list-container > li > h3{
-    background-color: #ececec;
+    display:flex;
+    align-items: center;
+    justify-content: center;
     height:4rem;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    border-bottom:1px solid var(--border-color);
+    background-color: #ececec;
     font-size: 1.6rem;
-    border-bottom:1px solid var(--border-color);
-  }
-
-  .anchor-list-box > li{
-    border-bottom:1px solid var(--border-color);
-    height:3.5rem;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
   }
 
   .anchor-list-box > li>a:hover{
@@ -64,33 +63,31 @@
     font-size:1.5rem;
   }
 
-
-
 /* main */
 
   .main {
-    min-height: 75rem;
     width:82%;
+    min-height: 75rem;
     padding:1rem 0;
   }
   
   .main-title {
-    height: 6rem;
-    padding-left: 1rem;
-    font-weight: bold;
     display: flex;
     align-items: center;
-    font-size: 1.8rem;
-    border-bottom: 2px solid #afafaf;
+    height: 6rem;
     margin-bottom: 1rem;
+    padding-left: 1rem;
+    border-bottom: 2px solid #afafaf;
+    font-weight: bold;
+    font-size: 1.8rem;
   }
 
   /* half-container */
 
   .left-right-container{
     display:flex;
-    margin-bottom:1rem;
     width:100%;
+    margin-bottom:1rem;
   }
   
 /* left-container */

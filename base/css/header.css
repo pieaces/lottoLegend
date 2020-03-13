@@ -1,5 +1,4 @@
 
-  
   /* header */
 /* top-nav */
 
@@ -39,30 +38,25 @@
   color: var(--default-color);
 }
 
-.mid-nav {
+.mid-nav-menu {
   display: flex;
   align-items: center;
-}
-
-.mid-nav-menu {
   width:100%;
   height:100%;
-  display: flex;
-  align-items: center;
 }
 
 .mid-nav-menu > li {
-  height:100%;
   flex:1;
+  height:100%;
 }
 
 .mid-nav-menu > li > a {
   display:flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
   height:100%;
   color: var(--default-color);
+  text-align: center;
 }
 
 .mid-nav-menu > li:nth-child(1) > a {
@@ -74,15 +68,14 @@
 }
 
 .hover-menu-container{
-  z-index:98;
+  display:flex;
   position: absolute;
   top:100%;
   left:0;
+  z-index:98;
   width:100%;
-  background-color:var(--default-color);
-  display:flex;
   border-bottom:1px solid var(--main-color);
-
+  background-color:var(--default-color);
 }
 
 .hover-menu-box{
@@ -104,17 +97,17 @@
 }
 
 .hover-menu-box > ul > li{
-height:4rem;
+  height:4rem;
 }
 
 .hover-menu-box > ul > li >a{
-  font-size:1.4rem;
   display:flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
   width:100%;
   height:100%;
+  font-size:1.4rem;
+  text-align: center;
   opacity: 0.7;
   }
 
@@ -124,9 +117,9 @@ height:4rem;
 
 .hamburger-box{
   display:none;
+  position: relative;
   width:3rem;
   height:3rem;
-  position: relative;
 }
 
 .hamburger-box > i{
@@ -137,9 +130,9 @@ height:4rem;
   position: absolute;
   top:0;
   left:0;
+  z-index: -1;
   width: 100%;
   height:100%;
-  z-index: -1;
 }
 
 /* bottom-nav */
@@ -165,8 +158,8 @@ height:4rem;
 }
 
 .bottom-nav-left > ul > li:nth-child(1) {
-  color: var(--default-color);
   background-color: red;
+  color: var(--default-color);
 }
 
 .bottom-nav-right > p {

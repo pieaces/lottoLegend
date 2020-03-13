@@ -7,6 +7,12 @@
   padding:5rem;
 }
 
+.login-box {
+  box-shadow: 1px 2px 8px rgba(0,0,0,.1),-2px -1px 8px rgba(0,0,0,.1);
+  border-radius: .75em;
+  width: 35rem;
+}
+
 .login-title-text{
   height:12rem;
   font-size:2.2rem;
@@ -18,12 +24,10 @@
   
 }
 
-.login-box {
-  box-shadow: 1px 2px 8px rgba(0,0,0,.1),-2px -1px 8px rgba(0,0,0,.1);
-  border-radius: .75em;
-  width: 35rem;
-
-
+.login-content-box{
+  padding:0.5rem 3rem 2rem 3rem;
+  display:flex;
+  flex-direction: column;
 }
 
 .login-content-box > input {
@@ -46,15 +50,6 @@
   font-size:1.4rem;
 }
 
-.login-btn{
-  height:5rem;
-}
-
-.login-content-box{
-  padding:0.5rem 3rem 2rem 3rem;
-  display:flex;
-  flex-direction: column;
-}
 @media (min-width: 481px) and (max-width: 767px) {
   .signup-input-box > input{
     width:13rem;

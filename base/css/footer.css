@@ -9,10 +9,10 @@
 }
 
 .top-footer > ul {
-  height:100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  height:100%;
 }
 
 .top-footer > ul > li {
@@ -27,8 +27,8 @@
 
 .mid-footer-container {
   height: 100px;
-  background-color: #ececec;
   border-top: 1px solid var(--border-color);
+  background-color: #ececec;
 }
 
 .mid-footer {
@@ -42,8 +42,8 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  text-align: center;
   padding: 20px;
+  text-align: center;
 }
 
 .mid-footer > div > p {
@@ -69,17 +69,10 @@
 }
 
 .bottom-footer > div > p:nth-child(1) {
+  margin-bottom: 10px;
   padding: 10px 0;
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
-  margin-bottom: 10px;
-}
-
-.bottom-footer > div > p:nth-child(1) {
-  padding: 10px 0;
-  border-top: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
-  margin-bottom: 10px;
 }
 
 .bottom-footer > div > p:not(:nth-child(1)) {

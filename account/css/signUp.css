@@ -10,14 +10,20 @@
   width:50rem;
 }
 
-.signup-terms-use-check-container{
-  display:flex;
-  margin-bottom:1rem;
-}
 .signup-terms-use-all-check{
   display:flex;
   margin-bottom:3rem;
 }
+
+.signup-terms-use-tab-box{
+  margin-bottom:3rem;
+}
+
+.signup-terms-use-check-container{
+  display:flex;
+  margin-bottom:1rem;
+}
+
 .signup-checkbox-container{
   display:flex;
   align-items: center;
@@ -36,9 +42,7 @@
   border:1px solid var(--border-color);
   overflow-y: scroll;
 }
-.signup-terms-use-tab-box{
-  margin-bottom:3rem;
-}
+
 .signup-container-box {
 
   margin-bottom:5rem;
