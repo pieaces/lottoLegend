@@ -4,20 +4,20 @@ document.write(`<div class="anchor-title">
     <ul class="anchor-list-container">
     <li>
         <ul class="anchor-list-box">
-        <li>  <a href="../analSystem/analPreExp.html">체험하기</a>  </li>
+        <li>  <a href="premium.html">체험하기</a>  </li>
         </ul>
     </li>
     <li>  <h3>추천/제외수 생성기</h3> 
         <ul class="anchor-list-box">
-        <li>  <a href="../analSystem/analIncGen.html">추천수</a>  
-        <li>  <a href="../analSystem/analExcGen.html">제외수</a>  </li>
+        <li>  <a href="include.html">추천수</a>  
+        <li>  <a href="exclude.html">제외수</a>  </li>
         </ul>
     </li>
     <li>
         <h3>번호 조합기</h3>
         <ul class="anchor-list-box">
-        <li>  <a href="../analSystem/analFreeGen.html">기본 필터</a>  </li>
-        <li>  <a href="../analSystem/analPre.html">프리미엄 필터</a>  </li>
+        <li>  <a href="basic.html">기본 필터</a>  </li>
+        <li>  <a href="premium.html">프리미엄 필터</a>  </li>
         </ul>
     </li>
        
