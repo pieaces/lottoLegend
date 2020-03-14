@@ -1,11 +1,10 @@
 import verify from "./auth";
 import { getCurrentRound, isIdentical } from "./funtions";
-
 import Posts from "./mariaDB/Posts";
 import Comments from "./mariaDB/Comments";
 import { getIncOrExcNumbers, IncOrExc } from './dynamoDB/myNumbers'
 import { getRecommendUsers } from "./dynamoDB/recommend";
-import { getRank } from "./dynamoDB/userInfo";
+import { getRank, addPoint, Point, subtractPoint } from "./dynamoDB/userInfo";
 import Users from "./mariaDB/Users";
 
 const headers = {
@@ -53,6 +52,7 @@ exports.handler = async (event: any) => {
                     if (logedIn) {
                         const { category, title, contents } = JSON.parse(event.body);
                         const insertId = await db.post(category, title, currentId, contents);
+                        await addPoint(currentId, Point.post);
                         body = insertId;
                     } else {
                         statusCode = 400;
@@ -101,6 +101,7 @@ exports.handler = async (event: any) => {
                     const response = isIdentical(currentId, (await db.getUserName(postId)));
                     if (!response.error) {
                         const affectedRows = await db.delete(postId);
+                        await subtractPoint(currentId, Point.post);
                         body = affectedRows;
                     } else {
                         statusCode = 400;
@@ -123,6 +124,7 @@ exports.handler = async (event: any) => {
                     if (logedIn) {
                         const { contents } = JSON.parse(event.body);
                         const insertId = await db.post(postId, currentId, contents);
+                        await addPoint(currentId, Point.comment);
                         const users = new Users();
                         const {rank} = await users.getRank(currentId);
                         body = {commentId:insertId, rank};
@@ -147,6 +149,7 @@ exports.handler = async (event: any) => {
                         break;
                     case 'DELETE':
                         const affectedRows = await db.delete(commentId);
+                        await subtractPoint(currentId, Point.comment);
                         body = affectedRows;
                         break;
                 }
@@ -162,7 +165,10 @@ exports.handler = async (event: any) => {
                     if (logedIn) {
                         const db = new Posts();
                         const postId = Number(event.pathParameters.postId);
+                        const userName = await db.getUserName(postId);
                         await db.updateRecommends(postId, currentId);
+                        await addPoint(currentId, Point.recommend);
+                        await addPoint(userName, Point.recommended);
                     } else {
                         statusCode = 400;
                         body = "로그인되지 않은 사용자입니다."
