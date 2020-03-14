@@ -22,8 +22,8 @@ async function init() {
     excNumList.makePage();
 
     if (rounds) {
-        const config:IOptions = {
-            data: rounds.map((round:string) => {
+        const config: IOptions = {
+            data: rounds.map((round: string) => {
                 return {
                     text: round,
                     value: round

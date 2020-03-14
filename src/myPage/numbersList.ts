@@ -16,6 +16,7 @@ const numInfoToggleBtn = document.querySelector('.mynum-toggle-btn');
 const pastFilterBox = document.getElementsByClassName('func3-past-filter-box');
 
 init();
+
 function makeTableByData(data: any): void {
     const rounds = Object.keys(data);
     rounds.reverse().forEach(round => {

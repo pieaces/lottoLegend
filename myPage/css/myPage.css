@@ -60,6 +60,10 @@
   background-color: var(--table-title-color);
 }
 
+.mypage-num-list-container > .mypage-title{
+  margin-bottom:1rem;
+}
+
 
 .mypage-content-box{
   height:80%;
@@ -119,7 +123,6 @@ align-items: center;
 .mypage-win-num > div{
   width: 2.5rem;
   height: 2.5rem;
-  background-color: blue;
   margin-right: 1rem;
   border-radius: 50%;
   color: var(--default-color);
@@ -129,18 +132,6 @@ align-items: center;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
 }
 
-.mypage-table-num-box{
-  margin-top:1rem;
-}
-.mypage-table-num tr{
-  height:6rem;
-}
-.mypage-table-num th,
-.mypage-table-num td{
-  text-align: center;
-  font-size:1.4rem;
-  padding:0 0.5rem;
-}
 
 .mypage-notice-box > i{
   cursor: pointer;

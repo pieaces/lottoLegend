@@ -83,8 +83,8 @@ async function init() {
         if (currentUser === post.userName) {
             contentsUpdateBtn.classList.remove('hide');
             const category = document.querySelector<HTMLElement>('#wrapper').getAttribute('data-category');
-            if(category === 'incl' || category === 'excl'){
-                makeNum([1,3,5,7,9,10,13,15,19,24,29,35,41,42,44,45]);
+            if (category === 'incl' || category === 'excl') {
+                makeNum([1, 3, 5, 7, 9, 10, 13, 15, 19, 24, 29, 35, 41, 42, 44, 45]);
             }
             document.querySelector<HTMLElement>('#content-update-btn').setAttribute('onclick', `location.href='/${getCategoryHtml(category, 'post')}?id=${id}'`);
             document.querySelector<HTMLElement>('#delete-btn').addEventListener('click', async () => {
