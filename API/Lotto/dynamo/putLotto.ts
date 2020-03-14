@@ -5,6 +5,7 @@ import { Method } from '../interface/LottoDB';
 import Calculate from '../class/Calculate';
 import Analyze from '../class/Analyze';
 import { setTimeout } from 'timers';
+import { PutItemInput } from 'aws-sdk/clients/dynamodb';
 interface LottoData extends LData {
     winner: number;
     winAmount: number;
@@ -25,7 +26,7 @@ export default async function putLotto(round: number): Promise<void> {
     }
     console.log(`${round}회 읽기 성공`);
 
-    var params: any = {
+    var params: PutItemInput = {
         Item: {
             "Round": {
                 N: lotto.round.toString()
@@ -82,6 +83,19 @@ export default async function putLotto(round: number): Promise<void> {
                     },
                 }
             },
+            "Win":{
+                M:{
+                    1:{
+                        L: new Array()
+                    },
+                    2:{
+                        L: new Array()
+                    },
+                    3:{
+                        L: new Array()
+                    }
+                }
+            }
         },
         TableName: "LottoData"
     };
