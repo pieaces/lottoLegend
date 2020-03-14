@@ -1,9 +1,11 @@
 
 
 export default class CheckBoxToggle {
-    inputbox: NodeListOf<Element>;
+    inputbox: NodeListOf<HTMLInputElement>;
+    allCheckBox: HTMLInputElement;
     constructor() {
         this.inputbox = document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input');
+        this.allCheckBox = document.querySelector<HTMLInputElement>('#all-check');
     }
 
     addEvent() {
@@ -23,10 +25,8 @@ export default class CheckBoxToggle {
             })
         });
 
-        const allCheckBox = document.querySelector<HTMLInputElement>('#all-check');
-
-        allCheckBox.addEventListener('click', () => {
-            if (allCheckBox.checked) {
+        this.allCheckBox.addEventListener('click', () => {
+            if (this.allCheckBox.checked) {
                 this.inputbox.forEach((node: any) => {
                     const checkTextBox = node.nextElementSibling as HTMLElement;
                     const checkText = checkTextBox.children[0];
@@ -47,4 +47,5 @@ export default class CheckBoxToggle {
             }
         });
     }
+
 }

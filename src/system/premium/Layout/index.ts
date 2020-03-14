@@ -120,7 +120,7 @@ export default class Layout extends LayoutToggle(Layout3) {
         infoText.textContent = DataAPI.infoList[currentFilter];
         if (currentFilter > 7) {
             filteredCounterBox.classList.remove('hide');
-            if(currentFilter > 8){
+            if (currentFilter > 8) {
                 filteredSubCounter.textContent = (DataAPI.getInstance().filteredCount - Number(filteredCounter.textContent)).toString();
             }
             filteredCounter.textContent = DataAPI.getInstance().filteredCount.toString();

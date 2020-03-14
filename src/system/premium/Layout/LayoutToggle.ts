@@ -13,6 +13,8 @@ const carrycountCanvas = document.getElementById('carrycount');
 const includeCanvas = document.getElementById('include');
 const excludeCanvas = document.getElementById('exclude');
 const filterTableValues = document.querySelectorAll('.func3-filter-table > tbody > tr:nth-child(2) > td');
+const numListSelectTotal = document.querySelector('#num-list-select-total');
+const numListSelectCurrent = document.querySelector('#num-list-select-current');
 
 type Constructor<T = {}> = new (...args: any[]) => T;
 const layout1Class = 'func1-layout'
@@ -58,6 +60,35 @@ export default function LayoutToggle<TBase extends Constructor>(Base: TBase) {
             numBoard.makeNumBoard();
             const checkBoxToggle = new CheckBoxToggle();
             checkBoxToggle.addEvent();
+            (function () {
+
+                const allCheckBox = document.querySelector<HTMLInputElement>('#all-check');
+                const checkboxes = document.querySelectorAll<HTMLInputElement>('.func3-num-container-box input');
+                let checkedCurrentValue = 0;
+
+                numListSelectCurrent.textContent = "0";
+                numListSelectTotal.textContent = checkboxes.length.toString();
+                checkboxes.forEach((node) => {
+                    node.addEventListener('click', () => {
+                        if (node.checked) {
+                            checkedCurrentValue++;
+                        } else {
+                            checkedCurrentValue--;
+                        }
+                        numListSelectCurrent.textContent = checkedCurrentValue.toString();
+                    })
+                })
+                allCheckBox.addEventListener('click', () => {
+                    if (allCheckBox.checked) {
+                        checkedCurrentValue = checkboxes.length;
+                        numListSelectCurrent.textContent = checkedCurrentValue.toString();
+                    } else {
+                        checkedCurrentValue = 0;
+                        numListSelectCurrent.textContent = checkedCurrentValue.toString();
+                    }
+                })
+
+            })();
             excLineCountText.textContent = (<number[]>data[1]).map(value => {
                 switch (value) {
                     case 0: return '1번대';
