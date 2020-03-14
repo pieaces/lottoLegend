@@ -140,6 +140,10 @@ function makeTable(dataSet: any[], round: number | string) {
         const tableContent = document.createElement('div');
         tableContent.classList.add('mypage-table-content');
 
+        if (i === dataSet.length - 1) {
+            tableContent.style.borderBottom = "1px solid rgba(0,0,0,0.1)";
+        }
+
         const tableCheckBox = document.createElement('div');
 
         tableCheckBox.classList.add('mynum-table-checkbox');
@@ -209,14 +213,15 @@ function makeTable(dataSet: any[], round: number | string) {
 
 
         const infoTd = makePastFilterTable(dataSet[i]);
+        if (i !== 0 && (i + 1) % 5 === 0) {
+            infoTd.style.borderBottom = "0.5rem solid #09538e";
+        } else {
+            infoTd.style.borderBottom = "0.5rem solid #dadada";
+        }
         tableNumBox.appendChild(infoTd);
 
-        if (i !== 0 && (i + 1) % 5 === 0) {
-            tableContent.style.borderBottom = "1px solid rgba(0,0,0,0.1)";
-            const div = document.createElement('div');
-            div.classList.add('num-list-boundary');
-            tableNumBox.appendChild(div);
-        }
+
+
     }
 
 }

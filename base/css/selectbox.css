@@ -1,15 +1,16 @@
-.mynum-selectbox-wrapper{
+.selectbox-wrapper{
+    width:100%;
     display:flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 1rem;
 }
 
-.mynum-selectbox-container{
+.selectbox-container{
     display:flex;
 }
 
-.mynum-selectbox-box{
+.selectbox-box{
     width: 12rem;
     display: flex;
     align-items: center;
@@ -19,7 +20,7 @@
     margin-right:0.5rem;
 }
 
-.mynum-selectbox-text{
+.selectbox-text{
     font-size:1.7rem;
     width:3rem;
     display:flex;

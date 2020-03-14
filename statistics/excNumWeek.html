@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="../base/css/init.css" />
+    <link rel="stylesheet" href="../base/css/section.css">
+    <link rel="stylesheet" href="../base/css/header.css" />
+    <link rel="stylesheet" href="../base/css/footer.css" />
+    <link href="https://unpkg.com/mobius1-selectr@latest/dist/selectr.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../base/css/selectbox.css">
+    <link rel="stylesheet" href="css/excNumWeek.css">
+    <title>CanvasLotto</title>
+</head>
+
+<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
+    <div id="wrapper">
+        <div class="hamburger-menu">
+            <div class="hamburger-menu-header">
+                <div class="hamburger-my-info">
+                </div>
+            </div>
+        </div>
+        <script src="../base/components/header.js"></script>
+        <div class="section1">
+            <div class="grid-section-1 container">
+                <div class="aside">
+                    <div class="anchor-box">
+                        <script src="../base/components/aside/analysis.js"></script>
+                    </div>
+                </div>
+                <div class="main">
+
+                    <div class="exc-num-week-wrapper">
+                        <div class="exc-num-week-container">
+                            <div class="exc-num-week-title">
+                                THIS WEEK NUMBER
+                            </div>
+                        </div>
+                        <div class="selectbox-wrapper">
+                            <div class="selectbox-container">
+                                <div class="selectbox-box">
+                                    <select name="" id="exc-num-week-select-box">
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="win-num-container box-color">
+                            <span class="win-num-text">당첨번호 :</span>
+                            <div class="win-num-box">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                        <div class="exc-num-week-result-box box-color">
+                            상위 6개 번호 중&nbsp;<span class="exc-num-week-result-value" id="num-result-value"></span>개
+                            예측성공 ( <span class="exc-num-week-result-percent" id="num-result-percent"></span> %)
+                        </div>
+                        <div class="lotto-num-container">
+                            <table class="table lotto-num-box">
+                                <tr>
+                                    <th>순위</th>
+                                    <th>번호</th>
+                                    <th>득표율</th>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../base/components/footer.js"></script>
+    </div>
+    <script src="../base/js/headerHover.js"></script>
+    <script src="js/excNumWeek.js"></script>
+    <script src="https://kit.fontawesome.com/e14b8c39aa.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

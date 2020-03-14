@@ -16,7 +16,6 @@ const lottoRank = document.querySelector('#lotto-rank');
 
 function init() {
 
-
     nickname.textContent = "luckysso";
     phoneNumber.textContent = "010-9524-2432";
     service.textContent = "일반";

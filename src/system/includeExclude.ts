@@ -17,7 +17,7 @@ const loading = document.querySelector<HTMLElement>('.loading-box');
 loading.classList.remove('none');
 init();
 
-function infoAlert(title:string, text:string){
+function infoAlert(title: string, text: string) {
     return Swal.fire({
         title,
         text,
@@ -30,7 +30,7 @@ function infoAlert(title:string, text:string){
     })
 }
 async function init() {
-    const { include, exclude } = await getAuthAPI('/numbers/piece', {flag:true});
+    const { include, exclude } = await getAuthAPI('/numbers/piece', { flag: true });
     console.log(include, exclude)
     try {
         const data = await getUnAuthAPI('/stats/mass', { method: 'excludeInclude' });
@@ -64,7 +64,7 @@ async function init() {
 
         makeBtn.addEventListener('click', async () => {
             console.log(current);
-            if ((!current || current.length ===0) || layout.checkedNumbers.length === 0 && (await infoAlert('선택하신 번호가 없습니다', '빈 상태로 초기화합니다')).value ||
+            if ((!current || current.length === 0) || layout.checkedNumbers.length === 0 && (await infoAlert('선택하신 번호가 없습니다', '빈 상태로 초기화합니다')).value ||
                 (current && current.length > 0 && layout.checkedNumbers.length > 0) && (await infoAlert('기존에 번호를 생성하셨습니다', '초기화하고 덮어씁니다')).value) {
                 try {
                     await postAuthAPI('/numbers/piece', { numbers: layout.checkedNumbers, choice: incOrExc });
