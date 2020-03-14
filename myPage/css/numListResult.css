@@ -1,4 +1,4 @@
-.mypage-num-result-box{
+.num-result-box{
     height: 5rem;
     display: flex;
     align-items: center;
@@ -7,11 +7,11 @@
 }
 
 
-#mypage-num-result-value,
-#mypage-num-result-value-percent{
+.num-result-value,
+.num-result-percent{
     font-weight: bold;
 }
 
-#mypage-num-result-value-percent{
+.num-result-percent{
     color: red;
 }

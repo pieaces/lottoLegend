@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../base/css/header.css" />
     <link rel="stylesheet" href="../base/css/footer.css" />
     <link href="https://unpkg.com/mobius1-selectr@latest/dist/selectr.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="css/numListSelectbox.css">
+    <link rel="stylesheet" href="../base/css/selectbox.css">
     <link rel="stylesheet" href="css/numListResult.css">
     <link rel="stylesheet" href="css/myIncludeExclude.css">
     <title>CanvasLotto</title>
@@ -30,13 +30,13 @@
                     <div class="main-title">
                         나의 추천/제외 번호
                     </div>
-                    <div class="mynum-selectbox-wrapper">
-                        <div class="mynum-selectbox-container">
-                            <div class="mynum-selectbox-box">
+                    <div class="selectbox-wrapper">
+                        <div class="selectbox-container">
+                            <div class="selectbox-box">
                                 <select name="" id="round-select-box">
                                 </select>
                             </div>
-                            <span class="mynum-selectbox-text">회</span>
+                            <span class="selectbox-text">회</span>
                         </div>
                     </div>
                     <div class="func2-win-num-container box-color">
@@ -76,15 +76,19 @@
                     </div>
                     <div class="left-right-container">
                         <div class="left-container">
-                            <div class="mypage-num-result-box inc-num-result-box box-color">
-                                <span id="inc-num-result-total"></span>개 중&nbsp;<span id="inc-num-result-value"></span>개
-                                예측성공 ( <span id="inc-num-result-percent"></span> %)
+                            <div class="num-result-box inc-num-result-box box-color">
+                                <span class="num-result-total" id="inc-num-result-total"></span>
+                                개 중&nbsp;
+                                <span class="num-result-value" id="inc-num-result-value"></span>개
+                                예측성공 ( <span class="num-result-percent" id="inc-num-result-percent"></span> %)
                             </div>
                         </div>
                         <div class="right-container">
-                            <div class="mypage-num-result-box exc-num-result-box box-color">
-                                <span id="exc-num-result-total"></span>개 중&nbsp;<span id="exc-num-result-value"></span>개
-                                예측성공 ( <span id="exc-num-result-percent"></span> %)
+                            <div class="num-result-box exc-num-result-box box-color">
+                                <span class="num-result-total" id="exc-num-result-total"></span>
+                                개 중&nbsp;
+                                <span class="num-result-value" id="exc-num-result-value"></span>개
+                                예측성공 ( <span class="num-result-percent" id="exc-num-result-percent"></span> %)
                             </div>
                         </div>
                     </div>

@@ -1,0 +1,166 @@
+.exc-num-week-wrapper{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 6rem 0;
+}
+
+.exc-num-week-container{
+    width:100%;
+    margin-bottom: 2rem;
+    box-shadow: 1px 2px 8px rgba(0,0,0,.1),-2px -1px 8px rgba(0,0,0,.1);
+}
+
+.exc-num-week-title{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height:10rem;
+    font-size:5rem;
+    font-weight: bold;
+    font-family: 'Nanum-gothic';
+    border-bottom:1px solid var(--border-color);
+}
+
+.exc-num-week-rank-container{
+    display:flex;
+    height:5rem;    
+}
+
+.exc-num-week-rank-container>div:not(:last-child){
+    border-right: 1px solid var(--border-color);
+}
+
+.exc-num-week-rank-box{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width: 16.6%;
+    height:100%;
+}
+
+.exc-num-week-rank-box > div{
+    display:flex;
+}
+
+
+.exc-num-week-rank-num {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width:3.5rem;
+    height:3.5rem;
+    margin-right:1rem;
+    border-radius: 50%;
+    background-color: rosybrown;
+    color:var(--default-color);
+    font-size: 1.5rem;
+}
+
+.exc-num-week-rank-value{
+    font-size:1.5rem;
+}
+
+.lotto-num-container{
+    width:100%;
+}
+
+.lotto-num-box{
+    box-shadow: 1px 2px 8px rgba(0,0,0,.1),-2px -1px 8px rgba(0,0,0,.1);
+}
+
+.lotto-num-box  tr{
+    border-bottom: 1px solid var(--border-color);
+}
+
+.lotto-num-box tr >th,
+.lotto-num-box tr >td{
+    width: 33.3%;
+    text-align: center;
+    font-size:1.4rem;
+}
+
+.lotto-num-box tr:nth-child(1) {
+    height:5rem;
+    font-size: 1.5rem;
+    background-color: #1e98fe;
+    color:var(--default-color);
+}
+
+.lotto-num-box tr:nth-child(1)~tr {
+    height:5rem;
+}
+
+.lotto-num-box tr:nth-child(1)~tr > td {
+    font-size: 1.4rem;
+}
+
+.lotto-num{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lotto-num-value{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width:3rem;
+    height:3rem;
+    border-radius: 50%;
+    background-color: var(--main-color);
+    color:var(--default-color);
+}
+
+.win-num-container{
+    width:100%;
+    height:7rem;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+  
+  .win-num-text {
+    font-weight: 500;
+    font-size:1.4rem;
+  }
+  
+  .win-num-box {
+    display: flex;
+    margin-left:3rem;
+  }
+  
+  .win-num-box > div {
+    font-size:1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    margin-right: 2rem;
+    color: var(--default-color);
+    background-color: #ffffff;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  }
+  
+  .exc-num-week-result-box{
+      width: 100%;
+    height: 5rem;
+    margin-bottom:2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+}
+
+.exc-num-week-result-value,
+.exc-num-week-result-percent{
+    font-weight: bold;
+}
+
+.exc-num-week-result-percent{
+    color: red;
+}

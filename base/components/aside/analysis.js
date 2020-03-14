@@ -4,7 +4,7 @@ document.write(`    <div class="anchor-title">
 <ul class="anchor-list-container">
 <li>
         <ul class="anchor-list-box">
-        <li>  <a href="#">예상번호게시판</a>  </li>
+        <li>  <a href="/statistics/excNumWeek.html">금주의 제외번호</a>  </li>
         </ul>
 </li>
 <li>

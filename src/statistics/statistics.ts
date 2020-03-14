@@ -89,7 +89,7 @@ const barOption: Chart.ChartOptions = {
 };
 
 loading.classList.remove('none');
-getUnAuthAPI('/stats/piece', {method})
+getUnAuthAPI('/stats/piece', { method })
     .then(data => {
         console.log(data);
         mean.textContent = Number(data.stats.mean).toFixed(2);
@@ -99,7 +99,7 @@ getUnAuthAPI('/stats/piece', {method})
         lineInstance.create();
         const lineSlide = new LineSlide(lineInstance, lineNum, leftBtn, rightBtn);
         lineSlide.init(data);
-        const setText:()=>void = function(this:any){
+        const setText: () => void = function (this: any) {
             switch (this.current) {
                 case 0: lineTitle.textContent = '1~12회차 종합';
                     break;
