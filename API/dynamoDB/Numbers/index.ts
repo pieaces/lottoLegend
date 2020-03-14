@@ -1,7 +1,7 @@
 import dynamoDB from '..'
 import { Plan, getPlan } from '../userInfo';
 import { Response } from '../../Response';
-import { numsArrToAWSMapList, AWSListToNumbers, numbersToAWSList } from './functions';
+import { numsArrToAWSMapList, NSToNumbers, numbersToNS } from './functions';
 import { AWSError } from 'aws-sdk/lib/error';
 import { UpdateItemInput, GetItemOutput, GetItemInput } from 'aws-sdk/clients/dynamodb';
 
@@ -201,7 +201,7 @@ export function getNumbers(userName: string, round?: number, select?:SelectClass
                         } else return true;
                     }).map(item => {
                         return {
-                            numbers: AWSListToNumbers(item.M.numbers.L),
+                            numbers: NSToNumbers(item.M.numbers.NS).sort((a,b)=>a-b),
                             date: item.M.date.S,
                             method: item.M.method.S,
                             tool: item.M.tool.S,
@@ -225,7 +225,7 @@ export function getNumbers(userName: string, round?: number, select?:SelectClass
                             } else return true;
                         }).map(item => {
                             return {
-                                numbers: AWSListToNumbers(item.M.numbers.L),
+                                numbers: NSToNumbers(item.M.numbers.NS).sort((a,b)=>a-b),
                                 date: item.M.date.S,
                                 method: item.M.method.S,
                                 tool: item.M.tool.S,
@@ -241,32 +241,9 @@ export function getNumbers(userName: string, round?: number, select?:SelectClass
     });
 }
 
-export async function deleteNumbers(userName: string, round: number, choice:IncOrExc): Promise<void> {
-    const params = {
-        TableName: 'LottoUsers',
-        ExpressionAttributeNames: {
-            "#Choice": choice,
-            "#Round": round.toString()
-        },
-        Key: {
-            "UserName": {
-                S: userName
-            }
-        },
-        UpdateExpression: `REMOVE #Choice.#Round`
-    };
-
-    return new Promise((resolve, reject) => {
-        dynamoDB.updateItem(params, (err:AWSError) => {
-            if (err) reject(err);
-            resolve();
-        });
-    });
-}
-
 type IncOrExc = "include" | "exclude"
 export async function updateIncOrExcNumbers(userName: string, round: number, numbers: number[], choice: IncOrExc): Promise<Response> {
-    const params = {
+    const params :UpdateItemInput= {
         TableName: 'LottoUsers',
         ExpressionAttributeNames: {
             "#Map": 'IncludeExclude',
@@ -275,7 +252,7 @@ export async function updateIncOrExcNumbers(userName: string, round: number, num
         },
         ExpressionAttributeValues: {
             ":element": {
-                L: numbersToAWSList(numbers)
+                NS: numbersToNS(numbers)
             }
         },
         ConditionExpression: 'attribute_exists(#Map.#Round)',
@@ -356,7 +333,7 @@ export function getIncOrExcNumbers(userName: string, round: number, choice: IncO
             else {
                 const item = data.Item;
                 if('IncludeExclude' in item){
-                    resolve(item.IncludeExclude.M[round].M[choice].L.map(item => Number(item.N)));
+                    resolve(item.IncludeExclude.M[round].M[choice].NS.map(item => Number(item)));
                 } else resolve([]);
             }
         });
@@ -386,8 +363,8 @@ export function getIncAndExcNumbers(userName: string, round: number): Promise<{i
                 const item = data.Item;
                 if('IncludeExclude' in item){
                     const joint = item.IncludeExclude.M[round].M;
-                    const include = joint.include && joint.include.L.map(item => Number(item.N));
-                    const exclude = joint.exclude && joint.exclude.L.map(item => Number(item.N));
+                    const include = joint.include && joint.include.NS.map(item => Number(item));
+                    const exclude = joint.exclude && joint.exclude.NS.map(item => Number(item));
 
                     resolve({include, exclude});
                 } else resolve({});

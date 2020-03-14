@@ -1,15 +1,11 @@
 import DynamoDB = require('aws-sdk/clients/dynamodb');
 import { SelectMethod, SelectTool } from '.';
 
-export function numbersToAWSList(numbers: number[]): DynamoDB.ListAttributeValue {
-    return numbers.map(num => {
-        return {
-            N: num.toString()
-        }
-    });
+export function numbersToNS(numbers: number[]): DynamoDB.NumberSetAttributeValue {
+    return numbers.map(num => num.toString());
 }
-export function AWSListToNumbers(list:DynamoDB.ListAttributeValue): number[]{
-    return list.map(item => Number(item.N));
+export function NSToNumbers(NS:DynamoDB.NumberSetAttributeValue): number[]{
+    return NS.map(item => Number(item));
 }
 
 export function numsArrToAWSMapList(numsArr: number[][], method: SelectMethod, tool: SelectTool) {
@@ -18,7 +14,7 @@ export function numsArrToAWSMapList(numsArr: number[][], method: SelectMethod, t
             M: {
                 method: { S: method },
                 tool: { S: tool },
-                numbers: { L: numbersToAWSList(nums) },
+                numbers: { NS: numbersToNS(nums) },
                 date: { S: new Date().toISOString() }
             }
         }
