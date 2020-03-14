@@ -4,8 +4,7 @@ import { UpdateItemOutput, GetItemOutput } from "aws-sdk/clients/dynamodb";
 import { AWSError } from "aws-sdk/lib/error";
 
 export async function updateRecommendUsers(post: number, userName: string):Promise<Response> {
-    const recommendUsers = await getRecommendUsers(post);
-    const exist = recommendUsers.some(user => user === userName);
+    const exist = await doesRecommend(post, userName);
     if(exist){
         await removeRecommendUser(post, userName);
         return new Response(true, "이미 추천하셨습니다.");
@@ -63,7 +62,7 @@ async function removeRecommendUser(post: number, userName:string):Promise<void> 
     });
 }
 
-export function getRecommendUsers(post: number): Promise<string[]> {
+export function doesRecommend(post: number, userName:string): Promise<boolean> {
     const params = {
         TableName: 'LottoPosts',
         ProjectionExpression: 'RecommendUsers',
@@ -79,9 +78,9 @@ export function getRecommendUsers(post: number): Promise<string[]> {
             if (err) {
                 reject(err);
             }
-            if (data.Item) {
-                resolve(data.Item.RecommendUsers.L.map(item => item.S));
-            }else resolve([]);
+            if (data.Item && data.Item.RecommendUsers) {
+                resolve(data.Item.RecommendUsers.SS.some(user => user === userName));
+            }else resolve(false);
         });
     });
 }

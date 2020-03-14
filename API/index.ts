@@ -3,7 +3,7 @@ import { getCurrentRound, isIdentical } from "./funtions";
 import Posts from "./mariaDB/Posts";
 import Comments from "./mariaDB/Comments";
 import { getIncOrExcNumbers, IncOrExc } from './dynamoDB/myNumbers'
-import { getRecommendUsers } from "./dynamoDB/recommend";
+import { doesRecommend } from "./dynamoDB/recommend";
 import { getRank, addPoint, Point, subtractPoint } from "./dynamoDB/userInfo";
 import Users from "./mariaDB/Users";
 
@@ -78,7 +78,7 @@ exports.handler = async (event: any) => {
                             post.excl = await getIncOrExcNumbers(post.userName, getCurrentRound(post.created), IncOrExc.exclude);
                         }
                         body = post;
-                        body.recommend = (await getRecommendUsers(postId)).indexOf(currentId) !== -1;
+                        body.recommend = await doesRecommend(postId, currentId);
                         body.rank = (await getRank(body.userName));
                     } else {
                         const post = await db.getTitleContents(postId);
