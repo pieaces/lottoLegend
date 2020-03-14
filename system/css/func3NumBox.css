@@ -9,18 +9,20 @@
   margin-bottom: 1rem;
 }
 
-.func3-all-check-box-container > span:nth-of-type(1){
-  width:6%;
-  font-size:1.3rem;
-  padding-left:0.5rem;
-  border-right:1px solid rgba(0,0,0,0.2);
+.func3-all-check-box-left{
+  display:flex;
+  align-items: center;
 }
 
 .func3-all-check-box{
-  width:8%;
   display:flex;
   align-items: center;
   justify-content: flex-end;
+  padding:0 2rem 0 5rem;
+}
+
+.func3-all-check-text{
+  font-size:1.4rem;
 }
 
 .func3-all-check-box > input{
@@ -28,7 +30,7 @@
   height:2rem;
 }
 
-.func3-num-list-select-box{
+/* .func3-num-list-select-box{
   width:9%;
   height:100%;
   display:flex;
@@ -57,10 +59,9 @@
 .func3-num-list-select-box >span:nth-child(3){
   width:40%;
 font-weight: bold;
-}
+} */
 
 .func3-save-box-1{
-  width:77%;
   display:flex;
   align-items: center;
   justify-content: flex-end;

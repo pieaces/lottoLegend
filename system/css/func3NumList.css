@@ -17,10 +17,9 @@
 }
 
 .func3-check-box{
-  width:8%;
   display:flex;
   align-items: center;
-  justify-content: flex-end;
+  padding:0 10rem 0 5rem;
 }
 
 .func3-check-box > input{
@@ -32,7 +31,6 @@
 }
 
 .func3-num-box{
-  width:92%;
   height:100%;
   display:flex;
   align-items: center;
