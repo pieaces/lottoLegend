@@ -79,7 +79,7 @@ exports.handler = async (event: any) => {
                         }
                         body = post;
                         body.recommend = (await getRecommendUsers(postId)).indexOf(currentId) !== -1;
-                        body.rank = (await getRank(body.userName));                        
+                        body.rank = (await getRank(body.userName));
                     } else {
                         const post = await db.getTitleContents(postId);
                         body = post;
@@ -126,8 +126,8 @@ exports.handler = async (event: any) => {
                         const insertId = await db.post(postId, currentId, contents);
                         await addPoint(currentId, Point.comment);
                         const users = new Users();
-                        const {rank} = await users.getRank(currentId);
-                        body = {commentId:insertId, rank};
+                        const { rank } = await users.getRank(currentId);
+                        body = { commentId: insertId, rank };
                     } else {
                         statusCode = 400;
                         body = "로그인되지 않은 사용자입니다."
@@ -182,8 +182,8 @@ exports.handler = async (event: any) => {
             switch (method) {
                 case 'GET':
                     const category: string = event.queryStringParameters.category;
-                    const title:string = event.queryStringParameters.title;
-                    const text:(string|undefined) = event.queryStringParameters.text;
+                    const title: string = event.queryStringParameters.title;
+                    const text: (string | undefined) = event.queryStringParameters.text;
                     const index = Number(event.queryStringParameters.index);
                     const posts = await db.search(category, index, title, text);
                     const count = await db.getCountBySearch(category, title, text);
