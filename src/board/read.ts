@@ -16,7 +16,7 @@ const postRank = document.getElementById('postRank');
 
 const commentContainerBox = document.querySelector('.comment-container-box');
 const commentNum = document.querySelector('#comment-num');
-const txtArea = document.querySelector<HTMLInputElement>('#comment-write-text');
+const txtArea = document.querySelector<HTMLTextAreaElement>('#comment-write-text');
 const charCurrentCount = document.querySelector('#char-current-count');
 const commentSubmit = document.getElementById('comment-submit');
 const contentsUpdateBtn = document.querySelector<HTMLElement>('.text-update-container');
@@ -236,21 +236,20 @@ function makeComments(objArr: any) {
     commentCount += objArr.length;
     commentNum.textContent = commentCount.toString();
 }
-txtArea.addEventListener('input', limitTxtAreaCount(txtArea))
-function limitTxtAreaCount(target: HTMLInputElement) {
+txtArea.addEventListener('input', limitTxtAreaCount())
+txtArea.addEventListener('paste', limitTxtAreaCount())
+function limitTxtAreaCount() {
     const maxlength = 150;
 
     return function () {
-        const currentLength = (target.value).length;
-
+        const currentLength = (txtArea.value).length;
         if (currentLength > maxlength) {
             charCurrentCount.classList.add('comment-limit-alert');
-            target.value = target.value.slice(0, target.value.length - 1);
-            return false;
+            charCurrentCount.textContent = (maxlength).toString();
+            txtArea.value = txtArea.value.slice(0, maxlength);
         } else {
             charCurrentCount.classList.remove('comment-limit-alert');
             charCurrentCount.textContent = currentLength.toString();
-            return true;
         }
     }
 }
