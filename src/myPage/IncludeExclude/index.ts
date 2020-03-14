@@ -29,6 +29,7 @@ export default class IncludeExclude {
 
     makePage() {
         const { numContainer, resultTotal, resultValue, resultPercent, resultBox } = this.elmentObj;
+
         numContainer.innerHTML = '';
         if (this.numbers) {
             console.log(this.numbers);
@@ -57,7 +58,7 @@ export default class IncludeExclude {
                 winNumBox.forEach(node => setDefaultColor(node));
                 resultBox.classList.add('none');
             }
-        }else{
+        } else {
             resultBox.classList.add('none');
         }
     }

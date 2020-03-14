@@ -116,7 +116,7 @@ lineBtn.addEventListener('click', async () => {
 async function init() {
     loading.classList.remove('none');
     lineGenTextToggleInit();
-    const { include, exclude, total } = await getAuthAPI('/numbers/piece', {flag:true});
+    const { include, exclude, total } = await getAuthAPI('/numbers/piece', { flag: true });
     document.querySelector<HTMLElement>('.line-gen-round').textContent = total + '회';
     include && Layout3.makeLine(includeCanvas, include);
     exclude && Layout3.makeLine(excludeCanvas, exclude);
