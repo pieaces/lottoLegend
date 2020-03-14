@@ -81,7 +81,7 @@ async function init() {
                             cancelButtonText: '아니요',
                         }).then(async (result) => {
                             if (result.value) {
-                                location.href = `./analExcGen.html`;
+                                location.href = `./exclude.html`;
                             } else {
 
                             }
@@ -98,7 +98,7 @@ async function init() {
                             cancelButtonText: '아니요',
                         }).then(async (result) => {
                             if (result.value) {
-                                location.href = `./analIncGen.html`;
+                                location.href = `./include.html`;
                             } else {
 
                             }

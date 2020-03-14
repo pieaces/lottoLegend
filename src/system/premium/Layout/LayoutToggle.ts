@@ -17,7 +17,7 @@ const filterTableValues = document.querySelectorAll('.func3-filter-table > tbody
 type Constructor<T = {}> = new (...args: any[]) => T;
 const layout1Class = 'func1-layout'
 const layout2Class = 'func2-layout'
-const layout3Class = 'func3-layout-1'
+const layout3Class = 'func3-layout'
 
 export default function LayoutToggle<TBase extends Constructor>(Base: TBase) {
     return class extends Base {
