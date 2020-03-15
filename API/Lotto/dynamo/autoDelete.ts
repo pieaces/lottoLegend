@@ -33,15 +33,17 @@ function scanUsersTool(round: number): Promise<{ userName: string, tools?: Tool[
 export default async function autoDelete() {
     const round = getCurrentRound() - 3;
     const users = await scanUsersTool(round);
-    users.forEach(async (user) => {
+    for(let i=0; i<users.length; i++){
+        const user = users[i];
         const deleteIndex: number[] = [];
         user.tools && user.tools.forEach((tool, index) => {
-            if (tool === Tool.free) deleteIndex.push(index);
+            if (tool === Tool.free)
+                deleteIndex.push(index);
         });
         if (deleteIndex.length > 0) {
             await deleteUsersLotto(user.userName, round, deleteIndex);
         }
-    });
+    }
     console.log('autoDelete 완료');
 }
 

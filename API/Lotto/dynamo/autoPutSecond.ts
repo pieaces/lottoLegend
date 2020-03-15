@@ -13,25 +13,29 @@ export default async function autoPutSecond() {
     const answer = await queryLotto2(round);
     const users = await scanUsers(round);
     const winner = new Array<number>(5).fill(0);
-    users.forEach(async(user) => {
-        user.numsArr && user.numsArr.forEach(async (numbers) => {
-            if (numbers) {
-                const rank = win(numbers, answer);
-                if (1 <= rank && rank <= 5) {
-                    winner[rank - 1]++;
-                    if(1 <=rank && rank <= 3) await addWinnerToLottoData(round, rank, user.userName);
+    for (let i = 0; i < users.length; i++) {
+        const user = users[i];
+        if (user.numsArr) {
+            for (let j = 0; j < user.numsArr.length; j++) {
+                const numbers = user.numsArr[j];
+                if (numbers) {
+                    const rank = win(numbers, answer);
+                    if (1 <= rank && rank <= 5) {
+                        winner[rank - 1]++;
+                        if (1 <= rank && rank <= 3) await addWinnerToLottoData(round, rank, user.userName);
+                    }
                 }
             }
-        });
-        if(user.include && user.include.length>=10){
-            const point = Math.pow(whatCount(user.include, answer.numbers), 2)<<3/Math.log10(user.include.length);
+        }
+        if (user.include && user.include.length >= 10) {
+            const point = Math.pow(whatCount(user.include, answer.numbers), 2) << 3 / Math.log10(user.include.length);
             await addPoint(user.userName, point);
         }
-        if(user.exclude && user.exclude.length>=10){
-            const point = Math.pow(whatCount(user.exclude, answer.numbers), 2)<<1/Math.log10(user.exclude.length);
+        if (user.exclude && user.exclude.length >= 10) {
+            const point = Math.pow(whatCount(user.exclude, answer.numbers), 2) << 1 / Math.log10(user.exclude.length);
             await addPoint(user.userName, point);
         }
-    });
+    }
     await addWinToLottoStats(winner);
     console.log('autoPutSeconds 완료');
 }
@@ -127,23 +131,23 @@ function getWin(): Promise<number[]> {
     });
 }
 
-export function whatCount(numbers:number[], answer:number[]):number{
+export function whatCount(numbers: number[], answer: number[]): number {
     let count = 0;
     numbers.forEach(num => {
-        if(answer.some(item => item === num)) count++;
+        if (answer.some(item => item === num)) count++;
     })
     return count;
 }
 
-function addWinToLottoStats(winner:number[]):Promise<void> {
-    const ExpressionAttributeValues:any = {};
+function addWinToLottoStats(winner: number[]): Promise<void> {
+    const ExpressionAttributeValues: any = {};
     let UpdateExpression = "ADD ";
 
     winner.forEach((num, index) => {
-        ExpressionAttributeValues[':operand'+index] = {
-            N:num.toString()
+        ExpressionAttributeValues[':operand' + index] = {
+            N: num.toString()
         }
-        UpdateExpression += `${rankToString(index+1)} :operand${index},`;
+        UpdateExpression += `${rankToString(index + 1)} :operand${index},`;
     });
 
     ExpressionAttributeValues
@@ -155,7 +159,7 @@ function addWinToLottoStats(winner:number[]):Promise<void> {
                 S: 'win'
             }
         },
-        UpdateExpression:UpdateExpression.slice(0,-1)
+        UpdateExpression: UpdateExpression.slice(0, -1)
     }
     return new Promise((resolve, reject) => {
         dynamoDB.updateItem(params, (err: AWSError) => {
