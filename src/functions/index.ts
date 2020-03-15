@@ -1,23 +1,23 @@
 import Swal from 'sweetalert2'
 import makeDraggable from '../system/premium/Layout/makeDraggable';
 
-export function networkAlert(){
-Swal.fire({
-    icon: 'error',
-    title: '실패',
-    text: '서버 또는 네트워크 문제가 발생하였습니다.',
-    footer: '<a href="../inqBoard/qAList.html">여기로 문의주시면 신속히 답변드리겠습니다.</a>'
-  });
+export function networkAlert() {
+    Swal.fire({
+        icon: 'error',
+        title: '실패',
+        text: '서버 또는 네트워크 문제가 발생하였습니다.',
+        footer: '<a href="../inqBoard/qAList.html">여기로 문의주시면 신속히 답변드리겠습니다.</a>'
+    });
 }
-export function onlyUserAlert(){
+export function onlyUserAlert() {
     Swal.fire({
         icon: 'info',
         title: '알림',
         text: '회원전용 서비스입니다.',
         allowOutsideClick: false,
-      }).then(result => {
+    }).then(result => {
         location.href = `../signIn/signIn.html`;
-      });
+    });
 }
 
 export function getQueryStringObject(): any {
@@ -34,9 +34,9 @@ export function getQueryStringObject(): any {
     return result;
 }
 
-export type Affix = "list"|"post"|"read";
-export function getCategoryHtml(category: string, affix:Affix) {
-    let directory:string;
+export type Affix = "list" | "post" | "read";
+export function getCategoryHtml(category: string, affix: Affix) {
+    let directory: string;
     switch (category) {
         case 'free':
             directory = 'free'
@@ -65,7 +65,7 @@ export function getCategoryHtml(category: string, affix:Affix) {
 
 export function isoStringToDate(isoString: string): string {
     const date = new Date(isoString);
-    date.setHours(date.getHours()+9);
+    date.setHours(date.getHours() + 9);
     const iso = date.toISOString();
     return iso.slice(0, 10) + ' ' + iso.slice(11, 16);
 }
@@ -83,9 +83,9 @@ export function makeModal(title: string, width: number) {
     makeDraggable(document.querySelector<HTMLElement>('.swal2-container'));
 }
 
-export function rangeMake(stats:any, mul:number=1, add:number=0): string{
-    let from = stats.mean - stats.stdev*mul;
-    let to = stats.mean + stats.stdev*mul;
+export function rangeMake(stats: any, mul: number = 1, add: number = 0): string {
+    let from = stats.mean - stats.stdev * mul;
+    let to = stats.mean + stats.stdev * mul;
 
     from = from < stats.min ? stats.min : from;
     to = to > stats.max ? stats.max : to;
@@ -102,6 +102,8 @@ export function setColorLotto(num: number, Box: HTMLElement) {
         Box.style.backgroundColor = '#AAAAAA';
     } else if (num <= 45) {
         Box.style.backgroundColor = '#B0D840';
+    } else {
+        console.error("setColorLotto 오류");
     }
 }
 export function setDefaultColor(node: HTMLElement) {

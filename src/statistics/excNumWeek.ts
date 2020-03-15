@@ -15,7 +15,7 @@ function init() {
         const hitsArr = [];
 
         for (let i = 0; i < 10; i++) {
-            numbers.push(i);
+            numbers.push(i + 1);
             hitsArr.push(true);
         }
 
@@ -80,7 +80,7 @@ function makeTable(dataSet: ({ rounds: string, hits: string, numbers: number[], 
 
         const th = document.createElement('th');
         th.setAttribute('colspan', '5');
-        th.textContent = `${dataSet[k].hits}회 로또끝 제외 10수`;
+        th.textContent = `${dataSet[k].rounds}회 로또끝 제외 10수`;
 
         tr.appendChild(th);
         table.appendChild(tr);
@@ -94,13 +94,18 @@ function makeTable(dataSet: ({ rounds: string, hits: string, numbers: number[], 
                 lottoNum.classList.add('lotto-num');
                 const lottoNumValue = document.createElement('div');
                 lottoNumValue.classList.add('lotto-num-value');
-                if (dataSet[k].hitsArr[DIVIDE * i + j] === true) {
-                    lottoNumValue.classList.add('lotto-num-mark');
-                }
                 lottoNumValue.textContent = dataSet[k].numbers[DIVIDE * i + j].toString();
                 setColorLotto(dataSet[k].numbers[DIVIDE * i + j], lottoNumValue);
                 lottoNum.appendChild(lottoNumValue);
+                const hitText = document.createElement('div');
+                hitText.classList.add('lotto-num-hit-text');
+                if (dataSet[k].hitsArr[DIVIDE * i + j] === true) {
+                    hitText.textContent = "적중";
+                } else {
+                    hitText.textContent = "적중 x";
+                }
                 td.appendChild(lottoNum);
+                td.appendChild(hitText);
                 tr.appendChild(td);
             }
             table.appendChild(tr);
@@ -111,8 +116,12 @@ function makeTable(dataSet: ({ rounds: string, hits: string, numbers: number[], 
         const resultTd = document.createElement('td');
         resultTd.setAttribute('colspan', '5');
 
-        const
-            div.appendChild(table);
+        resultTd.innerHTML = `적중률 <span class="exc-num-week-percent">${dataSet[k].hits}</span>%`;
+
+        resultTr.appendChild(resultTd);
+
+        table.appendChild(resultTr);
+        div.appendChild(table);
         excNumWeekWrapper.appendChild(div);
     }
 
