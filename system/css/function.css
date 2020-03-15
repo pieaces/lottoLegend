@@ -51,7 +51,6 @@
     justify-content: center;
     height: 100%;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2), -1px -1px 1px rgba(0, 0, 0, 0.2);
-    background-color: var(--default-color);
     font-size:1.4rem;
     transition: all 200ms;
   }

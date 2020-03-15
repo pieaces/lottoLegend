@@ -135,13 +135,14 @@
     text-align: center;
   }
 
+  .stats-table  tr > td:nth-child(1){
+    background-color: var(--table-title-color);
+  }
+  
   .stats-table tr > td:nth-child(2){
       color: #333333;
     font-weight: 600;
     font-size: 1.6rem;
-  }
-  .stats-table  tr > td:nth-child(1){
-    background-color: var(--table-title-color);
   }
 
   .lotto-num-container{

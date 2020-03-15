@@ -5,12 +5,6 @@
     justify-content: center;
 }
 
-.lotto-num-wrapper{
-    display:flex;
-    align-items: center;
-    width: 100%;
-}
-
 .lotto-num-container{
     display:flex;
     align-items: center;
@@ -65,6 +59,6 @@
 }
 
 
-.exc-num-week-percent{
+.exc-num-week-hit{
     font-weight: bold;
 }

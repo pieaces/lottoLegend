@@ -3,6 +3,7 @@
 /* main */
 
 .main{
+  width:100%;
   padding:1rem 0;
 }
 
@@ -43,19 +44,20 @@
 .login-box {
   display:flex;
   width: 100%;
+  margin-bottom:1rem;
   padding: 0 1rem;
 }
 
-.login-box >div:nth-child(1){
+.login-input-container{
   width:66%;
 }
 
-.login-box >div:nth-child(1)>input:nth-child(1){
-  margin-bottom:0.5rem;
+.login-input-container > input{
+  height:3.4rem;
 }
 
-.login-box > div:nth-child(2){
-  width:33%;
+.login-input-container>input:nth-child(1){
+  margin-bottom:0.5rem;
 }
 
 .login-btn {
@@ -74,26 +76,6 @@
   font-size:1.4rem;
 }
 
-.login-diff {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 100%;
-  padding: 0 1rem;
-}
-
-.login-diff-btn {
-  width: 14rem;
-  height: 4rem;
-  padding: 0.5rem;
-  border: 1px solid var(--border-color);
-  background-color: var(--default-color);
-}
-
-.login-diff-btn > i {
-  padding-right: 1rem;
-  color: var(--main-color);
-}
 
 .main-1-2{
   display:flex;
