@@ -9,19 +9,17 @@ init();
 function init() {
     const dataSet = [];
     for (let i = 0; i < 2; i++) {
-        const rounds = "902";
-        const hitsTotal = "90";
+        const rounds = "901";
         const numbers = [];
         const hitsArr = [];
 
         for (let i = 0; i < 10; i++) {
-            numbers.push(i + 1);
-            hitsArr.push(true);
+            numbers.push(i + 5);
+            hitsArr.push(false);
         }
 
         const obj = {
             rounds: rounds,
-            hits: hitsTotal,
             hitsArr: hitsArr,
             numbers: numbers
         }
@@ -29,22 +27,7 @@ function init() {
     }
 
     console.log(dataSet);
-    //        const dataSet= [ 
-    //         //    2개
-    //         {
-    //         round:"902",
-    //         hits:"90",
-    //           numbers: [
-    //             //객체   
-    //               {
-    //             number:1,
-    //             hit:true
-    //             }
-    //             //10개
-    //     ]
-    //     }
-    // // 2개
-    // ];
+
     const rounds = ['1', '2', '3', '4', '5'];
     ///////////////////////////////////////////////
 
@@ -67,60 +50,83 @@ function init() {
 
 }
 
-function makeTable(dataSet: ({ rounds: string, hits: string, numbers: number[], hitsArr: boolean[] })[]) {
+function makeTable(dataSet: ({ rounds: string, numbers: number[], hitsArr: boolean[] })[]) {
 
     for (let k = 0; k < dataSet.length; k++) {
+        let hitsTotal = 0;
         const div = document.createElement('div');
         div.classList.add('lotto-num-container');
 
         const table = document.createElement('table');
-        table.classList.add('table', 'lotto-num-box');
+        table.classList.add('table', 'lotto-num-table');
 
-        const tr = document.createElement('tr');
+        const thead = document.createElement('thead');
+
+
+        const titleTr = document.createElement('tr');
+        titleTr.classList.add('lotto-num-table-title');
 
         const th = document.createElement('th');
-        th.setAttribute('colspan', '5');
-        th.textContent = `${dataSet[k].rounds}회 로또끝 제외 10수`;
+        th.setAttribute('colspan', `${dataSet[k].numbers.length}`);
+        th.textContent = `${dataSet[k].rounds}회 제외 ${dataSet[k].numbers.length}수`;
 
-        tr.appendChild(th);
-        table.appendChild(tr);
-        const DIVIDE = 5;
-        const I = Math.ceil(dataSet[k].numbers.length / DIVIDE);
-        for (let i = 0; i < I; i++) {
-            const tr = document.createElement('tr');
-            for (let j = 0; j < DIVIDE; j++) {
-                const td = document.createElement('td');
-                const lottoNum = document.createElement('div');
-                lottoNum.classList.add('lotto-num');
-                const lottoNumValue = document.createElement('div');
-                lottoNumValue.classList.add('lotto-num-value');
-                lottoNumValue.textContent = dataSet[k].numbers[DIVIDE * i + j].toString();
-                setColorLotto(dataSet[k].numbers[DIVIDE * i + j], lottoNumValue);
-                lottoNum.appendChild(lottoNumValue);
-                const hitText = document.createElement('div');
-                hitText.classList.add('lotto-num-hit-text');
-                if (dataSet[k].hitsArr[DIVIDE * i + j] === true) {
-                    hitText.textContent = "적중";
-                } else {
-                    hitText.textContent = "적중 x";
-                }
-                td.appendChild(lottoNum);
-                td.appendChild(hitText);
-                tr.appendChild(td);
-            }
-            table.appendChild(tr);
+
+        titleTr.appendChild(th);
+        thead.appendChild(titleTr);
+        table.appendChild(thead);
+
+        const tbody = document.createElement('tbody');
+
+        const NumberTr = document.createElement('tr');
+
+        for (let j = 0; j < dataSet[k].numbers.length; j++) {
+            const td = document.createElement('td');
+            const numBox = document.createElement('div');
+            numBox.classList.add('lotto-num');
+
+            const num = document.createElement('div');
+            num.classList.add('lotto-num-value');
+            num.textContent = dataSet[k].numbers[j].toString();
+            setColorLotto(dataSet[k].numbers[j], num);
+
+            numBox.appendChild(num);
+            td.appendChild(numBox);
+            NumberTr.appendChild(td);
         }
+
+        tbody.appendChild(NumberTr);
+
+
+        const hitsTr = document.createElement('tr');
+
+        for (let j = 0; j < dataSet[k].hitsArr.length; j++) {
+            const td = document.createElement('td');
+            if (dataSet[k].hitsArr[j] === true) {
+                td.textContent = "적중";
+                hitsTotal++;
+            } else {
+                td.textContent = "적중 x";
+            }
+            hitsTr.appendChild(td);
+        }
+
+        tbody.appendChild(hitsTr);
+        table.appendChild(tbody);
+
+        const tfoot = document.createElement('tfoot');
 
         const resultTr = document.createElement('tr');
 
         const resultTd = document.createElement('td');
-        resultTd.setAttribute('colspan', '5');
+        resultTd.setAttribute('colspan', `${dataSet[k].numbers.length}`);
 
-        resultTd.innerHTML = `적중률 <span class="exc-num-week-percent">${dataSet[k].hits}</span>%`;
+        resultTd.innerHTML = `${dataSet[k].numbers.length}개 중 <span class="exc-num-week-percent">${hitsTotal}개</span> 적중`;
 
         resultTr.appendChild(resultTd);
 
-        table.appendChild(resultTr);
+        tfoot.appendChild(resultTr);
+
+        table.appendChild(tfoot);
         div.appendChild(table);
         excNumWeekWrapper.appendChild(div);
     }

@@ -1,11 +1,11 @@
 
 .stats-home-title{
-    background: #1f71b3;
-    height:21rem;
     display:flex;
     align-items: center;
     justify-content: center;
+    height:21rem;
     margin-bottom:1rem;
+    background: #1f71b3;
 }
 
 .stats-main-box-1{
@@ -19,19 +19,19 @@
 
 
 .win-num-times{
-    height:4rem;
-    font-size:2.5rem;
-    color:var(--default-color);
     display:flex;
     align-items: center;
     justify-content: center;
+    height:4rem;
+    color:var(--default-color);
+    font-size:2.5rem;
 }
 
 .win-date{
-    font-size:1.3rem;
-    margin-bottom:-1rem;
-    opacity: 0.7;
     margin-left:0.5rem;
+    margin-bottom:-1rem;
+    font-size:1.3rem;
+    opacity: 0.7;
 }
 
 .win-num-round {
@@ -39,10 +39,10 @@
 }
 
 .win-num-container{
-    padding:1rem 0;
     display:flex;
     align-items: center;
     justify-content:center;
+    padding:1rem 0;
 }
 
 .win-num-box{
@@ -52,17 +52,17 @@
 }
 
 .win-num{
-    font-weight: 500;
-    font-size: 2.8rem ;
-    color: var(--default-color);
+    display: flex;
+    justify-content: center;
     width: 5rem;
     height: 5rem;
     margin:0.6rem;
-    line-height: 1.7;
     border-radius: 50%;
-    display: flex;
-    justify-content: center;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    color: var(--default-color);
+    font-weight: 500;
+    font-size: 2.8rem ;
+    line-height: 1.7;
 }
 
 .win-info{
@@ -84,23 +84,23 @@
 }
 
 .plus{
+    margin-top:-0.5rem;
     color:var(--default-color);
     font-size:4rem;
-    margin-top:-0.5rem;
 }
 
 .arrow-btn-box{
-    width:8rem;
-    height:5rem;
     display:flex;
     align-items: center;
     justify-content: center;
+    width:8rem;
+    height:5rem;
     text-align: center;
 }
 .arrow-btn-box > i{
-    cursor: pointer;
-    font-size:3.5rem;
     color:var(--default-color);
+    font-size:3.5rem;
+    cursor: pointer;
 }
 
 .arrow-btn-box > i:hover{
@@ -115,9 +115,9 @@
   }
 
   .stack-chart-box{
-      padding: 3rem;
       width:100%;
       height:100%;
+      padding: 3rem;
   }
 
   .stats-filter-container{
@@ -136,9 +136,9 @@
   }
 
   .stats-table tr > td:nth-child(2){
+      color: #333333;
     font-weight: 600;
     font-size: 1.6rem;
-    color: #333333;
   }
   .stats-table  tr > td:nth-child(1){
     background-color: var(--table-title-color);
@@ -150,24 +150,24 @@
   }
 
 .lotto-num-box{
+    table-layout: fixed;
     width:85%;
     height:100%;
-    padding:1rem 2rem;
     margin: 0 auto;
-    table-layout: fixed;
+    padding:1rem 2rem;
   }
 
 
   .lotto-num {
-    margin: 1rem auto;
     display:flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.3rem ;
     width: 2rem;
     height: 3rem;
+    margin: 1rem auto;
     border-radius: 0.4rem;
     border-top: 1px solid rgba(0, 0, 0, 0.4);
     border-bottom: 1px solid rgba(0, 0, 0, 0.4);
     color: black;
+    font-size: 1.3rem ;
   }

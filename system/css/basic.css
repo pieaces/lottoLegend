@@ -1,13 +1,13 @@
 .line-gen-text-toggle-box{
+    margin-bottom: 1rem;
     font-weight: 500;
     cursor: pointer;
-    margin-bottom: 1rem;
 }
 
 .line-gen-text-toggle{
-    height:5rem;
     display:flex;
     align-items: center;
+    height:5rem;
     padding-left:2rem;
     font-size:1.4rem;
 }
@@ -17,22 +17,22 @@
 }
 
 .line-gen-text-content{
-    cursor: auto;
-    padding:2rem;
     height:49rem;
+    padding:2rem;
     font-size: 1.4rem;
     line-height: 1.8;
+    cursor: auto;
 }
 
 .code-block{
     display: block;
     padding: 8px;
     margin: 0 0 10px;
-    line-height: 1.45;
-    color: #666;
-    background-color: #f9f9f9;
     border: 1px solid #e1e1e1;
     border-radius: 2px;
+    background-color: #f9f9f9;
+    color: #666;
+    line-height: 1.45;
     white-space: pre-wrap;
     word-wrap: break-word;
     overflow: visible;

@@ -1,8 +1,8 @@
 .selectbox-wrapper{
-    width:100%;
     display:flex;
     align-items: center;
     justify-content: space-between;
+    width:100%;
     margin-bottom: 1rem;
 }
 
@@ -11,21 +11,21 @@
 }
 
 .selectbox-box{
-    width: 12rem;
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    width: 12rem;
+    margin-right:0.5rem;
     font-size: 1.5rem;
     text-align: center;
-    margin-right:0.5rem;
 }
 
 .selectbox-text{
-    font-size:1.7rem;
-    width:3rem;
     display:flex;
     align-items: center;
     justify-content: center;
+    width:3rem;
+    font-size:1.7rem;
 }
 
 .selectr-selected{
@@ -39,8 +39,8 @@
 .selectr-input{
     width: calc(100%-1rem);
     height:4rem;
-    padding:1rem;
     margin:1rem 1rem;
+    padding:1rem;
 }
 
 .selectr-options {

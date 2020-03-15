@@ -1,12 +1,12 @@
 
 .func3-all-check-box-container{
-  background-color: var(--table-title-color);
-  height:6rem;
   display:flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom:1px solid var(--border-color);
+  height:6rem;
   margin-bottom: 1rem;
+  border-bottom:1px solid var(--border-color);
+  background-color: var(--table-title-color);
 }
 
 .func3-all-check-box-left{
@@ -31,9 +31,9 @@
 }
 
 .func3-num-list-select{
-  height:100%;
   display:flex;
   align-items: center;
+  height:100%;
   padding-left:1rem;
 }
 
@@ -58,21 +58,21 @@
 }
 
 .save-btn{
-  border-radius: 3px;
-  margin-right:2rem;
   width:10rem;
   height:3.5rem;
+  margin-right:2rem;
+  border-radius: 3px;
+  background-color: var(--button-color2);
   color:var(--default-color);
   font-size:1.4rem;
-  background-color: var(--button-color2);
 }
 
   
   .func3-save-box-2{
-    background-color: var(--table-title-color);
     display:flex;
     align-items: center;
     justify-content: flex-end;
-    border-top:1px solid var(--border-color);
     height:6rem;
+    border-top:1px solid var(--border-color);
+    background-color: var(--table-title-color);
   }

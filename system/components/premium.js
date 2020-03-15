@@ -46,8 +46,8 @@ document.write(`<div class="filter-box-container-box func1-layout func2-layout b
                 <canvas id="func1-chart-line"></canvas>
             </div>
             <div class="func1-chart-slide-btn-box">
-                <i id="func1-left-line-chart-btn" class="func1-left-chart-btn fas fa-angle-left "></i>
-                <i id="func1-right-line-chart-btn" class="func1-right-chart-btn fas fa-angle-right "></i>
+                <i id="func1-left-line-chart-btn" class="func1-chart-btn func1-left-chart-btn fas fa-angle-left "></i>
+                <i id="func1-right-line-chart-btn" class="func1-chart-btn func1-right-chart-btn fas fa-angle-right "></i>
             </div>
         </div>
         <div class="right-container func1-chart-textbox-container">

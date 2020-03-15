@@ -5,24 +5,24 @@
 }
 
 .func3-past-win-table tr{
+  height: 2.5rem;
     background-color: aliceblue;
-    height: 2.5rem;
   }
   
   .func3-past-win-table tr>td{
     width: 16.6%;
-    text-align: center;
     font-size:1.3rem;
+    text-align: center;
   }
   
   .func3-list-filter-table tr >td{
-    font-size:1.3rem;
     width:12.5%;
+    font-size:1.3rem;
     text-align: center;
   }
   .func3-list-filter-table tr:nth-child(1){
-    background: beige;
     height:2rem;
+    background: beige;
   }
   .func3-list-filter-table tr:nth-child(2){
     height:2.5rem;

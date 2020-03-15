@@ -25,15 +25,15 @@
 
 .lotto-num-table tr >th,
 .lotto-num-table tr >td{
-    text-align: center;
     font-size:1.4rem;
+    text-align: center;
 }
 
 .lotto-num-table-title {
     height:5rem;
-    font-size: 1.5rem;
     background-color: #1e98fe;
     color:var(--default-color);
+    font-size: 1.5rem;
 }
 
 
@@ -42,8 +42,8 @@
 }
 
 .lotto-num-table > tfoot >tr{
-    height:4rem;
     width: 100%;
+    height:4rem;
 }
 
 .lotto-num{
@@ -59,9 +59,9 @@
     width:3.5rem;
     height:3.5rem;
     border-radius: 50%;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
     background-color: var(--main-color);
     color:var(--default-color);
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 

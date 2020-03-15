@@ -7,11 +7,11 @@
 }
 
 .mypage-num-box{
-  width:100%;
-  height:100%;
   display:flex;
   align-items: center;
   justify-content: center;
+  width:100%;
+  height:100%;
 }
 
 #service{
@@ -19,9 +19,9 @@
 }
 
 #service-expiry-date{
+  color: rgb(113, 113, 113);
   font-weight: 500;
   font-size: 1.3rem;
-  color: rgb(113, 113, 113);
 }
 
 #inc-num,
@@ -36,28 +36,28 @@
 }
 
 .mypage-num-box > div{
-  font-weight: 500;
-  font-size: 1.5rem;
-  color: var(--default-color);
+  display: flex;
+  justify-content: center;
   width: 3rem;
   height: 3rem;
   margin: 1rem 2rem;
-  line-height: 1.7;
   border-radius: 50%;
-  display: flex;
-  justify-content: center;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  color: var(--default-color);
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 1.7;
 }
 
 .mypage-title{
-  font-size:1.5rem;
-  height:4rem;
   display:flex;
   align-items: center;
+  height:4rem;
   padding-left:2rem;
   border-bottom: 1px solid var(--border-color);
-  font-weight: 500;
   background-color: var(--table-title-color);
+  font-size:1.5rem;
+  font-weight: 500;
 }
 
 .mypage-num-list-container > .mypage-title{
@@ -70,8 +70,8 @@
 }
 
 .mypage-info-box{
-  padding: 2rem;
   height: 20rem;
+  padding: 2rem;
 }
 
 .mypage-nickname,
@@ -84,16 +84,16 @@
 
 
 .mypage-info-box > li{
-font-size: 1.4rem;
-height:25%;
-display: flex;
+  display: flex;
 align-items: center;
+height:25%;
+font-size: 1.4rem;
 }
 
 .mypage-info-box > li >div{
+  display: flex;
+  align-items: center;
  height:100%; 
- display: flex;
- align-items: center;
 }
 
 .mypage-info-box > li>div >span:nth-child(1){
@@ -116,28 +116,28 @@ align-items: center;
 
 .mypage-win-num{
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
 .mypage-win-num > div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 2.5rem;
   height: 2.5rem;
   margin-right: 1rem;
   border-radius: 50%;
-  color: var(--default-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  color: var(--default-color);
 }
 
 
 .mypage-notice-box > i{
-  cursor: pointer;
   position: relative;
-  font-size:3rem;
   color: var(--main-color);
+  font-size:3rem;
+  cursor: pointer;
 }
 
 .mypage-notice-box > i:hover{
@@ -154,14 +154,14 @@ align-items: center;
 }
 
 .mypage-notice-num{
-  background-color: var(--main-color);
-  color:var(--default-color);
-  border:2px solid var(--default-color);
-  border-radius: 0.7rem;
   position: absolute;
   top:0;
   right:-1rem;
   width:2.5rem;
   padding:0.1rem;
+  border:2px solid var(--default-color);
+  border-radius: 0.7rem;
+  background-color: var(--main-color);
+  color:var(--default-color);
   font-size:1.2rem;
 }
