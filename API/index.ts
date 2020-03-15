@@ -45,20 +45,18 @@ exports.handler = async (event: any) => {
                         const numbersData = await getNumbers(currentId, round, { method: selectMethod, tool });
                         const lottoData = await scanLotto();
 
-                        for (const key in numbersData) {
-                            numbersData[key] = numbersData[key].map((data) => {
+                        const rounds = Object.keys(numbersData);
+                        const data = numbersData[rounds[rounds.length-1]].map((data) => {
                                 const result: any = numbersToData(data.numbers, lottoData);
                                 result.method = data.method;
                                 result.tool = data.tool;
                                 result.date = data.date;
-                                if (data.win) {
-                                    result.win = data.win;
-                                    result.ballBool = data.ballBool;
-                                }
                                 return result;
                             });
+                        body = {data, rounds};
+                        if (Number(rounds[rounds.length-1]) <= getCurrentRound()) {
+                            body.answer = await getLotto(round);
                         }
-                        body = numbersData;
                     }
                         break;
                     case 'POST':
