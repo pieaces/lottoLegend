@@ -10,28 +10,38 @@
     margin-bottom: 5rem;
 }
 
-.lotto-num-box{
+.lotto-num-table{
     box-shadow: 1px 2px 8px rgba(0,0,0,.1),-2px -1px 8px rgba(0,0,0,.1);
 }
 
-.lotto-num-box tr >th,
-.lotto-num-box tr >td{
-    width: 20%;
+.lotto-num-table tr >th,
+.lotto-num-table tr >td{
+    width: 33%;
     text-align: center;
     font-size:1.4rem;
 }
 
-.lotto-num-box tr:nth-child(1) {
+.lotto-num-table-title {
     height:5rem;
     font-size: 1.5rem;
     background-color: #1e98fe;
     color:var(--default-color);
 }
 
-.lotto-num-box tr:nth-child(1)~tr {
+.lotto-num-table-header {
+    height:3rem;
+    font-size: 1.5rem;
+    background-color: var(--table-title-color);
+}
+
+
+.lotto-num-table > tbody > tr {
     height:8rem;
 }
 
+.lotto-num-table > tfoot >tr{
+    height:5rem;
+}
 
 .lotto-num{
     display:flex;
