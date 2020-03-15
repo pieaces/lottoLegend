@@ -2,43 +2,53 @@ import Selectr, { IOptions } from 'mobius1-selectr';
 import { setColorLotto } from '../functions/index';
 
 const selectBox = document.querySelector<HTMLSelectElement>('#exc-num-week-select-box');
-const winNumBox = document.querySelectorAll<HTMLElement>('.win-num-box > div');
-const excNumWeekTable = document.querySelector('.lotto-num-box > tbody');
-const numResultValue = document.querySelector('#num-result-value');
-const numResultPercent = document.querySelector('#num-result-percent');
+const excNumWeekWrapper = document.querySelector('.exc-num-week-wrapper');
+
 
 init();
 function init() {
+    const dataSet = [];
+    for (let i = 0; i < 2; i++) {
+        const rounds = "902";
+        const hitsTotal = "90";
+        const numbers = [];
+        const hitsArr = [];
 
-    const numbers = [];
-    const voteValue = [];
-    const voteRate = [];
-    for (let i = 0; i < 10; i++) {
-        numbers.push(Math.floor(Math.random() * 11));
-        voteRate.push(Math.random() * (100));
+        for (let i = 0; i < 10; i++) {
+            numbers.push(i);
+            hitsArr.push(true);
+        }
+
+        const obj = {
+            rounds: rounds,
+            hits: hitsTotal,
+            hitsArr: hitsArr,
+            numbers: numbers
+        }
+        dataSet.push(obj);
     }
 
-    voteRate.sort((a, b) => {
-        return b - a;
-    })
-
-    const dataSet = {
-        numbers: numbers,
-        voteValue: voteValue,
-        voteRate: voteRate
-    };
-
-    const winNum = [1, 2, 3, 4, 5, 6];
+    console.log(dataSet);
+    //        const dataSet= [ 
+    //         //    2개
+    //         {
+    //         round:"902",
+    //         hits:"90",
+    //           numbers: [
+    //             //객체   
+    //               {
+    //             number:1,
+    //             hit:true
+    //             }
+    //             //10개
+    //     ]
+    //     }
+    // // 2개
+    // ];
     const rounds = ['1', '2', '3', '4', '5'];
     ///////////////////////////////////////////////
 
-    numResultValue.textContent = (6).toString();
-    numResultPercent.textContent = (100).toString();
 
-    for (let i = 0; i < winNum.length; i++) {
-        winNumBox[i].textContent = winNum[i].toString();
-        setColorLotto(winNum[i], winNumBox[i]);
-    }
 
     makeTable(dataSet);
 
@@ -57,33 +67,53 @@ function init() {
 
 }
 
-function makeTable(dataSet: { numbers: number[], voteValue: number[], voteRate: number[] }) {
-    for (let i = 0; i < dataSet.numbers.length; i++) {
+function makeTable(dataSet: ({ rounds: string, hits: string, numbers: number[], hitsArr: boolean[] })[]) {
+
+    for (let k = 0; k < dataSet.length; k++) {
+        const div = document.createElement('div');
+        div.classList.add('lotto-num-container');
+
+        const table = document.createElement('table');
+        table.classList.add('table', 'lotto-num-box');
+
         const tr = document.createElement('tr');
 
-        const rankTd = document.createElement('td');
-        rankTd.textContent = (i + 1).toString();
+        const th = document.createElement('th');
+        th.setAttribute('colspan', '5');
+        th.textContent = `${dataSet[k].hits}회 로또끝 제외 10수`;
 
-        const numTd = document.createElement('td');
-        const numBox = document.createElement('div');
-        numBox.classList.add('lotto-num');
+        tr.appendChild(th);
+        table.appendChild(tr);
+        const DIVIDE = 5;
+        const I = Math.ceil(dataSet[k].numbers.length / DIVIDE);
+        for (let i = 0; i < I; i++) {
+            const tr = document.createElement('tr');
+            for (let j = 0; j < DIVIDE; j++) {
+                const td = document.createElement('td');
+                const lottoNum = document.createElement('div');
+                lottoNum.classList.add('lotto-num');
+                const lottoNumValue = document.createElement('div');
+                lottoNumValue.classList.add('lotto-num-value');
+                if (dataSet[k].hitsArr[DIVIDE * i + j] === true) {
+                    lottoNumValue.classList.add('lotto-num-mark');
+                }
+                lottoNumValue.textContent = dataSet[k].numbers[DIVIDE * i + j].toString();
+                setColorLotto(dataSet[k].numbers[DIVIDE * i + j], lottoNumValue);
+                lottoNum.appendChild(lottoNumValue);
+                td.appendChild(lottoNum);
+                tr.appendChild(td);
+            }
+            table.appendChild(tr);
+        }
 
-        const num = document.createElement('div');
-        num.classList.add('lotto-num-value');
-        num.textContent = dataSet.numbers[i].toString();
-        setColorLotto(dataSet.numbers[i], num);
+        const resultTr = document.createElement('tr');
 
-        numBox.appendChild(num);
-        numTd.appendChild(numBox);
+        const resultTd = document.createElement('td');
+        resultTd.setAttribute('colspan', '5');
 
-        const voteRateTd = document.createElement('td');
-        voteRateTd.textContent = `${dataSet.voteRate[i].toString()}%`;
-
-        tr.appendChild(rankTd);
-        tr.appendChild(numTd);
-        tr.appendChild(voteRateTd);
-
-        excNumWeekTable.appendChild(tr);
+        const
+            div.appendChild(table);
+        excNumWeekWrapper.appendChild(div);
     }
 
 }
