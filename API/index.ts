@@ -55,7 +55,7 @@ exports.handler = async (event: any) => {
                             });
                         body = {data, rounds};
                         if (Number(rounds[rounds.length-1]) <= getCurrentRound()) {
-                            body.answer = await getLotto(round);
+                            body.answer = await getLotto(Number(rounds[rounds.length-1]));
                         }
                     }
                         break;
