@@ -5,18 +5,27 @@
     justify-content: center;
 }
 
+.lotto-num-wrapper{
+    display:flex;
+    align-items: center;
+    width: 100%;
+}
+
 .lotto-num-container{
+    display:flex;
+    align-items: center;
+    justify-content: center;
     width:100%;
     margin-bottom: 5rem;
 }
 
 .lotto-num-table{
-    box-shadow: 1px 2px 8px rgba(0,0,0,.1),-2px -1px 8px rgba(0,0,0,.1);
+    width:80%;
 }
 
 .lotto-num-table tr >th,
 .lotto-num-table tr >td{
-    width: 33%;
+    width: 33.33%;
     text-align: center;
     font-size:1.4rem;
 }
@@ -36,26 +45,25 @@
 
 
 .lotto-num-table > tbody > tr {
-    height:8rem;
+    height:4rem;
 }
 
 .lotto-num-table > tfoot >tr{
-    height:5rem;
+    height:4rem;
 }
 
 .lotto-num{
     display:flex;
     align-items: center;
     justify-content: center;
-    margin-bottom:1rem;
 }
 
 .lotto-num-value{
     display:flex;
     align-items: center;
     justify-content: center;
-    width:3.5rem;
-    height:3.5rem;
+    width:2.5rem;
+    height:2.5rem;
     border-radius: 50%;
     background-color: var(--main-color);
     color:var(--default-color);
