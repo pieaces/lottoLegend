@@ -1,4 +1,10 @@
+import configure from '../amplify/configure'
+import { getAuthAPI } from '../amplify/api'
 import { setColorLotto } from '../functions/index'
+import IncludeExclude from './IncludeExclude/index';
+import incObj from './IncludeExclude/include';
+import excObj from './IncludeExclude/exclude';
+configure();
 
 const winNumBox = document.querySelectorAll<HTMLElement>('.mypage-win-num > div');
 const nickname = document.querySelector('#nickname');
@@ -13,8 +19,10 @@ const incNum = document.querySelector('#inc-num');
 const excNum = document.querySelector('#exc-num');
 const excNumTotal = document.querySelector('#exc-num-total');
 const lottoRank = document.querySelector('#lotto-rank');
+const loading = document.querySelector('.loading-box');
 
-function init() {
+async function init() {
+    loading.classList.remove('none');
 
     nickname.textContent = "luckysso";
     phoneNumber.textContent = "010-9524-2432";
@@ -32,6 +40,7 @@ function init() {
     excNumTotal.textContent = "15";
     lottoRank.textContent = "5";
 
+    loading.classList.add('none');
 }
 
 function makeWinNum(numbers: number[]) {

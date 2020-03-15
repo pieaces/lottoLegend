@@ -56,7 +56,7 @@
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
   }
 
-.func2-win-num-container{
+.mypage-win-num-container{
   height:7rem;
   display:flex;
   align-items: center;
@@ -64,16 +64,16 @@
   margin-bottom: 2rem;
 }
 
-.func2-win-num-text {
+.mypage-win-num-text {
   font-size:1.4rem;
 }
 
-.func2-win-num-box {
+.mypage-win-num-box {
   display: flex;
   margin-left:3rem;
 }
 
-.func2-win-num-box > div {
+.mypage-win-num-box > div {
   font-size:1.3rem;
   display: flex;
   align-items: center;

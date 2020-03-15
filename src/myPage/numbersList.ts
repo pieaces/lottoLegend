@@ -12,7 +12,7 @@ const loading = document.querySelector('.loading-box');
 const roundSelectBox = document.querySelector<HTMLSelectElement>('#round-select-box');
 const toolSelectBox = document.querySelector<HTMLSelectElement>('#tool-select-box');
 const methodSelectBox = document.querySelector<HTMLSelectElement>('#method-select-box');
-const numInfoToggleBtn = document.querySelector('.mynum-toggle-btn');
+const numInfoToggleBtn = document.querySelector('.mypage-toggle-btn');
 const pastFilterBox = document.getElementsByClassName('func3-past-filter-box');
 
 init();
@@ -146,26 +146,26 @@ function makeTable(dataSet: any[], round: number | string) {
 
         const tableCheckBox = document.createElement('div');
 
-        tableCheckBox.classList.add('mynum-table-checkbox');
+        tableCheckBox.classList.add('mypage-table-checkbox');
 
         tableCheckBox.append(makeInputCheckBox());
 
         tableContent.appendChild(tableCheckBox);
 
         const tableRound = document.createElement('div');
-        tableRound.classList.add('mynum-table-round');
+        tableRound.classList.add('mypage-table-round');
         tableRound.textContent = round.toString();
 
         tableContent.appendChild(tableRound);
 
         const tableDate = document.createElement('div');
-        tableDate.classList.add('mynum-table-date');
+        tableDate.classList.add('mypage-table-date');
         tableDate.textContent = dataSet[i].date.slice(0, 10);
 
         tableContent.appendChild(tableDate);
 
         const tableDivision = document.createElement('div');
-        tableDivision.classList.add('mynum-table-division');
+        tableDivision.classList.add('mypage-table-division');
         let division: string;
         switch (dataSet[i].tool) {
             case 'a': division = "무료";
@@ -185,7 +185,7 @@ function makeTable(dataSet: any[], round: number | string) {
         tableContent.appendChild(tableDivision);
 
         const tableNum = document.createElement('div');
-        tableNum.classList.add('mynum-table-num');
+        tableNum.classList.add('mypage-table-num');
 
         const tableNumList = document.createElement('div');
         tableNumList.classList.add('mypage-table-num-list');
@@ -201,7 +201,7 @@ function makeTable(dataSet: any[], round: number | string) {
         tableContent.appendChild(tableNum);
 
         const tableIsWin = document.createElement('div');
-        tableIsWin.classList.add('mynum-table-iswin');
+        tableIsWin.classList.add('mypage-table-iswin');
         if (dataSet[i].win) {
             tableIsWin.textContent = dataSet[i].win;
         } else {

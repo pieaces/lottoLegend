@@ -52,26 +52,26 @@
     font-size: 1.2rem;
   }
 
-.mynum-table-checkbox,
-.mynum-table-round,
-.mynum-table-date,
-.mynum-table-division,
-.mynum-table-num-info, 
-.mynum-table-num{
+.mypage-table-checkbox,
+.mypage-table-round,
+.mypage-table-date,
+.mypage-table-division,
+.mypage-table-num-info, 
+.mypage-table-num{
 border-right:1px solid var(--border-color);
 }
 
-.mynum-table-checkbox,
-.mynum-table-round,
-.mynum-table-date,
-.mynum-table-division,
-.mynum-table-num-info, 
-.mynum-table-iswin
+.mypage-table-checkbox,
+.mypage-table-round,
+.mypage-table-date,
+.mypage-table-division,
+.mypage-table-num-info, 
+.mypage-table-iswin
 {
   flex:1;
 }
 
-.mynum-table-num{
+.mypage-table-num{
   flex:5;
 }
 

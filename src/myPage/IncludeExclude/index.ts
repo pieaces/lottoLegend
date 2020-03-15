@@ -32,7 +32,6 @@ export default class IncludeExclude {
 
         numContainer.innerHTML = '';
         if (this.numbers) {
-            console.log(this.numbers);
             const DIVIDE = 5;
             const I = Math.ceil(this.numbers.length / DIVIDE);
             for (let i = 0; i < I; i++) {
@@ -64,7 +63,7 @@ export default class IncludeExclude {
     }
 }
 
-const winNumBox = document.querySelectorAll<HTMLElement>('.func2-win-num-box > div');
+const winNumBox = document.querySelectorAll<HTMLElement>('.mypage-win-num-box > div');
 function makeWinNum(answer: number[]) {
     winNumBox.forEach((node, index) => {
         node.textContent = answer[index].toString();

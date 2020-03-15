@@ -45,7 +45,6 @@ document.write(`           <div class="text-title">
 </div>
 <div class="comment-container-box">
 
-
 </div>
 
 
