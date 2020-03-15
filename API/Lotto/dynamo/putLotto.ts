@@ -85,15 +85,6 @@ export default async function putLotto(round: number): Promise<void> {
             },
             "Win":{
                 M:{
-                    1:{
-                        L: new Array()
-                    },
-                    2:{
-                        L: new Array()
-                    },
-                    3:{
-                        L: new Array()
-                    }
                 }
             }
         },
@@ -106,7 +97,7 @@ export default async function putLotto(round: number): Promise<void> {
     }
     return new Promise((resolve, reject) => {
         dynamoDB.putItem(params, function (err: any) {
-            if (err) reject('putLotto 에러: ' + err);
+            if (err) reject(err);
             else {
                 console.log(`${round}회 putLotto 성공`);
                 resolve();
