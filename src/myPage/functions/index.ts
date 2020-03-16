@@ -4,7 +4,7 @@ export function makeTable(canvas: HTMLElement, dataSet: any[], round: number | s
     for (let i = 0; i < dataSet.length; i++) {
         const tableContent = document.createElement('div');
         tableContent.classList.add('mypage-table-content');
-
+        tableContent.setAttribute('data-numbers', JSON.stringify(dataSet[i].numbers));
         if (i === dataSet.length - 1) {
             tableContent.style.borderBottom = "1px solid rgba(0,0,0,0.1)";
         }

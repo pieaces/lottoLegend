@@ -88,10 +88,25 @@ async function init() {
         const { include, exclude, total } = await getAuthAPI('/numbers/piece', { flag: true });
         document.querySelectorAll<HTMLElement>('.current-round').forEach(node => node.textContent = total);
         document.querySelector<HTMLElement>('.before-round').textContent = (total - 1).toString();
-        const incNumList = new IncludeExclude(include, "include", incObj);
-        const excNumList = new IncludeExclude(exclude, "exclude", excObj);
-        incNumList.makePage();
-        excNumList.makePage();
+
+        if (include) {
+            const incNumList = new IncludeExclude(include, "include", incObj);
+            incNumList.makePage();
+        } else {
+            const div = document.createElement('div');
+            div.classList.add('mypage-none-box');
+            div.textContent = '없음';
+            document.querySelector<HTMLElement>('.inc-num-container').appendChild(div)
+        }
+        if (exclude) {
+            const excNumList = new IncludeExclude(exclude, "exclude", excObj);
+            excNumList.makePage();
+        } else {
+            const div = document.createElement('div');
+            div.classList.add('mypage-none-box');
+            div.textContent = '없음';
+            document.querySelector<HTMLElement>('.exc-num-container').appendChild(div)
+        }
         const { data } = await getAuthAPI('/numbers/mass/' + total);
         makeTable(document.querySelector<HTMLElement>('.mypage-table-num-box'), data, total, false);
 

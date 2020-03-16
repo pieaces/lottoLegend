@@ -61,6 +61,7 @@ export default function LayoutToggle<TBase extends Constructor>(Base: TBase) {
             const numBoard = new NumBoard(DataAPI.getInstance().numbersData);
             numBoard.makeNumBoard();
             const checkBoxToggle = new CheckBoxToggle();
+            checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
             checkBoxToggle.addEvent();
             makeCheckdValueBox();
             excLineCountText.textContent = (<number[]>data[1]).map(value => {

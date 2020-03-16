@@ -58,11 +58,12 @@ export async function patchAuthAPI(path: string, body?: any) {
     return await API.patch(apiName, path, myInit);
 }
 
-export async function deleteAuthAPI(path: string) {
+export async function deleteAuthAPI(path: string, body?: any) {
     const myInit = {
         headers: {
             'X-Id-Token': await getIdToken()
-        }
+        },
+        body,
         //response: true,
     }
     return await API.del(apiName, path, myInit);

@@ -28,6 +28,7 @@ const twentieth = document.querySelector<HTMLInputElement>('#twentieth-nums');
 const thirtieth = document.querySelector<HTMLInputElement>('#thirtieth-nums');
 const fortieth = document.querySelector<HTMLInputElement>('#fortieth-nums');
 
+const checkBoxToggle = new CheckBoxToggle();
 init();
 
 function sum() {
@@ -171,8 +172,7 @@ async function init() {
 
                     makeCheckdValueBox();
 
-                    const checkBoxToggle = new CheckBoxToggle();
-                    checkBoxToggle.addEvent();
+                    checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
                     CheckBoxToggle.allCheckedReset();
 
                 }
@@ -182,11 +182,9 @@ async function init() {
                 console.log(dataSet);
                 const numBoard = new NumBoard(dataSet);
                 numBoard.makeNumBoard();
-
                 makeCheckdValueBox();
 
-                const checkBoxToggle = new CheckBoxToggle();
-                checkBoxToggle.addEvent();
+                checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
                 CheckBoxToggle.allCheckedReset();
             }
         } else {

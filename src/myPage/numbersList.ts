@@ -1,9 +1,11 @@
 import configure from '../amplify/configure'
-import { getAuthAPI } from '../amplify/api';
+import { getAuthAPI, deleteAuthAPI } from '../amplify/api';
 import CheckBoxToggle from '../system/premium/instanceBtns/CheckBoxToggle';
 import Selectr, { IOptions } from 'mobius1-selectr';
 import { headerSign } from '../amplify/auth';
 import { makeTable } from './functions';
+import { networkAlert } from '../functions';
+import Swal from 'sweetalert2';
 
 configure();
 headerSign();
@@ -38,6 +40,7 @@ async function init() {
             }
         })
     };
+    let currentRound: number = rounds[0];
     makeTable(tableNumBox, data, rounds[0], true, answer);
 
     const toolConfig: IOptions = {
@@ -61,9 +64,55 @@ async function init() {
     const toolSelect = new Selectr(toolSelectBox, toolConfig);
     const methodSelect = new Selectr(methodSelectBox, methodConfig);
 
-    let currentRound: number = 0;
     let tool: string = null;
     let method: string = null;
+    document.querySelector('.mypage-num-delete-btn').addEventListener('click', async () => {
+        await Swal.fire({
+            title: '삭제하시겠습니까?',
+            text: "한번 삭제하면 되돌릴 수 없습니다",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '삭제',
+            cancelButtonText: '취소',
+        }).then(async (result) => {
+            if (result.value) {
+
+                const inputs = document.querySelectorAll<HTMLInputElement>('.mypage-table-num-box input');
+                const numbersContainer = document.querySelectorAll<HTMLElement>('.mypage-table-content');
+                const filterBoxes = document.querySelectorAll<HTMLElement>('.func3-past-filter-box');
+
+                const numsArr: number[][] = [];
+                const indexes: number[] = [];
+                Array.from(inputs).forEach((node, index) => {
+                    if (node.checked) {
+                        numsArr.push(JSON.parse(numbersContainer[index].getAttribute('data-numbers')));
+                        indexes.push(index);
+                    }
+                });
+                console.log(indexes);
+                try {
+                    loading.classList.remove('none');
+                    await deleteAuthAPI('/numbers/mass/' + currentRound, { numsArr });
+                    indexes.forEach(index => {
+                        numbersContainer[index].remove();
+                        filterBoxes[index].remove();
+                    });
+                    Swal.fire({
+                        title: '완료',
+                        text: '정상적으로 입력되었습니다',
+                        icon: 'success',
+                        timer: 1500,
+                    });
+                } catch (err) {
+                    networkAlert();
+                } finally {
+                    loading.classList.add('none');
+                }
+            }
+        });
+    });
 
     roundSelect.on('selectr.change', async (option) => {
         loading.classList.remove('none');
@@ -77,6 +126,9 @@ async function init() {
         }
         tableNumBox.innerHTML = '';
         makeTable(tableNumBox, result.data, result.rounds[0], true, result.answer);
+        checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
+        CheckBoxToggle.allCheckedReset();
+
         loading.classList.add('none');
     });
     toolSelect.on('selectr.change', async (option) => {
@@ -97,6 +149,9 @@ async function init() {
         }
         tableNumBox.innerHTML = '';
         makeTable(tableNumBox, result.data, result.rounds[0], true, result.answer);
+        checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
+        CheckBoxToggle.allCheckedReset();
+
         loading.classList.add('none');
     });
     methodSelect.on('selectr.change', async (option) => {
@@ -111,11 +166,15 @@ async function init() {
         }
         tableNumBox.innerHTML = '';
         makeTable(tableNumBox, result.data, result.rounds[0], true, result.answer);
+        checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
+        CheckBoxToggle.allCheckedReset();
+
         loading.classList.add('none');
     });
 
     loading.classList.add('none');
     const checkBoxToggle = new CheckBoxToggle();
+    checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
     checkBoxToggle.addEvent();
 
     numInfoToggleBtn.addEventListener('click', numInfoToggle());
