@@ -49,10 +49,7 @@ export default async function autoDelete() {
 
 function deleteUsersLotto(userName: string, round: number, indexes: number[]): Promise<void> {
     let UpdateExpression = "Remove ";
-
-    indexes.forEach((index) => {
-        UpdateExpression += `Numbers.#Round[${index}],`;
-    });
+    UpdateExpression += indexes.map(index => `Numbers.#Round[${index}]`).join(',');
 
     const params: UpdateItemInput = {
         TableName: 'LottoUsers',
@@ -64,7 +61,7 @@ function deleteUsersLotto(userName: string, round: number, indexes: number[]): P
                 S: userName
             }
         },
-        UpdateExpression: UpdateExpression.slice(0, -1)
+        UpdateExpression: UpdateExpression
     }
     return new Promise((resolve, reject) => {
         dynamoDB.updateItem(params, (err: AWSError) => {
