@@ -13,7 +13,7 @@ export enum Tool {
 export default class SaveBtn {
     static init(tool: Tool) {
         const numListSelectCurrent = document.querySelector('#num-list-select-current');
-
+        const numListSelectTotal = document.getElementById('num-list-select-total');
         saveBtns.forEach((node) => {
             node.addEventListener('click', async () => {
                 if (Number(numListSelectCurrent.textContent) === 0) {
@@ -33,8 +33,8 @@ export default class SaveBtn {
                         indexArr.push(index);
                     }
                 });
-                loading.classList.remove('none');
                 try {
+                    loading.classList.remove('none');
                     const code = await postAuthAPI('/numbers/mass', { numsArr, tool });
                     loading.classList.add('none');
                     if (code.error) {
@@ -51,6 +51,9 @@ export default class SaveBtn {
                             icon: 'success',
                             timer: 1500,
                         });
+
+                        numListSelectCurrent.textContent = '0';
+                        numListSelectTotal.textContent = (Number(numListSelectTotal.textContent) - indexArr.length).toString();
                         indexArr.forEach(index => numbersContainer[index].remove());
                         CheckBoxToggle.allCheckedReset();
                     }
