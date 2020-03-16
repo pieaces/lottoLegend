@@ -268,7 +268,7 @@ export async function updateIncOrExcNumbers(userName: string, round: number, num
             if (err) {
                 if (err.code === 'ConditionalCheckFailedException') {
                     await createIncOrExcNumbers(userName, round);
-                    updateIncOrExcNumbers(userName, round, numbers, choice);
+                    resolve(await updateIncOrExcNumbers(userName, round, numbers, choice));
                 } else reject(err);
             } else {
                 resolve(new Response(false));
