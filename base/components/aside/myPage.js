@@ -19,9 +19,7 @@ document.write(`<div class="anchor-title">
 <h3>회원정보</h3>
     <ul class="anchor-list-box">
     <li><a href="#">결제내역</a> </li>
-    <li><a href="/account/modifyNickname.html">닉네임 변경</a> </li>   
-    <li><a href="#">비밀번호 변경</a> </li>
-    <li>  <a href="#">회원탈퇴</a> </li>
+    <li><a href="/account/modify.html">내 정보 변경</a> </li>   
     </ul>
 </li>
 

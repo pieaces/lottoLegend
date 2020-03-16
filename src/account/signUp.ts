@@ -16,8 +16,9 @@ const id = document.querySelector<HTMLInputElement>('#id');
 const nickname = document.querySelector<HTMLInputElement>('#nickname');
 const password = document.querySelector<HTMLInputElement>('#password');
 const passwordCheck = document.querySelector<HTMLInputElement>('#password-check');
-const phoneNumberMid = document.querySelector<HTMLInputElement>('#phone-number-mid');
-const phoneNumberEnd = document.querySelector<HTMLInputElement>('#phone-number-end');
+const email = document.querySelector<HTMLInputElement>('#email');
+const phoneMidValue = document.querySelector<HTMLInputElement>('#phone-number-mid');
+const phoneEndValue = document.querySelector<HTMLInputElement>('#phone-number-end');
 const authNum = document.querySelector<HTMLInputElement>('#auth-num');
 const authCheck = document.querySelector('#auth-check');
 const signUpForm = document.querySelector('.signup-form');
@@ -37,16 +38,17 @@ function init() {
     passwordCheck.addEventListener('invalid', invalidPasswordCheck);
     passwordCheck.addEventListener('input', invalidPasswordCheck);
 
-    phoneNumberMid.addEventListener('invalid', invalidPhoneNumberMid);
-    phoneNumberMid.addEventListener('input', invalidPhoneNumberMid);
+    phoneMidValue.addEventListener('invalid', invalidPhoneMidValue);
+    phoneMidValue.addEventListener('input', invalidPhoneMidValue);
 
-    phoneNumberEnd.addEventListener('invalid', invalidPhoneNumberEnd);
-    phoneNumberEnd.addEventListener('input', invalidPhoneNumberEnd);
+    phoneEndValue.addEventListener('invalid', invalidPhoneEndValue);
+    phoneEndValue.addEventListener('input', invalidPhoneEndValue);
+
 
     signUpForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const result: any = await signUp(id.value, '+82'.concat(phoneNumberMid.value.slice(1)), password.value, nickname.value);
+        const result: any = await signUp(id.value, '+82'.concat(phoneMidValue.value.slice(1)), password.value, nickname.value);
         console.log(result);
         if (result.code === "UsernameExistsException") {
             console.log('이미 존재하는 아이디')
@@ -111,28 +113,28 @@ function invalidPasswordCheck() {
     return true;
 }
 
-function invalidPhoneNumberMid() {
+export function invalidPhoneMidValue() {
     const regPhoneNumberMid = /^([0-9]{3,4})$/;
 
-    if (phoneNumberMid.value === '') {
-        phoneNumberMid.setCustomValidity('이 입력란을 작성하세요.');
-    } else if (!regPhoneNumberMid.test(phoneNumberMid.value)) {
-        phoneNumberMid.setCustomValidity('휴대폰번호 양식에 맞지 않습니다');
+    if (phoneMidValue.value === '') {
+        phoneMidValue.setCustomValidity('이 입력란을 작성하세요.');
+    } else if (!regPhoneNumberMid.test(phoneMidValue.value)) {
+        phoneMidValue.setCustomValidity('휴대폰번호 양식에 맞지 않습니다');
     } else {
-        phoneNumberMid.setCustomValidity('');
+        phoneMidValue.setCustomValidity('');
     }
     return true;
 }
 
-function invalidPhoneNumberEnd() {
+export function invalidPhoneEndValue() {
     const regPhoneNumberEnd = /^([0-9]{4})$/;
 
-    if (phoneNumberEnd.value === '') {
-        phoneNumberEnd.setCustomValidity('이 입력란을 작성하세요.');
-    } else if (!regPhoneNumberEnd.test(phoneNumberEnd.value)) {
-        phoneNumberEnd.setCustomValidity('휴대폰번호 양식에 맞지 않습니다');
+    if (phoneEndValue.value === '') {
+        phoneEndValue.setCustomValidity('이 입력란을 작성하세요.');
+    } else if (!regPhoneNumberEnd.test(phoneEndValue.value)) {
+        phoneEndValue.setCustomValidity('휴대폰번호 양식에 맞지 않습니다');
     } else {
-        phoneNumberEnd.setCustomValidity('');
+        phoneEndValue.setCustomValidity('');
     }
     return true;
 }
