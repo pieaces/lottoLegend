@@ -426,7 +426,7 @@ document.write(`<div class="filter-box-container-box func1-layout func2-layout b
         </div>
 
         <div class="func3-filter-container">
-            <div class="func3-filter-title">나의 추천수</div>
+            <div class="func3-filter-title">나의 고정수</div>
             <div class="func3-filter-value-container">
                 <div class="func3-filter-value-box" id="include">
                 </div>
