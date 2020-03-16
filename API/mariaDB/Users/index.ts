@@ -1,9 +1,9 @@
-import DB from "../Engine/Method"
+import DB from "../Engine"
 
 export default class Users extends DB {
+    private tableName:string = 'Users';
     constructor(){
         super();
-        this.tableName = 'Users';
     }
     async setRank(rank:number, userName:string){
         const sql = `UPDATE ${this.tableName} SET rank=? WHERE userName = ?`;
