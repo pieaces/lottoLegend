@@ -1,9 +1,11 @@
 import configure from '../amplify/configure'
 import { getUnAuthAPI } from '../amplify/api'
 import { getQueryStringObject, isoStringToDate, getCategoryHtml, Affix } from '../functions';
+import { headerSign } from '../amplify/auth';
 const boardSection = document.querySelector('.board-section');
 const pageNumContainer = document.querySelector('.page-num-container');
 configure();
+headerSign();
 
 const category = document.getElementById('wrapper').getAttribute('data-category');
 const index = Number(getQueryStringObject().index) || 1;
@@ -26,7 +28,7 @@ getUnAuthAPI('/posts', { category, index })
         }
         //<div id="leap-last" class="hide">맨끝</div>
         loading.classList.add('none');
-    })
+    });
 
 function makeBoard(objArr: any[]) {
     for (let i = 0; i < objArr.length; i++) {

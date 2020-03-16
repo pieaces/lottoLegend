@@ -6,8 +6,10 @@ import Swal from 'sweetalert2'
 import { actualInstance, selectionInstance, latestInstance } from './stackInstances';
 import SaveBtn, { Tool } from './premium/instanceBtns/SaveBtn';
 import CheckBoxToggle from './premium/instanceBtns/CheckBoxToggle';
+import { headerSign } from '../amplify/auth';
 
 configure();
+headerSign();
 
 const loading = document.querySelector<HTMLElement>('.loading-box');
 const includeCanvas = document.getElementById('include');

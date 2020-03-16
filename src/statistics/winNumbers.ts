@@ -3,8 +3,11 @@ import configure from '../amplify/configure'
 import ChartBase from '../system/premium/Chart/Charts';
 import { getUnAuthAPI } from '../amplify/api';
 import Swal from 'sweetalert2'
+import { headerSign } from '../amplify/auth';
 
 configure();
+headerSign();
+
 const compartColor = ['#FBC400', '#69C8F2', '#FF7272', '#AAAAAA', '#B0D840'];
 
 const stackCanvas: HTMLCanvasElement = document.querySelector('.stack-chart');

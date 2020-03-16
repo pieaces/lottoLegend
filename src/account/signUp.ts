@@ -1,8 +1,10 @@
 import configure from '../amplify/configure'
-import { signUp, confirmSignUp } from "../amplify/auth";
+import { signUp, confirmSignUp, headerSign } from "../amplify/auth";
 import CheckBoxToggle from '../system/premium/instanceBtns/CheckBoxToggle'
 
 configure();
+headerSign();
+
 const anchorList = document.querySelectorAll<HTMLElement>('.anchor-list-container >li');
 const termsUseContainer = document.querySelector<HTMLElement>('.signup-terms-use-container');
 const termsUseAllCheck = document.querySelector<HTMLInputElement>('#all-check');

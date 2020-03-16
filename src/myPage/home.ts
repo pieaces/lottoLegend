@@ -4,7 +4,9 @@ import { setColorLotto } from '../functions/index'
 import IncludeExclude from './IncludeExclude/index';
 import incObj from './IncludeExclude/include';
 import excObj from './IncludeExclude/exclude';
+import { headerSign } from '../amplify/auth';
 configure();
+headerSign();
 
 const winNumBox = document.querySelectorAll<HTMLElement>('.mypage-win-num > div');
 const nickname = document.querySelector('#nickname');

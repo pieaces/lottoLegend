@@ -1,8 +1,11 @@
 import configure from '../amplify/configure'
 import DataAPI from "./premium/DataAPI";
 import Layout from './premium/Layout'
+import { headerSign } from '../amplify/auth';
 
 configure();
+headerSign();
+
 const loading = document.querySelector<HTMLElement>('.loading-box');
 
 async function execute() {

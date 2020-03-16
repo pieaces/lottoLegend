@@ -3,9 +3,10 @@ document.write(` <header>
     <div class="container top-nav">
         <div class="top-nav-right">
             <ul>
-                <li><a href="/account/signIn.html">로그인</a></li>
-                <li><a href="/account/signUp.html">회원가입</a></li>
-                <li><a href="/myPage/home.html">마이페이지</a></li>
+                <li id="header-signIn" class="none"><a href="/account/signIn.html">로그인</a></li>
+                <li id="header-signUp" class="none"><a href="/account/signUp.html">회원가입</a></li>
+                <li id="header-signOut" class="none"><a>로그아웃</a></li>
+                <li id="header-myPage" class="none"><a href="/myPage/home.html">마이페이지</a></li>
             </ul>
         </div>
     </div>

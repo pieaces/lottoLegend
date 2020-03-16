@@ -1,9 +1,14 @@
 import Selectr, { IOptions } from 'mobius1-selectr';
 import { setColorLotto } from '../functions/index';
+import { headerSign, getIdToken } from '../amplify/auth';
+import configure from '../amplify/configure';
 
 const selectBox = document.querySelector<HTMLSelectElement>('#exc-num-week-select-box');
 const excNumWeekWrapper = document.querySelector('.exc-num-week-wrapper');
 
+configure();
+getIdToken();
+headerSign();
 
 init();
 function init() {

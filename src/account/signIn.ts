@@ -1,7 +1,9 @@
 import configure from '../amplify/configure'
-import { signIn } from '../amplify/auth'
+import { signIn, headerSign } from '../amplify/auth'
 
 configure();
+headerSign();
+
 const loginBtn = document.getElementById('login-btn');
 
 const userNameInput = document.querySelector<HTMLInputElement>('#userName');

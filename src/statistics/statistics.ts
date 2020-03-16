@@ -5,9 +5,12 @@ import { getUnAuthAPI } from '../amplify/api';
 import { getQueryStringObject, rangeMake } from '../functions';
 import makeClickable from '../system/premium/Slide/makeClickable';
 import { getStaticsName } from './functions';
-const loading = document.querySelector('.loading-box');
-const labels = require('./functional/DataAPI/json/labels.json');
+import { headerSign } from '../amplify/auth';
 configure();
+headerSign();
+
+const loading = document.querySelector('.loading-box');
+const labels = require('../system/premium/DataAPI/json/labels.json');
 const lineNum = document.querySelectorAll<HTMLElement>('.chart-line-num > div');
 const leftBtn = document.getElementById('left-line-chart-btn');
 const rightBtn = document.getElementById('right-line-chart-btn');

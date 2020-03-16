@@ -4,8 +4,11 @@ import CheckBoxToggle from '../system/premium/instanceBtns/CheckBoxToggle';
 import { makeInputCheckBox, makePastFilterTable } from '../system/premium/Layout/functions';
 import Selectr, { IOptions } from 'mobius1-selectr';
 import { setColorLotto, setDisabledLotto } from '../functions';
+import { headerSign } from '../amplify/auth';
 
 configure();
+headerSign();
+
 const tableNumBox = document.querySelector('.mypage-table-num-box');
 const loading = document.querySelector('.loading-box');
 
