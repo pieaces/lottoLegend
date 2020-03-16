@@ -3,7 +3,7 @@ import { getAuthAPI } from '../amplify/api';
 import CheckBoxToggle from '../system/premium/instanceBtns/CheckBoxToggle';
 import { makeInputCheckBox, makePastFilterTable } from '../system/premium/Layout/functions';
 import Selectr, { IOptions } from 'mobius1-selectr';
-import { setColorLotto } from '../functions';
+import { setColorLotto, setDisabledLotto } from '../functions';
 
 configure();
 const tableNumBox = document.querySelector('.mypage-table-num-box');
@@ -17,26 +17,21 @@ const pastFilterBox = document.getElementsByClassName('func3-past-filter-box');
 
 init();
 
-function makeTableByData(data: any): void {
-    const rounds = Object.keys(data);
-    rounds.reverse().forEach(round => {
-        makeTable(data[round], round);
-    });
-}
 async function init() {
     loading.classList.remove('none');
-    const data = await getAuthAPI('/numbers/mass');
-    const rounds = Object.keys(data);
+    const {data, rounds, answer} = await getAuthAPI('/numbers/mass');
 
+    console.log(answer);
     const roundConfig: IOptions = {
-        data: [{
-            text: '전체', value: 'all'
-        }]
+        data: rounds.reverse().map((round: number) => {
+            return {
+                text: round.toString(),
+                value: round.toString()
+            }
+        })
     };
-    rounds.reverse().forEach(round => {
-        makeTable(data[round], round);
-        roundConfig.data.push({ text: round, value: round });
-    });
+    makeTable(data, rounds[0], answer);
+
     const toolConfig: IOptions = {
         data: [
             { text: '전체', value: 'all' },
@@ -64,50 +59,50 @@ async function init() {
 
     roundSelect.on('selectr.change', async (option) => {
         loading.classList.remove('none');
-        let data: any;
+        let result: any;
         if (option.value === 'all') {
-            data = await getAuthAPI('/numbers/mass/', { tool, method });
+            result = await getAuthAPI('/numbers/mass/', { tool, method });
             currentRound = null;
         } else {
-            data = (await getAuthAPI('/numbers/mass/' + option.value, { tool, method }));
+            result = (await getAuthAPI('/numbers/mass/' + option.value, { tool, method }));
             currentRound = Number(option.value);
         }
         tableNumBox.innerHTML = '';
-        makeTableByData(data);
+        makeTable(result.data, result.rounds[0], result.answer);
         loading.classList.add('none');
     });
     toolSelect.on('selectr.change', async (option) => {
         loading.classList.remove('none');
-        let data: any;
+        let result: any;
         if (option.value === 'all') {
-            data = (await getAuthAPI('/numbers/mass/' + (currentRound ? currentRound : ''), { method }));
+            result = (await getAuthAPI('/numbers/mass/' + (currentRound ? currentRound : ''), { method }));
             methodSelect.enable();
             tool = null;
         } else if (option.value === 'a') {
-            data = (await getAuthAPI('/numbers/mass/' + (currentRound ? currentRound : ''), { tool: option.value }));
+            result = (await getAuthAPI('/numbers/mass/' + (currentRound ? currentRound : ''), { tool: option.value }));
             methodSelect.disable();
             tool = option.value;
         } else if (option.value === 'b') {
-            data = (await getAuthAPI('/numbers/mass/' + (currentRound ? currentRound : ''), { tool: option.value, method }));
+            result = (await getAuthAPI('/numbers/mass/' + (currentRound ? currentRound : ''), { tool: option.value, method }));
             methodSelect.enable();
             tool = option.value;
         }
         tableNumBox.innerHTML = '';
-        makeTableByData(data);
+        makeTable(result.data, result.rounds[0], result.answer);
         loading.classList.add('none');
     });
     methodSelect.on('selectr.change', async (option) => {
         loading.classList.remove('none');
-        let data: any;
+        let result: any;
         if (option.value === 'all') {
-            data = (await getAuthAPI('/numbers/mass/' + (currentRound ? currentRound : ''), { tool }));
+            result = (await getAuthAPI('/numbers/mass/' + (currentRound ? currentRound : ''), { tool }));
             method = null;
         } else {
-            data = (await getAuthAPI('/numbers/mass/' + (currentRound ? currentRound : ''), { tool, method: option.value }));
+            result = (await getAuthAPI('/numbers/mass/' + (currentRound ? currentRound : ''), { tool, method: option.value }));
             method = option.value;
         }
         tableNumBox.innerHTML = '';
-        makeTableByData(data);
+        makeTable(result.data, result.rounds[0], result.answer);
         loading.classList.add('none');
     });
 
@@ -135,7 +130,7 @@ function numInfoToggle() {
     }
 }
 
-function makeTable(dataSet: any[], round: number | string) {
+function makeTable(dataSet: any[], round: number | string, answer?:{numbers:number[], bonusNum:number}) {
     for (let i = 0; i < dataSet.length; i++) {
         const tableContent = document.createElement('div');
         tableContent.classList.add('mypage-table-content');
@@ -190,10 +185,18 @@ function makeTable(dataSet: any[], round: number | string) {
         const tableNumList = document.createElement('div');
         tableNumList.classList.add('mypage-table-num-list');
 
+        let count = 0;        
         for (let j = 0; j < dataSet[i].numbers.length; j++) {
             const div = document.createElement('div');
             div.textContent = dataSet[i].numbers[j].toString();
-            setColorLotto(dataSet[i].numbers[j], div);
+            if (answer && answer.numbers.some(item => Number(item) === dataSet[i].numbers[j])) {
+                count++;
+                setColorLotto(dataSet[i].numbers[j], div);
+            } else {
+                if(!answer) setColorLotto(dataSet[i].numbers[j], div);
+                else setDisabledLotto(div);
+            }
+
             tableNumList.appendChild(div);
         }
 
@@ -202,8 +205,10 @@ function makeTable(dataSet: any[], round: number | string) {
 
         const tableIsWin = document.createElement('div');
         tableIsWin.classList.add('mypage-table-iswin');
-        if (dataSet[i].win) {
-            tableIsWin.textContent = dataSet[i].win;
+
+        if (answer) {
+            const winner = win(dataSet[i].numbers, count, answer);
+            tableIsWin.textContent = winner > 0 ? winner + '등' : '-';
         } else {
             tableIsWin.textContent = '추첨전';
         }
@@ -219,9 +224,22 @@ function makeTable(dataSet: any[], round: number | string) {
             infoTd.style.borderBottom = "0.5rem solid #dadada";
         }
         tableNumBox.appendChild(infoTd);
-
-
-
     }
+}
 
+function win(numbers: number[], count:number, answer: {bonusNum:number}): number {
+    if (numbers) {
+        switch (count) {
+            case 3://5등
+                return 5;
+            case 4://4등
+                return 4;
+            case 5:
+                if (numbers.some(item => Number(answer.bonusNum) === item)) return 2;
+                else return 3;
+            case 6://1등
+                return 1;
+            default: return 0;
+        }
+    }
 }

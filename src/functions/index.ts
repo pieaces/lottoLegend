@@ -106,6 +106,10 @@ export function setColorLotto(num: number, Box: HTMLElement) {
         console.error("setColorLotto 오류");
     }
 }
+export function setDisabledLotto(Box: HTMLElement) {
+    Box.style.backgroundColor= "white";
+    Box.style.color = "black";
+}
 export function setDefaultColor(node: HTMLElement) {
     node.style.background = "";
     node.textContent = "";
