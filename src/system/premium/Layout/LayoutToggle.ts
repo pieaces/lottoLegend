@@ -4,6 +4,7 @@ import NumBoard from "./NumBoard";
 import DataAPI from "../DataAPI";
 import CheckBoxToggle from "../instanceBtns/CheckBoxToggle";
 import { makeCheckdValueBox } from "./functions"
+import generatorLoading from "../../generatorLoading";
 
 const layout1 = document.querySelectorAll<HTMLElement>(".func1-layout");
 const layout2 = document.querySelectorAll<HTMLElement>(".func2-layout");
@@ -56,6 +57,7 @@ export default function LayoutToggle<TBase extends Constructor>(Base: TBase) {
         }
 
         layout3On(data: any) {
+            generatorLoading(3000);
             const numBoard = new NumBoard(DataAPI.getInstance().numbersData);
             numBoard.makeNumBoard();
             const checkBoxToggle = new CheckBoxToggle();

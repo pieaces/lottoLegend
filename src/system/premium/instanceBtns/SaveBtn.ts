@@ -11,8 +11,17 @@ export enum Tool{
 }
 export default class SaveBtn{
     static init(tool:Tool){
+        const numListSelectCurrent = document.querySelector('#num-list-select-current');
+
         saveBtns.forEach((node) => {
         node.addEventListener('click', async () => {
+            if(Number(numListSelectCurrent.textContent) === 0){
+                return Swal.fire({
+                    title: '알림',
+                    text: '1개 이상 선택하셔야 합니다',
+                    icon: 'info'
+                });
+            }
             const checkBoxList = document.querySelectorAll<HTMLInputElement>('.func3-check-box input');
             const numsArr:number[][] = [];
             const numbersContainer = document.querySelectorAll<HTMLElement>('.func3-num-container');
