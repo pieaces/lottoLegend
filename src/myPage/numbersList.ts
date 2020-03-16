@@ -14,12 +14,17 @@ const toolSelectBox = document.querySelector<HTMLSelectElement>('#tool-select-bo
 const methodSelectBox = document.querySelector<HTMLSelectElement>('#method-select-box');
 const numInfoToggleBtn = document.querySelector('.mypage-toggle-btn');
 const pastFilterBox = document.getElementsByClassName('func3-past-filter-box');
+const tableContent = document.getElementsByClassName('mypage-table-content');
+
+const darkBlueBorder = "0.5rem solid #09538e";
+const lightBlueBorder = "0.5rem solid #449ce3";
+const grayBorder = "0.5rem solid #dadada";
 
 init();
 
 async function init() {
     loading.classList.remove('none');
-    const {data, rounds, answer} = await getAuthAPI('/numbers/mass');
+    const { data, rounds, answer } = await getAuthAPI('/numbers/mass');
 
     console.log(answer);
     const roundConfig: IOptions = {
@@ -113,13 +118,28 @@ async function init() {
     numInfoToggleBtn.addEventListener('click', numInfoToggle());
 }
 
+
 function numInfoToggle() {
     let flag = true;
+    const pastFilterBoxArr = Array.from(pastFilterBox);
+    const tableContentArr = Array.from(tableContent);
     return function () {
         if (!flag) {
-            for (let i = 0; i < pastFilterBox.length; i++) {
-                pastFilterBox[i].classList.remove('none');
-            }
+            pastFilterBoxArr.forEach((node, index) => {
+                node[index].classList.remove('none');
+                if (index !== 0 && (index + 1) % 5 === 0) {
+                    tableContentArr[index].style.borderBottom = lightBlueBorder;
+                    node.style.borderBottom = lightBlueBorder;
+                    if ((i + 1) % 10 === 0) {
+                        tableContent.style.borderBottom = darkBlueBorder;
+                        infoTd.style.borderBottom = darkBlueBorder;
+                    }
+                } else {
+                    infoTd.style.borderBottom = grayBorder;
+                }
+            })
+
+
             flag = true;
         } else {
             for (let i = 0; i < pastFilterBox.length; i++) {
@@ -130,7 +150,8 @@ function numInfoToggle() {
     }
 }
 
-function makeTable(dataSet: any[], round: number | string, answer?:{numbers:number[], bonusNum:number}) {
+function makeTable(dataSet: any[], round: number | string, answer?: { numbers: number[], bonusNum: number }) {
+
     for (let i = 0; i < dataSet.length; i++) {
         const tableContent = document.createElement('div');
         tableContent.classList.add('mypage-table-content');
@@ -185,7 +206,7 @@ function makeTable(dataSet: any[], round: number | string, answer?:{numbers:numb
         const tableNumList = document.createElement('div');
         tableNumList.classList.add('mypage-table-num-list');
 
-        let count = 0;        
+        let count = 0;
         for (let j = 0; j < dataSet[i].numbers.length; j++) {
             const div = document.createElement('div');
             div.textContent = dataSet[i].numbers[j].toString();
@@ -193,7 +214,7 @@ function makeTable(dataSet: any[], round: number | string, answer?:{numbers:numb
                 count++;
                 setColorLotto(dataSet[i].numbers[j], div);
             } else {
-                if(!answer) setColorLotto(dataSet[i].numbers[j], div);
+                if (!answer) setColorLotto(dataSet[i].numbers[j], div);
                 else setDisabledLotto(div);
             }
 
@@ -218,16 +239,12 @@ function makeTable(dataSet: any[], round: number | string, answer?:{numbers:numb
 
 
         const infoTd = makePastFilterTable(dataSet[i]);
-        if (i !== 0 && (i + 1) % 5 === 0) {
-            infoTd.style.borderBottom = "0.5rem solid #09538e";
-        } else {
-            infoTd.style.borderBottom = "0.5rem solid #dadada";
-        }
+
         tableNumBox.appendChild(infoTd);
     }
 }
 
-function win(numbers: number[], count:number, answer: {bonusNum:number}): number {
+function win(numbers: number[], count: number, answer: { bonusNum: number }): number {
     if (numbers) {
         switch (count) {
             case 3://5등
