@@ -64,10 +64,11 @@ exports.handler = async (event: any) => {
                         const { numsArr, tool } = JSON.parse(event.body);
                         body = await updateNumbers(currentId, getCurrentRound() + 1, numsArr, tool);
                         break;
-                    case 'DELETE':
-                        const { numbers } = JSON.parse(event.body);
-                        await deleteMyNumber(currentId, getCurrentRound(), numbers);
+                    case 'DELETE': {
+                        const { numsArr, round } = JSON.parse(event.body);
+                        await deleteMyNumber(currentId, round, numsArr);
                         break;
+                    }
                 }
             } else {
                 statusCode = 400;

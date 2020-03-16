@@ -98,35 +98,40 @@ export async function updateNumbers(userName: string, round: number, numsArr: nu
     });
 }
 
-export async function deleteMyNumber(userName: string, round: number, numbers:number[]): Promise<void> {
+export async function deleteMyNumber(userName: string, round: number, numsArr: number[][]): Promise<void> {
     const data = (await getNumbers(userName, round))[round.toString()].map(item => item.numbers);
-    let index:number;
-    for(let i =0; i<data.length; i++){
-        if(JSON.stringify(data[i]) === JSON.stringify(numbers)){
-            index = i;
+    const indexes: number[] = [];
+    for (let i = 0; i < data.length; i++) {
+        if (numsArr.map(numbers => JSON.stringify(numbers)).some(item => JSON.stringify(data[i]) === item)) {
+            indexes.push(i);
             break;
         }
     }
-    const params:UpdateItemInput = {
-        TableName: 'LottoUsers',
-        ExpressionAttributeNames: {
-            "#Map": 'Numbers',
-            "#Round": round.toString(),
-        },
-        Key: {
-            "UserName": {
-                S: userName
-            }
-        },
-        UpdateExpression: `REMOVE #Map.#Round[${index}]`
-    };
+    if (indexes.length > 0) {
+        let UpdateExpression = "Remove ";
+        UpdateExpression += indexes.map(index => `#Map.#Round[${index}]`).join(',');
 
-    return new Promise((resolve, reject) => {
-        dynamoDB.updateItem(params, (err:AWSError) => {
-            if (err) reject(err);
-            resolve();
+        const params: UpdateItemInput = {
+            TableName: 'LottoUsers',
+            ExpressionAttributeNames: {
+                "#Map": 'Numbers',
+                "#Round": round.toString(),
+            },
+            Key: {
+                "UserName": {
+                    S: userName
+                }
+            },
+            UpdateExpression
+        };
+
+        return new Promise((resolve, reject) => {
+            dynamoDB.updateItem(params, (err: AWSError) => {
+                if (err) reject(err);
+                resolve();
+            });
         });
-    });
+    }
 }
 export function getNumberSize(userName: string, round: number): Promise<number>{
     return new Promise((resolve, reject) => {
