@@ -1,6 +1,6 @@
 import configure from '../amplify/configure'
 import { getUnAuthAPI } from '../amplify/api'
-import { getQueryStringObject, isoStringToDate, getCategoryHtml, Affix } from '../functions';
+import { getQueryStringObject, isoStringToDate, getCategoryHtml, rankToClass } from '../functions';
 import { headerSign } from '../amplify/auth';
 const boardSection = document.querySelector('.board-section');
 const pageNumContainer = document.querySelector('.page-num-container');
@@ -44,20 +44,8 @@ function makeBoard(objArr: any[]) {
 
         const boardAuthor = document.createElement('div');
         boardAuthor.classList.add('board-author');
-        let rankString: string;
-        switch (objArr[i].rank) {
-            case 1: rankString = 'first';
-            break;
-            case 2: rankString = 'second';
-            break;
-            case 3: rankString = 'third';
-            break;
-            case 4: rankString = 'fourth';
-            break;
-            case 5: rankString = 'fifth';
-            break;
-        }
-        boardAuthor.innerHTML = `<span class="rank rank-${rankString}">${objArr[i].rank}</span>${objArr[i].nickName}`;
+
+        boardAuthor.innerHTML = `<span class="rank ${rankToClass(objArr[i].rank)}">${objArr[i].rank}</span>${objArr[i].nickName}`;
 
         boardBox.appendChild(boardAuthor);
 

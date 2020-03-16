@@ -46,7 +46,7 @@ export default class IncludeExclude {
                 }
                 numContainer.appendChild(numBox);
             }
-            resultTotal.textContent = this.numbers.length.toString();
+            resultTotal && (resultTotal.textContent = this.numbers.length.toString());
             if (IncludeExclude.answer) {
                 const numCount = this.whatCount(this.numbers, IncludeExclude.answer);
                 resultBox.classList.remove('none');
@@ -55,10 +55,10 @@ export default class IncludeExclude {
                 makeWinNum(IncludeExclude.answer);
             } else {
                 winNumBox.forEach(node => setDefaultColor(node));
-                resultBox.classList.add('none');
+                resultBox && resultBox.classList.add('none');
             }
         } else {
-            resultBox.classList.add('none');
+            resultBox && resultBox.classList.add('none');
         }
     }
 }
