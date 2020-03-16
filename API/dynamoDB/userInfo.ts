@@ -156,7 +156,6 @@ export function getPointAndRank(userName:string):Promise<{point:number, rank:num
             if (err) {
                 reject(err);
             }
-            console.log(data);
             resolve({point:Number(data.Item.Point.N), rank: Number(data.Item.Rank.N)})
         });
     });
