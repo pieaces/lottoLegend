@@ -6,7 +6,7 @@ export function networkAlert() {
         icon: 'error',
         title: '실패',
         text: '서버 또는 네트워크 문제가 발생하였습니다.',
-        footer: '<a href="../inqBoard/qAList.html">여기로 문의주시면 신속히 답변드리겠습니다.</a>'
+        footer: '<a href="/board/qna/list.html">여기로 문의주시면 신속히 답변드리겠습니다.</a>'
     });
 }
 export function onlyUserAlert() {
@@ -16,7 +16,7 @@ export function onlyUserAlert() {
         text: '회원전용 서비스입니다.',
         allowOutsideClick: false,
     }).then(result => {
-        location.href = `../signIn/signIn.html`;
+        location.href = `/account/signIn.html`;
     });
 }
 
@@ -105,6 +105,10 @@ export function setColorLotto(num: number, Box: HTMLElement) {
     } else {
         console.error("setColorLotto 오류");
     }
+}
+export function setDisabledLotto(Box: HTMLElement) {
+    Box.style.backgroundColor= "white";
+    Box.style.color = "black";
 }
 export function setDefaultColor(node: HTMLElement) {
     node.style.background = "";

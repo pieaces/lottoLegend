@@ -14,7 +14,6 @@ init();
 async function init() {
     loading.classList.remove('none');
     const { include, exclude, rounds, answer } = await getAuthAPI('/numbers/piece');
-    console.log(include, answer);
     const incNumList = new IncludeExclude(include, "include", incObj);
     const excNumList = new IncludeExclude(exclude, "exclude", excObj);
     IncludeExclude.setAnswer(answer);

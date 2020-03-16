@@ -32,8 +32,12 @@ async function init() {
     rank.textContent = '1';
     point.textContent = "93점";
 
-    const winNumbers = [20, 12, 30, 12, 34, 25];
-    makeWinNum(winNumbers);
+    const { include, exclude, total } = await getAuthAPI('/numbers/piece', {flag:true});
+    const incNumList = new IncludeExclude(include, "include", incObj);
+    const excNumList = new IncludeExclude(exclude, "exclude", excObj);
+    //IncludeExclude.setAnswer(answer);
+    incNumList.makePage();
+    excNumList.makePage();
 
     incNum.textContent = "2";
     excNum.textContent = "13";
@@ -43,12 +47,6 @@ async function init() {
     loading.classList.add('none');
 }
 
-function makeWinNum(numbers: number[]) {
-    numbers.forEach((num, index) => {
-        winNumBox[index].textContent = num.toString();
-        setColorLotto(num, winNumBox[index]);
-    })
-}
 
 nicknameUpdateBtn.addEventListener('click', nicknameUpdate);
 serviceUpdateBtn.addEventListener('click', serviceUpdate)

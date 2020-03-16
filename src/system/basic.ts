@@ -174,7 +174,7 @@ async function init() {
                         icon: 'error'
                     });
                 }
-                else if (include.length > 0 && !includeFlag) {
+                else if (include && include.length > 0 && !includeFlag) {
                     alertEffect();
                     Swal.fire({
                         title: '오류',
@@ -248,9 +248,9 @@ function doesExist(one: number[], other: number[]) {
     }
     return flag;
 }
-function compartByLine(numbers) {
+function compartByLine(numbers:number[]) {
     const result = new Array(5);
-    numbers.forEach(num => {
+    numbers && numbers.forEach(num => {
         const index = Math.floor((num - 1) / 10);
         if (result[index])
             result[index].push(num);
@@ -259,9 +259,9 @@ function compartByLine(numbers) {
     });
     return result;
 }
-function makeChoice(exclude) {
+function makeChoice(exclude:number[]) {
     const choice = [];
-    if (exclude.length > 0) {
+    if (exclude && exclude.length > 0) {
         exclude.forEach((num, index) => {
             for (let i = exclude[index - 1] + 1 || 1; i < num; i++)
                 choice.push(i);
