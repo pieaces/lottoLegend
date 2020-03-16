@@ -21,7 +21,6 @@ const lineInputTable = document.querySelector<HTMLElement>('.line-gen-num-table'
 const textToggleShowBox = document.querySelector<HTMLElement>('.line-gen-text-toggle-show');
 const textToggleHideBox = document.querySelector<HTMLElement>('.line-gen-text-toggle-hide');
 const explainText = document.querySelector<HTMLElement>('.line-gen-text-content');
-const allCheck = document.querySelector<HTMLInputElement>('#all-check');
 
 const first = document.querySelector<HTMLInputElement>('#first-nums');
 const tenth = document.querySelector<HTMLInputElement>('#tenth-nums');
@@ -197,7 +196,7 @@ async function init() {
 
                     const checkBoxToggle = new CheckBoxToggle();
                     checkBoxToggle.addEvent();
-                    allCheck.checked = false;
+                    CheckBoxToggle.allCheckedReset();
 
                 }
             } else {
@@ -211,7 +210,7 @@ async function init() {
 
                 const checkBoxToggle = new CheckBoxToggle();
                 checkBoxToggle.addEvent();
-                allCheck.checked = false;
+                CheckBoxToggle.allCheckedReset();
             }
         } else {
             alertEffect();

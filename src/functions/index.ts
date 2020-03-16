@@ -107,10 +107,21 @@ export function setColorLotto(num: number, Box: HTMLElement) {
     }
 }
 export function setDisabledLotto(Box: HTMLElement) {
-    Box.style.backgroundColor= "white";
+    Box.style.backgroundColor = "white";
     Box.style.color = "black";
 }
 export function setDefaultColor(node: HTMLElement) {
     node.style.background = "";
     node.textContent = "";
+}
+
+export function rankToClass(rank: number): string {
+    switch (rank) {
+        case 1: return 'rank-first';
+        case 2: return 'rank-second';
+        case 3: return 'rank-third';
+        case 4: return 'rank-fourth';
+        case 5: return 'rank-fifth';
+        default: return 'heart';
+    }
 }

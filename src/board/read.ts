@@ -1,7 +1,7 @@
 import configure from '../amplify/configure'
 import { getUnAuthAPI, postAuthAPI, deleteAuthAPI, getAuthAPI, patchAuthAPI } from '../amplify/api';
 import { getUserName, getNickName, headerSign } from '../amplify/auth';
-import { getQueryStringObject, getCategoryHtml, isoStringToDate, networkAlert, setColorLotto } from '../functions';
+import { getQueryStringObject, getCategoryHtml, isoStringToDate, networkAlert, setColorLotto, rankToClass } from '../functions';
 import Swal from 'sweetalert2'
 
 configure();
@@ -49,21 +49,7 @@ commentSubmit.onclick = async function () {
         else alert('1글자 이상 입력해주세요.');
     }
 }
-function rankToClass(rank: number | string, object: HTMLElement) {
-    switch (rank) {
-        case 1: object.classList.add('rank-first');
-            break;
-        case 2: object.classList.add('rank-second');
-            break;
-        case 3: object.classList.add('rank-third');
-            break;
-        case 4: object.classList.add('rank-fourth');
-            break;
-        case 5: object.classList.add('rank-fifth');
-            break;
-        default: object.id = 'heart';
-    }
-}
+
 async function init() {
     loading.classList.remove('none');
     try {
@@ -80,7 +66,7 @@ async function init() {
         title.textContent = post.title;
         author.textContent = post.nickName;
         postRank.textContent = post.rank;
-        rankToClass(post.rank, postRank);
+        postRank.classList.add(rankToClass(post.rank));
         if (currentUser === post.userName) {
             contentsUpdateBtn.classList.remove('hide');
             const category = document.querySelector<HTMLElement>('#wrapper').getAttribute('data-category');
@@ -163,7 +149,7 @@ function makeComments(objArr: any) {
         const rankElement = document.createElement('span');
         rankElement.textContent = objArr[i].rank;
         rankElement.classList.add('rank');
-        rankToClass(objArr[i].rank, rankElement);
+        rankElement.classList.add(rankToClass(objArr[i].rank));
         const commentAuthor = document.createElement('div');
         commentAuthor.classList.add('comment-author');
         commentAuthor.textContent = objArr[i].nickName;

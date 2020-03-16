@@ -98,13 +98,11 @@ font-size: 1.4rem;
   width:2rem;
 }
 
-
 .service-update-btn{
   width: 4rem;
   height:2.5rem;
   color:black;
 }
-
 
 .mypage-win-num{
   display: flex;
@@ -163,4 +161,8 @@ font-size: 1.4rem;
   background-color: var(--main-color);
   color:var(--default-color);
   font-size:1.2rem;
+}
+
+#point{
+  margin-left: 0.5rem;
 }

@@ -1,15 +1,13 @@
 import configure from '../amplify/configure'
 import { getAuthAPI } from '../amplify/api';
 import CheckBoxToggle from '../system/premium/instanceBtns/CheckBoxToggle';
-import { makeInputCheckBox, makePastFilterTable } from '../system/premium/Layout/functions';
 import Selectr, { IOptions } from 'mobius1-selectr';
-import { setColorLotto, setDisabledLotto } from '../functions';
 import { headerSign } from '../amplify/auth';
+import { makeTable } from './functions';
 
 configure();
 headerSign();
 
-const tableNumBox = document.querySelector('.mypage-table-num-box');
 const loading = document.querySelector('.loading-box');
 
 const roundSelectBox = document.querySelector<HTMLSelectElement>('#round-select-box');
@@ -25,6 +23,7 @@ const grayBorder = "0.5rem solid #dadada";
 const defaultBorder = "1px solid rgba(0,0,0,0.1)";
 
 init();
+const tableNumBox = document.querySelector<HTMLElement>('.mypage-table-num-box');
 
 async function init() {
     loading.classList.remove('none');
@@ -39,7 +38,7 @@ async function init() {
             }
         })
     };
-    makeTable(data, rounds[0], answer);
+    makeTable(tableNumBox, data, rounds[0], true, answer);
 
     const toolConfig: IOptions = {
         data: [
@@ -77,7 +76,7 @@ async function init() {
             currentRound = Number(option.value);
         }
         tableNumBox.innerHTML = '';
-        makeTable(result.data, result.rounds[0], result.answer);
+        makeTable(tableNumBox, result.data, result.rounds[0], true, result.answer);
         loading.classList.add('none');
     });
     toolSelect.on('selectr.change', async (option) => {
@@ -97,7 +96,7 @@ async function init() {
             tool = option.value;
         }
         tableNumBox.innerHTML = '';
-        makeTable(result.data, result.rounds[0], result.answer);
+        makeTable(tableNumBox, result.data, result.rounds[0], true, result.answer);
         loading.classList.add('none');
     });
     methodSelect.on('selectr.change', async (option) => {
@@ -111,7 +110,7 @@ async function init() {
             method = option.value;
         }
         tableNumBox.innerHTML = '';
-        makeTable(result.data, result.rounds[0], result.answer);
+        makeTable(tableNumBox, result.data, result.rounds[0], true, result.answer);
         loading.classList.add('none');
     });
 
@@ -155,124 +154,6 @@ function numInfoToggle() {
                 }
             }
             flag = false;
-        }
-    }
-}
-
-function makeTable(dataSet: any[], round: number | string, answer?: { numbers: number[], bonusNum: number }) {
-
-    for (let i = 0; i < dataSet.length; i++) {
-        const tableContent = document.createElement('div');
-        tableContent.classList.add('mypage-table-content');
-
-        if (i === dataSet.length - 1) {
-            tableContent.style.borderBottom = "1px solid rgba(0,0,0,0.1)";
-        }
-
-        const tableCheckBox = document.createElement('div');
-
-        tableCheckBox.classList.add('mypage-table-checkbox');
-
-        tableCheckBox.append(makeInputCheckBox());
-
-        tableContent.appendChild(tableCheckBox);
-
-        const tableRound = document.createElement('div');
-        tableRound.classList.add('mypage-table-round');
-        tableRound.textContent = round.toString();
-
-        tableContent.appendChild(tableRound);
-
-        const tableDate = document.createElement('div');
-        tableDate.classList.add('mypage-table-date');
-        tableDate.textContent = dataSet[i].date.slice(0, 10);
-
-        tableContent.appendChild(tableDate);
-
-        const tableDivision = document.createElement('div');
-        tableDivision.classList.add('mypage-table-division');
-        let division: string;
-        switch (dataSet[i].tool) {
-            case 'a': division = "무료";
-                break;
-            case 'b': division = "유료"
-                switch (dataSet[i].method) {
-                    case 'a': division += " 자동"
-                        break;
-                    case 'm': division += " 수동"
-                        break;
-                }
-                break;
-        }
-
-        tableDivision.textContent = division;
-
-        tableContent.appendChild(tableDivision);
-
-        const tableNum = document.createElement('div');
-        tableNum.classList.add('mypage-table-num');
-
-        const tableNumList = document.createElement('div');
-        tableNumList.classList.add('mypage-table-num-list');
-
-        let count = 0;
-        for (let j = 0; j < dataSet[i].numbers.length; j++) {
-            const div = document.createElement('div');
-            div.textContent = dataSet[i].numbers[j].toString();
-            if (answer && answer.numbers.some(item => Number(item) === dataSet[i].numbers[j])) {
-                count++;
-                setColorLotto(dataSet[i].numbers[j], div);
-            } else {
-                if (!answer) setColorLotto(dataSet[i].numbers[j], div);
-                else setDisabledLotto(div);
-            }
-
-            tableNumList.appendChild(div);
-        }
-
-        tableNum.appendChild(tableNumList);
-        tableContent.appendChild(tableNum);
-
-        const tableIsWin = document.createElement('div');
-        tableIsWin.classList.add('mypage-table-iswin');
-
-        if (answer) {
-            const winner = win(dataSet[i].numbers, count, answer);
-            tableIsWin.textContent = winner > 0 ? winner + '등' : '-';
-        } else {
-            tableIsWin.textContent = '추첨전';
-        }
-        tableContent.appendChild(tableIsWin);
-
-        if (i !== 0 && (i + 1) % 5 === 0) {
-            tableContent.style.borderBottom = lightBlueBorder;
-            if ((i + 1) % 10 === 0) {
-                tableContent.style.borderBottom = darkBlueBorder;
-            }
-        }
-        tableNumBox.appendChild(tableContent);
-
-
-        const infoTd = makePastFilterTable(dataSet[i]);
-
-
-        tableNumBox.appendChild(infoTd);
-    }
-}
-
-function win(numbers: number[], count: number, answer: { bonusNum: number }): number {
-    if (numbers) {
-        switch (count) {
-            case 3://5등
-                return 5;
-            case 4://4등
-                return 4;
-            case 5:
-                if (numbers.some(item => Number(answer.bonusNum) === item)) return 2;
-                else return 3;
-            case 6://1등
-                return 1;
-            default: return 0;
         }
     }
 }
