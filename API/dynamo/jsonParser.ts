@@ -1,5 +1,5 @@
-import { Assembly, LottoDate } from "../interface/LottoDB";
-import { Stats } from "../interface/Statistics";
+import { Assembly, LottoDate } from "../Lotto/interface/LottoDB";
+import { Stats } from "../Lotto/interface/Statistics";
 
 export type dynamoData = Assembly | number[] | Stats | number[][] | boolean[][] | LottoDate[];
 export default function dynamoDBJson(data: dynamoData, option: any = null) {

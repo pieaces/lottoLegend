@@ -1,5 +1,5 @@
-import { Stats } from '../interface/Statistics';
-import { Method, DBData, Assembly, AssemblyVersion, QueryStatsParams } from '../interface/LottoDB';
+import { Stats } from '../Lotto/interface/Statistics';
+import { Method, DBData, Assembly, AssemblyVersion, QueryStatsParams } from '../Lotto/interface/LottoDB';
 import dynamoDB from '.'
 
 export default function queryStats(method: Method, params: QueryStatsParams): Promise<any[] | DBData> {

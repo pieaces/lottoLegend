@@ -1,11 +1,11 @@
 import LottoProcess from './LottoProcess';
 import { List } from 'immutable';
-import dynamoDBJson, { dynamoData } from '../../dynamo/jsonParser'
-import queryStats from '../../dynamo/queryStats'
-import scanLotto from '../../dynamo/scanLotto'
+import dynamoDBJson, { dynamoData } from '../../../dynamo/jsonParser'
+import queryStats from '../../../dynamo/queryStats'
+import scanLotto from '../../../dynamo/scanLotto'
 import { Method } from '../../interface/LottoDB';
 import { LData, Params, LottoNumber } from '../../interface/Lotto';
-import dynamoDB from '../../dynamo'
+import dynamoDB from '../../../dynamo'
 import Analyze from '../Analyze';
 
 export default class LottoStatDB extends LottoProcess {

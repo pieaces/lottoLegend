@@ -1,4 +1,4 @@
-import { LottoNumber } from '../interface/Lotto';
+import { LottoNumber } from '../Lotto/interface/Lotto';
 import dynamoDB from '.'
 
 export default function queryLotto(round: number): Promise<LottoNumber[]> {

@@ -1,4 +1,5 @@
 import { ScanInput, ScanOutput, UpdateItemInput } from "aws-sdk/clients/dynamodb"; import dynamoDB from "."; import { AWSError } from "aws-sdk";
+import Users from "../mariaDB/Users";
 
 function scanUsersPoint(): Promise<{ userName: string, point: number }[]> {
     const params: ScanInput = {
@@ -60,10 +61,17 @@ function setRank(userName: string, rank:number):Promise<void> {
     });
 }
 export default async function autoRank() {
+    const usersDB = new Users();
+
     const users = await scanUsersPoint();
     users.sort((a, b) => b.point - a.point);
+    
     //5, 10, 15, 25, 45
     for(let i =1; i<=users.length; i++){
-        await setRank(users[i-1].userName, yourRankIs(i/users.length));
+        const userName = users[i-1].userName;
+        const rank = yourRankIs(i/users.length);
+        await setRank(userName, rank);
+        await usersDB.setRank(rank, userName);
     }
+    usersDB.engine.end();
 }

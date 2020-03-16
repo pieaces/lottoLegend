@@ -1,9 +1,9 @@
 import axios from 'axios'
-import { LData } from '../interface/Lotto';
+import { LData } from '../Lotto/interface/Lotto';
 import dynamoDB from '.'
-import { Method } from '../interface/LottoDB';
-import Calculate from '../class/Calculate';
-import Analyze from '../class/Analyze';
+import { Method } from '../Lotto/interface/LottoDB';
+import Calculate from '../Lotto/class/Calculate';
+import Analyze from '../Lotto/class/Analyze';
 import { setTimeout } from 'timers';
 import { PutItemInput } from 'aws-sdk/clients/dynamodb';
 interface LottoData extends LData {

@@ -1,4 +1,4 @@
-import { LData, LottoNumber } from '../interface/Lotto';
+import { LData, LottoNumber } from '../Lotto/interface/Lotto';
 import dynamoDB from '.'
 
 export default function read(): Promise<LData[]> {

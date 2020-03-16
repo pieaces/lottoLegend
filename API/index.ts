@@ -1,7 +1,7 @@
-import autoPutLotto from "./Lotto/dynamo/autoPutLotto";
-import autoPutSecond from "./Lotto/dynamo/autoPutSecond";
-import autoDelete from "./Lotto/dynamo/autoDelete";
-import autoRank from "./Lotto/dynamo/autoRank";
+import autoPutLotto from "./dynamo/autoPutLotto";
+import autoPutSecond from "./dynamo/autoPutSecond";
+import autoDelete from "./dynamo/autoDelete";
+import autoRank from "./dynamo/autoRank";
 
 exports.handler = async () => {
     const status = await autoPutLotto();

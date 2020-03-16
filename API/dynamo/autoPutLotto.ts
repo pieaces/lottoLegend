@@ -1,5 +1,5 @@
 import putLotto from './putLotto'
-import LottoDB from '../class/LottoDB'
+import LottoDB from '../Lotto/class/LottoDB'
 import counterLotto, { getCurrentRound } from './functions';
 import dynamoDB from '.';
 import { GetItemInput } from 'aws-sdk/clients/dynamodb';
