@@ -44,7 +44,7 @@ document.write(` <header>
             <i class="fas fa-bars"></i></div>
         <ul class="mid-nav-menu">
             <li>
-                <a href="/main/main.html">
+                <a href="/main.html">
                   로또끝
                 </a>
             </li>

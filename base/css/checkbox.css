@@ -1,41 +1,9 @@
 .input-checkbox-container {
-    position: relative;
     width: 2.5rem;
     height: 2.5rem;
     margin:0 auto;
   }
-  
-  .input-checkbox-container >input{
-    position: absolute;
-    top:0;
-    left:0;
-    z-index:2;
-    width:100%;
-    height:100%;
-    opacity: 0;
-    cursor: pointer;
-  }
-  
-  .input-checkbox-text-box{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top:0;
-    left:0;
-    z-index:1;
+  .input-checkbox-container >input {
     width: 100%;
     height: 100%;
-    padding-bottom: 0.3rem;
-    border-radius: 2px;
-    background-color: lightgray;
-    color:var(--default-color);
-    font-size:1.6rem;
-  }
-  
-  .input-checkbox-text{
-    padding-left:0.1rem;
-    padding-bottom:0.1rem;
-    font-size:2rem;
-    transform: rotate(12deg);
   }

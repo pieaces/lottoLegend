@@ -121,6 +121,7 @@ function makeTable(dataSet: ({ rounds: string, numbers: number[], hitsArr: boole
         tbody.appendChild(NumberTr);
 
         if (isCurrent === "past") {
+            div.classList.add('lotto-num-container-past');
             let hitsTotal = 0;
             const hitsTr = document.createElement('tr');
 
@@ -151,11 +152,18 @@ function makeTable(dataSet: ({ rounds: string, numbers: number[], hitsArr: boole
             tfoot.appendChild(resultTr);
 
             table.appendChild(tfoot);
+
         }
 
         table.appendChild(tbody);
         div.appendChild(table);
+
         excNumWeekWrapper.appendChild(div);
+        if (isCurrent === 'current') {
+            const boundary = document.createElement('div');
+            boundary.classList.add('num-list-boundary');
+            excNumWeekWrapper.appendChild(boundary);
+        }
     }
 
 }

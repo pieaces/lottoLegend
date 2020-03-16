@@ -29,7 +29,6 @@ function init() {
     const checkBoxToggle = new CheckBoxToggle();
     checkBoxToggle.addEvent();
 
-
     termUseBtn.addEventListener('click', termUseSubmit);
 
     password.addEventListener('invalid', invalidPassword);
