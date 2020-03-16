@@ -10,6 +10,9 @@
     align-items: center;
     justify-content: center;
     width:100%;
+}
+
+.lotto-num-container-past{
     margin-bottom: 5rem;
 }
 
@@ -62,3 +65,4 @@
 .exc-num-week-hit{
     font-weight: bold;
 }
+
