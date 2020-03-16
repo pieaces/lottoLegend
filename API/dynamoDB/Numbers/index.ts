@@ -22,7 +22,7 @@ const planLimit = {
     [Plan.default]: 5,
     [Plan.basic]: 10,
     [Plan.premium]: 20,
-    [Plan.premiumplus]: 40
+    [Plan['premium+']]: 40
 }
 
 export async function autoUpdateNumbers(userName: string, round: number, numsArr: number[][], tool: SelectTool): Promise<void> {

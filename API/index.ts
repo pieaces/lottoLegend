@@ -3,6 +3,7 @@ import { getCurrentRound, scanLotto, getLotto, getLotto2 } from "./funtions";
 import { updateNumbers, getNumbers, deleteMyNumber, updateIncOrExcNumbers, getIncOrExcRounds, getIncAndExcNumbers } from './dynamoDB/Numbers'
 import { queryLottoData } from "./dynamoDB/lottoData";
 import { freeGenerator, numbersToData } from "./dynamoDB/generator";
+import { getPointAndRank, getPlanKeyAndUntil } from "./dynamoDB/userInfo";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -39,29 +40,29 @@ exports.handler = async (event: any) => {
             if (logedIn) {
                 switch (method) {
                     case 'GET': {
-                        const round =  event.pathParameters && event.pathParameters.round;
+                        const round = event.pathParameters && event.pathParameters.round;
                         const tool = event.queryStringParameters && event.queryStringParameters.tool;
                         const selectMethod = event.queryStringParameters && event.queryStringParameters.method;
                         const numbersData = await getNumbers(currentId, round, { method: selectMethod, tool });
                         const lottoData = await scanLotto();
 
                         const rounds = Object.keys(numbersData);
-                        const data = numbersData[rounds[rounds.length-1]].map((data) => {
-                                const result: any = numbersToData(data.numbers, lottoData);
-                                result.method = data.method;
-                                result.tool = data.tool;
-                                result.date = data.date;
-                                return result;
-                            });
-                        body = {data, rounds};
-                        if (Number(rounds[rounds.length-1]) <= getCurrentRound()) {
-                            body.answer = await getLotto2(Number(rounds[rounds.length-1]));
+                        const data = numbersData[rounds[rounds.length - 1]].map((data) => {
+                            const result: any = numbersToData(data.numbers, lottoData);
+                            result.method = data.method;
+                            result.tool = data.tool;
+                            result.date = data.date;
+                            return result;
+                        });
+                        body = { data, rounds };
+                        if (Number(rounds[rounds.length - 1]) <= getCurrentRound()) {
+                            body.answer = await getLotto2(Number(rounds[rounds.length - 1]));
                         }
                     }
                         break;
                     case 'POST':
                         const { numsArr, tool } = JSON.parse(event.body);
-                        body = await updateNumbers(currentId, getCurrentRound()+1, numsArr, tool);
+                        body = await updateNumbers(currentId, getCurrentRound() + 1, numsArr, tool);
                         break;
                     case 'DELETE':
                         const { numbers } = JSON.parse(event.body);
@@ -85,7 +86,7 @@ exports.handler = async (event: any) => {
                         body = await getIncAndExcNumbers(userName, round);
                         body.total = round;
                     } else {
-                        const rounds = await getIncOrExcRounds(userName);                        
+                        const rounds = await getIncOrExcRounds(userName);
                         const round = Number(rounds[0]);
                         body = await getIncAndExcNumbers(userName, round);
                         body.rounds = rounds;
@@ -98,7 +99,7 @@ exports.handler = async (event: any) => {
                 case 'POST':
                     if (logedIn) {
                         const { numbers, choice } = JSON.parse(event.body);
-                        await updateIncOrExcNumbers(currentId, getCurrentRound()+1, numbers.sort((a: number, b: number) => a - b), choice);
+                        await updateIncOrExcNumbers(currentId, getCurrentRound() + 1, numbers.sort((a: number, b: number) => a - b), choice);
                         break;
                     } else {
                         statusCode = 400;
@@ -136,6 +137,55 @@ exports.handler = async (event: any) => {
                 case 'GET':
                     const lineCount = event.queryStringParameters && JSON.parse(event.queryStringParameters.lineCount);
                     body = await freeGenerator(currentId, lineCount);
+            }
+        }
+            break;
+        case '/mypage': {
+            switch (method) {
+                case 'GET':
+                    const round = getCurrentRound();
+                    const lotto = await getLotto2(round);
+                    const numbersData = await getNumbers(currentId, round);
+
+                    let winner = 6;
+                    numbersData[round] && numbersData[round].forEach(data => {
+                        let count = 0;
+                        data.numbers.forEach(num => {
+                            if (lotto.numbers.some(item => item === num)) count++;
+                        });
+                        switch (count) {
+                            case 3:
+                                if (winner > 5) winner = 5;
+                                break;
+                            case 4:
+                                if (winner > 4) winner = 4;
+                                break;
+                            case 5:
+                                if (data.numbers.some(item => lotto.bonusNum === item)) {
+                                    if (winner > 2) winner = 2;
+                                }
+                                else {
+                                    if (winner > 3) winner = 3;
+                                }
+                                break;
+                            case 6:
+                                winner = 1;
+                        }
+                    });
+                    const { include, exclude } = await getIncAndExcNumbers(currentId, round);
+                    let includeAnswer = 0, excludeAnswer = 0;
+                    include && include.forEach(num => {
+                        if (lotto.numbers.some(item => item === num)) includeAnswer++
+                    });
+                    exclude && exclude.forEach(num => {
+                        if (lotto.numbers.some(item => item === num)) excludeAnswer++
+                    });
+                    const {plan, until} = await getPlanKeyAndUntil(currentId);
+                    const {point, rank} = await getPointAndRank(currentId);
+                    body = { winner, lotto,
+                        include: include && { size: include.length, answer: includeAnswer },
+                        exclude: exclude && { size: exclude.length, answer: excludeAnswer },
+                        plan, until, point, rank }
             }
         }
             break;
