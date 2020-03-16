@@ -51,7 +51,7 @@ export default class LottoStatDB extends LottoProcess {
                     break;
                 case Method.line:
                     Item['All'] = dynamoDBJson(Analyze.posCount$10(this.getLNumbers()));
-                    Item['Latest'] = dynamoDBJson(Analyze.posCount$10(this.getLNumbers(-12)));
+                    Item['Latest'] = dynamoDBJson(Analyze.posCount$10(this.getLNumbers(-5)));
                     break;
                 default:
                     const dbData = this.processHelper(method);
