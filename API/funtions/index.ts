@@ -50,3 +50,28 @@ export async function getLotto(round: number): Promise<number[]> {
         });
     });
 }
+
+export function getLotto2(round: number): Promise<{numbers:number[], bonusNum:number}> {
+    const params: GetItemInput = {
+        ProjectionExpression: 'Numbers, BonusNum',
+        TableName: "LottoData",
+        Key: {
+            'Round': {
+                N: round.toString()
+            }
+        },
+    };
+
+    return new Promise((resolve, reject) => {
+        dynamoDB.getItem(params, function (err, data) {
+            if (err) {
+                reject(err);
+            }
+            if (data.Item) {
+                const numbers = data.Item.Numbers.NS.map(value => Number(value)).sort((a, b) => a - b);
+                const bonusNum = Number(data.Item.BonusNum.N)
+                resolve({ numbers, bonusNum });
+            } else resolve();
+        });
+    });
+}

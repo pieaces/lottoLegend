@@ -1,5 +1,5 @@
 import verify from "./auth";
-import { getCurrentRound, scanLotto, getLotto } from "./funtions";
+import { getCurrentRound, scanLotto, getLotto, getLotto2 } from "./funtions";
 import { updateNumbers, getNumbers, deleteMyNumber, updateIncOrExcNumbers, getIncOrExcRounds, getIncAndExcNumbers } from './dynamoDB/Numbers'
 import { queryLottoData } from "./dynamoDB/lottoData";
 import { freeGenerator, numbersToData } from "./dynamoDB/generator";
@@ -55,7 +55,7 @@ exports.handler = async (event: any) => {
                             });
                         body = {data, rounds};
                         if (Number(rounds[rounds.length-1]) <= getCurrentRound()) {
-                            body.answer = await getLotto(Number(rounds[rounds.length-1]));
+                            body.answer = await getLotto2(Number(rounds[rounds.length-1]));
                         }
                     }
                         break;
