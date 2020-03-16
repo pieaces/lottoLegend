@@ -36,81 +36,89 @@
             <div class="left-container box-color">
 
               <div class="mypage-title">나의 정보</div>
-              <div class="mypage-content-box">
-                <ul class="mypage-info-box">
-                  <li class="mypage-nickname">
-                    <div>
-                      <span>닉네임</span>
-                      <span>:</span>
-                      <span id="nickname"></span>
-                    </div>
-                    <button type="button" class="btn box-color service-update-btn" id="nickname-update">변경</button>
-                  </li>
-                  <li class="mypage-phone">
-                    <div>
-                      <span>휴대폰</span>
-                      <span>:</span>
-                      <span id="phone-number"></span>
-                    </div>
-                  </li>
-                  <li class="mypage-service">
-                    <div>
-                      <span>서비스</span>
-                      <span>:</span>
-                      <span id="service"></span>
-                      <span id="service-expiry-date"></span>까지
-                    </div>
 
-                    <button type="button" class="btn box-color service-update-btn" id="service-update">변경</button>
-                  </li>
-                  <li class="mypage-point">
-                    <div>
-                      <span>기여점수</span>
-                      <span>:</span>
-                      <span class="rank"></span>
-                      <span id="point"></span>점
-                    </div>
-                  </li>
-                </ul>
-              </div>
+              <ul class="mypage-info-box">
+                <li class="mypage-nickname">
+                  <div>
+                    <span class="mypage-info-list-title">닉네임</span>
+                    <span>:</span>
+                    <span id="nickname"></span>
+                  </div>
+                  <button type="button" class="btn box-color service-update-btn" id="nickname-update">변경</button>
+                </li>
+                <li>
+                  <div>
+                    <span class="mypage-info-list-title">휴대폰</span>
+                    <span class="mypage-info--list-seperator">:</span>
+                    <span id="phone-number">010-9524-2432</span>
+
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <span class="mypage-info-list-title">이메일</span>
+                    <span class="mypage-info--list-seperator">:</span>
+                    <span id="email">sso9524@naver.com</span>
+                  </div>
+                </li>
+                <li class="mypage-service">
+                  <div>
+                    <span class="mypage-info-list-title">서비스</span>
+                    <span class="mypage-info--list-seperator">:</span>
+                    <span id="service"></span>
+                    <span id="service-expiry-date"></span>까지
+                  </div>
+
+                  <button type="button" class="btn box-color service-update-btn" id="service-update">변경</button>
+                </li>
+                <li>
+                  <div>
+                    <span class="mypage-info-list-title">기여점수</span>
+                    <span class="mypage-info--list-seperator">:</span>
+                    <span class="rank"></span>
+                    <span id="point"></span>점
+                  </div>
+                </li>
+              </ul>
+
             </div>
             <div class="right-container box-color">
               <div class="mypage-title">지난 회차 결과</div>
-              <div class="mypage-content-box">
-                <ul class="mypage-info-box">
-                  <li>
-                    <div>
-                      <span>당첨번호</span>
-                      <span>:</span>
-                      <div class="mypage-win-num">
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div>
-                      <span> 추천 수</span>
-                      <span>:</span>
-                      <span id="inc-num"></span><span>개 등장</span>
 
+              <ul class="mypage-info-box">
+                <li>
+                  <div>
+                    <span class="mypage-info-list-title">당첨번호</span>
+                    <span class="mypage-info--list-seperator">:</span>
+                    <div class="mypage-win-num">
                     </div>
-                  </li>
-                  <li>
-                    <div>
-                      <span>제외 수</span>
-                      <span>:</span>
-                      <span id="exc-num-total"></span>개 중&nbsp;<span id="exc-num"></span>개 적중</span>
-                    </div>
-                  </li>
-                  <li>
-                    <div>
-                      <span>등수</span>
-                      <span>:</span>
-                      <span id="lotto-rank"></span>등
-                    </div>
-                  </li>
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <span class="mypage-info-list-title"> 추천 수</span>
+                    <span class="mypage-info--list-seperator">:</span>
+                    <span id="inc-num"></span><span>개 등장</span>
 
-                </ul>
-              </div>
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <span class="mypage-info-list-title">제외 수</span>
+                    <span class="mypage-info--list-seperator">:</span>
+                    <span id="exc-num-total"></span>개 중&nbsp;<span id="exc-num"></span>개 적중</span>
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <span class="mypage-info-list-title">등수</span>
+                    <span class="mypage-info--list-seperator">:</span>
+                    <span id="lotto-rank"></span>등
+                  </div>
+                </li>
+
+              </ul>
+
             </div>
           </div>
 
@@ -120,7 +128,9 @@
 
               <div class="mypage-title ">이번 회차 나의 추천 번호</div>
               <div class="mypage-num-container inc-num-container">
-
+                <div class="mypage-none-box">
+                  없음
+                </div>
               </div>
             </div>
             <div class="right-container box-color">
@@ -128,7 +138,9 @@
 
 
               <div class="mypage-num-container exc-num-container">
-
+                <div class="mypage-none-box">
+                  없음
+                </div>
               </div>
             </div>
           </div>
@@ -150,6 +162,9 @@
               <div class="mypage-table-iswin">
                 당첨결과
               </div>
+            </div>
+            <div class="mypage-none-box box-color">
+              없음
             </div>
           </div>
         </div>

@@ -34,7 +34,7 @@ async function init() {
     rank.textContent = '1';
     point.textContent = "93점";
 
-    const { include, exclude, total } = await getAuthAPI('/numbers/piece', {flag:true});
+    const { include, exclude, total } = await getAuthAPI('/numbers/piece', { flag: true });
     const incNumList = new IncludeExclude(include, "include", incObj);
     const excNumList = new IncludeExclude(exclude, "exclude", excObj);
     //IncludeExclude.setAnswer(answer);
