@@ -38,7 +38,7 @@ export default class LottoProcess extends LottoMap {
         return this.processHelper(Method.carryCount);
     }
     processEmergedStatusForOne(one:LottoNumber): boolean[] {
-        return this.gatherEmergedBooleanForOne(one, -5);
+        return this.gatherEmergedBooleanForOne(one, -12);
     }
     processIntervalForOne(one:LottoNumber): number[] {
         return this.gatherIntervalForOne(one);
