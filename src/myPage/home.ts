@@ -28,17 +28,17 @@ async function init() {
     loading.classList.remove('none');
 
     Auth.currentSession()
-    .then(session => session.getIdToken())
-    .then(idToken => {
-        console.log(idToken.payload)
-        nickname.textContent = idToken.payload.nickname;
-        const phone = ('0' + idToken.payload.phone_number.slice(3));
-        phoneNumber.textContent = phone.slice(0,3) + '-' + phone.slice(3,7) + '-' + phone.slice(7,11);
-    });
+        .then(session => session.getIdToken())
+        .then(idToken => {
+            console.log(idToken.payload)
+            nickname.textContent = idToken.payload.nickname;
+            const phone = ('0' + idToken.payload.phone_number.slice(3));
+            phoneNumber.textContent = phone.slice(0, 3) + '-' + phone.slice(3, 7) + '-' + phone.slice(7, 11);
+        });
 
     try {
-        const {include, exclude, winner, lotto, plan, until, rank, point} = await getAuthAPI('/mypage');
-        lotto.numbers.forEach((num:number) =>{
+        const { include, exclude, winner, lotto, plan, until, rank, point } = await getAuthAPI('/mypage');
+        lotto.numbers.forEach((num: number) => {
             const div = document.createElement('div');
             div.textContent = num.toString();
             setColorLotto(num, div);
@@ -55,7 +55,7 @@ async function init() {
         winNumBox.appendChild(bonus);
 
         service.textContent = plan;
-        expiryDate.textContent = '~'+until;
+        expiryDate.textContent = '~' + until;
         rankHtml.classList.add(rankToClass(rank));
         rankHtml.textContent = rank;
         pointHtml.textContent = point;
@@ -64,21 +64,21 @@ async function init() {
             const span = document.createElement('span');
             span.innerHTML = `<span id="inc-num-total">${include.size}</span>개 중&nbsp;<span id="inc-num">${include.answer}</span>개 출현</span>`;
             document.getElementById('myOldInclude').appendChild(span);
-        }else{
+        } else {
             const span = document.createElement('span');
             span.textContent = '-';
-            document.getElementById('myOldInclude').appendChild(span);   
+            document.getElementById('myOldInclude').appendChild(span);
         }
         if (exclude) {
             const span = document.createElement('span');
             span.innerHTML = `<span id="exc-num-total">${exclude.size}</span>개 중&nbsp;<span id="exc-num">${exclude.answer}</span>개 적중</span>`;
             document.getElementById('myOldExclude').appendChild(span);
-        }else{
+        } else {
             const span = document.createElement('span');
             span.textContent = '-';
             document.getElementById('myOldExclude').appendChild(span);
         }
-        if(winner <=5) lottoRank.textContent = winner;
+        if (winner <= 5) lottoRank.textContent = winner + '등';
         else lottoRank.textContent = '-';
     } catch (err) {
         networkAlert();
