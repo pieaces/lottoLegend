@@ -2,6 +2,10 @@
   margin-bottom:5rem;
 }
 
+.mypage-num-container{
+  min-height:20rem;
+}
+
 .mypage-num-container>div:not(:last-child){
   border-bottom: 1px dashed var(--border-color);
 }
