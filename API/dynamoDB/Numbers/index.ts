@@ -101,10 +101,11 @@ export async function updateNumbers(userName: string, round: number, numsArr: nu
 export async function deleteMyNumber(userName: string, round: number, numsArr: number[][]): Promise<void> {
     const data = (await getNumbers(userName, round))[round.toString()].map(item => item.numbers);
     const indexes: number[] = [];
+    const jsonNumsArr = numsArr.map(numbers => JSON.stringify(numbers));
+
     for (let i = 0; i < data.length; i++) {
-        if (numsArr.map(numbers => JSON.stringify(numbers)).some(item => JSON.stringify(data[i]) === item)) {
+        if (jsonNumsArr.some(item => JSON.stringify(data[i]) === item)) {
             indexes.push(i);
-            break;
         }
     }
     if (indexes.length > 0) {
@@ -124,7 +125,6 @@ export async function deleteMyNumber(userName: string, round: number, numsArr: n
             },
             UpdateExpression
         };
-
         return new Promise((resolve, reject) => {
             dynamoDB.updateItem(params, (err: AWSError) => {
                 if (err) reject(err);
@@ -133,6 +133,8 @@ export async function deleteMyNumber(userName: string, round: number, numsArr: n
         });
     }
 }
+
+
 export function getNumberSize(userName: string, round: number): Promise<number>{
     return new Promise((resolve, reject) => {
         dynamoDB.getItem({
