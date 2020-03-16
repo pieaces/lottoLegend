@@ -1,6 +1,6 @@
 import { makeInputCheckBox, makePastFilterTable } from "../../system/premium/Layout/functions"; import { setColorLotto, setDisabledLotto } from "../../functions";
 
-export function makeTable(canvas:HTMLElement, dataSet: any[], round: number | string, info: boolean, answer?: { numbers: number[], bonusNum: number }) {
+export function makeTable(canvas: HTMLElement, dataSet: any[], round: number | string, info: boolean, answer?: { numbers: number[], bonusNum: number }) {
     for (let i = 0; i < dataSet.length; i++) {
         const tableContent = document.createElement('div');
         tableContent.classList.add('mypage-table-content');
@@ -9,11 +9,11 @@ export function makeTable(canvas:HTMLElement, dataSet: any[], round: number | st
             tableContent.style.borderBottom = "1px solid rgba(0,0,0,0.1)";
         }
 
-        if(info){
-        const tableCheckBox = document.createElement('div');
-        tableCheckBox.classList.add('mypage-table-checkbox');
-        tableCheckBox.append(makeInputCheckBox());
-        tableContent.appendChild(tableCheckBox);            
+        if (info) {
+            const tableCheckBox = document.createElement('div');
+            tableCheckBox.classList.add('mypage-table-checkbox');
+            tableCheckBox.append(makeInputCheckBox());
+            tableContent.appendChild(tableCheckBox);
         }
 
         const tableRound = document.createElement('div');
@@ -88,7 +88,10 @@ export function makeTable(canvas:HTMLElement, dataSet: any[], round: number | st
         if (info) {
             const infoTd = makePastFilterTable(dataSet[i]);
             if (i !== 0 && (i + 1) % 5 === 0) {
-                infoTd.style.borderBottom = "0.5rem solid #09538e";
+                infoTd.style.borderBottom = "0.5rem solid #449ce3";
+                if ((i + 1) % 10 === 0) {
+                    infoTd.style.borderBottom = "0.5rem solid #09538e";
+                }
             } else {
                 infoTd.style.borderBottom = "0.5rem solid #dadada";
             }
