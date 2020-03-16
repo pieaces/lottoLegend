@@ -62,48 +62,8 @@
   color:var(--default-color);
   font-size: 1.5rem;
 }
-
 .signup-container-box {
   margin-bottom:5rem;
-}
-
-.signup-box{
-  display:flex;
-  width:100%;
-  height:7rem;
-  border-top:1px solid var(--border-color);
-  border-bottom:1px solid var(--border-color);
-}
-
-.signup-title-box{
-  display:flex;
-  align-items: center;
-  justify-content:center;
-  width:25%;
-  padding:1rem;
-  border-right:1px solid var(--border-color);
-  background-color: rgb(245,245,245);
-  font-size:1.6rem;
-}
-
-.signup-title{
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.signup-input-box{
-  display:flex;
-  align-items: center;
-  text-align: center;
-  width:75%;
-  padding:1rem;
-}
-
-.signup-input-size > input{
-  width:15rem;
-  height:3.4rem;
 }
 
 .signup-phone-box > select{
@@ -117,26 +77,6 @@
   height:3.4rem;
 }
 
-.signup-info-box{
-  padding:1rem;
-  font-size:1.4rem;
-}
-
-
-.signup-btn {
-  width:14rem;
-  height: 4rem;
-  background-color: var(--main-color);
-  color:var(--default-color);
-  font-size: 1.5rem;
-}
-
-.signup-btn-box{
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  height:20rem;
-}
 
 .dash{
   padding:0.5rem;
