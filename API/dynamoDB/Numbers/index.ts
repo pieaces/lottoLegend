@@ -5,7 +5,7 @@ import { numsArrToAWSMapList, NSToNumbers, numbersToNS } from './functions';
 import { AWSError } from 'aws-sdk/lib/error';
 import { UpdateItemInput, GetItemOutput, GetItemInput } from 'aws-sdk/clients/dynamodb';
 
-export enum SelectTool{
+export enum SelectTool {
     "free" = 'a',
     "charge" = 'b'
 }
@@ -13,9 +13,9 @@ export enum SelectMethod {
     "auto" = 'a',
     "manual" = 'm'
 }
-interface SelectClass{
-    tool?:SelectTool;
-    method?:SelectMethod;
+interface SelectClass {
+    tool?: SelectTool;
+    method?: SelectMethod;
 }
 
 const planLimit = {
@@ -26,7 +26,7 @@ const planLimit = {
 }
 
 export async function autoUpdateNumbers(userName: string, round: number, numsArr: number[][], tool: SelectTool): Promise<void> {
-    const params:UpdateItemInput = {
+    const params: UpdateItemInput = {
         TableName: 'LottoUsers',
         ExpressionAttributeNames: {
             "#Map": 'Numbers',
@@ -48,7 +48,7 @@ export async function autoUpdateNumbers(userName: string, round: number, numsArr
         UpdateExpression: `SET #Map.#Round = list_append(if_not_exists(#Map.#Round, :empty_list), :element)`
     };
     return new Promise((resolve, reject) => {
-        dynamoDB.updateItem(params, async (err:AWSError) => {
+        dynamoDB.updateItem(params, async (err: AWSError) => {
             if (err) {
                 reject(err);
             } else {
@@ -66,7 +66,7 @@ export async function updateNumbers(userName: string, round: number, numsArr: nu
     if (numsArr.length > available) {
         return new Response(true, `현재 가입하신 서비스의 가용공간은 총 ${planLimit[plan]}개입니다.<br>사용중인 공간은 ${size}개이고, 남은 공간은 ${available}개입니다.`);
     }
-    const params:UpdateItemInput = {
+    const params: UpdateItemInput = {
         TableName: 'LottoUsers',
         ExpressionAttributeNames: {
             "#Map": 'Numbers',
@@ -88,7 +88,7 @@ export async function updateNumbers(userName: string, round: number, numsArr: nu
         UpdateExpression: `SET #Map.#Round = list_append(if_not_exists(#Map.#Round, :empty_list), :element)`
     };
     return new Promise((resolve, reject) => {
-        dynamoDB.updateItem(params, async (err:AWSError) => {
+        dynamoDB.updateItem(params, async (err: AWSError) => {
             if (err) {
                 reject(err);
             } else {
@@ -135,7 +135,7 @@ export async function deleteMyNumber(userName: string, round: number, numsArr: n
 }
 
 
-export function getNumberSize(userName: string, round: number): Promise<number>{
+export function getNumberSize(userName: string, round: number): Promise<number> {
     return new Promise((resolve, reject) => {
         dynamoDB.getItem({
             TableName: 'LottoUsers',
@@ -149,10 +149,10 @@ export function getNumberSize(userName: string, round: number): Promise<number>{
                     S: userName
                 }
             }
-        }, (err:AWSError, data:GetItemOutput) => {
-            if(err) reject(err);
+        }, (err: AWSError, data: GetItemOutput) => {
+            if (err) reject(err);
             const item = data.Item;
-            if('Numbers' in item) resolve(item.Numbers.M[round.toString()].L.length);
+            if ('Numbers' in item) resolve(item.Numbers.M[round.toString()].L.length);
             else resolve(0);
         })
     })
@@ -163,22 +163,20 @@ export interface MyNumberData {
     method: string;
     tool: string;
     date: string;
-    win?: number;
-    ballBool?: boolean[];
 }
 
-export function getNumbers(userName: string, round?: number, select?:SelectClass): Promise<{[round:string]:MyNumberData[]}> {
+export function getNumbers(userName: string, round?: number, select?: SelectClass): Promise<{ [round: string]: MyNumberData[] }> {
     const ExpressionAttributeNames: { [key: string]: string } = {
         "#Map": 'Numbers'
     }
     let ProjectionExpression = '#Map';
-    if(round){
+    if (round) {
         ExpressionAttributeNames["#Round"] = round.toString();
         ProjectionExpression += '.#Round';
     }
 
     const params = {
-        TableName:'LottoUsers',
+        TableName: 'LottoUsers',
         ExpressionAttributeNames,
         ProjectionExpression,
         Key: {
@@ -189,7 +187,7 @@ export function getNumbers(userName: string, round?: number, select?:SelectClass
     };
 
     return new Promise((resolve, reject) => {
-        dynamoDB.getItem(params, (err:AWSError, data:GetItemOutput) => {
+        dynamoDB.getItem(params, (err: AWSError, data: GetItemOutput) => {
             if (err) {
                 reject(err);
             }
@@ -205,44 +203,44 @@ export function getNumbers(userName: string, round?: number, select?:SelectClass
                                 return false;
                             }
                             return true;
-                        } else return true;
+                        } else {
+                            return true;
+                        }
                     }).map(item => {
                         return {
-                            numbers: NSToNumbers(item.M.numbers.NS).sort((a,b)=>a-b),
+                            numbers: NSToNumbers(item.M.numbers.NS).sort((a, b) => a - b),
                             date: item.M.date.S,
                             method: item.M.method.S,
                             tool: item.M.tool.S,
-                            win: item.M.win && Number(item.M.win.N),
-                            ballBool: item.M.ballBool && item.M.ballBool.L.map(item => item.BOOL)
                         }
                     });
-                    resolve({[round.toString()]:result});
-                }else if(!round && 'Numbers' in data.Item){
-                    const result:{[round:string]:MyNumberData[]} = {}
-                    for(const key in data.Item.Numbers.M){
-                        result[key] = data.Item.Numbers.M[key].L.filter(item => {
-                            if (select) {
-                                if (select.method && item.M.method.S !== select.method) {
-                                    return false;
+                    resolve({ [round.toString()]: result });
+                } else if (!round && 'Numbers' in data.Item) {
+                    const result: { [round: string]: MyNumberData[] } = {}
+                    for (const key in data.Item.Numbers.M) {
+                        if (data.Item.Numbers.M[key].L.length > 0) {
+                            result[key] = data.Item.Numbers.M[key].L.filter(item => {
+                                if (select) {
+                                    if (select.method && item.M.method.S !== select.method) {
+                                        return false;
+                                    }
+                                    if (select.tool && item.M.tool.S !== select.tool) {
+                                        return false;
+                                    }
+                                    return true;
+                                } else return true;
+                            }).map(item => {
+                                return {
+                                    numbers: NSToNumbers(item.M.numbers.NS).sort((a, b) => a - b),
+                                    date: item.M.date.S,
+                                    method: item.M.method.S,
+                                    tool: item.M.tool.S,
                                 }
-                                if (select.tool && item.M.tool.S !== select.tool) {
-                                    return false;
-                                }
-                                return true;
-                            } else return true;
-                        }).map(item => {
-                            return {
-                                numbers: NSToNumbers(item.M.numbers.NS).sort((a,b)=>a-b),
-                                date: item.M.date.S,
-                                method: item.M.method.S,
-                                tool: item.M.tool.S,
-                                win: item.M.win && Number(item.M.win.N),
-                                ballBool: item.M.ballBool && item.M.ballBool.L.map(item => item.BOOL)
-                            }
-                        });
+                            });
+                        }
                     }
                     resolve(result);
-                }else resolve({});
+                } else resolve({});
             }
         });
     });
@@ -250,7 +248,7 @@ export function getNumbers(userName: string, round?: number, select?:SelectClass
 
 type IncOrExc = "include" | "exclude"
 export async function updateIncOrExcNumbers(userName: string, round: number, numbers: number[], choice: IncOrExc): Promise<Response> {
-    const params :UpdateItemInput= {
+    const params: UpdateItemInput = {
         TableName: 'LottoUsers',
         ExpressionAttributeNames: {
             "#Map": 'IncludeExclude',
@@ -285,7 +283,7 @@ export async function updateIncOrExcNumbers(userName: string, round: number, num
 }
 
 async function createIncOrExcNumbers(userName: string, round: number): Promise<Response> {
-    const params:UpdateItemInput = {
+    const params: UpdateItemInput = {
         TableName: 'LottoUsers',
         ExpressionAttributeNames: {
             "#Map": 'IncludeExclude',
@@ -317,8 +315,8 @@ async function createIncOrExcNumbers(userName: string, round: number): Promise<R
 }
 
 export function getIncOrExcNumbers(userName: string, round: number, choice: IncOrExc): Promise<number[]> {
-    const params:GetItemInput = {
-        TableName:'LottoUsers',
+    const params: GetItemInput = {
+        TableName: 'LottoUsers',
         ExpressionAttributeNames: {
             "#Map": 'IncludeExclude',
             "#Choice": choice,
@@ -333,22 +331,22 @@ export function getIncOrExcNumbers(userName: string, round: number, choice: IncO
     };
 
     return new Promise((resolve, reject) => {
-        dynamoDB.getItem(params, (err:AWSError, data:GetItemOutput) => {
+        dynamoDB.getItem(params, (err: AWSError, data: GetItemOutput) => {
             if (err) {
                 reject(err);
             }
             else {
                 const item = data.Item;
-                if('IncludeExclude' in item){
+                if ('IncludeExclude' in item) {
                     resolve(item.IncludeExclude.M[round].M[choice].NS.map(item => Number(item)));
                 } else resolve([]);
             }
         });
     });
 }
-export function getIncAndExcNumbers(userName: string, round: number): Promise<{include?:number[], exclude?:number[]}> {
-    const params:GetItemInput = {
-        TableName:'LottoUsers',
+export function getIncAndExcNumbers(userName: string, round: number): Promise<{ include?: number[], exclude?: number[] }> {
+    const params: GetItemInput = {
+        TableName: 'LottoUsers',
         ExpressionAttributeNames: {
             "#Map": 'IncludeExclude',
             "#Round": round.toString()
@@ -362,18 +360,18 @@ export function getIncAndExcNumbers(userName: string, round: number): Promise<{i
     };
 
     return new Promise((resolve, reject) => {
-        dynamoDB.getItem(params, (err:AWSError, data:GetItemOutput) => {
+        dynamoDB.getItem(params, (err: AWSError, data: GetItemOutput) => {
             if (err) {
                 reject(err);
             }
             else {
                 const item = data.Item;
-                if('IncludeExclude' in item){
+                if ('IncludeExclude' in item) {
                     const joint = item.IncludeExclude.M[round].M;
                     const include = joint.include && joint.include.NS.map(item => Number(item));
                     const exclude = joint.exclude && joint.exclude.NS.map(item => Number(item));
 
-                    resolve({include, exclude});
+                    resolve({ include, exclude });
                 } else resolve({});
             }
         });
@@ -381,8 +379,8 @@ export function getIncAndExcNumbers(userName: string, round: number): Promise<{i
 }
 
 export function getIncOrExcRounds(userName: string): Promise<string[]> {
-    const params:GetItemInput = {
-        TableName:'LottoUsers',
+    const params: GetItemInput = {
+        TableName: 'LottoUsers',
         ExpressionAttributeNames: {
             "#Map": 'IncludeExclude',
         },
@@ -395,7 +393,7 @@ export function getIncOrExcRounds(userName: string): Promise<string[]> {
     };
 
     return new Promise((resolve, reject) => {
-        dynamoDB.getItem(params, (err:AWSError, data:GetItemOutput) => {
+        dynamoDB.getItem(params, (err: AWSError, data: GetItemOutput) => {
             if (err) {
                 reject(err);
             }

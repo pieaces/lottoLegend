@@ -65,7 +65,8 @@ exports.handler = async (event: any) => {
                         body = await updateNumbers(currentId, getCurrentRound() + 1, numsArr, tool);
                         break;
                     case 'DELETE': {
-                        const { numsArr, round } = JSON.parse(event.body);
+                        const round = event.pathParameters.round;
+                        const { numsArr} = JSON.parse(event.body);
                         await deleteMyNumber(currentId, round, numsArr);
                         break;
                     }
