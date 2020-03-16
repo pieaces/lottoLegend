@@ -6,8 +6,11 @@ import Swal from 'sweetalert2'
 import { actualInstance, selectionInstance, latestInstance } from './stackInstances';
 import SaveBtn, { Tool } from './premium/instanceBtns/SaveBtn';
 import CheckBoxToggle from './premium/instanceBtns/CheckBoxToggle';
+import { headerSign } from '../amplify/auth';
+import { makeCheckdValueBox } from './premium/Layout/functions';
 
 configure();
+headerSign();
 
 const loading = document.querySelector<HTMLElement>('.loading-box');
 const includeCanvas = document.getElementById('include');
@@ -18,6 +21,7 @@ const lineInputTable = document.querySelector<HTMLElement>('.line-gen-num-table'
 const textToggleShowBox = document.querySelector<HTMLElement>('.line-gen-text-toggle-show');
 const textToggleHideBox = document.querySelector<HTMLElement>('.line-gen-text-toggle-hide');
 const explainText = document.querySelector<HTMLElement>('.line-gen-text-content');
+const allCheck = document.querySelector<HTMLInputElement>('#all-check');
 
 const first = document.querySelector<HTMLInputElement>('#first-nums');
 const tenth = document.querySelector<HTMLInputElement>('#tenth-nums');
@@ -188,18 +192,26 @@ async function init() {
                     console.log(dataSet);
                     const numBoard = new NumBoard(dataSet);
                     numBoard.makeNumBoard();
+
+                    makeCheckdValueBox();
+
                     const checkBoxToggle = new CheckBoxToggle();
                     checkBoxToggle.addEvent();
+                    allCheck.checked = false;
+
                 }
             } else {
                 lineInputTable.style.border = "";
                 const dataSet = await getAuthAPI('/numbers/generator/free');
                 console.log(dataSet);
-
                 const numBoard = new NumBoard(dataSet);
                 numBoard.makeNumBoard();
+
+                makeCheckdValueBox();
+
                 const checkBoxToggle = new CheckBoxToggle();
                 checkBoxToggle.addEvent();
+                allCheck.checked = false;
             }
         } else {
             alertEffect();
@@ -248,7 +260,7 @@ function doesExist(one: number[], other: number[]) {
     }
     return flag;
 }
-function compartByLine(numbers:number[]) {
+function compartByLine(numbers: number[]) {
     const result = new Array(5);
     numbers && numbers.forEach(num => {
         const index = Math.floor((num - 1) / 10);
@@ -259,7 +271,7 @@ function compartByLine(numbers:number[]) {
     });
     return result;
 }
-function makeChoice(exclude:number[]) {
+function makeChoice(exclude: number[]) {
     const choice = [];
     if (exclude && exclude.length > 0) {
         exclude.forEach((num, index) => {

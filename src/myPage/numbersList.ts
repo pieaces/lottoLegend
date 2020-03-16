@@ -4,8 +4,11 @@ import CheckBoxToggle from '../system/premium/instanceBtns/CheckBoxToggle';
 import { makeInputCheckBox, makePastFilterTable } from '../system/premium/Layout/functions';
 import Selectr, { IOptions } from 'mobius1-selectr';
 import { setColorLotto, setDisabledLotto } from '../functions';
+import { headerSign } from '../amplify/auth';
 
 configure();
+headerSign();
+
 const tableNumBox = document.querySelector('.mypage-table-num-box');
 const loading = document.querySelector('.loading-box');
 
@@ -13,12 +16,13 @@ const roundSelectBox = document.querySelector<HTMLSelectElement>('#round-select-
 const toolSelectBox = document.querySelector<HTMLSelectElement>('#tool-select-box');
 const methodSelectBox = document.querySelector<HTMLSelectElement>('#method-select-box');
 const numInfoToggleBtn = document.querySelector('.mypage-toggle-btn');
-const pastFilterBox = document.getElementsByClassName('func3-past-filter-box');
-const tableContent = document.getElementsByClassName('mypage-table-content');
+const pastFilterBox = document.getElementsByClassName('func3-past-filter-box') as HTMLCollectionOf<HTMLElement>;
+const tableContent = document.getElementsByClassName('mypage-table-content') as HTMLCollectionOf<HTMLElement>;
 
 const darkBlueBorder = "0.5rem solid #09538e";
 const lightBlueBorder = "0.5rem solid #449ce3";
 const grayBorder = "0.5rem solid #dadada";
+const defaultBorder = "1px solid rgba(0,0,0,0.1)";
 
 init();
 
@@ -121,29 +125,34 @@ async function init() {
 
 function numInfoToggle() {
     let flag = true;
-    const pastFilterBoxArr = Array.from(pastFilterBox);
-    const tableContentArr = Array.from(tableContent);
+    numInfoToggleBtn.textContent = "번호정보 닫기";
     return function () {
         if (!flag) {
-            pastFilterBoxArr.forEach((node, index) => {
-                node[index].classList.remove('none');
-                if (index !== 0 && (index + 1) % 5 === 0) {
-                    tableContentArr[index].style.borderBottom = lightBlueBorder;
-                    node.style.borderBottom = lightBlueBorder;
+            numInfoToggleBtn.textContent = "번호정보 닫기";
+            for (let i = 0; i < pastFilterBox.length; i++) {
+                pastFilterBox[i].classList.remove('none');
+                if (i !== 0 && (i + 1) % 5 === 0) {
+                    tableContent[i].style.borderBottom = defaultBorder;
+                    pastFilterBox[i].style.borderBottom = lightBlueBorder;
                     if ((i + 1) % 10 === 0) {
-                        tableContent.style.borderBottom = darkBlueBorder;
-                        infoTd.style.borderBottom = darkBlueBorder;
+                        pastFilterBox[i].style.borderBottom = darkBlueBorder;
                     }
                 } else {
-                    infoTd.style.borderBottom = grayBorder;
+                    pastFilterBox[i].style.borderBottom = grayBorder;
                 }
-            })
-
+            }
 
             flag = true;
         } else {
+            numInfoToggleBtn.textContent = "번호정보 열기";
             for (let i = 0; i < pastFilterBox.length; i++) {
                 pastFilterBox[i].classList.add('none');
+                if (i !== 0 && (i + 1) % 5 === 0) {
+                    tableContent[i].style.borderBottom = lightBlueBorder;
+                    if ((i + 1) % 10 === 0) {
+                        tableContent[i].style.borderBottom = darkBlueBorder;
+                    }
+                }
             }
             flag = false;
         }
@@ -235,10 +244,17 @@ function makeTable(dataSet: any[], round: number | string, answer?: { numbers: n
         }
         tableContent.appendChild(tableIsWin);
 
+        if (i !== 0 && (i + 1) % 5 === 0) {
+            tableContent.style.borderBottom = lightBlueBorder;
+            if ((i + 1) % 10 === 0) {
+                tableContent.style.borderBottom = darkBlueBorder;
+            }
+        }
         tableNumBox.appendChild(tableContent);
 
 
         const infoTd = makePastFilterTable(dataSet[i]);
+
 
         tableNumBox.appendChild(infoTd);
     }

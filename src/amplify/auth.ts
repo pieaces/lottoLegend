@@ -1,5 +1,20 @@
 import Auth from '@aws-amplify/auth'
-import { onlyUserAlert } from '../functions';
+import { onlyUserAlert, networkAlert } from '../functions';
+import Swal from 'sweetalert2';
+
+export function headerSign() {
+    Auth.currentSession()
+        .then(() => {
+            const signOutBtn = document.getElementById('header-signOut')
+            signOutBtn.classList.remove('none');
+            signOutBtn.addEventListener('click', signOut);
+            document.getElementById('header-myPage').classList.remove('none');
+        })
+        .catch(() => {
+            document.getElementById('header-signIn').classList.remove('none');
+            document.getElementById('header-signUp').classList.remove('none');
+        });
+}
 
 export async function getUserName() {
     return await Auth.currentSession()
@@ -12,17 +27,43 @@ export async function getNickName() {
         .then(idToken => idToken.payload.nickname);
 }
 export async function signIn(username: string, password: string) {
+    if(username === '' || password === ''){
+        return Swal.fire({
+            title:'알림',
+            text: '아이디, 비밀번호는 공백일 수 없습니다.',
+            icon:'info'
+        });
+    }
+    const loading = document.querySelector('.loading-box');
+    loading.classList.remove('none');
     await Auth.signIn({
         username,
         password,
-    }).then(user => console.log(user))
-        .catch(err => console.log(err));
+    }).then(user => {
+        location.href = "/myPage/home.html";
+    })
+        .catch(err => {
+            if(err.message.indexOf('exceeded') !== -1){
+                Swal.fire({
+                    title: '알림',
+                    text: '5회 이상 잘못입력하였습니다. 잠시후 다시 시도해주세요',
+                    icon:'info'
+                });
+            }else{
+                Swal.fire({
+                    title: '알림',
+                    text: '아이디 또는 비밀번혹가 틀렸습니다',
+                    icon:'info'
+                });
+            }
+            loading.classList.add('none');
+        });
 }
 
 export async function signOut() {
     await Auth.signOut()
-        .then(data => console.log(data))
-        .catch(err => console.log(err));
+    .then(() => location.href= "/main.html")
+    .catch(()=>networkAlert());
 }
 export async function signUp(username: string, phone: string, password: string, nickname: string) {
     return await Auth.signUp({
@@ -45,7 +86,6 @@ export async function confirmSignUp(username: string, code: string) {
 
 export async function resendSignUp(username: string) {
     await Auth.resendSignUp(username).then(() => {
-        console.log('code resent successfully');
     });
 }
 

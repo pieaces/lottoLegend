@@ -5,17 +5,6 @@ export function makeInputCheckBox(): HTMLDivElement {
     const checkBox = document.createElement('input')
     checkBox.setAttribute('type', 'checkbox');
     inputBoxContainer.appendChild(checkBox);
-
-    const checkTextBox = document.createElement('div');
-    checkTextBox.classList.add('input-checkbox-text-box');
-
-    const checkText = document.createElement('div');
-    checkText.classList.add('input-checkbox-text');
-    checkText.classList.add('none');
-
-    checkTextBox.appendChild(checkText);
-    inputBoxContainer.appendChild(checkTextBox);
-
     return inputBoxContainer;
 }
 
@@ -91,4 +80,34 @@ export function makePastFilterTable(data: TableData): HTMLDivElement {
     tableBox.appendChild(makeFilterTable(data));
 
     return tableBox;
+}
+
+export function makeCheckdValueBox() {
+    const numListSelectTotal = document.querySelector('#num-list-select-total');
+    const numListSelectCurrent = document.querySelector('#num-list-select-current');
+    const allCheckBox = document.querySelector<HTMLInputElement>('#all-check');
+    const checkboxes = document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input:not(#all-check)');
+    let checkedCurrentValue = 0;
+
+    numListSelectCurrent.textContent = "0";
+    numListSelectTotal.textContent = checkboxes.length.toString();
+    checkboxes.forEach((node) => {
+        node.addEventListener('click', () => {
+            if (node.checked) {
+                checkedCurrentValue++;
+            } else {
+                checkedCurrentValue--;
+            }
+            numListSelectCurrent.textContent = checkedCurrentValue.toString();
+        })
+    })
+    allCheckBox.addEventListener('click', () => {
+        if (allCheckBox.checked) {
+            checkedCurrentValue = checkboxes.length;
+            numListSelectCurrent.textContent = checkedCurrentValue.toString();
+        } else {
+            checkedCurrentValue = 0;
+            numListSelectCurrent.textContent = checkedCurrentValue.toString();
+        }
+    })
 }

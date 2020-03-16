@@ -3,10 +3,11 @@ import suneditor from 'suneditor'
 import plugins from 'suneditor/src/plugins'
 import { ko } from 'suneditor/src/lang'
 import { postUnAuthAPI, postAuthAPI, getUnAuthAPI, patchAuthAPI } from '../amplify/api';
-import { getUserName } from '../amplify/auth'
+import { getUserName, headerSign } from '../amplify/auth'
 import { networkAlert, getQueryStringObject, getCategoryHtml, onlyUserAlert } from '../functions'
 import Swal from 'sweetalert2'
 
+headerSign();
 function attachTimestamp(name) {
   const index = name.indexOf('.');
   const now = new Date();
