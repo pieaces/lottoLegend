@@ -66,6 +66,7 @@ input[type="checkbox"]{
   cursor: pointer;
 }
 
+
 /* button */
 
 .btn {
@@ -231,20 +232,10 @@ input[type="checkbox"]{
 }
 
 
-@media (min-width: 0px) and (max-width: 1024px) {
-  html{
-    font-size:8px;
-  }
-}
-
-@media (min-width: 0px) and (max-width: 1024px) and (orientation: landscape) {
-  html{
-    font-size:8px;
-  }
-}
-
 @media (min-width: 768px) and (max-width: 1024px) {
-
+html{
+  font-size:8px;
+}
   .container {
     width: 700px;
   }
@@ -252,14 +243,18 @@ input[type="checkbox"]{
 }
 
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-
+  html{
+    font-size:8px;
+  }
   .container {
     width: 700px;
   }
   
 }
 @media (min-width: 481px) and (max-width: 767px) {
-
+  html{
+    font-size:11px;
+  }
   .container {
     width: 400px;
   }
@@ -268,6 +263,9 @@ input[type="checkbox"]{
 
 @media (min-width: 0px) and (max-width: 480px) {
 
+  html{
+    font-size: 10px;
+  }
   .container {
     width: 320px;
   }

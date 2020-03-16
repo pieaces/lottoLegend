@@ -109,11 +109,24 @@
     }
 
     .aside{
-      width:100%;
+      display:none;
     }
 
     .main{
       width:100%;
+    }
+
+    .left-right-container{
+      display:block;
+    }
+
+    .left-container,
+    .right-container{
+      width: 100%;
+    }
+
+    .left-container{
+      margin-bottom: 1rem;
     }
   }
 

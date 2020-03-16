@@ -8,18 +8,23 @@
   border-top: 1px solid var(--border-color);
 }
 
-.top-footer > ul {
+.top-footer{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.top-footer-list {
   display: flex;
   align-items: center;
   justify-content: center;
-  height:100%;
 }
 
-.top-footer > ul > li {
-  padding: 0 10px;
+.top-footer-list> li {
+  margin: 0 1rem;
 }
 
-.top-footer > ul > li>a {
+.top-footer-list > li>a {
   font-size: 1.4rem;
 }
 
@@ -37,19 +42,18 @@
   justify-content: center;
 }
 
-.mid-footer > div {
-  display: flex;
-  flex-direction: row;
+.mid-footer-list {
+  display:flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+}
+
+.mid-footer-list >li{
+  margin:0 1rem;
+  font-size: 1.4rem;
+  word-break: keep-all;
   text-align: center;
 }
-
-.mid-footer > div > p {
-  font-size:1.5rem; 
-}
-
 /* bottom-footer */
 
 .bottom-footer {
@@ -64,19 +68,20 @@
   text-align: center;
 }
 
-.bottom-footer > div > p {
+.bottom-footer-content > p {
   font-size: 1.4rem;
+  word-break: keep-all;
 }
 
-.bottom-footer > div > p:nth-child(1) {
-  margin-bottom: 10px;
-  padding: 10px 0;
+.bottom-footer-content > p:nth-child(1) {
+  margin-bottom: 1rem;
+  padding: 1rem 0;
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
 }
 
-.bottom-footer > div > p:not(:nth-child(1)) {
-  margin-bottom: 10px;
+.bottom-footer-content > p:not(:nth-child(1)) {
+  margin-bottom: 1rem;
 }
 
 @media (min-width: 0px) and (max-width: 767px) {
@@ -87,8 +92,12 @@
 }
 
 .bottom-footer > h1 {
-  margin:0;
+  margin:0 auto;
   padding:1rem 0;
+}
+
+.bottom-footer-content > p > span{
+  display:block;
 }
 
 }

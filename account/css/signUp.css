@@ -1,5 +1,9 @@
 /* signup */
 
+.anchor-list-box > li>a:hover{
+  opacity: 1;
+}
+
 .anchor-list-container >li:nth-child(1){
   background-color:#ececec;
 }

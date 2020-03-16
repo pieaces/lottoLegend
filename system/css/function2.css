@@ -14,9 +14,14 @@
   .func2-main-box-1{
     height:21rem;
   }
-  
+  .func2-win-num-container-box{
+    display:flex;
+    flex-direction: column;
+    height: 100%;
+  }
 
   .func2-win-num-container{
+    flex:1;
     display:flex;
     align-items: center;
     justify-content: space-around;
@@ -24,7 +29,10 @@
   }
 
   .func2-win-num-times {
-    padding: 0.5rem;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    padding:0.5rem;
     background-color: var(--main-color);
     color: var(--default-color);
     font-size:1.4rem;
@@ -41,7 +49,7 @@
     justify-content: center;
     width: 3.5rem;
     height: 3.5rem;
-    margin-right: 1rem;
+    margin:0 0.5rem;
     border-radius: 50%;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
     color: var(--default-color);
@@ -114,7 +122,7 @@
 
   .func2-lotto-num-box{
     table-layout: fixed;
-    width:85%;
+    width:90%;
     height:100%;
     margin: 0 auto;
   }
@@ -236,5 +244,33 @@
   }
 }
 
+@media (min-width: 0px) and (max-width: 767px) {
 
- 
+  .func2-main-box-1,
+  .func2-main-box-2{
+    height:auto;
+  }
+
+  .func2-win-num-container-box{
+    height:22rem;
+  }
+
+  .func2-chart-gauss-container{
+    height:20rem;
+  }
+
+  .func2-select-num-box-container{
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+}
+
+@media (min-width: 0px) and (max-width: 480px) {
+  
+  .func2-chart-radar{
+    margin-left:-33rem;
+  }
+
+}

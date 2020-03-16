@@ -118,7 +118,7 @@
 .hamburger-box{
   display:none;
   position: relative;
-  width:3rem;
+  width: 3rem;
   height:3rem;
 }
 
@@ -179,21 +179,24 @@
 
   @media (min-width: 0px) and (max-width: 767px) {
   
+    .mid-nav{
+      display:flex;
+      align-items: center;
+    }
 
+    .hamburger-box{
+      display:block;     
+    }
     
     .mid-nav-menu{
       display:none;
     }
-    
-   
+
     .bottom-nav-container {
       display:none;
     }
 
-    .hamburger-box{
-      display:block;
-     
-    }
+   
     
     }
 

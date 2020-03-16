@@ -73,6 +73,7 @@
 
   .steps span{
     font-size:1.3rem;
+    text-align: center;
   }
   
   .past,.present,.future{
@@ -81,7 +82,7 @@
     justify-content: center;
     width:10rem;
     height:4.5rem;
-    margin-right:1.3rem;
+    margin:0 0.6rem;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2), -1px -1px 1px rgba(0, 0, 0, 0.2);
     font-size:0.8rem;
   }
@@ -100,7 +101,7 @@
   }
 
   .triangle{
-    margin-right:0.5rem;
+    margin-left:0.7rem;
     border-top: 0.7rem solid transparent;
     border-right: 1rem solid transparent;
     border-bottom: 0.7rem solid transparent;
@@ -217,7 +218,7 @@
   display:flex;
   align-items: center;
   justify-content: flex-start;
-  width:49%;
+  width:50%;
   height:100%;
   padding:0 1rem;
   font-size: 1.4rem;
@@ -227,7 +228,7 @@
   display:flex;
   align-items: center;
   justify-content: flex-end;
-  width:15%;
+  width:8rem;
   height:100%;
 }
 
@@ -241,3 +242,37 @@
   font-size: 1.5rem;
   font-weight: 500;
 }
+
+@media (min-width: 0px) and (max-width: 767px) {
+   
+  .filter-box-container-box{
+    display:block;
+    height:auto;
+  }
+
+  .filter-box-container-box >div{
+    width: 100%;
+    padding:1rem 0;
+  }
+
+  .showcase-container{
+    display:block;
+  }
+
+  .next-btn-container{
+    width: 100%;
+    padding: 1rem 0;
+  }
+}
+
+
+  @media (min-width: 481px) and (max-width: 767px) {
+   
+  }
+  
+  @media (min-width: 0px) and (max-width: 480px) {
+  
+
+ 
+    
+  }
