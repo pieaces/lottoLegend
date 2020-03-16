@@ -250,9 +250,6 @@ export default class Layout extends LayoutToggle(Layout3) {
         this.layout2.init();
         infoText.textContent = DataAPI.infoList[0];
         this.layout1.setStatsBoard(DataAPI.getInstance().getStats().stats);
-        document.querySelector<HTMLElement>('.line-gen-toggle-btn-box').classList.add('none');
-        document.querySelector<HTMLElement>('.line-gen-num-container').classList.add('none');
-        document.querySelector<HTMLElement>('.line-gen-stack-chart-container').classList.add('none');
         SaveBtn.init(Tool.charge);
         this.nextBtn.addEvent(async () => {
             const currentFilter = DataAPI.getInstance().getCurrent();

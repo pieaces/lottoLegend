@@ -96,12 +96,8 @@
 }
 .comment-container-box > .comment-container{
 border-bottom: 1px solid rgba(0,0,0,0.2);
-}
-
-.comment-container{
-  padding: 1rem;
-  border-bottom: 1px dotted #656565;
-  font-size:1.3rem;
+padding: 1rem;
+font-size:1.3rem;
 }
 
 .comment-box{
@@ -139,11 +135,6 @@ border-bottom: 1px solid rgba(0,0,0,0.2);
   resize: none;
 }
 
-.comment-write-btn-box{
-  display:flex;
-  align-items: center;
-  justify-content:flex-end;
-}
 
 .char-count-container{
   display:flex;

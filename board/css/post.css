@@ -29,12 +29,9 @@
   margin-bottom:5rem;
 }
 
-#image-wrapper{
-  margin-bottom:10rem;
-}
-
-.image-list{
+.image-wrapper{
   margin-top:1rem;
+  margin-bottom:10rem;
 }
 
 #image-list >li{

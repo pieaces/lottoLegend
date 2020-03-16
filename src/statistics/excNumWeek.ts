@@ -7,9 +7,28 @@ const excNumWeekWrapper = document.querySelector('.exc-num-week-wrapper');
 
 init();
 function init() {
+    const dataSetCurrent = [];
+
+    const round = "901";
+    const numbers = [];
+    const hitsArr = [];
+
+    for (let i = 0; i < 10; i++) {
+        numbers.push(i + 5);
+        hitsArr.push(false);
+    }
+
+    const obj = {
+        rounds: round,
+        hitsArr: hitsArr,
+        numbers: numbers
+    }
+    dataSetCurrent.push(obj);
+
+
     const dataSet = [];
     for (let i = 0; i < 2; i++) {
-        const rounds = "901";
+        const round = "901";
         const numbers = [];
         const hitsArr = [];
 
@@ -19,21 +38,22 @@ function init() {
         }
 
         const obj = {
-            rounds: rounds,
+            rounds: round,
             hitsArr: hitsArr,
             numbers: numbers
         }
         dataSet.push(obj);
     }
 
-    console.log(dataSet);
+
 
     const rounds = ['1', '2', '3', '4', '5'];
     ///////////////////////////////////////////////
 
 
 
-    makeTable(dataSet);
+    makeTable(dataSetCurrent, 'current');
+    makeTable(dataSet, 'past');
 
     const config: IOptions = {
         data: rounds.map((round: string) => {
@@ -50,10 +70,9 @@ function init() {
 
 }
 
-function makeTable(dataSet: ({ rounds: string, numbers: number[], hitsArr: boolean[] })[]) {
+function makeTable(dataSet: ({ rounds: string, numbers: number[], hitsArr: boolean[] })[], isCurrent: string) {
 
     for (let k = 0; k < dataSet.length; k++) {
-        let hitsTotal = 0;
         const div = document.createElement('div');
         div.classList.add('lotto-num-container');
 
@@ -68,7 +87,7 @@ function makeTable(dataSet: ({ rounds: string, numbers: number[], hitsArr: boole
 
         const th = document.createElement('th');
         th.setAttribute('colspan', `${dataSet[k].numbers.length}`);
-        th.textContent = `${dataSet[k].rounds}회 제외 ${dataSet[k].numbers.length}수`;
+        th.textContent = `${dataSet[k].rounds}회`;
 
 
         titleTr.appendChild(th);
@@ -96,39 +115,43 @@ function makeTable(dataSet: ({ rounds: string, numbers: number[], hitsArr: boole
 
         tbody.appendChild(NumberTr);
 
+        if (isCurrent === "past") {
+            let hitsTotal = 0;
+            const hitsTr = document.createElement('tr');
 
-        const hitsTr = document.createElement('tr');
-
-        for (let j = 0; j < dataSet[k].hitsArr.length; j++) {
-            const td = document.createElement('td');
-            if (dataSet[k].hitsArr[j] === true) {
-                td.textContent = "적중";
-                hitsTotal++;
-            } else {
-                td.textContent = "적중 x";
+            for (let j = 0; j < dataSet[k].hitsArr.length; j++) {
+                const td = document.createElement('td');
+                if (dataSet[k].hitsArr[j] === true) {
+                    td.textContent = "적중";
+                    hitsTotal++;
+                } else {
+                    td.textContent = "적중 x";
+                }
+                hitsTr.appendChild(td);
             }
-            hitsTr.appendChild(td);
+            tbody.appendChild(hitsTr);
+            table.appendChild(tbody);
+
+            const tfoot = document.createElement('tfoot');
+
+            const resultTr = document.createElement('tr');
+
+            const resultTd = document.createElement('td');
+            resultTd.setAttribute('colspan', `${dataSet[k].numbers.length}`);
+
+            resultTd.innerHTML = `${dataSet[k].numbers.length}개 중 <span class="exc-num-week-hit">${hitsTotal}개</span> 적중`;
+
+            resultTr.appendChild(resultTd);
+
+            tfoot.appendChild(resultTr);
+
+            table.appendChild(tfoot);
         }
 
-        tbody.appendChild(hitsTr);
         table.appendChild(tbody);
-
-        const tfoot = document.createElement('tfoot');
-
-        const resultTr = document.createElement('tr');
-
-        const resultTd = document.createElement('td');
-        resultTd.setAttribute('colspan', `${dataSet[k].numbers.length}`);
-
-        resultTd.innerHTML = `${dataSet[k].numbers.length}개 중 <span class="exc-num-week-percent">${hitsTotal}개</span> 적중`;
-
-        resultTr.appendChild(resultTd);
-
-        tfoot.appendChild(resultTr);
-
-        table.appendChild(tfoot);
         div.appendChild(table);
         excNumWeekWrapper.appendChild(div);
     }
 
 }
+
