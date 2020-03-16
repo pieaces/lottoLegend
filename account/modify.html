@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="../../base/css/init.css" />
+    <link rel="stylesheet" href="../../base/css/section.css">
+    <link rel="stylesheet" href="../../base/css/header.css" />
+    <link rel="stylesheet" href="../../base/css/footer.css" />
+    <link rel="stylesheet" href="./css/inputBox.css">
+    <link rel="stylesheet" href="./css/modify.css">
+    <title>CanvasLotto</title>
+</head>
+
+<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
+    <div id="wrapper">
+        <div class="hamburger-menu">
+            <div class="hamburger-menu-header">
+                <div class="hamburger-my-info">
+
+                </div>
+            </div>
+        </div>
+        <script src="../../base/components/header.js"></script>
+        <div class="section1">
+            <div class="grid-section-1 container">
+                <div class="aside">
+                    <div class="anchor-box">
+                        <script src="../../base/components/aside/myPage.js"></script>
+                    </div>
+                </div>
+                <div class="main">
+                    <div class="main-title">
+                        기본 정보 변경
+                    </div>
+
+                    <div class="account-container-box">
+                        <div class="account-box">
+                            <div class="account-title-box">
+                                <div class="account-title">닉네임</div>
+                            </div>
+                            <div class="account-input-box modify-input-box">
+                                <div class="modify-input-tab">
+                                    <form>
+                                        <input type="text" name="" id="nickname" required>
+                                        <button type="submit" class="btn account-btn modify-btn"
+                                            id="nickname-update">변경</button>
+                                    </form>
+                                </div>
+                                <div class="account-info-box modify-info-box">
+                                    닉네임은 공백이 허용되지 않습니다
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="account-box">
+                            <div class="account-title-box">
+                                <div class="account-title">휴대폰번호</div>
+                            </div>
+                            <div class="account-input-box modify-input-box">
+                                <div class="modify-input-tab account-phone-box">
+                                    <select>
+                                        <option value="010">010</option>
+                                        <option value="011">011</option>
+                                        <option value="016">016</option>
+                                        <option value="017">017</option>
+                                        <option value="017">018</option>
+                                        <option value="017">019</option>
+                                    </select>
+                                    <div class="dash">
+                                        -
+                                    </div>
+                                    <input type="text" id="phone-number-mid" required>
+                                    <div class="dash">
+                                        -
+                                    </div>
+                                    <input type="text" id="phone-number-end" required>
+                                    <button type="submit" class="btn account-btn modify-btn"
+                                        id="phone-update">변경</button>
+                                </div>
+                                <div class="account-info-box modify-info-box">
+                                    휴대폰번호를 입력해주세요
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="account-box">
+                            <div class="account-title-box">
+                                <div class="account-title">이메일</div>
+                            </div>
+                            <div class="account-input-box modify-input-box">
+                                <div class="modify-input-tab">
+                                    <input type="email" name="" id="email" required>
+                                    <button type="submit" class="btn account-btn modify-btn"
+                                        id="email-update">변경</button>
+                                </div>
+                                <div class="account-info-box modify-info-box">
+                                    이메일을 입력해주세요
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+        <script src="../../base/components/footer.js"></script>
+    </div>
+    <script src="../../base/js/headerHover.js"></script>
+
+    <script src="https://kit.fontawesome.com/e14b8c39aa.js" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

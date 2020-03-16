@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../base/css/header.css" />
     <link rel="stylesheet" href="../base/css/footer.css" />
     <link rel="stylesheet" href="../base/css/checkbox.css">
-    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="./css/inputBox.css">
     <link rel="stylesheet" href="css/signUp.css">
 
     <title>CanvasLotto</title>
@@ -186,12 +186,12 @@
                         </div>
                     </div>
                     <form class="signup-form none">
-                        <div class="signup-container-box">
+                        <div class="account-container-box">
                             <div class="account-box">
                                 <div class="account-title-box">
                                     <div class="account-title">아이디</div>
                                 </div>
-                                <div class="account-input-box account-input-size">
+                                <div class="account-input-box ">
                                     <input type="text" name="" id="id" required>
                                     <div class="account-info-box">
                                         아이디는 공백이 허용되지 않습니다
@@ -203,7 +203,7 @@
                                 <div class="account-title-box">
                                     <div class="account-title">닉네임</div>
                                 </div>
-                                <div class="account-input-box account-input-size">
+                                <div class="account-input-box ">
                                     <input type="text" name="" id="nickname" required>
                                     <div class="account-info-box">
                                         닉네임은 공백이 허용되지 않습니다
@@ -217,7 +217,7 @@
                                 <div class="account-title-box">
                                     <div class="account-title">비밀번호</div>
                                 </div>
-                                <div class="account-input-box account-input-size">
+                                <div class="account-input-box ">
                                     <input type="password" name="" id="password"
                                         pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$" required>
                                     <div class="account-info-box">
@@ -231,10 +231,23 @@
                                 <div class="account-title-box">
                                     <div class="account-title">비밀번호 확인</div>
                                 </div>
-                                <div class="account-input-box account-input-size">
+                                <div class="account-input-box ">
                                     <input type="password" name="" id="password-check" required>
                                     <div class="account-info-box">
                                         비밀번호와 똑같이 입력해주세요
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="account-box">
+                                <div class="account-title-box">
+                                    <div class="account-title">이메일</div>
+                                </div>
+                                <div class="account-input-box">
+                                    <input type="email" name="" id="email" required>
+                                    <div class="account-info-box">
+                                        이메일 형식에 맞게 입력해주세요
                                     </div>
                                 </div>
 
@@ -246,7 +259,7 @@
                                 <div class="account-title-box">
                                     <div class="account-title">휴대폰번호</div>
                                 </div>
-                                <div class="account-input-box account-input-size signup-phone-box">
+                                <div class="account-input-box  account-phone-box">
                                     <select>
                                         <option value="010">010</option>
                                         <option value="011">011</option>
@@ -267,13 +280,9 @@
 
 
                             </div>
-
-
-
-
-                            <div class="account-btn-box">
-                                <button type="submit" class="btn account-btn" id="signup">가입하기</button>
-                            </div>
+                        </div>
+                        <div class="account-btn-box">
+                            <button type="submit" class="btn account-btn" id="signup">가입하기</button>
                         </div>
                     </form>
                     <div class="auth-check-wrapper none">
@@ -282,7 +291,7 @@
                             <div class="account-title-box">
                                 <div class="account-title">인증번호</div>
                             </div>
-                            <div class="account-input-box account-input-size">
+                            <div class="account-input-box ">
                                 <input type="text" name="" id="auth-num">
                             </div>
                         </div>
