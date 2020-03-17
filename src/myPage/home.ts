@@ -46,7 +46,7 @@ async function init() {
         });
         const plus = document.createElement('span');
         plus.textContent = '+';
-        plus.style.marginRight = "1rem";
+        plus.classList.add('plus');
         winNumBox.appendChild(plus);
 
         const bonus = document.createElement('div');

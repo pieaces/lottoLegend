@@ -16,6 +16,9 @@
 .stats-container{
     height:42rem;
 }
+.stats-container >div:not(:last-child){
+    margin-right: 1rem;
+}
 
 
 .win-num-times{
@@ -49,10 +52,12 @@
     display:flex;
     align-items: center;
     justify-content: center;
+    margin:0 3rem;
 }
 
 .win-num{
     display: flex;
+    align-items: center;
     justify-content: center;
     width: 5rem;
     height: 5rem;
@@ -62,7 +67,6 @@
     color: var(--default-color);
     font-weight: 500;
     font-size: 2.8rem ;
-    line-height: 1.7;
 }
 
 .win-info{
@@ -93,7 +97,6 @@
     display:flex;
     align-items: center;
     justify-content: center;
-    width:8rem;
     height:5rem;
     text-align: center;
 }
@@ -115,6 +118,9 @@
   }
 
   .stack-chart-box{
+      display:flex;
+      align-items: center;
+      justify-content: center;
       width:100%;
       height:100%;
       padding: 3rem;
@@ -122,12 +128,12 @@
 
   .stats-filter-container{
       width:30%;
-      margin-right:1rem;
   }
 
   .stats-table{
       height:100%;
   }
+
 
   .stats-table  tr > td{
     width:50%;
@@ -147,7 +153,6 @@
 
   .lotto-num-container{
       width:40%;
-      margin-right:1rem;
   }
 
 .lotto-num-box{
@@ -172,3 +177,49 @@
     color: black;
     font-size: 1.3rem ;
   }
+
+  @media (min-width: 0px) and (max-width: 767px) {
+    .stats-container{
+        height: auto;
+    }
+
+    .stats-container > div{
+        width:100%;
+    }
+
+    .stats-container >div:not(:last-child){
+        margin-bottom: 1rem;
+    }
+
+    .stats-main-box-1{
+        display:block;
+    }
+
+    .stats-filter-container{
+        height:35rem;
+    }
+
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .win-num-box{
+        margin:0 1rem ;
+    }
+    .win-num{
+        width:3rem;
+        height:3rem;
+        font-size:1.5rem;
+    }
+}
+
+@media (min-width: 0px) and (max-width: 480px) {
+    .win-num-box{
+        margin:0 0.5rem;
+    }
+    .win-num{
+        width:2.8rem;
+        height:2.8rem;
+        margin:0 0.3rem;
+        font-size:1.4rem;
+    }
+}

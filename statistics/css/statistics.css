@@ -124,3 +124,21 @@
 .stats-box > div{
   font-size:1.3rem;
 }
+
+
+@media (min-width: 0px) and (max-width: 767px) {
+
+  .stats-container.box-color{
+    border:none;
+  }
+
+  .stats-box{
+    width:30%;
+    height:7rem;
+  }
+
+}
+
+
+  
+  

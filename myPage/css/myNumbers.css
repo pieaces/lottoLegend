@@ -20,7 +20,11 @@
     color:var(--default-color);
     font-size:1.4rem;
 }
-
+.mypage-toggle-btn-box{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
 .mypage-toggle-btn{
     width:10rem;
     height:3.5rem;
@@ -39,3 +43,4 @@
     margin:2rem 0;
     background-color: #5f5f5f;
   }
+
