@@ -47,7 +47,7 @@ export function addPoint(userName:string, point:Point):Promise<void> {
                 S: userName
             }
         },
-        UpdateExpression: 'SET Point = Point + :operand'
+        UpdateExpression: 'ADD Point :operand'
     }
     return new Promise((resolve, reject) => {
         dynamoDB.updateItem(params, (err: AWSError) => {
