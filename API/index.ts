@@ -9,38 +9,45 @@ const headers = {
 }
 exports.handler = async (event: any) => {
     console.log(event);
-    const method: string = event.httpMethod;
 
+    const resource: string = event.resource;
+    const method: string = event.httpMethod;
     let statusCode: number = 200;
     let body: any;
-    const userDB = new Users();
 
-    switch (method) {
-        case 'GET': {
-            const nickName = event.queryStringParameters.nickName;
-            const users = await userDB.getNickNames() as { nickName: string }[];
-            if (users.some(user => user.nickName === nickName)) {
-                body = new Response(true, "이미 존재하는 닉네임입니다.");
-            } else {
-                body = new Response(false, "이미 존재하는 닉네임입니다.");
+    const userDB = new Users();
+    switch (resource) {
+        case '/accounts':
+        case '/accounts/{userName}': {
+            switch (method) {
+                case 'GET': {
+                    const nickName = event.queryStringParameters.nickName;
+                    const users = await userDB.getNickNames() as { nickName: string }[];
+                    if (users.some(user => user.nickName === nickName)) {
+                        body = new Response(true, "이미 존재하는 닉네임입니다.");
+                    } else {
+                        body = new Response(false, "이미 존재하는 닉네임입니다.");
+                    }
+                }
+                case 'POST': {
+                    const userName = event.pathParameters.round;
+                    const { nickName } = JSON.parse(event.body);
+                    await createUser(userName);
+                    await userDB.create(userName, nickName);
+                }
+                case 'DELETE': {
+                    const userName = event.pathParameters.round;
+                    await deleteUser(userName);
+                    await userDB.delete(userName);
+                }
+                case 'PATCH': {
+                    const userName = event.pathParameters.round;
+                    const { nickName } = JSON.parse(event.body);
+                    await userDB.modifyNickName(userName, nickName);
+                }
             }
         }
-        case 'POST': {
-            const { userName, nickName } = JSON.parse(event.body);
-            await createUser(userName);
-            await userDB.create(userName, nickName);
-        }
-        case 'DELETE': {
-            const { userName } = JSON.parse(event.body);
-            await deleteUser(userName);
-            await userDB.delete(userName);
-        }
-        case 'PATCH': {
-            const { userName, nickName } = JSON.parse(event.body);
-            await userDB.modifyNickName(userName, nickName);
-        }
     }
-
     const response = {
         statusCode,
         headers,
