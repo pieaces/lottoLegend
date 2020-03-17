@@ -21,6 +21,21 @@
   border-top: 1px solid var(--border-color);
 }
 
+.func3-filter-container > .func3-filter-title{
+  
+}
+
+.func3-filter-title{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  width:30%;
+  font-size:1.5rem;
+  border-right:1px solid var(--border-color);
+  background-color: var(--table-title-color);
+}
+
+
 .func3-filter-value-container{
   width:80%;
   border-bottom: 1px solid var(--border-color);
@@ -60,16 +75,6 @@
   color: var(--default-color);
   font-size:1.3rem;
   text-align: center;
-}
-
-.func3-filter-title{
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  width:20%;
-  font-size:1.5rem;
-  border-right:1px solid var(--border-color);
-  background-color: var(--table-title-color);
 }
 
 .func3-filter-table  tr:nth-child(1) >td{

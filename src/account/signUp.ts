@@ -5,24 +5,6 @@ import CheckBoxToggle from '../system/premium/instanceBtns/CheckBoxToggle'
 configure();
 headerSign();
 
-const anchorList = document.querySelectorAll<HTMLElement>('.anchor-list-container >li');
-const termsUseContainer = document.querySelector<HTMLElement>('.signup-terms-use-container');
-const termsUseAllCheck = document.querySelector<HTMLInputElement>('#all-check');
-const termsUseCheckboxes = document.querySelectorAll<HTMLInputElement>('.terms-use-check');
-const termUseBtn = document.querySelector('.terms-use-btn');
-const signupContainerBox = document.querySelector('.signup-container-box');
-const authCheckWrapper = document.querySelector('.auth-check-wrapper');
-const id = document.querySelector<HTMLInputElement>('#id');
-const nickname = document.querySelector<HTMLInputElement>('#nickname');
-const password = document.querySelector<HTMLInputElement>('#password');
-const passwordCheck = document.querySelector<HTMLInputElement>('#password-check');
-const email = document.querySelector<HTMLInputElement>('#email');
-const phoneMidValue = document.querySelector<HTMLInputElement>('#phone-number-mid');
-const phoneEndValue = document.querySelector<HTMLInputElement>('#phone-number-end');
-const authNum = document.querySelector<HTMLInputElement>('#auth-num');
-const authCheck = document.querySelector('#auth-check');
-const signUpForm = document.querySelector('.signup-form');
-const authAlertBox = document.querySelector<HTMLElement>('.auth-alert-box');
 
 init();
 
@@ -55,10 +37,8 @@ function init() {
         } else if (result.user) {
             console.log('인증번호 전송');
         }
-        signupContainerBox.classList.add('none');
         authCheckWrapper.classList.remove('none');
-        anchorList[1].style.backgroundColor = "white";
-        anchorList[2].style.backgroundColor = "#ececec";
+
     });
 
     authCheck.addEventListener('click', async () => {
@@ -84,8 +64,7 @@ function termUseSubmit() {
     if (termsUseAllCheck.checked || isAllCheck) {
         termsUseContainer.classList.add('none');
         signUpForm.classList.remove('none');
-        anchorList[0].style.backgroundColor = "white";
-        anchorList[1].style.backgroundColor = "#ececec";
+
     } else {
         alert('메롱');
     }
