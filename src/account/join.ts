@@ -1,13 +1,11 @@
 import configure from '../amplify/configure'
 import { signUp, headerSign } from "../amplify/auth";
 import Swal from 'sweetalert2';
-import { getUnAuthAPI, postUnAuthAPI } from '../amplify/api';
-import { networkAlert } from '../functions';
 
 configure();
 headerSign();
 
-const signUpForm = document.querySelector('.signup-form');
+const signUpBtn = document.querySelector('#signUp');
 const id = document.querySelector<HTMLInputElement>('#id');
 const nickname = document.querySelector<HTMLInputElement>('#nickname');
 const password = document.querySelector<HTMLInputElement>('#password');
@@ -23,46 +21,39 @@ password.addEventListener('input', invalidPassword);
 passwordCheck.addEventListener('invalid', invalidPasswordCheck);
 passwordCheck.addEventListener('input', invalidPasswordCheck);
 
-signUpForm.addEventListener('submit', async (e) => {
+signUpBtn.addEventListener('submit', async (e) => {
     e.preventDefault();
     //'+82'.concat(phoneMidInput.value.slice(1));
     loading.classList.remove('none');
-    const response = await getUnAuthAPI('/accounts', { nickName: nickname.value });
-    loading.classList.add('none');
-    if (response.error) {
+
+    const result = await signUp(id.value, password.value, nickname.value);
+    if (result.user) {
         Swal.fire({
-            title: '중복',
-            text: response.message,
-            icon: 'error'
+            title: '완료',
+            text: '찾아주셔서 감사합니다',
+            icon: 'success',
+            allowOutsideClick: false,
+            timer: 1500,
+        }).then(() => {
+            location.href = '/account/signIn.html';
         });
+
     } else {
-        const result: any = await signUp(id.value, password.value, nickname.value);
-        if (result.code === "UsernameExistsException") {
+        if (result.code === "UserLambdaValidationException") {
             Swal.fire({
-                title: '중복',
-                text: '이미 존재하는 아이디입니다',
+                title: result.message.slice(result.message.indexOf('error') + 6),
                 icon: 'error'
             });
-        } else if (result.user) {
-            try {
-                loading.classList.remove('none');
-                await postUnAuthAPI('/accounts/' + id.value, { nickName: nickname.value });
-                Swal.fire({
-                    title: '완료',
-                    text: '찾아주셔서 감사합니다',
-                    icon: 'success',
-                    allowOutsideClick: false,
-                    timer: 1500,
-                }).then(() => {
-                    location.href = '/account/signIn.html';
-                });
-            } catch (err) {
-                networkAlert();
-            } finally {
-                loading.classList.add('none');
-            }
+        } else {
+            Swal.fire({
+                title: result.message,
+                icon: 'error'
+            });
         }
     }
+
+    loading.classList.add('none');
+
 });
 
 function invalidId() {
