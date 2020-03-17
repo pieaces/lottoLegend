@@ -1,6 +1,4 @@
-import createUser from "./dynamo/createUser";
 import Users from "./mariaDB/Users";
-import { Response } from "./Response";
 import deleteUser from "./dynamo/deleteUser";
 
 const headers = {
@@ -17,26 +15,8 @@ exports.handler = async (event: any) => {
 
     const userDB = new Users();
     switch (resource) {
-        case '/accounts':
         case '/accounts/{userName}': {
             switch (method) {
-                case 'GET': {
-                    const nickName = event.queryStringParameters.nickName;
-                    const users = await userDB.getNickNames() as { nickName: string }[];
-                    if (users.some(user => user.nickName === nickName)) {
-                        body = new Response(true, "이미 존재하는 닉네임입니다.");
-                    } else {
-                        body = new Response(false, "이미 존재하는 닉네임입니다.");
-                    }
-                }
-                    break;
-                case 'POST': {
-                    const userName = event.pathParameters.userName;
-                    const { nickName } = JSON.parse(event.body);
-                    await createUser(userName);
-                    await userDB.create(userName, nickName);
-                }
-                    break;
                 case 'DELETE': {
                     const userName = event.pathParameters.userName;
                     await deleteUser(userName);
