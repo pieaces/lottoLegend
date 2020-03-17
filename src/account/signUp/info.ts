@@ -22,15 +22,16 @@ function init() {
 
 
     signUpForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
+        // e.preventDefault();
 
-        const result: any = await signUp(id.value, '+82'.concat(phoneMidInput.value.slice(1)), password.value, nickname.value);
-        console.log(result);
-        if (result.code === "UsernameExistsException") {
-            console.log('이미 존재하는 아이디')
-        } else if (result.user) {
-            console.log('인증번호 전송');
-        }
+        console.log(1);
+        // const result: any = await signUp(id.value, '+82'.concat(phoneMidInput.value.slice(1)), password.value, nickname.value);
+        // console.log(result);
+        // if (result.code === "UsernameExistsException") {
+        //     console.log('이미 존재하는 아이디')
+        // } else if (result.user) {
+        //     console.log('인증번호 전송');
+        // }
 
     });
 

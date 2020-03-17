@@ -1,4 +1,4 @@
-import { invalidPhoneMidValue, invalidPhoneEndValue } from './signUp';
+// import { invalidPhoneMidValue, invalidPhoneEndValue } from './signUp';
 
 const nickname = document.querySelector('#nickname');
 const nicknameUpdateBtn = document.querySelector('#nickname-update');
@@ -25,9 +25,9 @@ function init() {
 
     })
 
-    phoneMid.addEventListener('invalid', invalidPhoneMidValue);
-    phoneMid.addEventListener('input', invalidPhoneMidValue);
+    // phoneMid.addEventListener('invalid', invalidPhoneMidValue);
+    // phoneMid.addEventListener('input', invalidPhoneMidValue);
 
-    phoneEnd.addEventListener('invalid', invalidPhoneEndValue);
-    phoneEnd.addEventListener('input', invalidPhoneEndValue);
+    // phoneEnd.addEventListener('invalid', invalidPhoneEndValue);
+    // phoneEnd.addEventListener('input', invalidPhoneEndValue);
 }
