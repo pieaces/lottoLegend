@@ -1,25 +1,29 @@
 
-.main-box-1{
+.main-box{
   width:100%; 
-  height:47rem;
   margin-bottom:5rem;
 }
-.main-box-2{
-  width:100%; 
-  height:40rem;
-  margin-bottom:5rem;
-}
-
 .chart-container{
   position: relative;
   width: 100%;
   height: 100%;
 }
+
+.chart-slide-title{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  height:4rem;
+  background-color: var(--button-color3);
+  color:var(--default-color);
+  font-size:1.8rem;
+}
+
 .chart-slide-num {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  height:15%;
+  height:7rem;
   font-size:1.8rem;
 }
 
@@ -43,22 +47,23 @@
   display:flex;
   align-items: center;
   justify-content: center;
-  height:10%;
+  height:3rem;
   border-top:1px solid var(--border-color);
   border-bottom:1px solid var(--border-color);
   background-color: var(--table-title-color);
   font-size:1.4rem;
 }
 
-.chart-box{
-  height: 65%;
-  padding:0 2rem;
+.chart-line-container{
+  height: 30rem;
+  padding:1rem 2rem;
   } 
 
 .chart-bar-container{
   position: relative;
   width: 100%;
-  height:100%;
+  height: 35rem;
+  padding:0 2rem;
   overflow-x: scroll;
 }
 
@@ -85,7 +90,7 @@
   display:flex;
   align-items: center;
   justify-content: center;
-  height:10%;
+  height:5rem;
 }
 
 .chart-btn{

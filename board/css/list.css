@@ -22,9 +22,8 @@
   margin-right: 1rem;
 }
 
-
 .search-btn{
-  width:6rem;
+  width:5rem;
   height:4rem;
   background-color: var(--button-color1);
   color: var(--default-color);
@@ -151,9 +150,19 @@
   }
 
   .search-box{
-    display:flex;
-    align-items: center;
     justify-content: center;
+  }
+
+  .search-box > select{
+  width:20%
+  }
+
+  .search-box > input{
+    width:60%;
+  }
+
+  .search-box >button{
+    width:20%;
   }
 
 .post-btn-box{
@@ -170,9 +179,11 @@
 .board-box>div.board-author{
   flex-direction: column;
 }
+
 .board-header{
   font-size:1.2rem;
 }
+
 .board-section{
   font-size: 1.2rem;
 }
