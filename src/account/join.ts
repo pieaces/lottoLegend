@@ -1,37 +1,39 @@
 import configure from '../amplify/configure'
 import { signUp, headerSign } from "../amplify/auth";
 import Swal from 'sweetalert2';
-import { getUnAuthAPI, postUnAuthAPI } from '../amplify/api';
-import { networkAlert } from '../functions';
 
 configure();
 headerSign();
 
-const signUpBtn = document.getElementById('signUp');
+const signUpBtn = document.querySelector('#signUp');
 const id = document.querySelector<HTMLInputElement>('#id');
 const nickname = document.querySelector<HTMLInputElement>('#nickname');
 const password = document.querySelector<HTMLInputElement>('#password');
 const passwordCheck = document.querySelector<HTMLInputElement>('#password-check');
 const loading = document.querySelector('.loading-box');
 
+id.addEventListener('invalid', invalidId);
+id.addEventListener('input', invalidId);
+nickname.addEventListener('invalid', invalidNickname);
+nickname.addEventListener('input', invalidNickname);
 password.addEventListener('invalid', invalidPassword);
 password.addEventListener('input', invalidPassword);
 passwordCheck.addEventListener('invalid', invalidPasswordCheck);
 passwordCheck.addEventListener('input', invalidPasswordCheck);
 
-signUpBtn.addEventListener('click', async () => {
+signUpBtn.addEventListener('submit', async (e) => {
+    e.preventDefault();
     //'+82'.concat(phoneMidInput.value.slice(1));
     loading.classList.remove('none');
 
     const result = await signUp(id.value, password.value, nickname.value);
-    console.log(result);
     if (result.user) {
         Swal.fire({
             title: '완료',
             text: '찾아주셔서 감사합니다',
             icon: 'success',
             allowOutsideClick: false,
-            //timer: 1500,
+            timer: 1500,
         }).then(() => {
             location.href = '/account/signIn.html';
         });
@@ -54,7 +56,32 @@ signUpBtn.addEventListener('click', async () => {
 
 });
 
+function invalidId() {
+    const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\+<>@\#$%&\\\=\(\'\"]/gi;
+    if (id.value.length > 16) {
+        id.setCustomValidity(`16자 이내로 입력해주세요`);
+    } else if (id.value.search(regExp) !== -1) {
+        id.setCustomValidity(`-,_를 제외한 특수문자를 입력할 수 없습니다`);
+    } else {
+        id.setCustomValidity(``);
+    }
+    return true;
+}
+
+function invalidNickname() {
+    const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\+<>@\#$%&\\\=\(\'\"]/gi;
+    if (nickname.value.length > 8) {
+        nickname.setCustomValidity(`8자 이내로 입력해주세요`);
+    } else if (nickname.value.search(regExp) !== -1) {
+        nickname.setCustomValidity(`-,_를 제외한 특수문자를 입력할 수 없습니다`);
+    } else {
+        nickname.setCustomValidity(``);
+    }
+    return true;
+}
+
 function invalidPassword() {
+
     if (password.value.search(new RegExp(password.getAttribute('pattern'))) === -1) {
         password.setCustomValidity(`8자리이상 문자+숫자로 입력해주세요`);
     } else {
