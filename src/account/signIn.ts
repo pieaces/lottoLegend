@@ -9,10 +9,8 @@ const loginBtn = document.getElementById('login-btn');
 const userNameInput = document.querySelector<HTMLInputElement>('#userName');
 const passwordInput = document.querySelector<HTMLInputElement>('#password');
 
-loginBtn.onclick = () => {
+loginBtn.onclick = async () => {
     const userName = userNameInput.value;
     const password = passwordInput.value;
-    signIn(userName, password)
-        .then(() => console.log('signIn!'))
-        .catch(err => console.log(err));
+    await signIn(userName, password);
 }
