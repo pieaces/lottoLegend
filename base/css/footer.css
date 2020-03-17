@@ -4,7 +4,7 @@
 /* top-footer */
 
 .top-footer-container {
-  height: 40px;
+  height: 4rem;
   border-top: 1px solid var(--border-color);
 }
 
@@ -31,7 +31,7 @@
 /* mid-footer */
 
 .mid-footer-container {
-  height: 100px;
+  height: 10rem;
   border-top: 1px solid var(--border-color);
   background-color: #ececec;
 }
@@ -55,6 +55,7 @@
   text-align: center;
 }
 /* bottom-footer */
+
 
 .bottom-footer {
   display: flex;

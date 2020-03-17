@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "c3d8392cb35087750fc3";
+/******/ 	var hotCurrentHash = "2b0e19d363ba801c01c8";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -790,7 +790,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire("./src/account/signIn.ts")(__webpack_require__.s = "./src/account/signIn.ts");
+/******/ 	return hotCreateRequire("./src/account/join.ts")(__webpack_require__.s = "./src/account/join.ts");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -2731,15 +2731,15 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 
 /***/ }),
 
-/***/ "./src/account/signIn.ts":
-/*!*******************************!*\
-  !*** ./src/account/signIn.ts ***!
-  \*******************************/
+/***/ "./src/account/join.ts":
+/*!*****************************!*\
+  !*** ./src/account/join.ts ***!
+  \*****************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nvar configure_1 = __importDefault(__webpack_require__(/*! ../amplify/configure */ \"./src/amplify/configure.ts\"));\r\nvar auth_1 = __webpack_require__(/*! ../amplify/auth */ \"./src/amplify/auth.ts\");\r\nconfigure_1.default();\r\nauth_1.headerSign();\r\nvar loginBtn = document.getElementById('login-btn');\r\nvar userNameInput = document.querySelector('#userName');\r\nvar passwordInput = document.querySelector('#password');\r\nloginBtn.onclick = function () {\r\n    var userName = userNameInput.value;\r\n    var password = passwordInput.value;\r\n    auth_1.signIn(userName, password)\r\n        .then(function () { return console.log('signIn!'); })\r\n        .catch(function (err) { return console.log(err); });\r\n};\r\n\n\n//# sourceURL=webpack:///./src/account/signIn.ts?");
+eval("\r\nvar __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {\r\n    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }\r\n    return new (P || (P = Promise))(function (resolve, reject) {\r\n        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }\r\n        function rejected(value) { try { step(generator[\"throw\"](value)); } catch (e) { reject(e); } }\r\n        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }\r\n        step((generator = generator.apply(thisArg, _arguments || [])).next());\r\n    });\r\n};\r\nvar __generator = (this && this.__generator) || function (thisArg, body) {\r\n    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;\r\n    return g = { next: verb(0), \"throw\": verb(1), \"return\": verb(2) }, typeof Symbol === \"function\" && (g[Symbol.iterator] = function() { return this; }), g;\r\n    function verb(n) { return function (v) { return step([n, v]); }; }\r\n    function step(op) {\r\n        if (f) throw new TypeError(\"Generator is already executing.\");\r\n        while (_) try {\r\n            if (f = 1, y && (t = op[0] & 2 ? y[\"return\"] : op[0] ? y[\"throw\"] || ((t = y[\"return\"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;\r\n            if (y = 0, t) op = [op[0] & 2, t.value];\r\n            switch (op[0]) {\r\n                case 0: case 1: t = op; break;\r\n                case 4: _.label++; return { value: op[1], done: false };\r\n                case 5: _.label++; y = op[1]; op = [0]; continue;\r\n                case 7: op = _.ops.pop(); _.trys.pop(); continue;\r\n                default:\r\n                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }\r\n                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }\r\n                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }\r\n                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }\r\n                    if (t[2]) _.ops.pop();\r\n                    _.trys.pop(); continue;\r\n            }\r\n            op = body.call(thisArg, _);\r\n        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }\r\n        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };\r\n    }\r\n};\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nvar configure_1 = __importDefault(__webpack_require__(/*! ../amplify/configure */ \"./src/amplify/configure.ts\"));\r\nvar auth_1 = __webpack_require__(/*! ../amplify/auth */ \"./src/amplify/auth.ts\");\r\nvar sweetalert2_1 = __importDefault(__webpack_require__(/*! sweetalert2 */ \"./node_modules/sweetalert2/dist/sweetalert2.all.js\"));\r\nconfigure_1.default();\r\nauth_1.headerSign();\r\nvar signUpForm = document.querySelector('.signup-form');\r\nvar id = document.querySelector('#id');\r\nvar nickname = document.querySelector('#nickname');\r\nvar password = document.querySelector('#password');\r\nvar passwordCheck = document.querySelector('#password-check');\r\npassword.addEventListener('invalid', invalidPassword);\r\npassword.addEventListener('input', invalidPassword);\r\npasswordCheck.addEventListener('invalid', invalidPasswordCheck);\r\npasswordCheck.addEventListener('input', invalidPasswordCheck);\r\nsignUpForm.addEventListener('submit', function (e) { return __awaiter(void 0, void 0, void 0, function () {\r\n    var result;\r\n    return __generator(this, function (_a) {\r\n        switch (_a.label) {\r\n            case 0:\r\n                e.preventDefault();\r\n                return [4 /*yield*/, auth_1.signUp(id.value, password.value, nickname.value)];\r\n            case 1:\r\n                result = _a.sent();\r\n                if (result.code === \"UsernameExistsException\") {\r\n                    sweetalert2_1.default.fire({\r\n                        title: '중복',\r\n                        text: '이미 존재하는 아이디입니다',\r\n                        icon: 'error'\r\n                    });\r\n                }\r\n                else if (result.user) {\r\n                    location.href = '/account/signIn.html';\r\n                }\r\n                return [2 /*return*/];\r\n        }\r\n    });\r\n}); });\r\nfunction invalidPassword() {\r\n    if (password.value.search(new RegExp(password.getAttribute('pattern'))) === -1) {\r\n        password.setCustomValidity(\"8\\uC790\\uB9AC\\uC774\\uC0C1 \\uBB38\\uC790+\\uC22B\\uC790\\uB85C \\uC785\\uB825\\uD574\\uC8FC\\uC138\\uC694\");\r\n    }\r\n    else {\r\n        password.setCustomValidity(\"\");\r\n    }\r\n    return true;\r\n}\r\nfunction invalidPasswordCheck() {\r\n    if (password.value !== passwordCheck.value) {\r\n        passwordCheck.setCustomValidity('비밀번호와 비밀번호 확인이 서로 다릅니다');\r\n    }\r\n    else {\r\n        passwordCheck.setCustomValidity('');\r\n    }\r\n    return true;\r\n}\r\n\n\n//# sourceURL=webpack:///./src/account/join.ts?");
 
 /***/ }),
 

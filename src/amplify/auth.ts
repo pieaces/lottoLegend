@@ -65,12 +65,12 @@ export async function signOut() {
     .then(() => location.href= "/main.html")
     .catch(()=>networkAlert());
 }
-export async function signUp(username: string, phone: string, password: string, nickname: string) {
+export async function signUp(username: string, password: string, nickname: string) {
     return await Auth.signUp({
         username,
         password,
         attributes: {
-            phone_number: phone,
+            //phone_number: phone,
             nickname
         },
     })
