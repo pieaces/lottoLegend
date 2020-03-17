@@ -1,5 +1,4 @@
 document.write(`
-</div>
 <div class="board-container">
 <div class="board-header">
     <div class="board-title">제목</div>

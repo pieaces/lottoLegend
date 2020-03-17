@@ -9,6 +9,10 @@ document.write(`<div class="search-container">
     
     <button type="button" class="btn search-btn">검색</button>
     </div>
+    <div class="post-btn-box">
+    <a href="post.html" class="post-btn">글쓰기</a>
+</div>
+</div>
 `);
 
 
