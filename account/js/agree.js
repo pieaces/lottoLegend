@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "c3d8392cb35087750fc3";
+/******/ 	var hotCurrentHash = "7d0103fc507af108c33d";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -790,7 +790,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire("./src/account/signIn.ts")(__webpack_require__.s = "./src/account/signIn.ts");
+/******/ 	return hotCreateRequire("./src/account/agree.ts")(__webpack_require__.s = "./src/account/agree.ts");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -2731,15 +2731,15 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 
 /***/ }),
 
-/***/ "./src/account/signIn.ts":
-/*!*******************************!*\
-  !*** ./src/account/signIn.ts ***!
-  \*******************************/
+/***/ "./src/account/agree.ts":
+/*!******************************!*\
+  !*** ./src/account/agree.ts ***!
+  \******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nvar configure_1 = __importDefault(__webpack_require__(/*! ../amplify/configure */ \"./src/amplify/configure.ts\"));\r\nvar auth_1 = __webpack_require__(/*! ../amplify/auth */ \"./src/amplify/auth.ts\");\r\nconfigure_1.default();\r\nauth_1.headerSign();\r\nvar loginBtn = document.getElementById('login-btn');\r\nvar userNameInput = document.querySelector('#userName');\r\nvar passwordInput = document.querySelector('#password');\r\nloginBtn.onclick = function () {\r\n    var userName = userNameInput.value;\r\n    var password = passwordInput.value;\r\n    auth_1.signIn(userName, password)\r\n        .then(function () { return console.log('signIn!'); })\r\n        .catch(function (err) { return console.log(err); });\r\n};\r\n\n\n//# sourceURL=webpack:///./src/account/signIn.ts?");
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nvar configure_1 = __importDefault(__webpack_require__(/*! ../amplify/configure */ \"./src/amplify/configure.ts\"));\r\nvar auth_1 = __webpack_require__(/*! ../amplify/auth */ \"./src/amplify/auth.ts\");\r\nvar CheckBoxToggle_1 = __importDefault(__webpack_require__(/*! ../system/premium/instanceBtns/CheckBoxToggle */ \"./src/system/premium/instanceBtns/CheckBoxToggle.ts\"));\r\nvar sweetalert2_1 = __importDefault(__webpack_require__(/*! sweetalert2 */ \"./node_modules/sweetalert2/dist/sweetalert2.all.js\"));\r\nconfigure_1.default();\r\nauth_1.headerSign();\r\nvar checkBoxToggle = new CheckBoxToggle_1.default();\r\ncheckBoxToggle.setInputBoxes(document.querySelectorAll('.input-checkbox-container > input'));\r\ncheckBoxToggle.addEvent();\r\nvar termsUseAllCheck = document.querySelector('#all-check');\r\nvar termsUseCheckboxes = document.querySelectorAll('.terms-use-check');\r\ndocument.querySelector('.terms-use-btn').addEventListener('click', function () {\r\n    if (termsUseAllCheck.checked || Array.from(termsUseCheckboxes).every(function (node) { return node.checked === true; })) {\r\n        location.href = '/account/join.html';\r\n    }\r\n    else {\r\n        sweetalert2_1.default.fire({\r\n            title: '알림',\r\n            text: '이용약관에 동의해주셔야 가입가능합니다',\r\n            icon: 'info'\r\n        });\r\n    }\r\n});\r\n\n\n//# sourceURL=webpack:///./src/account/agree.ts?");
 
 /***/ }),
 
@@ -2800,6 +2800,18 @@ eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod)
 
 "use strict";
 eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nfunction makeDraggable(elmnt) {\r\n    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;\r\n    if (document.getElementById(elmnt.id + \"header\")) {\r\n        // if present, the header is where you move the DIV from:\r\n        document.getElementById(elmnt.id + \"header\").onmousedown = dragMouseDown;\r\n    }\r\n    else {\r\n        // otherwise, move the DIV from anywhere inside the DIV:\r\n        elmnt.onmousedown = dragMouseDown;\r\n    }\r\n    function dragMouseDown(e) {\r\n        e = e || window.event;\r\n        e.preventDefault();\r\n        // get the mouse cursor position at startup:\r\n        pos3 = e.clientX;\r\n        pos4 = e.clientY;\r\n        document.onmouseup = closeDragElement;\r\n        // call a function whenever the cursor moves:\r\n        document.onmousemove = elementDrag;\r\n    }\r\n    function elementDrag(e) {\r\n        e = e || window.event;\r\n        e.preventDefault();\r\n        // calculate the new cursor position:\r\n        pos1 = pos3 - e.clientX;\r\n        pos2 = pos4 - e.clientY;\r\n        pos3 = e.clientX;\r\n        pos4 = e.clientY;\r\n        // set the element's new position:\r\n        elmnt.style.top = (elmnt.offsetTop - pos2) + \"px\";\r\n        elmnt.style.left = (elmnt.offsetLeft - pos1) + \"px\";\r\n    }\r\n    function closeDragElement() {\r\n        // stop moving when mouse button is released:\r\n        document.onmouseup = null;\r\n        document.onmousemove = null;\r\n    }\r\n}\r\nexports.default = makeDraggable;\r\n\n\n//# sourceURL=webpack:///./src/system/premium/Layout/makeDraggable.ts?");
+
+/***/ }),
+
+/***/ "./src/system/premium/instanceBtns/CheckBoxToggle.ts":
+/*!***********************************************************!*\
+  !*** ./src/system/premium/instanceBtns/CheckBoxToggle.ts ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nvar allCheckBox = document.querySelector('#all-check');\r\nvar CheckBoxToggle = /** @class */ (function () {\r\n    function CheckBoxToggle() {\r\n    }\r\n    CheckBoxToggle.prototype.setInputBoxes = function (inputBoxes) {\r\n        this.inputBoxes = inputBoxes;\r\n    };\r\n    CheckBoxToggle.prototype.addEvent = function () {\r\n        var _this = this;\r\n        allCheckBox.addEventListener('click', function () {\r\n            if (allCheckBox.checked) {\r\n                _this.inputBoxes.forEach(function (node) {\r\n                    node.checked = true;\r\n                });\r\n            }\r\n            else {\r\n                _this.inputBoxes.forEach(function (node) {\r\n                    node.checked = false;\r\n                });\r\n            }\r\n        });\r\n    };\r\n    CheckBoxToggle.allCheckedReset = function () {\r\n        allCheckBox.checked = false;\r\n    };\r\n    return CheckBoxToggle;\r\n}());\r\nexports.default = CheckBoxToggle;\r\n\n\n//# sourceURL=webpack:///./src/system/premium/instanceBtns/CheckBoxToggle.ts?");
 
 /***/ }),
 
