@@ -52,7 +52,7 @@ export async function signIn(username: string, password: string) {
             }else{
                 Swal.fire({
                     title: '알림',
-                    text: '아이디 또는 비밀번혹가 틀렸습니다',
+                    text: '아이디 또는 비밀번호가 틀렸습니다',
                     icon:'info'
                 });
             }
