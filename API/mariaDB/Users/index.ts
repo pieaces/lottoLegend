@@ -1,6 +1,6 @@
-import DB from "../Engine"
+import Engine from "../Engine"
 
-export default class Users extends DB {
+export default class Users extends Engine {
     private tableName:string = 'Users';
     constructor(){
         super();
