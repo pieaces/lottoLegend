@@ -7,7 +7,7 @@ import { networkAlert } from '../functions';
 configure();
 headerSign();
 
-const signUpBtn = document.getElementById('signUp');
+const signUpForm = document.querySelector('.signup-form');
 const id = document.querySelector<HTMLInputElement>('#id');
 const nickname = document.querySelector<HTMLInputElement>('#nickname');
 const password = document.querySelector<HTMLInputElement>('#password');
@@ -19,7 +19,7 @@ password.addEventListener('input', invalidPassword);
 passwordCheck.addEventListener('invalid', invalidPasswordCheck);
 passwordCheck.addEventListener('input', invalidPasswordCheck);
 
-signUpBtn.addEventListener('submit', async (e) => {
+signUpForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     //'+82'.concat(phoneMidInput.value.slice(1));
     loading.classList.remove('none');
@@ -54,7 +54,7 @@ signUpBtn.addEventListener('submit', async (e) => {
                 });
             } catch (err) {
                 networkAlert();
-            }finally{
+            } finally {
                 loading.classList.add('none');
             }
         }
