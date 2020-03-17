@@ -1,6 +1,5 @@
 import configure from '../../amplify/configure'
 import { signUp, confirmSignUp, headerSign } from "../../amplify/auth";
-import { invalidPhoneMidValue, invalidPhoneEndValue } from './functions';
 
 configure();
 headerSign();
@@ -10,10 +9,8 @@ const id = document.querySelector<HTMLInputElement>('#id');
 const nickname = document.querySelector<HTMLInputElement>('#nickname');
 const password = document.querySelector<HTMLInputElement>('#password');
 const passwordCheck = document.querySelector<HTMLInputElement>('#password-check');
-const email = document.querySelector<HTMLInputElement>('#email');
-const phoneMidInput = document.querySelector<HTMLInputElement>('#phone-number-mid');
-const phoneEndInput = document.querySelector<HTMLInputElement>('#phone-number-end');
 
+init();
 
 function init() {
 
@@ -22,20 +19,6 @@ function init() {
 
     passwordCheck.addEventListener('invalid', invalidPasswordCheck);
     passwordCheck.addEventListener('input', invalidPasswordCheck);
-
-    phoneMidInput.addEventListener('invalid', () => {
-        invalidPhoneMidValue(phoneMidInput);
-    });
-    phoneMidInput.addEventListener('input', () => {
-        invalidPhoneMidValue(phoneMidInput);
-    });
-
-    phoneEndInput.addEventListener('invalid', () => {
-        invalidPhoneEndValue(phoneEndInput);
-    });
-    phoneEndInput.addEventListener('input', () => {
-        invalidPhoneEndValue(phoneEndInput);
-    });
 
 
     signUpForm.addEventListener('submit', async (e) => {
