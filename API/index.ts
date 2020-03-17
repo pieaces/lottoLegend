@@ -2,6 +2,7 @@ import { LottoNumber } from "./interface/Lotto";
 import { StatsMethod, QueryStatsParams } from "./interface/LottoDB";
 import { getCurrentRound } from "./funtions";
 import { queryStats, queryLotto } from "./dynamoDB/lottoData";
+import { getPlan } from "./dynamoDB/userInfo";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -51,6 +52,7 @@ exports.handler = async (event: any) => {
                 data = await queryStats(method as StatsMethod);
                 body = data;
             }else if (method in StatsMethod) {
+                //getPlan()
                 const temp: QueryStatsParams = {}
                 const from = event.queryStringParameters && event.queryStringParameters.from
                 const to = event.queryStringParameters && event.queryStringParameters.to;

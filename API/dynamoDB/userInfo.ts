@@ -1,10 +1,12 @@
-import { dynamoDB, TableName } from '.'
+import { dynamoDB } from '.'
+import { GetItemInput, GetItemOutput } from 'aws-sdk/clients/dynamodb';
+import { AWSError } from 'aws-sdk';
 
 export enum Plan {
     "default" = "a",
     "basic" = "b",
     "premium" = "c",
-    "premiumplus" = "d"
+    "premium+" = "d"
 }
 const ExpressionAttributeNames = {
     "#Plan": 'Plan',
@@ -12,8 +14,8 @@ const ExpressionAttributeNames = {
 };
 
 export function getPlan(userName:string):Promise<Plan>{
-    const params = {
-        TableName,
+    const params:GetItemInput = {
+        TableName: 'LottoUsers',
         ExpressionAttributeNames,
         ProjectionExpression: '#Plan, #Until',
         Key: {
@@ -23,7 +25,7 @@ export function getPlan(userName:string):Promise<Plan>{
         }
     };
     return new Promise((resolve, reject) => {
-        dynamoDB.getItem(params, (err, data) => {
+        dynamoDB.getItem(params, (err:AWSError, data:GetItemOutput) => {
             if (err) {
                 reject(err);
             }
@@ -44,44 +46,13 @@ export function getPlan(userName:string):Promise<Plan>{
                                 plan = Plan.premium;
                                 //availability = planValues[Plan.premium];
                                 break;
-                            case Plan.premiumplus:
-                                plan = Plan.premiumplus
+                            case Plan['premium+']:
+                                plan = Plan['premium+']
                         }
                     }
                 }
                 resolve(plan);
             }
-        });
-    });
-}
-export function makePlan(userName: string, plan: Plan, period: number): Promise<void> {
-    const time = new Date();
-    time.setMonth(time.getMonth() + period);
-    const until = time.toISOString();
-
-    const params = {
-        TableName,
-        ExpressionAttributeNames,
-        ExpressionAttributeValues: {
-            ':value': {
-                S: plan
-            },
-            ':until': {
-                S: until
-            },
-        },
-        Key: {
-            "UserName": {
-                S: userName
-            }
-        },
-        UpdateExpression: `SET #Plan = :value, #Until = :until`
-    };
-
-    return new Promise((resolve, reject) => {
-        dynamoDB.updateItem(params, (err) => {
-            if (err) reject(err);
-            resolve();
         });
     });
 }
