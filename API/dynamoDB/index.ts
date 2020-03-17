@@ -6,7 +6,7 @@ export enum Plan {
     "default" = "a",
     "basic" = "b",
     "premium" = "c",
-    "premiumplus" = "d"
+    "premium+" = "d"
 }
 export function getRank(userName:string):Promise<string>{
     const params = {

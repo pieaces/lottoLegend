@@ -37,7 +37,7 @@ exports.handler = async (event: any) => {
     let body: any;
 
     const plan = await getRank(currentId);
-    if (plan !== Plan.premium && plan !== Plan.premiumplus) {
+    if (plan !== Plan.premium && plan !== Plan['premium+']) {
         console.log('Intruder Alert! - Not Premium!');
         const response = {
             statusCode: 400,
