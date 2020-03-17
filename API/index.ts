@@ -71,6 +71,7 @@ exports.handler = async (event: any) => {
             }else if (method in StatsMethod) {
                 const plan = await getPlan(currentId);
                 if(plan !== Plan.premium && plan !== Plan["premium+"]){
+                    console.log('Intruder Alert! - Not Premium!');
                     return{
                         statusCode,
                         headers,
