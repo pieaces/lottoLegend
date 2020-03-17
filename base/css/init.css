@@ -237,7 +237,7 @@ html{
   font-size:8px;
 }
   .container {
-    width: 700px;
+    width: 95%;
   }
   
 }
@@ -247,28 +247,22 @@ html{
     font-size:8px;
   }
   .container {
-    width: 700px;
+    width: 95%;
   }
   
 }
+
+@media (min-width: 0px) and (max-width: 767px) {
+  .container {
+    width: 95%;
+  }
+}
+
 @media (min-width: 481px) and (max-width: 767px) {
   html{
     font-size:11px;
   }
-  .container {
-    width: 450px;
-  }
-  
+
 }
 
-@media (min-width: 0px) and (max-width: 480px) {
-
-  html{
-    font-size: 10px;
-  }
-  .container {
-    width: 320px;
-  }
-  
-}
 

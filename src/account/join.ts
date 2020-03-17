@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 configure();
 headerSign();
 
-const signUpBtn = document.querySelector('#signUp');
+const signUpForm = document.querySelector('.signUp-form');
 const id = document.querySelector<HTMLInputElement>('#id');
 const nickname = document.querySelector<HTMLInputElement>('#nickname');
 const password = document.querySelector<HTMLInputElement>('#password');
@@ -21,7 +21,7 @@ password.addEventListener('input', invalidPassword);
 passwordCheck.addEventListener('invalid', invalidPasswordCheck);
 passwordCheck.addEventListener('input', invalidPasswordCheck);
 
-signUpBtn.addEventListener('submit', async (e) => {
+signUpForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     //'+82'.concat(phoneMidInput.value.slice(1));
     loading.classList.remove('none');
