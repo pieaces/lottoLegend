@@ -29,22 +29,26 @@ exports.handler = async (event: any) => {
                         body = new Response(false, "이미 존재하는 닉네임입니다.");
                     }
                 }
+                    break;
                 case 'POST': {
                     const userName = event.pathParameters.userName;
                     const { nickName } = JSON.parse(event.body);
                     await createUser(userName);
                     await userDB.create(userName, nickName);
                 }
+                    break;
                 case 'DELETE': {
                     const userName = event.pathParameters.userName;
                     await deleteUser(userName);
                     await userDB.delete(userName);
                 }
+                    break;
                 case 'PATCH': {
                     const userName = event.pathParameters.userName;
                     const { nickName } = JSON.parse(event.body);
                     await userDB.modifyNickName(userName, nickName);
                 }
+                    break;
             }
         }
     }
