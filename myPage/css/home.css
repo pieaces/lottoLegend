@@ -80,7 +80,8 @@ font-size: 1.4rem;
 }
 
 .mypage-nickname,
-.mypage-service  {
+.mypage-service,
+.mypage-phone  {
   justify-content: space-between;
 }
 

@@ -6,7 +6,7 @@ document.write(`           <div class="text-title">
 </div>
 <div class="text-info">
 <div class="author-name">
-<span id="postRank" class="rank"></span><span id="author-name"></span>
+<span id="postRank"></span><span id="author-name"></span>
 </div>
 <div>
 
