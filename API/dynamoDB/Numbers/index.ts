@@ -281,6 +281,31 @@ export async function updateIncOrExcNumbers(userName: string, round: number, num
         });
     });
 }
+export function deleteIncOrExcNumbers(userName: string, round:number, choice: IncOrExc): Promise<void> {
+    const params: UpdateItemInput = {
+        TableName: 'LottoUsers',
+        ExpressionAttributeNames: {
+            "#Map": 'IncludeExclude',
+            "#Round": round.toString(),
+            "#Choice": choice,
+        },
+        Key: {
+            "UserName": {
+                S: userName
+            }
+        },
+        UpdateExpression: 'Remove #Map.#Round.#Choice'
+    };
+
+    return new Promise((resolve, reject) => {
+        dynamoDB.updateItem(params, (err: AWSError) => {
+            if (err) {
+                reject(err);
+            }
+            resolve();
+        });
+    });
+}
 
 async function createIncOrExcNumbers(userName: string, round: number): Promise<Response> {
     const params: UpdateItemInput = {

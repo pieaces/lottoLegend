@@ -1,6 +1,6 @@
 import verify from "./auth";
 import { getCurrentRound, scanLotto, getLotto, getLotto2 } from "./funtions";
-import { updateNumbers, getNumbers, deleteMyNumber, updateIncOrExcNumbers, getIncOrExcRounds, getIncAndExcNumbers } from './dynamoDB/Numbers'
+import { updateNumbers, getNumbers, deleteMyNumber, updateIncOrExcNumbers, getIncOrExcRounds, getIncAndExcNumbers, deleteIncOrExcNumbers } from './dynamoDB/Numbers'
 import { queryLottoData } from "./dynamoDB/lottoData";
 import { freeGenerator, numbersToData } from "./dynamoDB/generator";
 import { getPointAndRank, getPlanKeyAndUntil } from "./dynamoDB/userInfo";
@@ -100,7 +100,11 @@ exports.handler = async (event: any) => {
                 case 'POST':
                     if (logedIn) {
                         const { numbers, choice } = JSON.parse(event.body);
-                        await updateIncOrExcNumbers(currentId, getCurrentRound() + 1, numbers.sort((a: number, b: number) => a - b), choice);
+                        if(numbers && numbers.length > 0){
+                            await updateIncOrExcNumbers(currentId, getCurrentRound() + 1, numbers.sort((a: number, b: number) => a - b), choice);
+                        }else{
+                            await deleteIncOrExcNumbers(currentId, getCurrentRound() + 1, choice);
+                        }
                         break;
                     } else {
                         statusCode = 400;
