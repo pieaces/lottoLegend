@@ -15,13 +15,12 @@ exports.handler = async (event: any) => {
     const resource: string = event.resource;
     let logedIn: boolean = false;
 
-    let currentId: string, currentName: string;
+    let currentId: string;
     if (event.headers['x-id-token']) {
         try {
             const userInfo = verify(event.headers['x-id-token']);
             logedIn = true;
             currentId = userInfo["cognito:username"];
-            currentName = userInfo.nickname;
         } catch (err) {
             console.log('Intruder Alert! - Expired Token', err);
             const response = {
