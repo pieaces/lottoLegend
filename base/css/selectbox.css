@@ -53,3 +53,15 @@
     display: none; /* Chrome, Safari, Opera*/
 }
 
+@media (min-width: 0px) and (max-width: 767px) {
+
+    .selectbox-wrapper{
+        display:block;
+    }
+
+    .selectbox-container{
+        justify-content: center;
+        margin-bottom:1rem;
+    }
+  }
+  
