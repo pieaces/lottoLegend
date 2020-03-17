@@ -46,7 +46,7 @@ exports.handler = async (event: any) => {
                         const lottoData = await scanLotto();
 
                         const rounds = Object.keys(numbersData);
-                        const data = numbersData[rounds[rounds.length - 1]].map((data) => {
+                        const data = numbersData[rounds[rounds.length - 1]] && numbersData[rounds[rounds.length - 1]].map((data) => {
                             const result: any = numbersToData(data.numbers, lottoData);
                             result.method = data.method;
                             result.tool = data.tool;
