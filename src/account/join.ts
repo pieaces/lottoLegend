@@ -14,6 +14,10 @@ const password = document.querySelector<HTMLInputElement>('#password');
 const passwordCheck = document.querySelector<HTMLInputElement>('#password-check');
 const loading = document.querySelector('.loading-box');
 
+id.addEventListener('invalid', invalidId);
+id.addEventListener('input', invalidId);
+nickname.addEventListener('invalid', invalidNickname);
+nickname.addEventListener('input', invalidNickname);
 password.addEventListener('invalid', invalidPassword);
 password.addEventListener('input', invalidPassword);
 passwordCheck.addEventListener('invalid', invalidPasswordCheck);
@@ -61,7 +65,32 @@ signUpForm.addEventListener('submit', async (e) => {
     }
 });
 
+function invalidId() {
+    const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\+<>@\#$%&\\\=\(\'\"]/gi;
+    if (id.value.length > 16) {
+        id.setCustomValidity(`16자 이내로 입력해주세요`);
+    } else if (id.value.search(regExp) !== -1) {
+        id.setCustomValidity(`-,_를 제외한 특수문자를 입력할 수 없습니다`);
+    } else {
+        id.setCustomValidity(``);
+    }
+    return true;
+}
+
+function invalidNickname() {
+    const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\+<>@\#$%&\\\=\(\'\"]/gi;
+    if (nickname.value.length > 8) {
+        nickname.setCustomValidity(`8자 이내로 입력해주세요`);
+    } else if (nickname.value.search(regExp) !== -1) {
+        nickname.setCustomValidity(`-,_를 제외한 특수문자를 입력할 수 없습니다`);
+    } else {
+        nickname.setCustomValidity(``);
+    }
+    return true;
+}
+
 function invalidPassword() {
+
     if (password.value.search(new RegExp(password.getAttribute('pattern'))) === -1) {
         password.setCustomValidity(`8자리이상 문자+숫자로 입력해주세요`);
     } else {

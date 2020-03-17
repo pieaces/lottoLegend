@@ -84,24 +84,9 @@
   height: 8rem;
   font-size:1.4rem;
 }
-@media (min-width: 768px) and (max-width: 1024px) {
- 
-    .login-container{
-      min-height: 85rem;
-    }
-  }
-  
-  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-   
-    .login-container{
-      min-height: 85rem;
-    }
-  }
+
 @media (min-width: 0px) and (max-width: 767px) {
 
-.login-container{
-  margin-top:0;
-}
   .login-title-text{
     font-size:4rem;
     letter-spacing: 0.3rem;
