@@ -2,7 +2,9 @@ import { LottoNumber } from "./interface/Lotto";
 import { StatsMethod, QueryStatsParams } from "./interface/LottoDB";
 import { getCurrentRound } from "./funtions";
 import { queryStats, queryLotto } from "./dynamoDB/lottoData";
-import { getPlan } from "./dynamoDB/userInfo";
+import { getPlan, Plan } from "./dynamoDB/userInfo";
+import verify from "./auth";
+import Response from "./Response";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -15,6 +17,21 @@ exports.handler = async (event: any) => {
     let statusCode: number = 200;
     let body: any;
 
+    let currentId: string;
+    if (event.headers['x-id-token']) {
+        try {
+            const userInfo = verify(event.headers['x-id-token']);
+            currentId = userInfo["cognito:username"];
+        } catch (err) {
+            console.log('Intruder Alert! - Expired Token', err);
+            const response = {
+                statusCode: 400,
+                headers,
+            };
+            return response;
+        }
+    }
+    
     const method = event.queryStringParameters.method;
     switch (resource) {
         case '/stats/mass':
@@ -52,7 +69,14 @@ exports.handler = async (event: any) => {
                 data = await queryStats(method as StatsMethod);
                 body = data;
             }else if (method in StatsMethod) {
-                //getPlan()
+                const plan = await getPlan(currentId);
+                if(plan !== Plan.premium && plan !== Plan["premium+"]){
+                    return{
+                        statusCode,
+                        headers,
+                        body: JSON.stringify(new Response(true, "프리미엄 회원이 아닙니다.")),
+                    }
+                }
                 const temp: QueryStatsParams = {}
                 const from = event.queryStringParameters && event.queryStringParameters.from
                 const to = event.queryStringParameters && event.queryStringParameters.to;
