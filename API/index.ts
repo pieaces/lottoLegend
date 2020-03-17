@@ -30,18 +30,18 @@ exports.handler = async (event: any) => {
                     }
                 }
                 case 'POST': {
-                    const userName = event.pathParameters.round;
+                    const userName = event.pathParameters.userName;
                     const { nickName } = JSON.parse(event.body);
                     await createUser(userName);
                     await userDB.create(userName, nickName);
                 }
                 case 'DELETE': {
-                    const userName = event.pathParameters.round;
+                    const userName = event.pathParameters.userName;
                     await deleteUser(userName);
                     await userDB.delete(userName);
                 }
                 case 'PATCH': {
-                    const userName = event.pathParameters.round;
+                    const userName = event.pathParameters.userName;
                     const { nickName } = JSON.parse(event.body);
                     await userDB.modifyNickName(userName, nickName);
                 }
