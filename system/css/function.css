@@ -218,7 +218,7 @@
   display:flex;
   align-items: center;
   justify-content: flex-start;
-  width:50%;
+  width:40%;
   height:100%;
   padding:0 1rem;
   font-size: 1.4rem;
@@ -250,9 +250,23 @@
     height:auto;
   }
 
+  .filter-box-container-box{
+  border: none;  
+  }
+  
+
   .filter-box-container-box >div{
     width: 100%;
     padding:1rem 0;
+  }
+
+  .filter-box{
+    width: 100%;
+  }
+
+
+  .extract-num{
+    width: 70%;
   }
 
   .showcase-container{

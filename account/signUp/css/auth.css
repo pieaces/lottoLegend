@@ -1,0 +1,37 @@
+
+.auth-check-btn {
+    width:10rem;
+    height: 4rem;
+    font-size: 1.5rem;
+  }
+  
+  .auth-again-btn{
+    width:10rem;
+    height: 4rem;
+    margin-right:1rem;
+    font-size: 1.5rem;
+  }
+  
+  .auth-check-wrapper{
+    margin-bottom:10rem;
+  }
+  
+  
+  .auth-alert-box{
+    display:flex;
+    align-items: center;
+    padding-left:1rem;
+    height:4rem;
+    color:red;
+  }
+  
+  .auth-check-container{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .auth-check-box{
+    display:flex;
+  }
+  
