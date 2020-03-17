@@ -24,7 +24,6 @@ const contentsUpdateBtn = document.querySelector<HTMLElement>('.text-update-cont
 const recommendBtn = document.getElementById('reco-btn');
 const loading = document.querySelector('.loading-box');
 
-
 let currentUser: string;
 let commentCount = 0;
 const id = getQueryStringObject().id;
@@ -51,7 +50,6 @@ commentSubmit.onclick = async function () {
 }
 
 async function init() {
-    loading.classList.remove('none');
     try {
         currentUser = await getUserName();
     } catch (err) { }
@@ -62,7 +60,6 @@ async function init() {
         } catch (err) {
             networkAlert();
         }
-        console.log(post);
         title.textContent = post.title;
         author.textContent = post.nickName;
         postRank.textContent = post.rank;
@@ -130,7 +127,7 @@ async function init() {
         if (post.comments) {
             makeComments(post.comments);
         }
-        loading.classList.add('none');
+
     }
 }
 

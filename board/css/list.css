@@ -89,7 +89,7 @@
 .board-section {
   display: flex;
   flex-direction: column;
-  min-height: 25rem;
+  margin-bottom: 3rem;
   font-size:1.4rem;
 }
 

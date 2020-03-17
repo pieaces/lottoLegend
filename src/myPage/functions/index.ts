@@ -1,7 +1,13 @@
 import { makeInputCheckBox, makePastFilterTable } from "../../system/premium/Layout/functions"; import { setColorLotto, setDisabledLotto } from "../../functions";
 
+export function makeNoneBox(){
+    const div = document.createElement('div');
+    div.classList.add('mypage-none-box');
+    div.textContent = '없음';
+    return div;
+}
 export function makeTable(canvas: HTMLElement, dataSet: any[], round: number | string, info: boolean, answer?: { numbers: number[], bonusNum: number }) {
-    for (let i = 0; i < dataSet.length; i++) {
+    for (let i = 0; i < (dataSet && dataSet.length) || 0; i++) {
         const tableContent = document.createElement('div');
         tableContent.classList.add('mypage-table-content');
         tableContent.setAttribute('data-numbers', JSON.stringify(dataSet[i].numbers));

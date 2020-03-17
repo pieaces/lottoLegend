@@ -9,25 +9,35 @@ headerSign();
 
 const category = document.getElementById('wrapper').getAttribute('data-category');
 const index = Number(getQueryStringObject().index) || 1;
-const loading = document.querySelector('.loading-box');
 
-loading.classList.remove('none');
 getUnAuthAPI('/posts', { category, index })
     .then(({ posts, count }) => {
         makeBoard(posts);
-        for (let i = 0; i < Math.ceil(count / 10); i++) {
+        const LIST_PACK = 15;
+        const INDEX_PACK = 5;
+        const total = Math.ceil(count / LIST_PACK);
+        const start = index - (index - 1) % INDEX_PACK;
+        const end = (start + INDEX_PACK - 1) >= total ? total : (start + INDEX_PACK - 1);
+        if (index > INDEX_PACK) {
             const div = document.createElement('div');
-            if (i + 1 === index) {
-                div.textContent = (i + 1).toString();
+            div.innerHTML = `<a class="page-anchor" href="?index=${start-1}">이전</a>`;
+            pageNumContainer.appendChild(div);
+        }
+        for (let i = start; i <= end; i++) {
+            const div = document.createElement('div');
+            if (i === index) {
+                div.textContent = (i).toString();
                 div.classList.add('page-current');
             } else {
-                div.innerHTML = `<a  class="page-anchor" href="?index=${(i + 1)}">${(i + 1)}</a>`;
-                div.classList.add('leap-n');
+                div.innerHTML = `<a class="page-anchor" href="?index=${i}">${i}</a>`;
             }
             pageNumContainer.appendChild(div);
         }
-        //<div id="leap-last" class="hide">맨끝</div>
-        loading.classList.add('none');
+        if (start + INDEX_PACK - 1 < total) {
+            const div = document.createElement('div');
+            div.innerHTML = `<a class="page-anchor" href="?index=${end + 1}">다음</a>`;
+            pageNumContainer.appendChild(div);
+        }
     });
 
 function makeBoard(objArr: any[]) {
