@@ -50,6 +50,7 @@ export async function signIn(username: string, password: string) {
                     icon:'info'
                 });
             }else{
+                console.log(err);
                 Swal.fire({
                     title: '알림',
                     text: '아이디 또는 비밀번호가 틀렸습니다',
@@ -74,7 +75,6 @@ export async function signUp(username: string, password: string, nickname: strin
             nickname
         },
     })
-        .then(data => data)
         .catch(err => err);
 }
 
