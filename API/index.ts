@@ -4,7 +4,7 @@ import Posts from "./mariaDB/Posts";
 import Comments from "./mariaDB/Comments";
 import { getIncOrExcNumbers, IncOrExc } from './dynamoDB/myNumbers'
 import { doesRecommend } from "./dynamoDB/recommend";
-import { getRank, addPoint, Point, subtractPoint } from "./dynamoDB/userInfo";
+import { addPoint, Point, subtractPoint } from "./dynamoDB/userInfo";
 import Users from "./mariaDB/Users";
 
 const headers = {
@@ -79,7 +79,6 @@ exports.handler = async (event: any) => {
                         }
                         body = post;
                         body.recommend = await doesRecommend(postId, currentId);
-                        body.rank = (await getRank(body.userName));
                     } else {
                         const post = await db.getTitleContents(postId);
                         body = post;
