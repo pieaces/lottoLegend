@@ -1,7 +1,7 @@
 import configure from '../amplify/configure'
 import { getUnAuthAPI, postAuthAPI, deleteAuthAPI, getAuthAPI, patchAuthAPI } from '../amplify/api';
-import { getUserName, getNickName, headerSign } from '../amplify/auth';
-import { getQueryStringObject, getCategoryHtml, isoStringToDate, networkAlert, setColorLotto, rankToClass } from '../functions';
+import { getUserName, getNickName, headerSign, isLogedIn } from '../amplify/auth';
+import { getQueryStringObject, getCategoryHtml, isoStringToDate, networkAlert, setColorLotto, rankToClass, onlyUserAlert } from '../functions';
 import Swal from 'sweetalert2'
 
 configure();
@@ -24,15 +24,15 @@ const contentsUpdateBtn = document.querySelector<HTMLElement>('.text-update-cont
 const recommendBtn = document.getElementById('reco-btn');
 const loading = document.querySelector('.loading-box');
 
-let currentUser: string;
 let commentCount = 0;
 const id = getQueryStringObject().id;
 init();
 commentSubmit.onclick = async function () {
-    if (Number(charCurrentCount.textContent) > 0 && currentUser) {
+    const logedIn = await isLogedIn();
+    if (Number(charCurrentCount.textContent) > 0 && logedIn) {
         try {
             const { commentId, rank } = await postAuthAPI(`/posts/${id}/comments`, { contents: txtArea.value });
-            makeComments([{ id: commentId, userName: currentUser, nickName: await getNickName(), rank, created: new Date().toISOString(), contents: txtArea.value }]);
+            makeComments([{ id: commentId, userName: await getUserName(), nickName: await getNickName(), rank, created: new Date().toISOString(), contents: txtArea.value }]);
             txtArea.value = "";
             Swal.fire({
                 title: '완료',
@@ -42,36 +42,39 @@ commentSubmit.onclick = async function () {
             networkAlert();
         }
     } else {
-        if (!currentUser) {
-            alert('로그인이 필요합니다.');
+        if (!logedIn) {
+            onlyUserAlert();
         }
         else alert('1글자 이상 입력해주세요.');
     }
 }
 
 async function init() {
-    try {
-        currentUser = await getUserName();
-    } catch (err) { }
     if (id) {
         let post: any;
         try {
-            post = currentUser ? await getAuthAPI('/posts/' + id) : await getUnAuthAPI('/posts/' + id);
+            if (await isLogedIn()) {
+                post = await getAuthAPI('/posts/' + id);
+            } else {
+                post = await getUnAuthAPI('/posts/' + id);
+            }
         } catch (err) {
             networkAlert();
         }
-        console.log(post);
         title.textContent = post.title;
         author.textContent = post.nickName;
         postRank.textContent = post.rank;
         postRank.classList.add('rank');
         postRank.classList.add(rankToClass(post.rank));
-        if (currentUser === post.userName) {
+
+        const category = document.querySelector<HTMLElement>('#wrapper').getAttribute('data-category');
+        if (category === 'incl' || category === 'excl') {
+            makeNum([1, 3, 5, 7, 9, 10, 13, 15, 19, 24, 29, 35, 41, 42, 44, 45]);
+        }
+
+        if (await isLogedIn() && await getUserName() === post.userName) {
             contentsUpdateBtn.classList.remove('hide');
-            const category = document.querySelector<HTMLElement>('#wrapper').getAttribute('data-category');
-            if (category === 'incl' || category === 'excl') {
-                makeNum([1, 3, 5, 7, 9, 10, 13, 15, 19, 24, 29, 35, 41, 42, 44, 45]);
-            }
+
             document.querySelector<HTMLElement>('#content-update-btn').setAttribute('onclick', `location.href='/${getCategoryHtml(category, 'post')}?id=${id}'`);
             document.querySelector<HTMLElement>('#delete-btn').addEventListener('click', async () => {
                 Swal.fire({
@@ -88,7 +91,7 @@ async function init() {
                         try {
                             await deleteAuthAPI('/posts/' + id);
                             Swal.fire({
-                                title: '완료!',
+                                title: '완료',
                                 icon: 'success',
                                 allowOutsideClick: false,
                                 timer: 1500,
@@ -111,31 +114,39 @@ async function init() {
             recommendBtn.classList.add('recommend');
         }
         recommendBtn.addEventListener('click', async () => {
-            loading.classList.remove('none')
-            await patchAuthAPI(`/posts/${id}/recommend`);
-            recommendStatus = !recommendStatus;
-            if (recommendStatus) {
-                recommendBtn.classList.add('recommend');
-                recommendation.textContent = (Number(recommendation.textContent) + 1).toString();
+            loading.classList.remove('none');
+            const logedIn = await isLogedIn();
+            if (logedIn) {
+                try {
+                    await patchAuthAPI(`/posts/${id}/recommend`);
+                    recommendStatus = !recommendStatus;
+                    if (recommendStatus) {
+                        recommendBtn.classList.add('recommend');
+                        recommendation.textContent = (Number(recommendation.textContent) + 1).toString();
+                    }
+                    else {
+                        recommendBtn.classList.remove('recommend');
+                        recommendation.textContent = (Number(recommendation.textContent) - 1).toString();
+                    }
+                } catch (err) {
+                    networkAlert();
+                }
+            } else {
+                onlyUserAlert();
             }
-            else {
-                recommendBtn.classList.remove('recommend');
-                recommendation.textContent = (Number(recommendation.textContent) - 1).toString();
-            }
-            loading.classList.add('none')
-        })
+
+            loading.classList.add('none');
+        });
         contentsInput.innerHTML = post.contents;
 
         if (post.comments) {
             makeComments(post.comments);
         }
-
     }
 }
 
-function makeComments(objArr: any) {
+async function makeComments(objArr: any) {
     for (let i = 0; i < objArr.length; i++) {
-        console.log(objArr[i]);
         const commentContainer = document.createElement('div');
         commentContainer.classList.add('comment-container');
 
@@ -163,20 +174,21 @@ function makeComments(objArr: any) {
 
         const updateBtnBox = document.createElement('div');
         updateBtnBox.classList.add('text-update-btn-box');
-        // const updateBtn = document.createElement('button');
-        // updateBtn.setAttribute('type', 'button');
-        // updateBtn.classList.add('btn','comment-update-btn');
-        // updateBtn.textContent = "수정";
+        const updateBtn = document.createElement('button');
+        updateBtn.setAttribute('type', 'button');
+        updateBtn.classList.add('btn','comment-update-btn');
+        updateBtn.textContent = "수정";
 
         const deleteBtn = document.createElement('button');
         deleteBtn.setAttribute('type', 'button');
         deleteBtn.classList.add('btn', 'comment-update-btn');
         deleteBtn.textContent = "삭제";
 
-        if (!(currentUser === objArr[i].userName)) updateBtnBox.classList.add('hide');
+        if (!(await isLogedIn()) || (await getUserName() !== objArr[i].userName)) updateBtnBox.classList.add('hide');
         else {
-            // updateBtn.addEventListener('click', () =>{
-            // });
+            updateBtn.addEventListener('click', () =>{
+                console.log('!')
+            });
             deleteBtn.addEventListener('click', async () => {
                 Swal.fire({
                     title: '삭제하시겠습니까?',
@@ -204,7 +216,7 @@ function makeComments(objArr: any) {
                 });
             });
         }
-        //updateBtnBox.appendChild(updateBtn);
+        updateBtnBox.appendChild(updateBtn);
         updateBtnBox.appendChild(deleteBtn);
 
         commentBox.appendChild(commentTitle);
