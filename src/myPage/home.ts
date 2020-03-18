@@ -29,6 +29,9 @@ Auth.currentAuthenticatedUser()
     .then(user => {
         console.log(user);
         nickname.textContent = user.attributes.nickname;
+        if(user.attributes.phone_number_verified){
+            document.querySelector<HTMLElement>('.mobile-btn').classList.add('none');
+        }
         if (user.attributes.phone_number) {
             phoneNumber.textContent = phoneString(user.attributes.phone_number);
         }
@@ -54,7 +57,7 @@ Auth.currentAuthenticatedUser()
             winNumBox.appendChild(bonus);
 
             service.textContent = plan;
-            expiryDate.textContent = '~' + until;
+            if(until) expiryDate.textContent = '~' + until;
             rankHtml.classList.add(rankToClass(rank));
             rankHtml.textContent = rank;
             pointHtml.textContent = point;
@@ -122,11 +125,15 @@ function modifyMessage(option:{title:string, text?:string, confirmButtonText:str
         allowOutsideClick: () => !Swal.isLoading()
     });
 }
-async function recursiveMessage(title:string) {
+async function phoneMessage(title:string) {
     await modifyMessage({
         title, confirmButtonText: '확인', preConfirm: async (code: string) => {
             try {
                 await Auth.verifyCurrentUserAttributeSubmit('phone_number', code);
+                await Auth.currentAuthenticatedUser({bypassCache:true}).then(user => {
+                    phoneNumber.textContent = phoneString(user.attributes.phone_number);
+                    patchAuthAPI('/account/phone', {phone:user.attributes.phone_number});
+                }).catch(err => networkAlert());
                 Swal.fire({
                     title: '인증완료',
                     icon:'success'
@@ -134,7 +141,7 @@ async function recursiveMessage(title:string) {
             }
             catch (err) {
                 if (err.code) {
-                    recursiveMessage('잘못된 코드입니다');
+                    phoneMessage('잘못된 코드입니다');
                 }
             }
         }
@@ -182,8 +189,9 @@ function mobileUpdate(){
             await Auth.currentAuthenticatedUser({bypassCache:true}).then(user => {
                 nickname.textContent = user.attributes.nickname;
                 phoneNumber.textContent = phoneString(user.attributes.phone_number);
+                document.querySelector<HTMLElement>('.mobile-btn').classList.add('none');
             });
-            recursiveMessage('인증번호를 입력해주세요');
+            phoneMessage('인증번호를 입력해주세요');
 
         } else if (result.value.code === "InvalidParameterException"){
             Swal.fire({
