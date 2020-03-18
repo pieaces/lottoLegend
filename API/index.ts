@@ -1,5 +1,6 @@
 import Users from "./mariaDB/Users";
 import deleteUser from "./dynamo/deleteUser";
+import { Response } from "./Response";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -15,18 +16,23 @@ exports.handler = async (event: any) => {
 
     const userDB = new Users();
     switch (resource) {
-        case '/accounts/{userName}': {
+        case '/accounts': {
             switch (method) {
                 case 'DELETE': {
-                    const userName = event.pathParameters.userName;
-                    await deleteUser(userName);
-                    await userDB.delete(userName);
+                    await deleteUser(currentId);
+                    await userDB.delete(currentId);
                 }
                     break;
                 case 'PATCH': {
-                    const userName = event.pathParameters.userName;
                     const { nickName } = JSON.parse(event.body);
-                    await userDB.modifyNickName(userName, nickName);
+
+                    const users = await userDB.getNickNames();
+                    if (users.some(user => user.nickName === nickName)) {
+                        body = new Response(true, "이미 존재하는 닉네임입니다");
+                    } else {
+                        await userDB.modifyNickName(currentId, nickName);
+                        body = new Response(false);
+                    }
                 }
                     break;
             }
