@@ -6,6 +6,7 @@ import excObj from './IncludeExclude/exclude';
 import Selectr, { IOptions } from 'mobius1-selectr';
 import { headerSign } from '../amplify/auth';
 import Swal from 'sweetalert2';
+import { networkAlert } from '../functions';
 
 configure();
 headerSign();
@@ -13,11 +14,9 @@ headerSign();
 const roundSelectBox = document.querySelector<HTMLSelectElement>('#round-select-box');
 const loading = document.querySelector('.loading-box');
 
-init();
-
-async function init() {
-    loading.classList.remove('none');
-    const { include, exclude, rounds, answer } = await getAuthAPI('/numbers/piece');
+loading.classList.remove('none');
+getAuthAPI('/numbers/piece')
+.then(({ include, exclude, rounds, answer })=>{
     if (include || exclude) {
         const incNumList = new IncludeExclude(include, "include", incObj);
         const excNumList = new IncludeExclude(exclude, "exclude", excObj);
@@ -55,5 +54,5 @@ async function init() {
             footer: '<a href="/system/includeExclude.html">번호 선택하러 가기</a>'
         });
     }
-    loading.classList.add('none');
-}
+}).catch(err => networkAlert())
+.finally(() => loading.classList.add('none'));

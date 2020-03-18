@@ -23,7 +23,7 @@ document.write(` <header>
         <li> <a href="/system/basic.html">번호 조합기</a> </li>
             </ul>
             <ul>
-                <li> <a href="/statistics/excNumWeek.html">금주의 제외번호</a> </li>
+                <li> <a href="/statistics/weekNumbers.html">금주의 제외번호</a> </li>
                 <li> <a href="/board/analysis/list.html">공유 게시판</a> </li>
                 <li> <a href="/statistics/winNumbers.html">통계자료</a> </li>
                 </ul>
