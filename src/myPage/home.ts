@@ -27,6 +27,7 @@ const loading = document.querySelector('.loading-box');
 
 Auth.currentAuthenticatedUser()
     .then(user => {
+        console.log(user);
         nickname.textContent = user.attributes.nickname;
         if (user.attributes.phone_number) {
             phoneNumber.textContent = phoneString(user.attributes.phone_number);
@@ -164,25 +165,38 @@ function mobileUpdate(){
         showLoaderOnConfirm: true,
         preConfirm: async (phone: string) => {
             const user = (await Auth.currentAuthenticatedUser());
-            await Auth.updateUserAttributes(user, { phone_number: phone })
-            .catch(err => {
-                console.log('errr:', err);
-            })
-            return await Auth.verifyCurrentUserAttribute('phone_number')
-                .then(() => {
-                    console.log('a verification code is sent');
-                });
+            try {
+                await Auth.updateUserAttributes(user, { phone_number: '+82' + phone.slice(1) });
+                return await Auth.verifyCurrentUserAttribute('phone_number')
+            } catch (err) {
+                return err;
+            }
         },
         allowOutsideClick: () => !Swal.isLoading()
     }).then(async (result) => {
         console.log(result);
-        if (result.value) {
+        if(result.dismiss){
+
+        }
+        else if (!result.value.code) {
             Auth.currentAuthenticatedUser({bypassCache:true}).then(user => {
                 nickname.textContent = user.attributes.nickname;
                 phoneNumber.textContent = phoneString(user.attributes.phone_number);
             })            
             Swal.fire({
                 title: '변경완료되었습니다',
+            });
+        }else if(result.value.code === "InvalidParameterException"){
+            Swal.fire({
+                title: '오류',
+                text:'휴대폰번호 형식을 잘못 입력하셨습니다',
+                icon:'error'
+            });
+        }else{
+            Swal.fire({
+                title: '오류',
+                text:'예기치 못한 오류가 발생하였습니다',
+                icon:'error'
             });
         }
     })
