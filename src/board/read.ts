@@ -60,9 +60,11 @@ async function init() {
         } catch (err) {
             networkAlert();
         }
+        console.log(post);
         title.textContent = post.title;
         author.textContent = post.nickName;
         postRank.textContent = post.rank;
+        postRank.classList.add('rank');
         postRank.classList.add(rankToClass(post.rank));
         if (currentUser === post.userName) {
             contentsUpdateBtn.classList.remove('hide');
@@ -237,7 +239,6 @@ function limitTxtAreaCount() {
         }
     }
 }
-
 
 function makeNum(number: number[]) {
     const numContainer = document.querySelector('.inc-exc-num-container');
