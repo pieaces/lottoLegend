@@ -109,6 +109,7 @@
   height:100%;
   font-size:1.4rem;
   text-align: center;
+  word-break: keep-all;
   opacity: 0.7;
   }
 
@@ -188,6 +189,19 @@
 
     .mid-nav-menu > li:nth-child(1)~li > a {
       font-size:1.4rem;
+    }
+
+    .hover-menu-box.container{
+      width:100%;
+      margin:0;
+    }
+
+    .hover-menu-box >ul:first-child{
+      display:none;
+    }
+
+    .hover-menu-box > ul >li{
+      height:6rem;
     }
 
     .bottom-nav-container {

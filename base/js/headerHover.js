@@ -14,17 +14,20 @@ function mqHeaderFunc(mediaQuery) {
         headerMenuList.removeEventListener('mouseover', headerMenuListShow);
         headerMenuList.removeEventListener('mouseout', headerMenuListHide);
 
-
         for (const node of headerMenuTitle) {
-            node.addEventListener('click', () => {
+            node.addEventListener('click', (e) => {
                 headerMenuList.classList.remove('none');
+                e.stopPropagation();
             });
-
         }
 
-        let headerMenu = Array.from(headerMenuTitle).concat(Array.from(headerMenuList));
-
-        const bodyAll = document.querySelectorAll('body *');
+        let myExclusiveEl = Array.from(
+            document.querySelectorAll('body *')
+        );
+        let myEls = Array.from(
+            document.querySelectorAll('.mid-nav-container *')
+        );
+        myEls.push(document.querySelector('.mid-nave-container'));
 
         myExclusiveEl = myExclusiveEl.filter(parent => {
             let containedByExclusionNode = myEls.filter(child => {
@@ -40,36 +43,11 @@ function mqHeaderFunc(mediaQuery) {
                 return false;
             }
         });
-
         for (const node of myExclusiveEl) {
             node.addEventListener("click", () => {
-                if (node.className === "filter-box") {
-                } else {
-                    filterListBox.classList.add("none");
-                    filterArrow.classList.add("fa-sort-down");
-                    filterArrow.classList.remove("fa-sort-up");
-                    this.flag = true;
-                }
+                headerMenuList.classList.add('none');
             });
         }
-
-        // for (const node of bodyAll) {
-        //     console.log(node);
-        //     node.addEventListener("click", () => {
-        //         if (node.className === "mid-nav-container") {
-
-        //         } else {
-        //             if (!flag) {
-        //                 headerMenuList.classList.remove('none');
-        //                 flag = true;
-        //             } else {
-        //                 headerMenuList.classList.add('none');
-        //                 flag = false;
-        //             }
-        //         }
-        //     });
-        // }
-
     } else {
         for (const node of headerMenuTitle) {
             node.addEventListener('mouseover', headerMenuListShow);
@@ -87,3 +65,4 @@ function headerMenuListShow() {
 function headerMenuListHide() {
     headerMenuList.classList.add('none');
 }
+
