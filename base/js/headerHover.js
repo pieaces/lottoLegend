@@ -1,87 +1,76 @@
-const headerMenu = document.querySelectorAll('.mid-nav-menu >li:nth-child(1)~li');
-const headerHoverMenuContainer = document.querySelector('.hover-menu-container');
-
-// (function () {
-//     let flag = false;
-//     for (const node of headerMenu) {
-
-//         node.addEventListener('click', () => {
-//             if (!flag) {
-//                 headerHoverMenuContainer.classList.remove('none');
-//                 flag = true;
-
-//             } else {
-//                 headerHoverMenuContainer.classList.add('none');
-//                 flag = false;
-
-//             }
-//         });
-
-//     }
-
-// })();
-
-
-
-
-// let myExclusiveEl = Array.from(document.querySelectorAll(DropDown.body));
-// let myEls = Array.from(document.querySelectorAll(DropDown.dropDownBox));
-
-// myExclusiveEl = myExclusiveEl.filter(parent => {
-//     let containedByExclusionNode = myEls.filter(child => {
-//         if (parent === child) {
-//             return true;
-//         } else {
-//             return false;
-//         }
-//     });
-//     if (containedByExclusionNode.length === 0) {
-//         return true;
-//     } else {
-//         return false;
-//     }
-// });
-
-
-
-// for (const node of myExclusiveEl) {
-//     node.addEventListener("click", () => {
-//         if (node.className === "filter-box") {
-//         } else {
-//             filterListBox.classList.add("none");
-//             filterArrow.classList.add("fa-sort-down");
-//             filterArrow.classList.remove("fa-sort-up");
-//             this.flag = true;
-//         }
-//     });
-// }
+const headerMenuTitle = document.querySelectorAll('.mid-nav-menu >li:nth-child(1)~li');
+const headerMenuList = document.querySelector('.hover-menu-container');
 
 const mqMobile = window.matchMedia("(max-width: 767px)");
 
+mqMobile.addListener(mqHeaderFunc);
+
 function mqHeaderFunc(mediaQuery) {
     if (mediaQuery.matches) {
-        for (const node of headerMenu) {
-            node.addEventListener('mouseover', () => {
-                headerHoverMenuContainer.classList.remove('none');
-            })
+        for (const node of headerMenuTitle) {
+            node.removeEventListener('mouseover', headerMenuListShow);
+            node.removeEventListener('mouseout', headerMenuListHide);
+        }
+        headerMenuList.removeEventListener('mouseover', headerMenuListShow);
+        headerMenuList.removeEventListener('mouseout', headerMenuListHide);
 
-            node.addEventListener('mouseout', () => {
-                headerHoverMenuContainer.classList.add('none');
-            })
+
+        let flag = false;
+        for (const node of headerMenuTitle) {
+
+            node.addEventListener('click', () => {
+                headerMenuList.classList.remove('none');
+                flag = true;
+            });
+
         }
 
-        headerHoverMenuContainer.addEventListener('mouseover', () => {
-            headerHoverMenuContainer.classList.remove('none');
-        })
+        let bodyAll = Array.from(document.querySelectorAll('body *'));
+        let headerMenu = Array.from(headerMenuTitle).concat(Array.from(headerMenuList));
 
-        headerHoverMenuContainer.addEventListener('mouseout', () => {
-            headerHoverMenuContainer.classList.add('none');
-        })
+        bodyAll = bodyAll.filter(parent => {
+            let containedByExclusionNode = headerMenu.filter(child => {
+                if (parent === child) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+            if (containedByExclusionNode.length === 0) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+
+        console.log(bodyAll);
+        for (const node of bodyAll) {
+
+            node.addEventListener("click", () => {
+                if (!flag) {
+                    headerMenuList.classList.remove('none');
+                    flag = true;
+                } else {
+                    headerMenuList.classList.add('none');
+                    flag = false;
+                }
+            });
+        }
+
     } else {
-
+        for (const node of headerMenuTitle) {
+            node.addEventListener('mouseover', headerMenuListShow);
+            node.addEventListener('mouseout', headerMenuListHide);
+        }
+        headerMenuList.addEventListener('mouseover', headerMenuListShow);
+        headerMenuList.addEventListener('mouseout', headerMenuListHide);
     }
 }
 
-mqMobile.addListener(mqHeaderFunc);
+function headerMenuListShow() {
+    headerMenuList.classList.remove('none');
+}
 
-
+function headerMenuListHide() {
+    headerMenuList.classList.add('none');
+}
