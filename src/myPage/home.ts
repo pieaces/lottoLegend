@@ -107,35 +107,54 @@ Auth.currentAuthenticatedUser()
     )
     .catch(err => onlyUserAlert());
 
-function nicknameUpdate() {
-    Swal.fire({
-        title: '변경하실 닉네임을 입력해주세요',
+function modifyMessage(option:{title:string, text?:string, confirmButtonText:string, preConfirm:(param:any)=>any}) {
+    return Swal.fire({
+        title:option.title,
         input: 'text',
         inputAttributes: {
             autocapitalize: 'off'
         },
         showCancelButton: true,
-        confirmButtonText: '변경',
+        confirmButtonText:option.confirmButtonText,
         cancelButtonText: '취소',
         showLoaderOnConfirm: true,
-        preConfirm: (nickName: string) => {
-            return patchAuthAPI('/account', { nickName })
-                .then(async (response) => {
-                    if (response.error) {
-                        throw new Error(response.message)
-                    }
-                    const user = (await Auth.currentAuthenticatedUser());
-                    await Auth.updateUserAttributes(user, { nickname: nickName });
-                    return response
-                })
-                .catch(error => {
-                    Swal.showValidationMessage(
-                        error
-                    )
-                });
-        },
+        preConfirm:option.preConfirm,
         allowOutsideClick: () => !Swal.isLoading()
-    }).then(async (result) => {
+    });
+}
+async function recursiveMessage(title:string) {
+    await modifyMessage({
+        title, confirmButtonText: '확인', preConfirm: async (code: string) => {
+            try {
+                await Auth.verifyCurrentUserAttributeSubmit('phone_number', code);
+                Swal.fire({
+                    title: '인증완료',
+                    icon:'success'
+                });
+            }
+            catch (err) {
+                if (err.code) {
+                    recursiveMessage('잘못된 코드입니다');
+                }
+            }
+        }
+    });
+}
+function nicknameUpdate() {
+    modifyMessage({title:'변경하실 닉네임을 입력해주세요', confirmButtonText:'변경', preConfirm: async (nickName: string) => {
+        try {
+            const response = await patchAuthAPI('/account', { nickName });
+            if (response.error) {
+                throw new Error(response.message);
+            }
+            const user = (await Auth.currentAuthenticatedUser());
+            await Auth.updateUserAttributes(user, { nickname: nickName });
+            return response;
+        }
+        catch (error) {
+            Swal.showValidationMessage(error);
+        }
+    }}).then(async (result) => {
         if (result.value) {
             Auth.currentAuthenticatedUser({bypassCache:true}).then(user => {
                 nickname.textContent = user.attributes.nickname;
@@ -147,49 +166,35 @@ function nicknameUpdate() {
     });
 }
 
-function serviceUpdate() {
-
-}
-
 function mobileUpdate(){
-    Swal.fire({
-        title: '인증하실 휴대폰번호를 입력해주세요',
-        text:'숫자로만 입력해주세요 예)01012345678',
-        input: 'text',
-        inputAttributes: {
-            autocapitalize: 'off'
-        },
-        showCancelButton: true,
-        confirmButtonText: '확인',
-        cancelButtonText: '취소',
-        showLoaderOnConfirm: true,
-        preConfirm: async (phone: string) => {
-            const user = (await Auth.currentAuthenticatedUser());
-            try {
-                await Auth.updateUserAttributes(user, { phone_number: '+82' + phone.slice(1) });
-                return await Auth.verifyCurrentUserAttribute('phone_number')
-            } catch (err) {
-                return err;
-            }
-        },
-        allowOutsideClick: () => !Swal.isLoading()
-    }).then(async (result) => {
-        console.log(result);
+    modifyMessage({title:'인증하실 휴대폰번호를 입력해주세요',text:'숫자로만 입력해주세요 예)01012345678', confirmButtonText:'확인',preConfirm: async (phone: string) => {
+        const user = (await Auth.currentAuthenticatedUser());
+        try {
+            await Auth.updateUserAttributes(user, { phone_number: '+82' + phone.slice(1) });
+            return await Auth.verifyCurrentUserAttribute('phone_number')
+        } catch (err) {
+            return err;
+        }
+    }}).then(async (result) => {
         if(result.dismiss){
-
         }
         else if (!result.value.code) {
-            Auth.currentAuthenticatedUser({bypassCache:true}).then(user => {
+            await Auth.currentAuthenticatedUser({bypassCache:true}).then(user => {
                 nickname.textContent = user.attributes.nickname;
                 phoneNumber.textContent = phoneString(user.attributes.phone_number);
-            })            
-            Swal.fire({
-                title: '변경완료되었습니다',
             });
-        }else if(result.value.code === "InvalidParameterException"){
+            recursiveMessage('인증번호를 입력해주세요');
+
+        } else if (result.value.code === "InvalidParameterException"){
             Swal.fire({
                 title: '오류',
                 text:'휴대폰번호 형식을 잘못 입력하셨습니다',
+                icon:'error'
+            });
+        } else if(result.value.code === "LimitExceededException"){
+            Swal.fire({
+                title: '오류',
+                text: '시도횟수가 기준을 초과하였습니다. 잠시후 다시 시도해주세요',
                 icon:'error'
             });
         }else{
@@ -199,5 +204,10 @@ function mobileUpdate(){
                 icon:'error'
             });
         }
-    })
+    });
+}
+
+
+function serviceUpdate() {
+
 }
