@@ -5,7 +5,7 @@ import { Method } from '../Lotto/interface/LottoDB';
 import Calculate from '../Lotto/class/Calculate';
 import Analyze from '../Lotto/class/Analyze';
 import { setTimeout } from 'timers';
-import { PutItemInput } from 'aws-sdk/clients/dynamodb';
+import { PutItemInput, NumberSetAttributeValue, GetItemInput } from 'aws-sdk/clients/dynamodb';
 interface LottoData extends LData {
     winner: number;
     winAmount: number;
@@ -83,9 +83,12 @@ export default async function putLotto(round: number): Promise<void> {
                     },
                 }
             },
-            "Win":{
-                M:{
+            "Win": {
+                M: {
                 }
+            },
+            "Week": {
+                NS: await getWeekNumberSet(round)
             }
         },
         TableName: "LottoData"
@@ -106,6 +109,27 @@ export default async function putLotto(round: number): Promise<void> {
     });
 }
 
+function getWeekNumberSet(round: number): Promise<NumberSetAttributeValue> {
+    const params: GetItemInput = {
+        ProjectionExpression: 'Week',
+        TableName: "LottoData",
+        Key: {
+            'Round': {
+                N: round.toString()
+            }
+        },
+    };
+
+    return new Promise((resolve, reject) => {
+        dynamoDB.getItem(params, function (err, data) {
+            if (err) {
+                reject(err);
+            }
+            resolve(data.Item.Week.NS)
+        });
+    });
+}
+
 export async function writeAllLotto(until: number, from: number = 1): Promise<void> {
     let round = from;
     try {
@@ -115,6 +139,6 @@ export async function writeAllLotto(until: number, from: number = 1): Promise<vo
         }
     } catch (err) {
         console.error('-----');
-        setTimeout(()=>writeAllLotto(until, round), 100);
+        setTimeout(() => writeAllLotto(until, round), 100);
     }
 }

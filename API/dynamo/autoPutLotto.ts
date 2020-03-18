@@ -6,7 +6,7 @@ import { GetItemInput } from 'aws-sdk/clients/dynamodb';
 
 export default async function autoPutLotto() {
     const total = getCurrentRound();
-    const count = await counterLotto();
+    const count = await counterLotto() - 1;
     console.log(`현재:${count}, 로또전체:${total}`);
     if (count < total) {
         try {
