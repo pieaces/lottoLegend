@@ -50,9 +50,11 @@ exports.handler = async (event: any) => {
                             const result: any = numbersToData(data.numbers, lottoData);
                             result.method = data.method;
                             result.tool = data.tool;
-                            result.date = data.date;
+                            const date = new Date(data.date);
+                            date.setHours(date.getHours()+9);
+                            result.date = date.toISOString();
                             return result;
-                        });
+                        }).reverse();
                         body = { data, rounds };
                         if (Number(rounds[rounds.length - 1]) <= getCurrentRound()) {
                             body.answer = await getLotto2(Number(rounds[rounds.length - 1]));
