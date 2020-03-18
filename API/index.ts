@@ -2,6 +2,7 @@ import Users from "./mariaDB/Users";
 import deleteUser from "./dynamo/deleteUser";
 import { Response } from "./Response";
 import verify from "./auth";
+import setPhone from "./dynamo/setPhone";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -29,7 +30,7 @@ exports.handler = async (event: any) => {
             return response;
         }
     }
-    
+
     const userDB = new Users();
     switch (resource) {
         case '/account': {
@@ -50,6 +51,14 @@ exports.handler = async (event: any) => {
                         body = new Response(false);
                     }
                 }
+                    break;
+            }
+        }
+        case '/account/phone': {
+            switch (method) {
+                case 'PATCH':
+                    const { phone } = JSON.parse(event.body);
+                    await setPhone(currentId, phone);
                     break;
             }
         }
