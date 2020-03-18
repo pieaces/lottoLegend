@@ -1,18 +1,10 @@
-import jwt from 'jsonwebtoken';
-import jwkToPem from 'jwk-to-pem';
 import { Plan, getPlan } from './dynamoDB/userInfo';
 import Calculate from './Lotto/class/Calculate';
 import Generator from './Lotto/class/Generator';
 import { numbersToData } from './dynamoDB/generator';
 import { scanLotto } from './funtions';
-const pem = jwkToPem({
-    "alg": "RS256",
-    "e": "AQAB",
-    "kid": "mv27gjWoWPX6h3VfMR2y2WsKGIAwdQ9jXRgn4cnMrYo=",
-    "kty": "RSA",
-    "n": "lqR6rfxpx4fNjalDjNrG1qQCo0sd7uLgIEwCRqg7bgvY6mbKPFhY0EbQGmgKl8-_p1Zx48r4XJ5zeKmbcpBBHrY57fQOsZGQonXSFH4FQDRMVMFVHwExokvGLnk83mJpuHikO1b-IMmsUlRwm6NE_Jgu7Yg4ErHPNcx3kBYfFjHO7h0J3jZ6HM_5uW8QPLh9Mvt_ZDxr37ElctecSXiWoKr7ySbsTt_W5qFxMHLkd9mwVO_CC3k5pBpLXsn5VKRAiM51X_aaQ1MMGTZ4f-0KFZr3jChn7-7BKouJoGO43x1FdkexdiBjRIWGzTszFXeziTNFY1R9uTtzrFdgeqMJ3w",
-    "use": "sig"
-});
+import verify from './auth';
+
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
     //"Access-Control-Allow-Credentials" : true // Required for cookies, authorization headers with HTTPS
@@ -23,10 +15,10 @@ exports.handler = async (event: any) => {
 
     let currentId: string;
     try {
-        const userInfo:any = jwt.verify(event.headers['x-id-token'], pem, { algorithms: ['RS256'] });
+        const userInfo = verify(event.headers['x-id-token']);
         currentId = userInfo["cognito:username"];
     } catch (err) {
-        console.log('Intruder Alert! - Expired Token || Not LogedIn', err);
+        console.log('Intruder Alert! - Expired Token', err);
         const response = {
             statusCode: 400,
             headers,
