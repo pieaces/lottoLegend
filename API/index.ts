@@ -198,10 +198,10 @@ exports.handler = async (event: any) => {
                     if(winner <= 5) myData.winner = winner;
 
                     let includeAnswer = 0, excludeAnswer = 0;
-                    myData.include.before && myData.include.before.forEach(num => {
+                    myData.include && myData.include.before && myData.include.before.forEach(num => {
                         if (lotto.numbers.some(item => item === num)) includeAnswer++
                     });
-                    myData.exclude.before && myData.exclude.before.forEach(num => {
+                    myData.exclude && myData.exclude.before && myData.exclude.before.forEach(num => {
                         if (lotto.numbers.some(item => item === num)) excludeAnswer++
                     });
 

@@ -181,8 +181,8 @@ export function getMyHome(userName: string): Promise<MyPage> {
             else {
                 const result: MyPage = {};
 
-                const numbersData = data.Item.Numbers.M[round.toString()].L;
-                result.numsArr = numbersData.map(item => {
+                const numbersData = data.Item.Numbers.M[round.toString()] && data.Item.Numbers.M[round.toString()].L;
+                result.numsArr = numbersData && numbersData.map(item => {
                     return {
                         numbers: NSToNumbers(item.M.numbers.NS).sort((a, b) => a - b),
                         date: item.M.date.S,
