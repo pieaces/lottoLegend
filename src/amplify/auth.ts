@@ -17,14 +17,12 @@ export function headerSign() {
 }
 
 export async function getUserName() {
-    return await Auth.currentSession()
-        .then(session => session.getIdToken())
-        .then(idToken => idToken.payload['cognito:username']);
+    return await Auth.currentAuthenticatedUser()
+        .then(user => user.username)
 }
 export async function getNickName() {
-    return await Auth.currentSession()
-        .then(session => session.getIdToken())
-        .then(idToken => idToken.payload.nickname);
+    return await Auth.currentAuthenticatedUser()
+        .then(user => user.attributes.nickname);
 }
 export async function signIn(username: string, password: string) {
     if(username === '' || password === ''){
