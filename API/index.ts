@@ -32,7 +32,7 @@ exports.handler = async (event: any) => {
     
     const userDB = new Users();
     switch (resource) {
-        case '/accounts': {
+        case '/account': {
             switch (method) {
                 case 'DELETE': {
                     await deleteUser(currentId);
