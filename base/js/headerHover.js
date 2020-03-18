@@ -26,10 +26,10 @@ function mqHeaderFunc(mediaQuery) {
         }
 
         let bodyAll = Array.from(document.querySelectorAll('body *'));
-        let headerMenu = Array.from(headerMenuTitle).concat(Array.from(headerMenuList));
+        let midNavMenu = Array.from(document.querySelectorAll('.mid-nav-menu *'));
 
         bodyAll = bodyAll.filter(parent => {
-            let containedByExclusionNode = headerMenu.filter(child => {
+            let containedByExclusionNode = midNavMenu.filter(child => {
                 if (parent === child) {
                     return true;
                 } else {
