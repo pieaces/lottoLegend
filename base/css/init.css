@@ -170,16 +170,14 @@ input[type="checkbox"]{
 
 
 .rank{
-  margin-right: 0.5rem;
-  font-weight: 500;
-  font-size: 1.5rem;
+  display: inline-block;
   width: 1.8rem;
   height: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  margin-right: 0.5rem;
   border-radius: 4px;
+  font-weight: 500;
+  font-size: 1.4rem;
+  text-align: center;
 }
 
 @keyframes rank{
