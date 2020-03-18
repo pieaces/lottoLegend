@@ -128,7 +128,7 @@ async function init() {
 
     document.getElementById('make').addEventListener('click', async () => {
         if (!lineCheck || lineCheck && sum() === 6) {
-            generatorLoading(1000);
+            generatorLoading(1250);
             if (lineCheck) {
                 const lineCount = [Number(first.value), Number(tenth.value), Number(twentieth.value), Number(thirtieth.value), Number(fortieth.value)];
                 const choice = makeChoice(exclude);
