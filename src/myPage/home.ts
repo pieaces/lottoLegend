@@ -21,6 +21,8 @@ const serviceUpdateBtn = document.querySelector('#service-update');
 const rankHtml = document.querySelector('.rank');
 const lottoRank = document.querySelector('#lotto-rank');
 
+const loading = document.querySelector('.loading-box');
+
 Auth.currentSession()
     .then(session => session.getIdToken())
     .then(idToken => {
@@ -31,7 +33,8 @@ Auth.currentSession()
         }
     });
 
-getAuthAPI('/mypage').then(({ include, exclude, winner, lotto, plan, until, rank, point }) => {
+loading.classList.remove('none');
+getAuthAPI('/mypage').then(({numsArr, total, include, exclude, winner, lotto, plan, until, rank, point }) => {
     lotto.numbers.forEach((num: number) => {
         const div = document.createElement('div');
         div.textContent = num.toString();
@@ -54,18 +57,18 @@ getAuthAPI('/mypage').then(({ include, exclude, winner, lotto, plan, until, rank
     rankHtml.textContent = rank;
     pointHtml.textContent = point;
 
-    if (include) {
+    if (include && include.before) {
         const span = document.createElement('span');
-        span.innerHTML = `<span id="inc-num-total">${include.size}</span>개 중&nbsp;<span id="inc-num">${include.answer}</span>개 출현</span>`;
+        span.innerHTML = `<span id="inc-num-total">${include.before.size}</span>개 중&nbsp;<span id="inc-num">${include.before.answer}</span>개 출현</span>`;
         document.getElementById('myOldInclude').appendChild(span);
     } else {
         const span = document.createElement('span');
         span.textContent = '-';
         document.getElementById('myOldInclude').appendChild(span);
     }
-    if (exclude) {
+    if (exclude && exclude.before) {
         const span = document.createElement('span');
-        span.innerHTML = `<span id="exc-num-total">${exclude.size}</span>개 중&nbsp;<span id="exc-num">${exclude.answer}</span>개 적중</span>`;
+        span.innerHTML = `<span id="exc-num-total">${exclude.before.size}</span>개 중&nbsp;<span id="exc-num">${exclude.before.answer}</span>개 적중</span>`;
         document.getElementById('myOldExclude').appendChild(span);
     } else {
         const span = document.createElement('span');
@@ -74,33 +77,30 @@ getAuthAPI('/mypage').then(({ include, exclude, winner, lotto, plan, until, rank
     }
     if (winner <= 5) lottoRank.textContent = winner + '등';
     else lottoRank.textContent = '-';
-}).catch(err => networkAlert());
 
-getAuthAPI('/numbers/piece', { flag: true }).then(({ include, exclude, total }) => {
     document.querySelectorAll<HTMLElement>('.current-round').forEach(node => node.textContent = total);
     document.querySelector<HTMLElement>('.before-round').textContent = (total - 1).toString();
 
-    if (include) {
-        const incNumList = new IncludeExclude(include, "include", incObj);
+    if (include && include.current) {
+        const incNumList = new IncludeExclude(include.current, "include", incObj);
         incNumList.makePage();
     } else {
         document.querySelector<HTMLElement>('.inc-num-container').appendChild(makeNoneBox())
     }
-    if (exclude) {
-        const excNumList = new IncludeExclude(exclude, "exclude", excObj);
+    if (exclude && exclude.current) {
+        const excNumList = new IncludeExclude(exclude.current, "exclude", excObj);
         excNumList.makePage();
     } else {
         document.querySelector<HTMLElement>('.exc-num-container').appendChild(makeNoneBox())
-    }
-    getAuthAPI('/numbers/mass/' + total).then(({ data }) => {
-        if (data && data.length > 0) {
-            makeTable(document.querySelector<HTMLElement>('.mypage-table-num-box'), data, total, false);
-        } else {
-            document.querySelector<HTMLElement>('.mypage-table-num-box').appendChild(makeNoneBox());
-        }
-    }).catch(err => networkAlert());
-}).catch(err => networkAlert());
+    } 
 
+    if (numsArr && numsArr.length > 0) {
+        makeTable(document.querySelector<HTMLElement>('.mypage-table-num-box'), numsArr, total, false);
+    } else {
+        document.querySelector<HTMLElement>('.mypage-table-num-box').appendChild(makeNoneBox());
+    }
+}).catch(err => networkAlert())
+.finally(() => loading.classList.add('none'));
 
 nicknameUpdateBtn.addEventListener('click', nicknameUpdate);
 serviceUpdateBtn.addEventListener('click', serviceUpdate)
