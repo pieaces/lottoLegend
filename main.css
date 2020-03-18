@@ -53,6 +53,7 @@
 }
 
 .login-input-container > input{
+  width:100%;
   height:3.4rem;
 }
 
@@ -61,7 +62,7 @@
 }
 
 .login-btn {
-  width: 100%;
+  width: 33%;
   margin-left:0.5rem;
   background-color: var(--main-color);
   color: var(--default-color);
@@ -108,3 +109,50 @@
 .main-1-3-2{
   width:33%;
 }
+
+
+@media (min-width: 0px) and (max-width: 767px) {
+
+  .main-1-1,
+  .main-1-2,
+  .main-1-3{
+    display:block;
+  }
+
+  .main-1-1 > div,
+  .main-1-2 > div,
+  .main-1-3 > div{
+    width:100%;
+  }
+
+  .main-1-1 > .main-1-1-1{
+    margin-bottom: 1rem;
+  }
+
+  .main-1-1 > .main-1-1-2{
+    height:auto;
+  }
+
+  .main-1-1 > .main-1-1-2 > div{
+    height:20rem;
+    margin-bottom:1rem;
+  }
+
+
+  .main-1-2,
+  .main-1-3 {
+    height:auto;
+  }
+
+  .main-1-2 > div,
+  .main-1-3 > div{
+    height:20rem;
+    margin-bottom:1rem;
+  }
+
+
+}
+
+
+
+ 

@@ -22,6 +22,7 @@
     border-right:1px solid var(--border-color);
     background-color: rgb(245,245,245);
     font-size:1.6rem;
+    word-break: keep-all;
   }
   
   .account-title{
@@ -34,7 +35,6 @@
   .account-input-box{
     display:flex;
     align-items: center;
-    text-align: center;
     width:75%;
     padding:1rem;
   }
@@ -47,6 +47,7 @@
   .account-info-box{
     padding:1rem;
     font-size:1.4rem;
+    word-break: keep-all;
   }
   
   .account-btn {
@@ -77,5 +78,16 @@
   
   .dash{
     padding:0.5rem;
+  }
+  
+  @media (min-width: 0px) and (max-width: 767px) {
+
+    .account-input-box{
+      display:block;
+    }
+
+    .account-info-box{
+      padding:1rem 0;
+    }
   }
   
