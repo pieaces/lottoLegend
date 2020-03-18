@@ -26,11 +26,9 @@ const defaultBorder = "1px solid rgba(0,0,0,0.1)";
 
 const tableNumBox = document.querySelector<HTMLElement>('.mypage-table-num-box');
 
-init();
-
-async function init() {
-    loading.classList.remove('none');
-    const { data, rounds, answer } = await getAuthAPI('/numbers/mass');
+loading.classList.remove('none');
+getAuthAPI('/numbers/mass')
+.then(({ data, rounds, answer }) => {
     if (data) {
         const roundConfig: IOptions = {
             data: rounds.reverse().map((round: number) => {
@@ -185,10 +183,9 @@ async function init() {
             icon: 'info',
             footer: '<a href="/system/basic.html">번호 조합기 사용하기</a>'
         });
-        loading.classList.add('none');
     }
-}
-
+}).catch(err => networkAlert())
+.finally(() => loading.classList.add('none'));
 
 function numInfoToggle() {
     let flag = true;

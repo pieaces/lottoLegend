@@ -10,10 +10,25 @@ configure();
 getIdToken();
 headerSign();
 
-init();
-function init() {
-    const dataSetCurrent = [];
+const dataSetCurrent = [];
+const round = "901";
+const numbers = [];
+const hitsArr = [];
 
+for (let i = 0; i < 10; i++) {
+    numbers.push(i + 5);
+    hitsArr.push(false);
+}
+
+const obj = {
+    rounds: round,
+    hitsArr: hitsArr,
+    numbers: numbers
+}
+dataSetCurrent.push(obj);
+
+const dataSet = [];
+for (let i = 0; i < 2; i++) {
     const round = "901";
     const numbers = [];
     const hitsArr = [];
@@ -28,64 +43,36 @@ function init() {
         hitsArr: hitsArr,
         numbers: numbers
     }
-    dataSetCurrent.push(obj);
-
-
-    const dataSet = [];
-    for (let i = 0; i < 2; i++) {
-        const round = "901";
-        const numbers = [];
-        const hitsArr = [];
-
-        for (let i = 0; i < 10; i++) {
-            numbers.push(i + 5);
-            hitsArr.push(false);
-        }
-
-        const obj = {
-            rounds: round,
-            hitsArr: hitsArr,
-            numbers: numbers
-        }
-        dataSet.push(obj);
-    }
-
-
-
-    const rounds = ['1', '2', '3', '4', '5'];
-    ///////////////////////////////////////////////
-
-
-
-    makeTable(dataSetCurrent, 'current');
-    makeTable(dataSet, 'past');
-
-    const config: IOptions = {
-        data: rounds.map((round: string) => {
-            return {
-                text: round,
-                value: round
-            }
-        }),
-    };
-    const selector = new Selectr(selectBox, config);
-    selector.on('selectr.change', async (option) => {
-
-    });
-
+    dataSet.push(obj);
 }
 
-function makeTable(dataSet: ({ rounds: string, numbers: number[], hitsArr: boolean[] })[], isCurrent: string) {
+const rounds = ['1', '2', '3', '4', '5'];
 
+makeTable(dataSetCurrent, 'current');
+makeTable(dataSet, 'past');
+
+const config: IOptions = {
+    data: rounds.map((round: string) => {
+        return {
+            text: round,
+            value: round
+        }
+    }),
+};
+const selector = new Selectr(selectBox, config);
+selector.on('selectr.change', async (option) => {
+});
+
+
+
+function makeTable(dataSet: ({ rounds: string, numbers: number[], hitsArr: boolean[] })[], isCurrent: string) {
     for (let k = 0; k < dataSet.length; k++) {
         const div = document.createElement('div');
         div.classList.add('lotto-num-container');
 
         const table = document.createElement('table');
         table.classList.add('table', 'lotto-num-table');
-
         const thead = document.createElement('thead');
-
 
         const titleTr = document.createElement('tr');
         titleTr.classList.add('lotto-num-table-title');
@@ -93,7 +80,6 @@ function makeTable(dataSet: ({ rounds: string, numbers: number[], hitsArr: boole
         const th = document.createElement('th');
         th.setAttribute('colspan', `${dataSet[k].numbers.length}`);
         th.textContent = `${dataSet[k].rounds}회`;
-
 
         titleTr.appendChild(th);
         thead.appendChild(titleTr);
@@ -119,7 +105,6 @@ function makeTable(dataSet: ({ rounds: string, numbers: number[], hitsArr: boole
         }
 
         tbody.appendChild(NumberTr);
-
         if (isCurrent === "past") {
             div.classList.add('lotto-num-container-past');
             let hitsTotal = 0;
@@ -139,25 +124,18 @@ function makeTable(dataSet: ({ rounds: string, numbers: number[], hitsArr: boole
             table.appendChild(tbody);
 
             const tfoot = document.createElement('tfoot');
-
             const resultTr = document.createElement('tr');
-
             const resultTd = document.createElement('td');
+
             resultTd.setAttribute('colspan', `${dataSet[k].numbers.length}`);
-
             resultTd.innerHTML = `${dataSet[k].numbers.length}개 중 <span class="exc-num-week-hit">${hitsTotal}개</span> 적중`;
-
             resultTr.appendChild(resultTd);
-
             tfoot.appendChild(resultTr);
-
             table.appendChild(tfoot);
-
         }
 
         table.appendChild(tbody);
         div.appendChild(table);
-
         excNumWeekWrapper.appendChild(div);
         if (isCurrent === 'current') {
             const boundary = document.createElement('div');
@@ -165,6 +143,4 @@ function makeTable(dataSet: ({ rounds: string, numbers: number[], hitsArr: boole
             excNumWeekWrapper.appendChild(boundary);
         }
     }
-
 }
-
