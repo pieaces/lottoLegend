@@ -3,7 +3,7 @@ import { Plan, getPlan } from '../userInfo';
 import { Response } from '../../Response';
 import { numsArrToAWSMapList, NSToNumbers, numbersToNS } from './functions';
 import { AWSError } from 'aws-sdk/lib/error';
-import { UpdateItemInput, GetItemOutput, GetItemInput } from 'aws-sdk/clients/dynamodb';
+import { UpdateItemInput, GetItemOutput, GetItemInput, ScanInput, ScanOutput } from 'aws-sdk/clients/dynamodb';
 
 export enum SelectTool {
     "free" = 'a',
@@ -281,7 +281,7 @@ export async function updateIncOrExcNumbers(userName: string, round: number, num
         });
     });
 }
-export function deleteIncOrExcNumbers(userName: string, round:number, choice: IncOrExc): Promise<void> {
+export function deleteIncOrExcNumbers(userName: string, round: number, choice: IncOrExc): Promise<void> {
     const params: UpdateItemInput = {
         TableName: 'LottoUsers',
         ExpressionAttributeNames: {
@@ -426,6 +426,33 @@ export function getIncOrExcRounds(userName: string): Promise<string[]> {
                 const rounds = Object.keys(data.Item.IncludeExclude.M).reverse();
                 resolve(rounds);
             }
+        });
+    });
+}
+
+export function scanWeekNumbers():Promise<{round:number, week:number[], numbers?:number[]}[]> {
+    const params: ScanInput = {
+        TableName: 'LottoData',
+        ExpressionAttributeNames: {
+            "#Round": 'Round',
+            "#Week": 'Week',
+            "#Numbers": 'Numbers'
+        },
+        ProjectionExpression: '#Round, #Week, #Numbers',
+    };
+
+    return new Promise((resolve, reject) => {
+        dynamoDB.scan(params, (err: AWSError, data: ScanOutput) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(data.Items.filter(item => 'Week' in item).map(item => {
+                return {
+                    round: Number(item.Round.N),
+                    week: item.Week.NS.map(num => Number(num)).sort((a, b) => a - b),
+                    numbers: item.Numbers && item.Numbers.NS.map(num =>Number(num))
+                }
+            }).sort((a, b) => b.round - a.round));
         });
     });
 }

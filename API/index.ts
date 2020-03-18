@@ -1,6 +1,6 @@
 import verify from "./auth";
 import { getCurrentRound, scanLotto, getLotto, getLotto2 } from "./funtions";
-import { updateNumbers, getNumbers, deleteMyNumber, updateIncOrExcNumbers, getIncOrExcRounds, getIncAndExcNumbers, deleteIncOrExcNumbers } from './dynamoDB/Numbers'
+import { updateNumbers, getNumbers, deleteMyNumber, updateIncOrExcNumbers, getIncOrExcRounds, getIncAndExcNumbers, deleteIncOrExcNumbers, scanWeekNumbers } from './dynamoDB/Numbers'
 import { queryLottoData } from "./dynamoDB/lottoData";
 import { freeGenerator, numbersToData } from "./dynamoDB/generator";
 import { getPointAndRank, getPlanKeyAndUntil, getMyHome } from "./dynamoDB/userInfo";
@@ -142,6 +142,23 @@ exports.handler = async (event: any) => {
                 case 'GET':
                     const lineCount = event.queryStringParameters && JSON.parse(event.queryStringParameters.lineCount);
                     body = await freeGenerator(currentId, lineCount);
+            }
+        }
+            break;
+        case '/numbers/week': {
+            switch (method) {
+                case 'GET':
+                    (await scanWeekNumbers()).map(item => {
+                        let count = 0;
+                        item.week.forEach(weekNum => {
+                            if (item.numbers && !item.numbers.some(num => num === weekNum)) count++;
+                        });
+                        return {
+                            round: item.round,
+                            numbers: item.week,
+                            answer: count
+                        }
+                    });
             }
         }
             break;
