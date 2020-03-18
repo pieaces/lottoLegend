@@ -1,4 +1,4 @@
-import putLotto from './putLotto'
+import putLotto, { putWeekLotto } from './putLotto'
 import LottoDB from '../Lotto/class/LottoDB'
 import counterLotto, { getCurrentRound } from './functions';
 import dynamoDB from '.';
@@ -11,7 +11,7 @@ export default async function autoPutLotto() {
     if (count < total) {
         try {
             await putLotto(total);
-
+            await putWeekLotto(total + 1);
             const lottoDB = new LottoDB();
             await lottoDB.putALLStats();
             console.log('통계처리 자동화 완료');

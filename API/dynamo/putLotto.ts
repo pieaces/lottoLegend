@@ -109,6 +109,32 @@ export default async function putLotto(round: number): Promise<void> {
     });
 }
 
+export async function putWeekLotto(round: number): Promise<void> {
+    const set = new Set<number>();
+    while (set.size < 10) {
+        set.add(Math.floor(Math.random() * 45) + 1);
+    }
+    var params: PutItemInput = {
+        Item: {
+            "Round": {
+                N: round.toString()
+            },
+            "Week": {
+                NS: [...set].map(item => item.toString())
+            }
+        },
+        TableName: "LottoData"
+    };
+    return new Promise((resolve, reject) => {
+        dynamoDB.putItem(params, function (err: any) {
+            if (err) reject(err);
+            else {
+                resolve();
+            }
+        });
+    });
+}
+
 function getWeekNumberSet(round: number): Promise<NumberSetAttributeValue> {
     const params: GetItemInput = {
         ProjectionExpression: 'Week',
