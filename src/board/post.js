@@ -7,7 +7,13 @@ import { getUserName, headerSign } from '../amplify/auth'
 import { networkAlert, getQueryStringObject, getCategoryHtml, onlyUserAlert } from '../functions'
 import Swal from 'sweetalert2'
 
+configure();
+let userName;
+getUserName()
+  .then(username => userName = username)
+  .catch(err => onlyUserAlert());
 headerSign();
+
 function attachTimestamp(name) {
   const index = name.indexOf('.');
   const now = new Date();
@@ -31,12 +37,6 @@ const editor = suneditor.create('sample', {
   imageUploadSizeLimit: 4 * 1024 * 1024,
   lang: ko
 })
-
-configure();
-let userName;
-getUserName()
-  .then(username => userName = username)
-  .catch(err => onlyUserAlert());
 
 const post = getQueryStringObject().id;
 const submitBtn = document.getElementById('submit-btn');
