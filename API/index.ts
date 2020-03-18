@@ -145,11 +145,13 @@ exports.handler = async (event: any) => {
             }
         }
             break;
-        case '/numbers/week': {
+        case '/numbers/week':
+        case '/numbers/week/{round}': {
             switch (method) {
                 case 'GET':
-                    body = (await scanWeekNumbers()).map(item => {
-                        const hits = item.week.map(weekNum => !item.numbers.some(num => num === weekNum));
+                    const round = event.pathParameters && event.pathParameters.round;
+                    body = (await scanWeekNumbers(round)).map(item => {
+                        const hits = item.numbers && item.week.map(weekNum => !item.numbers.some(num => num === weekNum));
                         return {
                             round: item.round,
                             numbers: item.week,
