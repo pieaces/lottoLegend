@@ -51,7 +51,6 @@
   border-top: 1px solid black;
   border-bottom:1px solid var(--border-color);
   background-color: var(--box-color);
-  font-size:1.5rem;
   font-weight: 500;
 }
 
@@ -59,30 +58,33 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size:1.6rem;
 }
 
 .board-title {
   flex: 4;
-}
-
-.board-title > a{
   word-break: keep-all;
+  font-size:1.5rem;
 }
 
 .board-author {
   flex: 2;
+  font-size:1.3rem;
 }
 
 .board-date {
   flex: 2;
+  font-size:1.3rem;
 }
 
 .board-views {
   flex: 1;
+  font-size:1.3rem;
 }
 
 .board-reco {
   flex: 1;
+  font-size:1.3rem;
 }
 
 /* board-section */
@@ -91,14 +93,13 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 3rem;
-  font-size:1.4rem;
 }
 
 /* board-box */
 
 .board-box {
   display: flex;
-  height:5rem;
+  height:6rem;
   border-bottom: 1px solid var(--border-color);
   text-align: center;
 }
@@ -150,10 +151,6 @@
     padding:0;
   }
 
-  .search-box{
-    justify-content: center;
-  }
-
   .search-box > select{
   width:20%
   }
@@ -173,29 +170,49 @@
   padding:1rem 0;
 }
 
-.board-box{
-  height:10rem;
-}
-
-.board-box>div.board-author{
-  flex-direction: column;
-}
-
 .board-header{
-  font-size:1.2rem;
+  display:none;
 }
 
-.board-section{
-  font-size: 1.2rem;
+.board-section > div:nth-child(1){
+  border-top:1px solid var(--border-color);
 }
 
-.board-title{
-  flex: 3;
+.board-box{
+  display:block;
+  height:auto;
+  text-align: initial;
 }
 
-.board-date{
-  flex:2;
+
+.board-box >div.board-title{
+display:flex;
+align-items:center ;
+justify-content: flex-start;
+height:7rem;
 }
+
+
+.board-box > div:not(.board-title){
+  display:inline-block;
+  height:3rem;
+}
+
+.board-box > div:not(.board-title)::after{
+  content: "|";
+  margin: 0 1rem;
+  color:var(--faint-color);
+}
+
+.board-box > div.board-views::before{
+  content:"조회";
+  margin-right:0.3rem;
+}
+.board-box > div.board-reco::before{
+  content:"추천";
+  margin-right:0.3rem;
+}
+
 
 }
 
