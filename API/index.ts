@@ -148,15 +148,12 @@ exports.handler = async (event: any) => {
         case '/numbers/week': {
             switch (method) {
                 case 'GET':
-                    (await scanWeekNumbers()).map(item => {
-                        let count = 0;
-                        item.week.forEach(weekNum => {
-                            if (item.numbers && !item.numbers.some(num => num === weekNum)) count++;
-                        });
+                    body = (await scanWeekNumbers()).map(item => {
+                        const hits = item.week.map(weekNum => !item.numbers.some(num => num === weekNum));
                         return {
                             round: item.round,
                             numbers: item.week,
-                            answer: count
+                            hits
                         }
                     });
             }
