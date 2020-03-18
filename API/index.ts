@@ -1,6 +1,7 @@
 import Users from "./mariaDB/Users";
 import deleteUser from "./dynamo/deleteUser";
 import { Response } from "./Response";
+import verify from "./auth";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -14,6 +15,21 @@ exports.handler = async (event: any) => {
     let statusCode: number = 200;
     let body: any;
 
+    let currentId: string;
+    if (event.headers['x-id-token']) {
+        try {
+            const userInfo = verify(event.headers['x-id-token']);
+            currentId = userInfo["cognito:username"];
+        } catch (err) {
+            console.log('Intruder Alert! - Expired Token', err);
+            const response = {
+                statusCode: 400,
+                headers,
+            };
+            return response;
+        }
+    }
+    
     const userDB = new Users();
     switch (resource) {
         case '/accounts': {
