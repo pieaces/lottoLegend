@@ -139,7 +139,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32rem;
+  padding:0 2rem;
   font-size: 1.4rem;
 }
 
