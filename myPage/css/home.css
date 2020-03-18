@@ -102,12 +102,11 @@ font-size: 1.4rem;
 .service-update-btn{
   height:2.5rem;
   padding:0 0.5rem;
+  color:black;
 }
 
 .mobile-btn{
-  height:2.5rem;
   margin-right:0.5rem;
-  padding:0 0.5rem;
 }
 
 .mypage-win-num{

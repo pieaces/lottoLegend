@@ -60,8 +60,6 @@ const mqMobile = window.matchMedia("(max-width: 767px)");
 
 function mqHeaderFunc(mediaQuery) {
     if (mediaQuery.matches) {
-
-    } else {
         for (const node of headerMenu) {
             node.addEventListener('mouseover', () => {
                 headerHoverMenuContainer.classList.remove('none');
@@ -79,6 +77,8 @@ function mqHeaderFunc(mediaQuery) {
         headerHoverMenuContainer.addEventListener('mouseout', () => {
             headerHoverMenuContainer.classList.add('none');
         })
+    } else {
+
     }
 }
 
