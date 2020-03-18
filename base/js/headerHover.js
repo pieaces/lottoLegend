@@ -1,4 +1,4 @@
-const headerMenuTitle = document.querySelectorAll('.mid-nav-menu >li:nth-child(1)~li');
+const headerMenuTitle = document.querySelectorAll('.mid-nav-menu >li:nth-child(1)~li > a');
 const headerMenuList = document.querySelector('.hover-menu-container');
 
 const mqMobile = window.matchMedia("(max-width: 767px)");
@@ -15,47 +15,66 @@ function mqHeaderFunc(mediaQuery) {
         headerMenuList.removeEventListener('mouseout', headerMenuListHide);
 
 
-        let flag = false;
         for (const node of headerMenuTitle) {
-
             node.addEventListener('click', () => {
                 headerMenuList.classList.remove('none');
-                flag = true;
             });
 
         }
 
-        let bodyAll = Array.from(document.querySelectorAll('body *'));
-        let midNavMenu = Array.from(document.querySelectorAll('.mid-nav-menu *'));
+        let headerMenu = Array.from(headerMenuTitle).concat(Array.from(headerMenuList));
 
-        bodyAll = bodyAll.filter(parent => {
-            let containedByExclusionNode = midNavMenu.filter(child => {
-                if (parent === child) {
+        const bodyAll = document.querySelectorAll('body *');
+
+        for (let i = 0; i < bodyAll.length; i++) {
+            for (let j = 0; j < headerMenu.length; j++) {
+                if (bodyAll[i] ===)
+           }
+        }
+        let exclusiveEl =
+            myExclusiveEl = myExclusiveEl.filter(parent => {
+                let containedByExclusionNode = myEls.filter(child => {
+                    if (parent === child) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                });
+                if (containedByExclusionNode.length === 0) {
                     return true;
                 } else {
                     return false;
                 }
             });
-            if (containedByExclusionNode.length === 0) {
-                return true;
-            } else {
-                return false;
-            }
-        });
 
-        console.log(bodyAll);
-        for (const node of bodyAll) {
-
+        for (const node of myExclusiveEl) {
             node.addEventListener("click", () => {
-                if (!flag) {
-                    headerMenuList.classList.remove('none');
-                    flag = true;
+                if (node.className === "filter-box") {
                 } else {
-                    headerMenuList.classList.add('none');
-                    flag = false;
+                    filterListBox.classList.add("none");
+                    filterArrow.classList.add("fa-sort-down");
+                    filterArrow.classList.remove("fa-sort-up");
+                    this.flag = true;
                 }
             });
         }
+
+        // for (const node of bodyAll) {
+        //     console.log(node);
+        //     node.addEventListener("click", () => {
+        //         if (node.className === "mid-nav-container") {
+
+        //         } else {
+        //             if (!flag) {
+        //                 headerMenuList.classList.remove('none');
+        //                 flag = true;
+        //             } else {
+        //                 headerMenuList.classList.add('none');
+        //                 flag = false;
+        //             }
+        //         }
+        //     });
+        // }
 
     } else {
         for (const node of headerMenuTitle) {
