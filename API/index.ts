@@ -191,16 +191,16 @@ exports.handler = async (event: any) => {
                         lotto,
                         numsArr: myData.numsArr,
                         total: myData.total,
-                        include: {
+                        include: myData.include && {
                             current: myData.include.current,
-                            before: {
+                            before: myData.include.before && {
                                 size: myData.include.before.length,
                                 answer: includeAnswer
                             }
                         },
-                        exclude: {
+                        exclude:  myData.exclude &&{
                             current: myData.exclude.current,
-                            before: {
+                            before: myData.exclude.before && {
                                 size: myData.exclude.before.length,
                                 answer: excludeAnswer
                             }
