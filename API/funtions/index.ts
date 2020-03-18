@@ -99,9 +99,16 @@ export function parsePlanKeyAndUntil(item:AttributeMap):{plan:string, until?:str
             }
         }
     }
-    let planKey:string;
-    Object.entries(Plan).forEach(value =>{
-        if(value[1] === plan) planKey = value[0];
-    });
-    return {plan:planKey, until};
+    let planName = '';
+    switch(plan){
+        case Plan.default: planName = '없음';
+        break;
+        case Plan.basic: planName = '기본';
+        break;
+        case Plan.premium: planName = '프리미엄';
+        break;
+        case Plan["premium+"]: planName = '프리미엄+';
+        break;
+    }
+    return {plan:planName, until};
 }
