@@ -99,7 +99,7 @@ export function numbersToData(numbers:number[], lottoData:{BonusNum:{N:string}, 
     lottoData.forEach(lotto => {
         let count = 0;
         numbers.forEach(num => {
-            if (lotto.Numbers.NS.some(item => Number(item) === num)) count++;
+            if (lotto.Numbers && lotto.Numbers.NS.some(item => Number(item) === num)) count++;
         });
         switch (count) {
             case 3:

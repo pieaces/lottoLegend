@@ -363,7 +363,7 @@ export function getIncOrExcNumbers(userName: string, round: number, choice: IncO
             else {
                 const item = data.Item;
                 if ('IncludeExclude' in item) {
-                    resolve(item.IncludeExclude.M[round].M[choice].NS.map(item => Number(item)));
+                    resolve(item.IncludeExclude.M[round].M[choice].NS.map(item => Number(item)).sort((a,b) => a-b));
                 } else resolve([]);
             }
         });
@@ -393,8 +393,8 @@ export function getIncAndExcNumbers(userName: string, round: number): Promise<{ 
                 const item = data.Item;
                 if ('IncludeExclude' in item) {
                     const joint = item.IncludeExclude.M[round].M;
-                    const include = joint.include && joint.include.NS.map(item => Number(item));
-                    const exclude = joint.exclude && joint.exclude.NS.map(item => Number(item));
+                    const include = joint.include && joint.include.NS.map(item => Number(item)).sort((a, b) => a - b);
+                    const exclude = joint.exclude && joint.exclude.NS.map(item => Number(item)).sort((a, b) => a - b);
 
                     resolve({ include, exclude });
                 } else resolve({});
@@ -430,7 +430,7 @@ export function getIncOrExcRounds(userName: string): Promise<string[]> {
     });
 }
 
-export function scanWeekNumbers(round?: number): Promise<{ round: number, week: number[], numbers?: number[] }[]> {
+export function scanWeekNumbers(round?: number): Promise<{ data: { round: number, week: number[], numbers?: number[] }[], rounds?:number[] }> {
     const params: ScanInput = {
         TableName: 'LottoData',
         ExpressionAttributeNames: {
@@ -446,19 +446,23 @@ export function scanWeekNumbers(round?: number): Promise<{ round: number, week: 
             if (err) {
                 reject(err);
             }
-            resolve(data.Items
-                .filter(item => {
-                    return 'Week' in item && (!round || Number(item.Round.N) <= round)
-                })
-                .sort((a, b) => Number(b.Round.N) - Number(a.Round.N))
-                .slice(0, 5)
-                .map(item => {
-                    return {
-                        round: Number(item.Round.N),
-                        week: item.Week.NS.map(num => Number(num)).sort((a, b) => a - b),
-                        numbers: item.Numbers && item.Numbers.NS.map(num => Number(num))
-                    }
-                }));
+            const filteredData = data.Items.filter(item => {
+                return 'Week' in item && (!round || Number(item.Round.N) <= round)
+            });
+
+            resolve({
+                data: filteredData
+                    .sort((a, b) => Number(b.Round.N) - Number(a.Round.N))
+                    .slice(0, 5)
+                    .map(item => {
+                        return {
+                            round: Number(item.Round.N),
+                            week: item.Week.NS.map(num => Number(num)).sort((a, b) => a - b),
+                            numbers: item.Numbers && item.Numbers.NS.map(num => Number(num))
+                        }
+                    }),
+                rounds: !round && filteredData.map(item => Number(item.Round.N))
+            })
         });
     });
 }
