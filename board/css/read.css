@@ -129,6 +129,14 @@ font-size:1.3rem;
   resize: none;
 }
 
+.comment-update-write-text{
+  width:100%;
+  height:6rem;
+  padding:1rem;
+  font-size:1.3rem;
+  resize: none;
+}
+
 
 .char-count-container{
   display:flex;

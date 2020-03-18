@@ -26,26 +26,20 @@ function mqHeaderFunc(mediaQuery) {
 
         const bodyAll = document.querySelectorAll('body *');
 
-        for (let i = 0; i < bodyAll.length; i++) {
-            for (let j = 0; j < headerMenu.length; j++) {
-                if (bodyAll[i] ===)
-           }
-        }
-        let exclusiveEl =
-            myExclusiveEl = myExclusiveEl.filter(parent => {
-                let containedByExclusionNode = myEls.filter(child => {
-                    if (parent === child) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                });
-                if (containedByExclusionNode.length === 0) {
+        myExclusiveEl = myExclusiveEl.filter(parent => {
+            let containedByExclusionNode = myEls.filter(child => {
+                if (parent === child) {
                     return true;
                 } else {
                     return false;
                 }
             });
+            if (containedByExclusionNode.length === 0) {
+                return true;
+            } else {
+                return false;
+            }
+        });
 
         for (const node of myExclusiveEl) {
             node.addEventListener("click", () => {

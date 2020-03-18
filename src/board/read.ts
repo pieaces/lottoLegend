@@ -24,6 +24,7 @@ const contentsUpdateBtn = document.querySelector<HTMLElement>('.text-update-cont
 const recommendBtn = document.getElementById('reco-btn');
 const loading = document.querySelector('.loading-box');
 
+
 let commentCount = 0;
 const id = getQueryStringObject().id;
 init();
@@ -176,7 +177,7 @@ async function makeComments(objArr: any) {
         updateBtnBox.classList.add('text-update-btn-box');
         const updateBtn = document.createElement('button');
         updateBtn.setAttribute('type', 'button');
-        updateBtn.classList.add('btn','comment-update-btn');
+        updateBtn.classList.add('btn', 'comment-update-btn', 'comment-modify');
         updateBtn.textContent = "수정";
 
         const deleteBtn = document.createElement('button');
@@ -186,8 +187,13 @@ async function makeComments(objArr: any) {
 
         if (!(await isLogedIn()) || (await getUserName() !== objArr[i].userName)) updateBtnBox.classList.add('hide');
         else {
-            updateBtn.addEventListener('click', () =>{
-                console.log('!')
+            updateBtn.addEventListener('click', () => {
+                const textArea = document.createElement('textarea');
+                textArea.classList.add('comment-update-write-text');
+                const parentEl = updateBtn.parentElement.parentElement;
+                textArea.value = parentEl.nextElementSibling.textContent;
+                parentEl.nextElementSibling.remove();
+                parentEl.parentNode.appendChild(textArea);
             });
             deleteBtn.addEventListener('click', async () => {
                 Swal.fire({
@@ -267,4 +273,8 @@ function makeNum(number: number[]) {
         numContainer.appendChild(numBox);
     }
 }
+
+
+
+
 
