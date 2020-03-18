@@ -1,6 +1,9 @@
 import dynamoDB from '.'
 import { AWSError } from 'aws-sdk/lib/error';
 import { GetItemOutput, GetItemInput, UpdateItemInput } from 'aws-sdk/clients/dynamodb';
+import { parsePlanKeyAndUntil, getCurrentRound } from '../funtions';
+import { NSToNumbers } from './Numbers/functions';
+import { MyNumberData } from './Numbers';
 
 export enum Plan {
     "default" = "a",
@@ -13,8 +16,8 @@ const ExpressionAttributeNames = {
     '#Until': 'Until'
 };
 
-export function getPlan(userName:string):Promise<Plan>{
-    const params:GetItemInput = {
+export function getPlan(userName: string): Promise<Plan> {
+    const params: GetItemInput = {
         TableName: 'LottoUsers',
         ExpressionAttributeNames,
         ProjectionExpression: '#Plan, #Until',
@@ -25,13 +28,13 @@ export function getPlan(userName:string):Promise<Plan>{
         }
     };
     return new Promise((resolve, reject) => {
-        dynamoDB.getItem(params, (err:AWSError, data:GetItemOutput) => {
+        dynamoDB.getItem(params, (err: AWSError, data: GetItemOutput) => {
             if (err) {
                 reject(err);
             }
             else {
                 const item = data.Item;
-                let plan:Plan = Plan.default;
+                let plan: Plan = Plan.default;
                 if ('Plan' in item && 'Until' in item) {
                     const _plan = item.Plan.S;
                     const now = Number(new Date());
@@ -57,8 +60,8 @@ export function getPlan(userName:string):Promise<Plan>{
     });
 }
 
-export function getPlanKeyAndUntil(userName:string):Promise<{plan:string, until:string}>{
-    const params:GetItemInput = {
+export function getPlanKeyAndUntil(userName: string): Promise<{ plan: string, until?: string }> {
+    const params: GetItemInput = {
         TableName: 'LottoUsers',
         ExpressionAttributeNames,
         ProjectionExpression: '#Plan, #Until',
@@ -69,37 +72,12 @@ export function getPlanKeyAndUntil(userName:string):Promise<{plan:string, until:
         }
     };
     return new Promise((resolve, reject) => {
-        dynamoDB.getItem(params, (err:AWSError, data:GetItemOutput) => {
+        dynamoDB.getItem(params, (err: AWSError, data: GetItemOutput) => {
             if (err) {
                 reject(err);
             }
             else {
-                const item = data.Item;
-                let plan:Plan = Plan.default;
-                if ('Plan' in item && 'Until' in item) {
-                    const _plan = item.Plan.S;
-                    const now = Number(new Date());
-                    const until = Number(new Date(item.Until.S));
-                    if (now <= until) {
-                        switch (_plan) {
-                            case Plan.basic:
-                                plan = Plan.basic;
-                                //availability = planValues[Plan.basic];
-                                break;
-                            case Plan.premium:
-                                plan = Plan.premium;
-                                //availability = planValues[Plan.premium];
-                                break;
-                            case Plan['premium+']:
-                                plan = Plan['premium+'];
-                        }
-                    }
-                }
-                let planKey:string;
-                Object.entries(Plan).forEach(value =>{
-                    if(value[1] === plan) planKey = value[0];
-                })
-                resolve({plan:planKey, until:item.Until.S});
+                resolve(parsePlanKeyAndUntil(data.Item));
             }
         });
     });
@@ -110,7 +88,7 @@ export function makePlan(userName: string, plan: Plan, period: number): Promise<
     time.setMonth(time.getMonth() + period);
     const until = time.toISOString();
 
-    const params:UpdateItemInput = {
+    const params: UpdateItemInput = {
         TableName: 'LottoUsers',
         ExpressionAttributeNames,
         ExpressionAttributeValues: {
@@ -130,7 +108,7 @@ export function makePlan(userName: string, plan: Plan, period: number): Promise<
     };
 
     return new Promise((resolve, reject) => {
-        dynamoDB.updateItem(params, (err:AWSError) => {
+        dynamoDB.updateItem(params, (err: AWSError) => {
             if (err) reject(err);
             resolve();
         });
@@ -138,8 +116,8 @@ export function makePlan(userName: string, plan: Plan, period: number): Promise<
 }
 
 
-export function getPointAndRank(userName:string):Promise<{point:number, rank:number}>{
-    const params:GetItemInput = {
+export function getPointAndRank(userName: string): Promise<{ point: number, rank: number }> {
+    const params: GetItemInput = {
         TableName: 'LottoUsers',
         ExpressionAttributeNames: {
             '#Rank': 'Rank'
@@ -152,11 +130,90 @@ export function getPointAndRank(userName:string):Promise<{point:number, rank:num
         }
     };
     return new Promise((resolve, reject) => {
-        dynamoDB.getItem(params, (err:AWSError, data:GetItemOutput) => {
+        dynamoDB.getItem(params, (err: AWSError, data: GetItemOutput) => {
             if (err) {
                 reject(err);
             }
-            resolve({point:Number(data.Item.Point.N), rank: Number(data.Item.Rank.N)})
+            resolve({ point: Number(data.Item.Point.N), rank: Number(data.Item.Rank.N) })
+        });
+    });
+}
+
+interface MyPage {
+    include?: { current?: number[], before?: number[] },
+    exclude?: { current?: number[], before?: number[] },
+    numsArr?: MyNumberData[],
+    point?: number,
+    rank?: number,
+    plan?: string,
+    until?: string,
+    winner?: number,
+    total?: number
+}
+
+export function getMyHome(userName: string): Promise<MyPage> {
+    const round = getCurrentRound() + 1;
+    const params: GetItemInput = {
+        TableName: 'LottoUsers',
+        ExpressionAttributeNames: {
+            "#Numbers": 'Numbers',
+            "#IncExc": 'IncludeExclude',
+            "#Current": round.toString(),
+            "#Before": (round - 1).toString(),
+            "#Plan": "Plan",
+            "#Until": "Until",
+            "#Point": "Point",
+            "#Rank": "Rank"
+        },
+        ProjectionExpression: '#Numbers, #IncExc.#Current, #IncExc.#Before, #Plan, #Until, #Point, #Rank',
+        Key: {
+            "UserName": {
+                S: userName
+            }
+        }
+    };
+
+    return new Promise((resolve, reject) => {
+        dynamoDB.getItem(params, (err: AWSError, data: GetItemOutput) => {
+            if (err) {
+                reject(err);
+            }
+            else {
+                const result: MyPage = {};
+
+                const numbersData = data.Item.Numbers.M[round.toString()].L;
+                result.numsArr = numbersData.map(item => {
+                    return {
+                        numbers: NSToNumbers(item.M.numbers.NS).sort((a, b) => a - b),
+                        date: item.M.date.S,
+                        method: item.M.method.S,
+                        tool: item.M.tool.S,
+                    }
+                });
+
+                if ('IncludeExclude' in data.Item) {
+                    const include: { current?: number[], before?: number[] } = {};
+                    const exclude: { current?: number[], before?: number[] } = {};
+
+                    const current = data.Item.IncludeExclude.M[round].M;
+                    include.current = current.include && current.include.NS.map(item => Number(item));
+                    exclude.current = current.exclude && current.exclude.NS.map(item => Number(item));
+
+                    const before = data.Item.IncludeExclude.M[round - 1].M;
+                    include.before = before.include && before.include.NS.map(item => Number(item));
+                    exclude.before = before.exclude && before.exclude.NS.map(item => Number(item));
+
+                    result.include = include;
+                    result.exclude = exclude;
+                }
+                const { plan, until } = parsePlanKeyAndUntil(data.Item);
+                result.plan = plan;
+                result.until = until;
+                result.point = Number(data.Item.Point.N);
+                result.rank = Number(data.Item.Rank.N);
+                result.total = round;
+                resolve(result);
+            }
         });
     });
 }

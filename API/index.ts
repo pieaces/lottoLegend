@@ -3,7 +3,7 @@ import { getCurrentRound, scanLotto, getLotto, getLotto2 } from "./funtions";
 import { updateNumbers, getNumbers, deleteMyNumber, updateIncOrExcNumbers, getIncOrExcRounds, getIncAndExcNumbers, deleteIncOrExcNumbers } from './dynamoDB/Numbers'
 import { queryLottoData } from "./dynamoDB/lottoData";
 import { freeGenerator, numbersToData } from "./dynamoDB/generator";
-import { getPointAndRank, getPlanKeyAndUntil } from "./dynamoDB/userInfo";
+import { getPointAndRank, getPlanKeyAndUntil, getMyHome } from "./dynamoDB/userInfo";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -148,12 +148,11 @@ exports.handler = async (event: any) => {
         case '/mypage': {
             switch (method) {
                 case 'GET':
-                    const round = getCurrentRound();
-                    const lotto = await getLotto2(round);
-                    const numbersData = await getNumbers(currentId, round);
+                    const lotto = await getLotto2(getCurrentRound());
+                    const myData = await getMyHome(currentId);
 
                     let winner = 6;
-                    numbersData[round] && numbersData[round].forEach(data => {
+                    myData.numsArr && myData.numsArr.forEach(data => {
                         let count = 0;
                         data.numbers.forEach(num => {
                             if (lotto.numbers.some(item => item === num)) count++;
@@ -177,20 +176,40 @@ exports.handler = async (event: any) => {
                                 winner = 1;
                         }
                     });
-                    const { include, exclude } = await getIncAndExcNumbers(currentId, round);
+                    if(winner <= 5) myData.winner = winner;
+
                     let includeAnswer = 0, excludeAnswer = 0;
-                    include && include.forEach(num => {
+                    myData.include.before && myData.include.before.forEach(num => {
                         if (lotto.numbers.some(item => item === num)) includeAnswer++
                     });
-                    exclude && exclude.forEach(num => {
+                    myData.exclude.before && myData.exclude.before.forEach(num => {
                         if (lotto.numbers.some(item => item === num)) excludeAnswer++
                     });
-                    const {plan, until} = await getPlanKeyAndUntil(currentId);
-                    const {point, rank} = await getPointAndRank(currentId);
-                    body = { winner, lotto,
-                        include: include && { size: include.length, answer: includeAnswer },
-                        exclude: exclude && { size: exclude.length, answer: excludeAnswer },
-                        plan, until, point, rank }
+
+                    body = {
+                        winner: myData.winner,
+                        lotto,
+                        numsArr: myData.numsArr,
+                        total: myData.total,
+                        include: {
+                            current: myData.include.current,
+                            before: {
+                                size: myData.include.before.length,
+                                answer: includeAnswer
+                            }
+                        },
+                        exclude: {
+                            current: myData.exclude.current,
+                            before: {
+                                size: myData.exclude.before.length,
+                                answer: excludeAnswer
+                            }
+                        },
+                        plan: myData.plan,
+                        until: myData.until,
+                        point: myData.point,
+                        rank: myData.rank
+                    }
             }
         }
             break;

@@ -1,7 +1,8 @@
 import { Response } from '../Response'
 import dynamoDB from '../dynamoDB';
-import { ScanInput, ScanOutput, GetItemInput, GetItemOutput } from 'aws-sdk/clients/dynamodb';
+import { ScanInput, ScanOutput, GetItemInput, GetItemOutput, AttributeMap } from 'aws-sdk/clients/dynamodb';
 import { AWSError } from 'aws-sdk/lib/error';
+import { Plan } from '../dynamoDB/userInfo';
 
 export function getCurrentRound(currentDate?: string): number {
     const theDate = new Date('2020-02-01:11:50');
@@ -74,4 +75,33 @@ export function getLotto2(round: number): Promise<{numbers:number[], bonusNum:nu
             } else resolve();
         });
     });
+}
+
+export function parsePlanKeyAndUntil(item:AttributeMap):{plan:string, until?:string}{
+    let plan:Plan = Plan.default;
+    let until:string;
+    if ('Plan' in item && 'Until' in item) {
+        const _plan = item.Plan.S;
+        const now = Number(new Date());
+        if (now <= Number(new Date(item.Until.S))) {
+            until = item.Until.S;
+            switch (_plan) {
+                case Plan.basic:
+                    plan = Plan.basic;
+                    //availability = planValues[Plan.basic];
+                    break;
+                case Plan.premium:
+                    plan = Plan.premium;
+                    //availability = planValues[Plan.premium];
+                    break;
+                case Plan['premium+']:
+                    plan = Plan['premium+'];
+            }
+        }
+    }
+    let planKey:string;
+    Object.entries(Plan).forEach(value =>{
+        if(value[1] === plan) planKey = value[0];
+    });
+    return {plan:planKey, until};
 }
