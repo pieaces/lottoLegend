@@ -6,7 +6,7 @@ import incObj from './IncludeExclude/include';
 import excObj from './IncludeExclude/exclude';
 import { headerSign } from '../amplify/auth';
 import Auth from '@aws-amplify/auth';
-import { makeTable, makeNoneBox } from './functions';
+import { makeTable, makeNoneBox, phoneString } from './functions';
 import Swal from 'sweetalert2';
 configure();
 headerSign();
@@ -29,8 +29,7 @@ Auth.currentAuthenticatedUser()
     .then(user => {
         nickname.textContent = user.attributes.nickname;
         if (user.attributes.phone_number) {
-            const phone = ('0' + user.attributes.phone_number.slice(3));
-            phoneNumber.textContent = phone.slice(0, 3) + '-' + phone.slice(3, 7) + '-' + phone.slice(7, 11);
+            phoneNumber.textContent = phoneString(user.attributes.phone_number);
         }
         nicknameUpdateBtn.addEventListener('click', nicknameUpdate);
         serviceUpdateBtn.addEventListener('click', serviceUpdate);
@@ -152,5 +151,39 @@ function serviceUpdate() {
 }
 
 function mobileUpdate(){
-    
+    Swal.fire({
+        title: '인증하실 휴대폰번호를 입력해주세요',
+        text:'숫자로만 입력해주세요 예)01012345678',
+        input: 'text',
+        inputAttributes: {
+            autocapitalize: 'off'
+        },
+        showCancelButton: true,
+        confirmButtonText: '확인',
+        cancelButtonText: '취소',
+        showLoaderOnConfirm: true,
+        preConfirm: async (phone: string) => {
+            const user = (await Auth.currentAuthenticatedUser());
+            await Auth.updateUserAttributes(user, { phone_number: phone })
+            .catch(err => {
+                console.log('errr:', err);
+            })
+            return await Auth.verifyCurrentUserAttribute('phone_number')
+                .then(() => {
+                    console.log('a verification code is sent');
+                });
+        },
+        allowOutsideClick: () => !Swal.isLoading()
+    }).then(async (result) => {
+        console.log(result);
+        if (result.value) {
+            Auth.currentAuthenticatedUser({bypassCache:true}).then(user => {
+                nickname.textContent = user.attributes.nickname;
+                phoneNumber.textContent = phoneString(user.attributes.phone_number);
+            })            
+            Swal.fire({
+                title: '변경완료되었습니다',
+            });
+        }
+    })
 }

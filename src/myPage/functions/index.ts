@@ -123,3 +123,7 @@ export function win(numbers: number[], count: number, answer: { bonusNum: number
     }
 }
 
+export function phoneString(phone:string){
+    const _phone = ('0' + phone.slice(3));
+    return _phone.slice(0, 3) + '-' + _phone.slice(3, 7) + '-' + _phone.slice(7, 11);
+}
