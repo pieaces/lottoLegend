@@ -430,7 +430,7 @@ export function getIncOrExcRounds(userName: string): Promise<string[]> {
     });
 }
 
-export function scanWeekNumbers(round?:number):Promise<{round:number, week:number[], numbers?:number[]}[]> {
+export function scanWeekNumbers(round?: number): Promise<{ round: number, week: number[], numbers?: number[] }[]> {
     const params: ScanInput = {
         TableName: 'LottoData',
         ExpressionAttributeNames: {
@@ -448,16 +448,17 @@ export function scanWeekNumbers(round?:number):Promise<{round:number, week:numbe
             }
             resolve(data.Items
                 .filter(item => {
-                    return 'Week' in item && (!round ||  Number(item.Round.N)<=round )
+                    return 'Week' in item && (!round || Number(item.Round.N) <= round)
                 })
+                .sort((a, b) => Number(b.Round.N) - Number(a.Round.N))
                 .slice(0, 5)
                 .map(item => {
-                return {
-                    round: Number(item.Round.N),
-                    week: item.Week.NS.map(num => Number(num)).sort((a, b) => a - b),
-                    numbers: item.Numbers && item.Numbers.NS.map(num =>Number(num))
-                }
-            }).sort((a, b) => b.round - a.round));
+                    return {
+                        round: Number(item.Round.N),
+                        week: item.Week.NS.map(num => Number(num)).sort((a, b) => a - b),
+                        numbers: item.Numbers && item.Numbers.NS.map(num => Number(num))
+                    }
+                }));
         });
     });
 }
