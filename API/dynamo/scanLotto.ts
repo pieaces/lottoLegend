@@ -12,8 +12,8 @@ export default function read(): Promise<LData[]> {
                 reject(err);
             }
             else {
-                const item = data.Items;
-                const lottoData:LData[] = item.map(item => {
+                const items = data.Items;
+                const lottoData:LData[] = items.filter(item => 'Numbers' in item).map(item => {
                     return {
                         round: Number(item.Round.N),
                         date: item.LDate.S,
