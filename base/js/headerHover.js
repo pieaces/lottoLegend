@@ -1,20 +1,26 @@
 const headerMenu = document.querySelectorAll('.mid-nav-menu >li:nth-child(1)~li');
 const headerHoverMenuContainer = document.querySelector('.hover-menu-container');
 
-for (const node of headerMenu) {
-    node.addEventListener('mouseover', () => {
-        headerHoverMenuContainer.classList.remove('none');
-    })
+(function () {
+    let flag = false;
+    for (const node of headerMenu) {
 
-    node.addEventListener('mouseout', () => {
-        headerHoverMenuContainer.classList.add('none');
-    })
-}
+        node.addEventListener('click', () => {
+            if (!flag) {
+                headerHoverMenuContainer.classList.remove('none');
+                flag = true;
 
-headerHoverMenuContainer.addEventListener('mouseover', () => {
-    headerHoverMenuContainer.classList.remove('none');
-})
+            } else {
+                headerHoverMenuContainer.classList.add('none');
+                flag = false;
 
-headerHoverMenuContainer.addEventListener('mouseout', () => {
-    headerHoverMenuContainer.classList.add('none');
-})
+            }
+        });
+
+    }
+
+})();
+
+
+
+

@@ -95,14 +95,18 @@ font-size: 1.4rem;
 
   width:6.5rem;
 }
-.mypage-info--list-seperator{
+.mypage-info-list-seperator{
   width:2rem;
 }
 
 .service-update-btn{
-  width: 4rem;
   height:2.5rem;
+  padding:0 0.5rem;
   color:black;
+}
+
+.mobile-btn{
+  margin-right:0.5rem;
 }
 
 .mypage-win-num{

@@ -39,19 +39,16 @@ document.write(` <header>
         </div>
     </div>
     <div class="container mid-nav">
-        <div class="hamburger-box">
-            <input type="checkbox" name="" id="hamburger">
-            <i class="fas fa-bars"></i></div>
         <ul class="mid-nav-menu">
             <li>
                 <a href="/main.html">
                   로또끝
                 </a>
             </li>
-            <li><a href="#">캔버스로또 시스템</a>
+            <li><a href="#">소개</a>
 
             </li>
-            <li> <a href=""#>분석 시스템</a> </li>
+            <li> <a href="#">시스템</a> </li>
             <li> <a href="#">분석실</a> </li>
             
             <li> <a href="#">커뮤니티</a> </li>
