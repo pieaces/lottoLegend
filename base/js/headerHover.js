@@ -24,3 +24,32 @@ const headerHoverMenuContainer = document.querySelector('.hover-menu-container')
 
 
 
+let myExclusiveEl = Array.from(document.querySelectorAll(DropDown.body));
+let myEls = Array.from(document.querySelectorAll(DropDown.dropDownBox));
+
+myExclusiveEl = myExclusiveEl.filter(parent => {
+    let containedByExclusionNode = myEls.filter(child => {
+        if (parent === child) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+    if (containedByExclusionNode.length === 0) {
+        return true;
+    } else {
+        return false;
+    }
+});
+
+for (const node of myExclusiveEl) {
+    node.addEventListener("click", () => {
+        if (node.className === "filter-box") {
+        } else {
+            filterListBox.classList.add("none");
+            filterArrow.classList.add("fa-sort-down");
+            filterArrow.classList.remove("fa-sort-up");
+            this.flag = true;
+        }
+    });
+}
