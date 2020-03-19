@@ -1,4 +1,4 @@
-import { makeInputCheckBox, makePastFilterTable } from "../../system/premium/Layout/functions"; import { setColorLotto, setDisabledLotto } from "../../functions";
+import { makeInputCheckBox, makePastFilterTable } from "../../system/premium/Layout/functions"; import { setColorLotto, setDisabledLotto, isoStringToDate } from "../../functions";
 
 export function makeNoneBox(){
     const div = document.createElement('div');
@@ -30,7 +30,7 @@ export function makeTable(canvas: HTMLElement, dataSet: any[], round: number | s
 
         const tableDate = document.createElement('div');
         tableDate.classList.add('mypage-table-date');
-        tableDate.textContent = dataSet[i].date.slice(0, 10);
+        tableDate.textContent = isoStringToDate(dataSet[i].date).slice(0, 10);
 
         tableContent.appendChild(tableDate);
 
