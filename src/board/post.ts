@@ -19,6 +19,7 @@ function attachTimestamp(name) {
   const now = new Date();
   return `${name.slice(0, index)}_${now.getFullYear()}-${now.getMonth()}-${now.getDate()}:${now.getHours()}:${now.getMinutes()}${name.slice(index)}`;
 }
+
 const editor = suneditor.create('sample', {
   plugins: plugins,
   buttonList: [
@@ -42,7 +43,7 @@ const category = document.getElementById('wrapper').getAttribute('data-category'
 const loading = document.querySelector('.loading-box');
 
 const submitBtn = document.getElementById('submit-btn');
-const titleInput = document.getElementById('title-text');
+const titleInput = document.querySelector<HTMLInputElement>('title-text');
 //const imageWrapper = document.getElementById('image-wrapper');
 const imageTotalSize = document.getElementById('image-total-size');
 const imageRemove = document.getElementById('image-remove');
@@ -59,7 +60,7 @@ imageRemove.addEventListener('click', () => {
   deleteCheckedImages();
 })
 
-let imageList = [];
+let imageList:any[] = [];
 let selectedImages = [];
 let totalSize = 0;
 
@@ -106,7 +107,7 @@ submitBtn.onclick = async () => {
       allowOutsideClick: false,
       timer: 1500,
     }).then(() => {
-      location.href = `/${getCategoryHtml(category, 'Read')}?id=${leapId}`;
+      location.href = `/${getCategoryHtml(category, 'read')}?id=${leapId}`;
     });
   } catch (err) {
     networkAlert();
@@ -120,7 +121,7 @@ editor.onImageUpload = function (targetImgElement, index, state, imageInfo, rema
     const size = (totalSize / 1024 / 1024).toFixed(2);
     imageTotalSize.innerText = size + 'MB';
     const imageLi = imageTable.querySelectorAll('li');
-    const targetId = [...imageLi][deleteIndex].id;
+    const targetId = imageLi[deleteIndex].id;
     const li = imageTable.querySelector('#' + targetId);
     li.remove();
     imageList.splice(deleteIndex, 1);
@@ -151,13 +152,13 @@ document.getElementById('files-upload').addEventListener('change', function (e) 
   }
 })
 // Edit image list
-function setImageList() {
+function setImageList(imageList:{size:number, index:number, src:string}[]) {
   let list = '';
   let size = 0;
 
-  for (let i = 0, image, fixSize; i < imageList.length; i++) {
-    image = imageList[i];
-    fixSize = (image.size / 1024 / 1024).toFixed(2) * 1
+  for (let i = 0; i < imageList.length; i++) {
+    const image = imageList[i];
+    const fixSize = Number((image.size / 1024 / 1024).toFixed(2))
     list += `<li id="img_${image.index}">
       <div class="image-container" data-image-index="${image.index}">
           <div class="image-box"><img src="${image.src}" ></div>
@@ -217,7 +218,7 @@ function checkImage(index) {
   if (selectedImages.length > 0) {
     imageRemove.removeAttribute('disabled');
   } else {
-    imageRemove.setAttribute('disabled', true);
+    imageRemove.setAttribute('disabled', 'true');
   }
 }
 
