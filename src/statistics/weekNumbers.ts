@@ -6,48 +6,7 @@ import { getUnAuthAPI } from '../amplify/api';
 
 const selectBox = document.querySelector<HTMLSelectElement>('#exc-num-week-select-box');
 const excNumWeekWrapper = document.querySelector<HTMLElement>('.exc-num-week-wrapper');
-const lottoNumTable = document.getElementsByClassName('lotto-num-table');
-const mqMobile = window.matchMedia("(max-width: 767px)");
 
-mqMobile.addListener(mqNumListFunc);
-
-function mqNumListFunc(mediaQuery) {
-    if (mediaQuery.matches) {
-        for (let i = 1; i < lottoNumTable.length; i++) {
-            const chilrenEl = lottoNumTable[i].children[1];
-
-            const numTr1 = document.createElement('tr');
-            const hitsTr1 = document.createElement('tr');
-            const numTr2 = document.createElement('tr');
-            const hitsTr2 = document.createElement('tr');
-            for (let j = 0; j < chilrenEl.children[0].children.length; j++) {
-                if (j >= 0 && j <= 4) {
-                    numTr1.appendChild(chilrenEl.children[0].children[j]);
-                }
-                else {
-                    numTr2.appendChild(chilrenEl.children[0].children[j]);
-                }
-            }
-            for (let j = 0; j < chilrenEl.children[1].children.length; j++) {
-                if (j >= 0 && j <= 4) {
-                    hitsTr1.appendChild(chilrenEl.children[1].children[j]);
-                }
-                else {
-                    hitsTr2.appendChild(chilrenEl.children[1].children[j]);
-                }
-            }
-            chilrenEl.innerHTML = '';
-            chilrenEl.appendChild(numTr1);
-            chilrenEl.appendChild(hitsTr1);
-            chilrenEl.appendChild(numTr2);
-            chilrenEl.appendChild(hitsTr2);
-
-
-        }
-    } else {
-
-    }
-}
 
 configure();
 headerSign();
