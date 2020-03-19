@@ -28,6 +28,7 @@ const editor = suneditor.create('sample', {
         ['bold', 'underline', 'italic', 'strike'],
         ['fontColor', 'hiliteColor'],
         ['paragraphStyle'],
+        ['image'],
         ['table', 'align', 'list', 'horizontalRule'],
     ],
     width: '100%',
