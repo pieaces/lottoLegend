@@ -4,8 +4,8 @@ import { headerSign } from '../amplify/auth';
 import configure from '../amplify/configure';
 import { getUnAuthAPI } from '../amplify/api';
 
-const selectBox = document.querySelector<HTMLSelectElement>('#exc-num-week-select-box');
-const excNumWeekWrapper = document.querySelector<HTMLElement>('.exc-num-week-wrapper');
+const selectBox = document.querySelector<HTMLSelectElement>('#num-week-select-box');
+const numWeekWrapper = document.querySelector<HTMLElement>('.num-week-wrapper');
 
 
 configure();
@@ -31,83 +31,111 @@ getUnAuthAPI('/numbers/week')
     }).catch(err => networkAlert());
 
 function makeTable(dataSet: ({ round: string, numbers: number[], hits?: boolean[] })[]) {
-    excNumWeekWrapper.innerHTML = '';
+    numWeekWrapper.innerHTML = '';
     for (let i = 0; i < dataSet.length; i++) {
         const div = document.createElement('div');
-        div.classList.add('lotto-num-container');
+        div.classList.add('num-week-container', 'box-color');
 
-        const table = document.createElement('table');
-        table.classList.add('table', 'lotto-num-table');
-        const thead = document.createElement('thead');
+        const header = document.createElement('div');
+        header.classList.add('num-week-header');
 
-        const titleTr = document.createElement('tr');
-        titleTr.classList.add('lotto-num-table-title');
+        header.textContent = `${dataSet[i].round}회`;
 
-        const th = document.createElement('th');
-        th.setAttribute('colspan', dataSet[i].numbers.length.toString());
-        th.textContent = `${dataSet[i].round}회`;
+        const section = document.createElement('div');
+        section.classList.add('num-week-section');
 
-        titleTr.appendChild(th);
-        thead.appendChild(titleTr);
-        table.appendChild(thead);
+        const leftNumWeekBox = document.createElement('div');
+        leftNumWeekBox.classList.add('num-week-box');
 
-        const tbody = document.createElement('tbody');
-        const NumberTr = document.createElement('tr');
+        const leftNumWeekNumBox = document.createElement('div');
+        leftNumWeekNumBox.classList.add('num-week-num-box');
+
+        const leftNumWeekHitBox = document.createElement('div');
+        leftNumWeekHitBox.classList.add('num-week-hit-box');
+
+        const rightNumWeekBox = document.createElement('div');
+        rightNumWeekBox.classList.add('num-week-box');
+
+        const rightNumWeekNumBox = document.createElement('div');
+        rightNumWeekNumBox.classList.add('num-week-num-box');
+
+        const rightNumWeekHitBox = document.createElement('div');
+        rightNumWeekHitBox.classList.add('num-week-hit-box');
 
         for (let j = 0; j < dataSet[i].numbers.length; j++) {
-            const td = document.createElement('td');
-            const numBox = document.createElement('div');
-            numBox.classList.add('lotto-num');
+            if (j <= 4) {
+                const numWeekNum = document.createElement('div');
+                numWeekNum.classList.add('num-week-num');
 
-            const num = document.createElement('div');
-            num.classList.add('lotto-num-value');
-            num.textContent = dataSet[i].numbers[j].toString();
-            setColorLotto(dataSet[i].numbers[j], num);
+                const num = document.createElement('div');
+                num.textContent = dataSet[i].numbers[j].toString();
+                setColorLotto(dataSet[i].numbers[j], num);
 
-            numBox.appendChild(num);
-            td.appendChild(numBox);
-            NumberTr.appendChild(td);
+                numWeekNum.appendChild(num);
+                leftNumWeekNumBox.appendChild(numWeekNum);
+                leftNumWeekBox.appendChild(leftNumWeekNumBox);
+            }
+            else {
+                const numWeekNum = document.createElement('div');
+                numWeekNum.classList.add('num-week-num');
+
+                const num = document.createElement('div');
+                num.textContent = dataSet[i].numbers[j].toString();
+                setColorLotto(dataSet[i].numbers[j], num);
+
+                numWeekNum.appendChild(num);
+                rightNumWeekNumBox.appendChild(numWeekNum);
+                rightNumWeekBox.appendChild(rightNumWeekNumBox);
+            }
         }
 
-        tbody.appendChild(NumberTr);
 
         if (!dataSet[i].hits) {
-            table.appendChild(tbody);
-            div.appendChild(table);
-            excNumWeekWrapper.appendChild(div);
+            header.style.borderTop = "1px solid rgba(0,0,0,0.1)";
+            section.appendChild(leftNumWeekBox);
+            section.appendChild(rightNumWeekBox);
+            section.style.borderBottom = "none";
+            div.appendChild(header);
+            div.appendChild(section);
+            numWeekWrapper.appendChild(div);
             const adBox = document.createElement('div');
             adBox.classList.add('ad-box', 'box-color');
-            excNumWeekWrapper.appendChild(adBox);
+            numWeekWrapper.appendChild(adBox);
         } else {
-            div.classList.add('lotto-num-container-past');
+
             let hitsTotal = 0;
-            const hitsTr = document.createElement('tr');
 
             for (let j = 0; j < dataSet[i].hits.length; j++) {
-                const td = document.createElement('td');
+                const hit = document.createElement('div');
                 if (dataSet[i].hits[j]) {
-                    td.textContent = "적중";
+                    hit.textContent = "적중";
                     hitsTotal++;
                 } else {
-                    td.textContent = "-";
+                    hit.textContent = "-";
                 }
-                hitsTr.appendChild(td);
+                if (j <= 4) {
+                    leftNumWeekHitBox.appendChild(hit);
+                } else {
+                    rightNumWeekHitBox.appendChild(hit);
+                }
+
             }
-            tbody.appendChild(hitsTr);
-            table.appendChild(tbody);
 
-            const tfoot = document.createElement('tfoot');
-            const resultTr = document.createElement('tr');
-            const resultTd = document.createElement('td');
+            leftNumWeekBox.appendChild(leftNumWeekHitBox);
+            rightNumWeekBox.appendChild(rightNumWeekHitBox);
 
-            resultTd.setAttribute('colspan', dataSet[i].numbers.length.toString());
-            resultTd.innerHTML = `${dataSet[i].numbers.length}개 중 <span class="exc-num-week-hit">${hitsTotal}개</span> 적중 (${Math.round(hitsTotal / dataSet[i].numbers.length * 100)}%)`;
-            resultTr.appendChild(resultTd);
-            tfoot.appendChild(resultTr);
-            table.appendChild(tbody);
-            table.appendChild(tfoot);
-            div.appendChild(table);
-            excNumWeekWrapper.appendChild(div);
+            section.appendChild(leftNumWeekBox);
+            section.appendChild(rightNumWeekBox);
+
+            const footer = document.createElement('div');
+            footer.classList.add('num-week-footer');
+
+            footer.innerHTML = `${dataSet[i].numbers.length}개 중  <span class="num-week-hit-result">${hitsTotal}개</span>  적중 (${Math.round(hitsTotal / dataSet[i].numbers.length * 100)}%)`;
+
+            div.appendChild(header);
+            div.appendChild(section);
+            div.appendChild(footer);
+            numWeekWrapper.appendChild(div);
         }
     }
 }
