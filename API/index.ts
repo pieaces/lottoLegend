@@ -54,9 +54,7 @@ exports.handler = async (event: any) => {
                             const result: any = numbersToData(data.numbers, lottoData);
                             result.method = data.method;
                             result.tool = data.tool;
-                            const date = new Date(data.date);
-                            date.setHours(date.getHours()+9);
-                            result.date = date.toISOString();
+                            result.date = data.date;
                             return result;
                         }).reverse();
                         body = { data, rounds };
