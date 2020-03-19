@@ -88,17 +88,19 @@ export default class Posts extends DB {
         return affectedRows;
     }
 
-    async search(category: string, word:string, type:SearchType, index:number) {
+    async search(category: string, word: string, type: SearchType, index: number) {
         const values: (string | number)[] = [category];
         let match = "";
         if (type === "writer") {
             match = "nickName=?"
             values.push(word);
         } else {
+            const matchWord = word.split(' ').reduce((acc, cur) => acc + `+${cur}*`, '');
             match = `MATCH(title) AGAINST(? IN BOOLEAN MODE)`;//against('+사진*+테스트*' in boolean mode)
+            values.push(matchWord);
             if (type === "contents") {
                 match += ` + MATCH(text) AGAINST(? IN BOOLEAN MODE)`;
-                values.push(word.split(' ').reduce((acc, cur) => acc + `+${cur}*`, ''));
+                values.push(matchWord);
             }
         }
         values.push(Posts.SCAN_MAX * (index - 1), Posts.SCAN_MAX);
@@ -115,10 +117,12 @@ export default class Posts extends DB {
             values.push(word);
             usersJoin = `INNER JOIN Users ON ${this.tableName}.userName=Users.userName`
         } else {
+            const matchWord = word.split(' ').reduce((acc, cur) => acc + `+${cur}*`, '');
             match = `MATCH(title) AGAINST(? IN BOOLEAN MODE)`;//against('+사진*+테스트*' in boolean mode)
+            values.push(matchWord);
             if (type === "contents") {
                 match += ` + MATCH(text) AGAINST(? IN BOOLEAN MODE)`;
-                values.push(word.split(' ').reduce((acc, cur) => acc + `+${cur}*`, ''));
+                values.push(matchWord);
             }
         }
         const sql = `SELECT COUNT(*) FROM ${this.tableName} INNER JOIN PostsContents ON ${this.tableName}.id=PostsContents.post ${usersJoin} WHERE category=? AND ${match}`
