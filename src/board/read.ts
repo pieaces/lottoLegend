@@ -47,8 +47,8 @@ commentSubmit.onclick = async function () {
             onlyUserAlert();
         }
         else Swal.fire({
-            title:'내용은 비워둘 수 없습니다',
-            icon:'warning'
+            title: '내용은 비워둘 수 없습니다',
+            icon: 'warning'
         });
     }
 }
@@ -56,8 +56,8 @@ commentSubmit.onclick = async function () {
 async function init() {
     if (!id) {
         return Swal.fire({
-            title:'잘못된 접근입니다',
-            icon:'warning'
+            title: '잘못된 접근입니다',
+            icon: 'warning'
         });
     }
     let post: any;
@@ -202,13 +202,29 @@ async function makeComments(objArr: any) {
 
         if (!(await isLogedIn()) || (await getUserName() !== objArr[i].userName)) updateBtnBox.classList.add('hide');
         else {
+            let updateCheck = false;
             updateBtn.addEventListener('click', () => {
-                const textArea = document.createElement('textarea');
-                textArea.classList.add('comment-update-write-text');
-                const parentEl = updateBtn.parentElement.parentElement;
-                textArea.value = parentEl.nextElementSibling.textContent;
-                parentEl.nextElementSibling.remove();
-                parentEl.parentNode.appendChild(textArea);
+                if (!updateCheck) {
+                    updateBtn.textContent = "수정";
+                    const textArea = document.createElement('textarea');
+                    textArea.classList.add('comment-update-write-text');
+                    const parentEl = updateBtn.parentElement.parentElement;
+                    textArea.value = parentEl.nextElementSibling.textContent;
+                    parentEl.nextElementSibling.remove();
+                    parentEl.parentNode.appendChild(textArea);
+                    updateBtn.addEventListener('click', () => {
+                        const commentContent = document.createElement('div');
+                        commentContent.classList.add('comment-content');
+                        commentContent.textContent = textArea.value;
+                        textArea.remove();
+                        parentEl.parentNode.appendChild(commentContent);
+
+                    })
+                    updateCheck = true;
+                } else {
+                    updateBtn.textContent = "완료";
+                    updateCheck = false;
+                }
             });
             deleteBtn.addEventListener('click', async () => {
                 Swal.fire({
