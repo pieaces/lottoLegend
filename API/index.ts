@@ -42,13 +42,16 @@ exports.handler = async (event: any) => {
                     break;
                 case 'PATCH': {
                     const { nickName } = JSON.parse(event.body);
-
-                    const users = await userDB.getNickNames();
-                    if (users.some(user => user.nickName === nickName)) {
-                        body = new Response(true, "이미 존재하는 닉네임입니다");
-                    } else {
-                        await userDB.modifyNickName(currentId, nickName);
-                        body = new Response(false);
+                    if (nickName.length <= 8) {
+                        const users = await userDB.getNickNames();
+                        if (users.some(user => user.nickName === nickName)) {
+                            body = new Response(true, "이미 존재하는 닉네임입니다");
+                        } else {
+                            await userDB.modifyNickName(currentId, nickName);
+                            body = new Response(false);
+                        }
+                    }else{
+                        body = new Response(true, "8글자 이내여야합니다");
                     }
                 }
                     break;
