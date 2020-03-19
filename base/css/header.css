@@ -77,12 +77,11 @@
   border-bottom:1px solid var(--main-color);
   background-color: var(--default-color);
   color:black;
-  overflow-x: scroll;
 }
 
 .click-menu-box{
   display:flex;
-  width: 100%;
+  overflow-x: auto;
 }
 
 .click-menu-box > li{
