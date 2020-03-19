@@ -68,6 +68,27 @@
   font-size:1.8rem;
 }
 
+.click-menu-container{
+  position: absolute;
+  top:100%;
+  left:0;
+  z-index:98;
+  width: 100%;
+  border-bottom:1px solid var(--main-color);
+  background-color: var(--default-color);
+  color:black;
+  overflow-x: scroll;
+}
+
+.click-menu-box{
+  display:flex;
+  width: 100%;
+}
+
+.click-menu-box > li{
+  width:10rem;
+}
+
 .hover-menu-container{
   display:flex;
   position: absolute;
