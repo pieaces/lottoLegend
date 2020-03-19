@@ -206,20 +206,20 @@ async function makeComments(objArr: any) {
             updateBtn.addEventListener('click', () => {
                 if (!updateCheck) {
                     updateBtn.textContent = "수정";
-                    const textArea = document.createElement('textarea');
+                    const textArea = document.createElement('textarea') as HTMLTextAreaElement;
                     textArea.classList.add('comment-update-write-text');
-                    const parentEl = updateBtn.parentElement.parentElement;
+                    const parentEl = updateBtn.parentElement.parentElement as HTMLElement
                     textArea.value = parentEl.nextElementSibling.textContent;
                     parentEl.nextElementSibling.remove();
                     parentEl.parentNode.appendChild(textArea);
-                    updateBtn.addEventListener('click', () => {
+                    updateBtn.addEventListener('click', function modifyComment() {
                         const commentContent = document.createElement('div');
                         commentContent.classList.add('comment-content');
                         commentContent.textContent = textArea.value;
                         textArea.remove();
                         parentEl.parentNode.appendChild(commentContent);
-
-                    })
+                        this.removeEventListener('click', modifyComment);
+                    });
                     updateCheck = true;
                 } else {
                     updateBtn.textContent = "완료";
@@ -289,6 +289,8 @@ function limitTxtAreaCount() {
     }
 }
 
+
+
 function makeNum(number: number[]) {
     const numContainer = document.querySelector('.inc-exc-num-container');
     for (let i = 0; i < number.length; i++) {
@@ -304,3 +306,4 @@ function makeNum(number: number[]) {
         numContainer.appendChild(numBox);
     }
 }
+
