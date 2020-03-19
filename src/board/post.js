@@ -125,16 +125,21 @@ editor.onImageUpload = function (targetImgElement, index, state, imageInfo, rema
     li.remove();
     imageList.splice(deleteIndex, 1);
 
+    if (imageList.length === 0) {
+      imageTable.classList.remove('box-color');
+    }
+
   } else {
     if (state === 'create') {
       const image = editor.getImagesInfo()[findIndex(editor.getImagesInfo(), index)]
       totalSize += Number(image.size);
-      imageList.push(image)
+      imageList.push(image);
+      imageTable.classList.add('box-color');
     } else { // update }
     }
 
     if (remainingFilesCount === 0) {
-      setImageList(imageList)
+      setImageList(imageList);
     }
   }
 }
@@ -185,12 +190,11 @@ function setImageList() {
 
   for (const node of imageTableList) {
     node.addEventListener('click', () => {
+      const img = node.firstElementChild.firstElementChild.firstElementChild;
       if (node.classList.contains('checked')) {
-        node.style.backgroundColor = "rgb(91, 81, 253)";
-        node.children[1].style.color = "white";
+        img.style.border = "4px solid #66c2ff";
       } else {
-        node.style.backgroundColor = "";
-        node.children[1].style.color = "black";
+        img.style.border = "4px solid white";
       }
     });
   }
