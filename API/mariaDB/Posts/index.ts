@@ -111,7 +111,7 @@ export default class Posts extends DB {
         let usersJoin = "";
         if (type === "writer") {
             match = "nickName=?"
-            usersJoin = "INNER JOIN Users ON ${this.tableName}.userName=Users.userName"
+            usersJoin = `INNER JOIN Users ON ${this.tableName}.userName=Users.userName`
         } else {
             match = `MATCH(title) AGAINST(? IN BOOLEAN MODE)`;//against('+사진*+테스트*' in boolean mode)
             if (type === "contents") {
