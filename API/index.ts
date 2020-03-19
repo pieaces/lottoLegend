@@ -86,7 +86,7 @@ exports.handler = async (event: any) => {
                                 return {
                                     statusCode:200,
                                     headers,
-                                    body: JSON.stringify(new Response(true, "작성자가 아닙니다"))
+                                    body: JSON.stringify(new Response(true, "본인이 아닙니다"))
                                 }
                             }
                         }
