@@ -94,9 +94,9 @@ export default class Posts extends DB {
         if (type === "writer") {
             match = "userName=?"
         } else {
-            match = `MATCH(title) AGAINST('?' IN BOOLEAN MODE)`;//against('+사진*+테스트*' in boolean mode)
+            match = `MATCH(title) AGAINST(? IN BOOLEAN MODE)`;//against('+사진*+테스트*' in boolean mode)
             if (type === "contents") {
-                match = ` + MATCH(text) AGAINST('?' IN BOOLEAN MODE)`;
+                match = ` + MATCH(text) AGAINST(? IN BOOLEAN MODE)`;
                 values.push(word);
             }
         }
@@ -111,9 +111,9 @@ export default class Posts extends DB {
         if (type === "writer") {
             match = "userName=?"
         } else {
-            match = `MATCH(title) AGAINST('?' IN BOOLEAN MODE)`;//against('+사진*+테스트*' in boolean mode)
+            match = `MATCH(title) AGAINST(? IN BOOLEAN MODE)`;//against('+사진*+테스트*' in boolean mode)
             if (type === "contents") {
-                match += ` + MATCH(text) AGAINST('?' IN BOOLEAN MODE)`;
+                match += ` + MATCH(text) AGAINST(? IN BOOLEAN MODE)`;
                 values.push(word);
             }
         }
