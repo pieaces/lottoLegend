@@ -9,9 +9,27 @@ headerSign();
 
 const category = document.getElementById('wrapper').getAttribute('data-category');
 const index = Number(getQueryStringObject().index) || 1;
+const { word, type } = getQueryStringObject();
 
-getUnAuthAPI('/posts', { category, index })
-    .then(({ posts, count }) => {
+const selectBox = document.querySelector<HTMLSelectElement>('#search');
+const wordInput = document.querySelector<HTMLInputElement>('#word');
+
+document.querySelector<HTMLElement>('.search-btn').onclick = () =>{
+    location.href = `?index=1&word=${wordInput.value}&type=${selectBox.value}`;
+}
+function listAPI() {
+    if (word || type) {
+        console.log('search!')
+        return getUnAuthAPI('/posts/search', { category, index, word, type });
+    } else return getUnAuthAPI('/posts', { category, index });
+}
+function listHref(index:number){
+    let href = `?index=${index}`;
+    if(word) href += `&word=${word}`;
+    if(type) href += `&type=${type}`;
+    return href;
+}
+listAPI().then(({ posts, count }) => {
         makeBoard(posts);
         const LIST_PACK = 15;
         const INDEX_PACK = 5;
@@ -20,7 +38,7 @@ getUnAuthAPI('/posts', { category, index })
         const end = (start + INDEX_PACK - 1) >= total ? total : (start + INDEX_PACK - 1);
         if (index > INDEX_PACK) {
             const div = document.createElement('div');
-            div.innerHTML = `<a class="page-anchor" href="?index=${start-1}">이전</a>`;
+            div.innerHTML = `<a class="page-anchor" href="${listHref(start-1)}">이전</a>`;
             pageNumContainer.appendChild(div);
         }
         for (let i = start; i <= end; i++) {
@@ -29,13 +47,13 @@ getUnAuthAPI('/posts', { category, index })
                 div.textContent = (i).toString();
                 div.classList.add('page-current');
             } else {
-                div.innerHTML = `<a class="page-anchor" href="?index=${i}">${i}</a>`;
+                div.innerHTML = `<a class="page-anchor" href="${listHref(i)}">${i}</a>`;
             }
             pageNumContainer.appendChild(div);
         }
         if (start + INDEX_PACK - 1 < total) {
             const div = document.createElement('div');
-            div.innerHTML = `<a class="page-anchor" href="?index=${end + 1}">다음</a>`;
+            div.innerHTML = `<a class="page-anchor" href="${listHref(end + 1)}">다음</a>`;
             pageNumContainer.appendChild(div);
         }
     });
