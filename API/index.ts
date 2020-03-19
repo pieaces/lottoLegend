@@ -212,7 +212,7 @@ exports.handler = async (event: any) => {
                     body = {
                         winner: myData.winner,
                         lotto,
-                        numsArr: myData.numsArr,
+                        numsArr: myData.numsArr.reverse(),
                         total: myData.total,
                         include: myData.include && {
                             current: myData.include.current,
