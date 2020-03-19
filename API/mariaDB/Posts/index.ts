@@ -92,7 +92,7 @@ export default class Posts extends DB {
         const values: (string | number)[] = [category, word];
         let match = "";
         if (type === "writer") {
-            match = "userName=?"
+            match = "nickName=?"
         } else {
             match = `MATCH(title) AGAINST(? IN BOOLEAN MODE)`;//against('+사진*+테스트*' in boolean mode)
             if (type === "contents") {
@@ -108,8 +108,10 @@ export default class Posts extends DB {
     async getCountBySearch(category: string, word: string, type: SearchType): Promise<number> {
         const values = [category, word];
         let match = "";
+        let usersJoin = "";
         if (type === "writer") {
-            match = "userName=?"
+            match = "nickName=?"
+            usersJoin = "INNER JOIN Users ON ${this.tableName}.userName=Users.userName"
         } else {
             match = `MATCH(title) AGAINST(? IN BOOLEAN MODE)`;//against('+사진*+테스트*' in boolean mode)
             if (type === "contents") {
@@ -117,7 +119,7 @@ export default class Posts extends DB {
                 values.push(word);
             }
         }
-        const sql = `SELECT COUNT(*) FROM ${this.tableName} INNER JOIN PostsContents ON ${this.tableName}.id=PostsContents.post WHERE category=? AND ${match}`
+        const sql = `SELECT COUNT(*) FROM ${this.tableName} INNER JOIN PostsContents ON ${this.tableName}.id=PostsContents.post ${usersJoin} WHERE category=? AND ${match}`
         const rows = await this.query(sql, values);
         return rows[0]['COUNT(*)'];
     }
