@@ -125,3 +125,7 @@ export function rankToClass(rank: number): string {
         default: return 'heart';
     }
 }
+
+export function stringTrimer(str: string): string {
+    return str.trim().replace(/[\s]+/g, " ");
+}

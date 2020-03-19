@@ -4,7 +4,7 @@ import plugins from 'suneditor/src/plugins'
 import { ko } from 'suneditor/src/lang'
 import { postUnAuthAPI, postAuthAPI, getUnAuthAPI, patchAuthAPI } from '../amplify/api';
 import { headerSign, isLogedIn } from '../amplify/auth'
-import { networkAlert, getQueryStringObject, getCategoryHtml, onlyUserAlert } from '../functions'
+import { networkAlert, getQueryStringObject, getCategoryHtml, onlyUserAlert, stringTrimer } from '../functions'
 import Swal from 'sweetalert2'
 
 configure();
@@ -64,7 +64,7 @@ let selectedImages = [];
 let totalSize = 0;
 
 submitBtn.onclick = async () => {
-  const title = titleInput.value.trim();
+  const title = stringTrimer(titleInput.value);
   if (title === "") return Swal.fire({
     title: '제목은 비워둘 수 없습니다',
     icon: 'warning'
