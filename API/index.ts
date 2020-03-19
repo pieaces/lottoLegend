@@ -197,7 +197,9 @@ exports.handler = async (event: any) => {
                     const title: string = event.queryStringParameters.title;
                     const text: (string | undefined) = event.queryStringParameters.text;
                     const index = Number(event.queryStringParameters.index);
-                    const posts = await db.search(category, index, title, text);
+                    const writer = event.queryStringParameters.writer;
+
+                    const posts = await db.search({category, index, title, text, writer});
                     const count = await db.getCountBySearch(category, title, text);
                     body = { posts, count };
                     break;

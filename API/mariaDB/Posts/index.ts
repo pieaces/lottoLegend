@@ -87,14 +87,21 @@ export default class Posts extends DB {
         return affectedRows;
     }
 
-    async search(category: string = "free", index: number = 1, title: string, text?: string) {
-        let match = `MATCH(title) AGAINST('?' IN BOOLEAN MODE)`;//against('+사진*+테스트*' in boolean mode)
-        const values: (string | number)[] = [category, title];
-        if (text) {
-            match += ` + MATCH(text) AGAINST('?' IN BOOLEAN MODE)`;
-            values.push(text);
+    async search(param:{category: string, index: number, title?: string, text?: string, writer?:string}) {
+        const values: (string | number)[] = [param.category];
+        let match = "";
+        if (param.writer) {
+            match = "userName=?"
+            values.push(param.writer);
+        } else {
+            match = `MATCH(title) AGAINST('?' IN BOOLEAN MODE)`;//against('+사진*+테스트*' in boolean mode)
+            values.push(param.title);
+            if (param.text) {
+                match += ` + MATCH(text) AGAINST('?' IN BOOLEAN MODE)`;
+                values.push(param.text);
+            }
         }
-        values.push(Posts.SCAN_MAX * (index - 1), Posts.SCAN_MAX);
+        values.push(Posts.SCAN_MAX * (param.index - 1), Posts.SCAN_MAX);
         const sql = `SELECT id, title, Users.nickName AS 'nickName', Users.rank AS 'rank', created, hits, recommendation FROM ${this.tableName} INNER JOIN PostsContents ON ${this.tableName}.id=PostsContents.post INNER JOIN Users ON ${this.tableName}.userName=Users.userName WHERE category=? AND ${match} ORDER BY created DESC LIMIT ?, ?`
 
         return await this.query(sql, values);
