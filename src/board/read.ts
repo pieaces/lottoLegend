@@ -67,6 +67,12 @@ async function init() {
         } else {
             post = await getUnAuthAPI('/posts/' + id);
         }
+        if(post.error){
+            return Swal.fire({
+                title:post.message,
+                icon:'warning'
+            });
+        }
     } catch (err) {
         networkAlert();
     }

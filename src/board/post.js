@@ -36,18 +36,24 @@ const editor = suneditor.create('sample', {
   imageHeight: '360',
   imageUploadSizeLimit: 4 * 1024 * 1024,
   lang: ko
-})
-
+});
 const post = getQueryStringObject().id;
-const submitBtn = document.getElementById('submit-btn');
-const titleInput = document.getElementById('title-text');
-
 const category = document.getElementById('wrapper').getAttribute('data-category');
 const loading = document.querySelector('.loading-box');
+
+const submitBtn = document.getElementById('submit-btn');
+const titleInput = document.getElementById('title-text');
 //const imageWrapper = document.getElementById('image-wrapper');
 const imageTotalSize = document.getElementById('image-total-size');
 const imageRemove = document.getElementById('image-remove');
 const imageTable = document.getElementById('image-list');
+
+if (post) {
+  getUnAuthAPI(`/posts/${post}`, { flag: 1 }).then(post => {
+    titleInput.value = post.title;
+    editor.setContents(post.contents);
+  });
+}
 
 imageRemove.addEventListener('click', () => {
   deleteCheckedImages();
@@ -106,14 +112,6 @@ submitBtn.onclick = async () => {
     networkAlert();
   }
 }
-if (post) {
-  getUnAuthAPI(`/posts/${post}`, { flag: 1 }).then(post => {
-    titleInput.value = post.title;
-    editor.setContents(post.contents);
-  });
-} else {
-
-}
 
 editor.onImageUpload = function (targetImgElement, index, state, imageInfo, remainingFilesCount) {
   if (state === 'delete') {
@@ -121,11 +119,8 @@ editor.onImageUpload = function (targetImgElement, index, state, imageInfo, rema
     totalSize -= imageList[deleteIndex].size;
     const size = (totalSize / 1024 / 1024).toFixed(2);
     imageTotalSize.innerText = size + 'MB';
-
     const imageLi = imageTable.querySelectorAll('li');
-
     const targetId = [...imageLi][deleteIndex].id;
-
     const li = imageTable.querySelector('#' + targetId);
     li.remove();
     imageList.splice(deleteIndex, 1);
@@ -152,14 +147,12 @@ document.getElementById('files-upload').addEventListener('change', function (e) 
 })
 // Edit image list
 function setImageList() {
-
   let list = '';
   let size = 0;
 
   for (let i = 0, image, fixSize; i < imageList.length; i++) {
     image = imageList[i];
     fixSize = (image.size / 1024 / 1024).toFixed(2) * 1
-
     list += `<li id="img_${image.index}">
       <div class="image-container" data-image-index="${image.index}">
           <div class="image-box"><img src="${image.src}" ></div>
@@ -167,7 +160,6 @@ function setImageList() {
       <a href="javascript:void(0)" data-image-index="${image.index}" class="image-size">${fixSize}MB</a>
       
   </li>`
-
     size += fixSize;
   }
 
@@ -178,33 +170,29 @@ function setImageList() {
   const imageListSize = document.querySelectorAll('.image-size');
 
   for (const node of imageContainer) {
-
     node.addEventListener('click', () => {
       checkImage(parseInt(node.dataset.imageIndex));
-    })
+    });
   }
-
 
   for (const node of imageListSize) {
     node.addEventListener('click', () => {
       selectImage('select', parseInt(node.dataset.imageIndex));
-    })
+    });
   }
 
   const imageTableList = imageTable.querySelectorAll('li');
 
   for (const node of imageTableList) {
     node.addEventListener('click', () => {
-
       if (node.classList.contains('checked')) {
         node.style.backgroundColor = "rgb(91, 81, 253)";
         node.children[1].style.color = "white";
       } else {
         node.style.backgroundColor = "";
         node.children[1].style.color = "black";
-
       }
-    })
+    });
   }
 }
 
@@ -251,10 +239,8 @@ function selectImage(type, index) {
 
 function deleteCheckedImages() {
   const imagesInfo = editor.getImagesInfo();
-
   for (let i = 0; i < imagesInfo.length; i++) {
     if (selectedImages.indexOf(imagesInfo[i].index) > -1) {
-
       imagesInfo[i].delete();
       i--;
     }
