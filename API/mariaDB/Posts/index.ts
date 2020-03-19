@@ -13,7 +13,7 @@ interface Post {
     comment: Comment | null;
 }
 export default class Posts extends DB {
-    static readonly SCAN_MAX = 10;
+    static readonly SCAN_MAX = 15;
     comments: Comments = new Comments();
     postsContents: PostsContents = new PostsContents();
     constructor() {
