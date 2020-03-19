@@ -56,6 +56,8 @@ export default class Posts extends DB {
         return post.userName;
     }
     async post(category: string, title: string, userName: string, contents: string) {
+        if(!title || title === "") throw new Error('Not Empty Title!');
+        
         const post = {
             category, title, userName
         };
