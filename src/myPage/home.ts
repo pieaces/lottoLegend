@@ -1,6 +1,6 @@
 import configure from '../amplify/configure'
 import { getAuthAPI, patchAuthAPI } from '../amplify/api'
-import { setColorLotto, networkAlert, rankToClass, onlyUserAlert, stringTrimer } from '../functions/index'
+import { setColorLotto, networkAlert, rankToClass, onlyUserAlert, stringTrimer, isoStringToDate } from '../functions/index'
 import IncludeExclude from './IncludeExclude/index';
 import incObj from './IncludeExclude/include';
 import excObj from './IncludeExclude/exclude';
@@ -55,7 +55,7 @@ Auth.currentAuthenticatedUser()
             winNumBox.appendChild(bonus);
 
             service.textContent = plan;
-            if (until) expiryDate.textContent = '~' + until;
+            if (until) expiryDate.textContent = '~' + isoStringToDate(until).slice(0,10);
             rankHtml.classList.add(rankToClass(rank));
             rankHtml.textContent = rank;
             pointHtml.textContent = point;

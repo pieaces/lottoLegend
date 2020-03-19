@@ -76,7 +76,7 @@ submitBtn.onclick = async () => {
         const images = [];
         const imageElements = [];
         imageList.forEach(image => {
-            if (image.element.getAttribute('src').indexOf('https://canvas-lotto.s3.ap-northeast-2.amazonaws.com/images') === -1) {
+            if (image.element.getAttribute('src').indexOf('https://') === -1) {
                 const dataURL = image.src;
                 const fileName = attachTimestamp(image.name);
                 imageElements.push([image.element, `https://canvas-lotto.s3.ap-northeast-2.amazonaws.com/images/${userName}/${fileName}`]);
