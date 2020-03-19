@@ -16,43 +16,43 @@ const loading = document.querySelector('.loading-box');
 
 loading.classList.remove('none');
 getAuthAPI('/numbers/piece')
-.then(({ include, exclude, rounds, answer })=>{
-    if (include || exclude) {
-        const incNumList = new IncludeExclude(include, "include", incObj);
-        const excNumList = new IncludeExclude(exclude, "exclude", excObj);
-        IncludeExclude.setAnswer(answer);
-        incNumList.makePage();
-        excNumList.makePage();
-        document.querySelector<HTMLElement>('.selectbox-wrapper').classList.remove('none');
-        if (rounds) {
-            const config: IOptions = {
-                data: rounds.map((round: string) => {
-                    return {
-                        text: round,
-                        value: round
-                    }
-                }),
-            };
-            const selector = new Selectr(roundSelectBox, config);
-            selector.on('selectr.change', async (option) => {
-                loading.classList.remove('none');
-                const { include, exclude, answer } = await getAuthAPI('/numbers/piece/' + option.value);
-                incNumList.numbers = include;
-                excNumList.numbers = exclude;
+    .then(({ include, exclude, rounds, answer }) => {
+        if (include || exclude) {
+            const incNumList = new IncludeExclude(include, "include", incObj);
+            const excNumList = new IncludeExclude(exclude, "exclude", excObj);
+            IncludeExclude.setAnswer(answer);
+            incNumList.makePage();
+            excNumList.makePage();
+            document.querySelector<HTMLElement>('.selectbox-wrapper').classList.remove('none');
+            if (rounds) {
+                const config: IOptions = {
+                    data: rounds.map((round: string) => {
+                        return {
+                            text: round,
+                            value: round
+                        }
+                    }),
+                };
+                const selector = new Selectr(roundSelectBox, config);
+                selector.on('selectr.change', async (option) => {
+                    loading.classList.remove('none');
+                    const { include, exclude, answer } = await getAuthAPI('/numbers/piece/' + option.value);
+                    incNumList.numbers = include;
+                    excNumList.numbers = exclude;
 
-                IncludeExclude.setAnswer(answer);
-                incNumList.makePage();
-                excNumList.makePage();
-                loading.classList.add('none');
+                    IncludeExclude.setAnswer(answer);
+                    incNumList.makePage();
+                    excNumList.makePage();
+                    loading.classList.add('none');
+                });
+            }
+        } else {
+            Swal.fire({
+                title: '알림',
+                text: '번호리스트가 없습니다.',
+                icon: 'info',
+                footer: '<a href="/system/includeExclude.html">번호 선택하러 가기</a>'
             });
         }
-    }else{
-        Swal.fire({
-            title: '알림',
-            text: '번호리스트가 없습니다.',
-            icon: 'info',
-            footer: '<a href="/system/includeExclude.html">번호 선택하러 가기</a>'
-        });
-    }
-}).catch(err => networkAlert())
-.finally(() => loading.classList.add('none'));
+    }).catch(err => networkAlert())
+    .finally(() => loading.classList.add('none'));

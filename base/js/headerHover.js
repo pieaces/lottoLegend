@@ -3,6 +3,7 @@ const headerMenuList = document.querySelector('.hover-menu-container');
 
 const mqMobile = window.matchMedia("(max-width: 767px)");
 
+headerMenuHover();
 mqMobile.addListener(mqHeaderFunc);
 
 function mqHeaderFunc(mediaQuery) {
@@ -49,12 +50,7 @@ function mqHeaderFunc(mediaQuery) {
             });
         }
     } else {
-        for (const node of headerMenuTitle) {
-            node.addEventListener('mouseover', headerMenuListShow);
-            node.addEventListener('mouseout', headerMenuListHide);
-        }
-        headerMenuList.addEventListener('mouseover', headerMenuListShow);
-        headerMenuList.addEventListener('mouseout', headerMenuListHide);
+        headerMenuHover();
     }
 }
 
@@ -64,5 +60,14 @@ function headerMenuListShow() {
 
 function headerMenuListHide() {
     headerMenuList.classList.add('none');
+}
+
+function headerMenuHover() {
+    for (const node of headerMenuTitle) {
+        node.addEventListener('mouseover', headerMenuListShow);
+        node.addEventListener('mouseout', headerMenuListHide);
+    }
+    headerMenuList.addEventListener('mouseover', headerMenuListShow);
+    headerMenuList.addEventListener('mouseout', headerMenuListHide);
 }
 

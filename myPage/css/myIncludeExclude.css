@@ -82,6 +82,8 @@
   background-color: #ffffff;
   color: var(--default-color);
   font-size:1.3rem;
+  text-align: center;
+  line-height: 2.7;
 }
 
 @media (min-width: 0px) and (max-width: 767px) {
