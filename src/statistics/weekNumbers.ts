@@ -9,18 +9,15 @@ const excNumWeekWrapper = document.querySelector<HTMLElement>('.exc-num-week-wra
 const lottoNumTable = document.getElementsByClassName('lotto-num-table');
 const mqMobile = window.matchMedia("(max-width: 767px)");
 
-mqMobile.addListener(mqHeaderFunc);
+mqMobile.addListener(mqNumListFunc);
 
-function mqHeaderFunc(mediaQuery) {
+function mqNumListFunc(mediaQuery) {
     if (mediaQuery.matches) {
-        for (let i = 0; i < lottoNumTable.length; i++) {
-            if (lottoNumTable[i].children[1].tagName === "tbody") {
-                lottoNumTable[i].children[1].firstElementChild.children[4].innerHTML += "</tr><tr>";
-            }
-        }
+
     } else {
         for (let i = 0; i < lottoNumTable.length; i++) {
             const chilrenEl = lottoNumTable[i].children[1];
+            console.log(chilrenEl);
             if (chilrenEl.tagName === "tbody") {
                 const numTr1 = document.createElement('tr');
                 const hitsTr1 = document.createElement('tr');

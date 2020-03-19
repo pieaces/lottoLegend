@@ -12,12 +12,13 @@
     "@aws-amplify/core": "^2.2.4",
     "chart.js": "^2.9.3",
     "mobius1-selectr": "^2.4.13",
-    "suneditor": "^2.25.0",
+    "suneditor": "^2.26.0",
     "sweetalert2": "^9.8.2"
   },
   "devDependencies": {
     "@types/chart.js": "^2.9.13",
     "@types/node": "^13.7.4",
+    "types-suneditor": "^1.0.0",
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.5",
     "webpack": "^4.42.0",

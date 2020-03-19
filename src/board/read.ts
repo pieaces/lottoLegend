@@ -67,10 +67,12 @@ async function init() {
         } else {
             post = await getUnAuthAPI('/posts/' + id);
         }
-        if(post.error){
+        if (post.error) {
             return Swal.fire({
-                title:post.message,
-                icon:'warning'
+                title: post.message,
+                icon: 'warning'
+            }).then(() => {
+                location.href = "javascript:history.back();"
             });
         }
     } catch (err) {

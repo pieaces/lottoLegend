@@ -1,6 +1,6 @@
 import configure from '../amplify/configure'
 import { getAuthAPI, patchAuthAPI } from '../amplify/api'
-import { setColorLotto, networkAlert, rankToClass, onlyUserAlert } from '../functions/index'
+import { setColorLotto, networkAlert, rankToClass, onlyUserAlert, stringTrimer } from '../functions/index'
 import IncludeExclude from './IncludeExclude/index';
 import incObj from './IncludeExclude/include';
 import excObj from './IncludeExclude/exclude';
@@ -120,7 +120,7 @@ function modifyMessage(option: { title: string, text?: string, confirmButtonText
         allowOutsideClick: () => !Swal.isLoading()
     });
 }
-async function phoneMessage(title: string) {
+async function phoneCodeVerify(title: string) {
     await modifyMessage({
         title, confirmButtonText: '확인', preConfirm: async (code: string) => {
             try {
@@ -136,7 +136,7 @@ async function phoneMessage(title: string) {
             }
             catch (err) {
                 if (err.code) {
-                    phoneMessage('잘못된 코드입니다');
+                    Swal.showValidationMessage('잘못된 코드입니다');
                 }
             }
         }
@@ -146,7 +146,8 @@ function nicknameUpdate() {
     modifyMessage({
         title: '변경하실 닉네임을 입력해주세요', confirmButtonText: '변경', preConfirm: async (nickName: string) => {
             try {
-                const response = await patchAuthAPI('/account', { nickName });
+                if(nickName.length > 8) throw new Error('8글자 이내여야합니다');
+                const response = await patchAuthAPI('/account', { nickName: stringTrimer(nickName) });
                 if (response.error) {
                     throw new Error(response.message);
                 }
@@ -175,10 +176,18 @@ function mobileUpdate() {
         title: '인증하실 휴대폰번호를 입력해주세요', text: '숫자로만 입력해주세요 예)01012345678', confirmButtonText: '확인', preConfirm: async (phone: string) => {
             const user = (await Auth.currentAuthenticatedUser());
             try {
+                const regexr = /^[0-9]{10,11}$/;
+                if(!regexr.test(phone)) throw new Error('format')
                 await Auth.updateUserAttributes(user, { phone_number: '+82' + phone.slice(1) });
                 return await Auth.verifyCurrentUserAttribute('phone_number')
             } catch (err) {
-                return err;
+                if (err.message === "format") {
+                    Swal.showValidationMessage('휴대폰번호 형식을 지켜주세요');
+                } else if (err.code === "LimitExceededException") {
+                    Swal.showValidationMessage('시도횟수가 기준을 초과하였습니다. 잠시후 다시 시도해주세요');
+                } else {
+                    Swal.showValidationMessage('예기치 못한 오류가 발생하였습니다');
+                }
             }
         }
     }).then(async (result) => {
@@ -190,30 +199,10 @@ function mobileUpdate() {
                 phoneNumber.textContent = phoneString(user.attributes.phone_number);
                 document.querySelector<HTMLElement>('.mobile-btn').classList.add('none');
             });
-            phoneMessage('인증번호를 입력해주세요');
-
-        } else if (result.value.code === "InvalidParameterException") {
-            Swal.fire({
-                title: '오류',
-                text: '휴대폰번호 형식을 잘못 입력하셨습니다',
-                icon: 'error'
-            });
-        } else if (result.value.code === "LimitExceededException") {
-            Swal.fire({
-                title: '오류',
-                text: '시도횟수가 기준을 초과하였습니다. 잠시후 다시 시도해주세요',
-                icon: 'error'
-            });
-        } else {
-            Swal.fire({
-                title: '오류',
-                text: '예기치 못한 오류가 발생하였습니다',
-                icon: 'error'
-            });
+            phoneCodeVerify('인증번호를 입력해주세요');
         }
     });
 }
-
 
 function serviceUpdate() {
 
