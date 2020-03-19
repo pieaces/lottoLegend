@@ -54,6 +54,7 @@ exports.handler = async (event: any) => {
                     break;
             }
         }
+            break;
         case '/account/phone': {
             switch (method) {
                 case 'PATCH':
@@ -62,6 +63,7 @@ exports.handler = async (event: any) => {
                     break;
             }
         }
+            break;
     }
     const response = {
         statusCode,
