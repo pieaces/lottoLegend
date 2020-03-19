@@ -1,19 +1,16 @@
-.exc-num-week-wrapper{
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
 
-.board-container{
+
+.num-week-container{
     width: 100%;
+    margin-bottom:2rem;
 }
 
-.board-section{
+.num-week-section{
     display:flex;
+    border-bottom: 1px solid var(--border-color);
 }
 
-.board-header {
+.num-week-header {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -24,38 +21,63 @@
   }
   
 
-  .board-box {
+  .num-week-box {
       width:50%;
-    
   }
   
-  .board-num-box,
-  .board-hit-box{
+  .num-week-num-box,
+  .num-week-hit-box{
     display:flex;
     align-items: center;
     justify-content: center;
       width: 100%;
-      height:4rem;
       font-size:0px;
   }
 
-  .board-num,
-  .board-hit-box >div {
+  .num-week-num-box{
+    height:5rem;
+  }
+
+  .num-week-hit-box{
+    height: 3rem;
+  }
+
+  .num-week-hit-result{
+      margin:0 0.5rem;
+    font-weight: bold;
+}
+
+  .num-week-num-box>div,
+  .num-week-hit-box >div {
+      display:flex;
+        justify-content: center;
     width: 20%;
+    height:100%;
     font-size: 1.4rem;
     text-align: center;
   }
 
-  .board-num > div {
+  .num-week-num-box>div{
+    align-items: center;
+  }
+
+
+  .num-week-num > div {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 3rem;
-      height: 3rem;
-      margin:0 auto;
+      width: 3.5rem;
+      height: 3.5rem;
     border-radius: 50%;
     background-color: var(--main-color);
     color: var(--default-color);
+  }
+  .num-week-footer{
+      display:flex;
+      align-items: center;
+      justify-content: center;
+      height:5rem;
+      font-size:1.4rem;
   }
 
 .lotto-num-container{
@@ -112,13 +134,29 @@
     color:var(--default-color);
 }
 
-
-.exc-num-week-hit{
-    font-weight: bold;
-}
-
 .ad-box{
     width: 100%;
     height:10rem;
     margin: 2rem 0;
 }
+
+
+
+
+@media (min-width: 0px) and (max-width: 767px) {
+    .num-week-section {
+        display: block;
+    }
+
+    .num-week-section > div.num-week-box:nth-child(1){
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .num-week-box{
+        width: 100%;
+    }
+}
+
+
+
+ 
