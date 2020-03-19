@@ -69,9 +69,7 @@ const leftBtn = document.getElementById('left-btn');
 const stackInstance = new ChartBase('bar', stackCanvas, stackDataBox, stackOption);
 const lottoNums = document.querySelectorAll<HTMLElement>('.lotto-num');
 const statsValues = document.querySelectorAll('.stats-table tr >td:nth-child(2)');
-const loading = document.querySelector('.loading-box');
 
-loading.classList.remove('none');
 getUnAuthAPI('/numbers/win')
     .then(data => {
         const max: number = data.round;
@@ -103,7 +101,6 @@ getUnAuthAPI('/numbers/win')
                 });
             }
         });
-        loading.classList.add('none');
     });
 const lottoNumTemp: HTMLElement[] = [];
 function write(data: any) {

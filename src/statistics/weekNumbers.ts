@@ -12,7 +12,6 @@ headerSign();
 
 getUnAuthAPI('/numbers/week')
     .then(({data, rounds}) => {
-        console.log(data, rounds);
         makeTable(data);
 
         const config: IOptions = {
@@ -25,8 +24,7 @@ getUnAuthAPI('/numbers/week')
         };
         const selector = new Selectr(selectBox, config);
         selector.on('selectr.change', async (option) => {
-            const {data, rounds} = await getUnAuthAPI('/numbers/week/'+option.value);
-            console.log(data, rounds);
+            const {data} = await getUnAuthAPI('/numbers/week/'+option.value);
             makeTable(data);
         });
     }).catch(err => networkAlert());

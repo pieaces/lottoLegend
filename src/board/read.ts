@@ -46,103 +46,110 @@ commentSubmit.onclick = async function () {
         if (!logedIn) {
             onlyUserAlert();
         }
-        else alert('1글자 이상 입력해주세요.');
+        else Swal.fire({
+            title:'내용은 비워둘 수 없습니다',
+            icon:'warning'
+        });
     }
 }
 
 async function init() {
-    if (id) {
-        let post: any;
-        try {
-            if (await isLogedIn()) {
-                post = await getAuthAPI('/posts/' + id);
-            } else {
-                post = await getUnAuthAPI('/posts/' + id);
-            }
-        } catch (err) {
-            networkAlert();
-        }
-        title.textContent = post.title;
-        author.textContent = post.nickName;
-        postRank.textContent = post.rank;
-        postRank.classList.add('rank');
-        postRank.classList.add(rankToClass(post.rank));
-
-        const category = document.querySelector<HTMLElement>('#wrapper').getAttribute('data-category');
-        if (category === 'incl' || category === 'excl') {
-            makeNum([1, 3, 5, 7, 9, 10, 13, 15, 19, 24, 29, 35, 41, 42, 44, 45]);
-        }
-
-        if (await isLogedIn() && await getUserName() === post.userName) {
-            contentsUpdateBtn.classList.remove('hide');
-
-            document.querySelector<HTMLElement>('#content-update-btn').setAttribute('onclick', `location.href='/${getCategoryHtml(category, 'post')}?id=${id}'`);
-            document.querySelector<HTMLElement>('#delete-btn').addEventListener('click', async () => {
-                Swal.fire({
-                    title: '삭제하시겠습니까?',
-                    text: "한번 삭제하면 되돌릴 수 없습니다",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: '삭제',
-                    cancelButtonText: '취소',
-                }).then(async (result) => {
-                    if (result.value) {
-                        try {
-                            await deleteAuthAPI('/posts/' + id);
-                            Swal.fire({
-                                title: '완료',
-                                icon: 'success',
-                                allowOutsideClick: false,
-                                timer: 1500,
-                            }).then(() => {
-                                location.href = `/${getCategoryHtml(category, 'list')}`;
-                            });
-                        } catch (err) {
-                            networkAlert();
-                        }
-                    }
-                });
-            })
-        }
-        created.textContent = isoStringToDate(post.created);
-        hits.textContent = post.hits;
-        recommendation.textContent = post.recommendation;
-
-        let recommendStatus = post.recommend;
-        if (recommendStatus) {
-            recommendBtn.classList.add('recommend');
-        }
-        recommendBtn.addEventListener('click', async () => {
-            loading.classList.remove('none');
-            const logedIn = await isLogedIn();
-            if (logedIn) {
-                try {
-                    await patchAuthAPI(`/posts/${id}/recommend`);
-                    recommendStatus = !recommendStatus;
-                    if (recommendStatus) {
-                        recommendBtn.classList.add('recommend');
-                        recommendation.textContent = (Number(recommendation.textContent) + 1).toString();
-                    }
-                    else {
-                        recommendBtn.classList.remove('recommend');
-                        recommendation.textContent = (Number(recommendation.textContent) - 1).toString();
-                    }
-                } catch (err) {
-                    networkAlert();
-                }
-            } else {
-                onlyUserAlert();
-            }
-
-            loading.classList.add('none');
+    if (!id) {
+        return Swal.fire({
+            title:'잘못된 접근입니다',
+            icon:'warning'
         });
-        contentsInput.innerHTML = post.contents;
-
-        if (post.comments) {
-            makeComments(post.comments);
+    }
+    let post: any;
+    try {
+        if (await isLogedIn()) {
+            post = await getAuthAPI('/posts/' + id);
+        } else {
+            post = await getUnAuthAPI('/posts/' + id);
         }
+    } catch (err) {
+        networkAlert();
+    }
+    title.textContent = post.title;
+    author.textContent = post.nickName;
+    postRank.textContent = post.rank;
+    postRank.classList.add('rank');
+    postRank.classList.add(rankToClass(post.rank));
+
+    const category = document.querySelector<HTMLElement>('#wrapper').getAttribute('data-category');
+    if (category === 'incl' || category === 'excl') {
+        makeNum([1, 3, 5, 7, 9, 10, 13, 15, 19, 24, 29, 35, 41, 42, 44, 45]);
+    }
+
+    if (await isLogedIn() && await getUserName() === post.userName) {
+        contentsUpdateBtn.classList.remove('hide');
+
+        document.querySelector<HTMLElement>('#content-update-btn').setAttribute('onclick', `location.href='/${getCategoryHtml(category, 'post')}?id=${id}'`);
+        document.querySelector<HTMLElement>('#delete-btn').addEventListener('click', async () => {
+            Swal.fire({
+                title: '삭제하시겠습니까?',
+                text: "한번 삭제하면 되돌릴 수 없습니다",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: '삭제',
+                cancelButtonText: '취소',
+            }).then(async (result) => {
+                if (result.value) {
+                    try {
+                        await deleteAuthAPI('/posts/' + id);
+                        Swal.fire({
+                            title: '완료',
+                            icon: 'success',
+                            allowOutsideClick: false,
+                            timer: 1500,
+                        }).then(() => {
+                            location.href = `/${getCategoryHtml(category, 'list')}`;
+                        });
+                    } catch (err) {
+                        networkAlert();
+                    }
+                }
+            });
+        })
+    }
+    created.textContent = isoStringToDate(post.created);
+    hits.textContent = post.hits;
+    recommendation.textContent = post.recommendation;
+
+    let recommendStatus = post.recommend;
+    if (recommendStatus) {
+        recommendBtn.classList.add('recommend');
+    }
+    recommendBtn.addEventListener('click', async () => {
+        loading.classList.remove('none');
+        const logedIn = await isLogedIn();
+        if (logedIn) {
+            try {
+                await patchAuthAPI(`/posts/${id}/recommend`);
+                recommendStatus = !recommendStatus;
+                if (recommendStatus) {
+                    recommendBtn.classList.add('recommend');
+                    recommendation.textContent = (Number(recommendation.textContent) + 1).toString();
+                }
+                else {
+                    recommendBtn.classList.remove('recommend');
+                    recommendation.textContent = (Number(recommendation.textContent) - 1).toString();
+                }
+            } catch (err) {
+                networkAlert();
+            }
+        } else {
+            onlyUserAlert();
+        }
+
+        loading.classList.add('none');
+    });
+    contentsInput.innerHTML = post.contents;
+
+    if (post.comments) {
+        makeComments(post.comments);
     }
 }
 
@@ -273,8 +280,3 @@ function makeNum(number: number[]) {
         numContainer.appendChild(numBox);
     }
 }
-
-
-
-
-

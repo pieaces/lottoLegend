@@ -19,17 +19,15 @@ const service = document.querySelector('#service');
 const expiryDate = document.querySelector('#service-expiry-date');
 const nicknameUpdateBtn = document.querySelector('#nickname-update');
 const serviceUpdateBtn = document.querySelector('#service-update');
-const constmobileUpdateBtn =document.getElementById('mobile');
+const constmobileUpdateBtn = document.getElementById('mobile');
 const rankHtml = document.querySelector('.rank');
 const lottoRank = document.querySelector('#lotto-rank');
-
-const loading = document.querySelector('.loading-box');
 
 Auth.currentAuthenticatedUser()
     .then(user => {
         console.log(user);
         nickname.textContent = user.attributes.nickname;
-        if(user.attributes.phone_number_verified){
+        if (user.attributes.phone_number_verified) {
             document.querySelector<HTMLElement>('.mobile-btn').classList.add('none');
         }
         if (user.attributes.phone_number) {
@@ -38,7 +36,7 @@ Auth.currentAuthenticatedUser()
         nicknameUpdateBtn.addEventListener('click', nicknameUpdate);
         serviceUpdateBtn.addEventListener('click', serviceUpdate);
         constmobileUpdateBtn.addEventListener('click', mobileUpdate);
-        loading.classList.remove('none');
+
         getAuthAPI('/mypage').then(({ numsArr, total, include, exclude, winner, lotto, plan, until, rank, point }) => {
             lotto.numbers.forEach((num: number) => {
                 const div = document.createElement('div');
@@ -57,7 +55,7 @@ Auth.currentAuthenticatedUser()
             winNumBox.appendChild(bonus);
 
             service.textContent = plan;
-            if(until) expiryDate.textContent = '~' + until;
+            if (until) expiryDate.textContent = '~' + until;
             rankHtml.classList.add(rankToClass(rank));
             rankHtml.textContent = rank;
             pointHtml.textContent = point;
@@ -104,39 +102,36 @@ Auth.currentAuthenticatedUser()
             } else {
                 document.querySelector<HTMLElement>('.mypage-table-num-box').appendChild(makeNoneBox());
             }
-        }).catch(err => networkAlert())
-            .finally(() => loading.classList.add('none'));
-    }
-    )
-    .catch(err => onlyUserAlert());
+        }).catch(err => networkAlert());
+    }).catch(err => onlyUserAlert());
 
-function modifyMessage(option:{title:string, text?:string, confirmButtonText:string, preConfirm:(param:any)=>any}) {
+function modifyMessage(option: { title: string, text?: string, confirmButtonText: string, preConfirm: (param: any) => any }) {
     return Swal.fire({
-        title:option.title,
+        title: option.title,
         input: 'text',
         inputAttributes: {
             autocapitalize: 'off'
         },
         showCancelButton: true,
-        confirmButtonText:option.confirmButtonText,
+        confirmButtonText: option.confirmButtonText,
         cancelButtonText: '취소',
         showLoaderOnConfirm: true,
-        preConfirm:option.preConfirm,
+        preConfirm: option.preConfirm,
         allowOutsideClick: () => !Swal.isLoading()
     });
 }
-async function phoneMessage(title:string) {
+async function phoneMessage(title: string) {
     await modifyMessage({
         title, confirmButtonText: '확인', preConfirm: async (code: string) => {
             try {
                 await Auth.verifyCurrentUserAttributeSubmit('phone_number', code);
-                await Auth.currentAuthenticatedUser({bypassCache:true}).then(user => {
+                await Auth.currentAuthenticatedUser({ bypassCache: true }).then(user => {
                     phoneNumber.textContent = phoneString(user.attributes.phone_number);
-                    patchAuthAPI('/account/phone', {phone:user.attributes.phone_number});
+                    patchAuthAPI('/account/phone', { phone: user.attributes.phone_number });
                 }).catch(err => networkAlert());
                 Swal.fire({
                     title: '인증완료',
-                    icon:'success'
+                    icon: 'success'
                 });
             }
             catch (err) {
@@ -148,24 +143,26 @@ async function phoneMessage(title:string) {
     });
 }
 function nicknameUpdate() {
-    modifyMessage({title:'변경하실 닉네임을 입력해주세요', confirmButtonText:'변경', preConfirm: async (nickName: string) => {
-        try {
-            const response = await patchAuthAPI('/account', { nickName });
-            if (response.error) {
-                throw new Error(response.message);
+    modifyMessage({
+        title: '변경하실 닉네임을 입력해주세요', confirmButtonText: '변경', preConfirm: async (nickName: string) => {
+            try {
+                const response = await patchAuthAPI('/account', { nickName });
+                if (response.error) {
+                    throw new Error(response.message);
+                }
+                const user = (await Auth.currentAuthenticatedUser());
+                await Auth.updateUserAttributes(user, { nickname: nickName });
+                return response;
             }
-            const user = (await Auth.currentAuthenticatedUser());
-            await Auth.updateUserAttributes(user, { nickname: nickName });
-            return response;
+            catch (error) {
+                Swal.showValidationMessage(error);
+            }
         }
-        catch (error) {
-            Swal.showValidationMessage(error);
-        }
-    }}).then(async (result) => {
+    }).then(async (result) => {
         if (result.value) {
-            Auth.currentAuthenticatedUser({bypassCache:true}).then(user => {
+            Auth.currentAuthenticatedUser({ bypassCache: true }).then(user => {
                 nickname.textContent = user.attributes.nickname;
-            })            
+            })
             Swal.fire({
                 title: '변경완료되었습니다',
             });
@@ -173,43 +170,45 @@ function nicknameUpdate() {
     });
 }
 
-function mobileUpdate(){
-    modifyMessage({title:'인증하실 휴대폰번호를 입력해주세요',text:'숫자로만 입력해주세요 예)01012345678', confirmButtonText:'확인',preConfirm: async (phone: string) => {
-        const user = (await Auth.currentAuthenticatedUser());
-        try {
-            await Auth.updateUserAttributes(user, { phone_number: '+82' + phone.slice(1) });
-            return await Auth.verifyCurrentUserAttribute('phone_number')
-        } catch (err) {
-            return err;
+function mobileUpdate() {
+    modifyMessage({
+        title: '인증하실 휴대폰번호를 입력해주세요', text: '숫자로만 입력해주세요 예)01012345678', confirmButtonText: '확인', preConfirm: async (phone: string) => {
+            const user = (await Auth.currentAuthenticatedUser());
+            try {
+                await Auth.updateUserAttributes(user, { phone_number: '+82' + phone.slice(1) });
+                return await Auth.verifyCurrentUserAttribute('phone_number')
+            } catch (err) {
+                return err;
+            }
         }
-    }}).then(async (result) => {
-        if(result.dismiss){
+    }).then(async (result) => {
+        if (result.dismiss) {
         }
         else if (!result.value.code) {
-            await Auth.currentAuthenticatedUser({bypassCache:true}).then(user => {
+            await Auth.currentAuthenticatedUser({ bypassCache: true }).then(user => {
                 nickname.textContent = user.attributes.nickname;
                 phoneNumber.textContent = phoneString(user.attributes.phone_number);
                 document.querySelector<HTMLElement>('.mobile-btn').classList.add('none');
             });
             phoneMessage('인증번호를 입력해주세요');
 
-        } else if (result.value.code === "InvalidParameterException"){
+        } else if (result.value.code === "InvalidParameterException") {
             Swal.fire({
                 title: '오류',
-                text:'휴대폰번호 형식을 잘못 입력하셨습니다',
-                icon:'error'
+                text: '휴대폰번호 형식을 잘못 입력하셨습니다',
+                icon: 'error'
             });
-        } else if(result.value.code === "LimitExceededException"){
+        } else if (result.value.code === "LimitExceededException") {
             Swal.fire({
                 title: '오류',
                 text: '시도횟수가 기준을 초과하였습니다. 잠시후 다시 시도해주세요',
-                icon:'error'
+                icon: 'error'
             });
-        }else{
+        } else {
             Swal.fire({
                 title: '오류',
-                text:'예기치 못한 오류가 발생하였습니다',
-                icon:'error'
+                text: '예기치 못한 오류가 발생하였습니다',
+                icon: 'error'
             });
         }
     });

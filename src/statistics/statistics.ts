@@ -9,7 +9,6 @@ import { headerSign } from '../amplify/auth';
 configure();
 headerSign();
 
-const loading = document.querySelector('.loading-box');
 const labels = require('../system/premium/DataAPI/json/labels.json');
 const lineNum = document.querySelectorAll<HTMLElement>('.chart-line-num > div');
 const leftBtn = document.getElementById('left-line-chart-btn');
@@ -91,7 +90,6 @@ const barOption: Chart.ChartOptions = {
     legend: { display: false },
 };
 
-loading.classList.remove('none');
 getUnAuthAPI('/stats/piece', { method })
     .then(data => {
         console.log(data);
@@ -124,7 +122,6 @@ getUnAuthAPI('/stats/piece', { method })
         barDataBox.datasets[0].data = data.piece
         const barInstance = new ChartBase('bar', barCanvas, barDataBox, barOption);
         barInstance.create();
-        loading.classList.add('none');
     });
 
 

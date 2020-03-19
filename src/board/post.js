@@ -3,16 +3,16 @@ import suneditor from 'suneditor'
 import plugins from 'suneditor/src/plugins'
 import { ko } from 'suneditor/src/lang'
 import { postUnAuthAPI, postAuthAPI, getUnAuthAPI, patchAuthAPI } from '../amplify/api';
-import { getUserName, headerSign } from '../amplify/auth'
+import { headerSign, isLogedIn } from '../amplify/auth'
 import { networkAlert, getQueryStringObject, getCategoryHtml, onlyUserAlert } from '../functions'
 import Swal from 'sweetalert2'
 
 configure();
 let userName;
-getUserName()
-  .then(username => userName = username)
-  .catch(err => onlyUserAlert());
 headerSign();
+isLogedIn().then(bool=>{
+  if(!bool) onlyUserAlert();
+})
 
 function attachTimestamp(name) {
   const index = name.indexOf('.');
@@ -44,7 +44,6 @@ const titleInput = document.getElementById('title-text');
 
 const category = document.getElementById('wrapper').getAttribute('data-category');
 const loading = document.querySelector('.loading-box');
-
 //const imageWrapper = document.getElementById('image-wrapper');
 const imageTotalSize = document.getElementById('image-total-size');
 const imageRemove = document.getElementById('image-remove');
@@ -59,7 +58,11 @@ let selectedImages = [];
 let totalSize = 0;
 
 submitBtn.onclick = async () => {
-  const title = titleInput.value;
+  const title = titleInput.value.trim();
+  if (title === "") return Swal.fire({
+    title: '제목은 비워둘 수 없습니다',
+    icon: 'warning'
+  });
   loading.classList.remove('none');
   try {
     const images = [];
