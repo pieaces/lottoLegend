@@ -10,7 +10,11 @@ const headers = {
     //"Access-Control-Allow-Credentials" : true // Required for cookies, authorization headers with HTTPS
 }
 exports.handler = async (event: any) => {
+    if(event['detail-type'] === 'Scheduled Event'){
+        return console.log('Scheduled Event');
+    }    
     console.log(event);
+
     const method: string = event.httpMethod;
     const resource: string = event.resource;
     let logedIn: boolean = false;
