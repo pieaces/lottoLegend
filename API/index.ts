@@ -6,6 +6,7 @@ import { getIncOrExcNumbers, IncOrExc } from './dynamoDB/myNumbers'
 import { doesRecommend } from "./dynamoDB/recommend";
 import { addPoint, Point, subtractPoint } from "./dynamoDB/userInfo";
 import Users from "./mariaDB/Users";
+import Response from "./Response";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -80,6 +81,14 @@ exports.handler = async (event: any) => {
                         }
                         else if (post.category === "excl") {
                             post.excl = await getIncOrExcNumbers(post.userName, getCurrentRound(post.created), IncOrExc.exclude);
+                        }else if(post.category === "qna"){
+                            if(currentId !== post.userName){
+                                return {
+                                    statusCode:200,
+                                    headers,
+                                    body: JSON.stringify(new Response(true, "작성자가 아닙니다"))
+                                }
+                            }
                         }
                         body = post;
                         body.recommend = await doesRecommend(postId, currentId);

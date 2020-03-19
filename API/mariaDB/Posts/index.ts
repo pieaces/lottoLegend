@@ -3,14 +3,18 @@ import Comments, { Comment } from '../Comments/index'
 import PostsContents from "../PostsContents";
 import { updateRecommendUsers } from "../../dynamoDB/recommend";
 
+type category = "incl" | "excl" | "qna";
 interface Post {
     id: number;
+    category: category;
     title: string;
     userName: string;
     contents: string;
-    created: Date,
+    created: string,
     hits: number;
-    comment: Comment | null;
+    comments: Comment[] | null;
+    incl?: number[];
+    excl?: number[];
 }
 export default class Posts extends DB {
     static readonly SCAN_MAX = 15;
@@ -30,8 +34,8 @@ export default class Posts extends DB {
     }
     async get(id: number) {
         const rows = await this.query(`SELECT category, title, Users.userName AS 'userName', Users.nickName AS 'nickName', Users.rank AS 'rank', created, hits, recommendation, text as 'contents' FROM ${this.tableName} INNER JOIN PostsContents ON ${this.tableName}.id = PostsContents.post INNER JOIN Users On ${this.tableName}.userName = Users.userName WHERE ${this.tableName}.id=?`, [id]);
-        const post = rows[0];
-        const comments = await this.comments.getByPost(id);
+        const post = rows[0] as Post;
+        const comments = (await this.comments.getByPost(id)) as Comment[];
         if (comments) post.comments = comments;
 
         return post;
@@ -56,8 +60,8 @@ export default class Posts extends DB {
         return post.userName;
     }
     async post(category: string, title: string, userName: string, contents: string) {
-        if(!title || title === "") throw new Error('Not Empty Title!');
-        
+        if (!title || title === "") throw new Error('Not Empty Title!');
+
         const post = {
             category, title, userName
         };
