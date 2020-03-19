@@ -89,15 +89,16 @@ export default class Posts extends DB {
     }
 
     async search(category: string, word:string, type:SearchType, index:number) {
-        const values: (string | number)[] = [category, word];
+        const values: (string | number)[] = [category];
         let match = "";
         if (type === "writer") {
             match = "nickName=?"
+            values.push(word);
         } else {
             match = `MATCH(title) AGAINST(? IN BOOLEAN MODE)`;//against('+사진*+테스트*' in boolean mode)
             if (type === "contents") {
-                match = ` + MATCH(text) AGAINST(? IN BOOLEAN MODE)`;
-                values.push(word);
+                match += ` + MATCH(text) AGAINST(? IN BOOLEAN MODE)`;
+                values.push(word.split(' ').reduce((acc, cur) => acc + `+${cur}*`, ''));
             }
         }
         values.push(Posts.SCAN_MAX * (index - 1), Posts.SCAN_MAX);
@@ -106,17 +107,18 @@ export default class Posts extends DB {
         return await this.query(sql, values);
     }
     async getCountBySearch(category: string, word: string, type: SearchType): Promise<number> {
-        const values = [category, word];
+        const values = [category];
         let match = "";
         let usersJoin = "";
         if (type === "writer") {
             match = "nickName=?"
+            values.push(word);
             usersJoin = `INNER JOIN Users ON ${this.tableName}.userName=Users.userName`
         } else {
             match = `MATCH(title) AGAINST(? IN BOOLEAN MODE)`;//against('+사진*+테스트*' in boolean mode)
             if (type === "contents") {
                 match += ` + MATCH(text) AGAINST(? IN BOOLEAN MODE)`;
-                values.push(word);
+                values.push(word.split(' ').reduce((acc, cur) => acc + `+${cur}*`, ''));
             }
         }
         const sql = `SELECT COUNT(*) FROM ${this.tableName} INNER JOIN PostsContents ON ${this.tableName}.id=PostsContents.post ${usersJoin} WHERE category=? AND ${match}`
