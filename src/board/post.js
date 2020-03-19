@@ -10,8 +10,8 @@ import Swal from 'sweetalert2'
 configure();
 let userName;
 headerSign();
-isLogedIn().then(bool=>{
-  if(!bool) onlyUserAlert();
+isLogedIn().then(bool => {
+  if (!bool) onlyUserAlert();
 })
 
 function attachTimestamp(name) {
