@@ -16,20 +16,18 @@
     margin-bottom: 5rem;
 }
 
-.lotto-num-table{
-    width:100%;
-}
-
 .lotto-num-table tr >th,
 .lotto-num-table tr >td{
-    font-size:1.4rem;
     text-align: center;
+}
+
+.lotto-num-table tr >td{
+    font-size: 1.4rem;
 }
 
 .lotto-num-table-title {
     height:5rem;
-    background-color: #1f71b3;
-    color:var(--default-color);
+    background-color: var(--table-title-color);
     font-size: 1.5rem;
 }
 
