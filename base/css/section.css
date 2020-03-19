@@ -1,6 +1,10 @@
 
 /* grid-section-1 */
 
+.section1{
+  position: relative;
+}
+
 .grid-section-1 {
     display: flex;
   }
@@ -108,13 +112,15 @@
       display:block;
     }
 
+    .main{
+      width:100%;
+    }
+
     .aside{
       display:none;
     }
 
-    .main{
-      width:100%;
-    }
+
 
     .left-right-container{
       display:block;
