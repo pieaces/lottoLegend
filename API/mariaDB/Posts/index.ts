@@ -4,6 +4,7 @@ import PostsContents from "../PostsContents";
 import { updateRecommendUsers } from "../../dynamoDB/recommend";
 
 type category = "incl" | "excl" | "qna";
+export type SearchType = "writer" | "title" | "contents";
 interface Post {
     id: number;
     category: category;
@@ -87,31 +88,34 @@ export default class Posts extends DB {
         return affectedRows;
     }
 
-    async search(param:{category: string, index: number, title?: string, text?: string, writer?:string}) {
-        const values: (string | number)[] = [param.category];
+    async search(category: string, word:string, type:SearchType, index:number) {
+        const values: (string | number)[] = [category, word];
         let match = "";
-        if (param.writer) {
+        if (type === "writer") {
             match = "userName=?"
-            values.push(param.writer);
         } else {
             match = `MATCH(title) AGAINST('?' IN BOOLEAN MODE)`;//against('+사진*+테스트*' in boolean mode)
-            values.push(param.title);
-            if (param.text) {
-                match += ` + MATCH(text) AGAINST('?' IN BOOLEAN MODE)`;
-                values.push(param.text);
+            if (type === "contents") {
+                match = ` + MATCH(text) AGAINST('?' IN BOOLEAN MODE)`;
+                values.push(word);
             }
         }
-        values.push(Posts.SCAN_MAX * (param.index - 1), Posts.SCAN_MAX);
+        values.push(Posts.SCAN_MAX * (index - 1), Posts.SCAN_MAX);
         const sql = `SELECT id, title, Users.nickName AS 'nickName', Users.rank AS 'rank', created, hits, recommendation FROM ${this.tableName} INNER JOIN PostsContents ON ${this.tableName}.id=PostsContents.post INNER JOIN Users ON ${this.tableName}.userName=Users.userName WHERE category=? AND ${match} ORDER BY created DESC LIMIT ?, ?`
 
         return await this.query(sql, values);
     }
-    async getCountBySearch(category: string = "free", title: string, text?: string): Promise<number> {
-        let match = `MATCH(title) AGAINST('?' IN BOOLEAN MODE)`;//against('+사진*+테스트*' in boolean mode)
-        const values = [category, title];
-        if (text) {
-            match += ` + MATCH(text) AGAINST('?' IN BOOLEAN MODE)`;
-            values.push(text);
+    async getCountBySearch(category: string, word: string, type: SearchType): Promise<number> {
+        const values = [category, word];
+        let match = "";
+        if (type === "writer") {
+            match = "userName=?"
+        } else {
+            match = `MATCH(title) AGAINST('?' IN BOOLEAN MODE)`;//against('+사진*+테스트*' in boolean mode)
+            if (type === "contents") {
+                match += ` + MATCH(text) AGAINST('?' IN BOOLEAN MODE)`;
+                values.push(word);
+            }
         }
         const sql = `SELECT COUNT(*) FROM ${this.tableName} INNER JOIN PostsContents ON ${this.tableName}.id=PostsContents.post WHERE category=? AND ${match}`
         const rows = await this.query(sql, values);

@@ -1,6 +1,6 @@
 import verify from "./auth";
 import { getCurrentRound, isIdentical } from "./funtions";
-import Posts from "./mariaDB/Posts";
+import Posts, { SearchType } from "./mariaDB/Posts";
 import Comments from "./mariaDB/Comments";
 import { getIncOrExcNumbers, IncOrExc } from './dynamoDB/myNumbers'
 import { doesRecommend } from "./dynamoDB/recommend";
@@ -189,18 +189,17 @@ exports.handler = async (event: any) => {
             }
         }
             break;
-        case '/search': {
+        case '/posts/search': {
             const db = new Posts();
             switch (method) {
                 case 'GET':
                     const category: string = event.queryStringParameters.category;
-                    const title: string = event.queryStringParameters.title;
-                    const text: (string | undefined) = event.queryStringParameters.text;
+                    const word: string = event.queryStringParameters.word;
+                    const type: string = event.queryStringParameters.type;
                     const index = Number(event.queryStringParameters.index);
-                    const writer = event.queryStringParameters.writer;
 
-                    const posts = await db.search({category, index, title, text, writer});
-                    const count = await db.getCountBySearch(category, title, text);
+                    const posts = await db.search(category, word, type as SearchType, index);
+                    const count = await db.getCountBySearch(category, word, type as SearchType);
                     body = { posts, count };
                     break;
             }
