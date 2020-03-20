@@ -48,8 +48,8 @@ export default class Expectation extends Base {
         const defaultParam = { mode: this.mode }
         const { count } = this.returnParams(defaultParam, params);
 
-        const pos = [9 / 45, 10 / 45, 10 / 45, 10 / 45, 6 / 45];
-        return pos.map(value => value * (6 * count));
+        const pos = [0.19928152769899793, 0.1651189800934554, 0.1651189800934554, 0.1651189800934554, 0.40056463672459136];
+        return pos.map(value => value * count);
     }
 
     expectedCarryCount(params: Params = {}): number[] {
