@@ -44,8 +44,8 @@ export default class Gather extends Expectation {
         return this.gatherHelper(helper);
     }
     //회차별 계산된 결과(LottoCal)를 종합.
-    gatherLineCount(params: Params = { mode: this.mode }): number[] {
-        return Analyze.posCount$10(this.getLNumbers(params.mode));
+    gatherExcludedLine(params: Params = { mode: this.mode }): number[] {
+        return Analyze.excludedLine(this.getLNumbers(params.mode));
     }
 
     gatherEmergedRoundForOne(one: LottoNumber, mode = this.mode): number[] {

@@ -44,7 +44,7 @@ export default class Expectation extends Base {
         const pos: number[] = posExcludedLineCount;
         return pos.slice(from, to + 1).map(value => value * count);
     }
-    expectedLineCount(params: Params = { mode: this.mode }): number[] {//1~9, 10~19, 20~29, 30~39, 40~45
+    expectedExcludedLine(params: Params = { mode: this.mode }): number[] {//1~9, 10~19, 20~29, 30~39, 40~45
         const defaultParam = { mode: this.mode }
         const { count } = this.returnParams(defaultParam, params);
 

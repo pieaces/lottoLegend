@@ -21,9 +21,9 @@ export default class LottoMap extends Lotto{
             }
         ],
         [
-            Method.lineCount, {
-                ideal: this.expectedLineCount,
-                actual: this.gatherLineCount,
+            Method.excludedLine, {
+                ideal: this.expectedExcludedLine,
+                actual: this.gatherExcludedLine,
             }
         ],
         [

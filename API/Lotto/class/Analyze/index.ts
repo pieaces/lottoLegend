@@ -18,6 +18,20 @@ interface HData {
 export default class Analyze extends PosAnalyze {
     private constructor() { super(); }
 
+    static excludedLine(numsArray: number[][]): number[] {
+        const result = new Array<number>(5).fill(0);
+        numsArray.forEach(numbers => {
+            const boolArr = new Array<boolean>(5).fill(true);
+            numbers.forEach(num => {
+                boolArr[Math.floor(num/10)] = false;
+            });
+            boolArr.forEach((bool, index) => {
+                if(bool) result[index]++;
+            });
+        });
+        
+        return result;
+    }
     static frequencyCount(numsArray: Array<number[]>): number[] {
         const result = new Array<number>(Lotto.BALL_NUM).fill(0);
 

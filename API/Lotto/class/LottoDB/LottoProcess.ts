@@ -31,8 +31,8 @@ export default class LottoProcess extends LottoMap {
     processExcludedLineCount(): DBData {
         return this.processHelper(Method.excludedLineCount);
     }
-    processLineCount(): DBData {
-        return this.processHelper(Method.lineCount);
+    processExcludedLine(): DBData {
+        return this.processHelper(Method.excludedLine);
     }
     processCarryCount(): DBData {
         return this.processHelper(Method.carryCount);
