@@ -7,7 +7,7 @@ document.write(`
 <textarea id="sample"></textarea>
 </div>
 <div id="image-wrapper" class="image-wrapper">
-<div class=" file-list">
+<div class="file-list">
     <div class="img-btn-container">
         <div class="img-btn-box box-color">
             <div class="img-upload-box">
@@ -28,7 +28,7 @@ document.write(`
 
     </div>
     <div class="image-list-container">
-        <ul id="image-list">
+        <ul id="image-list" >
 
         </ul>
     </div>

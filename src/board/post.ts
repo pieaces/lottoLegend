@@ -136,7 +136,6 @@ editor.onImageUpload = function (targetImgElement, index, state, imageInfo, rema
             const image = editor.getImagesInfo()[findIndex(editor.getImagesInfo(), index)]
             totalSize += Number(image.size);
             imageList.push(image);
-            imageTable.classList.add('box-color');
         } else { // update }
         }
 
