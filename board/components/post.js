@@ -8,8 +8,8 @@ document.write(`
 </div>
 <div id="image-wrapper" class="image-wrapper">
 <div class="file-list">
-    <div class="img-btn-container">
-        <div class="img-btn-box box-color">
+  
+        <div class="img-btn-box">
             <div class="img-upload-box">
 
                 <span class="img-upload-text">
@@ -26,17 +26,18 @@ document.write(`
         </div>
 
 
-    </div>
+   
     <div class="image-list-container">
         <ul id="image-list" >
-
+       
         </ul>
+        <div class="button-wrapper">
+        <button type="submit" class="btn post-btn" id="submit-btn">
+            완료
+        </button>
+    </div>
     </div>
 </div>
-<div class="button-wrapper">
-    <button type="submit" class="btn post-btn" id="submit-btn">
-        완료
-    </button>
-</div>
+
 </div>
 `);
