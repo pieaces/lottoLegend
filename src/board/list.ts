@@ -14,7 +14,7 @@ const { word, type } = getQueryStringObject();
 const selectBox = document.querySelector<HTMLSelectElement>('#search');
 const wordInput = document.querySelector<HTMLInputElement>('#word');
 
-document.querySelector<HTMLElement>('.search-btn').onclick = () =>{
+document.querySelector<HTMLElement>('.search-btn').onclick = () => {
     location.href = `?index=1&word=${wordInput.value}&type=${selectBox.value}`;
 }
 function listAPI() {
@@ -23,40 +23,40 @@ function listAPI() {
         return getUnAuthAPI('/posts/search', { category, index, word, type });
     } else return getUnAuthAPI('/posts', { category, index });
 }
-function listHref(index:number){
+function listHref(index: number) {
     let href = `?index=${index}`;
-    if(word) href += `&word=${word}`;
-    if(type) href += `&type=${type}`;
+    if (word) href += `&word=${word}`;
+    if (type) href += `&type=${type}`;
     return href;
 }
 listAPI().then(({ posts, count }) => {
-        makeBoard(posts);
-        const LIST_PACK = 15;
-        const INDEX_PACK = 5;
-        const total = Math.ceil(count / LIST_PACK);
-        const start = index - (index - 1) % INDEX_PACK;
-        const end = (start + INDEX_PACK - 1) >= total ? total : (start + INDEX_PACK - 1);
-        if (index > INDEX_PACK) {
-            const div = document.createElement('div');
-            div.innerHTML = `<a class="page-anchor" href="${listHref(start-1)}">이전</a>`;
-            pageNumContainer.appendChild(div);
+    makeBoard(posts);
+    const LIST_PACK = 15;
+    const INDEX_PACK = 5;
+    const total = Math.ceil(count / LIST_PACK);
+    const start = index - (index - 1) % INDEX_PACK;
+    const end = (start + INDEX_PACK - 1) >= total ? total : (start + INDEX_PACK - 1);
+    if (index > INDEX_PACK) {
+        const div = document.createElement('div');
+        div.innerHTML = `<a class="page-anchor" href="${listHref(start - 1)}">이전</a>`;
+        pageNumContainer.appendChild(div);
+    }
+    for (let i = start; i <= end; i++) {
+        const div = document.createElement('div');
+        if (i === index) {
+            div.textContent = (i).toString();
+            div.classList.add('page-current');
+        } else {
+            div.innerHTML = `<a class="page-anchor" href="${listHref(i)}">${i}</a>`;
         }
-        for (let i = start; i <= end; i++) {
-            const div = document.createElement('div');
-            if (i === index) {
-                div.textContent = (i).toString();
-                div.classList.add('page-current');
-            } else {
-                div.innerHTML = `<a class="page-anchor" href="${listHref(i)}">${i}</a>`;
-            }
-            pageNumContainer.appendChild(div);
-        }
-        if (start + INDEX_PACK - 1 < total) {
-            const div = document.createElement('div');
-            div.innerHTML = `<a class="page-anchor" href="${listHref(end + 1)}">다음</a>`;
-            pageNumContainer.appendChild(div);
-        }
-    });
+        pageNumContainer.appendChild(div);
+    }
+    if (start + INDEX_PACK - 1 < total) {
+        const div = document.createElement('div');
+        div.innerHTML = `<a class="page-anchor" href="${listHref(end + 1)}">다음</a>`;
+        pageNumContainer.appendChild(div);
+    }
+});
 
 function makeBoard(objArr: any[]) {
     for (let i = 0; i < objArr.length; i++) {
@@ -73,7 +73,7 @@ function makeBoard(objArr: any[]) {
         const boardAuthor = document.createElement('div');
         boardAuthor.classList.add('board-author');
 
-        boardAuthor.innerHTML = `<span class="rank ${rankToClass(objArr[i].rank)}">${objArr[i].rank}</span>${objArr[i].nickName}`;
+        boardAuthor.innerHTML = `<span class="rank ${rankToClass(objArr[i].rank)}"><div class="rank-text">${objArr[i].rank}</div></span>${objArr[i].nickName}`;
 
         boardBox.appendChild(boardAuthor);
 

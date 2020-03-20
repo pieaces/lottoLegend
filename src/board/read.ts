@@ -80,9 +80,13 @@ async function init() {
     }
     title.textContent = post.title;
     author.textContent = post.nickName;
-    postRank.textContent = post.rank;
     postRank.classList.add('rank');
     postRank.classList.add(rankToClass(post.rank));
+    const rankText = document.createElement('div');
+    rankText.classList.add('rank-text');
+    rankText.textContent = post.rank;
+    postRank.appendChild(rankText);
+
 
     const category = document.querySelector<HTMLElement>('#wrapper').getAttribute('data-category');
     if (category === 'incl' || category === 'excl') {
@@ -173,9 +177,13 @@ async function makeComments(objArr: any) {
         commentTitle.classList.add('comment-title');
 
         const rankElement = document.createElement('span');
-        rankElement.textContent = objArr[i].rank;
         rankElement.classList.add('rank');
         rankElement.classList.add(rankToClass(objArr[i].rank));
+        const rankText = document.createElement('div');
+        rankText.classList.add('rank-text');
+        rankText.textContent = objArr[i].rank;
+        rankElement.appendChild(rankText);
+
         const commentAuthor = document.createElement('div');
         commentAuthor.classList.add('comment-author');
         commentAuthor.textContent = objArr[i].nickName;
@@ -206,9 +214,9 @@ async function makeComments(objArr: any) {
             updateBtn.addEventListener('click', () => {
                 if (!updateCheck) {
                     updateBtn.textContent = "수정";
-                    const textArea = document.createElement('textarea') as HTMLTextAreaElement;
+                    const textArea = document.createElement('textarea')
                     textArea.classList.add('comment-update-write-text');
-                    const parentEl = updateBtn.parentElement.parentElement as HTMLElement
+                    const parentEl = updateBtn.parentElement.parentElement
                     textArea.value = parentEl.nextElementSibling.textContent;
                     parentEl.nextElementSibling.remove();
                     parentEl.parentNode.appendChild(textArea);

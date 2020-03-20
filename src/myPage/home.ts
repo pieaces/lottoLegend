@@ -55,9 +55,12 @@ Auth.currentAuthenticatedUser()
             winNumBox.appendChild(bonus);
 
             service.textContent = plan;
-            if (until) expiryDate.textContent = '~' + isoStringToDate(until).slice(0,10);
+            if (until) expiryDate.textContent = '~' + isoStringToDate(until).slice(0, 10);
             rankHtml.classList.add(rankToClass(rank));
-            rankHtml.textContent = rank;
+            const rankText = document.createElement('div');
+            rankText.classList.add('rank-text');
+            rankText.textContent = rank;
+            rankHtml.appendChild(rankText);
             pointHtml.textContent = point;
 
             if (include && include.before) {
@@ -146,7 +149,7 @@ function nicknameUpdate() {
     modifyMessage({
         title: '변경하실 닉네임을 입력해주세요', confirmButtonText: '변경', preConfirm: async (nickName: string) => {
             try {
-                if(nickName.length > 8) throw new Error('8글자 이내여야합니다');
+                if (nickName.length > 8) throw new Error('8글자 이내여야합니다');
                 const response = await patchAuthAPI('/account', { nickName: stringTrimer(nickName) });
                 if (response.error) {
                     throw new Error(response.message);
@@ -177,7 +180,7 @@ function mobileUpdate() {
             const user = (await Auth.currentAuthenticatedUser());
             try {
                 const regexr = /^[0-9]{10,11}$/;
-                if(!regexr.test(phone)) throw new Error('format')
+                if (!regexr.test(phone)) throw new Error('format')
                 await Auth.updateUserAttributes(user, { phone_number: '+82' + phone.slice(1) });
                 return await Auth.verifyCurrentUserAttribute('phone_number')
             } catch (err) {
