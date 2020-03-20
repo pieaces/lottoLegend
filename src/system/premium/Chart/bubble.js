@@ -12,14 +12,11 @@ export default class BubbleChart {
         const labels = DataAPI.getInstance().getLabels();
         for (let i = 0; i < labels.length; i++) {
             let x = statsData.ideal['all'][i] - statsData.actual['all'][i];
-            if (statsData.ideal['all'][i] >= statsData.actual['all'][i])
-                x /= statsData.ideal['all'][i];
+            if (statsData.ideal['all'][i] >= statsData.actual['all'][i]) x /= statsData.ideal['all'][i];
             else x /= statsData.actual['all'][i];
             x *= statsData.pos[i];
-            let y =
-                statsData.ideal['latest'][i] - statsData.actual['latest'][i];
-            if (statsData.ideal['latest'][i] >= statsData.actual['latest'][i])
-                y /= statsData.ideal['latest'][i];
+            let y = statsData.ideal['latest'][i] - statsData.actual['latest'][i];
+            if (statsData.ideal['latest'][i] >= statsData.actual['latest'][i]) y /= statsData.ideal['latest'][i];
             else y /= statsData.actual['latest'][i];
             y *= statsData.pos[i];
 
@@ -30,8 +27,6 @@ export default class BubbleChart {
         const option = {
             bubble: { textStyle: { fontSize: 11 } },
             chartArea: { width: '50%', height: '75%' },
-
-
         };
         const chart = new google.visualization.BubbleChart(this.element);
         chart.draw(dataTable, option);
