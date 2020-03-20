@@ -1,6 +1,6 @@
 import { StatsMethod } from "../interface/LottoDB";
 import { queryStats } from "./lottoData";
-import { GeneratorOption } from "../interface/Generator";
+import { GeneratorOption, ZeroToSix } from "../interface/Generator";
 import Generator from "../Lotto/class/Generator";
 
 const valueList = {
@@ -44,16 +44,18 @@ async function returnOption(method:StatsMethod): Promise<any[]> {
 }
 
 async function generate() {
-    const option:any = {};
+    const option:GeneratorOption = {};
 
     for(const method in StatsMethod){
         option[method] = await returnOption(method as StatsMethod);
     }
+    option.includedNumbers = [2];
     const start = new Date();
-    option.lowCount = Math.floor(Math.random() * 5) + 1;
+    option.lowCount = Math.floor(Math.random() * 5) + 1 as ZeroToSix;
     const generator = new Generator(option);
     generator.generate();
-    //console.log(generator.count);
+
+    console.log(generator.count);
     console.log(Number(new Date())- Number(start));
 
     return generator.getGeneratedNumbers().sort(()=>0.5-Math.random()).slice(0,5);
@@ -61,3 +63,8 @@ async function generate() {
 generate().then(value => {
     console.log(value);
 });
+
+// queryStats('howLongNone').then(value => {
+//     value.sort((a,b) => a.round-b.round);
+//     console.log(value.slice(0,3));
+// });
