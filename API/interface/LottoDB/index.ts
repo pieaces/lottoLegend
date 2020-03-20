@@ -38,7 +38,7 @@ export interface DataMap {
 
 export enum StatsMethod {
     excludedLineCount = "excludedLineCount",
-    lineCount = "lineCount",
+    excludedLine = "excludedLine",
     carryCount = "carryCount",
     lowCount = "lowCount",
     sum = "sum",
