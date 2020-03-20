@@ -6,34 +6,37 @@ document.write(`
 <div class="textarea-box">
 <textarea id="sample"></textarea>
 </div>
-<div>
-<div id="image-wrapper" class="image-list">
-    <div class="file-list-info">
-        <div class="button-wrapper">
-            <div class="img-btn-container">
-                <div class="img-btn-box">
-                    <div class="img-upload-box">
-                        <span class="img-upload-text">
-                            사진 업로드
-                        </span>
-                        <input type="file" class="files-upload" id="files-upload"
-                            accept="image/*" multiple="multiple" />
-                    </div>
-                    <button class="btn image-remove" id="image-remove" disabled>사진 삭제</button>
+<div id="image-wrapper" class="image-wrapper">
+<div class=" file-list">
+    <div class="img-btn-container">
+        <div class="img-btn-box box-color">
+            <div class="img-upload-box">
 
-                    <span class="image-total-size" id="image-total-size">0.00MB</span>
-                </div>
-                <span class="post-alert" id="post-alert">최대 4MB까지 업로드 가능합니다.</span>
-
+                <span class="img-upload-text">
+                    사진 업로드
+                </span>
+                <input type="file" class="files-upload" id="files-upload" accept="image/*"
+                    multiple="multiple" />
             </div>
-            <button type="submit" class="btn post-btn" id="submit-btn">
-                완료
-            </button>
+            <button class="btn image-remove" id="image-remove" disabled>사진 삭제</button>
+            <div>
+                <span class="image-total-size" id="image-total-size">0.00MB</span>
+                <span class="post-alert" id="post-alert">/ 4MB</span>
+            </div>
         </div>
+
+
     </div>
-    <div class=" file-list">
+    <div class="image-list-container">
         <ul id="image-list">
+
         </ul>
     </div>
 </div>
-</div>`);
+<div class="button-wrapper">
+    <button type="submit" class="btn post-btn" id="submit-btn">
+        완료
+    </button>
+</div>
+</div>
+`);
