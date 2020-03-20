@@ -193,7 +193,7 @@ function setImageList(imageList: { size: number, index: number, src: string }[])
         node.addEventListener('click', () => {
             const img = node.firstElementChild.firstElementChild.firstElementChild as HTMLElement;
             if (node.classList.contains('checked')) {
-                img.style.border = "4px solid #66c2ff";
+                img.style.border = "4px solid #E28B89";
             } else {
                 img.style.border = "4px solid white";
             }
