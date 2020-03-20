@@ -5,26 +5,32 @@
 }
 
 .inc-exc-num-wrapper{
-  width:50%;
+  width:30rem;
 }
 
 .inc-exc-num-container{
 width: 100%;
+padding-top:1rem;
 font-size:0px;
 }
 
+.inc-exc-num-title{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  height:5rem;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--table-title-color);
+  font-size:1.6rem;
+}
+
 .inc-exc-num-box {
-    width: 100%;
-    height:100%;
-    padding-top:1rem;
+  display: inline-block;
+  width: 20%;
+  padding-bottom:1rem;
     font-size: 1.7rem;
   }
 
-.inc-exc-num-box{
-    display: inline-block;
-    width: 20%;
-    padding-bottom:1rem;
-  }
   
   .inc-exc-select-num {
     display: flex;
@@ -40,12 +46,3 @@ font-size:0px;
     text-align: center;
   }
 
-.inc-exc-num-title{
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    height:5rem;
-    border-bottom: 1px solid var(--border-color);
-    background-color: var(--table-title-color);
-    font-size:2rem;
-}
