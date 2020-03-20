@@ -1,7 +1,7 @@
 import { Stats } from "../Statistics";
 import { Params } from "../Lotto";
 
-export interface LottoDate{
+export interface LottoDate {
     round: number;
     date: string;
 }
@@ -37,9 +37,6 @@ export interface DataMap {
 }
 
 export enum StatsMethod {
-    excludedLineCount = "excludedLineCount",
-    excludedLine = "excludedLine",
-    carryCount = "carryCount",
     lowCount = "lowCount",
     sum = "sum",
     oddCount = "oddCount",
@@ -48,14 +45,6 @@ export enum StatsMethod {
     sum$10 = "sum$10",
     diffMaxMin = "diffMaxMin",
     AC = "AC",
-    consecutiveExist = "consecutiveExist",
-//
-    emergence = "emergence",
-    interval = "interval",
-    howLongNone = "howLongNone",
-    frequency = "frequency",
-//
-    line = "line"
 }
 
 export interface QueryStatsParams extends Params {
