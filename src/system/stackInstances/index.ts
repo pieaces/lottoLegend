@@ -13,7 +13,7 @@ const predictDataBox = {
         {
             label: '1번대',
             backgroundColor: compartColor[0],
-            data: [1.33]
+            data: [1.20]
         },
         {
             label: '10번대',
