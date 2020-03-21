@@ -211,26 +211,25 @@ async function makeComments(objArr: any) {
         if (!(await isLogedIn()) || (await getUserName() !== objArr[i].userName)) updateBtnBox.classList.add('hide');
         else {
             let updateCheck = false;
+            let parentEl: HTMLElement;
+            let textArea: HTMLTextAreaElement;
             updateBtn.addEventListener('click', () => {
                 if (!updateCheck) {
                     updateBtn.textContent = "수정";
-                    const textArea = document.createElement('textarea')
+                    textArea = document.createElement('textarea');
                     textArea.classList.add('comment-update-write-text');
-                    const parentEl = updateBtn.parentElement.parentElement
+                    parentEl = updateBtn.parentElement.parentElement;
                     textArea.value = parentEl.nextElementSibling.textContent;
                     parentEl.nextElementSibling.remove();
                     parentEl.parentNode.appendChild(textArea);
-                    updateBtn.addEventListener('click', function modifyComment() {
-                        const commentContent = document.createElement('div');
-                        commentContent.classList.add('comment-content');
-                        commentContent.textContent = textArea.value;
-                        textArea.remove();
-                        parentEl.parentNode.appendChild(commentContent);
-                        this.removeEventListener('click', modifyComment);
-                    });
                     updateCheck = true;
                 } else {
                     updateBtn.textContent = "완료";
+                    const commentContent = document.createElement('div');
+                    commentContent.classList.add('comment-content');
+                    commentContent.textContent = textArea.value;
+                    textArea.remove();
+                    parentEl.parentNode.appendChild(commentContent);
                     updateCheck = false;
                 }
             });
@@ -314,4 +313,5 @@ function makeNum(number: number[]) {
         numContainer.appendChild(numBox);
     }
 }
+
 
