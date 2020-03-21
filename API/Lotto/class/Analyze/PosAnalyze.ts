@@ -14,7 +14,7 @@ export default class PosAnalyze {
     };
     private static ratio$10(numbers: number[]): number[] {
         const result: number[] = new Array<number>(PosNumber.$10).fill(0);
-        numbers.forEach((value) => result[Math.floor(value / 10)]++);
+        numbers.forEach((value) => result[Math.floor((value-1) / 10)]++);
         //result[0] *= 10 / 9;
         //result[4] *= 10 / 6;
         return result;
