@@ -1,0 +1,20 @@
+.num-list-select{
+    display:flex;
+    align-items: center;
+    height:100%;
+    padding-left:1rem;
+  }
+  
+  .num-list-select >span{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      font-size:1.4rem;
+  }
+  
+  
+  .num-list-select >span:nth-child(1)
+  {
+    font-weight: bold;
+  }

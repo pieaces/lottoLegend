@@ -1,6 +1,6 @@
 import DataAPI from "../DataAPI";
 
-const checkBoxContainer = document.querySelector<HTMLElement>('.func1-checkbox-container');
+const checkBoxContainer = document.querySelector<HTMLElement>('.func1-checkbox-box');
 
 export default class CheckBox {
     static readonly checkedStyle = 'func1-num-check-current';
@@ -123,7 +123,6 @@ export default class CheckBox {
     init() {
         this.nodeList = [];
         let labels: (string | number)[];
-        const divArr: HTMLElement[] = [];
         labels = DataAPI.getInstance().getLabels().map(value => {
             if (typeof value === 'string') {
                 const index = value.indexOf('~');
@@ -138,12 +137,8 @@ export default class CheckBox {
         Array.from(checkBoxContainer.children).forEach(node => {
             node.remove();
         })
-        labels.forEach((label, index) => {
-            if (index % 10 === 0) {
-                const divContainer = document.createElement('div');
-                divContainer.classList.add('func1-checkbox-box');
-                divArr.push(divContainer);
-            }
+
+        labels.forEach(label => {
             const divBox = document.createElement('div');
             divBox.classList.add('func1-checkbox');
             this.nodeList.push(divBox);
@@ -156,13 +151,11 @@ export default class CheckBox {
             checkbox.classList.add('checkbox');
             div.appendChild(checkbox);
             divBox.appendChild(div);
-            divArr[parseInt(String(index / 10))].appendChild(divBox);
-
-            divArr.forEach((node) => {
-                checkBoxContainer.appendChild(node);
-            })
-
+            checkBoxContainer.appendChild(divBox);
         });
+
+
+
     }
 }
 

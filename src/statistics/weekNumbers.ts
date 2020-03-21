@@ -91,7 +91,6 @@ function makeTable(dataSet: ({ round: string, numbers: number[], hits?: boolean[
 
 
         if (!dataSet[i].hits) {
-            header.style.borderTop = "1px solid rgba(0,0,0,0.1)";
             section.appendChild(leftNumWeekBox);
             section.appendChild(rightNumWeekBox);
             section.style.borderBottom = "none";
