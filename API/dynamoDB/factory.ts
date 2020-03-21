@@ -1,10 +1,13 @@
 import { StatsMethod } from "../interface/LottoDB";
-import { queryStats } from "./lottoData";
-import { GeneratorOption, ZeroToSix } from "../interface/Generator";
+import queryStats from "./queryStats";
+import { GeneratorOption } from "../interface/Generator";
 import Generator from "../Lotto/class/Generator";
 import { LottoNumber } from "../interface/Lotto";
 
-const valueList = {
+const PER = 1//20;
+const REPEAT = 2//50;
+
+const valueList:any = {
     lowCount: [0, 1, 2, 3, 4, 5, 6],
     sum: [{ from: 21, to: 31 }, { from: 31, to: 41 }, { from: 41, to: 51 }, { from: 51, to: 61 }, { from: 61, to: 71 }, { from: 71, to: 81 }, { from: 81, to: 91 }, { from: 91, to: 101 }, { from: 101, to: 111 }, { from: 111, to: 121 }, { from: 121, to: 131 }, { from: 131, to: 141 }, { from: 141, to: 151 }, { from: 151, to: 161 }, { from: 161, to: 171 }, { from: 171, to: 181 }, { from: 181, to: 191 }, { from: 191, to: 201 }, { from: 201, to: 211 }, { from: 211, to: 221 }, { from: 221, to: 231 }, { from: 231, to: 241 }, { from: 241, to: 251 }, { from: 251, to: 255 }],
     oddCount: [0, 1, 2, 3, 4, 5, 6],
@@ -44,7 +47,7 @@ function returnOption(statsData: any, method: StatsMethod): any[] {
     return [...result];
 }
 
-export default async function factory() {
+export async function supply(){
     const statsDataObj: any = {};
     for (const method in StatsMethod) {
         statsDataObj[method] = await queryStats(method as StatsMethod);
@@ -57,9 +60,12 @@ export default async function factory() {
         }
     }))
     .then(data => [...data.sort((a, b) => a.round - b.round).slice(0, 15).map(item => item.num)]);
+    return {statsDataObj, numberList};
+}
 
+export default function factory(statsDataObj:any, numberList:number[]) {
     const result: number[][] = [];
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < REPEAT; i++) {
         result.push(...generate(statsDataObj, numberList));
     }
     result.sort(() => 0.5 - Math.random());
@@ -81,7 +87,7 @@ function generate(statsDataObj: any, numberList:number[]){
     const generator = new Generator(option);
     generator.generate();
 
-    return generator.getGeneratedNumbers().sort(() => 0.5 - Math.random()).slice(0, 20);
+    return generator.getGeneratedNumbers().sort(() => 0.5 - Math.random()).slice(0, PER);
 }
 
 function returnLowCountOption(){

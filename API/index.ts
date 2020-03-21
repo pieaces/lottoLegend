@@ -1,23 +1,21 @@
-import factory from "./dynamoDB/factory";
+import factory, { supply } from "./dynamoDB/factory";
 import { scanUsers } from "./dynamoDB/userInfo";
+import updateNumbers from "./dynamoDB/updateNumbers";
+import { getCurrentRound } from "./funtions";
 
 exports.handler = async (event: any) => {
     console.log(event);
     
-    const willWinNumberList:number[][] = [];
-    willWinNumberList.push(...await factory());
-
+    const {statsDataObj, numberList} = await supply();
     const users = await scanUsers();
 
+    const willWinNumberList:number[][] = [];
+    willWinNumberList.push(...factory(statsDataObj, numberList));
+
     for(let i =0; i<users.length; i++){
-        users[i]
+        if(willWinNumberList.length < users[i].value){
+            willWinNumberList.push(...factory(statsDataObj, numberList));
+        }
+        await updateNumbers(users[i].userName, getCurrentRound() + 1, willWinNumberList.splice(0, users[i].value));
     }
 };
-
-const start = new Date();
-factory()
-.then(data => {
-    const end = new Date();
-    console.log(data.length);
-    console.log(Number(end) - Number(start));
-})
