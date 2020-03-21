@@ -25,39 +25,6 @@ const planLimit = {
     [Plan['premium+']]: 40
 }
 
-export async function autoUpdateNumbers(userName: string, round: number, numsArr: number[][], tool: SelectTool): Promise<void> {
-    const params: UpdateItemInput = {
-        TableName: 'LottoUsers',
-        ExpressionAttributeNames: {
-            "#Map": 'Numbers',
-            "#Round": round.toString(),
-        },
-        ExpressionAttributeValues: {
-            ":empty_list": {
-                L: new Array()
-            },
-            ":element": {
-                L: numsArrToAWSMapList(numsArr, SelectMethod.auto, tool)
-            },
-        },
-        Key: {
-            "UserName": {
-                S: userName
-            }
-        },
-        UpdateExpression: `SET #Map.#Round = list_append(if_not_exists(#Map.#Round, :empty_list), :element)`
-    };
-    return new Promise((resolve, reject) => {
-        dynamoDB.updateItem(params, async (err: AWSError) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve();
-            }
-        });
-    });
-}
-
 export async function updateNumbers(userName: string, round: number, numsArr: number[][], tool: SelectTool): Promise<Response> {
     const plan: Plan = await getPlan(userName);
     const size = (await getNumberSize(userName, round));

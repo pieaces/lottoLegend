@@ -1,7 +1,7 @@
-import DynamoDB = require('aws-sdk/clients/dynamodb');
+import DynamoDB, { NumberSetAttributeValue } from 'aws-sdk/clients/dynamodb';
 import { SelectMethod, SelectTool } from '.';
 
-export function numbersToNS(numbers: number[]): DynamoDB.NumberSetAttributeValue {
+export function numbersToNS(numbers: number[]): NumberSetAttributeValue {
     return numbers.map(num => num.toString());
 }
 export function NSToNumbers(NS:DynamoDB.NumberSetAttributeValue): number[]{
