@@ -120,6 +120,8 @@
   position: absolute;
   top:0;
   right:0;
+  width:6rem;
+  height:100%;
 }
 
 .hover-menu-container{
