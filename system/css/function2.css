@@ -249,6 +249,15 @@
     height:22rem;
   }
 
+  .func2-chart-gauss-container{
+    padding:1rem;
+  }
+
+  .func2-chart-bar-container{
+    height: auto;
+    padding:1rem;
+  }
+
 
   .func2-select-num-box-container{
     width: 100%;

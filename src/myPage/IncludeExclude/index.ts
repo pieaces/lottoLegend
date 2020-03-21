@@ -39,10 +39,13 @@ export default class IncludeExclude {
                 numBox.classList.add('mypage-num-box');
                 for (let j = 0; j < DIVIDE; j++) {
                     if (!this.numbers[DIVIDE * i + j]) break;
+                    const numDiv = document.createElement('div');
+                    numDiv.classList.add('mypage-num');
                     const num = document.createElement('div');
                     num.textContent = this.numbers[DIVIDE * i + j].toString();
                     setColorLotto(this.numbers[DIVIDE * i + j], num);
-                    numBox.appendChild(num);
+                    numDiv.appendChild(num);
+                    numBox.appendChild(numDiv);
                 }
                 numContainer.appendChild(numBox);
             }

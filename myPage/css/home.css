@@ -1,53 +1,3 @@
-.mypage-num-list-container{
-  margin-bottom:5rem;
-}
-
-.mypage-num-container>div:not(:last-child){
-  border-bottom: 1px dashed var(--border-color);
-}
-
-.mypage-num-box{
-  display:flex;
-  align-items: center;
-  justify-content: space-around;
-  width:100%;
-  height:100%;
-}
-
-#service{
-  margin-right:1rem;
-}
-
-#service-expiry-date{
-  color: rgb(113, 113, 113);
-  font-weight: 500;
-  font-size: 1.3rem;
-}
-
-#inc-num,
-#exc-num{
-  font-weight: bold;
-}
-
-.mypage-num-box > div{
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.mypage-num-box > div{
-  display: flex;
-  justify-content: center;
-  width: 3rem;
-  height: 3rem;
-  margin: 1rem 2rem;
-  border-radius: 50%;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-  color: var(--default-color);
-  font-weight: 500;
-  font-size: 1.5rem;
-  line-height: 1.7;
-}
 
 .mypage-title{
   display:flex;
@@ -58,10 +8,6 @@
   background-color: var(--table-title-color);
   font-size:1.5rem;
   font-weight: 500;
-}
-
-.mypage-num-list-container > .mypage-title{
-  margin-bottom:1rem;
 }
 
 
@@ -79,12 +25,6 @@ align-items: center;
 font-size: 1.4rem;
 }
 
-.mypage-nickname,
-.mypage-service,
-.mypage-phone  {
-  justify-content: space-between;
-}
-
 .mypage-info-box > li >div{
   display: flex;
   align-items: center;
@@ -92,11 +32,31 @@ font-size: 1.4rem;
 }
 
 .mypage-info-list-title{
-
   width:6.5rem;
 }
 .mypage-info-list-seperator{
   width:2rem;
+}
+
+#service{
+  margin-right:1rem;
+}
+
+#service-expiry-date{
+  color: rgb(113, 113, 113);
+  font-weight: 500;
+  font-size: 1.3rem;
+}
+
+#inc-num,
+#exc-num{
+  font-weight: bold;
+}
+
+.mypage-nickname,
+.mypage-service,
+.mypage-phone  {
+  justify-content: space-between;
 }
 
 .service-update-btn{
@@ -107,6 +67,14 @@ font-size: 1.4rem;
 
 .mobile-btn{
   margin-right:0.5rem;
+}
+
+#point{
+  margin-left: 0.5rem;
+}
+
+.plus{
+  margin:0 0.2rem;
 }
 
 .mypage-win-num{
@@ -124,6 +92,44 @@ font-size: 1.4rem;
   text-align: center;
   line-height: 2;
   font-size:1.4rem;
+}
+
+
+.mypage-num-container>div:not(:last-child){
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.mypage-num-box{
+  width:100%;
+  height:100%;
+  padding:1rem 0;
+  font-size:0;
+}
+
+.mypage-num{
+  display: inline-block;
+  width: 20%;
+}
+
+.mypage-num > div{
+  width: 3rem;
+  height: 3rem;
+  margin: 0 auto;
+  border-radius: 50%;
+  box-shadow: 1px 1px 3px rgba(97, 87, 87, 0.4);
+  /* color: var(--default-color); */
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 2.1;
+  text-align: center;
+}
+
+.mypage-num-list-container{
+  margin-bottom:5rem;
+}
+
+.mypage-num-list-container > .mypage-title{
+  margin-bottom:1rem;
 }
 
 .mypage-none-box{
@@ -145,15 +151,6 @@ font-size: 1.4rem;
   animation: swing 0.6s ease;
 }
 
-@keyframes swing
-{
-    0% { transform:rotateZ(0); }
-    25%{ transform:rotateZ(25deg); }
-    50%{ transform:rotateZ(-15deg); }
-    75%{ transform:rotateZ(10deg); }
-    100%{ transform:rotateZ(0); }
-}
-
 .mypage-notice-num{
   position: absolute;
   top:0;
@@ -167,13 +164,15 @@ font-size: 1.4rem;
   font-size:1.2rem;
 }
 
-#point{
-  margin-left: 0.5rem;
+@keyframes swing
+{
+    0% { transform:rotateZ(0); }
+    25%{ transform:rotateZ(25deg); }
+    50%{ transform:rotateZ(-15deg); }
+    75%{ transform:rotateZ(10deg); }
+    100%{ transform:rotateZ(0); }
 }
 
-.plus{
-  margin:0 0.2rem;
-}
 
 @media (min-width: 0px) and (max-width: 767px) {
   .mypage-info-box{
