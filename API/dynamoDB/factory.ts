@@ -53,17 +53,20 @@ export async function supply(){
     }
     return {statsDataObj};
 }
-
-export default function factory(statsDataObj:any) {
+interface FactoryNumber{
+    exclude:number[],
+    include?:number[]
+}
+export default function factory(statsDataObj:any, numbers?:FactoryNumber) {
     const result: number[][] = [];
     for (let i = 0; i < REPEAT; i++) {
-        result.push(...generate(statsDataObj));
+        result.push(...generate(statsDataObj, numbers));
     }
     result.sort(() => 0.5 - Math.random());
     return result;
 }
 
-function generate(statsDataObj: any){
+function generate(statsDataObj: any, numbers?:FactoryNumber){
     const option: GeneratorOption|any = {};
 
     for (const method in StatsMethod) {
@@ -71,6 +74,8 @@ function generate(statsDataObj: any){
     }
     
     option.lowCount = returnLowCountOption();
+    numbers.exclude && (option.excludedNumbers = numbers.exclude);
+    numbers.include && (option.includedNumbers = numbers.include);
 
     const generator = new Generator(option);
     generator.generate();

@@ -1,11 +1,34 @@
-import { DynamoDB } from 'aws-sdk'
+import { DynamoDB, AWSError } from 'aws-sdk'
 import { Stats } from '../interface/Statistics';
 import { StatsMethod, DBData, Assembly, AssemblyVersion, QueryStatsParams } from '../interface/LottoDB';
 import { dynamoDB } from '.'
 import { getCurrentRound } from '../funtions';
+import { GetItemInput } from 'aws-sdk/clients/dynamodb';
 
+export async function getWeekNumbers(): Promise<number[]>{
+    const queryParams: GetItemInput = {
+        TableName: "LottoData",
+        ExpressionAttributeNames: {
+            "#Week": 'Week'
+        },
+        ProjectionExpression: '#Week',
+        Key: {
+            "Round": {
+                N: (getCurrentRound()+1).toString()
+            }
+        }
+    };
+    return await new Promise((resolve, reject) => {
+        dynamoDB.getItem(queryParams, (err:AWSError, data) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(data.Item.Week.NS.map(item => Number(item)));
+        })
+    });
+}
 export default async function queryStats(method: StatsMethod | 'howLongNone', ProjectionExpression?: string, ExpressionAttributeNames?: DynamoDB.ExpressionAttributeNameMap, params?: QueryStatsParams, ): Promise<any> {
-    const queryParams: any = {
+    const queryParams: GetItemInput = {
         TableName: "LottoStats",
         Key: {
             "Name": {
@@ -18,7 +41,6 @@ export default async function queryStats(method: StatsMethod | 'howLongNone', Pr
     return await new Promise((resolve, reject) => {
         dynamoDB.getItem(queryParams, function (err, data) {
             if (err) {
-                console.log('queryMassStats 에러', err);
                 reject(err);
             }
             else {

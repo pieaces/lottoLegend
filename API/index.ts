@@ -2,11 +2,13 @@ import factory, { supply } from "./dynamoDB/factory";
 import { scanUsers } from "./dynamoDB/userInfo";
 import updateNumbers from "./dynamoDB/updateNumbers";
 import { getCurrentRound } from "./funtions";
+import { getWeekNumbers } from "./dynamoDB/queryStats";
 
 exports.handler = async (event: any) => {
     console.log(event);
     
     const {statsDataObj} = await supply();
+    await getWeekNumbers()
     const users = await scanUsers();
 
     const willWinNumberList:number[][] = [];
