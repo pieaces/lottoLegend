@@ -35,13 +35,13 @@
     background-color: #fdfcfc;
   }
   
-  .mypage-num-box > div{
+  .mypage-num{
     display: flex;
     align-items: center;
     justify-content: center;
   }
   
-  .mypage-num-box > div{
+  .mypage-num > div{
     display: flex;
     justify-content: center;
     width: 3.5rem;

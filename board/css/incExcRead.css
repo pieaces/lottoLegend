@@ -4,13 +4,18 @@
   justify-content: center;
 }
 
+.inc-exc-num-wrapper-box > div.inc-exc-num-wrapper:first-child{
+  border-right: none;
+}
+
 .inc-exc-num-wrapper{
-  width:30rem;
+  width:50%;
 }
 
 .inc-exc-num-container{
 width: 100%;
-padding-top:1rem;
+min-height: 15.2rem;
+padding-top:0.8rem;
 font-size:0px;
 }
 
@@ -27,7 +32,7 @@ font-size:0px;
 .inc-exc-num-box {
   display: inline-block;
   width: 20%;
-  padding-bottom:1rem;
+  padding-bottom:0.8rem;
     font-size: 1.7rem;
   }
 
@@ -36,12 +41,12 @@ font-size:0px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 2.8rem;
+    height: 2.8rem;
     margin:0 auto;
     border-radius: 50%;
     color: var(--default-color);
-    font-size:1.3rem;
+    font-size:1.2rem;
     text-align: center;
   }
 
