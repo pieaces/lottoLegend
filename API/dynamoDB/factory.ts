@@ -59,7 +59,7 @@ export default async function factory() {
     .then(data => [...data.sort((a, b) => a.round - b.round).slice(0, 15).map(item => item.num)]);
 
     const result: number[][] = [];
-    for (let i = 0; i < 500; i++) {
+    for (let i = 0; i < 50; i++) {
         result.push(...generate(statsDataObj, numberList));
     }
     result.sort(() => 0.5 - Math.random());
@@ -81,7 +81,7 @@ function generate(statsDataObj: any, numberList:number[]){
     const generator = new Generator(option);
     generator.generate();
 
-    return generator.getGeneratedNumbers().sort(() => 0.5 - Math.random()).slice(0, 50);
+    return generator.getGeneratedNumbers().sort(() => 0.5 - Math.random()).slice(0, 20);
 }
 
 function returnLowCountOption(){
