@@ -2,11 +2,22 @@ const headerMenuTitle = document.querySelectorAll('.mid-nav-menu >li:nth-child(1
 const headerMenuListBox = document.querySelector('.hover-menu-container');
 const mqMobile = window.matchMedia("(max-width: 767px)");
 
-headerMenuHover();
 mqMobile.addListener(mqHeaderFunc);
+
+if (mqMobile.matches) {
+    //모바일 레이아웃
+    switch () {
+
+    }
+
+} else {
+    //데스크탑 레이아웃
+    headerMenuHover();
+}
 
 function mqHeaderFunc(mediaQuery) {
     if (mediaQuery.matches) {
+        //모바일 레이아웃
         for (const node of headerMenuTitle) {
             node.removeEventListener('mouseover', headerMenuListShow);
             node.removeEventListener('mouseout', headerMenuListHide);
@@ -49,6 +60,7 @@ function mqHeaderFunc(mediaQuery) {
         //     });
         // }
     } else {
+        //데스크탑 레이아웃
         headerMenuHover();
     }
 }
