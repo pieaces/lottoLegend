@@ -6,15 +6,15 @@ import { getCurrentRound } from "./funtions";
 exports.handler = async (event: any) => {
     console.log(event);
     
-    const {statsDataObj, numberList} = await supply();
+    const {statsDataObj} = await supply();
     const users = await scanUsers();
 
     const willWinNumberList:number[][] = [];
-    willWinNumberList.push(...factory(statsDataObj, numberList));
+    willWinNumberList.push(...factory(statsDataObj));
 
     for(let i =0; i<users.length; i++){
-        if(willWinNumberList.length < users[i].value){
-            willWinNumberList.push(...factory(statsDataObj, numberList));
+        while(willWinNumberList.length < users[i].value){
+            willWinNumberList.push(...factory(statsDataObj));
         }
         await updateNumbers(users[i].userName, getCurrentRound() + 1, willWinNumberList.splice(0, users[i].value));
     }

@@ -2,10 +2,9 @@ import { StatsMethod } from "../interface/LottoDB";
 import queryStats from "./queryStats";
 import { GeneratorOption } from "../interface/Generator";
 import Generator from "../Lotto/class/Generator";
-import { LottoNumber } from "../interface/Lotto";
 
-const PER = 1//20;
-const REPEAT = 2//50;
+const PER = 2//20;
+const REPEAT = 10//50;
 
 const valueList:any = {
     lowCount: [0, 1, 2, 3, 4, 5, 6],
@@ -52,35 +51,24 @@ export async function supply(){
     for (const method in StatsMethod) {
         statsDataObj[method] = await queryStats(method as StatsMethod);
     }
-    const numberList = await queryStats('howLongNone')
-    .then((data: any[]) => data.map((data, index) => {
-        return {
-            num: index + 1,
-            round: data.round
-        }
-    }))
-    .then(data => [...data.sort((a, b) => a.round - b.round).slice(0, 15).map(item => item.num)]);
-    return {statsDataObj, numberList};
+    return {statsDataObj};
 }
 
-export default function factory(statsDataObj:any, numberList:number[]) {
+export default function factory(statsDataObj:any) {
     const result: number[][] = [];
     for (let i = 0; i < REPEAT; i++) {
-        result.push(...generate(statsDataObj, numberList));
+        result.push(...generate(statsDataObj));
     }
     result.sort(() => 0.5 - Math.random());
     return result;
 }
 
-function generate(statsDataObj: any, numberList:number[]){
+function generate(statsDataObj: any){
     const option: GeneratorOption|any = {};
 
     for (const method in StatsMethod) {
         option[method] = returnOption(statsDataObj[method], method as StatsMethod);
     }
-
-    const randomPickCount = Math.floor(Math.random()*4)+1;
-    option.includedNumbers = numberList.sort(() => 0.5 - Math.random()).slice(0,randomPickCount) as LottoNumber[];
     
     option.lowCount = returnLowCountOption();
 
