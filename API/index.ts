@@ -1,10 +1,17 @@
 import factory from "./dynamoDB/factory";
+import { scanUsers } from "./dynamoDB/userInfo";
 
 exports.handler = async (event: any) => {
     console.log(event);
     
-    const data = await factory();
+    const willWinNumberList:number[][] = [];
+    willWinNumberList.push(...await factory());
 
+    const users = await scanUsers();
+
+    for(let i =0; i<users.length; i++){
+        users[i]
+    }
 };
 
 const start = new Date();

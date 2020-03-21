@@ -1,5 +1,5 @@
 import { dynamoDB } from '.'
-import { GetItemInput, GetItemOutput } from 'aws-sdk/clients/dynamodb';
+import { ScanInput, ScanOutput } from 'aws-sdk/clients/dynamodb';
 import { AWSError } from 'aws-sdk';
 
 export enum Plan {
@@ -8,51 +8,49 @@ export enum Plan {
     "premium" = "c",
     "premium+" = "d"
 }
-const ExpressionAttributeNames = {
-    "#Plan": 'Plan',
-    '#Until': 'Until'
-};
 
-export function getPlan(userName:string):Promise<Plan>{
-    const params:GetItemInput = {
-        TableName: 'LottoUsers',
-        ExpressionAttributeNames,
-        ProjectionExpression: '#Plan, #Until',
-        Key: {
-            "UserName": {
-                S: userName
-            }
+function planValue(plan: Plan, _until: string) {
+    const now = Number(new Date());
+    const until = Number(new Date(_until));
+    if (now <= until) {
+        switch (plan) {
+            case Plan.basic:
+                return 10;
+            case Plan.premium:
+                return 20;
+            case Plan['premium+']:
+                return 40;
+            default: return 0;
         }
+    }
+}
+function isCharged(user: { plan: Plan, until?: string }) {
+    if(!user.until || planValue(user.plan, user.until) === 0) return false;
+    if (planValue(user.plan, user.until) > 0) return true;
+}
+export function scanUsers(): Promise<{ userName: string, value: number }[]> {
+    const params: ScanInput = {
+        TableName: 'LottoUsers',
+        ExpressionAttributeNames: {
+            "#UserName": 'UserName',
+            "#Plan": 'Plan',
+            "#Until": 'Until'
+        },
+        ProjectionExpression: '#UserName, #Plan, #Until'
     };
+
     return new Promise((resolve, reject) => {
-        dynamoDB.getItem(params, (err:AWSError, data:GetItemOutput) => {
-            if (err) {
-                reject(err);
-            }
-            else {
-                const item = data.Item;
-                let plan:Plan = Plan.default;
-                if ('Plan' in item && 'Until' in item) {
-                    const _plan = item.Plan.S;
-                    const now = Number(new Date());
-                    const until = Number(new Date(item.Until.S));
-                    if (now <= until) {
-                        switch (_plan) {
-                            case Plan.basic:
-                                plan = Plan.basic;
-                                //availability = planValues[Plan.basic];
-                                break;
-                            case Plan.premium:
-                                plan = Plan.premium;
-                                //availability = planValues[Plan.premium];
-                                break;
-                            case Plan['premium+']:
-                                plan = Plan['premium+']
-                        }
+        dynamoDB.scan(params, (err: AWSError, data: ScanOutput) => {
+            if (err) reject(err);
+            const result = data.Items
+                .filter(item => isCharged({ plan: item.Plan.S as Plan, until: item.Until && item.Until.S }))
+                .map(item => {
+                    return {
+                        userName: item.UserName.S,
+                        value: planValue(item.Plan.S as Plan, item.Until.S)
                     }
-                }
-                resolve(plan);
-            }
+                });
+            resolve(result);
         });
     });
 }

@@ -67,7 +67,7 @@ export default async function factory() {
 }
 
 function generate(statsDataObj: any, numberList:number[]){
-    const option: GeneratorOption = {};
+    const option: GeneratorOption|any = {};
 
     for (const method in StatsMethod) {
         option[method] = returnOption(statsDataObj[method], method as StatsMethod);
