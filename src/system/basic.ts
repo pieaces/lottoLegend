@@ -28,6 +28,8 @@ const thirtieth = document.querySelector<HTMLInputElement>('#thirtieth-nums');
 const fortieth = document.querySelector<HTMLInputElement>('#fortieth-nums');
 
 const checkBoxToggle = new CheckBoxToggle();
+checkBoxToggle.addEvent();
+
 function sum() {
     return Number(first.value) + Number(tenth.value) + Number(twentieth.value) + Number(thirtieth.value) + Number(fortieth.value);
 }
