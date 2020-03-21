@@ -14,7 +14,7 @@ export async function getWeekNumbers(): Promise<number[]>{
         ProjectionExpression: '#Week',
         Key: {
             "Round": {
-                N: (getCurrentRound()+0).toString()
+                N: (getCurrentRound()+1).toString()
             }
         }
     };

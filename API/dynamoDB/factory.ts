@@ -3,8 +3,8 @@ import queryStats from "./queryStats";
 import { GeneratorOption } from "../interface/Generator";
 import Generator from "../Lotto/class/Generator";
 
-const PER = 10//20;
-const REPEAT = 500//50;
+const PER = 3//20;
+const REPEAT = 300//50;
 
 const valueList:any = {
     lowCount: [0, 1, 2, 3, 4, 5, 6],
@@ -35,7 +35,7 @@ function returnOption(statsData: any, method: StatsMethod): any[] {
     result.add(x);
 
     box.sort((a, b) => b.pos - a.pos);
-    for (let i = 0; i < valueList[method].length / 5; i++) {
+    for (let i = 0; i < valueList[method].length / 6; i++) {
         result.add(valueList[method][box[i].index]);
     }
     for (let i = 0; i < valueList[method].length / 10; i++) {
@@ -82,8 +82,13 @@ function generate(statsDataObj: any, numbers?:FactoryNumber){
     }
     
     option.lowCount = returnLowCountOption();
-    numbers.exclude && (option.excludedNumbers = numbers.exclude);
-    numbers.include && (option.includedNumbers = numbers.include);
+    if (numbers.exclude) {
+        (option.excludedNumbers = numbers.exclude);
+    }
+    if (numbers.include) {
+        const randomPickCount = Math.floor(Math.random() * 4) + 1;
+        (option.includedNumbers = numbers.include.sort(() => 0.5 - Math.random()).slice(0, randomPickCount));
+    }
 
     const generator = new Generator(option);
     generator.generate();
