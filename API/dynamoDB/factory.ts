@@ -3,8 +3,8 @@ import queryStats from "./queryStats";
 import { GeneratorOption } from "../interface/Generator";
 import Generator from "../Lotto/class/Generator";
 
-const PER = 2//20;
-const REPEAT = 10//50;
+const PER = 10//20;
+const REPEAT = 500//50;
 
 const valueList:any = {
     lowCount: [0, 1, 2, 3, 4, 5, 6],
@@ -51,7 +51,15 @@ export async function supply(){
     for (const method in StatsMethod) {
         statsDataObj[method] = await queryStats(method as StatsMethod);
     }
-    return {statsDataObj};
+    const include = await queryStats('howLongNone')
+    .then((data: any[]) => data.map((data, index) => {
+        return {
+            num: index + 1,
+            round: data.round
+        }
+    }))
+    .then(data => [...data.sort((a, b) => a.round - b.round).slice(0, 15).map(item => item.num)]);
+    return {statsDataObj, include};
 }
 interface FactoryNumber{
     exclude:number[],
