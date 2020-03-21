@@ -3,7 +3,7 @@ import { getCurrentRound, scanLotto, getLotto, getLotto2 } from "./funtions";
 import { updateNumbers, getNumbers, deleteMyNumber, updateIncOrExcNumbers, getIncOrExcRounds, getIncAndExcNumbers, deleteIncOrExcNumbers, scanWeekNumbers } from './dynamoDB/Numbers'
 import { queryLottoData } from "./dynamoDB/lottoData";
 import { freeGenerator, numbersToData } from "./dynamoDB/generator";
-import { getPointAndRank, getPlanKeyAndUntil, getMyHome } from "./dynamoDB/userInfo";
+import { getPointAndRank, getPlanKeyAndUntil, getMyHome, expirePlan } from "./dynamoDB/userInfo";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -209,10 +209,13 @@ exports.handler = async (event: any) => {
                         if (lotto.numbers.some(item => item === num)) excludeAnswer++
                     });
 
+                    if(Number(new Date(myData.until)) < Number(new Date())){
+                        await expirePlan(currentId);
+                    }
                     body = {
                         winner: myData.winner,
                         lotto,
-                        numsArr: myData.numsArr.reverse(),
+                        numsArr: myData.numsArr && myData.numsArr.reverse(),
                         total: myData.total,
                         include: myData.include && {
                             current: myData.include.current,
