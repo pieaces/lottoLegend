@@ -37,7 +37,6 @@ export interface DataMap {
 }
 
 export enum StatsMethod {
-    lowCount = "lowCount",
     sum = "sum",
     oddCount = "oddCount",
     primeCount = "primeCount",

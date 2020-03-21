@@ -5,9 +5,6 @@ import { GeneratorOption, ZeroToFour } from '../../../interface/Generator'
 
 export default class Generator extends Check {
     protected generatedNumbers: Array<LottoNumber[]> = [];
-    count:number = 0;
-    rangeSet: Set<number>;
-    rangeFinder:(numbers:number[])=>number;
     constructor(option: GeneratorOption) { super(option); }
 
     getGeneratedNumbers(): Array<LottoNumber[]> {
@@ -15,8 +12,6 @@ export default class Generator extends Check {
     }
 
     generate(): void {
-        this.count = 0;
-        this.rangeSet = new Set<number>();
         const list: LottoNumber[] = [];
 
         let highIndex = -1;
@@ -96,8 +91,6 @@ export default class Generator extends Check {
             } else if (this.option.consecutiveExist === false && this.checkConsecutiveExist(box.sort((a, b) => a - b))) {//제외하라고 했는데, 연속번호 존재하면 여기서 걸림. +여기서 정렬은 배열을 바꿈
             } else {//모든 조건상황에서도 참이었을 때,
                 result.push(box.sort((a, b) => a - b));
-                this.count++;
-                if(this.rangeFinder) this.rangeSet.add(this.rangeFinder(box));
             }
 
             if (indexBox[0] === indexUpb[0] && indexBox[this.option.lowCount] === indexUpb[this.option.lowCount]) break;
