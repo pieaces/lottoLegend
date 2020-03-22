@@ -1,29 +1,33 @@
 import ChartBase from "../Chart/Charts";
 import Slide from ".";
-import DataAPI from "../DataAPI";
+import { IDataAPI } from "../Layout";
 
 export default class BarSlide extends Slide<ChartBase> {
     static readonly SIZE = 3;
+    protected dataAPI:IDataAPI;
+
     constructor(barInstance: ChartBase, numBtns: NodeListOf<Element>, leftBtn: HTMLElement, rightBtn: HTMLElement, table?: HTMLElement, valueBox1?: HTMLElement, valueBox2?: HTMLElement) {
         super(BarSlide.SIZE, barInstance, numBtns, leftBtn, rightBtn, table, valueBox1, valueBox2);
     }
+    setDataAPI(dataAPI:IDataAPI){
+        this.dataAPI = dataAPI;
+    }
     setData() {
-        const data = DataAPI.getInstance().getStats();
         const rep = this.chart.dataBox.datasets[0];
         switch (this.current) {
             case 0:
-                rep.data = data.ideal['latest'];
+                rep.data = this.dataAPI.getStats().ideal['latest'];
                 rep.label = Slide.EXPECTED_TEXT;
                 break;
             case 1:
-                rep.data = data.actual['latest'];
+                rep.data = this.dataAPI.getStats().actual['latest'];
                 rep.label = Slide.ACTUAL_TEXT
                 break;
             case 2:
                 rep.label = '예상개수 대비 실제개수 비율(%)';
                 const temp = [];
-                for (let i = 0; i < data.ideal['latest'].length; i++) {
-                    const datum = (data.actual['latest'][i] - data.ideal['latest'][i]) / data.ideal['latest'][i] * 100;
+                for (let i = 0; i < this.dataAPI.getStats().ideal['latest'].length; i++) {
+                    const datum = (this.dataAPI.getStats().actual['latest'][i] - this.dataAPI.getStats().ideal['latest'][i]) / this.dataAPI.getStats().ideal['latest'][i] * 100;
                     temp.push(datum);
                 }
                 rep.data = temp;
@@ -32,7 +36,7 @@ export default class BarSlide extends Slide<ChartBase> {
         this.chart.update();
     }
     setText() {
-        this.valueBox1.textContent = DataAPI.getInstance().getCurrentName();
+        this.valueBox1.textContent = this.dataAPI.getCurrentName();
 
         switch (this.current) {
             case 0: this.valueBox2.textContent = Slide.EXPECTED_TEXT;
@@ -44,7 +48,7 @@ export default class BarSlide extends Slide<ChartBase> {
         }
 
         const data = [];
-        data.push(DataAPI.getInstance().getLabels());
+        data.push(this.dataAPI.getLabels());
         const ideal: number[] = this.chart.dataBox.datasets[0].data as number[];
         data.push(ideal.map(num => {
             if (num === -100 || num === 100) return '-';
@@ -66,8 +70,8 @@ export default class BarSlide extends Slide<ChartBase> {
         this.numBtns[this.current].classList.remove(this.CURRENT_CSS);
         this.current = 0;
         this.numBtns[this.current].classList.add(this.CURRENT_CSS);
-        this.chart.dataBox.labels = DataAPI.getInstance().getLabels();
-        this.chart.dataBox.datasets[0].data = DataAPI.getInstance().getStats().ideal['latest'];
+        this.chart.dataBox.labels = this.dataAPI.getLabels();
+        this.chart.dataBox.datasets[0].data = this.dataAPI.getStats().ideal['latest'];
         this.chart.dataBox.datasets[0].label = Slide.EXPECTED_TEXT;
         this.chart.update();
         this.setText();

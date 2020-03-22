@@ -4,6 +4,7 @@ export interface Params {
     list?: number[];
 }
 import excludedLineCount from './data/excludedLineCount';
+import excludedLine from './data/excludedLine';
 import carryCount from './data/carryCount';
 import excludeInclude from './data/excludeInclude';
 import lowCount from './data/lowCount';
@@ -18,6 +19,7 @@ import consecutiveExist from './data/consecutive'
 
 const stats = {
     excludedLineCount,
+    excludedLine,
     carryCount,
     excludeInclude,
     lowCount,

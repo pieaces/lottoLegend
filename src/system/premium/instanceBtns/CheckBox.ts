@@ -1,12 +1,16 @@
-import DataAPI from "../DataAPI";
+import { IDataAPI } from "../Layout";
 
 const checkBoxContainer = document.querySelector<HTMLElement>('.func1-checkbox-box');
 
 export default class CheckBox {
+    private dataAPI:IDataAPI;
     static readonly checkedStyle = 'func1-num-check-current';
     private eventHandler: (() => void)[] = [];
     private nodeList: HTMLElement[] = [];
     private labelList: boolean[] = [];
+    setDataAPI(dataAPI:IDataAPI){
+        this.dataAPI = dataAPI;
+    }
     getCheckedLabels(): boolean[] {
         return this.labelList;
     }
@@ -123,7 +127,7 @@ export default class CheckBox {
     init() {
         this.nodeList = [];
         let labels: (string | number)[];
-        labels = DataAPI.getInstance().getLabels().map(value => {
+        labels = this.dataAPI.getLabels().map(value => {
             if (typeof value === 'string') {
                 const index = value.indexOf('~');
                 if (index !== -1) {

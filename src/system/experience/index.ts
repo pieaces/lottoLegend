@@ -1,5 +1,6 @@
-import stats, { Params } from "./Stats";
+import stats, { Params } from "./stats";
 import Generator from "./Generator";
+const constraintLowCount = require('../premium/DataAPI/json/lowCount_compressed.json');
 
 function compartNumbers(param: Params, PACK: number): string[] {
     if (param.to - param.from >= PACK) {
@@ -23,6 +24,7 @@ export default class DataAPI {
     public numbersData: any[];
     public filteredCount: number;
     readonly filterList = ["전멸구간 개수", "전멸구간 선택", "이월수 개수", "이월수 선택", "고정수", "제외수", "저값 개수", "번호 합계", "홀수 개수", "소수 개수", "3배수 개수", "첫수 합", "고저 차", "AC", "연속수 포함여부"]
+    private static readonly optionList = [null, 'excludedLines', null, null, 'includedNumbers', 'excludedNumbers', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
     private static readonly dataList = ['excludedLineCount', 'excludedLine', 'carryCount', 'excludeInclude', 'excludeInclude', 'excludeInclude', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
     private rangeList: Array<string[] | number[]> = [[0, 1, 2, 3, 4], ['1~', '10~', '20~', '30~', '40~'], [0,1,2,3], null, null, null,
     [2,3,4], compartNumbers({ from:101, to:177 }, 10),
@@ -77,23 +79,33 @@ export default class DataAPI {
     }
     backward(): void {
         if (this.current > 0) {
+            this.current--;
         }
     }
 
     private async getGen(): Promise<void> {
-        const { count, numbers } = await this.generator.generate();
-        if (count){
-            this.filteredCount = count;
-        }
-        if (numbers) this.numbersData = numbers;
+        await this.generator.generate();
     }
 
     async forward(optionData: any = undefined): Promise<void> {
         if (0 <= this.current && this.current < DataAPI.dataList.length) {
+            const option = DataAPI.optionList[this.current];
+            if (option) {
+                this.generator.option[option] = optionData;
+            }
             if (this.current >= 6) {
                 await this.getGen();
             }
             this.current++;
+            if (this.current === 6) {
+                let range: number[];
+                if (this.generator.option.excludedLines) {
+                    range = constraintLowCount[this.generator.option.excludedLines.join('')];
+                } else {
+                    range = [0, 6];
+                }
+                this.rangeList[this.current] = paramToNumbers({ from: range[0], to: range[1] });
+            }            
         }
     }
 
@@ -102,5 +114,15 @@ export default class DataAPI {
     }
     public getStats2() {
         return this.stats['excludeInclude'];
+    }
+}
+
+function paramToNumbers(params: Params): number[] {
+    if (typeof params.from === 'number' && typeof params.to === 'number') {
+        const temp = [];
+        for (let i = params.from; i <= params.to; i++) temp.push(i);
+        return temp;
+    } else if (params.list) {
+        return params.list;
     }
 }

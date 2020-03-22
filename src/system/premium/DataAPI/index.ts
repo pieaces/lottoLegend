@@ -111,7 +111,6 @@ export default class DataAPI {
             } else {
                 range = [0, 6];
             }
-            params = { from: range[0], to: range[1] };
             this.rangeList[this.current] = paramToNumbers({ from: range[0], to: range[1] });
         } else if (this.current === 7) {
             if (this.generator.option.includedNumbers.length === 0) {

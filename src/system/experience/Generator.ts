@@ -1,3 +1,5 @@
+import Swal from "sweetalert2";
+
 interface GeneratorOption {
     excludedLines?: number[];
     excludedNumbers?: number[];
@@ -23,42 +25,12 @@ export default class Generator {
         const option = JSON.parse(JSON.stringify(this.option));
         delete option.excludedLineCount;
         delete option.carryCount;
-        let data: any;
-        if (option.sum) {
-            data = {
-                count: 2937
-            }
-        } else if (option.oddCount) {
-            data = {
-                count: 1432
-            }
-        } else if(option.primeCount){
-            data = {
-                count:413
-            }
-        }else if(option.$3Count){
-            data = {
-                count:367
-            }
-        }else if(option.sum$10){
-            data = {
-                count:169
-            }
-        }else if(option.diffMaxMin){
-            data = {
-                count:75
-            }
-        }else if(option.AC){
-            data = {
-                count:66
-            }
-        }else if(option.consecutiveExist){
-            data = {
-                count:47,
-                numbers:[[1,2,3,4,5,6]]
-            }
-        }
-        console.log(data);
-        return data;
+        Swal.fire({
+            title: '체험종료',
+            icon: 'info',
+            footer: '결제페이지로 이동'
+        }).then(() => {
+            location.href = '/main.html';
+        });
     }
 }
