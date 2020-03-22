@@ -8,12 +8,12 @@ const latestCanvas: HTMLCanvasElement = document.querySelector('#lately-canvas')
 const selectionCanvas: HTMLCanvasElement = document.querySelector('#selection-canvas');
 
 const predictDataBox = {
-    labels: ['구간별 출현횟수'],
+    labels: ['구간별 출현횟수(예측)'],
     datasets: [
         {
             label: '1번대',
             backgroundColor: compartColor[0],
-            data: [1.20]
+            data: [1.33]
         },
         {
             label: '10번대',
@@ -39,7 +39,7 @@ const predictDataBox = {
 };
 
 const actualDataBox = {
-    labels: ['구간별 출현횟수'],
+    labels: ['구간별 출현횟수(전체)'],
     datasets: [
         {
             label: '1번대',
@@ -69,7 +69,7 @@ const actualDataBox = {
     ]
 };
 const latestDataBox = {
-    labels: ['구간별 출현횟수'],
+    labels: ['구간별 출현횟수(최근)'],
     datasets: [
         {
             label: '1번대',
@@ -99,7 +99,7 @@ const latestDataBox = {
     ]
 };
 const selectionDataBox = {
-    labels: ['구간별 출현횟수'],
+    labels: ['구간별 출현횟수(입력)'],
     datasets: [
         {
             label: '1번대',
