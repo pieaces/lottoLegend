@@ -1,3 +1,5 @@
+import { IDataAPI } from "../Layout";
+
 const filterBox = document.querySelector(".filter-box");
 const filterArrow = document.querySelector(".filter-arrow");
 const filterListBox = document.querySelector<HTMLElement>(".filter-list");
@@ -6,9 +8,8 @@ const boardPresent = document.querySelector(".present span strong");
 const boardPrevious = document.querySelector(".past span strong");
 const boardNext = document.querySelector(".future span strong");
 
-import DataAPI from "../DataAPI";
-
 export default class DropDown {
+    private dataAPI:IDataAPI;
     static readonly PREVIOUS_COLOR = "white";
     static readonly CURRENT_COLOR = "#3da8e3";
     static readonly AFTER_COLOR = "#7e8c8c";
@@ -21,24 +22,24 @@ export default class DropDown {
     public nodeList: HTMLElement[] = [];
     private overEventList = [];
     private outEventList = [];
-    private filterList: string[];
-    constructor(filterList: string[]) {
-        this.filterList = filterList;
+    
+    setDataAPI(dataAPI:IDataAPI){
+        this.dataAPI = dataAPI;
     }
     changeBoard() {
-        const index = DataAPI.getInstance().getCurrent();
-        filterSelectText.textContent = DataAPI.getInstance().getCurrentName();
+        const index = this.dataAPI.getCurrent();
+        filterSelectText.textContent = this.dataAPI.getCurrentName();
         if (index === 0) {
             boardPrevious.textContent = "";
-            boardNext.textContent = DataAPI.getInstance().getNextName();
-        } else if (index === DataAPI.getInstance().SIZE - 1) {
-            boardPrevious.textContent = DataAPI.getInstance().getPreviousName();
+            boardNext.textContent = this.dataAPI.getNextName();
+        } else if (index === this.dataAPI.SIZE - 1) {
+            boardPrevious.textContent = this.dataAPI.getPreviousName();
             boardNext.textContent = "";
         } else {
-            boardPrevious.textContent = DataAPI.getInstance().getPreviousName();
-            boardNext.textContent = DataAPI.getInstance().getNextName();
+            boardPrevious.textContent = this.dataAPI.getPreviousName();
+            boardNext.textContent = this.dataAPI.getNextName();
         }
-        boardPresent.textContent = DataAPI.getInstance().getCurrentName();
+        boardPresent.textContent = this.dataAPI.getCurrentName();
     }
 
     cancelCheck() {
@@ -98,7 +99,7 @@ export default class DropDown {
         this.cancelCheck();
     }
     changeDropDownColor() {
-        const current = DataAPI.getInstance().getCurrent();
+        const current = this.dataAPI.getCurrent();
         for (let i = 0; i < this.overEventList.length; i++) {
             this.nodeList[i].removeEventListener('mouseover', this.overEventList[i]);
             this.nodeList[i].removeEventListener('mouseout', this.outEventList[i]);
@@ -135,7 +136,7 @@ export default class DropDown {
     init() {
         this.nodeList = [];
         this.changeBoard();
-        this.filterList.forEach(label => {
+        this.dataAPI.filterList.forEach(label => {
             const li = document.createElement("li");
             this.nodeList.push(li);
             li.textContent = label.toString();

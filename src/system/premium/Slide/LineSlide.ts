@@ -1,6 +1,5 @@
 import Slide from ".";
 import ChartBase from "../Chart/Charts";
-import DataAPI from "../DataAPI";
 
 export default class LineSlide extends Slide<ChartBase> {
     static readonly SIZE = 5;

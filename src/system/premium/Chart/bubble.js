@@ -1,15 +1,17 @@
-import DataAPI from '../DataAPI'
 google.charts.load('current', { packages: ['corechart'] });
 
 export default class BubbleChart {
     constructor(element) {
         this.element = element;
     }
+    setDataAPI(dataAPI){
+        this.dataAPI = dataAPI;
+    }
     drawChart() {
         const dataBubble = [['ID', '전체 포화도', '최근 포화도', '종합계수', '확률']];
 
-        const statsData = DataAPI.getInstance().getStats();
-        const labels = DataAPI.getInstance().getLabels();
+        const statsData = this.dataAPI.getStats();
+        const labels = this.dataAPI.getLabels();
         for (let i = 0; i < labels.length; i++) {
             let x = statsData.ideal['all'][i] - statsData.actual['all'][i];
             if (statsData.ideal['all'][i] >= statsData.actual['all'][i]) x /= statsData.ideal['all'][i];

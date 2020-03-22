@@ -9,7 +9,6 @@ import Layout1 from "./Layout1";
 import Layout2 from "./Layout2";
 import Swal from 'sweetalert2'
 import SaveBtn, { Tool } from "../instanceBtns/SaveBtn";
-import DataAPI from "../DataAPI";
 
 const section = document.querySelector(".section1");
 const infoText = document.querySelector<HTMLElement>(".checkbox-text");
@@ -23,8 +22,10 @@ export interface IDataAPI {
     getWinNums: () => number[][];
     getTOTAL: () => number;
     getCurrent: () => number;
+    getPreviousName?: () => string;
     getLabels: () => string[];
     getNextName: () => string;
+    getCurrentName?: () => string;
     getStats: () => any;
     forward: (option: any) => Promise<void>;
     leap: (page:number) => void;
@@ -34,10 +35,9 @@ export interface IDataAPI {
     filteredCount: number;
     infoList: string[];
 }
-export default class Layout extends LayoutToggle(Layout3, DataAPI.getInstance() as IDataAPI) {
-    private dataAPI: IDataAPI;
+export default class Layout extends LayoutToggle(Layout3) {
     dropDown: DropDown;
-    checkBox: Checkbox = new Checkbox();
+    checkBox: Checkbox;
     nextBtn: NextBtn = new NextBtn();
     autoBtn: AutoBtn = new AutoBtn();
     resetBtn: ResetBtn = new ResetBtn();
@@ -51,9 +51,15 @@ export default class Layout extends LayoutToggle(Layout3, DataAPI.getInstance() 
         super();
         this.dataAPI = dataAPI;
         this.layout1 = new Layout1();
+        this.layout1.lineSlide.setDataAPI(dataAPI);
+        this.layout1.barSlide.setDataAPI(dataAPI);
+        this.layout1.bubbleChart.setDataAPI(dataAPI);
+        this.checkBox = new Checkbox();
+        this.checkBox.setDataAPI(this.dataAPI);
         this.layout2 = new Layout2(this.options, this.dataAPI.getStats2(), this.dataAPI.getWinNums(), this.dataAPI.getTOTAL());
         this.layout3 = new Layout3();
-        this.dropDown = new DropDown(this.dataAPI.filterList);
+        this.dropDown = new DropDown();
+        this.dropDown.setDataAPI(this.dataAPI);
     }
     private resetSlideNum() {
         const slideNum = document.querySelectorAll<HTMLElement>('.func1-chart-slide-num');

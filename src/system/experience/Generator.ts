@@ -24,39 +24,43 @@ export default class Generator {
         delete option.excludedLineCount;
         delete option.carryCount;
         let data: any;
-        if (option.sum) {
+
+        if (option.consecutiveExist) {
             data = {
-                count: 2937
+                count: 47,
+                numbers: [[1, 2, 3, 4, 5, 6]]
             }
+        } else if (option.AC) {
+            data = {
+                count: 66
+            }
+        } else if (option.diffMaxMin) {
+            data = {
+                count: 75
+            }
+        } else if (option.sum$10) {
+            data = {
+                count: 169
+            }
+        } else if (option.$3Count) {
+            data = {
+                count: 367
+            }
+        } else if (option.primeCount) {
+            data = {
+                count: 413
+            }
+
         } else if (option.oddCount) {
             data = {
                 count: 1432
             }
-        } else if(option.primeCount){
+        } else if (option.sum) {
             data = {
-                count:413
+                count: 2937
             }
-        }else if(option.$3Count){
-            data = {
-                count:367
-            }
-        }else if(option.sum$10){
-            data = {
-                count:169
-            }
-        }else if(option.diffMaxMin){
-            data = {
-                count:75
-            }
-        }else if(option.AC){
-            data = {
-                count:66
-            }
-        }else if(option.consecutiveExist){
-            data = {
-                count:47,
-                numbers:[[1,2,3,4,5,6]]
-            }
+        } else {
+            data = {};
         }
         console.log(data);
         return data;

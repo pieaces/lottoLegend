@@ -1,4 +1,4 @@
-import stats, { Params } from "./Stats";
+import stats, { Params } from "./stats";
 import Generator from "./Generator";
 
 function compartNumbers(param: Params, PACK: number): string[] {
@@ -23,6 +23,7 @@ export default class DataAPI {
     public numbersData: any[];
     public filteredCount: number;
     readonly filterList = ["전멸구간 개수", "전멸구간 선택", "이월수 개수", "이월수 선택", "고정수", "제외수", "저값 개수", "번호 합계", "홀수 개수", "소수 개수", "3배수 개수", "첫수 합", "고저 차", "AC", "연속수 포함여부"]
+    private static readonly optionList = [null, 'excludedLines', null, null, 'includedNumbers', 'excludedNumbers', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
     private static readonly dataList = ['excludedLineCount', 'excludedLine', 'carryCount', 'excludeInclude', 'excludeInclude', 'excludeInclude', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
     private rangeList: Array<string[] | number[]> = [[0, 1, 2, 3, 4], ['1~', '10~', '20~', '30~', '40~'], [0,1,2,3], null, null, null,
     [2,3,4], compartNumbers({ from:101, to:177 }, 10),
@@ -90,6 +91,10 @@ export default class DataAPI {
 
     async forward(optionData: any = undefined): Promise<void> {
         if (0 <= this.current && this.current < DataAPI.dataList.length) {
+            if(optionData){
+                const option = DataAPI.optionList[this.current];
+                this.generator.option[option] = optionData;
+            }
             if (this.current >= 6) {
                 await this.getGen();
             }
