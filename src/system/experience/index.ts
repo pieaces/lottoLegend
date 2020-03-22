@@ -1,5 +1,6 @@
 import stats, { Params } from "./stats";
 import Generator from "./Generator";
+const constraintLowCount = require('../premium/DataAPI/json/lowCount_compressed.json');
 
 function compartNumbers(param: Params, PACK: number): string[] {
     if (param.to - param.from >= PACK) {
@@ -78,27 +79,33 @@ export default class DataAPI {
     }
     backward(): void {
         if (this.current > 0) {
+            this.current--;
         }
     }
 
     private async getGen(): Promise<void> {
-        const { count, numbers } = await this.generator.generate();
-        if (count){
-            this.filteredCount = count;
-        }
-        if (numbers) this.numbersData = numbers;
+        await this.generator.generate();
     }
 
     async forward(optionData: any = undefined): Promise<void> {
         if (0 <= this.current && this.current < DataAPI.dataList.length) {
-            if(optionData){
-                const option = DataAPI.optionList[this.current];
+            const option = DataAPI.optionList[this.current];
+            if (option) {
                 this.generator.option[option] = optionData;
             }
             if (this.current >= 6) {
                 await this.getGen();
             }
             this.current++;
+            if (this.current === 6) {
+                let range: number[];
+                if (this.generator.option.excludedLines) {
+                    range = constraintLowCount[this.generator.option.excludedLines.join('')];
+                } else {
+                    range = [0, 6];
+                }
+                this.rangeList[this.current] = paramToNumbers({ from: range[0], to: range[1] });
+            }            
         }
     }
 
@@ -107,5 +114,15 @@ export default class DataAPI {
     }
     public getStats2() {
         return this.stats['excludeInclude'];
+    }
+}
+
+function paramToNumbers(params: Params): number[] {
+    if (typeof params.from === 'number' && typeof params.to === 'number') {
+        const temp = [];
+        for (let i = params.from; i <= params.to; i++) temp.push(i);
+        return temp;
+    } else if (params.list) {
+        return params.list;
     }
 }
