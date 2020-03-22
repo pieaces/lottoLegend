@@ -87,9 +87,6 @@
     font-size:0.8rem;
     word-break: keep-all;
   }
-  .past{
-    cursor: pointer;
-  }
   
   .future{
     background: #ececec;

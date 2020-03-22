@@ -1,32 +1,47 @@
 const headerMenuTitle = document.querySelectorAll('.mid-nav-menu >li:nth-child(1)~li > a');
 const headerMenuListBox = document.querySelector('.hover-menu-container');
 const mqMobile = window.matchMedia("(max-width: 767px)");
+const clickMenuBox = document.querySelectorAll('.click-menu-box');
 
 mqMobile.addListener(mqHeaderFunc);
 
 if (mqMobile.matches) {
     //모바일 레이아웃
 
+    let current = null;
     headerMenuTitle.forEach((node, index) => {
         node.addEventListener('click', () => {
             switch (index) {
                 case 0:
-                    document.querySelector('.click-menu-system').classList.remove('none');
                     break;
                 case 1:
-                    document.querySelector('.click-menu-statistics').classList.remove('none');
+                    if (current !== null) {
+                        clickMenuBox[current].classList.add('none');
+                    }
+                    document.querySelector('.click-menu-system').classList.remove('none');
+                    current = 1;
                     break;
                 case 2:
-                    document.querySelector('.click-menu-community').classList.remove('none');
+                    if (current !== null) {
+                        clickMenuBox[current].classList.add('none');
+                    }
+                    document.querySelector('.click-menu-statistics').classList.remove('none');
+                    current = 2;
                     break;
                 case 3:
-                    document.querySelector('.click-menu-statistics').classList.remove('none');
+                    if (current !== null) {
+                        clickMenuBox[current].classList.add('none');
+                    }
+                    document.querySelector('.click-menu-community').classList.remove('none');
+                    current = 3;
                     break;
                 case 4:
-                    document.querySelector('.click-menu-statistics').classList.remove('none');
+                    if (current !== null) {
+                        clickMenuBox[current].classList.add('none');
+                    }
+                    document.querySelector('.click-menu-qna').classList.remove('none');
+                    current = 4;
                     break;
-                default:
-
             }
         })
     })
