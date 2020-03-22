@@ -97,7 +97,20 @@ export default class DataAPI {
                 await this.getGen();
             }
             this.current++;
-            if (this.current === 6) {
+            if (this.current === 2) {
+                let count = 0;
+                this.getWinNums()[0].forEach(num => {
+                    if (this.generator.option.excludedLines.indexOf(Math.floor(num / 10)) !== -1) {
+                        count++;
+                    }
+                })
+                const temp: number[] = [];
+                let to = 6 - count > 3 ? 3 : 6 - count;
+                for (let i = 0; i <= to; i++) {
+                    temp.push(i);
+                }
+                this.rangeList[this.current] = temp;
+            } else if (this.current === 6) {
                 let range: number[];
                 if (this.generator.option.excludedLines) {
                     range = constraintLowCount[this.generator.option.excludedLines.join('')];

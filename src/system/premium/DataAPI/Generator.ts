@@ -27,7 +27,6 @@ export default class Generator {
         delete option.carryCount;
       
         const data = await postAuthAPI('/numbers/generator/premium', {option})
-        console.log(data);
         return data;
     }
 }
