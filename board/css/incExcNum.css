@@ -1,0 +1,42 @@
+.inc-exc-num-wrapper-box{
+    display:flex;
+    justify-content: center;
+  }
+  
+  .inc-exc-num-container{
+  width: 100%;
+  min-height: 5rem;
+  padding-top:1.2rem;
+  font-size:0px;
+  }
+  
+  .inc-exc-num-title{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height:4rem;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--table-title-color);
+    font-size:1.6rem;
+  }
+  
+  .inc-exc-num-box {
+    display: inline-block;
+    width: 10%;
+    padding-bottom:1.2rem;
+      font-size: 1.7rem;
+    }
+  
+    
+    .inc-exc-select-num {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin:0 auto;
+      border-radius: 50%;
+      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+      color: var(--default-color);
+      text-align: center;
+    }
+  
+  

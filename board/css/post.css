@@ -1,4 +1,12 @@
-/* main */
+.inc-exc-num-wrapper{
+  width:100%;
+}
+
+.inc-exc-select-num {
+  width: 4rem;
+  height: 4rem;
+  font-size:1.6rem;
+}
 
 .comment-title{
   display:flex;
