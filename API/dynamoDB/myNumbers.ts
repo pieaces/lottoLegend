@@ -2,19 +2,17 @@ import dynamoDB from '.'
 import { AWSError } from 'aws-sdk/lib/error';
 import { GetItemOutput } from 'aws-sdk/clients/dynamodb';
 
-export enum IncOrExc {
-    "include" = "Include",
-    "exclude" = "Exclude"
-}
-
-export function getIncOrExcNumbers(userName: string, round: number, choice: IncOrExc): Promise<number[]> {
+export type IncOrExc = "include" | "exclude";
+export function getIncOrExcNumbers(userName: string, round: number, choice: IncOrExc): Promise<{current:number[], before?:number[]}> {
     const params = {
         TableName: 'LottoUsers',
         ExpressionAttributeNames: {
+            "#Map": 'IncludeExclude',
             "#Choice": choice,
-            "#Round": round.toString()
+            "#Round": round.toString(),
+            "#Before_Round": (round - 1).toString()
         },
-        ProjectionExpression: '#Choice.#Round',
+        ProjectionExpression: '#Map.#Round.#Choice, #Map.#Before_Round.#Choice',
         Key: {
             "UserName": {
                 S: userName
@@ -23,18 +21,38 @@ export function getIncOrExcNumbers(userName: string, round: number, choice: IncO
     };
 
     return new Promise((resolve, reject) => {
-        dynamoDB.getItem(params, (err:AWSError, data:GetItemOutput) => {
+        dynamoDB.getItem(params, (err: AWSError, data: GetItemOutput) => {
             if (err) {
                 reject(err);
             }
-            else {
-                const item = data.Item;
-                if (choice in item) {
-                    const result = item[choice].M && item[choice].M[round.toString()].L;
-                    resolve(result.map(item => Number(item.N)));
-                }
-                resolve([]);
+            const joint = data.Item.IncludeExclude && data.Item.IncludeExclude.M;
+            const current = joint && joint[round].M[choice].NS;
+            const before = joint && joint[round-1].M[choice].NS;
+            resolve({
+                current: current && current.map(item => Number(item)).sort((a, b) => a - b),
+                before: before && before.map(item => Number(item)).sort((a, b) => a - b),
+            });
+        });
+    });
+}
+
+export function getLotto(round: number): Promise<number[]> {
+    const params = {
+        TableName: 'LottoData',
+        ProjectionExpression: 'Numbers',
+        Key: {
+            "Round": {
+                N: round.toString()
             }
+        }
+    };
+
+    return new Promise((resolve, reject) => {
+        dynamoDB.getItem(params, (err: AWSError, data: GetItemOutput) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(data.Item.Numbers.NS.map(num => Number(num)));
         });
     });
 }

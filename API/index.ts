@@ -2,7 +2,7 @@ import verify from "./auth";
 import { getCurrentRound, isIdentical } from "./funtions";
 import Posts, { SearchType } from "./mariaDB/Posts";
 import Comments from "./mariaDB/Comments";
-import { getIncOrExcNumbers, IncOrExc } from './dynamoDB/myNumbers'
+import { getIncOrExcNumbers, IncOrExc, getLotto } from './dynamoDB/myNumbers'
 import { doesRecommend } from "./dynamoDB/recommend";
 import { addPoint, Point, subtractPoint } from "./dynamoDB/userInfo";
 import Users from "./mariaDB/Users";
@@ -76,11 +76,12 @@ exports.handler = async (event: any) => {
                     if (!flag) {
                         await db.addHits(postId);
                         const post = await db.get(postId);
-                        if (post.category === "incl") {
-                            post.incl = await getIncOrExcNumbers(post.userName, getCurrentRound(post.created), IncOrExc.include);
-                        }
-                        else if (post.category === "excl") {
-                            post.excl = await getIncOrExcNumbers(post.userName, getCurrentRound(post.created), IncOrExc.exclude);
+                        if (post.category === "incl" || post.category === 'excl') {
+                            let incOrExc:IncOrExc = 'include';
+                            if(post.category === 'excl') incOrExc = 'exclude';
+                            post.round = getCurrentRound(post.created)+1;
+                            post.numbers = await getIncOrExcNumbers(post.userName, post.round, incOrExc);
+                            post.answer = await getLotto(post.round-1);
                         }else if(post.category === "qna"){
                             if(currentId !== post.userName){
                                 return {

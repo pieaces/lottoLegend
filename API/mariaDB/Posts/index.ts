@@ -14,8 +14,9 @@ interface Post {
     created: string,
     hits: number;
     comments: Comment[] | null;
-    incl?: number[];
-    excl?: number[];
+    round?: number;
+    numbers?: {current:number[], before?:number[]};
+    answer?:number[];
 }
 export default class Posts extends DB {
     static readonly SCAN_MAX = 15;
