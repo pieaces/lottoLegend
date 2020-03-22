@@ -21,6 +21,10 @@ export default class DropDown {
     public nodeList: HTMLElement[] = [];
     private overEventList = [];
     private outEventList = [];
+    private filterList: string[];
+    constructor(filterList: string[]) {
+        this.filterList = filterList;
+    }
     changeBoard() {
         const index = DataAPI.getInstance().getCurrent();
         filterSelectText.textContent = DataAPI.getInstance().getCurrentName();
@@ -131,7 +135,7 @@ export default class DropDown {
     init() {
         this.nodeList = [];
         this.changeBoard();
-        DataAPI.filterList.forEach(label => {
+        this.filterList.forEach(label => {
             const li = document.createElement("li");
             this.nodeList.push(li);
             li.textContent = label.toString();

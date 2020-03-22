@@ -5,6 +5,7 @@ import DataAPI from "../DataAPI";
 import CheckBoxToggle from "../instanceBtns/CheckBoxToggle";
 import { makeCheckdValueBox } from "./functions"
 import generatorLoading from "../../generatorLoading";
+import { IDataAPI } from ".";
 
 const layout1 = document.querySelectorAll<HTMLElement>(".func1-layout");
 const layout2 = document.querySelectorAll<HTMLElement>(".func2-layout");
@@ -22,7 +23,7 @@ const layout1Class = 'func1-layout'
 const layout2Class = 'func2-layout'
 const layout3Class = 'func3-layout'
 
-export default function LayoutToggle<TBase extends Constructor>(Base: TBase) {
+export default function LayoutToggle<TBase extends Constructor>(Base: TBase, dataAPI:IDataAPI) {
     return class extends Base {
         layout1On() {
             layout2.forEach(node => {
@@ -38,7 +39,6 @@ export default function LayoutToggle<TBase extends Constructor>(Base: TBase) {
                     node.classList.add('none');
                 }
             });
-
         }
         layout2On() {
             layout1.forEach(node => {
@@ -58,7 +58,7 @@ export default function LayoutToggle<TBase extends Constructor>(Base: TBase) {
 
         layout3On(data: any) {
             generatorLoading(3000);
-            const numBoard = new NumBoard(DataAPI.getInstance().numbersData);
+            const numBoard = new NumBoard(dataAPI.numbersData);
             numBoard.makeNumBoard();
             const checkBoxToggle = new CheckBoxToggle();
             checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
