@@ -47,40 +47,21 @@ if (mqMobile.matches) {
         })
     })
 
-
-    let myExclusiveEl = Array.from(
-        document.querySelectorAll('body *')
-    );
-    let myEls = Array.from(
-        document.querySelectorAll('.mid-nav-container *')
-    );
-    myEls.push(document.querySelector('.mid-nav-container'));
-    myEls.push(document.querySelectorAll('.click-menu-container > *'));
-    myEls.push(document.querySelectorAll('.click-menu-container'));
-
-    myExclusiveEl = myExclusiveEl.filter(parent => {
-        let containedByExclusionNode = myEls.filter(child => {
-            if (parent === child) {
-                return true;
-            } else {
-                return false;
-            }
-        });
-        if (containedByExclusionNode.length === 0) {
-            return true;
-        } else {
-            return false;
-        }
-    });
-    for (const node of myExclusiveEl) {
-
-        node.addEventListener("click", () => {
-
+    let isMenuClick = false;
+    const menu = document.querySelector('.click-menu-container');
+    document.addEventListener('click', () => {
+        if (!isMenuClick) {
+            //target 다른 곳
             if (current !== null) {
                 clickMenuBox[current].classList.add('none');
             }
-        });
-    }
+        }
+        isMenuClick = false;
+    })
+    menu.addEventListener('click', () => {
+        //target
+        isMenuClick = true;
+    })
 
 } else {
     //데스크탑 레이아웃

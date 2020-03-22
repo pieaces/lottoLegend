@@ -73,8 +73,7 @@ export default class Layout2 {
     static readonly lottoNumSelectFontColor = 'black';
     static readonly lottoNumCheckedColor = 'rgb(49, 49, 49)';
     static readonly lottoNumExcludedColor = 'rgb(234, 234, 234)';
-    static readonly body = 'body *';
-    static readonly numBoard = '.func2-lotto-num-container *';
+    static readonly numBoard = '.func2-lotto-num-container';
     static readonly lottoCheckCurrent = 'func2-lotto-check-current';
     public checkedNumbers = new Array<number>();
     private choice = null;
@@ -178,34 +177,23 @@ export default class Layout2 {
         gauss.clear();
     }
     private cancelCheck() {
-        let myExclusiveEl = Array.from(document.querySelectorAll<HTMLElement>(Layout2.body));
-        let myEls = Array.from(document.querySelectorAll<HTMLElement>(Layout2.numBoard));
-
-        myExclusiveEl = myExclusiveEl.filter(parent => {
-            let containedByExclusionNode = myEls.filter(child => {
-                if (parent === child) {
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-            if (containedByExclusionNode.length === 0) {
-                return true;
-            } else {
-                return false;
-            }
-        });
-
-        for (const node of myExclusiveEl) {
-            node.addEventListener('click', e => {
+        let flag = false;
+        document.addEventListener('click', () => {
+            if (!flag) {
+                //target 다른 곳
                 if (this.choice !== null) {
                     lottoNumbers[this.choice - 1].style.backgroundColor = Layout2.lottoNumDefaultColor;
                     lottoNumbers[this.choice - 1].style.color = Layout2.lottoNumDefaultFontColor;
                     lottoNumbers[this.choice - 1].style.opacity = `${this.getOpacity(this.choice - 1)}`;
                     this.choice = null;
                 }
-            });
-        }
+            }
+            flag = false;
+        })
+        document.querySelector(Layout2.numBoard).addEventListener('click', () => {
+            //target
+            flag = true;
+        })
     }
     private doesExcluded(index: number): boolean {
         if (this.checkedNumbers.indexOf(index + 1) !== -1 ||

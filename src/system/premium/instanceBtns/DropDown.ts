@@ -9,21 +9,19 @@ const boardPrevious = document.querySelector(".past span strong");
 const boardNext = document.querySelector(".future span strong");
 
 export default class DropDown {
-    private dataAPI:IDataAPI;
+    private dataAPI: IDataAPI;
     static readonly PREVIOUS_COLOR = "white";
     static readonly CURRENT_COLOR = "#3da8e3";
     static readonly AFTER_COLOR = "#7e8c8c";
     static readonly PREVIOUS_FONT = "black";
     static readonly CURRENT_FONT = "white";
     static readonly AFTER_FONT = "white";
-    static readonly body = "body *";
-    static readonly dropDownBox = ".filter-box *";
-    private flag: boolean = true;
+    private flag: boolean = false;
     public nodeList: HTMLElement[] = [];
     private overEventList = [];
     private outEventList = [];
-    
-    setDataAPI(dataAPI:IDataAPI){
+
+    setDataAPI(dataAPI: IDataAPI) {
         this.dataAPI = dataAPI;
     }
     changeBoard() {
@@ -43,46 +41,22 @@ export default class DropDown {
     }
 
     cancelCheck() {
-        let myExclusiveEl = Array.from(
-            document.querySelectorAll<HTMLElement>(DropDown.body)
-        );
-        let myEls = Array.from(
-            document.querySelectorAll<HTMLElement>(DropDown.dropDownBox)
-        );
-
-        myExclusiveEl = myExclusiveEl.filter(parent => {
-            let containedByExclusionNode = myEls.filter(child => {
-                if (parent === child) {
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-            if (containedByExclusionNode.length === 0) {
-                return true;
-            } else {
-                return false;
+        document.addEventListener('click', () => {
+            if (this.flag) {
+                //target 다른 곳
+                filterListBox.classList.add("none");
+                filterArrow.classList.add("fa-sort-down");
+                filterArrow.classList.remove("fa-sort-up");
+                this.flag = false;
             }
-        });
-
-        for (const node of myExclusiveEl) {
-            node.addEventListener("click", () => {
-                if (node.className === "filter-box") {
-                } else {
-                    filterListBox.classList.add("none");
-                    filterArrow.classList.add("fa-sort-down");
-                    filterArrow.classList.remove("fa-sort-up");
-                    this.flag = true;
-                }
-            });
-        }
+        })
     }
 
     addEvent() {
         if (this.nodeList.length === 0) this.init();
 
         filterBox.addEventListener("click", e => {
-            if (this.flag) {
+            if (!this.flag) {
                 filterArrow.classList.remove("fa-sort-down");
                 filterArrow.classList.add("fa-sort-up");
                 filterListBox.classList.remove("none");

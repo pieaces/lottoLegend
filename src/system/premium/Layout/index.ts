@@ -28,7 +28,7 @@ export interface IDataAPI {
     getCurrentName?: () => string;
     getStats: () => any;
     forward: (option: any) => Promise<void>;
-    leap: (page:number) => void;
+    leap: (page: number) => void;
     numbersData: any[];
     filterList: string[];
     SIZE: number;
@@ -47,7 +47,7 @@ export default class Layout extends LayoutToggle(Layout3) {
     layout2: Layout2;
     layout3: Layout3;
 
-    constructor(dataAPI:IDataAPI){
+    constructor(dataAPI: IDataAPI) {
         super();
         this.dataAPI = dataAPI;
         this.layout1 = new Layout1();
@@ -111,7 +111,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                 } else if (currentFilter === 7) {
                     const range = this.dataAPI.getLabels();
                     const list = [];
-                    this.options[currentFilter].forEach((value: boolean, index:number) => {
+                    this.options[currentFilter].forEach((value: boolean, index: number) => {
                         if (value) {
                             if (typeof range[index] === 'string') {
                                 const from = Number((<string>range[index]).slice(0, (<string>range[index]).indexOf('~')));

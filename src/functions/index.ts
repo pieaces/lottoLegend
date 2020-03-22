@@ -129,3 +129,5 @@ export function rankToClass(rank: number): string {
 export function stringTrimer(str: string): string {
     return str.trim().replace(/[\s]+/g, " ");
 }
+
+
