@@ -1,6 +1,6 @@
 import { makeInputCheckBox, makePastFilterTable } from "../../system/premium/Layout/functions"; import { setColorLotto, setDisabledLotto, isoStringToDate } from "../../functions";
 
-export function makeNoneBox(){
+export function makeNoneBox() {
     const div = document.createElement('div');
     div.classList.add('mypage-none-box');
     div.textContent = '없음';
@@ -11,6 +11,15 @@ export function makeTable(canvas: HTMLElement, dataSet: any[], round: number | s
         const tableContent = document.createElement('div');
         tableContent.classList.add('mypage-table-content');
         tableContent.setAttribute('data-numbers', JSON.stringify(dataSet[i].numbers));
+
+        if (i !== 0 && i % 5 === 0) {
+            tableContent.style.borderTop = "0.5rem solid #449ce3";
+            if (i % 10 === 0) {
+                tableContent.style.borderTop = "0.5rem solid #09538e";
+            }
+        } else {
+            tableContent.style.borderTop = "1px solid rgba(0,0,0,0.1)";
+        }
         if (i === dataSet.length - 1) {
             tableContent.style.borderBottom = "1px solid rgba(0,0,0,0.1)";
         }
@@ -93,14 +102,6 @@ export function makeTable(canvas: HTMLElement, dataSet: any[], round: number | s
 
         if (info) {
             const infoTd = makePastFilterTable(dataSet[i]);
-            if (i !== 0 && (i + 1) % 5 === 0) {
-                infoTd.style.borderBottom = "0.5rem solid #449ce3";
-                if ((i + 1) % 10 === 0) {
-                    infoTd.style.borderBottom = "0.5rem solid #09538e";
-                }
-            } else {
-                infoTd.style.borderBottom = "0.5rem solid #dadada";
-            }
             canvas.appendChild(infoTd);
         }
     }
@@ -123,7 +124,7 @@ export function win(numbers: number[], count: number, answer: { bonusNum: number
     }
 }
 
-export function phoneString(phone:string){
+export function phoneString(phone: string) {
     const _phone = ('0' + phone.slice(3));
     return _phone.slice(0, 3) + '-' + _phone.slice(3, 7) + '-' + _phone.slice(7, 11);
 }

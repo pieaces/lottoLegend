@@ -22,6 +22,7 @@ const serviceUpdateBtn = document.querySelector('#service-update');
 const constmobileUpdateBtn = document.getElementById('mobile');
 const rankHtml = document.querySelector('.rank');
 const lottoRank = document.querySelector('#lotto-rank');
+const numListLength = document.querySelector('#num-list-select-total');
 
 Auth.currentAuthenticatedUser()
     .then(user => {
@@ -102,6 +103,7 @@ Auth.currentAuthenticatedUser()
 
             if (numsArr && numsArr.length > 0) {
                 makeTable(document.querySelector<HTMLElement>('.mypage-table-num-box'), numsArr, total, false);
+                numListLength.textContent = document.querySelectorAll('.mypage-table-content').length.toString();
             } else {
                 document.querySelector<HTMLElement>('.mypage-table-num-box').appendChild(makeNoneBox());
             }
