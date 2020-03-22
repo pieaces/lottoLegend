@@ -6,9 +6,31 @@ mqMobile.addListener(mqHeaderFunc);
 
 if (mqMobile.matches) {
     //모바일 레이아웃
-    switch () {
 
-    }
+    headerMenuTitle.forEach((node, index) => {
+        node.addEventListener('click', () => {
+            switch (index) {
+                case 0:
+                    document.querySelector('.click-menu-system').classList.remove('none');
+                    break;
+                case 1:
+                    document.querySelector('.click-menu-statistics').classList.remove('none');
+                    break;
+                case 2:
+                    document.querySelector('.click-menu-community').classList.remove('none');
+                    break;
+                case 3:
+                    document.querySelector('.click-menu-statistics').classList.remove('none');
+                    break;
+                case 4:
+                    document.querySelector('.click-menu-statistics').classList.remove('none');
+                    break;
+                default:
+
+            }
+        })
+    })
+
 
 } else {
     //데스크탑 레이아웃

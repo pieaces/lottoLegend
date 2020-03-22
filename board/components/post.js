@@ -28,6 +28,7 @@ document.write(`
 
    
     <div class="image-list-container">
+    
         <ul id="image-list" >
        
         </ul>

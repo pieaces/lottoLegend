@@ -45,7 +45,6 @@ const loading = document.querySelector('.loading-box');
 
 const submitBtn = document.getElementById('submit-btn');
 const titleInput = document.querySelector<HTMLInputElement>('#title-text');
-//const imageWrapper = document.getElementById('image-wrapper');
 const imageTotalSize = document.getElementById('image-total-size');
 const imageRemove = document.getElementById('image-remove');
 const imageTable = document.getElementById('image-list');
@@ -126,7 +125,6 @@ editor.onImageUpload = function (targetImgElement, index, state, imageInfo, rema
         const li = imageTable.querySelector('#' + targetId);
         li.remove();
         imageList.splice(deleteIndex, 1);
-
         if (imageList.length === 0) {
             imageTable.classList.remove('box-color');
         }
@@ -136,6 +134,9 @@ editor.onImageUpload = function (targetImgElement, index, state, imageInfo, rema
             const image = editor.getImagesInfo()[findIndex(editor.getImagesInfo(), index)]
             totalSize += Number(image.size);
             imageList.push(image);
+            if (!(imageTable.classList.contains('box-color'))) {
+                imageTable.classList.add('box-color');
+            }
         } else { // update }
         }
 
@@ -192,7 +193,7 @@ function setImageList(imageList: { size: number, index: number, src: string }[])
         node.addEventListener('click', () => {
             const img = node.firstElementChild.firstElementChild.firstElementChild as HTMLElement;
             if (node.classList.contains('checked')) {
-                img.style.border = "4px solid #E28B89";
+                img.style.border = "4px solid rgb(149, 90, 89)";
             } else {
                 img.style.border = "4px solid white";
             }
