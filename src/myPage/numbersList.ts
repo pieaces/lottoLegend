@@ -18,13 +18,6 @@ const toolSelectBox = document.querySelector<HTMLSelectElement>('#tool-select-bo
 const methodSelectBox = document.querySelector<HTMLSelectElement>('#method-select-box');
 const numInfoToggleBtn = document.querySelector('.mypage-toggle-btn');
 const pastFilterBox = document.getElementsByClassName('func3-past-filter-box') as HTMLCollectionOf<HTMLElement>;
-const tableContent = document.getElementsByClassName('mypage-table-content') as HTMLCollectionOf<HTMLElement>;
-
-const darkBlueBorder = "0.5rem solid #09538e";
-const lightBlueBorder = "0.5rem solid #449ce3";
-const grayBorder = "0.5rem solid #dadada";
-const defaultBorder = "1px solid rgba(0,0,0,0.1)";
-
 const tableNumBox = document.querySelector<HTMLElement>('.mypage-table-num-box');
 
 loading.classList.remove('none');
@@ -197,27 +190,16 @@ function numInfoToggle() {
             numInfoToggleBtn.textContent = "번호정보 닫기";
             for (let i = 0; i < pastFilterBox.length; i++) {
                 pastFilterBox[i].classList.remove('none');
-                if (i !== 0 && (i + 1) % 5 === 0) {
-                    tableContent[i].style.borderBottom = defaultBorder;
-                    pastFilterBox[i].style.borderBottom = lightBlueBorder;
-                    if ((i + 1) % 10 === 0) {
-                        pastFilterBox[i].style.borderBottom = darkBlueBorder;
-                    }
-                } else {
-                    pastFilterBox[i].style.borderBottom = grayBorder;
-                }
             }
-
             flag = true;
         } else {
             numInfoToggleBtn.textContent = "번호정보 열기";
             for (let i = 0; i < pastFilterBox.length; i++) {
                 pastFilterBox[i].classList.add('none');
                 if (i !== 0 && (i + 1) % 5 === 0) {
-                    tableContent[i].style.borderBottom = lightBlueBorder;
-                    if ((i + 1) % 10 === 0) {
-                        tableContent[i].style.borderBottom = darkBlueBorder;
-                    }
+                    pastFilterBox[i].style.borderBottom = "none";
+                } else {
+                    pastFilterBox[i].style.borderBottom = "0.5rem solid #dadada";
                 }
             }
             flag = false;

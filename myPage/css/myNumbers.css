@@ -1,3 +1,16 @@
+.num-list-select{
+    height: 4rem;
+    margin-left:1rem;
+    padding:1rem;
+    border:1px solid #999;
+    border-radius: 3px;
+}
+
+.mypage-selectbox-container{
+    display:flex;
+    align-items: center;
+}
+
 .mypage-table-num-box{
     margin-bottom:1rem;
 }

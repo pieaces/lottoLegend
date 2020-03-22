@@ -126,7 +126,7 @@ editor.onImageUpload = function (targetImgElement, index, state, imageInfo, rema
         li.remove();
         imageList.splice(deleteIndex, 1);
         if (imageList.length === 0) {
-            imageTable.classList.remove('box-color');
+            imageTable.classList.add('none');
         }
 
     } else {
@@ -134,8 +134,8 @@ editor.onImageUpload = function (targetImgElement, index, state, imageInfo, rema
             const image = editor.getImagesInfo()[findIndex(editor.getImagesInfo(), index)]
             totalSize += Number(image.size);
             imageList.push(image);
-            if (!(imageTable.classList.contains('box-color'))) {
-                imageTable.classList.add('box-color');
+            if (imageTable.classList.contains('none')) {
+                imageTable.classList.remove('none');
             }
         } else { // update }
         }

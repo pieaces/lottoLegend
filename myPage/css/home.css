@@ -94,6 +94,9 @@ font-size: 1.4rem;
   font-size:1.4rem;
 }
 
+.mypage-num-container > div.mypage-num-box:nth-child(2){
+  border-bottom: none;
+}
 
 .mypage-num-box{
   display:flex;
@@ -122,6 +125,27 @@ font-size: 1.4rem;
   font-size: 1.5rem;
   line-height: 2.1;
   text-align: center;
+}
+
+.mypage-num-list-select{
+  display:flex;
+  align-items: center;
+  margin-left:1rem;
+}
+
+.mypage-num-list-select >*{
+  margin-left: 1rem;
+}
+
+.mypage-num-list-select::before{
+  content: '|';
+  color:var(--faint-color);
+}
+
+.mypage-num-list-total-text{
+  color:rgb(93, 93, 93);
+  font-weight: 400;
+  font-size:1.4rem;
 }
 
 .mypage-num-list-container{
