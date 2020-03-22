@@ -24,3 +24,4 @@ export function getStaticsName(method: string) {
     }
     return name;
 }
+

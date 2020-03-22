@@ -6,6 +6,7 @@ import { getQueryStringObject, rangeMake } from '../functions';
 import makeClickable from '../system/premium/Slide/makeClickable';
 import { getStaticsName } from './functions';
 import { headerSign } from '../amplify/auth';
+
 configure();
 headerSign();
 
@@ -89,6 +90,8 @@ const barOption: Chart.ChartOptions = {
     maintainAspectRatio: false,
     legend: { display: false },
 };
+
+
 
 getUnAuthAPI('/stats/piece', { method })
     .then(data => {
