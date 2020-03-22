@@ -37,7 +37,8 @@ commentSubmit.onclick = async function () {
             txtArea.value = "";
             Swal.fire({
                 title: '완료',
-                icon: 'success'
+                icon: 'success',
+                timer: 750,
             });
         } catch (err) {
             networkAlert();
@@ -115,7 +116,7 @@ async function init() {
                             title: '완료',
                             icon: 'success',
                             allowOutsideClick: false,
-                            timer: 1500,
+                            timer: 750,
                         }).then(() => {
                             location.href = `/${getCategoryHtml(category, 'list')}`;
                         });
@@ -213,9 +214,9 @@ async function makeComments(objArr: any) {
             let updateCheck = false;
             let parentEl: HTMLElement;
             let textArea: HTMLTextAreaElement;
-            updateBtn.addEventListener('click', () => {
+            updateBtn.addEventListener('click', async () => {
                 if (!updateCheck) {
-                    updateBtn.textContent = "수정";
+                    updateBtn.textContent = "완료";
                     textArea = document.createElement('textarea');
                     textArea.classList.add('comment-update-write-text');
                     parentEl = updateBtn.parentElement.parentElement;
@@ -224,13 +225,23 @@ async function makeComments(objArr: any) {
                     parentEl.parentNode.appendChild(textArea);
                     updateCheck = true;
                 } else {
-                    updateBtn.textContent = "완료";
-                    const commentContent = document.createElement('div');
-                    commentContent.classList.add('comment-content');
-                    commentContent.textContent = textArea.value;
-                    textArea.remove();
-                    parentEl.parentNode.appendChild(commentContent);
-                    updateCheck = false;
+                    updateBtn.textContent = "수정";
+                    try {
+                        await patchAuthAPI(`/posts/${id}/comments/${objArr[i].id}`, { contents: textArea.value })
+                        const commentContent = document.createElement('div');
+                        commentContent.classList.add('comment-content');
+                        commentContent.textContent = textArea.value;
+                        textArea.remove();
+                        parentEl.parentNode.appendChild(commentContent);
+                        updateCheck = false;
+                        Swal.fire({
+                            title: '완료!',
+                            icon: 'success',
+                            timer: 750,
+                        });
+                    } catch (err) {
+                        networkAlert();
+                    }
                 }
             });
             deleteBtn.addEventListener('click', async () => {
@@ -251,7 +262,8 @@ async function makeComments(objArr: any) {
                             commentCount--;
                             commentNum.textContent = commentCount.toString();
                             Swal.fire({
-                                title: '완료!', icon: 'success'
+                                title: '완료!', icon: 'success',
+                                timer: 750,
                             });
                         } catch (err) {
                             networkAlert();
