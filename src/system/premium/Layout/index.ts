@@ -1,6 +1,5 @@
 import Layout3 from "./Layout3";
 import LayoutToggle from "./LayoutToggle";
-import DataAPI from "../DataAPI";
 import DropDown from "../instanceBtns/DropDown";
 import Checkbox from "../instanceBtns/CheckBox";
 import NextBtn from "../instanceBtns/NextBtn";
@@ -10,6 +9,7 @@ import Layout1 from "./Layout1";
 import Layout2 from "./Layout2";
 import Swal from 'sweetalert2'
 import SaveBtn, { Tool } from "../instanceBtns/SaveBtn";
+import DataAPI from "../DataAPI";
 
 const section = document.querySelector(".section1");
 const infoText = document.querySelector<HTMLElement>(".checkbox-text");
@@ -18,17 +18,43 @@ const filteredCounterBox = document.querySelector<HTMLElement>('.extract-num');
 const filteredCounter = document.getElementById('main-counter');
 const filteredSubCounter = document.getElementById('sub-counter');
 
-export default class Layout extends LayoutToggle(Layout3) {
-    dropDown: DropDown = new DropDown();
+export interface IDataAPI {
+    getStats2: () => any;
+    getWinNums: () => number[][];
+    getTOTAL: () => number;
+    getCurrent: () => number;
+    getLabels: () => string[];
+    getNextName: () => string;
+    getStats: () => any;
+    forward: (option: any) => Promise<void>;
+    leap: (page:number) => void;
+    numbersData: any[];
+    filterList: string[];
+    SIZE: number;
+    filteredCount: number;
+    infoList: string[];
+}
+export default class Layout extends LayoutToggle(Layout3, DataAPI.getInstance() as IDataAPI) {
+    private dataAPI: IDataAPI;
+    dropDown: DropDown;
     checkBox: Checkbox = new Checkbox();
     nextBtn: NextBtn = new NextBtn();
     autoBtn: AutoBtn = new AutoBtn();
     resetBtn: ResetBtn = new ResetBtn();
     nextAbleLimit: number = 1;
     options: any[] = [];
-    layout1: Layout1 = new Layout1();
-    layout2: Layout2 = new Layout2(this.options, DataAPI.getInstance().getStats2(), DataAPI.getInstance().getWinNums(), DataAPI.getInstance().getTOTAL());
-    layout3: Layout3 = new Layout3();
+    layout1: Layout1;
+    layout2: Layout2;
+    layout3: Layout3;
+
+    constructor(dataAPI:IDataAPI){
+        super();
+        this.dataAPI = dataAPI;
+        this.layout1 = new Layout1();
+        this.layout2 = new Layout2(this.options, this.dataAPI.getStats2(), this.dataAPI.getWinNums(), this.dataAPI.getTOTAL());
+        this.layout3 = new Layout3();
+        this.dropDown = new DropDown(this.dataAPI.filterList);
+    }
     private resetSlideNum() {
         const slideNum = document.querySelectorAll<HTMLElement>('.func1-chart-slide-num');
         slideNum.forEach((node) => {
@@ -44,7 +70,7 @@ export default class Layout extends LayoutToggle(Layout3) {
 
     }
     private setOption() {
-        const currentFilter = DataAPI.getInstance().getCurrent();
+        const currentFilter = this.dataAPI.getCurrent();
         switch (currentFilter) {
             case 3:
                 this.options[currentFilter] = this.layout2.checkedNumbers.slice();
@@ -54,7 +80,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                 if (currentFilter === 4) {
                     this.options[currentFilter].push(...this.options[3]);
                 } else if (currentFilter === 5) {
-                    const winNum: number[] = DataAPI.getInstance().getWinNums()[0];
+                    const winNum: number[] = this.dataAPI.getWinNums()[0];
                     for (let i = 0; i < this.options[3].length; i++) {
                         const index = winNum.indexOf(this.options[3][i]);
                         if (index !== -1) {
@@ -75,11 +101,11 @@ export default class Layout extends LayoutToggle(Layout3) {
                     });
                     this.options[currentFilter] = option;
                 } else if (currentFilter === 6) {
-                    this.options[currentFilter] = DataAPI.getInstance().getLabels()[this.options[currentFilter].indexOf(true)];
+                    this.options[currentFilter] = this.dataAPI.getLabels()[this.options[currentFilter].indexOf(true)];
                 } else if (currentFilter === 7) {
-                    const range = DataAPI.getInstance().getLabels();
+                    const range = this.dataAPI.getLabels();
                     const list = [];
-                    this.options[currentFilter].forEach((value: boolean, index) => {
+                    this.options[currentFilter].forEach((value: boolean, index:number) => {
                         if (value) {
                             if (typeof range[index] === 'string') {
                                 const from = Number((<string>range[index]).slice(0, (<string>range[index]).indexOf('~')));
@@ -89,8 +115,8 @@ export default class Layout extends LayoutToggle(Layout3) {
                         }
                     });
                     this.options[currentFilter] = list;
-                } else if (7 < currentFilter && currentFilter < DataAPI.getInstance().SIZE - 1) {
-                    const range = DataAPI.getInstance().getLabels()
+                } else if (7 < currentFilter && currentFilter < this.dataAPI.SIZE - 1) {
+                    const range = this.dataAPI.getLabels()
                     if (currentFilter === 12) {
                         const list = [];
                         this.options[currentFilter].forEach((value: boolean, index) => {
@@ -110,20 +136,20 @@ export default class Layout extends LayoutToggle(Layout3) {
                         });
                         this.options[currentFilter] = list;
                     }
-                } else if (currentFilter === DataAPI.getInstance().SIZE - 1) {
+                } else if (currentFilter === this.dataAPI.SIZE - 1) {
                     this.options[currentFilter] = this.options[currentFilter][0] ? false : true;
                 }
         }
     }
     private async on() {
-        const currentFilter = DataAPI.getInstance().getCurrent();
-        infoText.textContent = DataAPI.infoList[currentFilter];
+        const currentFilter = this.dataAPI.getCurrent();
+        infoText.textContent = this.dataAPI.infoList[currentFilter];
         if (currentFilter > 7) {
             filteredCounterBox.classList.remove('hide');
             if (currentFilter > 8) {
-                filteredSubCounter.textContent = (DataAPI.getInstance().filteredCount - Number(filteredCounter.textContent)).toString();
+                filteredSubCounter.textContent = (this.dataAPI.filteredCount - Number(filteredCounter.textContent)).toString();
             }
-            filteredCounter.textContent = DataAPI.getInstance().filteredCount.toString();
+            filteredCounter.textContent = this.dataAPI.filteredCount.toString();
         } else {
             filteredCounterBox.classList.add('hide');
         }
@@ -140,8 +166,8 @@ export default class Layout extends LayoutToggle(Layout3) {
                     if (this.nextAbleLimit === 0) {
                         this.dropDown.nodeList[currentFilter].textContent = '-';
                         this.options[currentFilter] = [];
-                        await DataAPI.getInstance().forward(this.options[currentFilter]);
-                        infoText.innerHTML = DataAPI.infoList[currentFilter + 1];
+                        await this.dataAPI.forward(this.options[currentFilter]);
+                        infoText.innerHTML = this.dataAPI.infoList[currentFilter + 1];
                     } else {
                         numFreq.classList.add('none');
                         numFreqTerm.classList.add('none');
@@ -166,14 +192,14 @@ export default class Layout extends LayoutToggle(Layout3) {
                 this.resetBtn.removeEvent();
                 this.resetBtn.addEvent(this.layout2.resetConfirm.bind(this.layout2));
                 break;
-            case DataAPI.getInstance().SIZE:
+            case this.dataAPI.SIZE:
                 this.layout3On(this.options);
                 break;
             default:
                 this.layout1On();
                 this.checkBox.init();
                 if (currentFilter === 0) {
-                    this.dropDown.nodeList[currentFilter + 1].textContent = DataAPI.getInstance().getNextName();
+                    this.dropDown.nodeList[currentFilter + 1].textContent = this.dataAPI.getNextName();
                     this.nextAbleLimit = 1;
                     this.checkBox.singleSelectEvent();
                 } else if (currentFilter === 1) {
@@ -182,7 +208,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                     if (this.nextAbleLimit === 0) {
                         this.dropDown.nodeList[currentFilter].textContent = '-';
                         this.options[currentFilter] = [];
-                        await DataAPI.getInstance().forward(this.options[currentFilter]);
+                        await this.dataAPI.forward(this.options[currentFilter]);
                         this.on();
                     } else if (this.nextAbleLimit === 1) {
                         this.checkBox.singleSelectEvent();
@@ -190,12 +216,12 @@ export default class Layout extends LayoutToggle(Layout3) {
                         this.checkBox.multiSelectEvent(this.nextAbleLimit);
                     }
                 } else if (currentFilter === 2) {
-                    this.dropDown.nodeList[currentFilter + 1].textContent = DataAPI.getInstance().getNextName();
+                    this.dropDown.nodeList[currentFilter + 1].textContent = this.dataAPI.getNextName();
                     this.nextAbleLimit = 1;
                     this.checkBox.singleSelectEvent();
                 } else if (currentFilter <= 6) {
                     this.checkBox.singleSelectEvent();
-                } else if (currentFilter === DataAPI.getInstance().SIZE - 1) {
+                } else if (currentFilter === this.dataAPI.SIZE - 1) {
                     this.checkBox.singleSelectEvent();
                 } else {
                     this.checkBox.multiSelectEvent();
@@ -212,8 +238,8 @@ export default class Layout extends LayoutToggle(Layout3) {
     private async next(current: number) {
 
         loading.classList.remove('none');
-        await DataAPI.getInstance().forward(this.options[current]);
-        if (DataAPI.getInstance().getCurrent() < DataAPI.getInstance().SIZE && DataAPI.getInstance().numbersData) {
+        await this.dataAPI.forward(this.options[current]);
+        if (this.dataAPI.getCurrent() < this.dataAPI.SIZE && this.dataAPI.numbersData) {
             Swal.fire({
                 title: '현재 필터링된 번호가 50개이하입니다.',
                 text: '남아있는 필터를 중단하고 생성페이지로 이동하시겠습니까?',
@@ -248,11 +274,11 @@ export default class Layout extends LayoutToggle(Layout3) {
         this.layout1.lineSlide.init();
         this.layout1.bubbleChart.init();
         this.layout2.init();
-        infoText.textContent = DataAPI.infoList[0];
-        this.layout1.setStatsBoard(DataAPI.getInstance().getStats().stats);
+        infoText.textContent = this.dataAPI.infoList[0];
+        this.layout1.setStatsBoard(this.dataAPI.getStats().stats);
         SaveBtn.init(Tool.charge);
         this.nextBtn.addEvent(async () => {
-            const currentFilter = DataAPI.getInstance().getCurrent();
+            const currentFilter = this.dataAPI.getCurrent();
             if (this.checkBox.getCount() >= this.nextAbleLimit ||
                 currentFilter === 3 && this.layout2.checkedNumbers.length === this.nextAbleLimit ||
                 currentFilter === 4 || currentFilter === 5) {
@@ -272,7 +298,7 @@ export default class Layout extends LayoutToggle(Layout3) {
             }
         });
         this.autoBtn.addEvent(async () => {
-            const current = DataAPI.getInstance().getCurrent();
+            const current = this.dataAPI.getCurrent();
             let index: number;
             let rand: number;
             let pos: number[];
@@ -303,15 +329,15 @@ export default class Layout extends LayoutToggle(Layout3) {
                 case 3: case 4: case 5: break;
                 case 6:
                     rand = Math.random();
-                    index = Math.floor(rand * DataAPI.getInstance().getLabels().length);
-                    this.options[current] = DataAPI.getInstance().getLabels()[index];
+                    index = Math.floor(rand * this.dataAPI.getLabels().length);
+                    this.options[current] = this.dataAPI.getLabels()[index];
                     break;
-                case DataAPI.getInstance().SIZE - 1:
+                case this.dataAPI.SIZE - 1:
                     this.options[current] = true;
                     break;
                 default:
                     index = 0;
-                    pos = DataAPI.getInstance().getStats().pos;
+                    pos = this.dataAPI.getStats().pos;
                     temp = pos[0]
                     for (let i = 1; i < pos.length; i++) {
                         if (temp < pos[i]) {
@@ -319,7 +345,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                         }
                     }
 
-                    const range = DataAPI.getInstance().getLabels();
+                    const range = this.dataAPI.getLabels();
                     if (current === 7) {
                         this.options[current] = [];
                         const from = Number((<string>range[index]).slice(0, (<string>range[index]).indexOf('~')));
@@ -360,11 +386,11 @@ export default class Layout extends LayoutToggle(Layout3) {
         });
         this.dropDown.nodeList.forEach((node, index) => {
             node.addEventListener('click', async () => {
-                const current = DataAPI.getInstance().getCurrent();
+                const current = this.dataAPI.getCurrent();
                 if (index < current && node.textContent !== '-') {
                     Swal.fire({
                         title: '알림',
-                        text: `'${DataAPI.filterList[index]}'(으)로 되돌아가시겠습니까?`,
+                        text: `'${this.dataAPI.filterList[index]}'(으)로 되돌아가시겠습니까?`,
                         icon: 'info',
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
@@ -373,13 +399,13 @@ export default class Layout extends LayoutToggle(Layout3) {
                         cancelButtonText: '아니요',
                     }).then(async (result) => {
                         if (result.value) {
-                            DataAPI.getInstance().numbersData = null;
+                            this.dataAPI.numbersData = null;
 
                             section.scrollIntoView({
                                 behavior: 'auto'
                             });
                             for (let i = 0; i < current - index; i++) this.options.pop();
-                            DataAPI.getInstance().leap(index);
+                            this.dataAPI.leap(index);
                             await this.on();
                             this.checkBox.reset();
                             this.dropDown.changeBoard();
@@ -391,7 +417,7 @@ export default class Layout extends LayoutToggle(Layout3) {
             })
         });
         document.querySelector<HTMLElement>('.past').addEventListener('click', () => {
-            if (DataAPI.getInstance().getCurrent() > 0) {
+            if (this.dataAPI.getCurrent() > 0) {
 
             }
         })

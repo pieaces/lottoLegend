@@ -46,11 +46,11 @@ export default class DataAPI {
     static instance: DataAPI = null;
     public numbersData: any[];
     public filteredCount: number;
-    static readonly filterList = ["전멸구간 개수", "전멸구간 선택", "이월수 개수", "이월수 선택", "고정수", "제외수", "저값 개수", "번호 합계", "홀수 개수", "소수 개수", "3배수 개수", "첫수 합", "고저 차", "AC", "연속수 포함여부"]
+    readonly filterList = ["전멸구간 개수", "전멸구간 선택", "이월수 개수", "이월수 선택", "고정수", "제외수", "저값 개수", "번호 합계", "홀수 개수", "소수 개수", "3배수 개수", "첫수 합", "고저 차", "AC", "연속수 포함여부"]
     private static readonly dataList = ['excludedLineCount', 'excludedLine', 'carryCount', 'excludeInclude', 'excludeInclude', 'excludeInclude', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
     private static readonly optionList = [null, 'excludedLines', null, null, 'includedNumbers', 'excludedNumbers', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
     private rangeList: Array<string[] | number[]> = [[0, 1, 2, 3, 4], ['1~', '10~', '20~', '30~', '40~'], null, null, null, null];
-    static readonly infoList = ['전멸구간 개수를 선택해주세요.', '전멸구간 번호대를 선택해주세요', '전회차에서 이월될 개수를 선택해주세요.', '전회차에서 이월될 수를 선택해주세요(나머지는 자동으로 제외됩니다.)',
+    readonly infoList = ['전멸구간 개수를 선택해주세요.', '전멸구간 번호대를 선택해주세요', '전회차에서 이월될 개수를 선택해주세요.', '전회차에서 이월될 수를 선택해주세요(나머지는 자동으로 제외됩니다.)',
         '고정시킬 수를 선택해주세요.(생략가능)', '제외될 수를 선택해주세요.(생략가능)', '저값 개수를 선택해주세요.',
         infoFront + '번호합계입니다. ' + infoBack,
         infoFront + '홀수개수입니다. ' + infoBack,
@@ -64,7 +64,7 @@ export default class DataAPI {
     private current: number = 0;
     private stats = new Stats();
     private generator = new Generator();
-    public readonly SIZE: number = DataAPI.filterList.length;
+    public readonly SIZE: number = this.filterList.length;
 
     static getInstance() {
         if (DataAPI.instance == null) {
@@ -78,13 +78,13 @@ export default class DataAPI {
         return this.rangeList[num];
     }
     public getPreviousName(): string {
-        return DataAPI.filterList[this.current - 1];
+        return this.filterList[this.current - 1];
     }
     public getCurrentName(): string {
-        return DataAPI.filterList[this.current];
+        return this.filterList[this.current];
     }
     public getNextName(): string {
-        return DataAPI.filterList[this.current + 1];
+        return this.filterList[this.current + 1];
     }
     public getCurrent() { return this.current }
 
