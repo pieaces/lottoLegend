@@ -4,7 +4,7 @@ document.write(`<div class="anchor-title">
     <ul class="anchor-list-container">
     <li>
         <ul class="anchor-list-box">
-        <li>  <a href="premium.html">체험하기</a>  </li>
+        <li>  <a href="experience.html">체험하기</a>  </li>
         </ul>
     </li>
     <li>  <h3>추천/제외수 생성기</h3> 

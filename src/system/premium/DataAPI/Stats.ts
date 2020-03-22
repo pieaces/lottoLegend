@@ -36,7 +36,6 @@ export default class Data {
                 location.href = '/main.html';
             });
         } else {
-            console.log(JSON.stringify(result.data));
             this[method] = result.data;
             if (result.total) this.total = result.total;
             if (result.winNums) this.winNums = result.winNums
