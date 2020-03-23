@@ -195,9 +195,26 @@
     display:block;
   }
 
-
-  .button-wrapper{
-    justify-content: center;
+  .img-btn-box{
+    margin:0 auto 1rem auto;
   }
+
+.image-list-container{
+  display:block;
+}
+
+.image-list-box{
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.button-wrapper{
+  width: 100%;
+}
+
+.post-btn{
+  height:5rem;
+}
+
 
 }

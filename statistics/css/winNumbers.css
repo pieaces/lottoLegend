@@ -1,6 +1,5 @@
-.filter-box-container{
-    justify-content: flex-start;
-    width: 100%;
+.filter-box{
+    width:12rem;
 }
 
 .stats-home-title{
