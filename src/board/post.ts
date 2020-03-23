@@ -2,7 +2,7 @@ import configure from '../amplify/configure'
 import suneditor, { ImageInfo } from 'suneditor'
 import plugins from 'suneditor/src/plugins'
 import { ko } from 'suneditor/src/lang'
-import { postUnAuthAPI, postAuthAPI, getUnAuthAPI, patchAuthAPI } from '../amplify/api';
+import { postUnAuthAPI, postAuthAPI, getUnAuthAPI, patchAuthAPI, getAuthAPI } from '../amplify/api';
 import { headerSign, isLogedIn } from '../amplify/auth'
 import { networkAlert, getQueryStringObject, getCategoryHtml, onlyUserAlert, stringTrimer } from '../functions'
 import Swal from 'sweetalert2'
@@ -55,7 +55,12 @@ if (post) {
         editor.setContents(post.contents);
     });
 }
-
+if(category === 'incl' || category === 'excl'){
+    getAuthAPI('/numbers/piece', { choice: category === 'incl' ? 'incl' : 'excl' })
+    .then(numbers => {
+        console.log(numbers);
+    })
+}
 imageRemove.addEventListener('click', () => {
     deleteCheckedImages();
 })
