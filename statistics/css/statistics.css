@@ -7,10 +7,10 @@
   position: relative;
   width: 100%;
   height: 100%;
-  border-top:3rem solid rgb(31, 5, 76);
-  border-right:2.8rem solid rgb(31, 5, 76);
-  border-bottom:3rem solid rgb(31, 5, 76);
-  border-left:2.8rem solid rgb(31, 5, 76);
+  border-top:3rem solid var(--bezel-color);
+  border-right:2.5rem solid var(--bezel-color);
+  border-bottom:3rem solid var(--bezel-color);
+  border-left:2.5rem solid var(--bezel-color);
   border-radius: 1rem;
 }
 
@@ -20,7 +20,7 @@
   justify-content: center;
   height:5rem;
   margin-top:-3rem;
-  background-color: rgb(31, 5, 76);
+  background-color: var(--bezel-color);
   color:var(--default-color);
   font-size:1.8rem;
 }
@@ -66,8 +66,8 @@
   padding:1rem 2rem;
   } 
 
-  .chart-bar-container-box{
-    border-bottom:8rem solid rgb(31, 5, 76);
+ .chart-container.chart-bar-container-box{
+    border-bottom:8rem solid var(--bezel-color);
   }
 
 .chart-bar-container{
@@ -102,7 +102,7 @@
   align-items: flex-end;
   justify-content: center;
   height:5rem;
-  background-color: rgb(31, 5, 76);
+  background-color: var(--bezel-color);
 }
 
 .chart-btn{
@@ -147,6 +147,17 @@
     width:30%;
     height:7rem;
   }
+
+  .chart-container{
+    border-right:1.5rem solid var(--bezel-color);
+    border-bottom:2rem solid var(--bezel-color);
+    border-left:1.5rem solid var(--bezel-color);
+  }
+
+  .chart-container.chart-bar-container-box{
+    border-bottom:7rem solid var(--bezel-color);
+  }
+
 
   .chart-slide-num > div{
     width: 4rem;

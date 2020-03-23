@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../base/css/header.css" />
     <link rel="stylesheet" href="../base/css/footer.css" />
     <link rel="stylesheet" href="../base/css/statsBox.css">
+    <link rel="stylesheet" href="../base/css/filterBox.css">
     <link rel="stylesheet" href="css/statistics.css">
     <title>CanvasLotto</title>
 </head>
@@ -28,6 +29,25 @@
                 <div class="main">
                     <div class="main-title">
                         통계 자료
+                    </div>
+                    <div class="filter-box-container">
+                        <div class="filter-box">
+                            <span>통계 자료</span>
+                            <i class="fas fa-sort-down filter-arrow"></i>
+                            <ul class="filter-list none">
+                                <li> <a href="/statistics/winNumbers.html">당첨번호 통계</a> </li>
+                                <li> <a href="/statistics/statistics.html?method=excludedLineCount">전멸구간 개수</a> </li>
+                                <li> <a href="/statistics/statistics.html?method=carryCount">이월 개수</a> </li>
+                                <li> <a href="/statistics/statistics.html?method=lowCount">저값 개수</a> </li>
+                                <li> <a href="/statistics/statistics.html?method=sum">번호 합계</a> </li>
+                                <li> <a href="/statistics/statistics.html?method=oddCount">홀수 개수</a> </li>
+                                <li> <a href="/statistics/statistics.html?method=primeCount">소수 개수</a> </li>
+                                <li> <a href="/statistics/statistics.html?method=$3Count">3배수 개수</a> </li>
+                                <li> <a href="/statistics/statistics.html?method=sum$10">첫수(십의자리) 합</a> </li>
+                                <li> <a href="/statistics/statistics.html?method=diffMaxMin">고저차</a> </li>
+                                <li> <a href="/statistics/statistics.html?method=AC">AC</a> </li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="stats-container box-color">
                         <div class="stats-box">

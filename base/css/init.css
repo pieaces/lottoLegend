@@ -14,6 +14,7 @@
   --border-color: rgba(0, 0, 0, 0.1);
   --checkbox-color:#d7af0d;
   --faint-color:#999;
+  --bezel-color:rgb(197, 140, 202);
 }
 
 *{
