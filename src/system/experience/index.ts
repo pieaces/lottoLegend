@@ -100,7 +100,7 @@ export default class DataAPI {
             if (this.current === 2) {
                 let count = 0;
                 this.getWinNums()[0].forEach(num => {
-                    if (this.generator.option.excludedLines.indexOf(Math.floor(num / 10)) !== -1) {
+                    if (this.generator.option.excludedLines.some(item => item === Math.floor((num - 1) / 10))) {
                         count++;
                     }
                 })
