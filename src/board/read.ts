@@ -1,7 +1,7 @@
 import configure from '../amplify/configure'
 import { getUnAuthAPI, postAuthAPI, deleteAuthAPI, getAuthAPI, patchAuthAPI } from '../amplify/api';
 import { getUserName, getNickName, headerSign, isLogedIn } from '../amplify/auth';
-import { getQueryStringObject, getCategoryHtml, isoStringToDate, networkAlert, setColorLotto, rankToClass, onlyUserAlert } from '../functions';
+import { getQueryStringObject, getCategoryHtml, isoStringToDate, networkAlert, setColorLotto, rankToClass, onlyUserAlert, setDefaultColor, setDisabledLotto } from '../functions';
 import Swal from 'sweetalert2'
 
 configure();
@@ -68,6 +68,7 @@ async function init() {
         } else {
             post = await getUnAuthAPI('/posts/' + id);
         }
+        console.log(post);
         if (post.error) {
             return Swal.fire({
                 title: post.message,
@@ -91,7 +92,9 @@ async function init() {
 
     const category = document.querySelector<HTMLElement>('#wrapper').getAttribute('data-category');
     if (category === 'incl' || category === 'excl') {
-        makeNum([1, 3, 5, 7, 9, 10, 13, 15, 19, 24, 29, 35, 41, 42, 44, 45]);
+        document.getElementById('current-text').textContent = post.round;
+        document.getElementById('before-text').textContent = (post.round-1).toString();
+        makeNum(post.numbers, post.answer);
     }
 
     if (await isLogedIn() && await getUserName() === post.userName) {
@@ -310,19 +313,35 @@ function limitTxtAreaCount() {
 
 
 
-function makeNum(number: number[]) {
-    const numContainer = document.querySelector('.inc-exc-num-container');
-    for (let i = 0; i < number.length; i++) {
+function makeNum(param:{current: number[], before?:number[]}, answer?:number[]) {
+    const currentBox = document.querySelector('#current');
+    const beforeBox = document.querySelector('#before');
+
+    for (let i = 0; i < param.current.length; i++) {
         const numBox = document.createElement('div');
         numBox.classList.add('inc-exc-num-box');
 
         const num = document.createElement('div');
         num.classList.add('inc-exc-select-num');
-        num.textContent = number[i].toString();
-        setColorLotto(number[i], num);
+        num.textContent = param.current[i].toString();
+        setColorLotto(param.current[i], num);
 
         numBox.appendChild(num);
-        numContainer.appendChild(numBox);
+        currentBox.appendChild(numBox);
+    }
+
+    for (let i = 0; i < param.before.length; i++) {
+        const numBox = document.createElement('div');
+        numBox.classList.add('inc-exc-num-box');
+
+        const num = document.createElement('div');
+        num.classList.add('inc-exc-select-num');
+        num.textContent = param.before[i].toString();
+        if(answer.some(item => item === param.before[i])) setColorLotto(param.before[i], num);
+        else setDisabledLotto(num);
+
+        numBox.appendChild(num);
+        beforeBox.appendChild(numBox);
     }
 }
 
