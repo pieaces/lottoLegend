@@ -77,12 +77,19 @@ const barDataBox = {
     labels: null,
     datasets: [
         {
-            backgroundColor: '#00B2EA',
+            backgroundColor: 'rgb(14,99,132)',
             data: null
         }
     ]
 };
 const barOption: Chart.ChartOptions = {
+    scales: {
+        yAxes: [{
+            ticks: {
+                min:0
+            }
+        }]
+    },
     tooltips: {
         mode: 'index',
         intersect: false,
