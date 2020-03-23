@@ -4,8 +4,9 @@ import plugins from 'suneditor/src/plugins'
 import { ko } from 'suneditor/src/lang'
 import { postUnAuthAPI, postAuthAPI, getUnAuthAPI, patchAuthAPI, getAuthAPI } from '../amplify/api';
 import { headerSign, isLogedIn } from '../amplify/auth'
-import { networkAlert, getQueryStringObject, getCategoryHtml, onlyUserAlert, stringTrimer } from '../functions'
+import { networkAlert, onlyUserAlert, stringTrimer, getQueryStringObject } from '../functions'
 import Swal from 'sweetalert2'
+import { Category, getCategoryHtml, makeNum } from './functions';
 
 configure();
 let userName;
@@ -40,7 +41,7 @@ const editor = suneditor.create('sample', {
     lang: ko
 });
 const post = getQueryStringObject().id;
-const category = document.getElementById('wrapper').getAttribute('data-category');
+const category:Category = document.getElementById('wrapper').getAttribute('data-category') as Category;
 const loading = document.querySelector('.loading-box');
 
 const submitBtn = document.getElementById('submit-btn');
@@ -55,10 +56,10 @@ if (post) {
         editor.setContents(post.contents);
     });
 }
-if(category === 'incl' || category === 'excl'){
-    getAuthAPI('/numbers/piece', { choice: category === 'incl' ? 'incl' : 'excl' })
+if(category === 'include' || category === 'exclude'){
+    getAuthAPI('/numbers/piece', { choice: category})
     .then(numbers => {
-        console.log(numbers);
+        makeNum(document.querySelector<HTMLElement>('.inc-exc-num-container'), numbers);
     })
 }
 imageRemove.addEventListener('click', () => {

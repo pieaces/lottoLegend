@@ -56,7 +56,7 @@ Auth.currentAuthenticatedUser()
             winNumBox.appendChild(bonus);
 
             service.textContent = plan;
-            if (until) expiryDate.textContent = '~' + isoStringToDate(until).slice(0, 10);
+            if (until) expiryDate.textContent = '~' + isoStringToDate(until);
             rankHtml.classList.add(rankToClass(rank));
             const rankText = document.createElement('div');
             rankText.classList.add('rank-text');

@@ -34,40 +34,17 @@ export function getQueryStringObject(): any {
     return result;
 }
 
-export type Affix = "list" | "post" | "read";
-export function getCategoryHtml(category: string, affix: Affix) {
-    let directory: string;
-    switch (category) {
-        case 'free':
-            directory = 'free'
-            break;
-        case 'incl':
-            directory = 'include'
-            break;
-        case 'excl':
-            directory = 'exclude'
-            break;
-        case 'info':
-            directory = 'notice'
-            break;
-        case 'anal':
-            directory = 'analysis'
-            break;
-        case 'win':
-            directory = 'win'
-            break;
-        case 'qna':
-            directory = 'qna'
-            break;
-    }
-    return `board/${directory}/${affix}.html`;
-}
-
 export function isoStringToDate(isoString: string): string {
     const date = new Date(isoString);
     date.setHours(date.getHours() + 9);
     const iso = date.toISOString();
-    return iso.slice(0, 10) + ' ' + iso.slice(11, 16);
+    return iso.slice(0, 10);
+}
+export function isoStringToTime(isoString: string): string{
+    const date = new Date(isoString);
+    date.setHours(date.getHours() + 9);
+    const iso = date.toISOString();
+    return iso.slice(11, 16);
 }
 
 export function makeModal(title: string, width: number) {
@@ -129,5 +106,3 @@ export function rankToClass(rank: number): string {
 export function stringTrimer(str: string): string {
     return str.trim().replace(/[\s]+/g, " ");
 }
-
-

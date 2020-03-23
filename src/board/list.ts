@@ -1,13 +1,14 @@
 import configure from '../amplify/configure'
 import { getUnAuthAPI } from '../amplify/api'
-import { getQueryStringObject, isoStringToDate, getCategoryHtml, rankToClass } from '../functions';
+import { isoStringToDate, rankToClass, getQueryStringObject } from '../functions';
 import { headerSign } from '../amplify/auth';
+import { Category, getCategoryHtml } from './functions';
 const boardSection = document.querySelector('.board-section');
 const pageNumContainer = document.querySelector('.page-num-container');
 configure();
 headerSign();
 
-const category = document.getElementById('wrapper').getAttribute('data-category');
+const category:Category = document.getElementById('wrapper').getAttribute('data-category') as Category;
 const index = Number(getQueryStringObject().index) || 1;
 const { word, type } = getQueryStringObject();
 
@@ -79,7 +80,7 @@ function makeBoard(objArr: any[]) {
 
         const boardDate = document.createElement('div');
         boardDate.classList.add('board-date');
-        boardDate.textContent = isoStringToDate(objArr[i].created).slice(0, 10);
+        boardDate.textContent = isoStringToDate(objArr[i].created);
 
         boardBox.appendChild(boardDate);
 

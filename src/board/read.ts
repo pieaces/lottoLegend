@@ -1,8 +1,9 @@
 import configure from '../amplify/configure'
 import { getUnAuthAPI, postAuthAPI, deleteAuthAPI, getAuthAPI, patchAuthAPI } from '../amplify/api';
 import { getUserName, getNickName, headerSign, isLogedIn } from '../amplify/auth';
-import { getQueryStringObject, getCategoryHtml, isoStringToDate, networkAlert, setColorLotto, rankToClass, onlyUserAlert, setDefaultColor, setDisabledLotto } from '../functions';
+import { isoStringToDate, networkAlert, rankToClass, onlyUserAlert, isoStringToTime, getQueryStringObject } from '../functions';
 import Swal from 'sweetalert2'
+import { Category, getCategoryHtml, makeNumSet } from './functions';
 
 configure();
 headerSign();
@@ -90,11 +91,11 @@ async function init() {
     postRank.appendChild(rankText);
 
 
-    const category = document.querySelector<HTMLElement>('#wrapper').getAttribute('data-category');
-    if (category === 'incl' || category === 'excl') {
+    const category:Category = document.querySelector<HTMLElement>('#wrapper').getAttribute('data-category') as Category;
+    if (category === 'include' || category === 'exclude') {
         document.getElementById('current-text').textContent = post.round;
         document.getElementById('before-text').textContent = (post.round - 1).toString();
-        makeNum(post.numbers, post.answer);
+        makeNumSet(post.numbers, post.answer);
     }
 
     if (await isLogedIn() && await getUserName() === post.userName) {
@@ -130,7 +131,7 @@ async function init() {
             });
         })
     }
-    created.textContent = isoStringToDate(post.created);
+    created.textContent = isoStringToDate(post.created) + ' ' + isoStringToTime(post.created);
     hits.textContent = post.hits;
     recommendation.textContent = post.recommendation;
 
@@ -194,7 +195,7 @@ async function makeComments(objArr: any) {
 
         const commentTime = document.createElement('div');
         commentTime.classList.add('comment-time');
-        commentTime.textContent = isoStringToDate(objArr[i].created);
+        commentTime.textContent = isoStringToDate(objArr[i].created) + ' ' + isoStringToTime(objArr[i].created);
 
         commentTitle.appendChild(rankElement);
         commentTitle.appendChild(commentAuthor);
@@ -307,42 +308,6 @@ function limitTxtAreaCount() {
         } else {
             charCurrentCount.classList.remove('comment-limit-alert');
             charCurrentCount.textContent = currentLength.toString();
-        }
-    }
-}
-
-
-
-function makeNum(param: { current: number[], before?: number[] }, answer?: number[]) {
-    const currentBox = document.querySelector('#current');
-    const beforeBox = document.querySelector('#before');
-
-    for (let i = 0; i < param.current.length; i++) {
-        const numBox = document.createElement('div');
-        numBox.classList.add('inc-exc-num-box');
-
-        const num = document.createElement('div');
-        num.classList.add('inc-exc-select-num');
-        num.textContent = param.current[i].toString();
-        setColorLotto(param.current[i], num);
-
-        numBox.appendChild(num);
-        currentBox.appendChild(numBox);
-    }
-
-    if (param.before) {
-        for (let i = 0; i < param.before.length; i++) {
-            const numBox = document.createElement('div');
-            numBox.classList.add('inc-exc-num-box');
-
-            const num = document.createElement('div');
-            num.classList.add('inc-exc-select-num');
-            num.textContent = param.before[i].toString();
-            if (answer.some(item => item === param.before[i])) setColorLotto(param.before[i], num);
-            else setDisabledLotto(num);
-
-            numBox.appendChild(num);
-            beforeBox.appendChild(numBox);
         }
     }
 }
