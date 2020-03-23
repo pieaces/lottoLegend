@@ -159,14 +159,6 @@ font-size: 1.4rem;
   margin-bottom:1rem;
 }
 
-.mypage-none-box{
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  height:5rem;
-  font-size: 1.6rem;
-}
-
 .mypage-notice-box > i{
   position: relative;
   color: var(--main-color);

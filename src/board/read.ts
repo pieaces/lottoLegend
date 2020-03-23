@@ -91,7 +91,7 @@ async function init() {
     postRank.appendChild(rankText);
 
 
-    const category:Category = document.querySelector<HTMLElement>('#wrapper').getAttribute('data-category') as Category;
+    const category: Category = document.querySelector<HTMLElement>('#wrapper').getAttribute('data-category') as Category;
     if (category === 'include' || category === 'exclude') {
         document.getElementById('current-text').textContent = post.round;
         document.getElementById('before-text').textContent = (post.round - 1).toString();

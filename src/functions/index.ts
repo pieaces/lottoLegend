@@ -40,7 +40,7 @@ export function isoStringToDate(isoString: string): string {
     const iso = date.toISOString();
     return iso.slice(0, 10);
 }
-export function isoStringToTime(isoString: string): string{
+export function isoStringToTime(isoString: string): string {
     const date = new Date(isoString);
     date.setHours(date.getHours() + 9);
     const iso = date.toISOString();
@@ -109,7 +109,7 @@ export function stringTrimer(str: string): string {
 
 export function makeNoneBox() {
     const div = document.createElement('div');
-    div.classList.add('mypage-none-box');
+    div.classList.add('none-box');
     div.textContent = '없음';
     return div;
 }

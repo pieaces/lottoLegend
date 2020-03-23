@@ -1,0 +1,7 @@
+.none-box{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 5rem;
+    font-size: 1.6rem;
+  }
