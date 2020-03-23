@@ -3,12 +3,12 @@ import { IDataAPI } from "../Layout";
 const checkBoxContainer = document.querySelector<HTMLElement>('.func1-checkbox-box');
 
 export default class CheckBox {
-    private dataAPI:IDataAPI;
+    private dataAPI: IDataAPI;
     static readonly checkedStyle = 'func1-num-check-current';
     private eventHandler: (() => void)[] = [];
     private nodeList: HTMLElement[] = [];
     private labelList: boolean[] = [];
-    setDataAPI(dataAPI:IDataAPI){
+    setDataAPI(dataAPI: IDataAPI) {
         this.dataAPI = dataAPI;
     }
     getCheckedLabels(): boolean[] {
@@ -162,18 +162,3 @@ export default class CheckBox {
 
     }
 }
-
-// 최근버전
-// const divBox = document.createElement('div');
-// divBox.classList.add('func1-checkbox');
-// this.nodeList.push(divBox);
-
-// const div = document.createElement('div');
-
-// const checkbox = document.createElement('input');
-// const num = document.createTextNode(label.toString());
-// div.appendChild(num);
-// checkbox.classList.add('checkbox');
-// div.appendChild(checkbox);
-// divBox.appendChild(div);
-// checkBoxContainer.appendChild(divBox);

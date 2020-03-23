@@ -168,6 +168,9 @@ input[type="checkbox"]{
   color: #0400ff;
 }
 
+.nopointer{
+  cursor: default;
+}
 
 .rank{
   display: inline-block;

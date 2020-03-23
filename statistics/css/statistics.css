@@ -7,15 +7,18 @@
   position: relative;
   width: 100%;
   height: 100%;
-  border:3rem solid rgb(31, 5, 76);
-  border-radius: 0.5em;
+  border-top:3rem solid rgb(31, 5, 76);
+  border-right:2.8rem solid rgb(31, 5, 76);
+  border-bottom:3rem solid rgb(31, 5, 76);
+  border-left:2.8rem solid rgb(31, 5, 76);
+  border-radius: 1rem;
 }
 
 .chart-slide-title{
   display:flex;
   align-items: center;
   justify-content: center;
-  height:4rem;
+  height:5rem;
   margin-top:-3rem;
   background-color: rgb(31, 5, 76);
   color:var(--default-color);
@@ -63,6 +66,10 @@
   padding:1rem 2rem;
   } 
 
+  .chart-bar-container-box{
+    border-bottom:8rem solid rgb(31, 5, 76);
+  }
+
 .chart-bar-container{
   position: relative;
   width: 100%;
@@ -92,15 +99,15 @@
 
 .chart-slide-btn-box{
   display:flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   height:5rem;
+  background-color: rgb(31, 5, 76);
 }
 
 .chart-btn{
-  color: var(--main-color);
+  color: var(--default-color);
   font-size:4rem;
-  opacity: 0.3;
   cursor: pointer;
 }
 

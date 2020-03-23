@@ -6,6 +6,7 @@ import { getQueryStringObject, rangeMake } from '../functions';
 import makeClickable from '../system/premium/Slide/makeClickable';
 import { getStaticsName } from './functions';
 import { headerSign } from '../amplify/auth';
+import DropDown from '../system/premium/instanceBtns/DropDown';
 
 configure();
 headerSign();
@@ -86,7 +87,7 @@ const barOption: Chart.ChartOptions = {
     scales: {
         yAxes: [{
             ticks: {
-                min:0
+                min: 0
             }
         }]
     },
@@ -133,5 +134,3 @@ getUnAuthAPI('/stats/piece', { method })
         const barInstance = new ChartBase('bar', barCanvas, barDataBox, barOption);
         barInstance.create();
     });
-
-
