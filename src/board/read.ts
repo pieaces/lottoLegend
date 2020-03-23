@@ -93,7 +93,7 @@ async function init() {
     const category = document.querySelector<HTMLElement>('#wrapper').getAttribute('data-category');
     if (category === 'incl' || category === 'excl') {
         document.getElementById('current-text').textContent = post.round;
-        document.getElementById('before-text').textContent = (post.round-1).toString();
+        document.getElementById('before-text').textContent = (post.round - 1).toString();
         makeNum(post.numbers, post.answer);
     }
 
@@ -313,7 +313,7 @@ function limitTxtAreaCount() {
 
 
 
-function makeNum(param:{current: number[], before?:number[]}, answer?:number[]) {
+function makeNum(param: { current: number[], before?: number[] }, answer?: number[]) {
     const currentBox = document.querySelector('#current');
     const beforeBox = document.querySelector('#before');
 
@@ -330,19 +330,19 @@ function makeNum(param:{current: number[], before?:number[]}, answer?:number[]) 
         currentBox.appendChild(numBox);
     }
 
-    for (let i = 0; i < param.before.length; i++) {
-        const numBox = document.createElement('div');
-        numBox.classList.add('inc-exc-num-box');
+    if (param.before) {
+        for (let i = 0; i < param.before.length; i++) {
+            const numBox = document.createElement('div');
+            numBox.classList.add('inc-exc-num-box');
 
-        const num = document.createElement('div');
-        num.classList.add('inc-exc-select-num');
-        num.textContent = param.before[i].toString();
-        if(answer.some(item => item === param.before[i])) setColorLotto(param.before[i], num);
-        else setDisabledLotto(num);
+            const num = document.createElement('div');
+            num.classList.add('inc-exc-select-num');
+            num.textContent = param.before[i].toString();
+            if (answer.some(item => item === param.before[i])) setColorLotto(param.before[i], num);
+            else setDisabledLotto(num);
 
-        numBox.appendChild(num);
-        beforeBox.appendChild(numBox);
+            numBox.appendChild(num);
+            beforeBox.appendChild(numBox);
+        }
     }
 }
-
-
