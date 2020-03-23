@@ -83,7 +83,11 @@
   display:flex;
   overflow-x: scroll;
   white-space: nowrap;
+  cursor : grab;
 }
+
+
+
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 .click-menu-box::-webkit-scrollbar {
@@ -96,16 +100,18 @@
 }
 
 .click-menu-box > li{
-  display:flex;
-  align-items: center;
-  justify-content: center;
   flex:0 0 auto;
   width:10rem;
   height:5rem;
+  font-size:1.3rem;
 }
 
-.click-menu-box > li{
-    font-size:1.3rem;
+.click-menu-box > li > a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
 .click-menu-toggle{

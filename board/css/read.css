@@ -1,5 +1,17 @@
 
-/* main */
+ .inc-exc-num-wrapper-box > div.inc-exc-num-wrapper:first-child{
+  border-right: none;
+}
+
+.inc-exc-num-wrapper{
+  width:50%;
+}
+
+.inc-exc-select-num {
+  width: 2.8rem;
+  height: 2.8rem;
+  font-size:1.2rem;
+}
     
 .text-title {
   display: flex;
@@ -161,7 +173,7 @@ font-size:1.3rem;
   display:flex;
   align-items: center;
   justify-content: flex-end;
-  padding-top:1rem;
+  padding:1rem 0;
 }
 
 

@@ -1,7 +1,7 @@
-const headerMenuTitle = document.querySelectorAll('.mid-nav-menu >li:nth-child(1)~li > a');
+const headerMenuTitle = document.querySelectorAll('.mid-nav-menu >li:nth-child(1)~li > a'); //소개부터 고객문의 까지 다섯개 배열
 const headerMenuListBox = document.querySelector('.hover-menu-container');
 const mqMobile = window.matchMedia("(max-width: 767px)");
-const clickMenuBox = document.querySelectorAll('.click-menu-box');
+const clickMenuBox = document.querySelectorAll('.click-menu-box'); //사이드 메뉴 배열
 
 mqMobile.addListener(mqHeaderFunc);
 
@@ -10,7 +10,7 @@ if (mqMobile.matches) {
 
     let current = null;
     headerMenuTitle.forEach((node, index) => {
-        node.addEventListener('click', () => {
+        node.addEventListener('click', (e) => {
             switch (index) {
                 case 0:
                     break;
@@ -19,33 +19,49 @@ if (mqMobile.matches) {
                         clickMenuBox[current].classList.add('none');
                     }
                     document.querySelector('.click-menu-system').classList.remove('none');
-                    current = 1;
+                    current = 0;
                     break;
                 case 2:
                     if (current !== null) {
                         clickMenuBox[current].classList.add('none');
                     }
                     document.querySelector('.click-menu-statistics').classList.remove('none');
-                    current = 2;
+                    current = 1;
                     break;
                 case 3:
                     if (current !== null) {
                         clickMenuBox[current].classList.add('none');
                     }
                     document.querySelector('.click-menu-community').classList.remove('none');
-                    current = 3;
+                    current = 2;
                     break;
                 case 4:
                     if (current !== null) {
                         clickMenuBox[current].classList.add('none');
                     }
                     document.querySelector('.click-menu-qna').classList.remove('none');
-                    current = 4;
+                    current = 3;
                     break;
             }
+            e.stopPropagation();
         })
     })
 
+    let isMenuClick = false;
+    const menu = document.querySelector('.click-menu-container');
+    document.addEventListener('click', () => {
+        if (!isMenuClick) {
+            //target 다른 곳
+            if (current !== null) {
+                clickMenuBox[current].classList.add('none');
+            }
+        }
+        isMenuClick = false;
+    })
+    menu.addEventListener('click', () => {
+        //target
+        isMenuClick = true;
+    })
 
 } else {
     //데스크탑 레이아웃
@@ -62,40 +78,8 @@ function mqHeaderFunc(mediaQuery) {
         headerMenuListBox.removeEventListener('mouseover', headerMenuListShow);
         headerMenuListBox.removeEventListener('mouseout', headerMenuListHide);
 
-        // for (const node of headerMenuTitle) {
-        //     node.addEventListener('click', (e) => {
-        //         headerMenuListBox.classList.remove('none');
-        //         e.stopPropagation();
-        //     });
-        // }
 
-        // let myExclusiveEl = Array.from(
-        //     document.querySelectorAll('body *')
-        // );
-        // let myEls = Array.from(
-        //     document.querySelectorAll('.mid-nav-container *')
-        // );
-        // myEls.push(document.querySelector('.mid-nave-container'));
 
-        // myExclusiveEl = myExclusiveEl.filter(parent => {
-        //     let containedByExclusionNode = myEls.filter(child => {
-        //         if (parent === child) {
-        //             return true;
-        //         } else {
-        //             return false;
-        //         }
-        //     });
-        //     if (containedByExclusionNode.length === 0) {
-        //         return true;
-        //     } else {
-        //         return false;
-        //     }
-        // });
-        // for (const node of myExclusiveEl) {
-        //     node.addEventListener("click", () => {
-        //         headerMenuListBox.classList.add('none');
-        //     });
-        // }
     } else {
         //데스크탑 레이아웃
         headerMenuHover();
