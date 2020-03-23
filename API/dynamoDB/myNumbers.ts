@@ -27,7 +27,7 @@ export function getIncOrExcNumbers(userName: string, round: number, choice: IncO
             }
             const joint = data.Item.IncludeExclude && data.Item.IncludeExclude.M;
             const current = joint && joint[round].M[choice].NS;
-            const before = joint && joint[round-1].M[choice].NS;
+            const before = joint && joint[round - 1] && joint[round-1].M[choice].NS;
             resolve({
                 current: current && current.map(item => Number(item)).sort((a, b) => a - b),
                 before: before && before.map(item => Number(item)).sort((a, b) => a - b),
