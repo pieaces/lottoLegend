@@ -1,62 +1,7 @@
-.filter-box-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width:40%;
-    margin-bottom: 1rem;
-  }
-  
-  .filter-box {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 20rem;
-    height: 4.5rem;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4), -1px -1px 1px rgba(0, 0, 0, 0.4);
-    cursor: pointer;
-  }
-  
-  .filter-box > span {
-    font-size: 1.4rem;
-  }
-  
-  .filter-box > i {
-    position: absolute;
-    top: 35%;
-    right: 7%;
-    font-size:1.4rem;
-  }
-  
-  .filter-list {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 4;
+.filter-box-container{
+    justify-content: flex-start;
     width: 100%;
-    height: 100%;
-  }
-  
-  .filter-list > li {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2), -1px -1px 1px rgba(0, 0, 0, 0.2);
-    font-size:1.4rem;
-    transition: all 200ms;
-  }
-  
-  .filter-list > li:last-child {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-  }
-
-  .filter-list-hover{
-    background-color: #3da8e3;
-    color:var(--default-color);
-  }
-
-
+}
 
 .stats-home-title{
     display:flex;
