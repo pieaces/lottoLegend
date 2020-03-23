@@ -106,3 +106,10 @@ export function rankToClass(rank: number): string {
 export function stringTrimer(str: string): string {
     return str.trim().replace(/[\s]+/g, " ");
 }
+
+export function makeNoneBox() {
+    const div = document.createElement('div');
+    div.classList.add('mypage-none-box');
+    div.textContent = '없음';
+    return div;
+}

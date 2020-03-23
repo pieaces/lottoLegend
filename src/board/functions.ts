@@ -1,4 +1,4 @@
-import { setColorLotto, setDisabledLotto } from "../functions";
+import { setColorLotto, setDisabledLotto, makeNoneBox } from "../functions";
 
 export function makeNum(canvas:HTMLElement, numbers:number[]){
     for (let i = 0; i < numbers.length; i++) {
@@ -33,6 +33,8 @@ export function makeNumSet(param: { current: number[], before?: number[] }, answ
             numBox.appendChild(num);
             beforeBox.appendChild(numBox);
         }
+    }else{
+        beforeBox.appendChild(makeNoneBox());
     }
 }
 

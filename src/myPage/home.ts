@@ -1,12 +1,12 @@
 import configure from '../amplify/configure'
 import { getAuthAPI, patchAuthAPI } from '../amplify/api'
-import { setColorLotto, networkAlert, rankToClass, onlyUserAlert, stringTrimer, isoStringToDate } from '../functions/index'
+import { setColorLotto, networkAlert, rankToClass, onlyUserAlert, stringTrimer, isoStringToDate, makeNoneBox } from '../functions/index'
 import IncludeExclude from './IncludeExclude/index';
 import incObj from './IncludeExclude/include';
 import excObj from './IncludeExclude/exclude';
 import { headerSign } from '../amplify/auth';
 import Auth from '@aws-amplify/auth';
-import { makeTable, makeNoneBox, phoneString } from './functions';
+import { makeTable, phoneString } from './functions';
 import Swal from 'sweetalert2';
 configure();
 headerSign();
