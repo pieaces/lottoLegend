@@ -1,6 +1,6 @@
 import { setColorLotto, setDisabledLotto, makeNoneBox } from "../functions";
 
-export function makeNum(canvas:HTMLElement, numbers:number[]){
+export function makeNum(canvas: HTMLElement, numbers: number[]) {
     for (let i = 0; i < numbers.length; i++) {
         const numBox = document.createElement('div');
         numBox.classList.add('inc-exc-num-box');
@@ -33,7 +33,7 @@ export function makeNumSet(param: { current: number[], before?: number[] }, answ
             numBox.appendChild(num);
             beforeBox.appendChild(numBox);
         }
-    }else{
+    } else {
         beforeBox.appendChild(makeNoneBox());
     }
 }

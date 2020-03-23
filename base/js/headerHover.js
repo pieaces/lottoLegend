@@ -5,12 +5,14 @@ const clickMenuBox = document.querySelectorAll('.click-menu-box'); //사이드 �
 
 mqMobile.addListener(mqHeaderFunc);
 
+const eventHandler = [];
+
 if (mqMobile.matches) {
     //모바일 레이아웃
 
     let current = null;
     headerMenuTitle.forEach((node, index) => {
-        node.addEventListener('click', (e) => {
+        const event = function (e) {
             switch (index) {
                 case 0:
                     break;
@@ -44,7 +46,9 @@ if (mqMobile.matches) {
                     break;
             }
             e.stopPropagation();
-        })
+        }
+        eventHandler.push(event);
+        node.addEventListener('click', event);
     })
 
     let isMenuClick = false;
@@ -65,24 +69,20 @@ if (mqMobile.matches) {
 
 } else {
     //데스크탑 레이아웃
-    headerMenuHover();
+    headerMenuHoverAddEvent();
 }
 
 function mqHeaderFunc(mediaQuery) {
     if (mediaQuery.matches) {
         //모바일 레이아웃
-        for (const node of headerMenuTitle) {
-            node.removeEventListener('mouseover', headerMenuListShow);
-            node.removeEventListener('mouseout', headerMenuListHide);
-        }
-        headerMenuListBox.removeEventListener('mouseover', headerMenuListShow);
-        headerMenuListBox.removeEventListener('mouseout', headerMenuListHide);
-
-
+        headerMenuHoverRemoveEvent();
 
     } else {
         //데스크탑 레이아웃
-        headerMenuHover();
+        headerMenuTitle.forEach((node, index) => {
+            node.removeEventListener('click', eventHandler[index]);
+        })
+        headerMenuHoverAddEvent();
     }
 }
 
@@ -94,7 +94,7 @@ function headerMenuListHide() {
     headerMenuListBox.classList.add('none');
 }
 
-function headerMenuHover() {
+function headerMenuHoverAddEvent() {
     for (const node of headerMenuTitle) {
         node.addEventListener('mouseover', headerMenuListShow);
         node.addEventListener('mouseout', headerMenuListHide);
@@ -103,3 +103,11 @@ function headerMenuHover() {
     headerMenuListBox.addEventListener('mouseout', headerMenuListHide);
 }
 
+function headerMenuHoverRemoveEvent() {
+    for (const node of headerMenuTitle) {
+        node.removeEventListener('mouseover', headerMenuListShow);
+        node.removeEventListener('mouseout', headerMenuListHide);
+    }
+    headerMenuListBox.removeEventListener('mouseover', headerMenuListShow);
+    headerMenuListBox.removeEventListener('mouseout', headerMenuListHide);
+}
