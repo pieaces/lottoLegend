@@ -3,11 +3,11 @@ import Comments, { Comment } from '../Comments/index'
 import PostsContents from "../PostsContents";
 import { updateRecommendUsers } from "../../dynamoDB/recommend";
 
-type category = "incl" | "excl" | "qna";
+type Category = "include" | "exclude" | "qna" | "notice";
 export type SearchType = "writer" | "title" | "contents";
 interface Post {
     id: number;
-    category: category;
+    category: Category;
     title: string;
     userName: string;
     contents: string;

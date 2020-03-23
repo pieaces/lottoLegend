@@ -76,11 +76,9 @@ exports.handler = async (event: any) => {
                     if (!flag) {
                         await db.addHits(postId);
                         const post = await db.get(postId);
-                        if (post.category === "incl" || post.category === 'excl') {
-                            let incOrExc:IncOrExc = 'include';
-                            if(post.category === 'excl') incOrExc = 'exclude';
+                        if (post.category === "include" || post.category === 'exclude') {
                             post.round = getCurrentRound(post.created)+1;
-                            post.numbers = await getIncOrExcNumbers(post.userName, post.round, incOrExc);
+                            post.numbers = await getIncOrExcNumbers(post.userName, post.round, post.category);
                             post.answer = await getLotto(post.round-1);
                         }else if(post.category === "qna"){
                             if(currentId !== post.userName){
