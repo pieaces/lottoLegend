@@ -106,14 +106,13 @@
     width:95%;
     height:100%;
     padding-bottom:0.5rem;
-    font-size:1.8rem;
-}
-
-.make-btn{
     border-radius: 5px;
     background-color: rgb(237, 59, 59,1);
     color:var(--default-color);
-  }
+    font-size:1.8rem;
+}
+
+
   
   .make-btn:hover{
     box-shadow: inset -3px -5px 0 rgba(0,0,0,0.2),inset 3px 1px 0 rgba(0,0,0,0.2);
@@ -125,3 +124,22 @@
     box-shadow:none;
     transition: ease-in-out all 0.15s;
   }
+
+  
+@media (min-width: 0px) and (max-width: 767px) {
+ .line-gen-num-container{
+     display:block;
+     height: auto;
+ }
+
+ .line-gen-num-table{
+     width: 100%;
+     margin-bottom:1rem;
+ }
+
+ .line-gen-make-btn-box{
+     width: 100%;
+     height: 5rem;
+ }
+  }
+  

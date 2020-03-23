@@ -55,3 +55,16 @@
     border-top:1px solid var(--border-color);
     background-color: var(--table-title-color);
   }
+
+  @media (min-width: 0px) and (max-width: 767px) {
+
+    .func3-all-check-box{
+      padding-left:2rem;
+      padding-right:1rem;
+    }
+
+    .save-btn{
+      margin-right: 1rem;
+    }
+
+  }

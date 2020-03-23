@@ -156,7 +156,7 @@
   display:flex;
   align-items: center;
   justify-content: space-between;
-  height:4rem;
+  min-height:4rem;
   margin-bottom:1rem;
 }
 
@@ -166,8 +166,10 @@
   justify-content: flex-start;
   width:40%;
   height:100%;
-  padding:0 1rem;
+  padding:0.5rem 1rem;
   font-size: 1.4rem;
+  word-break: keep-all;
+  text-align: center;
 }
 
 .auto-choose-container{
@@ -210,9 +212,13 @@
     width: 100%;
   }
 
-
   .extract-num{
+    display:block;
     width: 70%;
+  }
+
+  .chart-slide-current{
+    border-width: 5px;
   }
 
   .showcase-container{

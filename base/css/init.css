@@ -169,7 +169,7 @@ input[type="checkbox"]{
 }
 
 .nopointer{
-  cursor: default;
+  cursor: default !important; /*유의*/
 }
 
 .rank{

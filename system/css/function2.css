@@ -249,6 +249,20 @@
     height:22rem;
   }
 
+  .func2-win-num-box > div{
+    width: 3.3rem;
+    height: 3.3rem;
+  }
+
+  .func2-lotto-num-box{
+    width: 95%;
+  }
+
+  .func2-lotto-num{
+    width: 3.3rem;
+    height: 3.3rem;
+  }
+
   .func2-chart-gauss-container{
     padding:1rem;
   }
@@ -274,7 +288,7 @@
 @media (min-width: 0px) and (max-width: 480px) {
   
   .func2-chart-radar{
-    margin-left:-33rem;
+    margin-left:-33.5rem;
   }
 
 }

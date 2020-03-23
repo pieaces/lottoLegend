@@ -148,6 +148,16 @@
     height:7rem;
   }
 
+  .chart-slide-num > div{
+    width: 4rem;
+    height: 4rem;
+  }
+
+  .chart-slide-current{
+    border-width: 5px;
+  }
+
+
 }
 
 

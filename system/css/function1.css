@@ -236,6 +236,11 @@
     height:25rem;
   }
 
+  .func1-chart-slide-num > div{
+    width: 4rem;
+    height: 4rem;
+  }
+
   .func1-checkbox-container{
     width: 100%;
     border-right:none;
