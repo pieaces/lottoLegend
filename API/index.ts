@@ -84,9 +84,15 @@ exports.handler = async (event: any) => {
             switch (method) {
                 case 'GET': {
                     const choice = event.queryStringParameters && event.queryStringParameters.choice;
+                    const flag = event.queryStringParameters && event.queryStringParameters.flag;
+
                     if (choice) {
                         body = await getIncOrExcNumbers(currentId, getCurrentRound()+1, choice);
-                    } else {
+                    } else if (flag) {
+                        const round = getCurrentRound() + 1;
+                        body = await getIncAndExcNumbers(currentId, round);
+                        body.total = round;
+                    }  else {
                         const rounds = await getIncOrExcRounds(currentId);
                         const round = Number(rounds[0]);
                         body = await getIncAndExcNumbers(currentId, round);
