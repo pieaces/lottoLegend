@@ -72,8 +72,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                     node.className = "";
                 }
             })
-        })
-
+        });
     }
     private setOption() {
         const currentFilter = this.dataAPI.getCurrent();
@@ -190,6 +189,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                 else if (currentFilter === 5) {
                     numFreq.classList.remove('none');
                     numFreqTerm.classList.remove('none');
+                    this.nextAbleLimit = 1;
                     this.layout2.excludeVersion(40);
                 }
                 this.layout2.setOpacity();
@@ -242,7 +242,6 @@ export default class Layout extends LayoutToggle(Layout3) {
     }
 
     private async next(current: number) {
-
         loading.classList.remove('none');
         await this.dataAPI.forward(this.options[current]);
         if (this.dataAPI.getCurrent() < this.dataAPI.SIZE && this.dataAPI.numbersData) {
