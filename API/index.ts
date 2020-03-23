@@ -1,6 +1,6 @@
 import verify from "./auth";
 import { getCurrentRound, scanLotto, getLotto, getLotto2 } from "./funtions";
-import { updateNumbers, getNumbers, deleteMyNumber, updateIncOrExcNumbers, getIncOrExcRounds, getIncAndExcNumbers, deleteIncOrExcNumbers, scanWeekNumbers } from './dynamoDB/Numbers'
+import { updateNumbers, getNumbers, deleteMyNumber, updateIncOrExcNumbers, getIncOrExcRounds, getIncAndExcNumbers, deleteIncOrExcNumbers, scanWeekNumbers, getIncOrExcNumbers } from './dynamoDB/Numbers'
 import { queryLottoData } from "./dynamoDB/lottoData";
 import { freeGenerator, numbersToData } from "./dynamoDB/generator";
 import { getPointAndRank, getPlanKeyAndUntil, getMyHome, expirePlan } from "./dynamoDB/userInfo";
@@ -83,14 +83,17 @@ exports.handler = async (event: any) => {
         case '/numbers/piece': {
             switch (method) {
                 case 'GET': {
-                    const userName = event.queryStringParameters && event.queryStringParameters.userName || currentId;
-
-                    const rounds = await getIncOrExcRounds(userName);
-                    const round = Number(rounds[0]);
-                    body = await getIncAndExcNumbers(userName, round);
-                    body.rounds = rounds;
-                    if (round <= getCurrentRound()) {
-                        body.answer = await getLotto(round);
+                    const choice = event.queryStringParameters && event.queryStringParameters.choice;
+                    if (choice) {
+                        body = await getIncOrExcNumbers(currentId, getCurrentRound()+1, choice);
+                    } else {
+                        const rounds = await getIncOrExcRounds(currentId);
+                        const round = Number(rounds[0]);
+                        body = await getIncAndExcNumbers(currentId, round);
+                        body.rounds = rounds;
+                        if (round <= getCurrentRound()) {
+                            body.answer = await getLotto(round);
+                        }
                     }
                 }
                     break;
