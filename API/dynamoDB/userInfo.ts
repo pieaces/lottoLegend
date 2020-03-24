@@ -205,7 +205,7 @@ export function getMyHome(userName: string): Promise<MyPage> {
             else {
                 const result: MyPage = {};
 
-                const numbersData = data.Item.Numbers.M[round-1] && data.Item.Numbers.M[round-1].L;
+                const numbersData = data.Item.Numbers.M[round] && data.Item.Numbers.M[round].L;
                 result.numsArr = numbersData && numbersData.map(item => {
                     return {
                         numbers: NSToNumbers(item.M.numbers.NS).sort((a, b) => a - b),
@@ -222,15 +222,15 @@ export function getMyHome(userName: string): Promise<MyPage> {
                     if (data.Item.IncludeExclude.M[round]) {
                         const current = data.Item.IncludeExclude.M[round].M;
                         if (current) {
-                            include.current = current.include && current.include.NS.map(item => Number(item));
-                            exclude.current = current.exclude && current.exclude.NS.map(item => Number(item));
+                            include.current = current.include && current.include.NS.map(item => Number(item)).sort((a,b)=>a-b);
+                            exclude.current = current.exclude && current.exclude.NS.map(item => Number(item)).sort((a,b)=>a-b);
                         }
                     }
                     if (data.Item.IncludeExclude.M[round - 1]) {
                         const before = data.Item.IncludeExclude.M[round - 1].M;
                         if (before) {
-                            include.before = before.include && before.include.NS.map(item => Number(item));
-                            exclude.before = before.exclude && before.exclude.NS.map(item => Number(item));
+                            include.before = before.include && before.include.NS.map(item => Number(item)).sort((a,b)=>a-b);
+                            exclude.before = before.exclude && before.exclude.NS.map(item => Number(item)).sort((a,b)=>a-b);
                         }
                     }
                     result.include = include;
