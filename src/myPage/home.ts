@@ -102,8 +102,9 @@ Auth.currentAuthenticatedUser()
             }
 
             if (numsArr && numsArr.length > 0) {
+                console.log(numsArr, numsArr.length);
                 makeTable(document.querySelector<HTMLElement>('.mypage-table-num-box'), numsArr, total, false);
-                numListLength.textContent = document.querySelectorAll('.mypage-table-content').length.toString();
+                numListLength.textContent = numsArr.length.toString();
             } else {
                 document.querySelector<HTMLElement>('.mypage-table-num-box').appendChild(makeNoneBox());
             }
