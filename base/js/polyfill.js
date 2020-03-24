@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "a289f8860359c63280f5";
+/******/ 	var hotCurrentHash = "1c341cd67a28b1a17785";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -4547,25 +4547,25 @@ eval("var g;\n\n// This works in non-strict mode\ng = (function() {\n\treturn th
 
 /***/ }),
 
-/***/ "./src/base/babelPolyfill.js":
-/*!***********************************!*\
-  !*** ./src/base/babelPolyfill.js ***!
-  \***********************************/
+/***/ "./src/base/polyfill.js":
+/*!******************************!*\
+  !*** ./src/base/polyfill.js ***!
+  \******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("/* WEBPACK VAR INJECTION */(function(global) {if (!global._babelPolyfill) {\n  __webpack_require__(/*! babel-polyfill */ \"./node_modules/babel-polyfill/lib/index.js\");\n}\n/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../node_modules/webpack/buildin/global.js */ \"./node_modules/webpack/buildin/global.js\")))\n\n//# sourceURL=webpack:///./src/base/babelPolyfill.js?");
+eval("/* WEBPACK VAR INJECTION */(function(global) {if (!global._babelPolyfill) {\n  __webpack_require__(/*! babel-polyfill */ \"./node_modules/babel-polyfill/lib/index.js\");\n}\n/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../node_modules/webpack/buildin/global.js */ \"./node_modules/webpack/buildin/global.js\")))\n\n//# sourceURL=webpack:///./src/base/polyfill.js?");
 
 /***/ }),
 
 /***/ 0:
-/*!*****************************************!*\
-  !*** multi ./src/base/babelPolyfill.js ***!
-  \*****************************************/
+/*!************************************!*\
+  !*** multi ./src/base/polyfill.js ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("module.exports = __webpack_require__(/*! ./src/base/babelPolyfill.js */\"./src/base/babelPolyfill.js\");\n\n\n//# sourceURL=webpack:///multi_./src/base/babelPolyfill.js?");
+eval("module.exports = __webpack_require__(/*! ./src/base/polyfill.js */\"./src/base/polyfill.js\");\n\n\n//# sourceURL=webpack:///multi_./src/base/polyfill.js?");
 
 /***/ })
 

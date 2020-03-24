@@ -4,7 +4,7 @@ export default class BubbleChart {
     constructor(element) {
         this.element = element;
     }
-    setDataAPI(dataAPI){
+    setDataAPI(dataAPI) {
         this.dataAPI = dataAPI;
     }
     drawChart() {

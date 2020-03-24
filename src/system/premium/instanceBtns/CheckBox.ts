@@ -138,8 +138,8 @@ export default class CheckBox {
         });
 
         this.labelList = new Array<boolean>(labels.length).fill(false);
-        Array.from(checkBoxContainer.children).forEach(node => {
-            node.remove();
+        Array.from(checkBoxContainer.children).forEach((node, index, array) => {
+            node.parentNode.removeChild(array[index]);
         })
 
         labels.forEach(label => {
@@ -150,6 +150,7 @@ export default class CheckBox {
             const div = document.createElement('div');
 
             const checkbox = document.createElement('input');
+            checkbox.setAttribute('type', 'checkbox');
             const num = document.createTextNode(label.toString());
             div.appendChild(num);
             checkbox.classList.add('checkbox');
