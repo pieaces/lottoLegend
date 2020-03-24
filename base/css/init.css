@@ -2,7 +2,7 @@
 /* init css */
 
 :root {
-  --default-color: white;
+  /* --default-color: white;
   --main-color: #09538e;
   --table-title-color:#f6f6f6;
   --side-color: #1f71b3;
@@ -14,7 +14,7 @@
   --border-color: rgba(0, 0, 0, 0.1);
   --checkbox-color:#d7af0d;
   --faint-color:#999;
-  --bezel-color:rgb(197, 140, 202);
+  --bezel-color:rgb(197, 140, 202); */
 }
 
 *{
@@ -59,7 +59,7 @@ input {
 }
 
 input:focus {
-  border: 1px solid var(--main-color);
+  border: 1px solid #09538e;
 }
 
 input[type="checkbox"]{
@@ -90,8 +90,8 @@ input[type="checkbox"]{
 }
 
 .box-color{
-  border: 1px solid var(--border-color);
-  background-color: var(--default-color);
+  border: 1px solid rgba(0,0,0,0.1);
+  background-color: white;
 }
 
 .table{
@@ -101,7 +101,7 @@ input[type="checkbox"]{
 
 .table th,
 .table td{
-  border:1px solid var(--border-color);
+  border:1px solid rgba(0,0,0,0.1);
   
 }
 

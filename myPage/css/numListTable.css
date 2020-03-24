@@ -10,7 +10,7 @@
     margin:0 1rem 1rem 1rem;
     border-radius: 50%;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-    color:var(--default-color);
+    color:white;
     font-size:1.5rem;
     line-height: 2.3;
     text-align: center;
@@ -24,10 +24,10 @@
   .mypage-table-header{
     display:flex;
     height:5rem;
-    border-top:1px solid var(--border-color);
-    border-right:1px solid var(--border-color);
-    border-left:1px solid var(--border-color);
-    background-color: var(--table-title-color);
+    border-top:1px solid rgba(0, 0, 0, 0.1);
+    border-right:1px solid rgba(0, 0, 0, 0.1);
+    border-left:1px solid rgba(0, 0, 0, 0.1);
+    background-color: #f6f6f6;
     font-size:1.3rem;
     text-align: center;
     word-break: keep-all;
@@ -35,9 +35,9 @@
 
   .mypage-table-content{
     display:flex;
-    border-top:1px solid var(--border-color);
-    border-right:1px solid var(--border-color);
-    border-left:1px solid var(--border-color);
+    border-top:1px solid rgba(0, 0, 0, 0.1);
+    border-right:1px solid rgba(0, 0, 0, 0.1);
+    border-left:1px solid rgba(0, 0, 0, 0.1);
     font-size: 1.2rem;
   }
 
@@ -60,11 +60,11 @@
 .mypage-table-date,
 .mypage-table-division{
   flex:1;
-  border-right:1px solid var(--border-color);
+  border-right:1px solid rgba(0, 0, 0, 0.1);
 }
  
 .mypage-table-num{
-border-right:1px solid var(--border-color);
+border-right:1px solid rgba(0, 0, 0, 0.1);
 }
 
 .mypage-table-iswin
@@ -87,7 +87,7 @@ border-right:1px solid var(--border-color);
 .mypage-table-num-toggle{
   width:6rem;
   height:2.5rem;
-  background-color: var(--default-color);
+  background-color: white;
 }
 
 @media (min-width: 0px) and (max-width: 767px) {

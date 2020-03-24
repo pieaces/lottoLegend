@@ -22,8 +22,8 @@
     align-items: center;
     justify-content: center;
     height: 12rem;
-    background-color: var(--side-color);
-    color: var(--default-color);
+    background-color:#1f71b3;
+    color: white;
     font-size: 2rem;
   }
 
@@ -32,8 +32,8 @@
   }
 
   .anchor-list-container{
-    border-left:1px solid var(--border-color);
-    border-right:1px solid var(--border-color);
+    border-left:1px solid rgba(0,0,0,0.1);
+    border-right:1px solid rgba(0,0,0,0.1);
   }
 
   .anchor-list-box > li{
@@ -41,7 +41,7 @@
     align-items: center;
     justify-content: center;
     height:3.5rem;
-    border-bottom:1px solid var(--border-color);
+    border-bottom:1px solid rgba(0,0,0,0.1);
     text-align: center;
   }
 
@@ -54,7 +54,7 @@
     align-items: center;
     justify-content: center;
     height:4rem;
-    border-bottom:1px solid var(--border-color);
+    border-bottom:1px solid rgba(0,0,0,0.1);
     background-color: #ececec;
     font-size: 1.6rem;
   }

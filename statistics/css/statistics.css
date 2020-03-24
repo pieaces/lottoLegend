@@ -10,10 +10,10 @@
   position: relative;
   width: 100%;
   height: 100%;
-  border-top:3rem solid var(--bezel-color);
-  border-right:2.5rem solid var(--bezel-color);
-  border-bottom:3rem solid var(--bezel-color);
-  border-left:2.5rem solid var(--bezel-color);
+  border-top:3rem solid #f6f6f6;
+  border-right:2.5rem solid #f6f6f6;
+  border-bottom:3rem solid #f6f6f6;
+  border-left:2.5rem solid #f6f6f6;
   border-radius: 1rem;
 }
 
@@ -23,8 +23,8 @@
   justify-content: center;
   height:5rem;
   margin-top:-3rem;
-  background-color: var(--bezel-color);
-  color:var(--default-color);
+  background-color: #f6f6f6;
+  color:white;
   font-size:1.8rem;
 }
 
@@ -49,7 +49,7 @@
 }
 
 .chart-slide-current {
-  border: 6px solid var(--lotto-title-color);
+  border: 6px solid #a5484c;
 }
 
 
@@ -58,9 +58,9 @@
   align-items: center;
   justify-content: center;
   height:3rem;
-  border-top:1px solid var(--border-color);
-  border-bottom:1px solid var(--border-color);
-  background-color: var(--table-title-color);
+  border-top:1px solid rgba(0,0,0,0.1);
+  border-bottom:1px solid rgba(0,0,0,0.1);
+  background-color: #f6f6f6;
   font-size:1.4rem;
 }
 
@@ -70,7 +70,7 @@
   } 
 
  .chart-container.chart-bar-container-box{
-    border-bottom:8rem solid var(--bezel-color);
+    border-bottom:8rem solid #f6f6f6;
   }
 
 .chart-bar-container{
@@ -105,11 +105,11 @@
   align-items: flex-end;
   justify-content: center;
   height:5rem;
-  background-color: var(--bezel-color);
+  background-color: #f6f6f6;
 }
 
 .chart-btn{
-  color: var(--default-color);
+  color: white;
   font-size:4rem;
   cursor: pointer;
 }
@@ -152,13 +152,13 @@
   }
 
   .chart-container{
-    border-right:1.5rem solid var(--bezel-color);
-    border-bottom:2rem solid var(--bezel-color);
-    border-left:1.5rem solid var(--bezel-color);
+    border-right:1.5rem solid #f6f6f6;
+    border-bottom:2rem solid #f6f6f6;
+    border-left:1.5rem solid #f6f6f6;
   }
 
   .chart-container.chart-bar-container-box{
-    border-bottom:7rem solid var(--bezel-color);
+    border-bottom:7rem solid #f6f6f6;
   }
 
 

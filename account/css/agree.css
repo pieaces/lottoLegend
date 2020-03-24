@@ -38,7 +38,7 @@
   .signup-terms-use-textarea{
     height:25rem;
     padding:1rem;
-    border:1px solid var(--border-color);
+    border:1px solid rgba(0,0,0,0.1);
     font-size:1.3rem;
     overflow-y: scroll;
   }
@@ -52,7 +52,7 @@
   .terms-use-btn{
     width:10rem;
     height:4.5rem;
-    background-color: var(--main-color);
-    color:var(--default-color);
+    background-color: #09538e;
+    color:white;
     font-size: 1.5rem;
   }

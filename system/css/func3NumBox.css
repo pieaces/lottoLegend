@@ -5,8 +5,8 @@
   justify-content: space-between;
   height:6rem;
   margin-bottom: 1rem;
-  border-bottom:1px solid var(--border-color);
-  background-color: var(--table-title-color);
+  border-bottom:1px solid rgba(0, 0, 0, 0.1);
+  background-color: #f6f6f6;
 }
 
 .func3-all-check-box-left{
@@ -41,8 +41,8 @@
   height:3.5rem;
   margin-right:2rem;
   border-radius: 3px;
-  background-color: var(--button-color2);
-  color:var(--default-color);
+  background-color: #59758c;
+  color:white;
   font-size:1.4rem;
 }
 
@@ -52,8 +52,8 @@
     align-items: center;
     justify-content: flex-end;
     height:6rem;
-    border-top:1px solid var(--border-color);
-    background-color: var(--table-title-color);
+    border-top:1px solid rgba(0, 0, 0, 0.1);
+    background-color: #f6f6f6;
   }
 
   @media (min-width: 0px) and (max-width: 767px) {

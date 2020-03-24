@@ -5,7 +5,7 @@
 
 .top-footer-container {
   height: 4rem;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .top-footer{
@@ -32,7 +32,7 @@
 
 .mid-footer-container {
   height: 10rem;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
   background-color: #ececec;
 }
 
@@ -77,8 +77,8 @@
 .bottom-footer-content > p:nth-child(1) {
   margin-bottom: 1rem;
   padding: 1rem 0;
-  border-top: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .bottom-footer-content > p:not(:nth-child(1)) {

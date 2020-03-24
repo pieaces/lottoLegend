@@ -25,7 +25,7 @@
 }
 
 .func3-filter-container > .func3-filter-title{
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .func3-filter-title{
@@ -34,14 +34,14 @@
   justify-content: center;
   width:30%;
   font-size:1.5rem;
-  border-right:1px solid var(--border-color);
-  background-color: var(--table-title-color);
+  border-right:1px solid rgba(0, 0, 0, 0.1);
+  background-color: #f6f6f6;
 }
 
 
 .func3-filter-value-container{
   width:80%;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 #excludedLineCount-text{
   display: flex;
@@ -74,13 +74,13 @@
   margin:0 auto;
   border-radius: 50%;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-  color: var(--default-color);
+  color: white;
   font-size:1.3rem;
   text-align: center;
 }
 
 .func3-filter-table  tr:nth-child(1) >td{
-  background-color: var(--table-title-color);
+  background-color: #f6f6f6;
   word-break: keep-all;
 }
 

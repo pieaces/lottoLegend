@@ -13,7 +13,7 @@
 }
 
 .mypage-table-num-box > div.mypage-table-content:last-child{
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
 .mypage-num-delete-btn-box{
@@ -26,8 +26,8 @@
 .mypage-num-delete-btn{
     width:10rem;
     height:4rem;
-    background-color: var(--button-color2);
-    color:var(--default-color);
+    background-color: #59758c;
+    color:white;
     font-size:1.4rem;
 }
 .mypage-toggle-btn-box{
@@ -38,10 +38,10 @@
 .mypage-toggle-btn{
     width:10rem;
     height:3.5rem;
-    border: 1px solid var(--border-color);
+    border: 1px solid rgba(0,0,0,0.1);
     border-radius: 3px;
-    background-color: var(--button-color3);
-    color:var(--default-color);
+    background-color: #66c2ff;
+    color:white;
     font-size:1.4rem;
 }
 

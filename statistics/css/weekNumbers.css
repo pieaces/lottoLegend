@@ -7,7 +7,7 @@
 
 .num-week-section{
     display:flex;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
 .num-week-header {
@@ -15,8 +15,8 @@
     align-items: center;
     justify-content: center;
     height:5rem;
-    border-bottom: 1px solid var(--border-color);
-    background-color: var(--table-title-color);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    background-color: #f6f6f6;
     font-size: 1.6rem;
   }
   
@@ -69,8 +69,8 @@
       width: 3.5rem;
       height: 3.5rem;
     border-radius: 50%;
-    background-color: var(--main-color);
-    color: var(--default-color);
+    background-color: #09538e;
+    color: white;
   }
   .num-week-footer{
       display:flex;
@@ -102,7 +102,7 @@
 
 .lotto-num-table-title {
     height:5rem;
-    background-color: var(--table-title-color);
+    background-color: #f6f6f6;
     font-size: 1.5rem;
 }
 
@@ -130,8 +130,8 @@
     height:3.5rem;
     border-radius: 50%;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-    background-color: var(--main-color);
-    color:var(--default-color);
+    background-color: #09538e;
+    color:white;
 }
 
 .ad-box{
@@ -149,7 +149,7 @@
     }
 
     .num-week-section > div.num-week-box:nth-child(1){
-        border-bottom: 1px solid var(--border-color);
+        border-bottom: 1px solid rgba(0,0,0,0.1);
     }
 
     .num-week-box{
