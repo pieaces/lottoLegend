@@ -90,7 +90,7 @@ export function makeCheckdValueBox() {
 
     numListSelectCurrent.textContent = "0";
     numListSelectTotal.textContent = checkboxes.length.toString();
-    checkboxes.forEach((node) => {
+    Array.from(checkboxes).forEach((node) => {
         node.addEventListener('click', () => {
             let checkedCurrentValue = Number(numListSelectCurrent.textContent);
             if (node.checked) {

@@ -113,3 +113,5 @@ export function makeNoneBox() {
     div.textContent = '없음';
     return div;
 }
+
+

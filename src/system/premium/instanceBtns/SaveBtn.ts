@@ -14,7 +14,7 @@ export default class SaveBtn {
     static init(tool: Tool) {
         const numListSelectCurrent = document.querySelector('#num-list-select-current');
         const numListSelectTotal = document.getElementById('num-list-select-total');
-        saveBtns.forEach((node) => {
+        Array.from(saveBtns).forEach((node) => {
             node.addEventListener('click', async () => {
                 if (Number(numListSelectCurrent.textContent) === 0) {
                     return Swal.fire({
@@ -27,7 +27,7 @@ export default class SaveBtn {
                 const numsArr: number[][] = [];
                 const numbersContainer = document.querySelectorAll<HTMLElement>('.func3-num-container');
                 const indexArr: number[] = [];
-                checkBoxList.forEach((node, index) => {
+                Array.from(checkBoxList).forEach((node, index) => {
                     if (node.checked) {
                         numsArr.push(JSON.parse(numbersContainer[index].getAttribute('data-numbers')));
                         indexArr.push(index);

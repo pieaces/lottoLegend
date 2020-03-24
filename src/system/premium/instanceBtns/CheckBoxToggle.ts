@@ -1,10 +1,10 @@
 const allCheckBox = document.querySelector<HTMLInputElement>('#all-check');
 
 export default class CheckBoxToggle {
-    private inputBoxes: NodeListOf<HTMLInputElement>;
+    private inputBoxes: HTMLInputElement[];
 
     setInputBoxes(inputBoxes: NodeListOf<HTMLInputElement>) {
-        this.inputBoxes = inputBoxes;
+        this.inputBoxes = Array.from(inputBoxes);
     }
     addEvent() {
         allCheckBox.addEventListener('click', () => {

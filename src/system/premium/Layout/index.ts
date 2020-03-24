@@ -63,7 +63,7 @@ export default class Layout extends LayoutToggle(Layout3) {
     }
     private resetSlideNum() {
         const slideNum = document.querySelectorAll<HTMLElement>('.func1-chart-slide-num');
-        slideNum.forEach((node) => {
+        Array.from(slideNum).forEach((node) => {
             Array.from(node.children).forEach((node, index) => {
 
                 if (index === 0) {

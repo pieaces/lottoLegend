@@ -25,15 +25,18 @@ const layout3Class = 'func3-layout'
 
 export default function LayoutToggle<TBase extends Constructor>(Base: TBase) {
     return class extends Base {
-        protected dataAPI:IDataAPI;
+        protected dataAPI: IDataAPI;
+        private layout1Arr: HTMLElement[] = Array.from(layout1);
+        private layout2Arr: HTMLElement[] = Array.from(layout2);
+        private layout3Arr: HTMLElement[] = Array.from(layout3);
         layout1On() {
-            layout2.forEach(node => {
+            this.layout2Arr.forEach(node => {
                 node.classList.add('none');
             });
-            layout3.forEach(node => {
+            this.layout3Arr.forEach(node => {
                 node.classList.add('none');
             });
-            layout1.forEach(node => {
+            this.layout1Arr.forEach(node => {
                 if (node.classList.contains(layout1Class)) {
                     node.classList.remove('none');
                 } else {
@@ -42,13 +45,13 @@ export default function LayoutToggle<TBase extends Constructor>(Base: TBase) {
             });
         }
         layout2On() {
-            layout1.forEach(node => {
+            this.layout1Arr.forEach(node => {
                 node.classList.add('none');
             });
-            layout3.forEach(node => {
+            this.layout3Arr.forEach(node => {
                 node.classList.add('none');
             });
-            layout2.forEach(node => {
+            this.layout2Arr.forEach(node => {
                 if (node.classList.contains(layout2Class)) {
                     node.classList.remove('none');
                 } else {
@@ -77,7 +80,7 @@ export default function LayoutToggle<TBase extends Constructor>(Base: TBase) {
             Layout3.makeLine(carrycountCanvas, data[3].sort((a, b) => a - b));
             Layout3.makeLine(includeCanvas, data[4].sort((a, b) => a - b));
             Layout3.makeLine(excludeCanvas, data[5].sort((a, b) => a - b));
-            filterTableValues.forEach((node, index) => {
+            Array.from(filterTableValues).forEach((node, index) => {
                 if (index === 0) {
                     node.innerHTML = data.slice(6)[index];
                 } else if (index === 1) {
@@ -90,13 +93,13 @@ export default function LayoutToggle<TBase extends Constructor>(Base: TBase) {
                     if (typeof data.slice(6)[index] === 'boolean') node.innerHTML = data.slice(6)[index] ? '포함' : '제외';
                 }
             })
-            layout1.forEach(node => {
+            this.layout1Arr.forEach(node => {
                 node.classList.add('none');
             });
-            layout2.forEach(node => {
+            this.layout2Arr.forEach(node => {
                 node.classList.add('none');
             });
-            layout3.forEach(node => {
+            this.layout3Arr.forEach(node => {
                 if (node.classList.contains(layout3Class)) {
                     node.classList.remove('none');
                 } else {

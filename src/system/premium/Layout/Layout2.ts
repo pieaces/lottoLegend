@@ -76,6 +76,7 @@ export default class Layout2 {
     static readonly numBoard = '.func2-lotto-num-container';
     static readonly lottoCheckCurrent = 'func2-lotto-check-current';
     public checkedNumbers = new Array<number>();
+    private lottoNumbersArr: HTMLElement[] = Array.from(lottoNumbers);
     private choice = null;
     private boardCurrent = 0;
     private numbersEventList = [];
@@ -133,7 +134,7 @@ export default class Layout2 {
         this.initCoefVerInclude();
         applyBtn.textContent = '포함'
         Layout2.lottoNumDefaultColor = '#00048c';
-        lottoNumbers.forEach((node: HTMLElement) => {
+        this.lottoNumbersArr.forEach((node: HTMLElement) => {
             node.style.backgroundColor = '#00048c';
         })
         gauss.dataBox.datasets[0].borderColor = '#3E3D55';
@@ -146,7 +147,7 @@ export default class Layout2 {
         this.initCoefVerExclude();
         applyBtn.textContent = '제외'
         Layout2.lottoNumDefaultColor = '#8c0000';
-        lottoNumbers.forEach((node: HTMLElement) => {
+        this.lottoNumbersArr.forEach((node: HTMLElement) => {
             node.style.backgroundColor = '#8c0000';
         })
         gauss.dataBox.datasets[0].borderColor = '#8c0000';
@@ -209,7 +210,7 @@ export default class Layout2 {
     }
     private setColorWinNum() {
         const winNums = document.querySelectorAll<HTMLElement>('.func2-win-num-box > div');
-        winNums.forEach(node => {
+        Array.from(winNums).forEach(node => {
             const nodeValue = parseInt(node.textContent);
             setColorLotto(nodeValue, node);
         });
@@ -228,7 +229,7 @@ export default class Layout2 {
     }
     setOpacity() {
         let opacities = this.getOpacities();
-        lottoNumbers.forEach((node, index) => {
+        this.lottoNumbersArr.forEach((node, index) => {
             if (this.doesExcluded(index)) {
                 node.classList.add('nopointer');
             } else {
@@ -241,7 +242,7 @@ export default class Layout2 {
         return opacities[index];
     }
     numFreqOrTermToggle() {
-        numTermFreqBox.forEach((node: HTMLElement, index: number) => {
+        Array.from(numTermFreqBox).forEach((node: HTMLElement, index: number) => {
             node.addEventListener('click', () => {
                 numTermFreqBox[this.boardCurrent].classList.remove(Layout2.lottoCheckCurrent);
                 numTermFreqBox[index].classList.add(Layout2.lottoCheckCurrent);
@@ -410,7 +411,7 @@ export default class Layout2 {
         for (let i = 0; i < this.numbersEventList.length; i++) {
             lottoNumbers[i].removeEventListener('click', this.numbersEventList[i]);
         }
-        lottoNumbers.forEach((node, index) => {
+        this.lottoNumbersArr.forEach((node, index) => {
             if (this.doesExcluded(index)) {
                 node.style.backgroundColor = Layout2.lottoNumExcludedColor;
                 node.style.color = Layout2.lottoNumDefaultFontColor;
