@@ -8,16 +8,16 @@ const directory = file.slice(0, file.lastIndexOf('/'));
 const name = file.slice(file.lastIndexOf('/') + 1, file.indexOf('.'));
 module.exports = {
     mode: 'development',
-    entry: `./src/${file}`,
+    entry: ["@babel/polyfill", `./base/js/headerHover.js`],
     output: {
-        filename: `${name}.js`,
-        path: path.resolve(__dirname, `${directory}/js`)
+        filename: `headerHover.js`,
+        path: path.resolve(__dirname, `base/js`)
     },
     module: {
         rules: [
             {
-                test: /\.ts$/,
-                use: ['ts-loader'],
+                test: /\.(js|ts)$/,
+                use: 'babel-loader',
                 exclude: /node_modules/
             }
         ]
