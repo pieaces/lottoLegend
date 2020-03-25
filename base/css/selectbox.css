@@ -55,13 +55,17 @@
 
 @media (min-width: 0px) and (max-width: 767px) {
 
+    .selectr-selected{
+        height: 3.5rem;
+    }
+
     .selectbox-wrapper{
         display:block;
     }
 
-    .selectbox-container{
-        justify-content: center;
-        margin-bottom:1rem;
+    .selectbox-box{
+        width:7rem;
+        font-size:1.3rem;
     }
   }
   

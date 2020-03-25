@@ -68,6 +68,10 @@
   font-size:1.8rem;
 }
 
+.mid-nav-menu-small > a{
+  font-size:1.5rem;
+}
+
 .click-menu-container{
   position: absolute;
   top:100%;

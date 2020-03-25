@@ -21,6 +21,10 @@
     height:2.5rem;
   }
 
+  .mypage-table{
+    margin-bottom: 1rem;
+  }
+
   .mypage-table-header{
     display:flex;
     height:5rem;

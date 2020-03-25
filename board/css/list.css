@@ -217,7 +217,7 @@
 .board-box > div:not(.board-title)::after{
   content: "|";
   margin: 0 1rem;
-  color:##999;
+  color:#999;
 }
 
 .board-box > div.board-views::before{

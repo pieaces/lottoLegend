@@ -6,11 +6,9 @@
 .mypage-selectbox-container{
     display:flex;
     align-items: center;
+    justify-content: space-between;
 }
 
-.mypage-table-num-box{
-    margin-bottom:1rem;
-}
 
 .mypage-table-num-box > div.mypage-table-content:last-child{
     border-bottom: 1px solid rgba(0,0,0,0.1);
@@ -20,16 +18,22 @@
     display:flex;
     align-items: center;
     justify-content: flex-end;
-    height:10rem;
+    margin-bottom:5rem;
 }
 
 .mypage-num-delete-btn{
     width:10rem;
-    height:4rem;
-    background-color: #59758c;
+    height:3.5rem;
+    border-radius: 3px;
+    background-color: #6995b9;
     color:white;
     font-size:1.4rem;
 }
+
+.mypage-num-delete-btn:hover{
+    background-color: #689cc7;
+}
+
 .mypage-toggle-btn-box{
     display:flex;
     align-items: center;
@@ -58,12 +62,16 @@
   @media (min-width: 0px) and (max-width: 767px) {
 
     .mypage-selectbox-container{
-        display: block;
+        margin-bottom:1rem;
     }
 
     .num-list-select{
         width:6rem;
-        margin: 0 auto 1rem auto;
+        height: 3.5rem;
+    }
+
+    .mypage-toggle-btn-box{
+        justify-content: flex-end;
     }
   
   }

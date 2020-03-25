@@ -1,6 +1,4 @@
-.filter-box{
-  width:12rem;
-}
+
 
 .main-box{
   width:100%; 
@@ -10,10 +8,10 @@
   position: relative;
   width: 100%;
   height: 100%;
-  border-top:3rem solid #f6f6f6;
-  border-right:2.5rem solid #f6f6f6;
-  border-bottom:3rem solid #f6f6f6;
-  border-left:2.5rem solid #f6f6f6;
+  border-top:3rem solid #f0f0f0;
+  border-right:2.5rem solid #f0f0f0;
+  border-bottom:3rem solid #f0f0f0;
+  border-left:2.5rem solid #f0f0f0;
   border-radius: 1rem;
 }
 
@@ -23,8 +21,7 @@
   justify-content: center;
   height:5rem;
   margin-top:-3rem;
-  background-color: #f6f6f6;
-  color:white;
+  background-color: #f0f0f0;
   font-size:1.8rem;
 }
 
@@ -70,7 +67,7 @@
   } 
 
  .chart-container.chart-bar-container-box{
-    border-bottom:8rem solid #f6f6f6;
+    border-bottom:8rem solid #f0f0f0;
   }
 
 .chart-bar-container{
@@ -105,11 +102,10 @@
   align-items: flex-end;
   justify-content: center;
   height:5rem;
-  background-color: #f6f6f6;
+  background-color: #f0f0f0;
 }
 
 .chart-btn{
-  color: white;
   font-size:4rem;
   cursor: pointer;
 }

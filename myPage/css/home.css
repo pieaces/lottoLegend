@@ -3,6 +3,14 @@
   padding:1rem 0;
 }
 
+.mypage-table-num{
+ border-right: none; 
+}
+
+.mypage-table-iswin{
+  display:none;
+}
+
 .mypage-title{
   display:flex;
   align-items: center;
