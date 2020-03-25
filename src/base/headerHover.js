@@ -1,10 +1,16 @@
-const menuTitle = document.querySelectorAll('.mid-nav-menu >li:nth-child(1)~li > a'); //소개부터 고객문의 까지 다섯개 배열
+const menuTitle = document.querySelectorAll('.mid-nav-menu >li > a'); //소개부터 커뮤니티 까지 네개 배열
 const menuListBox = document.querySelector('.hover-menu-container');
 const mqMobile = window.matchMedia("(max-width: 767px)");
 const clickMenuBox = document.querySelectorAll('.click-menu-box'); //사이드 메뉴 배열
 const menu = document.querySelector('.click-menu-container');
+const menuInfoText = document.querySelector('.mid-nav-menu-info-text');
+const menuInfo = document.querySelector('.mid-nav-menu-info');
 
-(function () {
+
+mqInit();
+// menuInfoToggle();
+
+function mqInit() {
 
     let menuTitleEventHandler = [];
     let menuExceptEvent;
@@ -16,13 +22,13 @@ const menu = document.querySelector('.click-menu-container');
         mqMobileInit();
     } else {
         //데스크탑 레이아웃
-        menuHoverAddEvent();
+        mqDeskTopInit();
     }
 
     mqMobile.addListener(mqFunc);
 
     function mqMobileInit() {
-
+        menu.classList.remove('none');
         let isMenuClick = false;
         menuTitle.forEach((node, index) => {
             const event = function (e) {
@@ -80,6 +86,7 @@ const menu = document.querySelector('.click-menu-container');
             mqMobileInit();
         } else {
             //데스크탑 레이아웃
+
             if (current !== null) {
                 clickMenuBox[current].classList.add('none');
             }
@@ -90,11 +97,13 @@ const menu = document.querySelector('.click-menu-container');
             document.removeEventListener('click', menuExceptEvent);
             menu.removeEventListener('click', menuEvent);
 
-            menuHoverAddEvent();
+            mqDeskTopInit();
         }
     }
 
-})();
+};
+
+
 
 function menuListShow() {
     menuListBox.classList.remove('none');
@@ -120,4 +129,34 @@ function menuHoverRemoveEvent() {
     }
     menuListBox.removeEventListener('mouseover', menuListShow);
     menuListBox.removeEventListener('mouseout', menuListHide);
+}
+
+function mqDeskTopInit() {
+    menu.classList.add('none');
+    menuHoverAddEvent();
+}
+
+
+function menuInfoToggle() {
+    let flag = false;
+    menuInfoText.addEventListener('click', (e) => {
+        if (flag) {
+            menuInfo.classList.remove('none');
+        } else {
+            menuInfo.classList.add('none');
+        }
+        flag = !flag;
+        e.stopPropagation();
+    });
+    document.addEventListener('click', () => {
+        if (!flag) {
+            //target 다른 곳
+            menuInfo.classList.add("none");
+        }
+        flag = false;
+    })
+
+    menuInfo.addEventListener("click", () => {
+        flag = true;
+    });
 }
