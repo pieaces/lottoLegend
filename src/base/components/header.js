@@ -131,24 +131,19 @@ document.write(`        <header>
         </div>
     </div>
     <div class="container mid-nav">
+    <div class="mid-nav-mobile-box">
         <h1 class="mid-nav-logo">
             <a href="/main.html">
                 로또끝
             </a>
         </h1>
-        <ul class="mid-nav-menu">
-            <li><a href="#">소개</a></li>
-            <li> <a href="#">시스템</a> </li>
-            <li> <a href="#">분석실</a> </li>
-            <li> <a href="#">커뮤니티</a> </li>
-        </ul>
-        <ul class="mid-nav-menu-info-box">
-            <li class="mid-nav-menu-info-text">
-                <span>영자님
+          <ul class="mid-nav-info-box">
+            <li class="mid-nav-info-text">
+                <a href="#" class="nickname">영자님
                     <i class="fas fa-sort-down"></i>
-                </span>
-                <div class="mid-nav-menu-info none">
-                    <ul class="mid-nav-menu-info-list">
+                </a>
+                <div class="mid-nav-info none">
+                    <ul class="mid-nav-info-list">
                         <li><a href="/myPage/home.html">마이 페이지 홈</a> </li>
                         <li><a href="/myPage/numbersList.html">나의 번호리스트</a> </li>
                         <li><a href="/myPage/IncludeExclude.html">나의 추천/제외 번호</a> </li>
@@ -159,6 +154,14 @@ document.write(`        <header>
             </li>
             <li><a href="/board/qna/list.html">고객문의</a></li>
         </ul>
+        </div>
+        <ul class="mid-nav-menu">
+            <li><a href="#">소개</a></li>
+            <li> <a href="#">시스템</a> </li>
+            <li> <a href="#">분석실</a> </li>
+            <li> <a href="#">커뮤니티</a> </li>
+        </ul>
+      
 
     </div>
 </div>

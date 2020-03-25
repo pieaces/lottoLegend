@@ -20,6 +20,7 @@ const numInfoToggleBtn = document.querySelector('.mypage-toggle-btn');
 const pastFilterBox = document.getElementsByClassName('func3-past-filter-box') as HTMLCollectionOf<HTMLElement>;
 const tableNumBox = document.querySelector<HTMLElement>('.mypage-table-num-box');
 
+
 loading.classList.remove('none');
 getAuthAPI('/numbers/mass')
     .then(({ data, rounds, answer }) => {
@@ -74,6 +75,8 @@ getAuthAPI('/numbers/mass')
                         const inputs = document.querySelectorAll<HTMLInputElement>('.mypage-table-num-box input');
                         const numbersContainer = document.querySelectorAll<HTMLElement>('.mypage-table-content');
                         const filterBoxes = document.querySelectorAll<HTMLElement>('.func3-past-filter-box');
+                        const numListSelectCurrent = document.querySelector('#num-list-select-current');
+                        const numListSelectTotal = document.getElementById('num-list-select-total');
 
                         const numsArr: number[][] = [];
                         const indexes: number[] = [];
@@ -91,6 +94,8 @@ getAuthAPI('/numbers/mass')
                                 numbersContainer[index].remove();
                                 filterBoxes[index].remove();
                             });
+                            numListSelectCurrent.textContent = '0';
+                            numListSelectTotal.textContent = (Number(numListSelectTotal.textContent) - indexes.length).toString();
                             Swal.fire({
                                 title: '완료',
                                 text: '정상적으로 입력되었습니다',

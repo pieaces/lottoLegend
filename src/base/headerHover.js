@@ -3,8 +3,8 @@ const menuListBox = document.querySelector('.hover-menu-container');
 const mqMobile = window.matchMedia("(max-width: 767px)");
 const clickMenuBox = document.querySelectorAll('.click-menu-box'); //사이드 메뉴 배열
 const menu = document.querySelector('.click-menu-container');
-const menuInfoText = document.querySelector('.mid-nav-menu-info-text');
-const menuInfo = document.querySelector('.mid-nav-menu-info');
+const menuInfoText = document.querySelector('.mid-nav-info-text');
+const menuInfo = document.querySelector('.mid-nav-info');
 
 
 mqInit();
@@ -152,11 +152,12 @@ function menuInfoToggle() {
         if (flag) {
             //target 다른 곳
             menuInfo.classList.add("none");
+            flag = false;
         }
-        flag = false;
     })
 
-    menuInfo.addEventListener("click", () => {
-        flag = true;
+    menuInfo.addEventListener("click", (e) => {
+
+        e.stopPropagation();
     });
 }
