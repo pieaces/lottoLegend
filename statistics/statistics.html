@@ -19,158 +19,64 @@
 
 <body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div id="wrapper">
-        <!-- <script src="../base/components/header.js"></script> -->
-        <header>
-            <!-- <nav class="top-nav-container">
-                <div class="container top-nav">
-                    <div class="top-nav-right">
-                        <ul>
-                            <li id="header-signIn" class="none"><a href="/account/signIn.html">로그인</a></li>
-                            <li id="header-signUp" class="none"><a href="/account/agree.html">회원가입</a></li>
-                            <li id="header-signOut" class="none"><a>로그아웃</a></li>
-                            <li id="header-myPage" class="none"><a href="/myPage/home.html">마이페이지</a></li>
+        <script src="../base/components/header.js"></script>
+
+        <div class="section1">
+            <div class="grid-section-1 container">
+                <div class="aside">
+                    <div class="anchor-box">
+
+                        <!-- <script src="../base/components/aside/analysis.js"></script> -->
+                        <div class="anchor-title">분석실</div>
+                        <ul class="anchor-list-container">
+                            <li>
+                                <ul class="anchor-list-box">
+                                    <li> <a href="/statistics/weekNumbers.html">금주의 제외번호</a> </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h3> 공유 게시판</h3>
+                                <ul class="anchor-list-box">
+                                    <li> <a href="/board/analysis/list.html">분석 Tip 공유</a> </li>
+                                    <li><a href="/board/include/list.html">추천수 공유</a></li>
+                                    <li><a href="/board/exclude/list.html">제외수 공유</a></li>
+                                </ul>
+                            </li>
+                            <li class="arrow-box">
+                                <h3> 통계자료</h3>
+                                <ul class="anchor-list-box">
+                                    <li> <a href="/statistics/winNumbers.html">당첨번호 통계</a> </li>
+                                    <li> <a href="/statistics/statistics.html?method=excludedLineCount">전멸구간 개수</a>
+                                    </li>
+                                    <li> <a href="/statistics/statistics.html?method=carryCount">이월 개수</a> </li>
+                                    <li> <a href="/statistics/statistics.html?method=lowCount">저값(1~22) 개수</a> </li>
+                                    <li> <a href="/statistics/statistics.html?method=sum">번호 합계</a> </li>
+                                    <li> <a href="/statistics/statistics.html?method=oddCount">홀수 개수</a> </li>
+                                    <li> <a href="/statistics/statistics.html?method=primeCount">소수 개수</a> </li>
+                                    <li> <a href="/statistics/statistics.html?method=$3Count">3배수 개수</a> </li>
+                                    <li> <a href="/statistics/statistics.html?method=sum$10">첫수(십의자리) 합</a> </li>
+                                    <li> <a href="/statistics/statistics.html?method=diffMaxMin">고저차</a> </li>
+                                    <li> <a href="/statistics/statistics.html?method=AC">AC</a> </li>
+                                </ul>
+                            </li>
+
+
                         </ul>
                     </div>
                 </div>
-            </nav> -->
-            <nav class="mid-nav-container">
-                <div class="click-menu-container">
-                    <ul class="click-menu-box click-menu-system none">
-                        <li> <a href="/system/premium.html">체험하기</a> </li>
-                        <li> <a href="/system/include.html">추천수</a>
-                        <li> <a href="/system/exclude.html">제외수</a> </li>
-                        <li> <a href="/system/basic.html">기본 필터</a> </li>
-                        <li> <a href="/system/premium.html">프리미엄 필터</a> </li>
-                    </ul>
-                    <ul class="click-menu-box click-menu-statistics none">
-                        <li> <a href="/statistics/weekNumbers.html">금주의 제외번호</a> </li>
-                        <li> <a href="/board/analysis/list.html">분석 Tip 공유</a> </li>
-                        <li><a href="/board/include/list.html">추천수 공유</a></li>
-                        <li><a href="/board/exclude/list.html">제외수 공유</a></li>
-                        <li><a href="/statistics/winNumbers.html">통계 자료</a></li>
-                    </ul>
-                    <ul class="click-menu-box click-menu-community none">
-                        <li><a href="/board/notice/list.html">공지사항</a></li>
-                        <li><a href="/board/win/list.html">당첨인증 게시판</a></li>
-                        <li><a href="/board/free/list.html">자유게시판</a> </li>
-                    </ul>
-                    <ul class="click-menu-box click-menu-qna none">
-                        <li><a href="/board/qna/oftenAskList.html">자주 묻는 질문</a></li>
-                        <li> <a href="/board/qna/list.html">Q & A</a> </li>
-                    </ul>
-
-                    <div class="click-menu-toggle none">더보기</div>
-                </div>
-
-                <div class="hover-menu-container">
-                    <div class="container hover-menu-box-container">
-                        <div class="hover-menu-box">
-                            <ul></ul>
-                            <ul>
-                                <li> <a href="/system/experience.html">체험하기</a> </li>
-                                <li> <a href="/system/include.html">추천/제외수 생성기</a> </li>
-                                <li> <a href="/system/basic.html">번호 조합기</a> </li>
-                            </ul>
-                            <ul>
-                                <li> <a href="/statistics/weekNumbers.html">금주의 제외번호</a> </li>
-                                <li> <a href="/board/analysis/list.html">공유 게시판</a> </li>
-                                <li> <a href="/statistics/winNumbers.html">통계자료</a> </li>
-                            </ul>
-                            <ul>
-                                <li> <a href="/board/notice/list.html">공지사항</a> </li>
-                                <li> <a href="/board/win/list.html">당첨인증 게시판</a> </li>
-                                <li> <a href="/board/free/list.html">자유게시판</a> </li>
-                            </ul>
-                        </div>
+                <div class="main">
+                    <div class="main-title">
+                        통계 자료
                     </div>
-                </div>
-                <div class="container mid-nav">
-                    <h1 class="mid-nav-logo">
-                        <a href="/main.html">
-                            로또끝
-                        </a>
-                    </h1>
-                    <ul class="mid-nav-menu">
-                        <li><a href="#">소개</a></li>
-                        <li> <a href="#">시스템</a> </li>
-                        <li> <a href="#">분석실</a> </li>
-                        <li> <a href="#">커뮤니티</a> </li>
-                    </ul>
-                    <ul class="mid-nav-menu-info-box">
-                        <li class="mid-nav-menu-info-text">
-                            <a href="#">영자님
-                                <i class="fas fa-sort-down"></i>
-                            </a>
-                            <div class="mid-nav-menu-info none">
-                                <ul class="mid-nav-menu-info-list">
-                                    <li><a href="/myPage/home.html">마이 페이지 홈</a> </li>
-                                    <li><a href="/myPage/numbersList.html">나의 번호리스트</a> </li>
-                                    <li><a href="/myPage/IncludeExclude.html">나의 추천/제외 번호</a> </li>
-                                    <li><a href="#">결제내역</a> </li>
-                                    <li> <a href="#">로그아웃</a> </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li><a href="#">고객문의</a></li>
-                    </ul>
-
-                </div>
-    </div>
-    </nav>
-    <nav class="bottom-nav-container">
-        <div class="container bottom-nav">
-            <div class="bottom-nav-left">
-                <ul>
-                    <li>공지</li>
-                    <li>
-                        [831회 11억 실제 1등 당첨자 탄생] 역대 90번째 실제1등! 2주연속 1등
-                        조합배출!
-                    </li>
-                </ul>
-            </div>
-            <div class="bottom-nav-right">
-                <p>캔버스로또만의 시스템을 이용해보시기 바랍니다</p>
-            </div>
-        </div>
-    </nav>
-    <div class="loading-box none">
-        <div class="loading">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>
-    </header>
-    <div class="section1">
-        <div class="grid-section-1 container">
-            <div class="aside">
-                <div class="anchor-box">
-
-                    <!-- <script src="../base/components/aside/analysis.js"></script> -->
-                    <div class="anchor-title">분석실</div>
-                    <ul class="anchor-list-container">
-                        <li>
-                            <ul class="anchor-list-box">
-                                <li> <a href="/statistics/weekNumbers.html">금주의 제외번호</a> </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <h3> 공유 게시판</h3>
-                            <ul class="anchor-list-box">
-                                <li> <a href="/board/analysis/list.html">분석 Tip 공유</a> </li>
-                                <li><a href="/board/include/list.html">추천수 공유</a></li>
-                                <li><a href="/board/exclude/list.html">제외수 공유</a></li>
-                            </ul>
-                        </li>
-                        <li class="arrow-box">
-                            <h3> 통계자료</h3>
-                            <ul class="anchor-list-box">
+                    <div class="filter-box-container">
+                        <div class="filter-box">
+                            <span>통계 자료</span>
+                            <i class="fas fa-sort-down filter-arrow"></i>
+                            <ul class="filter-list none">
                                 <li> <a href="/statistics/winNumbers.html">당첨번호 통계</a> </li>
-                                <li> <a href="/statistics/statistics.html?method=excludedLineCount">전멸구간 개수</a>
-                                </li>
+                                <li> <a href="/statistics/statistics.html?method=excludedLineCount">전멸구간 개수</a> </li>
                                 <li> <a href="/statistics/statistics.html?method=carryCount">이월 개수</a> </li>
-                                <li> <a href="/statistics/statistics.html?method=lowCount">저값(1~22) 개수</a> </li>
+                                <li> <a href="/statistics/statistics.html?method=lowCount">저값 개수</a> </li>
                                 <li> <a href="/statistics/statistics.html?method=sum">번호 합계</a> </li>
                                 <li> <a href="/statistics/statistics.html?method=oddCount">홀수 개수</a> </li>
                                 <li> <a href="/statistics/statistics.html?method=primeCount">소수 개수</a> </li>
@@ -179,162 +85,135 @@
                                 <li> <a href="/statistics/statistics.html?method=diffMaxMin">고저차</a> </li>
                                 <li> <a href="/statistics/statistics.html?method=AC">AC</a> </li>
                             </ul>
-                        </li>
-
-
-                    </ul>
-                </div>
-            </div>
-            <div class="main">
-                <div class="main-title">
-                    통계 자료
-                </div>
-                <div class="filter-box-container">
-                    <div class="filter-box">
-                        <span>통계 자료</span>
-                        <i class="fas fa-sort-down filter-arrow"></i>
-                        <ul class="filter-list none">
-                            <li> <a href="/statistics/winNumbers.html">당첨번호 통계</a> </li>
-                            <li> <a href="/statistics/statistics.html?method=excludedLineCount">전멸구간 개수</a> </li>
-                            <li> <a href="/statistics/statistics.html?method=carryCount">이월 개수</a> </li>
-                            <li> <a href="/statistics/statistics.html?method=lowCount">저값 개수</a> </li>
-                            <li> <a href="/statistics/statistics.html?method=sum">번호 합계</a> </li>
-                            <li> <a href="/statistics/statistics.html?method=oddCount">홀수 개수</a> </li>
-                            <li> <a href="/statistics/statistics.html?method=primeCount">소수 개수</a> </li>
-                            <li> <a href="/statistics/statistics.html?method=$3Count">3배수 개수</a> </li>
-                            <li> <a href="/statistics/statistics.html?method=sum$10">첫수(십의자리) 합</a> </li>
-                            <li> <a href="/statistics/statistics.html?method=diffMaxMin">고저차</a> </li>
-                            <li> <a href="/statistics/statistics.html?method=AC">AC</a> </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="stats-container box-color">
-                    <div class="stats-box">
-                        <div>
-                            평균
-                        </div>
-                        <div class="stats-mean-value">
-
                         </div>
                     </div>
-                    <div class="stats-box">
-                        <div>
-                            전체 68% 범위
-                        </div>
-                        <div class="stats-68-value">
+                    <div class="stats-container box-color">
+                        <div class="stats-box">
+                            <div>
+                                평균
+                            </div>
+                            <div class="stats-mean-value">
 
+                            </div>
                         </div>
-                    </div>
-                    <div class="stats-box">
-                        <div>
-                            전체 95% 범위
+                        <div class="stats-box">
+                            <div>
+                                전체 68% 범위
+                            </div>
+                            <div class="stats-68-value">
+
+                            </div>
                         </div>
-                        <div class="stats-95-value">
+                        <div class="stats-box">
+                            <div>
+                                전체 95% 범위
+                            </div>
+                            <div class="stats-95-value">
 
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="main-box">
-                    <div class="chart-container box-color">
-                        <div class="chart-slide-title">
-                            전체 요약
-                        </div>
-                        <div class="chart-slide-num chart-line-num">
-                            <div class="chart-slide-current ">1</div>
-                            <div>2</div>
-                            <div>3</div>
-                            <div>4</div>
-                            <div>5</div>
-                        </div>
-                        <div class="chart-title">1~12회차 종합</div>
-                        <div class="chart-line-container">
-                            <canvas id="chart-line"></canvas>
-                        </div>
-                        <div class="chart-slide-btn-box">
-
-                            <i id="left-line-chart-btn" class="chart-btn left-chart-btn fa fa-angle-left"></i>
-                            <i id="right-line-chart-btn" class="chart-btn right-chart-btn fa fa-angle-right"></i>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="main-box">
-                    <div class="chart-container chart-bar-container-box box-color">
-                        <div class="chart-slide-title">
-                            최근 50회차
-                        </div>
-                        <div class=" chart-bar-container">
-
-                            <div class="chart-bar-box">
-
-                                <canvas id="chart-bar" class="chart-bar"></canvas>
                             </div>
                         </div>
 
                     </div>
 
+                    <div class="main-box">
+                        <div class="chart-container box-color">
+                            <div class="chart-slide-title">
+                                전체 요약
+                            </div>
+                            <div class="chart-slide-num chart-line-num">
+                                <div class="chart-slide-current ">1</div>
+                                <div>2</div>
+                                <div>3</div>
+                                <div>4</div>
+                                <div>5</div>
+                            </div>
+                            <div class="chart-title">1~12회차 종합</div>
+                            <div class="chart-line-container">
+                                <canvas id="chart-line"></canvas>
+                            </div>
+                            <div class="chart-slide-btn-box">
+
+                                <i id="left-line-chart-btn" class="chart-btn left-chart-btn fa fa-angle-left"></i>
+                                <i id="right-line-chart-btn" class="chart-btn right-chart-btn fa fa-angle-right"></i>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="main-box">
+                        <div class="chart-container chart-bar-container-box box-color">
+                            <div class="chart-slide-title">
+                                최근 50회차
+                            </div>
+                            <div class=" chart-bar-container">
+
+                                <div class="chart-bar-box">
+
+                                    <canvas id="chart-bar" class="chart-bar"></canvas>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- <script src="../base/components/footer.js"></script> -->
-    <footer>
-        <nav class="top-footer-container">
-            <div class="top-footer container">
-                <ul class="top-footer-list">
-                    <li><a href="#">회사소개</a></li>
-                    <li><a href="#">이용약관</a></li>
-                    <li><a href="#">개인정보처리방침</a></li>
+        <!-- <script src="../base/components/footer.js"></script> -->
+        <footer>
+            <nav class="top-footer-container">
+                <div class="top-footer container">
+                    <ul class="top-footer-list">
+                        <li><a href="#">회사소개</a></li>
+                        <li><a href="#">이용약관</a></li>
+                        <li><a href="#">개인정보처리방침</a></li>
 
-                </ul>
-            </div>
-        </nav>
-        <nav class="mid-footer-container">
-            <div class="mid-footer container">
-                <ul class="mid-footer-list">
-                    <li> 사실을
-                        토대로 한
-                        통계</li>
-                    <li>고객만족을 위한 최고의
-                        서비스</li>
-                    <li> 다른 사이트에서 찾아볼 수 없는
-                        새로운 시스템</li>
-
-                </ul>
-            </div>
-        </nav>
-        <nav class="bottom-footer-container">
-            <div class="bottom-footer container">
-                <h1>로또끝</h1>
-                <div class="bottom-footer-content">
-                    <p>
-                        당사의 분석시스템은 누적패턴을 분석/필터링한 정보제공만을
-                        목적으로 하며, 당첨확률 개선서비스가 아니므로 서비스 이용
-                        과정에서 기대이익을 얻지 못하거나 발생한 손해 등에 대한
-                        최종책임은 서비스 이용자 본인에게 있습니다.
-                    </p>
-                    <p>
-                        <span> 법인명:(주)브레인콘텐츠대표자:강진원 장대용</span>
-                        <span>
-                            도로명주소:서울특별시 강남구 테헤란로 325 (역삼동) 어반벤치빌딩
-                            14층</span>
-                    </p>
-                    <p>
-                        <span>TEL:1588-0649 FAX:02-2017-7994</span> <span>E-mail:help@brain-group.co.kr</span>
-                        <span>제휴문의:lottorichmkt@gmail.com</span>
-                    </p>
-                    <p>
-                        통신판매업신고:2017-서울강남-00217호 사업자
-                        등록번호:125-81-26555
-                    </p>
-                    <p>COPYRIGHTⓒBRAIN CONTENTS ALL RIGHT RESERVED.</p>
+                    </ul>
                 </div>
-            </div>
-        </nav>
-    </footer>
+            </nav>
+            <nav class="mid-footer-container">
+                <div class="mid-footer container">
+                    <ul class="mid-footer-list">
+                        <li> 사실을
+                            토대로 한
+                            통계</li>
+                        <li>고객만족을 위한 최고의
+                            서비스</li>
+                        <li> 다른 사이트에서 찾아볼 수 없는
+                            새로운 시스템</li>
+
+                    </ul>
+                </div>
+            </nav>
+            <nav class="bottom-footer-container">
+                <div class="bottom-footer container">
+                    <h1>로또끝</h1>
+                    <div class="bottom-footer-content">
+                        <p>
+                            당사의 분석시스템은 누적패턴을 분석/필터링한 정보제공만을
+                            목적으로 하며, 당첨확률 개선서비스가 아니므로 서비스 이용
+                            과정에서 기대이익을 얻지 못하거나 발생한 손해 등에 대한
+                            최종책임은 서비스 이용자 본인에게 있습니다.
+                        </p>
+                        <p>
+                            <span> 법인명:(주)브레인콘텐츠대표자:강진원 장대용</span>
+                            <span>
+                                도로명주소:서울특별시 강남구 테헤란로 325 (역삼동) 어반벤치빌딩
+                                14층</span>
+                        </p>
+                        <p>
+                            <span>TEL:1588-0649 FAX:02-2017-7994</span> <span>E-mail:help@brain-group.co.kr</span>
+                            <span>제휴문의:lottorichmkt@gmail.com</span>
+                        </p>
+                        <p>
+                            통신판매업신고:2017-서울강남-00217호 사업자
+                            등록번호:125-81-26555
+                        </p>
+                        <p>COPYRIGHTⓒBRAIN CONTENTS ALL RIGHT RESERVED.</p>
+                    </div>
+                </div>
+            </nav>
+        </footer>
     </div>
     <script src="../base/js/polyfill.js"></script>
     <script src="../base/js/prefixfree.min.js"></script>

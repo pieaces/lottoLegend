@@ -8,7 +8,7 @@ const menuInfo = document.querySelector('.mid-nav-menu-info');
 
 
 mqInit();
-// menuInfoToggle();
+menuInfoToggle();
 
 function mqInit() {
 
@@ -140,7 +140,7 @@ function mqDeskTopInit() {
 function menuInfoToggle() {
     let flag = false;
     menuInfoText.addEventListener('click', (e) => {
-        if (flag) {
+        if (!flag) {
             menuInfo.classList.remove('none');
         } else {
             menuInfo.classList.add('none');
@@ -149,7 +149,7 @@ function menuInfoToggle() {
         e.stopPropagation();
     });
     document.addEventListener('click', () => {
-        if (!flag) {
+        if (flag) {
             //target 다른 곳
             menuInfo.classList.add("none");
         }
