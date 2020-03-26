@@ -5,7 +5,8 @@ const clickMenuBox = document.querySelectorAll('.click-menu-box'); //사이드 �
 const menu = document.querySelector('.click-menu-container');
 const menuInfoText = document.querySelector('.mid-nav-info-text');
 const menuInfo = document.querySelector('.mid-nav-info');
-
+const menuInfoBox = document.querySelector('.mid-nav-info-box');
+const menuTitleQna = menuInfoBox.children[1].firstElementChild;
 
 mqInit();
 menuInfoToggle();
@@ -13,6 +14,7 @@ menuInfoToggle();
 function mqInit() {
 
     let menuTitleEventHandler = [];
+    let menuTitleQnaEvent;
     let menuExceptEvent;
     let menuEvent;
     let current = null;
@@ -29,6 +31,7 @@ function mqInit() {
 
     function mqMobileInit() {
         menu.classList.remove('none');
+        menuTitleQna.setAttribute('href', '#');
         let isMenuClick = false;
         menuTitle.forEach((node, index) => {
             const event = function (e) {
@@ -40,18 +43,14 @@ function mqInit() {
                         break;
                     case 1:
                         document.querySelector('.click-menu-system').classList.remove('none');
-                        current = 0;
+                        current = 1;
                         break;
                     case 2:
                         document.querySelector('.click-menu-statistics').classList.remove('none');
-                        current = 1;
+                        current = 2;
                         break;
                     case 3:
                         document.querySelector('.click-menu-community').classList.remove('none');
-                        current = 2;
-                        break;
-                    case 4:
-                        document.querySelector('.click-menu-qna').classList.remove('none');
                         current = 3;
                         break;
                 }
@@ -60,6 +59,17 @@ function mqInit() {
             menuTitleEventHandler.push(event);
             node.addEventListener('click', event);
         })
+
+        menuTitleQnaEvent = function (e) {
+            if (current !== null) {
+                clickMenuBox[current].classList.add('none');
+            }
+            document.querySelector('.click-menu-qna').classList.remove('none');
+            current = 4;
+            e.stopPropagation();
+        }
+
+        menuTitleQna.addEventListener('click', menuTitleQnaEvent);
 
         menuExceptEvent = function () {
             if (!isMenuClick) {
@@ -94,6 +104,8 @@ function mqInit() {
                 node.removeEventListener('click', menuTitleEventHandler[index]);
             })
             menuTitleEventHandler = [];
+
+            menuTitleQna.removeEventListener('click', menuTitleQnaEvent);
             document.removeEventListener('click', menuExceptEvent);
             menu.removeEventListener('click', menuEvent);
 
@@ -133,6 +145,7 @@ function menuHoverRemoveEvent() {
 
 function mqDeskTopInit() {
     menu.classList.add('none');
+    menuTitleQna.setAttribute('href', '/board/qna/list.html');
     menuHoverAddEvent();
 }
 

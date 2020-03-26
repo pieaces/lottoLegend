@@ -81,6 +81,9 @@
 document.write(`        <header>
 <nav class="mid-nav-container">
     <div class="click-menu-container">
+    <ul class="click-menu-box click-menu-introduce none">
+            
+        </ul>
         <ul class="click-menu-box click-menu-system none">
             <li> <a href="/system/premium.html">체험하기</a> </li>
             <li> <a href="/system/include.html">추천수</a>

@@ -116,6 +116,10 @@
       width:100%;
     }
 
+    .main-title{
+      font-size:1.5rem;
+    }
+
     .aside{
       display:none;
     }

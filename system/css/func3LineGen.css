@@ -78,15 +78,24 @@
     margin-bottom:1rem;
 }
 
-.line-gen-stack-chart-container > div:not(:last-child){
+.line-gen-stack-chart-container > div:first-child{
+    margin-right:1rem;
+    margin-bottom:1rem;
+}
+
+.line-gen-stack-half-container > div:first-child{
     margin-right:1rem;
 }
 
+.line-gen-stack-half-container{
+    display:flex;
+    width: 50%;
+}
 
 .line-gen-stack-chart-box{
-    width:25%;
+    width:50%;
     height:100%;
-    padding:2rem;
+    padding:0.5rem;
 }
 
 .line-gen-stack-chart-box > canvas{
@@ -112,8 +121,6 @@
     font-size:1.8rem;
 }
 
-
-  
   .make-btn:hover{
     box-shadow: inset -3px -5px 0 rgba(0,0,0,0.2),inset 3px 1px 0 rgba(0,0,0,0.2);
     background-color: rgb(237, 59, 59,0.95);
@@ -127,6 +134,16 @@
 
   
 @media (min-width: 0px) and (max-width: 767px) {
+
+    .line-gen-stack-chart-container{
+        display:block;
+        height: auto;
+    }
+
+    .line-gen-stack-half-container{
+        width: 100%;
+        height: 25rem;
+    }
  .line-gen-num-container{
      display:block;
      height: auto;
@@ -134,8 +151,13 @@
 
  .line-gen-num-table{
      width: 100%;
+     height: 4rem;
      margin-bottom:1rem;
  }
+
+ .line-gen-num-table tr td:nth-child(-n+5) label{
+    font-size:1.3rem;
+}
 
  .line-gen-make-btn-box{
      width: 100%;

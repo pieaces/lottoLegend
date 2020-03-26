@@ -143,9 +143,9 @@ const stackOption: Chart.ChartOptions = {
         }],
         yAxes: [{
             stacked: true,
-            ticks:{
-                min:0,
-                max:6
+            ticks: {
+                min: 0,
+                max: 6
             }
         }]
     }
@@ -160,4 +160,4 @@ actualInstance.create();
 latestInstance.create();
 selectionInstance.create();
 
-export {predictInstance, actualInstance, latestInstance, selectionInstance};
+export { predictInstance, actualInstance, latestInstance, selectionInstance };
