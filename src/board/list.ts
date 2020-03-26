@@ -8,7 +8,7 @@ const pageNumContainer = document.querySelector('.page-num-container');
 configure();
 headerSign();
 
-const category:Category = document.getElementById('wrapper').getAttribute('data-category') as Category;
+const category: Category = document.getElementById('wrapper').getAttribute('data-category') as Category;
 const index = Number(getQueryStringObject().index) || 1;
 const { word, type } = getQueryStringObject();
 
