@@ -18,7 +18,7 @@ export default class NumBoard {
             numBoxWrapper.classList.add('func3-num-box-wrapper');
             const checkboxContainer = document.createElement('div');
             checkboxContainer.classList.add('func3-check-box');
-            checkboxContainer.append(makeInputCheckBox());
+            checkboxContainer.appendChild(makeInputCheckBox());
             numBoxWrapper.appendChild(checkboxContainer);
             const numBox = document.createElement('div');
             numBox.classList.add('func3-num-box');

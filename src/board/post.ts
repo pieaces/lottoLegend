@@ -80,14 +80,14 @@ submitBtn.onclick = async () => {
     try {
         const images = [];
         const imageElements = [];
-        imageList.forEach(image => {
-            if (image.element.getAttribute('src').indexOf('https://') === -1) {
-                const dataURL = image.src;
-                const fileName = attachTimestamp(image.name);
-                imageElements.push([image.element, `https://canvas-lotto.s3.ap-northeast-2.amazonaws.com/images/${userName}/${fileName}`]);
+        for(let i=0;i<imageList.length;i++){
+            if (imageList[i].element.getAttribute('src').indexOf('https://') === -1) {
+                const dataURL = imageList[i].src;
+                const fileName = attachTimestamp(imageList[i].name);
+                imageElements.push([imageList[i].element, `https://canvas-lotto.s3.ap-northeast-2.amazonaws.com/images/${userName}/${fileName}`]);
                 images.push({ userName, fileName, dataURL });
             }
-        });
+    }
         await postUnAuthAPI('/images', images);
         imageElements.forEach(image => {
             image[0].setAttribute('src', image[1]);
@@ -182,12 +182,12 @@ function setImageList(imageList: { size: number, index: number, src: string }[])
     const imageContainer = document.querySelectorAll<HTMLElement>('.image-container');
     const imageListSize = document.querySelectorAll<HTMLElement>('.image-size');
 
-    imageContainer.forEach(node => {
+    Array.from(imageContainer).forEach(node => {
         node.addEventListener('click', () => {
             checkImage(parseInt(node.dataset.imageIndex));
         });
     })
-    imageListSize.forEach(node => {
+    Array.from(imageListSize).forEach(node => {
         node.addEventListener('click', () => {
             selectImage('select', parseInt(node.dataset.imageIndex));
         });
@@ -195,7 +195,7 @@ function setImageList(imageList: { size: number, index: number, src: string }[])
 
     const imageTableList = imageTable.querySelectorAll<HTMLElement>('li');
 
-    imageTableList.forEach(node => {
+    Array.from(imageTableList).forEach(node => {
         node.addEventListener('click', () => {
             const img = node.firstElementChild.firstElementChild.firstElementChild as HTMLElement;
             if (node.classList.contains('checked')) {

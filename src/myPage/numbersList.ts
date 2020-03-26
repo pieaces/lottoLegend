@@ -184,7 +184,9 @@ getAuthAPI('/numbers/mass')
                 footer: '<a href="/system/basic.html">번호 조합기 사용하기</a>'
             });
         }
-    }).catch(err => networkAlert())
+    }).catch(err => {
+        console.log(err);
+        networkAlert()})
     .finally(() => loading.classList.add('none'));
 
 function numInfoToggle() {

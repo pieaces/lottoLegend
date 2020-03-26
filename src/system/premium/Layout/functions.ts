@@ -13,7 +13,8 @@ function makePastTable(winner: number[]) {
     const pastWinBox = document.createElement('div');
     pastWinBox.classList.add('func3-past-win-box');
     const pastWinTable = document.createElement('table');
-    pastWinTable.classList.add('table', 'func3-past-win-table');
+    pastWinTable.classList.add('table');
+    pastWinTable.classList.add('func3-past-win-table');
     const pastWinTableTr = document.createElement('tr');
     const pastWinTableTdFirst = document.createElement('td');
     pastWinTableTdFirst.textContent = "역대기록";
@@ -44,7 +45,8 @@ function makeFilterTable(data: Stats) {
     const filterNumInfo = document.createElement('div');
     filterNumInfo.classList.add('func3-filter-num-info');
     const listFilterTable = document.createElement('table');
-    listFilterTable.classList.add('table', 'func3-list-filter-table');
+    listFilterTable.classList.add('table');
+    listFilterTable.classList.add('func3-list-filter-table');
 
     const listFilterTableMap = new Map([
         ["저값개수", data["lowCount"]],

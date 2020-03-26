@@ -21,7 +21,7 @@ export function makeTable(canvas: HTMLElement, dataSet: any[], round: number | s
         if (info) {
             const tableCheckBox = document.createElement('div');
             tableCheckBox.classList.add('mypage-table-checkbox');
-            tableCheckBox.append(makeInputCheckBox());
+            tableCheckBox.appendChild(makeInputCheckBox());
             tableContent.appendChild(tableCheckBox);
         }
 

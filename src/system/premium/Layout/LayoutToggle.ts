@@ -1,7 +1,6 @@
 
 import Layout3 from "./Layout3";
 import NumBoard from "./NumBoard";
-import DataAPI from "../DataAPI";
 import CheckBoxToggle from "../instanceBtns/CheckBoxToggle";
 import { makeCheckdValueBox } from "./functions"
 import generatorLoading from "../../generatorLoading";

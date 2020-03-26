@@ -21,7 +21,7 @@
 
 .func3-filter-container{
   display:flex;
-  min-height: 6rem;
+  height: 6rem;
 }
 
 .func3-filter-container > .func3-filter-title{

@@ -57,7 +57,7 @@ export default class IncludeExclude {
                 resultPercent.textContent = (numCount / this.numbers.length * 100).toFixed(2);
                 makeWinNum(IncludeExclude.answer);
             } else {
-                winNumBox.forEach(node => setDefaultColor(node));
+                Array.from(winNumBox).forEach(node => setDefaultColor(node));
                 resultBox && resultBox.classList.add('none');
             }
         } else {
@@ -68,7 +68,7 @@ export default class IncludeExclude {
 
 const winNumBox = document.querySelectorAll<HTMLElement>('.mypage-win-num-box > div');
 function makeWinNum(answer: number[]) {
-    winNumBox.forEach((node, index) => {
+    Array.from(winNumBox).forEach((node, index) => {
         node.textContent = answer[index].toString();
         setColorLotto(answer[index], node);
     });

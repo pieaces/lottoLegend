@@ -134,6 +134,9 @@
       height:100%;
   }
 
+  .stats-table tr{
+      height: 4.2rem;
+  }
 
   .stats-table  tr > td{
     width:50%;

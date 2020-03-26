@@ -34,7 +34,8 @@ function makeTable(dataSet: ({ round: string, numbers: number[], hits?: boolean[
     numWeekWrapper.innerHTML = '';
     for (let i = 0; i < dataSet.length; i++) {
         const div = document.createElement('div');
-        div.classList.add('num-week-container', 'box-color');
+        div.classList.add('num-week-container');
+        div.classList.add('box-color');
 
         const header = document.createElement('div');
         header.classList.add('num-week-header');

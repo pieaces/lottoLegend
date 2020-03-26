@@ -330,7 +330,7 @@ export default class Layout2 {
                     this.updateChartData();
                     for (let i = 0; i < selectNumBox.children.length; i++) {
                         if (this.checkedNumbers.indexOf(nodeValue) !== -1) {
-                            selectNumBox.children[this.checkedNumbers.indexOf(nodeValue)].remove();
+                            selectNumBox.removeChild(selectNumBox.children[this.checkedNumbers.indexOf(nodeValue)]);
                             this.checkedNumbers.splice(this.checkedNumbers.indexOf(nodeValue), 1);
                             break;
                         }
@@ -346,9 +346,11 @@ export default class Layout2 {
         $68.textContent = "";
         $95.textContent = "";
         last.textContent = "";
-        for (const node of Array.from(selectNumBox.children)) {
-            node.remove();
+        for(let i=0;i<selectNumBox.children.length;i++){
+            selectNumBox.children[i].parentNode.removeChild(selectNumBox.children[i]);
         }
+            
+        
         for (let i = 0; i < this.checkedNumbers.length; i++) {
             lottoNumbers[this.checkedNumbers[i] - 1].style.backgroundColor = Layout2.lottoNumDefaultColor;
         }

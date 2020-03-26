@@ -115,7 +115,7 @@ function write(data: any) {
     });
     for (let i = 0; i < 6; i++) {
         lottoNumTemp[i] = lottoNums[data.numbers[i] - 1];
-        lottoNumTemp[i].style.backgroundColor = '#000000e3';
+        lottoNumTemp[i].style.backgroundColor = 'black';
         lottoNumTemp[i].style.color = 'white';
         const num = document.createElement('div');
         num.classList.add('win-num');

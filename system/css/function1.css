@@ -76,13 +76,13 @@
 
 .func1-chart-title > div{
   display:flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   height:100%;
   border-right:1px solid rgba(0, 0, 0, 0.1);
   font-size:1.3rem;
   text-align: center;
+  word-break: keep-all;
 }
 
 
@@ -100,6 +100,10 @@
 
 .func1-line-values > div{
   width:25%;
+}
+
+.func1-line-values > div:first-child{
+  flex-direction: column;
 }
 
 #func1-line-table tr td{
@@ -163,13 +167,13 @@
     border-bottom:1px solid rgba(0, 0, 0, 0.1);
     border-left:1px solid rgba(0, 0, 0, 0.1);
     width:100%;
-    height:60%;
+    height:19rem;
   }
 
   
   #func1-bubble-table{
     width:100%;
-    height:40%;
+    height:12rem;
   }
   
   .func1-checkbox-container{

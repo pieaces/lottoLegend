@@ -6,7 +6,6 @@ import { getQueryStringObject, rangeMake } from '../functions';
 import makeClickable from '../system/premium/Slide/makeClickable';
 import { getStaticsName } from './functions';
 import { headerSign } from '../amplify/auth';
-import DropDown from '../system/premium/instanceBtns/DropDown';
 
 configure();
 headerSign();
