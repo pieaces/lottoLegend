@@ -11,4 +11,3 @@ loading.classList.remove('none');
 const layout = new Layout(DataAPI.getInstance() as IDataAPI);
 layout.init();
 loading.classList.add('none');
-loading.classList.add('filter-loading');

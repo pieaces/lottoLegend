@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "69c0550223b76eda0abf";
+/******/ 	var hotCurrentHash = "bbfb0cff064f70cd5a76";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -5980,7 +5980,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _amplify_configure__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../amplify/configure */ \"./src/amplify/configure.ts\");\n/* harmony import */ var _premium_DataAPI__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./premium/DataAPI */ \"./src/system/premium/DataAPI/index.ts\");\n/* harmony import */ var _premium_Layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./premium/Layout */ \"./src/system/premium/Layout/index.ts\");\n/* harmony import */ var _amplify_auth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../amplify/auth */ \"./src/amplify/auth.ts\");\n\n\n\n\nObject(_amplify_configure__WEBPACK_IMPORTED_MODULE_0__[\"default\"])();\nObject(_amplify_auth__WEBPACK_IMPORTED_MODULE_3__[\"headerSign\"])();\nvar loading = document.querySelector('.loading-box');\nloading.classList.remove('none');\n_premium_DataAPI__WEBPACK_IMPORTED_MODULE_1__[\"default\"].getInstance().init().then(function () {\n  var layout = new _premium_Layout__WEBPACK_IMPORTED_MODULE_2__[\"default\"](_premium_DataAPI__WEBPACK_IMPORTED_MODULE_1__[\"default\"].getInstance());\n  layout.init();\n  loading.classList.add('none');\n  loading.classList.add('filter-loading');\n});\n\n//# sourceURL=webpack:///./src/system/premium.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _amplify_configure__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../amplify/configure */ \"./src/amplify/configure.ts\");\n/* harmony import */ var _premium_DataAPI__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./premium/DataAPI */ \"./src/system/premium/DataAPI/index.ts\");\n/* harmony import */ var _premium_Layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./premium/Layout */ \"./src/system/premium/Layout/index.ts\");\n/* harmony import */ var _amplify_auth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../amplify/auth */ \"./src/amplify/auth.ts\");\n\n\n\n\nObject(_amplify_configure__WEBPACK_IMPORTED_MODULE_0__[\"default\"])();\nObject(_amplify_auth__WEBPACK_IMPORTED_MODULE_3__[\"headerSign\"])();\nvar loading = document.querySelector('.loading-box');\nloading.classList.remove('none');\n_premium_DataAPI__WEBPACK_IMPORTED_MODULE_1__[\"default\"].getInstance().init().then(function () {\n  var layout = new _premium_Layout__WEBPACK_IMPORTED_MODULE_2__[\"default\"](_premium_DataAPI__WEBPACK_IMPORTED_MODULE_1__[\"default\"].getInstance());\n  layout.init();\n  loading.classList.add('none');\n});\n\n//# sourceURL=webpack:///./src/system/premium.ts?");
 
 /***/ }),
 

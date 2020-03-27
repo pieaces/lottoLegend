@@ -1,4 +1,5 @@
 const menuTitle = document.querySelectorAll('.mid-nav-menu >li > a'); //소개부터 커뮤니티 까지 네개 배열
+const menuTitleArr=Array.from(menuTitle);
 const menuListBox = document.querySelector('.hover-menu-container');
 const mqMobile = window.matchMedia("(max-width: 767px)");
 const clickMenuBox = document.querySelectorAll('.click-menu-box'); //사이드 메뉴 배열
@@ -33,7 +34,7 @@ function mqInit() {
         menu.classList.remove('none');
         menuTitleQna.setAttribute('href', '#');
         let isMenuClick = false;
-        menuTitle.forEach((node, index) => {
+        menuTitleArr.forEach((node, index) => {
             const event = function (e) {
                 if (current !== null) {
                     clickMenuBox[current].classList.add('none');
@@ -100,7 +101,7 @@ function mqInit() {
             if (current !== null) {
                 clickMenuBox[current].classList.add('none');
             }
-            menuTitle.forEach((node, index) => {
+            menuTitleArr.forEach((node, index) => {
                 node.removeEventListener('click', menuTitleEventHandler[index]);
             })
             menuTitleEventHandler = [];
@@ -126,19 +127,19 @@ function menuListHide() {
 }
 
 function menuHoverAddEvent() {
-    for(let i=0;i<menuTitle.length;i++){
-        menuTitle[i].addEventListener('mouseover', menuListShow);
-        menuTitle[i].addEventListener('mouseout', menuListHide);
-    }
+   menuTitleArr.forEach(node=>{
+       node.addEventListener('mouseover', menuListShow);
+       node.addEventListener('mouseout', menuListHide);
+    })
     menuListBox.addEventListener('mouseover', menuListShow);
     menuListBox.addEventListener('mouseout', menuListHide);
 }
 
 function menuHoverRemoveEvent() {
-    for(let i=0;i<menuTitle.length;i++){
-        menuTitle[i].removeEventListener('mouseover', menuListShow);
-        menuTitle[i].removeEventListener('mouseout', menuListHide);
-    }
+    menuTitleArr.forEach(node=>{
+       node.removeEventListener('mouseover', menuListShow);
+       node.removeEventListener('mouseout', menuListHide);
+    });
     menuListBox.removeEventListener('mouseover', menuListShow);
     menuListBox.removeEventListener('mouseout', menuListHide);
 }

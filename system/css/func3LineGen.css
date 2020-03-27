@@ -97,8 +97,16 @@
 }
 
 .line-gen-stack-chart-box{
+    display:flex;
+    align-items: center;
+    justify-content: center;
     width:50%;
     height:100%;
+}
+
+.line-gen-stack-canvas-box{
+    width: 90%;
+    height: 90%;
 }
 
 
@@ -163,6 +171,7 @@
 }
 
  .line-gen-make-btn-box{
+     justify-content: center;
      width: 100%;
      height: 5rem;
  }
