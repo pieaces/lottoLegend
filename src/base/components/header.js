@@ -105,7 +105,7 @@ document.write(`<header>
 </div>
 </div>
 </nav>
-<div class="loading-box">
+<div class="loading-box none">
 <div class="loading">
 <div></div>
 <div></div>
