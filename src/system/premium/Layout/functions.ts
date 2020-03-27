@@ -89,13 +89,13 @@ export function makeCheckdValueBox() {
     const numListSelectTotal = document.querySelector('#num-list-select-total');
     const numListSelectCurrent = document.querySelector('#num-list-select-current');
     const allCheckBox = document.querySelector<HTMLInputElement>('#all-check');
-    const checkboxes = document.getElementsByClassName('checkbox') as HTMLCollectionOf<HTMLInputElement>;
+    const checkboxes = document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox') ;
+    let checkedCurrentValue =null;
 
     numListSelectCurrent.textContent = "0";
     numListSelectTotal.textContent = checkboxes.length.toString();
     Array.from(checkboxes).forEach((node) => {
-        node.addEventListener('click', () => {
-            let checkedCurrentValue = Number(numListSelectCurrent.textContent);
+        node.addEventListener('change', () => {  
             if (node.checked) {
                 checkedCurrentValue++;
             } else {
@@ -105,11 +105,10 @@ export function makeCheckdValueBox() {
         })
 
     })
-    allCheckBox.addEventListener('click', () => {
-        let checkedCurrentValue = Number(numListSelectCurrent.textContent);
-
+    allCheckBox.addEventListener('change', () => {
+        
         if (allCheckBox.checked) {
-            checkedCurrentValue = checkboxes.length;
+            checkedCurrentValue=checkboxes.length;
             numListSelectCurrent.textContent = checkedCurrentValue.toString();
         } else {
             checkedCurrentValue = 0;

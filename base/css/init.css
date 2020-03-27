@@ -166,6 +166,10 @@ input[type="checkbox"]{
   font-size: 1.3rem !important; /*유의*/
 }
 
+.swal2-container.swal2-center{
+  align-items: center !important;
+}
+
 .swal2-footer a{
   color: #0400ff;
 }

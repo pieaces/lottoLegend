@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "ff6ad4be52ee497feb1a";
+/******/ 	var hotCurrentHash = "3a5a205a0f8b7fb0bfde";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -802,7 +802,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("document.write(\"<div class=\\\"search-container\\\">\\n<div class=\\\"search-box\\\">\\n    <select id=\\\"search\\\">\\n        <option value=\\\"title\\\">\\uC81C\\uBAA9</option>\\n        <option value=\\\"contents\\\">\\uC81C\\uBAA9+\\uB0B4\\uC6A9</option>\\n        <option value=\\\"writer\\\">\\uC791\\uC131\\uC790</option>\\n    </select>\\n    <input type=\\\"text\\\" id=\\\"word\\\" placeholder=\\\"\\uAC80\\uC0C9\\uC5B4(\\uC785\\uB825)\\\">\\n    \\n    <button type=\\\"button\\\" class=\\\"btn search-btn\\\">\\uAC80\\uC0C9</button>\\n    </div>\\n   \\n    <a href=\\\"post.html\\\" class=\\\"post-btn\\\">\\uAE00\\uC4F0\\uAE30</a>\\n\\n</div>\\n\");\n\n//# sourceURL=webpack:///./src/board/components/search.js?");
+eval("document.write(\" <div class=\\\"search-container\\\">\\n<div class=\\\"search-box\\\">\\n    <form class=\\\"search-box-form\\\">\\n    <select id=\\\"search\\\">\\n        <option value=\\\"title\\\">\\uC81C\\uBAA9</option>\\n        <option value=\\\"contents\\\">\\uC81C\\uBAA9+\\uB0B4\\uC6A9</option>\\n        <option value=\\\"writer\\\">\\uC791\\uC131\\uC790</option>\\n    </select>\\n    <input type=\\\"text\\\" id=\\\"word\\\" placeholder=\\\"\\uAC80\\uC0C9\\uC5B4(\\uC785\\uB825)\\\" required>\\n    \\n    <button type=\\\"submit\\\" class=\\\"btn search-btn\\\">\\uAC80\\uC0C9</button>\\n</form>\\n    </div>\\n   \\n    <a href=\\\"post.html\\\" class=\\\"post-btn\\\">\\uAE00\\uC4F0\\uAE30</a>\\n\\n</div>\\n\");\n\n//# sourceURL=webpack:///./src/board/components/search.js?");
 
 /***/ }),
 
