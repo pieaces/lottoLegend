@@ -347,13 +347,14 @@ export default class Layout2 {
         $95.textContent = "";
         last.textContent = "";
 
-        for(let i=0;i<selectNumBox.children.length;i++){
-            selectNumBox.children[i].remove();
-        }
+        Array.from(selectNumBox.children).forEach(node=>{
+            node.remove();
+        })
 
         for (let i = 0; i < this.checkedNumbers.length; i++) {
             lottoNumbers[this.checkedNumbers[i] - 1].style.backgroundColor = Layout2.lottoNumDefaultColor;
         }
+
         this.checkedNumbers = [];
         this.setOpacity();
         if (this.choice !== null) {

@@ -34,7 +34,11 @@ document.write(`<header>
     <div class="hover-menu-container none">
         <div class="container hover-menu-box-container">
             <div class="hover-menu-box">
-                <ul></ul>
+                <ul>
+                    <li> <a href="/service/campaign.html">캠페인</a> </li>
+                    <li> <a href="/service/premium.html">프리미엄 필터</a> </li>
+                    <li> <a href="/service/pay.html">결제</a> </li>
+                </ul>
                 <ul>
                     <li> <a href="/system/experience.html">체험하기</a> </li>
                     <li> <a href="/system/include.html">추천/제외수 생성기</a> </li>
@@ -67,7 +71,7 @@ document.write(`<header>
                 </a>
                 <div class="mid-nav-info none">
                     <ul class="mid-nav-info-list">
-                        <li><a href="/myPage/home.html">마이 페이지 홈</a> </li>
+                        <li><a href="/myPage/home.html">마이 홈</a> </li>
                         <li><a href="/myPage/numbersList.html">나의 번호리스트</a> </li>
                         <li><a href="/myPage/IncludeExclude.html">나의 추천/제외 번호</a> </li>
                         <li><a href="#">결제내역</a> </li>
@@ -79,7 +83,7 @@ document.write(`<header>
         </ul>
         </div>
         <ul class="mid-nav-menu">
-            <li><a href="#">소개</a></li>
+            <li><a href="#">서비스</a></li>
             <li> <a href="#">시스템</a> </li>
             <li> <a href="#">분석실</a> </li>
             <li> <a href="#">커뮤니티</a> </li>
