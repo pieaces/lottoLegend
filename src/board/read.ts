@@ -225,7 +225,7 @@ async function makeComments(objArr: any) {
                     textArea.classList.add('comment-update-write-text');
                     parentEl = updateBtn.parentElement.parentElement;
                     textArea.value = parentEl.nextElementSibling.textContent;
-                    parentEl.nextElementSibling.remove();
+                    parentEl.parentNode.children[1].remove();
                     parentEl.parentNode.appendChild(textArea);
                     updateCheck = true;
                 } else {

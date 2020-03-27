@@ -21,7 +21,6 @@
 
 .func3-filter-container{
   display:flex;
-  height: 6rem;
 }
 
 .func3-filter-container > .func3-filter-title{
@@ -41,6 +40,7 @@
 
 .func3-filter-value-container{
   width:80%;
+  min-height: 6rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 #excludedLineCount-text{

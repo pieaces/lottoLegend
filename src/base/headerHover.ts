@@ -126,18 +126,18 @@ function menuListHide() {
 }
 
 function menuHoverAddEvent() {
-    for (const node of menuTitle) {
-        node.addEventListener('mouseover', menuListShow);
-        node.addEventListener('mouseout', menuListHide);
+    for(let i=0;i<menuTitle.length;i++){
+        menuTitle[i].addEventListener('mouseover', menuListShow);
+        menuTitle[i].addEventListener('mouseout', menuListHide);
     }
     menuListBox.addEventListener('mouseover', menuListShow);
     menuListBox.addEventListener('mouseout', menuListHide);
 }
 
 function menuHoverRemoveEvent() {
-    for (const node of menuTitle) {
-        node.removeEventListener('mouseover', menuListShow);
-        node.removeEventListener('mouseout', menuListHide);
+    for(let i=0;i<menuTitle.length;i++){
+        menuTitle[i].removeEventListener('mouseover', menuListShow);
+        menuTitle[i].removeEventListener('mouseout', menuListHide);
     }
     menuListBox.removeEventListener('mouseover', menuListShow);
     menuListBox.removeEventListener('mouseout', menuListHide);

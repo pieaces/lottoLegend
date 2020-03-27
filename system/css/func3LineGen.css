@@ -99,13 +99,8 @@
 .line-gen-stack-chart-box{
     width:50%;
     height:100%;
-    padding:0.5rem;
 }
 
-.line-gen-stack-chart-box > canvas{
-    width:100%;
-    height:100%;
-}
 
 .line-gen-make-btn-box{
     display:flex;

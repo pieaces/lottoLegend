@@ -138,8 +138,8 @@ export default class CheckBox {
         });
 
         this.labelList = new Array<boolean>(labels.length).fill(false);
-        Array.from(checkBoxContainer.children).forEach((node, index, array) => {
-            node.parentNode.removeChild(array[index]);
+        Array.from(checkBoxContainer.children).forEach((node) => {
+            node.remove();
         })
 
         labels.forEach(label => {
