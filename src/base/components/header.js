@@ -1,4 +1,4 @@
-document.write(`<header>
+document.write(` <header>
 <nav class="mid-nav-container">
     <div class="click-menu-container">
     <ul class="click-menu-box click-menu-introduce none">
@@ -9,7 +9,7 @@ document.write(`<header>
             <li> <a href="/system/include.html">추천수</a>
             <li> <a href="/system/exclude.html">제외수</a> </li>
             <li> <a href="/system/basic.html">기본 필터</a> </li>
-            <li> <a href="/system/premium.html">프리미엄 필터</a> </li>
+            <li> <a href="/system/premium.html">베르누이 분석</a> </li>
         </ul>
         <ul class="click-menu-box click-menu-statistics none">
             <li> <a href="/statistics/weekNumbers.html">금주의 제외번호</a> </li>
@@ -36,7 +36,7 @@ document.write(`<header>
             <div class="hover-menu-box">
                 <ul>
                     <li> <a href="/service/campaign.html">캠페인</a> </li>
-                    <li> <a href="/service/premium.html">프리미엄 필터</a> </li>
+                    <li> <a href="/service/premium.html">베르누이 분석</a> </li>
                     <li> <a href="/service/pay.html">결제</a> </li>
                 </ul>
                 <ul>
@@ -64,20 +64,24 @@ document.write(`<header>
                 로또끝
             </a>
         </h1>
-          <ul class="mid-nav-info-box" id="header-myPage">
+          <ul class="mid-nav-info-box">
+              <li> <a class="mid-nav-info-anchor" href="/account/signIn.html">로그인</a> </li>
+              <li> <a class="mid-nav-info-anchor" href="/account/join.html">회원가입</a> </li>
             <li class="mid-nav-info-text">
-                <a href="#" class="nickname"><span id="nickName"></span>님<i class="fas fa-sort-down"></i></a>
-                <div class="mid-nav-info none">
-                    <ul class="mid-nav-info-list">
-                        <li><a href="/myPage/home.html">마이 홈</a> </li>
-                        <li><a href="/myPage/numbersList.html">나의 번호리스트</a> </li>
-                        <li><a href="/myPage/IncludeExclude.html">나의 추천/제외 번호</a> </li>
-                        <li><a href="#">결제내역</a> </li>
-                        <li id="header-signOut">로그아웃</li>
-                    </ul>
-                </div>
+                <div class="nickname mid-nav-info-anchor"><span id="nickName">안녕하세요하이루</span>님                            
+                <i class="fas fa-sort-down"></i>                        
+            <div class="mid-nav-info none">
+                <ul class="mid-nav-info-list">
+                    <li><a href="/myPage/home.html">마이 홈</a> </li>
+                    <li><a href="/myPage/numbersList.html">나의 번호리스트</a> </li>
+                    <li><a href="/myPage/IncludeExclude.html">나의 추천/제외 번호</a> </li>
+                    <li><a href="#">결제내역</a> </li>
+                    <li> <a href="#">로그아웃</a> </li>
+                </ul>
+            </div>
+        </div>
             </li>
-            <li><a href="/board/qna/list.html">고객문의</a></li>
+            <li><a class="mid-nav-info-anchor" href="/board/qna/list.html">고객문의</a></li>
         </ul>
         </div>
         <ul class="mid-nav-menu">

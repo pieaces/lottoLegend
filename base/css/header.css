@@ -207,8 +207,8 @@
   display:flex;
   position: absolute;
   top:0;
-  left:22rem;
-  width: 52%;
+  left:16rem;
+  width: 50%;
 }
 
 .hover-menu-box >ul{

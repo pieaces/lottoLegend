@@ -17,7 +17,7 @@ document.write(`<div class="anchor-title">
         <h3>번호 조합기</h3>
         <ul class="anchor-list-box">
         <li>  <a href="basic.html">기본 필터</a>  </li>
-        <li>  <a href="premium.html">프리미엄 필터</a>  </li>
+        <li>  <a href="premium.html">베르누이 분석</a>  </li>
         </ul>
     </li>
        

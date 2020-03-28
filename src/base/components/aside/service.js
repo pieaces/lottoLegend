@@ -9,7 +9,7 @@ document.write(` <div class="anchor-title">
 </li>
 <li>
     <ul class="anchor-list-box">
-    <li> <a href="premium.html">프리미엄 필터</a> </li>
+    <li> <a href="premium.html">베르누이 분석</a> </li>
     </ul> 
 </li>
 <li>
