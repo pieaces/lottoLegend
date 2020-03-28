@@ -30,10 +30,10 @@
 .mid-nav-menu {
   position: absolute;
   top:0;
-  left:15rem;
+  left:22rem;
   display: flex;
   align-items: center;
-  width:60%;
+  width:52%;
   height:100%;
 }
 
@@ -62,7 +62,7 @@
   align-items: center;
   position: absolute;
   top:0;
-  right:5rem;
+  right:2rem;
   height: 100%;
 }
 
@@ -206,8 +206,8 @@
   display:flex;
   position: absolute;
   top:0;
-  left:15rem;
-  width: 60%;
+  left:22rem;
+  width: 52%;
 }
 
 .hover-menu-box >ul{

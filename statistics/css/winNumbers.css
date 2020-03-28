@@ -1,11 +1,21 @@
-
 .stats-home-title{
     display:flex;
     align-items: center;
     justify-content: center;
+    position: relative;
     height:21rem;
     margin-bottom:1rem;
     background: #1f71b3;
+}
+
+.stats-selectbox-box{
+    position: absolute;
+    top:1rem;
+    left:1rem;
+}
+.stats-selectbox-box > select{
+    width: 12rem;
+    height: 4rem;
 }
 
 .stats-main-box-1{

@@ -34,47 +34,60 @@ export function mqInit(){
     
     if (mqMobile.matches) {
         //모바일 레이아웃
-            filterBoxContainer.classList.remove('none');
+            mqMobileInit();
     } else {
         //데스크탑 레이아웃
-        filterBoxContainer.classList.add('none');
+       mqDeskTopInit();
     }
         mqMobile.addListener(mqFunc);
         
         let flag = false;
         
-        filterBox.addEventListener("click", e => {
-            if (!flag) {
-                filterArrow.classList.remove("fa-sort-down");
-                filterArrow.classList.add("fa-sort-up");
-                filterListBox.classList.remove("none");
-            } else {
-                filterArrow.classList.add("fa-sort-down");
-                filterArrow.classList.remove("fa-sort-up");
-                filterListBox.classList.add("none");
-            }
-            flag = !flag;
-        
-            e.stopPropagation();
-        });
-        
-        document.addEventListener('click', () => {
-            if (flag) {
-                //target 다른 곳
-                filterListBox.classList.add("none");
-                filterArrow.classList.add("fa-sort-down");
-                filterArrow.classList.remove("fa-sort-up");
-                flag = false;
-            }
-        })
+        filterBox.addEventListener("click",dropDownEvent);
+        document.addEventListener('click',dropDownExceptEvent);
+
+        function dropDownEvent(e){
+                if (!flag) {
+                    filterArrow.classList.remove("fa-sort-down");
+                    filterArrow.classList.add("fa-sort-up");
+                    filterListBox.classList.remove("none");
+                } else {
+                    filterArrow.classList.add("fa-sort-down");
+                    filterArrow.classList.remove("fa-sort-up");
+                    filterListBox.classList.add("none");
+                }
+                flag = !flag;
+            
+                e.stopPropagation();
+        }
+
+        function dropDownExceptEvent(e){
+                if (flag) {
+                    //target 다른 곳
+                    filterListBox.classList.add("none");
+                    filterArrow.classList.add("fa-sort-down");
+                    filterArrow.classList.remove("fa-sort-up");
+                    flag = false;
+                }
+        }
     
         function mqFunc(mediaQuery) {
             if (mediaQuery.matches) {
                 //모바일 레이아웃
-                filterBoxContainer.classList.remove('none');
+              mqMobileInit();
             } else {
-                filterBoxContainer.classList.add('none');
+              mqDeskTopInit();
             }
-        
+        }
+
+        function mqMobileInit(){
+            filterBoxContainer.classList.remove('none');
+            filterBox.addEventListener("click",dropDownEvent);
+            document.addEventListener('click',dropDownExceptEvent);
+        }
+        function mqDeskTopInit(){
+            filterBoxContainer.classList.add('none');
+            filterBox.removeEventListener("click",dropDownEvent);
+             document.removeEventListener('click',dropDownExceptEvent);
         }
     }
