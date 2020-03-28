@@ -66,9 +66,7 @@ document.write(`<header>
         </h1>
           <ul class="mid-nav-info-box">
             <li class="mid-nav-info-text">
-                <a href="#" class="nickname">영자님
-                    <i class="fas fa-sort-down"></i>
-                </a>
+                <a href="#" class="nickname"><span id="nickName">영자</span>님<i class="fas fa-sort-down"></i></a>
                 <div class="mid-nav-info none">
                     <ul class="mid-nav-info-list">
                         <li><a href="/myPage/home.html">마이 홈</a> </li>
