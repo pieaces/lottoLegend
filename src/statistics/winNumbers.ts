@@ -76,29 +76,31 @@ const roundSelectBox=document.querySelector<HTMLSelectElement>('#round-selectbox
 mqInit();
 getUnAuthAPI('/numbers/win')
     .then(data => {
+        console.log(data);
         const max: number = data.round;
         stackInstance.create();
         write(data);
 
-        // const roundConfig: IOptions = {
-        //     data: data.reverse().map((round: number) => {
-        //         return {
-        //             text: round.toString(),
-        //             value: round.toString()
-        //         }
-        //     })
-        // };
-        // const roundSelect = new Selectr(roundSelectBox, roundConfig);
-        // roundSelect.on('selectr.change', async (option) => {
-        //    console.log(option.value);
-        // });
+        const roundConfig: IOptions = {
+            data: []
+        };
+        for(let round =data.round; round>=1; round--){
+            roundConfig.data.push({
+                text:round, value:round
+            });
+        }
+        console.log(roundConfig.data);
+        const roundSelect = new Selectr(roundSelectBox, roundConfig);
+        roundSelect.on('selectr.change', async (option) => {
+           const data = await getUnAuthAPI('/numbers/win', { round: option.value });
+           winBox.innerHTML = '';
+           write(data);
+        });
 
         rightBtn.addEventListener('click', async () => {
-            const currentRound = Number(round.textContent);
+            const currentRound = Number(roundSelect.getValue());
             if (currentRound < max) {
-                const data = await getUnAuthAPI('/numbers/win', { round: currentRound + 1 });
-                winBox.innerHTML = '';
-                write(data);
+                roundSelect.setValue((currentRound + 1).toString());
             } else {
                 Swal.fire({
                     title: '마지막회차입니다.',
@@ -107,11 +109,9 @@ getUnAuthAPI('/numbers/win')
             }
         });
         leftBtn.addEventListener('click', async () => {
-            const currentRound = Number(round.textContent);
+            const currentRound = Number(roundSelect.getValue());
             if (0 < currentRound) {
-                const data = await getUnAuthAPI('/numbers/win', { round: currentRound - 1 });
-                winBox.innerHTML = '';
-                write(data);
+                roundSelect.setValue((currentRound - 1).toString());
             } else {
                 Swal.fire({
                     title: '첫회차입니다.',
@@ -122,7 +122,7 @@ getUnAuthAPI('/numbers/win')
     });
 const lottoNumTemp: HTMLElement[] = [];
 function write(data: any) {
-    round.textContent = data.round;
+    //round.textContent = data.round;
     winner.textContent = data.winner;
     winAmount.textContent = Math.round(data.winAmount / 100000000).toString();
     date.textContent = data.date;
