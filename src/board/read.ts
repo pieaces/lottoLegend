@@ -1,7 +1,7 @@
 import configure from '../amplify/configure'
 import { getUnAuthAPI, postAuthAPI, deleteAuthAPI, getAuthAPI, patchAuthAPI } from '../amplify/api';
 import { getUserName, getNickName, headerSign, isLogedIn } from '../amplify/auth';
-import { isoStringToDate, networkAlert, rankToClass, onlyUserAlert, isoStringToTime, getQueryStringObject } from '../functions';
+import { isoStringToDate, networkAlert, rankToClass, onlyUserAlert, isoStringToTime, getQueryStringObject, blankToHtml, blankToString } from '../functions';
 import Swal from 'sweetalert2'
 import { Category, getCategoryHtml, makeNumSet } from './functions';
 
@@ -227,7 +227,7 @@ async function makeComments(objArr: any) {
                     textArea = document.createElement('textarea');
                     textArea.classList.add('comment-update-write-text');
                     parentEl = updateBtn.parentElement.parentElement;
-                    textArea.value = parentEl.nextElementSibling.textContent;
+                    textArea.value = blankToString(parentEl.nextElementSibling.innerHTML);
                     parentEl.parentNode.children[1].remove();
                     parentEl.parentNode.appendChild(textArea);
                     updateCheck = true;
@@ -237,7 +237,7 @@ async function makeComments(objArr: any) {
                         await patchAuthAPI(`/posts/${id}/comments/${objArr[i].id}`, { contents: textArea.value })
                         const commentContent = document.createElement('div');
                         commentContent.classList.add('comment-content');
-                        commentContent.textContent = textArea.value;
+                        commentContent.innerHTML = blankToHtml(textArea.value);
                         textArea.remove();
                         parentEl.parentNode.appendChild(commentContent);
                         updateCheck = false;
@@ -287,7 +287,7 @@ async function makeComments(objArr: any) {
 
         const commentContent = document.createElement('div');
         commentContent.classList.add('comment-content');
-        commentContent.innerHTML = objArr[i].contents.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;');
+        commentContent.innerHTML = blankToHtml(objArr[i].contents);
 
         commentContainer.appendChild(commentBox);
         commentContainer.appendChild(commentContent);
