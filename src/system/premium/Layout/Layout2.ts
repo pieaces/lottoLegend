@@ -15,6 +15,7 @@ const $68 = document.querySelector<HTMLElement>('.stats-68-value');
 const $95 = document.querySelector<HTMLElement>('.stats-95-value');
 const last = document.querySelector<HTMLElement>('.stats-last-value');
 
+const coldHotText = document.getElementById('cold-hot-text');
 type Version = 'include' | 'exclude' | 'carry';
 const carryInfo =
     `<span style="font-size: 1.4rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
@@ -27,10 +28,9 @@ const carryInfo =
 기존에는 이것을 숫자로 분리표현하여 종합적으로 보기 힘들었습니다.
 우리는 이를 <span style="color:black;font-weight:bold;">농도</span>로 표현함으로써 <span style="color:black;font-weight:bold;">종합적이고 직관적 판단</span>이 가능해졌습니다.
 
-*<span style="color:blue;font-weight:bold;">번호빈도</span>: 엄밀한 수학적 예상값을 채우지 못할수록 진하게 표현하였습니다.
+*<span style="color:blue;font-weight:bold;">번호빈도</span>: 수학적 예상값을 채우지 못할수록 진하게 표현하였습니다.
 확률적 값에 비해 <span style="color:black;"><U>적게 출현할수록 진하고, 많이 출현할수록 옅습니다.</U></span>`;
-const includeInfo =
-    `<span style="font-size: 1.4rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
+const includeInfo =`<span style="font-size: 1.4rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
 우리의 모티브는 아래와 같습니다.
 "수백회차가 진행되는 동안, 출현했던 번호만 계속 나온다면,
 <span style="color:black;font-weight:bold;">큰수'법칙'</span>은 충족되지 않을것입니다."
@@ -40,15 +40,14 @@ const includeInfo =
 기존에는 이것을 숫자로 분리표현하여 종합적으로 보기 힘들었습니다.
 우리는 이를 <span style="color:black;font-weight:bold;">농도</span>로 표현함으로써 <span style="color:black;font-weight:bold;">종합적이고 직관적 판단</span>이 가능해졌습니다.
 
-*<span style="color:blue;font-weight:bold;">번호빈도</span>: 엄밀한 수학적 예상값을 채우지 못할수록 진하게 표현하였습니다.
+*<span style="color:blue;font-weight:bold;">번호빈도</span>: 수학적 예상값을 채우지 못할수록 진하게 표현하였습니다.
 확률적 값에 비해 <span style="color:black;"><U>적게 출현할수록 진하고, 많이 출현할수록 옅습니다.</U></span>
 
-*<span style="color:blue;font-weight:bold;">번호간격</span>: 마지막 출현회차가 오래될수록 진하게 표현하였습니다.
+*<span style="color:blue;font-weight:bold;">번호간격(콜드수)</span>: 마지막 출현회차가 오래될수록 진하게 표현하였습니다.
 마지막 출현회차가 <span style="color:black;"><U>오래전일수록 진하고, 최근일수록 옅습니다.</U></span>
 
 *<span style="color:blue;font-weight:bold;">빈도X간격</span>: 빈도의 계수(고유한수치)와 간격의 계수를 산술처리로 종합하였습니다.`;
-const excludeInfo =
-    `<span style="font-size: 1.4rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
+const excludeInfo =`<span style="font-size: 1.4rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
 우리의 모티브는 아래와 같습니다.
 "수백회차가 진행되는 동안, 출현했던 번호만 계속 나온다면,
 <span style="color:black;font-weight:bold;">큰수'법칙'</span>은 충족되지 않을것입니다."
@@ -58,10 +57,10 @@ const excludeInfo =
 기존에는 이것을 숫자로 분리표현하여 종합적으로 보기 힘들었습니다.
 우리는 이를 <span style="color:black;font-weight:bold;">농도</span>로 표현함으로써 <span style="color:black;font-weight:bold;">종합적이고 직관적 판단</span>이 가능해졌습니다.
 
-*<span style="color:red;font-weight:bold;">번호빈도</span>: 엄밀한 수학적 예상값을 넘어갈수록 진하게 표현하였습니다.
+*<span style="color:red;font-weight:bold;">번호빈도</span>: 수학적 예상값을 넘어갈수록 진하게 표현하였습니다.
 확률적 값에 비해 <span style="color:black;"><U>많이 출현할수록 진하고, 적게 출현할수록 옅습니다.</U></span>
 
-*<span style="color:red;font-weight:bold;">번호간격</span>: 마지막 출현회차가 최근일수록 진하게 표현하였습니다.
+*<span style="color:red;font-weight:bold;">번호간격(핫수)</span>: 마지막 출현회차가 최근일수록 진하게 표현하였습니다.
 마지막 출현회차가 <span style="color:black;"><U>최근일수록 진하고, 오래 전이었을수록 옅습니다.</U></span>
 
 *<span style="color:red;font-weight:bold;">빈도X간격</span>: 빈도의 계수(고유한수치)와 간격의 계수를 산술처리로 종합하였습니다.`;
@@ -133,6 +132,7 @@ export default class Layout2 {
         this.updateChart();
         this.initCoefVerInclude();
         applyBtn.textContent = '포함'
+        coldHotText.textContent = "콜드수";
         Layout2.lottoNumDefaultColor = '#00048c';
         this.lottoNumbersArr.forEach((node: HTMLElement) => {
             node.style.backgroundColor = '#00048c';
@@ -146,6 +146,7 @@ export default class Layout2 {
         this.updateChart();
         this.initCoefVerExclude();
         applyBtn.textContent = '제외'
+        coldHotText.textContent = "핫수";
         Layout2.lottoNumDefaultColor = '#8c0000';
         this.lottoNumbersArr.forEach((node: HTMLElement) => {
             node.style.backgroundColor = '#8c0000';
