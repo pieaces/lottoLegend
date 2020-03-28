@@ -7,9 +7,9 @@ export function makeTable(canvas: HTMLElement, dataSet: any[], round: number | s
         tableContent.setAttribute('data-numbers', JSON.stringify(dataSet[i].numbers));
 
         if (i !== 0 && i % 5 === 0) {
-            tableContent.style.borderTop = "0.5rem solid #449ce3";
+            tableContent.classList.add('mypage-table-five-boundary');
             if (i % 10 === 0) {
-                tableContent.style.borderTop = "0.5rem solid #09538e";
+                tableContent.classList.add('mypage-table-ten-boundary');
             }
         } else {
             tableContent.style.borderTop = "1px solid rgba(0,0,0,0.1)";
@@ -99,6 +99,11 @@ export function makeTable(canvas: HTMLElement, dataSet: any[], round: number | s
             canvas.appendChild(infoTd);
         }
     }
+}
+
+export function modifyTableBoundary(){
+    const tableboundary=Array.from(document.querySelectorAll('mypage-table-five-boundary'));
+
 }
 
 export function win(numbers: number[], count: number, answer: { bonusNum: number }): number {

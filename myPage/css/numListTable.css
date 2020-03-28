@@ -94,6 +94,18 @@ border-right:1px solid rgba(0, 0, 0, 0.1);
   background-color: white;
 }
 
+.mypage-table-five-boundary{
+  border-top:0.5rem solid #449ce3
+}
+
+.mypage-table-ten-boundary{
+border-top:0.5rem solid #09538e;
+}
+
+.mypage-table-default-boundary{
+  border-top:1px solid rgba(0,0,0,0.1);
+}
+
 @media (min-width: 0px) and (max-width: 767px) {
 
 .mypage-table .mypage-table-date,
