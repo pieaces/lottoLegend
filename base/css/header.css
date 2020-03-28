@@ -20,6 +20,7 @@
   display:flex;
   align-items: center;
   height: 100%;
+  margin-left:3rem;
 }
 
 .mid-nav-logo > a{
@@ -30,7 +31,7 @@
 .mid-nav-menu {
   position: absolute;
   top:0;
-  left:16rem;
+  left:14rem;
   display: flex;
   align-items: center;
   width:50%;
@@ -62,12 +63,12 @@
   align-items: center;
   position: absolute;
   top:0;
-  right:0;
+  right:2.5rem;
   height: 100%;
 }
 
 .mid-nav-info-box > li:not(:first-child){
-  margin-left:1rem;
+  margin-left:1.2rem;
 }
 
 .mid-nav-info-anchor{
@@ -131,11 +132,9 @@
   align-items: center;
   justify-content: center;
   height: 4rem;
-}
-
-.mid-nav-info-list > li > a{
   font-size:1.4rem;
 }
+
 
 .click-menu-container{
   position: absolute;
@@ -207,7 +206,7 @@
   display:flex;
   position: absolute;
   top:0;
-  left:16rem;
+  left:14rem;
   width: 50%;
 }
 
