@@ -5,13 +5,13 @@ import Swal from 'sweetalert2';
 export function headerSign() {
     Auth.currentSession()
         .then(() => {
-            document.getElementById('header-myPage').classList.remove('none');
-            const signOutBtn = document.getElementById('header-signOut');
+            document.getElementById('header-mypage').classList.remove('none');
+            const signOutBtn = document.getElementById('header-signout');
             signOutBtn.addEventListener('click', signOut);
         })
         .catch(() => {
-            document.getElementById('header-signIn').classList.remove('none');
-            document.getElementById('header-signUp').classList.remove('none');
+            document.getElementById('header-signin').classList.remove('none');
+            document.getElementById('header-signup').classList.remove('none');
         });
 }
 

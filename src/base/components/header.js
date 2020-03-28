@@ -70,7 +70,7 @@ document.write(` <header>
             <li class="mid-nav-info-text none">
                 <div class="nickname mid-nav-info-anchor"><span id="nickName"></span>님                            
                 <i class="fas fa-sort-down"></i>                        
-            <div class="mid-nav-info none">
+            <div class="mid-nav-info none" id="header-mypage">
                 <ul class="mid-nav-info-list">
                     <li><a href="/myPage/home.html">마이 홈</a> </li>
                     <li><a href="/myPage/numbersList.html">나의 번호리스트</a> </li>
