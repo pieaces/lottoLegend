@@ -173,12 +173,13 @@ export default class Layout extends LayoutToggle(Layout3) {
                         this.options[currentFilter] = [];
                         await this.dataAPI.forward(this.options[currentFilter]);
                         infoText.innerHTML = this.dataAPI.infoList[currentFilter + 1];
+                        this.layout2.includeVerson();
                     } else {
                         numFreq.classList.add('none');
                         numFreqTerm.classList.add('none');
+                        this.layout2.includeVerson();
+                        this.layout2.carryVersion();
                     }
-                    this.layout2.includeVerson();
-                    this.layout2.carryVersion();
                 }
                 else if (currentFilter === 4) {
                     numFreq.classList.remove('none');
@@ -326,6 +327,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                     this.options[current].sort((a: number, b: number) => a - b);
                     break;
                 case 2:
+                    console.log(this.checkBox.getCheckedLabels());
                     rand = Math.random();
                     if (rand > 0.5) this.options[current] = [false, true, false, false,];
                     else if (rand > 0.25) this.options[current] = [true, false, false, false];
