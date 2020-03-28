@@ -327,10 +327,10 @@ export default class Layout extends LayoutToggle(Layout3) {
                     this.options[current].sort((a: number, b: number) => a - b);
                     break;
                 case 2:
-                    console.log(this.checkBox.getCheckedLabels());
                     rand = Math.random();
-                    if (rand > 0.5) this.options[current] = [false, true, false, false,];
-                    else if (rand > 0.25) this.options[current] = [true, false, false, false];
+                    const max = this.checkBox.getCheckedLabels().length
+                    if (rand > 0.5 && max >=1) this.options[current] = [false, true, false, false,];
+                    else if (rand > 0.15 || max === 0) this.options[current] = [true, false, false, false];
                     else this.options[current] = [false, false, true, false];
                     break;
                 case 3: case 4: case 5: break;
