@@ -5,6 +5,7 @@ import { getUnAuthAPI } from '../amplify/api';
 import Swal from 'sweetalert2'
 import { headerSign } from '../amplify/auth';
 import {mqInit } from './functions'
+import Selectr, { IOptions } from 'mobius1-selectr';
 
 configure();
 headerSign();
@@ -70,6 +71,7 @@ const leftBtn = document.getElementById('left-btn');
 const stackInstance = new ChartBase('bar', stackCanvas, stackDataBox, stackOption);
 const lottoNums = document.querySelectorAll<HTMLElement>('.lotto-num');
 const statsValues = document.querySelectorAll('.stats-table tr >td:nth-child(2)');
+const roundSelectBox=document.querySelector<HTMLSelectElement>('#round-selectbox');
 
 mqInit();
 getUnAuthAPI('/numbers/win')
@@ -77,6 +79,20 @@ getUnAuthAPI('/numbers/win')
         const max: number = data.round;
         stackInstance.create();
         write(data);
+
+        // const roundConfig: IOptions = {
+        //     data: data.reverse().map((round: number) => {
+        //         return {
+        //             text: round.toString(),
+        //             value: round.toString()
+        //         }
+        //     })
+        // };
+        // const roundSelect = new Selectr(roundSelectBox, roundConfig);
+        // roundSelect.on('selectr.change', async (option) => {
+        //    console.log(option.value);
+        // });
+
         rightBtn.addEventListener('click', async () => {
             const currentRound = Number(round.textContent);
             if (currentRound < max) {

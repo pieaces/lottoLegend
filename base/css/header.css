@@ -30,10 +30,10 @@
 .mid-nav-menu {
   position: absolute;
   top:0;
-  left:22rem;
+  left:16rem;
   display: flex;
   align-items: center;
-  width:52%;
+  width:50%;
   height:100%;
 }
 
@@ -62,40 +62,41 @@
   align-items: center;
   position: absolute;
   top:0;
-  right:2rem;
+  right:0;
   height: 100%;
 }
 
 .mid-nav-info-box > li:not(:first-child){
-  margin-left:2rem;
+  margin-left:1rem;
 }
 
-.mid-nav-info-box > li > a{
-  position: relative;
+.mid-nav-info-anchor{
   color:white;
   font-size:1.3rem;
 }
 
 .mid-nav-info-text{
   position: relative;
+  /* width: 10rem; */
   padding-right: 2rem;
   cursor: pointer;
 }
 
-.mid-nav-info-text > a > i{
+.mid-nav-info-anchor > i{
   position: absolute;
   top:5%;
-  left:100%;
   margin-left:0.4rem;
   font-size:1.6rem;
   cursor: pointer;
 }
 
+
+
 .mid-nav-info {
   display:flex;
   position: absolute;
   top:3.5rem;
-  left:-9rem;
+  right:0;
   z-index: 98;
   width: 15rem;
   padding:0.5rem 0;
@@ -115,7 +116,7 @@
 	border: 1rem solid transparent;
 	border-bottom-color: white;
 	border-top: 0;
-	margin-left: 5rem;
+	margin-left: 5.4rem;
 	margin-top: -0.9rem;
 }
 
