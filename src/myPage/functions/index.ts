@@ -6,12 +6,11 @@ export function makeTable(canvas: HTMLElement, dataSet: any[], round: number | s
         tableContent.classList.add('mypage-table-content');
         tableContent.setAttribute('data-numbers', JSON.stringify(dataSet[i].numbers));
 
-        if (i !== 0 && i % 5 === 0) {
-            tableContent.classList.add('mypage-table-five-boundary');
-            if (i % 10 === 0) {
-                tableContent.classList.add('mypage-table-ten-boundary');
-            }
-        } else {
+        if (i !== 0 && i % 10 === 0) {
+            tableContent.style.borderTop='0.5rem solid #09538e';
+        }else if (i !== 0 && i % 5 === 0) {
+            tableContent.style.borderTop='0.5rem solid #449ce3';
+        }else {
             tableContent.style.borderTop = "1px solid rgba(0,0,0,0.1)";
         }
         if (i === dataSet.length - 1) {
@@ -102,8 +101,18 @@ export function makeTable(canvas: HTMLElement, dataSet: any[], round: number | s
 }
 
 export function modifyTableBoundary(){
-    const tableboundary=Array.from(document.querySelectorAll('mypage-table-five-boundary'));
+   const tableContent=document.querySelectorAll<HTMLElement>('.mypage-table-content');
 
+   for(let i=0;i<tableContent.length;i++){
+   if (i !== 0 && i % 10 === 0) {
+    tableContent[i].style.borderTop='0.5rem solid #09538e';
+}else if (i !== 0 && i % 5 === 0) {
+    tableContent[i].style.borderTop='0.5rem solid #449ce3';
+}else {
+    tableContent[i].style.borderTop = "1px solid rgba(0,0,0,0.1)";
+}
+   }
+    
 }
 
 export function win(numbers: number[], count: number, answer: { bonusNum: number }): number {

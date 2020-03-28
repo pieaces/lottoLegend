@@ -4,8 +4,9 @@ import LineSlide from '../system/premium/Slide/LineSlide'
 import { getUnAuthAPI } from '../amplify/api';
 import { getQueryStringObject, rangeMake } from '../functions';
 import makeClickable from '../system/premium/Slide/makeClickable';
-import { getStaticsName } from './functions';
+import { getStaticsName,mqInit } from './functions';
 import { headerSign } from '../amplify/auth';
+
 
 configure();
 headerSign();
@@ -99,7 +100,7 @@ const barOption: Chart.ChartOptions = {
 };
 
 
-
+mqInit();
 getUnAuthAPI('/stats/piece', { method })
     .then(data => {
         console.log(data);

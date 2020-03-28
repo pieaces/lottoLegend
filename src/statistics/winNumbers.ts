@@ -4,6 +4,7 @@ import ChartBase from '../system/premium/Chart/Charts';
 import { getUnAuthAPI } from '../amplify/api';
 import Swal from 'sweetalert2'
 import { headerSign } from '../amplify/auth';
+import {mqInit } from './functions'
 
 configure();
 headerSign();
@@ -70,6 +71,7 @@ const stackInstance = new ChartBase('bar', stackCanvas, stackDataBox, stackOptio
 const lottoNums = document.querySelectorAll<HTMLElement>('.lotto-num');
 const statsValues = document.querySelectorAll('.stats-table tr >td:nth-child(2)');
 
+mqInit();
 getUnAuthAPI('/numbers/win')
     .then(data => {
         const max: number = data.round;
@@ -151,34 +153,3 @@ function write(data: any) {
     statsValues[8].textContent = data.stats.diffMaxMin;
     statsValues[9].textContent = data.stats.AC;
 }
-
-const filterBox = document.querySelector('.filter-box');
-const filterArrow = document.querySelector('.filter-arrow');
-const filterListBox = document.querySelector<HTMLElement>(".filter-list");
-
-let flag = false;
-
-filterBox.addEventListener("click", e => {
-    if (!flag) {
-        filterArrow.classList.remove("fa-sort-down");
-        filterArrow.classList.add("fa-sort-up");
-        filterListBox.classList.remove("none");
-    } else {
-        filterArrow.classList.add("fa-sort-down");
-        filterArrow.classList.remove("fa-sort-up");
-        filterListBox.classList.add("none");
-    }
-    flag = !flag;
-
-    e.stopPropagation();
-});
-
-document.addEventListener('click', () => {
-    if (flag) {
-        //target 다른 곳
-        filterListBox.classList.add("none");
-        filterArrow.classList.add("fa-sort-down");
-        filterArrow.classList.remove("fa-sort-up");
-        flag = false;
-    }
-})

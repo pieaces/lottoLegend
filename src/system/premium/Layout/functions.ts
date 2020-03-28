@@ -116,3 +116,21 @@ export function makeCheckdValueBox() {
         }
     })
 }
+
+export function modifyBoundary(){
+    const numContainer=document.querySelectorAll('.func3-num-container');
+    const numListBoundary=document.querySelectorAll('.num-list-boundary');
+
+    for(let i=0;i<numListBoundary.length;i++){
+        numListBoundary[i].remove();
+    }
+
+    for(let i=0;i<numContainer.length;i++){
+        if (i !== 0 && (i + 1) % 5 === 0) {
+            const div = document.createElement('div');
+            div.classList.add('num-list-boundary');
+            numContainer[i].appendChild(div);
+        }
+    }
+   
+}

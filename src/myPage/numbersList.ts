@@ -3,7 +3,7 @@ import { getAuthAPI, deleteAuthAPI } from '../amplify/api';
 import CheckBoxToggle from '../system/premium/instanceBtns/CheckBoxToggle';
 import Selectr, { IOptions } from 'mobius1-selectr';
 import { headerSign } from '../amplify/auth';
-import { makeTable } from './functions';
+import { makeTable,modifyTableBoundary } from './functions';
 import { networkAlert } from '../functions';
 import { makeCheckdValueBox } from '../system/premium/Layout/functions'
 import Swal from 'sweetalert2';
@@ -88,12 +88,14 @@ getAuthAPI('/numbers/mass')
                         });
                         console.log(indexes);
                         try {
-                            loading.classList.remove('none');
-                            await deleteAuthAPI('/numbers/mass/' + currentRound, { numsArr });
+                            loading.classList.remove('none');                            
+                           
+                            await deleteAuthAPI('/numbers/mass/' + currentRound, { numsArr });                    
                             indexes.forEach(index => {
                                 numbersContainer[index].remove();
                                 filterBoxes[index].remove();
                             });
+                            modifyTableBoundary();    
                             numListSelectCurrent.textContent = '0';
                             numListSelectTotal.textContent = (Number(numListSelectTotal.textContent) - indexes.length).toString();
                             Swal.fire({
@@ -173,7 +175,7 @@ getAuthAPI('/numbers/mass')
             const checkBoxToggle = new CheckBoxToggle();
             checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
             checkBoxToggle.addEvent();
-            makeCheckdValueBox();
+             makeCheckdValueBox();
             numInfoToggleBtn.addEventListener('click', numInfoToggle());
 
         } else {

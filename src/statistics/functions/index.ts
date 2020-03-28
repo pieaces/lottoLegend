@@ -25,3 +25,56 @@ export function getStaticsName(method: string) {
     return name;
 }
 
+export function mqInit(){
+    const mqMobile = window.matchMedia("(max-width: 767px)");
+    const filterBoxContainer=document.querySelector('.filter-box-container');
+    const filterBox=document.querySelector('.filter-box');
+    const filterArrow = document.querySelector('.filter-arrow');
+    const filterListBox = document.querySelector<HTMLElement>(".filter-list");
+    
+    if (mqMobile.matches) {
+        //모바일 레이아웃
+            filterBoxContainer.classList.remove('none');
+    } else {
+        //데스크탑 레이아웃
+        filterBoxContainer.classList.add('none');
+    }
+        mqMobile.addListener(mqFunc);
+        
+        let flag = false;
+        
+        filterBox.addEventListener("click", e => {
+            if (!flag) {
+                filterArrow.classList.remove("fa-sort-down");
+                filterArrow.classList.add("fa-sort-up");
+                filterListBox.classList.remove("none");
+            } else {
+                filterArrow.classList.add("fa-sort-down");
+                filterArrow.classList.remove("fa-sort-up");
+                filterListBox.classList.add("none");
+            }
+            flag = !flag;
+        
+            e.stopPropagation();
+        });
+        
+        document.addEventListener('click', () => {
+            if (flag) {
+                //target 다른 곳
+                filterListBox.classList.add("none");
+                filterArrow.classList.add("fa-sort-down");
+                filterArrow.classList.remove("fa-sort-up");
+                flag = false;
+            }
+        })
+    
+        function mqFunc(mediaQuery) {
+            if (mediaQuery.matches) {
+                //모바일 레이아웃
+                filterBoxContainer.classList.remove('none');
+            } else {
+                filterBoxContainer.classList.add('none');
+            }
+        
+        }
+    }

@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import { networkAlert } from "../../../functions";
 import { postAuthAPI } from "../../../amplify/api";
+import {modifyBoundary} from "../Layout/functions";
 import CheckBoxToggle from "./CheckBoxToggle";
 
 const saveBtns = document.querySelectorAll<HTMLElement>('.save-btn');
@@ -56,6 +57,7 @@ export default class SaveBtn {
                         numListSelectTotal.textContent = (Number(numListSelectTotal.textContent) - indexArr.length).toString();
                         indexArr.forEach(index => numbersContainer[index].remove());
                         CheckBoxToggle.allCheckedReset();
+                        modifyBoundary();
                     }
                 } catch (err) {
                     loading.classList.add('none');
