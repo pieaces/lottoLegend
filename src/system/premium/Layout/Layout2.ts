@@ -18,10 +18,10 @@ const last = document.querySelector<HTMLElement>('.stats-last-value');
 const coldHotText = document.getElementById('cold-hot-text');
 type Version = 'include' | 'exclude' | 'carry';
 const carryInfo =
-    `<span style="font-size: 1.4rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
+    `<span class="modal-pc-text"  style="font-size: 1.4rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
 우리의 모티브는 아래와 같습니다.
 "수백회차가 진행되는 동안, 출현했던 번호만 계속 나온다면,
-<span style="color:black;font-weight:bold;">큰수'법칙'</span>은 충족되지 않을것입니다."
+<span style="color:black;font-weight:bold;">대수법칙</span>은 충족되지 않을것입니다."
 
 흔히 <span style="color:blue">콜드수</span>라 불리는 로또용어가 있는데,
 이는 <span style="color:blue">최근 미출현 번호</span>를 의미합니다.
@@ -30,10 +30,10 @@ const carryInfo =
 
 *<span style="color:blue;font-weight:bold;">번호빈도</span>: 수학적 예상값을 채우지 못할수록 진하게 표현하였습니다.
 확률적 값에 비해 <span style="color:black;"><U>적게 출현할수록 진하고, 많이 출현할수록 옅습니다.</U></span>`;
-const includeInfo =`<span style="font-size: 1.4rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
+const includeInfo =`<span class="modal-pc-text"  style="font-size: 1.4rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
 우리의 모티브는 아래와 같습니다.
 "수백회차가 진행되는 동안, 출현했던 번호만 계속 나온다면,
-<span style="color:black;font-weight:bold;">큰수'법칙'</span>은 충족되지 않을것입니다."
+<span style="color:black;font-weight:bold;">대수법칙</span>은 충족되지 않을것입니다."
 
 흔히 <span style="color:blue">콜드수</span>라 불리는 로또용어가 있는데,
 이는 <span style="color:blue">최근 미출현 번호</span>를 의미합니다.
@@ -47,10 +47,10 @@ const includeInfo =`<span style="font-size: 1.4rem;font-weight: 400;color: #bdbd
 마지막 출현회차가 <span style="color:black;"><U>오래전일수록 진하고, 최근일수록 옅습니다.</U></span>
 
 *<span style="color:blue;font-weight:bold;">빈도X간격</span>: 빈도의 계수(고유한수치)와 간격의 계수를 산술처리로 종합하였습니다.`;
-const excludeInfo =`<span style="font-size: 1.4rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
+const excludeInfo =`<span class="modal-pc-text"  style="font-size: 1.4rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
 우리의 모티브는 아래와 같습니다.
 "수백회차가 진행되는 동안, 출현했던 번호만 계속 나온다면,
-<span style="color:black;font-weight:bold;">큰수'법칙'</span>은 충족되지 않을것입니다."
+<span style="color:black;font-weight:bold;">대수법칙</span>은 충족되지 않을것입니다."
 
 흔히 <span style="color:red">핫수</span>라 불리는 로또용어가 있는데,
 이는 <span style="color:red">최근 출현 번호</span>를 의미합니다.
@@ -396,10 +396,10 @@ export default class Layout2 {
         });
         document.querySelector<HTMLElement>('.func2-radar-que').addEventListener('click', () => {
             const radarInfo =
-                `<span style="font-size: 1.4rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
+                `<span class="modal-pc-text"  style="font-size: 1.4rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
 우리의 모티브는 아래와 같습니다.
 "수백회차가 진행되는 동안, 출현했던 번호만 계속 나온다면,
-<span style="color:black;font-weight:bold;">큰수'법칙'</span>은 충족되지 않을것입니다."
+<span style="color:black;font-weight:bold;">대수법칙</span>은 충족되지 않을것입니다."
 
 전체 회차에 대한 번호별 출현간격은
 레이더차트를 이용해 12간격까지 나타내었습니다.

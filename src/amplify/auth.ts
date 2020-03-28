@@ -5,10 +5,9 @@ import Swal from 'sweetalert2';
 export function headerSign() {
     Auth.currentSession()
         .then(() => {
-            const signOutBtn = document.getElementById('header-signOut')
-            signOutBtn.classList.remove('none');
-            signOutBtn.addEventListener('click', signOut);
             document.getElementById('header-myPage').classList.remove('none');
+            const signOutBtn = document.getElementById('header-signOut');
+            signOutBtn.addEventListener('click', signOut);
         })
         .catch(() => {
             document.getElementById('header-signIn').classList.remove('none');

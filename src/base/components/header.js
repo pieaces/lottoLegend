@@ -64,7 +64,7 @@ document.write(`<header>
                 로또끝
             </a>
         </h1>
-          <ul class="mid-nav-info-box">
+          <ul class="mid-nav-info-box" id="header-myPage">
             <li class="mid-nav-info-text">
                 <a href="#" class="nickname"><span id="nickName"></span>님<i class="fas fa-sort-down"></i></a>
                 <div class="mid-nav-info none">
@@ -73,7 +73,7 @@ document.write(`<header>
                         <li><a href="/myPage/numbersList.html">나의 번호리스트</a> </li>
                         <li><a href="/myPage/IncludeExclude.html">나의 추천/제외 번호</a> </li>
                         <li><a href="#">결제내역</a> </li>
-                        <li> <a href="#">로그아웃</a> </li>
+                        <li id="header-signOut">로그아웃</li>
                     </ul>
                 </div>
             </li>
