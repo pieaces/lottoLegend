@@ -1,15 +1,24 @@
 .selectr-container{
     width: 10rem !important;
     margin-right:0.5rem;
-    font-size:1.6rem;
+    font-size:2.5rem;
+}
+
+.selectr-selected{
+    padding:0 2.8rem 0 1.4rem;
 }
 
 .selectr-label{
+    font-weight: bold;
     text-align: center;
 }
 
+.selectr-options{
+    max-height: 20rem;
+}
+
 .selectr-options > li{
-    padding-left:3rem !important;
+    text-align: center;
 }
 
 .stats-home-title{
