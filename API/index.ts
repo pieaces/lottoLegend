@@ -208,7 +208,7 @@ exports.handler = async (event: any) => {
                         if (lotto.numbers.some(item => item === num)) includeAnswer++
                     });
                     myData.exclude && myData.exclude.before && myData.exclude.before.forEach(num => {
-                        if (lotto.numbers.some(item => item === num)) excludeAnswer++
+                        if (!lotto.numbers.some(item => item === num)) excludeAnswer++
                     });
 
                     if(Number(new Date(myData.until)) < Number(new Date())){
