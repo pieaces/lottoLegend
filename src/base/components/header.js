@@ -65,10 +65,10 @@ document.write(` <header>
             </a>
         </h1>
           <ul class="mid-nav-info-box">
-              <li> <a class="mid-nav-info-anchor" href="/account/signIn.html">로그인</a> </li>
-              <li> <a class="mid-nav-info-anchor" href="/account/join.html">회원가입</a> </li>
-            <li class="mid-nav-info-text">
-                <div class="nickname mid-nav-info-anchor"><span id="nickName">안녕하세요하이루</span>님                            
+              <li> <a class="mid-nav-info-anchor none" id="header-signin" href="/account/signIn.html">로그인</a> </li>
+              <li> <a class="mid-nav-info-anchor none" id="header-signup" href="/account/join.html">회원가입</a> </li>
+            <li class="mid-nav-info-text none">
+                <div class="nickname mid-nav-info-anchor"><span id="nickName"></span>님                            
                 <i class="fas fa-sort-down"></i>                        
             <div class="mid-nav-info none">
                 <ul class="mid-nav-info-list">
@@ -76,7 +76,7 @@ document.write(` <header>
                     <li><a href="/myPage/numbersList.html">나의 번호리스트</a> </li>
                     <li><a href="/myPage/IncludeExclude.html">나의 추천/제외 번호</a> </li>
                     <li><a href="#">결제내역</a> </li>
-                    <li> <a href="#">로그아웃</a> </li>
+                    <li> <span id="header-signout">로그아웃</span> </li>
                 </ul>
             </div>
         </div>
