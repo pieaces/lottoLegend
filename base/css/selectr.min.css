@@ -14,6 +14,12 @@
     display:none;
 }
 
+.selectr-input-container{
+    display:flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
 .selectr-input{
     width: calc(100%-1rem);
     height:4rem;

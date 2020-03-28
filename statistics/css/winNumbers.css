@@ -1,7 +1,6 @@
 .selectr-container{
     width: 10rem !important;
     margin-right:0.5rem;
-    font-size:2.5rem;
 }
 
 .selectr-selected{
@@ -9,11 +8,14 @@
 }
 
 .selectr-label{
+    color:#6b6b6b;
+    font-size:2.5rem;
     font-weight: bold;
     text-align: center;
 }
 
 .selectr-options{
+    font-size:1.6rem;
     max-height: 20rem;
 }
 
