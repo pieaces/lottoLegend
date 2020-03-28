@@ -16,18 +16,22 @@
   height: 4rem;;
 }
 
-.search-box > input,
-.search-box > select {
+.search-box-form{
+  height: 100%;
+}
+
+.search-box-form > input,
+.search-box-form > select {
   height: 100%;
   margin-right: 1rem;
   font-size:1.4rem;
 }
 
-.search-box > input{
+.search-box-form > input{
   width:20rem;
 }
 
-.search-box > select{
+.search-box-form > select{
   width:8rem;
 }
 
@@ -159,17 +163,18 @@
     height:3rem;
   }
 
-  .search-box>select,
-  .search-box>input{
+
+  .search-box-form>select,
+  .search-box-form>input{
     margin-right:0.5rem;
     font-size:1.2rem;
   }
 
-  .search-box > select{
+  .search-box-form > select{
   width:5rem;
   }
 
-  .search-box > input{
+  .search-box-form > input{
     width:13rem;
   }
 
@@ -195,7 +200,7 @@
 .board-box{
   display:block;
   height:auto;
-  text-align: initial;
+  text-align: left;
 }
 
 
@@ -227,6 +232,10 @@
 .board-box > div.board-reco::before{
   content:"추천";
   margin-right:0.3rem;
+}
+
+.board-box > div.board-author > span{
+  vertical-align: middle;
 }
 
 

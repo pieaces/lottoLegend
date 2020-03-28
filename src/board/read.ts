@@ -205,12 +205,15 @@ async function makeComments(objArr: any) {
         updateBtnBox.classList.add('text-update-btn-box');
         const updateBtn = document.createElement('button');
         updateBtn.setAttribute('type', 'button');
-        updateBtn.classList.add('btn', 'comment-update-btn', 'comment-modify');
+        updateBtn.classList.add('btn');
+        updateBtn.classList.add('comment-update-btn');
+        updateBtn.classList.add('comment-modify');
         updateBtn.textContent = "수정";
 
         const deleteBtn = document.createElement('button');
         deleteBtn.setAttribute('type', 'button');
-        deleteBtn.classList.add('btn', 'comment-update-btn');
+        deleteBtn.classList.add('btn');
+        deleteBtn.classList.add('comment-update-btn');
         deleteBtn.textContent = "삭제";
 
         if (!(await isLogedIn()) || (await getUserName() !== objArr[i].userName)) updateBtnBox.classList.add('hide');

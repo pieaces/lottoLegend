@@ -15,9 +15,11 @@ const { word, type } = getQueryStringObject();
 const selectBox = document.querySelector<HTMLSelectElement>('#search');
 const wordInput = document.querySelector<HTMLInputElement>('#word');
 
-document.querySelector<HTMLElement>('.search-btn').onclick = () => {
+document.querySelector<HTMLElement>('.search-box-form').onsubmit = (e) => {
+    e.preventDefault();
     location.href = `?index=1&word=${wordInput.value}&type=${selectBox.value}`;
 }
+
 function listAPI() {
     if (word || type) {
         console.log('search!')

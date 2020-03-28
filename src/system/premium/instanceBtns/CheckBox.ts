@@ -153,7 +153,6 @@ export default class CheckBox {
             checkbox.setAttribute('type', 'checkbox');
             const num = document.createTextNode(label.toString());
             div.appendChild(num);
-            checkbox.classList.add('checkbox');
             div.appendChild(checkbox);
             divBox.appendChild(div);
             checkBoxContainer.appendChild(divBox);
