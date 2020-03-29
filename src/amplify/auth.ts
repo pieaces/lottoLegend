@@ -3,9 +3,10 @@ import { onlyUserAlert, networkAlert } from '../functions';
 import Swal from 'sweetalert2';
 
 export function headerSign() {
-    Auth.currentSession()
-        .then(() => {
+    Auth.currentAuthenticatedUser()
+        .then((user) => {
             document.getElementById('header-mypage').classList.remove('none');
+            document.getElementById('nickName').textContent = user.attributes.nickname;
             const signOutBtn = document.getElementById('header-signout');
             signOutBtn.addEventListener('click', signOut);
         })
