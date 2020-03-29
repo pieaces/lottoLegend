@@ -9,7 +9,7 @@ document.write(` <header>
             <li> <a href="/system/include.html">추천수</a>
             <li> <a href="/system/exclude.html">제외수</a> </li>
             <li> <a href="/system/basic.html">기본 필터</a> </li>
-            <li> <a href="/system/premium.html">베르누이 분석</a> </li>
+            <li> <a href="/system/premium.html">베르누이 분석 툴</a> </li>
         </ul>
         <ul class="click-menu-box click-menu-statistics none">
             <li> <a href="/statistics/weekNumbers.html">금주의 제외번호</a> </li>
@@ -36,7 +36,7 @@ document.write(` <header>
             <div class="hover-menu-box">
                 <ul>
                     <li> <a href="/service/campaign.html">캠페인</a> </li>
-                    <li> <a href="/service/premium.html">베르누이 분석</a> </li>
+                    <li> <a href="/service/premium.html">베르누이 분석 툴</a> </li>
                     <li> <a href="/service/pay.html">결제</a> </li>
                 </ul>
                 <ul>

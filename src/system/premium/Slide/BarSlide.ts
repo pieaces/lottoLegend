@@ -24,7 +24,7 @@ export default class BarSlide extends Slide<ChartBase> {
                 rep.label = Slide.ACTUAL_TEXT
                 break;
             case 2:
-                rep.label = '예상개수 대비 실제개수 비율(%)';
+                rep.label = '예상대비 초과비율(%)';
                 const temp = [];
                 for (let i = 0; i < this.dataAPI.getStats().ideal['latest'].length; i++) {
                     const datum = (this.dataAPI.getStats().actual['latest'][i] - this.dataAPI.getStats().ideal['latest'][i]) / this.dataAPI.getStats().ideal['latest'][i] * 100;
@@ -43,7 +43,7 @@ export default class BarSlide extends Slide<ChartBase> {
                 break;
             case 1: this.valueBox2.textContent = Slide.ACTUAL_TEXT;
                 break;
-            case 2: this.valueBox2.textContent = '예상개수 대비 실제개수 비율(%)';
+            case 2: this.valueBox2.textContent = '예상대비 초과비율(%)';
                 break;
         }
 
