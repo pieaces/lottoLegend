@@ -1,188 +1,77 @@
-
-.pricing-table-title {
-	text-transform: uppercase;
-	font-weight: 700;
-	font-size: 2.6em;
-	color: #FFF;
-	margin-top: 15px;
-	text-align: left;
-	margin-bottom: 25px;
-	text-shadow: 0 1px 1px rgba(0,0,0,0.4);
-}
-
-.pricing-table-title a {
-	font-size: 0.6em;
-}
-
-
-.pricing-table {
-	margin: 0 10px;
+.price-container {
+	padding: 0.8rem;
+  }
+  
+  .price-box {
+	  border: 1px solid rgba(0,0,0,0.1);
+	background: #fff;
+	color: #555;
+	transition: 0.3s;
 	text-align: center;
-	width: 300px;
-	float: left;
-	-webkit-box-shadow: 0 0 15px rgba(0,0,0,0.4);
-	box-shadow: 0 0 15px rgba(0,0,0,0.4);
-	-webkit-transition: all 0.25s ease;
-	-o-transition: all 0.25s ease;
-	transition: all 0.25s ease;
+  }
+  
+  .price-box:hover {
+	box-shadow: 0 5px 10px 0 rgba(0,0,0,0.3);
+  }
+  
+  .price-box .price-header {
+	  padding:1rem 0;
+	color: #fff;
+	font-size: 2.5rem;
+	font-weight: 500;
+  }
+  .price-box .price-header.price-header-two-year{
+	animation: rank 3.5s ease-in infinite;
+	background: linear-gradient(45deg, #f3cc00 5%,rgb(251, 246, 145) 56%, gold 95%);
+  background-size: 270% 270%;
+  }
+
+  .price-box .price-header.price-header-one-year{
+	animation: rank 3.5s ease-in infinite;
+	background: linear-gradient(45deg, rgb(136, 136, 136) 0%,rgb(207, 207, 207) 56%,rgba(149, 148, 148, 0.5) 96%);
+	background-size: 270% 270%;
 }
 
-.pricing-table:hover {
-	-webkit-transform: scale(1.06);
-	-ms-transform: scale(1.06);
-	-o-transform: scale(1.06);
-	transform: scale(1.06);
+.price-box .price-header.price-header-six-month{
+	background-color:#E83F3F;
+}
+  
+.price-box .price-header.price-header-one-month{
+	background-color:#00ACEE;
 }
 
-.pricing-title {
-	color: #FFF;
-	background: #e95846;
-	padding: 20px 0;
-	font-size: 2em;
-	text-transform: uppercase;
-	text-shadow: 0 1px 1px rgba(0,0,0,0.4);
+.price-content{
+	display:flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 15rem;
+	text-align: center;
 }
+ 
+ .price-box .price{
+	font-size:4rem;
+  }
 
-.pricing-table.recommended .pricing-title {
-	background: #2db3cb;
-}
+  .price-box .price-info{
+	font-size:1.6rem;
+  }
 
-.pricing-table.recommended .pricing-action {
-	background: #2db3cb;
-}
-
-.pricing-table .price {
-	background: #403e3d;
-	font-size: 3.4em;
-	font-weight: 700;
-	padding: 20px 0;
-	text-shadow: 0 1px 1px rgba(0,0,0,0.4);
-}
-
-.pricing-table .price sup {
-	font-size: 0.4em;
-	position: relative;
-	left: 5px;
-}
-
-.table-list {
-	background: #FFF;
-	color: #403d3a;
-}
-
-.table-list li {
-	font-size: 1.4em;
-	font-weight: 700;
-	padding: 12px 8px;
-}
-
-.table-list li:before {
-	content: "\f00c";
-	font-family: 'FontAwesome';
-	color: #3fab91;
-	display: inline-block;
-	position: relative;
-	right: 5px;
-	font-size: 16px;
-} 
-
-.table-list li span {
-	font-weight: 400;
-}
-
-.table-list li span.unlimited {
-	color: #FFF;
-	background: #e95846;
-	font-size: 0.9em;
-	padding: 5px 7px;
-	display: inline-block;
-	-webkit-border-radius: 38px;
-	-moz-border-radius: 38px;
-	border-radius: 38px;
-}
-
-
-.table-list li:nth-child(2n) {
-	background: #F0F0F0;
-}
-
-.table-buy {
-	background: #FFF;
-	padding: 15px;
-	text-align: left;
-	overflow: hidden;
-}
-
-.table-buy p {
-	float: left;
-	color: #37353a;
-	font-weight: 700;
-	font-size: 2.4em;
-}
-
-.table-buy p sup {
-	font-size: 0.5em;
-	position: relative;
-	left: 5px;
-}
-
-.table-buy .pricing-action {
-	float: right;
-	color: #FFF;
-	background: #e95846;
-	padding: 10px 16px;
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border-radius: 2px;
-	font-weight: 700;
-	font-size: 1.4em;
-	text-shadow: 0 1px 1px rgba(0,0,0,0.4);
-	-webkit-transition: all 0.25s ease;
-	-o-transition: all 0.25s ease;
-	transition: all 0.25s ease;
-}
-
-.table-buy .pricing-action:hover {
-	background: #cf4f3e;
-}
-
-.recommended .table-buy .pricing-action:hover {
-	background: #228799;	
-}
-
-/** ================
- * Responsive
- ===================*/
- @media only screen and (min-width: 768px) and (max-width: 959px) {
- 	.pricing-wrapper {
- 		width: 768px;
- 	}
-
- 	.pricing-table {
- 		width: 236px;
- 	}
+  .price-box .price-service-anchor-box{
+	  border-top:1px solid rgba(0,0,0,0.1);
+	background-color: #f4f4f4;
+	padding:1rem 0;
 	
-	.table-list li {
-		font-size: 1.3em;
-	}
+}
 
- }
-
- @media only screen and (max-width: 767px) {
- 	.pricing-wrapper {
- 		width: 420px;
- 	}
-
- 	.pricing-table {
- 		display: block;
- 		float: none;
- 		margin: 0 0 20px 0;
- 		width: 100%;
- 	}
- }
-
-@media only screen and (max-width: 479px) {
-	.pricing-wrapper {
-		width: 300px;
-	}
-} 
+  
+  .price-box .price-service-anchor{
+	  display: inline-block;
+	  width: 80%;
+	  background-color: rgba(0, 0, 0, 0.8);
+	  border:3px solid rgba(0, 0, 0, 0.2);
+	  color:#fff;
+	  padding:0.5rem 1.5rem;
+	  text-align: center;
+	  font-size:1.8rem;
+  }
+  

@@ -108,13 +108,25 @@ export function makeCheckdValueBox() {
     allCheckBox.addEventListener('change', () => {
         
         if (allCheckBox.checked) {
-            checkedCurrentValue=checkboxes.length;
+            checkedCurrentValue=document.querySelectorAll('.input-checkbox-container > .checkbox').length;
             numListSelectCurrent.textContent = checkedCurrentValue.toString();
         } else {
             checkedCurrentValue = 0;
             numListSelectCurrent.textContent = checkedCurrentValue.toString();
         }
     })
+
+    if(document.querySelector('.save-btn')){
+    document.querySelector('.save-btn').addEventListener('click',()=>{
+        checkedCurrentValue=0;
+    })
+}
+    if(document.querySelector('.mypage-num-delete-btn')){
+        document.querySelector('.mypage-num-delete-btn').addEventListener('click',()=>{
+            checkedCurrentValue=0;
+        })
+}
+
 }
 
 export function modifyBoundary(){
