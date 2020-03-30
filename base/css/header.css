@@ -19,13 +19,20 @@
 .mid-nav-logo{
   display:flex;
   align-items: center;
+  width: 12rem;
   height: 100%;
-  margin-left:5rem;
+  margin-left:4rem;
 }
 
 .mid-nav-logo > a{
+  display: inline-block;
+  width: 100%;
   color:white;
   font-size:3rem;
+}
+
+.mid-nav-logo > a>img{
+  width: 100%;
 }
 
 .mid-nav-menu {

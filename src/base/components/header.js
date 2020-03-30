@@ -64,7 +64,7 @@ document.write(` <header>
     <div class="mid-nav-mobile-box">
         <h1 class="mid-nav-logo">
             <a href="/main.html">
-                로또끝
+                <img src="/base/img/logo.png">
             </a>
         </h1>
           <ul class="mid-nav-info-box">
