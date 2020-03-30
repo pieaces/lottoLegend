@@ -12,7 +12,7 @@
     "@aws-amplify/core": "^2.2.4",
     "chart.js": "^2.9.3",
     "mobius1-selectr": "^2.4.13",
-    "suneditor": "^2.26.0",
+    "suneditor": "^2.28.0",
     "sweetalert2": "^9.8.2"
   },
   "devDependencies": {
