@@ -238,6 +238,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                 this.layout1.barSlide.init();
                 this.layout1.lineSlide.init();
                 this.layout1.bubbleChart.init();
+                this.layout1.setStatsBoard(this.dataAPI.getStats().stats);
                 break;
         }
     }
