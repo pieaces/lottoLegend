@@ -137,22 +137,6 @@
     font-size:1.3rem;
   }
 
-  .table-2 tr{
-    width:50%;
-    height:3rem;
-    font-size:0.8rem;
-    text-align: center;
-    word-break: keep-all;
-  }
-
-  .table-2 tr td{
-    width:50%;
-  }
-
-  .table-2 td{
-    font-size:1.3rem;
-  }
-
 .auto-choose-container-box{
   display:flex;
   align-items: center;

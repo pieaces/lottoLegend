@@ -76,7 +76,7 @@ document.write(` <header>
                     <li><a href="/myPage/home.html">마이 홈</a> </li>
                     <li><a href="/myPage/numbersList.html">나의 번호리스트</a> </li>
                     <li><a href="/myPage/IncludeExclude.html">나의 추천/제외 번호</a> </li>
-                    <li><a href="#">결제내역</a> </li>
+                    <li><a href="/myPage/pay.html">결제내역</a> </li>
                     <li> <span id="header-signout">로그아웃</span> </li>
                 </ul>
             </div>
