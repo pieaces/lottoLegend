@@ -131,7 +131,7 @@ export function makeCheckdValueBox() {
 
 export function modifyBoundary(){
     const numContainer=document.querySelectorAll('.func3-num-container');
-    const numListBoundary=document.querySelectorAll('.num-list-boundary');
+    const numListBoundary=document.querySelectorAll('.boundary-line');
 
     for(let i=0;i<numListBoundary.length;i++){
         numListBoundary[i].remove();
@@ -140,7 +140,7 @@ export function modifyBoundary(){
     for(let i=0;i<numContainer.length;i++){
         if (i !== 0 && (i + 1) % 5 === 0) {
             const div = document.createElement('div');
-            div.classList.add('num-list-boundary');
+            div.classList.add('boundary-line');
             numContainer[i].appendChild(div);
         }
     }
