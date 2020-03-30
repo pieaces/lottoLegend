@@ -162,18 +162,28 @@
   }
 
   .func1-bubble-text{
+    display:flex;
+    align-items: center;
+    justify-content: center;
     border-right:1px solid rgba(0, 0, 0, 0.1);
     border-bottom:1px solid rgba(0, 0, 0, 0.1);
     border-left:1px solid rgba(0, 0, 0, 0.1);
     width:100%;
     height:19rem;
-    padding:1rem;
     font-size:1.3rem;
+    text-align: center;
+    line-height: 1.9;
+  }
+
+  .func1-bubble-text-emph{
+    font-weight: 500;
+    font-size:1.4rem;
   }
 
   #func1-bubble-table{
     width:100%;
     height:12rem;
+    letter-spacing: 0.05rem;
   }
   
   .func1-checkbox-container{
