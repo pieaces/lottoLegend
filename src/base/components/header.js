@@ -36,7 +36,8 @@ document.write(` <header>
             <div class="hover-menu-box">
                 <ul>
                     <li> <a href="/service/campaign.html">캠페인</a> </li>
-                    <li> <a href="/service/premium.html">베르누이 분석 툴</a> </li>
+                    <li> <a href="/service/system.html">베르누이 분석 시스템</a> </li>
+                    <li> <a href="/service/tool.html">베르누이 분석 툴</a> </li>
                     <li> <a href="/service/pay.html">결제</a> </li>
                 </ul>
                 <ul>
