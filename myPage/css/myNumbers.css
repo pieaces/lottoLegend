@@ -53,11 +53,6 @@
  background-color: rgb(138, 196, 243);
 }
 
-.func3-num-list-boundary{
-    height: 0.5rem;
-    margin:2rem 0;
-    background-color: #5f5f5f;
-  }
 
   @media (min-width: 0px) and (max-width: 767px) {
 

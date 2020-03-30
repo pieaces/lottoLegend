@@ -34,7 +34,7 @@ export default class NumBoard {
             numContainerBox.appendChild(numContainer);
             if (i !== 0 && (i + 1) % 5 === 0) {
                 const div = document.createElement('div');
-                div.classList.add('num-list-boundary');
+                div.classList.add('boundary-line');
                 numContainerBox.appendChild(div);
             }
         }

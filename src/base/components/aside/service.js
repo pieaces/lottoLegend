@@ -1,5 +1,5 @@
 document.write(` <div class="anchor-title">
-서비스
+안내
 </div>
 <ul class="anchor-list-container">
 <li>

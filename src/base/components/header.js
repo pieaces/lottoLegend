@@ -85,7 +85,7 @@ document.write(` <header>
         </ul>
         </div>
         <ul class="mid-nav-menu">
-            <li><a href="#">서비스</a></li>
+            <li><a href="#">안내</a></li>
             <li> <a href="#">시스템</a> </li>
             <li> <a href="#">분석실</a> </li>
             <li> <a href="#">커뮤니티</a> </li>
