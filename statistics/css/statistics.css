@@ -147,13 +147,13 @@
   }
 
   .chart-container{
-    border-right:1.5rem solid #f6f6f6;
-    border-bottom:2rem solid #f6f6f6;
-    border-left:1.5rem solid #f6f6f6;
+    border-right:1.5rem solid #f0f0f0;
+    border-bottom:2rem solid #f0f0f0;
+    border-left:1.5rem solid #f0f0f0;
   }
 
   .chart-container.chart-bar-container-box{
-    border-bottom:7rem solid #f6f6f6;
+    border-bottom:7rem solid #f0f0f0;
   }
 
 

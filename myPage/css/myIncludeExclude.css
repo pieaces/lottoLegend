@@ -74,7 +74,9 @@
 }
 
 .mypage-win-num-box > div {
-  display: inline-block;
+  display:flex;
+  align-items: center;
+  justify-content: center;
   width: 3.5rem;
   height: 3.5rem;
   margin:0 1rem 1rem 1rem;

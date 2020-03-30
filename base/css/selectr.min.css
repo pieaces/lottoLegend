@@ -10,6 +10,10 @@
     height:4rem;
 }
 
+.selectr-label{
+    height: 100%;
+}
+
 .selectr-input-container.active .selectr-input-clear{
     display:none;
 }

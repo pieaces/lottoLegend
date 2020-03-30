@@ -7,17 +7,19 @@ export default class CheckBoxToggle {
         this.inputBoxes = Array.from(inputBoxes);
     }
     addEvent() {
-        allCheckBox.addEventListener('click', () => {
-            if (allCheckBox.checked) {
-                this.inputBoxes.forEach((node: any) => {
-                    node.checked = true;
-                });
-            } else {
-                this.inputBoxes.forEach((node: any) => {
-                    node.checked = false;
-                });
-            }
-        });
+        if (this.inputBoxes) {
+            allCheckBox.addEventListener('click', () => {
+                if (allCheckBox.checked) {
+                    this.inputBoxes.forEach((node: any) => {
+                        node.checked = true;
+                    });
+                } else {
+                    this.inputBoxes.forEach((node: any) => {
+                        node.checked = false;
+                    });
+                }
+            });
+        }
     }
 
     static allCheckedReset() {
