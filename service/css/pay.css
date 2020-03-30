@@ -37,17 +37,11 @@
 }
 
 .premium-box .price-header.price-header-six-month{
-	animation: rank 3.5s ease-in infinite;
-	background: linear-gradient(45deg, #E83F3F 5%,rgb(255, 182, 182) 50%,#E83F3F 96%);
-	background-size: 270% 270%;
 	background-color:#E83F3F;
 	font-weight: 500;
 }
   
 .premium-box .price-header.price-header-one-month{
-	animation: rank 3.5s ease-in infinite;
-	background: linear-gradient(45deg, #00ACEE 5%,rgb(165, 229, 255) 50%,#00ACEE 96%);
-	background-size: 270% 270%;
 	background-color:#00ACEE;
 	font-weight: 500;
 }
@@ -55,11 +49,13 @@
 
 .basic-box .price-header.price-header-three-month{
 	background-color: #00D560;
+	font-weight: 500;
 }
 
 
 .basic-box .price-header.price-header-one-month{
 	background-color: #00ACEE;
+	font-weight: 500;
 }
 
 .price-content{
