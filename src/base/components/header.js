@@ -43,12 +43,14 @@ document.write(` <header>
                 <ul>
                     <li> <a href="/system/experience.html">체험하기</a> </li>
                     <li> <a href="/system/include.html">추천/제외수 생성기</a> </li>
-                    <li> <a href="/system/basic.html">번호 조합기</a> </li>
+                    <li> <a href="/system/basic.html">기본 툴</a> </li>
+                    <li> <a href="/system/premium.html">베르누이 분석 툴</a> </li>
                 </ul>
                 <ul>
                     <li> <a href="/statistics/weekNumbers.html">금주의 제외번호</a> </li>
                     <li> <a href="/board/analysis/list.html">공유 게시판</a> </li>
-                    <li> <a href="/statistics/winNumbers.html">통계자료</a> </li>
+                    <li> <a href="/statistics/winNumbers.html">당첨번호</a> </li>
+                    <li> <a href="/statistics/statistics.html?method=excludedLineCount">통계자료</a> </li>
                 </ul>
                 <ul>
                     <li> <a href="/board/notice/list.html">공지사항</a> </li>
