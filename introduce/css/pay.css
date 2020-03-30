@@ -9,7 +9,7 @@
 	transition: 0.3s;
   }
   .price-box.premium-box{
-	background: black;
+	background: rgb(39, 39, 39);
 	color:gold;
   }
 
@@ -64,13 +64,18 @@
 	border:2px solid #00ACEE;
 }
 
-.basic-box .price-header.price-header-three-month{
+.price-box.basic-box{
+ background-color:#353436;
+ color:#D2B17A; 
+}
+
+.basic-box.price-three-month .price-header{
 	background-color: #00D560;
 	font-weight: 500;
 }
 
 
-.basic-box .price-header.price-header-one-month{
+.basic-box.price-one-month .price-header{
 	background-color: #00ACEE;
 	font-weight: 500;
 }
