@@ -25,7 +25,9 @@
 }
 
 .mid-nav-logo > a{
-  display: inline-block;
+  display:flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   color:white;
   font-size:3rem;
@@ -33,6 +35,7 @@
 
 .mid-nav-logo > a>img{
   width: 100%;
+  height: 100%;
 }
 
 .mid-nav-menu {
