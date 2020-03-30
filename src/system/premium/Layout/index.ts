@@ -288,7 +288,6 @@ export default class Layout extends LayoutToggle(Layout3) {
             if (this.checkBox.getCount() >= this.nextAbleLimit ||
                 currentFilter === 3 && this.layout2.checkedNumbers.length === this.nextAbleLimit ||
                 currentFilter === 4 || currentFilter === 5) {
-
                 this.setOption();
                 this.next(currentFilter);
                 this.resetSlideNum();
@@ -329,7 +328,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                 case 2:
                     rand = Math.random();
                     const max = this.checkBox.getCheckedLabels().length
-                    if (rand > 0.5 && max >=1) this.options[current] = [false, true, false, false,];
+                    if (rand > 0.5 && max >= 1) this.options[current] = [false, true, false, false,];
                     else if (rand > 0.15 || max === 0) this.options[current] = [true, false, false, false];
                     else this.options[current] = [false, false, true, false];
                     break;
