@@ -55,14 +55,16 @@ export default class Layout1 {
         });
     }
     public setStatsBoard(stats: Stats) {
-        meanValue.textContent = stats.mean.toFixed(2);
-        stdevValue.textContent = stats.stdev.toFixed(2);
-        maxValue.textContent = stats.max.toFixed(2);
-        minValue.textContent = stats.min.toFixed(2);
-        const sRange = range(stats.mean, stats.stdev, 1);
-        const bRange = range(stats.mean, stats.stdev, 2);
-        smallPercent.textContent = rangeString(sRange, stats.min, stats.max);
-        bigPercent.textContent = rangeString(bRange, stats.min, stats.max);
+        if (stats) {
+            meanValue.textContent = stats.mean.toFixed(2);
+            stdevValue.textContent = stats.stdev.toFixed(2);
+            maxValue.textContent = stats.max.toFixed(2);
+            minValue.textContent = stats.min.toFixed(2);
+            const sRange = range(stats.mean, stats.stdev, 1);
+            const bRange = range(stats.mean, stats.stdev, 2);
+            smallPercent.textContent = rangeString(sRange, stats.min, stats.max);
+            bigPercent.textContent = rangeString(bRange, stats.min, stats.max);
+        }
     }
 
     public clearStatsBoard() {
