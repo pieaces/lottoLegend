@@ -1,13 +1,20 @@
-import autoPutLotto from "./dynamo/autoPutLotto";
 import autoPutSecond from "./dynamo/autoPutSecond";
 import autoDelete from "./dynamo/autoDelete";
 import autoRank from "./dynamo/autoRank";
-import autoPutInfo from "./dynamo/autoPutInfo";
+import counterLotto, { getCurrentRound } from "./dynamo/functions";
+import lambda from "./lambda";
 
 exports.handler = async () => {
-    const status = await autoPutLotto();
-    await autoPutInfo();
-    if(status){
+    const params = {
+        FunctionName: 'lotto-auto-put-lotto',
+    };
+    lambda.invoke(params, function (err) {
+        if (err) console.log(err);
+    });
+
+    const total = getCurrentRound();
+    const count = await counterLotto() - 1;
+    if (count < total) {
         await autoPutSecond();
         await autoDelete();
         await autoRank();

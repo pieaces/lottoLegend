@@ -1,4 +1,4 @@
-import AWS from 'aws-sdk';
-const dynamoDB = new AWS.DynamoDB({region:'ap-northeast-2'});
+import DynamoDB from 'aws-sdk/clients/dynamodb';
+const dynamoDB = new DynamoDB();
 
 export default dynamoDB;
