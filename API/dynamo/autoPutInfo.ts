@@ -26,7 +26,6 @@ async function getLottoInfo(round:number) {
 export default async function autoPutInfo() {
     const round = getCurrentRound();
     const info = await getLottoInfo(round);
-    console.log(info);
     if (info[0][0] !== 0) {
         const params: UpdateItemInput = {
             TableName: 'LottoData',
