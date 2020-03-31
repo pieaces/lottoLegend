@@ -22,7 +22,7 @@ export default async function autoPutSecond() {
                     const rank = win(numbers, answer);
                     if (1 <= rank && rank <= 5) {
                         winner[rank - 1]++;
-                        if (1 <= rank && rank <= 3) await addWinnerToLottoData(round, rank, user.userName);
+                        await addWinnerToLottoData(round, rank, user.userName);
                     }
                 }
             }
@@ -170,27 +170,52 @@ function addWinToLottoStats(winner: number[]): Promise<void> {
         });
     })
 }
-function addWinnerToLottoData(round: number, rank: number, userName: string) {
-    const params: UpdateItemInput = {
-        TableName: 'LottoData',
-        Key: {
-            'Round': {
-                N: round.toString()
-            }
-        },
-        ExpressionAttributeValues: {
-            ':user': {
-                SS: [userName]
-            }
-        },
-        UpdateExpression: `ADD Win.${rankToString(rank)} :user`
-    };
-    return new Promise((resolve, reject) => {
-        dynamoDB.updateItem(params, function (err, data) {
-            if (err) {
-                reject(err);
-            }
-            resolve();
+function addWinnerToLottoData(round: number, rank: number, userName?: string) {
+    if (1 <= rank && rank <= 3) {
+        const params: UpdateItemInput = {
+            TableName: 'LottoData',
+            Key: {
+                'Round': {
+                    N: round.toString()
+                }
+            },
+            ExpressionAttributeValues: {
+                ':user': {
+                    SS: [userName]
+                }
+            },
+            UpdateExpression: `ADD Win.${rankToString(rank)} :user`
+        };
+        return new Promise((resolve, reject) => {
+            dynamoDB.updateItem(params, function (err, data) {
+                if (err) {
+                    reject(err);
+                }
+                resolve();
+            });
         });
-    });
+    } else if (rank === 4 || rank === 5) {
+        const params: UpdateItemInput = {
+            TableName: 'LottoData',
+            Key: {
+                'Round': {
+                    N: round.toString()
+                }
+            },
+            ExpressionAttributeValues: {
+                ':value': {
+                    N: '1'
+                }
+            },
+            UpdateExpression: `ADD Win.${rankToString(rank)} :value`
+        };
+        return new Promise((resolve, reject) => {
+            dynamoDB.updateItem(params, function (err, data) {
+                if (err) {
+                    reject(err);
+                }
+                resolve();
+            });
+        });
+    }
 }
