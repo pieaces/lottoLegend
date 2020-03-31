@@ -31,7 +31,7 @@ document.write(` <header>
     <div class="click-menu-toggle none">더보기</div>
   </div>
 
-  <div class="hover-menu-container">
+  <div class="hover-menu-container none">
     <div class="container hover-menu-box-container">
       <div class="hover-menu-box">
         <ul>

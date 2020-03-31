@@ -18,7 +18,7 @@ document.write(`   <div>
                 번호빈도
             </div>
             <div class="func2-lotto-checkbox func2-num-freq">
-                번호간격
+            번호간격(<span id="cold-hot-text">콜드수</span>)
             </div>
             <div class="func2-lotto-checkbox func2-num-freq-term">
                 빈도X간격
