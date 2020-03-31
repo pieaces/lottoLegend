@@ -9,15 +9,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/cheerio": "^0.22.17",
     "@types/node": "^13.1.6",
     "@types/mysql2": "github:types/mysql2",
     "aws-sdk": "^2.610.0"
   },
   "dependencies": {
-    "axios": "^0.19.2",
-    "cheerio": "^1.0.0-rc.3",
-    "immutable": "^4.0.0-rc.12",
     "mysql2": "^2.1.0"
   }
 }
