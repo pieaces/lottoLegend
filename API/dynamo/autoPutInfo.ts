@@ -94,12 +94,15 @@ export default async function autoPutInfo() {
             UpdateExpression: `SET Info = :info`
         };
         return new Promise((resolve, reject) => {
-            dynamoDB.updateItem(params, function (err, data) {
+            dynamoDB.updateItem(params, function (err) {
                 if (err) {
                     reject(err);
                 }
+                console.log('autoPutInfo 완료');
                 resolve();
             });
         });
+    }else{
+        console.log('autoPutInfo - 동행복권 API 준비중')
     }
 }
