@@ -226,8 +226,6 @@
   flex-direction: column;
   padding-bottom:2rem;
   border-left:1px solid rgb(210,210,210);
-  list-style-type: disc;
-  list-style-position: inside;
 }
 
 .hover-menu-box >ul:last-child{
@@ -236,7 +234,7 @@
 
 .hover-menu-box > ul > li{
   height:4rem;
-  padding-left:1.5rem;
+  padding-left:3rem;
   color:rgb(97, 97, 97);
 }
 

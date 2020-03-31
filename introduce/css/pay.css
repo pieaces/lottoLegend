@@ -6,6 +6,7 @@
   
  .price-box {
 	position: relative;
+	 padding:0 2rem;
 	 border-radius: 1rem;
 	  box-shadow: 0 3px 5px 2px rgba(0,0,0,0.3);
 	  color:white;
@@ -16,7 +17,7 @@
   }
   
   .price-box .price-header {
-	padding:1.5rem;
+	padding:2rem 0;
 	font-size: 2.2rem;
   }
 
@@ -40,12 +41,9 @@
 
   
 .premium-box.price-one-month{
-	background-color: black;
+	background-color:#00ACEE;
 }
 
-.premium-box.price-one-month .price-header{
-	border-bottom:3px solid #00ACEE;
-  }
 
 
 .price-content{
@@ -54,7 +52,6 @@
 	justify-content: flex-end;
 	height: 15rem;
 	padding-bottom:4rem;
-	color:gold;
 	text-align: center;
 }
 

@@ -1,8 +1,9 @@
 document.write(
-    `<div class="anchor-title">분석실</div ><ul class="anchor-list-container">
+    `      <div class="anchor-title">분석실</div>
+    <ul class="anchor-list-container">
         <li>
             <ul class="anchor-list-box">
-                <li>  <a href="/statistics/weekNumbers.html">금주의 제외번호</a>  </li>
+                <li> <a href="/statistics/weekNumbers.html">금주의 제외번호</a> </li>
             </ul>
         </li>
         <li>
@@ -17,7 +18,8 @@ document.write(
             <h3> 통계자료</h3>
             <ul class="anchor-list-box">
                 <li> <a href="/statistics/winNumbers.html">당첨번호 통계</a> </li>
-                <li> <a href="/statistics/statistics.html?method=excludedLineCount">전멸구간 개수</a> </li>
+                <li> <a href="/statistics/statistics.html?method=excludedLineCount">전멸구간 개수</a>
+                </li>
                 <li> <a href="/statistics/statistics.html?method=carryCount">이월 개수</a> </li>
                 <li> <a href="/statistics/statistics.html?method=lowCount">저값(1~22) 개수</a> </li>
                 <li> <a href="/statistics/statistics.html?method=sum">번호 합계</a> </li>
