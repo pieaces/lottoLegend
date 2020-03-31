@@ -207,6 +207,10 @@
   display:block;
 }
 
+.image-list-box{
+  display:none;
+}
+
 .button-wrapper{
   width: 100%;
 }

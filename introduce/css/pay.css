@@ -24,10 +24,6 @@
 	text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   }
 
-  .premium-box{
-	background-size: 100% 100%;
-  }
-
   .premium-box.price-two-year{
 	background: linear-gradient(-45deg, rgb(223, 189, 0) 10%,rgb(255, 252, 158) 50%,  rgb(223, 189, 0) 90%);
   }
@@ -84,23 +80,25 @@
 	  left:0;
 	  width: 100%;
 	  height: 100%;
-	  box-shadow: inset 50px 50px 100px  rgb(83, 83, 83), inset -50px -50px 100px rgb(83, 83, 83);
+	  border-radius: 1rem;
 	  opacity: 0;
 	  transition: 0.3s;
 }
 
 .price-service-anchor-box:hover{
-	opacity: 0.7;
+	opacity: 0.6;
 }
 
 .price-service-anchor{
-	  display: inline-block;
-	  width: 10rem;
-	  padding:0.5rem 1.5rem;
-	  border-radius: 5px;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	border-radius: 1rem;
 	  background-color: black;
-	  color:#fff;
-	  font-size:1.8rem;
+	  color:white;
+	  font-size:2.5rem;
 	  text-align: center;
 	  text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
   }
