@@ -107,7 +107,7 @@ submitBtn.onclick = async () => {
         loading.classList.add('none');
 
         Swal.fire({
-            title: '완료!',
+            title: '완료',
             text: '공유해주셔서 감사합니다',
             icon: 'success',
             allowOutsideClick: false,

@@ -242,7 +242,7 @@ async function makeComments(objArr: any) {
                         parentEl.parentNode.appendChild(commentContent);
                         updateCheck = false;
                         Swal.fire({
-                            title: '완료!',
+                            title: '완료',
                             icon: 'success',
                             timer: 750,
                         });
@@ -269,7 +269,7 @@ async function makeComments(objArr: any) {
                             commentCount--;
                             commentNum.textContent = commentCount.toString();
                             Swal.fire({
-                                title: '완료!', icon: 'success',
+                                title: '완료', icon: 'success',
                                 timer: 750,
                             });
                         } catch (err) {
