@@ -3,122 +3,105 @@
   }
   
  .price-box {
+	position: relative;
+	 padding:0 2rem;
+	 border-radius: 1rem;
 	  box-shadow: 0 3px 5px 2px rgba(0,0,0,0.3);
+	  color:white;
 	  font-family: 'Nanum Gothic', serif;
 	  font-weight: bold;
 	  letter-spacing: 0.1rem;
-	  color:white;
-	text-align: center;
 	transition: 0.3s;
-  }
-
-  .price-box:hover {
-	box-shadow: 0 10px 15px 5px rgba(0,0,0,0.4);
   }
   
   .price-box .price-header {
-	padding:1.3rem 0;
-	color: #fff;
-	font-size: 2.5rem;
+	padding:2rem 0;
+	font-size: 2.2rem;
   }
 
+  .price-box .price-header,
   .price-box .price-content{
-text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+	text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   }
 
-  .premium-box.price-two-year .price-header{
-	background: linear-gradient(45deg, gold 5%,rgb(253, 251, 201) 50%, gold 95%);
-  text-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+  .premium-box{
+	background-size: 100% 100%;
   }
 
-  .premium-box.price-two-year .price-section{
-	  border-top:2px solid gold;
-	background: linear-gradient(45deg, gold 5%,rgb(255, 252, 158) 50%, gold 95%);
-  	background-size: 270% 270%;
+  .premium-box.price-two-year{
+	background: linear-gradient(-45deg, rgb(223, 189, 0) 10%,rgb(255, 252, 158) 50%,  rgb(223, 189, 0) 90%);
   }
 
-  .premium-box.price-one-year .price-header{
-	background: linear-gradient(45deg, silver 5%,rgb(230, 230, 230) 50%,silver 96%);
-	background-size: 270% 270%;
-	text-shadow: 2px 2px 1px rgba(0,0,0,0.2);
+  .premium-box.price-one-year{
+	background: linear-gradient(-45deg, silver 5%,rgb(238, 238, 238) 50%,silver 96%);
 }
 
-.premium-box.price-one-year .price-section{
-	border:2px solid silver;
-	background: linear-gradient(45deg, silver 5%,rgb(230, 230, 230) 50%,silver 96%);
-	background-size: 270% 270%;
-}
 
-.premium-box.price-six-month .price-header{
+.premium-box.price-six-month{
+	background: linear-gradient(-45deg, #E83F3F 10%,rgb(255, 145, 145) 50%,#E83F3F 90%);
 	background-color:#E83F3F;
-	
 }
 
-.premium-box.price-six-month .price-section{
-	border:2px solid #E83F3F;
-}
   
-.premium-box.price-one-month .price-header{
+.premium-box.price-one-month{
+	background: linear-gradient(-45deg, #00ACEE 10%,rgb(145, 224, 255) 50%,#00ACEE 90%);
 	background-color:#00ACEE;
-	
-}
-
-.premium-box.price-one-month .price-section{
-	border:2px solid #00ACEE;
-}
-
-.price-box.basic-box{
- background-color:#353436;
- color:#D2B17A; 
-}
-
-.basic-box.price-three-month .price-header{
-	background-color: #00D560;
-	
 }
 
 
-.basic-box.price-one-month .price-header{
+.basic-box.price-three-month{
+	background-color: #00D560;	
+}
+
+.basic-box.price-one-month{
 	background-color: #00ACEE;
 	
 }
 
 .price-content{
 	display:flex;
-	flex-direction: column;
+	align-items: flex-end;
 	justify-content: center;
-	height: 12rem;
+	height: 15rem;
+	padding:1rem 1rem 4rem 1rem;
 	text-align: center;
 }
  
  .price-box .price{
-	font-size:4rem;
+	font-size:3rem;
   }
 
   .price-box .price-info{
 	font-size:1.6rem;
   }
 
-  .price-box .price-service-anchor-box{
-	  padding:1rem 0;
+ .price-service-anchor-box{
+	 display:flex;
+	 align-items: center;
+	 justify-content: center;
+	  position: absolute;
+	  top:0;
+	  left:0;
+	  width: 100%;
+	  height: 100%;
+	  box-shadow: inset 50px 50px 100px  rgb(83, 83, 83), inset -50px -50px 100px rgb(83, 83, 83);
+	  opacity: 0;
+	  transition: 0.3s;
+}
+
+.price-service-anchor-box:hover{
+	opacity: 0.7;
 }
 
 .price-service-anchor{
 	  display: inline-block;
-	  width: 80%;
+	  width: 10rem;
 	  padding:0.5rem 1.5rem;
 	  border-radius: 5px;
+	  background-color: black;
 	  color:#fff;
 	  font-size:1.8rem;
 	  text-align: center;
+	  text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
   }
 
-  .premium-box .price-service-anchor{
-	background-color: #F19B10;
-  }
-
-
-  .basic-box .price-service-anchor{
-	  background-color: rgb(153, 134, 103);
-  }
-  
