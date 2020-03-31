@@ -15,10 +15,8 @@ export default async function autoPutLotto() {
             const lottoDB = new LottoDB();
             await lottoDB.putALLStats();
             console.log('통계처리 자동화 완료');
-            return true;
         } catch (err) {
             console.log('자동화 실패', err);
-            return false;
         }
     } else {
         const { winAmount, winner } = await getWinAmountAndWinner();
@@ -28,7 +26,6 @@ export default async function autoPutLotto() {
         } else {
             console.log(`업데이트가 필요없는 최신상태(count:${count}, total:${total})`);
         }
-        return false;
     }
 }
 
