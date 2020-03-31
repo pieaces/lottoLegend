@@ -100,9 +100,8 @@ getAuthAPI('/numbers/mass')
                             numListSelectTotal.textContent = (Number(numListSelectTotal.textContent) - indexes.length).toString();
                             Swal.fire({
                                 title: '완료',
-                                text: '정상적으로 입력되었습니다',
                                 icon: 'success',
-                                timer: 1500,
+                                timer: 1000,
                             });
                         } catch (err) {
                             networkAlert();
