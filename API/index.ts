@@ -10,6 +10,7 @@ exports.handler = async () => {
     if(status){
         await autoPutSecond();
         await autoDelete();
+        await autoRank();
     }
     console.log('데이터 자동화 시스템 종료');
 };
