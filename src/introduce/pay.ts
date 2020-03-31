@@ -14,5 +14,4 @@ function checkboxToggle() {
             current = i;
         })
     }
-
 }
