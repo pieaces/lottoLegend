@@ -1,9 +1,95 @@
+.pay-container{
+	margin:2rem 0;
+	border:1px solid rgba(0,0,0,0.1);
+}
 
+.pay-price-box{
+	margin:1rem 0;
+	padding:1rem 0;
+	border:1px solid rgba(0,0,0,0.1);
+	background-color: #f6f6f6;
+}
 
-.price-container {
-	padding: 1rem;
-  }
-  
+.pay-price-box > span{
+	font-size:1.5rem;
+}
+
+.payment-box > div:nth-child(1){
+	padding:1rem 0 1rem 3rem;
+	background-color: #f6f6f6;
+	border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.payment-box > div{
+	font-size: 1.5rem;
+}
+
+.pay-price-p{
+	margin-left:3rem;
+}
+
+.pay-price-n{
+	margin-left:10rem;
+}
+
+.pay-price-d{
+	color:red;
+	margin-left:1rem;
+}
+
+.pay-price-n > span:nth-child(2){
+	text-decoration: line-through;
+}
+
+.pay-price{
+	font-weight: bold;
+}
+
+.pay-price-result-box{
+	display: inline-block;
+	margin-left:15rem;
+	padding:1rem;
+	border-radius: 1rem;
+	border:1px solid rgba(0,0,0,0.3);
+	background-color: white;
+	font-size:1.6rem;
+}
+
+.pay-price-result-box > div{
+	display: inline-block;
+}
+
+.pay-price-result-box > div:nth-child(1){
+	margin-right: 5rem;
+}
+
+.payment-tab-box{
+	display:flex;
+	align-items: center;
+	justify-content: space-around;
+	padding:1.5rem 0;
+}
+
+.payment-tab{
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #09538e;
+	width:15rem;
+	height:5rem;
+	color:white;
+	font-size:1.6rem;
+}
+
+.payment-tab > i{
+	margin-right:0.5rem;
+	font-size:2rem;
+}
+
+.price-section-container{
+	margin:1rem 0;
+}
+
  .price-box {
 	position: relative;
 	 padding:0 2rem;
@@ -21,9 +107,14 @@
 	font-size: 2.2rem;
   }
 
-  .price-box .price-header,
+  .price-box .price-header{
+text-shadow:0 0 1px #fffc96,
+         1px -1px 1px #ffe96a,
+         -1px -1px 1px #ffa929;
+  }
+
   .price-box .price-content{
-	text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+	text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
   }
 
   .premium-box.price-two-year{
@@ -81,12 +172,7 @@
 	  width: 100%;
 	  height: 100%;
 	  border-radius: 1rem;
-	  opacity: 0;
 	  transition: 0.3s;
-}
-
-.price-service-anchor-box:hover{
-	opacity: 0.6;
 }
 
 .price-service-anchor{
@@ -101,5 +187,23 @@
 	  font-size:2.5rem;
 	  text-align: center;
 	  text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+	  cursor: pointer;
+	  opacity: 0;
+  }
+
+
+  .price-checkbox{
+	  position: absolute;
+	  top:0;
+	  left:0;
+	  z-index: 1;
+	  width: 100%;
+	  height: 100%;
+	  opacity: 0;
+  }
+
+  .price-checkbox:checked + div.price-service-anchor{
+	  border:5px solid gold;
+	  opacity: 0.6;
   }
 
