@@ -105,7 +105,9 @@
 }
 
 .chart-btn{
+  margin-bottom:-1rem;
   font-size:4rem;
+  color:#999;
   cursor: pointer;
 }
 
