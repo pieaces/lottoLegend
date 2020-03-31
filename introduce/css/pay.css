@@ -34,13 +34,11 @@
 
 
 .premium-box.price-six-month{
-	background: linear-gradient(-45deg, #E83F3F 10%,rgb(255, 145, 145) 50%,#E83F3F 90%);
 	background-color:#E83F3F;
 }
 
   
 .premium-box.price-one-month{
-	background: linear-gradient(-45deg, #00ACEE 10%,rgb(145, 224, 255) 50%,#00ACEE 90%);
 	background-color:#00ACEE;
 }
 
@@ -55,9 +53,7 @@
 }
 
 .price-content{
-	display:flex;
-	align-items: flex-end;
-	justify-content: center;
+
 	height: 15rem;
 	padding:1rem 1rem 4rem 1rem;
 	text-align: center;
