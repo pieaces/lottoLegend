@@ -234,8 +234,8 @@
 
 .hover-menu-box > ul > li{
   height:4rem;
-  padding-left:3rem;
   color:rgb(97, 97, 97);
+  text-align: center;
 }
 
 .hover-menu-box > ul > li >a{

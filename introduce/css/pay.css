@@ -3,35 +3,6 @@
 	margin-bottom: 10rem;
 }
 
-.pay-price-box{
-	margin:1rem 0;
-	padding:1.5rem 0;
-	border:1px solid rgba(0,0,0,0.1);
-	background-color: black;
-	color:white;
-}
-
-.pay-price-box > span{
-	font-size:1.5rem;
-}
-
-.pay-price-p{
-	margin-left:3rem;
-}
-
-.pay-price-n{
-	margin-left:10rem;
-}
-
-.pay-price-d{
-	color:red;
-	margin-left:1rem;
-}
-
-.pay-price-n > span:nth-child(2){
-	text-decoration: line-through;
-}
-
 .pay-price{
 	font-weight: bold;
 }
@@ -48,13 +19,15 @@
 }
 
 .pay-price-result-box{
-	display: inline-block;
+	display: flex;
+	align-items: center;
 	margin-left:3rem;
-	padding:1rem;
-	border-radius: 1rem;
+	height: 5rem;
+	padding:0 2rem;
+	border-radius: 3rem;
 	border:1px solid rgba(0,0,0,0.3);
-	background-color: white;
-	color:black;
+	background-color: #1e1a12;
+	color:white;
 	font-size:1.6rem;
 }
 
@@ -88,8 +61,8 @@
 	display:flex;
 	align-items: center;
 	justify-content: center;
-	background-color: black;
-	border-radius: 2rem;
+	background-color: #1e1a12;
+	border-radius: 0.5rem;
 	width:15rem;
 	height:5rem;
 	color:gold;
@@ -143,31 +116,38 @@
   
   .price-box .price-header {
 	padding:2rem 0;
-	font-size: 2.2rem;
+	font-size: 2.5rem;
+  }
+
+  .price-box .price-header .price-header-time {
+	font-size:2.8rem;
   }
 
   .price-box .price-header,
-  .price-box .price-content{
+  .price-box .price-content,
+  .price-service-anchor{
 	text-shadow: 1px 1px 2px rgba(0,0,0,0.8),
 	0px 0px 2px white;
 	
   }
 
-  .premium-box.price-two-year{
+  .premium-box.price-two-year,
+  .premium-box.price-two-year ~ .price-service-anchor-box{
 	background: linear-gradient(-45deg, rgb(223, 189, 0) 10%,rgb(255, 252, 158) 50%,  rgb(223, 189, 0) 90%);
   }
 
-  .premium-box.price-one-year{
+  .premium-box.price-one-year,
+  .premium-box.price-one-year ~ .price-service-anchor-box{
 	background: linear-gradient(-45deg, silver 5%,rgb(238, 238, 238) 50%,silver 96%);
 }
 
-
-.premium-box.price-six-month{
+.premium-box.price-six-month,
+.premium-box.price-six-month ~ .price-service-anchor-box{
 	background-color:#E83F3F;
 }
-
   
-.premium-box.price-one-month{
+.premium-box.price-one-month,
+.premium-box.price-one-month ~ .price-service-anchor-box{
 	background-color:#00ACEE;
 }
 
@@ -205,7 +185,6 @@
 	  left:0;
 	  width: 100%;
 	  height: 100%;
-	  background-color: rgba(0,0,0,0.8);
 	  border-radius: 1rem;
 	  backface-visibility:hidden;
 	  transform:perspective(1200px) rotateY(180deg);	  
@@ -221,7 +200,6 @@
 	  color:white;
 	  font-size:2.5rem;
 	  text-align: center;
-	  text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
 	  cursor: pointer;
   }
 
