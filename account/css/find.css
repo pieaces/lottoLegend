@@ -1,5 +1,8 @@
   
-
+.find-form-container{
+  margin-top:5rem;
+  padding:0 5rem;
+}
 
   .find-box{
     display:flex;
@@ -52,15 +55,20 @@
     display:flex;
     align-items: center;
     justify-content: center;
-    height:20rem;
+    height:10rem;
   }
 
   .find-btn {
     width:14rem;
     height: 4rem;
-    background-color: #09538e;
+    background-color: #318eda;
+    border-radius: 3px;
     color:white;
     font-size: 1.5rem;
+  }
+
+  .find-btn:hover{
+    background-color: rgb(64, 150, 221)
   }
 
 

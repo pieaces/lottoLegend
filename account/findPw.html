@@ -27,66 +27,80 @@
                     <div class="main-title">
                         비밀번호 찾기
                     </div>
-                    <form id="find-form-phone">
-                        <div class="find-container">
-                            <div class="find-box">
-                                <div class="find-title-box">
-                                    <div class="find-title">휴대폰번호</div>
-                                </div>
-                                <div class="find-input-box  find-phone-box">
-                                    <select id="phone-number-start">
-                                        <option value="010">010</option>
-                                        <option value="011">011</option>
-                                        <option value="016">016</option>
-                                        <option value="017">017</option>
-                                        <option value="017">018</option>
-                                        <option value="017">019</option>
-                                    </select>
-                                    <div class="dash">
-                                        -
+                    <div class="find-form-container">
+                        <form id="find-form-phone">
+                            <div class="find-container">
+                                <div class="find-box">
+                                    <div class="find-title-box">
+                                        <div class="find-title">아이디</div>
                                     </div>
-                                    <input type="text" id="phone-number-mid" required>
-                                    <div class="dash">
-                                        -
+                                    <div class="find-input-box ">
+                                        <input type="text" id="id" required>
+                                        <div class="find-info-box">
+                                            아이디는 최대 16자 이내로 작성해주세요.
+                                        </div>
                                     </div>
-                                    <input type="text" id="phone-number-end" required>
+
                                 </div>
-                            </div>
-                        </div>
-                        <div class="find-btn-box">
-                            <button type="submit" class="btn find-btn" id="send">전송</button>
-                        </div>
-                    </form>
-                    <form id="find-form-pw" class="none">
-                        <div class="find-container">
-                            <div class="find-box">
-                                <div class="find-title-box">
-                                    <div class="find-title">비밀번호</div>
-                                </div>
-                                <div class="find-input-box ">
-                                    <input type="password" id="password" required
-                                        pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$">
-                                    <div class="find-info-box">
-                                        8자리 이상 문자+숫자로 입력해주세요
+                                <div class="find-box">
+                                    <div class="find-title-box">
+                                        <div class="find-title">휴대폰번호</div>
+                                    </div>
+                                    <div class="find-input-box  find-phone-box">
+                                        <select id="phone-number-start">
+                                            <option value="010">010</option>
+                                            <option value="011">011</option>
+                                            <option value="016">016</option>
+                                            <option value="017">017</option>
+                                            <option value="017">018</option>
+                                            <option value="017">019</option>
+                                        </select>
+                                        <div class="dash">
+                                            -
+                                        </div>
+                                        <input type="text" id="phone-number-mid" required>
+                                        <div class="dash">
+                                            -
+                                        </div>
+                                        <input type="text" id="phone-number-end" required>
                                     </div>
                                 </div>
                             </div>
-                            <div class="find-box">
-                                <div class="find-title-box">
-                                    <div class="find-title">비밀번호 확인</div>
+                            <div class="find-btn-box">
+                                <button type="submit" class="btn find-btn" id="send">확인</button>
+                            </div>
+                        </form>
+                        <form id="find-form-pw" class="none">
+                            <div class="find-container">
+                                <div class="find-box">
+                                    <div class="find-title-box">
+                                        <div class="find-title">비밀번호</div>
+                                    </div>
+                                    <div class="find-input-box ">
+                                        <input type="password" id="password" required
+                                            pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$">
+                                        <div class="find-info-box">
+                                            8자리 이상 문자+숫자로 입력해주세요
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="find-input-box">
-                                    <input type="password" id="password-check" required>
-                                    <div class="find-info-box">
-                                        비밀번호와 똑같이 입력해주세요
+                                <div class="find-box">
+                                    <div class="find-title-box">
+                                        <div class="find-title">비밀번호 확인</div>
+                                    </div>
+                                    <div class="find-input-box">
+                                        <input type="password" id="password-check" required>
+                                        <div class="find-info-box">
+                                            비밀번호와 똑같이 입력해주세요
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="find-btn-box">
-                            <button type="submit" class="btn find-btn" id="update">변경</button>
-                        </div>
-                    </form>
+                            <div class="find-btn-box">
+                                <button type="submit" class="btn find-btn" id="update">변경</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
