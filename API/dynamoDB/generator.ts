@@ -26,7 +26,7 @@ function doesExist(one: number[], other: number[]) {
     return flag;
 }
 async function generateNumberA(userName: string) {
-    const currentRound = getCurrentRound();
+    const currentRound = getCurrentRound() + 1;
     const include = await getIncOrExcNumbers(userName, currentRound, 'include');
     const exclude = await getIncOrExcNumbers(userName, currentRound, 'exclude');
     const choice: number[] = makeChoice(exclude);
@@ -59,7 +59,7 @@ function compartByLine(numbers: number[]) {
     return result;
 }
 async function generateNumberB(userName: string, lineCount?: number[]) {
-    const currentRound = getCurrentRound();
+    const currentRound = getCurrentRound() + 1;
     const include = await getIncOrExcNumbers(userName, currentRound, 'include');
     const exclude = await getIncOrExcNumbers(userName, currentRound, 'exclude');
     const choice: number[] = makeChoice(exclude);
