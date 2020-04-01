@@ -130,7 +130,8 @@
 	  font-weight: bold;
 	  letter-spacing: 0.1rem;
 	  backface-visibility:hidden;
-	  transform:perspective(1000px) rotateY(0deg);	  
+	  transform:perspective(1000px) rotateY(0deg);
+	  cursor: pointer;	  
   }
   
   .price-box .price-header {
@@ -217,4 +218,17 @@
 	  cursor: pointer;
   }
 
-
+.price-service-anchor-hover-box{
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	top:0;
+	left:0;
+	width: 100%;
+	height: 100%;
+	border-radius: 1rem;
+	background-color: rgba(0,0,0,0.6);
+	color:white;
+	font-size: 2.5rem;
+}

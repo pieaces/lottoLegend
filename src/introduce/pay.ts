@@ -2,6 +2,7 @@ const priceCheckbox = document.querySelectorAll<HTMLInputElement>('.price-checkb
 const priceContainer = document.querySelectorAll<HTMLElement>('.price-container');
 const priceBox = document.querySelectorAll<HTMLElement>('.price-box');
 const priceAnchorBox = document.querySelectorAll<HTMLElement>('.price-service-anchor-box');
+const priceAnchorHoverBox = document.querySelectorAll<HTMLElement>('.price-service-anchor-hover-box');
 
 checkboxToggle();
 
