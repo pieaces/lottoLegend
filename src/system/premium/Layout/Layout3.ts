@@ -15,7 +15,7 @@ export default class Layout3 {
                     div.style.border = "5px solid #a5484c";
                     numsArr.push(num);
                 } else {
-                    div.style.border = "5px solid rgb(143, 143, 143)";
+                    div.style.border = "none";
                     numsArr.splice(numsArr.indexOf(num), 1);
                 }
                 flag = !flag;
