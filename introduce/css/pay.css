@@ -198,7 +198,6 @@
 	  width: 100%;
 	  height: 100%;
 	  border-radius: 1rem;
-	  transition: 0.3s;
 	  transform:rotateY(90deg);
 }
 
@@ -234,9 +233,10 @@
 	  opacity: 0;
   }
 
+
 .cardRotate .price-box{opacity:1;animation: rotateAni 0.5s 1; transform:rotateY(90deg);}
 .cardRotate .price-service-anchor-box{opacity:1;animation: rotateAni2 0.5s 0.5s 1 backwards; transform:rotateY(0);}
-.backRotate .price-box{animation: backAni 1.2s 1; opacity:1;}
+.backRotate .price-box{animation: backAni 0.5s 1; opacity:1;}
 .backRotate .price-service-anchor-box{opacity:0; }
 
 @keyframes rotateAni{

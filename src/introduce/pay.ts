@@ -27,19 +27,6 @@ function checkboxToggle() {
                     cardHoverBox[i].removeEventListener('mouseover', overEventHandler[i]);
                     cardHoverBox[i].removeEventListener('mouseout', outEventHandler[i]);
                     cardHoverBox[i].style.opacity = "0";
-                } else {
-                    if (priceContainer[i].classList.contains('cardRotate')) {
-                        priceContainer[i].classList.add('backRotate');
-                        priceContainer[i].classList.remove("cardRotate");
-                        cardHoverBox[i].addEventListener('mouseover', overEventHandler[i]);
-                        cardHoverBox[i].addEventListener('mouseout', outEventHandler[i]);
-                        cardHoverBox[i].style.opacity = "0";
-                    } else {
-                        priceContainer[i].classList.remove('backRotate');
-                        priceContainer[i].classList.add("cardRotate");
-                        cardHoverBox[i].removeEventListener('mouseover', overEventHandler[i]);
-                        cardHoverBox[i].removeEventListener('mouseout', outEventHandler[i]);
-                    }
                 }
             }
             current = i;
