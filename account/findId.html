@@ -25,7 +25,7 @@
                 </div>
                 <div class="main">
                     <div class="main-title">
-                        비밀번호 찾기
+                        아이디 찾기
                     </div>
                     <form id="find-form-phone">
                         <div class="find-container">
@@ -57,28 +57,16 @@
                             <button type="submit" class="btn find-btn" id="send">전송</button>
                         </div>
                     </form>
-                    <form id="find-form-pw" class="none">
+                    <form id="find-form-id" class="none">
                         <div class="find-container">
                             <div class="find-box">
                                 <div class="find-title-box">
-                                    <div class="find-title">비밀번호</div>
+                                    <div class="find-title">아이디</div>
                                 </div>
                                 <div class="find-input-box ">
-                                    <input type="password" id="password" required
-                                        pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$">
+                                    <input type="text" id="id" required>
                                     <div class="find-info-box">
-                                        8자리 이상 문자+숫자로 입력해주세요
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="find-box">
-                                <div class="find-title-box">
-                                    <div class="find-title">비밀번호 확인</div>
-                                </div>
-                                <div class="find-input-box">
-                                    <input type="password" id="password-check" required>
-                                    <div class="find-info-box">
-                                        비밀번호와 똑같이 입력해주세요
+                                        아이디는 최대 16자 이내로 작성해주세요.
                                     </div>
                                 </div>
                             </div>
@@ -95,6 +83,7 @@
     <script src="../base/js/headerHover.js"></script>
     <script src="js/find.js"></script>
     <script src="https://kit.fontawesome.com/e14b8c39aa.js" crossorigin="anonymous"></script>
+
 </body>
 
 </html>

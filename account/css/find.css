@@ -1,0 +1,82 @@
+  
+
+
+  .find-box{
+    display:flex;
+    width:100%;
+    height:7rem;
+    border-top:1px solid rgba(0,0,0,0.1);
+  }
+
+ .find-container .find-box:last-child{
+    border-bottom:1px solid rgba(0,0,0,0.1);
+}
+  
+  .find-title-box{
+    display:flex;
+    align-items: center;
+    justify-content:center;
+    width:25%;
+    padding:1rem;
+    border-right:1px solid rgba(0,0,0,0.1);
+    background-color: rgb(245,245,245);
+    font-size:1.6rem;
+  }
+  
+  .find-title{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .find-input-box{
+    display:flex;
+    align-items: center;
+    text-align: center;
+    width:75%;
+    padding:1rem;
+  }
+  
+  .find-input-box > input{
+    width:15rem;
+    height:3.4rem;
+  }
+  
+  .find-info-box{
+    padding:1rem;
+    font-size:1.4rem;
+  }
+
+  .find-btn-box{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height:20rem;
+  }
+
+  .find-btn {
+    width:14rem;
+    height: 4rem;
+    background-color: #09538e;
+    color:white;
+    font-size: 1.5rem;
+  }
+
+
+  .find-phone-box > select,
+  .find-phone-box > input{
+      height: 3.4rem;
+  }
+
+  .find-phone-box > select{
+      width: 6rem;
+  }
+
+  .find-phone-box > input{
+      width:12rem;
+  }
+
+  .dash{
+      padding:0 1rem;
+  }

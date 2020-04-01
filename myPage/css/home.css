@@ -104,7 +104,7 @@ font-size: 1.4rem;
   display: inline-block;
   width: 2.8rem;
   height: 2.8rem;
-  margin:0 0.5rem 0.3rem 0;
+  margin:0 0.5rem 0.5rem 0;
   border-radius: 50%;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
   color: white;
@@ -209,8 +209,13 @@ font-size: 1.4rem;
 
 
 @media (min-width: 0px) and (max-width: 767px) {
+
+  .mypage-info-box > li{
+    font-size:1.3rem;
+  }
+
   .mypage-info-box{
-    padding:1rem;
+    padding:0.5rem;
   }
 
 }
