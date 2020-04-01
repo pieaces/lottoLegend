@@ -178,7 +178,6 @@ exports.handler = async (event: any) => {
                         const postId = Number(event.pathParameters.postId);
                         const userName = await db.getUserName(postId);
                         await db.updateRecommends(postId, currentId);
-                        await addPoint(currentId, Point.recommend);
                         await addPoint(userName, Point.recommended);
                     } else {
                         statusCode = 400;
