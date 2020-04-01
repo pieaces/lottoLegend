@@ -38,12 +38,12 @@ document.write(` <header>
           <li> <a href="/introduce/campaign.html">캠페인</a> </li>
           <li> <a href="/introduce/system.html">베르누이 분석 시스템</a> </li>
           <li> <a href="/introduce/tool.html">베르누이 분석 툴</a> </li>
-          <li> <a href="/introduce/pay.html">결제</a> </li>
+          <li> <a href="/introduce/pay.html">프리미엄 멤버십</a> </li>
         </ul>
         <ul>
           <li> <a href="/system/experience.html">체험하기</a> </li>
           <li> <a href="/system/include.html">추천/제외수 생성기</a> </li>
-          <li> <a href="/system/basic.html">기본 툴</a> </li>
+          <li> <a href="/system/basic.html">기본 필터</a> </li>
           <li> <a href="/system/premium.html">베르누이 분석 툴</a> </li>
         </ul>
         <ul>
