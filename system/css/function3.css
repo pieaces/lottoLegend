@@ -65,6 +65,10 @@
   margin-bottom:1rem;
 }
 
+#include > .func3-select-num-box >.func3-select-num{
+  cursor: pointer;
+}
+
 .func3-select-num {
   display: flex;
   align-items: center;
@@ -77,7 +81,6 @@
   color: white;
   font-size:1.3rem;
   text-align: center;
-  cursor: pointer;
 }
 
 .func3-filter-table  tr:nth-child(1) >td{

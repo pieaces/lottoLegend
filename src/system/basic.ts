@@ -50,6 +50,23 @@ getAuthAPI('/numbers/piece', { flag: true })
         document.querySelector<HTMLElement>('.line-gen-round').textContent = total + '회';
         include && Layout3.makeLine(includeCanvas, include);
         exclude && Layout3.makeLine(excludeCanvas, exclude);
+
+        const includeNumsArr: number[] = [];
+        Array.from(includeCanvas.children).forEach(node => {
+            const numEl = node.firstElementChild as HTMLElement;
+            let flag = false;
+            numEl.addEventListener('click', () => {
+                if (!flag) {
+                    numEl.style.border = "5px solid rgb(134, 0, 6)";
+                    includeNumsArr.push(Number(numEl.textContent));
+                } else {
+                    numEl.style.border = "none";
+                    includeNumsArr.splice(includeNumsArr.indexOf(Number(numEl.textContent)), 1);
+                }
+                flag = !flag;
+            })
+        })
+
         SaveBtn.init(Tool.free);
 
         document.getElementById('make').addEventListener('click', async () => {
