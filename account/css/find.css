@@ -38,7 +38,7 @@
     padding:1rem;
   }
   
-  .find-input-size > input{
+  .find-input-box > input{
     width:15rem;
     height:3.4rem;
   }
@@ -48,6 +48,13 @@
     font-size:1.4rem;
   }
 
+  .find-btn-box{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height:20rem;
+  }
+
   .find-btn {
     width:14rem;
     height: 4rem;
@@ -55,10 +62,21 @@
     color:white;
     font-size: 1.5rem;
   }
-  
-  .find-btn-box{
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    height:20rem;
+
+
+  .find-phone-box > select,
+  .find-phone-box > input{
+      height: 3.4rem;
+  }
+
+  .find-phone-box > select{
+      width: 6rem;
+  }
+
+  .find-phone-box > input{
+      width:12rem;
+  }
+
+  .dash{
+      padding:0 1rem;
   }
