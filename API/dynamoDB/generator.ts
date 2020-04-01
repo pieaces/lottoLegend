@@ -25,9 +25,8 @@ function doesExist(one: number[], other: number[]) {
     }
     return flag;
 }
-async function generateNumberA(userName: string) {
+async function generateNumberA(userName: string, include:number[]) {
     const currentRound = getCurrentRound() + 1;
-    const include = await getIncOrExcNumbers(userName, currentRound, 'include');
     const exclude = await getIncOrExcNumbers(userName, currentRound, 'exclude');
     const choice: number[] = makeChoice(exclude);
 
@@ -36,13 +35,11 @@ async function generateNumberA(userName: string) {
     while (numsArr.length < 5) {
         const numberSet: Set<number> = new Set();
 
-        if (include.length === 1) numberSet.add(include[0]);
+        include && include.forEach(num => numberSet.add(num));
         while (numberSet.size < 6) numberSet.add(choice[Math.floor(Math.random() * SIZE)]);
-        const numbers = [...numberSet].sort((a, b) => a - b);
+        const numbers = [...numberSet].sort((a, b) => a - b).slice(0,6);
 
-        if (include.length > 1) {
-            if (doesExist(numbers, include)) numsArr.push(numbers);
-        } else numsArr.push(numbers);
+        numsArr.push(numbers);
     }
 
     return numsArr;
@@ -58,34 +55,25 @@ function compartByLine(numbers: number[]) {
 
     return result;
 }
-async function generateNumberB(userName: string, lineCount?: number[]) {
+async function generateNumberB(userName: string, lineCount?: number[], include?:number[]) {
     const currentRound = getCurrentRound() + 1;
-    const include = await getIncOrExcNumbers(userName, currentRound, 'include');
     const exclude = await getIncOrExcNumbers(userName, currentRound, 'exclude');
-    const choice: number[] = makeChoice(exclude);
+    const choice: number[][] = compartByLine(makeChoice(exclude));
 
-    const compart = {
-        choice: compartByLine(choice),
-        include: compartByLine(include),
-    };
-
+    const includeCompart = include && compartByLine(include);
     const numsArr: number[][] = [];
     while (numsArr.length < 5) {
-        let includeFlag = false;
         const numbers: number[] = [];
         for (let i = 0; i < 5; i++) {
             const set = new Set<number>();
+            includeCompart && includeCompart[i] && includeCompart[i].forEach(num => set.add(num));
             while (set.size < lineCount[i]) {
-                set.add(compart.choice[i][Math.floor(Math.random() * compart.choice[i].length)]);
+                set.add(choice[i][Math.floor(Math.random() * choice[i].length)]);
             }
             numbers.push(...[...set]);
-            if (include.length > 0 && !includeFlag && compart.include[i] && lineCount[i] > 0) {
-                includeFlag = doesExist(numbers, compart.include[i]);
-            }
+
         }
-        if (includeFlag || include.length === 0) {
-            numsArr.push(numbers.sort((a, b) => a - b));
-        }
+        numsArr.push(numbers.sort((a, b) => a - b));
     }
 
     return numsArr;
@@ -130,10 +118,11 @@ export function numbersToData(numbers:number[], lottoData:{BonusNum:{N:string}, 
     }
 }
 
-export async function freeGenerator(userName: string, lineCount?: number[]) {
+export async function freeGenerator(userName: string, param?:{lineCount?: number[], include?:number[]}) {
     let numsArr: number[][];
-    if (!lineCount) numsArr = await generateNumberA(userName);
-    else numsArr = await generateNumberB(userName, lineCount);
+    const {lineCount, include} = param;
+    if (!lineCount) numsArr = await generateNumberA(userName, include);
+    else numsArr = await generateNumberB(userName, lineCount, include);
     const lottoData = await scanLotto();
 
     return numsArr.map((numbers) => {
