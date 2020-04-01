@@ -1,7 +1,7 @@
 import configure from '../amplify/configure'
 import Layout3 from './premium/Layout/Layout3'
 import NumBoard from './premium/Layout/NumBoard';
-import { getAuthAPI, getUnAuthAPI } from '../amplify/api';
+import { getAuthAPI, getUnAuthAPI, postAuthAPI } from '../amplify/api';
 import Swal from 'sweetalert2'
 import { actualInstance, selectionInstance, latestInstance } from './stackInstances';
 import SaveBtn, { Tool } from './premium/instanceBtns/SaveBtn';
@@ -70,60 +70,51 @@ getAuthAPI('/numbers/piece', { flag: true })
         SaveBtn.init(Tool.free);
 
         document.getElementById('make').addEventListener('click', async () => {
-            if (!lineCheck || lineCheck && sum() === 6) {
-                generatorLoading(1250);
-                if (lineCheck) {
-                    const lineCount = [Number(first.value), Number(tenth.value), Number(twentieth.value), Number(thirtieth.value), Number(fortieth.value)];
-                    const choice = makeChoice(exclude);
-                    const compart = {
-                        choice: compartByLine(choice),
-                        include: compartByLine(include),
-                    };
-                    let choiceFlag = true;
-                    let includeFlag = false;
-                    for (let i = 0; i < 5; i++) {
-                        if (!compart.choice[i] && lineCount[i] || compart.choice[i] && compart.choice[i].length < lineCount[i]) {
-                            choiceFlag = false;
-                            break;
-                        }
-                        if (!includeFlag && compart.include[i] && lineCount[i] > 0) {
-                            includeFlag = doesExist(compart.choice[i], compart.include[i]);
-                        }
-                    }
-                    if (!choiceFlag) {
-                        alertEffect();
-                        Swal.fire({
-                            title: '오류',
-                            text: '현재의 제외번호로는 조합될 수 없는 구간개수 조건입니다.',
-                            icon: 'error'
-                        });
-                    }
-                    else if (include && include.length > 0 && !includeFlag) {
-                        alertEffect();
-                        Swal.fire({
-                            title: '오류',
-                            text: '현재의 추천번호가 절대 나올 수 없는 구간개수 조건입니다.',
-                            icon: 'error'
-                        });
-                    }
-                    else {
-                        lineInputTable.style.border = "";
-                        const dataSet = await getAuthAPI('/numbers/generator/free', { lineCount: JSON.stringify(lineCount) });
-                        console.log(dataSet);
-                        const numBoard = new NumBoard(dataSet);
-                        numBoard.makeNumBoard();
+            console.log(includeNumsArr.length > 0, exclude.some(num => includeNumsArr.some(fix => fix === num)));
+            if (includeNumsArr.length > 0 && (exclude && exclude.length > 0 && exclude.some(num => includeNumsArr.some(fix => fix === num)))) {
+                alertEffect();
+                Swal.fire({
+                    title: '오류',
+                    text: '고정수는 제외수가 될 수 없습니다. 다시 지정해주세요.',
+                    icon: 'error'
+                });
+            } else if (lineCheck && sum() === 6) {
+                const lineCount = [Number(first.value), Number(tenth.value), Number(twentieth.value), Number(thirtieth.value), Number(fortieth.value)];
 
-                        makeCheckdValueBox();
+                const choiceCompart = compartByLine(makeChoice(exclude));
+                const includeCompart = compartByLine(includeNumsArr);
+                let choiceFlag = true;
+                let includeFlag = true;
 
-                        checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
-                        checkBoxToggle.addEvent();
-                        CheckBoxToggle.allCheckedReset();
-
+                for (let i = 0; i < 5; i++) {
+                    if (!choiceCompart[i] && lineCount[i] || choiceCompart[i] && choiceCompart[i].length < lineCount[i]) {
+                        choiceFlag = false;
+                        break;
                     }
-                } else {
+                    if(includeCompart[i] && includeCompart[i].length > lineCount[i]){
+                        includeFlag = false;
+                        break;
+                    }
+                }
+                if (!choiceFlag) {
+                    alertEffect();
+                    Swal.fire({
+                        title: '오류',
+                        text: '현재의 제외수로는 조합될 수 없는 구간개수 조건입니다.',
+                        icon: 'error'
+                    });
+                } else if(!includeFlag){
+                    alertEffect();
+                    Swal.fire({
+                        title: '오류',
+                        text: '고정수가 구간개수 조건과 충돌합니다.',
+                        icon: 'error'
+                    });
+                }else {
+                    generatorLoading(1250);
+
                     lineInputTable.style.border = "";
-                    const dataSet = await getAuthAPI('/numbers/generator/free');
-                    console.log(dataSet);
+                    const dataSet = await postAuthAPI('/numbers/generator/free', { lineCount, include:includeNumsArr });
                     const numBoard = new NumBoard(dataSet);
                     numBoard.makeNumBoard();
                     makeCheckdValueBox();
@@ -132,13 +123,27 @@ getAuthAPI('/numbers/piece', { flag: true })
                     checkBoxToggle.addEvent();
                     CheckBoxToggle.allCheckedReset();
                 }
-            } else {
+            } else if (lineCheck && sum() !== 6) {
                 alertEffect();
                 Swal.fire({
                     title: '알림',
                     text: '구간개수의 합이 6이 되어야합니다',
                     icon: 'info'
                 });
+            }
+            else if (!lineCheck) {
+                generatorLoading(1250);
+
+                lineInputTable.style.border = "";
+                const dataSet = await postAuthAPI('/numbers/generator/free', {include: includeNumsArr});
+                console.log(dataSet);
+                const numBoard = new NumBoard(dataSet);
+                numBoard.makeNumBoard();
+                makeCheckdValueBox();
+
+                checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
+                checkBoxToggle.addEvent();
+                CheckBoxToggle.allCheckedReset();
             }
         });
     });
@@ -251,7 +256,7 @@ function doesExist(one: number[], other: number[]) {
     return flag;
 }
 function compartByLine(numbers: number[]) {
-    const result = new Array(5);
+    const result:number[][] = new Array(5);
     numbers && numbers.forEach(num => {
         const index = Math.floor((num - 1) / 10);
         if (result[index])
@@ -262,7 +267,7 @@ function compartByLine(numbers: number[]) {
     return result;
 }
 function makeChoice(exclude: number[]) {
-    const choice = [];
+    const choice:number[] = [];
     if (exclude && exclude.length > 0) {
         exclude.forEach((num, index) => {
             for (let i = exclude[index - 1] + 1 || 1; i < num; i++)

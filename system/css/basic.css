@@ -28,17 +28,3 @@
     line-height: 1.8;
     cursor: auto;
 }
-
-.code-block{
-    display: block;
-    padding: 8px;
-    margin: 0 0 10px;
-    border: 1px solid #e1e1e1;
-    border-radius: 2px;
-    background-color: #f9f9f9;
-    color: #666;
-    line-height: 1.45;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    overflow: visible;
-}
