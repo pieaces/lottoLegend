@@ -4,7 +4,7 @@ import { headerSign, isLogedIn } from './amplify/auth';
 configure();
 headerSign();
 
-const main111Img = document.querySelector<HTMLElement>('.main-1-1-1 > img');
+const main111Img = document.querySelector<HTMLElement>('.main-1-1-1 > a');
 const imgBtn = document.querySelectorAll('.img-btn > i');
 
 document.querySelector<HTMLElement>('.login-btn').onclick = () => {
@@ -18,7 +18,21 @@ function backgroundImgSlide() {
     let i = 2;
 
     const slideIntervalId = setInterval(() => {
-        main111Img.setAttribute('src', `img/${i}.png`);
+        switch (i) {
+            case 0:
+                main111Img.setAttribute('href', 'introduce/campaign.html');
+                break;
+            case 1:
+                main111Img.setAttribute('href', 'introduce/system.html');
+                break;
+            case 2:
+                main111Img.setAttribute('href', 'introduce/pay.html');
+                break;
+            case 3:
+                main111Img.setAttribute('href', '#');
+                break;
+        }
+        main111Img.firstElementChild.setAttribute('src', `img/${i}.png`);
 
         if (i === 1) {
             imgBtn[i - 1].classList.remove('fas');
@@ -40,7 +54,21 @@ function backgroundImgSlide() {
 
     for (let node = 0; node < imgBtn.length; node++) {
         imgBtn[node].addEventListener('click', () => {
-            main111Img.setAttribute('src', `img/${node + 1}.png`);
+            switch (node) {
+                case 0:
+                    main111Img.setAttribute('href', 'introduce/campaign.html');
+                    break;
+                case 1:
+                    main111Img.setAttribute('href', 'introduce/system.html');
+                    break;
+                case 2:
+                    main111Img.setAttribute('href', 'introduce/pay.html');
+                    break;
+                case 3:
+                    main111Img.setAttribute('href', '#');
+                    break;
+            }
+            main111Img.firstElementChild.setAttribute('src', `img/${node + 1}.png`);
             for (let i = 0; i < imgBtn.length; i++) {
                 imgBtn[i].classList.add('fas');
                 imgBtn[i].classList.remove('far');

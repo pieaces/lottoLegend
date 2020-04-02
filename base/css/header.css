@@ -201,40 +201,29 @@
   z-index:97;
   width:100%;
   height: 16rem;
-  border-bottom:1px solid #09538e;
+  margin-top:0.1rem;
+  border-bottom:2px solid #09538e;
   background-color:white;
 }
 
-.hover-menu-box-container{
-  position: relative;
-}
-
-.hover-menu-box{
-  display:flex;
-  position: absolute;
-  top:0;
-  left:18rem;
-  width: 60%;
-}
-
-.hover-menu-box >ul{
+.hover-menu-container >ul{
   flex:1;
   display:flex;
   flex-direction: column;
   border-left:1px solid rgb(210,210,210);
 }
 
-.hover-menu-box >ul:last-child{
+.hover-menu-container >ul:last-child{
   border-right:1px solid rgb(210,210,210);
 }
 
-.hover-menu-box > ul > li{
+.hover-menu-container > ul > li{
   height:4rem;
   color:rgb(97, 97, 97);
   text-align: center;
 }
 
-.hover-menu-box > ul > li >a{
+.hover-menu-container > ul > li >a{
   display: inline-block;
   color:rgb(97, 97, 97);
   height: 100%;
@@ -308,6 +297,7 @@
       position: static;
       width: 100%;
       height: 50%;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
       background-color: white;
     }
 

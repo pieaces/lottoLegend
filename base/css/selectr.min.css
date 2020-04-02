@@ -25,7 +25,7 @@
 }
 
 .selectr-input{
-    width: calc(100%-1rem);
+    width: calc(100% - 1rem);
     height:4rem;
     margin:1rem 1rem;
     padding:1rem;
@@ -45,6 +45,11 @@
 
     .selectr-selected{
         height: 3.5rem;
+    }
+
+    .selectr-input{
+        width: calc(100%);
+        margin:1rem 0.5rem;
     }
 
   }

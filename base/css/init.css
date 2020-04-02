@@ -273,9 +273,13 @@ html{
   }
 
   .rank{
-    width:1.6rem;
-    height:1.8rem;
-    font-size:1.2rem;
+    width:1.4rem;
+    height:1.6rem;
+    margin-top:-0.2rem;
+  }
+
+  .rank-text{
+    font-size: 1.1rem;
   }
 }
 

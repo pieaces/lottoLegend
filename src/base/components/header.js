@@ -1,4 +1,4 @@
-document.write(` <header>
+document.write(`  <header>
 <nav class="mid-nav-container">
   <div class="click-menu-container">
     <ul class="click-menu-box click-menu-introduce none">
@@ -31,35 +31,6 @@ document.write(` <header>
     <div class="click-menu-toggle none">더보기</div>
   </div>
 
-  <div class="hover-menu-container none">
-    <div class="container hover-menu-box-container">
-      <div class="hover-menu-box">
-        <ul>
-          <li> <a href="/introduce/campaign.html">캠페인</a> </li>
-          <li> <a href="/introduce/system.html">베르누이 분석 시스템</a> </li>
-          <li> <a href="/introduce/tool.html">베르누이 분석 툴</a> </li>
-          <li> <a href="/introduce/pay.html">프리미엄 멤버십</a> </li>
-        </ul>
-        <ul>
-          <li> <a href="/system/experience.html">체험하기</a> </li>
-          <li> <a href="/system/include.html">추천/제외수 생성기</a> </li>
-          <li> <a href="/system/basic.html">기본 필터</a> </li>
-          <li> <a href="/system/premium.html">베르누이 분석 툴</a> </li>
-        </ul>
-        <ul>
-          <li> <a href="/statistics/weekNumbers.html">금주의 제외번호</a> </li>
-          <li> <a href="/board/analysis/list.html">공유 게시판</a> </li>
-          <li> <a href="/statistics/winNumbers.html">당첨번호</a> </li>
-          <li> <a href="/statistics/statistics.html?method=excludedLineCount">통계자료</a> </li>
-        </ul>
-        <ul>
-          <li> <a href="/board/notice/list.html">공지사항</a> </li>
-          <li> <a href="/board/win/list.html">당첨인증 게시판</a> </li>
-          <li> <a href="/board/free/list.html">자유게시판</a> </li>
-        </ul>
-      </div>
-    </div>
-  </div>
   <div class="container mid-nav">
     <div class="mid-nav-mobile-box">
       <h1 class="mid-nav-logo">
@@ -92,9 +63,32 @@ document.write(` <header>
       <li> <a href="#">시스템</a> </li>
       <li> <a href="#">분석실</a> </li>
       <li> <a href="#">커뮤니티</a> </li>
+      <div class="hover-menu-container none">
+        <ul>
+          <li> <a href="/introduce/campaign.html">캠페인</a> </li>
+          <li> <a href="/introduce/system.html">베르누이 분석 시스템</a> </li>
+          <li> <a href="/introduce/tool.html">베르누이 분석 툴</a> </li>
+          <li> <a href="/introduce/pay.html">프리미엄 멤버십</a> </li>
+        </ul>
+        <ul>
+          <li> <a href="/system/experience.html">체험하기</a> </li>
+          <li> <a href="/system/include.html">추천/제외수 생성기</a> </li>
+          <li> <a href="/system/basic.html">기본 필터</a> </li>
+          <li> <a href="/system/premium.html">베르누이 분석 툴</a> </li>
+        </ul>
+        <ul>
+          <li> <a href="/statistics/weekNumbers.html">금주의 제외번호</a> </li>
+          <li> <a href="/board/analysis/list.html">공유 게시판</a> </li>
+          <li> <a href="/statistics/winNumbers.html">당첨번호</a> </li>
+          <li> <a href="/statistics/statistics.html?method=excludedLineCount">통계자료</a> </li>
+        </ul>
+        <ul>
+          <li> <a href="/board/notice/list.html">공지사항</a> </li>
+          <li> <a href="/board/win/list.html">당첨인증 게시판</a> </li>
+          <li> <a href="/board/free/list.html">자유게시판</a> </li>
+        </ul>
+      </div>
     </ul>
-
-
   </div>
 </div>
 </nav>

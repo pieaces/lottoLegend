@@ -216,6 +216,7 @@
 .board-box > div:not(.board-title){
   display:inline-block;
   height:3rem;
+  color:rgb(80, 80, 80);
   font-size:1.1rem;
 }
 
