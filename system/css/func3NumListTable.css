@@ -19,6 +19,7 @@
     width:12.5%;
     font-size:1.3rem;
     text-align: center;
+    word-break: keep-all;
   }
   .func3-list-filter-table tr:nth-child(1){
     height:2rem;

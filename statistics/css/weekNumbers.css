@@ -69,6 +69,7 @@
       width: 3.5rem;
       height: 3.5rem;
     border-radius: 50%;
+    box-shadow: 1px 1px 3px rgba(97, 87, 87, 0.4);
     background-color: #09538e;
     color: white;
   }

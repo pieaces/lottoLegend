@@ -88,7 +88,6 @@
 
 .mid-nav-info-text{
   position: relative;
-  /* width: 10rem; */
   padding-right: 2rem;
   cursor: pointer;
 }
@@ -100,8 +99,6 @@
   font-size:1.6rem;
   cursor: pointer;
 }
-
-
 
 .mid-nav-info {
   display:flex;
