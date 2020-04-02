@@ -4,19 +4,21 @@ import { headerSign, isLogedIn } from './amplify/auth';
 configure();
 headerSign();
 
-const main11 = document.querySelector()
+const main111 = document.querySelector<HTMLElement>('.main-1-1-1');
 const imgBtn = document.querySelectorAll('.img-btn > i');
 
 document.querySelector<HTMLElement>('.login-btn').onclick = () => {
 
 }
 
+backgroundImgSlide();
+
 function backgroundImgSlide() {
 
     let i = 2;
 
     const slideIntervalId = setInterval(() => {
-        mainBackground.style.backgroundImage = `url(../img/main-background${i}.jpeg)`;
+        main111.style.backgroundImage = `url(img/${i}.png)`;
 
         if (i === 1) {
             imgBtn[i - 1].classList.remove('fas');
@@ -38,7 +40,7 @@ function backgroundImgSlide() {
 
     for (let node = 0; node < imgBtn.length; node++) {
         imgBtn[node].addEventListener('click', () => {
-            mainBackground.style.backgroundImage = `url(../img/main-background${node + 1}.jpeg)`;
+            main111.style.backgroundImage = `url(img/${node + 1}.png)`;
             for (let i = 0; i < imgBtn.length; i++) {
                 imgBtn[i].classList.add('fas');
                 imgBtn[i].classList.remove('far');

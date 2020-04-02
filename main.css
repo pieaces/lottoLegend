@@ -15,10 +15,12 @@
   position: relative;
   width:70%;
   margin-right:0.6rem;
+  background-image: url(img/1.png);
+  transition: ease-in-out background 1s;
 }
 
 .img-btn {
-  color: var(--main-color);
+  color: white;
   position: absolute;
   top: 73%;
   left: 47%;
