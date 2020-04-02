@@ -1,4 +1,4 @@
-import { setColorLotto, setDefaultColor } from "../../functions";
+import { setColorLotto, setDefaultColor, setDisabledLotto } from "../../functions";
 
 type IncExc = "include" | "exclude";
 export default class IncludeExclude {
@@ -43,7 +43,13 @@ export default class IncludeExclude {
                     numDiv.classList.add('mypage-num');
                     const num = document.createElement('div');
                     num.textContent = this.numbers[DIVIDE * i + j].toString();
-                    setColorLotto(this.numbers[DIVIDE * i + j], num);
+                    if(!IncludeExclude.answer) setColorLotto(this.numbers[DIVIDE * i + j], num);
+                    else if(this.choice === 'include' && IncludeExclude.answer.some(num => num === this.numbers[DIVIDE*i + j])){
+                        setColorLotto(this.numbers[DIVIDE * i + j], num);
+                    } else if(this.choice === 'exclude' && !IncludeExclude.answer.some(num => num === this.numbers[DIVIDE*i + j])){
+                        setColorLotto(this.numbers[DIVIDE * i + j], num);
+                    }
+                    else setDisabledLotto(num);
                     numDiv.appendChild(num);
                     numBox.appendChild(numDiv);
                 }
