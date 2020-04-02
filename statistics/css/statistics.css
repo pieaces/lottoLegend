@@ -144,8 +144,14 @@
   }
 
   .stats-box{
+    display:block;
     width:30%;
     height:7rem;
+  }
+
+  .stats-box>div{
+    width: 100%;
+    height: 50%;
   }
 
   .chart-container{

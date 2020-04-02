@@ -91,7 +91,7 @@ getAuthAPI('/numbers/piece', { flag: true })
                         choiceFlag = false;
                         break;
                     }
-                    if(includeCompart[i] && includeCompart[i].length > lineCount[i]){
+                    if (includeCompart[i] && includeCompart[i].length > lineCount[i]) {
                         includeFlag = false;
                         break;
                     }
@@ -103,18 +103,18 @@ getAuthAPI('/numbers/piece', { flag: true })
                         text: '현재의 제외수로는 조합될 수 없는 구간개수 조건입니다.',
                         icon: 'error'
                     });
-                } else if(!includeFlag){
+                } else if (!includeFlag) {
                     alertEffect();
                     Swal.fire({
                         title: '오류',
                         text: '고정수가 구간개수 조건과 충돌합니다.',
                         icon: 'error'
                     });
-                }else {
+                } else {
                     generatorLoading(1250);
 
                     lineInputTable.style.border = "";
-                    const dataSet = await postAuthAPI('/numbers/generator/free', { lineCount, include:includeNumsArr });
+                    const dataSet = await postAuthAPI('/numbers/generator/free', { lineCount, include: includeNumsArr });
                     const numBoard = new NumBoard(dataSet);
                     numBoard.makeNumBoard();
                     makeCheckdValueBox();
@@ -135,7 +135,7 @@ getAuthAPI('/numbers/piece', { flag: true })
                 generatorLoading(1250);
 
                 lineInputTable.style.border = "";
-                const dataSet = await postAuthAPI('/numbers/generator/free', {include: includeNumsArr});
+                const dataSet = await postAuthAPI('/numbers/generator/free', { include: includeNumsArr });
                 console.log(dataSet);
                 const numBoard = new NumBoard(dataSet);
                 numBoard.makeNumBoard();
@@ -256,7 +256,7 @@ function doesExist(one: number[], other: number[]) {
     return flag;
 }
 function compartByLine(numbers: number[]) {
-    const result:number[][] = new Array(5);
+    const result: number[][] = new Array(5);
     numbers && numbers.forEach(num => {
         const index = Math.floor((num - 1) / 10);
         if (result[index])
@@ -267,7 +267,7 @@ function compartByLine(numbers: number[]) {
     return result;
 }
 function makeChoice(exclude: number[]) {
-    const choice:number[] = [];
+    const choice: number[] = [];
     if (exclude && exclude.length > 0) {
         exclude.forEach((num, index) => {
             for (let i = exclude[index - 1] + 1 || 1; i < num; i++)

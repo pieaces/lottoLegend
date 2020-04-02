@@ -3,7 +3,7 @@ import { getAuthAPI, deleteAuthAPI } from '../amplify/api';
 import CheckBoxToggle from '../system/premium/instanceBtns/CheckBoxToggle';
 import Selectr, { IOptions } from 'mobius1-selectr';
 import { headerSign } from '../amplify/auth';
-import { makeTable,modifyTableBoundary } from './functions';
+import { makeTable, modifyTableBoundary } from './functions';
 import { networkAlert } from '../functions';
 import { makeCheckdValueBox } from '../system/premium/Layout/functions'
 import Swal from 'sweetalert2';
@@ -53,6 +53,7 @@ getAuthAPI('/numbers/mass')
                 searchable: false
             };
 
+
             const roundSelect = new Selectr(roundSelectBox, roundConfig);
             const toolSelect = new Selectr(toolSelectBox, toolConfig);
             const methodSelect = new Selectr(methodSelectBox, methodConfig);
@@ -88,14 +89,14 @@ getAuthAPI('/numbers/mass')
                         });
                         console.log(indexes);
                         try {
-                            loading.classList.remove('none');                            
-                           
-                            await deleteAuthAPI('/numbers/mass/' + currentRound, { numsArr });                    
+                            loading.classList.remove('none');
+
+                            await deleteAuthAPI('/numbers/mass/' + currentRound, { numsArr });
                             indexes.forEach(index => {
                                 numbersContainer[index].remove();
                                 filterBoxes[index].remove();
                             });
-                            modifyTableBoundary();    
+                            modifyTableBoundary();
                             numListSelectCurrent.textContent = '0';
                             numListSelectTotal.textContent = (Number(numListSelectTotal.textContent) - indexes.length).toString();
                             Swal.fire({
@@ -126,7 +127,7 @@ getAuthAPI('/numbers/mass')
                 makeTable(tableNumBox, result.data, result.rounds[0], true, result.answer);
                 checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
                 CheckBoxToggle.allCheckedReset();
-
+                document.querySelector('#num-list-select-total').textContent = document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox').length.toString();
                 loading.classList.add('none');
             });
             toolSelect.on('selectr.change', async (option) => {
@@ -149,7 +150,7 @@ getAuthAPI('/numbers/mass')
                 makeTable(tableNumBox, result.data, result.rounds[0], true, result.answer);
                 checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
                 CheckBoxToggle.allCheckedReset();
-
+                document.querySelector('#num-list-select-total').textContent = document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox').length.toString();
                 loading.classList.add('none');
             });
             methodSelect.on('selectr.change', async (option) => {
@@ -166,7 +167,7 @@ getAuthAPI('/numbers/mass')
                 makeTable(tableNumBox, result.data, result.rounds[0], true, result.answer);
                 checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
                 CheckBoxToggle.allCheckedReset();
-
+                document.querySelector('#num-list-select-total').textContent = document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox').length.toString();
                 loading.classList.add('none');
             });
 
@@ -174,7 +175,7 @@ getAuthAPI('/numbers/mass')
             const checkBoxToggle = new CheckBoxToggle();
             checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
             checkBoxToggle.addEvent();
-             makeCheckdValueBox();
+            makeCheckdValueBox();
             numInfoToggleBtn.addEventListener('click', numInfoToggle());
 
         } else {
@@ -187,7 +188,8 @@ getAuthAPI('/numbers/mass')
         }
     }).catch(err => {
         console.log(err);
-        networkAlert()})
+        networkAlert()
+    })
     .finally(() => loading.classList.add('none'));
 
 function numInfoToggle() {

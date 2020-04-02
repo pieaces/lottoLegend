@@ -17,7 +17,7 @@ function makePastTable(winner: number[]) {
     pastWinTable.classList.add('func3-past-win-table');
     const pastWinTableTr = document.createElement('tr');
     const pastWinTableTdFirst = document.createElement('td');
-    pastWinTableTdFirst.textContent = "역대기록";
+    pastWinTableTdFirst.textContent = "역대 기록";
 
     pastWinTableTr.appendChild(pastWinTableTdFirst);
 
@@ -49,11 +49,11 @@ function makeFilterTable(data: Stats) {
     listFilterTable.classList.add('func3-list-filter-table');
 
     const listFilterTableMap = new Map([
-        ["저값개수", data["lowCount"]],
-        ["번호합계", data["sum"]],
-        ["홀수개수", data["oddCount"]],
-        ["소수개수", data["primeCount"]],
-        ["3배수개수", data["$3Count"]],
+        ["저값 개수", data["lowCount"]],
+        ["번호 합계", data["sum"]],
+        ["홀수 개수", data["oddCount"]],
+        ["소수 개수", data["primeCount"]],
+        ["3배수 개수", data["$3Count"]],
         ["첫수 합", data["sum$10"]],
         ["고저 차", data["diffMaxMin"]],
         ["AC", data["AC"]]
@@ -89,13 +89,13 @@ export function makeCheckdValueBox() {
     const numListSelectTotal = document.querySelector('#num-list-select-total');
     const numListSelectCurrent = document.querySelector('#num-list-select-current');
     const allCheckBox = document.querySelector<HTMLInputElement>('#all-check');
-    const checkboxes = document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox') ;
-    let checkedCurrentValue =null;
+    const checkboxes = document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox');
+    let checkedCurrentValue = null;
 
     numListSelectCurrent.textContent = "0";
     numListSelectTotal.textContent = checkboxes.length.toString();
     Array.from(checkboxes).forEach((node) => {
-        node.addEventListener('change', () => {  
+        node.addEventListener('change', () => {
             if (node.checked) {
                 checkedCurrentValue++;
             } else {
@@ -103,12 +103,11 @@ export function makeCheckdValueBox() {
             }
             numListSelectCurrent.textContent = checkedCurrentValue.toString();
         })
-
     })
     allCheckBox.addEventListener('change', () => {
-        
+
         if (allCheckBox.checked) {
-            checkedCurrentValue=document.querySelectorAll('.input-checkbox-container > .checkbox').length;
+            checkedCurrentValue = document.querySelectorAll('.input-checkbox-container > .checkbox').length;
             numListSelectCurrent.textContent = checkedCurrentValue.toString();
         } else {
             checkedCurrentValue = 0;
@@ -116,33 +115,33 @@ export function makeCheckdValueBox() {
         }
     })
 
-    if(document.querySelector('.save-btn')){
-    document.querySelector('.save-btn').addEventListener('click',()=>{
-        checkedCurrentValue=0;
-    })
-}
-    if(document.querySelector('.mypage-num-delete-btn')){
-        document.querySelector('.mypage-num-delete-btn').addEventListener('click',()=>{
-            checkedCurrentValue=0;
+    if (document.querySelector('.save-btn')) {
+        document.querySelector('.save-btn').addEventListener('click', () => {
+            checkedCurrentValue = 0;
         })
-}
+    }
+    if (document.querySelector('.mypage-num-delete-btn')) {
+        document.querySelector('.mypage-num-delete-btn').addEventListener('click', () => {
+            checkedCurrentValue = 0;
+        })
+    }
 
 }
 
-export function modifyBoundary(){
-    const numContainer=document.querySelectorAll('.func3-num-container');
-    const numListBoundary=document.querySelectorAll('.boundary-line');
+export function modifyBoundary() {
+    const numContainer = document.querySelectorAll('.func3-num-container');
+    const numListBoundary = document.querySelectorAll('.boundary-line');
 
-    for(let i=0;i<numListBoundary.length;i++){
+    for (let i = 0; i < numListBoundary.length; i++) {
         numListBoundary[i].remove();
     }
 
-    for(let i=0;i<numContainer.length;i++){
+    for (let i = 0; i < numContainer.length; i++) {
         if (i !== 0 && (i + 1) % 5 === 0) {
             const div = document.createElement('div');
             div.classList.add('boundary-line');
             numContainer[i].appendChild(div);
         }
     }
-   
+
 }

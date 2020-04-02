@@ -4,6 +4,6 @@ import { headerSign, isLogedIn } from './amplify/auth';
 configure();
 headerSign();
 
-document.querySelector<HTMLElement>('.login-btn').onclick = () =>{
-    
+document.querySelector<HTMLElement>('.login-btn').onclick = () => {
+
 }
