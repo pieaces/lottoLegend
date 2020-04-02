@@ -1,5 +1,5 @@
 import Selectr, { IOptions } from 'mobius1-selectr';
-import { setColorLotto, networkAlert } from '../functions/index';
+import { setColorLotto, networkAlert, setDisabledLotto } from '../functions/index';
 import { headerSign } from '../amplify/auth';
 import configure from '../amplify/configure';
 import { getUnAuthAPI } from '../amplify/api';
@@ -64,32 +64,25 @@ function makeTable(dataSet: ({ round: string, numbers: number[], hits?: boolean[
         rightNumWeekHitBox.classList.add('num-week-hit-box');
 
         for (let j = 0; j < dataSet[i].numbers.length; j++) {
+            const numWeekNum = document.createElement('div');
+            numWeekNum.classList.add('num-week-num');
+            const num = document.createElement('div');
+            num.textContent = dataSet[i].numbers[j].toString();
+            numWeekNum.appendChild(num);
+
             if (j <= 4) {
-                const numWeekNum = document.createElement('div');
-                numWeekNum.classList.add('num-week-num');
-
-                const num = document.createElement('div');
-                num.textContent = dataSet[i].numbers[j].toString();
-                setColorLotto(dataSet[i].numbers[j], num);
-
-                numWeekNum.appendChild(num);
                 leftNumWeekNumBox.appendChild(numWeekNum);
                 leftNumWeekBox.appendChild(leftNumWeekNumBox);
             }
             else {
-                const numWeekNum = document.createElement('div');
-                numWeekNum.classList.add('num-week-num');
-
-                const num = document.createElement('div');
-                num.textContent = dataSet[i].numbers[j].toString();
-                setColorLotto(dataSet[i].numbers[j], num);
-
-                numWeekNum.appendChild(num);
                 rightNumWeekNumBox.appendChild(numWeekNum);
                 rightNumWeekBox.appendChild(rightNumWeekNumBox);
             }
-        }
 
+            if(dataSet[i].hits && dataSet[i].hits[j]) setColorLotto(dataSet[i].numbers[j], num);
+            else if(!dataSet[i].hits) setColorLotto(dataSet[i].numbers[j], num);
+            else setDisabledLotto(num);
+        }
 
         if (!dataSet[i].hits) {
             section.appendChild(leftNumWeekBox);
@@ -102,9 +95,7 @@ function makeTable(dataSet: ({ round: string, numbers: number[], hits?: boolean[
             adBox.classList.add('ad-box', 'box-color');
             numWeekWrapper.appendChild(adBox);
         } else {
-
             let hitsTotal = 0;
-
             for (let j = 0; j < dataSet[i].hits.length; j++) {
                 const hit = document.createElement('div');
                 if (dataSet[i].hits[j]) {
@@ -118,7 +109,6 @@ function makeTable(dataSet: ({ round: string, numbers: number[], hits?: boolean[
                 } else {
                     rightNumWeekHitBox.appendChild(hit);
                 }
-
             }
 
             leftNumWeekBox.appendChild(leftNumWeekHitBox);
