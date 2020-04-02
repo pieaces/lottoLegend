@@ -35,16 +35,16 @@ function backgroundImgSlide() {
         main111Img.firstElementChild.setAttribute('src', `img/${i}.png`);
 
         if (i === 1) {
-            imgBtn[i - 1].classList.remove('fas');
-            imgBtn[i - 1].classList.add('far');
-            imgBtn[imgBtn.length - 1].classList.add('fas');
-            imgBtn[imgBtn.length - 1].classList.remove('far');
+            imgBtn[i - 1].classList.remove('far');
+            imgBtn[i - 1].classList.add('fas');
+            imgBtn[imgBtn.length - 1].classList.add('far');
+            imgBtn[imgBtn.length - 1].classList.remove('fas');
         }
         else {
-            imgBtn[i - 2].classList.add('fas');
-            imgBtn[i - 2].classList.remove('far');
-            imgBtn[i - 1].classList.remove('fas');
-            imgBtn[i - 1].classList.add('far');
+            imgBtn[i - 2].classList.add('far');
+            imgBtn[i - 2].classList.remove('fas');
+            imgBtn[i - 1].classList.remove('far');
+            imgBtn[i - 1].classList.add('fas');
         }
         i++;
         if (i === imgBtn.length + 1) {
@@ -70,11 +70,11 @@ function backgroundImgSlide() {
             }
             main111Img.firstElementChild.setAttribute('src', `img/${node + 1}.png`);
             for (let i = 0; i < imgBtn.length; i++) {
-                imgBtn[i].classList.add('fas');
-                imgBtn[i].classList.remove('far');
+                imgBtn[i].classList.add('far');
+                imgBtn[i].classList.remove('fas');
             }
-            imgBtn[node].classList.add('far');
-            imgBtn[node].classList.remove('fas');
+            imgBtn[node].classList.add('fas');
+            imgBtn[node].classList.remove('far');
             clearInterval(slideIntervalId);
         })
     }
