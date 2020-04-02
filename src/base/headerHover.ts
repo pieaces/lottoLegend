@@ -3,7 +3,7 @@ const menuTitleArr = Array.from(menuTitle);
 const menuListBox = document.querySelector('.hover-menu-container');
 const mqMobile = window.matchMedia("(max-width: 767px)");
 const clickMenuBox = document.querySelectorAll('.click-menu-box'); //사이드 메뉴 배열
-const menu = document.querySelector('.click-menu-container');
+const menu = document.querySelector<HTMLElement>('.click-menu-container');
 const menuInfoText = document.querySelector('.mid-nav-info-text');
 const menuInfo = document.querySelector('.mid-nav-info');
 const menuInfoBox = document.querySelector('.mid-nav-info-box');
@@ -55,6 +55,7 @@ function mqInit() {
                         current = 3;
                         break;
                 }
+                menu.style.borderBottom = "1px solid #09538e";
                 e.stopPropagation();
             }
             menuTitleEventHandler.push(event);
@@ -77,6 +78,7 @@ function mqInit() {
                 //target 다른 곳
                 if (current !== null) {
                     clickMenuBox[current].classList.add('none');
+                    menu.style.borderBottom = "none";
                 }
             }
             isMenuClick = false;

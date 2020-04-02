@@ -17,9 +17,6 @@ const includeCanvas = document.getElementById('include');
 const excludeCanvas = document.getElementById('exclude');
 const lineGenerator = document.querySelector<HTMLElement>('.line-gen-stack-chart-container');
 const lineInputTable = document.querySelector<HTMLElement>('.line-gen-num-table');
-const textToggleShowBox = document.querySelector<HTMLElement>('.line-gen-text-toggle-show');
-const textToggleHideBox = document.querySelector<HTMLElement>('.line-gen-text-toggle-hide');
-const explainText = document.querySelector<HTMLElement>('.line-gen-text-content');
 
 const first = document.querySelector<HTMLInputElement>('#first-nums');
 const tenth = document.querySelector<HTMLInputElement>('#tenth-nums');
@@ -44,7 +41,6 @@ function info() {
     })
 }
 
-lineGenTextToggleInit();
 getAuthAPI('/numbers/piece', { flag: true })
     .then(({ include, exclude, total }) => {
         document.querySelector<HTMLElement>('.line-gen-round').textContent = total + '회';
@@ -220,28 +216,6 @@ lineBtn.addEventListener('click', async () => {
     }
 });
 
-function lineGenTextToggleInit() {
-    let flag = false;
-    function lineGenTextToggle() {
-        if (!flag) {
-            explainText.classList.remove('none');
-            textToggleHideBox.classList.remove('none');
-            textToggleShowBox.classList.add('none');
-            textToggleHideBox.style.borderTop = "1px solid rgba(0,0,0,0.1)";
-
-            flag = true;
-        } else {
-            explainText.classList.add('none');
-            textToggleHideBox.classList.add('none');
-            textToggleShowBox.classList.remove('none');
-            textToggleHideBox.style.borderTop = "";
-
-            flag = false;
-        }
-    }
-    textToggleShowBox.addEventListener('click', lineGenTextToggle);
-    textToggleHideBox.addEventListener('click', lineGenTextToggle);
-}
 
 function doesExist(one: number[], other: number[]) {
     let flag = false;

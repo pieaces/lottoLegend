@@ -258,3 +258,27 @@ font-size:1.3rem;
       transform: scale(.75);
   }
 }
+
+
+@media (min-width: 0px) and (max-width: 767px) {
+
+  .inc-exc-num-wrapper{
+   width: 100%;    
+   margin-bottom: 1rem; 
+  }
+
+.author-time > span{
+    font-size: 1.3rem;
+}
+
+.author-name >#author-name{
+  font-size: 1.3rem;
+}
+
+.author-lookup{
+  font-size: 1.3rem;
+}
+
+  }
+
+
