@@ -101,9 +101,10 @@ const barOption: Chart.ChartOptions = {
 
 
 mqInit();
+const loading = document.querySelector<HTMLElement>('.loading-box');
+loading.classList.remove('none');
 getUnAuthAPI('/stats/piece', { method })
     .then(data => {
-        console.log(data);
         mean.textContent = Number(data.stats.mean).toFixed(2);
         $68.textContent = rangeMake(data.stats);
         $95.textContent = rangeMake(data.stats, 2);
@@ -133,6 +134,7 @@ getUnAuthAPI('/stats/piece', { method })
         barDataBox.datasets[0].data = data.piece
         const barInstance = new ChartBase('bar', barCanvas, barDataBox, barOption);
         barInstance.create();
+        loading.classList.add('none');
     });
 
 const filterBox = document.querySelector('.filter-box');
