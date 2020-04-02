@@ -8,7 +8,7 @@
 }
 
 .selectr-label{
-    color:#6b6b6b;
+    color:#525252;
     font-size:2.3rem;
     font-weight: bold;
     text-align: center;
@@ -113,14 +113,13 @@
     font-size:1.6rem;
 }
 
-.win-info > span{
-    /* color:white; */
-}
 
 .plus{
     margin-top:-0.5rem;
-    /* color:white; */
+    color:#777777;
     font-size:4rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
 }
 
 .arrow-btn-box{
@@ -131,7 +130,7 @@
     text-align: center;
 }
 .arrow-btn-box > i{
-    /* color:white; */
+    color:#777777;
     font-size:3.5rem;
     cursor: pointer;
 }

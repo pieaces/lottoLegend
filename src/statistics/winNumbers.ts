@@ -133,8 +133,8 @@ function write(data: any) {
     });
     for (let i = 0; i < 6; i++) {
         lottoNumTemp[i] = lottoNums[data.numbers[i] - 1];
-        lottoNumTemp[i].style.backgroundColor = 'black';
-        lottoNumTemp[i].style.color = 'white';
+        lottoNumTemp[i].style.backgroundColor = 'rgb(49, 49, 49)';
+        lottoNumTemp[i].style.color = 'rgb(226, 226, 226)';
         const num = document.createElement('div');
         num.classList.add('win-num');
         num.textContent = data.numbers[i];
