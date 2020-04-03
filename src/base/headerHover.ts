@@ -7,7 +7,7 @@ const menu = document.querySelector<HTMLElement>('.click-menu-container');
 const menuInfoText = document.querySelector('.mid-nav-info-text');
 const menuInfo = document.querySelector('.mid-nav-info');
 const menuInfoBox = document.querySelector('.mid-nav-info-box');
-const menuTitleQna = menuInfoBox.children[1].firstElementChild;
+const menuTitleQna = document.querySelector('#qna-anchor');
 
 mqInit();
 menuInfoToggle();
@@ -41,6 +41,8 @@ function mqInit() {
                 }
                 switch (index) {
                     case 0:
+                        document.querySelector('.click-menu-introduce').classList.remove('none');
+                        current = 0;
                         break;
                     case 1:
                         document.querySelector('.click-menu-system').classList.remove('none');

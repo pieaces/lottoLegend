@@ -2,7 +2,11 @@ document.write(`    <header>
 <nav class="mid-nav-container">
     <div class="click-menu-container">
         <ul class="click-menu-box click-menu-introduce none">
-
+            <li><a href="/introduce/campaign.html">캠페인</a></li>
+            <li> <a href="/introduce/system.html">베르누이 분석 시스템</a> </li>
+            <li> <a href="/introduce/tool.html">베르누이 분석 툴</a> </li>
+            <li> <a href="/introduce/event.html">이벤트</a> </li>
+            <li> <a href="/introduce/pay.html">프리미엄 멤버십</a> </li>
         </ul>
         <ul class="click-menu-box click-menu-system none">
             <li> <a href="/system/experience.html">체험하기</a> </li>
@@ -56,7 +60,7 @@ document.write(`    <header>
                         </div>
                     </div>
                 </li>
-                <li><a class="mid-nav-info-anchor" href="/board/qna/list.html">고객문의</a></li>
+                <li><a class="mid-nav-info-anchor" id="qna-anchor" href="/board/qna/list.html">고객문의</a></li>
             </ul>
         </div>
         <ul class="mid-nav-menu">
