@@ -7,6 +7,7 @@ headerSign();
 const main111Img = document.querySelector<HTMLElement>('.main-1-1-1 > a');
 const imgBtn = document.querySelectorAll('.img-btn > i');
 
+
 document.querySelector<HTMLElement>('.login-btn').onclick = () => {
 
 }
@@ -32,6 +33,7 @@ function backgroundImgSlide() {
                 main111Img.setAttribute('href', '#');
                 break;
         }
+
         main111Img.firstElementChild.setAttribute('src', `img/${i}.png`);
 
         if (i === 1) {
@@ -68,7 +70,9 @@ function backgroundImgSlide() {
                     main111Img.setAttribute('href', '#');
                     break;
             }
+
             main111Img.firstElementChild.setAttribute('src', `img/${node + 1}.png`);
+
             for (let i = 0; i < imgBtn.length; i++) {
                 imgBtn[i].classList.add('far');
                 imgBtn[i].classList.remove('fas');
@@ -79,3 +83,4 @@ function backgroundImgSlide() {
         })
     }
 }
+
