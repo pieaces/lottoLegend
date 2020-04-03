@@ -15,7 +15,9 @@ const carrycountCanvas = document.getElementById('carrycount');
 const includeCanvas = document.getElementById('include');
 const excludeCanvas = document.getElementById('exclude');
 const filterTableValues = document.querySelectorAll('.func3-filter-table > tbody > tr:nth-child(2) > td');
-
+const numListSelectTotal = document.querySelector<HTMLElement>('#num-list-select-total');
+const numListSelectCurrent = document.querySelector<HTMLElement>('#num-list-select-current');
+const allCheckBox = document.querySelector<HTMLInputElement>('#all-check');
 
 type Constructor<T = {}> = new (...args: any[]) => T;
 const layout1Class = 'func1-layout'
@@ -66,7 +68,7 @@ export default function LayoutToggle<TBase extends Constructor>(Base: TBase) {
             const checkBoxToggle = new CheckBoxToggle();
             checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
             checkBoxToggle.addEvent();
-            makeCheckdValueBox();
+            makeCheckdValueBox(numListSelectTotal, numListSelectCurrent, allCheckBox);
             excLineCountText.textContent = (<number[]>data[1]).map(value => {
                 switch (value) {
                     case 0: return '1번대';

@@ -19,7 +19,9 @@ const methodSelectBox = document.querySelector<HTMLSelectElement>('#method-selec
 const numInfoToggleBtn = document.querySelector('.mypage-toggle-btn');
 const pastFilterBox = document.getElementsByClassName('func3-past-filter-box') as HTMLCollectionOf<HTMLElement>;
 const tableNumBox = document.querySelector<HTMLElement>('.mypage-table-num-box');
-
+const numListSelectTotal = document.querySelector<HTMLElement>('#num-list-select-total');
+const numListSelectCurrent = document.querySelector<HTMLElement>('#num-list-select-current');
+const allCheckBox = document.querySelector<HTMLInputElement>('#all-check');
 
 loading.classList.remove('none');
 getAuthAPI('/numbers/mass')
@@ -127,6 +129,7 @@ getAuthAPI('/numbers/mass')
                 makeTable(tableNumBox, result.data, result.rounds[0], true, result.answer);
                 checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
                 CheckBoxToggle.allCheckedReset();
+                makeCheckdValueBox(numListSelectTotal, numListSelectCurrent, allCheckBox);
                 document.querySelector('#num-list-select-total').textContent = document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox').length.toString();
                 loading.classList.add('none');
             });
@@ -150,6 +153,7 @@ getAuthAPI('/numbers/mass')
                 makeTable(tableNumBox, result.data, result.rounds[0], true, result.answer);
                 checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
                 CheckBoxToggle.allCheckedReset();
+                makeCheckdValueBox(numListSelectTotal, numListSelectCurrent, allCheckBox);
                 document.querySelector('#num-list-select-total').textContent = document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox').length.toString();
                 loading.classList.add('none');
             });
@@ -167,6 +171,7 @@ getAuthAPI('/numbers/mass')
                 makeTable(tableNumBox, result.data, result.rounds[0], true, result.answer);
                 checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
                 CheckBoxToggle.allCheckedReset();
+                makeCheckdValueBox(numListSelectTotal, numListSelectCurrent, allCheckBox);
                 document.querySelector('#num-list-select-total').textContent = document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox').length.toString();
                 loading.classList.add('none');
             });
@@ -175,7 +180,7 @@ getAuthAPI('/numbers/mass')
             const checkBoxToggle = new CheckBoxToggle();
             checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
             checkBoxToggle.addEvent();
-            makeCheckdValueBox();
+            makeCheckdValueBox(numListSelectTotal, numListSelectCurrent, allCheckBox);
             numInfoToggleBtn.addEventListener('click', numInfoToggle());
 
         } else {

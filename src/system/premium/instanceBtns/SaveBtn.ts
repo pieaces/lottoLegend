@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import { networkAlert } from "../../../functions";
 import { postAuthAPI } from "../../../amplify/api";
-import {modifyBoundary} from "../Layout/functions";
+import { modifyBoundary } from "../Layout/functions";
 import CheckBoxToggle from "./CheckBoxToggle";
 
 const saveBtns = document.querySelectorAll<HTMLElement>('.save-btn');
