@@ -7,6 +7,7 @@ import { doesRecommend } from "./dynamoDB/recommend";
 import { addPoint, Point, subtractPoint } from "./dynamoDB/userInfo";
 import Users from "./mariaDB/Users";
 import Response from "./Response";
+import getMainPage from "./dynamoDB/getMainPage";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -207,8 +208,7 @@ exports.handler = async (event: any) => {
             switch (method) {
                 case 'GET':
                     const round = getCurrentRound();
-                    const lotto = (await getLotto(round)).sort((a, b) => a - b);
-                    body = { lotto };
+                    body = getMainPage(round);
             }
         }
     }
