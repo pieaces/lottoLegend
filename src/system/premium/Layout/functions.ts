@@ -85,15 +85,12 @@ export function makePastFilterTable(data: TableData): HTMLDivElement {
     return tableBox;
 }
 
-export function makeCheckdValueBox() {
-    const numListSelectTotal = document.querySelector('#num-list-select-total');
-    const numListSelectCurrent = document.querySelector('#num-list-select-current');
-    const allCheckBox = document.querySelector<HTMLInputElement>('#all-check');
+export function makeCheckdValueBox(totalEl: HTMLElement, currentEl: HTMLElement, allCheckEl: HTMLInputElement) {
     const checkboxes = document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox');
     let checkedCurrentValue = null;
 
-    numListSelectCurrent.textContent = "0";
-    numListSelectTotal.textContent = checkboxes.length.toString();
+    currentEl.textContent = "0";
+    totalEl.textContent = checkboxes.length.toString();
     Array.from(checkboxes).forEach((node) => {
         node.addEventListener('change', () => {
             if (node.checked) {
@@ -101,17 +98,17 @@ export function makeCheckdValueBox() {
             } else {
                 checkedCurrentValue--;
             }
-            numListSelectCurrent.textContent = checkedCurrentValue.toString();
+            currentEl.textContent = checkedCurrentValue.toString();
         })
     })
-    allCheckBox.addEventListener('change', () => {
+    allCheckEl.addEventListener('change', () => {
 
-        if (allCheckBox.checked) {
+        if (allCheckEl.checked) {
             checkedCurrentValue = document.querySelectorAll('.input-checkbox-container > .checkbox').length;
-            numListSelectCurrent.textContent = checkedCurrentValue.toString();
+            currentEl.textContent = checkedCurrentValue.toString();
         } else {
             checkedCurrentValue = 0;
-            numListSelectCurrent.textContent = checkedCurrentValue.toString();
+            currentEl.textContent = checkedCurrentValue.toString();
         }
     })
 

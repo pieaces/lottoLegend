@@ -17,6 +17,9 @@ const includeCanvas = document.getElementById('include');
 const excludeCanvas = document.getElementById('exclude');
 const lineGenerator = document.querySelector<HTMLElement>('.line-gen-stack-chart-container');
 const lineInputTable = document.querySelector<HTMLElement>('.line-gen-num-table');
+const numListSelectTotal = document.querySelector<HTMLElement>('#num-list-select-total');
+const numListSelectCurrent = document.querySelector<HTMLElement>('#num-list-select-current');
+const allCheckBox = document.querySelector<HTMLInputElement>('#all-check');
 
 const first = document.querySelector<HTMLInputElement>('#first-nums');
 const tenth = document.querySelector<HTMLInputElement>('#tenth-nums');
@@ -113,7 +116,7 @@ getAuthAPI('/numbers/piece', { flag: true })
                     const dataSet = await postAuthAPI('/numbers/generator/free', { lineCount, include: includeNumsArr });
                     const numBoard = new NumBoard(dataSet);
                     numBoard.makeNumBoard();
-                    makeCheckdValueBox();
+                    makeCheckdValueBox(numListSelectTotal, numListSelectCurrent, allCheckBox);
 
                     checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
                     checkBoxToggle.addEvent();
@@ -135,7 +138,7 @@ getAuthAPI('/numbers/piece', { flag: true })
                 console.log(dataSet);
                 const numBoard = new NumBoard(dataSet);
                 numBoard.makeNumBoard();
-                makeCheckdValueBox();
+                makeCheckdValueBox(numListSelectTotal, numListSelectCurrent, allCheckBox);
 
                 checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
                 checkBoxToggle.addEvent();
