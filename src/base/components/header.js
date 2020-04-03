@@ -70,8 +70,7 @@ document.write(`    <header>
             <li> <a href="#">커뮤니티</a> </li>
             <div class="hover-menu-container none">
                 <ul>
-                    <li> <a href="/introduce/campaign.html">캠페인</a> </li>
-                    <li> <a href="/introduce/trust.html">그 날의 진실</a> </li>
+                    <li> <a href="/introduce/campaign.html">캠페인</a> </li>                    
                     <li> <a href="/introduce/system.html">베르누이 분석 시스템</a> </li>
                     <li> <a href="/introduce/tool.html">베르누이 분석 툴</a> </li>
                     <li> <a href="/introduce/pay.html">프리미엄 멤버십</a> </li>
