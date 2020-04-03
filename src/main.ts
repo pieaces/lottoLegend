@@ -1,4 +1,5 @@
 import configure from './amplify/configure'
+import { getUnAuthAPI } from './amplify/api';
 import { headerSign, isLogedIn } from './amplify/auth';
 
 configure();
@@ -10,12 +11,37 @@ const winBox = document.querySelector<HTMLElement>('.win-num-box');
 const winner = document.getElementById('winner');
 const winAmount = document.getElementById('winAmount');
 const winRound = document.getElementById('win-round');
+const compartColor = ['#FBC400', '#69C8F2', '#FF7272', '#AAAAAA', '#B0D840'];
+
 
 document.querySelector<HTMLElement>('.login-btn').onclick = () => {
 
 }
 
 backgroundImgSlide();
+
+function makeWinNumBox(data: any) {
+    winner.textContent = data.winner;
+    winAmount.textContent = Math.round(data.winAmount / 100000000).toString();
+    for (let i = 0; i < 6; i++) {
+        const num = document.createElement('div');
+        num.classList.add('win-num');
+        num.textContent = data.numbers[i];
+        const compartIndex = Math.floor((data.numbers[i] - 1) / 10);
+        num.style.backgroundColor = compartColor[compartIndex];
+        winBox.appendChild(num);
+    }
+    const plus = document.createElement('div');
+    plus.classList.add('plus');
+    plus.textContent = '+';
+    winBox.appendChild(plus);
+    const bonus = document.createElement('div');
+    bonus.classList.add('win-num');
+    bonus.textContent = data.bonusNum;
+    const compartIndex = Math.floor((data.bonusNum - 1) / 10);
+    bonus.style.backgroundColor = compartColor[compartIndex];
+    winBox.appendChild(bonus);
+}
 
 function backgroundImgSlide() {
 
