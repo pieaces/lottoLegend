@@ -156,7 +156,6 @@
 .click-menu-box{
   display:flex;
   overflow-x: scroll;
-  white-space: nowrap;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -171,9 +170,11 @@
 
 .click-menu-box > li{
   flex:0 0 auto;
-  width:10rem;
+  width:12rem;
   height:5rem;
   font-size:1.3rem;
+  word-break: keep-all;
+  text-align: center;
 }
 
 .click-menu-box > li > a{
@@ -182,7 +183,6 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  word-break:break-all;
 }
 
 .click-menu-toggle{
@@ -201,7 +201,6 @@
   z-index:97;
   width:100%;
   height: 16rem;
-  margin-top:0.1rem;
   border-bottom:2px solid #09538e;
   background-color:white;
 }

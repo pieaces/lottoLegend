@@ -126,15 +126,14 @@
   align-items: center;
   justify-content: center;
   height:4rem;
+  font-size:2.4rem;
 }
 
 .win-num-times-text{
   margin-left:0.1rem;
-  font-size:2.4rem;
 }
 
 #win-round{
-  font-size:2.4rem;
   font-weight: bold;
 }
 
@@ -275,10 +274,13 @@
     width:100%;
     margin-bottom:1rem;
   }
-  .main-1-2 > div,
   .main-1-3 > div,
   .main-1-4 > div{
   height:20rem;
+  }
+
+  .main-1-2 > div{
+    height:18rem;
   }
 
   .main-1-1-2{
@@ -297,6 +299,29 @@
   .login-service{
     padding-left:4rem;
     padding-right:4rem;
+  }
+
+  .win-num-container{
+    display: block;
+  }
+
+  .win-num-times{
+    font-size:2rem;
+  }
+
+  .win-num{
+    width:3.2rem;
+    height: 3.2rem;
+    margin:0.3rem;
+    font-size:1.6rem;
+  }
+
+  .small-text{
+    font-size:1.6rem;
+  }
+
+  .big-text{
+    font-size:1.8rem;
   }
 }
 
