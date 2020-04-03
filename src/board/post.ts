@@ -40,8 +40,12 @@ const editor = suneditor.create('sample', {
     imageUploadSizeLimit: 4 * 1024 * 1024,
     lang: ko
 });
+
+editor.setOptions({
+    Height: 'auto'
+});
 const post = getQueryStringObject().id;
-const category:Category = document.getElementById('wrapper').getAttribute('data-category') as Category;
+const category: Category = document.getElementById('wrapper').getAttribute('data-category') as Category;
 const loading = document.querySelector('.loading-box');
 
 const submitBtn = document.getElementById('submit-btn');
@@ -56,11 +60,11 @@ if (post) {
         editor.setContents(post.contents);
     });
 }
-if(category === 'include' || category === 'exclude'){
-    getAuthAPI('/numbers/piece', { choice: category})
-    .then(numbers => {
-        makeNum(document.querySelector<HTMLElement>('.inc-exc-num-container'), numbers);
-    })
+if (category === 'include' || category === 'exclude') {
+    getAuthAPI('/numbers/piece', { choice: category })
+        .then(numbers => {
+            makeNum(document.querySelector<HTMLElement>('.inc-exc-num-container'), numbers);
+        })
 }
 imageRemove.addEventListener('click', () => {
     deleteCheckedImages();
@@ -80,14 +84,14 @@ submitBtn.onclick = async () => {
     try {
         const images = [];
         const imageElements = [];
-        for(let i=0;i<imageList.length;i++){
+        for (let i = 0; i < imageList.length; i++) {
             if (imageList[i].element.getAttribute('src').indexOf('https://') === -1) {
                 const dataURL = imageList[i].src;
                 const fileName = attachTimestamp(imageList[i].name);
                 imageElements.push([imageList[i].element, `https://canvas-lotto.s3.ap-northeast-2.amazonaws.com/images/${userName}/${fileName}`]);
                 images.push({ userName, fileName, dataURL });
             }
-    }
+        }
         await postUnAuthAPI('/images', images);
         imageElements.forEach(image => {
             image[0].setAttribute('src', image[1]);

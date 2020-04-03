@@ -6,7 +6,12 @@ headerSign();
 
 const main111Img = document.querySelector<HTMLElement>('.main-1-1-1 > a');
 const imgBtn = document.querySelectorAll('.img-btn > i');
-
+const winBox = document.querySelector<HTMLElement>('.win-num-box');
+const rightBtn = document.getElementById('right-btn');
+const leftBtn = document.getElementById('left-btn');
+const roundSelectBox = document.querySelector<HTMLSelectElement>('#round-selectbox');
+const winner = document.getElementById('winner');
+const winAmount = document.getElementById('winAmount');
 
 document.querySelector<HTMLElement>('.login-btn').onclick = () => {
 
@@ -19,20 +24,7 @@ function backgroundImgSlide() {
     let i = 2;
 
     const slideIntervalId = setInterval(() => {
-        switch (i) {
-            case 0:
-                main111Img.setAttribute('href', 'introduce/system.html');
-                break;
-            case 1:
-                main111Img.setAttribute('href', 'introduce/event.html');
-                break;
-            case 2:
-                main111Img.setAttribute('href', 'introduce/campaign.html');
-                break;
-            case 3:
-                main111Img.setAttribute('href', '#');
-                break;
-        }
+        imgBranch(i);
 
         main111Img.firstElementChild.setAttribute('src', `img/${i}.png`);
 
@@ -56,20 +48,7 @@ function backgroundImgSlide() {
 
     for (let node = 0; node < imgBtn.length; node++) {
         imgBtn[node].addEventListener('click', () => {
-            switch (node) {
-                case 0:
-                    main111Img.setAttribute('href', 'introduce/system.html');
-                    break;
-                case 1:
-                    main111Img.setAttribute('href', 'introduce/event.html');
-                    break;
-                case 2:
-                    main111Img.setAttribute('href', 'introduce/campaign.html');
-                    break;
-                case 3:
-                    main111Img.setAttribute('href', '#');
-                    break;
-            }
+            imgBranch(node);
 
             main111Img.firstElementChild.setAttribute('src', `img/${node + 1}.png`);
 
@@ -84,3 +63,19 @@ function backgroundImgSlide() {
     }
 }
 
+function imgBranch(order: number) {
+    switch (order) {
+        case 0:
+            main111Img.setAttribute('href', 'introduce/system.html');
+            break;
+        case 1:
+            main111Img.setAttribute('href', 'introduce/event.html');
+            break;
+        case 2:
+            main111Img.setAttribute('href', 'introduce/campaign.html');
+            break;
+        case 3:
+            main111Img.setAttribute('href', '#');
+            break;
+    }
+}

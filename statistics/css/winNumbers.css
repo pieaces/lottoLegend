@@ -54,7 +54,6 @@
 }
 
 .win-num-times-text{
-    /* color:white; */
     font-size:2.5rem;
 }
 
@@ -66,7 +65,6 @@
 .win-date{
     margin-left:0.5rem;
     margin-bottom:-1rem;
-    /* color:white; */
     font-size:1.3rem;
     opacity: 0.7;
 }
