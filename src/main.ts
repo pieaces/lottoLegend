@@ -21,13 +21,13 @@ function backgroundImgSlide() {
     const slideIntervalId = setInterval(() => {
         switch (i) {
             case 0:
-                main111Img.setAttribute('href', 'introduce/campaign.html');
-                break;
-            case 1:
                 main111Img.setAttribute('href', 'introduce/system.html');
                 break;
+            case 1:
+                main111Img.setAttribute('href', 'introduce/event.html');
+                break;
             case 2:
-                main111Img.setAttribute('href', 'introduce/pay.html');
+                main111Img.setAttribute('href', 'introduce/campaign.html');
                 break;
             case 3:
                 main111Img.setAttribute('href', '#');
@@ -58,13 +58,13 @@ function backgroundImgSlide() {
         imgBtn[node].addEventListener('click', () => {
             switch (node) {
                 case 0:
-                    main111Img.setAttribute('href', 'introduce/campaign.html');
-                    break;
-                case 1:
                     main111Img.setAttribute('href', 'introduce/system.html');
                     break;
+                case 1:
+                    main111Img.setAttribute('href', 'introduce/event.html');
+                    break;
                 case 2:
-                    main111Img.setAttribute('href', 'introduce/pay.html');
+                    main111Img.setAttribute('href', 'introduce/campaign.html');
                     break;
                 case 3:
                     main111Img.setAttribute('href', '#');

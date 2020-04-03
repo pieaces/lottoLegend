@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "5df2f7a3aa5883227f57";
+/******/ 	var hotCurrentHash = "ec620a0e361bb6434606";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -795,25 +795,25 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/system/components/IncExcBottom.js":
+/***/ "./src/system/components/incExcBottom.js":
 /*!***********************************************!*\
-  !*** ./src/system/components/IncExcBottom.js ***!
+  !*** ./src/system/components/incExcBottom.js ***!
   \***********************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("document.write(\"           </td>\\n</tr>\\n</table>\\n\\n\\n</div>\\n</div>\\n<div class=\\\"right-container\\\">\\n\\n<div class=\\\"func2-chart-radar-container-box box-color\\\">\\n\\n<div class=\\\"func2-chart-radar-container\\\">\\n<div class=\\\"que-container func2-radar-que\\\">\\n    <i class=\\\"far fa-question-circle\\\"></i>\\n</div>\\n<div class=\\\"func2-chart-radar-box\\\">\\n    <canvas class=\\\"func2-chart-radar\\\"></canvas>\\n</div>\\n</div>\\n<div class=\\\"stats-container\\\">\\n<div class=\\\"stats-box\\\">\\n\\n    <div class=\\\"stats-mean-term-text\\\">\\n        \\uAC04\\uACA9 \\uD3C9\\uADE0\\n    </div>\\n    <div class=\\\"stats-mean-value\\\">\\n\\n    </div>\\n\\n</div>\\n<div class=\\\"stats-box\\\">\\n\\n    <div class=\\\"stats-stdev-term-text\\\">\\n        \\uC804\\uCCB4 68%\\uC758\\n        <br />\\uAC04\\uACA9\\n    </div>\\n    <div class=\\\"stats-68-value\\\">\\n\\n    </div>\\n\\n</div>\\n<div class=\\\"stats-box\\\">\\n\\n    <div class=\\\"stats-last-show-num-text\\\">\\n        \\uC804\\uCCB4 95%\\uC758\\n        <br />\\uAC04\\uACA9\\n    </div>\\n    <div class=\\\"stats-95-value\\\">\\n\\n    </div>\\n\\n</div>\\n<div class=\\\"stats-box\\\">\\n\\n    <div class=\\\"stats-last-show-date-text\\\">\\n        \\uB9C8\\uC9C0\\uB9C9\\n        <br />\\uCD9C\\uD604\\n    </div>\\n    <div class=\\\"stats-last-value\\\">\\n\\n    </div>\\n\\n</div>\\n</div>\\n\\n\\n</div>\\n<div class=\\\"func2-chart-bar-container box-color\\\">\\n\\n<canvas class=\\\"func2-chart-bar\\\"></canvas>\\n</div>\\n</div>\\n</div>\\n<div class=\\\"checkbox-textbox\\\">\\n<div class=\\\"checkbox-text\\\">\\n</div>\\n</div>\\n<div class=\\\"showcase-container box-color\\\">\\n\\n<div class=\\\"func2-select-num-box-container \\\">\\n<div class=\\\"func2-select-num-box\\\">\\n\\n</div>\\n</div>\\n<div class=\\\"next-btn-container\\\">\\n<button type=\\\"reset\\\" class=\\\"btn circle-btn\\\" id=\\\"reset\\\">\\uCD08\\uAE30\\uD654</button>\\n<button type=\\\"button\\\" class=\\\"btn circle-btn\\\" id=\\\"make-btn\\\">\\uC0DD\\uC131</button>\\n</div>\\n</div>\");\n\n//# sourceURL=webpack:///./src/system/components/IncExcBottom.js?");
+eval("document.write(\"                 </td>\\n</tr>\\n</table>\\n\\n\\n</div>\\n</div>\\n<div class=\\\"right-container\\\">\\n\\n<div class=\\\"func2-chart-radar-container-box box-color\\\">\\n\\n<div class=\\\"func2-chart-radar-container\\\">\\n<div class=\\\"que-container func2-radar-que\\\">\\n    <i class=\\\"far fa-question-circle\\\"></i>\\n</div>\\n<div class=\\\"func2-chart-radar-box\\\">\\n    <canvas class=\\\"func2-chart-radar\\\"></canvas>\\n</div>\\n</div>\\n<div class=\\\"stats-container\\\">\\n<div class=\\\"stats-box\\\">\\n\\n    <div class=\\\"stats-mean-term-text\\\">\\n        \\uAC04\\uACA9 \\uD3C9\\uADE0\\n    </div>\\n    <div class=\\\"stats-mean-value\\\">\\n\\n    </div>\\n\\n</div>\\n<div class=\\\"stats-box\\\">\\n\\n    <div class=\\\"stats-stdev-term-text\\\">\\n        \\uC804\\uCCB4 68%\\uC758\\n        <br />\\uAC04\\uACA9\\n    </div>\\n    <div class=\\\"stats-68-value\\\">\\n\\n    </div>\\n\\n</div>\\n<div class=\\\"stats-box\\\">\\n\\n    <div class=\\\"stats-last-show-num-text\\\">\\n        \\uC804\\uCCB4 95%\\uC758\\n        <br />\\uAC04\\uACA9\\n    </div>\\n    <div class=\\\"stats-95-value\\\">\\n\\n    </div>\\n\\n</div>\\n<div class=\\\"stats-box\\\">\\n\\n    <div class=\\\"stats-last-show-date-text\\\">\\n        \\uB9C8\\uC9C0\\uB9C9\\n        <br />\\uCD9C\\uD604\\n    </div>\\n    <div class=\\\"stats-last-value\\\">\\n\\n    </div>\\n\\n</div>\\n</div>\\n\\n\\n</div>\\n<div class=\\\"func2-chart-bar-container box-color\\\">\\n\\n<canvas class=\\\"func2-chart-bar\\\"></canvas>\\n</div>\\n</div>\\n</div>\\n<div class=\\\"checkbox-textbox\\\">\\n<div class=\\\"checkbox-text\\\">\\n</div>\\n</div>\\n<div class=\\\"showcase-container box-color\\\">\\n\\n<div class=\\\"func2-select-num-box-container \\\">\\n<div class=\\\"func2-select-num-box\\\">\\n\\n</div>\\n</div>\\n<div class=\\\"next-btn-container\\\">\\n<button type=\\\"reset\\\" class=\\\"btn circle-btn\\\" id=\\\"reset\\\">\\uCD08\\uAE30\\uD654</button>\\n<button type=\\\"button\\\" class=\\\"btn circle-btn\\\" id=\\\"make-btn\\\">\\uC0DD\\uC131</button>\\n</div>\\n</div>\");\n\n//# sourceURL=webpack:///./src/system/components/incExcBottom.js?");
 
 /***/ }),
 
 /***/ 0:
 /*!*****************************************************!*\
-  !*** multi ./src/system/components/IncExcBottom.js ***!
+  !*** multi ./src/system/components/incExcBottom.js ***!
   \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("module.exports = __webpack_require__(/*! ./src/system/components/IncExcBottom.js */\"./src/system/components/IncExcBottom.js\");\n\n\n//# sourceURL=webpack:///multi_./src/system/components/IncExcBottom.js?");
+eval("module.exports = __webpack_require__(/*! ./src/system/components/incExcBottom.js */\"./src/system/components/incExcBottom.js\");\n\n\n//# sourceURL=webpack:///multi_./src/system/components/incExcBottom.js?");
 
 /***/ })
 

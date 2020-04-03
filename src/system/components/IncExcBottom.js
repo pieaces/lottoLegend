@@ -1,4 +1,4 @@
-document.write(`           </td>
+document.write(`                 </td>
 </tr>
 </table>
 

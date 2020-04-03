@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 
 // 확장자명 유의해서 쓸것! ts냐, js냐?
-const file = 'system/premium.ts'
+const file = 'system/components/incExcTop.js'
 ////
 const directory = file.slice(0, file.lastIndexOf('/'));
 const name = file.slice(file.lastIndexOf('/') + 1, file.indexOf('.'));
@@ -12,7 +12,7 @@ module.exports = {
 
     output: {
         filename: `${name}.js`,
-        path: path.resolve(__dirname, `${directory}/js`)
+        path: path.resolve(__dirname, `${directory}`)
     },
     module: {
         rules: [
