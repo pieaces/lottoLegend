@@ -79,8 +79,8 @@ function makeTable(dataSet: ({ round: string, numbers: number[], hits?: boolean[
                 rightNumWeekBox.appendChild(rightNumWeekNumBox);
             }
 
-            if(dataSet[i].hits && dataSet[i].hits[j]) setColorLotto(dataSet[i].numbers[j], num);
-            else if(!dataSet[i].hits) setColorLotto(dataSet[i].numbers[j], num);
+            if (dataSet[i].hits && dataSet[i].hits[j]) setColorLotto(dataSet[i].numbers[j], num);
+            else if (!dataSet[i].hits) setColorLotto(dataSet[i].numbers[j], num);
             else setDisabledLotto(num);
         }
 
@@ -90,10 +90,6 @@ function makeTable(dataSet: ({ round: string, numbers: number[], hits?: boolean[
             section.style.borderBottom = "none";
             div.appendChild(header);
             div.appendChild(section);
-            numWeekWrapper.appendChild(div);
-            const adBox = document.createElement('div');
-            adBox.classList.add('ad-box', 'box-color');
-            numWeekWrapper.appendChild(adBox);
         } else {
             let hitsTotal = 0;
             for (let j = 0; j < dataSet[i].hits.length; j++) {
@@ -125,7 +121,10 @@ function makeTable(dataSet: ({ round: string, numbers: number[], hits?: boolean[
             div.appendChild(header);
             div.appendChild(section);
             div.appendChild(footer);
-            numWeekWrapper.appendChild(div);
         }
+        numWeekWrapper.appendChild(div);
+        const adBox = document.createElement('div');
+        adBox.classList.add('ad-box', 'box-color');
+        numWeekWrapper.appendChild(adBox);
     }
 }
