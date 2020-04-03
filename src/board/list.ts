@@ -22,7 +22,6 @@ document.querySelector<HTMLElement>('.search-box-form').onsubmit = (e) => {
 
 function listAPI() {
     if (word || type) {
-        console.log('search!')
         return getUnAuthAPI('/posts/search', { category, index, word, type });
     } else return getUnAuthAPI('/posts', { category, index });
 }
