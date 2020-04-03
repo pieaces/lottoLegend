@@ -4,7 +4,7 @@ import ChartBase from '../system/premium/Chart/Charts';
 import { getUnAuthAPI } from '../amplify/api';
 import Swal from 'sweetalert2'
 import { headerSign } from '../amplify/auth';
-import {mqInit } from './functions'
+import { mqInit } from './functions'
 import Selectr, { IOptions } from 'mobius1-selectr';
 
 configure();
@@ -71,7 +71,7 @@ const leftBtn = document.getElementById('left-btn');
 const stackInstance = new ChartBase('bar', stackCanvas, stackDataBox, stackOption);
 const lottoNums = document.querySelectorAll<HTMLElement>('.lotto-num');
 const statsValues = document.querySelectorAll('.stats-table tr >td:nth-child(2)');
-const roundSelectBox=document.querySelector<HTMLSelectElement>('#round-selectbox');
+const roundSelectBox = document.querySelector<HTMLSelectElement>('#round-selectbox');
 
 mqInit();
 getUnAuthAPI('/numbers/win')
@@ -84,17 +84,17 @@ getUnAuthAPI('/numbers/win')
         const roundConfig: IOptions = {
             data: []
         };
-        for(let round =data.round; round>=1; round--){
+        for (let round = data.round; round >= 1; round--) {
             roundConfig.data.push({
-                text:round, value:round
+                text: round, value: round
             });
         }
         console.log(roundConfig.data);
         const roundSelect = new Selectr(roundSelectBox, roundConfig);
         roundSelect.on('selectr.change', async (option) => {
-           const data = await getUnAuthAPI('/numbers/win', { round: option.value });
-           winBox.innerHTML = '';
-           write(data);
+            const data = await getUnAuthAPI('/numbers/win', { round: option.value });
+            winBox.innerHTML = '';
+            write(data);
         });
 
         rightBtn.addEventListener('click', async () => {
