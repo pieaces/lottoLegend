@@ -13,9 +13,9 @@ const headers = {
     //"Access-Control-Allow-Credentials" : true // Required for cookies, authorization headers with HTTPS
 }
 exports.handler = async (event: any) => {
-    if(event['detail-type'] === 'Scheduled Event'){
+    if (event['detail-type'] === 'Scheduled Event') {
         return console.log('Scheduled Event');
-    }    
+    }
     console.log(event);
 
     const method: string = event.httpMethod;
@@ -77,13 +77,13 @@ exports.handler = async (event: any) => {
                         await db.addHits(postId);
                         const post = await db.get(postId);
                         if (post.category === "include" || post.category === 'exclude') {
-                            post.round = getCurrentRound(post.created)+1;
+                            post.round = getCurrentRound(post.created) + 1;
                             post.numbers = await getIncOrExcNumbers(post.userName, post.round, post.category);
-                            post.answer = await getLotto(post.round-1);
-                        }else if(post.category === "qna"){
-                            if(currentId !== post.userName){
+                            post.answer = await getLotto(post.round - 1);
+                        } else if (post.category === "qna") {
+                            if (currentId !== post.userName) {
                                 return {
-                                    statusCode:200,
+                                    statusCode: 200,
                                     headers,
                                     body: JSON.stringify(new Response(true, "본인이 아닙니다"))
                                 }
@@ -203,6 +203,14 @@ exports.handler = async (event: any) => {
             }
         }
             break;
+        case '/main': {
+            switch (method) {
+                case 'GET':
+                    const round = getCurrentRound();
+                    const lotto = (await getLotto(round)).sort((a, b) => a - b);
+                    body = { lotto };
+            }
+        }
     }
     const response = {
         statusCode,
