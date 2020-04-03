@@ -70,10 +70,10 @@ function imgBranch(order: number) {
             main111Img.setAttribute('href', 'introduce/event.html');
             break;
         case 2:
-            main111Img.setAttribute('href', 'introduce/campaign.html');
+            main111Img.setAttribute('href', 'introduce/event.html');
             break;
         case 3:
-            main111Img.setAttribute('href', '#');
+            main111Img.setAttribute('href', 'introduce/campaign.html');
             break;
     }
 }
