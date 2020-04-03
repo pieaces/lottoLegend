@@ -7,11 +7,9 @@ headerSign();
 const main111Img = document.querySelector<HTMLElement>('.main-1-1-1 > a');
 const imgBtn = document.querySelectorAll('.img-btn > i');
 const winBox = document.querySelector<HTMLElement>('.win-num-box');
-const rightBtn = document.getElementById('right-btn');
-const leftBtn = document.getElementById('left-btn');
-const roundSelectBox = document.querySelector<HTMLSelectElement>('#round-selectbox');
 const winner = document.getElementById('winner');
 const winAmount = document.getElementById('winAmount');
+const winRound = document.getElementById('win-round');
 
 document.querySelector<HTMLElement>('.login-btn').onclick = () => {
 
