@@ -67,7 +67,7 @@ function imgBranch(order: number) {
             main111Img.setAttribute('href', 'introduce/system.html');
             break;
         case 1:
-            main111Img.setAttribute('href', 'introduce/event.html');
+            main111Img.setAttribute('href', 'introduce/truth.html');
             break;
         case 2:
             main111Img.setAttribute('href', 'introduce/event.html');
