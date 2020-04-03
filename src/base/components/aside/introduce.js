@@ -9,6 +9,11 @@ document.write(` <div class="anchor-title">
 </li>
 <li>
     <ul class="anchor-list-box">
+    <li><a href="trust.html">그 날의 진실</a></li>
+    </ul> 
+</li>
+<li>
+    <ul class="anchor-list-box">
     <li> <a href="system.html">베르누이 분석 시스템</a> </li>
     </ul> 
 </li>
