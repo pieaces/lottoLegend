@@ -242,6 +242,10 @@
   font-size:1.5rem;
 }
 
+.win-count-rank-box{
+  margin-right:0.5rem;
+}
+
 .win-count-small-text{
   font-size:1.8rem;
 }
@@ -356,7 +360,7 @@ transform: translateY(-0.1rem);
 
 .main-1-4{
   display:flex;
-  height: 50rem;
+  height: 60rem;
 }
 
 .main-1-4-1{
@@ -396,8 +400,8 @@ transform: translateY(-0.1rem);
   text-align: center;
 }
 
-.community-container{
-  height: 100%;
+.community-box{
+  padding: 0 2rem;
 }
 
 .community-tabs{
@@ -407,7 +411,42 @@ transform: translateY(-0.1rem);
 
 .community-tab{
   flex:1;
-  border:1px solid rgba(0, 0, 0, 0.1)
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top:1px solid rgba(0, 0, 0, 0.1);
+  border-left:1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #09538e;
+  text-align: center;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.community-tab:last-child{
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.community-tab-current{
+  border-top:1px solid #09538e;
+  border-left:1px solid #09538e;
+  border-right:1px solid #09538e;
+  border-bottom: none;
+}
+
+.community-content{
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+  padding:1rem;
+  color:#535353;
+}
+
+.community-content-title{
+  font-size:1.3rem;
+}
+
+.community-time{
+  font-size:1.1rem;
 }
 
 .main-1-4-2{
