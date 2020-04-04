@@ -1,6 +1,5 @@
 import Selectr, { IOptions } from 'mobius1-selectr';
 import { setColorLotto, networkAlert, setDisabledLotto } from '../functions/index';
-import { headerSign } from '../amplify/auth';
 import configure from '../amplify/configure';
 import { getUnAuthAPI } from '../amplify/api';
 
@@ -9,7 +8,6 @@ const numWeekWrapper = document.querySelector<HTMLElement>('.num-week-wrapper');
 
 
 configure();
-headerSign();
 
 getUnAuthAPI('/numbers/week')
     .then(({ data, rounds }) => {

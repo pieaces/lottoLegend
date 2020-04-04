@@ -3,12 +3,10 @@ import configure from '../amplify/configure'
 import ChartBase from '../system/premium/Chart/Charts';
 import { getUnAuthAPI } from '../amplify/api';
 import Swal from 'sweetalert2'
-import { headerSign } from '../amplify/auth';
 import { mqInit } from './functions'
 import Selectr, { IOptions } from 'mobius1-selectr';
 
 configure();
-headerSign();
 
 const compartColor = ['#FBC400', '#69C8F2', '#FF7272', '#AAAAAA', '#B0D840'];
 

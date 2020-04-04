@@ -1,34 +1,35 @@
+.box-border{
+	border-radius: 1rem;
+    border: 1px solid rgba(0,0,0,0.3);
+}
 .pay-container{
-	margin-top:2rem;
+	margin-top:5rem;
 	margin-bottom: 10rem;
 }
 
 .pay-price{
+	width:8rem;
 	font-weight: bold;
 }
 
 .pay-text-seperator{
-	margin-left:7rem;
+	margin-left:5rem;
 	color:#999;
 	font-size:2rem;
 }
 
 .payment-text{
-	margin-left:7rem;
+	margin-left:3rem;
 	font-size:1.6rem;
 }
 
 .pay-price-result-box{
-	display: flex;
-	align-items: center;
-	height: 5rem;
-	margin-left:3rem;
-	padding:0 2rem;
-	border-radius: 3rem;
-	border:1px solid rgba(0,0,0,0.3);
-	background-color: #1e1a12;
-	color:white;
-	font-size:1.6rem;
+    display: flex;
+    align-items: center;
+    height: 5rem;
+    margin-left: 3rem;
+    padding: 0 2rem;
+    font-size: 1.6rem;
 }
 
 .pay-price-result-box > div{
@@ -36,7 +37,7 @@
 }
 
 .pay-price-result-box > div:nth-child(1){
-	margin-right: 5rem;
+	margin-right: 3rem;
 }
 
 .payment-box{
@@ -54,27 +55,22 @@
 }
 
 .payment-tabs{
-	margin-left:7rem;
+	margin-left:3rem;
 }
 
 .payment-tab{
 	display:flex;
 	align-items: center;
 	justify-content: center;
-	background-color: #1e1a12;
-	border-radius: 0.5rem;
-	width:15rem;
+	width:12rem;
 	height:5rem;
-	color:gold;
 	font-size:1.6rem;
 	cursor: pointer;
 }
-
-.payment-tab > i{
-	margin-right:0.5rem;
-	font-size:2rem;
+.payment-clicked{
+	background: #1f1b16;
+    color: gold;
 }
-
 .price-section-container{
 	margin:1rem 0;
 }

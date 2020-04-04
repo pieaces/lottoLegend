@@ -1,12 +1,11 @@
 import configure from '../amplify/configure'
 import { getUnAuthAPI, postAuthAPI, deleteAuthAPI, getAuthAPI, patchAuthAPI } from '../amplify/api';
-import { getUserName, getNickName, headerSign, isLogedIn } from '../amplify/auth';
+import { getUserName, getNickName, isLogedIn } from '../amplify/auth';
 import { isoStringToDate, networkAlert, rankToClass, onlyUserAlert, isoStringToTime, getQueryStringObject, blankToHtml, blankToString } from '../functions';
 import Swal from 'sweetalert2'
 import { Category, getCategoryHtml, makeNumSet } from './functions';
 
 configure();
-headerSign();
 
 const title = document.getElementById('content-title');
 const author = document.getElementById('author-name');

@@ -1,12 +1,10 @@
 import configure from '../amplify/configure'
 import { getUnAuthAPI } from '../amplify/api'
 import { isoStringToDate, rankToClass, getQueryStringObject } from '../functions';
-import { headerSign } from '../amplify/auth';
 import { Category, getCategoryHtml } from './functions';
 const boardSection = document.querySelector('.board-section');
 const pageNumContainer = document.querySelector('.page-num-container');
 configure();
-headerSign();
 
 const category: Category = document.getElementById('wrapper').getAttribute('data-category') as Category;
 const index = Number(getQueryStringObject().index) || 1;

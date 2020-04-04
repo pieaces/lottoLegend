@@ -1,8 +1,7 @@
 import configure from '../amplify/configure'
-import { signIn, headerSign } from '../amplify/auth'
+import { signIn } from '../amplify/auth'
 
 configure();
-headerSign();
 
 const loginBtn = document.getElementById('login-btn');
 

@@ -2,14 +2,12 @@ import configure from '../amplify/configure'
 import { getAuthAPI, deleteAuthAPI } from '../amplify/api';
 import CheckBoxToggle from '../system/premium/instanceBtns/CheckBoxToggle';
 import Selectr, { IOptions } from 'mobius1-selectr';
-import { headerSign } from '../amplify/auth';
 import { makeTable, modifyTableBoundary } from './functions';
 import { networkAlert } from '../functions';
 import { makeCheckdValueBox } from '../system/premium/Layout/functions'
 import Swal from 'sweetalert2';
 
 configure();
-headerSign();
 
 const loading = document.querySelector('.loading-box');
 

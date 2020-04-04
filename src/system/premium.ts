@@ -1,10 +1,8 @@
 import configure from '../amplify/configure'
 import DataAPI from "./premium/DataAPI";
 import Layout, { IDataAPI } from './premium/Layout'
-import { headerSign } from '../amplify/auth';
 
 configure();
-headerSign();
 
 const loading = document.querySelector<HTMLElement>('.loading-box');
 loading.classList.remove('none');

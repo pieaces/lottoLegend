@@ -1,10 +1,8 @@
 import configure from '../amplify/configure'
-import { headerSign } from "../amplify/auth";
 import CheckBoxToggle from "../system/premium/instanceBtns/CheckBoxToggle";
 import Swal from 'sweetalert2';
 
 configure();
-headerSign();
 
 const checkBoxToggle = new CheckBoxToggle();
 checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
