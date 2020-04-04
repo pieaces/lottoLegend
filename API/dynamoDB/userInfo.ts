@@ -167,6 +167,7 @@ interface MyPage {
     include?: { current?: number[], before?: number[] },
     exclude?: { current?: number[], before?: number[] },
     numsArr?: MyNumberData[],
+    beforeNumbers?: MyNumberData[],
     point?: number,
     rank?: number,
     plan?: string,
@@ -188,7 +189,7 @@ export function getMyHome(userName: string): Promise<MyPage> {
             "#Point": "Point",
             "#Rank": "Rank"
         },
-        ProjectionExpression: '#Numbers.#Before, #IncExc.#Current, #IncExc.#Before, #Plan, #Until, #Point, #Rank',
+        ProjectionExpression: '#Numbers.#Current, #Numbers.#Before, #IncExc.#Current, #IncExc.#Before, #Plan, #Until, #Point, #Rank',
         Key: {
             "UserName": {
                 S: userName
@@ -204,7 +205,16 @@ export function getMyHome(userName: string): Promise<MyPage> {
             else {
                 const result: MyPage = {};
 
-                const numbersData = data.Item.Numbers.M[round-1] && data.Item.Numbers.M[round-1].L;
+                const beforeNumbers = data.Item.Numbers.M[round-1] && data.Item.Numbers.M[round-1].L;
+                const numbersData = data.Item.Numbers.M[round] && data.Item.Numbers.M[round].L;
+                result.beforeNumbers = beforeNumbers && beforeNumbers.map(item => {
+                    return {
+                        numbers: NSToNumbers(item.M.numbers.NS).sort((a, b) => a - b),
+                        date: item.M.date.S,
+                        method: item.M.method.S,
+                        tool: item.M.tool.S,
+                    }
+                });
                 result.numsArr = numbersData && numbersData.map(item => {
                     return {
                         numbers: NSToNumbers(item.M.numbers.NS).sort((a, b) => a - b),

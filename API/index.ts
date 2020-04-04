@@ -177,7 +177,7 @@ exports.handler = async (event: any) => {
                     const myData = await getMyHome(currentId);
 
                     let winner = 6;
-                    myData.numsArr && myData.numsArr.forEach(data => {
+                    myData.beforeNumbers && myData.beforeNumbers.forEach(data => {
                         let count = 0;
                         data.numbers.forEach(num => {
                             if (lotto.numbers.some(item => item === num)) count++;
