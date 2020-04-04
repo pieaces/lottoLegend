@@ -19,6 +19,7 @@ backgroundImgSlide();
 getUnAuthAPI('/main').then((data) => {
     console.log(data);
     makeWinNumBox(data);
+    document.querySelectorAll('.win-round').forEach(node => node.textContent = data.round);
     winRound.textContent = data.round;
 })
 function makeWinNumBox(data: any) {
