@@ -174,7 +174,6 @@ interface MyPage {
     winner?: number,
     total?: number
 }
-
 export function getMyHome(userName: string): Promise<MyPage> {
     const round = getCurrentRound() + 1;
     const params: GetItemInput = {
@@ -189,7 +188,7 @@ export function getMyHome(userName: string): Promise<MyPage> {
             "#Point": "Point",
             "#Rank": "Rank"
         },
-        ProjectionExpression: '#Numbers, #IncExc.#Current, #IncExc.#Before, #Plan, #Until, #Point, #Rank',
+        ProjectionExpression: '#Numbers.#Before, #IncExc.#Current, #IncExc.#Before, #Plan, #Until, #Point, #Rank',
         Key: {
             "UserName": {
                 S: userName
@@ -205,7 +204,7 @@ export function getMyHome(userName: string): Promise<MyPage> {
             else {
                 const result: MyPage = {};
 
-                const numbersData = data.Item.Numbers.M[round] && data.Item.Numbers.M[round].L;
+                const numbersData = data.Item.Numbers.M[round-1] && data.Item.Numbers.M[round-1].L;
                 result.numsArr = numbersData && numbersData.map(item => {
                     return {
                         numbers: NSToNumbers(item.M.numbers.NS).sort((a, b) => a - b),
