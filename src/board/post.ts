@@ -77,6 +77,12 @@ let imageList: ImageInfo[] = [];
 let selectedImages = [];
 let totalSize = 0;
 
+window.onbeforeunload = function(e) {
+    var dialogText = 'Dialog text here';
+    e.returnValue = dialogText;
+    return dialogText;
+};
+
 submitBtn.onclick = async () => {
     const title = stringTrimer(titleInput.value);
     if (title === "") return Swal.fire({
