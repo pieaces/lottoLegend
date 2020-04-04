@@ -49,7 +49,7 @@ getAuthAPI('/numbers/piece')
                 title: '알림',
                 text: '번호리스트가 없습니다.',
                 icon: 'info',
-                footer: '<a href="/system/includeExclude.html">번호 선택하러 가기</a>'
+                footer: '<a href="/system/include.html">번호 선택하러 가기</a>'
             });
         }
     }).catch(err => networkAlert())
