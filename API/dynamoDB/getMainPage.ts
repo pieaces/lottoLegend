@@ -5,7 +5,7 @@ import { GetItemOutput } from "aws-sdk/clients/dynamodb";
 export default function getMainPage(round: number): Promise<any> {
     const params = {
         TableName: 'LottoData',
-        ProjectionExpression: 'Numbers, WinAmount, Winner, Win, Info',
+        ProjectionExpression: 'Numbers, BonusNum, WinAmount, Winner, Win, Info',
         Key: {
             "Round": {
                 N: round.toString()
@@ -20,6 +20,7 @@ export default function getMainPage(round: number): Promise<any> {
             }
             if ('Win' in data.Item && 'Info' in data.Item) {
                 const numbers = data.Item.Numbers.NS.map(num => Number(num)).sort((a, b) => a - b);
+                const bonusNum = Number(data.Item.BonusNum.N);
                 const winner = Number(data.Item.Winner.N);
                 const winAmount = Number(data.Item.WinAmount.N);
                 const win = [
@@ -41,7 +42,7 @@ export default function getMainPage(round: number): Promise<any> {
                         winAmount: Number(item.winAmount.N)
                     }
                 });
-                resolve({ numbers, winner, winAmount, win, info });
+                resolve({ round, numbers, bonusNum, winner, winAmount, win, info });
             } else {
                 resolve(await getMainPage(round - 1));
             }

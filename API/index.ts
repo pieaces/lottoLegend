@@ -57,6 +57,13 @@ exports.handler = async (event: any) => {
                 case 'POST':
                     if (logedIn) {
                         const { category, title, contents } = JSON.parse(event.body);
+                        if(category === 'notice' && currentId !== 'lottoend'){
+                            console.log('Intruder Alert! - You are not the Manager!');
+                            return{
+                                statusCode:400,
+                                headers,
+                            }
+                        }
                         const insertId = await db.post(category, title, currentId, contents);
                         await addPoint(currentId, Point.post);
                         body = insertId;
@@ -208,7 +215,7 @@ exports.handler = async (event: any) => {
             switch (method) {
                 case 'GET':
                     const round = getCurrentRound();
-                    body = getMainPage(round);
+                    body = await getMainPage(round);
             }
         }
     }
