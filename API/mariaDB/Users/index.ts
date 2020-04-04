@@ -5,8 +5,8 @@ export default class Users extends DB {
         super();
         this.tableName = 'Users';
     }
-    async getRank(userName:string){
+    async getRank(userName:string): Promise<number>{
         const sql = `SELECT rank FROM ${this.tableName} WHERE userName = ?`;
-        return (await this.query(sql, [userName]))[0];
+        return ((await this.query(sql, [userName]))[0]).rank;
     }
 }

@@ -63,6 +63,12 @@ exports.handler = async (event: any) => {
                                 statusCode:400,
                                 headers,
                             }
+                        }else if(category === 'pro' && Number(await (new Users().getRank(currentId))) > 3 ){
+                            console.log('Intruder Alert! - You are not the 1,2,3 rank!');
+                            return{
+                                statusCode:400,
+                                headers,
+                            }
                         }
                         const insertId = await db.post(category, title, currentId, contents);
                         await addPoint(currentId, Point.post);
@@ -145,7 +151,7 @@ exports.handler = async (event: any) => {
                         const insertId = await db.post(postId, currentId, contents);
                         await addPoint(currentId, Point.comment);
                         const users = new Users();
-                        const { rank } = await users.getRank(currentId);
+                        const rank = await users.getRank(currentId);
                         body = { commentId: insertId, rank };
                     } else {
                         statusCode = 400;
