@@ -438,11 +438,19 @@ transform: translateY(-0.1rem);
   border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+.community-tab.community-tab-current:last-child{
+  border-right:1px solid #09538e;
+}
+
 .community-tab-current{
   border-top:1px solid #09538e;
   border-left:1px solid #09538e;
   border-right:1px solid #09538e;
   border-bottom: none;
+}
+
+.community-content-box{
+  padding:1rem 0;
 }
 
 .community-content{

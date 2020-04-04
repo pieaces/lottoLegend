@@ -13,11 +13,71 @@ const compartColor = ['#FBC400', '#69C8F2', '#FF7272', '#AAAAAA', '#B0D840'];
 const totalWinResultBox = document.querySelectorAll<HTMLElement>('.total-win-result-box > div');
 const ownWinResultBox = document.querySelectorAll<HTMLElement>('.own-win-result-box > div');
 const reviewTabs = document.querySelector('.review-tabs');
+const commContentBox = document.querySelector('.community-content-box');
+const winCount = document.querySelectorAll('.win-count-rank');
+const communityTab = document.querySelectorAll('.community-tab');
 
+insertWinCount([21, 32, 12, 32, 12]);
 insertWinResult([{ number: 1, amount: 2 }, { number: 4, amount: 3 }, { number: 1, amount: 2 }, { number: 1, amount: 2 }, { number: 1, amount: 2 }], totalWinResultBox);
 insertWinResult([{ number: 20, amount: 19 }, { number: 34, amount: 32 }, { number: 1, amount: 2 }, { number: 1, amount: 2 }, { number: 1, amount: 2 }], ownWinResultBox)
 makeWinReview([{ title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }]);
+makeCommContent([{ title: "하이루이월수는 이리봅니다.", time: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", time: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", time: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", time: "2020-04-04" }])
+commToggle();
 
+document.querySelector<HTMLElement>('.login-btn').onclick = () => {
+
+}
+
+backgroundImgSlide();
+getUnAuthAPI('/main').then((data) => {
+    console.log(data);
+    makeWinNumBox(data);
+    document.querySelectorAll('.win-round').forEach(node => node.textContent = data.round);
+    winRound.textContent = data.round;
+})
+
+
+function commToggle() {
+    let current = 0;
+    for (let i = 0; i < communityTab.length; i++) {
+        communityTab[i].addEventListener('click', () => {
+            communityTab[current].classList.remove('community-tab-current');
+            communityTab[i].classList.add('community-tab-current');
+            current = i;
+        })
+    }
+}
+
+
+function insertWinCount(data) {
+    data.forEach((item, index) => {
+        winCount[index].textContent = item.toString();
+    })
+}
+
+
+function makeCommContent(data) {
+    data.forEach(item => {
+        const box = document.createElement('div');
+        box.classList.add('community-content');
+
+        const title = document.createElement('div');
+        title.classList.add('community-content-title');
+        const anchor = document.createElement('a');
+        anchor.setAttribute('href', '#');
+        anchor.textContent = item.title;
+
+        title.appendChild(anchor);
+        box.appendChild(title);
+
+        const time = document.createElement('div');
+        time.classList.add('community-time');
+        time.textContent = item.time;
+
+        box.appendChild(time);
+        commContentBox.appendChild(box);
+    })
+}
 
 function insertWinResult(data, target: NodeListOf<HTMLElement>) {
     Array.from(target).forEach((node, index) => {
@@ -28,7 +88,8 @@ function insertWinResult(data, target: NodeListOf<HTMLElement>) {
 
 function makeWinReview(data) {
     data.forEach(item => {
-        const tab = document.createElement('div');
+        const tab = document.createElement('a');
+        tab.setAttribute('href', '#');
         tab.classList.add('review-tab');
         tab.classList.add('box-color');
 
@@ -56,20 +117,6 @@ function makeWinReview(data) {
         reviewTabs.appendChild(tab);
     })
 }
-
-document.querySelector<HTMLElement>('.login-btn').onclick = () => {
-
-}
-
-backgroundImgSlide();
-getUnAuthAPI('/main').then((data) => {
-    console.log(data);
-    makeWinNumBox(data);
-    document.querySelectorAll('.win-round').forEach(node => node.textContent = data.round);
-    winRound.textContent = data.round;
-})
-
-
 
 function makeWinNumBox(data: any) {
     winner.textContent = data.winner;
