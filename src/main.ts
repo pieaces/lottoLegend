@@ -3,7 +3,7 @@ import { getUnAuthAPI } from './amplify/api';
 
 configure();
 
-const main111Img = document.querySelector<HTMLElement>('.main-1-1-1 > a');
+const main111Img = document.querySelector<HTMLElement>('.main-image > a');
 const imgBtn = document.querySelectorAll('.img-btn > i');
 const winBox = document.querySelector<HTMLElement>('.win-num-box');
 const winner = document.getElementById('winner');
@@ -16,7 +16,7 @@ document.querySelector<HTMLElement>('.login-btn').onclick = () => {
 }
 
 backgroundImgSlide();
-getUnAuthAPI('/main').then((data) =>{
+getUnAuthAPI('/main').then((data) => {
     console.log(data);
     makeWinNumBox(data);
     winRound.textContent = data.round;
