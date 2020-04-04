@@ -23,21 +23,14 @@
                         <div class="find-title-text">
                             아이디 찾기
                         </div>
-                        <form id="find-form-phone">
+                        <form id="form">
                             <div class="find-container">
                                 <div class="find-box">
                                     <div class="find-title-box">
                                         <div class="find-title">휴대폰번호</div>
                                     </div>
                                     <div class="find-input-box  find-phone-box">
-                                        <select id="phone-number-option">
-                                            <option value="010">010</option>
-                                            <option value="011">011</option>
-                                            <option value="016">016</option>
-                                            <option value="017">017</option>
-                                            <option value="017">018</option>
-                                            <option value="017">019</option>
-                                        </select>
+                                        <input type="text" id="phone-number-first" style="width:10rem;" required>
                                         <div class="dash">
                                             -
                                         </div>
@@ -45,12 +38,12 @@
                                         <div class="dash">
                                             -
                                         </div>
-                                        <input type="text" id="phone-number-end" required>
+                                        <input type="text" id="phone-number-last" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="find-btn-box">
-                                <button type="submit" class="btn find-btn" id="send">확인</button>
+                                <button type="submit" class="btn find-btn">확인</button>
                             </div>
                         </form>
                     </div>
@@ -59,8 +52,9 @@
         </section>
         <script src="../base/components/footer.js"></script>
     </div>
+    <script src="../base/js/polyfill.js"></script>
     <script src="../base/js/headerHover.js"></script>
-    <script src="js/find.js"></script>
+    <script src="js/findId.js"></script>
     <script src="https://kit.fontawesome.com/e14b8c39aa.js" crossorigin="anonymous"></script>
 
 </body>
