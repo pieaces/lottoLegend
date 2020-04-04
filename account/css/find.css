@@ -8,13 +8,13 @@
 
 .find-form-container{
   width: 70%;
-  padding:1rem 5rem 1rem 5rem;
+  padding:3rem 5rem 3rem 5rem;
   box-shadow: 1px 2px 8px rgba(0,0,0,.1),-2px -1px 8px rgba(0,0,0,.1);
   border-radius: .75em;
 }
 
 .find-title-text{
-  padding:4rem 4rem 4rem 0.5rem;
+  padding:0 4rem 2rem 0.5rem;
   font-size : 2.6rem;   
   font-weight: 700;
   font-family: 'Nanum-gothic';
@@ -72,7 +72,7 @@
     display:flex;
     align-items: center;
     justify-content: center;
-    height:10rem;
+    padding-top:2rem;
   }
 
   .find-btn {
@@ -104,4 +104,21 @@
 
   .dash{
       padding:0 1rem;
+  }
+
+  #find-id-result-container{
+    list-style-type: disc;
+
+  }
+
+  .find-id-result-box{
+    margin-left:2rem;
+    font-size:1.4rem;
+    text-align: left;
+  }
+
+  .find-id-result-info-text{
+    padding:1rem 0 0 0.5rem;
+    color:rgb(105, 105, 105);
+    font-size:1.2rem;
   }

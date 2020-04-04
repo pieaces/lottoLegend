@@ -21,9 +21,9 @@
                 <div class="main find-form-wrapper">
                     <div class="find-form-container">
                         <div class="find-title-text">
-                            비밀번호 찾기
+                            비밀번호 재설정
                         </div>
-                        <form id="find-form-phone">
+                        <form id="find-form-id">
                             <div class="find-container">
                                 <div class="find-box">
                                     <div class="find-title-box">
@@ -34,29 +34,6 @@
                                     </div>
 
                                 </div>
-                                <div class="find-box">
-                                    <div class="find-title-box">
-                                        <div class="find-title">휴대폰번호</div>
-                                    </div>
-                                    <div class="find-input-box  find-phone-box">
-                                        <select id="phone-number-start">
-                                            <option value="010">010</option>
-                                            <option value="011">011</option>
-                                            <option value="016">016</option>
-                                            <option value="017">017</option>
-                                            <option value="017">018</option>
-                                            <option value="017">019</option>
-                                        </select>
-                                        <div class="dash">
-                                            -
-                                        </div>
-                                        <input type="text" id="phone-number-mid" required>
-                                        <div class="dash">
-                                            -
-                                        </div>
-                                        <input type="text" id="phone-number-end" required>
-                                    </div>
-                                </div>
                             </div>
                             <div class="find-btn-box">
                                 <button type="submit" class="btn find-btn" id="send">확인</button>
@@ -66,7 +43,15 @@
                             <div class="find-container">
                                 <div class="find-box">
                                     <div class="find-title-box">
-                                        <div class="find-title">비밀번호</div>
+                                        <div class="find-title">인증번호</div>
+                                    </div>
+                                    <div class="find-input-box">
+                                        <input type="text" id="verify" required>
+                                    </div>
+                                </div>
+                                <div class="find-box">
+                                    <div class="find-title-box">
+                                        <div class="find-title">새 비밀번호</div>
                                     </div>
                                     <div class="find-input-box ">
                                         <input type="password" id="password" required
@@ -78,7 +63,7 @@
                                 </div>
                                 <div class="find-box">
                                     <div class="find-title-box">
-                                        <div class="find-title">비밀번호 확인</div>
+                                        <div class="find-title">새 비밀번호 확인</div>
                                     </div>
                                     <div class="find-input-box">
                                         <input type="password" id="password-check" required>
