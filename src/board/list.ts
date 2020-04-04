@@ -2,11 +2,19 @@ import configure from '../amplify/configure'
 import { getUnAuthAPI } from '../amplify/api'
 import { isoStringToDate, rankToClass, getQueryStringObject } from '../functions';
 import { Category, getCategoryHtml } from './functions';
+import { getUserName } from '../amplify/auth';
 const boardSection = document.querySelector('.board-section');
 const pageNumContainer = document.querySelector('.page-num-container');
 configure();
 
 const category: Category = document.getElementById('wrapper').getAttribute('data-category') as Category;
+if(category === 'notice' ){
+    const postBtn = document.querySelector('.post-btn');
+    postBtn.classList.add('none');
+    getUserName().then(userName => {
+        if(userName === 'lottoend') postBtn.classList.remove('none');
+    })
+}
 const index = Number(getQueryStringObject().index) || 1;
 const { word, type } = getQueryStringObject();
 
