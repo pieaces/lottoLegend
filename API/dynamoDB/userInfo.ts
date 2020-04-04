@@ -205,8 +205,8 @@ export function getMyHome(userName: string): Promise<MyPage> {
             else {
                 const result: MyPage = {};
 
-                const beforeNumbers = data.Item.Numbers.M[round-1] && data.Item.Numbers.M[round-1].L;
-                const numbersData = data.Item.Numbers.M[round] && data.Item.Numbers.M[round].L;
+                const beforeNumbers = data.Item.Numbers && data.Item.Numbers.M[round-1] && data.Item.Numbers.M[round-1].L;
+                const numbersData = data.Item.Numbers && data.Item.Numbers.M[round] && data.Item.Numbers.M[round].L;
                 result.beforeNumbers = beforeNumbers && beforeNumbers.map(item => {
                     return {
                         numbers: NSToNumbers(item.M.numbers.NS).sort((a, b) => a - b),
