@@ -1,9 +1,8 @@
 import configure from '../amplify/configure'
-import { signUp, headerSign } from "../amplify/auth";
+import { signUp } from "../amplify/auth";
 import Swal from 'sweetalert2';
 
 configure();
-headerSign();
 
 const signUpForm = document.querySelector('.signUp-form');
 const id = document.querySelector<HTMLInputElement>('#id');

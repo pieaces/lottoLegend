@@ -4,10 +4,8 @@ import Layout2 from "./premium/Layout/Layout2";
 import ResetBtn from './premium/instanceBtns/ResetBtn';
 import Swal from 'sweetalert2'
 import { networkAlert } from '../functions';
-import { headerSign } from '../amplify/auth';
 
 configure();
-headerSign();
 
 const category = document.querySelector('.main').getAttribute('data-category');
 const makeBtn = document.getElementById('make-btn');

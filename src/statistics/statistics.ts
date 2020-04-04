@@ -5,11 +5,8 @@ import { getUnAuthAPI } from '../amplify/api';
 import { getQueryStringObject, rangeMake } from '../functions';
 import makeClickable from '../system/premium/Slide/makeClickable';
 import { getStaticsName,mqInit } from './functions';
-import { headerSign } from '../amplify/auth';
-
 
 configure();
-headerSign();
 
 const labels = require('../system/premium/DataAPI/json/labels.json');
 const lineNum = document.querySelectorAll<HTMLElement>('.chart-line-num > div');

@@ -1,9 +1,7 @@
 import configure from './amplify/configure'
 import { getUnAuthAPI } from './amplify/api';
-import { headerSign, isLogedIn } from './amplify/auth';
 
 configure();
-headerSign();
 
 const main111Img = document.querySelector<HTMLElement>('.main-1-1-1 > a');
 const imgBtn = document.querySelectorAll('.img-btn > i');
@@ -12,7 +10,6 @@ const winner = document.getElementById('winner');
 const winAmount = document.getElementById('winAmount');
 const winRound = document.getElementById('win-round');
 const compartColor = ['#FBC400', '#69C8F2', '#FF7272', '#AAAAAA', '#B0D840'];
-
 
 document.querySelector<HTMLElement>('.login-btn').onclick = () => {
 

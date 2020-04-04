@@ -4,12 +4,10 @@ import { setColorLotto, networkAlert, rankToClass, onlyUserAlert, stringTrimer, 
 import IncludeExclude from './IncludeExclude/index';
 import incObj from './IncludeExclude/include';
 import excObj from './IncludeExclude/exclude';
-import { headerSign } from '../amplify/auth';
 import Auth from '@aws-amplify/auth';
 import { makeTable, phoneString } from './functions';
 import Swal from 'sweetalert2';
 configure();
-headerSign();
 
 const winNumBox = document.querySelector<HTMLElement>('.mypage-win-num');
 const nickname = document.querySelector('#nickname');

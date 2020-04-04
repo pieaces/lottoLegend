@@ -4,12 +4,10 @@ import IncludeExclude from './IncludeExclude/index';
 import incObj from './IncludeExclude/include';
 import excObj from './IncludeExclude/exclude';
 import Selectr, { IOptions } from 'mobius1-selectr';
-import { headerSign } from '../amplify/auth';
 import Swal from 'sweetalert2';
 import { networkAlert } from '../functions';
 
 configure();
-headerSign();
 
 const roundSelectBox = document.querySelector<HTMLSelectElement>('#round-select-box');
 const loading = document.querySelector('.loading-box');

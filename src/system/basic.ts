@@ -6,12 +6,10 @@ import Swal from 'sweetalert2'
 import { actualInstance, selectionInstance, latestInstance } from './stackInstances';
 import SaveBtn, { Tool } from './premium/instanceBtns/SaveBtn';
 import CheckBoxToggle from './premium/instanceBtns/CheckBoxToggle';
-import { headerSign } from '../amplify/auth';
 import { makeCheckdValueBox } from './premium/Layout/functions';
 import generatorLoading from './generatorLoading';
 
 configure();
-headerSign();
 
 const includeCanvas = document.getElementById('include');
 const excludeCanvas = document.getElementById('exclude');

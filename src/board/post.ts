@@ -3,47 +3,13 @@ import suneditor from 'suneditor'
 import plugins from 'suneditor/src/plugins'
 import { ko } from 'suneditor/src/lang'
 import { postUnAuthAPI, postAuthAPI, getUnAuthAPI, patchAuthAPI, getAuthAPI } from '../amplify/api';
-import { headerSign, isLogedIn } from '../amplify/auth'
+import { isLogedIn } from '../amplify/auth'
 import { networkAlert, onlyUserAlert, stringTrimer, getQueryStringObject } from '../functions'
 import Swal from 'sweetalert2'
 import { Category, getCategoryHtml, makeNum } from './functions';
 
-// 
-const mqMobile = window.matchMedia("(max-width: 767px)");
-
-if (mqMobile.matches) {
-    //첫 화면이 모바일 레이아웃일때
-    mqMobileInit();
-} else {
-    //첫 화면이 데스크탑 레이아웃일때
-    mqDeskTopInit();
-}
-
-mqMobile.addListener(mqFunc);
-
-function mqFunc(mediaQuery) {
-    if (mediaQuery.matches) {
-        //데스크탑 레이아웃에서 모바일 레이아웃으로 넘어갈때      
-        mqMobileInit();
-    } else {
-        //모바일 레이아웃에서 데스크탑 레이아웃으로 넘어갈때
-        mqDeskTopInit();
-    }
-}
-
-function mqMobileInit() {
-
-}
-
-function mqDeskTopInit() {
-
-}
-
-// 
-
 configure();
 let userName: string;
-headerSign();
 isLogedIn().then(bool => {
     if (!bool) onlyUserAlert();
 })
@@ -53,26 +19,50 @@ function attachTimestamp(name) {
     const now = new Date();
     return `${name.slice(0, index)}_${now.getFullYear()}-${now.getMonth()}-${now.getDate()}:${now.getHours()}:${now.getMinutes()}${name.slice(index)}`;
 }
+let editor:any;
+const mqMobile = window.matchMedia("(max-width: 767px)");
+if (mqMobile.matches) {
+    mqMobileInit();
+} else {
+    mqDeskTopInit();
+}
+function mqMobileInit() {
+    editor = suneditor.create('sample', {
+        plugins,
+        buttonList: [
+            ['bold', 'underline', 'italic', 'strike'],
+            ['fontColor', 'hiliteColor'],
+            ['image'],
+        ],
+        width: '100%',
+        height: 'auto',
+        minHeight: '360',
+        imageWidth: 500,
+        imageUploadSizeLimit: 4 * 1024 * 1024,
+        lang: ko
+    });
+}
 
-const editor = suneditor.create('sample', {
-    plugins,
-    buttonList: [
-        ['undo', 'redo'],
-        ['fontSize', 'formatBlock'],
-        ['bold', 'underline', 'italic', 'strike'],
-        ['fontColor', 'hiliteColor'],
-        ['paragraphStyle'],
-        ['image'],
-        ['table', 'align', 'list', 'horizontalRule'],
-    ],
-    width: '100%',
-    height: 'auto',
-    minHeight: '480',
-    imageWidth: 360,
-    //imageHeight: '360',
-    imageUploadSizeLimit: 4 * 1024 * 1024,
-    lang: ko
-});
+function mqDeskTopInit() {
+    editor = suneditor.create('sample', {
+        plugins,
+        buttonList: [
+            ['undo', 'redo'],
+            ['fontSize', 'formatBlock'],
+            ['bold', 'underline', 'italic', 'strike'],
+            ['fontColor', 'hiliteColor'],
+            ['paragraphStyle'],
+            ['image'],
+            ['table', 'align', 'list', 'horizontalRule'],
+        ],
+        width: '100%',
+        height: 'auto',
+        minHeight: '480',
+        imageWidth: 500,
+        imageUploadSizeLimit: 4 * 1024 * 1024,
+        lang: ko
+    });
+}
 
 const post = getQueryStringObject().id;
 const category: Category = document.getElementById('wrapper').getAttribute('data-category') as Category;

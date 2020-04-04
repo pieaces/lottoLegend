@@ -1,8 +1,7 @@
 import configure from '../amplify/configure'
-import { confirmSignUp, headerSign } from "../amplify/auth";
+import { confirmSignUp } from "../amplify/auth";
 
 configure();
-headerSign();
 
 const verifyCode = document.querySelector<HTMLInputElement>('#auth-num');
 const authCheck = document.querySelector('#auth-check');

@@ -1,11 +1,23 @@
+import configure from "../amplify/configure";
+
 const priceCheckbox = document.querySelectorAll<HTMLInputElement>('.price-checkbox');
 const priceContainer = document.querySelectorAll<HTMLElement>('.price-container');
 const priceBox = document.querySelectorAll<HTMLElement>('.price-box');
 const priceAnchorBox = document.querySelectorAll<HTMLElement>('.price-service-anchor-box');
 const priceAnchorHoverBox = document.querySelectorAll<HTMLElement>('.price-service-anchor-hover-box');
+const price = document.getElementById('price');
+const bankbook = document.getElementById('bankbook');
 
+configure();
 checkboxToggle();
 
+type PayMethod = 'bankbook' | 'card';
+let payMethod:PayMethod;
+bankbook.onclick = () =>{
+    if(payMethod !== 'bankbook'){
+        bankbook.classList.add('payment-clicked');
+    }
+}
 function checkboxToggle() {
     const overEventHandler: (() => void)[] = [];
     const outEventHandler: (() => void)[] = [];
@@ -26,6 +38,20 @@ function checkboxToggle() {
                 priceAnchorHoverBox[i].removeEventListener('mouseout', outEventHandler[i]);
                 priceAnchorHoverBox[i].style.transform = "perspective(1200px) rotateY(-179.9deg)";
                 priceAnchorHoverBox[i].style.opacity = "0";
+                switch(i){
+                    case 0:
+                        price.textContent = '150,000원';
+                    break;
+                    case 1:
+                        price.textContent = '90,000원';
+                    break;
+                    case 2:
+                        price.textContent = '53,000원';
+                    break;
+                    case 3:
+                        price.textContent = '9,900원';
+                    break;
+                }
             }
             current = i;
         });
