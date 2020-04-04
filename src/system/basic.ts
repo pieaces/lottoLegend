@@ -43,8 +43,8 @@ function info() {
 }
 
 getAuthAPI('/numbers/piece', { flag: true })
-    .then(({ include, exclude, total }) => {
-        document.querySelector<HTMLElement>('.line-gen-round').textContent = total + '회';
+    .then(({ include, exclude }) => {
+        //document.querySelector<HTMLElement>('.line-gen-round').textContent = total + '회';
         include && Layout3.makeLine(includeCanvas, include);
         exclude && Layout3.makeLine(excludeCanvas, exclude);
 
@@ -67,7 +67,6 @@ getAuthAPI('/numbers/piece', { flag: true })
         SaveBtn.init(Tool.free);
 
         document.getElementById('make').addEventListener('click', async () => {
-            console.log(includeNumsArr.length > 0, exclude.some(num => includeNumsArr.some(fix => fix === num)));
             if (includeNumsArr.length > 0 && (exclude && exclude.length > 0 && exclude.some(num => includeNumsArr.some(fix => fix === num)))) {
                 alertEffect();
                 Swal.fire({
