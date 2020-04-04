@@ -8,6 +8,39 @@ import { networkAlert, onlyUserAlert, stringTrimer, getQueryStringObject } from 
 import Swal from 'sweetalert2'
 import { Category, getCategoryHtml, makeNum } from './functions';
 
+// 
+const mqMobile = window.matchMedia("(max-width: 767px)");
+
+if (mqMobile.matches) {
+    //첫 화면이 모바일 레이아웃일때
+    mqMobileInit();
+} else {
+    //첫 화면이 데스크탑 레이아웃일때
+    mqDeskTopInit();
+}
+
+mqMobile.addListener(mqFunc);
+
+function mqFunc(mediaQuery) {
+    if (mediaQuery.matches) {
+        //데스크탑 레이아웃에서 모바일 레이아웃으로 넘어갈때      
+        mqMobileInit();
+    } else {
+        //모바일 레이아웃에서 데스크탑 레이아웃으로 넘어갈때
+        mqDeskTopInit();
+    }
+}
+
+function mqMobileInit() {
+
+}
+
+function mqDeskTopInit() {
+
+}
+
+// 
+
 configure();
 let userName: string;
 headerSign();
