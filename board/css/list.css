@@ -80,21 +80,13 @@
   font-size:1.5rem;
 }
 
-.board-author {
-  flex: 2;
-  font-size:1.3rem;
-}
-
+.board-author,
 .board-date {
   flex: 2;
   font-size:1.3rem;
 }
 
-.board-views {
-  flex: 1;
-  font-size:1.3rem;
-}
-
+.board-views,
 .board-reco {
   flex: 1;
   font-size:1.3rem;
