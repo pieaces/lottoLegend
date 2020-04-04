@@ -121,8 +121,10 @@ function makeTable(dataSet: ({ round: string, numbers: number[], hits?: boolean[
             div.appendChild(footer);
         }
         numWeekWrapper.appendChild(div);
-        const adBox = document.createElement('div');
-        adBox.classList.add('ad-box', 'box-color');
-        numWeekWrapper.appendChild(adBox);
+        if (i === 0) {
+            const adBox = document.createElement('div');
+            adBox.classList.add('ad-box', 'box-color');
+            numWeekWrapper.appendChild(adBox);
+        }
     }
 }
