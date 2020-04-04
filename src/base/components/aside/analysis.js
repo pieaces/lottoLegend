@@ -9,8 +9,8 @@ document.write(
         <li>
             <h3> 공유 게시판</h3>
             <ul class="anchor-list-box">
-                <li> <a href="/board/preAnalysis/list.html">전문가 분석실</a> </li>
-                <li> <a href="/board/basicAnalysis/list.html">일반 분석실</a> </li>
+                <li> <a href="/board/pro/list.html">전문가 분석실</a> </li>
+                <li> <a href="/board/analysis/list.html">일반 분석실</a> </li>
                 <li><a href="/board/include/list.html">추천수 공유</a></li>
                 <li><a href="/board/exclude/list.html">제외수 공유</a></li>
             </ul>

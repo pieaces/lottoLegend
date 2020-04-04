@@ -10,6 +10,52 @@ const winner = document.getElementById('winner');
 const winAmount = document.getElementById('winAmount');
 const winRound = document.getElementById('win-round');
 const compartColor = ['#FBC400', '#69C8F2', '#FF7272', '#AAAAAA', '#B0D840'];
+const totalWinResultBox = document.querySelectorAll<HTMLElement>('.total-win-result-box > div');
+const ownWinResultBox = document.querySelectorAll<HTMLElement>('.own-win-result-box > div');
+const reviewTabs = document.querySelector('.review-tabs');
+
+insertWinResult([{ number: 1, amount: 2 }, { number: 4, amount: 3 }, { number: 1, amount: 2 }, { number: 1, amount: 2 }, { number: 1, amount: 2 }], totalWinResultBox);
+insertWinResult([{ number: 20, amount: 19 }, { number: 34, amount: 32 }, { number: 1, amount: 2 }, { number: 1, amount: 2 }, { number: 1, amount: 2 }], ownWinResultBox)
+makeWinReview([{ title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }]);
+
+
+function insertWinResult(data, target: NodeListOf<HTMLElement>) {
+    Array.from(target).forEach((node, index) => {
+        node.children[1].textContent = data[index].number.toString();
+        node.children[2].textContent = data[index].amount.toString();
+    })
+}
+
+function makeWinReview(data) {
+    data.forEach(item => {
+        const tab = document.createElement('div');
+        tab.classList.add('review-tab');
+        tab.classList.add('box-color');
+
+        const imgBox = document.createElement('div');
+        imgBox.classList.add('review-img-box');
+
+        const img = document.createElement('img');
+        img.setAttribute('src', 'img/1.png');
+
+        imgBox.appendChild(img);
+        tab.appendChild(imgBox);
+
+        const content = document.createElement('div');
+        content.classList.add('review-content');
+        content.textContent = item.title;
+
+        tab.appendChild(content);
+
+        const time = document.createElement('div');
+        time.classList.add('review-time');
+
+        time.textContent = item.time;
+
+        tab.appendChild(time);
+        reviewTabs.appendChild(tab);
+    })
+}
 
 document.querySelector<HTMLElement>('.login-btn').onclick = () => {
 
@@ -22,6 +68,9 @@ getUnAuthAPI('/main').then((data) => {
     document.querySelectorAll('.win-round').forEach(node => node.textContent = data.round);
     winRound.textContent = data.round;
 })
+
+
+
 function makeWinNumBox(data: any) {
     winner.textContent = data.winner;
     winAmount.textContent = Math.round(data.winAmount / 100000000).toString();
