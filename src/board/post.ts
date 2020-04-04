@@ -1,5 +1,5 @@
 import configure from '../amplify/configure'
-import suneditor, { ImageInfo } from 'suneditor'
+import suneditor from 'suneditor'
 import plugins from 'suneditor/src/plugins'
 import { ko } from 'suneditor/src/lang'
 import { postUnAuthAPI, postAuthAPI, getUnAuthAPI, patchAuthAPI, getAuthAPI } from '../amplify/api';
@@ -9,7 +9,7 @@ import Swal from 'sweetalert2'
 import { Category, getCategoryHtml, makeNum } from './functions';
 
 configure();
-let userName;
+let userName:string;
 headerSign();
 isLogedIn().then(bool => {
     if (!bool) onlyUserAlert();
@@ -35,8 +35,8 @@ const editor = suneditor.create('sample', {
     width: '100%',
     height: 'auto',
     minHeight: '480',
-    imageWidth: '360',
-    imageHeight: '360',
+    imageWidth: 360,
+    //imageHeight: '360',
     imageUploadSizeLimit: 4 * 1024 * 1024,
     lang: ko
 });
@@ -69,7 +69,13 @@ if (category === 'include' || category === 'exclude') {
 imageRemove.addEventListener('click', () => {
     deleteCheckedImages();
 })
-
+interface ImageInfo {
+    element: HTMLElement;
+    name: string;
+    src: string;
+    size: number;
+    index: number;
+}
 let imageList: ImageInfo[] = [];
 let selectedImages = [];
 let totalSize = 0;
@@ -97,7 +103,7 @@ submitBtn.onclick = async () => {
             image[0].setAttribute('src', image[1]);
         });
         const contents = editor.getContents();
-        let leapId;
+        let leapId:number;
         if (!post) {
             leapId = await postAuthAPI('/posts', {
                 category, title, contents

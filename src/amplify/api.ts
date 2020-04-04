@@ -1,5 +1,4 @@
 
-import Auth from '@aws-amplify/auth'
 import API from '@aws-amplify/api'
 import { getIdToken } from './auth';
 

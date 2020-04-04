@@ -19,7 +19,11 @@ document.querySelector<HTMLElement>('.login-btn').onclick = () => {
 }
 
 backgroundImgSlide();
-
+getUnAuthAPI('/main').then((data) =>{
+    console.log(data);
+    makeWinNumBox(data);
+    winRound.textContent = data.round;
+})
 function makeWinNumBox(data: any) {
     winner.textContent = data.winner;
     winAmount.textContent = Math.round(data.winAmount / 100000000).toString();
@@ -44,9 +48,7 @@ function makeWinNumBox(data: any) {
 }
 
 function backgroundImgSlide() {
-
     let i = 2;
-
     const slideIntervalId = setInterval(() => {
         imgBranch(i);
 
