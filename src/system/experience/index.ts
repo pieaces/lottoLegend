@@ -53,7 +53,7 @@ export default class DataAPI {
         }
         return DataAPI.instance;
     }
-    public getTOTAL(): number { return 903; }
+    public getTOTAL(): number { return 3; }
     public getWinNums(): number[][] { return [[2,15,16,21,22,28],[7,19,23,24,36,39],[5,18,20,23,30,34]] }
     public getLabels(num = this.current): Array<string | number> {
         return this.rangeList[num];
