@@ -39,7 +39,7 @@ export function makeNumSet(param: { current: number[], before?: number[] }, answ
 }
 
 export type Affix = "list" | "post" | "read";
-export type Category = "free" | "include" | "exclude" | "notice" | "qna" | "win" | "analysis"
+export type Category = "free" | "include" | "exclude" | "notice" | "qna" | "win" | "analysis" | "pro";
 export function getCategoryHtml(category: Category, affix: Affix) {
     return `board/${category}/${affix}.html`;
 }

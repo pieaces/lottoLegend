@@ -1,5 +1,5 @@
 import configure from '../amplify/configure'
-import { getUnAuthAPI } from '../amplify/api'
+import { getUnAuthAPI, getAuthAPI } from '../amplify/api'
 import { isoStringToDate, rankToClass, getQueryStringObject } from '../functions';
 import { Category, getCategoryHtml } from './functions';
 import { getUserName } from '../amplify/auth';
@@ -8,13 +8,16 @@ const pageNumContainer = document.querySelector('.page-num-container');
 configure();
 
 const category: Category = document.getElementById('wrapper').getAttribute('data-category') as Category;
+const postBtn = document.querySelector('.post-btn');
 if(category === 'notice' ){
-    const postBtn = document.querySelector('.post-btn');
     postBtn.classList.add('none');
     getUserName().then(userName => {
         if(userName === 'lottoend') postBtn.classList.remove('none');
-    })
+    });
+}else if(category === 'pro'){
+    postBtn.classList.add('none');
 }
+
 const index = Number(getQueryStringObject().index) || 1;
 const { word, type } = getQueryStringObject();
 
@@ -29,7 +32,8 @@ document.querySelector<HTMLElement>('.search-box-form').onsubmit = (e) => {
 function listAPI() {
     if (word || type) {
         return getUnAuthAPI('/posts/search', { category, index, word, type });
-    } else return getUnAuthAPI('/posts', { category, index });
+    } else if (category === 'pro') return getAuthAPI('/posts', { category, index });
+    else return getUnAuthAPI('/posts', { category, index });
 }
 function listHref(index: number) {
     let href = `?index=${index}`;
@@ -37,7 +41,8 @@ function listHref(index: number) {
     if (type) href += `&type=${type}`;
     return href;
 }
-listAPI().then(({ posts, count }) => {
+listAPI().then(({ posts, count, rank }) => {
+    if(rank <= 3) postBtn.classList.remove('none');
     makeBoard(posts);
     const LIST_PACK = 15;
     const INDEX_PACK = 5;
