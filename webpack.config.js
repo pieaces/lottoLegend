@@ -7,7 +7,7 @@ const file = 'board/post.ts'
 const directory = file.slice(0, file.lastIndexOf('/'));
 const name = file.slice(file.lastIndexOf('/') + 1, file.indexOf('.'));
 let output = `${directory}/js`;
-if(file ==='main.ts') output = '';
+if (file === 'main.ts') output = '';
 module.exports = {
     mode: 'development',
     entry: [`./src/${file}`],

@@ -9,7 +9,7 @@ import Swal from 'sweetalert2'
 import { Category, getCategoryHtml, makeNum } from './functions';
 
 configure();
-let userName:string;
+let userName: string;
 headerSign();
 isLogedIn().then(bool => {
     if (!bool) onlyUserAlert();
@@ -41,9 +41,6 @@ const editor = suneditor.create('sample', {
     lang: ko
 });
 
-editor.setOptions({
-    Height: 'auto'
-});
 const post = getQueryStringObject().id;
 const category: Category = document.getElementById('wrapper').getAttribute('data-category') as Category;
 const loading = document.querySelector('.loading-box');
@@ -103,7 +100,7 @@ submitBtn.onclick = async () => {
             image[0].setAttribute('src', image[1]);
         });
         const contents = editor.getContents();
-        let leapId:number;
+        let leapId: number;
         if (!post) {
             leapId = await postAuthAPI('/posts', {
                 category, title, contents
