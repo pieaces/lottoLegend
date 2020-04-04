@@ -83,7 +83,7 @@ Auth.currentAuthenticatedUser()
             if (winner <= 5) lottoRank.textContent = winner + '등';
             else lottoRank.textContent = '-';
 
-            Array.from(document.querySelectorAll('.current-round')).forEach(node => node.textContent = total);
+            document.querySelectorAll('.current-round').forEach(node => node.textContent = total);
             document.querySelector<HTMLElement>('.before-round').textContent = (total - 1).toString();
 
             if (include && include.current) {

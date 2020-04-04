@@ -108,7 +108,7 @@
 
   #find-id-result-container{
     list-style-type: disc;
-
+    color:#4c4c4c;
   }
 
   .find-id-result-box{
@@ -121,4 +121,5 @@
     padding:1rem 0 0 0.5rem;
     color:rgb(105, 105, 105);
     font-size:1.2rem;
+    text-align: center;
   }
