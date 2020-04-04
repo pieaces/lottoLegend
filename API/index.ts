@@ -3,6 +3,7 @@ import deleteUser from "./dynamo/deleteUser";
 import { Response } from "./Response";
 import verify from "./auth";
 import setPhone from "./dynamo/setPhone";
+import getUserNameByPhone from "./dynamo/getUserNameByPhone";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -35,6 +36,11 @@ exports.handler = async (event: any) => {
     switch (resource) {
         case '/account': {
             switch (method) {
+                case 'GET': {
+                    const phone = event.queryStringParameters.phone;
+                    body = await getUserNameByPhone(phone);
+                }
+                    break;
                 case 'DELETE': {
                     await deleteUser(currentId);
                     await userDB.delete(currentId);
@@ -50,7 +56,7 @@ exports.handler = async (event: any) => {
                             await userDB.modifyNickName(currentId, nickName);
                             body = new Response(false);
                         }
-                    }else{
+                    } else {
                         body = new Response(true, "8글자 이내여야합니다");
                     }
                 }
