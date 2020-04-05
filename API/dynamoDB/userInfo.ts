@@ -1,5 +1,5 @@
 import dynamoDB from ".";
-import {  UpdateItemInput } from "aws-sdk/clients/dynamodb";
+import {  UpdateItemInput, GetItemInput, GetItemOutput } from "aws-sdk/clients/dynamodb";
 import { AWSError } from "aws-sdk/lib/error";
 
 export enum Point{
@@ -57,4 +57,27 @@ export function subtractPoint(userName:string, point:Point):Promise<void> {
             }
         });
     })
+}
+
+export function getRank(userName: string): Promise<number> {
+    const params: GetItemInput = {
+        TableName: 'LottoUsers',
+        ExpressionAttributeNames: {
+            '#Rank': 'Rank'
+        },
+        ProjectionExpression: '#Rank',
+        Key: {
+            "UserName": {
+                S: userName
+            }
+        }
+    };
+    return new Promise((resolve, reject) => {
+        dynamoDB.getItem(params, (err: AWSError, data: GetItemOutput) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(Number(data.Item.Rank.N))
+        });
+    });
 }

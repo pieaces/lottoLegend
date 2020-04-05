@@ -2,7 +2,7 @@ import dynamoDB from ".";
 import { AWSError } from "aws-sdk/lib/error";
 import { GetItemOutput } from "aws-sdk/clients/dynamodb";
 
-export default function getMainPage(round: number): Promise<any> {
+export default function getMainPage(round: number): Promise<{ round:number, numbers:number[], bonusNum:number, winner:number, winAmount:number, win:number[], info:any[] }> {
     const params = {
         TableName: 'LottoData',
         ProjectionExpression: 'Numbers, BonusNum, WinAmount, Winner, Win, Info',

@@ -2,9 +2,9 @@ import verify from "./auth";
 import { getCurrentRound, isIdentical } from "./funtions";
 import Posts, { SearchType } from "./mariaDB/Posts";
 import Comments from "./mariaDB/Comments";
-import { getIncOrExcNumbers, IncOrExc, getLotto } from './dynamoDB/myNumbers'
+import { getIncOrExcNumbers, IncOrExc, getLotto, getWinStats } from './dynamoDB/myNumbers'
 import { doesRecommend } from "./dynamoDB/recommend";
-import { addPoint, Point, subtractPoint } from "./dynamoDB/userInfo";
+import { addPoint, Point, subtractPoint, getRank } from "./dynamoDB/userInfo";
 import Users from "./mariaDB/Users";
 import Response from "./Response";
 import getMainPage from "./dynamoDB/getMainPage";
@@ -53,6 +53,7 @@ exports.handler = async (event: any) => {
                     const posts = await db.scan(category, index);
                     const count = await db.getCount(category);
                     body = { posts, count };
+                    if(category === 'pro') body.rank = currentId && await getRank(currentId);
                     break;
                 case 'POST':
                     if (logedIn) {
@@ -222,6 +223,7 @@ exports.handler = async (event: any) => {
                 case 'GET':
                     const round = getCurrentRound();
                     body = await getMainPage(round);
+                    body.stats = await getWinStats();
             }
         }
     }

@@ -1,6 +1,6 @@
 import dynamoDB from '.'
 import { AWSError } from 'aws-sdk/lib/error';
-import { GetItemOutput } from 'aws-sdk/clients/dynamodb';
+import { GetItemOutput, GetItemInput } from 'aws-sdk/clients/dynamodb';
 
 export type IncOrExc = "include" | "exclude";
 export function getIncOrExcNumbers(userName: string, round: number, choice: IncOrExc): Promise<{current:number[], before?:number[]}> {
@@ -53,6 +53,26 @@ export function getLotto(round: number): Promise<number[]> {
                 reject(err);
             }
             resolve(data.Item.Numbers.NS.map(num => Number(num)));
+        });
+    });
+}
+
+export function getWinStats(): Promise<number[]> {
+    const params: GetItemInput = {
+        TableName: 'LottoStats',
+        Key: {
+            "Name": {
+                S: 'win'
+            }
+        }
+    };
+
+    return new Promise((resolve, reject) => {
+        dynamoDB.getItem(params, (err: AWSError, data: GetItemOutput) => {
+            if (err) {
+                reject(err);
+            }
+            resolve([Number(data.Item.firstWinner.N), Number(data.Item.secondWinner.N), Number(data.Item.thirdWinner.N), Number(data.Item.fourthWinner.N), Number(data.Item.fifthWinner.N)]);
         });
     });
 }
