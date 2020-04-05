@@ -33,7 +33,7 @@ export default class Data {
                 timer: 3000,
                 footer: '3초 뒤 결제페이지로 이동합니다.'
             }).then(() => {
-                location.href = '/main.html';
+                location.href = '/introduce/pay.html';
             });
         } else {
             this[method] = result.data;
