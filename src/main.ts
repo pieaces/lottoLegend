@@ -10,19 +10,12 @@ const winner = document.getElementById('winner');
 const winAmount = document.getElementById('winAmount');
 const winRound = document.getElementById('win-round');
 const compartColor = ['#FBC400', '#69C8F2', '#FF7272', '#AAAAAA', '#B0D840'];
-const totalWinResultBox = document.querySelectorAll<HTMLElement>('.total-win-result-box > div');
-const ownWinResultBox = document.querySelectorAll<HTMLElement>('.own-win-result-box > div');
+const officialWinResultBox = document.querySelectorAll<HTMLElement>('.total-win-result-box > div');
+const myWinResultBox = document.querySelectorAll<HTMLElement>('.own-win-result-box > div');
 const reviewTabs = document.querySelector('.review-tabs');
 const commContentBox = document.querySelector('.community-content-box');
 const winCount = document.querySelectorAll('.win-count-rank');
 const communityTab = document.querySelectorAll('.community-tab');
-
-insertWinCount([21, 32, 12, 32, 12]);
-insertWinResult([{ number: 1, amount: 2 }, { number: 4, amount: 3 }, { number: 1, amount: 2 }, { number: 1, amount: 2 }, { number: 1, amount: 2 }], totalWinResultBox);
-insertWinResult([{ number: 20, amount: 19 }, { number: 34, amount: 32 }, { number: 1, amount: 2 }, { number: 1, amount: 2 }, { number: 1, amount: 2 }], ownWinResultBox)
-makeWinReview([{ title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }]);
-makeCommContent([{ title: "하이루이월수는 이리봅니다.", time: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", time: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", time: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", time: "2020-04-04" }])
-commToggle();
 
 document.querySelector<HTMLElement>('.login-btn').onclick = () => {
 
@@ -34,10 +27,22 @@ getUnAuthAPI('/main').then((data) => {
     makeWinNumBox(data);
     document.querySelectorAll('.win-round').forEach(node => node.textContent = data.round);
     winRound.textContent = data.round;
-})
+
+    insertWinCount([21, 32, 12, 32, 12]);
+    insertWinResult(data.info, officialWinResultBox);
+    insertWinResult(data.win.map((winner:number, index:number) => {
+        return{
+            winner,
+            winAmount:winner*data.info[index].winAmount
+        }
+    }), myWinResultBox)
+    makeWinReview([{ title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }]);
+    makeBoard([{ title: "하이루이월수는 이리봅니다.", time: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", time: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", time: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", time: "2020-04-04" }])
+    boardToggle();
+});
 
 
-function commToggle() {
+function boardToggle() {
     let current = 0;
     for (let i = 0; i < communityTab.length; i++) {
         communityTab[i].addEventListener('click', () => {
@@ -56,7 +61,7 @@ function insertWinCount(data) {
 }
 
 
-function makeCommContent(data) {
+function makeBoard(data:{title:string, time:string}[]) {
     data.forEach(item => {
         const box = document.createElement('div');
         box.classList.add('community-content');
@@ -81,8 +86,8 @@ function makeCommContent(data) {
 
 function insertWinResult(data, target: NodeListOf<HTMLElement>) {
     Array.from(target).forEach((node, index) => {
-        node.children[1].textContent = data[index].number.toString();
-        node.children[2].textContent = data[index].amount.toString();
+        node.children[1].textContent = data[index].winner.toString();
+        node.children[2].textContent = data[index].winAmount.toString();
     })
 }
 
