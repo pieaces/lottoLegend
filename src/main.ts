@@ -22,13 +22,13 @@ document.querySelector<HTMLElement>('.login-btn').onclick = () => {
 }
 
 backgroundImgSlide();
-getUnAuthAPI('/main').then((data) => {
+getUnAuthAPI('/main/numbers').then((data) => {
     console.log(data);
     makeWinNumBox(data);
     document.querySelectorAll('.win-round').forEach(node => node.textContent = data.round);
     winRound.textContent = data.round;
 
-    insertWinCount([21, 32, 12, 32, 12]);
+    insertWinCount(data.stats);
     insertWinResult(data.info, officialWinResultBox);
     insertWinResult(data.win.map((winner:number, index:number) => {
         return{
