@@ -69,11 +69,17 @@ function insertWinCount(data) {
 }
 
 function makeBoard(data: { id?: number, category?: Category, title: string, created: string }[]) {
-    data.forEach((item, index) => {
-        commContentAnchor[index].setAttribute('href', `/${getCategoryHtml(item.category, 'read')}?id=${item.id}`);
-        commContentAnchor[index].textContent = item.title;
-        commContent[index].children[1].textContent = item.created;
-    });
+    for (let i = 0; i < 5; i++) {
+        if (data[i]) {
+            commContentAnchor[i].setAttribute('href', `/${getCategoryHtml(data[i].category, 'read')}?id=${data[i].id}`);
+            commContentAnchor[i].textContent = data[i].title;
+            commContent[i].children[1].textContent = data[i].created;
+        }else{
+            commContentAnchor[i].setAttribute('href', '');
+            commContentAnchor[i].textContent = '';
+            commContent[i].children[1].textContent = '';
+        }
+    }
 }
 
 function insertWinResult(data, target: NodeListOf<HTMLElement>) {
