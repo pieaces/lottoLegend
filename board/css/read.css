@@ -18,8 +18,12 @@
   border-bottom: 1px solid rgba(0,0,0,0.2);
 }
 .text-title > h1{
+  width: 40rem;
   padding-left: 1rem;
   font-size:1.8rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .text-info {
