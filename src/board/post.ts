@@ -114,6 +114,15 @@ submitBtn.onclick = async () => {
         title: '제목은 비워둘 수 없습니다',
         icon: 'warning'
     });
+    else if(title.length > 40 ) return Swal.fire({
+        title: '제목은 40글자를 넘길 수 없습니다',
+        icon: 'warning'
+    });
+    const contents = editor.getContents();
+    if (contents === "<p><br></p>") return Swal.fire({
+        title: '내용은 비워둘 수 없습니다',
+        icon: 'warning'
+    });
     loading.classList.remove('none');
     try {
         const images = [];
@@ -130,7 +139,6 @@ submitBtn.onclick = async () => {
         imageElements.forEach(image => {
             image[0].setAttribute('src', image[1]);
         });
-        const contents = editor.getContents();
         let leapId: number;
         if (!post) {
             leapId = await postAuthAPI('/posts', {
@@ -205,12 +213,11 @@ function setImageList(imageList: { size: number, index: number, src: string }[])
         const image = imageList[i];
         const fixSize = Number((image.size / 1024 / 1024).toFixed(2))
         list += `<li id="img_${image.index}">
-      <div class="image-container" data-image-index="${image.index}">
-          <div class="image-box"><img src="${image.src}" ></div>
-      </div>
-      <a href="javascript:void(0)" data-image-index="${image.index}" class="image-size">${fixSize}MB</a>
-      
-  </li>`
+<div class="image-container" data-image-index="${image.index}">
+<div class="image-box"><img src="${image.src}" ></div>
+</div>
+<a href="javascript:void(0)" data-image-index="${image.index}" class="image-size">${fixSize}MB</a>
+</li>`
         size += fixSize;
     }
 
