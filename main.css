@@ -407,28 +407,28 @@ flex:2;
 }
 
 .info-btn{
-  width:7rem;
-    height:2.8rem;
-    margin-right: 1rem;
-  margin-top:0.5rem;
-    border: 1px solid rgba(0,0,0,0.1);
-    border-radius: 3px;
-    background-color: #f6f6f6;
-    color:rgb(128, 128, 128);
-    font-size:1.4rem;
+  width: 5rem;
+  height: 2.5rem;
+  margin-right: 1.5rem;
+  margin-top: 0.5rem;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 3px;
+  background-color: #f6f6f6;
+  color: rgb(128, 128, 128);
+  font-size: 1.2rem;
 }
 
 .detail-btn{
   position: absolute;
-  top:0.5rem;
-  right:1rem;
-  width:7rem;
-    height:2.8rem;
-    border: 1px solid rgba(0,0,0,0.1);
-    border-radius: 3px;
-    background-color: #66c2ff;
-    color:white;
-    font-size:1.4rem;
+  top: 0.5rem;
+  right: 1rem;
+  width: 5rem;
+  height: 2.5rem;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 3px;
+  background-color: #66c2ff;
+  color: white;
+  font-size: 1.2rem;
 }
 
 
