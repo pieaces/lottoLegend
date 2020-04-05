@@ -1,6 +1,7 @@
 import configure from './amplify/configure'
 import { getUnAuthAPI } from './amplify/api';
 import { getCategoryHtml, Category } from './board/functions';
+import { isoStringToDate } from './functions';
 
 configure();
 
@@ -41,7 +42,7 @@ getUnAuthAPI('/main/numbers').then(data => {
 });
 getUnAuthAPI('/main/posts').then(data =>{
     console.log(data);
-    makeWinReview([{ title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }]);
+    makeWinReview(data.win);
     for(let i=0;i<commContentBox.length;i++){
         const boardEl=makeBoard([{ title: "하이루이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }]);
         commContentBox[i].appendChild(boardEl);
@@ -68,7 +69,6 @@ function insertWinCount(data) {
         winCount[index].textContent = item.toString();
     })
 }
-
 
 function makeBoard(data: { id?: number, category?: Category, title: string, created: string }[]):HTMLElement {
    const contentWrapper=document.createElement('div');
@@ -103,10 +103,10 @@ function insertWinResult(data, target: NodeListOf<HTMLElement>) {
     });
 }
 
-function makeWinReview(data) {
+function makeWinReview(data:{id:number, title:string, created:string, img:string}[]) {
     data.forEach(item => {
         const tab = document.createElement('a');
-        tab.setAttribute('href', '#');
+        tab.setAttribute('href', `/${getCategoryHtml('win', 'read')}?id=${item.id}`);
         tab.classList.add('review-tab');
         tab.classList.add('box-color');
 
@@ -114,7 +114,9 @@ function makeWinReview(data) {
         imgBox.classList.add('review-img-box');
 
         const img = document.createElement('img');
-        img.setAttribute('src', 'img/1.png');
+        //onerror="this.src='에러발생이미지';"
+        img.setAttribute('src', item.img);
+        img.setAttribute('onerror', "this.src='img/logo/2.png';")
 
         imgBox.appendChild(img);
         tab.appendChild(imgBox);
@@ -128,7 +130,7 @@ function makeWinReview(data) {
         const time = document.createElement('div');
         time.classList.add('review-time');
 
-        time.textContent = item.time;
+        time.textContent = isoStringToDate(item.created);
 
         tab.appendChild(time);
         reviewTabs.appendChild(tab);
