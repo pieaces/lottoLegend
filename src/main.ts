@@ -73,7 +73,7 @@ function makeBoard(data: { id?: number, category?: Category, title: string, crea
         if (data[i]) {
             commContentAnchor[i].setAttribute('href', `/${getCategoryHtml(data[i].category, 'read')}?id=${data[i].id}`);
             commContentAnchor[i].textContent = data[i].title;
-            commContent[i].children[1].textContent = data[i].created;
+            commContent[i].children[1].textContent = isoStringToDate(data[i].created);
         }else{
             commContentAnchor[i].setAttribute('href', '');
             commContentAnchor[i].textContent = '';
