@@ -547,7 +547,9 @@ flex:2;
 }
 
 @media (min-width: 0px) and (max-width: 767px) {
-
+  .review-tab:last-child{
+    display: none;
+  }
   .main-aside{
     display:none;
   }
@@ -658,7 +660,7 @@ flex:2;
 }
 
   .win-count-big-text{
-font-size: 2.2rem;
+    font-size: 2.2rem;
   }
 
   .win-count-small-text{
@@ -674,9 +676,8 @@ font-size: 2.2rem;
   }
 
   .review-tab{
-    width: 13rem;
+    width: 48%;
   }
-
 
   .community-tab{
     font-size:1.3rem;
@@ -716,9 +717,4 @@ font-size: 2.2rem;
   .win-num-container-box{
     position: relative;
   }
-
 }
-
-
-
- 
