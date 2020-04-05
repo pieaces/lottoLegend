@@ -37,21 +37,7 @@ export function makeNumSet(param: { current: number[], before?: number[] }, answ
         beforeBox.appendChild(makeNoneBox());
     }
 }
-export function compressString(text:string){
-    if(text.replace(/[ ,.]/g, '').length > 18) {
-        let count = 0, index = 0;
-        for(let i = 0; i<text.length; i++){
-            if(text[i] !== ' ' && text[i] !== ',' && text[i] !== '.') {
-                count++;
-            }
-            index++;
-            if(count === 18) break;
-        }
-        console.log(count, index);
-        return text.slice(0,index) + ' ...';
-    }
-    else return text;
-}
+
 export type Affix = "list" | "post" | "read";
 export type Category = "free" | "include" | "exclude" | "notice" | "qna" | "win" | "analysis" | "pro";
 export function getCategoryHtml(category: Category, affix: Affix) {

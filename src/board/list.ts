@@ -1,7 +1,7 @@
 import configure from '../amplify/configure'
 import { getUnAuthAPI, getAuthAPI } from '../amplify/api'
 import { isoStringToDate, rankToClass, getQueryStringObject } from '../functions';
-import { Category, getCategoryHtml, compressString } from './functions';
+import { Category, getCategoryHtml } from './functions';
 import { getUserName } from '../amplify/auth';
 const boardSection = document.querySelector('.board-section');
 const pageNumContainer = document.querySelector('.page-num-container');
@@ -80,7 +80,7 @@ function makeBoard(objArr: any[]) {
         boardTitle.classList.add('board-title');
         const anchor = document.createElement('a');
         anchor.setAttribute('href', `/${getCategoryHtml(category, 'read')}?id=${objArr[i].id}`);
-        anchor.textContent = compressString(objArr[i].title);
+        anchor.textContent = objArr[i].title;
         boardTitle.appendChild(anchor);
 
         boardBox.appendChild(boardTitle);

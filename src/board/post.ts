@@ -3,13 +3,12 @@ import suneditor from 'suneditor'
 import plugins from 'suneditor/src/plugins'
 import { ko } from 'suneditor/src/lang'
 import { postUnAuthAPI, postAuthAPI, getUnAuthAPI, patchAuthAPI, getAuthAPI } from '../amplify/api';
-import { isLogedIn } from '../amplify/auth'
+import { isLogedIn, getUserName } from '../amplify/auth'
 import { networkAlert, onlyUserAlert, stringTrimer, getQueryStringObject } from '../functions'
 import Swal from 'sweetalert2'
 import { Category, getCategoryHtml, makeNum } from './functions';
 
 configure();
-let userName: string;
 isLogedIn().then(bool => {
     if (!bool) onlyUserAlert();
 })
@@ -118,8 +117,7 @@ submitBtn.onclick = async () => {
         title: '제목은 40글자를 넘길 수 없습니다',
         icon: 'warning'
     });
-    const contents = editor.getContents();
-    if (contents === "<p><br></p>") return Swal.fire({
+    if (editor.getContents() === "<p><br></p>") return Swal.fire({
         title: '내용은 비워둘 수 없습니다',
         icon: 'warning'
     });
@@ -128,9 +126,10 @@ submitBtn.onclick = async () => {
         const images = [];
         const imageElements = [];
         for (let i = 0; i < imageList.length; i++) {
-            if (imageList[i].element.getAttribute('src').indexOf('https://') === -1) {
+            if (!(/^https:\/\//.test(imageList[i].element.getAttribute('src')))) {
                 const dataURL = imageList[i].src;
                 const fileName = attachTimestamp(imageList[i].name);
+                const userName = await getUserName();
                 imageElements.push([imageList[i].element, `https://canvas-lotto.s3.ap-northeast-2.amazonaws.com/images/${userName}/${fileName}`]);
                 images.push({ userName, fileName, dataURL });
             }
@@ -140,6 +139,7 @@ submitBtn.onclick = async () => {
             image[0].setAttribute('src', image[1]);
         });
         let leapId: number;
+        const contents = editor.getContents();
         if (!post) {
             leapId = await postAuthAPI('/posts', {
                 category, title, contents
