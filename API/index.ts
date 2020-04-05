@@ -4,6 +4,7 @@ import { updateNumbers, getNumbers, deleteMyNumber, updateIncOrExcNumbers, getIn
 import { queryLottoData } from "./dynamoDB/lottoData";
 import { freeGenerator, numbersToData } from "./dynamoDB/generator";
 import { getPointAndRank, getPlanKeyAndUntil, getMyHome, expirePlan } from "./dynamoDB/userInfo";
+import { getLottoData, getWinStats } from "./dynamoDB/getMainPage";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -168,6 +169,12 @@ exports.handler = async (event: any) => {
                     const rounds = result.rounds;
                     body = {data, rounds};
             }
+        }
+            break;
+        case '/main/numbers': {
+            const round = getCurrentRound();
+            body = await getLottoData(round);
+            body.stats = await getWinStats();
         }
             break;
         case '/mypage': {
