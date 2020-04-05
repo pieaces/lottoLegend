@@ -84,6 +84,7 @@ document.write(`    <header>
                 </ul>
                 <ul>
                     <li> <a href="/statistics/weekNumbers.html">금주의 제외번호</a> </li>
+                    <li> <a href="/statistics/explain.html">로또용어 설명</a> </li>
                     <li> <a href="/board/pro/list.html">공유 게시판</a> </li>
                     <li> <a href="/statistics/winNumbers.html">당첨번호</a> </li>
                     <li> <a href="/statistics/statistics.html?method=excludedLineCount">통계자료</a> </li>

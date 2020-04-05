@@ -58,9 +58,6 @@
   margin-bottom: 0.7rem;
 }
 
-.main-1-1-1-2{
-
-}
 
 .main-1-1-2{
   width:26.5%;
@@ -306,14 +303,16 @@ transform: translateY(-0.1rem);
 
 .main-1-3-2-1{
   width: 50%;
+  margin-right:0.6rem;
   border-right: 1px solid rgba(0,0,0,0.1);
 }
 
 .box-title{
-  font-size:1.7rem;
-  letter-spacing: -0.1rem;
   padding:2rem 0 2rem 2rem;
   color:rgb(80, 80, 80);
+  font-size:1.7rem;
+  word-break: keep-all;
+  letter-spacing: -0.1rem;
 }
 
 .board-container{
@@ -333,6 +332,7 @@ transform: translateY(-0.1rem);
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   font-size:1.3rem;
 }
 
@@ -434,6 +434,7 @@ transform: translateY(-0.1rem);
   text-align: center;
   font-size: 1.4rem;
   cursor: pointer;
+  word-break: keep-all;
 }
 
 .community-tab:last-child{
@@ -449,6 +450,10 @@ transform: translateY(-0.1rem);
   border-left:1px solid #09538e;
   border-right:1px solid #09538e;
   border-bottom: none;
+}
+
+.community-tab-current + .community-tab{
+  border-left:none;
 }
 
 .community-content-box{
@@ -496,21 +501,41 @@ transform: translateY(-0.1rem);
     width:100%;
     margin-bottom:1rem;
   }
-  .main-1-3 > div,
-  .main-1-4 > div{
-  height:20rem;
+
+  .main-1-1{
+    padding-bottom: 0;
   }
 
-  .main-1-2 > div{
-    height:18rem;
+  .main-1-3-1{
+    height:25rem;
+  }
+
+  .main-1-3-2{
+    height:30.5rem;
+  }
+
+  .box-title{
+    font-size:1.3rem;
+  }
+
+  .board-header > div{
+    font-size:1.2rem;
+  }
+
+  .board-tab{
+    font-size:1.1rem;
   }
 
   .main-1-1-2{
-    height:25rem;
+    height:15rem;
   }
 
   .main-1-1-2-1{
     display: none;
+  }
+
+  .main-1-1-2-2{
+    height: 100%;
   }
 
   .login-box{
@@ -528,7 +553,8 @@ transform: translateY(-0.1rem);
   }
 
   .win-num-times{
-    font-size:2rem;
+    height: 3rem;
+    font-size:1.8rem;
   }
 
   .win-num{
@@ -538,12 +564,63 @@ transform: translateY(-0.1rem);
     font-size:1.6rem;
   }
 
-  .small-text{
+  .win-count-small-text .rank.rank-first,
+.win-count-small-text .rank.rank-second,
+.win-count-small-text .rank.rank-third{
+  width: 2.1rem;
+  height: 2.3rem;
+}
+.win-count-small-text .rank.rank-first .rank-text,
+.win-count-small-text .rank.rank-second .rank-text,
+.win-count-small-text .rank.rank-third .rank-text{
+  font-size:1.6rem;
+}
+
+.win-count-small-text .rank.rank-fourth,
+.win-count-small-text .rank.rank-fifth{
+  width: 1.8rem;
+  height: 2rem;
+}
+
+.win-count-small-text .rank.rank-fourth .rank-text,
+.win-count-small-text .rank.rank-fifth .rank-text{
+ font-size:1.4rem;
+}
+
+  .win-count-big-text{
+font-size: 2.2rem;
+  }
+
+  .win-count-small-text{
     font-size:1.6rem;
   }
 
+  .small-text{
+    font-size:1.5rem;
+  }
+
   .big-text{
-    font-size:1.8rem;
+    font-size:1.6rem;
+  }
+
+  .review-content{
+    padding: 0.5rem 0;
+  }
+
+  .review-time{
+    padding:0.5rem 0;
+  }
+
+  .community-tab{
+    font-size:1.3rem;
+  }
+
+  .community-content-title{
+    font-size: 1.2rem;
+  }
+
+  .main-1-4-2{
+    height:20rem;
   }
 }
 

@@ -14,9 +14,10 @@ const compartColor = ['#FBC400', '#69C8F2', '#FF7272', '#AAAAAA', '#B0D840'];
 const officialWinResultBox = document.querySelectorAll<HTMLElement>('.total-win-result-box > div');
 const myWinResultBox = document.querySelectorAll<HTMLElement>('.own-win-result-box > div');
 const reviewTabs = document.querySelector('.review-tabs');
-const commContentBox = document.querySelector('.community-content-box');
+const commBox = document.querySelector('.community-box');
 const winCount = document.querySelectorAll('.win-count-rank');
-const communityTab = document.querySelectorAll('.community-tab');
+const commTab = document.querySelectorAll('.community-tab');
+const commContentBox=document.querySelectorAll('.community-content-box');
 
 document.querySelector<HTMLElement>('.login-btn').onclick = () => {
 
@@ -41,16 +42,22 @@ getUnAuthAPI('/main/numbers').then(data => {
 getUnAuthAPI('/main/posts').then(data =>{
     console.log(data);
     makeWinReview([{ title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }]);
-    makeBoard([{ title: "하이루이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }])
+    for(let i=0;i<commContentBox.length;i++){
+        const boardEl=makeBoard([{ title: "하이루이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }]);
+        commContentBox[i].appendChild(boardEl);
+    }
     boardToggle();
 });
 
 function boardToggle() {
     let current = 0;
-    for (let i = 0; i < communityTab.length; i++) {
-        communityTab[i].addEventListener('click', () => {
-            communityTab[current].classList.remove('community-tab-current');
-            communityTab[i].classList.add('community-tab-current');
+    const contentBox=document.querySelectorAll('.community-content-box');
+    for (let i = 0; i < commTab.length; i++) {
+        commTab[i].addEventListener('click', () => {
+            commTab[current].classList.remove('community-tab-current');
+            commTab[i].classList.add('community-tab-current');
+            contentBox[current].classList.add('none');
+            contentBox[i].classList.remove('none');
             current = i;
         })
     }
@@ -62,9 +69,12 @@ function insertWinCount(data) {
     })
 }
 
-function makeBoard(data: { id?: number, category?: Category, title: string, created: string }[]) {
+
+function makeBoard(data: { id?: number, category?: Category, title: string, created: string }[]):HTMLElement {
+   const contentWrapper=document.createElement('div');
+   contentWrapper.classList.add('community-content-wrapper');
     data.forEach(item => {
-        const box = document.createElement('div');
+      const  box = document.createElement('div');
         box.classList.add('community-content');
 
         const title = document.createElement('div');
@@ -81,8 +91,9 @@ function makeBoard(data: { id?: number, category?: Category, title: string, crea
         time.textContent = item.created;
 
         box.appendChild(time);
-        commContentBox.appendChild(box);
-    });
+        contentWrapper.appendChild(box);
+    })
+    return contentWrapper;
 }
 
 function insertWinResult(data, target: NodeListOf<HTMLElement>) {

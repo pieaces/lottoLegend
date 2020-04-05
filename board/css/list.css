@@ -100,6 +100,21 @@
   margin-bottom: 3rem;
 }
 
+.board-section > .board-box > .board-title{
+  padding-left:3rem; 
+  display: block;
+    display: -webkit-box;
+    max-width: 200px;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+} 
+
+.board-section > .board-box > .board-title > a{
+
+}
+
 /* board-box */
 
 .board-box {
