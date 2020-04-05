@@ -17,7 +17,6 @@ const myWinResultBox = document.querySelectorAll<HTMLElement>('.own-win-result-b
 const reviewTabs = document.querySelector('.review-tabs');
 const winCount = document.querySelectorAll('.win-count-rank');
 const commTab = document.querySelectorAll('.community-tab');
-const commBox = document.querySelector('.community-content-box');
 const commContent = document.querySelectorAll<HTMLElement>('.community-content');
 const commContentAnchor = document.querySelectorAll<HTMLElement>('.community-content-title > a');
 const userNameInput = document.querySelector<HTMLInputElement>('#id');
@@ -31,7 +30,6 @@ document.querySelector<HTMLElement>('.login-btn').onclick = async () => {
 
 backgroundImgSlide();
 getUnAuthAPI('/main/numbers').then(data => {
-    console.log(data);
     makeWinNumBox(data);
     document.querySelectorAll('.win-round').forEach(node => node.textContent = data.round);
     winRound.textContent = data.round;
@@ -44,10 +42,10 @@ getUnAuthAPI('/main/numbers').then(data => {
             winAmount: winner * data.info[index].winAmount
         }
     }), myWinResultBox);
+    // document.getElementById('totalAmount').textContent = (<any[]>data.info).reduce((acc, cur, index) =>
+    //     acc + cur.winAmount * data.win[index], 0);
 });
-function abc(){
 
-}
 getUnAuthAPI('/main/posts').then(data => {
     let current = 0;
     const tabs = ['pro', 'analysis', 'include', 'exclude', 'free'];
