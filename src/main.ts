@@ -40,56 +40,22 @@ getUnAuthAPI('/main/numbers').then(data => {
         }
     }), myWinResultBox);
 });
+function abc(){
+
+}
 getUnAuthAPI('/main/posts').then(data => {
-    let current = "pro";
+    let current = 0;
+    const tabs = ['pro', 'analysis', 'include', 'exclude', 'free'];
     console.log(data);
+    makeBoard(data[tabs[current]]);
+
     for (let i = 0; i < commTab.length; i++) {
         commTab[i].addEventListener('click', () => {
-            if (commBox.classList.contains("pro")) {
-                commTab[0].classList.remove('community-tab-current');
-            } else if (commBox.classList.contains("anaylsis")) {
-                commTab[1].classList.remove('community-tab-current');
-            } else if (commBox.classList.contains("include")) {
-                commTab[2].classList.remove('community-tab-current');
-            } else if (commBox.classList.contains("exclude")) {
-                commTab[3].classList.remove('community-tab-current');
-            } else if (commBox.classList.contains("free")) {
-                commTab[4].classList.remove('community-tab-current');
-            }
+            commTab[current].classList.remove('community-tab-current');
+            current = i;
             commTab[i].classList.add('community-tab-current');
-            switch (i) {
-                case 0:
-                    commBox.classList.remove(current);
-                    current = "pro";
-                    commBox.classList.add(current);
-                    makeBoard([{ title: "하이루이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }]);
-                    break;
-                case 1:
-                    commBox.classList.remove(current);
-                    current = "anaylsis";
-                    commBox.classList.add(current);
-                    makeBoard([{ title: "1234수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }]);
-                    break;
-                case 2:
-                    commBox.classList.remove(current);
-                    current = "include";
-                    commBox.classList.add(current);
-                    makeBoard([{ title: "하이루이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }]);
-                    break;
-                case 3:
-                    commBox.classList.remove(current);
-                    current = "exclude";
-                    commBox.classList.add(current);
-                    makeBoard([{ title: "하이루이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }]);
-                    break;
-                case 4:
-                    commBox.classList.remove(current);
-                    current = "free";
-                    commBox.classList.add(current);
-                    makeBoard([{ title: "하이루이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }]);
-                    break;
-            }
-        })
+            makeBoard(data[tabs[current]]);
+        });
     }
     makeWinReview(data.win);
 });
@@ -107,8 +73,7 @@ function makeBoard(data: { id?: number, category?: Category, title: string, crea
         commContentAnchor[index].setAttribute('href', `/${getCategoryHtml(item.category, 'read')}?id=${item.id}`);
         commContentAnchor[index].textContent = item.title;
         commContent[index].children[1].textContent = item.created;
-    })
-
+    });
 }
 
 function insertWinResult(data, target: NodeListOf<HTMLElement>) {
