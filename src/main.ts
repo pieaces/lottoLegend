@@ -2,6 +2,7 @@ import configure from './amplify/configure'
 import { getUnAuthAPI } from './amplify/api';
 import { getCategoryHtml, Category } from './board/functions';
 import { isoStringToDate, numberFormat } from './functions';
+import { signIn } from './amplify/auth'
 
 configure();
 
@@ -19,9 +20,13 @@ const commTab = document.querySelectorAll('.community-tab');
 const commBox = document.querySelector('.community-content-box');
 const commContent = document.querySelectorAll<HTMLElement>('.community-content');
 const commContentAnchor = document.querySelectorAll<HTMLElement>('.community-content-title > a');
+const userNameInput = document.querySelector<HTMLInputElement>('#id');
+const passwordInput = document.querySelector<HTMLInputElement>('#password');
 
-document.querySelector<HTMLElement>('.login-btn').onclick = () => {
-
+document.querySelector<HTMLElement>('.login-btn').onclick = async () => {
+    const userName = userNameInput.value;
+    const password = passwordInput.value;
+    await signIn(userName, password);
 }
 
 backgroundImgSlide();
