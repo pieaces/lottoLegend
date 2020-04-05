@@ -2,12 +2,11 @@ import verify from "./auth";
 import { getCurrentRound, isIdentical } from "./funtions";
 import Posts, { SearchType } from "./mariaDB/Posts";
 import Comments from "./mariaDB/Comments";
-import { getIncOrExcNumbers, IncOrExc, getLotto, getWinStats } from './dynamoDB/myNumbers'
+import { getIncOrExcNumbers, getLotto } from './dynamoDB/myNumbers'
 import { doesRecommend } from "./dynamoDB/recommend";
 import { addPoint, Point, subtractPoint, getRank } from "./dynamoDB/userInfo";
 import Users from "./mariaDB/Users";
 import Response from "./Response";
-import getMainPage from "./dynamoDB/getMainPage";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -218,12 +217,10 @@ exports.handler = async (event: any) => {
             }
         }
             break;
-        case '/main': {
+        case '/main/posts': {
             switch (method) {
                 case 'GET':
                     const round = getCurrentRound();
-                    body = await getMainPage(round);
-                    body.stats = await getWinStats();
             }
         }
     }
