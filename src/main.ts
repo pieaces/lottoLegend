@@ -14,10 +14,11 @@ const compartColor = ['#FBC400', '#69C8F2', '#FF7272', '#AAAAAA', '#B0D840'];
 const officialWinResultBox = document.querySelectorAll<HTMLElement>('.total-win-result-box > div');
 const myWinResultBox = document.querySelectorAll<HTMLElement>('.own-win-result-box > div');
 const reviewTabs = document.querySelector('.review-tabs');
-const commBox = document.querySelector('.community-box');
 const winCount = document.querySelectorAll('.win-count-rank');
 const commTab = document.querySelectorAll('.community-tab');
-const commContentBox=document.querySelectorAll('.community-content-box');
+const commBox = document.querySelector('.community-content-box');
+const commContent = document.querySelectorAll<HTMLElement>('.community-content');
+const commContentAnchor = document.querySelectorAll<HTMLElement>('.community-content-title > a');
 
 document.querySelector<HTMLElement>('.login-btn').onclick = () => {
 
@@ -39,29 +40,61 @@ getUnAuthAPI('/main/numbers').then(data => {
         }
     }), myWinResultBox);
 });
-getUnAuthAPI('/main/posts').then(data =>{
+getUnAuthAPI('/main/posts').then(data => {
+    let current = "pro";
     console.log(data);
-    makeWinReview(data.win);
-    for(let i=0;i<commContentBox.length;i++){
-        const boardEl=makeBoard([{ title: "하이루이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }]);
-        commContentBox[i].appendChild(boardEl);
-    }
-    boardToggle();
-});
-
-function boardToggle() {
-    let current = 0;
-    const contentBox=document.querySelectorAll('.community-content-box');
     for (let i = 0; i < commTab.length; i++) {
         commTab[i].addEventListener('click', () => {
-            commTab[current].classList.remove('community-tab-current');
+            if (commBox.classList.contains("pro")) {
+                commTab[0].classList.remove('community-tab-current');
+            } else if (commBox.classList.contains("anaylsis")) {
+                commTab[1].classList.remove('community-tab-current');
+            } else if (commBox.classList.contains("include")) {
+                commTab[2].classList.remove('community-tab-current');
+            } else if (commBox.classList.contains("exclude")) {
+                commTab[3].classList.remove('community-tab-current');
+            } else if (commBox.classList.contains("free")) {
+                commTab[4].classList.remove('community-tab-current');
+            }
             commTab[i].classList.add('community-tab-current');
-            contentBox[current].classList.add('none');
-            contentBox[i].classList.remove('none');
-            current = i;
+            switch (i) {
+                case 0:
+                    commBox.classList.remove(current);
+                    current = "pro";
+                    commBox.classList.add(current);
+                    makeBoard([{ title: "하이루이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }]);
+                    break;
+                case 1:
+                    commBox.classList.remove(current);
+                    current = "anaylsis";
+                    commBox.classList.add(current);
+                    makeBoard([{ title: "1234수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }]);
+                    break;
+                case 2:
+                    commBox.classList.remove(current);
+                    current = "include";
+                    commBox.classList.add(current);
+                    makeBoard([{ title: "하이루이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }]);
+                    break;
+                case 3:
+                    commBox.classList.remove(current);
+                    current = "exclude";
+                    commBox.classList.add(current);
+                    makeBoard([{ title: "하이루이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }]);
+                    break;
+                case 4:
+                    commBox.classList.remove(current);
+                    current = "free";
+                    commBox.classList.add(current);
+                    makeBoard([{ title: "하이루이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }]);
+                    break;
+            }
         })
     }
-}
+    makeWinReview(data.win);
+});
+
+
 
 function insertWinCount(data) {
     data.forEach((item, index) => {
@@ -69,40 +102,23 @@ function insertWinCount(data) {
     })
 }
 
-function makeBoard(data: { id?: number, category?: Category, title: string, created: string }[]):HTMLElement {
-   const contentWrapper=document.createElement('div');
-   contentWrapper.classList.add('community-content-wrapper');
-    data.forEach(item => {
-      const  box = document.createElement('div');
-        box.classList.add('community-content');
-
-        const title = document.createElement('div');
-        title.classList.add('community-content-title');
-        const anchor = document.createElement('a');
-        anchor.setAttribute('href', `/${getCategoryHtml(item.category, 'read')}?id=${item.id}`);
-        anchor.textContent = item.title;
-
-        title.appendChild(anchor);
-        box.appendChild(title);
-
-        const time = document.createElement('div');
-        time.classList.add('community-time');
-        time.textContent = item.created;
-
-        box.appendChild(time);
-        contentWrapper.appendChild(box);
+function makeBoard(data: { id?: number, category?: Category, title: string, created: string }[]) {
+    data.forEach((item, index) => {
+        commContentAnchor[index].setAttribute('href', `/${getCategoryHtml(item.category, 'read')}?id=${item.id}`);
+        commContentAnchor[index].textContent = item.title;
+        commContent[index].children[1].textContent = item.created;
     })
-    return contentWrapper;
+
 }
 
 function insertWinResult(data, target: NodeListOf<HTMLElement>) {
     Array.from(target).forEach((node, index) => {
-        node.children[1].textContent = numberFormat(data[index].winner);
-        node.children[2].textContent = numberFormat(data[index].winAmount);
+        node.children[1].textContent = `${numberFormat(data[index].winner)}조합`;
+        node.children[2].textContent = `${numberFormat(data[index].winAmount)}원`;
     });
 }
 
-function makeWinReview(data:{id:number, title:string, created:string, img:string}[]) {
+function makeWinReview(data: { id: number, title: string, created: string, img: string }[]) {
     data.forEach(item => {
         const tab = document.createElement('a');
         tab.setAttribute('href', `/${getCategoryHtml('win', 'read')}?id=${item.id}`);
@@ -116,12 +132,12 @@ function makeWinReview(data:{id:number, title:string, created:string, img:string
         //onerror="this.src='에러발생이미지';"
         img.setAttribute('src', item.img);
         img.setAttribute('onerror', "this.src='img/logo/2.png';")
-       
+
         imgBox.appendChild(img);
 
-        if(item.img===null){
-            (img.parentNode as HTMLElement).style.padding="1rem";
-            img.style.height="auto";        
+        if (item.img === null) {
+            (img.parentNode as HTMLElement).style.padding = "1rem";
+            img.style.height = "auto";
         }
 
         tab.appendChild(imgBox);
