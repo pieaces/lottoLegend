@@ -1,14 +1,3 @@
-// const idEl = document.querySelector('#id');
-// const password = document.querySelector('#password');
-// const passwordCheck = document.querySelector('#password-check');
-// const send = document.querySelector('#send');
-// const update = document.querySelector('#update');
-// const verify = document.querySelector('#verify');
-// const findFormPw = document.querySelector('#find-form-pw');
-// const findFormId = document.querySelector('#find-form-id');
-// const fidnFormPhone = document.querySelector('#find-form-phone');
-
-
 import configure from "../amplify/configure";
 import Auth from "@aws-amplify/auth";
 import Swal from "sweetalert2";
@@ -24,11 +13,19 @@ const passwordCheck = document.querySelector<HTMLInputElement>('#password-check'
 idForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     Auth.forgotPassword(userName.value)
-        .then(data => {
+        .then(() => {
+            Swal.fire({
+                title:'확인 코드 전송',
+                text:'인증된 휴대폰 번호로 확인 코드를 전송하였습니다',
+                icon:'info'
+            });
             idForm.classList.add('none');
             codeForm.classList.remove('none');
         })
-        .catch(err => console.log(err));
+        .catch(err => Swal.fire({
+            title:'오류',
+            icon:'warning'
+        }));
 });
 
 codeForm.addEventListener('submit', async (e) => {

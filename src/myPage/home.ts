@@ -203,7 +203,7 @@ function mobileUpdate() {
                 phoneNumber.textContent = phoneString(user.attributes.phone_number);
                 document.querySelector<HTMLElement>('.mobile-btn').classList.add('none');
             });
-            phoneCodeVerify('인증번호를 입력해주세요');
+            phoneCodeVerify('확인 코드를 입력해주세요');
         }
     });
 }
