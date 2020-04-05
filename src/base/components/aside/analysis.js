@@ -7,6 +7,11 @@ document.write(
             </ul>
         </li>
         <li>
+        <ul class="anchor-list-box">
+            <li> <a href="/statistics/explain.html">로또용어 설명</a> </li>
+        </ul>
+    </li>
+        <li>
             <h3> 공유 게시판</h3>
             <ul class="anchor-list-box">
                 <li> <a href="/board/pro/list.html">전문가 분석실</a> </li>
