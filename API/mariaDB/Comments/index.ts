@@ -13,9 +13,9 @@ export default class Comments extends DB {
         super();
         this.tableName = 'Comments';
     }
-    async getByPost(post:number){
+    getByPost(post:number){
         const sql = `SELECT id, Users.userName AS 'userName', Users.nickName AS 'nickName', Users.rank AS 'rank', contents, created FROM Comments INNER JOIN Users ON Comments.userName = Users.userName WHERE post=? ORDER BY created ASC`;
-        return await this.query(sql, [post]);
+        return this.query(sql, [post]);
     }
     async getUserName(commentId:number): Promise<string>{
         const option = {

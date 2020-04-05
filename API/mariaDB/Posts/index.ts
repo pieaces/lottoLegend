@@ -3,7 +3,7 @@ import Comments, { Comment } from '../Comments/index'
 import PostsContents from "../PostsContents";
 import { updateRecommendUsers } from "../../dynamoDB/recommend";
 
-export type Category = "pro" | 'analysis' | "include" | "exclude" | 'free' | "qna" | "notice";
+export type Category = "pro" | 'analysis' | "include" | "exclude" | 'free' | "qna" | "notice" | 'win';
 export type SearchType = "writer" | "title" | "contents";
 interface Post {
     id: number;
@@ -26,13 +26,16 @@ export default class Posts extends DB {
         super();
         this.tableName = 'Posts';
     }
-    async scan(category: Category, index: number = 1) {
+    scan(category: Category, index: number = 1) {
         const sql = `SELECT id, title, Users.nickName AS 'nickName', Users.rank AS 'rank', created, hits, recommendation FROM Posts INNER JOIN Users ON Posts.userName = Users.userName WHERE category = ? ORDER BY created DESC LIMIT ?, ?`;
-        return await this.query(sql, [category, Posts.SCAN_MAX * (index - 1), Posts.SCAN_MAX]);
+        return this.query(sql, [category, Posts.SCAN_MAX * (index - 1), Posts.SCAN_MAX]);
     }
-    async mainPage(category:Category){
+    mainBoard(category:Category){
         const sql = `SELECT id, title, category, created FROM Posts WHERE category = ? ORDER BY created DESC LIMIT 5`;
-        return await this.query(sql, [category]);
+        return this.query(sql, [category]);
+    }
+    mainWin(){
+        return this.query(`SELECT id, title, created, text as 'contents' FROM ${this.tableName} INNER JOIN PostsContents ON ${this.tableName}.id = PostsContents.post WHERE ${this.tableName}.category='win' ORDER BY created DESC LIMIT 5`, []);
     }
     async getCount(category: string): Promise<number> {
         const rows = await this.query(`SELECT COUNT(*) FROM ${this.tableName} WHERE category=?`, [category]);

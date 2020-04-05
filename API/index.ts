@@ -222,8 +222,9 @@ exports.handler = async (event: any) => {
             switch (method) {
                 case 'GET':
                     const categories: Category[] = ['pro', 'analysis', 'include', 'exclude', 'free'];
-                    body = [];
-                    for(let i =0; i<categories.length; i++) body[i] = await db.mainPage(categories[i]);
+                    body = {};
+                    for(let i =0; i<categories.length; i++) body[categories[i]] = await db.mainBoard(categories[i]);
+                    body.win = await db.mainWin();
             }
         }
         break;
