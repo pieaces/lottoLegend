@@ -313,7 +313,7 @@ transform: translateY(-0.1rem);
 .box-title{
   font-size:1.7rem;
   letter-spacing: -0.1rem;
-  padding:3rem 0 2rem 2rem;
+  padding:2rem 0 2rem 2rem;
   color:rgb(80, 80, 80);
 }
 
@@ -340,7 +340,7 @@ transform: translateY(-0.1rem);
 
 .board-tab {
   flex: 1;
-  font-size:1.2rem;
+  font-size:1.5rem;
 }
 
 /* board-section */
