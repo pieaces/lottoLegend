@@ -56,13 +56,11 @@ function boardToggle() {
     }
 }
 
-
 function insertWinCount(data) {
     data.forEach((item, index) => {
         winCount[index].textContent = item.toString();
     })
 }
-
 
 function makeBoard(data: { id?: number, category?: Category, title: string, created: string }[]) {
     data.forEach(item => {
@@ -84,14 +82,14 @@ function makeBoard(data: { id?: number, category?: Category, title: string, crea
 
         box.appendChild(time);
         commContentBox.appendChild(box);
-    })
+    });
 }
 
 function insertWinResult(data, target: NodeListOf<HTMLElement>) {
     Array.from(target).forEach((node, index) => {
         node.children[1].textContent = data[index].winner.toString();
         node.children[2].textContent = data[index].winAmount.toString();
-    })
+    });
 }
 
 function makeWinReview(data) {
