@@ -531,15 +531,15 @@ flex:2;
   align-items: center;
   justify-content: space-between;
   padding:1rem;
-  color:#535353;
+  color:#535353 !important;
 }
 
 .community-content-title{
-  font-size:1.3rem;
+  font-size:1.5rem;
 }
 
 .community-time{
-  font-size:1.1rem;
+  font-size:1.2rem;
 }
 
 .main-1-4-2{
