@@ -374,7 +374,7 @@ flex:2;
 
 .board-box {
   display: flex;
-  height:4rem;
+  height:4.4rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   text-align: center;
 }
@@ -523,7 +523,7 @@ flex:2;
 }
 
 .community-content-box{
-  padding:1rem 0;
+  padding:1rem 1rem;
 }
 
 .community-content{
