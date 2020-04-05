@@ -316,6 +316,7 @@ transform: translateY(-0.1rem);
 }
 
 .board-container{
+  padding-left:1rem;
   color:rgb(80, 80, 80);
 }
 
