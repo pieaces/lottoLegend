@@ -384,13 +384,15 @@ transform: translateY(-0.1rem);
 }
 
 .review-tab{
+  background: #f7f7f7;
   width: 20%;
   height:20rem;
   margin:0.5rem;
 }
 
 .review-img-box{
-  height: 12rem;
+  height: 15rem;
+  background: white;
 }
 
 .review-img-box > img{
@@ -400,9 +402,9 @@ transform: translateY(-0.1rem);
 }
 
 .review-content{
+  padding-top: 0.5rem;
   width: 10rem;
   margin: 0 auto;
-  padding:1rem 0;
   color:#535353;
   font-size:1.5rem;
   text-align: center;
@@ -412,8 +414,8 @@ transform: translateY(-0.1rem);
 }
 
 .review-time{
-  color:#535353;
-  font-size:1.3rem;
+  color:#9a9a9a;
+  font-size:1.2rem;
   text-align: center;
 }
 
