@@ -47,7 +47,7 @@ exports.handler = async (event: any) => {
             const db = new Posts();
             switch (method) {
                 case 'GET':
-                    const category: string = event.queryStringParameters.category;
+                    const category: Category = event.queryStringParameters.category;
                     const index: number = Number(event.queryStringParameters.index);
                     const posts = await db.scan(category, index);
                     const count = await db.getCount(category);
@@ -222,7 +222,8 @@ exports.handler = async (event: any) => {
             switch (method) {
                 case 'GET':
                     const categories: Category[] = ['pro', 'analysis', 'include', 'exclude', 'free'];
-                    body = categories.map(async (category) => await db.mainPage(category));
+                    body = [];
+                    for(let i =0; i<categories.length; i++) body[i] = await db.mainPage(categories[i]);
             }
         }
         break;

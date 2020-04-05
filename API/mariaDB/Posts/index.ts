@@ -26,12 +26,12 @@ export default class Posts extends DB {
         super();
         this.tableName = 'Posts';
     }
-    async scan(category: string = "free", index: number = 1) {
+    async scan(category: Category, index: number = 1) {
         const sql = `SELECT id, title, Users.nickName AS 'nickName', Users.rank AS 'rank', created, hits, recommendation FROM Posts INNER JOIN Users ON Posts.userName = Users.userName WHERE category = ? ORDER BY created DESC LIMIT ?, ?`;
         return await this.query(sql, [category, Posts.SCAN_MAX * (index - 1), Posts.SCAN_MAX]);
     }
-    async mainPage(category:string){
-        const sql = `SELECT id, title, created FROM Posts WHERE category = ? ORDER BY created DESC LIMIT 5`;
+    async mainPage(category:Category){
+        const sql = `SELECT id, title, category, created FROM Posts WHERE category = ? ORDER BY created DESC LIMIT 5`;
         return await this.query(sql, [category]);
     }
     async getCount(category: string): Promise<number> {
