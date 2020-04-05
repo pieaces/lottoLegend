@@ -1,0 +1,18 @@
+.explain-container{
+    
+    padding-left: 3rem;
+}
+
+.explain-container > li{
+    list-style-type: initial;
+    padding:1rem 0 1rem 0;
+}
+
+.explain-title{
+    font-size:1.6rem;
+}
+
+.explain-content{
+    color:rgb(82, 82, 82);
+    font-size:1.4rem;
+}
