@@ -75,7 +75,7 @@
 }
 
 .board-title {
-  flex: 4;
+  width: 200px;
   word-break: keep-all;
   font-size:1.4rem;
 }
@@ -102,17 +102,13 @@
 
 .board-section > .board-box > .board-title{
   padding-left:3rem; 
-  display: block;
-    display: -webkit-box;
-    max-width: 200px;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  justify-content: flex-start;
 } 
 
 .board-section > .board-box > .board-title > a{
-
+  white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* board-box */
@@ -199,6 +195,11 @@
     height:auto;
     text-align: left;
   }
+
+  .board-section > .board-box > .board-title{
+    padding-left:0; 
+  } 
+
   .board-box >div.board-title{
     display:flex;
     align-items:center ;
