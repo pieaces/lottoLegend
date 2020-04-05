@@ -45,7 +45,7 @@ getUnAuthAPI('/main/numbers').then(data => {
     // document.getElementById('totalAmount').textContent = (<any[]>data.info).reduce((acc, cur, index) =>
     //     acc + cur.winAmount * data.win[index], 0);
 });
-
+const boardPlus = document.getElementById('board-plus');
 getUnAuthAPI('/main/posts').then(data => {
     let current = 0;
     const tabs = ['pro', 'analysis', 'include', 'exclude', 'free'];
@@ -57,6 +57,7 @@ getUnAuthAPI('/main/posts').then(data => {
             commTab[current].classList.remove('community-tab-current');
             current = i;
             commTab[i].classList.add('community-tab-current');
+            boardPlus.setAttribute('href', `board/${tabs[current]}/list.html`);
             makeBoard(data[tabs[current]]);
         });
     }
