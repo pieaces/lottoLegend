@@ -30,14 +30,14 @@ getUnAuthAPI('/main').then((data) => {
 
     insertWinCount([21, 32, 12, 32, 12]);
     insertWinResult(data.info, officialWinResultBox);
-    insertWinResult(data.win.map((winner:number, index:number) => {
-        return{
+    insertWinResult(data.win.map((winner: number, index: number) => {
+        return {
             winner,
-            winAmount:winner*data.info[index].winAmount
+            winAmount: winner * data.info[index].winAmount
         }
     }), myWinResultBox)
     makeWinReview([{ title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }]);
-    makeBoard([{ title: "하이루이월수는 이리봅니다.", time: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", time: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", time: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", time: "2020-04-04" }])
+    makeBoard([{ title: "하이루이월수는 이리봅니다.", time: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", time: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", time: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", time: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", time: "2020-04-04" }])
     boardToggle();
 });
 
@@ -61,7 +61,7 @@ function insertWinCount(data) {
 }
 
 
-function makeBoard(data:{title:string, time:string}[]) {
+function makeBoard(data: { title: string, time: string }[]) {
     data.forEach(item => {
         const box = document.createElement('div');
         box.classList.add('community-content');
