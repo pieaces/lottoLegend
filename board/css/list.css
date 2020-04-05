@@ -75,7 +75,7 @@
 }
 
 .board-title {
-  width: 200px;
+  width: 33rem;
   word-break: keep-all;
   font-size:1.4rem;
 }
@@ -207,6 +207,7 @@
     height:4rem;
     font-size:1.4rem;
   }
+
   .board-box > div:not(.board-title){
     display:inline-block;
     height:3rem;
