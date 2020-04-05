@@ -117,8 +117,13 @@ function makeWinReview(data:{id:number, title:string, created:string, img:string
         //onerror="this.src='에러발생이미지';"
         img.setAttribute('src', item.img);
         img.setAttribute('onerror', "this.src='img/logo/2.png';")
-
+       
         imgBox.appendChild(img);
+
+        if(item.img===null){
+            (img.parentNode as HTMLElement).style.padding="1rem";        
+        }
+
         tab.appendChild(imgBox);
 
         const content = document.createElement('div');
