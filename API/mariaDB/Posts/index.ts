@@ -3,7 +3,7 @@ import Comments, { Comment } from '../Comments/index'
 import PostsContents from "../PostsContents";
 import { updateRecommendUsers } from "../../dynamoDB/recommend";
 
-type Category = "pro" | "include" | "exclude" | "qna" | "notice";
+export type Category = "pro" | 'analysis' | "include" | "exclude" | 'free' | "qna" | "notice";
 export type SearchType = "writer" | "title" | "contents";
 interface Post {
     id: number;
@@ -29,6 +29,10 @@ export default class Posts extends DB {
     async scan(category: string = "free", index: number = 1) {
         const sql = `SELECT id, title, Users.nickName AS 'nickName', Users.rank AS 'rank', created, hits, recommendation FROM Posts INNER JOIN Users ON Posts.userName = Users.userName WHERE category = ? ORDER BY created DESC LIMIT ?, ?`;
         return await this.query(sql, [category, Posts.SCAN_MAX * (index - 1), Posts.SCAN_MAX]);
+    }
+    async mainPage(category:string){
+        const sql = `SELECT id, title, created FROM Posts WHERE category = ? ORDER BY created DESC LIMIT 5`;
+        return await this.query(sql, [category]);
     }
     async getCount(category: string): Promise<number> {
         const rows = await this.query(`SELECT COUNT(*) FROM ${this.tableName} WHERE category=?`, [category]);

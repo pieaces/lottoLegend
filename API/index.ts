@@ -1,6 +1,6 @@
 import verify from "./auth";
 import { getCurrentRound, isIdentical } from "./funtions";
-import Posts, { SearchType } from "./mariaDB/Posts";
+import Posts, { SearchType, Category } from "./mariaDB/Posts";
 import Comments from "./mariaDB/Comments";
 import { getIncOrExcNumbers, getLotto } from './dynamoDB/myNumbers'
 import { doesRecommend } from "./dynamoDB/recommend";
@@ -218,11 +218,14 @@ exports.handler = async (event: any) => {
         }
             break;
         case '/main/posts': {
+            const db = new Posts();
             switch (method) {
                 case 'GET':
-                    const round = getCurrentRound();
+                    const categories: Category[] = ['pro', 'analysis', 'include', 'exclude', 'free'];
+                    body = categories.map(async (category) => await db.mainPage(category));
             }
         }
+        break;
     }
     const response = {
         statusCode,
