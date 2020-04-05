@@ -223,11 +223,21 @@ exports.handler = async (event: any) => {
                 case 'GET':
                     const categories: Category[] = ['pro', 'analysis', 'include', 'exclude', 'free'];
                     body = {};
-                    for(let i =0; i<categories.length; i++) body[categories[i]] = await db.mainBoard(categories[i]);
-                    body.win = await db.mainWin();
+                    for (let i = 0; i < categories.length; i++) body[categories[i]] = await db.mainBoard(categories[i]);
+                    const winPosts = await db.mainWin();
+                    body.win = winPosts.map((post, index) => {
+                        const _img = post.contents.match(/<img src="\S+"/);
+                        const img = _img && _img[0].slice(10, -1);
+                        return {
+                            id: winPosts[index].id,
+                            title: winPosts[index].title,
+                            created:winPosts[index].created,
+                            img
+                        }
+                    });
             }
         }
-        break;
+            break;
     }
     const response = {
         statusCode,
