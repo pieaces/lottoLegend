@@ -1,5 +1,6 @@
 import configure from './amplify/configure'
 import { getUnAuthAPI } from './amplify/api';
+import { getCategoryHtml, Category } from './board/functions';
 
 configure();
 
@@ -22,7 +23,7 @@ document.querySelector<HTMLElement>('.login-btn').onclick = () => {
 }
 
 backgroundImgSlide();
-getUnAuthAPI('/main/numbers').then((data) => {
+getUnAuthAPI('/main/numbers').then(data => {
     console.log(data);
     makeWinNumBox(data);
     document.querySelectorAll('.win-round').forEach(node => node.textContent = data.round);
@@ -35,12 +36,14 @@ getUnAuthAPI('/main/numbers').then((data) => {
             winner,
             winAmount: winner * data.info[index].winAmount
         }
-    }), myWinResultBox)
+    }), myWinResultBox);
+});
+getUnAuthAPI('/main/posts').then(data =>{
+    console.log(data);
     makeWinReview([{ title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }, { title: "ㅇㅇㅇ", time: "2020-02-20" }]);
-    makeBoard([{ title: "하이루이월수는 이리봅니다.", time: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", time: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", time: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", time: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", time: "2020-04-04" }])
+    makeBoard([{ title: "하이루이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }, { title: "이번주 이월수는 이리봅니다.", created: "2020-04-04" }])
     boardToggle();
 });
-
 
 function boardToggle() {
     let current = 0;
@@ -61,7 +64,7 @@ function insertWinCount(data) {
 }
 
 
-function makeBoard(data: { title: string, time: string }[]) {
+function makeBoard(data: { id?: number, category?: Category, title: string, created: string }[]) {
     data.forEach(item => {
         const box = document.createElement('div');
         box.classList.add('community-content');
@@ -69,7 +72,7 @@ function makeBoard(data: { title: string, time: string }[]) {
         const title = document.createElement('div');
         title.classList.add('community-content-title');
         const anchor = document.createElement('a');
-        anchor.setAttribute('href', '#');
+        anchor.setAttribute('href', `/${getCategoryHtml(item.category, 'read')}?id=${item.id}`);
         anchor.textContent = item.title;
 
         title.appendChild(anchor);
@@ -77,7 +80,7 @@ function makeBoard(data: { title: string, time: string }[]) {
 
         const time = document.createElement('div');
         time.classList.add('community-time');
-        time.textContent = item.time;
+        time.textContent = item.created;
 
         box.appendChild(time);
         commContentBox.appendChild(box);
