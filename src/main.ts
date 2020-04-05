@@ -121,7 +121,8 @@ function makeWinReview(data:{id:number, title:string, created:string, img:string
         imgBox.appendChild(img);
 
         if(item.img===null){
-            (img.parentNode as HTMLElement).style.padding="1rem";        
+            (img.parentNode as HTMLElement).style.padding="1rem";
+            img.style.height="auto";        
         }
 
         tab.appendChild(imgBox);
