@@ -1,7 +1,7 @@
 import configure from './amplify/configure'
 import { getUnAuthAPI } from './amplify/api';
 import { getCategoryHtml, Category } from './board/functions';
-import { isoStringToDate } from './functions';
+import { isoStringToDate, numberFormat } from './functions';
 
 configure();
 
@@ -9,7 +9,6 @@ const main111Img = document.querySelector<HTMLElement>('.main-image > a');
 const imgBtn = document.querySelectorAll('.img-btn > i');
 const winBox = document.querySelector<HTMLElement>('.win-num-box');
 const winner = document.getElementById('winner');
-const winAmount = document.getElementById('winAmount');
 const winRound = document.getElementById('win-round');
 const compartColor = ['#FBC400', '#69C8F2', '#FF7272', '#AAAAAA', '#B0D840'];
 const officialWinResultBox = document.querySelectorAll<HTMLElement>('.total-win-result-box > div');
@@ -98,8 +97,8 @@ function makeBoard(data: { id?: number, category?: Category, title: string, crea
 
 function insertWinResult(data, target: NodeListOf<HTMLElement>) {
     Array.from(target).forEach((node, index) => {
-        node.children[1].textContent = data[index].winner.toString();
-        node.children[2].textContent = data[index].winAmount.toString();
+        node.children[1].textContent = numberFormat(data[index].winner);
+        node.children[2].textContent = numberFormat(data[index].winAmount);
     });
 }
 
@@ -139,12 +138,13 @@ function makeWinReview(data:{id:number, title:string, created:string, img:string
 
         tab.appendChild(time);
         reviewTabs.appendChild(tab);
-    })
+    });
 }
 
 function makeWinNumBox(data: any) {
     winner.textContent = data.winner;
-    winAmount.textContent = Math.round(data.winAmount / 100000000).toString();
+    document.getElementById('winAmount1').textContent = numberFormat(data.winAmount);
+    document.getElementById('winAmount2').textContent = Math.round(data.winAmount / 100000000).toString();
     for (let i = 0; i < 6; i++) {
         const num = document.createElement('div');
         num.classList.add('win-num');

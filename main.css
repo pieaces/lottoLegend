@@ -130,11 +130,14 @@
 }
 
 .win-num-times{
-  display:flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  height:4rem;
-  font-size:2.4rem;
+  height: 4rem;
+  font-size: 3.5rem;
+  font-weight: bold;
+  color: #b70000;
+  margin-right: 2rem;
 }
 
 .win-num-times-text{
@@ -190,7 +193,9 @@
 }
 
 .big-text{
-  font-size:2.1rem;
+  font-size: 2.1rem;
+  color: #f30000;
+  font-weight: bold;
 }
 
 .small-text{

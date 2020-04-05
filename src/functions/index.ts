@@ -121,3 +121,7 @@ export function blankToString(html:string){
     console.log(html);
     return html.replace(/<br>/g, '\n').replace(/&nbsp;/g, ' ');
 }
+
+export function numberFormat(inputNumber:string | number) {
+    return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+ }
