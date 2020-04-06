@@ -179,15 +179,14 @@ exports.handler = async (event: any) => {
                         break;
                 }
             }
-        case '/users/{userName}/payment/bankbook':{
-            const userName = event.pathParameters.userName;
+        case '/users/payment/bankbook':{
             switch(method){
                 case 'GET':
-                    body = await getPayment(userName);
+                    body = await getPayment(currentId);
                     break;
                 case 'POST':
                     const {month, price} = JSON.parse(event.body);
-                    await makePayment(userName, Plan.premium, month, price);
+                    await makePayment(currentId, Plan.premium, month, price);
                     body = new Response(false);
             }
         }

@@ -1,7 +1,7 @@
 import dynamoDB from '.'
 import { AWSError } from 'aws-sdk/lib/error';
 import { GetItemOutput, GetItemInput, UpdateItemInput } from 'aws-sdk/clients/dynamodb';
-import { parsePlanKeyAndUntil, getCurrentRound } from '../funtions';
+import { parsePlanKeyAndUntil, getCurrentRound, getPlanName } from '../funtions';
 import { NSToNumbers } from './Numbers/functions';
 import { MyNumberData } from './Numbers';
 
@@ -173,7 +173,7 @@ export function getPayment(userName: string) {
                 resolve({
                     date: payment.date.S,
                     month: payment.month.N,
-                    plan: payment.plan.S,
+                    plan: getPlanName(payment.plan.S as Plan),
                     price: payment.price.N
                 });
             } else resolve();

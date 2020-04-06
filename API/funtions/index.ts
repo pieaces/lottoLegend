@@ -99,16 +99,18 @@ export function parsePlanKeyAndUntil(item:AttributeMap):{plan:string, until?:str
             }
         }
     }
-    let planName = '';
+    return {plan:getPlanName(plan), until};
+}
+
+export function getPlanName(plan:Plan){
     switch(plan){
-        case Plan.default: planName = '없음';
+        case Plan.default: return '없음';
         break;
-        case Plan.basic: planName = '기본';
+        case Plan.basic: return '기본';
         break;
-        case Plan.premium: planName = '프리미엄';
+        case Plan.premium: return '프리미엄';
         break;
-        case Plan["premium+"]: planName = '프리미엄+';
+        case Plan["premium+"]: return '프리미엄+';
         break;
     }
-    return {plan:planName, until};
 }
