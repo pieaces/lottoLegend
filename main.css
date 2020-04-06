@@ -121,32 +121,33 @@
 .login-after-box{
   display:flex;
   flex-direction: column;
-  justify-content: space-between;
   height: 100%;
-  padding:1rem;
+  padding:1.2rem;
   font-size:1.4rem;
 }
 
 .login-after-point-box > span,
 .login-after-service-box > span{
-  
+  margin-right:1.5rem;
 }
 
 .login-after-box > div{
-  margin-bottom: 1rem;
+  margin: 0.7rem 0;
 }
 
 .login-after-nickname {
-  margin-right: 1rem;
+  margin-right: 10rem;
 }
 
 .login-after-anchor-box{
   display:flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .login-after-anchor-box > a{
   color:rgb(105, 105, 105);
+  font-size:1.3rem;
 }
 
 .login-after-anchor-box > a:hover{

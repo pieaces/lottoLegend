@@ -273,6 +273,7 @@
 
   @media (min-width: 0px) and (max-width: 767px) {
 
+
     .mid-nav-container{
       height: auto;
     }
@@ -287,11 +288,11 @@
       align-items: center;
       justify-content: space-between;
       height: 5.5rem;
-      padding:0 3rem;
+      padding:0 1.5rem;
     }
 
     .mid-nav-logo{
-      width: 9rem;
+      width: 14rem;
       margin-left:0;
     }
 
