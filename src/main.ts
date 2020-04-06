@@ -2,13 +2,13 @@ import configure from './amplify/configure'
 import { getUnAuthAPI } from './amplify/api';
 import { getCategoryHtml, Category } from './board/functions';
 import { isoStringToDate, numberFormat } from './functions';
-import {  isLogedIn } from './amplify/auth'
+import { signIn, isLogedIn } from './amplify/auth'
 
 configure();
 
 const loginContainer=document.querySelector('.login-container')
 const loginAfterBox=document.querySelector('.login-after-box');
-const banner = document.getElementById('banner');
+const banner = document.querySelector<HTMLElement>('#banner');
 const imgBtn = document.querySelectorAll('.img-btn > i');
 const winBox = document.querySelector<HTMLElement>('.win-num-box');
 const winner = document.getElementById('winner');
@@ -24,6 +24,13 @@ const commContentAnchor = document.querySelectorAll<HTMLElement>('.community-con
 const nickname=document.querySelector('.nickname');
 const point=document.querySelector('#point');
 const service=document.querySelector('#service');
+const userNameInput = document.querySelector<HTMLInputElement>('#id');
+const passwordInput = document.querySelector<HTMLInputElement>('#password');
+
+document.querySelector<HTMLInputElement>('.login-btn').onclick = async () => {
+    const userName = userNameInput.value;
+    const password = passwordInput.value;
+}
 
 isLogedIn().then((result) => {
     if(result){

@@ -121,11 +121,15 @@
 .login-after-box{
   display:flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-between;
   height: 100%;
-  padding-top:1rem;
+  padding:1rem;
   font-size:1.4rem;
+}
+
+.login-after-point-box > span,
+.login-after-service-box > span{
+  
 }
 
 .login-after-box > div{
