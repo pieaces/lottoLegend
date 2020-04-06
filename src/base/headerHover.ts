@@ -1,19 +1,13 @@
-const menuTitle = document.querySelectorAll('.mid-nav-menu >li > a'); //소개부터 커뮤니티 까지 네개 배열
-const menuTitleArr = Array.from(menuTitle);
+const menuTitleArr = Array.from(document.querySelectorAll('.mid-nav-menu >li > a'));
 const menuListBox = document.querySelector('.hover-menu-container');
 const mqMobile = window.matchMedia("(max-width: 767px)");
 const clickMenuBox = document.querySelectorAll('.click-menu-box'); //사이드 메뉴 배열
 const menu = document.querySelector<HTMLElement>('.click-menu-container');
 const menuInfoText = document.querySelector('.mid-nav-info-text');
 const menuInfo = document.querySelector('.mid-nav-info');
-const menuInfoBox = document.querySelector('.mid-nav-info-box');
 const menuTitleQna = document.querySelector('#qna-anchor');
 
-mqInit();
-menuInfoToggle();
-
-function mqInit() {
-
+export function mqInit() {
     let menuTitleEventHandler = [];
     let menuTitleQnaEvent;
     let menuExceptEvent;
@@ -117,10 +111,7 @@ function mqInit() {
             mqDeskTopInit();
         }
     }
-
 };
-
-
 
 function menuListShow() {
     menuListBox.classList.remove('none');
@@ -134,7 +125,7 @@ function menuHoverAddEvent() {
     menuTitleArr.forEach(node => {
         node.addEventListener('mouseover', menuListShow);
         node.addEventListener('mouseout', menuListHide);
-    })
+    });
     menuListBox.addEventListener('mouseover', menuListShow);
     menuListBox.addEventListener('mouseout', menuListHide);
 }
@@ -154,8 +145,7 @@ function mqDeskTopInit() {
     menuHoverAddEvent();
 }
 
-
-function menuInfoToggle() {
+export function menuInfoToggle() {
     let flag = false;
     menuInfoText.addEventListener('click', (e) => {
         if (!flag) {
@@ -172,10 +162,9 @@ function menuInfoToggle() {
             menuInfo.classList.add("none");
             flag = false;
         }
-    })
+    });
 
     menuInfo.addEventListener("click", (e) => {
-
         e.stopPropagation();
     });
 }
