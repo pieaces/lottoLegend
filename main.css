@@ -132,6 +132,10 @@
   margin-right:1.5rem;
 }
 
+#point{
+  margin-right: 0;
+}
+
 .login-after-box > div{
   margin: 0.7rem 0;
 }
