@@ -12,7 +12,7 @@ isLogedIn().then((result) => {
         //로그아웃상태
     }
 })
-const main111Img = document.getElementById('banner');
+const banner = document.getElementById('banner');
 const imgBtn = document.querySelectorAll('.img-btn > i');
 const winBox = document.querySelector<HTMLElement>('.win-num-box');
 const winner = document.getElementById('winner');
@@ -201,19 +201,19 @@ function imgBranch(order: number) {
     switch (order) {
         case 0:
             bannerAnchor.setAttribute('href', 'introduce/system.html');
-            main111Img.style.background = 'url(./img/main.png) -10px -813px';
+            banner.style.background = 'url(./img/main.png) -10px -10px';
             break;
         case 1:
             bannerAnchor.setAttribute('href', 'introduce/truth.html');
-            main111Img.style.background = 'url(./img/main.png) -10px -1107px';
+            banner.style.background = 'url(./img/main.png) -10px -1336px;';
             break;
         case 2:
             bannerAnchor.setAttribute('href', 'introduce/event.html');
-            main111Img.style.background = 'url(./img/main.png) -731px -813px';
+            banner.style.background = 'url(./img/main.png) -730px -1045px;';
             break;
         case 3:
             bannerAnchor.setAttribute('href', 'introduce/campaign.html');
-            main111Img.style.background = 'url(./img/main.png) -731px -1107px';
+            banner.style.background = 'url(./img/main.png) -730px -1337px;';
             break;
     }
 }
