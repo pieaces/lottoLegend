@@ -802,6 +802,11 @@ flex:2;
   height: 27rem;
   background: url(./img/main.png) -10px -813px;
 }
-  .community-box{
-    padding:0;
-  }
+.community-box{
+  padding:0;
+}
+#logo{
+  width: 70rem;
+  height: 27rem;
+  background: url(./img/main.png) -10px -813px;
+}

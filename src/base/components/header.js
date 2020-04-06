@@ -39,7 +39,7 @@ document.write(`    <header>
         <div class="mid-nav-mobile-box">
             <h1 class="mid-nav-logo">
                 <a href="/main.html">
-                    <img src="/base/img/logo.png">
+                    <div id="logo"></div>
                 </a>
             </h1>
             <ul class="mid-nav-info-box">
