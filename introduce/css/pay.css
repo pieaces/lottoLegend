@@ -70,10 +70,17 @@
 	cursor: pointer;
 }
 
+.payment-order-btn-box{
+	display:flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding-top:2rem;
+}
+
 .order-btn{
-	width: 10rem;
+	width: 15rem;
 	height: 4rem;
-	background-color: rgb(103, 103, 121);
+	background-color: #443d33;
 	border-radius: 0.3rem;
 	color:white;
 	font-size: 1.5rem;
@@ -196,7 +203,10 @@
 @media (min-width: 0px) and (max-width: 767px) {
 
 	.pay-price-result-box{
+		flex-direction: column;
+		text-align: center;
 		margin-left: 1rem;
+		padding: 0 1rem;
 		font-size: 1.3rem;
 	}
 
@@ -219,6 +229,7 @@
 
 	.payment-tabs{
 		margin-left: 1rem;
+		margin-right: 1rem;
 	}
 
 	.payment-tab{
