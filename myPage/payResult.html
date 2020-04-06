@@ -25,62 +25,77 @@
                 </div>
                 <div class="main">
                     <div class="main-title">
-                        상품 주문내역
+                        주문현황
                     </div>
                     <div class="pay-result-info-box">
                         <div class="board-container box-color">
                             <div class="board-header">
-                               주문번호 : 
+                                주문번호 : <span id="orderId"></span>
                             </div>
                             <div class="board-section">
-                            <div class="board-box">
-                                <div class="board-title">
-                                    주문일자
+                                <div class="board-box">
+                                    <div class="board-title">
+                                        주문일자
+                                    </div>
+                                    <div class="board-content" id="orderDate"></div>
                                 </div>
-                                <div class="board-content">2020-04-06</div>
-                            </div>
-                             <div class="board-box">
-                            <div class="board-title">
-                                상품명
-                            </div>
-                            <div class="board-content">프리미엄</div>
-                            </div>
-                            <div class="board-box">
-                                <div class="board-title">
-                                    조합수
+                                <div class="board-box">
+                                    <div class="board-title">
+                                        상품명
+                                    </div>
+                                    <div class="board-content"  id="orderProduct"></div>
                                 </div>
-                                <div class="board-content">20조합</div>
-                            </div>
-                            <div class="board-box">
-                                <div class="board-title">
-                                    결제금액
+                                <div class="board-box">
+                                    <div class="board-title">
+                                        결제금액
+                                    </div>
+                                    <div class="board-content" id="orderPrice">9900원</div>
                                 </div>
-                                <div class="board-content">9900원</div>
+                                <div class="board-box">
+                                    <div class="board-title">
+                                        입금자명
+                                    </div>
+                                    <div class="board-content" id="person"></div>
+                                </div>
+                                <div class="board-box">
+                                    <div class="board-title">
+                                        입금계좌
+                                    </div>
+                                    <div class="board-content">
+                                        <ul>
+                                            <li>국민은행 : 756402-01-304886 (박재성)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="board-box">
+                                    <div class="board-title">
+                                        입금기한
+                                    </div>
+                                    <div class="board-content" id="dueDate""></div>
+                                </div>
+                                <div class="board-box">
+                                    <div class="board-title">
+                                        주문취소
+                                    </div>
+                                    <div class="board-content" id="dueDate""></div>
+                                </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="pay-account-info-box">
+                        <div class="board-container box-color">
+                            <div class="board-header">
+                                결제 안내
                             </div>
+                            <div class="board-section">
+                                <div class="board-s-box">반드시 입금자명과 동일하게 입금해주세요. 번거로운 본인확인을 줄이기 위함입니다.</div>
+                                <div class="board-s-box">정해진 기일 내에 입금이 완료되지 않으면, 자동으로 주문취소됩니다.</div>
+                                <div class="board-s-box">정확한 금액으로 입금해주시기 바랍니다.</div>
+                                <div class="board-s-box">그 외 기타사항은 고객문의 - 1:1 문의 게시판에 문의바랍니다.</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="pay-account-info-box">
-                    <div class="board-container box-color">
-                        <div class="board-header">
-                           무통장 입금시 로또끝 계좌안내                                                           
-                        </div>
-                        <div class="board-section">
-                            <div class="board-s-box">-국민은행 : 705601-01-180957</div>
-                        </div>
-                </div>
-                </div>
-                <div class="pay-account-info-box">
-                    <div class="board-container box-color">
-                        <div class="board-header">
-                           무통장 입금시 로또끝 계좌안내                                                           
-                        </div>
-                        <div class="board-section">
-                            <div class="board-s-box">-국민은행 : 705601-01-180957</div>
-                        </div>
-                </div>
-                </div>
-            </div>
         </section>
         <script src="../base/components/footer.js"></script>
     </div>
