@@ -8,7 +8,7 @@ export default class CheckBoxToggle {
     }
     addEvent() {
         if (this.inputBoxes) {
-            allCheckBox.addEventListener('click', () => {
+            allCheckBox.addEventListener('change', () => {
                 if (allCheckBox.checked) {
                     this.inputBoxes.forEach((node: any) => {
                         node.checked = true;
