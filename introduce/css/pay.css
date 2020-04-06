@@ -28,12 +28,13 @@
 	justify-content: space-around;
     height: 5rem;
 	margin-left: 3rem;
-	padding:0 1rem;
+	padding:0 1.5rem;
     font-size: 1.6rem;
 }
 
 .pay-price-result-box > div{
 	display: inline-block;
+	width: 8rem;
 }
 
 .pay-price-result-box > div:nth-child(1){
@@ -56,6 +57,7 @@
 
 .payment-tabs{
 	margin-left:3rem;
+	margin-right: 10rem;
 }
 
 .payment-tab{
@@ -67,6 +69,16 @@
 	font-size:1.6rem;
 	cursor: pointer;
 }
+
+.order-btn{
+	width: 10rem;
+	height: 4rem;
+	background-color: rgb(103, 103, 121);
+	border-radius: 0.3rem;
+	color:white;
+	font-size: 1.5rem;
+}
+
 .payment-clicked{
 	background: #1f1b16;
     color: gold;
