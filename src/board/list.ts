@@ -3,14 +3,14 @@ import { getUnAuthAPI, getAuthAPI } from '../amplify/api'
 import { isoStringToDate, rankToClass, getQueryStringObject } from '../functions';
 import { Category, getCategoryHtml } from './functions';
 import { getUserName } from '../amplify/auth';
-const boardSection = document.querySelector('.board-section');
-const pageNumContainer = document.querySelector('.page-num-container');
 import {mqInit,menuInfoToggle} from '../base/headerHover';
 
 mqInit();
 menuInfoToggle();
 configure();
 
+const boardSection = document.querySelector('.board-section');
+const pageNumContainer = document.querySelector('.page-num-container');
 const category: Category = document.getElementById('wrapper').getAttribute('data-category') as Category;
 const postBtn = document.querySelector('.post-btn');
 if(category === 'notice' ){
