@@ -7,6 +7,10 @@ import excObj from './IncludeExclude/exclude';
 import Auth from '@aws-amplify/auth';
 import { makeTable, phoneString } from './functions';
 import Swal from 'sweetalert2';
+import {mqInit,menuInfoToggle} from '../base/headerHover';
+
+mqInit();
+menuInfoToggle();
 configure();
 
 const winNumBox = document.querySelector<HTMLElement>('.mypage-win-num');

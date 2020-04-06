@@ -2,6 +2,10 @@ import configure from '../amplify/configure'
 import DataAPI from "./premium/DataAPI";
 import Layout, { IDataAPI } from './premium/Layout'
 
+import {mqInit,menuInfoToggle} from '../base/headerHover';
+
+mqInit();
+menuInfoToggle();
 configure();
 
 const loading = document.querySelector<HTMLElement>('.loading-box');

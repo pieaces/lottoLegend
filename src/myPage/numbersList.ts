@@ -7,6 +7,10 @@ import { networkAlert } from '../functions';
 import { makeCheckdValueBox } from '../system/premium/Layout/functions'
 import Swal from 'sweetalert2';
 
+import {mqInit,menuInfoToggle} from '../base/headerHover';
+
+mqInit();
+menuInfoToggle();
 configure();
 
 const loading = document.querySelector('.loading-box');

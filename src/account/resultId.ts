@@ -13,6 +13,10 @@ import { getUnAuthAPI } from "../amplify/api";
 import configure from "../amplify/configure";
 import Swal from "sweetalert2";
 
+import {mqInit,menuInfoToggle} from '../base/headerHover';
+
+mqInit();
+menuInfoToggle();
 configure();
 const phone = '+82' + getQueryStringObject().phone.slice(1);
 getUnAuthAPI('/account', { phone }).then(users => {

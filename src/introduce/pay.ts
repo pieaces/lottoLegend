@@ -8,6 +8,10 @@ const priceAnchorHoverBox = document.querySelectorAll<HTMLElement>('.price-servi
 const price = document.getElementById('price');
 const bankbook = document.getElementById('bankbook');
 
+import {mqInit,menuInfoToggle} from '../base/headerHover';
+
+mqInit();
+menuInfoToggle();
 configure();
 checkboxToggle();
 

@@ -3,9 +3,12 @@ import configure from '../amplify/configure'
 import ChartBase from '../system/premium/Chart/Charts';
 import { getUnAuthAPI } from '../amplify/api';
 import Swal from 'sweetalert2'
-import { mqInit } from './functions'
+import { mqMobileInit } from './functions'
 import Selectr, { IOptions } from 'mobius1-selectr';
+import {mqInit,menuInfoToggle} from '../base/headerHover';
 
+mqInit();
+menuInfoToggle();
 configure();
 
 const compartColor = ['#FBC400', '#69C8F2', '#FF7272', '#AAAAAA', '#B0D840'];
@@ -71,7 +74,7 @@ const lottoNums = document.querySelectorAll<HTMLElement>('.lotto-num');
 const statsValues = document.querySelectorAll('.stats-table tr >td:nth-child(2)');
 const roundSelectBox = document.querySelector<HTMLSelectElement>('#round-selectbox');
 
-mqInit();
+mqMobileInit();
 getUnAuthAPI('/numbers/win')
     .then(data => {
         console.log(data);

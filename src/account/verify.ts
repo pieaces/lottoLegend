@@ -1,6 +1,10 @@
 import configure from '../amplify/configure'
 import { confirmSignUp } from "../amplify/auth";
 
+import {mqInit,menuInfoToggle} from '../base/headerHover';
+
+mqInit();
+menuInfoToggle();
 configure();
 
 const verifyCode = document.querySelector<HTMLInputElement>('#auth-num');
