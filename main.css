@@ -608,11 +608,7 @@ flex:2;
 }
 
 .community-content-title{
-  width: 20rem;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  font-size:1.5rem;
+  font-size:1.3rem;
 }
 
 .community-content-title > a,
@@ -653,6 +649,13 @@ flex:2;
   padding:0;
 }
 @media (min-width: 0px) and (max-width: 767px) {
+  .community-content-title{
+    font-size: 1.2rem;
+    width: 20rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
   #banner{
     width: 34rem;
     height: 21rem;
@@ -807,10 +810,6 @@ flex:2;
   }
   .community-tab{
     font-size:1.2rem;
-  }
-
-  .community-content-title{
-    font-size: 1.2rem;
   }
 
   .main-1-3-2{
