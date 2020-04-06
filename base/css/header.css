@@ -270,11 +270,30 @@
   font-size:1.6rem;
 }
 
+@media (min-width: 768px) and (max-width: 1024px) {
+ .mid-nav-logo{
+   width: 18rem;
+ }
+    #logo{
+      height:7rem;
+    }
+  }
+  
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .mid-nav-logo{
+      width: 18rem;
+    }
+       #logo{
+         height:7rem;
+       }
+    
+  }
+
 
   @media (min-width: 0px) and (max-width: 767px) {
-#logo{
-  background: url(../../img/main.png) -1030px -1922px;
-}
+    #logo{
+      background: url(../../img/main.png) -1030px -1922px;
+    }
 
     .mid-nav-container{
       height: auto;
