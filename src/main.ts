@@ -2,16 +2,12 @@ import configure from './amplify/configure'
 import { getUnAuthAPI } from './amplify/api';
 import { getCategoryHtml, Category } from './board/functions';
 import { isoStringToDate, numberFormat } from './functions';
-import { signIn, isLogedIn } from './amplify/auth'
+import {  isLogedIn } from './amplify/auth'
 
 configure();
-isLogedIn().then((result) => {
-    if(result){
-        //로그인상태
-    }else{
-        //로그아웃상태
-    }
-})
+
+const loginContainer=document.querySelector('.login-container')
+const loginAfterBox=document.querySelector('.login-after-box');
 const main111Img = document.getElementById('banner');
 const imgBtn = document.querySelectorAll('.img-btn > i');
 const winBox = document.querySelector<HTMLElement>('.win-num-box');
@@ -25,14 +21,21 @@ const winCount = document.querySelectorAll('.win-count-rank');
 const commTab = document.querySelectorAll('.community-tab');
 const commContent = document.querySelectorAll<HTMLElement>('.community-content');
 const commContentAnchor = document.querySelectorAll<HTMLElement>('.community-content-title > a');
-const userNameInput = document.querySelector<HTMLInputElement>('#id');
-const passwordInput = document.querySelector<HTMLInputElement>('#password');
+const nickname=document.querySelector('.nickname');
+const point=document.querySelector('#point');
+const service=document.querySelector('#service');
 
-document.querySelector<HTMLElement>('.login-btn').onclick = async () => {
-    const userName = userNameInput.value;
-    const password = passwordInput.value;
-    await signIn(userName, password);
-}
+isLogedIn().then((result) => {
+    if(result){
+        //로그인
+        loginContainer.classList.add('none');
+        loginAfterBox.classList.remove('none');
+    }else{
+        loginAfterBox.classList.add('none');
+        loginContainer.classList.remove('none');
+        //로그아웃상태
+    }
+})
 
 backgroundImgSlide();
 getUnAuthAPI('/main/numbers').then(data => {

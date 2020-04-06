@@ -136,6 +136,24 @@
   margin-right: 1rem;
 }
 
+.login-after-anchor-box{
+  display:flex;
+  align-items: center;
+}
+
+.login-after-anchor-box > a{
+  color:rgb(105, 105, 105);
+}
+
+.login-after-anchor-box > a:hover{
+  color:rgb(46, 46, 46);
+}
+
+.seperator{
+  padding:0 0.5rem;
+  color:rgb(119, 119, 119);
+}
+
 .anchor-btn{
   padding:0.2rem 0.3rem;
   border-radius: 0.2rem;
@@ -807,9 +825,11 @@ flex:2;
   background: url(./img/main.png) -10px -594px;
 }
 #banner{
-  width: 70rem;
+  width: 100%;
   height: 27rem;
-  background: url(./img/main.png) -10px -813px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background: url(./img/main.png);
 }
 .community-box{
   padding:0;
