@@ -367,7 +367,7 @@ transform: translateY(-0.1rem);
 }
 
 .box-title{
-  padding:1rem 0 1rem 2rem;
+  padding:1rem 0 1.5rem 2rem;
   color:rgb(80, 80, 80);
   font-size:1.7rem;
   word-break: keep-all;
@@ -512,6 +512,7 @@ flex:2;
 
 .review-tabs{
   width:100%;
+  margin-bottom: 4rem;
 }
 
 .review-tab{
@@ -710,7 +711,8 @@ flex:2;
   }
 
   .box-title{
-    font-size:1.3rem;
+    font-size:1.5rem;
+    padding-bottom: 1rem;
   }
 
   .board-header > div{
