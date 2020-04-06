@@ -9,7 +9,7 @@ document.write(` <div class="anchor-title">
 </li>
 <li>
     <ul class="anchor-list-box">
-    <li><a href="trust.html">그 날의 진실</a></li>
+    <li><a href="truth.html">그 날의 진실</a></li>
     </ul> 
 </li>
 <li>

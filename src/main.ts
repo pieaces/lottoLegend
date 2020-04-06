@@ -2,10 +2,16 @@ import configure from './amplify/configure'
 import { getUnAuthAPI } from './amplify/api';
 import { getCategoryHtml, Category } from './board/functions';
 import { isoStringToDate, numberFormat } from './functions';
-import { signIn } from './amplify/auth'
+import { signIn, isLogedIn } from './amplify/auth'
 
 configure();
-
+isLogedIn().then((result) => {
+    if(result){
+        //로그인상태
+    }else{
+        //로그아웃상태
+    }
+})
 const main111Img = document.getElementById('banner');
 const imgBtn = document.querySelectorAll('.img-btn > i');
 const winBox = document.querySelector<HTMLElement>('.win-num-box');
