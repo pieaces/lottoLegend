@@ -825,7 +825,7 @@ flex:2;
 .main-aside #img1{
   width: 15rem;
   height: 17rem;
-  background: url(./img/main.png) -350px -823px !;
+  background: url(./img/main.png) -350px -823px;
 }
 .main-aside #img2{
   width: 15rem;

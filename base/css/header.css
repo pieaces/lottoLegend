@@ -272,7 +272,9 @@
 
 
   @media (min-width: 0px) and (max-width: 767px) {
-
+#logo{
+  background: url(../../img/main.png) -1030px -1922px;
+}
 
     .mid-nav-container{
       height: auto;
