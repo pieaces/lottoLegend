@@ -8,7 +8,6 @@
 }
 
 .pay-price{
-	width:8rem;
 	font-weight: bold;
 }
 
@@ -25,10 +24,11 @@
 
 .pay-price-result-box{
     display: flex;
-    align-items: center;
+	align-items: center;
+	justify-content: space-around;
     height: 5rem;
-    margin-left: 3rem;
-    padding: 0 2rem;
+	margin-left: 3rem;
+	padding:0 1rem;
     font-size: 1.6rem;
 }
 
@@ -63,7 +63,7 @@
 	align-items: center;
 	justify-content: center;
 	width:12rem;
-	height:5rem;
+	height:4.5rem;
 	font-size:1.6rem;
 	cursor: pointer;
 }
@@ -181,3 +181,39 @@
 	transform:perspective(1000px) rotateY(0deg);
 }
 
+@media (min-width: 0px) and (max-width: 767px) {
+
+	.pay-price-result-box{
+		margin-left: 1rem;
+		font-size: 1.3rem;
+	}
+
+	.pay-price-result-box > div:nth-child(1){
+		margin-right: 1rem;
+	}
+	
+	.pay-text-seperator{
+		margin-left: 2rem;
+	}
+  
+	.payment-text{
+		margin-left: 1rem;
+		font-size:1.3rem;
+	}
+
+	.payment-tab-box{
+		justify-content: space-around;
+	}
+
+	.payment-tabs{
+		margin-left: 1rem;
+	}
+
+	.payment-tab{
+		width: 7rem;
+		height:4rem;
+		font-size:1.3rem;
+	}
+  
+  }
+  

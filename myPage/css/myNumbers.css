@@ -13,11 +13,18 @@
     border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
+.selectbox-wrapper + .mypage-num-delete-btn-box{
+    margin-bottom: 1rem;
+}
+
+.mypage-table + .mypage-num-delete-btn-box{
+    margin-bottom: 5rem;
+}
+
 .mypage-num-delete-btn-box{
     display:flex;
     align-items: center;
     justify-content: flex-end;
-    margin-bottom:5rem;
 }
 
 .mypage-num-delete-btn{
@@ -38,6 +45,7 @@
     align-items: center;
     justify-content: center;
 }
+
 .mypage-toggle-btn{
     width:10rem;
     height:3.5rem;
