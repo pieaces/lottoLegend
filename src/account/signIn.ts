@@ -1,6 +1,10 @@
 import configure from '../amplify/configure'
 import { signIn } from '../amplify/auth'
 
+import {mqInit,menuInfoToggle} from '../base/headerHover';
+
+mqInit();
+menuInfoToggle();
 configure();
 
 const loginBtn = document.getElementById('login-btn');

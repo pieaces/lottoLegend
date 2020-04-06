@@ -7,6 +7,10 @@ import Selectr, { IOptions } from 'mobius1-selectr';
 import Swal from 'sweetalert2';
 import { networkAlert } from '../functions';
 
+import {mqInit,menuInfoToggle} from '../base/headerHover';
+
+mqInit();
+menuInfoToggle();
 configure();
 
 const roundSelectBox = document.querySelector<HTMLSelectElement>('#round-select-box');

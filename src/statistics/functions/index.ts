@@ -25,7 +25,7 @@ export function getStaticsName(method: string) {
     return name;
 }
 
-export function mqInit(){
+export function mqMobileInit(){
     const mqMobile = window.matchMedia("(max-width: 767px)");
     const filterBoxContainer=document.querySelector('.filter-box-container');
     const filterBox=document.querySelector('.filter-box');

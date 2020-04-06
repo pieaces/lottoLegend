@@ -5,6 +5,10 @@ import { Category, getCategoryHtml } from './functions';
 import { getUserName } from '../amplify/auth';
 const boardSection = document.querySelector('.board-section');
 const pageNumContainer = document.querySelector('.page-num-container');
+import {mqInit,menuInfoToggle} from '../base/headerHover';
+
+mqInit();
+menuInfoToggle();
 configure();
 
 const category: Category = document.getElementById('wrapper').getAttribute('data-category') as Category;

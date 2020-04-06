@@ -4,8 +4,12 @@ import LineSlide from '../system/premium/Slide/LineSlide'
 import { getUnAuthAPI } from '../amplify/api';
 import { getQueryStringObject, rangeMake } from '../functions';
 import makeClickable from '../system/premium/Slide/makeClickable';
-import { getStaticsName,mqInit } from './functions';
+import { getStaticsName,mqMobileInit } from './functions';
 
+import {mqInit,menuInfoToggle} from '../base/headerHover';
+
+mqInit();
+menuInfoToggle();
 configure();
 
 const labels = require('../system/premium/DataAPI/json/labels.json');
@@ -97,7 +101,7 @@ const barOption: Chart.ChartOptions = {
 };
 
 
-mqInit();
+mqMobileInit();
 const loading = document.querySelector<HTMLElement>('.loading-box');
 loading.classList.remove('none');
 getUnAuthAPI('/stats/piece', { method })

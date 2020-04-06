@@ -5,6 +5,10 @@ import { isoStringToDate, networkAlert, rankToClass, onlyUserAlert, isoStringToT
 import Swal from 'sweetalert2'
 import { Category, getCategoryHtml, makeNumSet } from './functions';
 
+import {mqInit,menuInfoToggle} from '../base/headerHover';
+
+mqInit();
+menuInfoToggle();
 configure();
 
 const title = document.getElementById('content-title');

@@ -2,8 +2,11 @@ import configure from './amplify/configure'
 import { getUnAuthAPI } from './amplify/api';
 import { getCategoryHtml, Category } from './board/functions';
 import { isoStringToDate, numberFormat } from './functions';
-import { isLogedIn } from './amplify/auth'
+import { isLogedIn } from './amplify/auth';
+import {mqInit,menuInfoToggle} from './base/headerHover';
 
+mqInit();
+menuInfoToggle();
 configure();
 
 const loginContainer=document.querySelector('.login-container')
@@ -26,6 +29,36 @@ const point=document.querySelector('#point');
 const service=document.querySelector('#service');
 const userNameInput = document.querySelector<HTMLInputElement>('#id');
 const passwordInput = document.querySelector<HTMLInputElement>('#password');
+//
+const mqMobile = window.matchMedia("(max-width: 767px)");
+
+if (mqMobile.matches) {
+    mqMobileInit();
+} else {
+    mqDeskTopInit();
+}
+mqMobile.addListener(mqFunc);
+
+function mqFunc(mediaQuery) {
+    if (mediaQuery.matches) {
+        //모바일 레이아웃
+        mqMobileInit();
+    } else {
+        //데스크탑 레이아웃
+
+        mqDeskTopInit();
+    }
+}
+
+function mqMobileInit() {
+    
+}
+
+function mqDeskTopInit() {
+  
+}
+//
+
 
 document.querySelector<HTMLInputElement>('.login-btn').onclick = async () => {
     const userName = userNameInput.value;

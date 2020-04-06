@@ -8,6 +8,10 @@ import { networkAlert, onlyUserAlert, stringTrimer, getQueryStringObject } from 
 import Swal from 'sweetalert2'
 import { Category, getCategoryHtml, makeNum } from './functions';
 
+import {mqInit,menuInfoToggle} from '../base/headerHover';
+
+mqInit();
+menuInfoToggle();
 configure();
 isLogedIn().then(bool => {
     if (!bool) onlyUserAlert();
