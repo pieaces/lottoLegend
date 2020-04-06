@@ -403,7 +403,7 @@ flex:2;
 
 .board-box {
   display: flex;
-  height:4rem;
+  height:4.4rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   text-align: center;
 }
@@ -531,7 +531,7 @@ flex:2;
 }
 
 .community-box{
-  padding: 0 2rem;
+  padding: 0 1rem;
 }
 
 .community-tabs{
@@ -739,7 +739,7 @@ flex:2;
   }
 
   .review-tab{
-    width: 48%;
+    width: 47%;
   }
 
   .community-tab{
