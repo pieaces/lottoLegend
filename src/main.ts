@@ -6,7 +6,7 @@ import { signIn } from './amplify/auth'
 
 configure();
 
-const main111Img = document.querySelector<HTMLElement>('.main-image > a');
+const main111Img = document.getElementById('banner');
 const imgBtn = document.querySelectorAll('.img-btn > i');
 const winBox = document.querySelector<HTMLElement>('.win-num-box');
 const winner = document.getElementById('winner');
@@ -49,7 +49,6 @@ const boardPlus = document.getElementById('board-plus');
 getUnAuthAPI('/main/posts').then(data => {
     let current = 0;
     const tabs = ['pro', 'analysis', 'include', 'exclude', 'free'];
-    console.log(data);
     makeBoard(data[tabs[current]]);
 
     for (let i = 0; i < commTab.length; i++) {
@@ -63,8 +62,6 @@ getUnAuthAPI('/main/posts').then(data => {
     }
     makeWinReview(data.win);
 });
-
-
 
 function insertWinCount(data) {
     data.forEach((item, index) => {
@@ -162,8 +159,6 @@ function backgroundImgSlide() {
     const slideIntervalId = setInterval(() => {
         imgBranch(i);
 
-        main111Img.firstElementChild.setAttribute('src', `img/${i}.png`);
-
         if (i === 1) {
             imgBtn[i - 1].classList.remove('far');
             imgBtn[i - 1].classList.add('fas');
@@ -185,9 +180,6 @@ function backgroundImgSlide() {
     for (let node = 0; node < imgBtn.length; node++) {
         imgBtn[node].addEventListener('click', () => {
             imgBranch(node);
-
-            main111Img.firstElementChild.setAttribute('src', `img/${node + 1}.png`);
-
             for (let i = 0; i < imgBtn.length; i++) {
                 imgBtn[i].classList.add('far');
                 imgBtn[i].classList.remove('fas');
@@ -198,20 +190,24 @@ function backgroundImgSlide() {
         })
     }
 }
-
+const bannerAnchor = document.getElementById('bannerAnchor');
 function imgBranch(order: number) {
     switch (order) {
         case 0:
-            main111Img.setAttribute('href', 'introduce/system.html');
+            bannerAnchor.setAttribute('href', 'introduce/system.html');
+            main111Img.style.background = 'url(./img/main.png) -10px -813px';
             break;
         case 1:
-            main111Img.setAttribute('href', 'introduce/truth.html');
+            bannerAnchor.setAttribute('href', 'introduce/truth.html');
+            main111Img.style.background = 'url(./img/main.png) -10px -1107px';
             break;
         case 2:
-            main111Img.setAttribute('href', 'introduce/event.html');
+            bannerAnchor.setAttribute('href', 'introduce/event.html');
+            main111Img.style.background = 'url(./img/main.png) -731px -813px';
             break;
         case 3:
-            main111Img.setAttribute('href', 'introduce/campaign.html');
+            bannerAnchor.setAttribute('href', 'introduce/campaign.html');
+            main111Img.style.background = 'url(./img/main.png) -731px -1107px';
             break;
     }
 }

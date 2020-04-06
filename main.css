@@ -780,8 +780,28 @@ flex:2;
   .win-num-container-box{
     position: relative;
   }
+}
 
+.main-aside #img1{
+  width: 15rem;
+  height: 17rem;
+  background: url(./img/main.png) -351px -594px;
+}
+.main-aside #img2{
+  width: 15rem;
+  height: 20rem;
+  background: url(./img/main.png) -180px -594px;
+}
+.main-aside #img3{
+  width: 15rem;
+  height: 21rem;
+  background: url(./img/main.png) -10px -594px;
+}
+#banner{
+  width: 70rem;
+  height: 27rem;
+  background: url(./img/main.png) -10px -813px;
+}
   .community-box{
     padding:0;
   }
-}
