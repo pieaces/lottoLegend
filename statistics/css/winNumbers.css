@@ -223,10 +223,20 @@
     }
 
     .stats-main-box-1{
-        display:block;
+        display:flex;
+        flex-direction: column;
+    }
+
+    .lotto-num-container{
+        order:1;
+    }
+
+    .stats-filter-container{
+        order:2;
     }
 
     .stack-chart-container{
+        order:3;
         height: 35rem;
     }
 }

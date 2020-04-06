@@ -118,6 +118,35 @@
   font-size:1.4rem;
 }
 
+.login-after-box{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding-top:1rem;
+  font-size:1.4rem;
+}
+
+.login-after-box > div{
+  margin-bottom: 1rem;
+}
+
+.login-after-nickname {
+  margin-right: 1rem;
+}
+
+.anchor-btn{
+  padding:0.2rem 0.3rem;
+  border-radius: 0.2rem;
+  border:1px solid rgba(0, 0, 0, 0.1);
+  background-color: #fafafa;
+}
+
+.anchor-btn > a{
+ color: rgb(71, 71, 71);
+}
+
 .main-1-2{
   display:flex;
   height:15rem;
@@ -392,12 +421,12 @@ flex:2;
 
 .main-1-4{
   display:flex;
-  height: 60rem;
 }
 
 .main-1-4-1{
   width:73.5%;
   margin-right:0.6rem;
+  padding:1rem;
 }
 
 .box-title-btn-wrapper{
@@ -407,15 +436,18 @@ flex:2;
 }
 
 .info-btn{
-  width: 5rem;
-  height: 2.5rem;
   margin-right: 1.5rem;
   margin-top: 0.5rem;
+  padding:0.3rem;
   border: 1px solid rgba(0,0,0,0.1);
   border-radius: 3px;
   background-color: #f6f6f6;
   color: rgb(128, 128, 128);
   font-size: 1.2rem;
+}
+
+.info-btn > a{
+  color:rgb(128, 128, 128)
 }
 
 .detail-btn{
@@ -431,9 +463,27 @@ flex:2;
   font-size: 1.2rem;
 }
 
+.detail-btn > a{
+  color: white;
+}
 
 .detail-btn:hover{
   background-color: rgb(138, 196, 243);
+}
+
+.real-lotto-text-1{
+  color:#f46d00; 
+  font-weight: bold;
+}
+
+.real-lotto-text-2{
+  color:#007bc7; 
+  font-weight: bold;
+}
+
+.own-lotto-text{
+  color:#000096;
+   font-weight: bold;
 }
 
 .review-tabs{
@@ -481,7 +531,7 @@ flex:2;
 }
 
 .community-box{
-  padding: 0 2rem;
+  padding: 0 1rem;
 }
 
 .community-tabs{
@@ -496,7 +546,7 @@ flex:2;
   justify-content: center;
   border-top:1px solid rgba(0, 0, 0, 0.1);
   border-left:1px solid rgba(0, 0, 0, 0.1);
-  border-bottom: 1px solid #09538e;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   text-align: center;
   font-size: 1.4rem;
   cursor: pointer;
@@ -507,23 +557,18 @@ flex:2;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.community-tab.community-tab-current:last-child{
-  border-right:1px solid #09538e;
-}
-
 .community-tab-current{
-  border-top:1px solid #09538e;
-  border-left:1px solid #09538e;
-  border-right:1px solid #09538e;
+  background-color: rgb(250, 250, 250);
   border-bottom: none;
 }
 
-.community-tab-current + .community-tab{
-  border-left:none;
-}
 
 .community-content-box{
-  padding:1rem 1rem;
+  padding:1rem 0;
+  border-left:1px solid rgba(0, 0, 0, 0.1);
+  border-right:1px solid rgba(0, 0, 0, 0.1);
+  border-bottom:1px solid rgba(0, 0, 0, 0.1);
+  background-color: rgb(250, 250, 250);
 }
 
 .community-content{
@@ -543,6 +588,7 @@ flex:2;
 }
 
 .community-time{
+  padding:1rem;
   font-size:1.2rem;
 }
 
@@ -593,6 +639,10 @@ flex:2;
 
   .main-1-3-2{
     height:30.5rem;
+  }
+
+  .main-1-3-2-1{
+    margin-bottom: 1rem;
   }
 
   .box-title{
@@ -689,7 +739,7 @@ flex:2;
   }
 
   .review-tab{
-    width: 48%;
+    width: 47%;
   }
 
   .community-tab{
@@ -752,3 +802,6 @@ flex:2;
   height: 27rem;
   background: url(./img/main.png) -10px -813px;
 }
+  .community-box{
+    padding:0;
+  }

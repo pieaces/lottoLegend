@@ -13,11 +13,18 @@
     border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
+.selectbox-wrapper + .mypage-num-delete-btn-box{
+    margin-bottom: 1rem;
+}
+
+.mypage-table + .mypage-num-delete-btn-box{
+    margin-bottom: 5rem;
+}
+
 .mypage-num-delete-btn-box{
     display:flex;
     align-items: center;
     justify-content: flex-end;
-    margin-bottom:5rem;
 }
 
 .mypage-num-delete-btn{
@@ -38,6 +45,7 @@
     align-items: center;
     justify-content: center;
 }
+
 .mypage-toggle-btn{
     width:10rem;
     height:3.5rem;
@@ -59,13 +67,37 @@
         margin-bottom:1rem;
     }
 
+    .selectbox-wrapper{
+        position: relative;
+    }
+
     .num-list-select{
+        position: absolute;
+        top:4.5rem;
+        left:-1rem;
         width:6rem;
         height: 3.5rem;
     }
 
+    .num-list-select > span{
+        font-size:1.2rem;
+    }
+
     .mypage-toggle-btn-box{
+        position: absolute;
+        top:0rem;
+        right:0;
         justify-content: flex-end;
+    }
+
+    .mypage-toggle-btn{
+        width: 8rem;
+        font-size:1.2rem;
+    }
+
+    .mypage-num-delete-btn{
+        width: 8rem;
+        font-size: 1.2rem;
     }
   
   }

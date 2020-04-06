@@ -48,7 +48,7 @@ document.write(`    <header>
                 <li> <a class="mid-nav-info-anchor none" id="header-signup"
                         href="/account/join.html">회원가입</a> </li>
                 <li class="mid-nav-info-text none" id="header-mypage">
-                    <div class="nickname mid-nav-info-anchor"><span id="nickName"></span>님
+                    <div class="mid-nav-info-anchor"><span id="nickName"></span>님
                         <i class="fas fa-sort-down"></i>
                         <div class="mid-nav-info none">
                             <ul class="mid-nav-info-list">
