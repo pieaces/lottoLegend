@@ -119,6 +119,7 @@
 }
 
 .login-after-box{
+  background-color: #f7f7ff;
   display:flex;
   flex-direction: column;
   height: 100%;

@@ -2,7 +2,7 @@ import configure from './amplify/configure'
 import { getUnAuthAPI } from './amplify/api';
 import { getCategoryHtml, Category } from './board/functions';
 import { isoStringToDate, numberFormat } from './functions';
-import { isLogedIn } from './amplify/auth';
+import { isLogedIn, getNickName } from './amplify/auth';
 import {mqInit,menuInfoToggle} from './base/headerHover';
 
 mqInit();
@@ -11,6 +11,23 @@ configure();
 
 const loginContainer=document.querySelector('.login-container')
 const loginAfterBox=document.querySelector('.login-after-box');
+isLogedIn().then((result) => {
+    if(result){
+        //로그인
+        const nickname = document.querySelector('.nickname');
+        getNickName().then(name => nickname.textContent = name);
+        const point = document.querySelector('#point');
+        const service = document.querySelector('#service');
+        loginContainer.classList.add('none');
+        loginAfterBox.classList.remove('none');
+        
+    }else{
+        loginAfterBox.classList.add('none');
+        loginContainer.classList.remove('none');
+        //로그아웃상태
+    }
+});
+
 const banner = document.getElementById('banner');
 const imgBtn = document.querySelectorAll('.img-btn > i');
 const winBox = document.querySelector<HTMLElement>('.win-num-box');
@@ -24,9 +41,6 @@ const winCount = document.querySelectorAll('.win-count-rank');
 const commTab = document.querySelectorAll('.community-tab');
 const commContent = document.querySelectorAll<HTMLElement>('.community-content');
 const commContentAnchor = document.querySelectorAll<HTMLElement>('.community-content-title > a');
-const nickname=document.querySelector('.nickname');
-const point=document.querySelector('#point');
-const service=document.querySelector('#service');
 const userNameInput = document.querySelector<HTMLInputElement>('#id');
 const passwordInput = document.querySelector<HTMLInputElement>('#password');
 //
@@ -34,18 +48,6 @@ document.querySelector<HTMLInputElement>('.login-btn').onclick = async () => {
     const userName = userNameInput.value;
     const password = passwordInput.value;
 }
-
-isLogedIn().then((result) => {
-    if(result){
-        //로그인
-        loginContainer.classList.add('none');
-        loginAfterBox.classList.remove('none');
-    }else{
-        loginAfterBox.classList.add('none');
-        loginContainer.classList.remove('none');
-        //로그아웃상태
-    }
-});
 const mqMobile = window.matchMedia("(max-width: 767px)");
 if (mqMobile.matches) {
     mqMobileInit();
