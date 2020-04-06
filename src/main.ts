@@ -1,7 +1,7 @@
 import configure from './amplify/configure'
-import { getUnAuthAPI } from './amplify/api';
+import { getUnAuthAPI, getAuthAPI } from './amplify/api';
 import { getCategoryHtml, Category } from './board/functions';
-import { isoStringToDate, numberFormat } from './functions';
+import { isoStringToDate, numberFormat, rankToClass } from './functions';
 import { isLogedIn, getNickName } from './amplify/auth';
 import {mqInit,menuInfoToggle} from './base/headerHover';
 
@@ -11,23 +11,59 @@ configure();
 
 const loginContainer=document.querySelector('.login-container')
 const loginAfterBox=document.querySelector('.login-after-box');
+
+const commTab = document.querySelectorAll('.community-tab');
+const boardPlus = document.getElementById('board-plus');
+const commContent = document.querySelectorAll<HTMLElement>('.community-content');
+const commContentAnchor = document.querySelectorAll<HTMLElement>('.community-content-title > a');
 isLogedIn().then((result) => {
     if(result){
         //로그인
         const nickname = document.querySelector('.nickname');
         getNickName().then(name => nickname.textContent = name);
-        const point = document.querySelector('#point');
-        const service = document.querySelector('#service');
         loginContainer.classList.add('none');
         loginAfterBox.classList.remove('none');
-        
-    }else{
+        getAuthAPI('/main/posts').then(data => {
+            console.log(data);
+            document.querySelector('#rank-text').textContent = data.user.rank;
+            document.querySelector('.rank').classList.add(rankToClass(data.user.rank));
+            document.querySelector('#point').textContent = data.user.point;
+            document.querySelector('#service').textContent = data.user.plan;
+            executeMakingBoard(data);
+        });
+    } else {
         loginAfterBox.classList.add('none');
         loginContainer.classList.remove('none');
         //로그아웃상태
+        const userNameInput = document.querySelector<HTMLInputElement>('#id');
+        const passwordInput = document.querySelector<HTMLInputElement>('#password');
+        //
+        document.querySelector<HTMLInputElement>('.login-btn').onclick = async () => {
+            const userName = userNameInput.value;
+            const password = passwordInput.value;
+        }
+        getUnAuthAPI('/main/posts').then(data => {
+            console.log(data);
+            executeMakingBoard(data);
+        });
     }
 });
+function executeMakingBoard(data:any){
+    let current = 0;
+    const tabs = ['pro', 'analysis', 'include', 'exclude', 'free'];
+    makeBoard(data[tabs[current]]);
 
+    for (let i = 0; i < commTab.length; i++) {
+        commTab[i].addEventListener('click', () => {
+            commTab[current].classList.remove('community-tab-current');
+            current = i;
+            commTab[i].classList.add('community-tab-current');
+            boardPlus.setAttribute('href', `board/${tabs[current]}/list.html`);
+            makeBoard(data[tabs[current]]);
+        });
+    }
+    makeWinReview(data.win);
+}
 const banner = document.getElementById('banner');
 const imgBtn = document.querySelectorAll('.img-btn > i');
 const winBox = document.querySelector<HTMLElement>('.win-num-box');
@@ -38,16 +74,7 @@ const officialWinResultBox = document.querySelectorAll<HTMLElement>('.total-win-
 const myWinResultBox = document.querySelectorAll<HTMLElement>('.own-win-result-box > div');
 const reviewTabs = document.querySelector('.review-tabs');
 const winCount = document.querySelectorAll('.win-count-rank');
-const commTab = document.querySelectorAll('.community-tab');
-const commContent = document.querySelectorAll<HTMLElement>('.community-content');
-const commContentAnchor = document.querySelectorAll<HTMLElement>('.community-content-title > a');
-const userNameInput = document.querySelector<HTMLInputElement>('#id');
-const passwordInput = document.querySelector<HTMLInputElement>('#password');
-//
-document.querySelector<HTMLInputElement>('.login-btn').onclick = async () => {
-    const userName = userNameInput.value;
-    const password = passwordInput.value;
-}
+
 const mqMobile = window.matchMedia("(max-width: 767px)");
 if (mqMobile.matches) {
     mqMobileInit();
@@ -130,24 +157,6 @@ getUnAuthAPI('/main/numbers').then(data => {
     // document.getElementById('totalAmount').textContent = (<any[]>data.info).reduce((acc, cur, index) =>
     //     acc + cur.winAmount * data.win[index], 0);
 });
-const boardPlus = document.getElementById('board-plus');
-getUnAuthAPI('/main/posts').then(data => {
-    let current = 0;
-    const tabs = ['pro', 'analysis', 'include', 'exclude', 'free'];
-    makeBoard(data[tabs[current]]);
-
-    for (let i = 0; i < commTab.length; i++) {
-        commTab[i].addEventListener('click', () => {
-            commTab[current].classList.remove('community-tab-current');
-            current = i;
-            commTab[i].classList.add('community-tab-current');
-            boardPlus.setAttribute('href', `board/${tabs[current]}/list.html`);
-            makeBoard(data[tabs[current]]);
-        });
-    }
-    makeWinReview(data.win);
-});
-
 function insertWinCount(data) {
     data.forEach((item, index) => {
         winCount[index].textContent = item.toString();
