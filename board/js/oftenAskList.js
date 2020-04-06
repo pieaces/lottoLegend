@@ -86,25 +86,25 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/base/components/aside/myPage.js":
-/*!*********************************************!*\
-  !*** ./src/base/components/aside/myPage.js ***!
-  \*********************************************/
+/***/ "./src/board/oftenAskList.ts":
+/*!***********************************!*\
+  !*** ./src/board/oftenAskList.ts ***!
+  \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("document.write(\"<div class=\\\"anchor-title\\\">\\n\\uB9C8\\uC774\\uD398\\uC774\\uC9C0\\n</div>\\n<ul class=\\\"anchor-list-container\\\">\\n<li>  \\n    <ul class=\\\"anchor-list-box\\\">\\n    <li><a href=\\\"home.html\\\">\\uB9C8\\uC774 \\uD398\\uC774\\uC9C0 \\uD648</a> </li>\\n    \\n    </ul>\\n</li>\\n<li>  \\n<h3>\\uBC88\\uD638\\uBAA9\\uB85D</h3>\\n    <ul class=\\\"anchor-list-box\\\">\\n    <li><a href=\\\"numbersList.html\\\">\\uB098\\uC758 \\uBC88\\uD638\\uB9AC\\uC2A4\\uD2B8</a> </li>\\n    <li><a href=\\\"IncludeExclude.html\\\">\\uB098\\uC758 \\uCD94\\uCC9C/\\uC81C\\uC678 \\uBC88\\uD638</a> </li>\\n    </ul>\\n</li>\\n<li> \\n<h3>\\uD68C\\uC6D0\\uC815\\uBCF4</h3>\\n    <ul class=\\\"anchor-list-box\\\">\\n    <li><a href=\\\"payResult.html\\\">\\uC8FC\\uBB38\\uD604\\uD669</a> </li>\\n    <li><a href=\\\"pay.html\\\">\\uACB0\\uC81C\\uB0B4\\uC5ED</a> </li>\\n    </ul>\\n</li>\\n\\n</ul>\\n\\n\");//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvYmFzZS9jb21wb25lbnRzL2FzaWRlL215UGFnZS5qcy5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL3NyYy9iYXNlL2NvbXBvbmVudHMvYXNpZGUvbXlQYWdlLmpzP2VjYzQiXSwic291cmNlc0NvbnRlbnQiOlsiZG9jdW1lbnQud3JpdGUoXCI8ZGl2IGNsYXNzPVxcXCJhbmNob3ItdGl0bGVcXFwiPlxcblxcdUI5QzhcXHVDNzc0XFx1RDM5OFxcdUM3NzRcXHVDOUMwXFxuPC9kaXY+XFxuPHVsIGNsYXNzPVxcXCJhbmNob3ItbGlzdC1jb250YWluZXJcXFwiPlxcbjxsaT4gIFxcbiAgICA8dWwgY2xhc3M9XFxcImFuY2hvci1saXN0LWJveFxcXCI+XFxuICAgIDxsaT48YSBocmVmPVxcXCJob21lLmh0bWxcXFwiPlxcdUI5QzhcXHVDNzc0IFxcdUQzOThcXHVDNzc0XFx1QzlDMCBcXHVENjQ4PC9hPiA8L2xpPlxcbiAgICBcXG4gICAgPC91bD5cXG48L2xpPlxcbjxsaT4gIFxcbjxoMz5cXHVCQzg4XFx1RDYzOFxcdUJBQTlcXHVCODVEPC9oMz5cXG4gICAgPHVsIGNsYXNzPVxcXCJhbmNob3ItbGlzdC1ib3hcXFwiPlxcbiAgICA8bGk+PGEgaHJlZj1cXFwibnVtYmVyc0xpc3QuaHRtbFxcXCI+XFx1QjA5OFxcdUM3NTggXFx1QkM4OFxcdUQ2MzhcXHVCOUFDXFx1QzJBNFxcdUQyQjg8L2E+IDwvbGk+XFxuICAgIDxsaT48YSBocmVmPVxcXCJJbmNsdWRlRXhjbHVkZS5odG1sXFxcIj5cXHVCMDk4XFx1Qzc1OCBcXHVDRDk0XFx1Q0M5Qy9cXHVDODFDXFx1QzY3OCBcXHVCQzg4XFx1RDYzODwvYT4gPC9saT5cXG4gICAgPC91bD5cXG48L2xpPlxcbjxsaT4gXFxuPGgzPlxcdUQ2OENcXHVDNkQwXFx1QzgxNVxcdUJDRjQ8L2gzPlxcbiAgICA8dWwgY2xhc3M9XFxcImFuY2hvci1saXN0LWJveFxcXCI+XFxuICAgIDxsaT48YSBocmVmPVxcXCJwYXlSZXN1bHQuaHRtbFxcXCI+XFx1QzhGQ1xcdUJCMzhcXHVENjA0XFx1RDY2OTwvYT4gPC9saT5cXG4gICAgPGxpPjxhIGhyZWY9XFxcInBheS5odG1sXFxcIj5cXHVBQ0IwXFx1QzgxQ1xcdUIwQjRcXHVDNUVEPC9hPiA8L2xpPlxcbiAgICA8L3VsPlxcbjwvbGk+XFxuXFxuPC91bD5cXG5cXG5cIik7Il0sIm1hcHBpbmdzIjoiQUFBQSIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./src/base/components/aside/myPage.js\n");
+eval("var boardTitleText = document.querySelectorAll('.board-title-text');\nboardTextToggle();\n\nfunction boardTextToggle() {\n  var current = null;\n\n  var _loop = function _loop(i) {\n    boardTitleText[i].addEventListener('click', function () {\n      if (current !== i) {\n        if (current !== null) {\n          boardTitleText[current].parentElement.nextElementSibling.classList.add('none');\n        }\n\n        boardTitleText[i].parentElement.nextElementSibling.classList.remove('none');\n      } else {\n        if (boardTitleText[i].parentElement.nextElementSibling.classList.contains('none')) {\n          boardTitleText[i].parentElement.nextElementSibling.classList.remove('none');\n        } else {\n          boardTitleText[i].parentElement.nextElementSibling.classList.add('none');\n        }\n      }\n\n      current = i;\n    });\n  };\n\n  for (var i = 0; i < boardTitleText.length; i++) {\n    _loop(i);\n  }\n}//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvYm9hcmQvb2Z0ZW5Bc2tMaXN0LnRzLmpzIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vLy4vc3JjL2JvYXJkL29mdGVuQXNrTGlzdC50cz9iMzJiIl0sInNvdXJjZXNDb250ZW50IjpbInZhciBib2FyZFRpdGxlVGV4dCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3JBbGwoJy5ib2FyZC10aXRsZS10ZXh0Jyk7XG5ib2FyZFRleHRUb2dnbGUoKTtcblxuZnVuY3Rpb24gYm9hcmRUZXh0VG9nZ2xlKCkge1xuICB2YXIgY3VycmVudCA9IG51bGw7XG5cbiAgdmFyIF9sb29wID0gZnVuY3Rpb24gX2xvb3AoaSkge1xuICAgIGJvYXJkVGl0bGVUZXh0W2ldLmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJywgZnVuY3Rpb24gKCkge1xuICAgICAgaWYgKGN1cnJlbnQgIT09IGkpIHtcbiAgICAgICAgaWYgKGN1cnJlbnQgIT09IG51bGwpIHtcbiAgICAgICAgICBib2FyZFRpdGxlVGV4dFtjdXJyZW50XS5wYXJlbnRFbGVtZW50Lm5leHRFbGVtZW50U2libGluZy5jbGFzc0xpc3QuYWRkKCdub25lJyk7XG4gICAgICAgIH1cblxuICAgICAgICBib2FyZFRpdGxlVGV4dFtpXS5wYXJlbnRFbGVtZW50Lm5leHRFbGVtZW50U2libGluZy5jbGFzc0xpc3QucmVtb3ZlKCdub25lJyk7XG4gICAgICB9IGVsc2Uge1xuICAgICAgICBpZiAoYm9hcmRUaXRsZVRleHRbaV0ucGFyZW50RWxlbWVudC5uZXh0RWxlbWVudFNpYmxpbmcuY2xhc3NMaXN0LmNvbnRhaW5zKCdub25lJykpIHtcbiAgICAgICAgICBib2FyZFRpdGxlVGV4dFtpXS5wYXJlbnRFbGVtZW50Lm5leHRFbGVtZW50U2libGluZy5jbGFzc0xpc3QucmVtb3ZlKCdub25lJyk7XG4gICAgICAgIH0gZWxzZSB7XG4gICAgICAgICAgYm9hcmRUaXRsZVRleHRbaV0ucGFyZW50RWxlbWVudC5uZXh0RWxlbWVudFNpYmxpbmcuY2xhc3NMaXN0LmFkZCgnbm9uZScpO1xuICAgICAgICB9XG4gICAgICB9XG5cbiAgICAgIGN1cnJlbnQgPSBpO1xuICAgIH0pO1xuICB9O1xuXG4gIGZvciAodmFyIGkgPSAwOyBpIDwgYm9hcmRUaXRsZVRleHQubGVuZ3RoOyBpKyspIHtcbiAgICBfbG9vcChpKTtcbiAgfVxufSJdLCJtYXBwaW5ncyI6IkFBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./src/board/oftenAskList.ts\n");
 
 /***/ }),
 
 /***/ 0:
-/*!***************************************************!*\
-  !*** multi ./src/base/components/aside/myPage.js ***!
-  \***************************************************/
+/*!*****************************************!*\
+  !*** multi ./src/board/oftenAskList.ts ***!
+  \*****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! ./src/base/components/aside/myPage.js */"./src/base/components/aside/myPage.js");
+module.exports = __webpack_require__(/*! ./src/board/oftenAskList.ts */"./src/board/oftenAskList.ts");
 
 
 /***/ })

@@ -7,7 +7,6 @@ import { isLogedIn, getUserName } from '../amplify/auth'
 import { networkAlert, onlyUserAlert, stringTrimer, getQueryStringObject } from '../functions'
 import Swal from 'sweetalert2'
 import { Category, getCategoryHtml, makeNum } from './functions';
-
 import {mqInit,menuInfoToggle} from '../base/headerHover';
 
 mqInit();

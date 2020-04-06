@@ -18,6 +18,7 @@ document.write(`<div class="anchor-title">
 <li> 
 <h3>회원정보</h3>
     <ul class="anchor-list-box">
+    <li><a href="payResult.html">주문현황</a> </li>
     <li><a href="pay.html">결제내역</a> </li>
     </ul>
 </li>

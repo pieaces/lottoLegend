@@ -1,4 +1,5 @@
 import configure from "../amplify/configure";
+import {mqInit,menuInfoToggle} from '../base/headerHover';
 
 const priceCheckbox = document.querySelectorAll<HTMLInputElement>('.price-checkbox');
 const priceContainer = document.querySelectorAll<HTMLElement>('.price-container');
@@ -7,8 +8,6 @@ const priceAnchorBox = document.querySelectorAll<HTMLElement>('.price-service-an
 const priceAnchorHoverBox = document.querySelectorAll<HTMLElement>('.price-service-anchor-hover-box');
 const price = document.getElementById('price');
 const bankbook = document.getElementById('bankbook');
-
-import {mqInit,menuInfoToggle} from '../base/headerHover';
 
 mqInit();
 menuInfoToggle();
