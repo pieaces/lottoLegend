@@ -3,8 +3,9 @@ import { getCurrentRound, scanLotto, getLotto, getLotto2 } from "./funtions";
 import { updateNumbers, getNumbers, deleteMyNumber, updateIncOrExcNumbers, getIncOrExcRounds, getIncAndExcNumbers, deleteIncOrExcNumbers, scanWeekNumbers, getIncOrExcNumbers } from './dynamoDB/Numbers'
 import { queryLottoData } from "./dynamoDB/lottoData";
 import { freeGenerator, numbersToData } from "./dynamoDB/generator";
-import { getPointAndRank, getPlanKeyAndUntil, getMyHome, expirePlan } from "./dynamoDB/userInfo";
+import { getPointAndRank, getPlanKeyAndUntil, getMyHome, expirePlan, makePayment, Plan, getPayment } from "./dynamoDB/userInfo";
 import { getLottoData, getWinStats } from "./dynamoDB/getMainPage";
+import { Response } from "./Response";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -171,10 +172,33 @@ exports.handler = async (event: any) => {
             }
         }
             break;
+            case '/users/{userName}/payment':{
+                switch(method){
+                    case 'GET':
+                        
+                        break;
+                }
+            }
+        case '/users/{userName}/payment/bankbook':{
+            const userName = event.pathParameters.userName;
+            switch(method){
+                case 'GET':
+                    body = await getPayment(userName);
+                    break;
+                case 'POST':
+                    const {month, price} = JSON.parse(event.body);
+                    await makePayment(userName, Plan.premium, month, price);
+                    body = new Response(false);
+            }
+        }
+        break;
         case '/main/numbers': {
             const round = getCurrentRound();
             body = await getLottoData(round);
             body.stats = await getWinStats();
+            if(currentId){
+                
+            }
         }
             break;
         case '/mypage': {

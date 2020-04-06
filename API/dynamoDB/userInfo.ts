@@ -114,6 +114,72 @@ export function makePlan(userName: string, plan: Plan, period: number): Promise<
         });
     });
 }
+export function makePayment(userName: string, plan: Plan, month: number, price: number):Promise<void> {
+    const params: UpdateItemInput = {
+        TableName: 'LottoUsers',
+        Key: {
+            "UserName": {
+                S: userName
+            }
+        },
+        ExpressionAttributeValues: {
+            ':payment': {
+                M: {
+                    plan: {
+                        S: plan
+                    },
+                    month: {
+                        N: month.toString()
+                    },
+                    price: {
+                        N: price.toString()
+                    },
+                    date: {
+                        S: new Date().toISOString()
+                    }
+                }
+            }
+        },
+        UpdateExpression: 'SET Payment = :payment'
+    };
+
+    return new Promise((resolve, reject) => {
+        dynamoDB.updateItem(params, (err: AWSError) => {
+            if (err) {
+                reject(err);
+            }
+            resolve();
+        });
+    });
+}
+export function getPayment(userName: string) {
+    const params: GetItemInput = {
+        TableName: 'LottoUsers',
+        Key: {
+            "UserName": {
+                S: userName
+            }
+        },
+        ProjectionExpression: 'Payment',
+    };
+
+    return new Promise((resolve, reject) => {
+        dynamoDB.getItem(params, (err: AWSError, data: GetItemOutput) => {
+            if (err) {
+                reject(err);
+            }
+            if ('Payment' in data.Item) {
+                const payment = data.Item.Payment.M;
+                resolve({
+                    date: payment.date.S,
+                    month: payment.month.N,
+                    plan: payment.plan.S,
+                    price: payment.price.N
+                });
+            } else resolve();
+        });
+    });
+}
 
 export function expirePlan(userName: string): Promise<void> {
     const params: UpdateItemInput = {
