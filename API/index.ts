@@ -3,9 +3,8 @@ import { getCurrentRound, scanLotto, getLotto, getLotto2 } from "./funtions";
 import { updateNumbers, getNumbers, deleteMyNumber, updateIncOrExcNumbers, getIncOrExcRounds, getIncAndExcNumbers, deleteIncOrExcNumbers, scanWeekNumbers, getIncOrExcNumbers } from './dynamoDB/Numbers'
 import { queryLottoData } from "./dynamoDB/lottoData";
 import { freeGenerator, numbersToData } from "./dynamoDB/generator";
-import { getPointAndRank, getPlanKeyAndUntil, getMyHome, expirePlan, makePayment, Plan, getPayment } from "./dynamoDB/userInfo";
+import { getMyHome, expirePlan, Plan, getPayment, makePaymentByBankBook, deletePayment } from "./dynamoDB/userInfo";
 import { getLottoData, getWinStats } from "./dynamoDB/getMainPage";
-import { Response } from "./Response";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -185,9 +184,12 @@ exports.handler = async (event: any) => {
                     body = await getPayment(currentId);
                     break;
                 case 'POST':
-                    const {month, price} = JSON.parse(event.body);
-                    await makePayment(currentId, Plan.premium, month, price);
-                    body = new Response(false);
+                    const { month, price } = JSON.parse(event.body);
+                    await makePaymentByBankBook(currentId, Plan.premium, month, price);
+                    break;
+                case 'DELETE':
+                    await deletePayment(currentId);
+                    break;
             }
         }
         break;

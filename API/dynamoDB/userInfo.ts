@@ -114,7 +114,7 @@ export function makePlan(userName: string, plan: Plan, period: number): Promise<
         });
     });
 }
-export function makePayment(userName: string, plan: Plan, month: number, price: number):Promise<void> {
+export function makePaymentByBankBook(userName: string, plan: Plan, month: number, price: number):Promise<void> {
     const params: UpdateItemInput = {
         TableName: 'LottoUsers',
         Key: {
@@ -177,6 +177,26 @@ export function getPayment(userName: string) {
                     price: payment.price.N
                 });
             } else resolve();
+        });
+    });
+}
+export function deletePayment(userName: string) {
+    const params: UpdateItemInput = {
+        TableName: 'LottoUsers',
+        Key: {
+            "UserName": {
+                S: userName
+            }
+        },
+        UpdateExpression:'Remove Payment'
+    };
+
+    return new Promise((resolve, reject) => {
+        dynamoDB.updateItem(params, (err: AWSError) => {
+            if (err) {
+                reject(err);
+            }
+            resolve();
         });
     });
 }
