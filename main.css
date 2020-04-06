@@ -583,7 +583,7 @@ flex:2;
 
 
 .community-content-box{
-  height:31rem;
+  height:26rem;
   padding:1rem 0;
   border-left:1px solid rgba(0, 0, 0, 0.1);
   border-right:1px solid rgba(0, 0, 0, 0.1);
@@ -598,7 +598,7 @@ flex:2;
   display:flex;
   align-items: center;
   justify-content: space-between;
-  padding:0.5rem 1rem;
+  padding:0.5rem 2rem;
 }
 
 .community-content-title{
@@ -628,6 +628,9 @@ flex:2;
     width: 34rem !important;
     height: 21rem !important;
     background: url(./img/main.png) -10px -595px !important;
+  }
+  .community-time{
+    font-size: 1rem;
   }
   .review-tab:last-child{
     display: none;
@@ -773,9 +776,8 @@ flex:2;
   .review-tab{
     width: 47%;
   }
-
   .community-tab{
-    font-size:1.3rem;
+    font-size:1.2rem;
   }
 
   .community-content-title{
