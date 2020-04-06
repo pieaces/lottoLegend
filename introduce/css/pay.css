@@ -72,11 +72,12 @@
 
 .order-btn{
 	width: 10rem;
-	height: 4rem;
-	background-color: rgb(103, 103, 121);
-	border-radius: 0.3rem;
-	color:white;
-	font-size: 1.5rem;
+    height: 4rem;
+    background-color: rgb(48, 48, 255);
+    border-radius: 0.3rem;
+    color: white;
+    font-size: 1.6rem;
+    font-weight: bold;
 }
 
 .payment-clicked{
