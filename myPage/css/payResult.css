@@ -23,7 +23,7 @@
   }
   
   .board-content {
-      flex:2;
+      flex:5;
       color: #424242;
     font-size:1.3rem;
   }
