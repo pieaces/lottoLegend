@@ -193,7 +193,7 @@
 	}
 	
 	.pay-text-seperator{
-		margin-left: 2rem;
+		margin-left: 0.5rem;
 	}
   
 	.payment-text{
@@ -213,6 +213,10 @@
 		width: 7rem;
 		height:4rem;
 		font-size:1.3rem;
+	}
+
+	.price-service-anchor-box{
+		height: auto;
 	}
   
   }

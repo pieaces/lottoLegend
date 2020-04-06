@@ -2,7 +2,7 @@ import configure from './amplify/configure'
 import { getUnAuthAPI } from './amplify/api';
 import { getCategoryHtml, Category } from './board/functions';
 import { isoStringToDate, numberFormat } from './functions';
-import {  isLogedIn } from './amplify/auth'
+import { isLogedIn } from './amplify/auth'
 
 configure();
 
@@ -24,6 +24,13 @@ const commContentAnchor = document.querySelectorAll<HTMLElement>('.community-con
 const nickname=document.querySelector('.nickname');
 const point=document.querySelector('#point');
 const service=document.querySelector('#service');
+const userNameInput = document.querySelector<HTMLInputElement>('#id');
+const passwordInput = document.querySelector<HTMLInputElement>('#password');
+
+document.querySelector<HTMLInputElement>('.login-btn').onclick = async () => {
+    const userName = userNameInput.value;
+    const password = passwordInput.value;
+}
 
 isLogedIn().then((result) => {
     if(result){
@@ -208,15 +215,15 @@ function imgBranch(order: number) {
             break;
         case 1:
             bannerAnchor.setAttribute('href', 'introduce/truth.html');
-            banner.style.background = 'url(./img/main.png) -10px -1336px;';
+            banner.style.background = 'url(./img/main.png) -10px -1336px';
             break;
         case 2:
             bannerAnchor.setAttribute('href', 'introduce/event.html');
-            banner.style.background = 'url(./img/main.png) -730px -1045px;';
+            banner.style.background = 'url(./img/main.png) -730px -1045px';
             break;
         case 3:
             bannerAnchor.setAttribute('href', 'introduce/campaign.html');
-            banner.style.background = 'url(./img/main.png) -730px -1337px;';
+            banner.style.background = 'url(./img/main.png) -730px -1337px';
             break;
     }
 }
