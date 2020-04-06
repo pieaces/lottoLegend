@@ -30,36 +30,6 @@ const service=document.querySelector('#service');
 const userNameInput = document.querySelector<HTMLInputElement>('#id');
 const passwordInput = document.querySelector<HTMLInputElement>('#password');
 //
-const mqMobile = window.matchMedia("(max-width: 767px)");
-
-if (mqMobile.matches) {
-    mqMobileInit();
-} else {
-    mqDeskTopInit();
-}
-mqMobile.addListener(mqFunc);
-
-function mqFunc(mediaQuery) {
-    if (mediaQuery.matches) {
-        //모바일 레이아웃
-        mqMobileInit();
-    } else {
-        //데스크탑 레이아웃
-
-        mqDeskTopInit();
-    }
-}
-
-function mqMobileInit() {
-    
-}
-
-function mqDeskTopInit() {
-  
-}
-//
-
-
 document.querySelector<HTMLInputElement>('.login-btn').onclick = async () => {
     const userName = userNameInput.value;
     const password = passwordInput.value;
@@ -75,8 +45,72 @@ isLogedIn().then((result) => {
         loginContainer.classList.remove('none');
         //로그아웃상태
     }
-})
+});
+const mqMobile = window.matchMedia("(max-width: 767px)");
+if (mqMobile.matches) {
+    mqMobileInit();
+} else {
+    mqDeskTopInit();
+}
+mqMobile.addListener(mqFunc);
+function mqFunc(mediaQuery) {
+    if (mediaQuery.matches) {
+        //모바일 레이아웃
+        mqMobileInit();
+    } else {
+        //데스크탑 레이아웃
 
+        mqDeskTopInit();
+    }
+}
+let imgBranch:(order:number) => void;
+const bannerAnchor = document.getElementById('bannerAnchor');
+
+function mqMobileInit() {
+    imgBranch = (order: number) => {
+        switch (order) {
+            case 0:
+                bannerAnchor.setAttribute('href', 'introduce/system.html');
+                banner.style.background = 'url(./img/main.png) -10px -595px';
+                break;
+            case 1:
+                bannerAnchor.setAttribute('href', 'introduce/truth.html');
+                banner.style.background = 'url(./img/main.png) -369px -595px';
+                break;
+            case 2:
+                bannerAnchor.setAttribute('href', 'introduce/event.html');
+                banner.style.background = 'url(./img/main.png) -729px -595px';
+                break;
+            case 3:
+                bannerAnchor.setAttribute('href', 'introduce/campaign.html');
+                banner.style.background = 'url(./img/main.png) -1090px -595px';
+                break;
+        }
+    }
+}
+
+function mqDeskTopInit() {
+    imgBranch = (order: number) => {
+        switch (order) {
+            case 0:
+                bannerAnchor.setAttribute('href', 'introduce/system.html');
+                banner.style.background = 'url(./img/main.png) -10px -10px';
+                break;
+            case 1:
+                bannerAnchor.setAttribute('href', 'introduce/truth.html');
+                banner.style.background = 'url(./img/main.png) -10px -1336px';
+                break;
+            case 2:
+                bannerAnchor.setAttribute('href', 'introduce/event.html');
+                banner.style.background = 'url(./img/main.png) -730px -1045px';
+                break;
+            case 3:
+                bannerAnchor.setAttribute('href', 'introduce/campaign.html');
+                banner.style.background = 'url(./img/main.png) -730px -1337px';
+                break;
+        }
+    }
+}
 backgroundImgSlide();
 getUnAuthAPI('/main/numbers').then(data => {
     makeWinNumBox(data);
@@ -206,7 +240,7 @@ function makeWinNumBox(data: any) {
 function backgroundImgSlide() {
     let i = 2;
     const slideIntervalId = setInterval(() => {
-        imgBranch(i);
+        imgBranch(i-1);
 
         if (i === 1) {
             imgBtn[i - 1].classList.remove('far');
@@ -237,26 +271,5 @@ function backgroundImgSlide() {
             imgBtn[node].classList.remove('far');
             clearInterval(slideIntervalId);
         })
-    }
-}
-const bannerAnchor = document.getElementById('bannerAnchor');
-function imgBranch(order: number) {
-    switch (order) {
-        case 0:
-            bannerAnchor.setAttribute('href', 'introduce/system.html');
-            banner.style.background = 'url(./img/main.png) -10px -10px';
-            break;
-        case 1:
-            bannerAnchor.setAttribute('href', 'introduce/truth.html');
-            banner.style.background = 'url(./img/main.png) -10px -1336px';
-            break;
-        case 2:
-            bannerAnchor.setAttribute('href', 'introduce/event.html');
-            banner.style.background = 'url(./img/main.png) -730px -1045px';
-            break;
-        case 3:
-            bannerAnchor.setAttribute('href', 'introduce/campaign.html');
-            banner.style.background = 'url(./img/main.png) -730px -1337px';
-            break;
     }
 }
