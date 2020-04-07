@@ -61,7 +61,7 @@ document.write(`    <header>
                         </div>
                     </div>
                 </li>
-                <li><a class="mid-nav-info-anchor" id="qna-anchor" href="/board/qna/list.html">고객문의</a></li>
+                <li><a class="mid-nav-info-anchor" id="qna-anchor" href="/board/qna/qnaList.html">고객문의</a></li>
             </ul>
         </div>
         <ul class="mid-nav-menu">

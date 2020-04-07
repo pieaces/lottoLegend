@@ -115,7 +115,7 @@ export function makeNoneBox() {
 }
 
 export function blankToHtml(text:string){
-    return text.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;');
+    return text.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 export function blankToString(html:string){
     console.log(html);
