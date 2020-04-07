@@ -119,6 +119,7 @@
 }
 
 .login-after-box{
+  color:#525252;
   background-color: #f7f7ff;
   display:flex;
   flex-direction: column;

@@ -2,7 +2,7 @@ import configure from './amplify/configure'
 import { getUnAuthAPI, getAuthAPI } from './amplify/api';
 import { getCategoryHtml, Category } from './board/functions';
 import { isoStringToDate, numberFormat, rankToClass } from './functions';
-import { isLogedIn, getNickName } from './amplify/auth';
+import { isLogedIn, getNickName, signOut, signIn } from './amplify/auth';
 import {mqInit,menuInfoToggle} from './base/headerHover';
 
 mqInit();
@@ -23,6 +23,7 @@ isLogedIn().then((result) => {
         getNickName().then(name => nickname.textContent = name);
         loginContainer.classList.add('none');
         loginAfterBox.classList.remove('none');
+        document.getElementById('logout').onclick = () => signOut();
         getAuthAPI('/main/posts').then(data => {
             console.log(data);
             document.querySelector('#rank-text').textContent = data.user.rank;
@@ -38,9 +39,10 @@ isLogedIn().then((result) => {
         const userNameInput = document.querySelector<HTMLInputElement>('#id');
         const passwordInput = document.querySelector<HTMLInputElement>('#password');
         //
-        document.querySelector<HTMLInputElement>('.login-btn').onclick = async () => {
+        document.querySelector<HTMLInputElement>('.login-btn').onclick = () => {
             const userName = userNameInput.value;
             const password = passwordInput.value;
+            signIn(userName, password);
         }
         getUnAuthAPI('/main/posts').then(data => {
             console.log(data);
