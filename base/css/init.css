@@ -17,6 +17,7 @@
   --bezel-color:rgb(197, 140, 202); */
 }
 
+
 *{
   box-sizing: border-box;
   margin: 0;
@@ -54,8 +55,8 @@ ul {
   padding: 0;
 }
 
-
 input {
+  outline: none;
   border: 1px solid rgb(190,190,190);
 }
 
