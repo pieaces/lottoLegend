@@ -1,5 +1,6 @@
 import Stats, { Params } from "./Stats";
 import Generator from "./Generator";
+import Swal from "sweetalert2";
 const constraintLowCount = require('./json/lowCount_compressed.json');
 const constraintSum = require('./json/sum_compressed.json');
 const constraintSumNotExcluded = require('./json/sum_notExcluded.json');
@@ -60,7 +61,7 @@ export default class DataAPI {
         infoFront + '고저차(가장 큰값 - 작은값)입니다. ' + infoBack,
         infoFront + 'AC(Arithmetic Complexity' + infoBack,
         '연속번호 포함여부를 선택해주세요.',
-    ]
+    ];
     private current: number = 0;
     private stats = new Stats();
     private generator = new Generator();
@@ -111,14 +112,24 @@ export default class DataAPI {
             } else {
                 range = [0, 6];
             }
-            const lowCount = [getLowCount(this.generator.option.includedNumbers), 6 - this.generator.option.includedNumbers.length];
-            const choices = makeChoice({include:this.generator.option.includedNumbers, exclude:this.generator.option.excludedNumbers})
+            const lowCount = [getLowCount(this.generator.option.includedNumbers), 6 - this.generator.option.includedNumbers.length];//포함수의, 나머지
+            const choices = makeChoice({include:this.generator.option.includedNumbers, exclude:this.generator.option.excludedNumbers, excludedLines:this.generator.option.excludedLines})
             const _min = getHighCount(choices);
             const _max = getLowCount(choices);
 
             const max = lowCount[0] + (_max < lowCount[1] ? _max : lowCount[1]);
-            const min = max - (_min > lowCount[0] ? _min : lowCount[0]);
+            const min = (max - _min) > lowCount[0] ? max - _min : lowCount[0];
+            console.log(_min, lowCount[0]);
+            console.log(min, max);
             this.rangeList[this.current] = paramToNumbers({ from: range[0], to: range[1] }).filter(one => min <= one && one <= max);
+            if(this.rangeList[this.current].length === 0){
+                Swal.fire({
+                    title:'현재까지의 조건을 만족하는 경우가 없습니다',
+                    text:'되돌아가서 재설정해주시기 바랍니다',
+                    icon:'warning'
+                });
+                document.getElementById('func1-chart-bubble').style.visibility= 'hidden';
+            }
         } else if (this.current === 7) {
             if (this.generator.option.includedNumbers.length === 0) {
                 let range: any;
@@ -215,10 +226,10 @@ export default class DataAPI {
     }
 }
 
-function makeChoice(param:{include:number[], exclude:number[]}){
+function makeChoice(param:{include:number[], exclude:number[], excludedLines:number[]}){
     const numbers = [];
     for(let i = 1; i <= 45; i++){
-        numbers.push(i);
+        if(!param.excludedLines.some(item => item === Math.floor((i-1)/10))) numbers.push(i);
     }
     return numbers.filter(num => !param.include.some(item => item === num) && ! param.exclude.some(item => item === num));
 }
