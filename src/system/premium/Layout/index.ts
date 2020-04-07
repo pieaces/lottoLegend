@@ -212,6 +212,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                 } else if (currentFilter === 1) {
                     this.layout1.clearStatsBoard();
                     this.nextAbleLimit = this.options[currentFilter - 1].indexOf(true);
+                    infoText.innerHTML = `전멸구간 번호대를 선택해주세요.(${this.nextAbleLimit}개)`;
                     if (this.nextAbleLimit === 0) {
                         this.dropDown.nodeList[currentFilter].textContent = '-';
                         this.options[currentFilter] = [];

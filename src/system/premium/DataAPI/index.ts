@@ -50,7 +50,7 @@ export default class DataAPI {
     private static readonly dataList = ['excludedLineCount', 'excludedLine', 'carryCount', 'excludeInclude', 'excludeInclude', 'excludeInclude', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
     private static readonly optionList = [null, 'excludedLines', null, null, 'includedNumbers', 'excludedNumbers', 'lowCount', 'sum', 'oddCount', 'primeCount', '$3Count', 'sum$10', 'diffMaxMin', 'AC', 'consecutiveExist']
     private rangeList: Array<string[] | number[]> = [[0, 1, 2, 3], ['1~', '10~', '20~', '30~', '40~'], null, null, null, null];
-    readonly infoList = ['전멸구간 개수를 선택해주세요.', '전멸구간 번호대를 선택해주세요', '전회차에서 이월될 개수를 선택해주세요.', '전회차에서 이월될 수를 선택해주세요(나머지는 자동으로 제외됩니다.)',
+    readonly infoList = ['전멸구간 개수를 선택해주세요.', '', '전회차에서 이월될 개수를 선택해주세요.', '',
         '고정시킬 수를 선택해주세요.(생략가능)', '제외될 수를 선택해주세요.(생략가능)', '저값 개수를 선택해주세요.',
         infoFront + '번호합계입니다. ' + infoBack,
         infoFront + '홀수개수입니다. ' + infoBack,
@@ -111,8 +111,14 @@ export default class DataAPI {
             } else {
                 range = [0, 6];
             }
-            const lowCount = [this.generator.option.includedNumbers.filter(one => one < 23).length, 6-this.generator.option.includedNumbers.length];
-            this.rangeList[this.current] = paramToNumbers({ from: range[0], to: range[1] }).filter(one => lowCount[0] <= one && one <= lowCount[0] + lowCount[1]);
+            const lowCount = [getLowCount(this.generator.option.includedNumbers), 6 - this.generator.option.includedNumbers.length];
+            const choices = makeChoice({include:this.generator.option.includedNumbers, exclude:this.generator.option.excludedNumbers})
+            const _min = getHighCount(choices);
+            const _max = getLowCount(choices);
+
+            const max = lowCount[0] + (_max < lowCount[1] ? _max : lowCount[1]);
+            const min = max - (_min > lowCount[0] ? _min : lowCount[0]);
+            this.rangeList[this.current] = paramToNumbers({ from: range[0], to: range[1] }).filter(one => min <= one && one <= max);
         } else if (this.current === 7) {
             if (this.generator.option.includedNumbers.length === 0) {
                 let range: any;
@@ -149,7 +155,7 @@ export default class DataAPI {
         }
         await this.stats.getData(DataAPI.dataList[this.current], params);
         if(this.current === 6) {
-            const list = ['$12', '$24', '$48', '$192', 'all'];
+            const list = ['$12', '$24', '$48', '$192', 'all', 'latest'];
             for(const one of list){
                 this.stats[DataAPI.dataList[6]].ideal[one] = this.stats[DataAPI.dataList[6]].ideal[one].filter((one, index) => this.rangeList[this.current].some(num => num === index));
                 this.stats[DataAPI.dataList[6]].actual[one] = this.stats[DataAPI.dataList[6]].actual[one].filter((one, index) => this.rangeList[this.current].some(num => num === index));                
@@ -190,9 +196,7 @@ export default class DataAPI {
             }
             this.current++;
             if (this.current <= DataAPI.dataList.length - 1) {
-                if (!this.stats[DataAPI.dataList[this.current]]) {
                     await this.setStats();
-                }
             }
         }
     }
@@ -209,4 +213,19 @@ export default class DataAPI {
     public getStats2() {
         return this.stats['excludeInclude'];
     }
+}
+
+function makeChoice(param:{include:number[], exclude:number[]}){
+    const numbers = [];
+    for(let i = 1; i <= 45; i++){
+        numbers.push(i);
+    }
+    return numbers.filter(num => !param.include.some(item => item === num) && ! param.exclude.some(item => item === num));
+}
+
+function getLowCount(numbers:number[]){
+    return numbers.filter(num => num < 23).length;
+}
+function getHighCount(numbers:number[]){
+    return numbers.filter(num => num >= 23).length;
 }
