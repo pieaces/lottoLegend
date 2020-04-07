@@ -4,7 +4,7 @@ import Posts, { SearchType, Category } from "./mariaDB/Posts";
 import Comments from "./mariaDB/Comments";
 import { getIncOrExcNumbers, getLotto } from './dynamoDB/myNumbers'
 import { doesRecommend } from "./dynamoDB/recommend";
-import { addPoint, Point, subtractPoint, getRank } from "./dynamoDB/userInfo";
+import { addPoint, Point, subtractPoint, getRank, getMainUserInfo } from "./dynamoDB/userInfo";
 import Users from "./mariaDB/Users";
 import Response from "./Response";
 
@@ -235,6 +235,7 @@ exports.handler = async (event: any) => {
                             img
                         }
                     });
+                    if(logedIn) body.user = await getMainUserInfo(currentId);
             }
         }
             break;
