@@ -1,3 +1,63 @@
+.board-header {
+    display: flex;
+    align-items: center;
+    height:4.5rem;
+    padding-left:1rem;
+    border-bottom:1px solid rgba(0, 0, 0, 0.1);
+    background-color: #f8f9fb;
+    font-size:1.6rem;
+  }
+  
+  .board-title {
+    flex:1;
+    color:#424242;
+    font-size:1.4rem;
+  }
+  
+  .board-content {
+      flex:5;
+      color: #424242;
+    font-size:1.3rem;
+  }
+  
+  /* board-section */
+  
+  .board-section {
+    display: flex;
+	flex-direction: column;
+	padding:1rem;
+  }
+
+  .board-section > .board-box:last-child{
+      border-bottom: none;
+  }
+  
+  .board-section > .board-box > .board-title > a{
+    white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+  }
+  
+  /* board-box */
+  
+  .board-box {
+    display: flex;
+    height:4rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .board-box > div {
+    display: flex;
+    align-items: center;
+    padding-left:1rem;
+  }
+
+.board-s-box{
+    padding:0.5rem 0.5rem 0.5rem 2rem;
+    color: rgb(90, 90, 90);
+    font-size:1.3rem;
+}
+
 .box-border{
 	border-radius: 1rem;
     border: 1px solid rgba(0,0,0,0.3);
@@ -42,6 +102,7 @@
 }
 
 .payment-box{
+	margin-bottom: 2rem;
 	border:1px solid rgba(0,0,0,0.3);
 }
 
@@ -68,6 +129,33 @@
 	height:4.5rem;
 	font-size:1.6rem;
 	cursor: pointer;
+}
+
+.payment-info-box{
+	display:flex;
+	align-items: center;
+	padding:1rem 0 1rem 2rem;
+}
+
+.payment-bank-title{
+	margin-right:3rem;
+	font-size:1.5rem;
+}
+
+.payment-bank-content{
+	margin-right:5rem;
+	color : rgb(90, 90, 90);
+	font-size:1.4rem;
+}
+
+.payment-deposit-box > label{
+	margin-right: 3rem;
+	font-size:1.5rem;
+}
+
+#deposit-name{
+	width: 12rem;
+	height:3rem;
 }
 
 .payment-order-btn-box{
@@ -199,6 +287,7 @@
 	backface-visibility:hidden;
 	transform:perspective(1000px) rotateY(0deg);
 }
+
 
 @media (min-width: 0px) and (max-width: 767px) {
 	.order-btn{

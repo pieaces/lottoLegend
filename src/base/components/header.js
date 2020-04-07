@@ -78,13 +78,15 @@ document.write(`    <header>
                 </ul>
                 <ul>
                     <li> <a href="/system/experience.html">체험하기</a> </li>
-                    <li> <a href="/system/include.html">추천/제외수 생성기</a> </li>
+                    <li> <a href="/system/include.html">추천수 생성기</a> </li>
+                    <li> <a href="/system/exclude.html">제외수 생성기</a> </li>
                     <li> <a href="/system/basic.html">기본 필터</a> </li>
                     <li> <a href="/system/premium.html">베르누이 분석 툴</a> </li>
                 </ul>
                 <ul>
-                    <li> <a href="/statistics/weekNumbers.html">금주의 제외번호</a> </li>                    
-                    <li> <a href="/board/pro/list.html">공유 게시판</a> </li>
+                    <li> <a href="/statistics/weekNumbers.html">금주의 제외번호</a> </li>   
+                    <li> <a href="/board/pro/list.html">전문가 분석실</a> </li>                    
+                    <li><a href="/board/exclude/list.html">제외수 공유</a></li>
                     <li> <a href="/statistics/winNumbers.html">당첨번호</a> </li>
                     <li> <a href="/statistics/statistics.html?method=excludedLineCount">통계자료</a> </li>
                 </ul>
