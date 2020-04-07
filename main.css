@@ -127,6 +127,11 @@
   font-size:1.4rem;
 }
 
+.login-after-point-box{
+  display:flex;
+  align-items: center;
+}
+
 .login-after-point-box .rank{
   margin-right: 0.5rem;
 }
@@ -321,10 +326,6 @@
   margin-right:0.5rem;
 }
 
-.win-count-small-text{
-  font-size:1.8rem;
-}
-
 .win-count-small-text .rank{
   margin-right: 0;
 transform: translateY(-0.1rem);
@@ -337,9 +338,9 @@ transform: translateY(-0.1rem);
   height: 2.5rem;
 }
 
-.win-count-small-text .rank.rank-first #rank-text,
-.win-count-small-text .rank.rank-second #rank-text,
-.win-count-small-text .rank.rank-third #rank-text{
+.win-count-small-text .rank.rank-first .rank-text,
+.win-count-small-text .rank.rank-second .rank-text,
+.win-count-small-text .rank.rank-third .rank-text{
   font-size:1.8rem;
 }
 

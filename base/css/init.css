@@ -109,7 +109,6 @@ input:not([type="checkbox"]){
 .table th,
 .table td{
   border:1px solid rgba(0,0,0,0.1);
-  
 }
 
 .loading-box{
