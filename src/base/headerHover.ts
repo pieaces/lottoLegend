@@ -6,6 +6,7 @@ const menu = document.querySelector<HTMLElement>('.click-menu-container');
 const menuInfoText = document.querySelector('.mid-nav-info-text');
 const menuInfo = document.querySelector('.mid-nav-info');
 const menuTitleQna = document.querySelector('#qna-anchor');
+const logo=document.querySelector('#logo');
 
 export function mqInit() {
     let menuTitleEventHandler = [];
@@ -25,6 +26,7 @@ export function mqInit() {
     mqMobile.addListener(mqFunc);
 
     function mqMobileInit() {
+        logo.setAttribute('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAAAyAQMAAACEQrBZAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABFJREFUeNpjYBgFo2AUDHcAAAPoAAHOSUxYAAAAAElFTkSuQmCC');
         menu.classList.remove('none');
         menuTitleQna.setAttribute('href', '#');
         let isMenuClick = false;
@@ -140,6 +142,7 @@ function menuHoverRemoveEvent() {
 }
 
 function mqDeskTopInit() {
+    logo.setAttribute('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAAAyAQMAAACEQrBZAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABFJREFUeNpjYBgFo2AUDHcAAAPoAAHOSUxYAAAAAElFTkSuQmCC');
     menu.classList.add('none');
     menuTitleQna.setAttribute('href', '/board/qna/list.html');
     menuHoverAddEvent();

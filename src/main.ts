@@ -98,46 +98,48 @@ let imgBranch:(order:number) => void;
 const bannerAnchor = document.getElementById('bannerAnchor');
 
 function mqMobileInit() {
+    banner.setAttribute('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAVQAAADSAQMAAAAvwqqHAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAB9JREFUeNrtwQENAAAAwqD3T20PBxQAAAAAAAAAAPBmJBgAAeBdCIQAAAAASUVORK5CYII=');
     imgBranch = (order: number) => {
         switch (order) {
             case 0:
                 bannerAnchor.setAttribute('href', 'introduce/system.html');
-                banner.style.background = 'url(./img/main.png) -10px -595px';
+                banner.style.backgroundPosition = '0 40.08843%';
                 break;
             case 1:
                 bannerAnchor.setAttribute('href', 'introduce/truth.html');
-                banner.style.background = 'url(./img/main.png) -369px -595px';
+                banner.style.backgroundPosition = '0 47.826087%';
                 break;
             case 2:
                 bannerAnchor.setAttribute('href', 'introduce/event.html');
-                banner.style.background = 'url(./img/main.png) -729px -595px';
+                banner.style.backgroundPosition = '0 55.563744%';
                 break;
             case 3:
                 bannerAnchor.setAttribute('href', 'introduce/campaign.html');
-                banner.style.background = 'url(./img/main.png) -1090px -595px';
+                banner.style.backgroundPosition = '0 63.3014%';
                 break;
         }
     }
 }
 
 function mqDeskTopInit() {
+    banner.setAttribute('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAr0AAAEQAQMAAACHgF42AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAC5JREFUeNrtwQENAAAAwqD3T20PBxQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI8GXpAAAQ4N7WkAAAAASUVORK5CYII=');
     imgBranch = (order: number) => {
         switch (order) {
             case 0:
-                bannerAnchor.setAttribute('href', 'introduce/system.html');
-                banner.style.background = 'url(./img/main.png) -10px -10px';
+                bannerAnchor.setAttribute('href', 'introduce/system.html');                
+                banner.style.backgroundPosition = '0 0%';
                 break;
             case 1:
                 bannerAnchor.setAttribute('href', 'introduce/truth.html');
-                banner.style.background = 'url(./img/main.png) -10px -1336px';
+                banner.style.backgroundPosition = '0 10.25641%';
                 break;
             case 2:
                 bannerAnchor.setAttribute('href', 'introduce/event.html');
-                banner.style.background = 'url(./img/main.png) -730px -1045px';
+                banner.style.backgroundPosition = '0 20.512821%';
                 break;
             case 3:
                 bannerAnchor.setAttribute('href', 'introduce/campaign.html');
-                banner.style.background = 'url(./img/main.png) -730px -1337px';
+                banner.style.backgroundPosition = '0 30.769231%';
                 break;
         }
     }
