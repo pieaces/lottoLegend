@@ -62,61 +62,66 @@ getAuthAPI('/numbers/mass')
             const toolSelect = new Selectr(toolSelectBox, toolConfig);
             const methodSelect = new Selectr(methodSelectBox, methodConfig);
             document.querySelector<HTMLElement>('.selectbox-wrapper').classList.remove('none');
-            document.querySelector<HTMLElement>('.mypage-num-delete-btn-box').classList.remove('none');
+
+            Array.from(document.querySelectorAll('.mypage-num-delete-btn-box')).forEach(node=>{
+                node.classList.remove('none');
+            })            
             let tool: string = null;
             let method: string = null;
-            document.querySelector('.mypage-num-delete-btn').addEventListener('click', async () => {
-                await Swal.fire({
-                    title: '삭제하시겠습니까?',
-                    text: "한번 삭제하면 되돌릴 수 없습니다",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: '삭제',
-                    cancelButtonText: '취소',
-                }).then(async (result) => {
-                    if (result.value) {
-                        const inputs = document.querySelectorAll<HTMLInputElement>('.mypage-table-num-box input');
-                        const numbersContainer = document.querySelectorAll<HTMLElement>('.mypage-table-content');
-                        const filterBoxes = document.querySelectorAll<HTMLElement>('.func3-past-filter-box');
-                        const numListSelectCurrent = document.querySelector('#num-list-select-current');
-                        const numListSelectTotal = document.getElementById('num-list-select-total');
-
-                        const numsArr: number[][] = [];
-                        const indexes: number[] = [];
-                        Array.from(inputs).forEach((node, index) => {
-                            if (node.checked) {
-                                numsArr.push(JSON.parse(numbersContainer[index].getAttribute('data-numbers')));
-                                indexes.push(index);
+            Array.from(document.querySelectorAll('.mypage-num-delete-btn')).forEach(node=>{
+                node.addEventListener('click', async () => {
+                    await Swal.fire({
+                        title: '삭제하시겠습니까?',
+                        text: "한번 삭제하면 되돌릴 수 없습니다",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: '삭제',
+                        cancelButtonText: '취소',
+                    }).then(async (result) => {
+                        if (result.value) {
+                            const inputs = document.querySelectorAll<HTMLInputElement>('.mypage-table-num-box input');
+                            const numbersContainer = document.querySelectorAll<HTMLElement>('.mypage-table-content');
+                            const filterBoxes = document.querySelectorAll<HTMLElement>('.func3-past-filter-box');
+                            const numListSelectCurrent = document.querySelector('#num-list-select-current');
+                            const numListSelectTotal = document.getElementById('num-list-select-total');
+    
+                            const numsArr: number[][] = [];
+                            const indexes: number[] = [];
+                            Array.from(inputs).forEach((node, index) => {
+                                if (node.checked) {
+                                    numsArr.push(JSON.parse(numbersContainer[index].getAttribute('data-numbers')));
+                                    indexes.push(index);
+                                }
+                            });
+                            console.log(indexes);
+                            try {
+                                loading.classList.remove('none');
+    
+                                await deleteAuthAPI('/numbers/mass/' + currentRound, { numsArr });
+                                indexes.forEach(index => {
+                                    numbersContainer[index].remove();
+                                    filterBoxes[index].remove();
+                                });
+                                modifyTableBoundary();
+                                numListSelectCurrent.textContent = '0';
+                                numListSelectTotal.textContent = (Number(numListSelectTotal.textContent) - indexes.length).toString();
+                                Swal.fire({
+                                    title: '완료',
+                                    icon: 'success',
+                                    timer: 1000,
+                                });
+                            } catch (err) {
+                                networkAlert();
+                            } finally {
+                                loading.classList.add('none');
                             }
-                        });
-                        console.log(indexes);
-                        try {
-                            loading.classList.remove('none');
-
-                            await deleteAuthAPI('/numbers/mass/' + currentRound, { numsArr });
-                            indexes.forEach(index => {
-                                numbersContainer[index].remove();
-                                filterBoxes[index].remove();
-                            });
-                            modifyTableBoundary();
-                            numListSelectCurrent.textContent = '0';
-                            numListSelectTotal.textContent = (Number(numListSelectTotal.textContent) - indexes.length).toString();
-                            Swal.fire({
-                                title: '완료',
-                                icon: 'success',
-                                timer: 1000,
-                            });
-                        } catch (err) {
-                            networkAlert();
-                        } finally {
-                            loading.classList.add('none');
                         }
-                    }
+                    });
                 });
-            });
-
+            })
+           
             roundSelect.on('selectr.change', async (option) => {
                 loading.classList.remove('none');
                 let result: any;

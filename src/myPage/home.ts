@@ -20,7 +20,6 @@ const phoneNumber = document.querySelector('#phone-number');
 const service = document.querySelector('#service');
 const expiryDate = document.querySelector('#service-expiry-date');
 const nicknameUpdateBtn = document.querySelector('#nickname-update');
-const serviceUpdateBtn = document.querySelector('#service-update');
 const constmobileUpdateBtn = document.getElementById('mobile');
 const rankHtml = document.querySelector('.rank');
 const lottoRank = document.querySelector('#lotto-rank');
@@ -37,7 +36,6 @@ Auth.currentAuthenticatedUser()
             phoneNumber.textContent = phoneString(user.attributes.phone_number);
         }
         nicknameUpdateBtn.addEventListener('click', nicknameUpdate);
-        serviceUpdateBtn.addEventListener('click', serviceUpdate);
         constmobileUpdateBtn.addEventListener('click', mobileUpdate);
 
         getAuthAPI('/mypage').then(({ numsArr, total, include, exclude, winner, lotto, plan, until, rank, point }) => {
@@ -212,6 +210,3 @@ function mobileUpdate() {
     });
 }
 
-function serviceUpdate() {
-
-}

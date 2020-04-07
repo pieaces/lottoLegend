@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,500|Nanum+Gothic&display=swap&subset=korean');
+
 /* init css */
 
 :root {
@@ -16,6 +16,7 @@
   --faint-color:#999;
   --bezel-color:rgb(197, 140, 202); */
 }
+
 
 *{
   box-sizing: border-box;
@@ -54,8 +55,8 @@ ul {
   padding: 0;
 }
 
-
 input {
+  outline: none;
   border: 1px solid rgb(190,190,190);
 }
 
