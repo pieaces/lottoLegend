@@ -36,6 +36,7 @@ export default class Generator extends Check {
         const indexBox = new Array<number>(BOX_SIZE); //list의 index를 value로 취함.
         const indexDnb = new Array<number>(BOX_SIZE);
         const indexUpb = new Array<number>(BOX_SIZE);
+        highIndex = highIndex === -1 ? LIST_SIZE : highIndex;
 
         let moveBox: () => void;
 
