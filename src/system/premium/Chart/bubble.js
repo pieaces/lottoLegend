@@ -47,10 +47,10 @@ export default class BubbleChart {
                 ymax.index = i;
             }
         }
-        document.getElementById('func1-bubble-all-most-value').textContent = xmin.index;
-        document.getElementById('func1-bubble-all-less-value').textContent = xmax.index;
-        document.getElementById('func1-bubble-five-most-value').textContent = ymin.index;
-        document.getElementById('func1-bubble-five-less-value').textContent = ymax.index;
+        document.getElementById('func1-bubble-all-most-value').textContent = labels[xmin.index];
+        document.getElementById('func1-bubble-all-less-value').textContent = labels[xmax.index];
+        document.getElementById('func1-bubble-five-most-value').textContent = labels[ymin.index];
+        document.getElementById('func1-bubble-five-less-value').textContent = labels[ymax.index];
 
         const dataTable = google.visualization.arrayToDataTable(dataBubble);
         const option = {
