@@ -31,14 +31,11 @@
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid rgba(0,0,0,0.2);
+  padding-right: 1rem;
 }
 .text-title > h1{
-  width: 40rem;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
   padding-left: 1rem;
-  font-size:1.8rem;
+  font-size: 1.8rem;
   margin-bottom: 0.5rem;
 }
 
@@ -46,7 +43,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding:1rem 0;
+  padding: 1rem 0;
+  padding-right: 1rem;
   border-bottom: 1px solid rgba(0,0,0,0.2);
 }
 
@@ -168,7 +166,6 @@ font-size:1.3rem;
   resize: none;
 }
 
-
 .char-count-container{
   display:flex;
   align-items: center;
@@ -242,10 +239,10 @@ font-size:1.3rem;
   }
 
   .text-title > h1{
-    width: 30rem;
+    width: 100%;
   }
-
   .author-time{
+    text-align: right;
     padding-left: 1rem;
     padding-bottom: 0.5rem;
   }
