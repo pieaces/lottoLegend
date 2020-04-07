@@ -127,6 +127,10 @@
   font-size:1.4rem;
 }
 
+.login-after-point-box .rank{
+  margin-right: 0.5rem;
+}
+
 .login-after-point-box > span,
 .login-after-service-box > span{
   margin-right:1.5rem;
@@ -610,6 +614,10 @@ flex:2;
 }
 
 .community-content-title{
+  width: 25rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   font-size:1.3rem;
 }
 
@@ -619,7 +627,6 @@ flex:2;
 }
 
 .community-time{
-  padding:1rem;
   font-size:1.2rem;
 }
 
@@ -844,5 +851,9 @@ flex:2;
 
   .win-num-container-box{
     position: relative;
+  }
+
+  .community-content-title{
+    width: 15rem;
   }
 }

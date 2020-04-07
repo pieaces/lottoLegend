@@ -143,7 +143,7 @@ function mqDeskTopInit() {
 backgroundImgSlide();
 getUnAuthAPI('/main/numbers').then(data => {
     makeWinNumBox(data);
-    document.querySelectorAll('.win-round').forEach(node => node.textContent = data.round);
+    Array.from(document.querySelectorAll('.win-round')).forEach(node => node.textContent = data.round);
     winRound.textContent = data.round;
 
     insertWinCount(data.stats);
