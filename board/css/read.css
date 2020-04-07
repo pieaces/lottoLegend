@@ -35,7 +35,7 @@
 }
 .text-title > h1{
   padding-left: 1rem;
-  font-size:1.8rem;
+  font-size: 1.8rem;
   margin-bottom: 0.5rem;
 }
 
@@ -146,7 +146,7 @@ font-size:1.3rem;
 
 .comment-content{
   margin-top: 0.2rem;
-  padding-left:2.3rem;
+  padding:0 2.3rem;
 }
 
 .comment-write-text{
@@ -237,9 +237,13 @@ font-size:1.3rem;
     display:block;
   }
 
+  .text-title > h1{
+    width: 30rem;
+  }
   .author-time{
     text-align: right;
-    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-bottom: 0.5rem;
   }
 }
 
