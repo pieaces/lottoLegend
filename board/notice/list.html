@@ -5,10 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../../base/css/init.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,500|Nanum+Gothic&display=swap&subset=korean">
+<link rel="stylesheet" href="../../base/css/init.css" />
     <link rel="stylesheet" href="../../base/css/section.css">
     <link rel="stylesheet" href="../../base/css/header.css" />
-    <link rel="stylesheet" href="../../base/css/footer.css" />
+        <link rel="stylesheet" href="../../base/css/footer.css" />
+<link rel="stylesheet" href="../../base/css/fontawesome.min.css">
     <link rel="stylesheet" href="../css/list.css">
     <title>CanvasLotto</title>
 </head>
@@ -30,7 +32,21 @@
                         공지사항
                     </div>
                     <script src="../components/search.js"></script>
-                    <script src="../components/list.js"></script>
+                    <!-- <script src="../components/list.js"></script> -->
+                    <div class="board-container notice-container">
+                        <div class="board-header">
+                            <div class="board-title">제목</div>
+                            <div class="board-author">작성자</div>
+                            <div class="board-date">등록일</div>
+                            <div class="board-views">조회수</div>
+                            <div class="board-reco">추천</div>
+                        </div>
+                        <div class="board-section">
+                        </div>
+                        </div>
+                        <div class="page-num-container">
+                        <div id="leap-first" class="hide">맨앞</div>
+                        </div>
                 </div>
             </div>
         </section>
@@ -38,7 +54,7 @@
     </div>
     <script src="../../base/js/polyfill.js"></script>
     <script src="../js/list.js"></script>
-    <script src="https://kit.fontawesome.com/e14b8c39aa.js" crossorigin="anonymous"></script>
+    
 </body>
 
 </html>
