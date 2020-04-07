@@ -37,9 +37,7 @@ export async function signIn(username: string, password: string) {
     await Auth.signIn({
         username,
         password,
-    }).then(user => {
-        location.href = "/myPage/home.html";
-    })
+    }).then(() => location.reload(true))
         .catch(err => {
             if (err.message.indexOf('exceeded') !== -1) {
                 Swal.fire({
