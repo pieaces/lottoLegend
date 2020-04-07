@@ -8,20 +8,6 @@ document.write(`<footer><nav class="top-footer-container">
         </ul>
     </div>
 </nav>
-<nav class="mid-footer-container">
-    <div class="mid-footer container">
-        <ul class="mid-footer-list">
-        <li>  사실을
-        토대로 한
-         통계</li>
-        <li>고객만족을 위한 최고의
-         서비스</li>
-        <li> 다른 사이트에서 찾아볼 수 없는 
-       새로운 시스템</li>
-
-    </ul>
-    </div>
-</nav>
 <nav class="bottom-footer-container">
     <div class="bottom-footer container">
         <h1>로또끝</h1>
