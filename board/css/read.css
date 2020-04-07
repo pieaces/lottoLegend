@@ -147,6 +147,7 @@ font-size:1.3rem;
 .comment-content{
   margin-top: 0.2rem;
   padding:0 2.3rem;
+  word-wrap: break-word;
 }
 
 .comment-write-text{
