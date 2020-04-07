@@ -31,6 +31,7 @@
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid rgba(0,0,0,0.2);
+  padding-right: 1rem;
 }
 .text-title > h1{
   padding-left: 1rem;
@@ -42,7 +43,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding:1rem 0;
+  padding: 1rem 0;
+  padding-right: 1rem;
   border-bottom: 1px solid rgba(0,0,0,0.2);
 }
 
@@ -163,7 +165,6 @@ font-size:1.3rem;
   resize: none;
 }
 
-
 .char-count-container{
   display:flex;
   align-items: center;
@@ -236,9 +237,9 @@ font-size:1.3rem;
     display:block;
   }
 
-
   .author-time{
-    padding-left: 1rem;
+    text-align: right;
+    padding-bottom: 1rem;
   }
 }
 
