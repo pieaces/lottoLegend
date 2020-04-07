@@ -238,7 +238,7 @@ font-size:1.3rem;
   }
 
   .text-title > h1{
-    width: 30rem;
+    width: 100%;
   }
   .author-time{
     text-align: right;
