@@ -111,7 +111,8 @@ export default class DataAPI {
             } else {
                 range = [0, 6];
             }
-            this.rangeList[this.current] = paramToNumbers({ from: range[0], to: range[1] });
+            const lowCount = [this.generator.option.includedNumbers.filter(one => one < 23).length, 6-this.generator.option.includedNumbers.length];
+            this.rangeList[this.current] = paramToNumbers({ from: range[0], to: range[1] }).filter(one => lowCount[0] <= one && one <= lowCount[0] + lowCount[1]);
         } else if (this.current === 7) {
             if (this.generator.option.includedNumbers.length === 0) {
                 let range: any;
@@ -147,6 +148,13 @@ export default class DataAPI {
             }
         }
         await this.stats.getData(DataAPI.dataList[this.current], params);
+        if(this.current === 6) {
+            const list = ['$12', '$24', '$48', '$192', 'all'];
+            for(const one of list){
+                this.stats[DataAPI.dataList[6]].ideal[one] = this.stats[DataAPI.dataList[6]].ideal[one].filter((one, index) => this.rangeList[this.current].some(num => num === index));
+                this.stats[DataAPI.dataList[6]].actual[one] = this.stats[DataAPI.dataList[6]].actual[one].filter((one, index) => this.rangeList[this.current].some(num => num === index));                
+            }
+        }
     }
 
     private async getGen(): Promise<void> {

@@ -4,7 +4,7 @@ import ChartBase from "../Chart/Charts";
 export default class LineSlide extends Slide<ChartBase> {
     static readonly SIZE = 5;
     protected data:any;
-    private lineMap = { 0: '$12', 1: '$24', 2: '$48', 3: '$192', 4: 'all' }
+    private lineMap = ['$12', '$24', '$48', '$192', 'all'];
     constructor(lineInstance: ChartBase, numBtns: NodeListOf<Element>, leftBtn?: HTMLElement, rightBtn?: HTMLElement, table?: HTMLElement, valueBox1?: HTMLElement, valueBox2?: HTMLElement) {
         super(LineSlide.SIZE, lineInstance, numBtns, leftBtn, rightBtn, table, valueBox1, valueBox2);
     }
