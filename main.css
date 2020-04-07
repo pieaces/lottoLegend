@@ -141,8 +141,9 @@
 .login-after-service-box > span{
   margin-right:1.5rem;
 }
-.login-after-service-box > span{
-  margin-right: 2.7rem;
+
+.login-after-service-box > span:first-child{
+  margin-right: 2.4rem;
 }
 #point{
   margin-right: 0;
@@ -153,7 +154,8 @@
 }
 
 .login-after-nickname {
-  margin-right: 10rem;
+  display: inline-block;
+  width:15rem;
 }
 
 .login-after-anchor-box{

@@ -24,11 +24,6 @@ document.write(` <div class="anchor-title">
 </li>
 <li>
     <ul class="anchor-list-box">
-    <li> <a href="event.html">이벤트</a> </li>
-    </ul> 
-</li>
-<li>
-    <ul class="anchor-list-box">
     <li> <a href="pay.html">프리미엄 멤버십</a> </li>
     </ul> 
 </li>
