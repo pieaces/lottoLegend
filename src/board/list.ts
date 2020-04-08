@@ -34,11 +34,16 @@ document.querySelector<HTMLElement>('.search-box-form').onsubmit = (e) => {
 }
 
 function listAPI() {
-    if (word || type) {
+    if(category === 'pro' || category === 'qna'){
+        if(word || type) return getAuthAPI('/posts/search', { category, index, word, type });
+        return getAuthAPI('/posts', { category, index });
+    }
+    else if (word || type) {
         return getUnAuthAPI('/posts/search', { category, index, word, type });
-    } else if (category === 'pro') return getAuthAPI('/posts', { category, index });
+    }
     else return getUnAuthAPI('/posts', { category, index });
 }
+
 function listHref(index: number) {
     let href = `?index=${index}`;
     if (word) href += `&word=${word}`;

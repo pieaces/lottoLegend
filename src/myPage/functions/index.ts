@@ -41,6 +41,12 @@ export function makeTable(canvas: HTMLElement, dataSet: any[], round: number | s
         let division: string;
         switch (dataSet[i].tool) {
             case 'a': division = "무료";
+            switch (dataSet[i].method) {
+                case 'a': division += " 자동"
+                    break;
+                case 'm': division += " 수동"
+                    break;
+            }
                 break;
             case 'b': division = "유료"
                 switch (dataSet[i].method) {

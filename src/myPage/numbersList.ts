@@ -148,15 +148,12 @@ getAuthAPI('/numbers/mass')
                 let result: any;
                 if (option.value === 'all') {
                     result = (await getAuthAPI('/numbers/mass/' + (currentRound ? currentRound : ''), { method }));
-                    methodSelect.enable();
                     tool = null;
                 } else if (option.value === 'a') {
                     result = (await getAuthAPI('/numbers/mass/' + (currentRound ? currentRound : ''), { tool: option.value }));
-                    methodSelect.disable();
                     tool = option.value;
                 } else if (option.value === 'b') {
                     result = (await getAuthAPI('/numbers/mass/' + (currentRound ? currentRound : ''), { tool: option.value, method }));
-                    methodSelect.enable();
                     tool = option.value;
                 }
                 tableNumBox.innerHTML = '';

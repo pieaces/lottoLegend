@@ -1,6 +1,7 @@
 import Auth from '@aws-amplify/auth'
 import { onlyUserAlert, networkAlert } from '../functions';
 import Swal from 'sweetalert2';
+import { getAuthAPI, deleteAuthAPI } from './api';
 
 export function headerSign() {
     Auth.currentAuthenticatedUser()
@@ -37,7 +38,25 @@ export async function signIn(username: string, password: string) {
     await Auth.signIn({
         username,
         password,
-    }).then(() => location.href = "/main.html")
+    }).then(async () => {
+        const message = await getAuthAPI('/users/message');
+        loading.classList.add('none');
+        if(message) Swal.fire({
+            title:'새로운 메시지',
+            text:message,
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '보류',
+            cancelButtonText: '지우기',
+        }).then(async (result) => {
+            if (!result.value) {
+                await deleteAuthAPI('/users/message');
+            }
+            location.href = "/myPage/home.html"
+        });
+        else location.href = "/myPage/home.html"
+    })
         .catch(err => {
             if (err.message.indexOf('exceeded') !== -1) {
                 Swal.fire({
