@@ -11,6 +11,7 @@ getAuthAPI('/users/payment/bankbook').then(data => {
         bankbookBoard.classList.remove('none');
         document.getElementById('orderDate').textContent = isoStringToDate(data.date);
         document.getElementById('orderProduct').textContent = data.plan;
+        document.getElementById('person').textContent = data.person;
         document.getElementById('orderPrice').textContent = numberFormat(data.price) + '원';
         const dueDate = new Date(data.date);
         dueDate.setDate(dueDate.getDate() + 3);

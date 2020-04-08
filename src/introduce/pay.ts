@@ -30,16 +30,19 @@ getAuthAPI('/users/payment/bankbook').then(data=>{
 });
 type PayMethod = 'bankbook' | 'card';
 let payMethod:PayMethod = null;
+const bankPerson = document.querySelector('.payment-method-box');
 bankbook.onclick = () =>{
     if(payMethod !== 'bankbook'){
         bankbook.classList.add('payment-clicked');
     }
     payMethod = 'bankbook';
+    bankPerson.classList.remove('none');
 }
 const monthList = [24,12,6,1];
 const priceList = [150000, 90000, 53000, 9900];
 let current:number = null;
-
+const person = document.querySelector<HTMLInputElement>('#deposit-name');
+const bank = document.querySelector<HTMLInputElement>('.payment-bank-content');
 document.getElementById('order-btn').onclick = () =>{
     if(isNull(current)) {
         Swal.fire({
@@ -51,8 +54,13 @@ document.getElementById('order-btn').onclick = () =>{
         title:'결제수단을 선택해주세요',
         icon:'warning'
     });
-    }else if(payMethod === 'bankbook'){
-        postAuthAPI('/users/payment/bankbook', { month: monthList[current], price: priceList[current] }).then(() => {
+    } else if(person.value === ''){
+        Swal.fire({
+            title: '입금자명은 비워둘 수 없습니다',
+            icon:'warning'
+        })
+    } else if(payMethod === 'bankbook'){
+        postAuthAPI('/users/payment/bankbook', { bank: bank.textContent, person:person.value, month: monthList[current], price: priceList[current] }).then(() => {
             Swal.fire({
                 title:'정상적으로 기록되었습니다',
                 icon:'info',
