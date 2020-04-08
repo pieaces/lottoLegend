@@ -105,7 +105,7 @@ function mqMobileInit() {
                 banner.style.backgroundPosition = '0 47.826087%';
                 break;
             case 2:
-                bannerAnchor.setAttribute('href', 'introduce/event.html');
+                bannerAnchor.setAttribute('href', 'introduce/pay.html');
                 banner.style.backgroundPosition = '0 55.563744%';
                 break;
             case 3:
