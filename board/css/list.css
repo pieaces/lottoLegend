@@ -121,9 +121,12 @@
 } 
 
 .board-section > .board-box > .board-title > a{
+  display: inline-block;
+  width: 100%;
   white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    text-align: left;
 }
 
 /* board-box */
