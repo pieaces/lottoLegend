@@ -153,6 +153,35 @@
   font-size:1.4rem;
 }
 
+.bottom-nav-container {
+  height: 4rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.bottom-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bottom-nav-right{
+  display:flex;
+  align-items: center;
+  font-size:1.6rem;
+}
+
+.bottom-nav-right > a {
+  margin-right: 0.5rem;
+  font-size:1.4rem;
+}
+
+.seperator{
+  margin-top: -0.1rem;
+  padding:0 0.5rem;
+  color:rgb(141, 141, 141);
+  font-size:1.3rem;
+}
+
 
 .click-menu-container{
   position: absolute;

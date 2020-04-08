@@ -99,6 +99,20 @@ document.write(`  <header>
         </ul>
     </div>
 </nav>
+<nav class="bottom-nav-container">
+<div class="container bottom-nav">
+    <div class="bottom-nav-left">
+    
+    </div>
+    <div class="bottom-nav-right">
+    <a href="/myPage/home.html">마이페이지</a>
+    <span class="seperator">|</span>
+    <a href="/system/basic.html">기본 필터</a>
+    <span class="seperator">|</span>
+    <a href="/system/premium.html">베르누이 분석툴</a>
+    </div>
+</div>
+</nav>
 <div class="loading-box none">
     <div class="loading">
         <div></div>
