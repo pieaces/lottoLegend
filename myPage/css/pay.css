@@ -21,6 +21,7 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 3rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 /* board-box */
@@ -38,4 +39,8 @@
   align-items: center;
   justify-content: center;
   font-size:1.4rem;
+}
+
+.board-box:last-child{
+  border-bottom: none;
 }
