@@ -131,7 +131,7 @@ function mqDeskTopInit() {
                 banner.style.backgroundPosition = '0 10.25641%';
                 break;
             case 2:
-                bannerAnchor.setAttribute('href', 'introduce/event.html');
+                bannerAnchor.setAttribute('href', 'introduce/pay.html');
                 banner.style.backgroundPosition = '0 20.512821%';
                 break;
             case 3:

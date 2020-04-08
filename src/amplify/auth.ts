@@ -109,7 +109,7 @@ export async function getIdToken() {
         const idToken = (await Auth.currentSession()).getIdToken().getJwtToken()
         return idToken;
     } catch (err) {
-        onlyUserAlert();
+        return onlyUserAlert();
     }
 }
 
