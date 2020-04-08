@@ -13,13 +13,11 @@ const boardSection = document.querySelector('.board-section');
 const pageNumContainer = document.querySelector('.page-num-container');
 const category: Category = document.getElementById('wrapper').getAttribute('data-category') as Category;
 const postBtn = document.querySelector('.post-btn');
-if(category === 'notice' ){
+if(category === 'notice' || category === 'pro'){
     postBtn.classList.add('none');
     getUserName().then(userName => {
         if(userName === 'lottoend') postBtn.classList.remove('none');
     });
-}else if(category === 'pro'){
-    postBtn.classList.add('none');
 }
 
 const index = Number(getQueryStringObject().index) || 1;

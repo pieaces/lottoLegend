@@ -27,7 +27,14 @@ const contentsUpdateBtn = document.querySelector<HTMLElement>('.text-update-cont
 const recommendBtn = document.getElementById('reco-btn');
 const loading = document.querySelector('.loading-box');
 
-
+const category: Category = document.querySelector<HTMLElement>('#wrapper').getAttribute('data-category') as Category;
+const postBtn = document.querySelector('.post-btn');
+if(category === 'notice' || category === 'pro'){
+    postBtn.classList.add('none');
+    getUserName().then(userName => {
+        if(userName === 'lottoend') postBtn.classList.remove('none');
+    });
+}
 let commentCount = 0;
 const id = getQueryStringObject().id;
 init();
@@ -72,7 +79,6 @@ async function init() {
         } else {
             post = await getUnAuthAPI('/posts/' + id);
         }
-        console.log(post);
         if (post.error) {
             return Swal.fire({
                 title: post.message,
@@ -81,6 +87,7 @@ async function init() {
                 location.href = "javascript:history.back();"
             });
         }
+        if(category === 'pro' && post.user <= 3) postBtn.classList.remove('none');
     } catch (err) {
         networkAlert();
     }
@@ -94,7 +101,6 @@ async function init() {
     postRank.appendChild(rankText);
 
 
-    const category: Category = document.querySelector<HTMLElement>('#wrapper').getAttribute('data-category') as Category;
     if (category === 'include' || category === 'exclude') {
         document.getElementById('current-text').textContent = post.round;
         document.getElementById('before-text').textContent = (post.round - 1).toString();
