@@ -136,7 +136,6 @@ getAuthAPI('/numbers/piece', { flag: true })
 
                 lineInputTable.style.border = "";
                 const dataSet = await postAuthAPI('/numbers/generator/free', { include: includeNumsArr });
-                console.log(dataSet);
                 const numBoard = new NumBoard(dataSet);
                 numBoard.makeNumBoard();
                 makeCheckdValueBox(numListSelectTotal, numListSelectCurrent, allCheckBox);
@@ -212,7 +211,6 @@ lineBtn.addEventListener('click', async () => {
         lineInputTable.classList.remove('hide');
         lineCheck = true;
         const data = await getUnAuthAPI('/stats/mass', { method: 'line' });
-        console.log(data)
         actualInstance.dataBox.datasets.forEach((box, index) => box.data = [Number((data.all[index] / data.total).toFixed(2))]);
         latestInstance.dataBox.datasets.forEach((box, index) => box.data = [Number((data.latest[index] / 12).toFixed(2))]);
         actualInstance.update();

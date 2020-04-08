@@ -27,7 +27,6 @@ const numListLength = document.querySelector('#num-list-select-total');
 
 Auth.currentAuthenticatedUser()
     .then(user => {
-        console.log(user);
         nickname.textContent = user.attributes.nickname;
         if (user.attributes.phone_number_verified) {
             document.querySelector<HTMLElement>('.mobile-btn').classList.add('none');
@@ -102,7 +101,6 @@ Auth.currentAuthenticatedUser()
             }
 
             if (numsArr && numsArr.length > 0) {
-                console.log(numsArr, numsArr.length);
                 makeTable(document.querySelector<HTMLElement>('.mypage-table-num-box'), numsArr, total, false);
                 numListLength.textContent = numsArr.length.toString();
             } else {
@@ -142,7 +140,7 @@ async function phoneCodeVerify(title: string) {
             }
             catch (err) {
                 if (err.code) {
-                    Swal.showValidationMessage('잘못된 코드입니다');
+                    Swal.showValidationMessage('잘못된 번호입니다');
                 }
             }
         }
@@ -205,7 +203,7 @@ function mobileUpdate() {
                 phoneNumber.textContent = phoneString(user.attributes.phone_number);
                 document.querySelector<HTMLElement>('.mobile-btn').classList.add('none');
             });
-            phoneCodeVerify('확인 코드를 입력해주세요');
+            phoneCodeVerify('인증번호를 입력해주세요');
         }
     });
 }

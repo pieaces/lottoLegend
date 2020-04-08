@@ -77,7 +77,6 @@ const roundSelectBox = document.querySelector<HTMLSelectElement>('#round-selectb
 mqMobileInit();
 getUnAuthAPI('/numbers/win')
     .then(data => {
-        console.log(data);
         const max: number = data.round;
         stackInstance.create();
         write(data);
@@ -90,7 +89,6 @@ getUnAuthAPI('/numbers/win')
                 text: round, value: round
             });
         }
-        console.log(roundConfig.data);
         const roundSelect = new Selectr(roundSelectBox, roundConfig);
         roundSelect.on('selectr.change', async (option) => {
             const data = await getUnAuthAPI('/numbers/win', { round: option.value });
