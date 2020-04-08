@@ -82,6 +82,70 @@ export function getPlanKeyAndUntil(userName: string): Promise<{ plan: string, un
         });
     });
 }
+export function makeMessage(userName: string, message:string): Promise<void> {
+    const params: UpdateItemInput = {
+        TableName: 'LottoUsers',
+        ExpressionAttributeValues: {
+            ':message': {
+                S: message
+            },
+        },
+        Key: {
+            "UserName": {
+                S: userName
+            }
+        },
+        UpdateExpression: `SET Message = :message`
+    };
+
+    return new Promise((resolve, reject) => {
+        dynamoDB.updateItem(params, (err: AWSError) => {
+            if (err) reject(err);
+            resolve();
+        });
+    });
+}
+export function deleteMessage(userName: string): Promise<void> {
+    const params: UpdateItemInput = {
+        TableName: 'LottoUsers',
+        Key: {
+            "UserName": {
+                S: userName
+            }
+        },
+        UpdateExpression: `Remove Message`
+    };
+
+    return new Promise((resolve, reject) => {
+        dynamoDB.updateItem(params, (err: AWSError) => {
+            if (err) reject(err);
+            resolve();
+        });
+    });
+}
+export function getMessage(userName: string): Promise<string> {
+    const params: GetItemInput = {
+        TableName: 'LottoUsers',
+        ExpressionAttributeNames: {
+            '#Message': 'Message',
+        },
+        ProjectionExpression: '#Message',
+        Key: {
+            "UserName": {
+                S: userName
+            }
+        }
+    };
+    return new Promise((resolve, reject) => {
+        dynamoDB.getItem(params, (err: AWSError, data: GetItemOutput) => {
+            if (err) {
+                reject(err);
+            }
+            if('Message' in data.Item) resolve(data.Item.Message.S);
+            else resolve();
+        });
+    });
+}
 
 export function makePlan(userName: string, plan: Plan, period: number): Promise<void> {
     const time = new Date();
@@ -108,8 +172,9 @@ export function makePlan(userName: string, plan: Plan, period: number): Promise<
     };
 
     return new Promise((resolve, reject) => {
-        dynamoDB.updateItem(params, (err: AWSError) => {
+        dynamoDB.updateItem(params, async (err: AWSError) => {
             if (err) reject(err);
+            await makeMessage(userName, `${getPlanName(plan)} ${period}개월 가입이 성공적으로 완료되었습니다.\n이제 해당기간동안 베르누이 분석툴을 마음껏 사용하실 수 있으며,\n매주 베르누이 분석 20조합을 받아보실 수 있습니다.\n모든 조합리스트는 마이페이지에서 확인하실 수 있습니다.`);
             resolve();
         });
     });

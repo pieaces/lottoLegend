@@ -3,7 +3,7 @@ import { getCurrentRound, scanLotto, getLotto, getLotto2 } from "./funtions";
 import { updateNumbers, getNumbers, deleteMyNumber, updateIncOrExcNumbers, getIncOrExcRounds, getIncAndExcNumbers, deleteIncOrExcNumbers, scanWeekNumbers, getIncOrExcNumbers } from './dynamoDB/Numbers'
 import { queryLottoData } from "./dynamoDB/lottoData";
 import { freeGenerator, numbersToData } from "./dynamoDB/generator";
-import { getMyHome, expirePlan, Plan, getPayment, makePaymentByBankBook, deletePayment } from "./dynamoDB/userInfo";
+import { getMyHome, expirePlan, Plan, getPayment, makePaymentByBankBook, deletePayment, getMessage, makeMessage, deleteMessage } from "./dynamoDB/userInfo";
 import { getLottoData, getWinStats } from "./dynamoDB/getMainPage";
 
 const headers = {
@@ -11,9 +11,9 @@ const headers = {
     //"Access-Control-Allow-Credentials" : true // Required for cookies, authorization headers with HTTPS
 }
 exports.handler = async (event: any) => {
-    if(event['detail-type'] === 'Scheduled Event'){
+    if (event['detail-type'] === 'Scheduled Event') {
         return console.log('Scheduled Event');
-    }    
+    }
     console.log(event);
 
     const method: string = event.httpMethod;
@@ -70,7 +70,7 @@ exports.handler = async (event: any) => {
                         break;
                     case 'DELETE': {
                         const round = event.pathParameters.round;
-                        const { numsArr} = JSON.parse(event.body);
+                        const { numsArr } = JSON.parse(event.body);
                         await deleteMyNumber(currentId, round, numsArr);
                         break;
                     }
@@ -88,12 +88,12 @@ exports.handler = async (event: any) => {
                     const flag = event.queryStringParameters && event.queryStringParameters.flag;
 
                     if (choice) {
-                        body = await getIncOrExcNumbers(currentId, getCurrentRound()+1, choice);
+                        body = await getIncOrExcNumbers(currentId, getCurrentRound() + 1, choice);
                     } else if (flag) {
                         const round = getCurrentRound() + 1;
                         body = await getIncAndExcNumbers(currentId, round);
                         body.total = round;
-                    }  else {
+                    } else {
                         const rounds = await getIncOrExcRounds(currentId);
                         const round = Number(rounds[0]);
                         body = await getIncAndExcNumbers(currentId, round);
@@ -107,9 +107,9 @@ exports.handler = async (event: any) => {
                 case 'POST':
                     if (logedIn) {
                         const { numbers, choice } = JSON.parse(event.body);
-                        if(numbers && numbers.length > 0){
+                        if (numbers && numbers.length > 0) {
                             await updateIncOrExcNumbers(currentId, getCurrentRound() + 1, numbers.sort((a: number, b: number) => a - b), choice);
-                        }else{
+                        } else {
                             await deleteIncOrExcNumbers(currentId, getCurrentRound() + 1, choice);
                         }
                         break;
@@ -148,7 +148,7 @@ exports.handler = async (event: any) => {
             switch (method) {
                 case 'POST':
                     const { lineCount, include } = JSON.parse(event.body);
-                    body = await freeGenerator(currentId, {lineCount, include});
+                    body = await freeGenerator(currentId, { lineCount, include });
             }
         }
             break;
@@ -167,19 +167,31 @@ exports.handler = async (event: any) => {
                         }
                     });
                     const rounds = result.rounds;
-                    body = {data, rounds};
+                    body = { data, rounds };
             }
         }
             break;
-            case '/users/{userName}/payment':{
-                switch(method){
-                    case 'GET':
-                        
-                        break;
-                }
-            }
-        case '/users/payment/bankbook':{
+        case '/users/message': {
             switch(method){
+                case 'GET':
+                    body = await getMessage(currentId);
+                    break;
+                case 'DELETE':
+                    await deleteMessage(currentId);
+                    break;
+            }
+        }
+        break;
+        case '/users/payment': {
+            switch (method) {
+                case 'GET':
+
+                    break;
+            }
+        }
+        break;
+        case '/users/payment/bankbook': {
+            switch (method) {
                 case 'GET':
                     body = await getPayment(currentId);
                     break;
@@ -192,13 +204,13 @@ exports.handler = async (event: any) => {
                     break;
             }
         }
-        break;
+            break;
         case '/main/numbers': {
             const round = getCurrentRound();
             body = await getLottoData(round);
             body.stats = await getWinStats();
-            if(currentId){
-                
+            if (currentId) {
+
             }
         }
             break;
@@ -233,7 +245,7 @@ exports.handler = async (event: any) => {
                                 winner = 1;
                         }
                     });
-                    if(winner <= 5) myData.winner = winner;
+                    if (winner <= 5) myData.winner = winner;
 
                     let includeAnswer = 0, excludeAnswer = 0;
                     myData.include && myData.include.before && myData.include.before.forEach(num => {
@@ -243,7 +255,7 @@ exports.handler = async (event: any) => {
                         if (!lotto.numbers.some(item => item === num)) excludeAnswer++
                     });
 
-                    if(Number(new Date(myData.until)) < Number(new Date())){
+                    if (Number(new Date(myData.until)) < Number(new Date())) {
                         await expirePlan(currentId);
                     }
                     body = {
@@ -258,7 +270,7 @@ exports.handler = async (event: any) => {
                                 answer: includeAnswer
                             }
                         },
-                        exclude:  myData.exclude &&{
+                        exclude: myData.exclude && {
                             current: myData.exclude.current,
                             before: myData.exclude.before && {
                                 size: myData.exclude.before.length,
