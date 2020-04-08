@@ -179,7 +179,7 @@ export function makePlan(userName: string, plan: Plan, period: number): Promise<
         });
     });
 }
-export function makePaymentByBankBook(userName: string, plan: Plan, month: number, price: number):Promise<void> {
+export function makePaymentByBankBook(userName: string, bank:string, person:string, plan: Plan, month: number, price: number):Promise<void> {
     const params: UpdateItemInput = {
         TableName: 'LottoUsers',
         Key: {
@@ -190,6 +190,12 @@ export function makePaymentByBankBook(userName: string, plan: Plan, month: numbe
         ExpressionAttributeValues: {
             ':payment': {
                 M: {
+                    bank: {
+                        S: bank
+                    },
+                    person: {
+                        S: person
+                    },
                     plan: {
                         S: plan
                     },
@@ -217,7 +223,7 @@ export function makePaymentByBankBook(userName: string, plan: Plan, month: numbe
         });
     });
 }
-export function getPayment(userName: string) {
+export function getPaymentByBankBook(userName: string) {
     const params: GetItemInput = {
         TableName: 'LottoUsers',
         Key: {
@@ -236,6 +242,8 @@ export function getPayment(userName: string) {
             if ('Payment' in data.Item) {
                 const payment = data.Item.Payment.M;
                 resolve({
+                    bank: payment.bank.S,
+                    person: payment.person.S,
                     date: payment.date.S,
                     month: payment.month.N,
                     plan: getPlanName(payment.plan.S as Plan),
