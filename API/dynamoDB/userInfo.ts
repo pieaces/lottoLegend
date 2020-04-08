@@ -270,6 +270,9 @@ export function makePaymentByBankBook(userName: string, bank:string, person:stri
         });
     });
 }
+function getMethodName(method:PayMethod){
+    return method === 'card' ? '카드결제' : '무통장입금'
+}
 export function getPayments(userName: string):Promise<any> {
     const params: GetItemInput = {
         TableName: 'LottoUsers',
@@ -291,11 +294,11 @@ export function getPayments(userName: string):Promise<any> {
                     return{
                         date: item.M.date.S,
                         month: Number(item.M.month.N),
-                        method: item.M.method.S,
+                        method: getMethodName(item.M.method.S as PayMethod),
                         plan: getPlanName(item.M.plan.S as Plan),
                         price: Number(item.M.price.N)
                     }
-                }));
+                }).reverse());
             }else resolve();
         });
     });
