@@ -235,20 +235,28 @@ export function getPaymentByBankBook(userName: string) {
     };
 
     return new Promise((resolve, reject) => {
-        dynamoDB.getItem(params, (err: AWSError, data: GetItemOutput) => {
+        dynamoDB.getItem(params, async (err: AWSError, data: GetItemOutput) => {
             if (err) {
                 reject(err);
             }
             if ('Payment' in data.Item) {
                 const payment = data.Item.Payment.M;
-                resolve({
-                    bank: payment.bank.S,
-                    person: payment.person.S,
-                    date: payment.date.S,
-                    month: payment.month.N,
-                    plan: getPlanName(payment.plan.S as Plan),
-                    price: payment.price.N
-                });
+                const now = new Date();
+                const dueDate = new Date(payment.date.S);
+                dueDate.setDate(dueDate.getDate()+3);
+                if (Number(now) < Number(dueDate)) {
+                    resolve({
+                        bank: payment.bank.S,
+                        person: payment.person.S,
+                        date: payment.date.S,
+                        month: payment.month.N,
+                        plan: getPlanName(payment.plan.S as Plan),
+                        price: payment.price.N
+                    });
+                }else {
+                    await deletePayment(userName);
+                    resolve();
+                }
             } else resolve();
         });
     });
