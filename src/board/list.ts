@@ -17,7 +17,7 @@ if(category === 'notice' || category === 'pro'){
     postBtn.classList.add('none');
     getUserName().then(userName => {
         if(userName === 'lottoend') postBtn.classList.remove('none');
-    });
+    }).catch(() => {});
 }
 
 const index = Number(getQueryStringObject().index) || 1;
