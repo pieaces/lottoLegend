@@ -38,7 +38,14 @@ isLogedIn().then((result) => {
         //로그아웃상태
         const userNameInput = document.querySelector<HTMLInputElement>('#id');
         const passwordInput = document.querySelector<HTMLInputElement>('#password');
-        //
+        
+        passwordInput.addEventListener('keypress',(e)=>{
+            if(e.keyCode===13){
+            const userName = userNameInput.value;
+            const password = passwordInput.value;
+            signIn(userName, password);
+            }
+        })
         document.querySelector<HTMLInputElement>('.login-btn').onclick = () => {
             const userName = userNameInput.value;
             const password = passwordInput.value;
