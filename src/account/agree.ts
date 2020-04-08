@@ -15,7 +15,7 @@ const termsUseAllCheck = document.querySelector<HTMLInputElement>('#all-check');
 const termsUseCheckboxes = document.querySelectorAll<HTMLInputElement>('.terms-use-check');
 
 document.querySelector('.terms-use-btn').addEventListener('click', () => {
-    if (termsUseAllCheck.checked || Array.from(termsUseCheckboxes).every((node) => node.checked === true)) {
+    if (Array.from(termsUseCheckboxes).every((node) => node.checked === true)) {
         location.href = '/account/join.html';
     } else {
         Swal.fire({

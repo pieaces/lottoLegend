@@ -83,6 +83,10 @@ font-size: 1.4rem;
   justify-content: space-between;
 }
 
+  #mobile-status{
+  cursor: initial;
+}
+
 .service-update-btn{
   height:2.5rem;
   padding:0 0.5rem;
@@ -176,6 +180,13 @@ font-size: 1.4rem;
 
 .mypage-num-list-container > .mypage-title{
   margin-bottom:1rem;
+}
+
+.mypage-table-num-box .none-box{
+  border-top: 1px solid rgba(0,0,0,0.1);
+  border-left: 1px solid rgba(0,0,0,0.1);
+  border-right: 1px solid rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
 .mypage-notice-box > i{
