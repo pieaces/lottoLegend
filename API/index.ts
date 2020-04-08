@@ -224,7 +224,7 @@ exports.handler = async (event: any) => {
             const db = new Posts();
             switch (method) {
                 case 'GET':
-                    const categories: Category[] = ['pro', 'analysis', 'include', 'exclude', 'free'];
+                    const categories: Category[] = ['pro', 'analysis', 'include', 'exclude', 'free', 'notice'];
                     body = {};
                     for (let i = 0; i < categories.length; i++) body[categories[i]] = await db.mainBoard(categories[i]);
                     const winPosts = await db.mainWin();
