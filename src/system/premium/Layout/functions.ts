@@ -113,14 +113,18 @@ export function makeCheckdValueBox(totalEl: HTMLElement, currentEl: HTMLElement,
     })
 
     if (document.querySelector('.save-btn')) {
-        document.querySelector('.save-btn').addEventListener('click', () => {
-            checkedCurrentValue = 0;
-        })
+        Array.from(document.querySelectorAll('.save-btn')).forEach(node=>{
+            node.addEventListener('click', () => {
+                checkedCurrentValue = 0;
+            })
+        }) 
     }
-    if (document.querySelector('.mypage-num-delete-btn')) {
-        document.querySelector('.mypage-num-delete-btn').addEventListener('click', () => {
-            checkedCurrentValue = 0;
-        })
+    if (document.querySelectorAll('.mypage-num-delete-btn')) {
+        Array.from(document.querySelectorAll('.mypage-num-delete-btn')).forEach(node=>{
+            node.addEventListener('click', () => {
+                checkedCurrentValue = 0;
+            })
+        })        
     }
 
 }

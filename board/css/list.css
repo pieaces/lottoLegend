@@ -89,6 +89,12 @@
   flex:1;
 }
 
+.qna-container .board-author,
+.qna-container .board-views,
+.qna-container .board-reco{
+    display:none;
+}
+
 .board-author,
 .board-date {
   flex: 2;

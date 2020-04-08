@@ -1,4 +1,4 @@
-document.write(`    <header>
+document.write(`  <header>
 <nav class="mid-nav-container">
     <div class="click-menu-container">
         <ul class="click-menu-box click-menu-introduce none">
@@ -69,7 +69,7 @@ document.write(`    <header>
             <li> <a href="#">시스템</a> </li>
             <li> <a href="#">분석실</a> </li>
             <li> <a href="#">커뮤니티</a> </li>
-            <div class="hover-menu-container none">
+            <div class="hover-menu-container">
                 <ul>
                     <li> <a href="/introduce/campaign.html">캠페인</a> </li>                    
                     <li> <a href="/introduce/system.html">베르누이 분석 시스템</a> </li>

@@ -103,10 +103,13 @@ getAuthAPI('/numbers/mass')
                                 indexes.forEach(index => {
                                     numbersContainer[index].remove();
                                     filterBoxes[index].remove();
-                                });
+                                });                                
                                 modifyTableBoundary();
                                 numListSelectCurrent.textContent = '0';
                                 numListSelectTotal.textContent = (Number(numListSelectTotal.textContent) - indexes.length).toString();
+                                if(numListSelectTotal.textContent==="1"){
+                                    Array.from(numbersContainer)[0].style.borderBottom="1px solid rgba(0,0,0,0.1)";
+                                }
                                 Swal.fire({
                                     title: '완료',
                                     icon: 'success',
