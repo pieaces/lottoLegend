@@ -45,6 +45,7 @@ isLogedIn().then((result) => {
         });
     }
 });
+
 function executeMakingBoard(data:any){
     let current = 0;
     const tabs = ['pro', 'analysis', 'include', 'exclude', 'free'];
@@ -71,6 +72,7 @@ const officialWinResultBox = document.querySelectorAll<HTMLElement>('.total-win-
 const myWinResultBox = document.querySelectorAll<HTMLElement>('.own-win-result-box > div');
 const reviewTabs = document.querySelector('.review-tabs');
 const winCount = document.querySelectorAll('.win-count-rank');
+const scrollList=document.querySelectorAll('#scroll-list > ul > li > a');
 
 const mqMobile = window.matchMedia("(max-width: 767px)");
 if (mqMobile.matches) {
@@ -139,6 +141,56 @@ function mqDeskTopInit() {
         }
     }
 }
+
+function scrolling(this:any,objId:string,sec1:number,sec2:number,speed:number,height:number){ 
+    this.sec1=sec1; 
+    this.sec2=sec2; 
+    this.speed=speed; 
+    this.height=height; 
+    this.h=0; 
+    this.div=document.getElementById(objId); 
+    this.htmltxt=this.div.innerHTML; 
+    this.div.innerHTML=this.htmltxt+this.htmltxt; 
+    this.div.isover=false; 
+    this.div.onmouseover=function(){this.isover=true;} 
+    this.div.onmouseout=function(){this.isover=false;} 
+    var self=this; 
+    this.div.scrollTop=0; 
+    window.setTimeout(function(){self.play()},this.sec1); 
+  } 
+  scrolling.prototype={ 
+    play:function(){ 
+      var self=this; 
+      if(!this.div.isover){ 
+        this.div.scrollTop+=this.speed; 
+        if(this.div.scrollTop>this.div.scrollHeight/2){ 
+          this.div.scrollTop=0; 
+        }else{ 
+          this.h+=this.speed; 
+          if(this.h>=this.height){ 
+            if(this.h>this.height|| this.div.scrollTop%this.height !=0){ 
+              this.div.scrollTop-=this.h%this.height; 
+            } 
+            this.h=0; 
+            window.setTimeout(function(){self.play()},this.sec1); 
+            return; 
+          } 
+        } 
+      } 
+      window.setTimeout(function(){self.play()},this.sec2); 
+    }, 
+    prev:function(){ 
+      if(this.div.scrollTop == 0) 
+      this.div.scrollTop = this.div.scrollHeight/2; 
+      this.div.scrollTop -= this.height; 
+    }, 
+    next:function(){ 
+      if(this.div.scrollTop ==  this.div.scrollHeight/2) 
+      this.div.scrollTop =0; 
+      this.div.scrollTop += this.height; 
+    } 
+  }; 
+
 backgroundImgSlide();
 getUnAuthAPI('/main/numbers').then(data => {
     makeWinNumBox(data);
@@ -156,6 +208,22 @@ getUnAuthAPI('/main/numbers').then(data => {
     // document.getElementById('totalAmount').textContent = (<any[]>data.info).reduce((acc, cur, index) =>
     //     acc + cur.winAmount * data.win[index], 0);
 });
+
+insertScrollText([
+    {href:"www.naver.com",text:"[896회 20억 실제1등 당첨자 탄생] 역대 108번째 실제1등 탄생!"},
+    {href:"www.daum.net",text:"[897회 25억 실제1등 당첨자 탄생] 역대 108번째 실제1등 탄생!"},
+    {href:"www.kakaocorp.com",text:"[898회 50억 실제1등 당첨자 탄생] 역대 108번째 실제1등 탄생!"},
+    {href:"www.kakaocorp.com",text:"[899회 100억 실제1등 당첨자 탄생] 역대 108번째 실제1등 탄생!"}
+])
+const scroll = new scrolling("scroll-list",4000,3,1,18);
+
+function insertScrollText(data:any){
+    for(let i=0;i<scrollList.length;i++){      
+            scrollList[i].setAttribute('src',`${data[i].href}`);
+            scrollList[i].textContent=data[i].text; 
+        }
+    }
+
 function insertWinCount(data) {
     data.forEach((item, index) => {
         winCount[index].textContent = item.toString();
@@ -283,3 +351,4 @@ function backgroundImgSlide() {
         })
     }
 }
+
