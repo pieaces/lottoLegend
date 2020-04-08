@@ -99,22 +99,6 @@ document.write(`  <header>
         </ul>
     </div>
 </nav>
-<nav class="bottom-nav-container">
-    <div class="container bottom-nav">
-        <div class="bottom-nav-left">
-            <ul>
-                <li>공지</li>
-                <li>
-                    [831회 11억 실제 1등 당첨자 탄생] 역대 90번째 실제1등! 2주연속 1등
-                    조합배출!
-                </li>
-            </ul>
-        </div>
-        <div class="bottom-nav-right">
-            <p>캔버스로또만의 시스템을 이용해보시기 바랍니다</p>
-        </div>
-    </div>
-</nav>
 <div class="loading-box none">
     <div class="loading">
         <div></div>
