@@ -4,6 +4,7 @@ import { getCategoryHtml, Category } from './board/functions';
 import { isoStringToDate, numberFormat, rankToClass } from './functions';
 import { isLogedIn, getNickName, signOut, signIn } from './amplify/auth';
 import {mqInit,menuInfoToggle} from './base/headerHover';
+import {login} from './account/signIn';
 
 mqInit();
 menuInfoToggle();
@@ -36,21 +37,8 @@ isLogedIn().then((result) => {
         loginAfterBox.classList.add('none');
         loginContainer.classList.remove('none');
         //로그아웃상태
-        const userNameInput = document.querySelector<HTMLInputElement>('#id');
-        const passwordInput = document.querySelector<HTMLInputElement>('#password');
-        
-        passwordInput.addEventListener('keypress',(e)=>{
-            if(e.keyCode===13){
-            const userName = userNameInput.value;
-            const password = passwordInput.value;
-            signIn(userName, password);
-            }
-        })
-        document.querySelector<HTMLInputElement>('.login-btn').onclick = () => {
-            const userName = userNameInput.value;
-            const password = passwordInput.value;
-            signIn(userName, password);
-        }
+        login();
+       
         getUnAuthAPI('/main/posts').then(data => {
             console.log(data);
             executeMakingBoard(data);

@@ -6,14 +6,25 @@ import {mqInit,menuInfoToggle} from '../base/headerHover';
 mqInit();
 menuInfoToggle();
 configure();
+login();
 
-const loginBtn = document.getElementById('login-btn');
+export function login(){
 
-const userNameInput = document.querySelector<HTMLInputElement>('#userName');
+const userNameInput = document.querySelector<HTMLInputElement>('#username');
 const passwordInput = document.querySelector<HTMLInputElement>('#password');
 
-loginBtn.onclick = async () => {
+document.getElementById('login-btn').onclick = async () => {
     const userName = userNameInput.value;
     const password = passwordInput.value;
     await signIn(userName, password);
+}
+
+passwordInput.addEventListener('keypress',(e)=>{
+    if(e.keyCode===13){
+    const userName = userNameInput.value;
+    const password = passwordInput.value;
+    signIn(userName, password);
+    }
+})
+
 }
