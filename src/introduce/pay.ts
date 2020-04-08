@@ -4,6 +4,7 @@ import { numberFormat, networkAlert } from "../functions";
 import { isNull } from "util";
 import Swal from "sweetalert2";
 import { postAuthAPI, getAuthAPI } from "../amplify/api";
+import { isLogedIn } from "../amplify/auth";
 
 const priceContainer = document.querySelectorAll<HTMLElement>('.price-container');
 const priceBox = document.querySelectorAll<HTMLElement>('.price-box');
@@ -16,18 +17,20 @@ mqInit();
 menuInfoToggle();
 configure();
 checkboxToggle();
-getAuthAPI('/users/payment/bankbook').then(data=>{
-    console.log(data);
-    if(data){
-        Swal.fire({
-            title:'이미 주문하신 상품이 있습니다',
-            text:'다른 상품가입을 원하시면 기존 주문을 취소해주세요',
-            icon:'warning'
-        }).then(()=> location.href = '/myPage/currentPayment.html')
-    }else{
-
+isLogedIn().then(result => {
+    if (result) {
+        getAuthAPI('/users/payment/bankbook').then(data => {
+            if (data) {
+                Swal.fire({
+                    title: '이미 주문하신 상품이 있습니다',
+                    text: '다른 상품가입을 원하시면 기존 주문을 취소해주세요',
+                    icon: 'warning'
+                }).then(() => location.href = '/myPage/currentPayment.html')
+            }
+        });
     }
-});
+})
+
 type PayMethod = 'bankbook' | 'card';
 let payMethod:PayMethod = null;
 const bankPerson = document.querySelector('.payment-method-box');
