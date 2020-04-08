@@ -28,11 +28,11 @@ export default async function autoPutSecond() {
             }
         }
         if (user.include && user.include.length >= 10) {
-            const point = Math.pow(whatCount(user.include, answer.numbers), 2) << 3 / Math.log10(user.include.length);
+            const point = Math.floor((Math.pow(whatCount(user.include, answer.numbers, 'include'), 2) << 3) / Math.log10(user.include.length));
             await addPoint(user.userName, point);
         }
         if (user.exclude && user.exclude.length >= 10) {
-            const point = Math.pow(whatCount(user.exclude, answer.numbers), 2) << 1 / Math.log10(user.exclude.length);
+            const point = Math.floor((Math.pow(whatCount(user.exclude, answer.numbers, 'exclude'), 2) *3) / user.exclude.length);
             await addPoint(user.userName, point);
         }
     }
@@ -131,12 +131,13 @@ function getWin(): Promise<number[]> {
     });
 }
 
-export function whatCount(numbers: number[], answer: number[]): number {
+export function whatCount(numbers: number[], answer: number[], choice:'include'|'exclude'): number {
     let count = 0;
     numbers.forEach(num => {
         if (answer.some(item => item === num)) count++;
-    })
-    return count;
+    });
+    if(choice === 'include') return count;
+    return numbers.length - count;
 }
 
 function addWinToLottoStats(winner: number[]): Promise<void> {
