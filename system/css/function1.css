@@ -178,6 +178,11 @@
   #func1-bubble-table tr{
     height:3.44rem;
   }
+
+  #func1-bubble-table tr.func1-bubble-exc-text{
+    height:13.76rem;
+    font-size:1.4rem;
+  }
   
   .func1-checkbox-container{
     display:flex;

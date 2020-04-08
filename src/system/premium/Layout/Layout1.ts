@@ -12,6 +12,22 @@ const maxValue = document.querySelector('#func1-bubble-max-value');
 const smallPercent = document.querySelector('#func1-bubble-s-percent-value');
 const bigPercent = document.querySelector('#func1-bubble-b-percent-value');
 
+/*
+const excTextRow=document.querySelectorAll('#func1-bubble-table tr:nth-child(-n+5)');
+const excText=document.querySelector('.func1-bubble-exc-text');
+if 전멸구간 지원하지 않으면 
+Array.from(excTextRow).forEach(node=>{
+    node.classList.add('none');
+})
+excText.classList.remove('none');
+else
+Array.from(excTextRow).forEach(node=>{
+    node.classList.remove('none');
+})
+excText.classList.add('none');
+*/
+
+
 interface Stats {
     mean: number;
     stdev: number;
