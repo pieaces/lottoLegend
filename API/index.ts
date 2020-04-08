@@ -49,7 +49,7 @@ exports.handler = async (event: any) => {
                 case 'GET':
                     const category: Category = event.queryStringParameters.category;
                     const index: number = Number(event.queryStringParameters.index);
-                    const posts = await db.scan(category, index);
+                    const posts = await db.scan(category, index, currentId);
                     const count = await db.getCount(category);
                     body = { posts, count };
                     if(category === 'pro') body.rank = currentId && await getRank(currentId);
@@ -87,6 +87,7 @@ exports.handler = async (event: any) => {
             switch (method) {
                 case 'GET':
                     const flag = event.queryStringParameters && event.queryStringParameters.flag;
+                    let currentRank;
                     if (!flag) {
                         await db.addHits(postId);
                         const post = await db.get(postId);
@@ -103,8 +104,10 @@ exports.handler = async (event: any) => {
                                 }
                             }
                         }
+                        else if(post.category === 'pro') currentRank = currentId && await getRank(currentId);
                         body = post;
                         body.recommend = await doesRecommend(postId, currentId);
+                        currentRank && (body.user = currentRank);
                     } else {
                         const post = await db.getTitleContents(postId);
                         body = post;

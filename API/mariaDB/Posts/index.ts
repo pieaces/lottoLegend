@@ -26,9 +26,16 @@ export default class Posts extends DB {
         super();
         this.tableName = 'Posts';
     }
-    scan(category: Category, index: number = 1) {
-        const sql = `SELECT id, title, Users.nickName AS 'nickName', Users.rank AS 'rank', created, hits, recommendation FROM Posts INNER JOIN Users ON Posts.userName = Users.userName WHERE category = ? ORDER BY created DESC LIMIT ?, ?`;
-        return this.query(sql, [category, Posts.SCAN_MAX * (index - 1), Posts.SCAN_MAX]);
+    scan(category: Category, index: number = 1, userName?: string) {
+        let qnaCondition = '', values;
+        if (category === 'qna') {
+            qnaCondition = `and Users.userName = ?`;
+            values = [category, userName, Posts.SCAN_MAX * (index - 1), Posts.SCAN_MAX]
+        } else {
+            values = [category, Posts.SCAN_MAX * (index - 1), Posts.SCAN_MAX]
+        }
+        const sql = `SELECT id, title, Users.nickName AS 'nickName', Users.rank AS 'rank', created, hits, recommendation FROM Posts INNER JOIN Users ON Posts.userName = Users.userName WHERE category = ? ${qnaCondition} ORDER BY created DESC LIMIT ?, ?`;
+        return this.query(sql, values);
     }
     mainBoard(category:Category){
         const sql = `SELECT id, title, category, created FROM Posts WHERE category = ? ORDER BY created DESC LIMIT 5`;
