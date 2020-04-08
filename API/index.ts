@@ -19,6 +19,6 @@ exports.handler = async (event: any) => {
         while(willWinNumberList.length < users[i].value){
             willWinNumberList.push(...factory(statsDataObj, numbers));
         }
-        await updateNumbers(users[i].userName, getCurrentRound() + 1, willWinNumberList.splice(0, users[i].value));
+        await updateNumbers(users[i].userName, users[i].tool, getCurrentRound() + 1, willWinNumberList.splice(0, users[i].value));
     }
 };

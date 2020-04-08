@@ -3,8 +3,8 @@ import queryStats from "./queryStats";
 import { GeneratorOption } from "../interface/Generator";
 import Generator from "../Lotto/class/Generator";
 
-const PER = 3//20;
-const REPEAT = 300//50;
+const PER = 20//20;
+const REPEAT = 50//50;
 
 const valueList:any = {
     lowCount: [0, 1, 2, 3, 4, 5, 6],

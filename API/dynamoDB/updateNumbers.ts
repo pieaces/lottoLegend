@@ -2,7 +2,7 @@ import { AWSError } from "aws-sdk";
 import { UpdateItemInput, NumberSetAttributeValue } from "aws-sdk/clients/dynamodb";
 import { dynamoDB } from ".";
 
-enum SelectTool {
+export enum SelectTool {
     "free" = 'a',
     "charge" = 'b'
 }
@@ -25,7 +25,7 @@ function numsArrToAWSMapList(numsArr: number[][], method: SelectMethod, tool: Se
 function numbersToNS(numbers: number[]): NumberSetAttributeValue {
     return numbers.map(num => num.toString());
 }
-export default async function updateNumbers(userName: string, round: number, numsArr: number[][]): Promise<void> {
+export default async function updateNumbers(userName: string, tool:SelectTool, round: number, numsArr: number[][]): Promise<void> {
     const params: UpdateItemInput = {
         TableName: 'LottoUsers',
         ExpressionAttributeNames: {
@@ -37,7 +37,7 @@ export default async function updateNumbers(userName: string, round: number, num
                 L: new Array()
             },
             ":element": {
-                L: numsArrToAWSMapList(numsArr, SelectMethod.auto, SelectTool.charge)
+                L: numsArrToAWSMapList(numsArr, SelectMethod.auto, tool)
             },
         },
         Key: {

@@ -1,6 +1,7 @@
 import { dynamoDB } from '.'
 import { ScanInput, ScanOutput } from 'aws-sdk/clients/dynamodb';
 import { AWSError } from 'aws-sdk';
+import { SelectTool } from './updateNumbers';
 
 export enum Plan {
     "default" = "a",
@@ -9,26 +10,25 @@ export enum Plan {
     "premium+" = "d"
 }
 
-function planValue(plan: Plan, _until: string) {
+const FREE = 5;
+function planValue(param:{plan?: Plan, _until?: string}) {
     const now = Number(new Date());
-    const until = Number(new Date(_until));
+    if(!param.plan || !param._until) return 5;
+    const until = Number(new Date(param._until));
     if (now <= until) {
-        switch (plan) {
+        switch (param.plan) {
             case Plan.basic:
                 return 10;
             case Plan.premium:
                 return 20;
             case Plan['premium+']:
                 return 40;
-            default: return 0;
+            default: return FREE;
         }
     }
 }
-function isCharged(user: { plan: Plan, until?: string }) {
-    if(!user.until || planValue(user.plan, user.until) === 0) return false;
-    if (planValue(user.plan, user.until) > 0) return true;
-}
-export function scanUsers(): Promise<{ userName: string, value: number }[]> {
+
+export function scanUsers(): Promise<{ userName: string, value: number, tool:SelectTool }[]> {
     const params: ScanInput = {
         TableName: 'LottoUsers',
         ExpressionAttributeNames: {
@@ -43,11 +43,12 @@ export function scanUsers(): Promise<{ userName: string, value: number }[]> {
         dynamoDB.scan(params, (err: AWSError, data: ScanOutput) => {
             if (err) reject(err);
             const result = data.Items
-                .filter(item => isCharged({ plan: item.Plan.S as Plan, until: item.Until && item.Until.S }))
                 .map(item => {
+                    const value = planValue({plan: item.Plan && item.Plan.S as Plan, _until: item.Until && item.Until.S});
                     return {
                         userName: item.UserName.S,
-                        value: planValue(item.Plan.S as Plan, item.Until.S)
+                        value,
+                        tool: value === FREE ? SelectTool.free : SelectTool.charge
                     }
                 });
             resolve(result);
