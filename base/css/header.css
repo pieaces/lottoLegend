@@ -212,17 +212,19 @@
   z-index:97;
   width:100%;
   height: 20rem;
+  border-bottom:2px solid #09538e;
+  background-color:white;
 }
 
 .hover-menu-container >ul{
-  width: 25%;
+  flex:1;
   display:flex;
   flex-direction: column;
   border-left:1px solid rgb(210,210,210);
+}
+
+.hover-menu-container >ul:last-child{
   border-right:1px solid rgb(210,210,210);
-  border-bottom:2px solid #09538e;
-  background-color: white;
-  opacity: 0;
 }
 
 .hover-menu-container > ul > li{

@@ -69,7 +69,7 @@ document.write(`  <header>
             <li> <a href="#">시스템</a> </li>
             <li> <a href="#">분석실</a> </li>
             <li> <a href="#">커뮤니티</a> </li>
-            <div class="hover-menu-container">
+            <div class="hover-menu-container none">
                 <ul>
                     <li> <a href="/introduce/campaign.html">캠페인</a> </li>                    
                     <li> <a href="/introduce/system.html">베르누이 분석 시스템</a> </li>

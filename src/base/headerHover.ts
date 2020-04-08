@@ -1,5 +1,5 @@
 const menuTitleArr = Array.from(document.querySelectorAll('.mid-nav-menu >li > a'));
-const menuListArr=Array.from(document.querySelectorAll('.hover-menu-container > ul'));
+const menuListBox = document.querySelector('.hover-menu-container');
 const mqMobile = window.matchMedia("(max-width: 767px)");
 const clickMenuBox = document.querySelectorAll('.click-menu-box'); //사이드 메뉴 배열
 const menu = document.querySelector<HTMLElement>('.click-menu-container');
@@ -115,35 +115,30 @@ export function mqInit() {
     }
 };
 
+function menuListShow() {
+    menuListBox.classList.remove('none');
+}
+
+function menuListHide() {
+    menuListBox.classList.add('none');
+}
 
 function menuHoverAddEvent() {
-    let current=null;
-    menuTitleArr.forEach((node,index) => {
-        node.addEventListener('mouseover', ()=>{
-            if(current!==null){            
-                (menuListArr[current] as HTMLElement).style.opacity="0";
-            }
-            (menuListArr[index] as HTMLElement).style.opacity="1"; 
-            current=index;
-        });
-        node.addEventListener('mouseout', ()=>{
-            (menuListArr[index] as HTMLElement).style.opacity="0";
-        });
+    menuTitleArr.forEach(node => {
+        node.addEventListener('mouseover', menuListShow);
+        node.addEventListener('mouseout', menuListHide);
     });
-
-
+    menuListBox.addEventListener('mouseover', menuListShow);
+    menuListBox.addEventListener('mouseout', menuListHide);
 }
 
 function menuHoverRemoveEvent() {
-    menuTitleArr.forEach((node,index) => {
-        node.removeEventListener('mouseover', ()=>{
-            menuListArr[index].classList.remove('none');
-        });
-        node.removeEventListener('mouseout', ()=>{
-            menuListArr[index].classList.add('none');
-        });
+    menuTitleArr.forEach(node => {
+        node.removeEventListener('mouseover', menuListShow);
+        node.removeEventListener('mouseout', menuListHide);
     });
-
+    menuListBox.removeEventListener('mouseover', menuListShow);
+    menuListBox.removeEventListener('mouseout', menuListHide);
 }
 
 function mqDeskTopInit() {
