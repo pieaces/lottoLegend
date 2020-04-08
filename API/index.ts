@@ -3,7 +3,7 @@ import { getCurrentRound, scanLotto, getLotto, getLotto2 } from "./funtions";
 import { updateNumbers, getNumbers, deleteMyNumber, updateIncOrExcNumbers, getIncOrExcRounds, getIncAndExcNumbers, deleteIncOrExcNumbers, scanWeekNumbers, getIncOrExcNumbers } from './dynamoDB/Numbers'
 import { queryLottoData } from "./dynamoDB/lottoData";
 import { freeGenerator, numbersToData } from "./dynamoDB/generator";
-import { getMyHome, expirePlan, Plan, getPaymentByBankBook, makePaymentByBankBook, deletePayment, getMessage, makeMessage, deleteMessage } from "./dynamoDB/userInfo";
+import { getMyHome, expirePlan, Plan, getPaymentByBankBook, makePaymentByBankBook, deletePaymentBank, getMessage, makeMessage, deleteMessage, getPayments, makePlan } from "./dynamoDB/userInfo";
 import { getLottoData, getWinStats } from "./dynamoDB/getMainPage";
 
 const headers = {
@@ -185,8 +185,11 @@ exports.handler = async (event: any) => {
         case '/users/payment': {
             switch (method) {
                 case 'GET':
-
+                    body = await getPayments(currentId);
                     break;
+                case 'POST':
+                    const {plan, month, price, method} = JSON.parse(event.body);
+                    await makePlan(currentId, plan, month, price, method);
             }
         }
         break;
@@ -200,7 +203,7 @@ exports.handler = async (event: any) => {
                     await makePaymentByBankBook(currentId, bank, person, Plan.premium, month, price);
                     break;
                 case 'DELETE':
-                    await deletePayment(currentId);
+                    await deletePaymentBank(currentId);
                     break;
             }
         }

@@ -146,10 +146,10 @@ export function getMessage(userName: string): Promise<string> {
         });
     });
 }
-
-export function makePlan(userName: string, plan: Plan, period: number): Promise<void> {
+type PayMethod = 'bank' | 'card';
+export function makePlan(userName: string, plan: Plan, month: number, price:number, method:PayMethod): Promise<void> {
     const time = new Date();
-    time.setMonth(time.getMonth() + period);
+    time.setMonth(time.getMonth() + month);
     const until = time.toISOString();
 
     const params: UpdateItemInput = {
@@ -174,7 +174,54 @@ export function makePlan(userName: string, plan: Plan, period: number): Promise<
     return new Promise((resolve, reject) => {
         dynamoDB.updateItem(params, async (err: AWSError) => {
             if (err) reject(err);
-            await makeMessage(userName, `${getPlanName(plan)} ${period}개월 가입이 성공적으로 완료되었습니다.\n이제 해당기간동안 베르누이 분석툴을 마음껏 사용하실 수 있으며,\n매주 베르누이 분석 20조합을 받아보실 수 있습니다.\n모든 조합리스트는 마이페이지에서 확인하실 수 있습니다.`);
+            await makeMessage(userName, `${getPlanName(plan)} ${month}개월 가입이 성공적으로 완료되었습니다.\n이제 해당기간동안 베르누이 분석툴을 마음껏 사용하실 수 있으며,\n매주 베르누이 분석 20조합을 받아보실 수 있습니다.\n모든 조합리스트는 마이페이지에서 확인하실 수 있습니다.`);
+            await makePayment(userName, plan, month, price, method);
+            resolve();
+        });
+    });
+}
+export function makePayment(userName: string, plan: Plan, month: number, price:number, method:PayMethod):Promise<void> {
+    const params: UpdateItemInput = {
+        TableName: 'LottoUsers',
+        ExpressionAttributeValues: {
+            ':empty_list': {
+                L: new Array()
+            },
+            ":element": {
+                L: [
+                    {
+                        M: {
+                            plan: {
+                                S: plan
+                            },
+                            month: {
+                                N: month.toString()
+                            },
+                            price: {
+                                N: price.toString()
+                            },
+                            date: {
+                                S: new Date().toISOString()
+                            },
+                            method: {
+                                S: method
+                            }
+                        }
+                    }
+                ]
+            },
+        },
+        Key: {
+            "UserName": {
+                S: userName
+            }
+        },
+        UpdateExpression: `SET Payment = list_append(if_not_exists(Payment, :empty_list), :element)`
+    };
+
+    return new Promise((resolve, reject) => {
+        dynamoDB.updateItem(params, async (err: AWSError) => {
+            if (err) reject(err);
             resolve();
         });
     });
@@ -211,7 +258,7 @@ export function makePaymentByBankBook(userName: string, bank:string, person:stri
                 }
             }
         },
-        UpdateExpression: 'SET Payment = :payment'
+        UpdateExpression: 'SET PaymentBank = :payment'
     };
 
     return new Promise((resolve, reject) => {
@@ -223,7 +270,7 @@ export function makePaymentByBankBook(userName: string, bank:string, person:stri
         });
     });
 }
-export function getPaymentByBankBook(userName: string) {
+export function getPayments(userName: string):Promise<any> {
     const params: GetItemInput = {
         TableName: 'LottoUsers',
         Key: {
@@ -232,6 +279,36 @@ export function getPaymentByBankBook(userName: string) {
             }
         },
         ProjectionExpression: 'Payment',
+    };
+
+    return new Promise((resolve, reject) => {
+        dynamoDB.getItem(params, async (err: AWSError, data: GetItemOutput) => {
+            if (err) {
+                reject(err);
+            }
+            if('Payment' in data.Item){
+                resolve(data.Item.Payment.L.map(item => {
+                    return{
+                        date: item.M.date.S,
+                        month: Number(item.M.month.N),
+                        method: item.M.method.S,
+                        plan: getPlanName(item.M.plan.S as Plan),
+                        price: Number(item.M.price.N)
+                    }
+                }));
+            }else resolve();
+        });
+    });
+}
+export function getPaymentByBankBook(userName: string) {
+    const params: GetItemInput = {
+        TableName: 'LottoUsers',
+        Key: {
+            "UserName": {
+                S: userName
+            }
+        },
+        ProjectionExpression: 'PaymentBank',
     };
 
     return new Promise((resolve, reject) => {
@@ -254,14 +331,14 @@ export function getPaymentByBankBook(userName: string) {
                         price: payment.price.N
                     });
                 }else {
-                    await deletePayment(userName);
+                    await deletePaymentBank(userName);
                     resolve();
                 }
             } else resolve();
         });
     });
 }
-export function deletePayment(userName: string) {
+export function deletePaymentBank(userName: string) {
     const params: UpdateItemInput = {
         TableName: 'LottoUsers',
         Key: {
@@ -269,7 +346,7 @@ export function deletePayment(userName: string) {
                 S: userName
             }
         },
-        UpdateExpression:'Remove Payment'
+        UpdateExpression:'Remove PaymentBank'
     };
 
     return new Promise((resolve, reject) => {

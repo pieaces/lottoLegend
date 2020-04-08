@@ -101,7 +101,6 @@ export async function deleteMyNumber(userName: string, round: number, numsArr: n
     }
 }
 
-
 export function getNumberSize(userName: string, round: number): Promise<number> {
     return new Promise((resolve, reject) => {
         dynamoDB.getItem({
@@ -119,10 +118,10 @@ export function getNumberSize(userName: string, round: number): Promise<number> 
         }, (err: AWSError, data: GetItemOutput) => {
             if (err) reject(err);
             const item = data.Item;
-            if ('Numbers' in item) resolve(item.Numbers.M[round.toString()].L.length);
+            if ('Numbers' in item) resolve(item.Numbers.M[round.toString()].L.filter(value => value.M.method.S === 'm').length);
             else resolve(0);
         })
-    })
+    });
 }
 
 export interface MyNumberData {
