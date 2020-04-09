@@ -82,6 +82,32 @@ export function getPlanKeyAndUntil(userName: string): Promise<{ plan: string, un
         });
     });
 }
+export function makeDay(userName: string, day:0|1|2|3|4|5|6): Promise<void> {
+    const params: UpdateItemInput = {
+        TableName: 'LottoUsers',
+        ExpressionAttributeNames: {
+            '#Day': 'Day'
+        },
+        ExpressionAttributeValues: {
+            ':day': {
+                N:  day.toString()
+            },
+        },
+        Key: {
+            "UserName": {
+                S: userName
+            }
+        },
+        UpdateExpression: `SET #Day = :day`
+    };
+
+    return new Promise((resolve, reject) => {
+        dynamoDB.updateItem(params, (err: AWSError) => {
+            if (err) reject(err);
+            resolve();
+        });
+    });
+}
 export function makeMessage(userName: string, message:string): Promise<void> {
     const params: UpdateItemInput = {
         TableName: 'LottoUsers',
