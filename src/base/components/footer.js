@@ -1,10 +1,11 @@
 document.write(`<footer><nav class="top-footer-container">
     <div class="top-footer container">
         <ul class="top-footer-list">
-            <li><a href="#">회사소개</a></li>
             <li><a href="#">이용약관</a></li>
             <li><a href="#">개인정보처리방침</a></li>
-    
+            <li><a href="/board/notice/list.html">공지사항</a></li>
+            <li><a href="/board/qna/qnaList.html">자주묻는질문</a></li>
+            <li><a href="/board/qna/post.html">문의하기</a></li>
         </ul>
     </div>
 </nav>
@@ -13,24 +14,14 @@ document.write(`<footer><nav class="top-footer-container">
         <h1>로또끝</h1>
         <div class="bottom-footer-content">
             <p>
-                당사의 분석시스템은 누적패턴을 분석/필터링한 정보제공만을
-                목적으로 하며, 당첨확률 개선서비스가 아니므로 서비스 이용
-                과정에서 기대이익을 얻지 못하거나 발생한 손해 등에 대한
-                최종책임은 서비스 이용자 본인에게 있습니다.
+<span>비춤소프트&nbsp;&nbsp;&nbsp;▪&nbsp;&nbsp;&nbsp;사업자등록번호 : 234-03-01786&nbsp;&nbsp;&nbsp;▪&nbsp;&nbsp;&nbsp;대표자 : 박재성&nbsp;&nbsp;&nbsp;▪&nbsp;&nbsp;&nbsp;도로명주소:서울특별시 광진구 용마산로 21길 42</span>
             </p>
             <p>
-              <span>  법인명:(주)브레인콘텐츠대표자:강진원 장대용</span>
-                <span>
-                도로명주소:서울특별시 강남구 테헤란로 325 (역삼동) 어반벤치빌딩
-                14층</span>
+            <span>FAX:0505-008-1777</span> <span>E-mail:lottoend@gmail.com</span>
+                <span>제휴문의:lottoend@gmail.com</span>
             </p>
             <p>
-            <span>TEL:1588-0649 FAX:02-2017-7994</span> <span>E-mail:help@brain-group.co.kr</span>
-                <span>제휴문의:lottorichmkt@gmail.com</span>
-            </p>
-            <p>
-                통신판매업신고:2017-서울강남-00217호 사업자
-                등록번호:125-81-26555
+                사업자등록번호:234-03-01786
             </p>
             <p>COPYRIGHTⓒBRAIN CONTENTS ALL RIGHT RESERVED.</p>
         </div>

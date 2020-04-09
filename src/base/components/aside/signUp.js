@@ -4,7 +4,7 @@ document.write(` <div class="anchor-title">
 <ul class="anchor-list-container">
 <li>
     <ul class="anchor-list-box">
-    <li><a href="#">이용약관</a></li>
+    <li><a href="#">약관동의</a></li>
     </ul> 
 </li>
 <li>
