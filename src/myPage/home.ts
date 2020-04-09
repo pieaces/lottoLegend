@@ -1,5 +1,5 @@
 import configure from '../amplify/configure'
-import { getAuthAPI, patchAuthAPI } from '../amplify/api'
+import { getAuthAPI, patchAuthAPI, postAuthAPI } from '../amplify/api'
 import { setColorLotto, networkAlert, rankToClass, onlyUserAlert, stringTrimer, isoStringToDate, makeNoneBox } from '../functions/index'
 import IncludeExclude from './IncludeExclude/index';
 import incObj from './IncludeExclude/include';
@@ -39,7 +39,6 @@ Auth.currentAuthenticatedUser()
         constmobileUpdateBtn.addEventListener('click', mobileUpdate);
 
         getAuthAPI('/mypage').then(({ numsArr, total, include, exclude, winner, lotto, plan, until, rank, point, day }) => {
-            console.log(day);
             lotto.numbers.forEach((num: number) => {
                 const div = document.createElement('div');
                 div.textContent = num.toString();
@@ -57,7 +56,11 @@ Auth.currentAuthenticatedUser()
             winNumBox.appendChild(bonus);
 
             service.textContent = plan;
-            if (until) expireDate.textContent = '~' + isoStringToDate(until);
+            if (until) {
+                expireDate.textContent = '~' + isoStringToDate(until);
+            }else{
+                document.getElementById('gaip').classList.remove('none');
+            }
             rankHtml.classList.add(rankToClass(rank));
             const rankText = document.createElement('div');
             rankText.classList.add('rank-text');
@@ -107,6 +110,11 @@ Auth.currentAuthenticatedUser()
                 numListLength.textContent = numsArr.length.toString();
             } else {
                 document.querySelector<HTMLElement>('.mypage-table-num-box').appendChild(makeNoneBox());
+            }
+            if(day) {
+                document.getElementById('dayChange').onclick = () => {
+                    postAuthAPI('/users/day')
+                }
             }
         }).catch(err => networkAlert());
     }).catch(err => onlyUserAlert());
