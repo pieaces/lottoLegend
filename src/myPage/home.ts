@@ -7,7 +7,7 @@ import excObj from './IncludeExclude/exclude';
 import Auth from '@aws-amplify/auth';
 import { makeTable, phoneString } from './functions';
 import Swal from 'sweetalert2';
-import {mqInit,menuInfoToggle} from '../base/headerHover';
+import { mqInit, menuInfoToggle } from '../base/headerHover';
 
 mqInit();
 menuInfoToggle();
@@ -24,7 +24,7 @@ const constmobileUpdateBtn = document.getElementById('mobile');
 const rankHtml = document.querySelector('.rank');
 const lottoRank = document.querySelector('#lotto-rank');
 const numListLength = document.querySelector('#num-list-select-total');
-const dayWeekReceive=document.querySelector<HTMLSelectElement>('#day-week-receive');
+const dayReceive = document.querySelector<HTMLSelectElement>('#day-receive');
 
 Auth.currentAuthenticatedUser()
     .then(user => {
@@ -39,6 +39,8 @@ Auth.currentAuthenticatedUser()
         constmobileUpdateBtn.addEventListener('click', mobileUpdate);
 
         getAuthAPI('/mypage').then(({ numsArr, total, include, exclude, winner, lotto, plan, until, rank, point, day }) => {
+            if (day) dayReceive.options[day].setAttribute('selected', '');
+            
             lotto.numbers.forEach((num: number) => {
                 const div = document.createElement('div');
                 div.textContent = num.toString();
@@ -58,7 +60,7 @@ Auth.currentAuthenticatedUser()
             service.textContent = plan;
             if (until) {
                 expireDate.textContent = '~' + isoStringToDate(until);
-            }else{
+            } else {
                 document.getElementById('gaip').classList.remove('none');
             }
             rankHtml.classList.add(rankToClass(rank));
@@ -111,11 +113,15 @@ Auth.currentAuthenticatedUser()
             } else {
                 document.querySelector<HTMLElement>('.mypage-table-num-box').appendChild(makeNoneBox());
             }
-            if(day) {
-                document.getElementById('dayChange').onclick = () => {
-                    postAuthAPI('/users/day')
-                }
+            document.getElementById('day-change').onclick = async () => {
+                postAuthAPI('/users/day', { day: dayReceive.selectedIndex }).then(() => {
+                    Swal.fire({
+                        title: '완료',
+                        icon: 'success'
+                    });
+                }).catch(() => networkAlert());
             }
+
         }).catch(err => networkAlert());
     }).catch(err => onlyUserAlert());
 
@@ -217,4 +223,3 @@ function mobileUpdate() {
         }
     });
 }
-
