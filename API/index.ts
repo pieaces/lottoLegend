@@ -290,7 +290,8 @@ exports.handler = async (event: any) => {
                         plan: myData.plan,
                         until: myData.until,
                         point: myData.point,
-                        rank: myData.rank
+                        rank: myData.rank,
+                        day: myData.day
                     }
             }
         }
