@@ -12,10 +12,5 @@ document.write(` <div class="anchor-title">
     <li> <a href="#">기본 정보</a> </li>
     </ul> 
 </li>
-<li>
-    <ul class="anchor-list-box">
-    <li> <a href="#">인증</a> </li>
-    </ul> 
-</li>
 </ul>
 `);
