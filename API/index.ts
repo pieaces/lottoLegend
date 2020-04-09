@@ -42,6 +42,7 @@ exports.handler = async (event: any) => {
                 }
                     break;
                 case 'DELETE': {
+                    console.log('DELETE: ' + currentId);
                     await deleteUser(currentId);
                     await userDB.delete(currentId);
                 }
