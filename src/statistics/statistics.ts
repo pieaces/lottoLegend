@@ -6,10 +6,6 @@ import { getQueryStringObject, rangeMake } from '../functions';
 import makeClickable from '../system/premium/Slide/makeClickable';
 import { getStaticsName,mqMobileInit } from './functions';
 
-import {mqInit,menuInfoToggle} from '../base/headerHover';
-
-mqInit();
-menuInfoToggle();
 configure();
 
 const labels = require('../system/premium/DataAPI/json/labels.json');

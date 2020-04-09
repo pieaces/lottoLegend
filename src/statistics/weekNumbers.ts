@@ -6,11 +6,6 @@ import { getUnAuthAPI } from '../amplify/api';
 const selectBox = document.querySelector<HTMLSelectElement>('#num-week-select-box');
 const numWeekWrapper = document.querySelector<HTMLElement>('.num-week-wrapper');
 
-
-import {mqInit,menuInfoToggle} from '../base/headerHover';
-
-mqInit();
-menuInfoToggle();
 configure();
 
 getUnAuthAPI('/numbers/week')

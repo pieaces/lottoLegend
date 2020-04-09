@@ -1,10 +1,7 @@
 import configure from "../amplify/configure";
 import Auth from "@aws-amplify/auth";
 import Swal from "sweetalert2";
-import {mqInit,menuInfoToggle} from '../base/headerHover';
 
-mqInit();
-menuInfoToggle();
 configure();
 
 const userName = document.querySelector<HTMLInputElement>('#userName');

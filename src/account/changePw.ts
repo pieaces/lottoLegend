@@ -1,5 +1,4 @@
 import configure from "../amplify/configure";
-import { mqInit, menuInfoToggle } from '../base/headerHover';
 import { invalidPassword, invalidPasswordCheck } from "./functions";
 import Auth from "@aws-amplify/auth";
 import Swal from "sweetalert2";
@@ -14,8 +13,7 @@ isLogedIn().then(result => {
         )
     }
 });
-mqInit();
-menuInfoToggle();
+
 
 const modifyForm = document.querySelector('#modify-form-pw');
 const oldPassword = document.querySelector<HTMLInputElement>('#old-password');

@@ -3,10 +3,6 @@ import DataAPI from "./experience/index";
 import Layout, { IDataAPI } from './premium/Layout'
 import Swal from 'sweetalert2';
 
-import {mqInit,menuInfoToggle} from '../base/headerHover';
-
-mqInit();
-menuInfoToggle();
 configure();
 
 const loading = document.querySelector<HTMLElement>('.loading-box');

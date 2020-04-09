@@ -3,10 +3,7 @@ import { getUnAuthAPI, getAuthAPI } from '../amplify/api'
 import { isoStringToDate, rankToClass, getQueryStringObject } from '../functions';
 import { Category, getCategoryHtml } from './functions';
 import { getUserName } from '../amplify/auth';
-import {mqInit,menuInfoToggle} from '../base/headerHover';
 
-mqInit();
-menuInfoToggle();
 configure();
 
 const boardSection = document.querySelector('.board-section');

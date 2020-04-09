@@ -1,5 +1,4 @@
 import configure from "../amplify/configure";
-import { mqInit, menuInfoToggle } from '../base/headerHover';
 import Auth from "@aws-amplify/auth";
 import { deleteAuthAPI } from "../amplify/api";
 import Swal from "sweetalert2";
@@ -14,8 +13,7 @@ isLogedIn().then(result => {
         )
     }
 });
-mqInit();
-menuInfoToggle();
+
 
 const withdrawalForm = document.querySelector('#withdrawl-form');
 const password = document.querySelector<HTMLInputElement>('#password');

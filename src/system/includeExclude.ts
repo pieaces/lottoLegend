@@ -5,10 +5,6 @@ import ResetBtn from './premium/instanceBtns/ResetBtn';
 import Swal from 'sweetalert2'
 import { networkAlert } from '../functions';
 
-import {mqInit,menuInfoToggle} from '../base/headerHover';
-
-mqInit();
-menuInfoToggle();
 configure();
 
 const category = document.querySelector('.main').getAttribute('data-category');
