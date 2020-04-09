@@ -18,7 +18,7 @@ const nickname = document.querySelector('#nickname');
 const pointHtml = document.querySelector('#point');
 const phoneNumber = document.querySelector('#phone-number');
 const service = document.querySelector('#service');
-const expiryDate = document.querySelector('#service-expiry-date');
+const expireDate = document.querySelector('#service-expire-date');
 const nicknameUpdateBtn = document.querySelector('#nickname-update');
 const constmobileUpdateBtn = document.getElementById('mobile');
 const rankHtml = document.querySelector('.rank');
@@ -38,7 +38,8 @@ Auth.currentAuthenticatedUser()
         nicknameUpdateBtn.addEventListener('click', nicknameUpdate);
         constmobileUpdateBtn.addEventListener('click', mobileUpdate);
 
-        getAuthAPI('/mypage').then(({ numsArr, total, include, exclude, winner, lotto, plan, until, rank, point }) => {
+        getAuthAPI('/mypage').then(({ numsArr, total, include, exclude, winner, lotto, plan, until, rank, point, day }) => {
+            console.log(day);
             lotto.numbers.forEach((num: number) => {
                 const div = document.createElement('div');
                 div.textContent = num.toString();
@@ -56,7 +57,7 @@ Auth.currentAuthenticatedUser()
             winNumBox.appendChild(bonus);
 
             service.textContent = plan;
-            if (until) expiryDate.textContent = '~' + isoStringToDate(until);
+            if (until) expireDate.textContent = '~' + isoStringToDate(until);
             rankHtml.classList.add(rankToClass(rank));
             const rankText = document.createElement('div');
             rankText.classList.add('rank-text');

@@ -165,6 +165,7 @@
 }
 
 .bottom-nav-right{
+  color: #777777;
   display:flex;
   align-items: center;
   font-size:1.6rem;

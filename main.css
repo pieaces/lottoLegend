@@ -1,5 +1,8 @@
 /* main */
-
+.lottoend{
+  color: #0000c3;
+  font-weight: 500;
+}
 #scroll-list-box{
   position:relative;
 } 
