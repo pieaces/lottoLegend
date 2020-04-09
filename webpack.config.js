@@ -1,7 +1,11 @@
 const path = require('path');
 
 // 확장자명 유의해서 쓸것! ts냐, js냐?
+<<<<<<< HEAD
 const file = 'account/signIn.ts'
+=======
+const file = 'base/components/footer.js'
+>>>>>>> e85af138f95180c558cc398ddd8b1fac800a5772
 ////
 const directory = file.slice(0, file.lastIndexOf('/'));
 const name = file.slice(file.lastIndexOf('/') + 1, file.indexOf('.'));
