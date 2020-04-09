@@ -51,9 +51,9 @@ export function scanUsers(round: number): Promise<{phone:string, numbers:number[
                     return {
                         phone: item.Phone.S,
                         numbers: item.Numbers && item.Numbers.M[round].L.filter(item => item.M.tool.S === SelectTool.charge && item.M.method.S === SelectMethod.auto)
-                            .map(item => (item.M.numbers.NS).map(num => Number(num)))
+                            .map(item => (item.M.numbers.NS).map(num => Number(num)).sort((a,b) => a-b))
                     }
-                }).filter(item => item.numbers);
+                }).filter(item => item.numbers && item.numbers.length > 0);
             resolve(result);
         });
     });
