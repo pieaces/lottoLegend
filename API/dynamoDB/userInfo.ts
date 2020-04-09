@@ -446,6 +446,7 @@ interface MyPage {
     plan?: string,
     until?: string,
     winner?: number,
+    day?: number,
     total?: number
 }
 export function getMyHome(userName: string): Promise<MyPage> {
@@ -460,9 +461,10 @@ export function getMyHome(userName: string): Promise<MyPage> {
             "#Plan": "Plan",
             "#Until": "Until",
             "#Point": "Point",
-            "#Rank": "Rank"
+            "#Rank": "Rank",
+            "#Day": 'Day'
         },
-        ProjectionExpression: '#Numbers.#Current, #Numbers.#Before, #IncExc.#Current, #IncExc.#Before, #Plan, #Until, #Point, #Rank',
+        ProjectionExpression: '#Numbers.#Current, #Numbers.#Before, #IncExc.#Current, #IncExc.#Before, #Plan, #Until, #Point, #Rank, #Day',
         Key: {
             "UserName": {
                 S: userName
@@ -523,6 +525,7 @@ export function getMyHome(userName: string): Promise<MyPage> {
                 result.until = until;
                 result.point = Number(data.Item.Point.N);
                 result.rank = Number(data.Item.Rank.N);
+                result.day = data.Item.Day && Number(data.Item.Day.N);
                 result.total = round;
                 resolve(result);
             }
