@@ -1,12 +1,8 @@
 import configure from '../amplify/configure'
 import { signUp } from "../amplify/auth";
 import Swal from 'sweetalert2';
-
-import {mqInit,menuInfoToggle} from '../base/headerHover';
 import { invalidPassword, invalidPasswordCheck } from './functions';
 
-mqInit();
-menuInfoToggle();
 configure();
 
 const signUpForm = document.querySelector('.signUp-form');

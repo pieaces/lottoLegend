@@ -9,10 +9,6 @@ import CheckBoxToggle from './premium/instanceBtns/CheckBoxToggle';
 import { makeCheckdValueBox } from './premium/Layout/functions';
 import generatorLoading from './generatorLoading';
 
-import {mqInit,menuInfoToggle} from '../base/headerHover';
-
-mqInit();
-menuInfoToggle();
 configure();
 
 const includeCanvas = document.getElementById('include');

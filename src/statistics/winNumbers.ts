@@ -5,10 +5,7 @@ import { getUnAuthAPI } from '../amplify/api';
 import Swal from 'sweetalert2'
 import { mqMobileInit } from './functions'
 import Selectr, { IOptions } from 'mobius1-selectr';
-import {mqInit,menuInfoToggle} from '../base/headerHover';
 
-mqInit();
-menuInfoToggle();
 configure();
 
 const compartColor = ['#FBC400', '#69C8F2', '#FF7272', '#AAAAAA', '#B0D840'];

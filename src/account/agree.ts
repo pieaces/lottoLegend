@@ -1,10 +1,7 @@
 import configure from '../amplify/configure'
 import CheckBoxToggle from "../system/premium/instanceBtns/CheckBoxToggle";
 import Swal from 'sweetalert2';
-import {mqInit,menuInfoToggle} from '../base/headerHover';
 
-mqInit();
-menuInfoToggle();
 configure();
 
 const checkBoxToggle = new CheckBoxToggle();

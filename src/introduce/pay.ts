@@ -1,5 +1,4 @@
 import configure from "../amplify/configure";
-import { mqInit, menuInfoToggle } from '../base/headerHover';
 import { numberFormat, networkAlert } from "../functions";
 import { isNull } from "util";
 import Swal from "sweetalert2";
@@ -14,8 +13,6 @@ const priceAnchorHoverBox = document.querySelectorAll<HTMLElement>('.price-servi
 const price = document.getElementById('price');
 const bankbook = document.getElementById('bankbook');
 
-mqInit();
-menuInfoToggle();
 configure();
 checkboxToggle();
 isLogedIn().then(result => {
