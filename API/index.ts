@@ -182,7 +182,7 @@ exports.handler = async (event: any) => {
             }
         }
         break;
-        case '/users/date': {
+        case '/users/day': {
             switch(method){
                 case 'POST':
                     const {day} = JSON.parse(event.body);
