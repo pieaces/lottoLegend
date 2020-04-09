@@ -20,8 +20,8 @@ document.write(`<div class="anchor-title">
     <ul class="anchor-list-box">
     <li><a href="currentPayment.html">주문현황</a> </li>
     <li><a href="payment.html">결제내역</a> </li>
-    <li><a href="../account/modifyPw.html">비밀번호 변경</a> </li>
-    <li><a href="../account/withdrawl.html">회원탈퇴</a> </li>
+    <li><a href="../account/changePw.html">비밀번호 변경</a> </li>
+    <li><a href="../account/withdrawal.html">회원탈퇴</a> </li>
     </ul>
 </li>
 

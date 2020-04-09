@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,500|Nanum+Gothic&display=swap&subset=korean">
+    <link rel="stylesheet" href="../base/css/init.css" />
+    <link rel="stylesheet" href="../base/css/section.css">
+    <link rel="stylesheet" href="../base/css/header.css" />
+    <link rel="stylesheet" href="../base/css/footer.css" />
+    <link rel="stylesheet" href="../base/css/fontawesome.min.css">
+    <link rel="stylesheet" href="./css/account.css">
+    <title>로또끝</title>
+</head>
+
+<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
+    <div id="wrapper">
+        <script src="../base/components/header.js"></script>
+        <section class="section1">
+            <div class="grid-section-1 container">
+                <div class="main account-form-wrapper">
+                    <div class="account-form-container">
+                        <div class="account-title-text">
+                            비밀번호 변경
+                        </div>
+                        <form id="modify-form-pw">
+                            <div class="account-container">
+                                <div class="account-box">
+                                    <div class="account-title-box">
+                                        <div class="account-title">현재 비밀번호</div>
+                                    </div>
+                                    <div class="account-input-box ">
+                                        <input type="password" id="old-password" required>                                        
+                                    </div>
+                                </div>                       
+                                <div class="account-box">
+                                    <div class="account-title-box">
+                                        <div class="account-title">새 비밀번호</div>
+                                    </div>
+                                    <div class="account-input-box ">
+                                        <input type="password" id="new-password" required
+                                            pattern="^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$">
+                                        <div class="account-info-box">
+                                            8자리 이상 문자+숫자로 입력해주세요
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="account-box">
+                                    <div class="account-title-box">
+                                        <div class="account-title">새 비밀번호 확인</div>
+                                    </div>
+                                    <div class="account-input-box">
+                                        <input type="password" id="new-password-check" required>
+                                        <div class="account-info-box">
+                                            비밀번호와 똑같이 입력해주세요
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="account-btn-box">
+                                <button type="submit" class="btn account-btn" id="update">변경</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script src="../base/components/footer.js"></script>
+    </div>
+    <script src="../base/js/polyfill.js"></script>
+    <script src="js/changePw.js"></script>
+    
+</body>
+
+</html>
