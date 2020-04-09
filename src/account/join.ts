@@ -19,10 +19,10 @@ id.addEventListener('invalid', invalidId);
 id.addEventListener('input', invalidId);
 nickname.addEventListener('invalid', invalidNickname);
 nickname.addEventListener('input', invalidNickname);
-password.addEventListener('invalid', invalidPassword);
-password.addEventListener('input', invalidPassword);
-passwordCheck.addEventListener('invalid', invalidPasswordCheck);
-passwordCheck.addEventListener('input', invalidPasswordCheck);
+password.addEventListener('invalid', invalidPassword(password));
+password.addEventListener('input', invalidPassword(password));
+passwordCheck.addEventListener('invalid', invalidPasswordCheck(password,passwordCheck));
+passwordCheck.addEventListener('input', invalidPasswordCheck(password,passwordCheck));
 
 signUpForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -83,8 +83,8 @@ function invalidNickname() {
     return true;
 }
 
-function invalidPassword() {
-
+export function invalidPassword(password:HTMLInputElement) {
+return function(){
     if (password.value.search(new RegExp(password.getAttribute('pattern'))) === -1) {
         password.setCustomValidity(`8자리이상 문자+숫자로 입력해주세요`);
     } else {
@@ -92,12 +92,15 @@ function invalidPassword() {
     }
     return true;
 }
-function invalidPasswordCheck() {
+}
+export function invalidPasswordCheck(password:HTMLInputElement,passwordCheck:HTMLInputElement) {
+    return function(){
     if (password.value !== passwordCheck.value) {
         passwordCheck.setCustomValidity('비밀번호와 비밀번호 확인이 서로 다릅니다');
     } else {
         passwordCheck.setCustomValidity('');
     }
     return true;
+}
 }
 
