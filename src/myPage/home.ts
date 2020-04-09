@@ -24,6 +24,7 @@ const constmobileUpdateBtn = document.getElementById('mobile');
 const rankHtml = document.querySelector('.rank');
 const lottoRank = document.querySelector('#lotto-rank');
 const numListLength = document.querySelector('#num-list-select-total');
+const dayWeekReceive=document.querySelector<HTMLSelectElement>('#day-week-receive');
 
 Auth.currentAuthenticatedUser()
     .then(user => {

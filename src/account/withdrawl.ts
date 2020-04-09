@@ -5,10 +5,10 @@ mqInit();
 menuInfoToggle();
 configure();
 
-const secessionForm=document.querySelector('#secession-form');
+const withdrawlForm=document.querySelector('#withdrawl-form');
 const password=document.querySelector('#password');
 
-secessionForm.addEventListener('submit', async (e) => {
+withdrawlForm.addEventListener('submit', async (e) => {
     e.preventDefault();
    
 });
