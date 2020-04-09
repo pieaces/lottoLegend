@@ -38,15 +38,19 @@ export function scanUsers(round: number): Promise<{phone:string, numbers:number[
         ExpressionAttributeNames: {
             "#Plan": 'Plan',
             "#Until": 'Until',
-            "#Round": round.toString()
+            "#Round": round.toString(),
+            "#Day": 'Day'
         },
-        ProjectionExpression: '#Plan, #Until, Phone, Numbers.#Round'
+        ProjectionExpression: '#Plan, #Until, Phone, Numbers.#Round, #Day'
     };
 
+    const today = new Date();
+    today.setHours(today.getHours() + 9);
+    const day = today.getDay();
     return new Promise((resolve, reject) => {
         dynamoDB.scan(params, (err: AWSError, data: ScanOutput) => {
             if (err) reject(err);
-            const result = data.Items.filter(item => planValue({ plan: item.Plan && item.Plan.S as Plan, _until: item.Until && item.Until.S }))
+            const result = data.Items.filter(item => item.Day && Number(item.Day.N) === day && planValue({ plan: item.Plan && item.Plan.S as Plan, _until: item.Until && item.Until.S }))
                 .map(item => {
                     return {
                         phone: item.Phone.S,
