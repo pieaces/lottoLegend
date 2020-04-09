@@ -101,6 +101,18 @@ font-size: 1.4rem;
   margin-left: 0.5rem;
 }
 
+.day-week-receive-text{
+  margin-left:2rem;
+}
+
+.day-week-receive-text + .mypage-info-list-seperator{
+  text-align: center;
+}
+
+#day-week-receive{
+  padding:0.2rem;
+}
+
 .plus{
   margin:0 0.2rem;
 }
