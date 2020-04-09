@@ -44,6 +44,10 @@ align-items: center;
 font-size: 1.4rem;
 }
 
+.mypage-last-result-box .mypage-info-list-title{
+  width: 6rem;
+}
+
 
 .mypage-info-box > li >div{
   display: flex;
@@ -56,8 +60,9 @@ font-size: 1.4rem;
 }
 
 .mypage-info-list-title{
+  width: 10rem;
   word-break: keep-all;
-  padding-right: 2rem;
+  padding-right: 1rem;
 }
 .mypage-info-list-seperator{
   width:2rem;
@@ -101,6 +106,12 @@ font-size: 1.4rem;
 
 #point{
   margin-left: 0.5rem;
+}
+
+.mypage-day-week-receive-box{
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 #day-week-receive{
