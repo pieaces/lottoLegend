@@ -47,7 +47,6 @@ codeForm.addEventListener('submit', async (e) => {
                 });
             })
             .catch(err => {
-                console.log(err);
                 if(err.code === "CodeMismatchException"){
                     Swal.fire({
                         title: '확인 코드가 일치하지 않습니다',

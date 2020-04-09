@@ -26,7 +26,6 @@ isLogedIn().then((result) => {
         loginAfterBox.classList.remove('none');
         document.getElementById('logout').onclick = () => signOut();
         getAuthAPI('/main/posts').then(data => {
-            console.log(data);
             document.querySelector('#rank-text').textContent = data.user.rank;
             document.querySelector('.rank').classList.add(rankToClass(data.user.rank));
             document.querySelector('#point').textContent = data.user.point;
@@ -40,7 +39,6 @@ isLogedIn().then((result) => {
         login();
        
         getUnAuthAPI('/main/posts').then(data => {
-            console.log(data);
             executeMakingBoard(data);
         });
     }
@@ -49,6 +47,10 @@ isLogedIn().then((result) => {
 function executeMakingBoard(data:any){
     let current = 0;
     const tabs = ['pro', 'analysis', 'include', 'exclude', 'free'];
+
+    insertScrollText(data.notice);
+    new scrolling("scroll-list",4000,3,1,18);
+
     makeBoard(data[tabs[current]]);
 
     for (let i = 0; i < commTab.length; i++) {
@@ -209,18 +211,10 @@ getUnAuthAPI('/main/numbers').then(data => {
     //     acc + cur.winAmount * data.win[index], 0);
 });
 
-insertScrollText([
-    {href:"www.naver.com",text:"[896회 20억 실제1등 당첨자 탄생] 역대 108번째 실제1등 탄생!"},
-    {href:"www.daum.net",text:"[897회 25억 실제1등 당첨자 탄생] 역대 108번째 실제1등 탄생!"},
-    {href:"www.kakaocorp.com",text:"[898회 50억 실제1등 당첨자 탄생] 역대 108번째 실제1등 탄생!"},
-    {href:"www.kakaocorp.com",text:"[899회 100억 실제1등 당첨자 탄생] 역대 108번째 실제1등 탄생!"}
-])
-const scroll = new scrolling("scroll-list",4000,3,1,18);
-
 function insertScrollText(data:any){
     for(let i=0;i<scrollList.length;i++){      
-            scrollList[i].setAttribute('src',`${data[i].href}`);
-            scrollList[i].textContent=data[i].text; 
+            scrollList[i].setAttribute('href',`/${getCategoryHtml('notice', 'read')}?id=${data[i].id}`);
+            scrollList[i].textContent=data[i].title; 
         }
     }
 

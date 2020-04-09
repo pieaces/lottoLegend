@@ -269,7 +269,6 @@ export default class Layout extends LayoutToggle(Layout3) {
         this.checkBox.reset();
         this.dropDown.changeBoard();
         this.dropDown.changeDropDownColor();
-        console.log(this.options);
     }
     init() {
         this.dropDown.init();

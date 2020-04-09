@@ -119,8 +119,6 @@ export default class DataAPI {
 
             const max = lowCount[0] + (_max < lowCount[1] ? _max : lowCount[1]);
             const min = (max - _min) > lowCount[0] ? max - _min : lowCount[0];
-            console.log(_min, lowCount[0]);
-            console.log(min, max);
             this.rangeList[this.current] = paramToNumbers({ from: range[0], to: range[1] }).filter(one => min <= one && one <= max);
             if(this.rangeList[this.current].length === 0){
                 Swal.fire({

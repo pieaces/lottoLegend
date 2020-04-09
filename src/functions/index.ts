@@ -79,8 +79,6 @@ export function setColorLotto(num: number, Box: HTMLElement) {
         Box.style.backgroundColor = '#AAAAAA';
     } else if (num <= 45) {
         Box.style.backgroundColor = '#B0D840';
-    } else {
-        console.error("setColorLotto 오류");
     }
 }
 export function setDisabledLotto(Box: HTMLElement) {
@@ -118,7 +116,6 @@ export function blankToHtml(text:string){
     return text.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 export function blankToString(html:string){
-    console.log(html);
     return html.replace(/<br>/g, '\n').replace(/&nbsp;/g, ' ');
 }
 

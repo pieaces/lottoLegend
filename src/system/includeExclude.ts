@@ -36,7 +36,6 @@ function infoAlert(title: string, text: string) {
 }
 async function init() {
     const { include, exclude } = await getAuthAPI('/numbers/piece', { flag: true });
-    console.log(include, exclude)
     try {
         const data = await getUnAuthAPI('/stats/mass', { method: 'excludeInclude' });
         const layout = new Layout2([null, null, null, true], data.data, data.winNums, data.total);
@@ -68,7 +67,6 @@ async function init() {
         resetBtn.addEvent(layout.resetConfirm.bind(layout));
 
         makeBtn.addEventListener('click', async () => {
-            console.log(current);
             if ((!current || current.length === 0) || layout.checkedNumbers.length === 0 && (await infoAlert('선택하신 번호가 없습니다', '빈 상태로 초기화합니다')).value ||
                 (current && current.length > 0 && layout.checkedNumbers.length > 0) && (await infoAlert('기존에 번호를 생성하셨습니다', '초기화하고 덮어씁니다')).value) {
                 try {

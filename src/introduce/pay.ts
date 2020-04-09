@@ -1,10 +1,11 @@
 import configure from "../amplify/configure";
-import {mqInit,menuInfoToggle} from '../base/headerHover';
+import { mqInit, menuInfoToggle } from '../base/headerHover';
 import { numberFormat, networkAlert } from "../functions";
 import { isNull } from "util";
 import Swal from "sweetalert2";
 import { postAuthAPI, getAuthAPI } from "../amplify/api";
 import { isLogedIn } from "../amplify/auth";
+import Analytics from "@aws-amplify/analytics";
 
 const priceContainer = document.querySelectorAll<HTMLElement>('.price-container');
 const priceBox = document.querySelectorAll<HTMLElement>('.price-box');
@@ -32,42 +33,46 @@ isLogedIn().then(result => {
 })
 
 type PayMethod = 'bankbook' | 'card';
-let payMethod:PayMethod = null;
+let payMethod: PayMethod = null;
 const bankPerson = document.querySelector('.payment-method-box');
-bankbook.onclick = () =>{
-    if(payMethod !== 'bankbook'){
+bankbook.onclick = () => {
+    if (payMethod !== 'bankbook') {
         bankbook.classList.add('payment-clicked');
     }
     payMethod = 'bankbook';
     bankPerson.classList.remove('none');
 }
-const monthList = [24,12,6,1];
+const monthList = [24, 12, 6, 1];
 const priceList = [150000, 90000, 53000, 9900];
-let current:number = null;
+let current: number = null;
 const person = document.querySelector<HTMLInputElement>('#deposit-name');
 const bank = document.querySelector<HTMLInputElement>('.payment-bank-content');
-document.getElementById('order-btn').onclick = () =>{
-    if(isNull(current)) {
+document.getElementById('order-btn').onclick = () => {
+    if (isNull(current)) {
         Swal.fire({
-        title:'상품카드를 선택해주세요',
-        icon:'warning'
-    });
-    }else if(isNull(payMethod)) {
+            title: '상품카드를 선택해주세요',
+            icon: 'warning'
+        });
+    } else if (isNull(payMethod)) {
         Swal.fire({
-        title:'결제수단을 선택해주세요',
-        icon:'warning'
-    });
-    } else if(person.value === ''){
+            title: '결제수단을 선택해주세요',
+            icon: 'warning'
+        });
+    } else if (person.value === '') {
         Swal.fire({
             title: '입금자명은 비워둘 수 없습니다',
-            icon:'warning'
+            icon: 'warning'
         })
-    } else if(payMethod === 'bankbook'){
-        postAuthAPI('/users/payment/bankbook', { bank: bank.textContent, person:person.value, month: monthList[current], price: priceList[current] }).then(() => {
-            Swal.fire({
-                title:'정상적으로 기록되었습니다',
-                icon:'info',
-                timer:2000
+    } else if (payMethod === 'bankbook') {
+        postAuthAPI('/users/payment/bankbook', { bank: bank.textContent, person: person.value, month: monthList[current], price: priceList[current] }).then(() => {
+            Analytics.record({
+                name: 'payment',
+                attributes: { method: 'bankbook' },
+                metrics: { money: priceList[current] }
+            }); Swal.fire({
+                title: '정상적으로 기록되었습니다',
+                icon: 'info',
+                timer: 2000
             }).then(() => location.href = '/myPage/currentPayment.html');
         }).catch(() => networkAlert());
     }
@@ -90,7 +95,7 @@ function checkboxToggle() {
                 priceAnchorHoverBox[i].removeEventListener('mouseover', overEventHandler[i]);
                 priceAnchorHoverBox[i].removeEventListener('mouseout', outEventHandler[i]);
                 priceAnchorHoverBox[i].style.transform = "perspective(1200px) rotateY(-179.9deg)";
-                priceAnchorHoverBox[i].style.opacity = "0";                
+                priceAnchorHoverBox[i].style.opacity = "0";
             }
             current = i;
             price.textContent = numberFormat(priceList[current]);

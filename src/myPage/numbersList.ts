@@ -95,7 +95,6 @@ getAuthAPI('/numbers/mass')
                                     indexes.push(index);
                                 }
                             });
-                            console.log(indexes);
                             try {
                                 loading.classList.remove('none');
     
@@ -199,7 +198,6 @@ getAuthAPI('/numbers/mass')
             });
         }
     }).catch(err => {
-        console.log(err);
         networkAlert()
     })
     .finally(() => loading.classList.add('none'));
