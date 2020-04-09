@@ -189,6 +189,7 @@ exports.handler = async (event: any) => {
                     await makeDay(currentId, day as 0|1|2|3|4|5|6);
             }
         }
+        break;
         case '/users/payment': {
             switch (method) {
                 case 'GET':
