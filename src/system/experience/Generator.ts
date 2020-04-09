@@ -27,6 +27,7 @@ export default class Generator {
         delete option.carryCount;
         Swal.fire({
             title: '체험종료',
+            text:'더 많은 필터가 준비되어 있습니다',
             icon: 'info',
             footer: '결제페이지로 이동'
         }).then(() => {
