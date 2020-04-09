@@ -1,5 +1,6 @@
 import Swal from 'sweetalert2'
 import makeDraggable from '../system/premium/Layout/makeDraggable';
+import { signIn } from '../amplify/auth';
 
 export function networkAlert() {
     Swal.fire({
@@ -122,3 +123,15 @@ export function blankToString(html:string){
 export function numberFormat(inputNumber:string | number) {
     return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
  }
+
+ export function loginAddEvent() {
+    const userNameInput = document.querySelector<HTMLInputElement>('#username');
+    const passwordInput = document.querySelector<HTMLInputElement>('#password');
+
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const userName = userNameInput.value;
+        const password = passwordInput.value;
+        await signIn(userName, password);
+    });
+}

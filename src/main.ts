@@ -1,13 +1,9 @@
 import configure from './amplify/configure'
 import { getUnAuthAPI, getAuthAPI } from './amplify/api';
 import { getCategoryHtml, Category } from './board/functions';
-import { isoStringToDate, numberFormat, rankToClass } from './functions';
-import { isLogedIn, getNickName, signOut, signIn } from './amplify/auth';
-import {mqInit,menuInfoToggle} from './base/headerHover';
-import {login} from './account/signIn';
+import { isoStringToDate, numberFormat, rankToClass, loginAddEvent } from './functions';
+import { isLogedIn, getNickName, signOut } from './amplify/auth';
 
-mqInit();
-menuInfoToggle();
 configure();
 
 const loginContainer=document.querySelector('.login-container')
@@ -18,6 +14,7 @@ const boardPlus = document.getElementById('board-plus');
 const commContent = document.querySelectorAll<HTMLElement>('.community-content');
 const commContentAnchor = document.querySelectorAll<HTMLElement>('.community-content-title > a');
 isLogedIn().then((result) => {
+    console.log(result);
     if(result){
         //로그인
         const nickname = document.querySelector('.nickname');
@@ -36,11 +33,10 @@ isLogedIn().then((result) => {
         loginAfterBox.classList.add('none');
         loginContainer.classList.remove('none');
         //로그아웃상태
-        login();
-       
         getUnAuthAPI('/main/posts').then(data => {
             executeMakingBoard(data);
-        });
+        }).catch((err) => console.log(err));
+        loginAddEvent();
     }
 });
 
