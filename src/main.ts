@@ -14,7 +14,6 @@ const boardPlus = document.getElementById('board-plus');
 const commContent = document.querySelectorAll<HTMLElement>('.community-content');
 const commContentAnchor = document.querySelectorAll<HTMLElement>('.community-content-title > a');
 isLogedIn().then((result) => {
-    console.log(result);
     if(result){
         //로그인
         const nickname = document.querySelector('.nickname');
@@ -71,7 +70,22 @@ const myWinResultBox = document.querySelectorAll<HTMLElement>('.own-win-result-b
 const reviewTabs = document.querySelector('.review-tabs');
 const winCount = document.querySelectorAll('.win-count-rank');
 const scrollList=document.querySelectorAll('#scroll-list > ul > li > a');
+getUnAuthAPI('/main/numbers').then(data => {
+    makeWinNumBox(data);
+    Array.from(document.querySelectorAll('.win-round')).forEach(node => node.textContent = data.round);
+    winRound.textContent = data.round;
 
+    insertWinCount(data.stats);
+    insertWinResult(data.info, officialWinResultBox);
+    insertWinResult(data.win.map((winner: number, index: number) => {
+        return {
+            winner,
+            winAmount: winner * data.info[index].winAmount
+        }
+    }), myWinResultBox);
+    // document.getElementById('totalAmount').textContent = (<any[]>data.info).reduce((acc, cur, index) =>
+    //     acc + cur.winAmount * data.win[index], 0);
+});
 const mqMobile = window.matchMedia("(max-width: 767px)");
 if (mqMobile.matches) {
     mqMobileInit();
@@ -190,22 +204,6 @@ function scrolling(this:any,objId:string,sec1:number,sec2:number,speed:number,he
   }; 
 
 backgroundImgSlide();
-getUnAuthAPI('/main/numbers').then(data => {
-    makeWinNumBox(data);
-    Array.from(document.querySelectorAll('.win-round')).forEach(node => node.textContent = data.round);
-    winRound.textContent = data.round;
-
-    insertWinCount(data.stats);
-    insertWinResult(data.info, officialWinResultBox);
-    insertWinResult(data.win.map((winner: number, index: number) => {
-        return {
-            winner,
-            winAmount: winner * data.info[index].winAmount
-        }
-    }), myWinResultBox);
-    // document.getElementById('totalAmount').textContent = (<any[]>data.info).reduce((acc, cur, index) =>
-    //     acc + cur.winAmount * data.win[index], 0);
-});
 
 function insertScrollText(data:any){
     for(let i=0;i<scrollList.length;i++){      
