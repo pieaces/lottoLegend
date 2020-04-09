@@ -13,18 +13,11 @@ export function login(){
     const userNameInput = document.querySelector<HTMLInputElement>('#username');
     const passwordInput = document.querySelector<HTMLInputElement>('#password');
     
-    document.getElementById('login-btn').onclick = async () => {
+    document.getElementById('login-form').addEventListener('submit',async (e) => {
+        e.preventDefault();
         const userName = userNameInput.value;
         const password = passwordInput.value;
         await signIn(userName, password);
-    }
-    
-    passwordInput.addEventListener('keypress',async(e)=>{
-        if(e.keyCode===13){
-        const userName = userNameInput.value;
-        const password = passwordInput.value;
-       await signIn(userName, password);
-        }
-    })
+    }); 
     
     }

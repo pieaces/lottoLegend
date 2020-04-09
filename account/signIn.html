@@ -6,13 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,500|Nanum+Gothic&display=swap&subset=korean">
-<link rel="stylesheet" href="../base/css/init.css" />
+  <link rel="stylesheet" href="../base/css/init.css" />
   <link rel="stylesheet" href="../base/css/section.css">
   <link rel="stylesheet" href="../base/css/header.css" />
-      <link rel="stylesheet" href="../base/css/footer.css" />
-     <link rel="stylesheet" href="../base/css/fontawesome.min.css">
+  <link rel="stylesheet" href="../base/css/footer.css" />
+  <link rel="stylesheet" href="../base/css/fontawesome.min.css">
   <link rel="stylesheet" href="css/signIn.css">
-
   <title>로또끝</title>
 </head>
 
@@ -21,7 +20,6 @@
     <script src="../base/components/header.js"></script>
     <section class="section1">
       <div class="grid-section-1 container">
-
         <div class="main login-container">
           <div class="login-box box-color">
             <div class="login-title-text">
@@ -29,16 +27,16 @@
             </div>
             <div class="login-content-wrapper">
               <div class="login-content-container-box">
-                <div class=" login-content-container">
+                <form id="login-form" class="login-content-container">
                   <div class=" login-input-container">
                     <input type="text" id="username" placeholder="아이디" />
 
                     <input type="password" id="password" placeholder="비밀번호" />
                   </div>
                   <div class="login-btn-container">
-                    <button type="button" class="btn login-btn" id="login-btn">로그인</button>
+                    <button type="submit" class="btn login-btn">로그인</button>
                   </div>
-                </div>
+                </form>
                 <div class="login-service">
                   <p><a href="#">아이디 찾기</a></p>
                   <span>|</span>
@@ -49,8 +47,6 @@
               </div>
             </div>
           </div>
-
-
         </div>
       </div>
     </section>
@@ -58,8 +54,6 @@
   </div>
   <script src="../base/js/polyfill.js"></script>
   <script src="js/signIn.js"></script>
-
-  
 </body>
 
 </html>
