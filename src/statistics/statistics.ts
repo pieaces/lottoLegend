@@ -69,11 +69,11 @@ const lineDataBox = {
     ]
 };
 
-const leftBarBtn: HTMLElement = document.querySelector('#func1-left-bar-chart-btn');
-const rightBarBtn: HTMLElement = document.querySelector('#func1-right-bar-chart-btn');
-const barNum = document.querySelectorAll('.func1-chart-bar-num > div');
-const bar1Canvas: HTMLCanvasElement = document.querySelector('#func1-chart-bar');
-const barTitle = document.querySelector<HTMLElement>('#func1-bar-table');
+const leftBarBtn: HTMLElement = document.querySelector('#left-bar-chart-btn');
+const rightBarBtn: HTMLElement = document.querySelector('#right-bar-chart-btn');
+const barNum = document.querySelectorAll('.chart-bar-num > div');
+const bar1Canvas: HTMLCanvasElement = document.querySelector('#chart-bar-slide');
+const barTitle = document.querySelector<HTMLElement>('#chart-bar-title');
 
 const bar1DataBox = {
     labels: null,
