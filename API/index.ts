@@ -99,7 +99,7 @@ exports.handler = async (event: any) => {
             break;
         case '/stats/piece':
             body = await queryStats(method as StatsMethod,
-                'Ideal.#12,Ideal.#24,Ideal.#48,Ideal.#192,Ideal.#all, Actual.#12,Actual.#24,Actual.#48,Actual.#192,Actual.#all, Pos, Stats, Piece',
+                'Ideal.#12,Ideal.#24,Ideal.#48,Ideal.#192,Ideal.#all, Ideal.latest12, Actual.#12,Actual.#24,Actual.#48,Actual.#192,Actual.#all,Actual.latest12, Pos, Stats, Piece',
                 {'#12':'$12','#24':'$24','#48':'$48','#192':'$192', '#all':'all'});
     }
     const response = {

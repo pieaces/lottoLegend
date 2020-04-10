@@ -1,146 +1,131 @@
-import {DynamoDB} from 'aws-sdk'
+import { DynamoDB } from 'aws-sdk'
 import { Stats } from '../interface/Statistics';
 import { StatsMethod, DBData, Assembly, AssemblyVersion, QueryStatsParams } from '../interface/LottoDB';
 import { LottoNumber } from '../interface/Lotto';
-import {dynamoDB} from '.'
-import {getCurrentRound} from '../funtions';
+import { dynamoDB } from '.'
+import { getCurrentRound } from '../funtions';
+import { GetItemInput, GetItemOutput } from 'aws-sdk/clients/dynamodb';
 export async function queryLotto(round: number): Promise<LottoNumber[]> {
-    const queryParams = {
+    const params: GetItemInput = {
         ProjectionExpression: 'Numbers',
         TableName: "LottoData",
-        Key:{
+        Key: {
             "Round": {
                 N: round.toString()
             }
         }
     };
-
     return await new Promise((resolve, reject) => {
-        dynamoDB.getItem(queryParams, function (err, data) {
-            if (err) {
-                reject('queryLotto 에러' + err);
-            }
+        dynamoDB.getItem(params, function (err, data: GetItemOutput) {
+            if (err)
+                reject(err);
+            const item = data.Item;
+            if (typeof item === 'undefined') reject(`Not Exist ${round} item`);
             else {
-                const item = data.Item;
-                if (typeof item === 'undefined') reject(`Not Exist ${round} item`);
-                else {
-                    const numbers = item.Numbers.NS.map(value => Number(value)).sort((a, b) => a - b);
-                    resolve(numbers as LottoNumber[]);
-                }
+                const numbers = item.Numbers.NS.map(value => Number(value)).sort((a, b) => a - b);
+                resolve(numbers as LottoNumber[]);
             }
         });
     });
 }
 
-export async function queryStats(method: StatsMethod, ProjectionExpression?:string, ExpressionAttributeNames?:DynamoDB.ExpressionAttributeNameMap, params?: QueryStatsParams, ): Promise<any> {
-    const queryParams:any = {
+export async function queryStats(method: StatsMethod, ProjectionExpression?: string, ExpressionAttributeNames?: DynamoDB.ExpressionAttributeNameMap, params?: QueryStatsParams, ): Promise<any> {
+    const queryParams: GetItemInput = {
         TableName: "LottoStats",
-        Key:{
+        Key: {
             "Name": {
                 S: method
             }
         }
     };
-    if(ProjectionExpression) queryParams.ProjectionExpression = ProjectionExpression;
-    if(ExpressionAttributeNames) queryParams.ExpressionAttributeNames = ExpressionAttributeNames;
+    if (ProjectionExpression) queryParams.ProjectionExpression = ProjectionExpression;
+    if (ExpressionAttributeNames) queryParams.ExpressionAttributeNames = ExpressionAttributeNames;
     return await new Promise((resolve, reject) => {
-        dynamoDB.getItem(queryParams, function (err, data) {
-            if (err) {
-                console.log('queryMassStats 에러', err);
-                reject(err);
-            }
-            else {
-                const item = data.Item;
-                let list: Array<any>;
-                switch (method) {
-                    case StatsMethod.frequency:
-                        list = item.List.L.map(value => Number(value.N));
-                        resolve(list);
-                        break;
-                    case StatsMethod.interval:
-                        list = item.List.L.map(value => {
-                            return {
-                                list: value.M.list.L.map(value => Number(value.N)),
-                                stats: {
-                                    mean: Number(value.M.stats.M.mean.N),
-                                    stdev: Number(value.M.stats.M.stdev.N),
-                                    max: Number(value.M.stats.M.max.N),
-                                    min: Number(value.M.stats.M.min.N),
-                                }
-                            }
-                        });
-                        resolve(list);
-                        break;
-                    case StatsMethod.emergence:
-                        list = item.List.L.map(value => value.L.map(value => value.BOOL));
-                        resolve(list);
-                        break;
-                    case StatsMethod.howLongNone:
-                        list = item.List.L.map(value => {
-                            return {
-                                round: Number(value.M.round.N),
-                                date: value.M.date.S
-                            }
-                        });
-                        resolve(list);
-                        break;
-                    case StatsMethod.line:
-                        const data = {
-                            all: item.All.L.map(value => Number(value.N)),
-                            latest: item.Latest.L.map(value => Number(value.N)),
-                            total: getCurrentRound()
-                        }
-                        resolve(data);
-                        break;
-                    default:
-                        if (method === StatsMethod.sum && params && params.from) {
-                            params.from -= 21;
-                            params.to -= 21;
-                        } else if (method === StatsMethod.diffMaxMin && params) {
-                            if (params.list) {
-                                params.list = params.list.map(value => value - 5);
-                            } else {
-                                params.from -= 5; params.to -= 5;
+        dynamoDB.getItem(queryParams, function (err, data: GetItemOutput) {
+            if (err) reject(err);
+            switch (method) {
+                case StatsMethod.frequency:
+                    resolve(data.Item.List.L.map(value => Number(value.N)));
+                    break;
+                case StatsMethod.interval:
+                    resolve(data.Item.List.L.map(value => {
+                        return {
+                            list: value.M.list.L.map(value => Number(value.N)),
+                            stats: {
+                                mean: Number(value.M.stats.M.mean.N),
+                                stdev: Number(value.M.stats.M.stdev.N),
+                                max: Number(value.M.stats.M.max.N),
+                                min: Number(value.M.stats.M.min.N),
                             }
                         }
-                        const ideal: Assembly = makeAssembly(item.Ideal.M, params);
-                        const actual: Assembly = makeAssembly(item.Actual.M, params);
-                        let pos: number[] = transformNumbers(item.Pos.L, params);
-                        if (method === StatsMethod.sum) {
-                            const PACK = 10;
-                            for (const v in ideal) {
-                                ideal[v as AssemblyVersion] = compressNumbers(ideal[v as AssemblyVersion], PACK);
-                                actual[v as AssemblyVersion] = compressNumbers(actual[v as AssemblyVersion], PACK);
-                            }
-                            pos = compressNumbers(pos, PACK);
+                    }));
+                    break;
+                case StatsMethod.emergence:
+                    resolve(data.Item.List.L.map(value => value.L.map(value => value.BOOL)));
+                    break;
+                case StatsMethod.howLongNone:
+                    resolve(data.Item.List.L.map(value => {
+                        return {
+                            round: Number(value.M.round.N),
+                            date: value.M.date.S
                         }
-                        if (method === StatsMethod.diffMaxMin && (params && params.to - params.from > 6)) {
-                            const PACK = 2;
-                            for (const v in ideal) {
-                                ideal[v as AssemblyVersion] = compressNumbers(ideal[v as AssemblyVersion], PACK);
-                                actual[v as AssemblyVersion] = compressNumbers(actual[v as AssemblyVersion], PACK);
-                            }
-                            pos = compressNumbers(pos, PACK);
+                    }));
+                    break;
+                case StatsMethod.line:
+                    resolve({
+                        all: data.Item.All.L.map(value => Number(value.N)),
+                        latest: data.Item.Latest.L.map(value => Number(value.N)),
+                        total: getCurrentRound()
+                    })
+                    break;
+                default:
+                    if (method === StatsMethod.sum && params && params.from) {
+                        params.from -= 21;
+                        params.to -= 21;
+                    } else if (method === StatsMethod.diffMaxMin && params) {
+                        if (params.list) {
+                            params.list = params.list.map(value => value - 5);
+                        } else {
+                            params.from -= 5; params.to -= 5;
                         }
-                        
-                        const dbData: DBData = { ideal, actual, pos };
-                        if (item.Stats) {
-                            const stats: Stats = {
-                                mean: Number(item.Stats.M.mean.N),
-                                stdev: Number(item.Stats.M.stdev.N),
-                                max: Number(item.Stats.M.max.N),
-                                min: Number(item.Stats.M.min.N)
-                            }
-                            dbData.stats = stats;
+                    }
+                    const ideal: Assembly = makeAssembly(data.Item.Ideal.M, params);
+                    const actual: Assembly = makeAssembly(data.Item.Actual.M, params);
+                    let pos: number[] = transformNumbers(data.Item.Pos.L, params);
+                    if (method === StatsMethod.sum) {
+                        const PACK = 10;
+                        for (const v in ideal) {
+                            ideal[v as AssemblyVersion] = compressNumbers(ideal[v as AssemblyVersion], PACK);
+                            actual[v as AssemblyVersion] = compressNumbers(actual[v as AssemblyVersion], PACK);
                         }
-                        if (item.Piece) {
-                            const piece = item.Piece.L.map(item => Number(item.N));
-                            dbData.piece = piece;
-                            dbData.total = getCurrentRound();
+                        pos = compressNumbers(pos, PACK);
+                    }
+                    if (method === StatsMethod.diffMaxMin && (params && params.to - params.from > 6)) {
+                        const PACK = 2;
+                        for (const v in ideal) {
+                            ideal[v as AssemblyVersion] = compressNumbers(ideal[v as AssemblyVersion], PACK);
+                            actual[v as AssemblyVersion] = compressNumbers(actual[v as AssemblyVersion], PACK);
                         }
-                        resolve(dbData);
-                        break;
-                }
+                        pos = compressNumbers(pos, PACK);
+                    }
+
+                    const dbData: DBData = { ideal, actual, pos };
+                    if (data.Item.Stats) {
+                        const stats: Stats = {
+                            mean: Number(data.Item.Stats.M.mean.N),
+                            stdev: Number(data.Item.Stats.M.stdev.N),
+                            max: Number(data.Item.Stats.M.max.N),
+                            min: Number(data.Item.Stats.M.min.N)
+                        }
+                        dbData.stats = stats;
+                    }
+                    if (data.Item.Piece) {
+                        const piece = data.Item.Piece.L.map(item => Number(item.N));
+                        dbData.piece = piece;
+                        dbData.total = getCurrentRound();
+                    }
+                    resolve(dbData);
+                    break;
             }
         });
     });
@@ -183,6 +168,5 @@ function makeAssembly(obj: DynamoDB.MapAttributeValue, params?: QueryStatsParams
         all: transformNumbers(obj.all && obj.all.L, params),
         latest: transformNumbers(obj.latest && obj.latest.L, params),
     };
-
     return result;
 }
