@@ -160,13 +160,13 @@ function transformNumbers(list: DynamoDB.ListAttributeValue, params?: QueryStats
 }
 
 function makeAssembly(obj: DynamoDB.MapAttributeValue, params?: QueryStatsParams): Assembly {
-    const result: Assembly = {
+    return {
         $12: transformNumbers(obj.$12 && obj.$12.L, params),
         $24: transformNumbers(obj.$24 && obj.$24.L, params),
         $48: transformNumbers(obj.$48 && obj.$48.L, params),
         $192: transformNumbers(obj.$192 && obj.$192.L, params),
         all: transformNumbers(obj.all && obj.all.L, params),
         latest: transformNumbers(obj.latest && obj.latest.L, params),
+        latest12: transformNumbers(obj.latest12 && obj.latest12.L, params),
     };
-    return result;
 }

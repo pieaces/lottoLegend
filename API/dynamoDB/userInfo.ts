@@ -13,8 +13,8 @@ const ExpressionAttributeNames = {
     '#Until': 'Until'
 };
 
-export function getPlan(userName:string):Promise<Plan>{
-    const params:GetItemInput = {
+export function getPlan(userName: string): Promise<Plan> {
+    const params: GetItemInput = {
         TableName: 'LottoUsers',
         ExpressionAttributeNames,
         ProjectionExpression: '#Plan, #Until',
@@ -25,13 +25,13 @@ export function getPlan(userName:string):Promise<Plan>{
         }
     };
     return new Promise((resolve, reject) => {
-        dynamoDB.getItem(params, (err:AWSError, data:GetItemOutput) => {
+        dynamoDB.getItem(params, (err: AWSError, data: GetItemOutput) => {
             if (err) {
                 reject(err);
             }
             else {
                 const item = data.Item;
-                let plan:Plan = Plan.default;
+                let plan: Plan = Plan.default;
                 if ('Plan' in item && 'Until' in item) {
                     const _plan = item.Plan.S;
                     const now = Number(new Date());

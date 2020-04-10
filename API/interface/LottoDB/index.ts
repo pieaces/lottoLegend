@@ -20,6 +20,7 @@ export interface Assembly {
     $192: number[];
     all: number[];
     latest: number[];
+    latest12: number[];
 }
 export interface DBData {
     ideal: Assembly;
