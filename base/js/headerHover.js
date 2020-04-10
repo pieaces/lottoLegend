@@ -66,6 +66,7 @@ export function mqInit() {
             }
             document.querySelector('.click-menu-qna').classList.remove('none');
             current = 4;
+            menu.style.borderBottom = "1px solid #09538e";
             e.stopPropagation();
         }
 
