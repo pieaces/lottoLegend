@@ -22,7 +22,7 @@ export default class LottoProcess extends LottoMap {
             $192: sampleMethod.actual.bind(this)({ mode: 192 }),
             all: sampleMethod.actual.bind(this)({}),
             latest: sampleMethod.actual.bind(this)({ mode: -5 }),
-            latest12: sampleMethod.ideal.bind(this)({ mode: -12 })
+            latest12: sampleMethod.actual.bind(this)({ mode: -12 })
         };
         //const coef = this.coefHelper({ mode: -5 }, method);
         const pos = this.methodMap.get(method).ideal.bind(this)({mode:1});
