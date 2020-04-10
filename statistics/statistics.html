@@ -258,7 +258,7 @@
                                 <div>4</div>
                                 <div>5</div>
                             </div>
-                            <div class="chart-title">1~12회차 종합</div>
+                            <div class="chart-title" id="chart-line-title">1~12회차 종합</div>
                             <div class="chart-line-container">
                                 <canvas id="chart-line"></canvas>
                             </div>
@@ -270,7 +270,26 @@
                         </div>
 
                     </div>
-
+                    <div class="main-box">
+                    <div class="chart-container box-color">
+                        <div class="chart-slide-title">
+                            전체 요약
+                        </div>
+                        <div class="chart-slide-num chart-bar-num">
+                            <div class="chart-slide-current">1</div>
+                            <div>2</div>
+                            <div>3</div>
+                        </div>
+                        <div class="chart-title" id="chart-bar-title">1~12회차 종합</div>
+                        <div class="chart-bar-slide-container">
+                            <canvas id="chart-bar-slide" ></canvas>
+                        </div>
+                        <div class="chart-slide-btn-box">
+                            <i id="left-bar-chart-btn" class="chart-btn left-chart-btn fas fa-angle-left"></i>
+                            <i id="right-bar-chart-btn" class="chart-btn right-chart-btn fas fa-angle-right"></i>
+                        </div>
+                    </div>
+                </div>
                     <div class="main-box">
                         <div class="chart-container chart-bar-container-box box-color">
                             <div class="chart-slide-title">

@@ -12,7 +12,7 @@ const labels = require('../system/premium/DataAPI/json/labels.json');
 const lineNum = document.querySelectorAll<HTMLElement>('.chart-line-num > div');
 const leftBtn = document.getElementById('left-line-chart-btn');
 const rightBtn = document.getElementById('right-line-chart-btn');
-const lineTitle = document.querySelector<HTMLElement>('.chart-title');
+const lineTitle = document.querySelector<HTMLElement>('#chart-line-title');
 
 const method = getQueryStringObject().method;
 const lineCanvas: HTMLCanvasElement = document.querySelector('#chart-line');
