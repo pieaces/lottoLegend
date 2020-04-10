@@ -126,6 +126,24 @@
   height: calc(60% - 0.7rem);
 }
 
+.main-top-img-bot{
+  display:flex;
+  height: 50%;
+}
+
+.main-top-img-1{
+width: 100%;
+height: 50%;
+}
+
+.main-top-img-2{
+width: 50%;
+}
+
+.main-top-img-3{
+  width: 50%;
+}
+
 .login-container {
   display: flex;
   flex-direction: column;
