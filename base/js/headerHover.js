@@ -8,7 +8,10 @@ const menuInfo = document.querySelector('.mid-nav-info');
 const menuTitleQna = document.querySelector('#qna-anchor');
 const logo=document.querySelector('#logo');
 
-export function mqInit() {
+mqInit();
+menuInfoToggle();
+
+ function mqInit() {
     let menuTitleEventHandler = [];
     let menuTitleQnaEvent;
     let menuExceptEvent;
@@ -145,11 +148,11 @@ function menuHoverRemoveEvent() {
 function mqDeskTopInit() {
     logo.setAttribute('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAAAyAQMAAACEQrBZAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABFJREFUeNpjYBgFo2AUDHcAAAPoAAHOSUxYAAAAAElFTkSuQmCC');
     menu.classList.add('none');
-    menuTitleQna.setAttribute('href', '/board/qna/list.html');
+    menuTitleQna.setAttribute('href', '/board/qna/qnaList.html');
     menuHoverAddEvent();
 }
 
-export function menuInfoToggle() {
+ function menuInfoToggle() {
     let flag = false;
     menuInfoText.addEventListener('click', (e) => {
         if (!flag) {

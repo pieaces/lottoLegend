@@ -145,7 +145,7 @@ function menuHoverRemoveEvent() {
 function mqDeskTopInit() {
     logo.setAttribute('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAAAyAQMAAACEQrBZAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABFJREFUeNpjYBgFo2AUDHcAAAPoAAHOSUxYAAAAAElFTkSuQmCC');
     menu.classList.add('none');
-    menuTitleQna.setAttribute('href', '/board/qna/list.html');
+    menuTitleQna.setAttribute('href', '/board/qna/qnaList.html');
     menuHoverAddEvent();
 }
 
