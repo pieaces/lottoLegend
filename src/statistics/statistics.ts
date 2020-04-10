@@ -69,25 +69,6 @@ const lineDataBox = {
     ]
 };
 
-const leftBarBtn: HTMLElement = document.querySelector('#left-bar-chart-btn');
-const rightBarBtn: HTMLElement = document.querySelector('#right-bar-chart-btn');
-const barNum = document.querySelectorAll('.chart-bar-num > div');
-const bar1Canvas: HTMLCanvasElement = document.querySelector('#chart-bar-slide');
-const barTitle = document.querySelector<HTMLElement>('#chart-bar-title');
-
-const bar1DataBox = {
-    labels: null,
-    datasets: [
-        {
-            label: Slide.EXPECTED_TEXT,
-            backgroundColor: '#00B2EA',
-            data: null
-        }
-    ]
-};
-const bar1Option = {
-}
-
 const bar2Canvas: HTMLCanvasElement = document.querySelector('#chart-bar');
 const bar2DataBox = {
     labels: null,
@@ -121,6 +102,7 @@ loading.classList.remove('none');
 
 getUnAuthAPI('/stats/piece', { method })
     .then(data => {
+        console.log(data);
         mean.textContent = Number(data.stats.mean).toFixed(2);
         $68.textContent = rangeMake(data.stats);
         $95.textContent = rangeMake(data.stats, 2);
@@ -145,23 +127,43 @@ getUnAuthAPI('/stats/piece', { method })
         }
         makeClickable(lineSlide, setText.bind(lineSlide));
 
-        const barInstance1 = new ChartBase('bar', bar1Canvas, bar1DataBox, bar1Option);
-        barInstance1.create();
-        const barSlide = new BarSlide(barInstance1, barNum, leftBarBtn, rightBarBtn);
-        barSlide.setData(data);
-        barSlide.init();
-        const setText2: () => void = function (this: any) {
-            switch (this.current) {
-                case 0: barTitle.textContent = Slide.EXPECTED_TEXT;
-                    break;
-                case 1: barTitle.textContent = Slide.ACTUAL_TEXT;
-                    break;
-                case 2: barTitle.textContent = '예상대비 초과비율(%)';
-                    break;
-            }
-        }
-        makeClickable(barSlide, setText2.bind(barSlide));
+        const leftBarBtn: HTMLElement = document.querySelector('#left-bar-chart-btn');
+        const rightBarBtn: HTMLElement = document.querySelector('#right-bar-chart-btn');
+        const barNum = document.querySelectorAll('.chart-bar-num > div');
+        const bar1Canvas: HTMLCanvasElement = document.querySelector('#chart-bar-slide');
+        const barTitle = document.querySelector<HTMLElement>('#chart-bar-title');
 
+        if (data.ideal.latest12) {
+            document.getElementById('bar1-box').classList.remove('none');
+            const bar1DataBox = {
+                labels: labels[method],
+                datasets: [
+                    {
+                        label: Slide.EXPECTED_TEXT,
+                        backgroundColor: '#00B2EA',
+                        data: null
+                    }
+                ]
+            };
+            const bar1Option = {
+            }
+            const barInstance1 = new ChartBase('bar', bar1Canvas, bar1DataBox, bar1Option);
+            barInstance1.create();
+            const barSlide = new BarSlide(barInstance1, barNum, leftBarBtn, rightBarBtn);
+            barSlide.setData(data);
+            barSlide.init();
+            const setText2: () => void = function (this: any) {
+                switch (this.current) {
+                    case 0: barTitle.textContent = Slide.EXPECTED_TEXT;
+                        break;
+                    case 1: barTitle.textContent = Slide.ACTUAL_TEXT;
+                        break;
+                    case 2: barTitle.textContent = '예상대비 초과비율(%)';
+                        break;
+                }
+            }
+            makeClickable(barSlide, setText2.bind(barSlide));
+        }
         const barLabels = [];
         for (let i = data.total - 49; i <= data.total; i++) barLabels.push(i);
         bar2DataBox.labels = barLabels;

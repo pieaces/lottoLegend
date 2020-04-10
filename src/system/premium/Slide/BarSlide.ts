@@ -27,7 +27,7 @@ export default class BarSlide extends Slide<ChartBase> {
                 const temp = [];
                 for (let i = 0; i < this.data.ideal['latest12'].length; i++) {
                     const datum = (this.data.actual['latest12'][i] - this.data.ideal['latest12'][i]) / this.data.ideal['latest12'][i] * 100;
-                    temp.push(datum);
+                    temp.push(datum === -100 ? null : datum);
                 }
                 rep.data = temp;
                 break;
@@ -36,8 +36,8 @@ export default class BarSlide extends Slide<ChartBase> {
     }
     init(){
         this.current = 0;
-        this.chart.dataBox.datasets[0].data = this.data.ideal['$12'];
-        this.chart.dataBox.datasets[1].data = this.data.actual['$12'];
+        this.chart.dataBox.datasets[0].data = this.data.ideal['latest12'];
+        this.chart.dataBox.datasets[0].label = Slide.EXPECTED_TEXT;
         this.chart.update();
     }
 }
