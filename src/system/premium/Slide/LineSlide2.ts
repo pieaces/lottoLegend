@@ -3,7 +3,7 @@ import LineSlide from "./LineSlide";
 import { IDataAPI } from "../Layout";
 
 export default class LineSlide2 extends LineSlide {
-    dataAPI:IDataAPI;
+    protected dataAPI:IDataAPI;
     constructor(lineInstance: ChartBase, numBtns: NodeListOf<Element>, leftBtn: HTMLElement, rightBtn: HTMLElement, table?: HTMLElement, valueBox1?: HTMLElement, valueBox2?: HTMLElement) {
         super(lineInstance, numBtns, leftBtn, rightBtn, table, valueBox1, valueBox2);
     }
@@ -52,7 +52,7 @@ export default class LineSlide2 extends LineSlide {
         }
     }
     init() {
-        super.init(this.dataAPI.getStats());
+        this.setData(this.dataAPI.getStats());
         this.numBtns[this.current].classList.remove(this.CURRENT_CSS);
         this.current = 0;
         this.numBtns[this.current].classList.add(this.CURRENT_CSS);

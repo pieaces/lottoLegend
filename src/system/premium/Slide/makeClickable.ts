@@ -12,7 +12,7 @@ export default function makeClickable(obj: Slide<ChartBase>, setText?: () => voi
                 obj.current--;
                 obj.numBtns[obj.current].classList.add(obj.CURRENT_CSS);
             }
-            obj.setData();
+            obj.updateData();
             if (setText) setText.call(obj);
         });
     }
@@ -26,7 +26,7 @@ export default function makeClickable(obj: Slide<ChartBase>, setText?: () => voi
                 obj.current++;
             }
             obj.numBtns[obj.current].classList.add(obj.CURRENT_CSS);
-            obj.setData();
+            obj.updateData();
             if (setText) setText.call(obj);
         });
     }
@@ -37,7 +37,7 @@ export default function makeClickable(obj: Slide<ChartBase>, setText?: () => voi
                 obj.numBtns[obj.current].classList.remove(obj.CURRENT_CSS);
                 obj.current = i;
                 obj.numBtns[obj.current].classList.add(obj.CURRENT_CSS);
-                obj.setData();
+                obj.updateData();
                 if (setText) setText.call(obj);
             });
         }

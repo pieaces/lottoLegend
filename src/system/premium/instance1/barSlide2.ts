@@ -1,4 +1,4 @@
-import BarSlide from "../Slide/BarSlide";
+import BarSlide from "../Slide/BarSlide2";
 import makeClickable from "../Slide/makeClickable";
 import ChartBase from "../Chart/Charts";
 import Slide from "../Slide";

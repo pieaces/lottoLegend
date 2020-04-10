@@ -1,5 +1,5 @@
-import BarSlide from "../Slide/BarSlide";
-import barSlide from "../instance1/barSlide";
+import BarSlide from "../Slide/BarSlide2";
+import barSlide from "../instance1/barSlide2";
 import lineSlide from '../instance1/lineSlide2'
 import bubbleChart from '../instance1/bubbleInstance'
 import LineSlide2 from "../Slide/LineSlide2";

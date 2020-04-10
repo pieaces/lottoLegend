@@ -1,26 +1,27 @@
 import configure from '../amplify/configure'
 import ChartBase from '../system/premium/Chart/Charts';
 import LineSlide from '../system/premium/Slide/LineSlide'
+import BarSlide from '../system/premium/Slide/BarSlide'
 import { getUnAuthAPI } from '../amplify/api';
 import { getQueryStringObject, rangeMake } from '../functions';
 import makeClickable from '../system/premium/Slide/makeClickable';
 import { getStaticsName,mqMobileInit } from './functions';
+import Slide from '../system/premium/Slide';
 
 configure();
 
 const labels = require('../system/premium/DataAPI/json/labels.json');
+const method = getQueryStringObject().method;
+const mean = document.querySelector<HTMLElement>('.stats-mean-value');
+const $68 = document.querySelector<HTMLElement>('.stats-68-value');
+const $95 = document.querySelector<HTMLElement>('.stats-95-value');
+document.querySelector<HTMLElement>('.main-title').textContent = getStaticsName(method);
+
+const lineCanvas: HTMLCanvasElement = document.querySelector('#chart-line');
 const lineNum = document.querySelectorAll<HTMLElement>('.chart-line-num > div');
 const leftBtn = document.getElementById('left-line-chart-btn');
 const rightBtn = document.getElementById('right-line-chart-btn');
 const lineTitle = document.querySelector<HTMLElement>('#chart-line-title');
-
-const method = getQueryStringObject().method;
-const lineCanvas: HTMLCanvasElement = document.querySelector('#chart-line');
-const mean = document.querySelector<HTMLElement>('.stats-mean-value');
-const $68 = document.querySelector<HTMLElement>('.stats-68-value');
-const $95 = document.querySelector<HTMLElement>('.stats-95-value');
-
-document.querySelector<HTMLElement>('.main-title').textContent = getStaticsName(method);
 const lineOption: Chart.ChartOptions = {
     tooltips: {
         mode: 'index',
@@ -47,7 +48,6 @@ const lineOption: Chart.ChartOptions = {
     },
 }
 const lineDataBox = {
-
     labels: labels[method],
     datasets: [
         {
@@ -69,9 +69,27 @@ const lineDataBox = {
     ]
 };
 
-const barCanvas: HTMLCanvasElement = document.querySelector('#chart-bar');
-const barDataBox = {
+const leftBarBtn: HTMLElement = document.querySelector('#func1-left-bar-chart-btn');
+const rightBarBtn: HTMLElement = document.querySelector('#func1-right-bar-chart-btn');
+const barNum = document.querySelectorAll('.func1-chart-bar-num > div');
+const bar1Canvas: HTMLCanvasElement = document.querySelector('#func1-chart-bar');
+const barTitle = document.querySelector<HTMLElement>('#func1-bar-table');
 
+const bar1DataBox = {
+    labels: null,
+    datasets: [
+        {
+            label: Slide.EXPECTED_TEXT,
+            backgroundColor: '#00B2EA',
+            data: null
+        }
+    ]
+};
+const bar1Option = {
+}
+
+const bar2Canvas: HTMLCanvasElement = document.querySelector('#chart-bar');
+const bar2DataBox = {
     labels: null,
     datasets: [
         {
@@ -80,7 +98,7 @@ const barDataBox = {
         }
     ]
 };
-const barOption: Chart.ChartOptions = {
+const bar2Option: Chart.ChartOptions = {
     scales: {
         yAxes: [{
             ticks: {
@@ -100,6 +118,7 @@ const barOption: Chart.ChartOptions = {
 mqMobileInit();
 const loading = document.querySelector<HTMLElement>('.loading-box');
 loading.classList.remove('none');
+
 getUnAuthAPI('/stats/piece', { method })
     .then(data => {
         mean.textContent = Number(data.stats.mean).toFixed(2);
@@ -108,7 +127,8 @@ getUnAuthAPI('/stats/piece', { method })
         const lineInstance = new ChartBase('line', lineCanvas, lineDataBox, lineOption);
         lineInstance.create();
         const lineSlide = new LineSlide(lineInstance, lineNum, leftBtn, rightBtn);
-        lineSlide.init(data);
+        lineSlide.setData(data);
+        lineSlide.init();
         const setText: () => void = function (this: any) {
             switch (this.current) {
                 case 0: lineTitle.textContent = '1~12회차 종합';
@@ -125,12 +145,29 @@ getUnAuthAPI('/stats/piece', { method })
         }
         makeClickable(lineSlide, setText.bind(lineSlide));
 
+        const barInstance1 = new ChartBase('bar', bar1Canvas, bar1DataBox, bar1Option);
+        barInstance1.create();
+        const barSlide = new BarSlide(barInstance1, barNum, leftBarBtn, rightBarBtn);
+        barSlide.setData(data);
+        barSlide.init();
+        const setText2: () => void = function (this: any) {
+            switch (this.current) {
+                case 0: barTitle.textContent = Slide.EXPECTED_TEXT;
+                    break;
+                case 1: barTitle.textContent = Slide.ACTUAL_TEXT;
+                    break;
+                case 2: barTitle.textContent = '예상대비 초과비율(%)';
+                    break;
+            }
+        }
+        makeClickable(barSlide, setText2.bind(barSlide));
+
         const barLabels = [];
         for (let i = data.total - 49; i <= data.total; i++) barLabels.push(i);
-        barDataBox.labels = barLabels;
-        barDataBox.datasets[0].data = data.piece
-        const barInstance = new ChartBase('bar', barCanvas, barDataBox, barOption);
-        barInstance.create();
+        bar2DataBox.labels = barLabels;
+        bar2DataBox.datasets[0].data = data.piece
+        const barInstance2 = new ChartBase('bar', bar2Canvas, bar2DataBox, bar2Option);
+        barInstance2.create();
         loading.classList.add('none');
     });
 
