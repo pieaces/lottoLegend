@@ -296,7 +296,7 @@
       align-items: center;
       justify-content: space-between;
       height: 5.5rem;
-      padding:0 1.5rem;
+      padding:0 1.2rem;
     }
 
     .mid-nav-logo{
@@ -327,6 +327,7 @@
     .mid-nav-info-box > li:not(:first-child){
       margin-left:1rem;
     }
+
 
     .hover-menu-box.container{
       width:100%;

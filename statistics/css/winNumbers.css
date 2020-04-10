@@ -227,6 +227,10 @@
         flex-direction: column;
     }
 
+    .arrow-btn-box > i{
+        font-size:3rem;
+    }
+
     .lotto-num-container{
         order:1;
     }
@@ -254,7 +258,7 @@
 
 @media (min-width: 0px) and (max-width: 480px) {
     .win-num-box{
-        margin:0 0.5rem;
+        margin:0 0.2rem;
     }
     .win-num{
         width:2.8rem;
