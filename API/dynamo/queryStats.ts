@@ -133,16 +133,13 @@ function transformNumbers(list: AWS.DynamoDB.ListAttributeValue, params: QuerySt
 }
 
 function makeAssembly(obj: AWS.DynamoDB.MapAttributeValue, params: QueryStatsParams): Assembly {
-    let result: Assembly;
-
-    result = {
+    return{
         $12: transformNumbers(obj.$12.L, params),
         $24: transformNumbers(obj.$24.L, params),
         $48: transformNumbers(obj.$48.L, params),
         $192: transformNumbers(obj.$192.L, params),
         all: transformNumbers(obj.all.L, params),
         latest: transformNumbers(obj.latest.L, params),
+        latest12: transformNumbers(obj.latest12.L, params)
     };
-
-    return result;
 }

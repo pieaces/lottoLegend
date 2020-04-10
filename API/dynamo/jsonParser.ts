@@ -35,6 +35,11 @@ export default function dynamoDBJson(data: dynamoData, option: any = null) {
                     "L": data.latest.map(item => {
                         return { "N": item.toString() };
                     })
+                },
+                "latest12": {
+                    "L": data.latest12.map(item => {
+                        return { "N": item.toString() };
+                    })
                 }
             }
         }

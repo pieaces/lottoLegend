@@ -11,7 +11,8 @@ export enum AssemblyVersion {
     $48 = "$48",
     $192 = "$192",
     all = "all",
-    latest = "latest"
+    latest = "latest",
+    latest12 = "latest12"
 }
 export interface Assembly {
     $12: number[];
@@ -20,6 +21,7 @@ export interface Assembly {
     $192: number[];
     all: number[];
     latest: number[];
+    latest12: number[];
 }
 export interface DBData {
     ideal: Assembly;
