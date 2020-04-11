@@ -1,0 +1,35 @@
+.lotto-num-container{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    padding-top:10rem;
+}
+
+.lotto-num-box{
+  table-layout: fixed;
+  width:60%;
+  height:100%;
+}
+
+.lotto-num-box th{
+    height:3rem;
+}
+
+.lotto-num-box td{
+    width: 100%;
+    height: 5rem;
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+.lotto-num-box th{
+    background-color: #f6f6f6;
+    font-size:1.5rem;
+    font-weight: bold;
+}
+
+.lotto-num-checked{
+    background-color: rgb(156, 101, 207);
+    color:white;
+}
+
