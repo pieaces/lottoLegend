@@ -106,7 +106,6 @@ loading.classList.remove('none');
 }).then(() => loading.classList.add('none'));
 method && getUnAuthAPI('/stats/piece', { method })
     .then(data => {
-        console.log(data);
         mean.textContent = Number(data.stats.mean).toFixed(2);
         $68.textContent = rangeMake(data.stats);
         $95.textContent = rangeMake(data.stats, 2);
@@ -179,7 +178,7 @@ method && getUnAuthAPI('/stats/piece', { method })
             const carryNumberContainer = document.querySelector<HTMLDivElement>('.carry-number-container');
             makeCarryNumbers(carryNumberContainer, data.total, data.lottos, data.piece.reverse());
         }
-    }).catch((err) => console.log(err));
+    }).catch((err) => networkAlert());
 
 const filterBox = document.querySelector('.filter-box');
 const filterArrow = document.querySelector('.filter-arrow');
