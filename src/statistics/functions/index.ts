@@ -112,7 +112,7 @@ export function makeCarryNumbers(container: HTMLElement, _round: number, numsArr
     container.appendChild(numContainer);
 round--;
 
-    for (let index = 1; index < info.length; index++) {
+    for (let index = 1; index < numsArr.length; index++) {
         upperBoxes = underBoxes;
         underBoxes = [];
 
