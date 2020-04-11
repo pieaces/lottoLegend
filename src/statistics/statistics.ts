@@ -3,11 +3,11 @@ import ChartBase from '../system/premium/Chart/Charts';
 import LineSlide from '../system/premium/Slide/LineSlide'
 import BarSlide from '../system/premium/Slide/BarSlide'
 import { getUnAuthAPI } from '../amplify/api';
-import { getQueryStringObject, rangeMake } from '../functions';
+import { getQueryStringObject, rangeMake, networkAlert } from '../functions';
 import makeClickable from '../system/premium/Slide/makeClickable';
-import { getStaticsName,mqMobileInit } from './functions';
+import { getStaticsName, mqMobileInit, makeCarryNumbers } from './functions';
 import Slide from '../system/premium/Slide';
-import {setColorLotto} from '../functions/index';
+import Swal from 'sweetalert2';
 
 configure();
 
@@ -100,8 +100,11 @@ const bar2Option: Chart.ChartOptions = {
 mqMobileInit();
 const loading = document.querySelector<HTMLElement>('.loading-box');
 loading.classList.remove('none');
-
-getUnAuthAPI('/stats/piece', { method })
+!method && Swal.fire({
+    title: '잘못된 접근입니다',
+    icon: 'warning'
+}).then(() => loading.classList.add('none'));
+method && getUnAuthAPI('/stats/piece', { method })
     .then(data => {
         console.log(data);
         mean.textContent = Number(data.stats.mean).toFixed(2);
@@ -172,7 +175,11 @@ getUnAuthAPI('/stats/piece', { method })
         const barInstance2 = new ChartBase('bar', bar2Canvas, bar2DataBox, bar2Option);
         barInstance2.create();
         loading.classList.add('none');
-    });
+        if (method === 'carryCount') {
+            const carryNumberContainer = document.querySelector<HTMLDivElement>('.carry-number-container');
+            makeCarryNumbers(carryNumberContainer, data.total, data.lottos, data.piece.reverse());
+        }
+    }).catch((err) => console.log(err));
 
 const filterBox = document.querySelector('.filter-box');
 const filterArrow = document.querySelector('.filter-arrow');
@@ -204,39 +211,3 @@ document.addEventListener('click', () => {
         flag = false;
     }
 })
-
-const canvasContainer=document.querySelector('.canvas-container');
-
-function makeCanvas(data){
-    const canvasBox=document.createElement('div');
-    canvasBox.classList.add('canvas-box');
-
-    const canvas=document.createElement('canvas');
-    canvas.classList.add('box-color');
-
-    canvasBox.appendChild(canvas);
-
-    const numContainer=document.createElement('div');
-    numContainer.classList.add('canvas-num-container');
-    numContainer.classList.add('box-color');
-
-    const times=document.createElement('div');
-    times.classList.add('canvas-num-times');
-    times.textContent="905";
-
-    numContainer.appendChild(times);
-
-    const numBox=document.createElement('div');
-    numBox.classList.add('canvas-num-box');
-
-    data.forEach(item=>{
-        const div=document.createElement('div');
-        div.textContent=item.toString();
-        setColorLotto(item,div);
-        numBox.appendChild(div);
-    })
-
-    numContainer.appendChild(numBox);
-    canvasBox.appendChild(numContainer);
-    canvasContainer.insertBefore(canvasBox, canvasContainer.firstChild);
-}

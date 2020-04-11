@@ -1,5 +1,12 @@
-
-
+.line{
+  position: absolute;;
+  width:20px;
+  margin-top:-1px;
+  background-color:#006700;
+}
+.line-box{
+  height: 5rem;
+}
 .main-box{
   width:100%; 
   margin-bottom:5rem;
@@ -187,6 +194,7 @@
 }
 
 .canvas-num-box > div{
+  z-index:1;
   display: flex;
   align-items: center;
   justify-content: center;
