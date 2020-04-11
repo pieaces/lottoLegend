@@ -2,12 +2,13 @@ import { ScanInput, ScanOutput, UpdateItemInput } from "aws-sdk/clients/dynamodb
 import dynamoDB from ".";
 import { AWSError } from "aws-sdk";
 import { getCurrentRound } from "./functions";
+import { queryLotto } from "./queryLotto";
 
 enum Tool {
     'free' = 'a',
     'premium' = 'b'
 }
-function scanUsersTool(round: number): Promise<{ userName: string, tools?: Tool[] }[]> {
+function scanUsersTool(round: number): Promise<{ userName: string, numsArr?:number[][], tools?: Tool[] }[]> {
     const params: ScanInput = {
         TableName: 'LottoUsers',
         ExpressionAttributeNames: {
@@ -19,32 +20,38 @@ function scanUsersTool(round: number): Promise<{ userName: string, tools?: Tool[
     return new Promise((resolve, reject) => {
         dynamoDB.scan(params, (err: AWSError, data: ScanOutput) => {
             if (err) reject(err);
-            const result = data.Items.map(item => {
+            resolve(data.Items.map(item => {
                 return {
                     userName: item.UserName.S,
+                    numsArr: item.Numbers && item.Numbers.M[round].L.map(myNumbers => myNumbers.M.numbers.NS.map(num => Number(num))),
                     tools: item.Numbers && item.Numbers.M[round].L.map(myNumbers => myNumbers.M.tool.S) as Tool[],
                 }
-            });
-            resolve(result);
+            }));
         });
     });
 }
 
 export default async function autoDelete() {
-    const round = getCurrentRound() - 3;
+    const round = getCurrentRound() - 4;
     const users = await scanUsersTool(round);
+    const lotto = await queryLotto(round);
     for(let i=0; i<users.length; i++){
         const user = users[i];
         const deleteIndex: number[] = [];
         user.tools && user.tools.forEach((tool, index) => {
-            if (tool === Tool.free)
-                deleteIndex.push(index);
+            if (tool === Tool.free) {
+                let count = 0;
+                user.numsArr[index].forEach(num => {
+                    if(lotto.some(item => item === num)) count++;
+                });
+                if(count < 3) deleteIndex.push(index);
+            }
         });
         if (deleteIndex.length > 0) {
             await deleteUsersLotto(user.userName, round, deleteIndex);
         }
     }
-    console.log('autoDelete 완료');
+    console.log(`${round}회: autoDelete 완료`);
 }
 
 function deleteUsersLotto(userName: string, round: number, indexes: number[]): Promise<void> {
