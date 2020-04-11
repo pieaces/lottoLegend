@@ -16,7 +16,7 @@ const commContentAnchor = document.querySelectorAll<HTMLElement>('.community-con
 isLogedIn().then((result) => {
     if(result){
         //로그인
-        const nickname = document.querySelector('.nickname');
+        const nickname = document.querySelector('#main-nickname');
         getNickName().then(name => nickname.textContent = name);
         loginContainer.classList.add('none');
         loginAfterBox.classList.remove('none');

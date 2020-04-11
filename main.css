@@ -223,7 +223,7 @@ width: 50%;
 #point{
   margin-right: 0;
   color:#09538e;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 #service{
@@ -233,12 +233,13 @@ width: 50%;
 
 .login-after-nickname {
   display:inline-block;
-  width:15rem;
+  width:16rem;
   font-size:1.4rem;
-  font-weight: bold;
   letter-spacing: 0.1rem;
 }
-
+#main-nickname{
+  font-weight: bold;
+}
 .login-after-anchor-box{
   display:flex;
   align-items: center;
