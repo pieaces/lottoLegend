@@ -7,6 +7,7 @@ import { getQueryStringObject, rangeMake } from '../functions';
 import makeClickable from '../system/premium/Slide/makeClickable';
 import { getStaticsName,mqMobileInit } from './functions';
 import Slide from '../system/premium/Slide';
+import {setColorLotto} from '../functions/index';
 
 configure();
 
@@ -203,3 +204,39 @@ document.addEventListener('click', () => {
         flag = false;
     }
 })
+
+const canvasContainer=document.querySelector('.canvas-container');
+
+function makeCanvas(data){
+    const canvasBox=document.createElement('div');
+    canvasBox.classList.add('canvas-box');
+
+    const canvas=document.createElement('canvas');
+    canvas.classList.add('box-color');
+
+    canvasBox.appendChild(canvas);
+
+    const numContainer=document.createElement('div');
+    numContainer.classList.add('canvas-num-container');
+    numContainer.classList.add('box-color');
+
+    const times=document.createElement('div');
+    times.classList.add('canvas-num-times');
+    times.textContent="905";
+
+    numContainer.appendChild(times);
+
+    const numBox=document.createElement('div');
+    numBox.classList.add('canvas-num-box');
+
+    data.forEach(item=>{
+        const div=document.createElement('div');
+        div.textContent=item.toString();
+        setColorLotto(item,div);
+        numBox.appendChild(div);
+    })
+
+    numContainer.appendChild(numBox);
+    canvasBox.appendChild(numContainer);
+    canvasContainer.insertBefore(canvasBox, canvasContainer.firstChild);
+}
