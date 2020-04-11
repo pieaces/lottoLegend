@@ -1,0 +1,34 @@
+.lotto-num-wrapper{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    padding-top:10rem;
+}
+
+.lotto-num-container{
+    width:40%;
+}
+
+.lotto-num-box{
+  table-layout: fixed;
+  width:85%;
+  height:100%;
+  margin: 0 auto;
+  padding:1rem 2rem;
+}
+
+
+.lotto-num {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 3rem;
+  margin: 1rem auto;
+  border-radius: 0.4rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  box-shadow: 1px 1px 3px rgba(97, 87, 87, 0.4);
+  color: black;
+  font-size: 1.3rem ;
+}
