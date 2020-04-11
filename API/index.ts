@@ -1,7 +1,7 @@
 import { LottoNumber } from "./interface/Lotto";
 import { StatsMethod, QueryStatsParams } from "./interface/LottoDB";
 import { getCurrentRound } from "./funtions";
-import { queryStats, queryLotto } from "./dynamoDB/lottoData";
+import { queryStats, queryLotto, scanLotto } from "./dynamoDB/lottoData";
 import { getPlan, Plan } from "./dynamoDB/userInfo";
 import verify from "./auth";
 import Response from "./Response";
@@ -106,6 +106,10 @@ exports.handler = async (event: any) => {
             body = await queryStats(method as StatsMethod,
                 ProjectionExpression,
                 ExpressionAttributeNames);
+            if (method === StatsMethod.carryCount || method === 'pos$1') {
+                body.lottos = await scanLotto(50);
+                body.total = getCurrentRound();
+            }
         }
     }
     const response = {

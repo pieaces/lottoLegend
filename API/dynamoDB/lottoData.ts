@@ -1,10 +1,10 @@
-import { DynamoDB } from 'aws-sdk'
+import { DynamoDB, AWSError } from 'aws-sdk'
 import { Stats } from '../interface/Statistics';
 import { StatsMethod, DBData, Assembly, AssemblyVersion, QueryStatsParams } from '../interface/LottoDB';
 import { LottoNumber } from '../interface/Lotto';
 import { dynamoDB } from '.'
 import { getCurrentRound } from '../funtions';
-import { GetItemInput, GetItemOutput } from 'aws-sdk/clients/dynamodb';
+import { GetItemInput, GetItemOutput, ScanOutput, ScanInput } from 'aws-sdk/clients/dynamodb';
 export async function queryLotto(round: number): Promise<LottoNumber[]> {
     const params: GetItemInput = {
         ProjectionExpression: 'Numbers',
@@ -25,6 +25,20 @@ export async function queryLotto(round: number): Promise<LottoNumber[]> {
                 const numbers = item.Numbers.NS.map(value => Number(value)).sort((a, b) => a - b);
                 resolve(numbers as LottoNumber[]);
             }
+        });
+    });
+}
+export async function scanLotto(latest: number): Promise<number[][]> {
+    const params: ScanInput = {
+        ProjectionExpression: 'Round, Numbers',
+        TableName: "LottoData",
+    };
+    return await new Promise((resolve, reject) => {
+        dynamoDB.scan(params, function (err: AWSError, data: ScanOutput) {
+            if (err) reject(err);
+            resolve(
+                data.Items.sort((a, b) => Number(a.Round.N) - Number(b.Round.N)).slice(-1-latest, -1).map(item => item.Numbers.NS.map(num => Number(num)).sort((a,b)=>a-b))
+            );
         });
     });
 }
