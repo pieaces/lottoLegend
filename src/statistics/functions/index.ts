@@ -156,7 +156,6 @@ round--;
 function makeNumContainer() {
     const numContainer = document.createElement('div');
     numContainer.classList.add('canvas-num-container');
-    numContainer.classList.add('box-color');
     return numContainer;
 }
 function makeRoundElement(round: number) {

@@ -162,6 +162,15 @@
   align-items: center;
   justify-content: center;
   height:7rem;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.carry-number-container > div:last-child .canvas-num-container{
+  border-bottom: none;
+}
+
+.line-box ~ .canvas-num-container{
+  border-top: 1px solid rgba(0,0,0,0.1);
 }
 
 .canvas-num-times {
