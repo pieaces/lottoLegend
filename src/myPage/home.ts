@@ -57,6 +57,7 @@ Auth.currentAuthenticatedUser()
             service.textContent = plan;
             if (until) {
                 expireDate.textContent = '~' + isoStringToDate(until);
+                document.querySelector<HTMLElement>('.mypage-day-week-receive-box').classList.remove('none');
             } else {
                 document.getElementById('gaip').classList.remove('none');
             }

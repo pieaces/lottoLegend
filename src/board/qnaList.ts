@@ -1,5 +1,8 @@
-const boardTitleText=document.querySelectorAll('.board-title-text');
+import configure from "../amplify/configure";
 
+configure();
+
+const boardTitleText=document.querySelectorAll('.board-title-text');
 boardTextToggle();
 
 function boardTextToggle(){
