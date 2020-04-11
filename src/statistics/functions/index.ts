@@ -181,6 +181,8 @@ function makeNumbersElement(numbers: number[]) {
 }
 
 function adjustLine(from: HTMLElement, to: HTMLElement, canvas:HTMLElement) {
+    from.classList.add('canvas-num-checked');
+    to.classList.add('canvas-num-checked');
     var fT = from.offsetTop + from.offsetHeight / 2;
     var tT = to.offsetTop + to.offsetHeight / 2;
     var fL = from.offsetLeft + from.offsetWidth / 2;
