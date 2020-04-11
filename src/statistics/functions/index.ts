@@ -97,8 +97,8 @@ export function mqMobileInit() {
 
 export function makeCarryNumbers(container: HTMLElement, _round: number, numsArr: number[][], info: number[]) {
     let round = _round;
-    let upperBoxes:HTMLDivElement[] = [];
-    let underBoxes:HTMLDivElement[] = [];
+    let upperBoxes: HTMLDivElement[] = [];
+    let underBoxes: HTMLDivElement[] = [];
 
     const numContainer = makeNumContainer();
     numContainer.appendChild(makeRoundElement(round));
@@ -110,7 +110,7 @@ export function makeCarryNumbers(container: HTMLElement, _round: number, numsArr
     });
     numContainer.appendChild(numBox);
     container.appendChild(numContainer);
-round--;
+    round--;
 
     for (let index = 1; index < numsArr.length; index++) {
         upperBoxes = underBoxes;
@@ -118,8 +118,8 @@ round--;
 
         const oneLine = document.createElement('div');
 
-        let lineBox:HTMLDivElement;
-        if (info[index-1]) {
+        let lineBox: HTMLDivElement;
+        if (info[index - 1]) {
             lineBox = document.createElement('div');
             lineBox.classList.add('line-box');
             oneLine.appendChild(lineBox);
@@ -137,13 +137,13 @@ round--;
         numContainer.appendChild(numBox);
         oneLine.appendChild(numContainer);
 
-        let count =0;
-        for(let i =0; i<6; i++){
-            for(let j = 0; j<6; j++){
-                if(count >= info[index-1]) break;
+        let count = 0;
+        for (let i = 0; i < 6; i++) {
+            for (let j = 0; j < 6; j++) {
+                if (count >= info[index - 1]) break;
 
-                if(Number(underBoxes[i] && underBoxes[i].textContent) === Number(upperBoxes[j].textContent)){
-                    adjustLine(underBoxes[i], upperBoxes[j], lineBox);
+                if (Number(underBoxes[i] && underBoxes[i].textContent) === Number(upperBoxes[j].textContent)) {
+                    adjustLine(underBoxes[i], upperBoxes[j], lineBox, Number(underBoxes[i].textContent));
                     count++;
                 }
             }
@@ -179,7 +179,7 @@ function makeNumbersElement(numbers: number[]) {
     });
 }
 
-function adjustLine(from: HTMLElement, to: HTMLElement, canvas:HTMLElement) {
+function adjustLine(from: HTMLElement, to: HTMLElement, canvas: HTMLElement, num: number) {
     from.classList.add('canvas-num-checked');
     to.classList.add('canvas-num-checked');
     var fT = from.offsetTop + from.offsetHeight / 2;
@@ -209,13 +209,79 @@ function adjustLine(from: HTMLElement, to: HTMLElement, canvas:HTMLElement) {
     top -= H / 2;
     const lineElement = document.createElement('div');
     lineElement.classList.add('line');
+    setColorLotto(num, lineElement);
+    
+    const darkenColor = LightenDarkenColor(lineElement.style.backgroundColor, -85);
+    from.style.borderColor = darkenColor;
+    to.style.borderColor = darkenColor;
     lineElement.style["-webkit-transform"] = 'rotate(' + ANG + 'deg)';
     lineElement.style["-moz-transform"] = 'rotate(' + ANG + 'deg)';
     lineElement.style["-ms-transform"] = 'rotate(' + ANG + 'deg)';
     lineElement.style["-o-transform"] = 'rotate(' + ANG + 'deg)';
     lineElement.style["-transform"] = 'rotate(' + ANG + 'deg)';
     lineElement.style.top = top + 'px';
-    lineElement.style.left = left-10 + 'px';
+    lineElement.style.left = left - 7 + 'px';
     lineElement.style.height = H + 'px';
     canvas.appendChild(lineElement);
 }
+
+function LightenDarkenColor(_colorCode:string, amount:number) {
+    let colorCode = _colorCode;
+    if (colorCode[0] == "#") {
+        colorCode = colorCode.slice(1);
+    }else{
+        colorCode = rgbToHex(colorCode).slice(1);
+    }
+ 
+    var num = parseInt(colorCode, 16);
+ 
+    var r = (num >> 16) + amount;
+ 
+    if (r > 255) {
+        r = 255;
+    } else if (r < 0) {
+        r = 0;
+    }
+ 
+    var b = ((num >> 8) & 0x00FF) + amount;
+ 
+    if (b > 255) {
+        b = 255;
+    } else if (b < 0) {
+        b = 0;
+    }
+ 
+    var g = (num & 0x0000FF) + amount;
+ 
+    if (g > 255) {
+        g = 255;
+    } else if (g < 0) {
+        g = 0;
+    }
+ 
+    return  "#"  + (g | (b << 8) | (r << 16)).toString(16);
+}
+
+function rgbToHex ( rgbType ){ 
+    var rgb = rgbType.replace( /[^%,.\d]/g, "" ); 
+    rgb = rgb.split( "," ); 
+
+    for ( var x = 0; x < 3; x++ ) { 
+            if ( rgb[ x ].indexOf( "%" ) > -1 ) rgb[ x ] = Math.round( parseFloat( rgb[ x ] ) * 2.55 ); 
+    } 
+
+    var toHex = function( string ){ 
+            string = parseInt( string, 10 ).toString( 16 ); 
+            string = ( string.length === 1 ) ? "0" + string : string; 
+
+            return string; 
+    }; 
+
+    var r = toHex( rgb[ 0 ] ); 
+    var g = toHex( rgb[ 1 ] ); 
+    var b = toHex( rgb[ 2 ] ); 
+
+    var hexType = "#" + r + g + b; 
+
+    return hexType; 
+} 
