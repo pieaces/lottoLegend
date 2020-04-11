@@ -33,3 +33,89 @@
     color:white;
 }
 
+.chart-slide-btn-box{
+    display:flex;
+    align-items: flex-end;
+    justify-content: center;
+    height:5rem;
+    background-color: #f0f0f0;
+  }
+  
+  .chart-btn{
+    margin-bottom:-1rem;
+    font-size:4rem;
+    color:#999;
+    cursor: pointer;
+  }
+  
+  .left-chart-btn {
+    margin-right: 1.5rem;
+  }
+  
+  .right-chart-btn {
+    margin-left: 1.5rem;
+  }
+
+  .main-box{
+    width:100%; 
+    margin-bottom:5rem;
+  }
+  .chart-container{
+    position: relative;
+    width: 100%;
+    border-top:3rem solid #f0f0f0;
+    border-right:2.5rem solid #f0f0f0;
+    border-bottom:3rem solid #f0f0f0;
+    border-left:2.5rem solid #f0f0f0;
+    border-radius: 1rem;
+  }
+  
+  .chart-slide-title{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height:5rem;
+    margin-top:-3rem;
+    background-color: #f0f0f0;
+    font-size:1.8rem;
+  }
+  
+  .chart-slide-num {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height:7rem;
+    border-radius: 2rem;
+    font-size:1.8rem;
+  }
+  
+  .chart-slide-num > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+  }
+  
+  .chart-slide-current {
+    border: 6px solid #a5484c;
+  }
+  
+  
+  .chart-title{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height:3rem;
+    border-top:1px solid rgba(0,0,0,0.1);
+    border-bottom:1px solid rgba(0,0,0,0.1);
+    background-color: #f6f6f6;
+    font-size:1.4rem;
+  }
+  
+  .chart-line-container{
+    height: 30rem;
+    } 
