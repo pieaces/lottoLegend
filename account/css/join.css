@@ -2,15 +2,14 @@
 .join-container-box {
     margin-bottom:5rem;
   }
+
+  .join-box{
+    display:flex;
+    border-top:1px solid rgba(0, 0, 0, 0.1);
+  }
   
   .join-container-box > div.join-box:last-child{
     border-bottom:1px solid rgba(0, 0, 0, 0.1);
-  }
-    
-  .join-box{
-    display:flex;
-    width:100%;
-    border-top:1px solid rgba(0, 0, 0, 0.1);
   }
   
   .join-title-box{
@@ -18,25 +17,19 @@
     align-items: center;
     justify-content:center;
     width:25%;
-    padding:1rem;
     border-right:1px solid rgba(0, 0, 0, 0.1);
     background-color: rgb(245,245,245);
     font-size:1.6rem;
     word-break: keep-all;
-  }
-  
-  .join-title{
-    display:flex;
-    align-items: center;
-    justify-content: center;
     text-align: center;
   }
   
+
   .join-input-box{
     display:flex;
     align-items: center;
     width:75%;
-    padding:1rem;
+    padding:1rem 0 1rem 1rem;
   }
   
   .join-input-box  input{
@@ -45,9 +38,14 @@
   }
   
   .join-info-box{
-    padding:1rem;
+    padding-left:1rem;
     font-size:1.4rem;
     word-break: keep-all;
+  }
+
+  .join-btn-box{
+    display:flex;
+    justify-content: center;
   }
   
   .join-btn {
@@ -56,28 +54,6 @@
     background-color: #09538e;
     color:white;
     font-size: 1.5rem;
-  }
-  
-  .join-btn-box{
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    height:20rem;
-  }
-  
-  .join-phone-box > select{
-    width:6rem;
-    height:3.4rem;
-    font-size:1.2rem;
-  }
-  
-  .join-phone-box > input{
-    width:10rem;
-    height:3.4rem;
-  }
-  
-  .dash{
-    padding:0.5rem;
   }
   
   @media (min-width: 0px) and (max-width: 767px) {

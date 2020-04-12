@@ -1,6 +1,5 @@
 
 /* footer */
-
 /* top-footer */
 
 .top-footer-container {
@@ -40,9 +39,7 @@
 .bottom-footer {
   display: flex;
   align-items:center;
-  padding-top:1rem;
-  padding-bottom: 1rem;
-
+  padding:1rem 0;
 }
 
 .bottom-footer > h1 {
@@ -65,12 +62,13 @@
 }
 
 .bottom-footer-content > p:not(:nth-child(1)) {
-  margin-bottom: 0.5rem;
   text-align: center;
 }
+
 #copyright{
   margin-top: 3rem;
 }
+
 @media (min-width:0px) and (max-width: 1024px) {
   .bottom-footer {
     display: block;
@@ -82,9 +80,6 @@
     padding:1rem 0;
   }
   
-  .bottom-footer-content > p > span{
-    display:block;
-  }
   }
   
   @media (min-width:0px) and (max-width: 1024px) and (orientation: landscape) {
@@ -96,10 +91,6 @@
     .bottom-footer > h1 {
       margin:0 auto;
       padding:1rem 0;
-    }
-    
-    .bottom-footer-content > p > span{
-      display:block;
     }
     
   }

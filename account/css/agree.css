@@ -14,20 +14,15 @@
   }
   
   .signup-checkbox-container{
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    width:4rem;
     margin-right:1rem;
   }
-  
+
+  .signup-terms-use-check-text{
+    font-size:1.4rem;
+  }
   
   .signup-terms-use-tab-box{
     margin-bottom:3rem;
-  }
-  
-  .signup-terms-use-check-text{
-    font-size:1.4rem;
   }
   
   .signup-terms-use-check-container{
@@ -45,7 +40,6 @@
   
   .signup-terms-use-btn-box{
     display:flex;
-    align-items: center;
     justify-content: center;
   }
   

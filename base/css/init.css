@@ -58,20 +58,21 @@ ul {
 input {
   outline: none;
   border: 1px solid rgb(190,190,190);
+  padding:0 1rem;
 }
 
 input:focus {
   border: 1px solid #09538e;
 }
 
+input[type="checkbox"],
+input[type="file"]{
+  padding:0;
+}
+
 input[type="checkbox"]{
   cursor: pointer;
 }
-
-input:not([type="checkbox"]){
-  padding:0 1rem;
-}
-
 
 /* button */
 
@@ -137,10 +138,10 @@ input:not([type="checkbox"]){
   position: absolute;
   width: 10rem;
   height: 10rem;
-  border: 2rem solid #19598c;
+  border-width: 2rem solid;
   border-radius: 50%;
-  animation: loading 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   border-color: #19598c transparent transparent transparent;
+  animation: loading 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
 }
 .loading div:nth-child(1) {
   animation-delay: -0.45s;
@@ -173,7 +174,7 @@ input:not([type="checkbox"]){
 }
 
 .swal2-container.swal2-center{
-  align-items: center !important;
+  align-items: center !important; /*유의*/
 }
 
 .swal2-footer a{
@@ -217,24 +218,25 @@ input:not([type="checkbox"]){
 
 .rank-first,.rank-second,.rank-third{
   background-size: 200% 200%;
+  border: 0.1rem solid;
 }
 
 .rank-first{
   color: rgb(153, 84, 195);
   background: linear-gradient(45deg, #f3cc00 10%,rgba(255,255,255,1) 56%, gold 90%);
-  border: 0.1rem solid #d387ff;
+  border-color: #d387ff;
 }
 
 .rank-second{
   color: rgb(0, 173, 165);
   background: linear-gradient(45deg, rgb(136, 136, 136) 0%,rgb(243, 243, 243) 56%,rgba(149, 148, 148, 0.5) 96%);
-  border: 0.1rem solid #89b1ff;
+  border-color:#89b1ff;
 }
 
 .rank-third{
   color: rgb(187, 117, 47);
   background: linear-gradient(45deg, rgb(216, 141, 66) 3%,rgb(226, 226, 226) 56%,rgb(212, 138, 64) 95%);
-  border: 0.1rem solid #cebfb9;
+  border-color: #cebfb9;
 }
 
 

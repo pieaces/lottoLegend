@@ -1,12 +1,16 @@
+.board-container{
+    margin-bottom: 5rem;
+}
+
 .board-title{
     display:flex;
-    padding:2rem;
+    padding:2rem 0 2rem 2rem;
     border-bottom: 1px solid rgba(0,0,0,0.1);
     font-size:1.6rem;  
 }
 .board-title> i{
-    color:rgb(127, 127, 226);
     margin-right: 2rem;
+    color:rgb(127, 127, 226);
     font-size: 2rem;
 }
 
@@ -18,7 +22,7 @@
     display:flex;
     border-bottom: 1px solid rgba(0,0,0,0.1);
     background-color: #f6f6f6;
-    padding:2rem;
+    padding:2rem 0 2rem 2rem;
     font-size:1.4rem;
 }
 

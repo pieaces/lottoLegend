@@ -17,6 +17,10 @@
     padding-top: 7rem;
   }
 
+  .anchor-box {
+    margin-bottom: 1rem;
+  }
+
   .anchor-title{
     display: flex;
     align-items: center;
@@ -25,10 +29,6 @@
     background-color:#0b65ad;
     color: white;
     font-size: 2rem;
-  }
-
-  .anchor-box {
-    margin-bottom: 1rem;
   }
 
   .anchor-list-container{
@@ -45,10 +45,6 @@
     text-align: center;
   }
 
-  .anchor-list-container > li:last-child{
-    border:none;
-  }
-  
   .anchor-list-container > li > h3{
     display:flex;
     align-items: center;
@@ -124,8 +120,6 @@
     .aside{
       display:none;
     }
-
-
 
     .left-right-container{
       display:block;

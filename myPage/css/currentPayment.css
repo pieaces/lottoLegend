@@ -2,10 +2,6 @@
     margin-bottom: 1rem;
 }
 
-.pay-account-info-box{
-    margin-bottom: 1rem;
-}
-
 .board-header {
     display: flex;
     align-items: center;
@@ -16,33 +12,11 @@
     font-size:1.6rem;
   }
   
-  .board-title {
-    flex:1;
-    color:#424242;
-    font-size:1.4rem;
-  }
-  
-  .board-content {
-      flex:5;
-      color: #424242;
-    font-size:1.3rem;
-  }
-  
+
   /* board-section */
-  
-  .board-section {
-    display: flex;
-    flex-direction: column;
-  }
 
   .board-section > .board-box:last-child{
       border-bottom: none;
-  }
-  
-  .board-section > .board-box > .board-title > a{
-    white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
   }
   
   /* board-box */
@@ -59,8 +33,20 @@
     padding-left:1rem;
   }
 
+  .board-title {
+    flex:1;
+    color:#424242;
+    font-size:1.4rem;
+  }
+  
+  .board-content {
+      flex:5;
+      color: #424242;
+    font-size:1.3rem;
+  }
+  
 .board-s-box{
-    padding:0.5rem 0.5rem 0.5rem 2rem;
+    padding:0.5rem 0 0.5rem 2rem;
     color: rgb(90, 90, 90);
     font-size:1.3rem;
 }

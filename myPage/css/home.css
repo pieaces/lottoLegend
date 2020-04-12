@@ -1,21 +1,3 @@
-#day-receive{
-  height: 2.5rem;
-  width: 7rem;
-}
-.day-time{
-  margin-left:1rem;
-}
-.mypage-num-container >div.none-box{
-  border-bottom:1px solid rgba(0, 0, 0, 0.1);
-}
-
-.mypage-table-num{
- border-right: none; 
-}
-
-.mypage-table-iswin{
-  display:none;
-}
 
 .mypage-title{
   display:flex;
@@ -51,15 +33,14 @@ align-items: center;
 font-size: 1.4rem;
 }
 
-.mypage-last-result-box .mypage-info-list-title{
-  width: 6rem;
-}
-
-
 .mypage-info-box > li >div{
   display: flex;
   align-items: center;
  height:100%; 
+}
+
+.mypage-last-result-box .mypage-info-list-title{
+  width: 6rem;
 }
 
 .mypage-info-win-num-container{
@@ -80,7 +61,7 @@ font-size: 1.4rem;
   margin-right:1rem;
 }
 
-#service-expiry-date{
+#service-expire-date{
   color: rgb(113, 113, 113);
   font-weight: 500;
   font-size: 1.3rem;
@@ -93,7 +74,8 @@ font-size: 1.4rem;
 
 .mypage-nickname,
 .mypage-service,
-.mypage-phone  {
+.mypage-phone ,
+.mypage-day-week-receive-box {
   justify-content: space-between;
 }
 
@@ -115,14 +97,12 @@ font-size: 1.4rem;
   margin-left: 0.5rem;
 }
 
-.mypage-day-week-receive-box{
-  display:flex;
-  align-items: center;
-  justify-content: space-between;
+#day-receive{
+  width: 7rem;
+  height: 2.5rem;
 }
-
-#day-week-receive{
-  padding:0.2rem;
+.day-time{
+  margin-left:1rem;
 }
 
 .plus{
@@ -134,14 +114,13 @@ font-size: 1.4rem;
   align-items: center;
   justify-content: space-around;
   width: 100%;
-  padding-top:0.3rem;
 }
 
 .mypage-win-num > div{
   display: inline-block;
   width: 2.8rem;
   height: 2.8rem;
-  margin:0 0.5rem 0.5rem 0;
+  margin-right:0.5rem;
   border-radius: 50%;
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
   color: white;
@@ -150,9 +129,7 @@ font-size: 1.4rem;
   font-size:1.4rem;
 }
 
-.mypage-num-box{
-  width:100%;
-  height:100%;
+.mypage-num-box{  
   padding:1rem 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   font-size:0;
@@ -206,6 +183,10 @@ font-size: 1.4rem;
   margin-bottom:1rem;
 }
 
+.mypage-table-iswin{
+  display:none;
+}
+
 .mypage-table-num-box .none-box{
   border-top: 1px solid rgba(0,0,0,0.1);
   border-left: 1px solid rgba(0,0,0,0.1);
@@ -213,43 +194,17 @@ font-size: 1.4rem;
   border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
-.mypage-notice-box > i{
-  position: relative;
-  color: #09538e;
-  font-size:3rem;
-  cursor: pointer;
+.mypage-num-container >div.none-box{
+  border-bottom:1px solid rgba(0, 0, 0, 0.1);
 }
 
-.mypage-notice-box > i:hover{
-  animation: swing 0.6s ease;
-}
-
-.mypage-notice-num{
-  position: absolute;
-  top:0;
-  right:-1rem;
-  width:2.5rem;
-  padding:0.1rem;
-  border:2px solid white;
-  border-radius: 0.7rem;
-  background-color: #09538e;
-  color:white;
-  font-size:1.2rem;
+.mypage-table-num{
+ border-right: none; 
 }
 
 .swal2-title{
   font-size: 2rem !important;
 }
-
-@keyframes swing
-{
-    0% { transform:rotateZ(0); }
-    25%{ transform:rotateZ(25deg); }
-    50%{ transform:rotateZ(-15deg); }
-    75%{ transform:rotateZ(10deg); }
-    100%{ transform:rotateZ(0); }
-}
-
 
 @media (min-width: 0px) and (max-width: 767px) {
 

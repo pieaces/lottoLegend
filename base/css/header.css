@@ -22,8 +22,6 @@
 }
 
 .mid-nav-logo{
-  display: flex;
-  align-items: center;
   margin-left: 3rem;
 }
 
@@ -38,15 +36,6 @@
   display:flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 100%;
-  color:white;
-  font-size:3rem;
-}
-
-.mid-nav-logo > a>img{
-  width: 100%;
-  height: 100%;
 }
 
 .mid-nav-menu {
@@ -119,9 +108,9 @@
   z-index: 98;
   width: 15rem;
   padding:0.5rem 0;
-  background: white;
   border:1px solid rgba(0, 0, 0, 0.1);
 	border-radius: 0.4rem;
+  background: white;
 }
 
 .mid-nav-info:after {
@@ -135,13 +124,13 @@
 	border: 1rem solid transparent;
 	border-bottom-color: white;
 	border-top: 0;
-	margin-left: 5.4rem;
 	margin-top: -0.9rem;
+	margin-left: 5.4rem;
 }
 
 .mid-nav-info-list{
   width: 100%;
-  color:black;
+  color:#424242;
   text-align: center;
 }
 
@@ -165,10 +154,8 @@
 }
 
 .bottom-nav-right{
-  color: #777777;
   display:flex;
   align-items: center;
-  font-size:1.6rem;
 }
 
 .bottom-nav-right > a {
@@ -183,7 +170,6 @@
   font-size:1.3rem;
 }
 
-
 .click-menu-container{
   position: absolute;
   top:100%;
@@ -191,7 +177,6 @@
   z-index:97;
   width: 100%;
   background-color: white;
-  color:black;
 }
 
 .click-menu-box{
@@ -213,25 +198,15 @@
   flex:0 0 auto;
   width:12rem;
   height:5rem;
-  font-size:1.3rem;
   word-break: keep-all;
-  text-align: center;
 }
 
 .click-menu-box > li > a{
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
   height: 100%;
-}
-
-.click-menu-toggle{
-  position: absolute;
-  top:0;
-  right:0;
-  width:6rem;
-  height:100%;
+  font-size:1.3rem;
 }
 
 .hover-menu-container{
@@ -248,8 +223,6 @@
 
 .hover-menu-container >ul{
   flex:1;
-  display:flex;
-  flex-direction: column;
   border-left:1px solid rgb(210,210,210);
 }
 
@@ -259,8 +232,6 @@
 
 .hover-menu-container > ul > li{
   height:4rem;
-  color:rgb(97, 97, 97);
-  text-align: center;
 }
 
 .hover-menu-container > ul > li >a{
@@ -268,7 +239,6 @@
   color:rgb(97, 97, 97);
   width: 100%;
   height: 100%;
-  margin-left:-0.6rem;
   padding:1rem 0;
   font-size:1.3rem;
   text-align: center;
@@ -296,15 +266,11 @@
       align-items: center;
       justify-content: space-between;
       height: 5.5rem;
-      padding:0 1.2rem;
+      padding:0 0.7rem;
     }
 
     .mid-nav-logo{
       margin-left:0;
-    }
-
-    .mid-nav-logo > a{
-      font-size:2.8rem;
     }
 
     .mid-nav-menu{
@@ -326,20 +292,6 @@
 
     .mid-nav-info-box > li:not(:first-child){
       margin-left:1rem;
-    }
-
-
-    .hover-menu-box.container{
-      width:100%;
-      margin:0;
-    }
-
-    .hover-menu-box >ul:first-child{
-      display:none;
-    }
-
-    .hover-menu-box > ul >li{
-      height:6rem;
     }
 
     .bottom-nav-container {
