@@ -42,7 +42,7 @@ export default class Expectation extends Base {
         const { count } = this.returnParams(defaultParam, params);
 
         const pos = [5 / 45, 5 / 45, 5 / 45, 5 / 45, 5 / 45, 4 / 45, 4 / 45, 4 / 45, 4 / 45, 4 / 45];
-        return pos.map(value => value * count);
+        return pos.map(value => value * count*6);
     }
     expectedExcludedLineCount(params: Params = {}): number[] {
         const defaultParam = { from: 0, to: 4, mode: this.mode }
