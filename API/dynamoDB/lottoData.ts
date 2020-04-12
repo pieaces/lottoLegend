@@ -37,7 +37,7 @@ export async function scanLotto(latest: number): Promise<number[][]> {
         dynamoDB.scan(params, function (err: AWSError, data: ScanOutput) {
             if (err) reject(err);
             resolve(
-                data.Items.sort((a, b) => Number(a.Round.N) - Number(b.Round.N)).slice(-1-latest, -1).map(item => item.Numbers.NS.map(num => Number(num)).sort((a,b)=>a-b))
+                data.Items.sort((a, b) => Number(b.Round.N) - Number(a.Round.N)).slice(1, 1+latest).map(item => item.Numbers.NS.map(num => Number(num)).sort((a,b)=>a-b))
             );
         });
     });
