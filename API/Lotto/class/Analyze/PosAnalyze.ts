@@ -3,7 +3,13 @@ export default class PosAnalyze {
     protected constructor() {}
     private static ratio$1(numbers: number[]): number[] {
         const result: number[] = new Array<number>(PosNumber.$1).fill(0);
-        numbers.forEach((value) => result[value % 10]++);
+        numbers.forEach((value) => {
+            switch(value){
+                case 0: result[PosNumber.$1 - 1]++;
+                break;
+                default: result[(value - 1) % 10]++;
+            }
+        });
         /*
         return result.map((value, index) => {
             if (index > 5) return value * (5 / 4);

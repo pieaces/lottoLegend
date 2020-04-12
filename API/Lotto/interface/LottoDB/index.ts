@@ -55,7 +55,9 @@ export enum Method {
     howLongNone = "howLongNone",
     frequency = "frequency",
 //
-    line = "line"
+    line = "line",
+//
+    pos$1 = 'pos$1'
 }
 
 export interface QueryStatsParams extends Params {

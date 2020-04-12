@@ -36,6 +36,9 @@ export default class Gather extends Expectation {
         return result;
     }
 
+    gatherPos$1(params: Params = { mode: this.mode }): number[] {
+        return Analyze.posCount$1(this.getLNumbers(params.mode));
+    }
     gatherExcludedLineCount(params: Params = { from: 0, to: 4, mode: this.mode }): number[] {
         const helper: Helper = {
             method: Calculate.excludedLineCount,

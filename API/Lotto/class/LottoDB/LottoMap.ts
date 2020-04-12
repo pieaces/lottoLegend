@@ -13,6 +13,12 @@ interface MethodMap {
 export default class LottoMap extends Lotto{
     methodMap = new Map<Method, MethodMap>([
         [
+            Method.pos$1, {
+                ideal: this.expectedPos$1,
+                actual: this.gatherPos$1,
+            }
+        ],
+        [
             Method.excludedLineCount, {
                 ideal: this.expectedExcludedLineCount,
                 actual: this.gatherExcludedLineCount,

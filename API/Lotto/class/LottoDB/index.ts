@@ -61,7 +61,7 @@ export default class LottoStatDB extends LottoProcess {
                     if (dbData.stats) {
                         Item["Stats"] = dynamoDBJson(dbData.stats);
                     }
-                    if(method !== Method.excludedLine && method !== Method.carryCount){
+                    if(method !== Method.excludedLine && method !== Method.carryCount && method !== Method.pos$1){
                         Item["Piece"] = {
                             L: this.getLNumbers(-50).map(numbers => {
                                 return {
