@@ -60,7 +60,7 @@ const stackOption: Chart.ChartOptions = {
 };
 
 const winBox = document.querySelector<HTMLElement>('.win-num-box');
-const round = document.getElementById('round');
+//const round = document.getElementById('round');
 const winner = document.getElementById('winner');
 const winAmount = document.getElementById('winAmount');
 const date = document.getElementById('date');

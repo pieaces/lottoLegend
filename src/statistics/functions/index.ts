@@ -5,9 +5,9 @@ export function getStaticsName(method: string) {
     switch (method) {
         case 'excludedLineCount': name = '전멸구간 개수'
             break;
-        case "carryCount": name = '이월 개수'
+        case "carryCount": name = '이월개수 & 이월수'
             break;
-        case "lowCount": name = '저값(1~22) 개수'
+        case "lowCount": name = '저값 개수'
             break;
         case "sum": name = '번호 합계'
             break;

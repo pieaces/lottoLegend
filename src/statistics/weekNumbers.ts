@@ -25,7 +25,7 @@ getUnAuthAPI('/numbers/week')
             const { data } = await getUnAuthAPI('/numbers/week/' + option.value);
             makeTable(data);
         });
-    }).catch(err => networkAlert());
+    }).catch(() => networkAlert());
 
 function makeTable(dataSet: ({ round: string, numbers: number[], hits?: boolean[] })[]) {
     numWeekWrapper.innerHTML = '';

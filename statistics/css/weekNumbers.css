@@ -141,9 +141,6 @@
     margin: 5rem 0;
 }
 
-
-
-
 @media (min-width: 0px) and (max-width: 767px) {
     .num-week-section {
         display: block;
