@@ -86,17 +86,17 @@ getUnAuthAPI('/stats/piece', { method: 'pos$1' })
         makeClickable(lineSlide, setText.bind(lineSlide));
 
         roundEl.forEach((element, index) => {
-            element.textContent = (data.total-index).toString();
+            element.textContent = (data.total - index).toString();
         });
-        
-        for(let i=0; i<numsEl.length; i++){
+
+        for (let i = 0; i < numsEl.length; i++) {
             console.log(numsEl[i]);
-            data.lottos[i].forEach(num =>{
-                const index = num%10;
-                switch(index){
+            data.lottos[i].forEach(num => {
+                const index = num % 10;
+                switch (index) {
                     case 0:
-                    check(numsEl[i].children[10] as HTMLElement);
-                    break;
+                        check(numsEl[i].children[10] as HTMLElement);
+                        break;
                     default: check(numsEl[i].children[index] as HTMLElement);
                 }
             })
@@ -105,11 +105,18 @@ getUnAuthAPI('/stats/piece', { method: 'pos$1' })
         loading.classList.add('none');
     });
 
-function check(div:HTMLElement){
-    if(div.classList.contains('lotto-num-checked')){
+function check(div: HTMLElement) {
+    if (div.classList.contains('lotto-num-checked')) {
         div.style.backgroundColor = 'rgb(101, 39, 158)';
         div.textContent = '2';
-    }else{
+    } else if (div.textContent === '') {
         div.classList.add('lotto-num-checked');
+        div.textContent = '1';
+    } else if (div.textContent === '3') {
+        div.style.backgroundColor = 'rgb(15, 0, 29)';
+        div.textContent = '4';
+    } else if (div.textContent === '2') {
+        div.style.backgroundColor = 'rgb(46, 8, 80)';
+        div.textContent = '3';
     }
 }
