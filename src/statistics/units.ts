@@ -5,7 +5,7 @@ import makeClickable from "../system/premium/Slide/makeClickable";
 import configure from "../amplify/configure";
 
 configure();
-const roundEl = document.querySelectorAll('.lotto-num-box tr > td:nth-child(1)');
+const roundEl = document.querySelectorAll('.one-line > td:nth-child(1)');
 const numsEl = document.querySelectorAll('.one-line');
 
 const lineCanvas: HTMLCanvasElement = document.querySelector('#chart-line');

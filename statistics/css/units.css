@@ -119,3 +119,7 @@
   .chart-line-container{
     height: 30rem;
     } 
+
+    .lotto-num-box tr:nth-child(1)~tr > td:first-child{
+      font-weight: 500;
+    }
