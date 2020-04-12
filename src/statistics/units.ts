@@ -7,7 +7,7 @@ import configure from "../amplify/configure";
 configure();
 const roundEl = document.querySelectorAll('.one-line > td:nth-child(1)');
 const numsEl = document.querySelectorAll('.one-line');
-
+const sum = document.querySelector<HTMLElement>('#sum');
 const lineCanvas: HTMLCanvasElement = document.querySelector('#chart-line');
 const lineNum = document.querySelectorAll<HTMLElement>('.chart-line-num > div');
 const leftBtn = document.getElementById('left-line-chart-btn');
@@ -89,6 +89,7 @@ getUnAuthAPI('/stats/piece', { method: 'pos$1' })
             element.textContent = (data.total - index).toString();
         });
 
+        const unitsList:number[] = new Array(10).fill(0);
         for (let i = 0; i < numsEl.length; i++) {
             console.log(numsEl[i]);
             data.lottos[i].forEach(num => {
@@ -96,12 +97,17 @@ getUnAuthAPI('/stats/piece', { method: 'pos$1' })
                 switch (index) {
                     case 0:
                         check(numsEl[i].children[10] as HTMLElement);
+                        unitsList[9]++;
                         break;
-                    default: check(numsEl[i].children[index] as HTMLElement);
+                    default:
+                        check(numsEl[i].children[index] as HTMLElement);
+                        unitsList[index-1]++;
                 }
             })
         }
-
+        for(let i=1; i<sum.children.length; i++){
+            sum.children[i].textContent = unitsList[i-1].toString();
+        }
         loading.classList.add('none');
     });
 
