@@ -98,14 +98,31 @@ exports.handler = async (event: any) => {
             }
             break;
         case '/stats/piece': {
-            let ProjectionExpression:string;
-            const plan:Plan = currentId && await getPlan(currentId);
-            if(plan !== Plan.basic) ProjectionExpression = 'Ideal.#12,Ideal.#24,Ideal.#48,Ideal.#192,Ideal.#all, Ideal.latest12, Actual.#12,Actual.#24,Actual.#48,Actual.#192,Actual.#all,Actual.latest12, Pos, Stats, Piece';
-            else ProjectionExpression = 'Ideal.#12,Ideal.#24,Ideal.#48,Ideal.#192,Ideal.#all, Actual.#12,Actual.#24,Actual.#48,Actual.#192,Actual.#all, Pos, Stats, Piece';
-            const ExpressionAttributeNames = { '#12': '$12', '#24': '$24', '#48': '$48', '#192': '$192', '#all': 'all' };
-            body = await queryStats(method as StatsMethod,
-                ProjectionExpression,
-                ExpressionAttributeNames);
+            let ProjectionExpression: string;
+            let ExpressionAttributeNames: any;
+            if (method !== StatsMethod.frequency) {
+                ProjectionExpression = 'Ideal.#12,Ideal.#24,Ideal.#48,Ideal.#192,Ideal.#all, Ideal.latest12, Actual.#12,Actual.#24,Actual.#48,Actual.#192,Actual.#all,Actual.latest12, Pos, Stats, Piece';
+                ExpressionAttributeNames = { '#12': '$12', '#24': '$24', '#48': '$48', '#192': '$192', '#all': 'all' };
+                body = await queryStats(method as StatsMethod,
+                    ProjectionExpression,
+                    ExpressionAttributeNames);                
+            }
+            else {
+                ProjectionExpression = '#List';
+                ExpressionAttributeNames = {
+                    "#List": 'List'
+                };
+                const result: any = {};
+                result.total = getCurrentRound();
+                result.frequency = await queryStats(StatsMethod.frequency,
+                    ProjectionExpression,
+                    ExpressionAttributeNames);
+                result.frequency12 = await queryStats(StatsMethod.frequency12,
+                    ProjectionExpression,
+                    ExpressionAttributeNames);
+                    body = result;
+            }
+
             if (method === StatsMethod.carryCount || method === 'pos$1') {
                 body.lottos = await scanLotto(50);
                 body.total = getCurrentRound();

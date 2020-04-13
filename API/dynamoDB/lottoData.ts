@@ -59,6 +59,7 @@ export async function queryStats(method: StatsMethod, ProjectionExpression?: str
             if (err) reject(err);
             switch (method) {
                 case StatsMethod.frequency:
+                case StatsMethod.frequency12:
                     resolve(data.Item.List.L.map(value => Number(value.N)));
                     break;
                 case StatsMethod.interval:

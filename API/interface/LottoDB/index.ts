@@ -55,6 +55,7 @@ export enum StatsMethod {
     interval = "interval",
     howLongNone = "howLongNone",
     frequency = "frequency",
+    frequency12 = 'frequency12',
 //
     line = "line"
 }
