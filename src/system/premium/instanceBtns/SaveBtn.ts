@@ -14,7 +14,6 @@ export enum Tool {
 export default class SaveBtn {
     static init(tool: Tool) {
         const numListSelectCurrent = document.querySelector('#num-list-select-current');
-        const numListSelectTotal = document.getElementById('num-list-select-total');
         Array.from(saveBtns).forEach((node) => {
             node.addEventListener('click', async () => {
                 if (Number(numListSelectCurrent.textContent) === 0) {
@@ -52,11 +51,9 @@ export default class SaveBtn {
                             icon: 'success',
                             timer: 1500,
                         });
-
-                        numListSelectCurrent.textContent = '0';
-                        numListSelectTotal.textContent = (Number(numListSelectTotal.textContent) - indexArr.length).toString();
-                        indexArr.forEach(index => numbersContainer[index].remove());
+                        CheckBoxToggle.subtract(indexArr.length);
                         CheckBoxToggle.allCheckedReset();
+                        indexArr.forEach(index => numbersContainer[index].remove());
                         modifyBoundary();
                     }
                 } catch (err) {

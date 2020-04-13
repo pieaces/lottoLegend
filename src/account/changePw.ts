@@ -14,7 +14,6 @@ isLogedIn().then(result => {
     }
 });
 
-
 const modifyForm = document.querySelector('#modify-form-pw');
 const oldPassword = document.querySelector<HTMLInputElement>('#old-password');
 const newPassword = document.querySelector<HTMLInputElement>('#new-password');
@@ -24,7 +23,6 @@ newPassword.addEventListener('invalid', invalidPassword(newPassword));
 newPassword.addEventListener('input', invalidPassword(newPassword));
 newPasswordCheck.addEventListener('invalid', invalidPasswordCheck(newPassword, newPasswordCheck));
 newPasswordCheck.addEventListener('input', invalidPasswordCheck(newPassword, newPasswordCheck));
-
 
 modifyForm.addEventListener('submit', async (e) => {
     e.preventDefault();

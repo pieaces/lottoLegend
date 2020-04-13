@@ -1,13 +1,3 @@
-// const idEl = document.querySelector('#id');
-// const password = document.querySelector('#password');
-// const passwordCheck = document.querySelector('#password-check');
-// const send = document.querySelector('#send');
-// const update = document.querySelector('#update');
-// const verify = document.querySelector('#verify');
-// const findFormPw = document.querySelector('#find-form-pw');
-// const findFormId = document.querySelector('#find-form-id');
-// const fidnFormPhone = document.querySelector('#find-form-phone');
-
 import { getQueryStringObject } from "../functions";
 import { getUnAuthAPI } from "../amplify/api";
 import configure from "../amplify/configure";

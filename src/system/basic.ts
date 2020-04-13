@@ -6,7 +6,6 @@ import Swal from 'sweetalert2'
 import { actualInstance, selectionInstance, latestInstance } from './stackInstances';
 import SaveBtn, { Tool } from './premium/instanceBtns/SaveBtn';
 import CheckBoxToggle from './premium/instanceBtns/CheckBoxToggle';
-import { makeCheckdValueBox } from './premium/Layout/functions';
 import generatorLoading from './generatorLoading';
 
 configure();
@@ -15,9 +14,6 @@ const includeCanvas = document.getElementById('include');
 const excludeCanvas = document.getElementById('exclude');
 const lineGenerator = document.querySelector<HTMLElement>('.line-gen-stack-chart-container');
 const lineInputTable = document.querySelector<HTMLElement>('.line-gen-num-table');
-const numListSelectTotal = document.querySelector<HTMLElement>('#num-list-select-total');
-const numListSelectCurrent = document.querySelector<HTMLElement>('#num-list-select-current');
-const allCheckBox = document.querySelector<HTMLInputElement>('#all-check');
 
 const first = document.querySelector<HTMLInputElement>('#first-nums');
 const tenth = document.querySelector<HTMLInputElement>('#tenth-nums');
@@ -113,10 +109,10 @@ getAuthAPI('/numbers/piece', { flag: true })
                     const dataSet = await postAuthAPI('/numbers/generator/free', { lineCount, include: includeNumsArr });
                     const numBoard = new NumBoard(dataSet);
                     numBoard.makeNumBoard();
-                    makeCheckdValueBox(numListSelectTotal, numListSelectCurrent, allCheckBox);
-
-                    checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
-                    checkBoxToggle.addEvent();
+                    checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox'));
+                    checkBoxToggle.checkBoxEvent();
+                    checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox'));
+                    checkBoxToggle.allBtnEvent();
                     CheckBoxToggle.allCheckedReset();
                 }
             } else if (lineCheck && sum() !== 6) {
@@ -134,10 +130,9 @@ getAuthAPI('/numbers/piece', { flag: true })
                 const dataSet = await postAuthAPI('/numbers/generator/free', { include: includeNumsArr });
                 const numBoard = new NumBoard(dataSet);
                 numBoard.makeNumBoard();
-                makeCheckdValueBox(numListSelectTotal, numListSelectCurrent, allCheckBox);
-
-                checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
-                checkBoxToggle.addEvent();
+                checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox'));
+                checkBoxToggle.checkBoxEvent();
+                checkBoxToggle.allBtnEvent();
                 CheckBoxToggle.allCheckedReset();
             }
         });
@@ -214,19 +209,6 @@ lineBtn.addEventListener('click', async () => {
     }
 });
 
-
-function doesExist(one: number[], other: number[]) {
-    let flag = false;
-    for (let i = 0; i < one.length; i++) {
-        for (let j = 0; j < other.length; j++) {
-            if (one[i] === other[j]) {
-                flag = true;
-                break;
-            }
-        }
-    }
-    return flag;
-}
 function compartByLine(numbers: number[]) {
     const result: number[][] = new Array(5);
     numbers && numbers.forEach(num => {

@@ -14,7 +14,6 @@ isLogedIn().then(result => {
     }
 });
 
-
 const withdrawalForm = document.querySelector('#withdrawl-form');
 const password = document.querySelector<HTMLInputElement>('#password');
 

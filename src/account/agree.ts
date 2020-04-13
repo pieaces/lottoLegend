@@ -1,15 +1,23 @@
 import configure from '../amplify/configure'
-import CheckBoxToggle from "../system/premium/instanceBtns/CheckBoxToggle";
 import Swal from 'sweetalert2';
 
 configure();
 
-const checkBoxToggle = new CheckBoxToggle();
-checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
-checkBoxToggle.addEvent();
-
 const termsUseAllCheck = document.querySelector<HTMLInputElement>('#all-check');
 const termsUseCheckboxes = document.querySelectorAll<HTMLInputElement>('.terms-use-check');
+
+termsUseAllCheck.addEventListener('change', () => {
+    if (termsUseAllCheck.checked) {
+        Array.from(termsUseCheckboxes).forEach((node: any) => {
+            node.checked = true;
+        });
+    } else {
+        Array.from(termsUseCheckboxes).forEach((node: any) => {
+            node.checked = false;
+        });
+    }
+});
+
 
 document.querySelector('.terms-use-btn').addEventListener('click', () => {
     if (Array.from(termsUseCheckboxes).every((node) => node.checked === true)) {

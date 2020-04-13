@@ -16,24 +16,9 @@ enum IncOrExc {
 let incOrExc: IncOrExc;
 const loading = document.querySelector<HTMLElement>('.loading-box');
 loading.classList.remove('none');
-init();
 
-function infoAlert(title: string, text: string) {
-    return Swal.fire({
-        title,
-        text,
-        icon: 'info',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: '예',
-        cancelButtonText: '아니요',
-    })
-}
-async function init() {
-    const { include, exclude } = await getAuthAPI('/numbers/piece', { flag: true });
-    try {
-        const data = await getUnAuthAPI('/stats/mass', { method: 'excludeInclude' });
+getAuthAPI('/numbers/piece', { flag: true }).then(async ({ include, exclude }) =>{
+    const data = await getUnAuthAPI('/stats/mass', { method: 'excludeInclude' });
         const layout = new Layout2([null, null, null, true], data.data, data.winNums, data.total);
         loading.classList.add('none');
         layout.init();
@@ -108,8 +93,18 @@ async function init() {
                 }
             }
         });
-    } catch (err) {
-        networkAlert();
-    }
-    loading.classList.add('none');
+}).catch(() => networkAlert())
+.finally(() =>     loading.classList.add('none'));
+
+function infoAlert(title: string, text: string) {
+    return Swal.fire({
+        title,
+        text,
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '예',
+        cancelButtonText: '아니요',
+    })
 }

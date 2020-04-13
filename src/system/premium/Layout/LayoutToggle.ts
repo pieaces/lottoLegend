@@ -2,7 +2,6 @@
 import Layout3 from "./Layout3";
 import NumBoard from "./NumBoard";
 import CheckBoxToggle from "../instanceBtns/CheckBoxToggle";
-import { makeCheckdValueBox } from "./functions"
 import generatorLoading from "../../generatorLoading";
 import { IDataAPI } from ".";
 
@@ -15,9 +14,6 @@ const carrycountCanvas = document.getElementById('carrycount');
 const includeCanvas = document.getElementById('include');
 const excludeCanvas = document.getElementById('exclude');
 const filterTableValues = document.querySelectorAll('.func3-filter-table > tbody > tr:nth-child(2) > td');
-const numListSelectTotal = document.querySelector<HTMLElement>('#num-list-select-total');
-const numListSelectCurrent = document.querySelector<HTMLElement>('#num-list-select-current');
-const allCheckBox = document.querySelector<HTMLInputElement>('#all-check');
 
 type Constructor<T = {}> = new (...args: any[]) => T;
 const layout1Class = 'func1-layout'
@@ -66,9 +62,9 @@ export default function LayoutToggle<TBase extends Constructor>(Base: TBase) {
             const numBoard = new NumBoard(this.dataAPI.numbersData);
             numBoard.makeNumBoard();
             const checkBoxToggle = new CheckBoxToggle();
-            checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
-            checkBoxToggle.addEvent();
-            makeCheckdValueBox(numListSelectTotal, numListSelectCurrent, allCheckBox);
+            checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox'));
+            checkBoxToggle.allBtnEvent();
+            checkBoxToggle.checkBoxEvent();
             excLineCountText.textContent = (<number[]>data[1]).map(value => {
                 switch (value) {
                     case 0: return '1번대';

@@ -85,50 +85,6 @@ export function makePastFilterTable(data: TableData): HTMLDivElement {
     return tableBox;
 }
 
-export function makeCheckdValueBox(totalEl: HTMLElement, currentEl: HTMLElement, allCheckEl: HTMLInputElement) {
-    const checkboxes = document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox');
-    let checkedCurrentValue = null;
-
-    currentEl.textContent = "0";
-    totalEl.textContent = checkboxes.length.toString();
-    Array.from(checkboxes).forEach((node) => {
-        node.addEventListener('change', () => {
-            if (node.checked) {
-                checkedCurrentValue++;
-            } else {
-                checkedCurrentValue--;
-            }
-            currentEl.textContent = checkedCurrentValue.toString();
-        })
-    })
-    allCheckEl.addEventListener('change', () => {
-
-        if (allCheckEl.checked) {
-            checkedCurrentValue = document.querySelectorAll('.input-checkbox-container > .checkbox').length;
-            currentEl.textContent = checkedCurrentValue.toString();
-        } else {
-            checkedCurrentValue = 0;
-            currentEl.textContent = checkedCurrentValue.toString();
-        }
-    })
-
-    if (document.querySelector('.save-btn')) {
-        Array.from(document.querySelectorAll('.save-btn')).forEach(node=>{
-            node.addEventListener('click', () => {
-                checkedCurrentValue = 0;
-            })
-        }) 
-    }
-    if (document.querySelectorAll('.mypage-num-delete-btn')) {
-        Array.from(document.querySelectorAll('.mypage-num-delete-btn')).forEach(node=>{
-            node.addEventListener('click', () => {
-                checkedCurrentValue = 0;
-            })
-        })        
-    }
-
-}
-
 export function modifyBoundary() {
     const numContainer = document.querySelectorAll('.func3-num-container');
     const numListBoundary = document.querySelectorAll('.boundary-line');

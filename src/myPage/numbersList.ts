@@ -4,11 +4,9 @@ import CheckBoxToggle from '../system/premium/instanceBtns/CheckBoxToggle';
 import Selectr, { IOptions } from 'mobius1-selectr';
 import { makeTable, modifyTableBoundary } from './functions';
 import { networkAlert } from '../functions';
-import { makeCheckdValueBox } from '../system/premium/Layout/functions'
 import Swal from 'sweetalert2';
 
 configure();
-
 const loading = document.querySelector('.loading-box');
 
 const roundSelectBox = document.querySelector<HTMLSelectElement>('#round-select-box');
@@ -17,9 +15,6 @@ const methodSelectBox = document.querySelector<HTMLSelectElement>('#method-selec
 const numInfoToggleBtn = document.querySelector('.mypage-toggle-btn');
 const pastFilterBox = document.getElementsByClassName('func3-past-filter-box') as HTMLCollectionOf<HTMLElement>;
 const tableNumBox = document.querySelector<HTMLElement>('.mypage-table-num-box');
-const numListSelectTotal = document.querySelector<HTMLElement>('#num-list-select-total');
-const numListSelectCurrent = document.querySelector<HTMLElement>('#num-list-select-current');
-const allCheckBox = document.querySelector<HTMLInputElement>('#all-check');
 
 loading.classList.remove('none');
 getAuthAPI('/numbers/mass')
@@ -53,18 +48,15 @@ getAuthAPI('/numbers/mass')
                 searchable: false
             };
 
-
             const roundSelect = new Selectr(roundSelectBox, roundConfig);
             const toolSelect = new Selectr(toolSelectBox, toolConfig);
             const methodSelect = new Selectr(methodSelectBox, methodConfig);
             document.querySelector<HTMLElement>('.selectbox-wrapper').classList.remove('none');
-
-            Array.from(document.querySelectorAll('.mypage-num-delete-btn-box')).forEach(node=>{
-                node.classList.remove('none');
-            })            
+       
             let tool: string = null;
             let method: string = null;
             Array.from(document.querySelectorAll('.mypage-num-delete-btn')).forEach(node=>{
+                node.classList.remove('none');
                 node.addEventListener('click', async () => {
                     await Swal.fire({
                         title: '삭제하시겠습니까?',
@@ -80,8 +72,6 @@ getAuthAPI('/numbers/mass')
                             const inputs = document.querySelectorAll<HTMLInputElement>('.mypage-table-num-box input');
                             const numbersContainer = document.querySelectorAll<HTMLElement>('.mypage-table-content');
                             const filterBoxes = document.querySelectorAll<HTMLElement>('.func3-past-filter-box');
-                            const numListSelectCurrent = document.querySelector('#num-list-select-current');
-                            const numListSelectTotal = document.getElementById('num-list-select-total');
     
                             const numsArr: number[][] = [];
                             const indexes: number[] = [];
@@ -100,10 +90,10 @@ getAuthAPI('/numbers/mass')
                                     filterBoxes[index].remove();
                                 });                                
                                 modifyTableBoundary();
-                                numListSelectCurrent.textContent = '0';
-                                numListSelectTotal.textContent = (Number(numListSelectTotal.textContent) - indexes.length).toString();
-                                if(numListSelectTotal.textContent==="1"){
-                                    Array.from(numbersContainer)[0].style.borderBottom="1px solid rgba(0,0,0,0.1)";
+                                CheckBoxToggle.subtract(indexes.length);
+                                CheckBoxToggle.allCheckedReset();
+                                if(checkBoxToggle.getTotal() === 1){
+                                    numbersContainer[0].style.borderBottom="1px solid rgba(0,0,0,0.1)";
                                 }
                                 Swal.fire({
                                     title: '완료',
@@ -132,10 +122,9 @@ getAuthAPI('/numbers/mass')
                 }
                 tableNumBox.innerHTML = '';
                 makeTable(tableNumBox, result.data, result.rounds[0], true, result.answer);
-                checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
+                checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox'));
                 CheckBoxToggle.allCheckedReset();
-                makeCheckdValueBox(numListSelectTotal, numListSelectCurrent, allCheckBox);
-                document.querySelector('#num-list-select-total').textContent = document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox').length.toString();
+                checkBoxToggle.checkBoxEvent();
                 loading.classList.add('none');
             });
             toolSelect.on('selectr.change', async (option) => {
@@ -153,10 +142,9 @@ getAuthAPI('/numbers/mass')
                 }
                 tableNumBox.innerHTML = '';
                 makeTable(tableNumBox, result.data, result.rounds[0], true, result.answer);
-                checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
+                checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox'));
                 CheckBoxToggle.allCheckedReset();
-                makeCheckdValueBox(numListSelectTotal, numListSelectCurrent, allCheckBox);
-                document.querySelector('#num-list-select-total').textContent = document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox').length.toString();
+                checkBoxToggle.checkBoxEvent();
                 loading.classList.add('none');
             });
             methodSelect.on('selectr.change', async (option) => {
@@ -171,18 +159,17 @@ getAuthAPI('/numbers/mass')
                 }
                 tableNumBox.innerHTML = '';
                 makeTable(tableNumBox, result.data, result.rounds[0], true, result.answer);
-                checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
+                checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox'));
                 CheckBoxToggle.allCheckedReset();
-                makeCheckdValueBox(numListSelectTotal, numListSelectCurrent, allCheckBox);
-                document.querySelector('#num-list-select-total').textContent = document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox').length.toString();
+                checkBoxToggle.checkBoxEvent();
                 loading.classList.add('none');
             });
 
             loading.classList.add('none');
             const checkBoxToggle = new CheckBoxToggle();
-            checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
-            checkBoxToggle.addEvent();
-            makeCheckdValueBox(numListSelectTotal, numListSelectCurrent, allCheckBox);
+            checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox'));
+            checkBoxToggle.allBtnEvent();
+            checkBoxToggle.checkBoxEvent();
             numInfoToggleBtn.addEventListener('click', numInfoToggle());
 
         } else {
