@@ -16,7 +16,7 @@
     display:flex;
     align-items: center;
     justify-content: center;
-    width:70%;
+    width:60%;
   }
 
   .steps span{
@@ -32,7 +32,6 @@
     height:4.5rem;
     margin:0 0.6rem;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2), -1px -1px 1px rgba(0, 0, 0, 0.2);
-    font-size:0.8rem;
     word-break: keep-all;
   }
   
@@ -90,9 +89,6 @@
   }
 
   .checkbox-textbox{
-    display:flex;
-    align-items: center;
-    justify-content: space-between;
     height:3rem;
     margin-bottom:1rem;
   }
@@ -100,7 +96,6 @@
   .checkbox-text{
     display:flex;
     align-items: center;
-    width:100%;
     height:100%;
     font-size:1.4rem;
   }
@@ -117,13 +112,6 @@
 
   .table-1{
     height:100%;
-  }
-
-  .table-1 th{
-    background-color: #09538e;
-    color:white;
-    font-size:0.8rem;
-    word-break: keep-all;
   }
 
   .table-1 tr{
@@ -155,14 +143,6 @@
   text-align: center;
 }
 
-.auto-choose-container{
-  display:flex;
-  align-items: center;
-  justify-content: flex-end;
-  width:8rem;
-  height:100%;
-}
-
 #main-counter{
   font-size: 2rem;
   font-weight: bold;
@@ -189,10 +169,6 @@
   .filter-box-container-box >div{
     width: 100%;
     padding:1rem 0;
-  }
-
-  .filter-box{
-    width: 100%;
   }
 
   .extract-num{

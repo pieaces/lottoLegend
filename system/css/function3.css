@@ -3,10 +3,7 @@
   margin-left:2rem;
 }
 
-.func3-filter-container-box-1{
-  margin-bottom:1rem;
-}
-
+.func3-filter-container-box-1,
 .func3-filter-container-box-2{
   margin-bottom:1rem;
 }
@@ -37,7 +34,6 @@
   background-color: #f6f6f6;
 }
 
-
 .func3-filter-value-container{
   width:80%;
   min-height: 6rem;
@@ -50,8 +46,6 @@
   padding-left:1rem;
 }
 .func3-filter-value-box {
-  width: 100%;
-  height:100%;
   padding-top:1rem;
   font-size: 0px;
 }
@@ -80,7 +74,6 @@
   box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
   color: white;
   font-size:1.3rem;
-  text-align: center;
 }
 
 .func3-filter-table  tr:nth-child(1) >td{
@@ -99,13 +92,6 @@
 }
 .func3-filter-table  tr:nth-child(2) >td:nth-child(1){
   font-size: 1.6rem;
-}
-
-.func3-make-btn-container{
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  height:10rem;
 }
 
 /*function3 전용 로딩바*/
@@ -141,9 +127,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: auto;
-  margin-bottom: 1rem;
-  text-align: center;
+  margin:0 auto 1rem auto;
 }
 .func3-table-piece{
   width: 2.5rem;

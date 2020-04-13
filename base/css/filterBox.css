@@ -1,7 +1,6 @@
 .filter-box-container {
     display: flex;
     align-items: center;
-    margin-bottom: 1rem;
   }
   
   .filter-box {

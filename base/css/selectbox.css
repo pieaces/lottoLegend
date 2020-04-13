@@ -2,7 +2,6 @@
     display:flex;
     align-items: center;
     justify-content: space-between;
-    width:100%;
     margin-bottom: 1rem;
 }
 
@@ -11,9 +10,6 @@
 }
 
 .selectbox-box{
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
     width: 12rem;
     margin-right:0.5rem;
     font-size: 1.5rem;

@@ -1,7 +1,4 @@
 .lotto-num-container{
-    display:flex;
-    align-items: center;
-    justify-content: center;
     padding:1rem 0;
 }
 #table-title{
@@ -14,30 +11,28 @@
 }
 .lotto-num-box{
   table-layout: fixed;
-  width:100%;
-  height:100%;
 }
 
 .lotto-num-box th{
     height:3rem;
-}
-
-.lotto-num-box td{
-    width: 100%;
-    height: 5rem;
-    text-align: center;
-    font-size: 1.4rem;
-}
-
-.lotto-num-box th{
     background-color: #f6f6f6;
     font-size:1.5rem;
     font-weight: bold;
 }
 
+.lotto-num-box td{
+    height: 5rem;
+    text-align: center;
+    font-size: 1.4rem;
+}
+
 .lotto-num-checked{
     background-color: rgb(156, 101, 207);
     color:white;
+}
+
+.main-box{
+  margin-bottom:8rem;
 }
 
 .chart-slide-btn-box{
@@ -61,11 +56,6 @@
   
   .right-chart-btn {
     margin-left: 1.5rem;
-  }
-
-  .main-box{
-    width:100%; 
-    margin-bottom:8rem;
   }
   .chart-container{
     position: relative;
@@ -110,7 +100,6 @@
   .chart-slide-current {
     border: 6px solid #a5484c;
   }
-  
   
   .chart-title{
     display:flex;

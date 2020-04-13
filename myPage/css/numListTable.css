@@ -1,8 +1,3 @@
-
-  .mypage-table-num-list{
-    width: 100%;
-  }
-  
   .mypage-table-num-list > div{
     display:inline-block;
     width:3.5rem;
@@ -14,11 +9,6 @@
     font-size:1.5rem;
     line-height: 2.3;
     text-align: center;
-  }
-
-  .mypage-table-num-toggle{
-    width:6rem;
-    height:2.5rem;
   }
 
   .mypage-table{
@@ -45,7 +35,7 @@
     font-size: 1.2rem;
   }
 
-  .mypage-table-checkbox,
+.mypage-table-checkbox,
 .mypage-table-round,
 .mypage-table-date,
 .mypage-table-division,
@@ -55,11 +45,10 @@
     display:flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
   }
 
 
-  .mypage-table-checkbox,
+.mypage-table-checkbox,
 .mypage-table-round,
 .mypage-table-date,
 .mypage-table-division{
@@ -77,7 +66,6 @@ border-right:1px solid rgba(0, 0, 0, 0.1);
     display:flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
 }
 
 .mypage-table-content >div.mypage-table-num{
@@ -87,13 +75,6 @@ border-right:1px solid rgba(0, 0, 0, 0.1);
 .mypage-table-num{
   flex:4;
 }
-
-.mypage-table-num-toggle{
-  width:6rem;
-  height:2.5rem;
-  background-color: white;
-}
-
 
 @media (min-width: 0px) and (max-width: 767px) {
 
