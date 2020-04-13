@@ -21,8 +21,8 @@ interface SelectClass {
 const planLimit = {
     [Plan.default]: 5,
     [Plan.basic]: 10,
-    [Plan.premium]: 20,
-    [Plan['premium+']]: 40
+    [Plan.premium]: 10,
+    [Plan['premium+']]: 20
 }
 
 export async function updateNumbers(userName: string, round: number, numsArr: number[][], tool: SelectTool): Promise<Response> {
