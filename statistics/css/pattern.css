@@ -1,14 +1,28 @@
 .stats-container{
   display:flex;
-  justify-content: space-around;
+  justify-content: center;
   margin-bottom:1rem;
   padding: 2rem 0;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #a2a2a2;
   background-color: #f6f6f6;
   color:#575757;
+  font-size:1.5rem;
+  align-items: center;
+}
+.explain-container{
+  margin-bottom: 1rem;
+  padding: 0.8rem;
+  color: #666;
+  border-radius: 2px;
+  border: 1px solid #e1e1e1;
+  background-color: #f9f9f9;
   font-size:1.3rem;
 }
-
+.box-title{
+  font-size: 1.7rem;
+  font-weight: bold;
+  margin-right: 1.5rem;
+}
 .lotto-num-container{
     width:40%;
 }
@@ -33,9 +47,4 @@
   color: white;
   background-color: black;
   font-size: 1.3rem ;
-}
-
-#all-less,#all-many{
-  color:black;
-  font-weight: bold;
 }
