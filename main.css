@@ -818,13 +818,13 @@ flex:2;
   }
   .community-content-title{
     width: 20rem;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
   }
   .community-time{
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
   .review-tab:last-child{
     display: none;
@@ -876,19 +876,19 @@ flex:2;
 
   .box-title{
     padding-bottom: 1rem;
-    font-size:1.5rem;
+    font-size:1.8rem;
   }
 
   .board-header > div{
-    font-size:1.2rem;
+    font-size:1.5rem;
   }
 
   .board-section > div{
-    font-size:1.1rem;
+    font-size:1.4rem;
   }
 
   .board-tab{
-    font-size:1.1rem;
+    font-size:1.3rem;
   }
 
   .main-1-1-2{
@@ -919,14 +919,14 @@ flex:2;
 
   .win-num-times{
     height: 3rem;
-    font-size:1.8rem;
+    font-size:2.5rem;
   }
 
   .win-num{
     width:3.2rem;
     height: 3.2rem;
     margin:0.3rem;
-    font-size:1.6rem;
+    font-size:1.8rem;
   }
 
   .win-count-small-text .rank.rank-first,
@@ -961,7 +961,7 @@ flex:2;
   }
 
   .small-text{
-    font-size:1.1rem;
+    font-size:1.3rem;
   }
 
   .big-text{
@@ -1007,6 +1007,6 @@ flex:2;
   }
 
   .community-content-title{
-    width: 15rem;
+    width: 24rem;
   }
 }

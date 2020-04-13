@@ -136,37 +136,36 @@ method && getUnAuthAPI('/stats/piece', { method })
         const bar1Canvas: HTMLCanvasElement = document.querySelector('#chart-bar-slide');
         const barTitle = document.querySelector<HTMLElement>('#chart-bar-title');
 
-        if (data.ideal.latest12) {
-            document.getElementById('bar1-box').classList.remove('none');
-            const bar1DataBox = {
-                labels: labels[method],
-                datasets: [
-                    {
-                        label: Slide.EXPECTED_TEXT,
-                        backgroundColor: '#00B2EA',
-                        data: null
-                    }
-                ]
-            };
-            const bar1Option = {
-            }
-            const barInstance1 = new ChartBase('bar', bar1Canvas, bar1DataBox, bar1Option);
-            barInstance1.create();
-            const barSlide = new BarSlide(barInstance1, barNum, leftBarBtn, rightBarBtn);
-            barSlide.setData(data);
-            barSlide.init();
-            const setText2: () => void = function (this: any) {
-                switch (this.current) {
-                    case 0: barTitle.textContent = Slide.EXPECTED_TEXT;
-                        break;
-                    case 1: barTitle.textContent = Slide.ACTUAL_TEXT;
-                        break;
-                    case 2: barTitle.textContent = '예상대비 초과비율(%)';
-                        break;
+        document.getElementById('bar1-box').classList.remove('none');
+        const bar1DataBox = {
+            labels: labels[method],
+            datasets: [
+                {
+                    label: Slide.EXPECTED_TEXT,
+                    backgroundColor: '#00B2EA',
+                    data: null
                 }
-            }
-            makeClickable(barSlide, setText2.bind(barSlide));
+            ]
+        };
+        const bar1Option = {
         }
+        const barInstance1 = new ChartBase('bar', bar1Canvas, bar1DataBox, bar1Option);
+        barInstance1.create();
+        const barSlide = new BarSlide(barInstance1, barNum, leftBarBtn, rightBarBtn);
+        barSlide.setData(data);
+        barSlide.init();
+        const setText2: () => void = function (this: any) {
+            switch (this.current) {
+                case 0: barTitle.textContent = Slide.EXPECTED_TEXT;
+                    break;
+                case 1: barTitle.textContent = Slide.ACTUAL_TEXT;
+                    break;
+                case 2: barTitle.textContent = '예상대비 초과비율(%)';
+                    break;
+            }
+        }
+        makeClickable(barSlide, setText2.bind(barSlide));
+
         const barLabels = [];
         for (let i = data.total - 49; i <= data.total; i++) barLabels.push(i);
         bar2DataBox.labels = barLabels;

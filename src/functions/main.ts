@@ -18,6 +18,8 @@ const bannerAnchor = document.getElementById('bannerAnchor');
 
 export function mqMobileInit() {
     banner.setAttribute('src', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAVQAAADSAQMAAAAvwqqHAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAB9JREFUeNrtwQENAAAAwqD3T20PBxQAAAAAAAAAAPBmJBgAAeBdCIQAAAAASUVORK5CYII=');
+    bannerAnchor.setAttribute('href', 'introduce/system.html');
+    banner.style.backgroundPosition = '0 40.08843%';
     imgBranch = (order: number) => {
         switch (order) {
             case 0:
