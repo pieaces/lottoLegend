@@ -85,10 +85,12 @@
 }
 
 .combi-num-box > select{
-	width: 4rem;
-	height:3.4rem;
-	border-radius: 3px;
-	text-align: center;
+	width: 16rem;
+    height: 4.5rem;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 600;
 }
 
 .payment-tabs{
