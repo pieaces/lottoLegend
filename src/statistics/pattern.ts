@@ -1,6 +1,25 @@
 import configure from "../amplify/configure";
-import { getAuthAPI } from "../amplify/api";
+import { getUnAuthAPI } from "../amplify/api";
+import { LightenDarkenColor } from "./functions";
 
 configure();
 
-getAuthAPI('/stats/mass', {method:'excludeInclude'}).then(data => console.log(data));
+const lottoNums = document.querySelectorAll<HTMLElement>('#frequency .lotto-num');
+const lottoNums12 = document.querySelectorAll<HTMLElement>('#frequency12 .lotto-num');
+getUnAuthAPI('/stats/piece', { method: 'frequency' }).then(({ total, frequency, frequency12 }) => {
+    const max = Math.max(...frequency);
+    const max12 = Math.max(...frequency12);
+    (<number[]>frequency).forEach((num, index) => {
+        lottoNums[index].style.backgroundColor = `rgba(0,0,0,${num / max}`;
+    });
+    (<number[]>frequency12).forEach((num, index) => {
+        const opacity = num /max12;
+        if(opacity === 0){
+            lottoNums12[index].style.backgroundColor = 'white';
+            lottoNums12[index].style.color = 'black';
+        }else{
+            lottoNums12[index].style.backgroundColor = `rgba(0,0,0,${num / max12}`;
+        }
+        
+    });
+});

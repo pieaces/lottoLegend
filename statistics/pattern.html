@@ -189,9 +189,13 @@
                     <div class="main-title">
                         로또용지 통계
                     </div>
+                    <div class="stats-container box-color">
+                    <div><span>전체회차 중 가장 적게 나온 수: <span id="all-less"></span></span><span>가장 많이 나온 수: <span id="all-many"></span></span></div>
+                    <div><span>최근12회차 중 가장 적게 나온 수: <span id="all-less"></span></span><span>가장 많이 나온 수: <span id="all-many"></span></span></div>
+                </div>
                     <div class="lotto-num-wrapper">
                         <div class="lotto-num-container box-color">
-                            <table class="lotto-num-box">
+                            <table class="lotto-num-box" id="frequency">
                                 <tr>
                                     <td>
                                         <div class="lotto-num"> 1
@@ -355,7 +359,7 @@
                     </div>
                     <div class="lotto-num-wrapper">
                         <div class="lotto-num-container box-color">
-                            <table class="lotto-num-box">
+                            <table class="lotto-num-box" id="frequency12">
                                 <tr>
                                     <td>
                                         <div class="lotto-num"> 1

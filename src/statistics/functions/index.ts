@@ -225,7 +225,7 @@ function adjustLine(from: HTMLElement, to: HTMLElement, canvas: HTMLElement, num
     canvas.appendChild(lineElement);
 }
 
-function LightenDarkenColor(_colorCode:string, amount:number) {
+export function LightenDarkenColor(_colorCode:string, amount:number) {
     let colorCode = _colorCode;
     if (colorCode[0] == "#") {
         colorCode = colorCode.slice(1);

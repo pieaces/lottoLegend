@@ -1,8 +1,14 @@
+.stats-container{
+  display:flex;
+  justify-content: space-around;
+  margin-bottom:1rem;
+  padding: 2rem 0;
+}
+
 .lotto-num-wrapper{
     display:flex;
     align-items: center;
     justify-content: center;
-    padding-top:10rem;
 }
 
 .lotto-num-container{
@@ -17,7 +23,6 @@
   padding:1rem 2rem;
 }
 
-
 .lotto-num {
   display:flex;
   align-items: center;
@@ -29,6 +34,7 @@
   border-top: 1px solid rgba(0, 0, 0, 0.4);
   border-bottom: 1px solid rgba(0, 0, 0, 0.4);
   box-shadow: 1px 1px 3px rgba(97, 87, 87, 0.4);
-  color: black;
+  color: white;
+  background-color: black;
   font-size: 1.3rem ;
 }
