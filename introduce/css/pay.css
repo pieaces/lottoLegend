@@ -23,7 +23,7 @@
 
 .box-border{
 	border-radius: 1rem;
-    border: 1px solid rgba(0,0,0,0.3);
+    border: 1px solid rgba(0,0,0,0.2);
 }
 .pay-container{
 	margin-top:5rem;
@@ -64,15 +64,31 @@
 	margin-right: 3rem;
 }
 
-.payment-box{
-	margin-bottom: 2rem;
-	border:1px solid rgba(0,0,0,0.3);
-}
 
 .payment-tab-box{
 	display:flex;
 	align-items: center;
+	justify-content: center;
+	border:1px solid rgba(0,0,0,0.2);
+	border-radius: 3px;
+	margin-bottom: 1rem;
 	padding:1.5rem 0;
+}
+
+.combi-num-box{
+	margin-left:2rem;
+}
+
+.combi-num-box > span{
+	margin-right: 1rem;
+	font-size: 1.5rem;
+}
+
+.combi-num-box > select{
+	width: 4rem;
+	height:3.4rem;
+	border-radius: 3px;
+	text-align: center;
 }
 
 .payment-tabs{
@@ -132,6 +148,15 @@
 	background: #1f1b16;
     color: gold;
 }
+
+.payment-tab-container{
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 1rem;
+	padding:1rem 0;
+}
+
 .price-section-container{
 	margin-top:1rem;
 }
@@ -248,7 +273,6 @@
 	}
   
 	.payment-text{
-		margin-left: 1rem;
 		font-size:1.3rem;
 	}
 
