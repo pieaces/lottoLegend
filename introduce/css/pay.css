@@ -71,7 +71,7 @@
 	justify-content: center;
 	border:1px solid rgba(0,0,0,0.2);
 	border-radius: 3px;
-	margin-bottom: 1rem;
+	margin-bottom: 2rem;
 	padding:1.5rem 0;
 }
 
@@ -157,6 +157,8 @@
 	justify-content: center;
 	margin-bottom: 1rem;
 	padding:1rem 0;
+	border:1px solid rgba(0,0,0,0.2);
+	border-radius: 0.3rem;
 }
 
 .price-section-container{
