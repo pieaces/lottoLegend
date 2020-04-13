@@ -73,7 +73,6 @@
 
 .main-1-1 {
   display:flex;
-  padding-bottom:0.7rem;
 }
 
 .main-1-1-1{
@@ -109,7 +108,7 @@
 }
 
 .main-1-1-1-1{
-  margin-bottom: 0.7rem;
+  margin-bottom: 1.5rem;
 }
 
 .main-1-1-2{
@@ -136,8 +135,24 @@ width: 100%;
 height: 50%;
 }
 
+.main-top-img-1 > img,.main-top-img-2 >img,.main-top-img-3>img{
+  background-image: url(img/main.png);
+}
+
+.main-top-img-1 > img{
+  width: 100%;
+  height: 100%;
+  background-position: 0 78.921396%; 
+  background-size: 280.4%;
+}
+
 .main-top-img-2{
 width: 50%;
+}
+
+.main-top-img-2 > img{
+  background-position: 0 98.243765%; 
+  background-size: 569.918699%; 
 }
 
 .main-top-img-3{
@@ -197,7 +212,7 @@ width: 50%;
 .login-after-top-box{
   display:flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   height:70%;
   padding:0.5rem 1.3rem 0 1.3rem;
 }
@@ -734,13 +749,13 @@ flex:2;
 }
 
 .main-aside #img1{
-   background-position: 0 76.934201%;
+  background-position: 0 85.131299%;
 }
 .main-aside #img2{
-  background-position: 0 83.552632%;
+  background-position: 0 88.40528%;
 }
 .main-aside #img3{
-  background-position: 0 70.778267%;
+  background-position: 0 82.195209%;
 }
 
 #banner{
