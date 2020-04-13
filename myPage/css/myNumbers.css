@@ -40,12 +40,6 @@
     background-color: #689cc7;
 }
 
-.mypage-toggle-btn-box{
-    display:flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .mypage-toggle-btn{
     width:10rem;
     height:3.5rem;

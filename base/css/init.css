@@ -138,7 +138,7 @@ input[type="checkbox"]{
   position: absolute;
   width: 10rem;
   height: 10rem;
-  border-width: 2rem solid;
+  border: 2rem solid;
   border-radius: 50%;
   border-color: #19598c transparent transparent transparent;
   animation: loading 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;

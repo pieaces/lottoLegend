@@ -6,13 +6,10 @@
 .line-gen-text-toggle-box{
     margin-bottom: 1rem;
     font-weight: 500;
-    cursor: pointer;
 }
 
 .line-gen-text-content{
-    height:auto;
     padding:2rem;
     font-size: 1.4rem;
     line-height: 1.8;
-    cursor: auto;
 }

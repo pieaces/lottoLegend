@@ -1,20 +1,5 @@
 .line-gen-toggle-btn-container{
-    display:flex;
-    align-items: center;
-    justify-content: space-between;
     margin-bottom: 1rem;
-}
-
-.line-gen-round{
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    width:10rem;
-    height: 5rem;
-    background-color: #09538e;
-    color:white;
-    font-size:1.4rem;
-    letter-spacing: 0.1rem;
 }
 
 .line-gen-toggle-btn{
@@ -27,22 +12,17 @@
 
 .line-gen-num-container{
     display:flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
     height:5rem;
     margin-bottom:1rem;
 }
 
 .line-gen-num-table{
-    table-layout: fixed;
     width:83.3%;
     height:100%;
 }
 
 .line-gen-num-table tr td{
     width:20%;
-    height:100%;
 }
 
 .line-gen-num-table tr td:nth-child(-n+5) label{
@@ -53,24 +33,18 @@
     height:100%;
     background-color: #f6f6f6;
     font-size:1.4rem;
-    text-align: center;
 }
 
 .line-gen-num-input-container{
     display:flex;
-    width: 100%;
     height:100%;
 }
 
 .line-gen-num-input-box{
-    display:flex;
-    align-items: center;
-    justify-content: center;
     width:50%;
 }
 
 .line-gen-num-input-box > input{
-    display: inline-block;
     width:100%;
     height:100%;
     border:1px solid rgba(0,0,0,0.1);

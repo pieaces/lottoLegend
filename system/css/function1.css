@@ -63,9 +63,6 @@
 
 .func1-chart-title{
   display:flex;
-  align-items: center;
-  justify-content: space-around;
-  width:100%;
   height:20%;
   border-top:1px solid rgba(0, 0, 0, 0.1);
   border-right:1px solid rgba(0, 0, 0, 0.1);
@@ -95,7 +92,6 @@
   display:flex;
   align-items: center;
   justify-content: center;
-  width:100%;
   height:50%;
 }
 
@@ -163,16 +159,11 @@
     right:5%;
   }
 
-  .func1-bubble-text-emph{
-    padding:1rem 0;
-  }
-
   #func1-bubble-table{
-    width:100%;
     height: 100%;
+    font-size:1.3rem;
     letter-spacing: 0.05rem;
     text-align: center;
-    font-size:1.3rem;
   }
 
   #func1-bubble-table tr{
@@ -193,7 +184,6 @@
   }
   
   .func1-checkbox-box {
-    height:100%;
     padding-top:2rem;
     padding-bottom:1rem;
     font-size:0;

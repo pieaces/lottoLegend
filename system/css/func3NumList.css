@@ -9,25 +9,10 @@
   background: #1f71b3;
 }
 
-.func3-past-filter-box>div{
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  font-size:1.4rem;
-}
-
 .func3-check-box{
   display:flex;
   align-items: center;
   padding-left:5rem;
-}
-
-.func3-check-box > input{
-  display:flex;
-  align-items: center;
-  justify-content: space-around;
-  width:2rem;
-  height:2rem;
 }
 
 .func3-num-box{
@@ -35,7 +20,6 @@
   display:flex;
   align-items: center;
   justify-content: center;
-  height:100%;
 }
 
 .func3-num-box > div{
@@ -50,7 +34,6 @@
   color: white;
   font-weight: 500;
   font-size: 2.8rem;
-  line-height: 1.7;
 }
 
 
@@ -64,8 +47,7 @@
   .func3-num-box > div{
     width: 3rem;
     height:3rem;
-    margin-left:0.5rem;
-    margin-right:0.5rem;
+    margin: 0 0.5rem;
     font-size:1.6rem;
   }
 
