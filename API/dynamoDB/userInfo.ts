@@ -20,9 +20,9 @@ function planValue(param:{plan?: Plan, _until?: string}) {
             case Plan.basic:
                 return 10;
             case Plan.premium:
-                return 20;
+                return 10;
             case Plan['premium+']:
-                return 40;
+                return 20;
             default: return FREE;
         }
     }
