@@ -26,7 +26,6 @@
 }
 
 #logo {
-  max-width: 100%;
   background-image: url(../../img/main.png);  
   background-position: 0 89.554318%;
    background-size: 467.333333%;
@@ -249,7 +248,8 @@
 
 @media (min-width: 0px) and (max-width: 767px) {
   #logo{
-    background-position: 0 99.89%;
+    margin-top: 1rem;
+    background-position: 0 96.518106%;
   }
   .mid-nav-container{
     height: auto;
