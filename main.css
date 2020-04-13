@@ -122,7 +122,7 @@
 }
 
 .main-1-1-2-2{
-  height: calc(60% - 0.7rem);
+  height: calc(60%);
 }
 
 .main-top-img-bot{
@@ -136,6 +136,7 @@ height: 50%;
 }
 
 .main-top-img-1 > img,.main-top-img-2 >img,.main-top-img-3>img{
+  width: 100%;
   background-image: url(img/main.png);
 }
 
@@ -157,6 +158,11 @@ width: 50%;
 
 .main-top-img-3{
   width: 50%;
+}
+
+.main-top-img-3 >img{
+  background-position: 0 100%; 
+  background-size: 569.918699%;
 }
 
 .login-container {
