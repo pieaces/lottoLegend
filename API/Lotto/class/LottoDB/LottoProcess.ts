@@ -1,6 +1,6 @@
 import LottoMap from "./LottoMap";
 import { Assembly, DBData, LottoDate, Method } from "../../interface/LottoDB";
-import { LottoNumber } from "../../interface/Lotto";
+import { LottoNumber, Mode } from "../../interface/Lotto";
 
 export default class LottoProcess extends LottoMap {
     processHelper(method: Method): DBData {
@@ -48,8 +48,8 @@ export default class LottoProcess extends LottoMap {
     processHowLongNone(): LottoDate[] {
         return this.gatherHowLongNone();
     }
-    processFrequency(): number[] {
-        return this.gatherFrequency();
+    processFrequency(mode?:Mode): number[] {
+        return this.gatherFrequency(mode);
     }
     processLowCount(): DBData {
         return this.processHelper(Method.lowCount);

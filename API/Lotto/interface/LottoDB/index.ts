@@ -55,6 +55,8 @@ export enum Method {
     howLongNone = "howLongNone",
     frequency = "frequency",
 //
+    frequency12 = 'frequency12',
+//
     line = "line",
 //
     pos$1 = 'pos$1'

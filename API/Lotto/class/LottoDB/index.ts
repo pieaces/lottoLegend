@@ -29,6 +29,10 @@ export default class LottoStatDB extends LottoProcess {
                     data = this.processFrequency();
                     Item['List'] = dynamoDBJson(data);
                     break;
+                case Method.frequency12:
+                    data = this.processFrequency(-12);
+                    Item['List'] = dynamoDBJson(data);
+                    break;
                 case Method.interval:
                     data = [] as number[][];
                     for (let i = 1; i <= 45; i++) {
