@@ -3,12 +3,10 @@
   justify-content: space-around;
   margin-bottom:1rem;
   padding: 2rem 0;
-}
-
-.lotto-num-wrapper{
-    display:flex;
-    align-items: center;
-    justify-content: center;
+  border-bottom: 1px solid black;
+  background-color: #f6f6f6;
+  color:#575757;
+  font-size:1.3rem;
 }
 
 .lotto-num-container{
@@ -16,9 +14,7 @@
 }
 
 .lotto-num-box{
-  table-layout: fixed;
   width:85%;
-  height:100%;
   margin: 0 auto;
   padding:1rem 2rem;
 }
@@ -37,4 +33,9 @@
   color: white;
   background-color: black;
   font-size: 1.3rem ;
+}
+
+#all-less,#all-many{
+  color:black;
+  font-weight: bold;
 }
