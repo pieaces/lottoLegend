@@ -1,5 +1,5 @@
 import configure from "../amplify/configure";
-import { numberFormat, networkAlert } from "../functions";
+import { numberFormat, networkAlert, onlyUserAlert } from "../functions";
 import { isNull } from "util";
 import Swal from "sweetalert2";
 import { postAuthAPI, getAuthAPI } from "../amplify/api";
@@ -45,34 +45,41 @@ let current: number = null;
 const person = document.querySelector<HTMLInputElement>('#deposit-name');
 const bank = document.querySelector<HTMLInputElement>('.payment-bank-content');
 document.getElementById('order-btn').onclick = () => {
-    if (isNull(current)) {
-        Swal.fire({
-            title: '상품카드를 선택해주세요',
-            icon: 'warning'
-        });
-    } else if (isNull(payMethod)) {
-        Swal.fire({
-            title: '결제수단을 선택해주세요',
-            icon: 'warning'
-        });
-    } else if (person.value === '') {
-        Swal.fire({
-            title: '입금자명은 비워둘 수 없습니다',
-            icon: 'warning'
-        })
-    } else if (payMethod === 'bankbook') {
-        postAuthAPI('/users/payment/bankbook', { bank: bank.textContent, person: person.value, month: monthList[current], price: priceList[current] }).then(() => {
-            Analytics.record({
-                name: 'payment',
-                attributes: { method: 'bankbook' },
-                metrics: { money: priceList[current] }
-            }); Swal.fire({
-                title: '정상적으로 기록되었습니다',
-                icon: 'info',
-                timer: 2000
-            }).then(() => location.href = '/myPage/currentPayment.html');
-        }).catch(() => networkAlert());
-    }
+    isLogedIn().then(result => {
+        if (result) {
+            if (isNull(current)) {
+                Swal.fire({
+                    title: '상품카드를 선택해주세요',
+                    icon: 'warning'
+                });
+            } else if (isNull(payMethod)) {
+                Swal.fire({
+                    title: '결제수단을 선택해주세요',
+                    icon: 'warning'
+                });
+            } else if (person.value === '') {
+                Swal.fire({
+                    title: '입금자명은 비워둘 수 없습니다',
+                    icon: 'warning'
+                })
+            } else if (payMethod === 'bankbook') {
+
+                postAuthAPI('/users/payment/bankbook', { bank: bank.textContent, person: person.value, month: monthList[current], price: priceList[current] }).then(() => {
+                    Analytics.record({
+                        name: 'payment',
+                        attributes: { method: 'bankbook' },
+                        metrics: { money: priceList[current] }
+                    }); Swal.fire({
+                        title: '정상적으로 기록되었습니다',
+                        icon: 'info',
+                        timer: 2000
+                    }).then(() => location.href = '/myPage/currentPayment.html');
+                }).catch(() => networkAlert());
+            }
+        } else {
+            onlyUserAlert();
+        }
+    })
 }
 function checkboxToggle() {
     const overEventHandler: (() => void)[] = [];
