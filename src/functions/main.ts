@@ -246,7 +246,7 @@ function makeWinReview(data: { id: number, title: string, created: string, img: 
         const img = document.createElement('img');
         //onerror="this.src='에러발생이미지';"
         img.setAttribute('src', item.img);
-        img.setAttribute('onerror', "this.src='img/logo/2.png';")
+        img.setAttribute('onerror', "this.src='img/logo/logo.png';")
 
         imgBox.appendChild(img);
 
