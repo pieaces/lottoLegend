@@ -120,6 +120,10 @@
 	padding:1rem 0 1rem 2rem;
 }
 
+.payment-bank-box{
+	display:flex;
+}
+
 .payment-bank-title,
 .payment-deposit-box > label{
 	margin-right:3rem;
@@ -271,14 +275,6 @@
 		margin:0 auto;
 	}
 
-	.pay-price-result-box{
-		flex-direction: column;
-		text-align: center;
-		margin-left: 0.5rem;
-		padding: 0 1rem;
-		font-size: 1.3rem;
-	}
-
 	.box > div:nth-child(1){
 		margin-right:0;
 	}
@@ -292,7 +288,34 @@
 	}
 
 	.payment-tab-box{
+		flex-direction: column;
 		justify-content: space-around;
+		padding:1rem 0 0 0;
+	}
+
+	.payment-deposit-box{
+		display:flex;
+		flex-direction: column;
+	}
+
+	.payment-info-box{
+		justify-content: space-around;
+		padding-left:1rem;
+		padding-right:1rem;
+	}
+
+	.payment-bank-box{
+		display:block;
+	}
+
+	.payment-bank-title,
+	.payment-bank-content{
+		width: 8rem;
+		margin-right: 0.3rem;
+	}
+
+	.payment-tab-box > div{
+		margin-bottom: 1rem;
 	}
 
 	.payment-tabs{
