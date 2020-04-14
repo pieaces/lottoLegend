@@ -280,6 +280,10 @@
 	.box > div:nth-child(1){
 		margin-right:0;
 	}
+
+	.combi-num-box,.box{
+		margin-left:0;
+	}
 	
 	.pay-text-seperator{
 		margin-left: 0.5rem;
