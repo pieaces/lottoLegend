@@ -1,3 +1,15 @@
+.info{
+	margin-bottom: 2rem;
+    margin-top: -1rem;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 0.3rem;
+    font-size: 1.4rem;
+    text-align: center;
+    padding: 1rem;
+}
+.bold{
+	font-weight: bold;
+}
 .board-header {
     display: flex;
     align-items: center;
@@ -45,7 +57,7 @@
 	font-size:1.6rem;
 }
 
-.pay-price-result-box{
+.box{
     display: flex;
 	align-items: center;
 	justify-content: space-around;
@@ -55,15 +67,9 @@
     font-size: 1.6rem;
 }
 
-.pay-price-result-box > div{
-	display: inline-block;
-	width: 8rem;
+.box > div{
+	width: 7rem;
 }
-
-.pay-price-result-box > div:nth-child(1){
-	margin-right: 3rem;
-}
-
 
 .payment-tab-box{
 	display:flex;
@@ -80,7 +86,6 @@
 }
 
 .combi-num-box > span{
-	margin-right: 1rem;
 	font-size: 1.5rem;
 }
 
@@ -274,7 +279,7 @@
 		font-size: 1.3rem;
 	}
 
-	.pay-price-result-box > div:nth-child(1){
+	.box > div:nth-child(1){
 		margin-right:0;
 	}
 	

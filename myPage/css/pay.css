@@ -37,6 +37,7 @@
   justify-content: center;
   color:rgb(112, 112, 112);
   font-size:1.3rem;
+  text-align: center;
 }
 
 .board-box:last-child{

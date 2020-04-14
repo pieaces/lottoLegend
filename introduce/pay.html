@@ -239,16 +239,23 @@
               <div class="payment-box">
                 <div class="payment-tab-box">
                   <div class="combi-num-box">
-                    <span> 조합수 선택</span>
+                    <span style="margin-right:1rem">조합수 선택</span>
                     <select id="combi-num">
-                      <option value="10">(프리미엄) 10조합</option>
-                      <option value="20">(프리미엄+) 20조합</option>
+                      <option value="premium">(프리미엄) 10조합</option>
+                      <option value="premium+">(프리미엄+) 20조합</option>
                     </select>
                   </div>
-                  <div class="pay-price-result-box box-border">
+                  <div class="combi-num-box box box-border" style="width:14rem;">
+                    <span id="product-name">프리미엄</span>
+                  </div>
+                  <div class="box box-border">
                     <div>결제금액</div>
                     <div class="pay-price"><span id="price"></span></div>
                   </div>
+                </div>
+                <div class="info">
+                  <div><U><B>프리미엄+</B>의 혜택</U>: &nbsp;'조합저장공간'과 '매주 발송되는 조합수'가 기존 10개에서 <B>20</B>개로 확장됩니다.</div>
+                  <div><U><B>프리미엄+</B>의 가격</U>: &nbsp;프리미엄 현재 판매가의 50%만큼 추가됩니다. (프리미엄 판매가*1.5)</div>
                 </div>
                 <div class="payment-tab-container">
                   <div class="payment-text">결제수단</div>

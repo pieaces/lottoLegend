@@ -11,7 +11,9 @@ const priceBox = document.querySelectorAll<HTMLElement>('.price-box');
 const priceAnchorBox = document.querySelectorAll<HTMLElement>('.price-service-anchor-box');
 const priceAnchorHoverBox = document.querySelectorAll<HTMLElement>('.price-service-anchor-hover-box');
 const price = document.getElementById('price');
+const productName = document.getElementById('product-name');
 const bankbook = document.getElementById('bankbook');
+
 
 configure();
 checkboxToggle();
@@ -41,9 +43,31 @@ bankbook.onclick = () => {
 }
 const monthList = [24, 12, 6, 1];
 const priceList = [150000, 90000, 53000, 9900];
+const productList = ['프리미엄 2년', '프리미엄 1년', '프리미엄 6개월', '프리미엄 1개월'];
 let current: number = null;
 const person = document.querySelector<HTMLInputElement>('#deposit-name');
 const bank = document.querySelector<HTMLInputElement>('.payment-bank-content');
+
+const select = document.querySelector<HTMLSelectElement>('#combi-num');
+function premiumPlusText(){
+    price.textContent = numberFormat(Math.floor(priceList[current] * 1.5/1000)*1000);
+    productName.textContent = productList[current].slice(0, 4) + '+ ' + productList[current].slice(5);
+}
+function premiumText(){
+    price.textContent = numberFormat(priceList[current]);
+    productName.textContent = productList[current];
+}
+select.addEventListener('change', () => {
+    if (current) {
+        if (select.selectedIndex === 1) {
+            premiumPlusText();
+        }
+        else {
+            premiumText();
+        }
+    }
+})
+
 document.getElementById('order-btn').onclick = () => {
     isLogedIn().then(result => {
         if (result) {
@@ -64,7 +88,7 @@ document.getElementById('order-btn').onclick = () => {
                 })
             } else if (payMethod === 'bankbook') {
 
-                postAuthAPI('/users/payment/bankbook', { bank: bank.textContent, person: person.value, month: monthList[current], price: priceList[current] }).then(() => {
+                postAuthAPI('/users/payment/bankbook', { bank: bank.textContent, plan: select.value, person: person.value, month: monthList[current], price: priceList[current] }).then(() => {
                     Analytics.record({
                         name: 'payment',
                         attributes: { method: 'bankbook' },
@@ -84,6 +108,7 @@ document.getElementById('order-btn').onclick = () => {
 function checkboxToggle() {
     const overEventHandler: (() => void)[] = [];
     const outEventHandler: (() => void)[] = [];
+
     for (let i = 0; i < priceContainer.length; i++) {
         priceContainer[i].addEventListener('click', function () {
             if (current !== i) {
@@ -102,8 +127,12 @@ function checkboxToggle() {
                 priceAnchorHoverBox[i].style.opacity = "0";
             }
             current = i;
-            price.textContent = numberFormat(priceList[current]);
-
+            if (select.selectedIndex === 1) {
+                premiumPlusText();
+            }
+            else {
+                premiumText();
+            }
         });
 
         const overEvent = () => {
