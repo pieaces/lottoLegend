@@ -5,12 +5,9 @@ const clickMenuBox = document.querySelectorAll('.click-menu-box'); //사이드 �
 const menu = document.querySelector('.click-menu-container');
 const menuInfoText = document.querySelector('.mid-nav-info-text');
 const menuInfo = document.querySelector('.mid-nav-info');
-const menuTitleQna = document.querySelector('#qna-anchor');
-const logo=document.querySelector('#logo');
 
 export function mqInit() {
     let menuTitleEventHandler = [];
-    let menuTitleQnaEvent;
     let menuExceptEvent;
     let menuEvent;
     let current = null;
@@ -26,9 +23,7 @@ export function mqInit() {
     mqMobile.addListener(mqFunc);
 
     function mqMobileInit() {
-        logo.setAttribute('src','/img/logo/mobile.png');
         menu.classList.remove('none');
-        menuTitleQna.setAttribute('href', '#');
         let isMenuClick = false;
         menuTitleArr.forEach((node, index) => {
             const event = function (e) {
@@ -58,19 +53,7 @@ export function mqInit() {
             }
             menuTitleEventHandler.push(event);
             node.addEventListener('click', event);
-        })
-
-        menuTitleQnaEvent = function (e) {
-            if (current !== null) {
-                clickMenuBox[current].classList.add('none');
-            }
-            document.querySelector('.click-menu-qna').classList.remove('none');
-            current = 4;
-            menu.style.borderBottom = "1px solid #09538e";
-            e.stopPropagation();
-        }
-
-        menuTitleQna.addEventListener('click', menuTitleQnaEvent);
+        });
 
         menuExceptEvent = function () {
             if (!isMenuClick) {
@@ -107,7 +90,6 @@ export function mqInit() {
             })
             menuTitleEventHandler = [];
 
-            menuTitleQna.removeEventListener('click', menuTitleQnaEvent);
             document.removeEventListener('click', menuExceptEvent);
             menu.removeEventListener('click', menuEvent);
 
@@ -143,9 +125,7 @@ function menuHoverRemoveEvent() {
 }
 
 function mqDeskTopInit() {
-    logo.setAttribute('src','/img/logo/desktop.png');
     menu.classList.add('none');
-    menuTitleQna.setAttribute('href', '/board/qna/qnaList.html');
     menuHoverAddEvent();
 }
 
