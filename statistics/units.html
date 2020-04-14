@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="../base/css/section.css">
     <link rel="stylesheet" href="../base/css/header.css" />
     <link rel="stylesheet" href="../base/css/footer.css" />
-    <link rel="stylesheet" href="../base/css/fontawesome.min.css">    
+    <link rel="stylesheet" href="../base/css/fontawesome.min.css"> 
+    <link rel="stylesheet" href="../base/css/filterBox.css">
+    <link rel="stylesheet" href="css/filterBox.css">   
     <link rel="stylesheet" href="css/units.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
     <title>로또끝</title>
@@ -58,7 +60,7 @@
         <div class="mid-nav-mobile-box">
             <h1 class="mid-nav-logo">
                 <a href="/main.html">
-                    <img id="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAADIAQMAAAAwS4omAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABtJREFUeNrtwTEBAAAAwqD1T20MH6AAAACAtwEPoAABVKU4XgAAAABJRU5ErkJggg==">             </a>
+                    <img id="logo" >             </a>
             </h1>
             <ul class="mid-nav-info-box">
                 <li> <a class="mid-nav-info-anchor none" id="header-signin"
@@ -190,6 +192,26 @@
                     <div class="main-title">
                         끝수 통계
                     </div>      
+                    <div class="filter-box-container">
+                        <div class="filter-box">
+                            <span>통계 자료</span>
+                            <i class="fas fa-sort-down filter-arrow"></i>
+                            <ul class="filter-list none">
+                                <li> <a href="/statistics/winNumbers.html">당첨번호 통계</a> </li>
+                                <li> <a href="/statistics/units.html">끝수</a> </li>
+                                <li> <a href="/statistics/statistics.html?method=excludedLineCount">전멸구간 개수</a> </li>
+                                <li> <a href="/statistics/statistics.html?method=carryCount">이월개수 & 이월수</a> </li>
+                                <li> <a href="/statistics/statistics.html?method=lowCount">저값 개수</a> </li>
+                                <li> <a href="/statistics/statistics.html?method=sum">번호 합계</a> </li>
+                                <li> <a href="/statistics/statistics.html?method=oddCount">홀수 개수</a> </li>
+                                <li> <a href="/statistics/statistics.html?method=primeCount">소수 개수</a> </li>
+                                <li> <a href="/statistics/statistics.html?method=$3Count">3배수 개수</a> </li>
+                                <li> <a href="/statistics/statistics.html?method=sum$10">첫수(십의자리) 합</a> </li>
+                                <li> <a href="/statistics/statistics.html?method=diffMaxMin">고저차</a> </li>
+                                <li> <a href="/statistics/statistics.html?method=AC">AC</a> </li>
+                            </ul>
+                        </div>
+                    </div>
                     <div class="main-box">
                         <div class="chart-container box-color">
                             <div class="chart-slide-title">
