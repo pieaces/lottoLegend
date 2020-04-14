@@ -300,11 +300,18 @@ margin-right: 1rem;
   color:rgb(46, 46, 46);
 }
 
+.login-anchor-btn-box{
+  display:flex;
+  justify-content: flex-end;
+}
+
 .anchor-btn{
+  width: 7rem;
   padding:0.2rem 0.3rem;
   border-radius: 0.2rem;
   border:1px solid rgba(0, 0, 0, 0.1);
   background-color: #fafafa;
+  text-align: right;
 }
 
 .anchor-btn > a{
@@ -765,13 +772,13 @@ flex:2;
   background-size: 467.333333%;
 }
 
-.main-aside #img1{
+.main-aside #aside-img1{
   background-position: 0 85.131299%;
 }
-.main-aside #img2{
+.main-aside #aside-img2{
   background-position: 0 88.40528%;
 }
-.main-aside #img3{
+.main-aside #aside-img3{
   background-position: 0 82.195209%;
 }
 

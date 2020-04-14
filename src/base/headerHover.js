@@ -26,7 +26,7 @@ export function mqInit() {
     mqMobile.addListener(mqFunc);
 
     function mqMobileInit() {
-        logo.setAttribute('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAAAyAQMAAACEQrBZAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABFJREFUeNpjYBgFo2AUDHcAAAPoAAHOSUxYAAAAAElFTkSuQmCC');
+        logo.setAttribute('src','/img/logo/mobile.png');
         menu.classList.remove('none');
         menuTitleQna.setAttribute('href', '#');
         let isMenuClick = false;
@@ -143,7 +143,7 @@ function menuHoverRemoveEvent() {
 }
 
 function mqDeskTopInit() {
-    logo.setAttribute('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAAAyAQMAAACEQrBZAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABFJREFUeNpjYBgFo2AUDHcAAAPoAAHOSUxYAAAAAElFTkSuQmCC');
+    logo.setAttribute('src','/img/logo/desktop.png');
     menu.classList.add('none');
     menuTitleQna.setAttribute('href', '/board/qna/qnaList.html');
     menuHoverAddEvent();

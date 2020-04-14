@@ -2,6 +2,7 @@ import { getUnAuthAPI } from "../amplify/api";
 import ChartBase from "../system/premium/Chart/Charts";
 import LineSlide from "../system/premium/Slide/LineSlide";
 import makeClickable from "../system/premium/Slide/makeClickable";
+import { mqMobileInit} from './functions';
 import configure from "../amplify/configure";
 
 configure();
@@ -60,6 +61,7 @@ const lineDataBox = {
     ]
 };
 
+mqMobileInit();
 const loading = document.querySelector<HTMLElement>('.loading-box');
 loading.classList.remove('none');
 getUnAuthAPI('/stats/piece', { method: 'pos$1' })

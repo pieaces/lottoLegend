@@ -1,3 +1,7 @@
+.filter-box-container{
+  padding: 1rem 0;
+}
+
 .filter-box{
     width:10rem;
     height:4rem;

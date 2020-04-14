@@ -13,11 +13,24 @@ const scrollList = document.querySelectorAll('#scroll-list > ul > li > a');
 const commContent = document.querySelectorAll<HTMLElement>('.community-content');
 const commContentAnchor = document.querySelectorAll<HTMLElement>('.community-content-title > a');
 const adBox=document.querySelector<HTMLElement>('.main-1-4-2 > img');
+const asideImg1=document.getElementById('aside-img1');
+const asideImg2=document.getElementById('aside-img2');
+const asideImg3=document.getElementById('aside-img3');
+const mainTopImg1=document.querySelector('.main-top-img-1 >img');
+const mainTopImg2=document.querySelector('.main-top-img-2 >img');
+const mainTopImg3=document.querySelector('.main-top-img-3 >img');
+
 let imgBranch: (order: number) => void;
 const bannerAnchor = document.getElementById('bannerAnchor');
 
 export function mqMobileInit() {
     banner.setAttribute('src', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAVQAAADSAQMAAAAvwqqHAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAB9JREFUeNrtwQENAAAAwqD3T20PBxQAAAAAAAAAAPBmJBgAAeBdCIQAAAAASUVORK5CYII=');
+    asideImg1.setAttribute('src', '');
+    asideImg2.setAttribute('src', '');
+    asideImg3.setAttribute('src', '');
+    mainTopImg1.setAttribute('src','');
+    mainTopImg2.setAttribute('src','');
+    mainTopImg3.setAttribute('src','');
     adBox.setAttribute('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAVQAAADIAQMAAACNj4t6AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAB9JREFUeNrtwYEAAAAAw6D5U5/gBlUBAAAAAAAAAMA3ImAAAUhLoDkAAAAASUVORK5CYII=')
     switch(Math.floor(Math.random() * 3)){
         case 0:
@@ -54,6 +67,12 @@ export function mqMobileInit() {
 
 export function mqDeskTopInit() {
     banner.setAttribute('src', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAr0AAAEQAQMAAACHgF42AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAC5JREFUeNrtwQENAAAAwqD3T20PBxQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI8GXpAAAQ4N7WkAAAAASUVORK5CYII=');
+    asideImg1.setAttribute('src', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACeAQMAAADqnGHMAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABpJREFUeNrtwTEBAAAAwqD1T20IX6AAAAA+AwxYAAEmVZUHAAAAAElFTkSuQmCC');
+    asideImg2.setAttribute('src', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAAC8AQMAAACg+MXxAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABtJREFUeNrtwTEBAAAAwqD1T20ND6AAAADgzwAOsAABcBYiywAAAABJRU5ErkJggg==');
+    asideImg3.setAttribute('src', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAADIAQMAAAAwS4omAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABtJREFUeNrtwTEBAAAAwqD1T20MH6AAAACAtwEPoAABVKU4XgAAAABJRU5ErkJggg==');
+    mainTopImg1.setAttribute('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPoAAAB4AQMAAADhWn2tAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABtJREFUeNrtwTEBAAAAwqD1T20KP6AAAACAlwEPeAABaEddxQAAAABJRU5ErkJggg==');
+    mainTopImg2.setAttribute('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHsAAABkAQMAAACcid1yAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABZJREFUeNpjYBgFo2AUjIJRMAoGJwAABqQAAe+UK5sAAAAASUVORK5CYII=');
+    mainTopImg3.setAttribute('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHsAAABkAQMAAACcid1yAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABZJREFUeNpjYBgFo2AUjIJRMAoGJwAABqQAAe+UK5sAAAAASUVORK5CYII=');
     adBox.setAttribute('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPoAAAKKAQMAAAAun9SWAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAACxJREFUeNrtwYEAAAAAw6D5Ux/hAlUBAAAAAAAAAAAAAAAAAAAAAAAAAADfAFPKAAEwuAWxAAAAAElFTkSuQmCC');
     switch(Math.floor(Math.random() * 3)){
         case 0:
