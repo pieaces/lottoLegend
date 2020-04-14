@@ -1,18 +1,3 @@
-.account-form-wrapper{
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 60rem;
-}
-
-.account-form-container{
-  width: 90%;
-  padding:3rem 5rem;
-  box-shadow: 1px 2px 8px rgba(0,0,0,.1),-2px -1px 8px rgba(0,0,0,.1);
-  border-radius: .75em;
-}
-
 .account-title-text{
   padding-bottom: 2rem;
   font-size : 2.6rem;   
@@ -47,7 +32,6 @@
   .account-input-box{
     display:flex;
     align-items: center;
-    text-align: center;
     width:75%;
     padding-left:1rem;
   }
@@ -55,11 +39,6 @@
   .account-input-box > input{
     width:15rem;
     height:3.4rem;
-  }
-  
-  .account-info-box{
-    padding-left:1rem;
-    font-size:1.4rem;
   }
 
   .account-btn-box{
@@ -107,32 +86,46 @@
     text-align: center;
   }
 
-  @media (min-width: 0px) and (max-width: 767px) {
-    .account-form-container{
-      padding:1rem 3rem;
-    }
-
-    .account-box{
-      display:block;
-      height:auto;
-      border-left:1px solid rgba(0,0,0,0.1);
-      border-right: 1px solid rgba(0,0,0,0.1);
-    }
-
-    .account-title-box,
-    .account-input-box{
-      width: 100%;
-    }
-
-    .account-title-box{
-      border-right: none;
-      border-bottom: 1px solid rgba(0,0,0,0.1);
-    }
-
-    .account-input-box{
-      flex-direction: column;
-      align-items: center;
-      padding:1rem 0;
-    }
-
+@media (min-width: 768px){
+  .account-info-box{
+    padding-left:1rem;
+    font-size:1.4rem;
   }
+  .account-form-wrapper{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 60rem;
+  }
+  .account-form-container{
+    width: 90%;
+    padding:3rem 5rem;
+    box-shadow: 1px 2px 8px rgba(0,0,0,.1),-2px -1px 8px rgba(0,0,0,.1);
+    border-radius: .75em;
+  }
+  .account-input-box{
+    text-align: center;
+  }
+}
+@media (min-width: 0px) and (max-width: 767px) {
+  .account-title-text {
+    font-size: 1.8rem;
+  }
+  .account-box{
+    height:auto;
+    border-left:1px solid rgba(0,0,0,0.1);
+    border-right: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .account-title-box{
+    font-size:1.1rem;
+    border-right: none;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+  }
+
+  .account-input-box{
+    display: block;
+    padding:1rem 1rem;
+  }
+}
