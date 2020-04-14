@@ -1,12 +1,14 @@
 import configure from "../amplify/configure";
 import { getUnAuthAPI } from "../amplify/api";
+import { networkAlert } from "../functions";
 
 configure();
 
 const lottoNums = document.querySelectorAll<HTMLElement>('#frequency .lotto-num');
 const lottoNums12 = document.querySelectorAll<HTMLElement>('#frequency12 .lotto-num');
 const unappearance = document.getElementById('unappearance');
-
+const loading = document.querySelector<HTMLElement>('.loading-box');
+loading.classList.remove('none');
 getUnAuthAPI('/stats/piece', { method: 'frequency' }).then(({ total, frequency, frequency12 }) => {
     const max = Math.max(...frequency);
     const max12 = Math.max(...frequency12);
@@ -29,4 +31,5 @@ getUnAuthAPI('/stats/piece', { method: 'frequency' }).then(({ total, frequency, 
         }
         
     });
-});
+    loading.classList.add('none');
+}).catch(() => networkAlert());

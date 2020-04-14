@@ -269,7 +269,9 @@
 
 
 @media (min-width: 0px) and (max-width: 767px) {
-
+	.price-box{
+		height: 16.7rem;
+	}
 	.price-container{
 		width: 30rem;
 		margin:0 auto;
