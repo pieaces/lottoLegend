@@ -1016,6 +1016,8 @@ flex:2;
   }
 
   .win-info{
+    display: block;
+    text-align: center;
     position: static;
   }
 
