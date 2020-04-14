@@ -245,7 +245,6 @@
 @media (min-width: 0px) and (max-width: 767px) {
   #logo{
     margin-top: 1rem;
-    background-position: 0 96.518106%;
   }
   .mid-nav-container{
     height: auto;
@@ -264,6 +263,8 @@
   .mid-nav-logo{
     margin-left:0;
   }
+
+
   .mid-nav-menu{
     position: static;
     width: 100%;
