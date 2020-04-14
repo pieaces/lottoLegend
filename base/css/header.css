@@ -1,7 +1,8 @@
-
-  /* header */
-
-/* mid-nav */
+/* header */
+#logo{
+  background-image: url(../../img/main.png);
+  background-position: 0 89.554318%; background-size: 467.333333%;
+}
 
 .mid-nav-container {
   position: relative;
@@ -249,8 +250,10 @@
 
 @media (min-width: 0px) and (max-width: 767px) {
   #logo{
+    background-position: 0 96.518106%; background-size: 467.333333%; 
     margin-top: 1rem;
   }
+
   .mid-nav-container{
     height: auto;
   }
