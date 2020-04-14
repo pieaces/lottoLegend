@@ -174,7 +174,7 @@ method && getUnAuthAPI('/stats/piece', { method })
         barInstance2.create();
         loading.classList.add('none');
         if (method === 'carryCount') {
-            document.getElementById('carry-title').classList.remove('none');
+            document.getElementById('carry-title').parentElement.classList.remove('none');
             const carryNumberContainer = document.querySelector<HTMLDivElement>('.carry-number-container');
             makeCarryNumbers(carryNumberContainer, data.total, data.lottos, data.piece.reverse());
         }
