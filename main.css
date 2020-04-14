@@ -140,15 +140,15 @@ height: 50%;
 margin-bottom: 0.5rem;
 }
 
-#banner,.main-aside img,.main-top-img-1 > img,.main-top-img-2 >img,.main-top-img-3>img,.main-1-4-2 >img{
+#banner,.main-aside img, #statistics-img, #include-img, #exclude-img, .main-1-4-2 >img{
   background-image: url(img/main.png);
 }
 
-.main-top-img-1 > img,.main-top-img-2 >img,.main-top-img-3>img, .main-1-4-2 > img{
+#statistics-img, #include-img, #exclude-img, .main-1-4-2 > img{
   width: 100%;
 }
 
-.main-top-img-1 > img{
+#statistics-img{
   height: 95%;
   background-position: 0 78.921396%;
   background-size: 280.4%;
@@ -159,7 +159,7 @@ width: 50%;
 margin-right: 1rem;
 }
 
-.main-top-img-2 > img{
+#include-img{
   background-position: 0 98.243765%; 
   background-size: 569.918699%; 
 }
@@ -168,7 +168,7 @@ margin-right: 1rem;
   width: 50%;
 }
 
-.main-top-img-3 >img{
+#exclude-img{
   background-position: 0 100%; 
   background-size: 569.918699%;
 }
@@ -224,6 +224,7 @@ margin-right: 1rem;
 }
 
 .login-after-top-box{
+  background-color: #edfbff;
   display:flex;
   flex-direction: column;
   justify-content: center;
@@ -234,6 +235,7 @@ margin-right: 1rem;
 .login-after-point-box{
   display:flex;
   align-items: center;
+  margin-top: 0.3rem;
 }
 
 .login-after-point-box .rank{
@@ -262,7 +264,6 @@ margin-right: 1rem;
 
 .login-after-nickname {
   display:inline-block;
-  width:16rem;
   font-size:1.4rem;
   letter-spacing: 0.1rem;
 }
@@ -305,7 +306,6 @@ margin-right: 1rem;
 .login-anchor-btn-box{
   display:flex;
   justify-content: flex-end;
-  margin-top: 0.5rem;
 }
 
 .anchor-btn{
