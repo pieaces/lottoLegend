@@ -266,10 +266,15 @@
 
 @media (min-width: 0px) and (max-width: 767px) {
 
-	.box{
+	.price-container{
+		width: 30rem;
+		margin:0 auto;
+	}
+
+	.pay-price-result-box{
 		flex-direction: column;
 		text-align: center;
-		margin-left: 1rem;
+		margin-left: 0.5rem;
 		padding: 0 1rem;
 		font-size: 1.3rem;
 	}
