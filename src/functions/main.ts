@@ -233,7 +233,7 @@ export function insertWinResult(data, target: NodeListOf<HTMLElement>) {
     });
 }
 
-function makeWinReview(data: { id: number, title: string, created: string, img: string }[]) {
+function makeWinReview(data: { id: number, title: string, created: string, img?: string }[]) {
     data.forEach(item => {
         const tab = document.createElement('a');
         tab.setAttribute('href', `/${getCategoryHtml('win', 'read')}?id=${item.id}`);
@@ -245,8 +245,8 @@ function makeWinReview(data: { id: number, title: string, created: string, img: 
 
         const img = document.createElement('img');
         //onerror="this.src='에러발생이미지';"
-        img.setAttribute('src', item.img);
-        img.setAttribute('onerror', "this.src='img/logo-blue.png';")
+        item.img && img.setAttribute('src', item.img);
+        !(item.img) && img.setAttribute('src', 'img/logo-blue.png');
 
         imgBox.appendChild(img);
 

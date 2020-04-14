@@ -136,7 +136,7 @@ margin-bottom: 0.5rem;
 }
 
 #banner,.main-aside img, #statistics-img, #include-img, #exclude-img, .main-1-4-2 >img{
-  background-image: url(img/main.png);
+  background-image: url(img/main.webp);
 }
 
 #statistics-img, #include-img, #exclude-img, .main-1-4-2 > img{
