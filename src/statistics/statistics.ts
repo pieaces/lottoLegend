@@ -147,7 +147,12 @@ method && getUnAuthAPI('/stats/piece', { method })
                 }
             ]
         };
-        const bar1Option = {
+        const bar1Option: Chart.ChartOptions = {
+            tooltips: {
+                mode: 'index',
+                intersect: false,
+            },
+            maintainAspectRatio: false
         }
         const barInstance1 = new ChartBase('bar', bar1Canvas, bar1DataBox, bar1Option);
         barInstance1.create();

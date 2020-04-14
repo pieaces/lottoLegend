@@ -91,10 +91,12 @@
 }
 
 .chart-bar-slide-container{
+  display:flex;
+  align-items: center;
+  justify-content: center;
   height: 33rem;
   padding:0 2rem;
 }
-
 .chart-bar-box{
   position: absolute;
   top:50%;
@@ -211,6 +213,10 @@
 }
 
 @media (min-width: 0px) and (max-width: 767px) {
+
+  .chart-bar-slide-container{
+    padding:0;
+  }
 
   .stats-container.box-color{
     border:none;
