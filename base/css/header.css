@@ -25,12 +25,6 @@
   margin-left: 3rem;
 }
 
-#logo {
-  background-image: url(../../img/main.png);  
-  background-position: 0 89.554318%;
-   background-size: 467.333333%;
-}
-
 .mid-nav-logo > a{
   display:flex;
   align-items: center;
