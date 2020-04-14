@@ -169,7 +169,6 @@
 }
 
 @media (min-width: 0px) and (max-width: 767px) {
-
   .title-label{
     width:20%;
   }
@@ -199,8 +198,7 @@
 }
 
 .post-btn{
-  width: 10rem;
-  height:5rem;
+  width: 8rem;
+  height: 4rem;
 }
-
 }
