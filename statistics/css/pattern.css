@@ -23,16 +23,11 @@
   font-weight: bold;
   margin-right: 1.5rem;
 }
-.lotto-num-container{
-    width:40%;
-}
-
 .lotto-num-box{
   width:85%;
   margin: 0 auto;
   padding:1rem 2rem;
 }
-
 .lotto-num {
   display:flex;
   align-items: center;

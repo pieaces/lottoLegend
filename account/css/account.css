@@ -2,7 +2,6 @@
   padding-bottom: 2rem;
   font-size : 2.6rem;   
   font-weight: 700;
-  font-family: 'Nanum-gothic';
   letter-spacing :-0.1rem;   
 }
 
@@ -58,32 +57,6 @@
 
   .account-btn:hover{
     background-color: rgb(64, 150, 221)
-  }
-
-  .account-phone-box > input{
-      height: 3.4rem;
-  }
-
-  .dash{
-      padding:0 1rem;
-  }
-
-  #find-id-result-container{
-    list-style-type: disc;
-    color:#4c4c4c;
-  }
-
-  .find-id-result-box{
-    margin-left:2rem;
-    font-size:1.4rem;
-    text-align: left;
-  }
-
-  .account-id-result-info-text{
-    padding:1rem 0 0 0.5rem;
-    color:rgb(105, 105, 105);
-    font-size:1.2rem;
-    text-align: center;
   }
 
 @media (min-width: 768px){

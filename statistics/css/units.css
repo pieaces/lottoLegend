@@ -1,3 +1,6 @@
+.fa-angle-right:before{content:"\f105"}
+.fa-angle-left:before{content:"\f104"}
+
 .lotto-num-container{
     padding:1rem 0;
 }

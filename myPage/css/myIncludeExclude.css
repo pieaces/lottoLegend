@@ -1,3 +1,10 @@
+.selectbox-text{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  width:3rem;
+  font-size:1.7rem;
+}
 
 .mypage-win-num-container{
   display:flex;

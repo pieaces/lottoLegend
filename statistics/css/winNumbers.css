@@ -1,3 +1,6 @@
+.fa-angle-right:before{content:"\f105"}
+.fa-angle-left:before{content:"\f104"}
+
 .selectr-container{
     width: 10rem !important;
     margin-right:0.5rem;

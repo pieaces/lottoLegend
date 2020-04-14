@@ -1,3 +1,6 @@
+.fa-angle-right:before{content:"\f105"}
+.fa-angle-left:before{content:"\f104"}
+
 .stats-container{
   display:flex;
   justify-content: space-around;

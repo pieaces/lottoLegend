@@ -25,11 +25,6 @@
   font-size:1.4rem;
 }
 
-.func3-all-check-box > input{
-  width:2rem;
-  height:2rem;
-}
-
 .func3-save-box-1{
   display:flex;
   align-items: center;
