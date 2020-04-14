@@ -5,7 +5,6 @@ const clickMenuBox = document.querySelectorAll('.click-menu-box'); //사이드 �
 const menu = document.querySelector('.click-menu-container');
 const menuInfoText = document.querySelector('.mid-nav-info-text');
 const menuInfo = document.querySelector('.mid-nav-info');
-const logo = document.querySelector('#logo');
 
 export function mqInit() {
     let menuTitleEventHandler = [];
@@ -24,7 +23,6 @@ export function mqInit() {
     mqMobile.addListener(mqFunc);
 
     function mqMobileInit() {
-        logo.setAttribute('src', '/img/logo/mobile.png');
         menu.classList.remove('none');
         let isMenuClick = false;
         menuTitleArr.forEach((node, index) => {
@@ -127,7 +125,6 @@ function menuHoverRemoveEvent() {
 }
 
 function mqDeskTopInit() {
-    logo.setAttribute('src', '/img/logo/desktop.png');
     menu.classList.add('none');
     menuHoverAddEvent();
 }
