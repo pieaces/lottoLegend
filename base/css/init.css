@@ -347,6 +347,10 @@ input[type="checkbox"]{
   font-size:1.4rem;
 }
 
+.mobile-qna-header{
+  display:none;
+}
+
 .bottom-nav-container {
   height: 4rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
