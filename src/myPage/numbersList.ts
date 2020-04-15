@@ -26,7 +26,8 @@ getAuthAPI('/numbers/mass')
                         text: round.toString(),
                         value: round.toString()
                     }
-                })
+                }),
+                nativeDropdown:false
             };
             let currentRound: number = rounds[0];
             makeTable(tableNumBox, data, rounds[0], true, answer);

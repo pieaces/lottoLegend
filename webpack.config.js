@@ -2,7 +2,7 @@ const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 // 확장자명 유의해서 쓸것! ts냐, js냐?
-const file = 'system/experience.ts'
+const file = 'statistics/pattern.ts'
 ////
 const directory = file.slice(0, file.lastIndexOf('/'));
 const name = file.slice(file.lastIndexOf('/') + 1, file.indexOf('.'));
