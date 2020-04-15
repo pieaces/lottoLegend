@@ -199,8 +199,8 @@ input[type="checkbox"]{
 
 /* header */
 #logo{
-  background-image: url(/img/main.webp);
-  background-position: 0 89.554318%; background-size: 467.333333%;
+  background-image: url(/img/main.png);
+  background-position: 0 78.976143%; background-size: 467.333333%;
 }
 
 .mid-nav-container {
@@ -538,7 +538,7 @@ input[type="checkbox"]{
 
     /* header */
     #logo{
-      background-position: 0 96.518106%; 
+      background-position: 0 81.461233%; 
       background-size: 467.333333%; 
       margin-top: 1rem;
     }

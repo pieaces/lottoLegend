@@ -17,37 +17,35 @@ const adBox = document.querySelector<HTMLElement>('#main-msg-img');
 let imgBranch: (order: number) => void;
 const bannerAnchor = document.getElementById('bannerAnchor');
 
+
 export function mqMobileInit() {
     banner.setAttribute('src', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAVQAAADSAQMAAAAvwqqHAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAB9JREFUeNrtwQENAAAAwqD3T20PBxQAAAAAAAAAAPBmJBgAAeBdCIQAAAAASUVORK5CYII=');
     adBox.setAttribute('src', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAVQAAADIAQMAAACNj4t6AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAB9JREFUeNrtwYEAAAAAw6D5U5/gBlUBAAAAAAAAAMA3ImAAAUhLoDkAAAAASUVORK5CYII=')
-    switch (Math.floor(Math.random() * 3)) {
+    switch (Math.floor(Math.random() * 2)) {
         case 0:
-            adBox.style.backgroundPosition = "0 41.616017%";
+            adBox.style.backgroundPosition = "0 49.767682%";
             break;
         case 1:
-            adBox.style.backgroundPosition = "0 38.040758%";
-            break;
-        case 2:
-            adBox.style.backgroundPosition = "0 34.465499%";
+            adBox.style.backgroundPosition = "0 54.930305%";
             break;
     }
     imgBranch = (order: number) => {
         switch (order) {
             case 0:
                 bannerAnchor.setAttribute('href', 'introduce/system.html');
-                banner.style.backgroundPosition = '0 19.484241%';
+                banner.style.backgroundPosition = '0 28.15735%';
                 break;
             case 1:
                 bannerAnchor.setAttribute('href', 'introduce/truth.html');
-                banner.style.backgroundPosition = '0 23.244986%';
+                banner.style.backgroundPosition = '0 33.592133%';
                 break;
             case 2:
                 bannerAnchor.setAttribute('href', 'introduce/pay.html');
-                banner.style.backgroundPosition = '0 27.005731%';
+                banner.style.backgroundPosition = '0 39.026915%';
                 break;
             case 3:
                 bannerAnchor.setAttribute('href', 'introduce/campaign.html');
-                banner.style.backgroundPosition = '0 30.766476%';
+                banner.style.backgroundPosition = '0 44.461698%';
                 break;
         }
     }
@@ -55,16 +53,13 @@ export function mqMobileInit() {
 
 export function mqDeskTopInit() {
     banner.setAttribute('src', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAr0AAAEQAQMAAACHgF42AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAC5JREFUeNrtwQENAAAAwqD3T20PBxQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI8GXpAAAQ4N7WkAAAAASUVORK5CYII=');
-    adBox.setAttribute('src', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPoAAAKKAQMAAAAun9SWAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAACxJREFUeNrtwYEAAAAAw6D5Ux/hAlUBAAAAAAAAAAAAAAAAAAAAAAAAAADfAFPKAAEwuAWxAAAAAElFTkSuQmCC');
-    switch (Math.floor(Math.random() * 3)) {
+    adBox.setAttribute('src', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAP0AAAFtAQMAAAD26v5IAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAACNJREFUeNrtwQENAAAAwqD3T20ON6AAAAAAAAAAAAAAAODMAC8NAAEIcAnCAAAAAElFTkSuQmCC');
+    switch (Math.floor(Math.random() * 2)) {
         case 0:
-            adBox.style.backgroundPosition = "0 74.416796%";
+            adBox.style.backgroundPosition = "0 62.766244%";
             break;
         case 1:
-            adBox.style.backgroundPosition = "0 61.780715%";
-            break;
-        case 2:
-            adBox.style.backgroundPosition = "0 49.144635%";
+            adBox.style.backgroundPosition = "0 72.607172%";
             break;
     }
     imgBranch = (order: number) => {
@@ -75,15 +70,15 @@ export function mqDeskTopInit() {
                 break;
             case 1:
                 bannerAnchor.setAttribute('href', 'introduce/truth.html');
-                banner.style.backgroundPosition = '0 4.925752%';
+                banner.style.backgroundPosition = '0 7.154129%';
                 break;
             case 2:
                 bannerAnchor.setAttribute('href', 'introduce/pay.html');
-                banner.style.backgroundPosition = '0 9.851503%';
+                banner.style.backgroundPosition = '0 14.308259%';
                 break;
             case 3:
                 bannerAnchor.setAttribute('href', 'introduce/campaign.html');
-                banner.style.backgroundPosition = '0 14.777255%';
+                banner.style.backgroundPosition = '0 21.462388%';
                 break;
         }
     }

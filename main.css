@@ -138,7 +138,7 @@ margin-bottom: 0.5rem;
 }
 
 #banner,.main-aside img, #statistics-img, #include-img, #exclude-img, #main-msg-img{
-  background-image: url(img/main.webp);
+  background-image: url(img/main.png);
 }
 
 #statistics-img, #include-img, #exclude-img, #main-msg-img{
@@ -147,7 +147,7 @@ margin-bottom: 0.5rem;
 
 #statistics-img{
   height: 95%;
-  background-position: 0 78.921396%;
+  background-position: 0 77.339403%;
   background-size: 280.4%;
 }
 
@@ -157,7 +157,7 @@ margin-right: 1rem;
 }
 
 #include-img{
-  background-position: 0 98.243765%; 
+  background-position: 0 97.483644%; 
   background-size: 569.918699%; 
 }
 
@@ -587,7 +587,7 @@ flex:2;
 }
 
 .main-1-4-2-2{
-  height:60%;
+  height:59%;
 }
 
 .box-title-btn-wrapper{
@@ -762,7 +762,8 @@ flex:2;
 }
 
 #main-msg-img{
-  background-size: 280.4%;
+  background-position: 0 62.766244%;
+  background-size: 277.075099%;
 }
 
 .main-aside img{
@@ -770,13 +771,13 @@ flex:2;
 }
 
 .main-aside #aside-img1{
-  background-position: 0 85.131299%;
+  background-position: 0 94.892748%;
 }
 .main-aside #aside-img2{
-  background-position: 0 88.40528%;
+  background-position: 0 85.640762%;
 }
 .main-aside #aside-img3{
-  background-position: 0 82.195209%;
+  background-position: 0 90.758906%;
 }
 
 #banner{
@@ -825,10 +826,11 @@ flex:2;
 @media (min-width: 0px) and (max-width: 767px) {
   #main-msg-img{
     background-size: 206.176471%;
+    background-position: 0 28.15735%;
   }
 
   #banner{
-    background-position: 0 19.484241%; 
+    background-position: 0 0%;
     background-size: 206.176471%;
   }
   .community-content-title{
