@@ -296,3 +296,30 @@ export function makeWinNumBox(data: any) {
     bonus.style.backgroundColor = compartColor[compartIndex];
     winBox.appendChild(bonus);
 }
+const winnerList = document.getElementById('winner-list');
+
+function numberToOrdinal(rank:number){
+    switch(rank){
+        case 1: return 'first';
+        case 2: return 'second';
+        case 3: return 'third';
+    }
+}
+function winnerHtml(winner:{rank:number, money:number, nickName:string}){
+    return `<div class="board-box">
+    <div class="board-tab1">
+        <span class="rank rank-${numberToOrdinal(winner.rank)}">
+          <div class="rank-text">${winner.rank}</div>
+        </span>
+    </div>
+    <div class="board-tab2">${numberFormat(winner.money)}</div>
+    <div class="board-tab3">${winner.nickName}</div>
+  </div>`
+}
+export function makeWinnersList(winners:{rank:number, money:number, nickName:string}[]){
+    let html = '';
+    winners.forEach(winner => {
+        html += winnerHtml(winner);
+    });
+    winnerList.innerHTML = html;
+}

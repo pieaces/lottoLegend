@@ -2,7 +2,7 @@ import configure from './amplify/configure'
 import { getUnAuthAPI, getAuthAPI } from './amplify/api';
 import { rankToClass, loginAddEvent, networkAlert } from './functions';
 import { isLogedIn, getNickName, signOut } from './amplify/auth';
-import { mqDeskTopInit, backgroundImgSlide, makeWinNumBox, insertWinCount, insertWinResult, executeMakingBoard, mqMobileInit } from './functions/main';
+import { mqDeskTopInit, backgroundImgSlide, makeWinNumBox, insertWinCount, insertWinResult, executeMakingBoard, mqMobileInit, makeWinnersList } from './functions/main';
 
 configure();
 
@@ -35,7 +35,7 @@ isLogedIn().then((result) => {
 
 const winRound = document.getElementById('win-round');
 const officialWinResultBox = document.querySelectorAll<HTMLElement>('.total-win-result-box > div');
-const myWinResultBox = document.querySelectorAll<HTMLElement>('.own-win-result-box > div');
+const myWinResultBox = document.querySelectorAll<HTMLElement>('#win-result > div');
 getUnAuthAPI('/main/numbers').then(data => {
     makeWinNumBox(data);
     Array.from(document.querySelectorAll('.win-round')).forEach(node => node.textContent = data.round);
@@ -51,7 +51,8 @@ getUnAuthAPI('/main/numbers').then(data => {
     }), myWinResultBox);
     // document.getElementById('totalAmount').textContent = (<any[]>data.info).reduce((acc, cur, index) =>
     //     acc + cur.winAmount * data.win[index], 0);
-}).catch(() => networkAlert());
+    makeWinnersList([{rank:1, money:100000000, nickName:'pieaces'}, {rank:2, money:203030, nickName:'hihi'}]);
+}).catch((err) => console.log(err));
 
 const mqMobile = window.matchMedia("(max-width: 767px)");
 if (mqMobile.matches) {

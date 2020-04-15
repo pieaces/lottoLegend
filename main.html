@@ -419,7 +419,7 @@
                     <div class="board-tab2">당첨조합수</div>
                     <div class="board-tab3">적중 총액</div>
                   </div>
-                  <div class="board-section own-win-result-box">
+                  <div class="board-section own-win-result-box" id="win-result">
                     <div class="board-box">
                       <div class="board-tab1">
                         <span class="rank rank-first">
@@ -482,9 +482,7 @@
               </div>
               <div class="community-container">
                 <div class="box-title box-title-btn-wrapper">
-                  게시판
-                  <a id="board-plus" href="/board/pro/list.html"><button type="button"
-                      class="btn info-btn">더보기</button></a>
+                  게시판 <a id="board-plus" href="/board/pro/list.html"><button type="button" class="btn info-btn">더보기</button></a>
                 </div>
                 <div class="community-box ">
                   <div class="community-tabs">
@@ -523,7 +521,20 @@
             </div>
             <div class="main-1-4-2">
               <div class="main-1-4-2-1 box-color">
-
+                <div class="box-title">
+                  <span class="own-lotto-text">로또끝</span> <span class="win-round"></span>회 당첨자 리스트
+                  <!--<span style="margin-left:1rem; font-size: 1.4rem;">총 적중금액: <span id="totalAmount"></span></span>-->
+                </div>
+                <div class="board-container">
+                  <div class="board-header">
+                    <div class="board-tab1">등수</div>
+                    <div class="board-tab2">당첨금</div>
+                    <div class="board-tab3">닉네임</div>
+                  </div>
+                  <div class="board-section own-win-result-box" id="winner-list">
+                    
+                  </div>
+                </div>
               </div>
               <div class="main-1-4-2-2">
               <img id="main-msg-img"
