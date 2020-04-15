@@ -12,7 +12,7 @@ const winCount = document.querySelectorAll('.win-count-rank');
 const scrollList = document.querySelectorAll('#scroll-list > ul > li > a');
 const commContent = document.querySelectorAll<HTMLElement>('.community-content');
 const commContentAnchor = document.querySelectorAll<HTMLElement>('.community-content-title > a');
-const adBox=document.querySelector<HTMLElement>('.main-1-4-2 > img');
+const adBox=document.querySelector<HTMLElement>('#main-msg-img');
 
 let imgBranch: (order: number) => void;
 const bannerAnchor = document.getElementById('bannerAnchor');
