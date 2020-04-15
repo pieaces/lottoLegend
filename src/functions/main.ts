@@ -12,25 +12,25 @@ const winCount = document.querySelectorAll('.win-count-rank');
 const scrollList = document.querySelectorAll('#scroll-list > ul > li > a');
 const commContent = document.querySelectorAll<HTMLElement>('.community-content');
 const commContentAnchor = document.querySelectorAll<HTMLElement>('.community-content-title > a');
-const adBox=document.querySelector<HTMLElement>('#main-msg-img');
+const adBox = document.querySelector<HTMLElement>('#main-msg-img');
 
 let imgBranch: (order: number) => void;
 const bannerAnchor = document.getElementById('bannerAnchor');
 
 export function mqMobileInit() {
     banner.setAttribute('src', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAVQAAADSAQMAAAAvwqqHAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAB9JREFUeNrtwQENAAAAwqD3T20PBxQAAAAAAAAAAPBmJBgAAeBdCIQAAAAASUVORK5CYII=');
-    adBox.setAttribute('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAVQAAADIAQMAAACNj4t6AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAB9JREFUeNrtwYEAAAAAw6D5U5/gBlUBAAAAAAAAAMA3ImAAAUhLoDkAAAAASUVORK5CYII=')
-    switch(Math.floor(Math.random() * 3)){
+    adBox.setAttribute('src', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAVQAAADIAQMAAACNj4t6AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAB9JREFUeNrtwYEAAAAAw6D5U5/gBlUBAAAAAAAAAMA3ImAAAUhLoDkAAAAASUVORK5CYII=')
+    switch (Math.floor(Math.random() * 3)) {
         case 0:
-            adBox.style.backgroundPosition="0 41.616017%";
+            adBox.style.backgroundPosition = "0 41.616017%";
             break;
         case 1:
-            adBox.style.backgroundPosition="0 38.040758%";
+            adBox.style.backgroundPosition = "0 38.040758%";
             break;
         case 2:
-            adBox.style.backgroundPosition="0 34.465499%";            
+            adBox.style.backgroundPosition = "0 34.465499%";
             break;
-    } 
+    }
     imgBranch = (order: number) => {
         switch (order) {
             case 0:
@@ -55,22 +55,22 @@ export function mqMobileInit() {
 
 export function mqDeskTopInit() {
     banner.setAttribute('src', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAr0AAAEQAQMAAACHgF42AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAC5JREFUeNrtwQENAAAAwqD3T20PBxQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI8GXpAAAQ4N7WkAAAAASUVORK5CYII=');
-    adBox.setAttribute('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPoAAAKKAQMAAAAun9SWAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAACxJREFUeNrtwYEAAAAAw6D5Ux/hAlUBAAAAAAAAAAAAAAAAAAAAAAAAAADfAFPKAAEwuAWxAAAAAElFTkSuQmCC');
-    switch(Math.floor(Math.random() * 3)){
+    adBox.setAttribute('src', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPoAAAKKAQMAAAAun9SWAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAACxJREFUeNrtwYEAAAAAw6D5Ux/hAlUBAAAAAAAAAAAAAAAAAAAAAAAAAADfAFPKAAEwuAWxAAAAAElFTkSuQmCC');
+    switch (Math.floor(Math.random() * 3)) {
         case 0:
-            adBox.style.backgroundPosition="0 74.416796%";
+            adBox.style.backgroundPosition = "0 74.416796%";
             break;
         case 1:
-            adBox.style.backgroundPosition="0 61.780715%";
+            adBox.style.backgroundPosition = "0 61.780715%";
             break;
         case 2:
-            adBox.style.backgroundPosition="0 49.144635%";            
+            adBox.style.backgroundPosition = "0 49.144635%";
             break;
-    } 
+    }
     imgBranch = (order: number) => {
         switch (order) {
             case 0:
-                bannerAnchor.setAttribute('href', 'introduce/system.html');                
+                bannerAnchor.setAttribute('href', 'introduce/system.html');
                 banner.style.backgroundPosition = '0 0%';
                 break;
             case 1:
@@ -298,25 +298,31 @@ export function makeWinNumBox(data: any) {
 }
 const winnerList = document.getElementById('winner-list');
 
-function numberToOrdinal(rank:number){
-    switch(rank){
+function numberToOrdinal(rank: number) {
+    switch (rank) {
         case 1: return 'first';
         case 2: return 'second';
         case 3: return 'third';
     }
 }
-function winnerHtml(winner:{rank:number, money:number, nickName:string}){
+export function moneyCompress(money: number) {
+    if (money >= 100000000) return '약 ' + Math.round(money / 100000000) + '억원';
+    else if (money >= 10000000) return '약 ' + Math.round(money / 10000) + '만원';
+    else if (money >= 1000000) return '약 ' + Math.round(money / 10000) + '만원';
+    else money + '원';
+}
+function winnerHtml(winner: { rank: number, money: number, nickName: string }) {
     return `<div class="board-box">
     <div class="board-tab1">
         <span class="rank rank-${numberToOrdinal(winner.rank)}">
           <div class="rank-text">${winner.rank}</div>
         </span>
     </div>
-    <div class="board-tab2">${numberFormat(winner.money)}</div>
+    <div class="board-tab2">${moneyCompress(winner.money)}</div>
     <div class="board-tab3">${winner.nickName}</div>
   </div>`
 }
-export function makeWinnersList(winners:{rank:number, money:number, nickName:string}[]){
+export function makeWinnersList(winners: { rank: number, money: number, nickName: string }[]) {
     let html = '';
     winners.forEach(winner => {
         html += winnerHtml(winner);

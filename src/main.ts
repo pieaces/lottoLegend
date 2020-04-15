@@ -2,7 +2,7 @@ import configure from './amplify/configure'
 import { getUnAuthAPI, getAuthAPI } from './amplify/api';
 import { rankToClass, loginAddEvent, networkAlert } from './functions';
 import { isLogedIn, getNickName, signOut } from './amplify/auth';
-import { mqDeskTopInit, backgroundImgSlide, makeWinNumBox, insertWinCount, insertWinResult, executeMakingBoard, mqMobileInit, makeWinnersList } from './functions/main';
+import { mqDeskTopInit, backgroundImgSlide, makeWinNumBox, insertWinCount, insertWinResult, executeMakingBoard, mqMobileInit, makeWinnersList, moneyCompress } from './functions/main';
 
 configure();
 
@@ -49,10 +49,15 @@ getUnAuthAPI('/main/numbers').then(data => {
             winAmount: winner * data.info[index].winAmount
         }
     }), myWinResultBox);
-    // document.getElementById('totalAmount').textContent = (<any[]>data.info).reduce((acc, cur, index) =>
-    //     acc + cur.winAmount * data.win[index], 0);
-    makeWinnersList([{rank:1, money:100000000, nickName:'pieaces'}, {rank:2, money:203030, nickName:'hihi'}]);
-}).catch((err) => console.log(err));
+    document.getElementById('totalAmount').textContent = moneyCompress((<any[]>data.info).reduce((acc, cur, index) => acc + cur.winAmount * data.win[index], 0));
+    const winners = [];
+    data.winners.forEach((_winners, index) => {
+        _winners && _winners.forEach(winner => {
+            winners.push({ rank: index + 1, money: data.info[index].winAmount, nickName: winner });
+        });
+    });
+    makeWinnersList(winners);
+}).catch((err) => networkAlert());
 
 const mqMobile = window.matchMedia("(max-width: 767px)");
 if (mqMobile.matches) {
