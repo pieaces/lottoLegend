@@ -715,13 +715,16 @@ flex:2;
 }
 
 .community-content-title{
-  width: 25rem;
+  width: 55rem;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   font-size:1.3rem;
 }
-
+.community-content-title > a{
+  display: inline-block;
+  width: 100%;
+}
 .community-content-title > a,
 .community-time{
   color:#535353;

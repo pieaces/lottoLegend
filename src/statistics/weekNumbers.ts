@@ -13,6 +13,7 @@ getUnAuthAPI('/numbers/week')
         makeTable(data);
 
         const config: IOptions = {
+            placeholder: '회차',
             data: rounds.map((round: string) => {
                 return {
                     text: round,

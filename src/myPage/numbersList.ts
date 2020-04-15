@@ -21,6 +21,7 @@ getAuthAPI('/numbers/mass')
     .then(({ data, rounds, answer }) => {
         if (data) {
             const roundConfig: IOptions = {
+                placeholder:'회차',
                 data: rounds.reverse().map((round: number) => {
                     return {
                         text: round.toString(),

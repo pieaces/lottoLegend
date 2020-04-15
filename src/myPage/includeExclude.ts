@@ -24,6 +24,7 @@ getAuthAPI('/numbers/piece')
             document.querySelector<HTMLElement>('.selectbox-wrapper').classList.remove('none');
             if (rounds) {
                 const config: IOptions = {
+                    placeholder:'회차',
                     data: rounds.map((round: string) => {
                         return {
                             text: round,

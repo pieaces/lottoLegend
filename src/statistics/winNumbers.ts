@@ -79,6 +79,7 @@ getUnAuthAPI('/numbers/win')
         write(data);
 
         const roundConfig: IOptions = {
+            placeholder:'회차',
             data: []
         };
         for (let round = data.round; round >= 1; round--) {

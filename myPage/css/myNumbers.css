@@ -192,3 +192,36 @@ border-right:1px solid rgba(0, 0, 0, 0.1);
     line-height: 1.7;
   }
 }
+
+/* fun3NumListTable */
+.func3-past-win-table,
+.func3-past-win-table td,
+.func3-past-win-table tr{
+  border-bottom:none;
+}
+
+.func3-past-win-table tr{
+  height: 2.5rem;
+    background-color: aliceblue;
+}
+  
+.func3-past-win-table tr>td{
+  width: 16.6%;
+  font-size:1.3rem;
+  text-align: center;
+  word-break: keep-all;
+}
+
+.func3-list-filter-table tr >td{
+  width:12.5%;
+  font-size:1.3rem;
+  text-align: center;
+  word-break: keep-all;
+}
+.func3-list-filter-table tr:nth-child(1){
+  height:2rem;
+  background: beige;
+}
+.func3-list-filter-table tr:nth-child(2){
+  height:2.5rem;
+}
