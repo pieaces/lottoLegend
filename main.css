@@ -806,11 +806,15 @@ flex:2;
     background-size: 206.176471%;
   }
   .community-content-title{
-    width: 20rem;
+    width: 18rem;
     font-size: 1.4rem;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+  }
+  .community-content{
+    padding-left:1rem;
+    padding-right:1rem;
   }
   .community-time{
     font-size: 1.2rem;
@@ -993,7 +997,4 @@ flex:2;
     position: relative;
   }
 
-  .community-content-title{
-    width: 24rem;
-  }
 }

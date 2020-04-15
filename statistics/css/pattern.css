@@ -42,3 +42,13 @@
   color: white;
   font-size: 1.3rem ;
 }
+
+@media (min-width: 0px) and (max-width: 767px) {
+ .stats-container{
+   flex-direction: column;
+ }
+
+ .box-title{
+   margin-right: 0;
+ }
+}

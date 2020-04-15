@@ -92,12 +92,16 @@
   }
 
   .account-title-box{
-    font-size:1.1rem;
+    font-size:1.2rem;
     border-right: none;
   }
 
   .account-input-box{
     display: block;
     padding:1rem 1rem;
+  }
+
+  .account-info-box{
+    font-size:1.2rem;
   }
 }

@@ -13,7 +13,7 @@ const lineValueBox2 = document.querySelector<HTMLElement>('#func1-line-times');
 const lineTable = document.querySelector<HTMLElement>('#func1-line-table');
 
 const option: Chart.ChartOptions = {
-    responsive: true,
+    maintainAspectRatio: false,
     tooltips: {
         mode: 'index',
         intersect: false,
