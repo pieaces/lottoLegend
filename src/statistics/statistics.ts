@@ -16,8 +16,8 @@ const method = getQueryStringObject().method;
 const mean = document.querySelector<HTMLElement>('.stats-mean-value');
 const $68 = document.querySelector<HTMLElement>('.stats-68-value');
 const $95 = document.querySelector<HTMLElement>('.stats-95-value');
-document.querySelector<HTMLElement>('.main-title').textContent = getStaticsName(method);
-
+document.querySelector<HTMLElement>('#pc-name').textContent = getStaticsName(method);
+document.querySelector<HTMLElement>('#mobile-name').textContent = getStaticsName(method);
 const lineCanvas: HTMLCanvasElement = document.querySelector('#chart-line');
 const lineNum = document.querySelectorAll<HTMLElement>('.chart-line-num > div');
 const leftBtn = document.getElementById('left-line-chart-btn');

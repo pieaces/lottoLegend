@@ -1,5 +1,7 @@
 @media (min-width: 0px) and (max-width: 767px) {
-
+#pc-name{
+  display:none;
+}
 .filter-box-container {
   display: flex;
   align-items: center;
@@ -11,7 +13,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width:10rem;
+  width:15rem;
   height:4rem;
   padding-right:1.5rem; 
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4), -1px -1px 1px rgba(0, 0, 0, 0.4);

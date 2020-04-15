@@ -56,11 +56,14 @@
                 <div class="container mid-nav">
                     <div class="mid-nav-mobile-box">
                         <h1 class="mid-nav-logo">
-                            <a href="/main.html"><img id="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAAAyAQMAAACEQrBZAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABFJREFUeNpjYBgFo2AUDHcAAAPoAAHOSUxYAAAAAElFTkSuQmCC"></a>
+                            <a href="/main.html"><img id="logo"
+                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAAAyAQMAAACEQrBZAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAABFJREFUeNpjYBgFo2AUDHcAAAPoAAHOSUxYAAAAAElFTkSuQmCC"></a>
                         </h1>
                         <ul class="mid-nav-info-box">
-                            <li> <a class="mid-nav-info-anchor none" id="header-signin"href="/account/signIn.html">로그인</a> </li>
-                            <li> <a class="mid-nav-info-anchor none" id="header-signup"href="/account/agree.html">회원가입</a> </li>
+                            <li> <a class="mid-nav-info-anchor none" id="header-signin"
+                                    href="/account/signIn.html">로그인</a> </li>
+                            <li> <a class="mid-nav-info-anchor none" id="header-signup"
+                                    href="/account/agree.html">회원가입</a> </li>
                             <li class="mid-nav-info-text none" id="header-mypage">
                                 <div class="mid-nav-info-anchor"><span id="nickName"></span>님
                                     <i class="fas fa-sort-down"></i>
@@ -77,7 +80,8 @@
                                     </div>
                                 </div>
                             </li>
-                            <li><a class="mid-nav-info-anchor" id="qna-anchor" href="/board/qna/qnaList.html">고객문의</a></li>
+                            <li><a class="mid-nav-info-anchor" id="qna-anchor" href="/board/qna/qnaList.html">고객문의</a>
+                            </li>
                         </ul>
                     </div>
                     <ul class="mid-nav-menu">
@@ -188,29 +192,30 @@
                 </div>
                 <div class="main">
                     <div class="main-title">
-                        통계 자료
-                    </div>
-                    <div class="filter-box-container none">
-                        <div class="filter-box">
-                            <span>통계 자료</span>
-                            <i class="fas fa-sort-down filter-arrow"></i>
-                            <ul class="filter-list none">
-                                <li> <a href="/statistics/winNumbers.html">당첨번호 통계</a> </li>
-                                <li> <a href="/statistics/units.html">끝수</a> </li>
-                                <li> <a href="/statistics/pattern.html">로또용지</a> </li>
-                                <li> <a href="/statistics/statistics.html?method=excludedLineCount">전멸구간 개수</a></li>
-                                <li> <a href="/statistics/statistics.html?method=carryCount">이월 개수</a> </li>
-                                <li> <a href="/statistics/statistics.html?method=lowCount">저값(1~22) 개수</a> </li>
-                                <li> <a href="/statistics/statistics.html?method=sum">번호 합계</a> </li>
-                                <li> <a href="/statistics/statistics.html?method=oddCount">홀수 개수</a> </li>
-                                <li> <a href="/statistics/statistics.html?method=primeCount">소수 개수</a> </li>
-                                <li> <a href="/statistics/statistics.html?method=$3Count">3배수 개수</a> </li>
-                                <li> <a href="/statistics/statistics.html?method=sum$10">첫수(십의자리) 합</a> </li>
-                                <li> <a href="/statistics/statistics.html?method=diffMaxMin">고저차</a> </li>
-                                <li> <a href="/statistics/statistics.html?method=AC">AC</a> </li>
-                            </ul>
+                        <span id="pc-name"></span>
+                        <div class="filter-box-container none">
+                            <div class="filter-box">
+                                <span id="mobile-name"></span>
+                                <i class="fas fa-sort-down filter-arrow"></i>
+                                <ul class="filter-list none">
+                                    <li> <a href="/statistics/winNumbers.html">당첨번호 통계</a> </li>
+                                    <li> <a href="/statistics/units.html">끝수</a> </li>
+                                    <li> <a href="/statistics/pattern.html">로또용지</a> </li>
+                                    <li> <a href="/statistics/statistics.html?method=excludedLineCount">전멸구간 개수</a></li>
+                                    <li> <a href="/statistics/statistics.html?method=carryCount">이월수</a> </li>
+                                    <li> <a href="/statistics/statistics.html?method=lowCount">저값(1~22) 개수</a> </li>
+                                    <li> <a href="/statistics/statistics.html?method=sum">번호 합계</a> </li>
+                                    <li> <a href="/statistics/statistics.html?method=oddCount">홀수 개수</a> </li>
+                                    <li> <a href="/statistics/statistics.html?method=primeCount">소수 개수</a> </li>
+                                    <li> <a href="/statistics/statistics.html?method=$3Count">3배수 개수</a> </li>
+                                    <li> <a href="/statistics/statistics.html?method=sum$10">첫수(십의자리) 합</a> </li>
+                                    <li> <a href="/statistics/statistics.html?method=diffMaxMin">고저차</a> </li>
+                                    <li> <a href="/statistics/statistics.html?method=AC">AC</a> </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
+
                     <div class="stats-container box-color">
                         <div class="stats-box">
                             <div>
