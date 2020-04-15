@@ -587,6 +587,9 @@ input[type="checkbox"]{
       width: 100%;
       background-color: white;
     }
+    .click-menu-container a{
+      color:#777777;
+    }
     .mobile-qna-header{
       border-bottom: 1px solid gray;
     }
@@ -720,6 +723,7 @@ input[type="checkbox"]{
     }
     .main-title{
       font-size:1.5rem;
+      font-weight: 400;
     }
 }
 /* boundaryLine*/
