@@ -61,44 +61,134 @@
     font-size:1.3rem;
 }
 
-
-  @media (min-width: 0px) and (max-width: 767px) {
-
-    .mypage-selectbox-container{
-        margin-bottom:1rem;
-    }
-
-    .selectbox-wrapper{
-        position: relative;
-    }
-
-    .num-list-select{
-        position: absolute;
-        top:4.5rem;
-        left:-1rem;
-        width:6rem;
-        height: 3.5rem;
-    }
-
-    .num-list-select > span{
-        font-size:1.2rem;
-    }
-
-    .mypage-toggle-btn-box{
-        position: absolute;
-        top:0rem;
-        right:0;
-        justify-content: flex-end;
-    }
-
-    .mypage-toggle-btn{
-        width: 8rem;
-        font-size:1.2rem;
-    }
-
-    .mypage-num-delete-btn{
-        width: 8rem;
-        font-size: 1.2rem;
-    }
-  
+@media (min-width: 0px) and (max-width: 767px) {
+  .mypage-selectbox-container{
+      margin-bottom:1rem;
   }
+  .selectbox-wrapper{
+      position: relative;
+  }
+  .num-list-select{
+      position: absolute;
+      top:4.5rem;
+      left:-1rem;
+      width:6rem;
+      height: 3.5rem;
+  }
+  .num-list-select > span{
+      font-size:1.2rem;
+  }
+  .mypage-toggle-btn-box{
+      position: absolute;
+      top:0rem;
+      right:0;
+      justify-content: flex-end;
+  }
+  .mypage-toggle-btn{
+      width: 8rem;
+      font-size:1.2rem;
+  }
+  .mypage-num-delete-btn{
+      width: 8rem;
+      font-size: 1.2rem;
+  }
+}
+
+/* numListTable */
+.mypage-table-num-list > div{
+    display:inline-block;
+    width:3.5rem;
+    height:3.5rem;
+    margin:0 1rem 1rem 1rem;
+    border-radius: 50%;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    color:white;
+    font-size:1.5rem;
+    line-height: 2.3;
+    text-align: center;
+  }
+
+  .mypage-table{
+    margin-bottom: 1rem;
+  }
+
+  .mypage-table-header{
+    display:flex;
+    height:5rem;
+    border-top:1px solid rgba(0, 0, 0, 0.1);
+    border-right:1px solid rgba(0, 0, 0, 0.1);
+    border-left:1px solid rgba(0, 0, 0, 0.1);
+    background-color: #f6f6f6;
+    font-size:1.3rem;
+    text-align: center;
+    word-break: keep-all;
+  }
+
+  .mypage-table-content{
+    display:flex;
+    border-top:1px solid rgba(0, 0, 0, 0.1);
+    border-right:1px solid rgba(0, 0, 0, 0.1);
+    border-left:1px solid rgba(0, 0, 0, 0.1);
+    font-size: 1.2rem;
+  }
+
+.mypage-table-checkbox,
+.mypage-table-round,
+.mypage-table-date,
+.mypage-table-division,
+.mypage-table-iswin,
+.mypage-table-num
+  {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+.mypage-table-checkbox,
+.mypage-table-round,
+.mypage-table-date,
+.mypage-table-division{
+  flex:1;
+  border-right:1px solid rgba(0, 0, 0, 0.1);
+}
+ 
+.mypage-table-num{
+border-right:1px solid rgba(0, 0, 0, 0.1);
+}
+
+.mypage-table-iswin
+{
+    flex:1;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mypage-table-content >div.mypage-table-num{
+  padding-top:1rem;
+}
+
+.mypage-table-num{
+  flex:4;
+}
+
+@media (min-width: 0px) and (max-width: 767px) {
+
+.mypage-table .mypage-table-date,
+.mypage-table .mypage-table-division{
+    display:none;
+}
+
+.mypage-table-num{
+  flex:5;
+}
+
+  .mypage-table-num-list > div{
+    width:2.5rem;
+    height:2.5rem;
+    margin-left:0.5rem;
+    margin-right:0.5rem;
+    line-height: 1.7;
+  }
+}
