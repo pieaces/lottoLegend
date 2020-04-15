@@ -55,5 +55,26 @@
   .inc-exc-num-box{
     width: 20%;
   }
+}
 
+/* incExcRead */
+.inc-exc-num-wrapper{
+  width:50%;
+}
+
+.inc-exc-select-num {
+  width: 2.8rem;
+  height: 2.8rem;
+  font-size:1.2rem;
+}
+
+/* incExcPost */
+.inc-exc-num-wrapper{
+  width:100%;
+}
+
+.inc-exc-select-num {
+  width: 4rem;
+  height: 4rem;
+  font-size:1.6rem;
 }

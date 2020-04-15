@@ -57,6 +57,23 @@
 .filter-list > li:last-child {
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
+}
 
+/* statsBox */ 
+.stats-box{
+  display:flex;
+  text-align: center;
+}
 
+.stats-box > div{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  width:50%;  
+}
+
+.stats-box > div:nth-child(1){
+  background-color: #1b507b;
+  color:white;
+  word-break: keep-all;
 }

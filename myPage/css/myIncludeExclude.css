@@ -103,3 +103,21 @@
 }
 }
 
+/* numListResult */
+.num-result-box{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 5rem;
+  font-size: 1.4rem;
+}
+
+
+.num-result-value,
+.num-result-percent{
+  font-weight: bold;
+}
+
+.num-result-percent{
+  color: red;
+}

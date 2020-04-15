@@ -1,3 +1,192 @@
+/* function */
+    /* main */
+.fa-angle-right:before{content:"\f105"}
+.fa-angle-left:before{content:"\f104"}
+.fa-question-circle:before{content:"\f059"}
+  
+.func3-table-values{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin:0 auto 1rem auto;
+}
+.func3-table-piece{
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background-color: #2e6307;
+  color: white;
+  font-size: 1.3rem;
+}
+
+.func3-filter-table  tr:nth-child(1) >td{
+  background-color: #f6f6f6;
+  word-break: keep-all;
+}
+
+.func3-filter-table  tr >td{
+  width: 11.11%;
+  height: 5rem;
+  font-size: 1.3rem;
+  text-align: center;
+}
+.func3-filter-table  tr:nth-child(2) >td{
+  padding: 1.5rem;
+}
+.func3-filter-table  tr:nth-child(2) >td:nth-child(1){
+  font-size: 1.6rem;
+}
+
+  #excludedLineCount-text{
+    display: flex;
+    align-items: center;
+    padding-top:0;
+    padding-left:1rem;
+  }
+
+  .filter-box-container-box {
+    display: flex;
+    align-items: center;
+    height:10rem;
+    margin:1rem 0;
+  }
+
+  .filter-box-container{
+    justify-content: center;
+    width:40%;
+  }
+
+  .steps{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width:60%;
+  }
+
+  .steps span{
+    font-size:1.3rem;
+    text-align: center;
+  }
+  
+  .past,.present,.future{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width:10rem;
+    height:4.5rem;
+    margin:0 0.6rem;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2), -1px -1px 1px rgba(0, 0, 0, 0.2);
+    word-break: keep-all;
+  }
+  
+  .future{
+    background: #ececec;
+    color: #b3b3b3;
+  }
+
+  .present{
+    background-color: #3da8e3;
+    color: white;
+  }
+
+  .triangle{
+    margin-left:0.7rem;
+    border-top: 0.7rem solid transparent;
+    border-right: 1rem solid transparent;
+    border-bottom: 0.7rem solid transparent;
+    border-left: 1rem solid #575755;
+  }
+  
+  .chart-slide-current {
+    border: 6px solid #a5484c;
+  }
+
+  .checkbox-textbox{
+    height:3rem;
+    margin-bottom:1rem;
+  }
+
+  .checkbox-text{
+    display:flex;
+    align-items: center;
+    height:100%;
+    font-size:1.4rem;
+  }
+
+  .table-1{
+    height:100%;
+  }
+
+  .table-1 tr{
+    height:3rem;
+    text-align: center;
+  }
+
+  .table-1 td{
+    font-size:1.3rem;
+  }
+
+.auto-choose-container-box{
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height:4rem;
+  margin-bottom:1rem;
+}
+
+.extract-num{
+  display:flex;
+  align-items: center;
+  justify-content: flex-start;
+  width:40%;
+  height:100%;
+  padding:0.5rem 1rem;
+  font-size: 1.4rem;
+  word-break: keep-all;
+  text-align: center;
+}
+
+#main-counter{
+  font-size: 2rem;
+  font-weight: bold;
+}
+#sub-counter{
+  margin-left: 1rem;
+  color: #ff8c8c;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+@media (min-width: 0px) and (max-width: 767px) {
+   .filter-box{
+     width:100%;
+   }
+  .filter-box-container-box{
+    display:block;
+    height:auto;
+  }
+
+  .filter-box-container-box{
+  border: none;  
+  }
+  
+  .filter-box-container-box >div{
+    width: 100%;
+    padding:1rem 0;
+  }
+
+  .extract-num{
+    display:block;
+    width: 70%;
+  }
+
+  .chart-slide-current{
+    border-width: 5px;
+  }
+
+}
+
+/* function1 */
 .func1-main-box-1{
   height:36rem;
 }
@@ -255,5 +444,3 @@
 
 
 }
-
-  
