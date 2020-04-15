@@ -22,7 +22,12 @@ const dataBox = {
         }
     ]
 };
-const option = {
+const option: Chart.ChartOptions = {
+    maintainAspectRatio: false,
+    tooltips: {
+        mode: 'index',
+        intersect: false,
+    }
 }
 const barInstance = new ChartBase('bar', barCanvas, dataBox, option);
 barInstance.create();

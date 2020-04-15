@@ -320,6 +320,10 @@
 		margin-right: 0.3rem;
 	}
 
+	.payment-bank-title{
+		margin-bottom:0.8rem;
+	}
+
 	.payment-tab-box > div{
 		margin-bottom: 1rem;
 	}
