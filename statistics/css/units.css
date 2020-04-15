@@ -1,3 +1,6 @@
+.fa-angle-right:before{content:"\f105"}
+.fa-angle-left:before{content:"\f104"}
+
 .lotto-num-container{
     padding:1rem 0;
 }
@@ -119,3 +122,24 @@
     .lotto-num-box tr:nth-child(1)~tr > td:first-child{
       font-weight: 500;
     }
+
+    
+@media (min-width: 0px) and (max-width: 767px) {
+
+  .chart-container{
+    border-right:1.5rem solid #f0f0f0;
+    border-bottom:2rem solid #f0f0f0;
+    border-left:1.5rem solid #f0f0f0;
+  }
+
+  .chart-slide-num > div{
+    width: 4rem;
+    height: 4rem;
+  }
+
+  .chart-slide-current{
+    border-width: 5px;
+  }
+
+}
+

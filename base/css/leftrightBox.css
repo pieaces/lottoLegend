@@ -1,0 +1,26 @@
+.left-right-container{
+    display:flex;
+    width:100%;
+    margin-bottom:1rem;
+}
+.left-container{
+  width:50%;
+  margin-right:1rem;
+}
+.right-container{
+  width:50%;
+}
+@media (min-width: 0px) and (max-width: 767px) {
+    .left-right-container{
+      display:block;
+    }
+
+    .left-container,
+    .right-container{
+      width: 100%;
+    }
+
+    .left-container{
+      margin-bottom: 1rem;
+    }
+}

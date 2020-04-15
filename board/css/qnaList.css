@@ -1,3 +1,7 @@
+.fa-font:before{content:"\f031"}
+
+.fa-question:before{content:"\f128"}
+
 .board-container{
     margin-bottom: 5rem;
 }

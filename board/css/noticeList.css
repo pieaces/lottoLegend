@@ -1,0 +1,7 @@
+.notice-container .board-author{
+    display:none;
+  }
+  
+  .notice-container .board-date{
+    flex:1;
+  }

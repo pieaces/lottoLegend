@@ -39,12 +39,7 @@
   min-height: 6rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
-#excludedLineCount-text{
-  display: flex;
-  align-items: center;
-  padding-top:0;
-  padding-left:1rem;
-}
+
 .func3-filter-value-box {
   padding-top:1rem;
   font-size: 0px;
@@ -76,24 +71,6 @@
   font-size:1.3rem;
 }
 
-.func3-filter-table  tr:nth-child(1) >td{
-  background-color: #f6f6f6;
-  word-break: keep-all;
-}
-
-.func3-filter-table  tr >td{
-  width: 11.11%;
-  height: 5rem;
-  font-size: 1.3rem;
-  text-align: center;
-}
-.func3-filter-table  tr:nth-child(2) >td{
-  padding: 1.5rem;
-}
-.func3-filter-table  tr:nth-child(2) >td:nth-child(1){
-  font-size: 1.6rem;
-}
-
 /*function3 전용 로딩바*/
 .lds-circle {
   display: inline-block;
@@ -122,22 +99,6 @@
     transform: rotateY(3600deg);
   }
 }
-
-.func3-table-values{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin:0 auto 1rem auto;
-}
-.func3-table-piece{
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  background-color: #2e6307;
-  color: white;
-  font-size: 1.3rem;
-}
-
 
 @media (min-width: 0px) and (max-width: 767px) {
   .func3-filter-table  tr:nth-child(2) >td{

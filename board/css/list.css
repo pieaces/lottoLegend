@@ -86,14 +86,6 @@
   word-break: keep-all;
 }
 
-.notice-container .board-author{
-  display:none;
-}
-
-.notice-container .board-date{
-  flex:1;
-}
-
 .board-author,
 .board-date {
   flex: 2;
