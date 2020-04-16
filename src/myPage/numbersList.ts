@@ -34,6 +34,7 @@ getAuthAPI('/numbers/mass')
             makeTable(tableNumBox, data, rounds[0], true, answer);
 
             const toolConfig: IOptions = {
+                nativeDropdown:false,
                 data: [
                     { text: '전체', value: 'all' },
                     { text: '무료', value: 'a' },
@@ -42,6 +43,7 @@ getAuthAPI('/numbers/mass')
                 searchable: false
             };
             const methodConfig: IOptions = {
+                nativeDropdown:false,
                 data: [
                     { text: '전체', value: 'all' },
                     { text: '자동', value: 'a' },
@@ -49,7 +51,12 @@ getAuthAPI('/numbers/mass')
                 ],
                 searchable: false
             };
-
+            Object.defineProperty(Selectr.prototype, 'mobileDevice', {
+                get() { return false; },
+                set() {},
+                enumerable: true,
+                configurable: true
+            });
             const roundSelect = new Selectr(roundSelectBox, roundConfig);
             const toolSelect = new Selectr(toolSelectBox, toolConfig);
             const methodSelect = new Selectr(methodSelectBox, methodConfig);

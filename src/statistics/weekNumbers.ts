@@ -11,8 +11,8 @@ configure();
 getUnAuthAPI('/numbers/week')
     .then(({ data, rounds }) => {
         makeTable(data);
-
         const config: IOptions = {
+            nativeDropdown:false,
             placeholder: '회차',
             data: rounds.map((round: string) => {
                 return {
@@ -21,6 +21,12 @@ getUnAuthAPI('/numbers/week')
                 }
             }),
         };
+        Object.defineProperty(Selectr.prototype, 'mobileDevice', {
+            get() { return false; },
+            set() {},
+            enumerable: true,
+            configurable: true
+        });
         const selector = new Selectr(selectBox, config);
         selector.on('selectr.change', async (option) => {
             const { data } = await getUnAuthAPI('/numbers/week/' + option.value);

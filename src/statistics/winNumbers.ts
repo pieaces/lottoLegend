@@ -3,7 +3,6 @@ import configure from '../amplify/configure'
 import ChartBase from '../system/premium/Chart/Charts';
 import { getUnAuthAPI } from '../amplify/api';
 import Swal from 'sweetalert2'
-import { mqMobileInit } from './functions'
 import Selectr, { IOptions } from 'mobius1-selectr';
 
 configure();
@@ -71,7 +70,6 @@ const lottoNums = document.querySelectorAll<HTMLElement>('.lotto-num');
 const statsValues = document.querySelectorAll('.stats-table tr >td:nth-child(2)');
 const roundSelectBox = document.querySelector<HTMLSelectElement>('#round-selectbox');
 
-mqMobileInit();
 getUnAuthAPI('/numbers/win')
     .then(data => {
         const max: number = data.round;
@@ -79,6 +77,7 @@ getUnAuthAPI('/numbers/win')
         write(data);
 
         const roundConfig: IOptions = {
+            nativeDropdown:false,
             placeholder:'회차',
             data: []
         };
@@ -87,6 +86,12 @@ getUnAuthAPI('/numbers/win')
                 text: round, value: round
             });
         }
+        Object.defineProperty(Selectr.prototype, 'mobileDevice', {
+            get() { return false; },
+            set() {},
+            enumerable: true,
+            configurable: true
+        });
         const roundSelect = new Selectr(roundSelectBox, roundConfig);
         roundSelect.on('selectr.change', async (option) => {
             const data = await getUnAuthAPI('/numbers/win', { round: option.value });

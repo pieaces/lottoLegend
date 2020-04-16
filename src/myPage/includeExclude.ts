@@ -24,6 +24,7 @@ getAuthAPI('/numbers/piece')
             document.querySelector<HTMLElement>('.selectbox-wrapper').classList.remove('none');
             if (rounds) {
                 const config: IOptions = {
+                    nativeDropdown:false,
                     placeholder:'회차',
                     data: rounds.map((round: string) => {
                         return {
@@ -32,6 +33,12 @@ getAuthAPI('/numbers/piece')
                         }
                     }),
                 };
+                Object.defineProperty(Selectr.prototype, 'mobileDevice', {
+                    get() { return false; },
+                    set() {},
+                    enumerable: true,
+                    configurable: true
+                });
                 const selector = new Selectr(roundSelectBox, config);
                 selector.on('selectr.change', async (option) => {
                     loading.classList.remove('none');
