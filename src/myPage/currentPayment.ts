@@ -25,9 +25,7 @@ isLogedIn().then(result => {
                     icon: 'info'
                 })
             }
-        })
-            .catch(() => networkAlert());
-
+        }).catch(() => networkAlert());
     } else onlyUserAlert();
 })
 
