@@ -14,7 +14,6 @@ const price = document.getElementById('price');
 const productName = document.getElementById('product-name');
 const bankbook = document.getElementById('bankbook');
 
-
 configure();
 checkboxToggle();
 isLogedIn().then(result => {
