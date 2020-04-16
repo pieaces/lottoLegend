@@ -441,6 +441,10 @@
     border-right:none;
     border-bottom:1px solid rgba(0, 0, 0, 0.1);
   }
-
-
+  #swal2-title{
+      font-size:1.3rem !important;
+}
+.modal-pc-text{
+    display: none;
+}
 }

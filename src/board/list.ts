@@ -1,8 +1,8 @@
 import configure from '../amplify/configure'
 import { getUnAuthAPI, getAuthAPI } from '../amplify/api'
-import { isoStringToDate, rankToClass, getQueryStringObject } from '../functions';
+import { isoStringToDate, rankToClass, getQueryStringObject, onlyUserAlert } from '../functions';
 import { Category, getCategoryHtml } from './functions';
-import { getUserName } from '../amplify/auth';
+import { getUserName, isLogedIn } from '../amplify/auth';
 
 configure();
 
@@ -30,9 +30,14 @@ searchBox && (searchBox.onsubmit = (e) => {
 });
 
 function listAPI() {
-    if(category === 'pro' || category === 'qna'){
-        if(word || type) return getAuthAPI('/posts/search', { category, index, word, type });
-        return getAuthAPI('/posts', { category, index });
+    if (category === 'pro' || category === 'qna') {
+        isLogedIn().then(value => {
+            if (value) {
+                if (word || type) return getAuthAPI('/posts/search', { category, index, word, type });
+                return getAuthAPI('/posts', { category, index });
+            }
+            else return onlyUserAlert();
+        });
     }
     else if (word || type) {
         return getUnAuthAPI('/posts/search', { category, index, word, type });

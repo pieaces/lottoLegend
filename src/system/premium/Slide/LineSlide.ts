@@ -1,5 +1,6 @@
 import Slide from ".";
 import ChartBase from "../Chart/Charts";
+import {roundPointThree} from './functions';
 
 export default class LineSlide extends Slide<ChartBase> {
     static readonly SIZE = 5;
@@ -12,14 +13,14 @@ export default class LineSlide extends Slide<ChartBase> {
         this.data = data;
     }
     updateData() {
-        this.chart.dataBox.datasets[0].data = this.data.ideal[this.lineMap[this.current]];
-        this.chart.dataBox.datasets[1].data = this.data.actual[this.lineMap[this.current]];
+        this.chart.dataBox.datasets[0].data = this.data.ideal[this.lineMap[this.current]].map(num => roundPointThree(num));
+        this.chart.dataBox.datasets[1].data = this.data.actual[this.lineMap[this.current]].map(num => roundPointThree(num));
         this.chart.update();
     }
     init(){
         this.current = 0;
-        this.chart.dataBox.datasets[0].data = this.data.ideal['$12'];
-        this.chart.dataBox.datasets[1].data = this.data.actual['$12'];
+        this.chart.dataBox.datasets[0].data = this.data.ideal['$12'].map(num => roundPointThree(num));
+        this.chart.dataBox.datasets[1].data = this.data.actual['$12'].map(num => roundPointThree(num));
         this.chart.update();
     }
 }

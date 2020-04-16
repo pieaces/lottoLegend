@@ -57,7 +57,9 @@ export function makeModal(title: string, width: number) {
     text.style.fontSize = '1.5rem';
     text.style.fontWeight = '500';
     modalBox.style.boxShadow = '0 1px 1px rgba(0,0,0,0.12),0 2px 2px rgba(0,0,0,0.12),0 4px 4px rgba(0,0,0,0.12),0 8px 8px rgba(0,0,0,0.12),0 16px 16px rgba(0,0,0,0.12)';
-    document.querySelector<HTMLElement>('.swal2-container').style.background = '#ffffff00';
+    const aa = document.querySelector<HTMLElement>('.swal2-container');
+    aa.style.background = "none";
+    console.log(aa);
     makeDraggable(document.querySelector<HTMLElement>('.swal2-container'));
 }
 

@@ -1,5 +1,6 @@
 import ChartBase from "../Chart/Charts";
 import Slide from ".";
+import {roundPointThree} from './functions';
 
 export default class BarSlide extends Slide<ChartBase> {
     static readonly SIZE = 3;
@@ -26,7 +27,7 @@ export default class BarSlide extends Slide<ChartBase> {
                 rep.label = '예상대비 초과비율(%)';
                 const temp = [];
                 for (let i = 0; i < this.data.ideal['latest12'].length; i++) {
-                    const datum = (this.data.actual['latest12'][i] - this.data.ideal['latest12'][i]) / this.data.ideal['latest12'][i] * 100;
+                    const datum = roundPointThree((this.data.actual['latest12'][i] - this.data.ideal['latest12'][i]) / this.data.ideal['latest12'][i] * 100);
                     temp.push(datum === -100 ? null : datum);
                 }
                 rep.data = temp;
@@ -36,7 +37,7 @@ export default class BarSlide extends Slide<ChartBase> {
     }
     init(){
         this.current = 0;
-        this.chart.dataBox.datasets[0].data = this.data.ideal['latest12'];
+        this.chart.dataBox.datasets[0].data = this.data.ideal['latest12'].map(num => roundPointThree(num));
         this.chart.dataBox.datasets[0].label = Slide.EXPECTED_TEXT;
         this.chart.update();
     }

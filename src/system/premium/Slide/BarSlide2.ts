@@ -2,6 +2,7 @@ import ChartBase from "../Chart/Charts";
 import Slide from ".";
 import { IDataAPI } from "../Layout";
 import BarSlide from "./BarSlide";
+import {roundPointThree} from './functions';
 
 export default class BarSlide2 extends BarSlide {
     static readonly SIZE = 3;
@@ -59,7 +60,7 @@ export default class BarSlide2 extends BarSlide {
                 rep.label = '예상대비 초과비율(%)';
                 const temp = [];
                 for (let i = 0; i < this.data.ideal['latest'].length; i++) {
-                    const datum = (this.data.actual['latest'][i] - this.data.ideal['latest'][i]) / this.data.ideal['latest'][i] * 100;
+                    const datum = roundPointThree((this.data.actual['latest'][i] - this.data.ideal['latest'][i]) / this.data.ideal['latest'][i] * 100);
                     temp.push(datum);
                 }
                 rep.data = temp;
@@ -73,7 +74,7 @@ export default class BarSlide2 extends BarSlide {
         this.current = 0;
         this.numBtns[this.current].classList.add(this.CURRENT_CSS);
         this.chart.dataBox.labels = this.dataAPI.getLabels();
-        this.chart.dataBox.datasets[0].data = this.dataAPI.getStats().ideal['latest'];
+        this.chart.dataBox.datasets[0].data = this.dataAPI.getStats().ideal['latest'].map(num => roundPointThree(num));
         this.chart.dataBox.datasets[0].label = Slide.EXPECTED_TEXT;
         this.chart.update();
         this.setText();

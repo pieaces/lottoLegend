@@ -93,7 +93,6 @@ getUnAuthAPI('/stats/piece', { method: 'pos$1' })
 
         const unitsList:number[] = new Array(10).fill(0);
         for (let i = 0; i < numsEl.length; i++) {
-            console.log(numsEl[i]);
             data.lottos[i].forEach(num => {
                 const index = num % 10;
                 switch (index) {
