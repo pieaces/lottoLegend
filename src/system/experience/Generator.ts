@@ -31,7 +31,7 @@ export default class Generator {
             icon: 'info',
             footer: '결제페이지로 이동'
         }).then(() => {
-            location.href = '/main.html';
+            location.href = '/introduce/pay.html';
         });
     }
 }

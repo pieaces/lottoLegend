@@ -158,6 +158,18 @@ export default class Layout extends LayoutToggle(Layout3) {
         } else {
             filteredCounterBox.classList.add('hide');
         }
+
+        const excTextRow = document.querySelectorAll('#func1-bubble-table tr:nth-child(-n+5)');
+        if (currentFilter === 1) {
+            Array.from(excTextRow).forEach(node => {
+                node.classList.add('none');
+            });
+        } else {
+            Array.from(excTextRow).forEach(node => {
+                node.classList.remove('none');
+            });
+        }
+
         switch (currentFilter) {
             case 3: case 4: case 5:
                 const numFreq = document.querySelector('.func2-num-freq');
