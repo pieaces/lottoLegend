@@ -4,6 +4,7 @@ import ChartBase from '../system/premium/Chart/Charts';
 import { getUnAuthAPI } from '../amplify/api';
 import Swal from 'sweetalert2'
 import Selectr, { IOptions } from 'mobius1-selectr';
+import { numberFormat } from '../functions';
 
 configure();
 
@@ -61,7 +62,8 @@ const stackOption: Chart.ChartOptions = {
 const winBox = document.querySelector<HTMLElement>('.win-num-box');
 //const round = document.getElementById('round');
 const winner = document.getElementById('winner');
-const winAmount = document.getElementById('winAmount');
+const winAmount1 = document.getElementById('winAmount1');
+const winAmount2 = document.getElementById('winAmount2');
 const date = document.getElementById('date');
 const rightBtn = document.getElementById('right-btn');
 const leftBtn = document.getElementById('left-btn');
@@ -126,7 +128,8 @@ const lottoNumTemp: HTMLElement[] = [];
 function write(data: any) {
     //round.textContent = data.round;
     winner.textContent = data.winner;
-    winAmount.textContent = Math.round(data.winAmount / 100000000).toString();
+    winAmount1.textContent = numberFormat(data.winAmount);
+    winAmount2.textContent = Math.round(data.winAmount / 100000000).toString();
     date.textContent = data.date;
     const compart: number[] = new Array(5).fill(0);
     lottoNumTemp.forEach(lotto => {

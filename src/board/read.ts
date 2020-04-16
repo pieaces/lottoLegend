@@ -26,15 +26,22 @@ const loading = document.querySelector('.loading-box');
 
 const category: Category = document.querySelector<HTMLElement>('#wrapper').getAttribute('data-category') as Category;
 const postBtn = document.querySelector('.post-btn');
+
+let commentCount = 0;
+const id = getQueryStringObject().id;
+if(category !== 'free' && category !== 'notice' && category !== 'win'){
+    isLogedIn().then(value => {
+        if(value) init();
+        else onlyUserAlert();
+    });
+}else init();
 if(category === 'notice' || category === 'pro'){
     postBtn.classList.add('none');
     getUserName().then(userName => {
         if(userName === 'lottoend') postBtn.classList.remove('none');
-    });
+    }).catch(() => {});
 }
-let commentCount = 0;
-const id = getQueryStringObject().id;
-init();
+
 commentSubmit.onclick = async function () {
     const logedIn = await isLogedIn();
     if (Number(charCurrentCount.textContent) > 0 && logedIn) {
