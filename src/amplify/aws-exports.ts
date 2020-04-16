@@ -9,15 +9,15 @@ const awsconfig = {
 
         cookieStorage: {
             // REQUIRED - Cookie domain (only required if cookieStorage is provided)
-            domain: 'lottoend.com',
-            //domain: '127.0.0.1',
+            //domain: 'lottoend.com',
+            domain: '127.0.0.1',
             // OPTIONAL - Cookie path
             path: '/',
             // OPTIONAL - Cookie expiration in days
             expires: 7,
             // OPTIONAL - Cookie secure flag
             // Either true or false, indicating if the cookie transmission requires a secure protocol (https).
-            secure: true
+            secure: false
         }
     },
     API: {

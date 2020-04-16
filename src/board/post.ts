@@ -80,18 +80,22 @@ if (post) {
     });
 }
 if (category === 'include' || category === 'exclude') {
-    getAuthAPI('/numbers/piece', { choice: category })
-        .then(numbers => {
-            if(numbers.length === 0){
-                Swal.fire({
-                    title: '알림',
-                    text: '번호리스트가 없습니다.',
-                    icon: 'info',
-                    footer: `<a href="/system/${category}.html">번호 선택하러 가기</a>`
-                }).then(() => location.href = `/system/${category}.html`);
-            }
-            makeNum(document.querySelector<HTMLElement>('.inc-exc-num-container'), numbers);
-        })
+    isLogedIn().then(value => {
+        if (value) {
+            getAuthAPI('/numbers/piece', { choice: category })
+                .then(numbers => {
+                    if (numbers.length === 0) {
+                        Swal.fire({
+                            title: '알림',
+                            text: '번호리스트가 없습니다.',
+                            icon: 'info',
+                            footer: `<a href="/system/${category}.html">번호 선택하러 가기</a>`
+                        }).then(() => location.href = `/system/${category}.html`);
+                    }
+                    makeNum(document.querySelector<HTMLElement>('.inc-exc-num-container'), numbers);
+                })
+        } else onlyUserAlert();
+    });
 }
 imageRemove.addEventListener('click', () => {
     deleteCheckedImages();
