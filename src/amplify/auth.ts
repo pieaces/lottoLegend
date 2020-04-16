@@ -39,7 +39,8 @@ export async function signIn(username: string, password: string) {
         password,
     }).then(async () => {
         loading.classList.add('none');
-        if(location.href.indexOf('main.html') !== -1) location.href = "/myPage/home.html";
+        
+        if(location.href.indexOf('main.html') !== -1 || document.referrer.indexOf('account')) location.href = "/myPage/home.html";
         else history.back();
     }).catch(err => {
             if (err.message.indexOf('exceeded') !== -1) {
