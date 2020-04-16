@@ -207,8 +207,8 @@ exports.handler = async (event: any) => {
                     body = await getPaymentByBankBook(currentId);
                     break;
                 case 'POST':
-                    const { bank, person, month, price } = JSON.parse(event.body);
-                    await makePaymentByBankBook(currentId, bank, person, Plan.premium, month, price);
+                    const { bank, plan, person, month, price } = JSON.parse(event.body);
+                    await makePaymentByBankBook(currentId, bank, person, plan, month, price);
                     break;
                 case 'DELETE':
                     await deletePaymentBank(currentId);

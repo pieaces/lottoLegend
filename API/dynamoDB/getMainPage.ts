@@ -2,7 +2,7 @@ import dynamoDB from ".";
 import { AWSError } from "aws-sdk/lib/error";
 import { GetItemOutput, GetItemInput } from "aws-sdk/clients/dynamodb";
 
-export function getLottoData(round: number): Promise<{ round:number, numbers:number[], bonusNum:number, winner:number, winAmount:number, win:number[], info:any[] }> {
+export function getLottoData(round: number): Promise<{ round:number, numbers:number[], bonusNum:number, winner:number, winners:any[], winAmount:number, win:number[], info:any[] }> {
     const params = {
         TableName: 'LottoData',
         ProjectionExpression: 'Numbers, BonusNum, WinAmount, Winner, Win, Info',
@@ -30,6 +30,11 @@ export function getLottoData(round: number): Promise<{ round:number, numbers:num
                     data.Item.Win.M.fourthWinner && Number(data.Item.Win.M.fourthWinner.N) || 0,
                     data.Item.Win.M.fifthWinner && Number(data.Item.Win.M.fifthWinner.N) || 0
                 ];
+                const winners = [
+                    data.Item.Win.M.firstWinner && data.Item.Win.M.firstWinner.SS,
+                    data.Item.Win.M.secondWinner && data.Item.Win.M.secondWinner.SS,
+                    data.Item.Win.M.thirdWinner && data.Item.Win.M.thirdWinner.SS,
+                ];
                 const info = [
                     data.Item.Info.M.first.M,
                     data.Item.Info.M.second.M,
@@ -42,7 +47,7 @@ export function getLottoData(round: number): Promise<{ round:number, numbers:num
                         winAmount: Number(item.winAmount.N)
                     }
                 });
-                resolve({ round, numbers, bonusNum, winner, winAmount, win, info });
+                resolve({ round, numbers, bonusNum, winner, winners, winAmount, win, info });
             } else {
                 resolve(await getLottoData(round - 1));
             }
