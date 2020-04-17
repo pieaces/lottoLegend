@@ -3,7 +3,7 @@ import { getCurrentRound, scanLotto, getLotto, getLotto2 } from "./funtions";
 import { updateNumbers, getNumbers, deleteMyNumber, updateIncOrExcNumbers, getIncOrExcRounds, getIncAndExcNumbers, deleteIncOrExcNumbers, scanWeekNumbers, getIncOrExcNumbers } from './dynamoDB/Numbers'
 import { queryLottoData } from "./dynamoDB/lottoData";
 import { freeGenerator, numbersToData } from "./dynamoDB/generator";
-import { getMyHome, expirePlan, Plan, getPaymentByBankBook, makePaymentByBankBook, deletePaymentBank, getMessage, deleteMessage, getPayments, makePlan, makeDay } from "./dynamoDB/userInfo";
+import { getMyHome, expirePlan, Plan, getPaymentByBankBook, makePaymentByBankBook, deletePaymentBank, getPayments, makePlan, makeDay, scanUsersForAdmin } from "./dynamoDB/userInfo";
 import { getLottoData, getWinStats } from "./dynamoDB/getMainPage";
 
 const headers = {
@@ -171,17 +171,26 @@ exports.handler = async (event: any) => {
             }
         }
             break;
-        case '/users/message': {
-            switch(method){
+        case '/admin/users': {
+            switch (method) {
                 case 'GET':
-                    body = await getMessage(currentId);
-                    break;
-                case 'DELETE':
-                    await deleteMessage(currentId);
+                    if(currentId === 'lottoend')
+                        body = await scanUsersForAdmin();
                     break;
             }
         }
-        break;
+            break;
+        // case '/users/message': {
+        //     switch(method){
+        //         case 'GET':
+        //             body = await getMessage(currentId);
+        //             break;
+        //         case 'DELETE':
+        //             await deleteMessage(currentId);
+        //             break;
+        //     }
+        // }
+        // break;
         case '/users/day': {
             switch(method){
                 case 'POST':

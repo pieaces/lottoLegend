@@ -1,6 +1,6 @@
 import dynamoDB from '.'
 import { AWSError } from 'aws-sdk/lib/error';
-import { GetItemOutput, GetItemInput, UpdateItemInput } from 'aws-sdk/clients/dynamodb';
+import { GetItemOutput, GetItemInput, UpdateItemInput, ScanInput, ScanOutput } from 'aws-sdk/clients/dynamodb';
 import { parsePlanKeyAndUntil, getCurrentRound, getPlanName } from '../funtions';
 import { NSToNumbers } from './Numbers/functions';
 import { MyNumberData } from './Numbers';
@@ -108,7 +108,7 @@ export function makeDay(userName: string, day:0|1|2|3|4|5|6): Promise<void> {
         });
     });
 }
-export function makeMessage(userName: string, message:string): Promise<void> {
+function makeMessage(userName: string, message:string): Promise<void> {
     const params: UpdateItemInput = {
         TableName: 'LottoUsers',
         ExpressionAttributeValues: {
@@ -131,7 +131,7 @@ export function makeMessage(userName: string, message:string): Promise<void> {
         });
     });
 }
-export function deleteMessage(userName: string): Promise<void> {
+function deleteMessage(userName: string): Promise<void> {
     const params: UpdateItemInput = {
         TableName: 'LottoUsers',
         Key: {
@@ -149,7 +149,7 @@ export function deleteMessage(userName: string): Promise<void> {
         });
     });
 }
-export function getMessage(userName: string): Promise<string> {
+function getMessage(userName: string): Promise<string> {
     const params: GetItemInput = {
         TableName: 'LottoUsers',
         ExpressionAttributeNames: {
@@ -200,7 +200,7 @@ export function makePlan(userName: string, plan: Plan, month: number, price:numb
     return new Promise((resolve, reject) => {
         dynamoDB.updateItem(params, async (err: AWSError) => {
             if (err) reject(err);
-            await makeMessage(userName, `${getPlanName(plan)} ${month}개월 가입이 성공적으로 완료되었습니다.\n이제 해당기간동안 베르누이 분석툴을 마음껏 사용하실 수 있으며,\n매주 베르누이 분석 20조합을 받아보실 수 있습니다.\n모든 조합리스트는 마이페이지에서 확인하실 수 있습니다.`);
+            //await makeMessage(userName, `${getPlanName(plan)} ${month}개월 가입이 성공적으로 완료되었습니다.\n이제 해당기간동안 베르누이 분석툴을 마음껏 사용하실 수 있으며,\n매주 베르누이 분석 20조합을 받아보실 수 있습니다.\n모든 조합리스트는 마이페이지에서 확인하실 수 있습니다.`);
             await makePayment(userName, plan, month, price, method);
             resolve();
         });
@@ -345,19 +345,19 @@ export function getPaymentByBankBook(userName: string) {
             if (err) {
                 reject(err);
             }
-            if ('Payment' in data.Item) {
-                const payment = data.Item.Payment.M;
+            if ('PaymentBank' in data.Item) {
+                const paymentBank = data.Item.PaymentBank.M;
                 const now = new Date();
-                const dueDate = new Date(payment.date.S);
+                const dueDate = new Date(paymentBank.date.S);
                 dueDate.setDate(dueDate.getDate()+3);
                 if (Number(now) < Number(dueDate)) {
                     resolve({
-                        bank: payment.bank.S,
-                        person: payment.person.S,
-                        date: payment.date.S,
-                        month: payment.month.N,
-                        plan: getPlanName(payment.plan.S as Plan),
-                        price: payment.price.N
+                        bank: paymentBank.bank.S,
+                        person: paymentBank.person.S,
+                        date: paymentBank.date.S,
+                        month: paymentBank.month.N,
+                        plan: getPlanName(paymentBank.plan.S as Plan),
+                        price: paymentBank.price.N
                     });
                 }else {
                     await deletePaymentBank(userName);
@@ -529,6 +529,43 @@ export function getMyHome(userName: string): Promise<MyPage> {
                 result.total = round;
                 resolve(result);
             }
+        });
+    });
+}
+
+export async function scanUsersForAdmin(): Promise<any> {
+    const params:ScanInput = {
+        TableName: 'LottoUsers',
+        ExpressionAttributeNames:{
+            '#Rank': 'Rank',
+            '#Plan': 'Plan',
+            '#Until': 'Until'
+        },
+        ProjectionExpression: 'UserName, Point, #Rank, PaymentBank, #Plan, #Until'
+    };
+    return new Promise((resolve, reject) => {
+        dynamoDB.scan(params, (err:AWSError, data: ScanOutput) => {
+            if (err) reject(err);
+            const users = data.Items.filter(item => item.PaymentBank).map(item => {
+                return {
+                    userName: item.UserName.S,
+                    rank: item.Rank.N,
+                    point: item.Point.N,
+                    plan: item.Plan.S,
+                    until: item.Until && item.Until.S,
+                    paymentBank: item.PaymentBank && {
+                        bank: item.PaymentBank.M.bank.S,
+                        person: item.PaymentBank.M.person.S,
+                        date: item.PaymentBank.M.date.S,
+                        month: item.PaymentBank.M.month.N,
+                        plan: item.PaymentBank.M.plan.S,
+                        price: item.PaymentBank.M.price.N
+                    }
+                }
+            }).sort((a,b) => a.userName < b.userName ? -1 : a.userName > b.userName ? 1 : 0);
+            resolve({
+                users, count:data.Count
+            });
         });
     });
 }
