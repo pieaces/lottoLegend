@@ -74,5 +74,7 @@ export default async function autoRank() {
         await setRank(userName, rank);
         await userDB.setRank(rank, userName);
     }
+    await setRank('lottoend', 0);
+    await userDB.setRank(0, 'lottoend');
     await userDB.end();
 }
