@@ -81,7 +81,7 @@ listAPI().then(({ posts, count, rank }) => {
     }
 });
 
-function makeBoard(objArr: any[]) {
+function makeBoard(objArr: {id:number, title:string, rank:number, nickName:string, created:string, comments:number, hits:number, recommendation:number}[]) {
     for (let i = 0; i < objArr.length; i++) {
         const boardBox = document.createElement('div');
         boardBox.classList.add('board-box');
@@ -90,7 +90,13 @@ function makeBoard(objArr: any[]) {
         boardTitle.classList.add('board-title');
         const anchor = document.createElement('a');
         anchor.setAttribute('href', `/${getCategoryHtml(category, 'read')}?id=${objArr[i].id}`);
-        anchor.textContent = objArr[i].title;
+        const titleText = document.createElement('span');
+        titleText.textContent = objArr[i].title;
+        anchor.appendChild(titleText);
+        const titleComments = document.createElement('span');
+        titleComments.classList.add('title-comments');
+        titleComments.textContent = `[${objArr[i].comments}]`
+        anchor.appendChild(titleComments);
         boardTitle.appendChild(anchor);
 
         boardBox.appendChild(boardTitle);
@@ -110,13 +116,13 @@ function makeBoard(objArr: any[]) {
 
         const boardViews = document.createElement('div');
         boardViews.classList.add('board-views');
-        boardViews.textContent = objArr[i].hits;
+        boardViews.textContent = (objArr[i].hits).toString();
 
         boardBox.appendChild(boardViews);
 
         const boardReco = document.createElement('div');
         boardReco.classList.add('board-reco');
-        boardReco.textContent = objArr[i].recommendation;
+        boardReco.textContent = (objArr[i].recommendation).toString();
 
         boardBox.appendChild(boardReco);
 
