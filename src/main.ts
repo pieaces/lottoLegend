@@ -3,7 +3,12 @@ import { getUnAuthAPI, getAuthAPI } from './amplify/api';
 import { rankToClass, loginAddEvent, networkAlert } from './functions';
 import { isLogedIn, getNickName, signOut } from './amplify/auth';
 import { mqDeskTopInit, backgroundImgSlide, makeWinNumBox, insertWinCount, insertWinResult, executeMakingBoard, mqMobileInit, makeWinnersList, moneyCompress } from './functions/main';
-
+import 'core-js/stable/promise'
+import 'core-js/stable/object/assign'
+import 'core-js/stable/array/from'
+import 'core-js/stable/array/includes'
+import 'regenerator-runtime/runtime'
+import 'whatwg-fetch'
 configure();
 
 const loginContainer = document.querySelector('.login-container')
@@ -22,7 +27,7 @@ isLogedIn().then((result) => {
             document.querySelector('#point').textContent = data.user.point;
             document.querySelector('#service').textContent = data.user.plan;
             executeMakingBoard(data);
-        }).catch(() => networkAlert());
+        }).catch((err) => console.log(err));
     } else {
         loginAfterBox.classList.add('none');
         loginContainer.classList.remove('none');

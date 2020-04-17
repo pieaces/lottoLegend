@@ -49,13 +49,13 @@ export async function signIn(username: string, password: string) {
                     text: '5회 이상 잘못입력하였습니다. 잠시후 다시 시도해주세요',
                     icon: 'info'
                 });
-            } else {
+            } else if(err.code === "NotAuthorizedException") {
                 Swal.fire({
                     title: '알림',
                     text: '아이디 또는 비밀번호가 틀렸습니다',
                     icon: 'info'
                 });
-            }
+            }else networkAlert();
             loading.classList.add('none');
         });
 }
@@ -90,7 +90,7 @@ export async function resendSignUp(username: string) {
 
 export async function getIdToken() {
     try {
-        const idToken = (await Auth.currentSession()).getIdToken().getJwtToken()
+        const idToken = (await Auth.currentSession()).getIdToken().getJwtToken();
         return idToken;
     } catch (err) {
         return onlyUserAlert();
