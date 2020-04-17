@@ -57,7 +57,7 @@ function premiumText(){
     productName.textContent = productList[current];
 }
 select.addEventListener('change', () => {
-    if (current) {
+    if (!isNull(current)) {
         if (select.selectedIndex === 1) {
             premiumPlusText();
         }

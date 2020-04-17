@@ -81,7 +81,9 @@ export default function LayoutToggle<TBase extends Constructor>(Base: TBase) {
                 if (index === 0) {
                     node.innerHTML = data.slice(6)[index];
                 } else if (index === 1) {
-                    node.innerHTML = data.slice(6)[index].sort((a, b) => a.from - b.from).map(value => `<div class="func3-table-values func3-table-sum">${value.from}~${value.to}</div>`).join('');
+                    if(data.slice(6)[index]){
+                        node.innerHTML = data.slice(6)[index].sort((a, b) => a.from - b.from).map(value => `<div class="func3-table-values func3-table-sum">${value.from}~${value.to}</div>`).join('');
+                    }
                 } else if (index < 8) {
                     const str = data.slice(6)[index] && data.slice(6)[index].sort((a, b) => a - b).map(value => `<div class="func3-table-values func3-table-piece">${value}</div>`).join('');
                     if (str) node.innerHTML = str;
