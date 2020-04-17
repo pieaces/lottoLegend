@@ -116,10 +116,10 @@ export function makeNoneBox() {
 }
 
 export function blankToHtml(text:string){
-    return text.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return text.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>').replace(/ /g, '&nbsp;');
 }
 export function blankToString(html:string){
-    return html.replace(/<br>/g, '\n').replace(/&nbsp;/g, ' ');
+    return html.replace(/<br>/g, '\n').replace(/&nbsp;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 }
 
 export function numberFormat(inputNumber:string | number) {
