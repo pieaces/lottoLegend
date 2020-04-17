@@ -172,7 +172,7 @@ function getMessage(userName: string): Promise<string> {
         });
     });
 }
-type PayMethod = 'bank' | 'card';
+export type PayMethod = 'bank' | 'card';
 export function makePlan(userName: string, plan: Plan, month: number, price:number, method:PayMethod): Promise<void> {
     const time = new Date();
     time.setMonth(time.getMonth() + month);

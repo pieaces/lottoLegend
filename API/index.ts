@@ -3,7 +3,7 @@ import { getCurrentRound, scanLotto, getLotto, getLotto2 } from "./funtions";
 import { updateNumbers, getNumbers, deleteMyNumber, updateIncOrExcNumbers, getIncOrExcRounds, getIncAndExcNumbers, deleteIncOrExcNumbers, scanWeekNumbers, getIncOrExcNumbers } from './dynamoDB/Numbers'
 import { queryLottoData } from "./dynamoDB/lottoData";
 import { freeGenerator, numbersToData } from "./dynamoDB/generator";
-import { getMyHome, expirePlan, Plan, getPaymentByBankBook, makePaymentByBankBook, deletePaymentBank, getPayments, makePlan, makeDay, scanUsersForAdmin } from "./dynamoDB/userInfo";
+import { getMyHome, expirePlan, Plan, getPaymentByBankBook, makePaymentByBankBook, deletePaymentBank, getPayments, makePlan, makeDay, scanUsersForAdmin, PayMethod } from "./dynamoDB/userInfo";
 import { getLottoData, getWinStats } from "./dynamoDB/getMainPage";
 
 const headers = {
@@ -180,6 +180,19 @@ exports.handler = async (event: any) => {
             }
         }
             break;
+            case '/admin/users/{userName}': {
+                const userName = event.pathParameters.userName;
+                switch (method) {
+                    case 'POST':
+                        if(currentId === 'lottoend'){
+                            const { plan, month, price, method } = JSON.parse(event.body);
+                            await makePlan(userName, plan, month, price, method);
+                            if(method as PayMethod === 'bank') await deletePaymentBank(userName);
+                        }
+                        break;
+                }
+            }
+                break;
         // case '/users/message': {
         //     switch(method){
         //         case 'GET':
