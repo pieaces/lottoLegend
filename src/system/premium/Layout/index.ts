@@ -160,14 +160,17 @@ export default class Layout extends LayoutToggle(Layout3) {
         }
 
         const excTextRow = document.querySelectorAll('#func1-bubble-table tr:nth-child(-n+5)');
+        const excText = document.querySelector('.func1-bubble-exc-text');
         if (currentFilter === 1) {
             Array.from(excTextRow).forEach(node => {
                 node.classList.add('none');
             });
+            excText.classList.remove('none');
         } else {
             Array.from(excTextRow).forEach(node => {
                 node.classList.remove('none');
             });
+            excText.classList.add('none');
         }
 
         switch (currentFilter) {
