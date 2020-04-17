@@ -34,7 +34,7 @@ export default class Posts extends DB {
         } else {
             values = [category, Posts.SCAN_MAX * (index - 1), Posts.SCAN_MAX]
         }
-        const sql = `SELECT id, title, Users.nickName AS 'nickName', Users.rank AS 'rank', created, hits, recommendation FROM Posts INNER JOIN Users ON Posts.userName = Users.userName WHERE category = ? ${qnaCondition} ORDER BY created DESC LIMIT ?, ?`;
+        const sql = `SELECT id, title, Users.nickName AS 'nickName', Users.rank AS 'rank', created, comments, hits, recommendation FROM Posts INNER JOIN Users ON Posts.userName = Users.userName WHERE category = ? ${qnaCondition} ORDER BY created DESC LIMIT ?, ?`;
         return this.query(sql, values);
     }
     mainBoard(category:Category){
@@ -119,7 +119,7 @@ export default class Posts extends DB {
             }
         }
         values.push(Posts.SCAN_MAX * (index - 1), Posts.SCAN_MAX);
-        const sql = `SELECT * FROM (SELECT id, title, Users.nickName AS 'nickName', Users.rank AS 'rank', created, hits, recommendation FROM ${this.tableName} INNER JOIN PostsContents ON ${this.tableName}.id=PostsContents.post INNER JOIN Users ON ${this.tableName}.userName=Users.userName WHERE category=? AND ${match} ORDER BY created DESC) AS x LIMIT ?, ?`
+        const sql = `SELECT * FROM (SELECT id, title, Users.nickName AS 'nickName', Users.rank AS 'rank', created, comments, hits, recommendation FROM ${this.tableName} INNER JOIN PostsContents ON ${this.tableName}.id=PostsContents.post INNER JOIN Users ON ${this.tableName}.userName=Users.userName WHERE category=? AND ${match} ORDER BY created DESC) AS x LIMIT ?, ?`
         return (await this.query(sql, values)).reverse();
     }
     async getCountBySearch(category: string, word: string, type: SearchType): Promise<number> {

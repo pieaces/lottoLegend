@@ -20,15 +20,12 @@ exports.handler = async (event: any) => {
 
     const method: string = event.httpMethod;
     const resource: string = event.resource;
-    let logedIn: boolean = false;
 
-    let currentId: string, currentName: string;
+    let currentId: string = null;
     if (event.headers['x-id-token']) {
         try {
             const userInfo = verify(event.headers['x-id-token']);
-            logedIn = true;
             currentId = userInfo["cognito:username"];
-            currentName = userInfo.nickname;
         } catch (err) {
             console.log('Intruder Alert! - Expired Token', err);
             const response = {
@@ -55,7 +52,7 @@ exports.handler = async (event: any) => {
                     if(category === 'pro') body.rank = currentId && await getRank(currentId);
                     break;
                 case 'POST':
-                    if (logedIn) {
+                    if (currentId) {
                         const { category, title, contents } = JSON.parse(event.body);
                         if(category === 'notice' && currentId !== 'lottoend'){
                             console.log('Intruder Alert! - You are not the Manager!');
@@ -149,7 +146,7 @@ exports.handler = async (event: any) => {
                     body = comments;
                     break;
                 case 'POST':
-                    if (logedIn) {
+                    if (currentId) {
                         const { contents } = JSON.parse(event.body);
                         const insertId = await db.post(postId, currentId, contents);
                         await addPoint(currentId, Point.comment);
@@ -166,6 +163,7 @@ exports.handler = async (event: any) => {
             break;
         case '/posts/{postId}/comments/{commentId}': {
             const db = new Comments();
+            const postId = Number(event.pathParameters.postId);
             const commentId = Number(event.pathParameters.commentId);
             const response = isIdentical(currentId, (await db.getUserName(commentId)));
             if (!response.error) {
@@ -176,7 +174,7 @@ exports.handler = async (event: any) => {
                         body = changedRows;
                         break;
                     case 'DELETE':
-                        const affectedRows = await db.delete(commentId);
+                        const affectedRows = await db.delete(postId, commentId);
                         await subtractPoint(currentId, Point.comment);
                         body = affectedRows;
                         break;
@@ -190,7 +188,7 @@ exports.handler = async (event: any) => {
         case '/posts/{postId}/recommend': {
             switch (method) {
                 case 'PATCH':
-                    if (logedIn) {
+                    if (currentId) {
                         const db = new Posts();
                         const postId = Number(event.pathParameters.postId);
                         const userName = await db.getUserName(postId);
@@ -238,7 +236,7 @@ exports.handler = async (event: any) => {
                             img
                         }
                     });
-                    if(logedIn) body.user = await getMainUserInfo(currentId);
+                    if(currentId) body.user = await getMainUserInfo(currentId);
             }
         }
             break;

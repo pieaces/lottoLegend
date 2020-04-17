@@ -31,6 +31,7 @@ export default class Comments extends DB {
             post, userName, contents
         };
         const insertId = await super._post(comment);
+        await this.query(`UPDATE Posts set comments = comments + 1 WHERE id=?`, [post]);
         return insertId;
     }
 
@@ -38,8 +39,9 @@ export default class Comments extends DB {
         const changedRows = await super._patch({ key: 'id', value: id }, { contents });
         return changedRows;
     }
-    async delete(id: number) {
+    async delete(post:number, id: number) {
         const affectedRows = await super._delete({ key: 'id', value: id });
+        await this.query(`UPDATE Posts set comments = comments - 1 WHERE id=?`, [post]);
         return affectedRows;
     }
 }
