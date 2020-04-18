@@ -1,7 +1,7 @@
 import configure from '../amplify/configure'
 import { getUnAuthAPI, postAuthAPI, deleteAuthAPI, getAuthAPI, patchAuthAPI } from '../amplify/api';
 import { getUserName, getNickName, isLogedIn } from '../amplify/auth';
-import { isoStringToDate, networkAlert, rankToClass, onlyUserAlert, isoStringToTime, getQueryStringObject, blankToHtml, blankToString } from '../functions';
+import { isoStringToDate, networkAlert, rankToClass, onlyUserAlert, isoStringToTime, getQueryStringObject, blankToHtml, blankToString, makeLoading, removeLoading } from '../functions';
 import Swal from 'sweetalert2'
 import { Category, getCategoryHtml, makeNumSet } from './functions';
 
@@ -22,7 +22,6 @@ const charCurrentCount = document.querySelector<HTMLElement>('#char-current-coun
 const commentSubmit = document.getElementById('comment-submit');
 const contentsUpdateBtn = document.querySelector<HTMLElement>('.text-update-container');
 const recommendBtn = document.getElementById('reco-btn');
-const loading = document.querySelector('.loading-box');
 
 const category: Category = document.querySelector<HTMLElement>('#wrapper').getAttribute('data-category') as Category;
 const postBtn = document.querySelector('.post-btn');
@@ -153,7 +152,7 @@ async function init() {
         recommendBtn.classList.add('recommend');
     }
     recommendBtn.addEventListener('click', async () => {
-        loading.classList.remove('none');
+        makeLoading();
         const logedIn = await isLogedIn();
         if (logedIn) {
             try {
@@ -174,7 +173,7 @@ async function init() {
             onlyUserAlert();
         }
 
-        loading.classList.add('none');
+        removeLoading();
     });
     contentsInput.innerHTML = post.contents;
 

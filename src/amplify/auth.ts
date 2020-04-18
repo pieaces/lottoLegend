@@ -1,5 +1,5 @@
 import Auth from '@aws-amplify/auth'
-import { onlyUserAlert, networkAlert } from '../functions';
+import { onlyUserAlert, networkAlert, makeLoading, removeLoading } from '../functions';
 import Swal from 'sweetalert2';
 
 export function headerSign() {
@@ -32,14 +32,11 @@ export async function signIn(username: string, password: string) {
             icon: 'info'
         });
     }
-    const loading = document.querySelector('.loading-box');
-    loading.classList.remove('none');
+    makeLoading();
     await Auth.signIn({
         username,
         password,
-    }).then(async () => {
-        loading.classList.add('none');
-        
+    }).then(async () => {        
         if(location.href.indexOf('main.html') !== -1 || document.referrer.indexOf('account')) location.href = "/myPage/home.html";
         else history.back();
     }).catch(err => {
@@ -56,8 +53,7 @@ export async function signIn(username: string, password: string) {
                     icon: 'info'
                 });
             }else networkAlert();
-            loading.classList.add('none');
-        });
+        }).finally(() => removeLoading());
 }
 
 export async function signOut() {

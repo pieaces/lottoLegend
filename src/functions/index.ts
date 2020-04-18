@@ -57,9 +57,7 @@ export function makeModal(title: string, width: number) {
     text.style.fontSize = '1.5rem';
     text.style.fontWeight = '500';
     modalBox.style.boxShadow = '0 1px 1px rgba(0,0,0,0.12),0 2px 2px rgba(0,0,0,0.12),0 4px 4px rgba(0,0,0,0.12),0 8px 8px rgba(0,0,0,0.12),0 16px 16px rgba(0,0,0,0.12)';
-    const aa = document.querySelector<HTMLElement>('.swal2-container');
-    aa.style.background = "none";
-    console.log(aa);
+    document.querySelector<HTMLElement>('.swal2-container').style.background = "none";
     makeDraggable(document.querySelector<HTMLElement>('.swal2-container'));
 }
 
@@ -136,4 +134,16 @@ export function numberFormat(inputNumber:string | number) {
         const password = passwordInput.value;
         await signIn(userName, password);
     });
+}
+
+export function makeLoading(){
+    const loadingBox = document.createElement('div');
+    loadingBox.id = 'loading-box';
+    loadingBox.innerHTML = '<div class="loading"><div></div><div></div><div></div><div></div></div>';
+
+    document.querySelector('body').appendChild(loadingBox);
+}
+export function removeLoading(){
+    const loadingBox = document.getElementById('loading-box');
+    loadingBox.remove();
 }

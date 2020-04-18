@@ -1,12 +1,10 @@
 import Swal from "sweetalert2";
-import { networkAlert } from "../../../functions";
+import { networkAlert, makeLoading, removeLoading } from "../../../functions";
 import { postAuthAPI } from "../../../amplify/api";
 import { modifyBoundary } from "../Layout/functions";
 import CheckBoxToggle from "./CheckBoxToggle";
 
 const saveBtns = document.querySelectorAll<HTMLElement>('.save-btn');
-const loading = document.querySelector<HTMLElement>('.loading-box');
-
 export enum Tool {
     'free' = 'a',
     'charge' = 'b'
@@ -34,9 +32,8 @@ export default class SaveBtn {
                     }
                 });
                 try {
-                    loading.classList.remove('none');
+                    makeLoading();
                     const code = await postAuthAPI('/numbers/mass', { numsArr, tool });
-                    loading.classList.add('none');
                     if (code.error) {
                         Swal.fire({
                             title: '개수 제한',
@@ -57,8 +54,9 @@ export default class SaveBtn {
                         modifyBoundary();
                     }
                 } catch (err) {
-                    loading.classList.add('none');
                     networkAlert();
+                } finally {
+                    removeLoading();
                 }
             });
         });

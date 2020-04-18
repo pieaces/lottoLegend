@@ -3,13 +3,11 @@ import { getAuthAPI, deleteAuthAPI } from '../amplify/api';
 import CheckBoxToggle from '../system/premium/instanceBtns/CheckBoxToggle';
 import Selectr, { IOptions } from 'mobius1-selectr';
 import { makeTable, modifyTableBoundary } from './functions';
-import { networkAlert, onlyUserAlert } from '../functions';
+import { networkAlert, onlyUserAlert, makeLoading, removeLoading } from '../functions';
 import Swal from 'sweetalert2';
 import { isLogedIn } from '../amplify/auth';
 
 configure();
-const loading = document.querySelector('.loading-box');
-
 const roundSelectBox = document.querySelector<HTMLSelectElement>('#round-select-box');
 const toolSelectBox = document.querySelector<HTMLSelectElement>('#tool-select-box');
 const methodSelectBox = document.querySelector<HTMLSelectElement>('#method-select-box');
@@ -17,7 +15,7 @@ const numInfoToggleBtn = document.querySelector('.mypage-toggle-btn');
 const pastFilterBox = document.getElementsByClassName('func3-past-filter-box') as HTMLCollectionOf<HTMLElement>;
 const tableNumBox = document.querySelector<HTMLElement>('.mypage-table-num-box');
 
-loading.classList.remove('none');
+makeLoading();
 isLogedIn().then(value => {
     if (value) {
         getAuthAPI('/numbers/mass')
@@ -94,8 +92,7 @@ isLogedIn().then(value => {
                                         }
                                     });
                                     try {
-                                        loading.classList.remove('none');
-
+                                        makeLoading();
                                         await deleteAuthAPI('/numbers/mass/' + currentRound, { numsArr });
                                         indexes.forEach(index => {
                                             numbersContainer[index].remove();
@@ -115,7 +112,7 @@ isLogedIn().then(value => {
                                     } catch (err) {
                                         networkAlert();
                                     } finally {
-                                        loading.classList.add('none');
+                                        removeLoading();
                                     }
                                 }
                             });
@@ -123,7 +120,7 @@ isLogedIn().then(value => {
                     })
 
                     roundSelect.on('selectr.change', async (option) => {
-                        loading.classList.remove('none');
+                        makeLoading();
                         let result: any;
                         if (option.value === 'all') {
                             result = await getAuthAPI('/numbers/mass/', { tool, method });
@@ -137,10 +134,10 @@ isLogedIn().then(value => {
                         checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox'));
                         CheckBoxToggle.allCheckedReset();
                         checkBoxToggle.checkBoxEvent();
-                        loading.classList.add('none');
+                        removeLoading();
                     });
                     toolSelect.on('selectr.change', async (option) => {
-                        loading.classList.remove('none');
+                        makeLoading();
                         let result: any;
                         if (option.value === 'all') {
                             result = (await getAuthAPI('/numbers/mass/' + (currentRound ? currentRound : ''), { method }));
@@ -157,10 +154,10 @@ isLogedIn().then(value => {
                         checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox'));
                         CheckBoxToggle.allCheckedReset();
                         checkBoxToggle.checkBoxEvent();
-                        loading.classList.add('none');
+                        removeLoading();
                     });
                     methodSelect.on('selectr.change', async (option) => {
-                        loading.classList.remove('none');
+                        makeLoading();
                         let result: any;
                         if (option.value === 'all') {
                             result = (await getAuthAPI('/numbers/mass/' + (currentRound ? currentRound : ''), { tool }));
@@ -174,10 +171,10 @@ isLogedIn().then(value => {
                         checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox'));
                         CheckBoxToggle.allCheckedReset();
                         checkBoxToggle.checkBoxEvent();
-                        loading.classList.add('none');
+                        removeLoading();
                     });
 
-                    loading.classList.add('none');
+                    removeLoading();
                     const checkBoxToggle = new CheckBoxToggle();
                     checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox'));
                     checkBoxToggle.allBtnEvent();
@@ -195,7 +192,7 @@ isLogedIn().then(value => {
             }).catch(err => {
                 networkAlert()
             })
-            .finally(() => loading.classList.add('none'));
+            .finally(() => removeLoading());
 
     } else onlyUserAlert();
 });

@@ -25,7 +25,7 @@ export default function generatorLoading(time: number) {
         onClose: () => {
             clearInterval(timerInterval)
         }
-    }).then((result) => {
+    }).then(() => {
         wrapper.classList.remove('none');
     });
 }

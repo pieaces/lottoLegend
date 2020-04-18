@@ -3,7 +3,7 @@ import ChartBase from '../system/premium/Chart/Charts';
 import LineSlide from '../system/premium/Slide/LineSlide'
 import BarSlide from '../system/premium/Slide/BarSlide'
 import { getUnAuthAPI } from '../amplify/api';
-import { getQueryStringObject, rangeMake, networkAlert } from '../functions';
+import { getQueryStringObject, rangeMake, networkAlert, makeLoading, removeLoading } from '../functions';
 import makeClickable from '../system/premium/Slide/makeClickable';
 import { getStaticsName, mqMobileInit, makeCarryNumbers } from './functions';
 import Slide from '../system/premium/Slide';
@@ -98,12 +98,11 @@ const bar2Option: Chart.ChartOptions = {
 
 
 mqMobileInit();
-const loading = document.querySelector<HTMLElement>('.loading-box');
-loading.classList.remove('none');
+makeLoading();
 !method && Swal.fire({
     title: '잘못된 접근입니다',
     icon: 'warning'
-}).then(() => loading.classList.add('none'));
+}).then(() => removeLoading());
 method && getUnAuthAPI('/stats/piece', { method })
     .then(data => {
         mean.textContent = Number(data.stats.mean).toFixed(2);
@@ -177,10 +176,10 @@ method && getUnAuthAPI('/stats/piece', { method })
         bar2DataBox.datasets[0].data = data.piece
         const barInstance2 = new ChartBase('bar', bar2Canvas, bar2DataBox, bar2Option);
         barInstance2.create();
-        loading.classList.add('none');
         if (method === 'carryCount') {
             document.getElementById('carry-title').parentElement.classList.remove('none');
             const carryNumberContainer = document.querySelector<HTMLDivElement>('.carry-number-container');
             makeCarryNumbers(carryNumberContainer, data.total, data.lottos, data.piece.reverse());
         }
-    }).catch((err) => networkAlert());
+    }).catch(() => networkAlert())
+    .finally(() => removeLoading());

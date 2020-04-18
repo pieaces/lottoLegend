@@ -22,7 +22,7 @@ isLogedIn().then((result) => {
             document.querySelector('#point').textContent = data.user.point;
             document.querySelector('#service').textContent = data.user.plan;
             executeMakingBoard(data);
-        }).catch((err) => console.log(err));
+        }).catch(() => networkAlert());
     } else {
         loginAfterBox.classList.add('none');
         loginContainer.classList.remove('none');
@@ -38,7 +38,7 @@ const officialWinResultBox = document.querySelectorAll<HTMLElement>('.total-win-
 const myWinResultBox = document.querySelectorAll<HTMLElement>('#win-result > div');
 getUnAuthAPI('/main/numbers').then(data => {
     makeWinNumBox(data);
-    (document.querySelectorAll('.win-round')).forEach(node => node.textContent = data.round);
+    document.querySelectorAll('.win-round').forEach(node => node.textContent = data.round);
     winRound.textContent = data.round;
 
     insertWinCount(data.stats);
@@ -57,7 +57,7 @@ getUnAuthAPI('/main/numbers').then(data => {
         });
     });
     makeWinnersList(winners);
-}).catch((err) => console.log(err));
+}).catch((err) => networkAlert());
 
 const mqMobile = window.matchMedia("(max-width: 767px)");
 if (mqMobile.matches) {

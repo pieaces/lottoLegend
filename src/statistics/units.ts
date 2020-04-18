@@ -4,6 +4,7 @@ import LineSlide from "../system/premium/Slide/LineSlide";
 import makeClickable from "../system/premium/Slide/makeClickable";
 import { mqMobileInit} from './functions';
 import configure from "../amplify/configure";
+import { makeLoading, networkAlert, removeLoading } from "../functions";
 
 configure();
 const roundEl = document.querySelectorAll('.one-line > td:nth-child(1)');
@@ -62,8 +63,7 @@ const lineDataBox = {
 };
 
 mqMobileInit();
-const loading = document.querySelector<HTMLElement>('.loading-box');
-loading.classList.remove('none');
+makeLoading();
 getUnAuthAPI('/stats/piece', { method: 'pos$1' })
     .then(data => {
         const lineInstance = new ChartBase('line', lineCanvas, lineDataBox, lineOption);
@@ -109,8 +109,8 @@ getUnAuthAPI('/stats/piece', { method: 'pos$1' })
         for(let i=1; i<sum.children.length; i++){
             sum.children[i].textContent = unitsList[i-1].toString();
         }
-        loading.classList.add('none');
-    });
+    }).catch(() => networkAlert())
+    .finally(() => removeLoading());
 
 function check(div: HTMLElement) {
     if (div.classList.contains('lotto-num-checked')) {

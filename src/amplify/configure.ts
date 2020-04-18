@@ -7,6 +7,8 @@ import { mqInit, menuInfoToggle } from '../base/headerHover'
 import 'whatwg-fetch'
 import 'core-js/stable/promise'
 import 'core-js/stable/object/assign'
+import 'core-js/stable/array/includes'
+import 'regenerator-runtime/runtime'
 if ('NodeList' in window && !NodeList.prototype.forEach) {
     NodeList.prototype.forEach = function (callback, thisArg) {
         thisArg = thisArg || window;
@@ -15,9 +17,13 @@ if ('NodeList' in window && !NodeList.prototype.forEach) {
         }
     };
 }
-import 'core-js/stable/array/includes'
-import 'regenerator-runtime/runtime'
-
+if (!('remove' in Element.prototype)) {
+    (<any>Element.prototype)['remove'] = function () {
+        if (this.parentNode) {
+            this.parentNode.removeChild(this);
+        }
+    };
+}
 export default function configure() {
     mqInit();
     menuInfoToggle();

@@ -5,15 +5,13 @@ import incObj from './IncludeExclude/include';
 import excObj from './IncludeExclude/exclude';
 import Selectr, { IOptions } from 'mobius1-selectr';
 import Swal from 'sweetalert2';
-import { networkAlert, onlyUserAlert } from '../functions';
+import { networkAlert, onlyUserAlert, makeLoading, removeLoading } from '../functions';
 import { isLogedIn } from '../amplify/auth';
 
 configure();
 
 const roundSelectBox = document.querySelector<HTMLSelectElement>('#round-select-box');
-const loading = document.querySelector('.loading-box');
-
-loading.classList.remove('none');
+makeLoading();
 isLogedIn().then(value => {
     if (value) {
         getAuthAPI('/numbers/piece')
@@ -44,7 +42,7 @@ isLogedIn().then(value => {
                         });
                         const selector = new Selectr(roundSelectBox, config);
                         selector.on('selectr.change', async (option) => {
-                            loading.classList.remove('none');
+                            makeLoading();
                             const { include, exclude, answer } = await getAuthAPI('/numbers/piece/' + option.value);
                             incNumList.numbers = include;
                             excNumList.numbers = exclude;
@@ -52,7 +50,7 @@ isLogedIn().then(value => {
                             IncludeExclude.setAnswer(answer);
                             incNumList.makePage();
                             excNumList.makePage();
-                            loading.classList.add('none');
+                            removeLoading();
                         });
                     }
                 } else {
@@ -64,6 +62,6 @@ isLogedIn().then(value => {
                     });
                 }
             }).catch(err => networkAlert())
-            .finally(() => loading.classList.add('none'));
+            .finally(() => removeLoading());
     } else onlyUserAlert();
 });

@@ -9,10 +9,10 @@ import Layout1 from "./Layout1";
 import Layout2 from "./Layout2";
 import Swal from 'sweetalert2'
 import SaveBtn, { Tool } from "../instanceBtns/SaveBtn";
+import { makeLoading, removeLoading } from "../../../functions";
 
 const section = document.querySelector(".section1");
 const infoText = document.querySelector<HTMLElement>(".checkbox-text");
-const loading = document.querySelector<HTMLElement>('.loading-box');
 const filteredCounterBox = document.querySelector<HTMLElement>('.extract-num');
 const filteredCounter = document.getElementById('main-counter');
 const filteredSubCounter = document.getElementById('sub-counter');
@@ -259,7 +259,7 @@ export default class Layout extends LayoutToggle(Layout3) {
     }
 
     private async next(current: number) {
-        loading.classList.remove('none');
+        makeLoading();
         await this.dataAPI.forward(this.options[current]);
         if (this.dataAPI.getCurrent() < this.dataAPI.SIZE && this.dataAPI.numbersData) {
             Swal.fire({
@@ -279,10 +279,10 @@ export default class Layout extends LayoutToggle(Layout3) {
             behavior: 'auto'
         });
         await this.on();
-        loading.classList.add('none');
         this.checkBox.reset();
         this.dropDown.changeBoard();
         this.dropDown.changeDropDownColor();
+        removeLoading();
     }
     init() {
         this.dropDown.init();
