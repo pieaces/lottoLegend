@@ -2,7 +2,7 @@ import dynamoDB from ".";
 import { AWSError } from "aws-sdk/lib/error";
 import { GetItemOutput, GetItemInput } from "aws-sdk/clients/dynamodb";
 
-export function getLottoData(round: number): Promise<{ round:number, numbers:number[], bonusNum:number, winner:number, winners:any[], winAmount:number, win:number[], info:any[] }> {
+export function getLottoData(round: number): Promise<{ round: number, numbers: number[], bonusNum: number, winner: number, winners: any[], winAmount: number, win: number[], info: any[] }> {
     const params = {
         TableName: 'LottoData',
         ProjectionExpression: 'Numbers, BonusNum, WinAmount, Winner, Win, Info',
@@ -15,27 +15,12 @@ export function getLottoData(round: number): Promise<{ round:number, numbers:num
 
     return new Promise((resolve, reject) => {
         dynamoDB.getItem(params, async (err: AWSError, data: GetItemOutput) => {
-            if (err) {
-                reject(err);
-            }
-            if ('Win' in data.Item && 'Info' in data.Item) {
-                const numbers = data.Item.Numbers.NS.map(num => Number(num)).sort((a, b) => a - b);
-                const bonusNum = Number(data.Item.BonusNum.N);
-                const winner = Number(data.Item.Winner.N);
-                const winAmount = Number(data.Item.WinAmount.N);
-                const win = [
-                    data.Item.Win.M.firstWinner && data.Item.Win.M.firstWinner.SS.length || 0,
-                    data.Item.Win.M.secondWinner && data.Item.Win.M.secondWinner.SS.length || 0,
-                    data.Item.Win.M.thirdWinner && data.Item.Win.M.thirdWinner.SS.length || 0,
-                    data.Item.Win.M.fourthWinner && Number(data.Item.Win.M.fourthWinner.N) || 0,
-                    data.Item.Win.M.fifthWinner && Number(data.Item.Win.M.fifthWinner.N) || 0
-                ];
-                const winners = [
-                    data.Item.Win.M.firstWinner && data.Item.Win.M.firstWinner.SS,
-                    data.Item.Win.M.secondWinner && data.Item.Win.M.secondWinner.SS,
-                    data.Item.Win.M.thirdWinner && data.Item.Win.M.thirdWinner.SS,
-                ];
-                const info = [
+            if (err) reject(err);
+            
+            let numbers, bonusNum, winner, winAmount, win, winners, info;
+
+            if ('Info' in data.Item) {
+                info = [
                     data.Item.Info.M.first.M,
                     data.Item.Info.M.second.M,
                     data.Item.Info.M.third.M,
@@ -47,6 +32,26 @@ export function getLottoData(round: number): Promise<{ round:number, numbers:num
                         winAmount: Number(item.winAmount.N)
                     }
                 });
+                if ('Win' in data.Item) {
+                    win = [
+                        data.Item.Win.M.firstWinner && data.Item.Win.M.firstWinner.SS.length || 0,
+                        data.Item.Win.M.secondWinner && data.Item.Win.M.secondWinner.SS.length || 0,
+                        data.Item.Win.M.thirdWinner && data.Item.Win.M.thirdWinner.SS.length || 0,
+                        data.Item.Win.M.fourthWinner && Number(data.Item.Win.M.fourthWinner.N) || 0,
+                        data.Item.Win.M.fifthWinner && Number(data.Item.Win.M.fifthWinner.N) || 0
+                    ];
+                    winners = [
+                        data.Item.Win.M.firstWinner && data.Item.Win.M.firstWinner.SS,
+                        data.Item.Win.M.secondWinner && data.Item.Win.M.secondWinner.SS,
+                        data.Item.Win.M.thirdWinner && data.Item.Win.M.thirdWinner.SS,
+                    ];
+                }                
+            }
+            if ('Numbers' in data.Item) {
+                numbers = data.Item.Numbers.NS.map(num => Number(num)).sort((a, b) => a - b);
+                bonusNum = Number(data.Item.BonusNum.N);
+                winner = Number(data.Item.Winner.N);
+                winAmount = Number(data.Item.WinAmount.N);
                 resolve({ round, numbers, bonusNum, winner, winners, winAmount, win, info });
             } else {
                 resolve(await getLottoData(round - 1));

@@ -242,9 +242,6 @@ exports.handler = async (event: any) => {
             const round = getCurrentRound();
             body = await getLottoData(round);
             body.stats = await getWinStats();
-            if (currentId) {
-
-            }
         }
             break;
         case '/mypage': {
