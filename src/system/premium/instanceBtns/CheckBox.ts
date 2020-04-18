@@ -138,9 +138,7 @@ export default class CheckBox {
         });
 
         this.labelList = new Array<boolean>(labels.length).fill(false);
-        for(let i=0;i<checkBoxContainer.children.length;i++){
-            checkBoxContainer.children[i].remove();
-        }
+        checkBoxContainer.innerHTML = '';
 
         labels.forEach(label => {
             const divBox = document.createElement('div');
@@ -157,8 +155,5 @@ export default class CheckBox {
             divBox.appendChild(div);
             checkBoxContainer.appendChild(divBox);
         });
-
-
-
     }
 }
