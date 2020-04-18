@@ -6,7 +6,7 @@ import { makeTable, modifyTableBoundary } from './functions';
 import { networkAlert, onlyUserAlert, makeLoading, removeLoading } from '../functions';
 import Swal from 'sweetalert2';
 import { isLogedIn } from '../amplify/auth';
-
+makeLoading();
 configure();
 const roundSelectBox = document.querySelector<HTMLSelectElement>('#round-select-box');
 const toolSelectBox = document.querySelector<HTMLSelectElement>('#tool-select-box');
@@ -15,7 +15,6 @@ const numInfoToggleBtn = document.querySelector('.mypage-toggle-btn');
 const pastFilterBox = document.getElementsByClassName('func3-past-filter-box') as HTMLCollectionOf<HTMLElement>;
 const tableNumBox = document.querySelector<HTMLElement>('.mypage-table-num-box');
 
-makeLoading();
 isLogedIn().then(value => {
     if (value) {
         getAuthAPI('/numbers/mass')
@@ -193,7 +192,6 @@ isLogedIn().then(value => {
                 networkAlert()
             })
             .finally(() => removeLoading());
-
     } else onlyUserAlert();
 });
 

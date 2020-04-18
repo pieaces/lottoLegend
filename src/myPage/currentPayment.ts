@@ -1,11 +1,10 @@
 import configure from "../amplify/configure";
 import { getAuthAPI, deleteAuthAPI } from "../amplify/api";
-import { isoStringToDate, numberFormat, networkAlert, onlyUserAlert } from "../functions";
+import { isoStringToDate, numberFormat, networkAlert, onlyUserAlert, makeLoading, removeLoading } from "../functions";
 import Swal from "sweetalert2";
 import { isLogedIn } from "../amplify/auth";
-
+makeLoading();
 configure();
-
 const bankbookBoard = document.querySelector('.board-section');
 isLogedIn().then(result => {
     if (result) {
@@ -25,7 +24,8 @@ isLogedIn().then(result => {
                     icon: 'info'
                 })
             }
-        }).catch(() => networkAlert());
+        }).catch(() => networkAlert())
+        .finally(() => removeLoading());
     } else onlyUserAlert();
 })
 

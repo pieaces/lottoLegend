@@ -1,14 +1,11 @@
+import 'regenerator-runtime/runtime'
+import 'core-js/stable/promise'
+import 'core-js/stable/object/assign'
 import Amplify from '@aws-amplify/core'
 import awsconfig from './aws-exports'
 import Analytics from '@aws-amplify/analytics';
 import { headerSign } from './auth';
 import { mqInit, menuInfoToggle } from '../base/headerHover'
-
-import 'whatwg-fetch'
-import 'core-js/stable/object/assign'
-import 'core-js/stable/array/includes'
-import 'regenerator-runtime/runtime'
-import 'core-js/stable/promise'
 export default function configure() {
     if ('NodeList' in window && !NodeList.prototype.forEach) {
         NodeList.prototype.forEach = function (callback, thisArg) {

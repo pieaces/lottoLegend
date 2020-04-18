@@ -1,7 +1,6 @@
 import configure from "../amplify/configure";
 import Auth from "@aws-amplify/auth";
 import Swal from "sweetalert2";
-
 configure();
 
 const userName = document.querySelector<HTMLInputElement>('#userName');

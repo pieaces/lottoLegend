@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import { postAuthAPI, getAuthAPI } from "../amplify/api";
 import { isLogedIn } from "../amplify/auth";
 import Analytics from "@aws-amplify/analytics";
-
+configure();
 const priceContainer = document.querySelectorAll<HTMLElement>('.price-container');
 const priceBox = document.querySelectorAll<HTMLElement>('.price-box');
 const priceAnchorBox = document.querySelectorAll<HTMLElement>('.price-service-anchor-box');
@@ -13,8 +13,6 @@ const priceAnchorHoverBox = document.querySelectorAll<HTMLElement>('.price-servi
 const price = document.getElementById('price');
 const productName = document.getElementById('product-name');
 const bankbook = document.getElementById('bankbook');
-
-configure();
 checkboxToggle();
 isLogedIn().then(result => {
     if (result) {

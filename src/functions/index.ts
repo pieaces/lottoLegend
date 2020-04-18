@@ -1,6 +1,6 @@
 import Swal from 'sweetalert2'
 import makeDraggable from '../system/premium/Layout/makeDraggable';
-import { signIn } from '../amplify/auth';
+import signIn from '../amplify/signIn';
 
 export function networkAlert() {
     Swal.fire({
