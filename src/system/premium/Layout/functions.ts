@@ -48,26 +48,19 @@ function makeFilterTable(data: Stats) {
     listFilterTable.classList.add('table');
     listFilterTable.classList.add('func3-list-filter-table');
 
-    const listFilterTableMap = new Map([
-        ["저값 개수", data["lowCount"]],
-        ["번호 합계", data["sum"]],
-        ["홀수 개수", data["oddCount"]],
-        ["소수 개수", data["primeCount"]],
-        ["3배수 개수", data["$3Count"]],
-        ["첫수 합", data["sum$10"]],
-        ["고저 차", data["diffMaxMin"]],
-        ["AC", data["AC"]]
-    ])
+    const listFilterKeys = ["저값 개수", "번호 합계", "홀수 개수", "소수 개수", "3배수 개수", "첫수 합", "고저 차", "AC"];
+    const listFilterValues = ["lowCount", "sum", "oddCount", "primeCount", "$3Count", "sum$10", "diffMaxMin", "AC" ];
+
     const listFilterTableTrTitle = document.createElement('tr');
     const listFilterTableTrValue = document.createElement('tr');
 
-    listFilterTableMap.forEach((value, key) => {
+    listFilterKeys.forEach((key, index) => {
         const keyTd = document.createElement('td');
         keyTd.textContent = key;
         listFilterTableTrTitle.appendChild(keyTd);
 
         const valueTd = document.createElement('td');
-        valueTd.textContent = value && value.toString();
+        valueTd.textContent = data[listFilterValues[index]];
         listFilterTableTrValue.appendChild(valueTd);
     })
     listFilterTable.appendChild(listFilterTableTrTitle);
@@ -81,7 +74,6 @@ export function makePastFilterTable(data: TableData): HTMLDivElement {
     tableBox.classList.add('func3-past-filter-box')
     tableBox.appendChild(makePastTable(data.winner));
     tableBox.appendChild(makeFilterTable(data));
-
     return tableBox;
 }
 
