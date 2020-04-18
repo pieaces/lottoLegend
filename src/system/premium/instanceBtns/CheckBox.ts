@@ -138,9 +138,9 @@ export default class CheckBox {
         });
 
         this.labelList = new Array<boolean>(labels.length).fill(false);
-        Array.from(checkBoxContainer.children).forEach((node) => {
-            node.remove();
-        })
+        for(let i=0;i<checkBoxContainer.children.length;i++){
+            checkBoxContainer.children[i].remove();
+        }
 
         labels.forEach(label => {
             const divBox = document.createElement('div');

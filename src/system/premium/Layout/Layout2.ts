@@ -199,7 +199,7 @@ export default class Layout2 {
     }
     private setColorWinNum() {
         const winNums = document.querySelectorAll<HTMLElement>('.func2-win-num-box > div');
-        Array.from(winNums).forEach(node => {
+        winNums.forEach(node => {
             const nodeValue = parseInt(node.textContent);
             setColorLotto(nodeValue, node);
         });
@@ -231,7 +231,7 @@ export default class Layout2 {
         return opacities[index];
     }
     numFreqOrTermToggle() {
-        Array.from(numTermFreqBox).forEach((node: HTMLElement, index: number) => {
+        numTermFreqBox.forEach((node: HTMLElement, index: number) => {
             node.addEventListener('click', () => {
                 numTermFreqBox[this.boardCurrent].classList.remove(Layout2.lottoCheckCurrent);
                 numTermFreqBox[index].classList.add(Layout2.lottoCheckCurrent);
@@ -336,9 +336,9 @@ export default class Layout2 {
         $95.textContent = "";
         last.textContent = "";
 
-        Array.from(selectNumBox.children).forEach(node=>{
-            node.remove();
-        })
+        for(let i=0;i<selectNumBox.children.length;i++){
+            selectNumBox.children[i].remove();
+        }
 
         for (let i = 0; i < this.checkedNumbers.length; i++) {
             lottoNumbers[this.checkedNumbers[i] - 1].style.backgroundColor = Layout2.lottoNumDefaultColor;
