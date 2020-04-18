@@ -1,13 +1,12 @@
+makeLoading();
 import configure from '../amplify/configure'
 import DataAPI from "./premium/DataAPI";
 import Layout, { IDataAPI } from './premium/Layout'
 import Swal from 'sweetalert2';
 import { isLogedIn } from '../amplify/auth';
 import { onlyUserAlert, makeLoading, removeLoading } from '../functions';
-
 configure();
 
-makeLoading();
 const COOKIE_NAME = 'instruction';
 const COOKIE_VALUE = 'false';
 isLogedIn().then(value => {
