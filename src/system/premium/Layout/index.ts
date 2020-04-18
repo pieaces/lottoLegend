@@ -64,15 +64,14 @@ export default class Layout extends LayoutToggle(Layout3) {
     private resetSlideNum() {
         const slideNum = document.querySelectorAll<HTMLElement>('.func1-chart-slide-num');
         slideNum.forEach((node) => {
-            Array.from(node.children).forEach((node, index) => {
-
-                if (index === 0) {
-                    node.classList.add('chart-slide-current');
+            for(let i=0;i<node.children.length;i++){
+                if (i === 0) {
+                    node.children[i].classList.add('chart-slide-current');
                 } else {
-                    node.className = "";
+                    node.children[i].className = "";
                 }
-            })
-        });
+            }
+        })        
     }
     private setOption() {
         const currentFilter = this.dataAPI.getCurrent();

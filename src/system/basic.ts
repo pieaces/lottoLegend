@@ -49,8 +49,8 @@ isLogedIn().then(value => {
                 exclude && Layout3.makeLine(excludeCanvas, exclude);
 
                 const includeNumsArr: number[] = [];
-                Array.from(includeCanvas.children).forEach(node => {
-                    const numEl = node.firstElementChild as HTMLElement;
+                for(let i=0;i<includeCanvas.children.length;i++){
+                    const numEl = includeCanvas.children[i].firstElementChild as HTMLElement;
                     let flag = false;
                     numEl.addEventListener('click', () => {
                         if (!flag) {
@@ -62,7 +62,7 @@ isLogedIn().then(value => {
                         }
                         flag = !flag;
                     })
-                })
+                }
 
                 SaveBtn.init(Tool.free);
 
