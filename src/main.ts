@@ -16,10 +16,12 @@ isLogedIn().then((result) => {
         loginAfterBox.classList.remove('none');
         document.getElementById('logout').onclick = () => signOut();
         getAuthAPI('/main/posts').then(data => {
-            document.querySelector('#rank-text').textContent = data.user.rank;
-            document.querySelector('.rank').classList.add(rankToClass(data.user.rank));
-            document.querySelector('#point').textContent = data.user.point;
-            document.querySelector('#service').textContent = data.user.plan;
+            if (data.user) {
+                document.querySelector('#rank-text').textContent = data.user.rank;
+                document.querySelector('.rank').classList.add(rankToClass(data.user.rank));
+                document.querySelector('#point').textContent = data.user.point;
+                document.querySelector('#service').textContent = data.user.plan;
+            }
             executeMakingBoard(data);
         }).catch(() => networkAlert());
     } else {
