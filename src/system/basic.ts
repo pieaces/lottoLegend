@@ -9,7 +9,6 @@ import CheckBoxToggle from './premium/instanceBtns/CheckBoxToggle';
 import generatorLoading from './generatorLoading';
 import { isLogedIn } from '../amplify/auth';
 import { onlyUserAlert } from '../functions';
-
 configure();
 
 const includeCanvas = document.getElementById('include');

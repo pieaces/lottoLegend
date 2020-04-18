@@ -3,7 +3,6 @@ import { signUp } from "../amplify/auth";
 import Swal from 'sweetalert2';
 import { invalidPassword, invalidPasswordCheck } from './functions';
 import { makeLoading, removeLoading } from '../functions';
-
 configure();
 
 const signUpForm = document.querySelector('.signUp-form');

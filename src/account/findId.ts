@@ -1,5 +1,4 @@
 import configure from "../amplify/configure";
-
 configure();
 
 const phoneFirst = document.querySelector<HTMLInputElement>('#phone-number-first');

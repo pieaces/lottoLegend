@@ -1,10 +1,9 @@
 import configure from "../amplify/configure";
 import { getAuthAPI } from "../amplify/api";
-import { networkAlert, numberFormat, isoStringToDate, isoStringToTime } from "../functions";
+import { networkAlert, numberFormat, isoStringToDate, isoStringToTime, makeLoading, removeLoading } from "../functions";
 import Swal from "sweetalert2";
-
+makeLoading();
 configure();
-
 const boardSection=document.querySelector('.board-section');
 
 getAuthAPI('/users/payment').then(payments => {
@@ -13,7 +12,8 @@ getAuthAPI('/users/payment').then(payments => {
         title:'결제내역이 없습니다',
         icon:'info'
     })
-}).catch(() => networkAlert());
+}).catch(() => networkAlert())
+.finally(() => removeLoading());
 
 
 function makeBoard(data:any){

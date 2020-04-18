@@ -1,15 +1,14 @@
 import configure from '../amplify/configure'
 import { getAuthAPI, patchAuthAPI, postAuthAPI } from '../amplify/api'
-import { setColorLotto, networkAlert, rankToClass, onlyUserAlert, stringTrimer, isoStringToDate, makeNoneBox } from '../functions/index'
+import { setColorLotto, networkAlert, rankToClass, onlyUserAlert, stringTrimer, isoStringToDate, makeNoneBox, makeLoading, removeLoading } from '../functions/index'
 import IncludeExclude from './IncludeExclude/index';
 import incObj from './IncludeExclude/include';
 import excObj from './IncludeExclude/exclude';
 import Auth from '@aws-amplify/auth';
 import { makeTable, phoneString } from './functions';
 import Swal from 'sweetalert2';
-
+makeLoading();
 configure();
-
 const winNumBox = document.querySelector<HTMLElement>('.mypage-win-num');
 const nickname = document.querySelector('#nickname');
 const pointHtml = document.querySelector('#point');
@@ -120,7 +119,8 @@ Auth.currentAuthenticatedUser()
                 }).catch(() => networkAlert());
             }
 
-        }).catch(err => networkAlert());
+        }).catch(err => networkAlert())
+        .finally(() => removeLoading());
     }).catch(err => onlyUserAlert());
 
 function modifyMessage(option: { title: string, text?: string, confirmButtonText: string, preConfirm: (param: any) => any }) {

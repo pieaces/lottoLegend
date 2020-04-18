@@ -7,11 +7,9 @@ import Selectr, { IOptions } from 'mobius1-selectr';
 import Swal from 'sweetalert2';
 import { networkAlert, onlyUserAlert, makeLoading, removeLoading } from '../functions';
 import { isLogedIn } from '../amplify/auth';
-
-configure();
-
-const roundSelectBox = document.querySelector<HTMLSelectElement>('#round-select-box');
 makeLoading();
+configure();
+const roundSelectBox = document.querySelector<HTMLSelectElement>('#round-select-box');
 isLogedIn().then(value => {
     if (value) {
         getAuthAPI('/numbers/piece')

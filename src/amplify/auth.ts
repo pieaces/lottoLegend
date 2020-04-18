@@ -1,6 +1,5 @@
 import Auth from '@aws-amplify/auth'
-import { onlyUserAlert, networkAlert, makeLoading, removeLoading } from '../functions';
-import Swal from 'sweetalert2';
+import { onlyUserAlert, networkAlert } from '../functions';
 
 export function headerSign() {
     Auth.currentAuthenticatedUser()
@@ -23,37 +22,6 @@ export async function getUserName():Promise<string> {
 export async function getNickName() {
     return await Auth.currentAuthenticatedUser()
         .then(user => user.attributes.nickname);
-}
-export async function signIn(username: string, password: string) {
-    if (username === '' || password === '') {
-        return Swal.fire({
-            title: '알림',
-            text: '아이디, 비밀번호는 공백일 수 없습니다.',
-            icon: 'info'
-        });
-    }
-    makeLoading();
-    await Auth.signIn({
-        username,
-        password,
-    }).then(async () => {        
-        if(location.href.indexOf('main.html') !== -1 || document.referrer.indexOf('account')) location.href = "/myPage/home.html";
-        else history.back();
-    }).catch(err => {
-            if (err.message.indexOf('exceeded') !== -1) {
-                Swal.fire({
-                    title: '알림',
-                    text: '5회 이상 잘못입력하였습니다. 잠시후 다시 시도해주세요',
-                    icon: 'info'
-                });
-            } else if(err.code === "NotAuthorizedException") {
-                Swal.fire({
-                    title: '알림',
-                    text: '아이디 또는 비밀번호가 틀렸습니다',
-                    icon: 'info'
-                });
-            }else networkAlert();
-        }).finally(() => removeLoading());
 }
 
 export async function signOut() {

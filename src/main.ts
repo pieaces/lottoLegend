@@ -3,7 +3,6 @@ import { getUnAuthAPI, getAuthAPI } from './amplify/api';
 import { rankToClass, loginAddEvent, networkAlert } from './functions';
 import { isLogedIn, getNickName, signOut } from './amplify/auth';
 import { mqDeskTopInit, backgroundImgSlide, makeWinNumBox, insertWinCount, insertWinResult, executeMakingBoard, mqMobileInit, makeWinnersList, moneyCompress } from './functions/main';
-
 configure();
 
 const loginContainer = document.querySelector('.login-container')
@@ -28,7 +27,8 @@ isLogedIn().then((result) => {
         loginContainer.classList.remove('none');
         getUnAuthAPI('/main/posts').then(data => {
             executeMakingBoard(data);
-        }).catch(() => networkAlert());
+        }).catch((err) => console.log(err));
+
         loginAddEvent();
     }
 });

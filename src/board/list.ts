@@ -3,7 +3,6 @@ import { getUnAuthAPI, getAuthAPI } from '../amplify/api'
 import { isoStringToDate, rankToClass, getQueryStringObject, onlyUserAlert } from '../functions';
 import { Category, getCategoryHtml } from './functions';
 import { getUserName, isLogedIn } from '../amplify/auth';
-
 configure();
 
 const boardSection = document.querySelector('.board-section');
@@ -29,15 +28,18 @@ searchBox && (searchBox.onsubmit = (e) => {
     location.href = `?index=1&word=${wordInput.value}&type=${selectBox.value}`;
 });
 
-function listAPI() {
+async function listAPI() {
     if (category === 'pro' || category === 'qna') {
-        isLogedIn().then(value => {
-            if (value) {
-                if (word || type) return getAuthAPI('/posts/search', { category, index, word, type });
+        const logedIn = await isLogedIn();
+        if (logedIn) {
+            if (word || type) {
+                return getAuthAPI('/posts/search', { category, index, word, type });
+            }
+            else {
                 return getAuthAPI('/posts', { category, index });
             }
-            else return onlyUserAlert();
-        });
+        }
+        else return onlyUserAlert();
     }
     else if (word || type) {
         return getUnAuthAPI('/posts/search', { category, index, word, type });
