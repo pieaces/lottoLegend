@@ -336,10 +336,8 @@ export default class Layout2 {
         $95.textContent = "";
         last.textContent = "";
 
-        for(let i=0;i<selectNumBox.children.length;i++){
-            selectNumBox.children[i].remove();
-        }
-
+        selectNumBox.innerHTML=''
+        
         for (let i = 0; i < this.checkedNumbers.length; i++) {
             lottoNumbers[this.checkedNumbers[i] - 1].style.backgroundColor = Layout2.lottoNumDefaultColor;
         }
