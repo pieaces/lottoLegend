@@ -3,8 +3,8 @@ import queryStats from "./queryStats";
 import { GeneratorOption } from "../interface/Generator";
 import Generator from "../Lotto/class/Generator";
 
-const PER = 20//20;
-const REPEAT = 50//50;
+const PER = 10//20;
+const REPEAT = 500//50;
 
 const valueList:any = {
     lowCount: [0, 1, 2, 3, 4, 5, 6],
@@ -38,7 +38,7 @@ function returnOption(statsData: any, method: StatsMethod): any[] {
     for (let i = 0; i < valueList[method].length / 6; i++) {
         result.add(valueList[method][box[i].index]);
     }
-    for (let i = 0; i < valueList[method].length / 10; i++) {
+    for (let i = 0; i < valueList[method].length / 6; i++) {
         const random = valueList[method][Math.floor(Math.random() * (valueList[method].length))]
         result.add(random);
     }
@@ -58,11 +58,11 @@ export async function supply(){
             round: data.round
         }
     }))
-    .then(data => [...data.sort((a, b) => a.round - b.round).slice(0, 15).map(item => item.num)]);
+    .then(data => [...data.sort((a, b) => a.round - b.round).slice(0, 20).map(item => item.num)]);
     return {statsDataObj, include};
 }
 interface FactoryNumber{
-    exclude:number[],
+    exclude?:number[],
     include?:number[]
 }
 export default function factory(statsDataObj:any, numbers?:FactoryNumber) {
@@ -85,8 +85,9 @@ function generate(statsDataObj: any, numbers?:FactoryNumber){
     if (numbers.exclude) {
         (option.excludedNumbers = numbers.exclude);
     }
+    option.excludedNumbers = randomNumbers();
     if (numbers.include) {
-        const randomPickCount = Math.floor(Math.random() * 4) + 1;
+        const randomPickCount = Math.floor(Math.random() * 3) + 1;
         (option.includedNumbers = numbers.include.sort(() => 0.5 - Math.random()).slice(0, randomPickCount));
     }
 
@@ -109,4 +110,12 @@ function returnLowCountOption(){
     }else{
         return 5;
     }
+}
+
+function randomNumbers(){
+    const set = new Set<number>();
+    while(set.size < 10){
+        set.add(Math.floor(Math.random() * 45) + 1);
+    }
+    return [...set];
 }

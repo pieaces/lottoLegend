@@ -9,7 +9,8 @@ exports.handler = async (event: any) => {
     
     const {statsDataObj,include} = await supply();
     const exclude = await getWeekNumbers();
-    const numbers = {exclude, include:include.filter(item => !exclude.some(num => num === item))};
+    //const numbers = {exclude, include:include.filter(item => !exclude.some(num => num === item))};
+    const numbers = {include};
     const users = await scanUsers();
 
     const willWinNumberList:number[][] = [];
@@ -22,3 +23,11 @@ exports.handler = async (event: any) => {
         await updateNumbers(users[i].userName, users[i].tool, getCurrentRound() + 1, willWinNumberList.splice(0, users[i].value));
     }
 };
+
+/*async function a(){
+    const {statsDataObj,include} = await supply();
+    const numbers = {include};
+    const willWinNumberList:number[][] = [];
+    willWinNumberList.push(...factory(statsDataObj, numbers));
+    console.log(willWinNumberList);
+}a();*/
