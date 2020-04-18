@@ -5,7 +5,9 @@ import makeClickable from "../system/premium/Slide/makeClickable";
 import { mqMobileInit} from './functions';
 import configure from "../amplify/configure";
 import { makeLoading, networkAlert, removeLoading } from "../functions";
-
+import 'core-js/stable/array/fill'
+import 'core-js/stable/object/assign'
+import 'core-js/stable/promise'
 configure();
 const roundEl = document.querySelectorAll('.one-line > td:nth-child(1)');
 const numsEl = document.querySelectorAll('.one-line');

@@ -7,6 +7,7 @@ export default class BubbleChart {
     setDataAPI(dataAPI) {
         this.dataAPI = dataAPI;
     }
+
     drawChart() {
         const dataBubble = [['ID', '전체 포화도', '최근 포화도', '종합계수', '확률']];
 
@@ -57,7 +58,9 @@ export default class BubbleChart {
             bubble: { textStyle: { fontSize: 11 } },
             chartArea: { width: '50%', height: '75%' },
         };
+
         const chart = new google.visualization.BubbleChart(this.element);
+
         chart.draw(dataTable, option);
     }
 

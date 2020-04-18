@@ -2,7 +2,6 @@ import configure from "../amplify/configure";
 import { getUnAuthAPI } from "../amplify/api";
 import { networkAlert, makeLoading, removeLoading } from "../functions";
 import { mqMobileInit} from './functions';
-
 configure();
 
 const lottoNums = document.querySelectorAll<HTMLElement>('#frequency .lotto-num');

@@ -2,11 +2,11 @@ import Selectr, { IOptions } from 'mobius1-selectr';
 import { setColorLotto, networkAlert, setDisabledLotto } from '../functions/index';
 import configure from '../amplify/configure';
 import { getUnAuthAPI } from '../amplify/api';
+import 'core-js/stable/promise'
+configure();
 
 const selectBox = document.querySelector<HTMLSelectElement>('#num-week-select-box');
 const numWeekWrapper = document.querySelector<HTMLElement>('.num-week-wrapper');
-
-configure();
 
 getUnAuthAPI('/numbers/week')
     .then(({ data, rounds }) => {

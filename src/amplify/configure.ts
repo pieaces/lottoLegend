@@ -5,26 +5,26 @@ import { headerSign } from './auth';
 import { mqInit, menuInfoToggle } from '../base/headerHover'
 
 import 'whatwg-fetch'
-import 'core-js/stable/promise'
 import 'core-js/stable/object/assign'
 import 'core-js/stable/array/includes'
 import 'regenerator-runtime/runtime'
-if ('NodeList' in window && !NodeList.prototype.forEach) {
-    NodeList.prototype.forEach = function (callback, thisArg) {
-        thisArg = thisArg || window;
-        for (var i = 0; i < this.length; i++) {
-            callback.call(thisArg, this[i], i, this);
-        }
-    };
-}
-if (!('remove' in Element.prototype)) {
-    (<any>Element.prototype)['remove'] = function () {
-        if (this.parentNode) {
-            this.parentNode.removeChild(this);
-        }
-    };
-}
+import 'core-js/stable/promise'
 export default function configure() {
+    if ('NodeList' in window && !NodeList.prototype.forEach) {
+        NodeList.prototype.forEach = function (callback, thisArg) {
+            thisArg = thisArg || window;
+            for (var i = 0; i < this.length; i++) {
+                callback.call(thisArg, this[i], i, this);
+            }
+        };
+    }
+    if (!('remove' in Element.prototype)) {
+        (<any>Element.prototype)['remove'] = function () {
+            if (this.parentNode) {
+                this.parentNode.removeChild(this);
+            }
+        };
+    }
     mqInit();
     menuInfoToggle();
     Amplify.configure(awsconfig);

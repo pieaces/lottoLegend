@@ -8,7 +8,7 @@ import makeClickable from '../system/premium/Slide/makeClickable';
 import { getStaticsName, mqMobileInit, makeCarryNumbers } from './functions';
 import Slide from '../system/premium/Slide';
 import Swal from 'sweetalert2';
-
+import 'core-js/stable/array/fill'
 configure();
 
 const labels = require('../system/premium/DataAPI/json/labels.json');
