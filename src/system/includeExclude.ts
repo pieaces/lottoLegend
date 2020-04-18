@@ -5,7 +5,7 @@ import ResetBtn from './premium/instanceBtns/ResetBtn';
 import Swal from 'sweetalert2'
 import { networkAlert, onlyUserAlert, makeLoading, removeLoading } from '../functions';
 import { isLogedIn } from '../amplify/auth';
-
+import 'core-js/stable/array/from'
 configure();
 
 const category = document.querySelector('.main').getAttribute('data-category');
@@ -66,8 +66,6 @@ isLogedIn().then(value =>{
                                 }).then(async (result) => {
                                     if (result.value) {
                                         location.href = `./exclude.html`;
-                                    } else {
-        
                                     }
                                 });
                             } else {
@@ -83,8 +81,6 @@ isLogedIn().then(value =>{
                                 }).then(async (result) => {
                                     if (result.value) {
                                         location.href = `./include.html`;
-                                    } else {
-        
                                     }
                                 });
                             }

@@ -32,8 +32,8 @@ isLogedIn().then(value => {
                     if (!result.value) setCookie(COOKIE_NAME, COOKIE_VALUE, 14);
                 });
             }
-            removeLoading();
         });
+        removeLoading();
     }else onlyUserAlert();
 })
 
