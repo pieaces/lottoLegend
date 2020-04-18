@@ -1,6 +1,6 @@
 import configure from '../amplify/configure'
+import 'core-js/stable/array/from'
 import Swal from 'sweetalert2';
-
 configure();
 
 const termsUseAllCheck = document.querySelector<HTMLInputElement>('#all-check');

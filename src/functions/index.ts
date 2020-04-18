@@ -129,10 +129,12 @@ export function numberFormat(inputNumber:string | number) {
     const passwordInput = document.querySelector<HTMLInputElement>('#password');
 
     document.getElementById('login-form').addEventListener('submit', async (e) => {
+        makeLoading();
         e.preventDefault();
         const userName = userNameInput.value;
         const password = passwordInput.value;
         await signIn(userName, password);
+        removeLoading();
     });
 }
 

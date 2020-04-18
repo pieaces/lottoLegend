@@ -1,7 +1,7 @@
 import 'whatwg-fetch'
 import 'core-js/stable/array/includes'
 import Swal from "sweetalert2";
-import { makeLoading, networkAlert, removeLoading } from "../functions";
+import { networkAlert } from "../functions";
 import Auth from "@aws-amplify/auth";
 
 export default async function signIn(username: string, password: string) {
@@ -12,7 +12,6 @@ export default async function signIn(username: string, password: string) {
             icon: 'info'
         });
     }
-    makeLoading();
     await Auth.signIn({
         username,
         password,
@@ -33,5 +32,5 @@ export default async function signIn(username: string, password: string) {
                     icon: 'info'
                 });
             }else networkAlert();
-        }).finally(() => removeLoading());
+        })
 }

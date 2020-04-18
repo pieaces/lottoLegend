@@ -43,21 +43,21 @@ getUnAuthAPI('/main/numbers').then(data => {
 
     insertWinCount(data.stats);
     insertWinResult(data.info, officialWinResultBox);
-    insertWinResult(data.win.map((winner: number, index: number) => {
+    insertWinResult(data.win && data.win.map((winner: number, index: number) => {
         return {
             winner,
             winAmount: winner * data.info[index].winAmount
         }
     }), myWinResultBox);
-    document.getElementById('totalAmount').textContent = moneyCompress((<any[]>data.info).reduce((acc, cur, index) => acc + cur.winAmount * data.win[index], 0));
+    document.getElementById('totalAmount').textContent = moneyCompress(data.info && data.info.reduce((acc, cur, index) => acc + cur.winAmount * data.win[index], 0));
     const winners = [];
-    data.winners.forEach((_winners, index) => {
+    data.winners && data.winners.forEach((_winners, index) => {
         _winners && _winners.forEach(winner => {
             winners.push({ rank: index + 1, money: data.info[index].winAmount, nickName: winner });
         });
     });
     makeWinnersList(winners);
-}).catch((err) => networkAlert());
+}).catch((err) => console.log(err));
 
 const mqMobile = window.matchMedia("(max-width: 767px)");
 if (mqMobile.matches) {

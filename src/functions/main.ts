@@ -222,10 +222,15 @@ function makeBoard(data: { id?: number, category?: Category, title: string, crea
 }
 
 export function insertWinResult(data, target: NodeListOf<HTMLElement>) {
-    target.forEach((node, index) => {
-        node.children[1].textContent = `${numberFormat(data[index].winner)}조합`;
-        node.children[2].textContent = `${numberFormat(data[index].winAmount)}원`;
-    });
+    if (data) {
+        target.forEach((node, index) => {
+            node.children[1].textContent = `${numberFormat(data[index].winner)}조합`;
+            node.children[2].textContent = `${numberFormat(data[index].winAmount)}원`;
+        });
+    } else {
+        target[0].children[1].textContent = '금일 21시 10분에';
+        target[0].children[2].textContent = '확인가능합니다';
+    }
 }
 
 function makeWinReview(data: { id: number, title: string, created: string, img?: string }[]) {
@@ -304,7 +309,7 @@ export function moneyCompress(money: number) {
     if (money >= 100000000) return '약 ' + Math.round(money / 100000000) + '억원';
     else if (money >= 10000000) return '약 ' + Math.round(money / 10000) + '만원';
     else if (money >= 1000000) return '약 ' + Math.round(money / 10000) + '만원';
-    else if(money === 0) return '';
+    else if(!money || money === 0) return '';
     else return money + '원';
 }
 function winnerHtml(winner: { rank: number, money: number, nickName: string }) {
