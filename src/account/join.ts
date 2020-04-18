@@ -2,6 +2,7 @@ import configure from '../amplify/configure'
 import { signUp } from "../amplify/auth";
 import Swal from 'sweetalert2';
 import { invalidPassword, invalidPasswordCheck } from './functions';
+import { makeLoading, removeLoading } from '../functions';
 
 configure();
 
@@ -10,7 +11,6 @@ const id = document.querySelector<HTMLInputElement>('#id');
 const nickname = document.querySelector<HTMLInputElement>('#nickname');
 const password = document.querySelector<HTMLInputElement>('#password');
 const passwordCheck = document.querySelector<HTMLInputElement>('#password-check');
-const loading = document.querySelector('.loading-box');
 
 id.addEventListener('invalid', invalidId);
 id.addEventListener('input', invalidId);
@@ -24,8 +24,7 @@ passwordCheck.addEventListener('input', invalidPasswordCheck(password,passwordCh
 signUpForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     //'+82'.concat(phoneMidInput.value.slice(1));
-    loading.classList.remove('none');
-
+    makeLoading();
     const result = await signUp(id.value, password.value, nickname.value);
     if (result.user) {
         Swal.fire({
@@ -52,8 +51,7 @@ signUpForm.addEventListener('submit', async (e) => {
         }
     }
 
-    loading.classList.add('none');
-
+    removeLoading();
 });
 
 function invalidId() {

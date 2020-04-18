@@ -3,7 +3,7 @@ import { getUnAuthAPI, postAuthAPI, getAuthAPI } from '../amplify/api'
 import Layout2 from "./premium/Layout/Layout2";
 import ResetBtn from './premium/instanceBtns/ResetBtn';
 import Swal from 'sweetalert2'
-import { networkAlert, onlyUserAlert } from '../functions';
+import { networkAlert, onlyUserAlert, makeLoading, removeLoading } from '../functions';
 import { isLogedIn } from '../amplify/auth';
 
 configure();
@@ -15,15 +15,12 @@ enum IncOrExc {
     "exclude" = "exclude"
 }
 let incOrExc: IncOrExc;
-const loading = document.querySelector<HTMLElement>('.loading-box');
-loading.classList.remove('none');
-
+makeLoading();
 isLogedIn().then(value =>{
     if(value){
         getAuthAPI('/numbers/piece', { flag: true }).then(async ({ include, exclude }) =>{
             const data = await getUnAuthAPI('/stats/mass', { method: 'excludeInclude' });
                 const layout = new Layout2([null, null, null, true], data.data, data.winNums, data.total);
-                loading.classList.add('none');
                 layout.init();
                 let alertMessage: string[] = [];
                 let numbers: number[];
@@ -97,7 +94,7 @@ isLogedIn().then(value =>{
                     }
                 });
         }).catch(() => networkAlert())
-        .finally(() => loading.classList.add('none'));
+        .finally(() => removeLoading());
     }else{
         onlyUserAlert();
     }

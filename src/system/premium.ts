@@ -3,12 +3,11 @@ import DataAPI from "./premium/DataAPI";
 import Layout, { IDataAPI } from './premium/Layout'
 import Swal from 'sweetalert2';
 import { isLogedIn } from '../amplify/auth';
-import { onlyUserAlert } from '../functions';
+import { onlyUserAlert, makeLoading, removeLoading } from '../functions';
 
 configure();
 
-const loading = document.querySelector<HTMLElement>('.loading-box');
-loading.classList.remove('none');
+makeLoading();
 const COOKIE_NAME = 'instruction';
 const COOKIE_VALUE = 'false';
 isLogedIn().then(value => {
@@ -33,7 +32,7 @@ isLogedIn().then(value => {
                     if (!result.value) setCookie(COOKIE_NAME, COOKIE_VALUE, 14);
                 });
             }
-            loading.classList.add('none');
+            removeLoading();
         });
     }else onlyUserAlert();
 })

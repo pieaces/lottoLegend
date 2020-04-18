@@ -4,7 +4,7 @@ import plugins from 'suneditor/src/plugins'
 import { ko } from 'suneditor/src/lang'
 import { postUnAuthAPI, postAuthAPI, getUnAuthAPI, patchAuthAPI, getAuthAPI } from '../amplify/api';
 import { isLogedIn, getUserName } from '../amplify/auth'
-import { networkAlert, onlyUserAlert, stringTrimer, getQueryStringObject } from '../functions'
+import { networkAlert, onlyUserAlert, stringTrimer, getQueryStringObject, makeLoading, removeLoading } from '../functions'
 import Swal from 'sweetalert2'
 import { Category, getCategoryHtml, makeNum } from './functions';
 
@@ -65,8 +65,6 @@ function mqDeskTopInit() {
 
 const post = getQueryStringObject().id;
 const category: Category = document.getElementById('wrapper').getAttribute('data-category') as Category;
-const loading = document.querySelector('.loading-box');
-
 const submitBtn = document.getElementById('submit-btn');
 const titleInput = document.querySelector<HTMLInputElement>('#title-text');
 const imageTotalSize = document.getElementById('image-total-size');
@@ -125,7 +123,7 @@ submitBtn.onclick = async () => {
         title: '내용은 비워둘 수 없습니다',
         icon: 'warning'
     });
-    loading.classList.remove('none');
+    makeLoading();
     try {
         const images = [];
         const imageElements = [];
@@ -154,7 +152,7 @@ submitBtn.onclick = async () => {
                 title, contents
             });
         }
-        loading.classList.add('none');
+        removeLoading();
 
         Swal.fire({
             title: '완료',

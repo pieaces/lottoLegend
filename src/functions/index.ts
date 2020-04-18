@@ -137,3 +137,15 @@ export function numberFormat(inputNumber:string | number) {
         await signIn(userName, password);
     });
 }
+
+export function makeLoading(){
+    const loadingBox = document.createElement('div');
+    loadingBox.id = 'loading-box';
+    loadingBox.innerHTML = '<div class="loading"><div></div><div></div><div></div><div></div></div>';
+
+    document.querySelector('body').appendChild(loadingBox);
+}
+export function removeLoading(){
+    const loadingBox = document.getElementById('loading-box');
+    loadingBox.remove();
+}
