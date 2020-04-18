@@ -304,7 +304,8 @@ export function moneyCompress(money: number) {
     if (money >= 100000000) return '약 ' + Math.round(money / 100000000) + '억원';
     else if (money >= 10000000) return '약 ' + Math.round(money / 10000) + '만원';
     else if (money >= 1000000) return '약 ' + Math.round(money / 10000) + '만원';
-    else money + '원';
+    else if(money === 0) return '';
+    else return money + '원';
 }
 function winnerHtml(winner: { rank: number, money: number, nickName: string }) {
     return `<div class="board-box">
