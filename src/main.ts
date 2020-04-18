@@ -3,19 +3,7 @@ import { getUnAuthAPI, getAuthAPI } from './amplify/api';
 import { rankToClass, loginAddEvent, networkAlert } from './functions';
 import { isLogedIn, getNickName, signOut } from './amplify/auth';
 import { mqDeskTopInit, backgroundImgSlide, makeWinNumBox, insertWinCount, insertWinResult, executeMakingBoard, mqMobileInit, makeWinnersList, moneyCompress } from './functions/main';
-import 'core-js/stable/promise'
-import 'core-js/stable/object/assign'
-if ('NodeList' in window && !NodeList.prototype.forEach) {
-    NodeList.prototype.forEach = function (callback, thisArg) {
-      thisArg = thisArg || window;
-      for (var i = 0; i < this.length; i++) {
-        callback.call(thisArg, this[i], i, this);
-      }
-    };
-  }
-import 'core-js/stable/array/includes'
-import 'regenerator-runtime/runtime'
-import 'whatwg-fetch'
+
 configure();
 
 const loginContainer = document.querySelector('.login-container')

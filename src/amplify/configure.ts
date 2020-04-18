@@ -4,6 +4,7 @@ import Analytics from '@aws-amplify/analytics';
 import { headerSign } from './auth';
 import { mqInit, menuInfoToggle } from '../base/headerHover'
 
+import 'whatwg-fetch'
 import 'core-js/stable/promise'
 import 'core-js/stable/object/assign'
 if ('NodeList' in window && !NodeList.prototype.forEach) {
@@ -16,7 +17,6 @@ if ('NodeList' in window && !NodeList.prototype.forEach) {
 }
 import 'core-js/stable/array/includes'
 import 'regenerator-runtime/runtime'
-import 'whatwg-fetch'
 
 export default function configure() {
     mqInit();
