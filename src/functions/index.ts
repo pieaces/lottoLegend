@@ -138,6 +138,7 @@ export function numberFormat(inputNumber:string | number) {
 
 export function makeLoading(){
     const loadingBox = document.createElement('div');
+    
     loadingBox.id = 'loading-box';
     loadingBox.innerHTML = '<div class="loading"><div></div><div></div><div></div><div></div></div>';
 
