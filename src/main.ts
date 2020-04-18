@@ -5,7 +5,14 @@ import { isLogedIn, getNickName, signOut } from './amplify/auth';
 import { mqDeskTopInit, backgroundImgSlide, makeWinNumBox, insertWinCount, insertWinResult, executeMakingBoard, mqMobileInit, makeWinnersList, moneyCompress } from './functions/main';
 import 'core-js/stable/promise'
 import 'core-js/stable/object/assign'
-import 'core-js/stable/array/from'
+if ('NodeList' in window && !NodeList.prototype.forEach) {
+    NodeList.prototype.forEach = function (callback, thisArg) {
+      thisArg = thisArg || window;
+      for (var i = 0; i < this.length; i++) {
+        callback.call(thisArg, this[i], i, this);
+      }
+    };
+  }
 import 'core-js/stable/array/includes'
 import 'regenerator-runtime/runtime'
 import 'whatwg-fetch'
@@ -43,7 +50,7 @@ const officialWinResultBox = document.querySelectorAll<HTMLElement>('.total-win-
 const myWinResultBox = document.querySelectorAll<HTMLElement>('#win-result > div');
 getUnAuthAPI('/main/numbers').then(data => {
     makeWinNumBox(data);
-    Array.from(document.querySelectorAll('.win-round')).forEach(node => node.textContent = data.round);
+    (document.querySelectorAll('.win-round')).forEach(node => node.textContent = data.round);
     winRound.textContent = data.round;
 
     insertWinCount(data.stats);
@@ -62,7 +69,7 @@ getUnAuthAPI('/main/numbers').then(data => {
         });
     });
     makeWinnersList(winners);
-}).catch((err) => networkAlert());
+}).catch((err) => console.log(err));
 
 const mqMobile = window.matchMedia("(max-width: 767px)");
 if (mqMobile.matches) {

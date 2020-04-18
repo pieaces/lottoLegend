@@ -222,7 +222,7 @@ function makeBoard(data: { id?: number, category?: Category, title: string, crea
 }
 
 export function insertWinResult(data, target: NodeListOf<HTMLElement>) {
-    Array.from(target).forEach((node, index) => {
+    target.forEach((node, index) => {
         node.children[1].textContent = `${numberFormat(data[index].winner)}조합`;
         node.children[2].textContent = `${numberFormat(data[index].winAmount)}원`;
     });

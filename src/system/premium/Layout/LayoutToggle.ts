@@ -23,9 +23,9 @@ const layout3Class = 'func3-layout'
 export default function LayoutToggle<TBase extends Constructor>(Base: TBase) {
     return class extends Base {
         protected dataAPI: IDataAPI;
-        private layout1Arr: HTMLElement[] = Array.from(layout1);
-        private layout2Arr: HTMLElement[] = Array.from(layout2);
-        private layout3Arr: HTMLElement[] = Array.from(layout3);
+        private layout1Arr: NodeListOf<HTMLElement> = layout1;
+        private layout2Arr: NodeListOf<HTMLElement> = layout2;
+        private layout3Arr: NodeListOf<HTMLElement> = layout3;
         layout1On() {
             this.layout2Arr.forEach(node => {
                 node.classList.add('none');
@@ -77,7 +77,7 @@ export default function LayoutToggle<TBase extends Constructor>(Base: TBase) {
             Layout3.makeLine(carrycountCanvas, data[3].sort((a, b) => a - b));
             Layout3.makeLine(includeCanvas, data[4].sort((a, b) => a - b));
             Layout3.makeLine(excludeCanvas, data[5].sort((a, b) => a - b));
-            Array.from(filterTableValues).forEach((node, index) => {
+            filterTableValues.forEach((node, index) => {
                 if (index === 0) {
                     node.innerHTML = data.slice(6)[index];
                 } else if (index === 1) {

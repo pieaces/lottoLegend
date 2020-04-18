@@ -3,7 +3,7 @@ const currentSize = document.querySelector<HTMLElement>('#num-list-select-curren
 const totalSize = document.querySelector<HTMLElement>('#num-list-select-total');
 
 export default class CheckBoxToggle {
-    private inputBoxes: HTMLInputElement[];
+    private inputBoxes: NodeListOf<HTMLInputElement>;
     private static currentValue = 0;
     private static totalValue = 0;
     constructor(){currentSize.textContent='0'}
@@ -12,7 +12,7 @@ export default class CheckBoxToggle {
         CheckBoxToggle.currentValue = 0;
         currentSize.textContent = '0';
         CheckBoxToggle.totalValue = inputBoxes.length;
-        this.inputBoxes = Array.from(inputBoxes);
+        this.inputBoxes = inputBoxes;
     }
     allBtnEvent() {
         if (this.inputBoxes) {
@@ -35,7 +35,7 @@ export default class CheckBoxToggle {
     }
     checkBoxEvent(){
         totalSize.textContent = this.inputBoxes.length.toString();
-        Array.from(this.inputBoxes).forEach((node) => {
+        this.inputBoxes.forEach((node) => {
             node.addEventListener('change', () => {
                 if (node.checked) {
                     CheckBoxToggle.currentValue++;

@@ -231,12 +231,12 @@ function setImageList(imageList: { size: number, index: number, src: string }[])
     const imageContainer = document.querySelectorAll<HTMLElement>('.image-container');
     const imageListSize = document.querySelectorAll<HTMLElement>('.image-size');
 
-    Array.from(imageContainer).forEach(node => {
+    imageContainer.forEach(node => {
         node.addEventListener('click', () => {
             checkImage(parseInt(node.dataset.imageIndex));
         });
     })
-    Array.from(imageListSize).forEach(node => {
+    imageListSize.forEach(node => {
         node.addEventListener('click', () => {
             selectImage('select', parseInt(node.dataset.imageIndex));
         });
@@ -244,7 +244,7 @@ function setImageList(imageList: { size: number, index: number, src: string }[])
 
     const imageTableList = imageTable.querySelectorAll<HTMLElement>('li');
 
-    Array.from(imageTableList).forEach(node => {
+    imageTableList.forEach(node => {
         node.addEventListener('click', () => {
             const img = node.firstElementChild.firstElementChild.firstElementChild as HTMLElement;
             if (node.classList.contains('checked')) {

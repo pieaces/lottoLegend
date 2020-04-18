@@ -63,7 +63,7 @@ export default class Layout2 {
     static readonly numBoard = '.func2-lotto-num-container';
     static readonly lottoCheckCurrent = 'func2-lotto-check-current';
     public checkedNumbers = new Array<number>();
-    private lottoNumbersArr: HTMLElement[] = Array.from(lottoNumbers);
+    private lottoNumbersArr: NodeListOf<HTMLElement> = lottoNumbers;
     private choice = null;
     private boardCurrent = 0;
     private numbersEventList = [];

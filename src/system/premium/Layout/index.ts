@@ -63,7 +63,7 @@ export default class Layout extends LayoutToggle(Layout3) {
     }
     private resetSlideNum() {
         const slideNum = document.querySelectorAll<HTMLElement>('.func1-chart-slide-num');
-        Array.from(slideNum).forEach((node) => {
+        slideNum.forEach((node) => {
             Array.from(node.children).forEach((node, index) => {
 
                 if (index === 0) {
@@ -162,12 +162,12 @@ export default class Layout extends LayoutToggle(Layout3) {
         const excTextRow = document.querySelectorAll('#func1-bubble-table tr:nth-child(-n+5)');
         const excText = document.querySelector('.func1-bubble-exc-text');
         if (currentFilter === 1) {
-            Array.from(excTextRow).forEach(node => {
+            excTextRow.forEach(node => {
                 node.classList.add('none');
             });
             excText.classList.remove('none');
         } else {
-            Array.from(excTextRow).forEach(node => {
+            excTextRow.forEach(node => {
                 node.classList.remove('none');
             });
             excText.classList.add('none');

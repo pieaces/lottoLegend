@@ -4,6 +4,19 @@ import Analytics from '@aws-amplify/analytics';
 import { headerSign } from './auth';
 import { mqInit, menuInfoToggle } from '../base/headerHover'
 
+import 'core-js/stable/promise'
+import 'core-js/stable/object/assign'
+if ('NodeList' in window && !NodeList.prototype.forEach) {
+    NodeList.prototype.forEach = function (callback, thisArg) {
+        thisArg = thisArg || window;
+        for (var i = 0; i < this.length; i++) {
+            callback.call(thisArg, this[i], i, this);
+        }
+    };
+}
+import 'core-js/stable/array/includes'
+import 'regenerator-runtime/runtime'
+import 'whatwg-fetch'
 
 export default function configure() {
     mqInit();

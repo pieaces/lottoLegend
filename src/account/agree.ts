@@ -8,11 +8,11 @@ const termsUseCheckboxes = document.querySelectorAll<HTMLInputElement>('.terms-u
 
 termsUseAllCheck.addEventListener('change', () => {
     if (termsUseAllCheck.checked) {
-        Array.from(termsUseCheckboxes).forEach((node: any) => {
+        termsUseCheckboxes.forEach((node: any) => {
             node.checked = true;
         });
     } else {
-        Array.from(termsUseCheckboxes).forEach((node: any) => {
+        termsUseCheckboxes.forEach((node: any) => {
             node.checked = false;
         });
     }

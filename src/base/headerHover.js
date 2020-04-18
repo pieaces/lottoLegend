@@ -1,4 +1,4 @@
-const menuTitleArr = Array.from(document.querySelectorAll('.mid-nav-menu >li > a'));
+const menuTitleArr = document.querySelectorAll('.mid-nav-menu >li > a');
 const menuListBox = document.querySelector('.hover-menu-container');
 const mqMobile = window.matchMedia("(max-width: 767px)");
 const clickMenuBox = document.querySelectorAll('.click-menu-box'); //사이드 메뉴 배열

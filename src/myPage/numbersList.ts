@@ -67,7 +67,7 @@ isLogedIn().then(value => {
 
                     let tool: string = null;
                     let method: string = null;
-                    Array.from(document.querySelectorAll('.mypage-num-delete-btn')).forEach(node => {
+                    document.querySelectorAll('.mypage-num-delete-btn').forEach(node => {
                         node.classList.remove('none');
                         node.addEventListener('click', async () => {
                             await Swal.fire({
@@ -87,7 +87,7 @@ isLogedIn().then(value => {
 
                                     const numsArr: number[][] = [];
                                     const indexes: number[] = [];
-                                    Array.from(inputs).forEach((node, index) => {
+                                    inputs.forEach((node, index) => {
                                         if (node.checked) {
                                             numsArr.push(JSON.parse(numbersContainer[index].getAttribute('data-numbers')));
                                             indexes.push(index);
