@@ -73,6 +73,15 @@ export default class LottoStatDB extends LottoProcess {
                                 }
                             })
                         };
+                        if(method === Method.excludedLineCount){
+                            Item['ExcludedLines'] = {
+                                L: this.getLNumbers(-50).map(numbers => {
+                                    return {
+                                        L: returnExcludedLine(numbers).map(bool => boolToAWS(bool))
+                                    }
+                                })
+                            }
+                        }
                     }else if(method === Method.carryCount){
                         Item["Piece"] = {
                             L: Analyze.carryCount(this.getLNumbers(-50)).map(num =>{
@@ -118,5 +127,18 @@ export default class LottoStatDB extends LottoProcess {
             await this.putStat(name as Method);
         }
         console.log('통계값 DB 작성 완료');
+    }
+}
+
+function returnExcludedLine(numbers:number[]) {
+    const boolArr = new Array<boolean>(5).fill(true);
+    numbers.forEach(num => {
+        boolArr[Math.floor((num - 1) / 10)] = false;
+    });
+    return boolArr;
+}
+function boolToAWS(bool:boolean){
+    return {
+        BOOL: bool
     }
 }

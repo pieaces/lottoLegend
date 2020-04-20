@@ -23,7 +23,7 @@ export default class Analyze extends PosAnalyze {
         numsArray.forEach(numbers => {
             const boolArr = new Array<boolean>(5).fill(true);
             numbers.forEach(num => {
-                boolArr[Math.floor(num/10)] = false;
+                boolArr[Math.floor((num-1)/10)] = false;
             });
             boolArr.forEach((bool, index) => {
                 if(bool) result[index]++;
