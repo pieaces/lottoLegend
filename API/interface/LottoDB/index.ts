@@ -29,6 +29,7 @@ export interface DBData {
     stats?: Stats;
     piece?: number[];
     total?: number;
+    excludedLines?:boolean[][];
 }
 
 export interface DataMap {

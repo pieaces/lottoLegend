@@ -138,6 +138,9 @@ export async function queryStats(method: StatsMethod, ProjectionExpression?: str
                         const piece = data.Item.Piece.L.map(item => Number(item.N));
                         dbData.piece = piece;
                         dbData.total = getCurrentRound();
+                        if(data.Item.ExcludedLines) {
+                            dbData.excludedLines = data.Item.ExcludedLines.L.map(boolArr => boolArr.L.map(item => item.BOOL))
+                        }
                     }
                     resolve(dbData);
                     break;
