@@ -46,11 +46,11 @@ const person = document.querySelector<HTMLInputElement>('#deposit-name');
 const bank = document.querySelector<HTMLInputElement>('.payment-bank-content');
 
 const select = document.querySelector<HTMLSelectElement>('#combi-num');
-function premiumPlusText(){
-    price.textContent = numberFormat(Math.floor(priceList[current] * 1.5/1000)*1000);
+function premiumPlusText() {
+    price.textContent = numberFormat(Math.floor(priceList[current] * 1.5 / 1000) * 1000);
     productName.textContent = productList[current].slice(0, 4) + '+ ' + productList[current].slice(5);
 }
-function premiumText(){
+function premiumText() {
     price.textContent = numberFormat(priceList[current]);
     productName.textContent = productList[current];
 }
@@ -84,8 +84,9 @@ document.getElementById('order-btn').onclick = () => {
                     icon: 'warning'
                 })
             } else if (payMethod === 'bankbook') {
-
-                postAuthAPI('/users/payment/bankbook', { bank: bank.textContent, plan: select.value, person: person.value, month: monthList[current], price: priceList[current] }).then(() => {
+                let price = priceList[current];
+                if(select.value === 'd') price = Math.floor(priceList[current] * 1.5 / 1000) * 1000;
+                postAuthAPI('/users/payment/bankbook', { bank: bank.textContent, plan: select.value, person: person.value, month: monthList[current], price }).then(() => {
                     Analytics.record({
                         name: 'payment',
                         attributes: { method: 'bankbook' },
@@ -145,4 +146,3 @@ function checkboxToggle() {
         outEventHandler.push(outEvent);
     }
 }
-

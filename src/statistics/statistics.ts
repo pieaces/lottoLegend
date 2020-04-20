@@ -96,7 +96,6 @@ const bar2Option: Chart.ChartOptions = {
     legend: { display: false },
 };
 
-
 mqMobileInit();
 makeLoading();
 !method && Swal.fire({
@@ -135,7 +134,6 @@ method && getUnAuthAPI('/stats/piece', { method })
         const bar1Canvas: HTMLCanvasElement = document.querySelector('#chart-bar-slide');
         const barTitle = document.querySelector<HTMLElement>('#chart-bar-title');
 
-        document.getElementById('bar1-box').classList.remove('none');
         const bar1DataBox = {
             labels: labels[method],
             datasets: [

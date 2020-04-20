@@ -1,3 +1,6 @@
+import 'regenerator-runtime/runtime'
+import 'core-js/stable/promise'
+//import 'core-js/stable/object/assign'
 import { getAuthAPI, postAuthAPI } from "./amplify/api";
 import Amplify from "@aws-amplify/core";
 import awsconfig from "./amplify/aws-exports";

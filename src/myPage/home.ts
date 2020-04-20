@@ -35,8 +35,14 @@ Auth.currentAuthenticatedUser()
         constmobileUpdateBtn.addEventListener('click', mobileUpdate);
 
         getAuthAPI('/mypage').then(({ numsArr, total, include, exclude, winner, lotto, plan, until, rank, point, day }) => {
-            if (day) dayReceive.options[day].setAttribute('selected', '');
-            
+            if (day) {
+                for(let i=0; i<dayReceive.options.length; i++){
+                    if(Number(dayReceive.options[i].value) === day) {
+                        dayReceive.options[i].setAttribute('selected', '');
+                        break;
+                    }
+                }
+            }
             lotto.numbers.forEach((num: number) => {
                 const div = document.createElement('div');
                 div.textContent = num.toString();
@@ -111,7 +117,7 @@ Auth.currentAuthenticatedUser()
                 document.querySelector<HTMLElement>('.mypage-table-num-box').appendChild(makeNoneBox());
             }
             document.getElementById('day-change').onclick = async () => {
-                postAuthAPI('/users/day', { day: dayReceive.selectedIndex }).then(() => {
+                postAuthAPI('/users/day', { day: dayReceive.options[dayReceive.selectedIndex].value}).then(() => {
                     Swal.fire({
                         title: '완료',
                         icon: 'success'
