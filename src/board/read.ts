@@ -96,13 +96,14 @@ async function init() {
     }
     title.textContent = post.title;
     author.textContent = post.nickName;
-    postRank.classList.add('rank');
-    postRank.classList.add(rankToClass(post.rank));
-    const rankText = document.createElement('div');
-    rankText.classList.add('rank-text');
-    rankText.textContent = post.rank;
-    postRank.appendChild(rankText);
-
+    if (category !== 'notice') {
+        postRank.classList.add('rank');
+        postRank.classList.add(rankToClass(post.rank));
+        const rankText = document.createElement('div');
+        rankText.classList.add('rank-text');
+        rankText.textContent = post.rank;
+        postRank.appendChild(rankText);
+    }
 
     if (category === 'include' || category === 'exclude') {
         document.getElementById('current-text').textContent = post.round;
