@@ -7,16 +7,8 @@ import Analytics from '@aws-amplify/analytics';
 import { headerSign } from './auth';
 import { mqInit, menuInfoToggle } from '../base/headerHover'
 export default function configure() {
-    if ('NodeList' in window && !NodeList.prototype.forEach) {
-        NodeList.prototype.forEach = function (callback, thisArg) {
-            thisArg = thisArg || window;
-            for (var i = 0; i < this.length; i++) {
-                callback.call(thisArg, this[i], i, this);
-            }
-        };
-    }
     if (!('remove' in Element.prototype)) {
-        (<any>Element.prototype)['remove'] = function () {
+        HTMLElement.prototype['remove'] = function () {
             if (this.parentNode) {
                 this.parentNode.removeChild(this);
             }

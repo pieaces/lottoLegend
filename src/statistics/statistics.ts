@@ -1,4 +1,6 @@
 import configure from '../amplify/configure'
+import 'core-js/stable/dom-collections/for-each'
+import 'core-js/stable/array/fill'
 import ChartBase from '../system/premium/Chart/Charts';
 import LineSlide from '../system/premium/Slide/LineSlide'
 import BarSlide from '../system/premium/Slide/BarSlide'
@@ -8,9 +10,9 @@ import makeClickable from '../system/premium/Slide/makeClickable';
 import { getStaticsName, mqMobileInit, makeCarryNumbers } from './functions';
 import Slide from '../system/premium/Slide';
 import Swal from 'sweetalert2';
-import 'core-js/stable/array/fill'
 import { isLogedIn } from '../amplify/auth';
 configure();
+makeLoading();
 
 const labels = require('../system/premium/DataAPI/json/labels.json');
 const method = getQueryStringObject().method;
@@ -98,7 +100,6 @@ const bar2Option: Chart.ChartOptions = {
 };
 
 mqMobileInit();
-makeLoading();
 !method && Swal.fire({
     title: '잘못된 접근입니다',
     icon: 'warning'
@@ -184,4 +185,4 @@ method && isLogedIn().then(value => {
         }).catch(() => networkAlert())
         .finally(() => removeLoading());
     else onlyUserAlert();
-}).finally(() => removeLoading());
+})

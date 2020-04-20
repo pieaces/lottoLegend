@@ -1,4 +1,5 @@
 import configure from './amplify/configure'
+import 'core-js/stable/dom-collections/for-each'
 import { getUnAuthAPI, getAuthAPI } from './amplify/api';
 import { rankToClass, loginAddEvent, networkAlert } from './functions';
 import { isLogedIn, getNickName, signOut } from './amplify/auth';
