@@ -94,4 +94,4 @@ isLogedIn().then(value => {
         }).catch(() => networkAlert())
         .finally(() => removeLoading());
     else onlyUserAlert();
-}).finally(() => removeLoading());
+});

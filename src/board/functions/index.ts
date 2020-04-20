@@ -16,7 +16,7 @@ export function makeNum(canvas: HTMLElement, numbers?: number[]) {
         }
     }
 }
-export function makeNumSet(param: { current?: number[], before?: number[] }, answer?: number[]) {
+export function makeNumSet(param: { current?: number[], before?: number[] }, category:Category, answer?: number[]) {
     const currentBox = document.querySelector<HTMLElement>('#current');
     const beforeBox = document.querySelector<HTMLElement>('#before');
 
@@ -29,8 +29,13 @@ export function makeNumSet(param: { current?: number[], before?: number[] }, ans
             const num = document.createElement('div');
             num.classList.add('inc-exc-select-num');
             num.textContent = param.before[i].toString();
-            if (answer.some(item => item === param.before[i])) setColorLotto(param.before[i], num);
-            else setDisabledLotto(num);
+            if (category === 'include') {
+                if (answer.some(item => item === param.before[i])) setColorLotto(param.before[i], num);
+                else setDisabledLotto(num);
+            } else if (category === 'exclude') {
+                if (!answer.some(item => item === param.before[i])) setColorLotto(param.before[i], num);
+                else setDisabledLotto(num);
+            }
 
             numBox.appendChild(num);
             beforeBox.appendChild(numBox);

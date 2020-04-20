@@ -1,4 +1,5 @@
 import configure from '../amplify/configure'
+import 'core-js/stable/dom-collections/for-each'
 import { getAuthAPI, deleteAuthAPI } from '../amplify/api';
 import CheckBoxToggle from '../system/premium/instanceBtns/CheckBoxToggle';
 import Selectr, { IOptions } from 'mobius1-selectr';
@@ -172,8 +173,6 @@ isLogedIn().then(value => {
                         checkBoxToggle.checkBoxEvent();
                         removeLoading();
                     });
-
-                    removeLoading();
                     const checkBoxToggle = new CheckBoxToggle();
                     checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox'));
                     checkBoxToggle.allBtnEvent();

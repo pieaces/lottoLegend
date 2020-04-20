@@ -1,4 +1,5 @@
 import configure from '../amplify/configure'
+import 'core-js/stable/dom-collections/for-each'
 import Layout3 from './premium/Layout/Layout3'
 import NumBoard from './premium/Layout/NumBoard';
 import { getAuthAPI, getUnAuthAPI, postAuthAPI } from '../amplify/api';
@@ -53,10 +54,10 @@ isLogedIn().then(value => {
                     let flag = false;
                     numEl.addEventListener('click', () => {
                         if (!flag) {
-                            numEl.style.border = "5px solid rgb(134, 0, 6)";
+                            numEl.classList.add('checked');
                             includeNumsArr.push(Number(numEl.textContent));
                         } else {
-                            numEl.style.border = "none";
+                            numEl.classList.remove('checked');
                             includeNumsArr.splice(includeNumsArr.indexOf(Number(numEl.textContent)), 1);
                         }
                         flag = !flag;

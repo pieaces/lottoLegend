@@ -107,7 +107,7 @@ async function init() {
     if (category === 'include' || category === 'exclude') {
         document.getElementById('current-text').textContent = post.round;
         document.getElementById('before-text').textContent = (post.round - 1).toString();
-        makeNumSet(post.numbers, post.answer);
+        makeNumSet(post.numbers, category, post.answer);
     }
 
     if (await isLogedIn() && await getUserName() === post.userName) {

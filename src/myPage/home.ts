@@ -1,4 +1,5 @@
 import configure from '../amplify/configure'
+import 'core-js/stable/dom-collections/for-each'
 import { getAuthAPI, patchAuthAPI, postAuthAPI } from '../amplify/api'
 import { setColorLotto, networkAlert, rankToClass, onlyUserAlert, stringTrimer, isoStringToDate, makeNoneBox, makeLoading, removeLoading } from '../functions/index'
 import IncludeExclude from './IncludeExclude/index';
@@ -13,7 +14,7 @@ const winNumBox = document.querySelector<HTMLElement>('.mypage-win-num');
 const nickname = document.querySelector('#nickname');
 const pointHtml = document.querySelector('#point');
 const phoneNumber = document.querySelector('#phone-number');
-const service = document.querySelector('#service');
+const service = document.getElementById('service');
 const expireDate = document.querySelector('#service-expire-date');
 const nicknameUpdateBtn = document.querySelector('#nickname-update');
 const constmobileUpdateBtn = document.getElementById('mobile');
@@ -159,6 +160,9 @@ async function phoneCodeVerify(title: string) {
                     title: '인증완료',
                     icon: 'success'
                 });
+                if(service.textContent !== '없음'){
+                    document.getElementById('mypage-day-week-receive-box').classList.remove('none');
+                }
             }
             catch (err) {
                 if (err.code) {
