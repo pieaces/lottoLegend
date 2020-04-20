@@ -75,7 +75,7 @@ export default class LottoStatDB extends LottoProcess {
                         };
                         if(method === Method.excludedLineCount){
                             Item['ExcludedLines'] = {
-                                L: this.getLNumbers(-50).map(numbers => {
+                                L: this.getLNumbers(-50).reverse().map(numbers => {
                                     return {
                                         L: returnExcludedLine(numbers).map(bool => boolToAWS(bool))
                                     }
