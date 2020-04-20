@@ -3,9 +3,9 @@ import { setColorLotto } from "../../functions";
 export function getStaticsName(method: string) {
     let name: string;
     switch (method) {
-        case 'excludedLineCount': name = '전멸구간 개수'
+        case 'excludedLineCount': name = '전멸구간&개수'
             break;
-        case "carryCount": name = '이월개수 & 이월수'
+        case "carryCount": name = '이월수&개수'
             break;
         case "lowCount": name = '저값 개수'
             break;
