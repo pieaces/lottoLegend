@@ -8,6 +8,20 @@ export enum Plan {
     "premium" = "c",
     "premium+" = "d"
 }
+export enum PlanValue {
+    "basic" = 10,
+    "premium" = 10,
+    "premium+" = 20,
+    "default" = 5
+}
+export function getPlanValue(plan:Plan): number{
+    switch(plan){
+        case Plan.default: return PlanValue.default;
+        case Plan.basic: return PlanValue.basic;
+        case Plan.premium: return PlanValue.premium;
+        case Plan["premium+"]: return PlanValue["premium+"];
+    }
+}
 const ExpressionAttributeNames = {
     "#Plan": 'Plan',
     '#Until': 'Until'

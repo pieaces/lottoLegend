@@ -3,20 +3,8 @@ import { ScanInput, ScanOutput } from 'aws-sdk/clients/dynamodb';
 import { AWSError } from 'aws-sdk';
 import { SelectTool } from './updateNumbers';
 import { getCurrentRound } from '../funtions';
+import { Plan, PlanValue } from './payment';
 
-export enum Plan {
-    "default" = "a",
-    "basic" = "b",
-    "premium" = "c",
-    "premium+" = "d"
-}
-
-enum PlanValue {
-    "basic" = 10,
-    "premium" = 10,
-    "premium+" = 20,
-    "default" = 5
-}
 function planValue(param:{plan?: Plan, until?: string}) {
     const now = Number(new Date());
     if(!param.plan || !param.until) return PlanValue.default;
