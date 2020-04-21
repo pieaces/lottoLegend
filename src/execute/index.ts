@@ -56,17 +56,36 @@ export async function distribute() {
     const { numbersList, count } = await scanNumbers();
 
     let sum = 0;
-    for (let i = 0; i < users.length; i++) {
-        while (numbersList.length < users[i].value) {
+    for (let index = 0; index < users.length; index++) {
+        const willPutNumbers = numbersList.splice(0, users[index].value);
+
+        while (numbersList.length <= users[index].value) {
             numbersList.push(...factory(statsDataObj, option));
         }
-        await updateNumbers(users[i].userName, users[i].tool, getCurrentRound() + 1, numbersList.splice(0, users[i].value));
-        sum += users[i].value;
+        for(let i = willPutNumbers.length-1; i>=0; i--){
+            for(let j = i-1; j>=0; j--){
+                if(sameNumberCouunt(willPutNumbers[i], willPutNumbers[j]) > 2){
+                    willPutNumbers.splice(i, 1, numbersList[0]);
+                    j=i;
+                }
+            }
+        }
+        await updateNumbers(users[index].userName, users[index].tool, getCurrentRound() + 1, numbersList.splice(0, users[index].value));
+        sum += users[index].value;
     }
+
     for (let index = count - 1; index >= count - sum; index--) {
         await deleteNumbers(index);
     }
     const end = new Date();
     console.log(`count: ${count}, sum: ${sum}`);
     console.log('end: ', Number(end) - Number(start));
+}
+
+function sameNumberCouunt(numbers1:number[], numbers2:number[]){
+    let count = 0;
+    numbers1.forEach(num =>{
+        if(numbers2.some(item => item === num)) count++;
+    });
+    return count;
 }

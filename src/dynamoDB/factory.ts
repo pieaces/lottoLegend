@@ -91,7 +91,7 @@ function generate(statsDataObj: any, per:number, numbers?:FactoryNumber){
     const generator = new Generator(option);
     generator.generate();
 
-    const result = generator.getGeneratedNumbers().sort(() => 0.5 - Math.random()).slice(0, per)
+    return generator.getGeneratedNumbers().sort(() => 0.5 - Math.random()).slice(0, per)
     .filter(item => {
         item.sort((a,b) => a-b);
         let check = true;
@@ -110,24 +110,8 @@ function generate(statsDataObj: any, per:number, numbers?:FactoryNumber){
         if(Calculate.excludedLineCount(item) >=3 || !check || set.some(item => item === 4)) return false;
         else return true;
     });
-    for(let i = result.length-1; i>=0; i--){
-        for(let j = i-1; j>=0; j--){
-            if(sameNumberCouunt(result[i], result[j]) > 2){
-                result.splice(i, 1);
-                j=-1;
-            }
-        }
-    }
-    return result;
 }
 
-function sameNumberCouunt(numbers1:number[], numbers2:number[]){
-    let count = 0;
-    numbers1.forEach(num =>{
-        if(numbers2.some(item => item === num)) count++;
-    });
-    return count;
-}
 function returnLowCountOption(){
     const random = Math.random();
     if(random < 0.1028){
