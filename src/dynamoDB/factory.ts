@@ -32,10 +32,10 @@ function returnOption(statsData: any, method: StatsMethod): any[] {
     result.add(x);
 
     box.sort((a, b) => b.pos - a.pos);
-    for (let i = 0; i <= valueList[method].length / 6; i++) {
+    for (let i = 0; i < valueList[method].length / 6; i++) {
         result.add(valueList[method][box[i].index]);
     }
-    for (let i = 0; i <= valueList[method].length / 6; i++) {
+    for (let i = 0; i <= valueList[method].length / 3; i++) {
         const random = valueList[method][Math.floor(Math.random() * (valueList[method].length))]
         result.add(random);
     }
@@ -77,7 +77,6 @@ function generate(statsDataObj: any, per:number, numbers?:FactoryNumber){
     for (const method in StatsMethod) {
         option[method] = returnOption(statsDataObj[method], method as StatsMethod);
     }
-    
     option.lowCount = returnLowCountOption();
     if (numbers.exclude) {
         (option.excludedNumbers = numbers.exclude);
