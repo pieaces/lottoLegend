@@ -2,7 +2,7 @@ import verify from "./auth";
 import { getPaymentByBankBook, makePaymentByBankBook, deletePaymentBank, getPayments, makePlan, makeDay, scanUsersForAdmin, PayMethod, getPlan, getPlanValue } from "./dynamoDB/payment";
 import factory, { supply } from "./dynamoDB/factory";
 import updateNumbers, { SelectTool } from "./dynamoDB/updateNumbers";
-import { getCurrentRound } from "../test/새 폴더/userInfo";
+import { getCurrentRound } from "./funtions";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work

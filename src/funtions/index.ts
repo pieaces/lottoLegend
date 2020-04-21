@@ -15,3 +15,11 @@ export function isIdentical(currentId: string, writerId: string): Response {
         return new Response(true, '작성자가 아닙니다.');
     }
 }
+
+export function numsArrToString(numbers:number[][]){
+    let result = '';
+    for(let i =0; i<numbers.length; i++){
+        result += `${i+1}>${numbers[i].join(',')}\n`;
+    }
+    return result;
+}
