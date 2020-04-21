@@ -27,22 +27,34 @@ function planValue(param:{plan?: Plan, _until?: string}) {
         }
     }
 }
-
-export function scanUsers(): Promise<{ userName: string, value: number, tool:SelectTool }[]> {
+export function scanUsers(day?:number): Promise<{ userName: string, value: number, tool:SelectTool }[]> {
+    let ProjectionExpression = '#UserName, #Plan, #Until';
+    let ExpressionAttributeNames = {
+        "#UserName": 'UserName',
+        "#Plan": 'Plan',
+        "#Until": 'Until'
+    }
+    if(day) {
+        ProjectionExpression += ', #Day';
+        ExpressionAttributeNames['#Day'] = 'Day';
+    }
     const params: ScanInput = {
         TableName: 'LottoUsers',
-        ExpressionAttributeNames: {
-            "#UserName": 'UserName',
-            "#Plan": 'Plan',
-            "#Until": 'Until'
-        },
-        ProjectionExpression: '#UserName, #Plan, #Until'
+        ExpressionAttributeNames,
+        ProjectionExpression
     };
 
     return new Promise((resolve, reject) => {
         dynamoDB.scan(params, (err: AWSError, data: ScanOutput) => {
             if (err) reject(err);
             const result = data.Items
+            .filter(item => {
+                if(!day) return true;
+                else{
+                    if(item.Day && day === Number(item.Day.N)) return true;
+                    else return false;
+                }
+            })
                 .map(item => {
                     const value = planValue({plan: item.Plan && item.Plan.S as Plan, _until: item.Until && item.Until.S});
                     return {

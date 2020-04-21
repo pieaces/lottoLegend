@@ -62,7 +62,7 @@ export async function supply(){
     return {statsDataObj, include};
 }
 interface FactoryNumber{
-    exclude:number[],
+    exclude?:number[],
     include?:number[]
 }
 export default function factory(statsDataObj:any, option:{per:number, repeat:number, numbers?:FactoryNumber}) {
@@ -84,7 +84,8 @@ function generate(statsDataObj: any, per:number, numbers?:FactoryNumber){
     option.lowCount = returnLowCountOption();
     if (numbers.exclude) {
         (option.excludedNumbers = numbers.exclude);
-    }
+    }else option.excludedNumbers = randomNumbers();
+    
     if (numbers.include) {
         const randomPickCount = Math.floor(Math.random() * 4) + 1;
         (option.includedNumbers = numbers.include.sort(() => 0.5 - Math.random()).slice(0, randomPickCount));
@@ -109,4 +110,12 @@ function returnLowCountOption(){
     }else{
         return 5;
     }
+}
+
+function randomNumbers() {
+    const set = new Set();
+    while (set.size < 10) {
+        set.add(Math.floor(Math.random() * 45) + 1);
+    }
+    return [...set];
 }
