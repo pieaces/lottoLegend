@@ -3,7 +3,7 @@ import { getCurrentRound, scanLotto, getLotto, getLotto2 } from "./funtions";
 import { updateNumbers, getNumbers, deleteMyNumber, updateIncOrExcNumbers, getIncOrExcRounds, getIncAndExcNumbers, deleteIncOrExcNumbers, scanWeekNumbers, getIncOrExcNumbers } from './dynamoDB/Numbers'
 import { queryLottoData } from "./dynamoDB/lottoData";
 import { freeGenerator, numbersToData } from "./dynamoDB/generator";
-import { getMyHome, expirePlan, Plan, getPaymentByBankBook, makePaymentByBankBook, deletePaymentBank, getPayments, makePlan, makeDay, scanUsersForAdmin, PayMethod } from "./dynamoDB/userInfo";
+import { getMyHome, expirePlan } from "./dynamoDB/userInfo";
 import { getLottoData, getWinStats } from "./dynamoDB/getMainPage";
 
 const headers = {
@@ -168,73 +168,6 @@ exports.handler = async (event: any) => {
                     });
                     const rounds = result.rounds;
                     body = { data, rounds };
-            }
-        }
-            break;
-        case '/admin/users': {
-            switch (method) {
-                case 'GET':
-                    if(currentId === 'lottoend')
-                        body = await scanUsersForAdmin();
-                    break;
-            }
-        }
-            break;
-            case '/admin/users/{userName}': {
-                const userName = event.pathParameters.userName;
-                switch (method) {
-                    case 'POST':
-                        if(currentId === 'lottoend'){
-                            const { plan, month, price, method } = JSON.parse(event.body);
-                            await makePlan(userName, plan, month, price, method);
-                            if(method as PayMethod === 'bank') await deletePaymentBank(userName);
-                        }
-                        break;
-                }
-            }
-                break;
-        // case '/users/message': {
-        //     switch(method){
-        //         case 'GET':
-        //             body = await getMessage(currentId);
-        //             break;
-        //         case 'DELETE':
-        //             await deleteMessage(currentId);
-        //             break;
-        //     }
-        // }
-        // break;
-        case '/users/day': {
-            switch(method){
-                case 'POST':
-                    const {day} = JSON.parse(event.body);
-                    await makeDay(currentId, day as 0|1|2|3|4|5|6);
-            }
-        }
-        break;
-        case '/users/payment': {
-            switch (method) {
-                case 'GET':
-                    body = await getPayments(currentId);
-                    break;
-                case 'POST':
-                    const {plan, month, price, method} = JSON.parse(event.body);
-                    await makePlan(currentId, plan, month, price, method);
-            }
-        }
-        break;
-        case '/users/payment/bankbook': {
-            switch (method) {
-                case 'GET':
-                    body = await getPaymentByBankBook(currentId);
-                    break;
-                case 'POST':
-                    const { bank, plan, person, month, price } = JSON.parse(event.body);
-                    await makePaymentByBankBook(currentId, bank, person, plan, month, price);
-                    break;
-                case 'DELETE':
-                    await deletePaymentBank(currentId);
-                    break;
             }
         }
             break;
