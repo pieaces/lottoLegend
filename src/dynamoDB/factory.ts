@@ -35,7 +35,7 @@ function returnOption(statsData: any, method: StatsMethod): any[] {
     for (let i = 0; i <= valueList[method].length / 6; i++) {
         result.add(valueList[method][box[i].index]);
     }
-    for (let i = 0; i < valueList[method].length / 6; i++) {
+    for (let i = 0; i <= valueList[method].length / 6; i++) {
         const random = valueList[method][Math.floor(Math.random() * (valueList[method].length))]
         result.add(random);
     }
@@ -55,7 +55,7 @@ export async function supply(){
             round: data.round
         }
     }))
-    .then(data => [...data.sort((a, b) => a.round - b.round).slice(0, 20).map(item => item.num)]);
+    .then(data => [...data.sort((a, b) => a.round - b.round).slice(0, 25).map(item => item.num)]);
     return {statsDataObj, include};
 }
 interface FactoryNumber{
@@ -104,7 +104,7 @@ function returnLowCountOption(){
         return 3;
     }else if(random < 0.9159){
         return 4;
-    }else{
+    }else
         return 5;
 }
 
