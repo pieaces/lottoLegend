@@ -47,7 +47,7 @@ export async function distribute() {
     const start = new Date();
     const { statsDataObj, include } = await supply();
     const numbers = { include };
-    const option = { per: 5, repeat: 250, numbers };
+    const option = { per: 3, repeat: 300, numbers };
 
     const today = new Date();
     today.setHours(today.getHours() + 9);
