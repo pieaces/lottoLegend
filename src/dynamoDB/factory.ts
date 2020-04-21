@@ -2,6 +2,7 @@ import { StatsMethod } from "../interface/LottoDB";
 import queryStats from "./queryStats";
 import { GeneratorOption } from "../interface/Generator";
 import Generator from "../Lotto/class/Generator";
+import Calculate from "../Lotto/class/Calculate";
 
 const valueList:any = {
     lowCount: [0, 1, 2, 3, 4, 5, 6],
@@ -90,7 +91,19 @@ function generate(statsDataObj: any, per:number, numbers?:FactoryNumber){
     const generator = new Generator(option);
     generator.generate();
 
-    return generator.getGeneratedNumbers().sort(() => 0.5 - Math.random()).slice(0, per);
+    return generator.getGeneratedNumbers().sort(() => 0.5 - Math.random()).slice(0, per)
+    .filter(item => {
+        item.sort((a,b) => a-b);
+        let check = true;
+        for(let i = 1; i<6; i++){
+            if (item[i-3] && item[i - 2] && item[i] === item[i - 3] + 3 && item[i] === item[i-2] + 2 && item[i] === item[i-1] + 1) {
+                check = false;
+                break;
+            }
+        }
+        if(Calculate.excludedLineCount(item) >=3 || !check) return false;
+        else return true;
+    });
 }
 
 function returnLowCountOption(){
