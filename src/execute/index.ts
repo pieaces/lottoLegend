@@ -50,7 +50,7 @@ export async function distribute() {
     const option = { per: 3, repeat: 300, numbers };
 
     const today = new Date();
-    today.setHours(today.getHours() + 9);
+    today.setHours(today.getHours() );
 
     const users = await scanUsers(today.getDay());
     const { numbersList, count } = await scanNumbers();
@@ -65,12 +65,11 @@ export async function distribute() {
         for(let i = willPutNumbers.length-1; i>=0; i--){
             for(let j = i-1; j>=0; j--){
                 if(sameNumberCouunt(willPutNumbers[i], willPutNumbers[j]) > 2){
-                    willPutNumbers.splice(i, 1, numbersList[0]);
+                    willPutNumbers.splice(i, 1, numbersList.splice(0,1)[0]);
                     j=i;
                 }
             }
         }
-        console.log(willPutNumbers);
         await updateNumbers(users[index].userName, users[index].tool, getCurrentRound() + 1, willPutNumbers);
         sum += users[index].value;
     }
