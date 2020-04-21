@@ -22,5 +22,5 @@ switch (method) {
 }
 
 function isNumber(a: any): a is number {
-    return (typeof a === 'number');
+    return (typeof a === 'number' && !isNaN(a));
 }
