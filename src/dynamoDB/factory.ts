@@ -35,7 +35,7 @@ function returnOption(statsData: any, method: StatsMethod): any[] {
     for (let i = 0; i < valueList[method].length / 6; i++) {
         result.add(valueList[method][box[i].index]);
     }
-    for (let i = 0; i < valueList[method].length / 10; i++) {
+    for (let i = 0; i < valueList[method].length / 6; i++) {
         const random = valueList[method][Math.floor(Math.random() * (valueList[method].length))]
         result.add(random);
     }
@@ -84,7 +84,7 @@ function generate(statsDataObj: any, per:number, numbers?:FactoryNumber){
     }else option.excludedNumbers = randomNumbers();
     
     if (numbers.include) {
-        const randomPickCount = Math.floor(Math.random() * 3);
+        const randomPickCount = Math.floor(Math.random() * 2);
         (option.includedNumbers = numbers.include.sort(() => 0.5 - Math.random()).slice(0, randomPickCount));
     }
 
