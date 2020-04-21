@@ -96,9 +96,7 @@ function generate(statsDataObj: any, per:number, numbers?:FactoryNumber){
 
 function returnLowCountOption(){
     const random = Math.random();
-    if(random < 0.05){
-        return 0;
-    }else if(random < 0.1028){
+    if(random < 0.1028){
         return 1;
     }else if(random <0.3539){
         return 2;
@@ -106,9 +104,8 @@ function returnLowCountOption(){
         return 3;
     }else if(random < 0.9159){
         return 4;
-    }else if(random < 0.95){
+    }else{
         return 5;
-    }else return 6;
 }
 
 function randomNumbers() {
