@@ -4,7 +4,7 @@ import { GeneratorOption } from "../interface/Generator";
 import Generator from "../Lotto/class/Generator";
 
 const PER = 20//20;
-const REPEAT = 50//50;
+const REPEAT = 500//50;
 
 const valueList:any = {
     lowCount: [0, 1, 2, 3, 4, 5, 6],
@@ -65,16 +65,16 @@ interface FactoryNumber{
     exclude:number[],
     include?:number[]
 }
-export default function factory(statsDataObj:any, numbers?:FactoryNumber) {
+export default function factory(statsDataObj:any, option:{per:number, repeat:number, numbers?:FactoryNumber}) {
     const result: number[][] = [];
-    for (let i = 0; i < REPEAT; i++) {
-        result.push(...generate(statsDataObj, numbers));
+    for (let i = 0; i < option.repeat; i++) {
+        result.push(...generate(statsDataObj, option.per, option.numbers));
     }
     result.sort(() => 0.5 - Math.random());
     return result;
 }
 
-function generate(statsDataObj: any, numbers?:FactoryNumber){
+function generate(statsDataObj: any, per:number, numbers?:FactoryNumber){
     const option: GeneratorOption|any = {};
 
     for (const method in StatsMethod) {
@@ -93,7 +93,7 @@ function generate(statsDataObj: any, numbers?:FactoryNumber){
     const generator = new Generator(option);
     generator.generate();
 
-    return generator.getGeneratedNumbers().sort(() => 0.5 - Math.random()).slice(0, PER);
+    return generator.getGeneratedNumbers().sort(() => 0.5 - Math.random()).slice(0, per);
 }
 
 function returnLowCountOption(){

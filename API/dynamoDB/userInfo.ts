@@ -55,3 +55,16 @@ export function scanUsers(): Promise<{ userName: string, value: number, tool:Sel
         });
     });
 }
+
+export function getUsersCount(): Promise<number> {
+    const params: ScanInput = {
+        TableName: 'LottoUsers'
+    };
+
+    return new Promise((resolve, reject) => {
+        dynamoDB.scan(params, (err: AWSError, data: ScanOutput) => {
+            if (err) reject(err);
+            resolve(data.Count);
+        });
+    });
+}

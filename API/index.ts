@@ -1,24 +1,14 @@
-import factory, { supply } from "./dynamoDB/factory";
-import { scanUsers } from "./dynamoDB/userInfo";
-import updateNumbers from "./dynamoDB/updateNumbers";
-import { getCurrentRound } from "./funtions";
-import { getWeekNumbers } from "./dynamoDB/queryStats";
+import { generateAndPutNumbers, deleteAllNumbers } from "./execute";
 
-exports.handler = async (event: any) => {
-    console.log(event);
-    
-    const {statsDataObj,include} = await supply();
-    const exclude = await getWeekNumbers();
-    const numbers = {exclude, include:include.filter(item => !exclude.some(num => num === item))};
-    const users = await scanUsers();
-
-    const willWinNumberList:number[][] = [];
-    willWinNumberList.push(...factory(statsDataObj, numbers));
-
-    for(let i =0; i<users.length; i++){
-        while(willWinNumberList.length < users[i].value){
-            willWinNumberList.push(...factory(statsDataObj, numbers));
-        }
-        await updateNumbers(users[i].userName, users[i].tool, getCurrentRound() + 1, willWinNumberList.splice(0, users[i].value));
-    }
-};
+type Method = "generate" | "distribute";
+const method: Method = process.argv[2] as Method;
+switch (method) {
+    case 'generate':
+        const per = Number(process.argv[3]);
+        const repeat = Number(process.argv[4]);
+        generateAndPutNumbers(per, repeat).then();
+        break;
+    case 'distribute':
+        deleteAllNumbers().then();
+        break;
+}
