@@ -2,6 +2,7 @@ import { dynamoDB } from '.'
 import { ScanInput, ScanOutput } from 'aws-sdk/clients/dynamodb';
 import { AWSError } from 'aws-sdk';
 import { SelectTool } from './updateNumbers';
+import { getCurrentRound } from '../funtions';
 
 export enum Plan {
     "default" = "a",
@@ -36,11 +37,14 @@ function isDefault(user:{plan?:Plan, until?:string}){
     return (PlanValue.default === planValue({ plan: user.plan, until: user.until }));
 }
 export function scanUsers(day?:number): Promise<{ userName: string, value: number, tool:SelectTool }[]> {
-    let ProjectionExpression = '#UserName, #Plan, #Until';
+    let ProjectionExpression = '#UserName, #Plan, #Until, #Numbers.#Round';
+    const round = (getCurrentRound()+1).toString();
     let ExpressionAttributeNames = {
         "#UserName": 'UserName',
         "#Plan": 'Plan',
-        "#Until": 'Until'
+        "#Until": 'Until',
+        "#Numbers": 'Numbers',
+        "#Round": round
     }
     if(typeof day === 'number') {
         ProjectionExpression += ', #Day';
@@ -60,6 +64,7 @@ export function scanUsers(day?:number): Promise<{ userName: string, value: numbe
             .filter(item => {
                 if(typeof day !== 'number') return true;
                 else{
+                    if(item.Numbers && item.Numbers.M[round].L.some(list => list.M.method.S === 'a')) return false;
                     if(item.Day && day === Number(item.Day.N)) return true;
                     else if ((!item.Day || Number(item.Day.N) === -1 || isDefault({ plan: item.Plan && item.Plan.S as Plan, until: item.Until && item.Until.S })) && day === 0) return true;
                     else return false;
