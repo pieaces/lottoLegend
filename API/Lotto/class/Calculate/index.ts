@@ -11,7 +11,7 @@ export default class Calculate {
         const set = new Set<number>();
 
         numbers.forEach(num => {
-            set.add(Math.floor(num / 10));
+            set.add(Math.floor((num-1) / 10));
         });
 
         return SIZE - set.size;
