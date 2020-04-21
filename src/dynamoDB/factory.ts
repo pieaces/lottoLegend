@@ -101,7 +101,13 @@ function generate(statsDataObj: any, per:number, numbers?:FactoryNumber){
                 break;
             }
         }
-        if(Calculate.excludedLineCount(item) >=3 || !check) return false;
+
+        const set = new Array<number>(5).fill(0);
+
+        item.forEach(num => {
+            set[Math.floor((num-1) / 10)]++;
+        });
+        if(Calculate.excludedLineCount(item) >=3 || !check || set.some(item => item === 4)) return false;
         else return true;
     });
 }
