@@ -13,6 +13,7 @@ export async function generateAndPutNumbers(per: number, repeat: number) {
     const numbers = { include };
     const usersCount = await getUsersCount();
 
+    console.log('users: ', usersCount);
     const option = { per, repeat, numbers };
     const willWinNumberList: number[][] = [];
     willWinNumberList.push(...factory(statsDataObj, option));
