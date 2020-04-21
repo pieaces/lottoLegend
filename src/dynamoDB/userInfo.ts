@@ -34,7 +34,7 @@ export function scanUsers(day?:number): Promise<{ userName: string, value: numbe
         "#Plan": 'Plan',
         "#Until": 'Until'
     }
-    if(day) {
+    if(typeof day === 'number') {
         ProjectionExpression += ', #Day';
         ExpressionAttributeNames['#Day'] = 'Day';
     }
@@ -47,6 +47,7 @@ export function scanUsers(day?:number): Promise<{ userName: string, value: numbe
     return new Promise((resolve, reject) => {
         dynamoDB.scan(params, (err: AWSError, data: ScanOutput) => {
             if (err) reject(err);
+
             const result = data.Items
             .filter(item => {
                 if(!day) return true;
