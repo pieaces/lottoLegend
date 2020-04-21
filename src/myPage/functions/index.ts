@@ -20,7 +20,8 @@ export function makeTable(canvas: HTMLElement, dataSet: any[], round: number | s
         if (info) {
             const tableCheckBox = document.createElement('div');
             tableCheckBox.classList.add('mypage-table-checkbox');
-            tableCheckBox.appendChild(makeInputCheckBox());
+
+            if(dataSet[i].method !== 'a') tableCheckBox.appendChild(makeInputCheckBox());
             tableContent.appendChild(tableCheckBox);
         }
 
