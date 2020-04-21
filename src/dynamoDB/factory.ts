@@ -32,7 +32,7 @@ function returnOption(statsData: any, method: StatsMethod): any[] {
     result.add(x);
 
     box.sort((a, b) => b.pos - a.pos);
-    for (let i = 0; i < valueList[method].length / 6; i++) {
+    for (let i = 0; i <= valueList[method].length / 6; i++) {
         result.add(valueList[method][box[i].index]);
     }
     for (let i = 0; i < valueList[method].length / 6; i++) {
