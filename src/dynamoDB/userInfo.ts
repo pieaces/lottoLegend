@@ -52,6 +52,7 @@ export function scanUsers(day?:number): Promise<{ userName: string, value: numbe
                 if(!day) return true;
                 else{
                     if(item.Day && day === Number(item.Day.N)) return true;
+                    else if((!item.Day || Number(item.Day.N) === -1) && day === 0) return true;
                     else return false;
                 }
             })

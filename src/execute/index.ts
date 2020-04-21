@@ -47,25 +47,30 @@ export async function distribute() {
     const start = new Date();
     const { statsDataObj, include } = await supply();
     const numbers = { include };
-    const option = { per: 3, repeat: 300, numbers };
+    const option = { per: 3, repeat: 100, numbers };
 
     const today = new Date();
-    today.setHours(today.getHours() );
+    today.setHours(today.getHours() + 9);
 
     const users = await scanUsers(today.getDay());
     const { numbersList, count } = await scanNumbers();
 
+    const temp = factory(statsDataObj, option);
     let sum = 0;
     console.log('users: ', users.length);
     for (let index = 0; index < users.length; index++) {
-        const willPutNumbers = numbersList.splice(0, users[index].value)
-        while (numbersList.length <= users[index].value) {
+        if(numbersList.length < users[index].value){
             numbersList.push(...factory(statsDataObj, option));
         }
+        const willPutNumbers = numbersList.splice(0, users[index].value);
+
         for(let i = willPutNumbers.length-1; i>=0; i--){
             for(let j = i-1; j>=0; j--){
                 if(sameNumberCouunt(willPutNumbers[i], willPutNumbers[j]) > 2){
-                    willPutNumbers.splice(i, 1, numbersList.splice(0,1)[0]);
+                    if(temp.length === 0){
+                        temp.push(...factory(statsDataObj, option));
+                    }
+                    willPutNumbers.splice(i, 1, temp.splice(0,1)[0]);
                     j=i;
                 }
             }
