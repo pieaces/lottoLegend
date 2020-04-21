@@ -1,7 +1,6 @@
-import dynamoDB from '.'
 import { AWSError } from 'aws-sdk/lib/error';
 import { GetItemOutput, GetItemInput, UpdateItemInput, ScanInput, ScanOutput } from 'aws-sdk/clients/dynamodb';
-import { parsePlanKeyAndUntil, getPlanName } from '../funtions';
+import { dynamoDB } from '.';
 
 export enum Plan {
     "default" = "a",
@@ -14,6 +13,14 @@ const ExpressionAttributeNames = {
     '#Until': 'Until'
 };
 
+function getPlanName(plan:Plan){
+    switch(plan){
+        case Plan.default: return '없음';
+        case Plan.basic: return '기본';
+        case Plan.premium: return '프리미엄';
+        case Plan["premium+"]: return '프리미엄+';
+    }
+}
 export function getPlan(userName: string): Promise<Plan> {
     const params: GetItemInput = {
         TableName: 'LottoUsers',
@@ -58,28 +65,6 @@ export function getPlan(userName: string): Promise<Plan> {
     });
 }
 
-export function getPlanKeyAndUntil(userName: string): Promise<{ plan: string, until?: string }> {
-    const params: GetItemInput = {
-        TableName: 'LottoUsers',
-        ExpressionAttributeNames,
-        ProjectionExpression: '#Plan, #Until',
-        Key: {
-            "UserName": {
-                S: userName
-            }
-        }
-    };
-    return new Promise((resolve, reject) => {
-        dynamoDB.getItem(params, (err: AWSError, data: GetItemOutput) => {
-            if (err) {
-                reject(err);
-            }
-            else {
-                resolve(parsePlanKeyAndUntil(data.Item));
-            }
-        });
-    });
-}
 export function makeDay(userName: string, day:0|1|2|3|4|5|6): Promise<void> {
     const params: UpdateItemInput = {
         TableName: 'LottoUsers',
