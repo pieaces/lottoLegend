@@ -9,8 +9,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/jsonwebtoken": "^8.3.7",
+    "@types/jwk-to-pem": "^2.0.0",
     "@types/node": "^13.1.6",
     "aws-sdk": "^2.610.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1",
+    "jwk-to-pem": "^2.0.3"
+  }
 }

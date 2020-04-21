@@ -3,6 +3,7 @@ import { getPaymentByBankBook, makePaymentByBankBook, deletePaymentBank, getPaym
 import factory, { supply } from "./dynamoDB/factory";
 import updateNumbers, { SelectTool } from "./dynamoDB/updateNumbers";
 import { getCurrentRound } from "./funtions";
+import { putNumberMessage } from "./sns/publish";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -56,6 +57,7 @@ exports.handler = async (event: any) => {
                         const numbersList = factory(statsDataObj, option);
                         
                         await updateNumbers(currentId, SelectTool.charge, getCurrentRound() + 1, numbersList.slice(0, getPlanValue(plan)));
+                        await putNumberMessage(currentId, numbersList.slice(0, getPlanValue(plan)));
                     }
                     break;
             }
