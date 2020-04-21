@@ -3,9 +3,6 @@ import queryStats from "./queryStats";
 import { GeneratorOption } from "../interface/Generator";
 import Generator from "../Lotto/class/Generator";
 
-const PER = 20//20;
-const REPEAT = 500//50;
-
 const valueList:any = {
     lowCount: [0, 1, 2, 3, 4, 5, 6],
     sum: [{ from: 21, to: 31 }, { from: 31, to: 41 }, { from: 41, to: 51 }, { from: 51, to: 61 }, { from: 61, to: 71 }, { from: 71, to: 81 }, { from: 81, to: 91 }, { from: 91, to: 101 }, { from: 101, to: 111 }, { from: 111, to: 121 }, { from: 121, to: 131 }, { from: 131, to: 141 }, { from: 141, to: 151 }, { from: 151, to: 161 }, { from: 161, to: 171 }, { from: 171, to: 181 }, { from: 181, to: 191 }, { from: 191, to: 201 }, { from: 201, to: 211 }, { from: 211, to: 221 }, { from: 221, to: 231 }, { from: 231, to: 241 }, { from: 241, to: 251 }, { from: 251, to: 255 }],
@@ -58,7 +55,7 @@ export async function supply(){
             round: data.round
         }
     }))
-    .then(data => [...data.sort((a, b) => a.round - b.round).slice(0, 15).map(item => item.num)]);
+    .then(data => [...data.sort((a, b) => a.round - b.round).slice(0, 20).map(item => item.num)]);
     return {statsDataObj, include};
 }
 interface FactoryNumber{
@@ -87,7 +84,7 @@ function generate(statsDataObj: any, per:number, numbers?:FactoryNumber){
     }else option.excludedNumbers = randomNumbers();
     
     if (numbers.include) {
-        const randomPickCount = Math.floor(Math.random() * 4) + 1;
+        const randomPickCount = Math.floor(Math.random() * 3);
         (option.includedNumbers = numbers.include.sort(() => 0.5 - Math.random()).slice(0, randomPickCount));
     }
 
@@ -99,7 +96,9 @@ function generate(statsDataObj: any, per:number, numbers?:FactoryNumber){
 
 function returnLowCountOption(){
     const random = Math.random();
-    if(random < 0.1028){
+    if(random < 0.05){
+        return 0;
+    }else if(random < 0.1028){
         return 1;
     }else if(random <0.3539){
         return 2;
@@ -107,9 +106,9 @@ function returnLowCountOption(){
         return 3;
     }else if(random < 0.9159){
         return 4;
-    }else{
+    }else if(random < 0.95){
         return 5;
-    }
+    }else return 6;
 }
 
 function randomNumbers() {

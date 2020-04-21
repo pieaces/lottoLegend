@@ -68,3 +68,4 @@ export function scanNumbers(): Promise<{ numbersList: number[][], count: number 
         });
     });
 }
+scanNumbers().then(value => console.log(value))
