@@ -10,22 +10,30 @@ export enum Plan {
     "premium+" = "d"
 }
 
-const FREE = 5;
-function planValue(param:{plan?: Plan, _until?: string}) {
+enum PlanValue {
+    "basic" = 10,
+    "premium" = 10,
+    "premium+" = 20,
+    "default" = 5
+}
+function planValue(param:{plan?: Plan, until?: string}) {
     const now = Number(new Date());
-    if(!param.plan || !param._until) return 5;
-    const until = Number(new Date(param._until));
+    if(!param.plan || !param.until) return PlanValue.default;
+    const until = Number(new Date(param.until));
     if (now <= until) {
         switch (param.plan) {
             case Plan.basic:
-                return 10;
+                return PlanValue.basic;
             case Plan.premium:
-                return 10;
+                return PlanValue.premium;
             case Plan['premium+']:
-                return 20;
-            default: return FREE;
+                return PlanValue["premium+"];
+            default: return PlanValue.default;
         }
     }
+}
+function isDefault(user:{plan?:Plan, until?:string}){
+    return (PlanValue.default === planValue({ plan: user.plan, until: user.until }));
 }
 export function scanUsers(day?:number): Promise<{ userName: string, value: number, tool:SelectTool }[]> {
     let ProjectionExpression = '#UserName, #Plan, #Until';
@@ -50,19 +58,18 @@ export function scanUsers(day?:number): Promise<{ userName: string, value: numbe
 
             const result = data.Items
             .filter(item => {
-                if(!day) return true;
+                if(typeof day !== 'number') return true;
                 else{
                     if(item.Day && day === Number(item.Day.N)) return true;
-                    else if((!item.Day || Number(item.Day.N) === -1) && day === 0) return true;
+                    else if ((!item.Day || Number(item.Day.N) === -1 || isDefault({ plan: item.Plan && item.Plan.S as Plan, until: item.Until && item.Until.S })) && day === 0) return true;
                     else return false;
                 }
-            })
-                .map(item => {
-                    const value = planValue({plan: item.Plan && item.Plan.S as Plan, _until: item.Until && item.Until.S});
+            }).map(item => {
+                    const value = planValue({plan: item.Plan && item.Plan.S as Plan, until: item.Until && item.Until.S});
                     return {
                         userName: item.UserName.S,
                         value,
-                        tool: value === FREE ? SelectTool.free : SelectTool.charge
+                        tool: value === PlanValue.default ? SelectTool.free : SelectTool.charge
                     }
                 });
             resolve(result);
