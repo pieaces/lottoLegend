@@ -53,11 +53,11 @@ exports.handler = async (event: any) => {
 
                         const { statsDataObj, include } = await supply();
                         const numbers = { include };
-                        const option = { per: 2, repeat: 25, numbers };
+                        const option = { per: 2, repeat: 20, numbers };
                         const numbersList = factory(statsDataObj, option);
                         
-                        await updateNumbers(currentId, SelectTool.charge, getCurrentRound() + 1, numbersList.slice(0, getPlanValue(plan)));
-                        await putNumberMessage(currentId, numbersList.slice(0, getPlanValue(plan)));
+                        await updateNumbers(userName, SelectTool.charge, getCurrentRound() + 1, numbersList.slice(0, getPlanValue(plan)));
+                        await putNumberMessage(userName, numbersList.slice(0, getPlanValue(plan)));
                     }
                     break;
             }
