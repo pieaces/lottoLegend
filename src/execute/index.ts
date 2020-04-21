@@ -56,9 +56,9 @@ export async function distribute() {
     const { numbersList, count } = await scanNumbers();
 
     let sum = 0;
+    console.log('users: ', users.length);
     for (let index = 0; index < users.length; index++) {
-        const willPutNumbers = numbersList.splice(0, users[index].value);
-
+        const willPutNumbers = numbersList.splice(0, users[index].value)
         while (numbersList.length <= users[index].value) {
             numbersList.push(...factory(statsDataObj, option));
         }
@@ -70,7 +70,8 @@ export async function distribute() {
                 }
             }
         }
-        await updateNumbers(users[index].userName, users[index].tool, getCurrentRound() + 1, numbersList.splice(0, users[index].value));
+        console.log(willPutNumbers);
+        await updateNumbers(users[index].userName, users[index].tool, getCurrentRound() + 1, willPutNumbers);
         sum += users[index].value;
     }
 
