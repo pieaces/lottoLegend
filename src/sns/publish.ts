@@ -20,9 +20,7 @@ export default function publish(message: string, PhoneNumber: string): Promise<v
 
 export async function putNumberMessage(userName: string, planValue:number, numbersList: number[][], phone?:string) {
     const round = getCurrentRound() + 1;
-    if (phone) {
-        await publish(`[로또끝] ${userName}님의 당첨을 기원합니다!\n${round}회 프리미엄 ${planValue}조합\n` + numsArrToString(numbersList), phone);
-    }
+    await publish(`[로또끝] ${userName}님의 당첨을 기원합니다!\n${round}회 프리미엄 ${planValue}조합\n` + numsArrToString(numbersList), phone);
 };
 
 export async function getPhoneNumber(userName: string): Promise<string> {

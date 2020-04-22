@@ -19,6 +19,7 @@ export function isIdentical(currentId: string, writerId: string): Response {
 export function numsArrToString(numbers:number[][]){
     let result = '';
     for(let i =0; i<numbers.length; i++){
+        numbers[i].sort((a,b) => a-b);
         result += `${i+1}>${numbers[i].join(',')}\n`;
     }
     return result;

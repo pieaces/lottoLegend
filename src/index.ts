@@ -59,7 +59,7 @@ exports.handler = async (event: any) => {
                         const planValue = getPlanValue(plan);
                         await updateNumbers(userName, SelectTool.charge, getCurrentRound() + 1, numbersList.slice(0, planValue));
                         const phone = await getPhoneNumber(userName);
-                        await putNumberMessage(userName, planValue, numbersList.slice(0, planValue), phone);
+                        if(phone) await putNumberMessage(userName, planValue, numbersList.slice(0, planValue), phone);
                     }
                     break;
             }

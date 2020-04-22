@@ -2,8 +2,9 @@ import factory, { supply } from "../dynamoDB/factory";
 import { getWeekNumbers } from "../dynamoDB/queryStats";
 import { getUsersCount, scanUsers } from "../dynamoDB/userInfo";
 import { putNumbers, getNumbersCount, deleteNumbers, scanNumbers } from "../dynamoDB/Numbers";
-import updateNumbers from "../dynamoDB/updateNumbers";
+import updateNumbers, { SelectTool } from "../dynamoDB/updateNumbers";
 import { getCurrentRound } from "../funtions";
+import { putNumberMessage } from "../sns/publish";
 
 export async function generateAndPutNumbers(per: number, repeat: number) {
     const start = new Date();
@@ -43,7 +44,7 @@ export async function deleteAllNumbers() {
     const end = new Date();
     console.log('end: ', Number(end) - Number(start));
 }
-
+distribute();
 export async function distribute() {
     const start = new Date();
     const { statsDataObj, include } = await supply();
@@ -77,6 +78,9 @@ export async function distribute() {
             }
         }
         await updateNumbers(users[index].userName, users[index].tool, getCurrentRound() + 1, willPutNumbers);
+        if (users[index].tool === SelectTool.charge && users[index].phone && users[index].day === today.getDay()) {
+            await putNumberMessage(users[index].userName, users[index].value, willPutNumbers, users[index].phone);
+        }
         sum += users[index].value;
     }
 

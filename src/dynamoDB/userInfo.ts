@@ -25,7 +25,7 @@ function isDefault(user:{plan?:Plan, until?:string}){
     return (PlanValue.default === planValue({ plan: user.plan, until: user.until }));
 }
 
-export function scanUsers(day?:number): Promise<{ userName: string, value: number, tool:SelectTool }[]> {
+export function scanUsers(day?:number): Promise<{ userName: string, value: number, tool:SelectTool, day?:number, phone?:string }[]> {
     const round = (getCurrentRound()+1).toString();
     let ExpressionAttributeNames = {
         "#UserName": 'UserName',
@@ -65,7 +65,8 @@ export function scanUsers(day?:number): Promise<{ userName: string, value: numbe
                         userName: item.UserName.S,
                         value,
                         tool: value === PlanValue.default ? SelectTool.free : SelectTool.charge,
-                        phone: item.Phone && item.Phone.S
+                        phone: item.Phone && item.Phone.S,
+                        day: item.Day && Number(item.Day.N)
                     }
                 });
             console.log(result);
