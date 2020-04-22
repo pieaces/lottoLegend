@@ -66,9 +66,7 @@ export function scanUsers(day?:number): Promise<{ userName: string, value: numbe
                         tool: value === PlanValue.default ? SelectTool.free : SelectTool.charge
                     }
                 });
-                if(day){
-                    console.log(result);
-                }
+            console.log(result);
             resolve(result);
         });
     });
