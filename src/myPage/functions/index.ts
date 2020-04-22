@@ -1,6 +1,6 @@
 import { makeInputCheckBox, makePastFilterTable } from "../../system/premium/Layout/functions"; import { setColorLotto, setDisabledLotto, isoStringToDate } from "../../functions";
 
-export function makeTable(canvas: HTMLElement, dataSet: any[], round: number | string, info: boolean, answer?: { numbers: number[], bonusNum: number }) {
+export function makeTable(canvas: HTMLElement, dataSet: any[], round: number | string, info: boolean, total:number, answer?: { numbers: number[], bonusNum: number }) {
     for (let i = 0; i < (dataSet && dataSet.length) || 0; i++) {
         const tableContent = document.createElement('div');
         tableContent.classList.add('mypage-table-content');
@@ -21,7 +21,7 @@ export function makeTable(canvas: HTMLElement, dataSet: any[], round: number | s
             const tableCheckBox = document.createElement('div');
             tableCheckBox.classList.add('mypage-table-checkbox');
 
-            if(dataSet[i].method !== 'a') tableCheckBox.appendChild(makeInputCheckBox());
+            tableCheckBox.appendChild(makeInputCheckBox(dataSet[i].method === 'a' && round > total ? true : false));
             tableContent.appendChild(tableCheckBox);
         }
 

@@ -1,3 +1,5 @@
+import { isNull } from "util";
+
 const allCheckBox = document.querySelector<HTMLInputElement>('#all-check');
 const currentSize = document.querySelector<HTMLElement>('#num-list-select-current');
 const totalSize = document.querySelector<HTMLElement>('#num-list-select-total');
@@ -18,13 +20,17 @@ export default class CheckBoxToggle {
         if (this.inputBoxes) {
             allCheckBox.addEventListener('change', () => {
                 if (allCheckBox.checked) {
-                    this.inputBoxes.forEach((node: any) => {
-                        node.checked = true;
+                    let sum = 0;
+                    this.inputBoxes.forEach(node => {
+                        if(isNull(node.getAttribute('disabled'))) {
+                            node.checked = true;
+                            sum++;
+                        }
                     });
-                    CheckBoxToggle.currentValue = CheckBoxToggle.totalValue;
-                    currentSize.textContent = CheckBoxToggle.totalValue.toString();
+                    CheckBoxToggle.currentValue = sum;
+                    currentSize.textContent = sum.toString();
                 } else {
-                    this.inputBoxes.forEach((node: any) => {
+                    this.inputBoxes.forEach(node => {
                         node.checked = false;
                     });
                     CheckBoxToggle.currentValue = 0;

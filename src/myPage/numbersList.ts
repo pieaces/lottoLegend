@@ -19,7 +19,7 @@ const tableNumBox = document.querySelector<HTMLElement>('.mypage-table-num-box')
 isLogedIn().then(value => {
     if (value) {
         getAuthAPI('/numbers/mass')
-            .then(({ data, rounds, answer }) => {
+            .then(({ data, rounds, total, answer }) => {
                 if (data) {
                     const roundConfig: IOptions = {
                         placeholder: '회차',
@@ -32,7 +32,7 @@ isLogedIn().then(value => {
                         nativeDropdown: false
                     };
                     let currentRound: number = rounds[0];
-                    makeTable(tableNumBox, data, rounds[0], true, answer);
+                    makeTable(tableNumBox, data, rounds[0], true, total, answer);
 
                     const toolConfig: IOptions = {
                         nativeDropdown: false,
@@ -130,7 +130,7 @@ isLogedIn().then(value => {
                             currentRound = Number(option.value);
                         }
                         tableNumBox.innerHTML = '';
-                        makeTable(tableNumBox, result.data, result.rounds[0], true, result.answer);
+                        makeTable(tableNumBox, result.data, result.rounds[0], true, total, result.answer);
                         checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox'));
                         CheckBoxToggle.allCheckedReset();
                         checkBoxToggle.checkBoxEvent();
@@ -150,7 +150,7 @@ isLogedIn().then(value => {
                             tool = option.value;
                         }
                         tableNumBox.innerHTML = '';
-                        makeTable(tableNumBox, result.data, result.rounds[0], true, result.answer);
+                        makeTable(tableNumBox, result.data, result.rounds[0], true, total, result.answer);
                         checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox'));
                         CheckBoxToggle.allCheckedReset();
                         checkBoxToggle.checkBoxEvent();
@@ -167,7 +167,7 @@ isLogedIn().then(value => {
                             method = option.value;
                         }
                         tableNumBox.innerHTML = '';
-                        makeTable(tableNumBox, result.data, result.rounds[0], true, result.answer);
+                        makeTable(tableNumBox, result.data, result.rounds[0], true, total, result.answer);
                         checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox'));
                         CheckBoxToggle.allCheckedReset();
                         checkBoxToggle.checkBoxEvent();

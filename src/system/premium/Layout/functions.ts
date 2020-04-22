@@ -1,8 +1,9 @@
-export function makeInputCheckBox(): HTMLDivElement {
+export function makeInputCheckBox(disabled?:boolean): HTMLDivElement {
     const inputBoxContainer = document.createElement('div');
     inputBoxContainer.classList.add('input-checkbox-container');
 
-    const checkBox = document.createElement('input')
+    const checkBox = document.createElement('input');
+    if(disabled) checkBox.setAttribute('disabled', '');
     checkBox.setAttribute('type', 'checkbox');
     checkBox.classList.add('checkbox');
     inputBoxContainer.appendChild(checkBox);
