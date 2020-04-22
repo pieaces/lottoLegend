@@ -41,15 +41,14 @@ export default class CheckBoxToggle {
         if (this.inputBoxes) {
             allCheckBox.addEventListener('change', () => {
                 if (allCheckBox.checked) {
-                    let sum = 0;
+                    let disabledCount = 0;
                     this.inputBoxes.forEach(node => {
                         if(isNull(node.getAttribute('disabled'))) {
                             node.checked = true;
-                            sum++;
-                        }
+                        }else disabledCount++;
                     });
-                    CheckBoxToggle.currentValue = sum;
-                    currentSize.textContent = sum.toString();
+                    CheckBoxToggle.currentValue = CheckBoxToggle.totalValue - disabledCount;
+                    currentSize.textContent = CheckBoxToggle.currentValue.toString();
                 } else {
                     this.inputBoxes.forEach(node => {
                         node.checked = false;
@@ -70,11 +69,12 @@ export default class CheckBoxToggle {
             }
         });
     }
-    static subtract(minus:number){
+    static subtract(){
+        CheckBoxToggle.totalValue -= CheckBoxToggle.currentValue;
+        totalSize.textContent = CheckBoxToggle.totalValue.toString();        
         CheckBoxToggle.currentValue = 0;
         currentSize.textContent = '0';
-        CheckBoxToggle.totalValue -= minus;
-        totalSize.textContent = CheckBoxToggle.totalValue.toString();
+
     }
     getTotal(){
         return CheckBoxToggle.totalValue;

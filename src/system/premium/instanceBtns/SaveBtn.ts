@@ -48,7 +48,7 @@ export default class SaveBtn {
                             icon: 'success',
                             timer: 1500,
                         });
-                        CheckBoxToggle.subtract(indexArr.length);
+                        CheckBoxToggle.subtract();
                         CheckBoxToggle.allCheckedReset();
                         indexArr.forEach(index => numbersContainer[index].remove());
                         modifyBoundary();
