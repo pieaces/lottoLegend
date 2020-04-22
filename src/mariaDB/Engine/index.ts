@@ -16,8 +16,6 @@ export default class Engine {
         return <RowDataPacket[]>rows;
     }
     async end() {
-        (await this.connection).end(() => {
-            console.log('MariaDB END Connection')
-        });
+        (await this.connection).end();
     }
 }

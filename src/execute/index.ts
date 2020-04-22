@@ -5,6 +5,7 @@ import { putNumbers, getNumbersCount, deleteNumbers, scanNumbers } from "../dyna
 import updateNumbers, { SelectTool } from "../dynamoDB/updateNumbers";
 import { getCurrentRound } from "../funtions";
 import { putNumberMessage } from "../sns/publish";
+import Users from "../mariaDB/Users";
 
 export async function generateAndPutNumbers(per: number, repeat: number) {
     const start = new Date();
@@ -60,6 +61,8 @@ export async function distribute() {
     const temp = factory(statsDataObj, option);
     let sum = 0;
     console.log('users: ', users.length);
+
+    const userDB = new Users();
     for (let index = 0; index < users.length; index++) {
         if(numbersList.length < users[index].value){
             numbersList.push(...factory(statsDataObj, option));
@@ -79,7 +82,8 @@ export async function distribute() {
         }
         await updateNumbers(users[index].userName, users[index].tool, getCurrentRound() + 1, willPutNumbers);
         if (users[index].tool === SelectTool.charge && users[index].phone && users[index].day === today.getDay()) {
-            await putNumberMessage(users[index].userName, users[index].value, willPutNumbers, users[index].phone);
+            const nickName = (await userDB.getNickName(users[index].userName));
+            await putNumberMessage(nickName, users[index].value, willPutNumbers, users[index].phone);
         }
         sum += users[index].value;
     }

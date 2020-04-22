@@ -18,9 +18,13 @@ export default function publish(message: string, PhoneNumber: string): Promise<v
     })
 }
 
-export async function putNumberMessage(userName: string, planValue:number, numbersList: number[][], phone?:string) {
+export async function putNumberMessage(nickName: string, planValue:number, numbersList: number[][], phone:string) {
     const round = getCurrentRound() + 1;
-    await publish(`[로또끝] ${userName}님의 당첨을 기원합니다!\n${round}회 프리미엄 ${planValue}조합\n` + numsArrToString(numbersList), phone);
+    if(nickName === ''){
+        await publish(`[로또끝] 함께해주셔서 감사합니다!\n${round}회 프리미엄 ${planValue}조합\n` + numsArrToString(numbersList), phone);
+    }else{
+        await publish(`[로또끝] ${nickName}님의 당첨을 기원합니다!\n${round}회 프리미엄 ${planValue}조합\n` + numsArrToString(numbersList), phone);
+    }
 };
 
 export async function getPhoneNumber(userName: string): Promise<string> {
