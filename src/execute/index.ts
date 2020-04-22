@@ -45,7 +45,7 @@ export async function deleteAllNumbers() {
     const end = new Date();
     console.log('end: ', Number(end) - Number(start));
 }
-distribute();
+
 export async function distribute() {
     const start = new Date();
     const { statsDataObj, include } = await supply();
