@@ -58,8 +58,9 @@ exports.handler = async (event: any) => {
                             result.date = data.date;
                             return result;
                         }).reverse();
-                        body = { data, rounds };
-                        if (Number(rounds[rounds.length - 1]) <= getCurrentRound()) {
+                        const total = getCurrentRound();
+                        body = { data, rounds, total };
+                        if (Number(rounds[rounds.length - 1]) <= total) {
                             body.answer = await getLotto2(Number(rounds[rounds.length - 1]));
                         }
                     }
