@@ -79,6 +79,9 @@ export default class CheckBoxToggle {
     getTotal(){
         return CheckBoxToggle.totalValue;
     }
+    getCurrentValue(){
+        return CheckBoxToggle.currentValue;
+    }
     static allCheckedReset() {
         allCheckBox.checked = false;
     }

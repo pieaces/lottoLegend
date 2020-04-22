@@ -74,6 +74,7 @@ isLogedIn().then(value => {
                     let filterBoxes = document.querySelectorAll<HTMLElement>('.func3-past-filter-box');
                     document.querySelectorAll('.mypage-num-delete-btn').forEach(node => {
                         node.addEventListener('click', async () => {
+                            if(checkBoxToggle.getCurrentValue()===0) return Swal.fire({title:'삭제할 조합을 선택해주세요', icon:'info'});
                             await Swal.fire({
                                 title: '삭제하시겠습니까?',
                                 text: "한번 삭제하면 되돌릴 수 없습니다",
