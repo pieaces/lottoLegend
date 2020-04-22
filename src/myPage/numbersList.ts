@@ -91,6 +91,7 @@ isLogedIn().then(value => {
                                         if (node.checked) {
                                             numsArr.push(JSON.parse(numbersContainer[index].getAttribute('data-numbers')));
                                             indexes.push(index);
+                                            node.checked = false;
                                         }
                                     });
                                     try {
@@ -128,7 +129,7 @@ isLogedIn().then(value => {
                             result = await getAuthAPI('/numbers/mass/', { tool, method });
                             currentRound = null;
                         } else {
-                            result = (await getAuthAPI('/numbers/mass/' + option.value, { tool, method }));
+                            result = await getAuthAPI('/numbers/mass/' + option.value, { tool, method });
                             currentRound = Number(option.value);
                         }
                         tableNumBox.innerHTML = '';
@@ -144,13 +145,13 @@ isLogedIn().then(value => {
                         makeLoading();
                         let result: any;
                         if (option.value === 'all') {
-                            result = (await getAuthAPI('/numbers/mass/' + (currentRound ? currentRound : ''), { method }));
+                            result = await getAuthAPI('/numbers/mass/' + (currentRound ? currentRound : ''), { method });
                             tool = null;
                         } else if (option.value === 'a') {
-                            result = (await getAuthAPI('/numbers/mass/' + (currentRound ? currentRound : ''), { tool: option.value }));
+                            result = await getAuthAPI('/numbers/mass/' + (currentRound ? currentRound : ''), { tool: option.value });
                             tool = option.value;
                         } else if (option.value === 'b') {
-                            result = (await getAuthAPI('/numbers/mass/' + (currentRound ? currentRound : ''), { tool: option.value, method }));
+                            result = await getAuthAPI('/numbers/mass/' + (currentRound ? currentRound : ''), { tool: option.value, method });
                             tool = option.value;
                         }
                         tableNumBox.innerHTML = '';
