@@ -24,7 +24,7 @@ function planValue(param:{plan?: Plan, until?: string}) {
 function isDefault(user:{plan?:Plan, until?:string}){
     return (PlanValue.default === planValue({ plan: user.plan, until: user.until }));
 }
-scanUsers(3).then(value => console.log(value));
+
 export function scanUsers(day?:number): Promise<{ userName: string, value: number, tool:SelectTool }[]> {
     let ProjectionExpression = '#UserName, #Plan, #Until, #Numbers.#Round';
     const round = (getCurrentRound()+1).toString();
