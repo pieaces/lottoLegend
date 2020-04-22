@@ -63,10 +63,16 @@ isLogedIn().then(value => {
                     const methodSelect = new Selectr(methodSelectBox, methodConfig);
                     document.querySelector<HTMLElement>('.selectbox-wrapper').classList.remove('none');
 
+                    const checkBoxToggle = new CheckBoxToggle();
+                    checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox'));
+                    checkBoxToggle.allBtnEvent();
+                    checkBoxToggle.addCheckBoxEvent();
+
                     let tool: string = null;
                     let method: string = null;
+                    let numbersContainer = document.querySelectorAll<HTMLElement>('.mypage-table-content');
+                    let filterBoxes = document.querySelectorAll<HTMLElement>('.func3-past-filter-box');
                     document.querySelectorAll('.mypage-num-delete-btn').forEach(node => {
-                        node.classList.remove('none');
                         node.addEventListener('click', async () => {
                             await Swal.fire({
                                 title: '삭제하시겠습니까?',
@@ -79,13 +85,9 @@ isLogedIn().then(value => {
                                 cancelButtonText: '취소',
                             }).then(async (result) => {
                                 if (result.value) {
-                                    const inputs = document.querySelectorAll<HTMLInputElement>('.mypage-table-num-box input');
-                                    const numbersContainer = document.querySelectorAll<HTMLElement>('.mypage-table-content');
-                                    const filterBoxes = document.querySelectorAll<HTMLElement>('.func3-past-filter-box');
-
                                     const numsArr: number[][] = [];
                                     const indexes: number[] = [];
-                                    inputs.forEach((node, index) => {
+                                    checkBoxToggle.getInputBoxes().forEach((node, index) => {
                                         if (node.checked) {
                                             numsArr.push(JSON.parse(numbersContainer[index].getAttribute('data-numbers')));
                                             indexes.push(index);
@@ -133,7 +135,9 @@ isLogedIn().then(value => {
                         makeTable(tableNumBox, result.data, result.rounds[0], true, total, result.answer);
                         checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox'));
                         CheckBoxToggle.allCheckedReset();
-                        checkBoxToggle.checkBoxEvent();
+                        checkBoxToggle.addCheckBoxEvent();
+                        numbersContainer = document.querySelectorAll<HTMLElement>('.mypage-table-content');
+                        filterBoxes = document.querySelectorAll<HTMLElement>('.func3-past-filter-box');
                         removeLoading();
                     });
                     toolSelect.on('selectr.change', async (option) => {
@@ -153,7 +157,9 @@ isLogedIn().then(value => {
                         makeTable(tableNumBox, result.data, result.rounds[0], true, total, result.answer);
                         checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox'));
                         CheckBoxToggle.allCheckedReset();
-                        checkBoxToggle.checkBoxEvent();
+                        checkBoxToggle.addCheckBoxEvent();
+                        numbersContainer = document.querySelectorAll<HTMLElement>('.mypage-table-content');
+                        filterBoxes = document.querySelectorAll<HTMLElement>('.func3-past-filter-box');
                         removeLoading();
                     });
                     methodSelect.on('selectr.change', async (option) => {
@@ -170,13 +176,11 @@ isLogedIn().then(value => {
                         makeTable(tableNumBox, result.data, result.rounds[0], true, total, result.answer);
                         checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox'));
                         CheckBoxToggle.allCheckedReset();
-                        checkBoxToggle.checkBoxEvent();
+                        checkBoxToggle.addCheckBoxEvent();
+                        numbersContainer = document.querySelectorAll<HTMLElement>('.mypage-table-content');
+                        filterBoxes = document.querySelectorAll<HTMLElement>('.func3-past-filter-box');
                         removeLoading();
                     });
-                    const checkBoxToggle = new CheckBoxToggle();
-                    checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox'));
-                    checkBoxToggle.allBtnEvent();
-                    checkBoxToggle.checkBoxEvent();
                     numInfoToggleBtn.addEventListener('click', numInfoToggle());
 
                 } else {

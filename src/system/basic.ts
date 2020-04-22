@@ -114,7 +114,7 @@ isLogedIn().then(value => {
                             const numBoard = new NumBoard(dataSet);
                             numBoard.makeNumBoard();
                             checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox'));
-                            checkBoxToggle.checkBoxEvent();
+                            checkBoxToggle.addCheckBoxEvent();
                             checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox'));
                             checkBoxToggle.allBtnEvent();
                             CheckBoxToggle.allCheckedReset();
@@ -135,7 +135,7 @@ isLogedIn().then(value => {
                         const numBoard = new NumBoard(dataSet);
                         numBoard.makeNumBoard();
                         checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox'));
-                        checkBoxToggle.checkBoxEvent();
+                        checkBoxToggle.addCheckBoxEvent();
                         checkBoxToggle.allBtnEvent();
                         CheckBoxToggle.allCheckedReset();
                     }

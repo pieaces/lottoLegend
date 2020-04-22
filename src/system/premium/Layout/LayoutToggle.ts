@@ -22,10 +22,10 @@ const layout3Class = 'func3-layout'
 
 export default function LayoutToggle<TBase extends Constructor>(Base: TBase) {
     return class extends Base {
-        protected dataAPI: IDataAPI;
-        private layout1Arr: NodeListOf<HTMLElement> = layout1;
-        private layout2Arr: NodeListOf<HTMLElement> = layout2;
-        private layout3Arr: NodeListOf<HTMLElement> = layout3;
+        dataAPI: IDataAPI;
+        layout1Arr: NodeListOf<HTMLElement> = layout1;
+        layout2Arr: NodeListOf<HTMLElement> = layout2;
+        layout3Arr: NodeListOf<HTMLElement> = layout3;
         layout1On() {
             this.layout2Arr.forEach(node => {
                 node.classList.add('none');
@@ -64,7 +64,7 @@ export default function LayoutToggle<TBase extends Constructor>(Base: TBase) {
             const checkBoxToggle = new CheckBoxToggle();
             checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox'));
             checkBoxToggle.allBtnEvent();
-            checkBoxToggle.checkBoxEvent();
+            checkBoxToggle.addCheckBoxEvent();
             excLineCountText.textContent = (<number[]>data[1]).map(value => {
                 switch (value) {
                     case 0: return '1번대';

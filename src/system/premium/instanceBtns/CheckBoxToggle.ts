@@ -1,20 +1,41 @@
 import { isNull } from "util";
-
+import 'core-js/stable/weak-map'
 const allCheckBox = document.querySelector<HTMLInputElement>('#all-check');
 const currentSize = document.querySelector<HTMLElement>('#num-list-select-current');
 const totalSize = document.querySelector<HTMLElement>('#num-list-select-total');
 
 export default class CheckBoxToggle {
-    private inputBoxes: NodeListOf<HTMLInputElement>;
+    private inputBoxes: NodeListOf<HTMLInputElement> = null;
     private static currentValue = 0;
     private static totalValue = 0;
-    constructor(){currentSize.textContent='0'}
+    private static checkBoxEvents:WeakMap<HTMLInputElement, any> = new WeakMap();
+    constructor(){
+        currentSize.textContent='0'
+    }
+    static inputChangeEvent(node:HTMLInputElement){
+        if (node.checked) {
+            CheckBoxToggle.currentValue++;
+        } else {
+            CheckBoxToggle.currentValue--;
+        }
+        currentSize.textContent = CheckBoxToggle.currentValue.toString();
+    }
 
     setInputBoxes(inputBoxes: NodeListOf<HTMLInputElement>) {
+        if(!isNull(this.inputBoxes)){
+            this.inputBoxes.forEach(node => {
+                const event = CheckBoxToggle.checkBoxEvents.get(node);
+                node.removeEventListener('change', event);
+                CheckBoxToggle.checkBoxEvents.delete(node);
+            });
+        }
         CheckBoxToggle.currentValue = 0;
         currentSize.textContent = '0';
         CheckBoxToggle.totalValue = inputBoxes.length;
         this.inputBoxes = inputBoxes;
+    }
+    getInputBoxes(){
+        return this.inputBoxes
     }
     allBtnEvent() {
         if (this.inputBoxes) {
@@ -39,17 +60,14 @@ export default class CheckBoxToggle {
             });
         }
     }
-    checkBoxEvent(){
+    addCheckBoxEvent() {
         totalSize.textContent = this.inputBoxes.length.toString();
-        this.inputBoxes.forEach((node) => {
-            node.addEventListener('change', () => {
-                if (node.checked) {
-                    CheckBoxToggle.currentValue++;
-                } else {
-                    CheckBoxToggle.currentValue--;
-                }
-                currentSize.textContent = CheckBoxToggle.currentValue.toString();
-            });
+        this.inputBoxes.forEach(node => {
+            if (isNull(node.getAttribute('disabled'))) {
+                const event = CheckBoxToggle.inputChangeEvent.bind(null, node);
+                node.addEventListener('change', event);
+                CheckBoxToggle.checkBoxEvents.set(node, event);
+            }
         });
     }
     static subtract(minus:number){
