@@ -153,7 +153,6 @@ submitBtn.onclick = async () => {
                 title, contents
             });
         }
-        removeLoading();
 
         Swal.fire({
             title: '완료',
@@ -166,6 +165,8 @@ submitBtn.onclick = async () => {
         });
     } catch (err) {
         networkAlert();
+    }finally{
+        removeLoading();
     }
 }
 
