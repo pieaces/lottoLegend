@@ -63,6 +63,7 @@ exports.handler = async (event: any) => {
                 }
                     break;
             }
+            await userDB.end();
         }
             break;
         case '/account/phone': {
