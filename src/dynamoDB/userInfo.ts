@@ -24,6 +24,7 @@ function planValue(param:{plan?: Plan, until?: string}) {
 function isDefault(user:{plan?:Plan, until?:string}){
     return (PlanValue.default === planValue({ plan: user.plan, until: user.until }));
 }
+scanUsers(3).then(value => console.log(value));
 export function scanUsers(day?:number): Promise<{ userName: string, value: number, tool:SelectTool }[]> {
     let ProjectionExpression = '#UserName, #Plan, #Until, #Numbers.#Round';
     const round = (getCurrentRound()+1).toString();
@@ -53,7 +54,7 @@ export function scanUsers(day?:number): Promise<{ userName: string, value: numbe
                 if(typeof day !== 'number') return true;
                 else{
                     if(item.Numbers && item.Numbers.M[round].L.some(list => list.M.method.S === 'a')) return false;
-                    if(item.Day && day === Number(item.Day.N)) return true;
+                    if(item.Day && day === Number(item.Day.N) && !isDefault({ plan: item.Plan && item.Plan.S as Plan, until: item.Until && item.Until.S })) return true;
                     else if ((!item.Day || Number(item.Day.N) === -1 || isDefault({ plan: item.Plan && item.Plan.S as Plan, until: item.Until && item.Until.S })) && day === 0) return true;
                     else return false;
                 }
