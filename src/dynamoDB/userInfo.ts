@@ -26,15 +26,16 @@ function isDefault(user:{plan?:Plan, until?:string}){
 }
 
 export function scanUsers(day?:number): Promise<{ userName: string, value: number, tool:SelectTool }[]> {
-    let ProjectionExpression = '#UserName, #Plan, #Until, #Numbers.#Round';
     const round = (getCurrentRound()+1).toString();
     let ExpressionAttributeNames = {
         "#UserName": 'UserName',
         "#Plan": 'Plan',
         "#Until": 'Until',
         "#Numbers": 'Numbers',
-        "#Round": round
+        "#Round": round,
+        "#Phone": 'Phone'
     }
+    let ProjectionExpression = '#UserName, #Plan, #Until, #Numbers.#Round, #Phone';
     if(typeof day === 'number') {
         ProjectionExpression += ', #Day';
         ExpressionAttributeNames['#Day'] = 'Day';
@@ -63,7 +64,8 @@ export function scanUsers(day?:number): Promise<{ userName: string, value: numbe
                     return {
                         userName: item.UserName.S,
                         value,
-                        tool: value === PlanValue.default ? SelectTool.free : SelectTool.charge
+                        tool: value === PlanValue.default ? SelectTool.free : SelectTool.charge,
+                        phone: item.Phone && item.Phone.S
                     }
                 });
             console.log(result);
