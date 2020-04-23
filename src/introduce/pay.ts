@@ -42,7 +42,7 @@ bankbook.onclick = () => {
     bankPerson.classList.remove('none');
 }
 const monthList = [24, 12, 6, 1];
-const priceList = [150000, 90000, 53000, 9900];
+const priceList = [180000, 99000, 59000, 11000];
 const productList = ['프리미엄 2년', '프리미엄 1년', '프리미엄 6개월', '프리미엄 1개월'];
 let current: number = null;
 const person = document.querySelector<HTMLInputElement>('#deposit-name');
