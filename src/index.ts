@@ -102,6 +102,7 @@ exports.handler = async (event: any) => {
                 case 'POST':
                     if (currentId) {
                         const { bank, plan, person, month, price } = JSON.parse(event.body);
+                        console.log(`[무통장입금] // 아이디:${currentId}, 은행: ${bank}, 요금제: ${plan}, 입금자명: ${person}, 개월수: ${month}, 금액: ${price}`);
                         await makePaymentByBankBook(currentId, bank, person, plan, month, price);
                     }
                     break;
