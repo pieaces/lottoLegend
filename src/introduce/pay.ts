@@ -1,7 +1,7 @@
 import configure from "../amplify/configure";
 import 'core-js/stable/string/includes'
 import 'core-js/stable/object/values'
-import 'core-js/stable/object/entries'
+//import 'core-js/stable/object/entries'
 import { numberFormat, networkAlert, onlyUserAlert, makeLoading, removeLoading } from "../functions";
 import { isNull } from "util";
 import Swal from "sweetalert2";
