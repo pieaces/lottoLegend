@@ -110,6 +110,7 @@ let imageList: ImageInfo[] = [];
 let selectedImages = [];
 let totalSize = 0;
 
+let submitCheck = false;
 submitBtn.onclick = async () => {
     const title = stringTrimer(titleInput.value);
     if (title === "") return Swal.fire({
@@ -161,6 +162,7 @@ submitBtn.onclick = async () => {
             allowOutsideClick: false,
             timer: 1500,
         }).then(() => {
+            submitCheck = true;
             location.href = `/${getCategoryHtml(category, 'read')}?id=${leapId}`;
         });
     } catch (err) {
@@ -171,7 +173,7 @@ submitBtn.onclick = async () => {
 }
 //새로고침, 이전페이지 이동 막기
 window.onbeforeunload = function (e) {
-    if (titleInput.value !== "") {
+    if (titleInput.value !== "" && !submitCheck) {
         const dialogText = '';
         e.returnValue = dialogText;
         return dialogText;

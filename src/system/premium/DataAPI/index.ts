@@ -42,7 +42,7 @@ function paramToNumbers(params: Params): number[] {
     }
 }
 const infoFront = '현재 필터에서 가능한 모든 ';
-const infoBack = '하나 또는 범위를 선택해주세요.';
+const infoBack = '한개 이상 선택해주세요.';
 export default class DataAPI {
     static instance: DataAPI = null;
     public numbersData: any[];
