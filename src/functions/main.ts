@@ -90,16 +90,16 @@ export function backgroundImgSlide() {
         imgBranch(i - 1);
 
         if (i === 1) {
-            imgBtn[i - 1].classList.remove('far');
-            imgBtn[i - 1].classList.add('fas');
-            imgBtn[imgBtn.length - 1].classList.add('far');
-            imgBtn[imgBtn.length - 1].classList.remove('fas');
+            imgBtn[i - 1].classList.remove('owf-empty');
+            imgBtn[i - 1].classList.add('owf-full');
+            imgBtn[imgBtn.length - 1].classList.add('owf-empty');
+            imgBtn[imgBtn.length - 1].classList.remove('owf-full');
         }
         else {
-            imgBtn[i - 2].classList.add('far');
-            imgBtn[i - 2].classList.remove('fas');
-            imgBtn[i - 1].classList.remove('far');
-            imgBtn[i - 1].classList.add('fas');
+            imgBtn[i - 2].classList.add('owf-empty');
+            imgBtn[i - 2].classList.remove('owf-full');
+            imgBtn[i - 1].classList.remove('owf-empty');
+            imgBtn[i - 1].classList.add('owf-full');
         }
         i++;
         if (i === imgBtn.length + 1) {
@@ -111,11 +111,11 @@ export function backgroundImgSlide() {
         imgBtn[node].addEventListener('click', () => {
             imgBranch(node);
             for (let i = 0; i < imgBtn.length; i++) {
-                imgBtn[i].classList.add('far');
-                imgBtn[i].classList.remove('fas');
+                imgBtn[i].classList.add('owf-empty');
+                imgBtn[i].classList.remove('owf-full');
             }
-            imgBtn[node].classList.add('fas');
-            imgBtn[node].classList.remove('far');
+            imgBtn[node].classList.add('owf-full');
+            imgBtn[node].classList.remove('owf-empty');
             clearInterval(slideIntervalId);
         })
     }

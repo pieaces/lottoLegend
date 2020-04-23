@@ -375,7 +375,7 @@ export default class Layout2 {
         this.numFreqOrTermToggle();
         this.setColorWinNum();
         this.addEvent();
-        document.querySelector<HTMLElement>('.func2-numboard-que').addEventListener('click', () => {
+        document.querySelector<HTMLElement>('.func2-numboard-que >.owf-question').addEventListener('click', () => {
             if (this.version === 'include') makeModal(includeInfo, 55);
             else if (this.version === 'exclude') makeModal(excludeInfo, 55);
             else makeModal(carryInfo, 55);
