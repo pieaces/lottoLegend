@@ -1,5 +1,5 @@
 import configure from "../amplify/configure";
-import { numberFormat, networkAlert, onlyUserAlert } from "../functions";
+import { numberFormat, networkAlert, onlyUserAlert, makeLoading, removeLoading } from "../functions";
 import { isNull } from "util";
 import Swal from "sweetalert2";
 import { postAuthAPI, getAuthAPI } from "../amplify/api";
@@ -86,17 +86,19 @@ document.getElementById('order-btn').onclick = () => {
             } else if (payMethod === 'bankbook') {
                 let price = priceList[current];
                 if(select.value === 'd') price = Math.floor(priceList[current] * 1.5 / 1000) * 1000;
-                postAuthAPI('/users/payment/bankbook', { bank: bank.textContent, plan: select.value, person: person.value, month: monthList[current], price }).then(() => {
-                    Analytics.record({
+                makeLoading();
+                postAuthAPI('/users/payment/bankbook', { bank: bank.textContent, plan: select.value, person: person.value, month: monthList[current], price }).then(async () => {
+                    await Analytics.record({
                         name: 'payment',
                         attributes: { method: 'bankbook' },
                         metrics: { money: priceList[current] }
-                    }); Swal.fire({
+                    });
+                    Swal.fire({
                         title: '정상적으로 기록되었습니다',
                         icon: 'info',
                         timer: 2000
                     }).then(() => location.href = '/myPage/currentPayment.html');
-                }).catch(() => networkAlert());
+                }).catch(() => networkAlert()).finally(() => removeLoading());
             }
         } else {
             onlyUserAlert();
