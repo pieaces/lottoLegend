@@ -170,10 +170,12 @@ submitBtn.onclick = async () => {
     }
 }
 //새로고침, 이전페이지 이동 막기
-window.onbeforeunload = function(e) {
-    var dialogText = '';
-    e.returnValue = dialogText;
-    return dialogText;
+window.onbeforeunload = function (e) {
+    if (titleInput.value !== "") {
+        const dialogText = '';
+        e.returnValue = dialogText;
+        return dialogText;
+    }
 };
 
 editor.onImageUpload = function (targetImgElement, index, state, imageInfo, remainingFilesCount) {
