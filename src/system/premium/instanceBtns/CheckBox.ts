@@ -116,9 +116,6 @@ export default class CheckBox {
         });
     }
     reset() {
-        if (this.nodeList.length === 0) {
-            this.init();
-        }
         this.nodeList.forEach(node => {
             node.children[0].classList.remove('func1-num-check-current');
             this.labelList.fill(false);

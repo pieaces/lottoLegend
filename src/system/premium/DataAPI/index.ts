@@ -126,7 +126,6 @@ export default class DataAPI {
                     text:'되돌아가서 재설정해주시기 바랍니다',
                     icon:'warning'
                 });
-                document.getElementById('func1-chart-bubble').style.visibility= 'hidden';
             }
         } else if (this.current === 7) {
             if (this.generator.option.includedNumbers.length === 0) {
