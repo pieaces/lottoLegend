@@ -1,5 +1,5 @@
 import { dynamoDB } from '.'
-import { ScanInput, ScanOutput } from 'aws-sdk/clients/dynamodb';
+import { ScanInput, ScanOutput, GetItemInput } from 'aws-sdk/clients/dynamodb';
 import { AWSError } from 'aws-sdk';
 import { SelectTool } from './updateNumbers';
 import { getCurrentRound } from '../funtions';
@@ -85,5 +85,28 @@ export function getUsersCount(): Promise<number> {
             if (err) reject(err);
             resolve(data.Count);
         });
+    });
+}
+
+export async function getPaymentBankForComputer(userName: string): Promise<{plan:Plan, month:number, price:number}> {
+    const queryParams: GetItemInput = {
+        TableName: "LottoUsers",
+        ProjectionExpression: 'PaymentBank',
+        Key: {
+            "UserName": {
+                S: userName
+            }
+        }
+    };
+    return await new Promise((resolve, reject) => {
+        dynamoDB.getItem(queryParams, (err: AWSError, data) => {
+            if (err) {
+                reject(err);
+            }
+            const paymentBank = data.Item.PaymentBank;
+            if(paymentBank){
+                resolve({plan:paymentBank.M.plan.S as Plan, month: Number(paymentBank.M.month.N), price:Number(paymentBank.M.price.N)});
+            }
+        })
     });
 }

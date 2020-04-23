@@ -1,9 +1,10 @@
 import verify from "./auth";
-import { getPaymentByBankBook, makePaymentByBankBook, deletePaymentBank, getPayments, makePlan, makeDay, scanUsersForAdmin, PayMethod, getPlan, getPlanValue } from "./dynamoDB/payment";
+import { getPaymentByBankBook, makePaymentByBankBook, deletePaymentBank, getPayments, makePlan, makeDay, scanUsersForAdmin, PayMethod, getPlanValue } from "./dynamoDB/payment";
 import factory, { supply } from "./dynamoDB/factory";
 import updateNumbers, { SelectTool } from "./dynamoDB/updateNumbers";
 import { getCurrentRound } from "./funtions";
 import { putNumberMessage, getPhoneNumber } from "./sns/publish";
+import { getPaymentBankForComputer } from "./dynamoDB/userInfo";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -47,7 +48,8 @@ exports.handler = async (event: any) => {
             switch (method) {
                 case 'POST':
                     if (currentId === 'lottoend') {
-                        const { plan, month, price, method } = JSON.parse(event.body);
+                        const { plan, month, price } = await getPaymentBankForComputer(userName);
+                        const method = 'bank';
                         await makePlan(userName, plan, month, price, method);
                         if (method as PayMethod === 'bank') await deletePaymentBank(userName);
 
