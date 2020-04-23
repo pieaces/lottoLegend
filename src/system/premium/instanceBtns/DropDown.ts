@@ -45,8 +45,8 @@ export default class DropDown {
             if (this.flag) {
                 //target 다른 곳
                 filterListBox.classList.add("none");
-                filterArrow.classList.add("fa-sort-down");
-                filterArrow.classList.remove("fa-sort-up");
+                filterArrow.classList.add("owf-down");
+                filterArrow.classList.remove("owf-up");
                 this.flag = false;
             }
         })
@@ -57,12 +57,12 @@ export default class DropDown {
 
         filterBox.addEventListener("click", e => {
             if (!this.flag) {
-                filterArrow.classList.remove("fa-sort-down");
-                filterArrow.classList.add("fa-sort-up");
+                filterArrow.classList.remove("owf-down");
+                filterArrow.classList.add("owf-up");
                 filterListBox.classList.remove("none");
             } else {
-                filterArrow.classList.add("fa-sort-down");
-                filterArrow.classList.remove("fa-sort-up");
+                filterArrow.classList.add("owf-down");
+                filterArrow.classList.remove("owf-up");
                 filterListBox.classList.add("none");
             }
             this.flag = !this.flag;
