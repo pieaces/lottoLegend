@@ -2,11 +2,12 @@ import configure from './amplify/configure'
 import { getUnAuthAPI, getAuthAPI } from './amplify/api';
 import { rankToClass, loginAddEvent, networkAlert } from './functions';
 import { isLogedIn, getNickName, signOut } from './amplify/auth';
-import { mqDeskTopInit, backgroundImgSlide, makeWinNumBox, insertWinCount, insertWinResult, executeMakingBoard, mqMobileInit, makeWinnersList, moneyCompress } from './functions/main';
+import { mqDeskTopInit, backgroundImgSlide, makeWinNumBox, insertWinCount, insertWinResult, executeMakingBoard, mqMobileInit, makeWinnersList, moneyCompress, makeScroll } from './functions/main';
 configure();
 
 const loginContainer = document.querySelector('.login-container')
 const loginAfterBox = document.querySelector('.login-after-box');
+const mqMobile = window.matchMedia("(max-width: 767px)");
 
 isLogedIn().then((result) => {
     if (result) {
@@ -23,12 +24,18 @@ isLogedIn().then((result) => {
                 document.querySelector('#service').textContent = data.user.plan;
             }
             executeMakingBoard(data);
+            if (!mqMobile.matches) {
+                makeScroll(data.notice);
+            }
         }).catch(() => networkAlert());
     } else {
         loginAfterBox.classList.add('none');
         loginContainer.classList.remove('none');
         getUnAuthAPI('/main/posts').then(data => {
             executeMakingBoard(data);
+            if (!mqMobile.matches) {
+                makeScroll(data.notice);
+            }
         }).catch((err) => console.log(err));
 
         loginAddEvent();
@@ -61,13 +68,8 @@ getUnAuthAPI('/main/numbers').then(data => {
     makeWinnersList(winners);
 }).catch((err) => console.log(err));
 
-const mqMobile = window.matchMedia("(max-width: 767px)");
-if (mqMobile.matches) {
-    mqMobileInit();
-} else {
-    mqDeskTopInit();
-}
-mqMobile.addListener(mqFunc);
+mqFunc(mqMobile);
+//mqMobile.addListener(mqFunc);
 function mqFunc(mediaQuery) {
     if (mediaQuery.matches) {
         mqMobileInit();
