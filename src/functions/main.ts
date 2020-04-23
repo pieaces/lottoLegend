@@ -84,6 +84,42 @@ export function mqDeskTopInit() {
     }
 }
 
+export function backgroundImgSlide() {
+    let i = 2;
+    const slideIntervalId = setInterval(() => {
+        imgBranch(i - 1);
+
+        if (i === 1) {
+            imgBtn[i - 1].classList.remove('far');
+            imgBtn[i - 1].classList.add('fas');
+            imgBtn[imgBtn.length - 1].classList.add('far');
+            imgBtn[imgBtn.length - 1].classList.remove('fas');
+        }
+        else {
+            imgBtn[i - 2].classList.add('far');
+            imgBtn[i - 2].classList.remove('fas');
+            imgBtn[i - 1].classList.remove('far');
+            imgBtn[i - 1].classList.add('fas');
+        }
+        i++;
+        if (i === imgBtn.length + 1) {
+            i = 1;
+        }
+    }, 7000);
+
+    for (let node = 0; node < imgBtn.length; node++) {
+        imgBtn[node].addEventListener('click', () => {
+            imgBranch(node);
+            for (let i = 0; i < imgBtn.length; i++) {
+                imgBtn[i].classList.add('far');
+                imgBtn[i].classList.remove('fas');
+            }
+            imgBtn[node].classList.add('fas');
+            imgBtn[node].classList.remove('far');
+            clearInterval(slideIntervalId);
+        })
+    }
+}
 
 function scrolling(this: any, objId: string, sec1: number, sec2: number, speed: number, height: number) {
     this.sec1 = sec1;
@@ -134,51 +170,22 @@ scrolling.prototype = {
     }
 };
 
-export function backgroundImgSlide() {
-    let i = 2;
-    const slideIntervalId = setInterval(() => {
-        imgBranch(i - 1);
-
-        if (i === 1) {
-            imgBtn[i - 1].classList.remove('far');
-            imgBtn[i - 1].classList.add('fas');
-            imgBtn[imgBtn.length - 1].classList.add('far');
-            imgBtn[imgBtn.length - 1].classList.remove('fas');
-        }
-        else {
-            imgBtn[i - 2].classList.add('far');
-            imgBtn[i - 2].classList.remove('fas');
-            imgBtn[i - 1].classList.remove('far');
-            imgBtn[i - 1].classList.add('fas');
-        }
-        i++;
-        if (i === imgBtn.length + 1) {
-            i = 1;
-        }
-    }, 7000);
-
-    for (let node = 0; node < imgBtn.length; node++) {
-        imgBtn[node].addEventListener('click', () => {
-            imgBranch(node);
-            for (let i = 0; i < imgBtn.length; i++) {
-                imgBtn[i].classList.add('far');
-                imgBtn[i].classList.remove('fas');
-            }
-            imgBtn[node].classList.add('fas');
-            imgBtn[node].classList.remove('far');
-            clearInterval(slideIntervalId);
-        })
+function insertScrollText(data: {id:number, title:string}[]) {
+    for (let i = 0; i < scrollList.length; i++) {
+        scrollList[i].setAttribute('href', `/${getCategoryHtml('notice', 'read')}?id=${data[i].id}`);
+        scrollList[i].textContent = data[i].title;
     }
 }
 
+export function makeScroll(notices:{id:number, title:string}[]){
+    insertScrollText(notices);
+    new scrolling("scroll-list", 4000, 3, 1, 18);
+}
 const commTab = document.querySelectorAll('.community-tab');
 const boardPlus = document.getElementById('board-plus');
 export function executeMakingBoard(data: any) {
     let current = 0;
     const tabs = ['pro', 'analysis', 'include', 'exclude', 'free'];
-
-    insertScrollText(data.notice);
-    new scrolling("scroll-list", 4000, 3, 1, 18);
 
     makeBoard(data[tabs[current]]);
 
@@ -192,13 +199,6 @@ export function executeMakingBoard(data: any) {
         });
     }
     makeWinReview(data.win);
-}
-
-function insertScrollText(data: any) {
-    for (let i = 0; i < scrollList.length; i++) {
-        scrollList[i].setAttribute('href', `/${getCategoryHtml('notice', 'read')}?id=${data[i].id}`);
-        scrollList[i].textContent = data[i].title;
-    }
 }
 
 export function insertWinCount(data) {
