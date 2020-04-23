@@ -55,10 +55,13 @@ signUpForm.addEventListener('submit', async (e) => {
 
 function invalidId() {
     const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\+<>@\#$%&\\\=\(\'\"]/gi;
+    const regExp1=/[ㄱ-ㅎ|가-힣|a-z|A-Z]/;
     if (!(id.value.length <= 16 && id.value.length >= 4)) {
         id.setCustomValidity(`최소 4글자 최대 16자로 작성해주세요.`);
     } else if (id.value.search(regExp) !== -1) {
         id.setCustomValidity(`-,_를 제외한 특수문자를 입력할 수 없습니다`);
+    } else if(id.value.search(regExp1) === -1){
+        id.setCustomValidity(`한글이나 영어로 입력해주세요`);
     } else {
         id.setCustomValidity(``);
     }
@@ -67,10 +70,13 @@ function invalidId() {
 
 function invalidNickname() {
     const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\+<>@\#$%&\\\=\(\'\"]/gi;
+    const regExp1=/[ㄱ-ㅎ|가-힣|a-z|A-Z]/;
     if (!(nickname.value.length <= 8 && nickname.value.length >= 2)) {
         nickname.setCustomValidity(`최소 2자 최대 8자로 작성해주세요.`);
     } else if (nickname.value.search(regExp) !== -1) {
         nickname.setCustomValidity(`-,_를 제외한 특수문자를 입력할 수 없습니다`);
+    } else if(nickname.value.search(regExp1) === -1){
+        nickname.setCustomValidity(`한글이나 영어로 입력해주세요`);
     } else {
         nickname.setCustomValidity(``);
     }
