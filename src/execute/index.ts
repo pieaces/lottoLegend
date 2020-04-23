@@ -92,6 +92,7 @@ export async function distribute() {
         await deleteNumbers(index);
     }
     const end = new Date();
+    await userDB.end();
     console.log(`count: ${count}, sum: ${sum}`);
     console.log('end: ', Number(end) - Number(start));
 }
