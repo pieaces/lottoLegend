@@ -1,5 +1,4 @@
 import configure from '../amplify/configure'
-import 'core-js/stable/dom-collections/for-each'
 import { getAuthAPI } from '../amplify/api'
 import IncludeExclude from './IncludeExclude/index';
 import incObj from './IncludeExclude/include';

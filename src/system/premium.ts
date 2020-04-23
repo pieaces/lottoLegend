@@ -1,5 +1,4 @@
 import configure from '../amplify/configure'
-import 'core-js/stable/dom-collections/for-each'
 import DataAPI from "./premium/DataAPI";
 import Layout, { IDataAPI } from './premium/Layout'
 import Swal from 'sweetalert2';

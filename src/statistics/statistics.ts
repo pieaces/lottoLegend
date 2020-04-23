@@ -1,5 +1,4 @@
 import configure from '../amplify/configure'
-import 'core-js/stable/dom-collections/for-each'
 import 'core-js/stable/array/fill'
 import ChartBase from '../system/premium/Chart/Charts';
 import LineSlide from '../system/premium/Slide/LineSlide'

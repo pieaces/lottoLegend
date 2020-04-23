@@ -1,8 +1,9 @@
+import 'core-js/stable/dom-collections/for-each'
 const menuTitleArr = document.querySelectorAll('.mid-nav-menu >li > a');
 const menuListBox = document.querySelector('.hover-menu-container');
 const mqMobile = window.matchMedia("(max-width: 767px)");
 const clickMenuBox = document.querySelectorAll('.click-menu-box'); //사이드 메뉴 배열
-const menu = document.querySelector('.click-menu-container');
+const menu = document.querySelector<HTMLElement>('.click-menu-container');
 const menuInfoText = document.querySelector('.mid-nav-info-text');
 const menuInfo = document.querySelector('.mid-nav-info');
 

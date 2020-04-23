@@ -1,5 +1,4 @@
 import configure from '../amplify/configure'
-import 'core-js/stable/dom-collections/for-each'
 import Layout3 from './premium/Layout/Layout3'
 import NumBoard from './premium/Layout/NumBoard';
 import { getAuthAPI, getUnAuthAPI, postAuthAPI } from '../amplify/api';

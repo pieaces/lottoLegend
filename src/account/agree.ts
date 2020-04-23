@@ -1,5 +1,4 @@
 import configure from '../amplify/configure'
-import 'core-js/stable/dom-collections/for-each'
 import 'core-js/stable/array/from'
 import Swal from 'sweetalert2';
 configure();

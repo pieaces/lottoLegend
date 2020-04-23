@@ -1,5 +1,4 @@
 import configure from '../amplify/configure'
-import 'core-js/stable/dom-collections/for-each'
 import { getAuthAPI, patchAuthAPI, postAuthAPI } from '../amplify/api'
 import { setColorLotto, networkAlert, rankToClass, onlyUserAlert, stringTrimer, isoStringToDate, makeNoneBox, makeLoading, removeLoading } from '../functions/index'
 import IncludeExclude from './IncludeExclude/index';

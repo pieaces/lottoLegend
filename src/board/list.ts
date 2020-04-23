@@ -22,7 +22,7 @@ const { word, type } = getQueryStringObject();
 const selectBox = document.querySelector<HTMLSelectElement>('#search');
 const wordInput = document.querySelector<HTMLInputElement>('#word');
 
-const searchBox = document.querySelector<HTMLElement>('.search-box-form');
+const searchBox = document.querySelector<HTMLElement>('.search-box');
 searchBox && (searchBox.onsubmit = (e) => {
     e.preventDefault();
     location.href = `?index=1&word=${wordInput.value}&type=${selectBox.value}`;

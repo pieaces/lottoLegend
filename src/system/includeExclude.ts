@@ -1,5 +1,4 @@
 import configure from '../amplify/configure'
-import 'core-js/stable/dom-collections/for-each'
 import { getUnAuthAPI, postAuthAPI, getAuthAPI } from '../amplify/api'
 import Layout2 from "./premium/Layout/Layout2";
 import ResetBtn from './premium/instanceBtns/ResetBtn';
