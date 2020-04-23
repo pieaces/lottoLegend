@@ -169,6 +169,12 @@ submitBtn.onclick = async () => {
         removeLoading();
     }
 }
+//새로고침, 이전페이지 이동 막기
+window.onbeforeunload = function(e) {
+    var dialogText = '';
+    e.returnValue = dialogText;
+    return dialogText;
+};
 
 editor.onImageUpload = function (targetImgElement, index, state, imageInfo, remainingFilesCount) {
     if (state === 'delete') {
