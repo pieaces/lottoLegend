@@ -3,11 +3,48 @@ const path = require('path');
 module.exports = {
     mode: 'production',
     entry: {
-        app: `./src/`,
+        'account/agree': './src/account/agree.ts',
+        'account/changePw': './src/account/changePw.ts',
+        'account/findId': './src/account/findId.ts',
+        'account/findPw': './src/account/findPw.ts',
+        'account/join': './src/account/join.ts',
+        'account/resultId': './src/account/resultId.ts',
+        'account/signIn': './src/account/signIn.ts',
+        'account/withdrawal': './src/account/withdrawal.ts',
+
+        'base/configure': './src/base/configure.ts',
+
+        'board/list': './src/board/list.ts',
+        'board/post': './src/board/post.ts',
+        'board/qnaList': './src/board/qnaList.ts',
+        'board/read': './src/board/read.ts',
+
+        'introduce/pay': './src/introduce/pay.ts',
+
+        'myPage/currentPayment': './src/myPage/currentPayment.ts',
+        'myPage/home': './src/myPage/home.ts',
+        'myPage/includeExclude': './src/myPage/includeExclude.ts',
+        'myPage/numbersList': './src/myPage/numbersList.ts',
+        'myPage/payment': './src/myPage/payment.ts',
+
+        // 'statistics/excludedLines': './src/statistics/excludedLines.ts',
+        // 'statistics/pattern': './src/statistics/pattern.ts',
+        // 'statistics/statistics': './src/statistics/statistics.ts',
+        // 'statistics/units': './src/statistics/units.ts',
+        // 'statistics/weekNumbers': './src/statistics/weekNumbers.ts',
+        // 'statistics/winNumbers': './src/statistics/winNumbers.ts',
+
+        // 'system/basic': './src/system/basic.ts',
+        // 'system/experience': './src/system/experience.ts',
+        // 'system/includeExclude': './src/system/includeExclude.ts',
+        // 'system/premium': './src/system/premium.ts',
+
+        'admin': './src/admin.ts',
+        'main': './src/main.ts'
     },
     devtool: 'cheap-eval-source-map',
     output: {
-        filename: `${name}.js`,
+        filename: '[name].js',
         path: path.resolve(__dirname, 'dist')
     },
     module: {
@@ -28,11 +65,11 @@ module.exports = {
             cacheGroups: {
                 vendors: {
                     // 대상이 되는 파일 지정(여기서는 node_modules 디렉터리에 있는 파일들이 대상)
-                    test: /[\\/]node_modules[\\/]((?!suneditor).)*$/,
+                    test: /[\\/]node_modules[\\/]((?!suneditor|mobius1-selectr).)*$/,
                     // 비동기 및 동기 모듈을 통한 최적화(test 조건에 포함되는 모든 것을 분리하겠다는 뜻)
                     chunks: 'initial',
                     // 청크로 분리할 때 이름으로 사용될 파일명
-                    name: 'vendor'
+                    name: 'vendor/non-system'
                 }
             }
         }
