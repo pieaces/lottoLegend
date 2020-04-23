@@ -1,4 +1,8 @@
 import configure from "../amplify/configure";
+import 'core-js/stable/dom-collections/for-each'
+import 'core-js/stable/string/includes'
+import 'core-js/stable/object/values'
+import 'core-js/stable/object/entries'
 import { numberFormat, networkAlert, onlyUserAlert, makeLoading, removeLoading } from "../functions";
 import { isNull } from "util";
 import Swal from "sweetalert2";
@@ -92,13 +96,13 @@ document.getElementById('order-btn').onclick = () => {
                         name: 'payment',
                         attributes: { method: 'bankbook' },
                         metrics: { money: priceList[current] }
-                    });
+                    })
                     Swal.fire({
                         title: '정상적으로 기록되었습니다',
                         icon: 'info',
                         timer: 2000
                     }).then(() => location.href = '/myPage/currentPayment.html');
-                }).catch(() => networkAlert()).finally(() => removeLoading());
+                }).catch((err) => networkAlert()).finally(() => removeLoading());
             }
         } else {
             onlyUserAlert();
