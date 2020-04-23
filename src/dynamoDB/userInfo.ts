@@ -69,7 +69,7 @@ export function scanUsers(day?:number): Promise<{ userName: string, value: numbe
                         day: item.Day && Number(item.Day.N)
                     }
                 });
-            console.log(result);
+            console.log('users: ', result);
             resolve(result);
         });
     });

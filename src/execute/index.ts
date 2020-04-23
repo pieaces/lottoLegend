@@ -60,7 +60,7 @@ export async function distribute() {
 
     const temp = factory(statsDataObj, option);
     let sum = 0;
-    console.log('users: ', users.length);
+    console.log('users size: ', users.length);
 
     const userDB = new Users();
     for (let index = 0; index < users.length; index++) {
