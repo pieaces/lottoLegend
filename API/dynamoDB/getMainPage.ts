@@ -41,9 +41,9 @@ export function getLottoData(round: number): Promise<{ round: number, numbers: n
                         data.Item.Win.M.fifthWinner && Number(data.Item.Win.M.fifthWinner.N) || 0
                     ];
                     winners = [
-                        data.Item.Win.M.firstWinner && data.Item.Win.M.firstWinner.SS,
-                        data.Item.Win.M.secondWinner && data.Item.Win.M.secondWinner.SS,
-                        data.Item.Win.M.thirdWinner && data.Item.Win.M.thirdWinner.SS,
+                        data.Item.Win.M.firstWinner && data.Item.Win.M.firstWinner.SS.map(userName => protectUserName(userName)),
+                        data.Item.Win.M.secondWinner && data.Item.Win.M.secondWinner.SS.map(userName => protectUserName(userName)),
+                        data.Item.Win.M.thirdWinner && data.Item.Win.M.thirdWinner.SS.map(userName => protectUserName(userName)),
                     ];
                 }                
             }
@@ -78,4 +78,8 @@ export function getWinStats(): Promise<number[]> {
             resolve([Number(data.Item.firstWinner.N), Number(data.Item.secondWinner.N), Number(data.Item.thirdWinner.N), Number(data.Item.fourthWinner.N), Number(data.Item.fifthWinner.N)]);
         });
     });
+}
+
+function protectUserName(userName:string){
+    return userName.slice(0, -2) + '**';
 }
