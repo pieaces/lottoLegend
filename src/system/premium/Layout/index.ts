@@ -187,11 +187,11 @@ export default class Layout extends LayoutToggle(Layout3) {
                         this.options[currentFilter] = [];
                         await this.dataAPI.forward(this.options[currentFilter]);
                         infoText.innerHTML = this.dataAPI.infoList[currentFilter + 1];
-                        this.layout2.includeVerson();
+                        this.layout2.includeVerson(5);
                     } else {
                         numFreq.classList.add('none');
                         numFreqTerm.classList.add('none');
-                        this.layout2.includeVerson();
+                        this.layout2.includeVerson(this.nextAbleLimit);
                         this.layout2.carryVersion();
                     }
                 }
@@ -205,7 +205,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                     numFreq.classList.remove('none');
                     numFreqTerm.classList.remove('none');
                     this.nextAbleLimit = 1;
-                    this.layout2.excludeVersion(40);
+                    this.layout2.excludeVersion();
                 }
                 this.layout2.setOpacity();
                 this.layout2.refreshNumberBoard();

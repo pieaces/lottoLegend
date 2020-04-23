@@ -53,7 +53,7 @@ const excludeInfo =`<span class="modal-pc-text"  style="font-size: 1.4rem;font-w
 
 *<span style="color:red;font-weight:bold;">빈도X간격</span>: 빈도의 계수(고유한수치)와 간격의 계수를 산술처리로 종합하였습니다.`;
 export default class Layout2 {
-    private limit = 40;
+    private limit = 30;
     static lottoNumDefaultColor = '#00048c';
     static readonly lottoNumSelectColor = '#e6e600';
     static readonly lottoNumDefaultFontColor = 'white';

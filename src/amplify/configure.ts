@@ -1,6 +1,9 @@
 import 'regenerator-runtime/runtime'
 import 'core-js/stable/promise'
 import 'core-js/stable/object/assign'
+import 'core-js/stable/string/includes'
+import 'core-js/stable/object/values'
+import 'core-js/stable/object/entries'
 import Amplify from '@aws-amplify/core'
 import awsconfig from './aws-exports'
 import Analytics from '@aws-amplify/analytics';
