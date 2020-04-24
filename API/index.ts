@@ -7,7 +7,9 @@ import {getUserNameByPhone, isMemberHasPhone} from "./dynamo/getInformation";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
-    //"Access-Control-Allow-Credentials" : true // Required for cookies, authorization headers with HTTPS
+    "Access-Control-Max-Age":3600,
+    "Access-Control-Allow-Credentials" : true, // Required for cookies, authorization headers with HTTPS
+    "Cache-Control": "max-age=3"
 }
 exports.handler = async (event: any) => {
     console.log(event);
