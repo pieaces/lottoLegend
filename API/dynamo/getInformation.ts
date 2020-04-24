@@ -1,8 +1,8 @@
-import { ScanInput, ScanOutput } from "aws-sdk/clients/dynamodb";
+import { ScanInput, ScanOutput, GetItemInput, GetItemOutput } from "aws-sdk/clients/dynamodb";
 import dynamoDB from ".";
 import { AWSError } from "aws-sdk";
 
-export default function getUserNameByPhone(phone: string): Promise<string[]> {
+export function getUserNameByPhone(phone: string): Promise<string[]> {
     const params: ScanInput = {
         TableName: 'LottoUsers',
         ProjectionExpression: 'UserName, Phone'
@@ -18,6 +18,25 @@ export default function getUserNameByPhone(phone: string): Promise<string[]> {
                 return userName;
             });
             resolve(users);
+        });
+    });
+}
+
+export function isMemberHasPhone(userName: string): Promise<boolean> {
+    const params: GetItemInput = {
+        TableName: 'LottoUsers',
+        //ProjectionExpression: 'Phone',
+        Key:{
+            UserName:{
+                S: userName
+            }
+        }
+    };
+
+    return new Promise((resolve, reject) => {
+        dynamoDB.getItem(params, async (err: AWSError, data: GetItemOutput) => {
+            if (err) reject(err);
+            resolve(data.Item && 'Phone' in data.Item);
         });
     });
 }

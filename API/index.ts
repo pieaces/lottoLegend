@@ -3,7 +3,7 @@ import deleteUser from "./dynamo/deleteUser";
 import { Response } from "./Response";
 import verify from "./auth";
 import setPhone from "./dynamo/setPhone";
-import getUserNameByPhone from "./dynamo/getUserNameByPhone";
+import {getUserNameByPhone, isMemberHasPhone} from "./dynamo/getInformation";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -68,6 +68,10 @@ exports.handler = async (event: any) => {
             break;
         case '/account/phone': {
             switch (method) {
+                case 'GET':
+                    const userName = event.queryStringParameters.userName;
+                    body = await isMemberHasPhone(userName);
+                    break;
                 case 'PATCH':
                     const { phone } = JSON.parse(event.body);
                     await setPhone(currentId, phone);
