@@ -17,7 +17,7 @@ export default async function signIn(username: string, password: string) {
         password,
     }).then(async () => {
         if (document.referrer.indexOf('account') !== -1) location.href = "/myPage/home.html";
-        else if (document.referrer.indexOf('lottoend') !== -1) location.href = "/"
+        else if(location.href === "https://lottoend.com/") location.href = "/";
         else history.back();
     }).catch(err => {
         if (err.message.indexOf('exceeded') !== -1) {
