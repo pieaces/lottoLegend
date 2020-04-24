@@ -8,7 +8,9 @@ import Response from "./Response";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
-    //"Access-Control-Allow-Credentials" : true // Required for cookies, authorization headers with HTTPS
+    "Access-Control-Max-Age":3600,
+    "Access-Control-Allow-Credentials" : true, // Required for cookies, authorization headers with HTTPS
+    "Cache-Control": "max-age=3600"
 }
 exports.handler = async (event: any) => {
     console.log(event);
