@@ -10,7 +10,7 @@ const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
     "Access-Control-Max-Age":3600,
     "Access-Control-Allow-Credentials" : true, // Required for cookies, authorization headers with HTTPS
-    "Cache-Control": "max-age=3"
+    "Cache-Control": "max-age=5"
 }
 exports.handler = async (event: any) => {
     if (event['detail-type'] === 'Scheduled Event') {
@@ -144,6 +144,7 @@ exports.handler = async (event: any) => {
             switch (method) {
                 case 'GET':
                     body = await queryLottoData(round);
+                    headers["Cache-Control"] = "max-age=60";
             }
         }
             break;
@@ -171,6 +172,7 @@ exports.handler = async (event: any) => {
                     });
                     const rounds = result.rounds;
                     body = { data, rounds };
+                    headers["Cache-Control"] = "max-age=60";
             }
         }
             break;
