@@ -383,10 +383,6 @@ export default class Layout2 {
         document.querySelector<HTMLElement>('.func2-radar-que').addEventListener('click', () => {
             const radarInfo =
                 `<span class="modal-pc-text"  style="font-size: 1.4rem;font-weight: 400;color: #bdbdbd;">*움직여보세요.</span>
-우리의 모티브는 아래와 같습니다.
-"수백회차가 진행되는 동안, 출현했던 번호만 계속 나온다면,
-<span style="color:black;font-weight:bold;">대수법칙</span>은 충족되지 않을것입니다."
-
 전체 회차에 대한 번호별 출현간격은
 레이더차트를 이용해 12간격까지 나타내었습니다.
 그리고 그밖의 데이터를 표로 나타내었습니다.

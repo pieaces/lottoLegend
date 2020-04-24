@@ -205,7 +205,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                     numFreq.classList.remove('none');
                     numFreqTerm.classList.remove('none');
                     this.nextAbleLimit = 1;
-                    this.layout2.excludeVersion();
+                    this.layout2.excludeVersion(30);
                 }
                 this.layout2.setOpacity();
                 this.layout2.refreshNumberBoard();
