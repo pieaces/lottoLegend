@@ -238,7 +238,10 @@ exports.handler = async (event: any) => {
                             img
                         }
                     });
-                    if(currentId) body.user = await getMainUserInfo(currentId);
+                    if(currentId) {
+                        body.user = await getMainUserInfo(currentId);
+                        headers["Cache-Control"] = "max-age=1";
+                    }
             }
         }
             break;
