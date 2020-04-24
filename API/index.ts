@@ -8,11 +8,10 @@ import { addPoint, Point, subtractPoint, getRank, getMainUserInfo } from "./dyna
 import Users from "./mariaDB/Users";
 import Response from "./Response";
 
-const headers = {
+const headers: any = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
     "Access-Control-Max-Age":3600,
     "Access-Control-Allow-Credentials" : true, // Required for cookies, authorization headers with HTTPS
-    "Cache-Control": "max-age=5"
 }
 exports.handler = async (event: any) => {
     if (event['detail-type'] === 'Scheduled Event') {
@@ -52,6 +51,7 @@ exports.handler = async (event: any) => {
                     const count = await db.getCount(category);
                     body = { posts, count };
                     if(category === 'pro') body.rank = currentId && await getRank(currentId);
+                    headers["Cache-Control"] = "max-age=60";
                     break;
                 case 'POST':
                     if (currentId) {
@@ -111,6 +111,7 @@ exports.handler = async (event: any) => {
                         const post = await db.getTitleContents(postId);
                         body = post;
                     }
+                    headers["Cache-Control"] = "max-age=3600";
                     break;
                 case 'PATCH': {
                     const response = isIdentical(currentId, (await db.getUserName(postId)));
@@ -146,6 +147,7 @@ exports.handler = async (event: any) => {
                 case 'GET':
                     const comments = await db.getByPost(postId);
                     body = comments;
+                    headers["Cache-Control"] = "max-age=60";
                     break;
                 case 'POST':
                     if (currentId) {
@@ -216,6 +218,7 @@ exports.handler = async (event: any) => {
                     const posts = await db.search(category, word, type as SearchType, index);
                     const count = await db.getCountBySearch(category, word, type as SearchType);
                     body = { posts, count };
+                    headers["Cache-Control"] = "max-age=30";
                     break;
             }
         }
@@ -240,8 +243,8 @@ exports.handler = async (event: any) => {
                     });
                     if(currentId) {
                         body.user = await getMainUserInfo(currentId);
-                        headers["Cache-Control"] = "max-age=1";
                     }
+                    headers["Cache-Control"] = "max-age=1";
             }
         }
             break;
