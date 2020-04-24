@@ -9,15 +9,15 @@ const awsconfig = {
 
         cookieStorage: {
             // REQUIRED - Cookie domain (only required if cookieStorage is provided)
-            //domain: 'lottoend.com',
-            domain: '127.0.0.1',
+            domain: 'lottoend.com',
+            //domain: '127.0.0.1',
             // OPTIONAL - Cookie path
             path: '/',
             // OPTIONAL - Cookie expiration in days
             expires: 30,
             // OPTIONAL - Cookie secure flag
             // Either true or false, indicating if the cookie transmission requires a secure protocol (https).
-            secure: false
+            secure: true
         }
     },
     API: {
@@ -37,8 +37,7 @@ const awsconfig = {
 
         AWSPinpoint: {
             // OPTIONAL -  Amazon Pinpoint App Client ID
-            appId: '7f944c1d4f6f4fe8826dd1c3412c365f',
-            //            appId: 'a47407198ab049d59ea309eb77421020',
+            appId: 'a47407198ab049d59ea309eb77421020',
 
             // OPTIONAL -  Amazon service region
             region: 'us-west-2',
