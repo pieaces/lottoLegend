@@ -12,7 +12,7 @@ const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
     "Access-Control-Max-Age":3600,
     "Access-Control-Allow-Credentials" : true, // Required for cookies, authorization headers with HTTPS
-    "Cache-Control": "max-age=3"
+    "Cache-Control": "max-age=5"
 }
 exports.handler = async (event: any) => {
     if (event['detail-type'] === 'Scheduled Event') {
