@@ -26,7 +26,7 @@ export async function getNickName() {
 
 export async function signOut() {
     await Auth.signOut()
-        .then(() => location.href = "/main.html")
+        .then(() => location.href = "/")
         .catch(() => networkAlert());
 }
 export async function signUp(username: string, password: string, nickname: string) {
