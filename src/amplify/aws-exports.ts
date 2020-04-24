@@ -36,10 +36,8 @@ const awsconfig = {
         autoSessionRecord: true,
 
         AWSPinpoint: {
-            // OPTIONAL -  Amazon Pinpoint App Client ID
             appId: 'a47407198ab049d59ea309eb77421020',
-
-            // OPTIONAL -  Amazon service region
+            // Amazon service region
             region: 'us-west-2',
             // OPTIONAL -  Customized endpoint
         },
