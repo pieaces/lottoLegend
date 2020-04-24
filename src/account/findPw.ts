@@ -13,17 +13,18 @@ const passwordCheck = document.querySelector<HTMLInputElement>('#password-check'
 idForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     Auth.forgotPassword(userName.value)
-        .then(() => {
+        .then((result) => {
+            console.log(result);
             Swal.fire({
-                title:'확인 코드 전송',
-                text:'인증된 휴대폰 번호로 확인 코드를 전송하였습니다',
+                title:'확인 코드',
+                text:'해당계정이 존재하지 않거나, 휴대폰인증되지 않으면 번호가 전송되지 않습니다.',
                 icon:'info'
             });
             idForm.classList.add('none');
             codeForm.classList.remove('none');
         })
         .catch(err => Swal.fire({
-            title:'오류',
+            title:'잘못된 입력입니다',
             icon:'warning'
         }));
 });
