@@ -67,7 +67,7 @@ export default function LayoutToggle<TBase extends Constructor>(Base: TBase) {
             checkBoxToggle.addCheckBoxEvent();
             excLineCountText.textContent = (<number[]>data[1]).map(value => {
                 switch (value) {
-                    case 0: return '1번대';
+                    case 0: return '단번대';
                     case 1: return '10번대';
                     case 2: return '20번대';
                     case 3: return '30번대';
