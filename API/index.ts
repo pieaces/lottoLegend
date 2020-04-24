@@ -6,11 +6,10 @@ import { freeGenerator, numbersToData } from "./dynamoDB/generator";
 import { getMyHome, expirePlan } from "./dynamoDB/userInfo";
 import { getLottoData, getWinStats } from "./dynamoDB/getMainPage";
 
-const headers = {
+const headers:any = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
     "Access-Control-Max-Age":3600,
     "Access-Control-Allow-Credentials" : true, // Required for cookies, authorization headers with HTTPS
-    "Cache-Control": "max-age=5"
 }
 exports.handler = async (event: any) => {
     if (event['detail-type'] === 'Scheduled Event') {
@@ -65,6 +64,7 @@ exports.handler = async (event: any) => {
                         if (Number(rounds[rounds.length - 1]) <= total) {
                             body.answer = await getLotto2(Number(rounds[rounds.length - 1]));
                         }
+                        headers["Cache-Control"] = "max-age=5";
                     }
                         break;
                     case 'POST':
@@ -105,6 +105,7 @@ exports.handler = async (event: any) => {
                             body.answer = await getLotto(round);
                         }
                     }
+                    headers["Cache-Control"] = "max-age=5";
                 }
                     break;
                 case 'POST':
@@ -134,6 +135,7 @@ exports.handler = async (event: any) => {
                     if (round <= getCurrentRound()) {
                         body.answer = await getLotto(round);
                     }
+                    headers["Cache-Control"] = "max-age=5";
                 }
                     break;
             }
@@ -180,6 +182,7 @@ exports.handler = async (event: any) => {
             const round = getCurrentRound();
             body = await getLottoData(round);
             body.stats = await getWinStats();
+            headers["Cache-Control"] = "max-age=60";
         }
             break;
         case '/mypage': {
@@ -252,6 +255,7 @@ exports.handler = async (event: any) => {
                         day: myData.day
                     }
             }
+            headers["Cache-Control"] = "max-age=5";
         }
             break;
     }
