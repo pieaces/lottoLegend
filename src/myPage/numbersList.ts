@@ -102,7 +102,7 @@ isLogedIn().then(value => {
                                             filterBoxes[index].remove();
                                         });
                                         modifyTableBoundary();
-                                        CheckBoxToggle.subtract(indexes.length);
+                                        CheckBoxToggle.subtract();
                                         CheckBoxToggle.allCheckedReset();
                                         if (checkBoxToggle.getTotal() === 1) {
                                             numbersContainer[0].style.borderBottom = "1px solid rgba(0,0,0,0.1)";
