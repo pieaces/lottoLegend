@@ -10,6 +10,7 @@ import Slide from '../system/premium/Slide';
 import 'core-js/stable/array/fill'
 import { insertexcludedLinesTable } from './tables';
 import { isLogedIn } from '../amplify/auth';
+makeLoading();
 configure();
 
 const labels = require('../system/premium/DataAPI/json/labels.json');
@@ -97,7 +98,6 @@ const bar2Option: Chart.ChartOptions = {
 };
 
 mqMobileInit();
-makeLoading();
 isLogedIn().then(value => {
     if (value) getUnAuthAPI('/stats/piece', { method })
         .then(data => {

@@ -4,7 +4,8 @@ import ChartBase from '../system/premium/Chart/Charts';
 import { getUnAuthAPI } from '../amplify/api';
 import Swal from 'sweetalert2'
 import Selectr, { IOptions } from 'mobius1-selectr';
-import { numberFormat } from '../functions';
+import { numberFormat, makeLoading, networkAlert, removeLoading } from '../functions';
+makeLoading();
 configure();
 
 const compartColor = ['#FBC400', '#69C8F2', '#FF7272', '#AAAAAA', '#B0D840'];
@@ -122,7 +123,8 @@ getUnAuthAPI('/numbers/win')
                 });
             }
         });
-    });
+    }).catch(() => networkAlert())
+    .finally(() => removeLoading());
 const lottoNumTemp: HTMLElement[] = [];
 function write(data: any) {
     //round.textContent = data.round;

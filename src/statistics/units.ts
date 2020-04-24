@@ -10,8 +10,8 @@ import { mqMobileInit } from './functions';
 import { makeLoading, networkAlert, removeLoading, onlyUserAlert } from "../functions";
 import { insertUnitsTable } from "./tables";
 import { isLogedIn } from "../amplify/auth";
+makeLoading();
 configure();
-
 const lineCanvas: HTMLCanvasElement = document.querySelector('#chart-line');
 const lineNum = document.querySelectorAll<HTMLElement>('.chart-line-num > div');
 const leftBtn = document.getElementById('left-line-chart-btn');
@@ -65,7 +65,6 @@ const lineDataBox = {
 };
 
 mqMobileInit();
-makeLoading();
 isLogedIn().then(value => {
     if (value) getUnAuthAPI('/stats/piece', { method: 'pos$1' })
         .then(data => {

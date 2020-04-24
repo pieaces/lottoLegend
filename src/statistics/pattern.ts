@@ -2,13 +2,13 @@ import configure from "../amplify/configure";
 import { getUnAuthAPI } from "../amplify/api";
 import { networkAlert, makeLoading, removeLoading } from "../functions";
 import { mqMobileInit} from './functions';
+makeLoading();
 configure();
 
 const lottoNums = document.querySelectorAll<HTMLElement>('#frequency .lotto-num');
 const lottoNums12 = document.querySelectorAll<HTMLElement>('#frequency12 .lotto-num');
 const unappearance = document.getElementById('unappearance');
 mqMobileInit();
-makeLoading();
 getUnAuthAPI('/stats/piece', { method: 'frequency' }).then(({ total, frequency, frequency12 }) => {
     const max = Math.max(...frequency);
     const max12 = Math.max(...frequency12);

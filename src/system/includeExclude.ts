@@ -6,6 +6,7 @@ import Swal from 'sweetalert2'
 import { networkAlert, onlyUserAlert, makeLoading, removeLoading } from '../functions';
 import { isLogedIn } from '../amplify/auth';
 import 'core-js/stable/array/from'
+makeLoading();
 configure();
 
 const category = document.querySelector('.main').getAttribute('data-category');
@@ -15,7 +16,6 @@ enum IncOrExc {
     "exclude" = "exclude"
 }
 let incOrExc: IncOrExc;
-makeLoading();
 isLogedIn().then(value =>{
     if(value){
         getAuthAPI('/numbers/piece', { flag: true }).then(async ({ include, exclude }) =>{

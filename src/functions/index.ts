@@ -142,8 +142,7 @@ export function makeLoading(){
     const loadingBox = document.createElement('div');
     
     loadingBox.id = 'loading-box';
-    loadingBox.innerHTML = '<div class="loading"><div></div><div></div><div></div><div></div></div>';
-
+    loadingBox.innerHTML = '<div id="loading"></div>';//<div id="loading-box"><div id="loading"></div></div>
     document.querySelector('body').appendChild(loadingBox);
 }
 export function removeLoading(){
