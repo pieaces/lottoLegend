@@ -187,7 +187,7 @@ export default class Layout2 {
     }
     private doesExcluded(index: number): boolean {
         if (this.checkedNumbers.indexOf(index + 1) !== -1 ||
-            this.options[1] && this.options[1].indexOf(Math.floor((index + 1) / 10)) !== -1 || //전멸구간
+            this.options[1] && this.options[1].indexOf(Math.floor((index) / 10)) !== -1 || //전멸구간
             !this.options[3] && this.winNumbers[0].indexOf(index + 1) === -1 || //이월수만 포함하라.
             this.options[3] && typeof this.options[3] === 'object' && this.winNumbers[0].indexOf(index + 1) !== -1 || //이월수는 제외하라
             this.options[4] && (this.winNumbers[0].indexOf(index + 1) !== -1 || this.options[4].indexOf(index + 1) !== -1) ||
