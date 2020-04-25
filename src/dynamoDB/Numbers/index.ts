@@ -53,7 +53,7 @@ export function getNumbersCount(): Promise<number> {
         });
     });
 }
-export function scanNumbers(): Promise<{ numbersList: number[][], count: number }> {
+export function scanNumbers(): Promise<{ numbersList: number[][], count: number }> {//내림차순으로 가져옴
     const params: ScanInput = {
         TableName: 'LottoNumbers'
     };

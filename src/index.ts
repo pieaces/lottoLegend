@@ -1,10 +1,10 @@
 import verify from "./auth";
 import { getPaymentByBankBook, makePaymentByBankBook, deletePaymentBank, getPayments, makePlan, makeDay, scanUsersForAdmin, PayMethod, getPlanValue } from "./dynamoDB/payment";
-import factory, { supply } from "./dynamoDB/factory";
 import updateNumbers, { SelectTool } from "./dynamoDB/updateNumbers";
 import { getCurrentRound } from "./funtions";
 import { putNumberMessage, getPhoneNumber } from "./sns/publish";
 import { getPaymentBankForComputer } from "./dynamoDB/userInfo";
+import { scanNumbers, deleteNumbers } from "./dynamoDB/Numbers";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -55,15 +55,18 @@ exports.handler = async (event: any) => {
                         await makePlan(userName, plan, month, price, method);
                         if (method as PayMethod === 'bank') await deletePaymentBank(userName);
 
-                        const { statsDataObj, include } = await supply();
-                        const numbers = { include };
-                        const option = { per: 2, repeat: 20, numbers };
-                        const numbersList = factory(statsDataObj, option);
-                        
                         const planValue = getPlanValue(plan);
-                        await updateNumbers(userName, SelectTool.charge, getCurrentRound() + 1, numbersList.slice(0, planValue));
+
+                        const { numbersList, count } = await scanNumbers();//index 내림차순으로 가져옴
+                        const sum = planValue;
+                        for (let index = count - 1; index >= count - sum; index--) {
+                            await deleteNumbers(index);
+                        }
+
+                        const willPutNumbers = numbersList.slice(0, planValue);
+                        await updateNumbers(userName, SelectTool.charge, getCurrentRound() + 1, willPutNumbers);
                         const phone = await getPhoneNumber(userName);
-                        if(phone) await putNumberMessage('', planValue, numbersList.slice(0, planValue), phone);
+                        if(phone) await putNumberMessage('', planValue, willPutNumbers, phone);
                     }
                     break;
             }
