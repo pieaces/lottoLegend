@@ -31,7 +31,7 @@ export default async function autoPutSecond() {
             const point = Math.floor((Math.pow(whatCount(user.include, answer.numbers, 'include'), 2) << 3) / Math.log10(user.include.length));
             await addPoint(user.userName, point);
         }else if(user.include && user.include.length >= 1){
-            const point = whatCount(user.exclude, answer.numbers, 'exclude') * 20;
+            const point = whatCount(user.include, answer.numbers, 'exclude') * 20;
             await addPoint(user.userName, point);
         }
         if (user.exclude && user.exclude.length >= 10) {
