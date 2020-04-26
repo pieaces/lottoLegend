@@ -324,9 +324,7 @@ export default class Layout2 {
                             break;
                         }
                     }
-                } else {
-                    this.choice = null;
-                }
+                } 
             });
         }
     }
