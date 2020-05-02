@@ -7,14 +7,13 @@ import { doesRecommend } from "./dynamoDB/recommend";
 import { addPoint, Point, subtractPoint, getRank, getMainUserInfo } from "./dynamoDB/userInfo";
 import Users from "./mariaDB/Users";
 import Response from "./Response";
-import publish from "./sns";
+import queue from "./sqs";
 
 const headers: any = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
     "Access-Control-Max-Age":3600,
     "Access-Control-Allow-Credentials" : true, // Required for cookies, authorization headers with HTTPS
     "Cache-Control": "max-age=1"
-
 }
 exports.handler = async (event: any) => {
     if (event['detail-type'] === 'Scheduled Event') {
@@ -54,6 +53,7 @@ exports.handler = async (event: any) => {
                     const count = await db.getCount(category);
                     body = { posts, count };
                     if(category === 'pro') body.rank = currentId && await getRank(currentId);
+                    headers["Cache-Control"] = "max-age=3";
                     break;
                 case 'POST':
                     if (currentId) {
@@ -71,7 +71,7 @@ exports.handler = async (event: any) => {
                                 headers,
                             }
                         }else if(category === 'qna'){
-                            await publish('qna 작성됨', '+821093152042');
+                            await queue('qna: ' + title);
                         }
                         const insertId = await db.post(category, title, currentId, contents);
                         await addPoint(currentId, Point.post);
@@ -115,7 +115,7 @@ exports.handler = async (event: any) => {
                         const post = await db.getTitleContents(postId);
                         body = post;
                     }
-                    headers["Cache-Control"] = "max-age=3600";
+                    headers["Cache-Control"] = "max-age=3";
                     break;
                 case 'PATCH': {
                     const response = isIdentical(currentId, (await db.getUserName(postId)));
