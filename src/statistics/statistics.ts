@@ -1,30 +1,30 @@
 import configure from '../amplify/configure'
+import 'core-js/stable/array/fill'
 import ChartBase from '../system/premium/Chart/Charts';
 import LineSlide from '../system/premium/Slide/LineSlide'
+import BarSlide from '../system/premium/Slide/BarSlide'
 import { getUnAuthAPI } from '../amplify/api';
-import { getQueryStringObject, rangeMake } from '../functions';
+import { getQueryStringObject, rangeMake, networkAlert, makeLoading, removeLoading, onlyUserAlert } from '../functions';
 import makeClickable from '../system/premium/Slide/makeClickable';
-import { getStaticsName,mqMobileInit } from './functions';
-
-import {mqInit,menuInfoToggle} from '../base/headerHover';
-
-mqInit();
-menuInfoToggle();
+import { getStaticsName, mqMobileInit, makeCarryNumbers } from './functions';
+import Slide from '../system/premium/Slide';
+import Swal from 'sweetalert2';
+import { isLogedIn } from '../amplify/auth';
+makeLoading();
 configure();
 
 const labels = require('../system/premium/DataAPI/json/labels.json');
-const lineNum = document.querySelectorAll<HTMLElement>('.chart-line-num > div');
-const leftBtn = document.getElementById('left-line-chart-btn');
-const rightBtn = document.getElementById('right-line-chart-btn');
-const lineTitle = document.querySelector<HTMLElement>('.chart-title');
-
 const method = getQueryStringObject().method;
-const lineCanvas: HTMLCanvasElement = document.querySelector('#chart-line');
 const mean = document.querySelector<HTMLElement>('.stats-mean-value');
 const $68 = document.querySelector<HTMLElement>('.stats-68-value');
 const $95 = document.querySelector<HTMLElement>('.stats-95-value');
-
-document.querySelector<HTMLElement>('.main-title').textContent = getStaticsName(method);
+document.querySelector<HTMLElement>('#pc-name').textContent = getStaticsName(method);
+document.querySelector<HTMLElement>('#mobile-name').textContent = getStaticsName(method);
+const lineCanvas: HTMLCanvasElement = document.querySelector('#chart-line');
+const lineNum = document.querySelectorAll<HTMLElement>('.chart-line-num > div');
+const leftBtn = document.getElementById('left-line-chart-btn');
+const rightBtn = document.getElementById('right-line-chart-btn');
+const lineTitle = document.querySelector<HTMLElement>('#chart-line-title');
 const lineOption: Chart.ChartOptions = {
     tooltips: {
         mode: 'index',
@@ -51,7 +51,6 @@ const lineOption: Chart.ChartOptions = {
     },
 }
 const lineDataBox = {
-
     labels: labels[method],
     datasets: [
         {
@@ -73,9 +72,8 @@ const lineDataBox = {
     ]
 };
 
-const barCanvas: HTMLCanvasElement = document.querySelector('#chart-bar');
-const barDataBox = {
-
+const bar2Canvas: HTMLCanvasElement = document.querySelector('#chart-bar');
+const bar2DataBox = {
     labels: null,
     datasets: [
         {
@@ -84,7 +82,7 @@ const barDataBox = {
         }
     ]
 };
-const barOption: Chart.ChartOptions = {
+const bar2Option: Chart.ChartOptions = {
     scales: {
         yAxes: [{
             ticks: {
@@ -100,71 +98,90 @@ const barOption: Chart.ChartOptions = {
     legend: { display: false },
 };
 
-
 mqMobileInit();
-const loading = document.querySelector<HTMLElement>('.loading-box');
-loading.classList.remove('none');
-getUnAuthAPI('/stats/piece', { method })
-    .then(data => {
-        mean.textContent = Number(data.stats.mean).toFixed(2);
-        $68.textContent = rangeMake(data.stats);
-        $95.textContent = rangeMake(data.stats, 2);
-        const lineInstance = new ChartBase('line', lineCanvas, lineDataBox, lineOption);
-        lineInstance.create();
-        const lineSlide = new LineSlide(lineInstance, lineNum, leftBtn, rightBtn);
-        lineSlide.init(data);
-        const setText: () => void = function (this: any) {
-            switch (this.current) {
-                case 0: lineTitle.textContent = '1~12회차 종합';
-                    break;
-                case 1: lineTitle.textContent = '1~24회차 종합';
-                    break;
-                case 2: lineTitle.textContent = '1~48회차 종합';
-                    break;
-                case 3: lineTitle.textContent = '1~192회차 종합';
-                    break;
-                case 4: lineTitle.textContent = '전회차 종합';
-                    break;
+!method && Swal.fire({
+    title: '잘못된 접근입니다',
+    icon: 'warning'
+}).then(() => removeLoading());
+method && isLogedIn().then(value => {
+    if (value) getUnAuthAPI('/stats/piece', { method })
+        .then(data => {
+            mean.textContent = Number(data.stats.mean).toFixed(2);
+            $68.textContent = rangeMake(data.stats);
+            $95.textContent = rangeMake(data.stats, 2);
+            const lineInstance = new ChartBase('line', lineCanvas, lineDataBox, lineOption);
+            lineInstance.create();
+            const lineSlide = new LineSlide(lineInstance, lineNum, leftBtn, rightBtn);
+            lineSlide.setData(data);
+            lineSlide.init();
+            const setText: () => void = function (this: any) {
+                switch (this.current) {
+                    case 0: lineTitle.textContent = '1~12회차 종합';
+                        break;
+                    case 1: lineTitle.textContent = '1~24회차 종합';
+                        break;
+                    case 2: lineTitle.textContent = '1~48회차 종합';
+                        break;
+                    case 3: lineTitle.textContent = '1~192회차 종합';
+                        break;
+                    case 4: lineTitle.textContent = '전회차 종합';
+                        break;
+                }
             }
-        }
-        makeClickable(lineSlide, setText.bind(lineSlide));
+            makeClickable(lineSlide, setText.bind(lineSlide));
 
-        const barLabels = [];
-        for (let i = data.total - 49; i <= data.total; i++) barLabels.push(i);
-        barDataBox.labels = barLabels;
-        barDataBox.datasets[0].data = data.piece
-        const barInstance = new ChartBase('bar', barCanvas, barDataBox, barOption);
-        barInstance.create();
-        loading.classList.add('none');
-    });
+            const leftBarBtn: HTMLElement = document.querySelector('#left-bar-chart-btn');
+            const rightBarBtn: HTMLElement = document.querySelector('#right-bar-chart-btn');
+            const barNum = document.querySelectorAll('.chart-bar-num > div');
+            const bar1Canvas: HTMLCanvasElement = document.querySelector('#chart-bar-slide');
+            const barTitle = document.querySelector<HTMLElement>('#chart-bar-title');
 
-const filterBox = document.querySelector('.filter-box');
-const filterArrow = document.querySelector('.filter-arrow');
-const filterListBox = document.querySelector<HTMLElement>(".filter-list");
+            const bar1DataBox = {
+                labels: labels[method],
+                datasets: [
+                    {
+                        label: Slide.EXPECTED_TEXT,
+                        backgroundColor: '#00B2EA',
+                        data: null
+                    }
+                ]
+            };
+            const bar1Option: Chart.ChartOptions = {
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                maintainAspectRatio: false
+            }
+            const barInstance1 = new ChartBase('bar', bar1Canvas, bar1DataBox, bar1Option);
+            barInstance1.create();
+            const barSlide = new BarSlide(barInstance1, barNum, leftBarBtn, rightBarBtn);
+            barSlide.setData(data);
+            barSlide.init();
+            const setText2: () => void = function (this: any) {
+                switch (this.current) {
+                    case 0: barTitle.textContent = Slide.EXPECTED_TEXT;
+                        break;
+                    case 1: barTitle.textContent = Slide.ACTUAL_TEXT;
+                        break;
+                    case 2: barTitle.textContent = '예상대비 초과비율(%)';
+                        break;
+                }
+            }
+            makeClickable(barSlide, setText2.bind(barSlide));
 
-let flag = false;
-
-filterBox.addEventListener("click", e => {
-    if (!flag) {
-        filterArrow.classList.remove("fa-sort-down");
-        filterArrow.classList.add("fa-sort-up");
-        filterListBox.classList.remove("none");
-    } else {
-        filterArrow.classList.add("fa-sort-down");
-        filterArrow.classList.remove("fa-sort-up");
-        filterListBox.classList.add("none");
-    }
-    flag = !flag;
-
-    e.stopPropagation();
-});
-
-document.addEventListener('click', () => {
-    if (flag) {
-        //target 다른 곳
-        filterListBox.classList.add("none");
-        filterArrow.classList.add("fa-sort-down");
-        filterArrow.classList.remove("fa-sort-up");
-        flag = false;
-    }
+            const barLabels = [];
+            for (let i = data.total - 49; i <= data.total; i++) barLabels.push(i);
+            bar2DataBox.labels = barLabels;
+            bar2DataBox.datasets[0].data = data.piece
+            const barInstance2 = new ChartBase('bar', bar2Canvas, bar2DataBox, bar2Option);
+            barInstance2.create();
+            if (method === 'carryCount') {
+                document.getElementById('carry-title').parentElement.classList.remove('none');
+                const carryNumberContainer = document.querySelector<HTMLDivElement>('.carry-number-container');
+                makeCarryNumbers(carryNumberContainer, data.total, data.lottos, data.piece.reverse());
+            }
+        }).catch(() => networkAlert())
+        .finally(() => removeLoading());
+    else onlyUserAlert();
 })

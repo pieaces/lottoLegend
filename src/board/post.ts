@@ -4,14 +4,10 @@ import plugins from 'suneditor/src/plugins'
 import { ko } from 'suneditor/src/lang'
 import { postUnAuthAPI, postAuthAPI, getUnAuthAPI, patchAuthAPI, getAuthAPI } from '../amplify/api';
 import { isLogedIn, getUserName } from '../amplify/auth'
-import { networkAlert, onlyUserAlert, stringTrimer, getQueryStringObject } from '../functions'
+import { networkAlert, onlyUserAlert, stringTrimer, getQueryStringObject, makeLoading, removeLoading } from '../functions'
 import Swal from 'sweetalert2'
 import { Category, getCategoryHtml, makeNum } from './functions';
 
-import {mqInit,menuInfoToggle} from '../base/headerHover';
-
-mqInit();
-menuInfoToggle();
 configure();
 isLogedIn().then(bool => {
     if (!bool) onlyUserAlert();
@@ -69,8 +65,6 @@ function mqDeskTopInit() {
 
 const post = getQueryStringObject().id;
 const category: Category = document.getElementById('wrapper').getAttribute('data-category') as Category;
-const loading = document.querySelector('.loading-box');
-
 const submitBtn = document.getElementById('submit-btn');
 const titleInput = document.querySelector<HTMLInputElement>('#title-text');
 const imageTotalSize = document.getElementById('image-total-size');
@@ -84,18 +78,22 @@ if (post) {
     });
 }
 if (category === 'include' || category === 'exclude') {
-    getAuthAPI('/numbers/piece', { choice: category })
-        .then(numbers => {
-            if(numbers.length === 0){
-                Swal.fire({
-                    title: '알림',
-                    text: '번호리스트가 없습니다.',
-                    icon: 'info',
-                    footer: `<a href="/system/${category}.html">번호 선택하러 가기</a>`
-                }).then(() => location.href = `/system/${category}.html`);
-            }
-            makeNum(document.querySelector<HTMLElement>('.inc-exc-num-container'), numbers);
-        })
+    isLogedIn().then(value => {
+        if (value) {
+            getAuthAPI('/numbers/piece', { choice: category })
+                .then(numbers => {
+                    if (numbers.length === 0) {
+                        Swal.fire({
+                            title: '알림',
+                            text: '번호리스트가 없습니다.',
+                            icon: 'info',
+                            footer: `<a href="/system/${category}.html">번호 선택하러 가기</a>`
+                        }).then(() => location.href = `/system/${category}.html`);
+                    }
+                    makeNum(document.querySelector<HTMLElement>('.inc-exc-num-container'), numbers);
+                })
+        } else onlyUserAlert();
+    });
 }
 imageRemove.addEventListener('click', () => {
     deleteCheckedImages();
@@ -111,6 +109,7 @@ let imageList: ImageInfo[] = [];
 let selectedImages = [];
 let totalSize = 0;
 
+let submitCheck = false;
 submitBtn.onclick = async () => {
     const title = stringTrimer(titleInput.value);
     if (title === "") return Swal.fire({
@@ -125,7 +124,7 @@ submitBtn.onclick = async () => {
         title: '내용은 비워둘 수 없습니다',
         icon: 'warning'
     });
-    loading.classList.remove('none');
+    makeLoading();
     try {
         const images = [];
         const imageElements = [];
@@ -154,7 +153,6 @@ submitBtn.onclick = async () => {
                 title, contents
             });
         }
-        loading.classList.add('none');
 
         Swal.fire({
             title: '완료',
@@ -163,12 +161,23 @@ submitBtn.onclick = async () => {
             allowOutsideClick: false,
             timer: 1500,
         }).then(() => {
+            submitCheck = true;
             location.href = `/${getCategoryHtml(category, 'read')}?id=${leapId}`;
         });
     } catch (err) {
         networkAlert();
+    }finally{
+        removeLoading();
     }
 }
+//새로고침, 이전페이지 이동 막기
+window.onbeforeunload = function (e) {
+    if (titleInput.value !== "" && !submitCheck) {
+        const dialogText = '';
+        e.returnValue = dialogText;
+        return dialogText;
+    }
+};
 
 editor.onImageUpload = function (targetImgElement, index, state, imageInfo, remainingFilesCount) {
     if (state === 'delete') {
@@ -231,12 +240,12 @@ function setImageList(imageList: { size: number, index: number, src: string }[])
     const imageContainer = document.querySelectorAll<HTMLElement>('.image-container');
     const imageListSize = document.querySelectorAll<HTMLElement>('.image-size');
 
-    Array.from(imageContainer).forEach(node => {
+    imageContainer.forEach(node => {
         node.addEventListener('click', () => {
             checkImage(parseInt(node.dataset.imageIndex));
         });
     })
-    Array.from(imageListSize).forEach(node => {
+    imageListSize.forEach(node => {
         node.addEventListener('click', () => {
             selectImage('select', parseInt(node.dataset.imageIndex));
         });
@@ -244,7 +253,7 @@ function setImageList(imageList: { size: number, index: number, src: string }[])
 
     const imageTableList = imageTable.querySelectorAll<HTMLElement>('li');
 
-    Array.from(imageTableList).forEach(node => {
+    imageTableList.forEach(node => {
         node.addEventListener('click', () => {
             const img = node.firstElementChild.firstElementChild.firstElementChild as HTMLElement;
             if (node.classList.contains('checked')) {

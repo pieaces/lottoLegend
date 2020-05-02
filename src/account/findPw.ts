@@ -1,10 +1,8 @@
 import configure from "../amplify/configure";
 import Auth from "@aws-amplify/auth";
 import Swal from "sweetalert2";
-import {mqInit,menuInfoToggle} from '../base/headerHover';
-
-mqInit();
-menuInfoToggle();
+import { getUnAuthAPI } from "../amplify/api";
+import { makeLoading, removeLoading } from "../functions";
 configure();
 
 const userName = document.querySelector<HTMLInputElement>('#userName');
@@ -16,20 +14,32 @@ const passwordCheck = document.querySelector<HTMLInputElement>('#password-check'
 
 idForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    Auth.forgotPassword(userName.value)
+    makeLoading();
+    const bool = await getUnAuthAPI('/account/phone', { userName: userName.value });
+    console.log(bool);
+    if (bool) {
+        Auth.forgotPassword(userName.value)
         .then(() => {
             Swal.fire({
-                title:'확인 코드 전송',
-                text:'인증된 휴대폰 번호로 확인 코드를 전송하였습니다',
-                icon:'info'
+                title: '확인 코드 전송',
+                text: '인증된 휴대폰 번호로 확인 코드를 전송하였습니다',
+                icon: 'info'
             });
             idForm.classList.add('none');
             codeForm.classList.remove('none');
         })
         .catch(err => Swal.fire({
-            title:'오류',
-            icon:'warning'
+            title: '잘못된 입력입니다',
+            icon: 'warning'
         }));
+    } else {
+        Swal.fire({
+            title: '전송 실패',
+            text: '존재하지 않는 아이디이거나, 휴대폰인증이 되어 있지 않습니다',
+            icon: 'warning'
+        });
+    }
+    removeLoading();
 });
 
 codeForm.addEventListener('submit', async (e) => {
@@ -47,7 +57,6 @@ codeForm.addEventListener('submit', async (e) => {
                 });
             })
             .catch(err => {
-                console.log(err);
                 if(err.code === "CodeMismatchException"){
                     Swal.fire({
                         title: '확인 코드가 일치하지 않습니다',

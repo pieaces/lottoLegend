@@ -24,5 +24,5 @@ export default abstract class Slide<T extends ChartBase> {
         this.valueBox1 = valueBox1;
         this.valueBox2 = valueBox2;
     }
-    abstract setData(): void;
+    abstract updateData(): void;
 }

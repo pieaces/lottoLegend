@@ -2,7 +2,6 @@
 import Layout3 from "./Layout3";
 import NumBoard from "./NumBoard";
 import CheckBoxToggle from "../instanceBtns/CheckBoxToggle";
-import { makeCheckdValueBox } from "./functions"
 import generatorLoading from "../../generatorLoading";
 import { IDataAPI } from ".";
 
@@ -15,9 +14,6 @@ const carrycountCanvas = document.getElementById('carrycount');
 const includeCanvas = document.getElementById('include');
 const excludeCanvas = document.getElementById('exclude');
 const filterTableValues = document.querySelectorAll('.func3-filter-table > tbody > tr:nth-child(2) > td');
-const numListSelectTotal = document.querySelector<HTMLElement>('#num-list-select-total');
-const numListSelectCurrent = document.querySelector<HTMLElement>('#num-list-select-current');
-const allCheckBox = document.querySelector<HTMLInputElement>('#all-check');
 
 type Constructor<T = {}> = new (...args: any[]) => T;
 const layout1Class = 'func1-layout'
@@ -26,10 +22,10 @@ const layout3Class = 'func3-layout'
 
 export default function LayoutToggle<TBase extends Constructor>(Base: TBase) {
     return class extends Base {
-        protected dataAPI: IDataAPI;
-        private layout1Arr: HTMLElement[] = Array.from(layout1);
-        private layout2Arr: HTMLElement[] = Array.from(layout2);
-        private layout3Arr: HTMLElement[] = Array.from(layout3);
+        dataAPI: IDataAPI;
+        layout1Arr: NodeListOf<HTMLElement> = layout1;
+        layout2Arr: NodeListOf<HTMLElement> = layout2;
+        layout3Arr: NodeListOf<HTMLElement> = layout3;
         layout1On() {
             this.layout2Arr.forEach(node => {
                 node.classList.add('none');
@@ -66,12 +62,12 @@ export default function LayoutToggle<TBase extends Constructor>(Base: TBase) {
             const numBoard = new NumBoard(this.dataAPI.numbersData);
             numBoard.makeNumBoard();
             const checkBoxToggle = new CheckBoxToggle();
-            checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
-            checkBoxToggle.addEvent();
-            makeCheckdValueBox(numListSelectTotal, numListSelectCurrent, allCheckBox);
+            checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > .checkbox'));
+            checkBoxToggle.allBtnEvent();
+            checkBoxToggle.addCheckBoxEvent();
             excLineCountText.textContent = (<number[]>data[1]).map(value => {
                 switch (value) {
-                    case 0: return '1번대';
+                    case 0: return '단번대';
                     case 1: return '10번대';
                     case 2: return '20번대';
                     case 3: return '30번대';
@@ -81,11 +77,13 @@ export default function LayoutToggle<TBase extends Constructor>(Base: TBase) {
             Layout3.makeLine(carrycountCanvas, data[3].sort((a, b) => a - b));
             Layout3.makeLine(includeCanvas, data[4].sort((a, b) => a - b));
             Layout3.makeLine(excludeCanvas, data[5].sort((a, b) => a - b));
-            Array.from(filterTableValues).forEach((node, index) => {
+            filterTableValues.forEach((node, index) => {
                 if (index === 0) {
                     node.innerHTML = data.slice(6)[index];
                 } else if (index === 1) {
-                    node.innerHTML = data.slice(6)[index].sort((a, b) => a.from - b.from).map(value => `<div class="func3-table-values func3-table-sum">${value.from}~${value.to}</div>`).join('');
+                    if(data.slice(6)[index]){
+                        node.innerHTML = data.slice(6)[index].sort((a, b) => a.from - b.from).map(value => `<div class="func3-table-values func3-table-sum">${value.from}~${value.to}</div>`).join('');
+                    }
                 } else if (index < 8) {
                     const str = data.slice(6)[index] && data.slice(6)[index].sort((a, b) => a - b).map(value => `<div class="func3-table-values func3-table-piece">${value}</div>`).join('');
                     if (str) node.innerHTML = str;

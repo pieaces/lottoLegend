@@ -9,21 +9,22 @@ const awsconfig = {
 
         cookieStorage: {
             // REQUIRED - Cookie domain (only required if cookieStorage is provided)
-            domain: '127.0.0.1',
+            domain: 'lottoend.com',
+            //domain: '127.0.0.1',
             // OPTIONAL - Cookie path
             path: '/',
             // OPTIONAL - Cookie expiration in days
-            expires: 7,
+            expires: 30,
             // OPTIONAL - Cookie secure flag
             // Either true or false, indicating if the cookie transmission requires a secure protocol (https).
-            secure: false
+            secure: true
         }
     },
     API: {
         endpoints: [
             {
                 name: "lotto",
-                endpoint: "https://gg0v4lri81.execute-api.ap-northeast-2.amazonaws.com/dev",
+                endpoint: "https://gg0v4lri81.execute-api.ap-northeast-2.amazonaws.com/prod",
                 region: "ap-northeast-2",
             }
         ]
@@ -35,9 +36,8 @@ const awsconfig = {
         autoSessionRecord: true,
 
         AWSPinpoint: {
-            // OPTIONAL -  Amazon Pinpoint App Client ID
-            appId: 'f18e519ada4541dba064658a0fdd325a',
-            // OPTIONAL -  Amazon service region
+            appId: 'a47407198ab049d59ea309eb77421020',
+            // Amazon service region
             region: 'us-west-2',
             // OPTIONAL -  Customized endpoint
         },

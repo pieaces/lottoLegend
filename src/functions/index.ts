@@ -1,5 +1,6 @@
 import Swal from 'sweetalert2'
 import makeDraggable from '../system/premium/Layout/makeDraggable';
+import signIn from '../amplify/signIn';
 
 export function networkAlert() {
     Swal.fire({
@@ -56,7 +57,7 @@ export function makeModal(title: string, width: number) {
     text.style.fontSize = '1.5rem';
     text.style.fontWeight = '500';
     modalBox.style.boxShadow = '0 1px 1px rgba(0,0,0,0.12),0 2px 2px rgba(0,0,0,0.12),0 4px 4px rgba(0,0,0,0.12),0 8px 8px rgba(0,0,0,0.12),0 16px 16px rgba(0,0,0,0.12)';
-    document.querySelector<HTMLElement>('.swal2-container').style.background = '#ffffff00';
+    document.querySelector<HTMLElement>('.swal2-container').style.background = "none";
     makeDraggable(document.querySelector<HTMLElement>('.swal2-container'));
 }
 
@@ -79,8 +80,6 @@ export function setColorLotto(num: number, Box: HTMLElement) {
         Box.style.backgroundColor = '#AAAAAA';
     } else if (num <= 45) {
         Box.style.backgroundColor = '#B0D840';
-    } else {
-        console.error("setColorLotto 오류");
     }
 }
 export function setDisabledLotto(Box: HTMLElement) {
@@ -115,13 +114,38 @@ export function makeNoneBox() {
 }
 
 export function blankToHtml(text:string){
-    return text.replace(/\n/g, '<br>').replace(/ /g, '&nbsp;');
+    return text.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>').replace(/ /g, '&nbsp;');
 }
 export function blankToString(html:string){
-    console.log(html);
-    return html.replace(/<br>/g, '\n').replace(/&nbsp;/g, ' ');
+    return html.replace(/<br>/g, '\n').replace(/&nbsp;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 }
 
 export function numberFormat(inputNumber:string | number) {
     return inputNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
  }
+
+ export function loginAddEvent() {
+    const userNameInput = document.querySelector<HTMLInputElement>('#username');
+    const passwordInput = document.querySelector<HTMLInputElement>('#password');
+
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+        makeLoading();
+        e.preventDefault();
+        const userName = userNameInput.value;
+        const password = passwordInput.value;
+        await signIn(userName, password);
+        removeLoading();
+    });
+}
+
+export function makeLoading(){
+    const loadingBox = document.createElement('div');
+    
+    loadingBox.id = 'loading-box';
+    loadingBox.innerHTML = '<div id="loading"></div>';//<div id="loading-box"><div id="loading"></div></div>
+    document.querySelector('body').appendChild(loadingBox);
+}
+export function removeLoading(){
+    const loadingBox = document.getElementById('loading-box');
+    loadingBox.remove();
+}

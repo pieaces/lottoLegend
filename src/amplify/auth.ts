@@ -1,6 +1,5 @@
 import Auth from '@aws-amplify/auth'
 import { onlyUserAlert, networkAlert } from '../functions';
-import Swal from 'sweetalert2';
 
 export function headerSign() {
     Auth.currentAuthenticatedUser()
@@ -24,44 +23,10 @@ export async function getNickName() {
     return await Auth.currentAuthenticatedUser()
         .then(user => user.attributes.nickname);
 }
-export async function signIn(username: string, password: string) {
-    if (username === '' || password === '') {
-        return Swal.fire({
-            title: '알림',
-            text: '아이디, 비밀번호는 공백일 수 없습니다.',
-            icon: 'info'
-        });
-    }
-    const loading = document.querySelector('.loading-box');
-    loading.classList.remove('none');
-    await Auth.signIn({
-        username,
-        password,
-    }).then(user => {
-        location.href = "/myPage/home.html";
-    })
-        .catch(err => {
-            if (err.message.indexOf('exceeded') !== -1) {
-                Swal.fire({
-                    title: '알림',
-                    text: '5회 이상 잘못입력하였습니다. 잠시후 다시 시도해주세요',
-                    icon: 'info'
-                });
-            } else {
-                console.log(err);
-                Swal.fire({
-                    title: '알림',
-                    text: '아이디 또는 비밀번호가 틀렸습니다',
-                    icon: 'info'
-                });
-            }
-            loading.classList.add('none');
-        });
-}
 
 export async function signOut() {
     await Auth.signOut()
-        .then(() => location.href = "/main.html")
+        .then(() => location.href = "/")
         .catch(() => networkAlert());
 }
 export async function signUp(username: string, password: string, nickname: string) {
@@ -89,10 +54,10 @@ export async function resendSignUp(username: string) {
 
 export async function getIdToken() {
     try {
-        const idToken = (await Auth.currentSession()).getIdToken().getJwtToken()
+        const idToken = (await Auth.currentSession()).getIdToken().getJwtToken();
         return idToken;
     } catch (err) {
-        onlyUserAlert();
+        return onlyUserAlert();
     }
 }
 

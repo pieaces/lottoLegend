@@ -1,31 +1,117 @@
 import configure from "../amplify/configure";
-
-const priceCheckbox = document.querySelectorAll<HTMLInputElement>('.price-checkbox');
+import 'core-js/stable/string/includes'
+import 'core-js/stable/object/values'
+import 'core-js/stable/object/entries'
+import { numberFormat, networkAlert, onlyUserAlert, makeLoading, removeLoading } from "../functions";
+import { isNull } from "util";
+import Swal from "sweetalert2";
+import { postAuthAPI, getAuthAPI } from "../amplify/api";
+import { isLogedIn } from "../amplify/auth";
+import Analytics from "@aws-amplify/analytics";
+configure();
 const priceContainer = document.querySelectorAll<HTMLElement>('.price-container');
 const priceBox = document.querySelectorAll<HTMLElement>('.price-box');
 const priceAnchorBox = document.querySelectorAll<HTMLElement>('.price-service-anchor-box');
 const priceAnchorHoverBox = document.querySelectorAll<HTMLElement>('.price-service-anchor-hover-box');
 const price = document.getElementById('price');
+const productName = document.getElementById('product-name');
 const bankbook = document.getElementById('bankbook');
-
-import {mqInit,menuInfoToggle} from '../base/headerHover';
-
-mqInit();
-menuInfoToggle();
-configure();
 checkboxToggle();
+isLogedIn().then(result => {
+    if (result) {
+        getAuthAPI('/users/payment/bankbook').then(data => {
+            if (data) {
+                Swal.fire({
+                    title: '이미 주문하신 상품이 있습니다',
+                    text: '다른 상품가입을 원하시면 기존 주문을 취소해주세요',
+                    icon: 'warning'
+                }).then(() => location.href = '/myPage/currentPayment.html')
+            }
+        });
+    }
+})
 
 type PayMethod = 'bankbook' | 'card';
-let payMethod:PayMethod;
-bankbook.onclick = () =>{
-    if(payMethod !== 'bankbook'){
+let payMethod: PayMethod = null;
+const bankPerson = document.querySelector('.payment-method-box');
+bankbook.onclick = () => {
+    if (payMethod !== 'bankbook') {
         bankbook.classList.add('payment-clicked');
     }
+    payMethod = 'bankbook';
+    bankPerson.classList.remove('none');
+}
+const monthList = [24, 12, 6, 1];
+const priceList = [180000, 99000, 59000, 11000];
+const productList = ['프리미엄 2년', '프리미엄 1년', '프리미엄 6개월', '프리미엄 1개월'];
+let current: number = null;
+const person = document.querySelector<HTMLInputElement>('#deposit-name');
+const bank = document.querySelector<HTMLInputElement>('.payment-bank-content');
+
+const select = document.querySelector<HTMLSelectElement>('#combi-num');
+function premiumPlusText() {
+    price.textContent = numberFormat(Math.floor(priceList[current] * 1.5 / 1000) * 1000);
+    productName.textContent = productList[current].slice(0, 4) + '+ ' + productList[current].slice(5);
+}
+function premiumText() {
+    price.textContent = numberFormat(priceList[current]);
+    productName.textContent = productList[current];
+}
+select.addEventListener('change', () => {
+    if (!isNull(current)) {
+        if (select.selectedIndex === 1) {
+            premiumPlusText();
+        }
+        else {
+            premiumText();
+        }
+    }
+})
+
+document.getElementById('order-btn').onclick = () => {
+    isLogedIn().then(result => {
+        if (result) {
+            if (isNull(current)) {
+                Swal.fire({
+                    title: '상품카드를 선택해주세요',
+                    icon: 'warning'
+                });
+            } else if (isNull(payMethod)) {
+                Swal.fire({
+                    title: '결제수단을 선택해주세요',
+                    icon: 'warning'
+                });
+            } else if (person.value === '') {
+                Swal.fire({
+                    title: '입금자명은 비워둘 수 없습니다',
+                    icon: 'warning'
+                })
+            } else if (payMethod === 'bankbook') {
+                let price = priceList[current];
+                if(select.value === 'd') price = Math.floor(priceList[current] * 1.5 / 1000) * 1000;
+                makeLoading();
+                postAuthAPI('/users/payment/bankbook', { bank: bank.textContent, plan: select.value, person: person.value, month: monthList[current], price }).then(async () => {
+                    await Analytics.record({
+                        name: 'payment',
+                        attributes: { method: 'bankbook' },
+                        metrics: { money: priceList[current] }
+                    });
+                    Swal.fire({
+                        title: '정상적으로 기록되었습니다',
+                        icon: 'info',
+                        timer: 2000
+                    }).then(() => location.href = '/myPage/currentPayment.html');
+                }).catch(() => networkAlert()).finally(() => removeLoading());
+            }
+        } else {
+            onlyUserAlert();
+        }
+    })
 }
 function checkboxToggle() {
     const overEventHandler: (() => void)[] = [];
     const outEventHandler: (() => void)[] = [];
-    let current = null;
+
     for (let i = 0; i < priceContainer.length; i++) {
         priceContainer[i].addEventListener('click', function () {
             if (current !== i) {
@@ -42,22 +128,14 @@ function checkboxToggle() {
                 priceAnchorHoverBox[i].removeEventListener('mouseout', outEventHandler[i]);
                 priceAnchorHoverBox[i].style.transform = "perspective(1200px) rotateY(-179.9deg)";
                 priceAnchorHoverBox[i].style.opacity = "0";
-                switch(i){
-                    case 0:
-                        price.textContent = '150,000원';
-                    break;
-                    case 1:
-                        price.textContent = '90,000원';
-                    break;
-                    case 2:
-                        price.textContent = '53,000원';
-                    break;
-                    case 3:
-                        price.textContent = '9,900원';
-                    break;
-                }
             }
             current = i;
+            if (select.selectedIndex === 1) {
+                premiumPlusText();
+            }
+            else {
+                premiumText();
+            }
         });
 
         const overEvent = () => {
@@ -73,4 +151,3 @@ function checkboxToggle() {
         outEventHandler.push(outEvent);
     }
 }
-

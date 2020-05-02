@@ -1,14 +1,11 @@
-
 import configure from '../amplify/configure'
+import 'core-js/stable/array/fill'
 import ChartBase from '../system/premium/Chart/Charts';
 import { getUnAuthAPI } from '../amplify/api';
 import Swal from 'sweetalert2'
-import { mqMobileInit } from './functions'
 import Selectr, { IOptions } from 'mobius1-selectr';
-import {mqInit,menuInfoToggle} from '../base/headerHover';
-
-mqInit();
-menuInfoToggle();
+import { numberFormat, makeLoading, networkAlert, removeLoading } from '../functions';
+makeLoading();
 configure();
 
 const compartColor = ['#FBC400', '#69C8F2', '#FF7272', '#AAAAAA', '#B0D840'];
@@ -63,9 +60,10 @@ const stackOption: Chart.ChartOptions = {
 };
 
 const winBox = document.querySelector<HTMLElement>('.win-num-box');
-const round = document.getElementById('round');
+//const round = document.getElementById('round');
 const winner = document.getElementById('winner');
-const winAmount = document.getElementById('winAmount');
+const winAmount1 = document.getElementById('winAmount1');
+const winAmount2 = document.getElementById('winAmount2');
 const date = document.getElementById('date');
 const rightBtn = document.getElementById('right-btn');
 const leftBtn = document.getElementById('left-btn');
@@ -74,15 +72,15 @@ const lottoNums = document.querySelectorAll<HTMLElement>('.lotto-num');
 const statsValues = document.querySelectorAll('.stats-table tr >td:nth-child(2)');
 const roundSelectBox = document.querySelector<HTMLSelectElement>('#round-selectbox');
 
-mqMobileInit();
 getUnAuthAPI('/numbers/win')
     .then(data => {
-        console.log(data);
         const max: number = data.round;
         stackInstance.create();
         write(data);
 
         const roundConfig: IOptions = {
+            nativeDropdown:false,
+            placeholder:'회차',
             data: []
         };
         for (let round = data.round; round >= 1; round--) {
@@ -90,7 +88,12 @@ getUnAuthAPI('/numbers/win')
                 text: round, value: round
             });
         }
-        console.log(roundConfig.data);
+        Object.defineProperty(Selectr.prototype, 'mobileDevice', {
+            get() { return false; },
+            set() {},
+            enumerable: true,
+            configurable: true
+        });
         const roundSelect = new Selectr(roundSelectBox, roundConfig);
         roundSelect.on('selectr.change', async (option) => {
             const data = await getUnAuthAPI('/numbers/win', { round: option.value });
@@ -120,12 +123,14 @@ getUnAuthAPI('/numbers/win')
                 });
             }
         });
-    });
+    }).catch(() => networkAlert())
+    .finally(() => removeLoading());
 const lottoNumTemp: HTMLElement[] = [];
 function write(data: any) {
     //round.textContent = data.round;
     winner.textContent = data.winner;
-    winAmount.textContent = Math.round(data.winAmount / 100000000).toString();
+    winAmount1.textContent = numberFormat(data.winAmount);
+    winAmount2.textContent = Math.round(data.winAmount / 100000000).toString();
     date.textContent = data.date;
     const compart: number[] = new Array(5).fill(0);
     lottoNumTemp.forEach(lotto => {

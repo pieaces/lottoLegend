@@ -1,6 +1,6 @@
 import { makeInputCheckBox, makePastFilterTable } from "../../system/premium/Layout/functions"; import { setColorLotto, setDisabledLotto, isoStringToDate } from "../../functions";
 
-export function makeTable(canvas: HTMLElement, dataSet: any[], round: number | string, info: boolean, answer?: { numbers: number[], bonusNum: number }) {
+export function makeTable(canvas: HTMLElement, dataSet: any[], round: number | string, info: boolean, total?:number, answer?: { numbers: number[], bonusNum: number }) {
     for (let i = 0; i < (dataSet && dataSet.length) || 0; i++) {
         const tableContent = document.createElement('div');
         tableContent.classList.add('mypage-table-content');
@@ -20,7 +20,8 @@ export function makeTable(canvas: HTMLElement, dataSet: any[], round: number | s
         if (info) {
             const tableCheckBox = document.createElement('div');
             tableCheckBox.classList.add('mypage-table-checkbox');
-            tableCheckBox.appendChild(makeInputCheckBox());
+
+            tableCheckBox.appendChild(makeInputCheckBox(dataSet[i].method === 'a' && round > total ? true : false));
             tableContent.appendChild(tableCheckBox);
         }
 
@@ -41,6 +42,12 @@ export function makeTable(canvas: HTMLElement, dataSet: any[], round: number | s
         let division: string;
         switch (dataSet[i].tool) {
             case 'a': division = "무료";
+            switch (dataSet[i].method) {
+                case 'a': division += " 자동"
+                    break;
+                case 'm': division += " 수동"
+                    break;
+            }
                 break;
             case 'b': division = "유료"
                 switch (dataSet[i].method) {
@@ -100,19 +107,18 @@ export function makeTable(canvas: HTMLElement, dataSet: any[], round: number | s
     }
 }
 
-export function modifyTableBoundary(){
-   const tableContent=document.querySelectorAll<HTMLElement>('.mypage-table-content');
+export function modifyTableBoundary() {
+    const tableContent = document.querySelectorAll<HTMLElement>('.mypage-table-content');
 
-   for(let i=0;i<tableContent.length;i++){
-   if (i !== 0 && i % 10 === 0) {
-    tableContent[i].style.borderTop='0.5rem solid #09538e';
-}else if (i !== 0 && i % 5 === 0) {
-    tableContent[i].style.borderTop='0.5rem solid #449ce3';
-}else {
-    tableContent[i].style.borderTop = "1px solid rgba(0,0,0,0.1)";
-}
-   }
-    
+    for (let i = 0; i < tableContent.length; i++) {
+        if (i !== 0 && i % 10 === 0) {
+            tableContent[i].style.borderTop = '0.5rem solid #09538e';
+        } else if (i !== 0 && i % 5 === 0) {
+            tableContent[i].style.borderTop = '0.5rem solid #449ce3';
+        } else {
+            tableContent[i].style.borderTop = "1px solid rgba(0,0,0,0.1)";
+        }
+    }
 }
 
 export function win(numbers: number[], count: number, answer: { bonusNum: number }): number {

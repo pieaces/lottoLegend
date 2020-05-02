@@ -1,9 +1,4 @@
 import configure from "../amplify/configure";
-
-import {mqInit,menuInfoToggle} from '../base/headerHover';
-
-mqInit();
-menuInfoToggle();
 configure();
 
 const phoneFirst = document.querySelector<HTMLInputElement>('#phone-number-first');

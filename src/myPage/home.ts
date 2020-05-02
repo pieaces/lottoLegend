@@ -1,34 +1,29 @@
 import configure from '../amplify/configure'
-import { getAuthAPI, patchAuthAPI } from '../amplify/api'
-import { setColorLotto, networkAlert, rankToClass, onlyUserAlert, stringTrimer, isoStringToDate, makeNoneBox } from '../functions/index'
+import { getAuthAPI, patchAuthAPI, postAuthAPI } from '../amplify/api'
+import { setColorLotto, networkAlert, rankToClass, onlyUserAlert, stringTrimer, isoStringToDate, makeNoneBox, makeLoading, removeLoading } from '../functions/index'
 import IncludeExclude from './IncludeExclude/index';
 import incObj from './IncludeExclude/include';
 import excObj from './IncludeExclude/exclude';
 import Auth from '@aws-amplify/auth';
 import { makeTable, phoneString } from './functions';
 import Swal from 'sweetalert2';
-import {mqInit,menuInfoToggle} from '../base/headerHover';
-
-mqInit();
-menuInfoToggle();
+makeLoading();
 configure();
-
 const winNumBox = document.querySelector<HTMLElement>('.mypage-win-num');
 const nickname = document.querySelector('#nickname');
 const pointHtml = document.querySelector('#point');
 const phoneNumber = document.querySelector('#phone-number');
-const service = document.querySelector('#service');
-const expiryDate = document.querySelector('#service-expiry-date');
+const service = document.getElementById('service');
+const expireDate = document.querySelector('#service-expire-date');
 const nicknameUpdateBtn = document.querySelector('#nickname-update');
-const serviceUpdateBtn = document.querySelector('#service-update');
 const constmobileUpdateBtn = document.getElementById('mobile');
 const rankHtml = document.querySelector('.rank');
 const lottoRank = document.querySelector('#lotto-rank');
 const numListLength = document.querySelector('#num-list-select-total');
+const dayReceive = document.querySelector<HTMLSelectElement>('#day-receive');
 
 Auth.currentAuthenticatedUser()
     .then(user => {
-        console.log(user);
         nickname.textContent = user.attributes.nickname;
         if (user.attributes.phone_number_verified) {
             document.querySelector<HTMLElement>('.mobile-btn').classList.add('none');
@@ -37,10 +32,17 @@ Auth.currentAuthenticatedUser()
             phoneNumber.textContent = phoneString(user.attributes.phone_number);
         }
         nicknameUpdateBtn.addEventListener('click', nicknameUpdate);
-        serviceUpdateBtn.addEventListener('click', serviceUpdate);
         constmobileUpdateBtn.addEventListener('click', mobileUpdate);
 
-        getAuthAPI('/mypage').then(({ numsArr, total, include, exclude, winner, lotto, plan, until, rank, point }) => {
+        getAuthAPI('/mypage').then(({ numsArr, total, include, exclude, winner, lotto, plan, until, rank, point, day }) => {
+            if (day) {
+                for(let i=0; i<dayReceive.options.length; i++){
+                    if(Number(dayReceive.options[i].value) === day) {
+                        dayReceive.options[i].setAttribute('selected', '');
+                        break;
+                    }
+                }
+            }
             lotto.numbers.forEach((num: number) => {
                 const div = document.createElement('div');
                 div.textContent = num.toString();
@@ -58,7 +60,14 @@ Auth.currentAuthenticatedUser()
             winNumBox.appendChild(bonus);
 
             service.textContent = plan;
-            if (until) expiryDate.textContent = '~' + isoStringToDate(until);
+            if (until) {
+                expireDate.textContent = '~' + isoStringToDate(until);
+                if (user.attributes.phone_number_verified) {
+                    document.getElementById('mypage-day-week-receive-box').classList.remove('none');
+                }
+            } else {
+                document.getElementById('gaip').classList.remove('none');
+            }
             rankHtml.classList.add(rankToClass(rank));
             const rankText = document.createElement('div');
             rankText.classList.add('rank-text');
@@ -104,13 +113,22 @@ Auth.currentAuthenticatedUser()
             }
 
             if (numsArr && numsArr.length > 0) {
-                console.log(numsArr, numsArr.length);
                 makeTable(document.querySelector<HTMLElement>('.mypage-table-num-box'), numsArr, total, false);
                 numListLength.textContent = numsArr.length.toString();
             } else {
                 document.querySelector<HTMLElement>('.mypage-table-num-box').appendChild(makeNoneBox());
             }
-        }).catch(err => networkAlert());
+            document.getElementById('day-change').onclick = async () => {
+                postAuthAPI('/users/day', { day: dayReceive.options[dayReceive.selectedIndex].value}).then(() => {
+                    Swal.fire({
+                        title: '완료',
+                        icon: 'success'
+                    });
+                }).catch(() => networkAlert());
+            }
+
+        }).catch(err => networkAlert())
+        .finally(() => removeLoading());
     }).catch(err => onlyUserAlert());
 
 function modifyMessage(option: { title: string, text?: string, confirmButtonText: string, preConfirm: (param: any) => any }) {
@@ -141,10 +159,13 @@ async function phoneCodeVerify(title: string) {
                     title: '인증완료',
                     icon: 'success'
                 });
+                if(service.textContent !== '없음'){
+                    document.getElementById('mypage-day-week-receive-box').classList.remove('none');
+                }
             }
             catch (err) {
                 if (err.code) {
-                    Swal.showValidationMessage('잘못된 코드입니다');
+                    Swal.showValidationMessage('잘못된 번호입니다');
                 }
             }
         }
@@ -207,11 +228,7 @@ function mobileUpdate() {
                 phoneNumber.textContent = phoneString(user.attributes.phone_number);
                 document.querySelector<HTMLElement>('.mobile-btn').classList.add('none');
             });
-            phoneCodeVerify('확인 코드를 입력해주세요');
+            phoneCodeVerify('인증번호를 입력해주세요');
         }
     });
-}
-
-function serviceUpdate() {
-
 }

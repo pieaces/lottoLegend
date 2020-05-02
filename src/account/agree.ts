@@ -1,21 +1,26 @@
 import configure from '../amplify/configure'
-import CheckBoxToggle from "../system/premium/instanceBtns/CheckBoxToggle";
+import 'core-js/stable/array/from'
 import Swal from 'sweetalert2';
-import {mqInit,menuInfoToggle} from '../base/headerHover';
-
-mqInit();
-menuInfoToggle();
 configure();
-
-const checkBoxToggle = new CheckBoxToggle();
-checkBoxToggle.setInputBoxes(document.querySelectorAll<HTMLInputElement>('.input-checkbox-container > input'));
-checkBoxToggle.addEvent();
 
 const termsUseAllCheck = document.querySelector<HTMLInputElement>('#all-check');
 const termsUseCheckboxes = document.querySelectorAll<HTMLInputElement>('.terms-use-check');
 
+termsUseAllCheck.addEventListener('change', () => {
+    if (termsUseAllCheck.checked) {
+        termsUseCheckboxes.forEach((node: any) => {
+            node.checked = true;
+        });
+    } else {
+        termsUseCheckboxes.forEach((node: any) => {
+            node.checked = false;
+        });
+    }
+});
+
+
 document.querySelector('.terms-use-btn').addEventListener('click', () => {
-    if (termsUseAllCheck.checked || Array.from(termsUseCheckboxes).every((node) => node.checked === true)) {
+    if (Array.from(termsUseCheckboxes).every((node) => node.checked === true)) {
         location.href = '/account/join.html';
     } else {
         Swal.fire({

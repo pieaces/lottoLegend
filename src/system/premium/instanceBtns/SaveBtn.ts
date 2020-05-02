@@ -1,12 +1,10 @@
 import Swal from "sweetalert2";
-import { networkAlert } from "../../../functions";
+import { networkAlert, makeLoading, removeLoading } from "../../../functions";
 import { postAuthAPI } from "../../../amplify/api";
 import { modifyBoundary } from "../Layout/functions";
 import CheckBoxToggle from "./CheckBoxToggle";
 
 const saveBtns = document.querySelectorAll<HTMLElement>('.save-btn');
-const loading = document.querySelector<HTMLElement>('.loading-box');
-
 export enum Tool {
     'free' = 'a',
     'charge' = 'b'
@@ -14,8 +12,7 @@ export enum Tool {
 export default class SaveBtn {
     static init(tool: Tool) {
         const numListSelectCurrent = document.querySelector('#num-list-select-current');
-        const numListSelectTotal = document.getElementById('num-list-select-total');
-        Array.from(saveBtns).forEach((node) => {
+        saveBtns.forEach((node) => {
             node.addEventListener('click', async () => {
                 if (Number(numListSelectCurrent.textContent) === 0) {
                     return Swal.fire({
@@ -28,16 +25,15 @@ export default class SaveBtn {
                 const numsArr: number[][] = [];
                 const numbersContainer = document.querySelectorAll<HTMLElement>('.func3-num-container');
                 const indexArr: number[] = [];
-                Array.from(checkBoxList).forEach((node, index) => {
+                checkBoxList.forEach((node, index) => {
                     if (node.checked) {
                         numsArr.push(JSON.parse(numbersContainer[index].getAttribute('data-numbers')));
                         indexArr.push(index);
                     }
                 });
                 try {
-                    loading.classList.remove('none');
+                    makeLoading();
                     const code = await postAuthAPI('/numbers/mass', { numsArr, tool });
-                    loading.classList.add('none');
                     if (code.error) {
                         Swal.fire({
                             title: '개수 제한',
@@ -52,16 +48,15 @@ export default class SaveBtn {
                             icon: 'success',
                             timer: 1500,
                         });
-
-                        numListSelectCurrent.textContent = '0';
-                        numListSelectTotal.textContent = (Number(numListSelectTotal.textContent) - indexArr.length).toString();
-                        indexArr.forEach(index => numbersContainer[index].remove());
+                        CheckBoxToggle.subtract();
                         CheckBoxToggle.allCheckedReset();
+                        indexArr.forEach(index => numbersContainer[index].remove());
                         modifyBoundary();
                     }
                 } catch (err) {
-                    loading.classList.add('none');
                     networkAlert();
+                } finally {
+                    removeLoading();
                 }
             });
         });

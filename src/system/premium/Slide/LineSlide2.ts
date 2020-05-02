@@ -1,9 +1,10 @@
 import ChartBase from "../Chart/Charts";
 import LineSlide from "./LineSlide";
 import { IDataAPI } from "../Layout";
+import {roundPointThree} from './functions';
 
 export default class LineSlide2 extends LineSlide {
-    dataAPI:IDataAPI;
+    protected dataAPI:IDataAPI;
     constructor(lineInstance: ChartBase, numBtns: NodeListOf<Element>, leftBtn: HTMLElement, rightBtn: HTMLElement, table?: HTMLElement, valueBox1?: HTMLElement, valueBox2?: HTMLElement) {
         super(lineInstance, numBtns, leftBtn, rightBtn, table, valueBox1, valueBox2);
     }
@@ -52,13 +53,13 @@ export default class LineSlide2 extends LineSlide {
         }
     }
     init() {
-        super.init(this.dataAPI.getStats());
+        this.setData(this.dataAPI.getStats());
         this.numBtns[this.current].classList.remove(this.CURRENT_CSS);
         this.current = 0;
         this.numBtns[this.current].classList.add(this.CURRENT_CSS);
         this.chart.dataBox.labels = this.dataAPI.getLabels();
-        this.chart.dataBox.datasets[0].data = this.data.ideal['$12'];
-        this.chart.dataBox.datasets[1].data = this.data.actual['$12'];
+        this.chart.dataBox.datasets[0].data = this.data.ideal['$12'].map(num => roundPointThree(num));
+        this.chart.dataBox.datasets[1].data = this.data.actual['$12'].map(num => roundPointThree(num));
         this.chart.update();
         this.setText();
     }

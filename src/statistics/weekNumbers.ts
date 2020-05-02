@@ -1,23 +1,18 @@
+import configure from '../amplify/configure';
 import Selectr, { IOptions } from 'mobius1-selectr';
 import { setColorLotto, networkAlert, setDisabledLotto } from '../functions/index';
-import configure from '../amplify/configure';
 import { getUnAuthAPI } from '../amplify/api';
+configure();
 
 const selectBox = document.querySelector<HTMLSelectElement>('#num-week-select-box');
 const numWeekWrapper = document.querySelector<HTMLElement>('.num-week-wrapper');
 
-
-import {mqInit,menuInfoToggle} from '../base/headerHover';
-
-mqInit();
-menuInfoToggle();
-configure();
-
 getUnAuthAPI('/numbers/week')
     .then(({ data, rounds }) => {
         makeTable(data);
-
         const config: IOptions = {
+            nativeDropdown:false,
+            placeholder: '회차',
             data: rounds.map((round: string) => {
                 return {
                     text: round,
@@ -25,12 +20,18 @@ getUnAuthAPI('/numbers/week')
                 }
             }),
         };
+        Object.defineProperty(Selectr.prototype, 'mobileDevice', {
+            get() { return false; },
+            set() {},
+            enumerable: true,
+            configurable: true
+        });
         const selector = new Selectr(selectBox, config);
         selector.on('selectr.change', async (option) => {
             const { data } = await getUnAuthAPI('/numbers/week/' + option.value);
             makeTable(data);
         });
-    }).catch(err => networkAlert());
+    }).catch(() => networkAlert());
 
 function makeTable(dataSet: ({ round: string, numbers: number[], hits?: boolean[] })[]) {
     numWeekWrapper.innerHTML = '';
@@ -127,7 +128,8 @@ function makeTable(dataSet: ({ round: string, numbers: number[], hits?: boolean[
         numWeekWrapper.appendChild(div);
         if (i === 0) {
             const adBox = document.createElement('div');
-            adBox.classList.add('ad-box', 'box-color');
+            //adBox.classList.add('ad-box', 'box-color');
+            adBox.classList.add('ad-box');
             numWeekWrapper.appendChild(adBox);
         }
     }

@@ -1,14 +1,10 @@
 import configure from '../amplify/configure'
 import { getUnAuthAPI, postAuthAPI, deleteAuthAPI, getAuthAPI, patchAuthAPI } from '../amplify/api';
 import { getUserName, getNickName, isLogedIn } from '../amplify/auth';
-import { isoStringToDate, networkAlert, rankToClass, onlyUserAlert, isoStringToTime, getQueryStringObject, blankToHtml, blankToString } from '../functions';
+import { isoStringToDate, networkAlert, rankToClass, onlyUserAlert, isoStringToTime, getQueryStringObject, blankToHtml, blankToString, makeLoading, removeLoading } from '../functions';
 import Swal from 'sweetalert2'
 import { Category, getCategoryHtml, makeNumSet } from './functions';
 
-import {mqInit,menuInfoToggle} from '../base/headerHover';
-
-mqInit();
-menuInfoToggle();
 configure();
 
 const title = document.getElementById('content-title');
@@ -22,16 +18,29 @@ const postRank = document.getElementById('postRank');
 const commentContainerBox = document.querySelector('.comment-container-box');
 const commentNum = document.querySelector('#comment-num');
 const txtArea = document.querySelector<HTMLTextAreaElement>('#comment-write-text');
-const charCurrentCount = document.querySelector('#char-current-count');
+const charCurrentCount = document.querySelector<HTMLElement>('#char-current-count');
 const commentSubmit = document.getElementById('comment-submit');
 const contentsUpdateBtn = document.querySelector<HTMLElement>('.text-update-container');
 const recommendBtn = document.getElementById('reco-btn');
-const loading = document.querySelector('.loading-box');
 
+const category: Category = document.querySelector<HTMLElement>('#wrapper').getAttribute('data-category') as Category;
+const postBtn = document.querySelector('.post-btn');
 
 let commentCount = 0;
 const id = getQueryStringObject().id;
-init();
+if(category !== 'free' && category !== 'notice' && category !== 'win'){
+    isLogedIn().then(value => {
+        if(value) init();
+        else onlyUserAlert();
+    });
+}else init();
+if(category === 'notice' || category === 'pro'){
+    postBtn.classList.add('none');
+    getUserName().then(userName => {
+        if(userName === 'lottoend') postBtn.classList.remove('none');
+    }).catch(() => {});
+}
+
 commentSubmit.onclick = async function () {
     const logedIn = await isLogedIn();
     if (Number(charCurrentCount.textContent) > 0 && logedIn) {
@@ -39,6 +48,7 @@ commentSubmit.onclick = async function () {
             const { commentId, rank } = await postAuthAPI(`/posts/${id}/comments`, { contents: txtArea.value });
             makeComments([{ id: commentId, userName: await getUserName(), nickName: await getNickName(), rank, created: new Date().toISOString(), contents: txtArea.value }]);
             txtArea.value = "";
+            charCurrentCount.textContent="0";
             Swal.fire({
                 title: '완료',
                 icon: 'success',
@@ -72,7 +82,6 @@ async function init() {
         } else {
             post = await getUnAuthAPI('/posts/' + id);
         }
-        console.log(post);
         if (post.error) {
             return Swal.fire({
                 title: post.message,
@@ -81,24 +90,25 @@ async function init() {
                 location.href = "javascript:history.back();"
             });
         }
+        if(category === 'pro' && post.user <= 3) postBtn.classList.remove('none');
     } catch (err) {
         networkAlert();
     }
     title.textContent = post.title;
     author.textContent = post.nickName;
-    postRank.classList.add('rank');
-    postRank.classList.add(rankToClass(post.rank));
-    const rankText = document.createElement('div');
-    rankText.classList.add('rank-text');
-    rankText.textContent = post.rank;
-    postRank.appendChild(rankText);
+    if (category !== 'notice') {
+        postRank.classList.add('rank');
+        postRank.classList.add(rankToClass(post.rank));
+        const rankText = document.createElement('div');
+        rankText.classList.add('rank-text');
+        rankText.textContent = post.rank;
+        postRank.appendChild(rankText);
+    }
 
-
-    const category: Category = document.querySelector<HTMLElement>('#wrapper').getAttribute('data-category') as Category;
     if (category === 'include' || category === 'exclude') {
         document.getElementById('current-text').textContent = post.round;
         document.getElementById('before-text').textContent = (post.round - 1).toString();
-        makeNumSet(post.numbers, post.answer);
+        makeNumSet(post.numbers, category, post.answer);
     }
 
     if (await isLogedIn() && await getUserName() === post.userName) {
@@ -143,7 +153,7 @@ async function init() {
         recommendBtn.classList.add('recommend');
     }
     recommendBtn.addEventListener('click', async () => {
-        loading.classList.remove('none');
+        makeLoading();
         const logedIn = await isLogedIn();
         if (logedIn) {
             try {
@@ -164,7 +174,7 @@ async function init() {
             onlyUserAlert();
         }
 
-        loading.classList.add('none');
+        removeLoading();
     });
     contentsInput.innerHTML = post.contents;
 
@@ -223,25 +233,53 @@ async function makeComments(objArr: any) {
         else {
             let updateCheck = false;
             let parentEl: HTMLElement;
-            let textArea: HTMLTextAreaElement;
+            let textAreaBox: HTMLElement;
             updateBtn.addEventListener('click', async () => {
                 if (!updateCheck) {
                     updateBtn.textContent = "완료";
-                    textArea = document.createElement('textarea');
-                    textArea.classList.add('comment-update-write-text');
                     parentEl = updateBtn.parentElement.parentElement;
+                    textAreaBox=document.createElement('div');
+                    textAreaBox.classList.add('comment-write-text-box');
+                    const textArea = document.createElement('textarea');
+                    textArea.classList.add('comment-write-text');
+                    textArea.setAttribute('placeholder',"소중한 댓글을 남겨주세요");
+                    const charCountWrapper=document.createElement('div');
+                    charCountWrapper.classList.add('char-count-container');
+                    const charCountBox=document.createElement('div');
+                    charCountBox.classList.add('char-count-box');
+                    const current=document.createElement('span');
+                    current.classList.add('char-current-count');
+                    current.textContent=parentEl.nextElementSibling.textContent.length.toString();                    
+                    const slash=document.createTextNode('/');
+                    const max=document.createElement('span');
+                    max.classList.add('char-max-count');                    
+                    max.textContent="150";
+                    charCountBox.appendChild(current);
+                    charCountBox.appendChild(slash);
+                    charCountBox.appendChild(max);
+                    charCountWrapper.appendChild(charCountBox);                    
                     textArea.value = blankToString(parentEl.nextElementSibling.innerHTML);
+                    textArea.addEventListener('input', limitTxtAreaCount(textArea,current));
+                    textArea.addEventListener('paste', limitTxtAreaCount(textArea,current));
+                    textAreaBox.appendChild(textArea);
+                    textAreaBox.appendChild(charCountWrapper);                                                                        
                     parentEl.parentNode.children[1].remove();
-                    parentEl.parentNode.appendChild(textArea);
+                    parentEl.parentNode.appendChild(textAreaBox);
                     updateCheck = true;
                 } else {
+                    if((textAreaBox.firstElementChild as HTMLInputElement).value.length===0){
+                        Swal.fire({
+                            title: '내용은 비워둘 수 없습니다',
+                            icon: 'warning'
+                        });
+                    }else{
                     updateBtn.textContent = "수정";
                     try {
-                        await patchAuthAPI(`/posts/${id}/comments/${objArr[i].id}`, { contents: textArea.value })
+                        await patchAuthAPI(`/posts/${id}/comments/${objArr[i].id}`, { contents: (textAreaBox.firstElementChild as HTMLInputElement).value })
                         const commentContent = document.createElement('div');
                         commentContent.classList.add('comment-content');
-                        commentContent.innerHTML = blankToHtml(textArea.value);
-                        textArea.remove();
+                        commentContent.innerHTML = blankToHtml((textAreaBox.firstElementChild as HTMLInputElement).value);
+                        textAreaBox.remove();
                         parentEl.parentNode.appendChild(commentContent);
                         updateCheck = false;
                         Swal.fire({
@@ -252,6 +290,7 @@ async function makeComments(objArr: any) {
                     } catch (err) {
                         networkAlert();
                     }
+                }
                 }
             });
             deleteBtn.addEventListener('click', async () => {
@@ -300,20 +339,20 @@ async function makeComments(objArr: any) {
     commentCount += objArr.length;
     commentNum.textContent = commentCount.toString();
 }
-txtArea.addEventListener('input', limitTxtAreaCount())
-txtArea.addEventListener('paste', limitTxtAreaCount())
-function limitTxtAreaCount() {
+txtArea.addEventListener('input', limitTxtAreaCount(txtArea,charCurrentCount));
+txtArea.addEventListener('paste', limitTxtAreaCount(txtArea,charCurrentCount));
+function limitTxtAreaCount(target:HTMLTextAreaElement,currentEl:HTMLElement) {
     const maxlength = 150;
 
     return function () {
-        const currentLength = (txtArea.value).length;
+        const currentLength = (target.value).length;
         if (currentLength > maxlength) {
-            charCurrentCount.classList.add('comment-limit-alert');
-            charCurrentCount.textContent = (maxlength).toString();
-            txtArea.value = txtArea.value.slice(0, maxlength);
+            currentEl.classList.add('comment-limit-alert');
+            currentEl.textContent = (maxlength).toString();
+            target.value = target.value.slice(0, maxlength);
         } else {
-            charCurrentCount.classList.remove('comment-limit-alert');
-            charCurrentCount.textContent = currentLength.toString();
+            currentEl.classList.remove('comment-limit-alert');
+            currentEl.textContent = currentLength.toString();
         }
     }
 }

@@ -1,16 +1,17 @@
+import 'regenerator-runtime/runtime'
+import 'core-js/stable/promise'
+import 'core-js/stable/object/assign'
+import 'core-js/stable/string/includes'
+import 'core-js/stable/object/values'
+import 'core-js/stable/object/entries'
 import Amplify from '@aws-amplify/core'
 import awsconfig from './aws-exports'
 import Analytics from '@aws-amplify/analytics';
 import { headerSign } from './auth';
 import { mqInit, menuInfoToggle } from '../base/headerHover'
-
-
 export default function configure() {
-    if (!global['_babelPolyfill']) {
-        require('babel-polyfill');
-    }
     if (!('remove' in Element.prototype)) {
-        (<any>Element.prototype)['remove'] = function () {
+        HTMLElement.prototype['remove'] = function () {
             if (this.parentNode) {
                 this.parentNode.removeChild(this);
             }

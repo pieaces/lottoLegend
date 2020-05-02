@@ -9,10 +9,10 @@ import Layout1 from "./Layout1";
 import Layout2 from "./Layout2";
 import Swal from 'sweetalert2'
 import SaveBtn, { Tool } from "../instanceBtns/SaveBtn";
+import { makeLoading, removeLoading } from "../../../functions";
 
 const section = document.querySelector(".section1");
 const infoText = document.querySelector<HTMLElement>(".checkbox-text");
-const loading = document.querySelector<HTMLElement>('.loading-box');
 const filteredCounterBox = document.querySelector<HTMLElement>('.extract-num');
 const filteredCounter = document.getElementById('main-counter');
 const filteredSubCounter = document.getElementById('sub-counter');
@@ -63,16 +63,15 @@ export default class Layout extends LayoutToggle(Layout3) {
     }
     private resetSlideNum() {
         const slideNum = document.querySelectorAll<HTMLElement>('.func1-chart-slide-num');
-        Array.from(slideNum).forEach((node) => {
-            Array.from(node.children).forEach((node, index) => {
-
-                if (index === 0) {
-                    node.classList.add('chart-slide-current');
+        slideNum.forEach((node) => {
+            for(let i=0;i<node.children.length;i++){
+                if (i === 0) {
+                    node.children[i].classList.add('chart-slide-current');
                 } else {
-                    node.className = "";
+                    node.children[i].className = "";
                 }
-            })
-        });
+            }
+        })        
     }
     private setOption() {
         const currentFilter = this.dataAPI.getCurrent();
@@ -158,6 +157,21 @@ export default class Layout extends LayoutToggle(Layout3) {
         } else {
             filteredCounterBox.classList.add('hide');
         }
+
+        const excTextRow = document.querySelectorAll('#func1-bubble-table tr:nth-child(-n+5)');
+        const excText = document.querySelector('.func1-bubble-exc-text');
+        if (currentFilter === 1) {
+            excTextRow.forEach(node => {
+                node.classList.add('none');
+            });
+            excText.classList.remove('none');
+        } else {
+            excTextRow.forEach(node => {
+                node.classList.remove('none');
+            });
+            excText.classList.add('none');
+        }
+
         switch (currentFilter) {
             case 3: case 4: case 5:
                 const numFreq = document.querySelector('.func2-num-freq');
@@ -173,11 +187,11 @@ export default class Layout extends LayoutToggle(Layout3) {
                         this.options[currentFilter] = [];
                         await this.dataAPI.forward(this.options[currentFilter]);
                         infoText.innerHTML = this.dataAPI.infoList[currentFilter + 1];
-                        this.layout2.includeVerson();
+                        this.layout2.includeVerson(5);
                     } else {
                         numFreq.classList.add('none');
                         numFreqTerm.classList.add('none');
-                        this.layout2.includeVerson();
+                        this.layout2.includeVerson(this.nextAbleLimit);
                         this.layout2.carryVersion();
                     }
                 }
@@ -191,7 +205,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                     numFreq.classList.remove('none');
                     numFreqTerm.classList.remove('none');
                     this.nextAbleLimit = 1;
-                    this.layout2.excludeVersion(40);
+                    this.layout2.excludeVersion(30);
                 }
                 this.layout2.setOpacity();
                 this.layout2.refreshNumberBoard();
@@ -212,6 +226,7 @@ export default class Layout extends LayoutToggle(Layout3) {
                 } else if (currentFilter === 1) {
                     this.layout1.clearStatsBoard();
                     this.nextAbleLimit = this.options[currentFilter - 1].indexOf(true);
+                    infoText.innerHTML = `전멸구간 번호대를 선택해주세요.(${this.nextAbleLimit}개)`;
                     if (this.nextAbleLimit === 0) {
                         this.dropDown.nodeList[currentFilter].textContent = '-';
                         this.options[currentFilter] = [];
@@ -244,7 +259,7 @@ export default class Layout extends LayoutToggle(Layout3) {
     }
 
     private async next(current: number) {
-        loading.classList.remove('none');
+        makeLoading();
         await this.dataAPI.forward(this.options[current]);
         if (this.dataAPI.getCurrent() < this.dataAPI.SIZE && this.dataAPI.numbersData) {
             Swal.fire({
@@ -264,11 +279,10 @@ export default class Layout extends LayoutToggle(Layout3) {
             behavior: 'auto'
         });
         await this.on();
-        loading.classList.add('none');
         this.checkBox.reset();
         this.dropDown.changeBoard();
         this.dropDown.changeDropDownColor();
-        console.log(this.options);
+        removeLoading();
     }
     init() {
         this.dropDown.init();

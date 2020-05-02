@@ -116,9 +116,6 @@ export default class CheckBox {
         });
     }
     reset() {
-        if (this.nodeList.length === 0) {
-            this.init();
-        }
         this.nodeList.forEach(node => {
             node.children[0].classList.remove('func1-num-check-current');
             this.labelList.fill(false);
@@ -138,9 +135,7 @@ export default class CheckBox {
         });
 
         this.labelList = new Array<boolean>(labels.length).fill(false);
-        Array.from(checkBoxContainer.children).forEach((node) => {
-            node.remove();
-        })
+        checkBoxContainer.innerHTML = '';
 
         labels.forEach(label => {
             const divBox = document.createElement('div');
@@ -157,8 +152,5 @@ export default class CheckBox {
             divBox.appendChild(div);
             checkBoxContainer.appendChild(divBox);
         });
-
-
-
     }
 }
