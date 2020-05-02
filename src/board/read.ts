@@ -194,13 +194,17 @@ async function makeComments(objArr: any) {
         const commentTitle = document.createElement('div');
         commentTitle.classList.add('comment-title');
 
-        const rankElement = document.createElement('span');
-        rankElement.classList.add('rank');
-        rankElement.classList.add(rankToClass(objArr[i].rank));
-        const rankText = document.createElement('div');
-        rankText.classList.add('rank-text');
-        rankText.textContent = objArr[i].rank;
-        rankElement.appendChild(rankText);
+        let rankElement: HTMLElement;
+        if (objArr[i].rank !== 0) {
+            rankElement = document.createElement('span');
+            rankElement.classList.add('rank');
+            rankElement.classList.add(rankToClass(objArr[i].rank));
+            rankElement.textContent = objArr[i].rank;
+        } else {
+            rankElement = document.createElement('img');
+            rankElement.setAttribute('src', '/img/favicon-32x32.png');
+            rankElement.style.width = "2rem";
+        }
 
         const commentAuthor = document.createElement('div');
         commentAuthor.classList.add('comment-author');
