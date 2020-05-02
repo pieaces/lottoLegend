@@ -7,6 +7,7 @@ import { doesRecommend } from "./dynamoDB/recommend";
 import { addPoint, Point, subtractPoint, getRank, getMainUserInfo } from "./dynamoDB/userInfo";
 import Users from "./mariaDB/Users";
 import Response from "./Response";
+import publish from "./sns";
 
 const headers: any = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -69,6 +70,8 @@ exports.handler = async (event: any) => {
                                 statusCode:400,
                                 headers,
                             }
+                        }else if(category === 'qna'){
+                            await publish('qna 작성됨', '+821093152042');
                         }
                         const insertId = await db.post(category, title, currentId, contents);
                         await addPoint(currentId, Point.post);
