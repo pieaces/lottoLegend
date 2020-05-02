@@ -28,7 +28,7 @@ export default class Posts extends DB {
     }
     scan(category: Category, index: number = 1, userName?: string) {
         let qnaCondition = '', values;
-        if (category === 'qna') {
+        if (category === 'qna' && userName !== 'lottoend') {
             qnaCondition = `and Users.userName = ?`;
             values = [category, userName, Posts.SCAN_MAX * (index - 1), Posts.SCAN_MAX]
         } else {

@@ -96,7 +96,7 @@ exports.handler = async (event: any) => {
                             post.numbers = await getIncOrExcNumbers(post.userName, post.round, post.category);
                             post.answer = await getLotto(post.round - 1);
                         } else if (post.category === "qna") {
-                            if (currentId !== post.userName) {
+                            if (currentId !== post.userName && currentId !== 'lottoend') {
                                 return {
                                     statusCode: 200,
                                     headers,
