@@ -198,8 +198,11 @@ async function makeComments(objArr: any) {
         if (objArr[i].rank !== 0) {
             rankElement = document.createElement('span');
             rankElement.classList.add('rank');
-            rankElement.classList.add(rankToClass(objArr[i].rank));
-            rankElement.textContent = objArr[i].rank;
+            rankElement.classList.add(rankToClass(objArr[i].rank));    
+            const rankDiv=document.createElement('div');
+            rankDiv.classList.add('rank-text');
+            rankDiv.textContent= objArr[i].rank;  
+            rankElement.appendChild(rankDiv);
         } else {
             rankElement = document.createElement('img');
             rankElement.setAttribute('src', '/img/favicon-32x32.png');
