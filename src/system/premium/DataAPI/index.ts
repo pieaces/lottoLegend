@@ -59,7 +59,7 @@ export default class DataAPI {
         infoFront + '3배수개수입니다. ' + infoBack,
         infoFront + '첫수합(십의자리 합)입니다. ' + infoBack,
         infoFront + '고저차(가장 큰값 - 작은값)입니다. ' + infoBack,
-        infoFront + 'AC(Arithmetic Complexity' + infoBack,
+        infoFront + 'AC값입니다. ' + infoBack,
         '연속번호 포함여부를 선택해주세요.',
     ];
     private current: number = 0;
