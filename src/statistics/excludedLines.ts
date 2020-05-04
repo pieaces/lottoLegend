@@ -98,81 +98,78 @@ const bar2Option: Chart.ChartOptions = {
 };
 
 mqMobileInit();
-isLogedIn().then(value => {
-    if (value) getUnAuthAPI('/stats/piece', { method })
-        .then(data => {
-            mean.textContent = Number(data.stats.mean).toFixed(2);
-            $68.textContent = rangeMake(data.stats);
-            $95.textContent = rangeMake(data.stats, 2);
-            const lineInstance = new ChartBase('line', lineCanvas, lineDataBox, lineOption);
-            lineInstance.create();
-            const lineSlide = new LineSlide(lineInstance, lineNum, leftBtn, rightBtn);
-            lineSlide.setData(data);
-            lineSlide.init();
-            const setText: () => void = function (this: any) {
-                switch (this.current) {
-                    case 0: lineTitle.textContent = '1~12회차 종합';
-                        break;
-                    case 1: lineTitle.textContent = '1~24회차 종합';
-                        break;
-                    case 2: lineTitle.textContent = '1~48회차 종합';
-                        break;
-                    case 3: lineTitle.textContent = '1~192회차 종합';
-                        break;
-                    case 4: lineTitle.textContent = '전회차 종합';
-                        break;
+getUnAuthAPI('/stats/piece', { method })
+    .then(data => {
+        mean.textContent = Number(data.stats.mean).toFixed(2);
+        $68.textContent = rangeMake(data.stats);
+        $95.textContent = rangeMake(data.stats, 2);
+        const lineInstance = new ChartBase('line', lineCanvas, lineDataBox, lineOption);
+        lineInstance.create();
+        const lineSlide = new LineSlide(lineInstance, lineNum, leftBtn, rightBtn);
+        lineSlide.setData(data);
+        lineSlide.init();
+        const setText: () => void = function (this: any) {
+            switch (this.current) {
+                case 0: lineTitle.textContent = '1~12회차 종합';
+                    break;
+                case 1: lineTitle.textContent = '1~24회차 종합';
+                    break;
+                case 2: lineTitle.textContent = '1~48회차 종합';
+                    break;
+                case 3: lineTitle.textContent = '1~192회차 종합';
+                    break;
+                case 4: lineTitle.textContent = '전회차 종합';
+                    break;
+            }
+        }
+        makeClickable(lineSlide, setText.bind(lineSlide));
+
+        const leftBarBtn: HTMLElement = document.querySelector('#left-bar-chart-btn');
+        const rightBarBtn: HTMLElement = document.querySelector('#right-bar-chart-btn');
+        const barNum = document.querySelectorAll('.chart-bar-num > div');
+        const bar1Canvas: HTMLCanvasElement = document.querySelector('#chart-bar-slide');
+        const barTitle = document.querySelector<HTMLElement>('#chart-bar-title');
+
+        const bar1DataBox = {
+            labels: labels[method],
+            datasets: [
+                {
+                    label: Slide.EXPECTED_TEXT,
+                    backgroundColor: '#00B2EA',
+                    data: null
                 }
+            ]
+        };
+        const bar1Option: Chart.ChartOptions = {
+            tooltips: {
+                mode: 'index',
+                intersect: false,
+            },
+            maintainAspectRatio: false
+        }
+        const barInstance1 = new ChartBase('bar', bar1Canvas, bar1DataBox, bar1Option);
+        barInstance1.create();
+        const barSlide = new BarSlide(barInstance1, barNum, leftBarBtn, rightBarBtn);
+        barSlide.setData(data);
+        barSlide.init();
+        const setText2: () => void = function (this: any) {
+            switch (this.current) {
+                case 0: barTitle.textContent = Slide.EXPECTED_TEXT;
+                    break;
+                case 1: barTitle.textContent = Slide.ACTUAL_TEXT;
+                    break;
+                case 2: barTitle.textContent = '예상대비 초과비율(%)';
+                    break;
             }
-            makeClickable(lineSlide, setText.bind(lineSlide));
+        }
+        makeClickable(barSlide, setText2.bind(barSlide));
 
-            const leftBarBtn: HTMLElement = document.querySelector('#left-bar-chart-btn');
-            const rightBarBtn: HTMLElement = document.querySelector('#right-bar-chart-btn');
-            const barNum = document.querySelectorAll('.chart-bar-num > div');
-            const bar1Canvas: HTMLCanvasElement = document.querySelector('#chart-bar-slide');
-            const barTitle = document.querySelector<HTMLElement>('#chart-bar-title');
-
-            const bar1DataBox = {
-                labels: labels[method],
-                datasets: [
-                    {
-                        label: Slide.EXPECTED_TEXT,
-                        backgroundColor: '#00B2EA',
-                        data: null
-                    }
-                ]
-            };
-            const bar1Option: Chart.ChartOptions = {
-                tooltips: {
-                    mode: 'index',
-                    intersect: false,
-                },
-                maintainAspectRatio: false
-            }
-            const barInstance1 = new ChartBase('bar', bar1Canvas, bar1DataBox, bar1Option);
-            barInstance1.create();
-            const barSlide = new BarSlide(barInstance1, barNum, leftBarBtn, rightBarBtn);
-            barSlide.setData(data);
-            barSlide.init();
-            const setText2: () => void = function (this: any) {
-                switch (this.current) {
-                    case 0: barTitle.textContent = Slide.EXPECTED_TEXT;
-                        break;
-                    case 1: barTitle.textContent = Slide.ACTUAL_TEXT;
-                        break;
-                    case 2: barTitle.textContent = '예상대비 초과비율(%)';
-                        break;
-                }
-            }
-            makeClickable(barSlide, setText2.bind(barSlide));
-
-            const barLabels = [];
-            for (let i = data.total - 49; i <= data.total; i++) barLabels.push(i);
-            bar2DataBox.labels = barLabels;
-            bar2DataBox.datasets[0].data = data.piece
-            const barInstance2 = new ChartBase('bar', bar2Canvas, bar2DataBox, bar2Option);
-            barInstance2.create();
-            insertexcludedLinesTable(data);
-        }).catch(() => networkAlert())
-        .finally(() => removeLoading());
-    else onlyUserAlert();
-});
+        const barLabels = [];
+        for (let i = data.total - 49; i <= data.total; i++) barLabels.push(i);
+        bar2DataBox.labels = barLabels;
+        bar2DataBox.datasets[0].data = data.piece
+        const barInstance2 = new ChartBase('bar', bar2Canvas, bar2DataBox, bar2Option);
+        barInstance2.create();
+        insertexcludedLinesTable(data);
+    }).catch(() => networkAlert())
+    .finally(() => removeLoading());
