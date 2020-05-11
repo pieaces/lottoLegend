@@ -3,9 +3,14 @@ import cheerio from "cheerio";
 import { UpdateItemInput } from "aws-sdk/clients/dynamodb";
 import dynamoDB from ".";
 import { getCurrentRound } from "./functions";
+const https = require('https');
 
 async function getLottoInfoHtml(round: number) {
-    return await axios.get("https://dhlottery.co.kr/gameResult.do?method=byWin&drwNo=" + round);
+    return await axios({
+        url: "https://dhlottery.co.kr/gameResult.do?method=byWin&drwNo=" + round,
+        method: 'GET',
+        httpsAgent: new https.Agent({ rejectUnauthorized: false })
+    });
 };
 
 async function getLottoInfo(round:number) {

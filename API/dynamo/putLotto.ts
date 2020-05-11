@@ -6,6 +6,7 @@ import Calculate from '../Lotto/class/Calculate';
 import Analyze from '../Lotto/class/Analyze';
 import { setTimeout } from 'timers';
 import { PutItemInput, NumberSetAttributeValue, GetItemInput } from 'aws-sdk/clients/dynamodb';
+
 interface LottoData extends LData {
     winner: number;
     winAmount: number;
@@ -16,12 +17,24 @@ function lottoDataParser(data: any): LottoData {
     return lotto;
 }
 export default async function putLotto(round: number): Promise<void> {
-    const result = await (axios.get('http://www.nlotto.co.kr/common.do?method=getLottoNumber&drwNo=' + round));
+    // At request level
+    const https = require('https');
+    const result = await axios(
+        {
+            url: 'http://www.nlotto.co.kr/common.do?method=getLottoNumber&drwNo=' + round,
+            method: 'GET',
+            httpsAgent: new https.Agent({ rejectUnauthorized: false })
+        }
+    );
     const lotto: LottoData = lottoDataParser(result.data);
     let before: any = null;
     let beforeLotto: LottoData = null;
     if (round > 1) {
-        before = await (axios.get('http://www.nlotto.co.kr/common.do?method=getLottoNumber&drwNo=' + (round - 1)));
+        before = await axios({
+            url: 'http://www.nlotto.co.kr/common.do?method=getLottoNumber&drwNo=' + (round - 1),
+            method: 'GET',
+            httpsAgent: new https.Agent({ rejectUnauthorized: false })
+        });
         beforeLotto = lottoDataParser(before.data);
     }
     console.log(`${round}회 읽기 성공`);
