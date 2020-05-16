@@ -1,9 +1,11 @@
 import Users from "./mariaDB/Users";
+import Comments from "./mariaDB/Comments";
 import deleteUser from "./dynamo/deleteUser";
 import { Response } from "./Response";
 import verify from "./auth";
 import setPhone from "./dynamo/setPhone";
 import {getUserNameByPhone, isMemberHasPhone} from "./dynamo/getInformation";
+import Posts from "./mariaDB/Posts";
 
 const headers = {
     "Access-Control-Allow-Origin": "*", // Required for CORS support to work
@@ -45,6 +47,12 @@ exports.handler = async (event: any) => {
                     break;
                 case 'DELETE': {
                     console.log('DELETE: ' + currentId);
+                    const commentsDB = new Comments();
+                    const posts = await commentsDB.getPostsByUserName(currentId);
+                    const postsDB = new Posts();
+                    for(let i = 0; i < posts.length; i++){
+                        await postsDB.modifyComments(posts[i].post, 1);
+                    }
                     await deleteUser(currentId);
                     await userDB.delete(currentId);
                 }
