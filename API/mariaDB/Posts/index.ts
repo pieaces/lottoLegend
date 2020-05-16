@@ -7,6 +7,6 @@ export default class Posts extends Engine {
     }
     async modifyComments(id:number, count:number){
         const sql = `UPDATE ${this.tableName} SET comments=comments-? WHERE id=?`;
-        await this.query(sql, [id, count]);
+        await this.query(sql, [count, id]);
     }
 }
