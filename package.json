@@ -13,11 +13,13 @@
     "@types/jwk-to-pem": "^2.0.0",
     "@types/mysql2": "github:types/mysql2",
     "@types/node": "^13.1.6",
+    "@types/request": "^2.48.5",
     "aws-sdk": "^2.610.0"
   },
   "dependencies": {
     "jsonwebtoken": "^8.5.1",
     "jwk-to-pem": "^2.0.3",
-    "mysql2": "^2.1.0"
+    "mysql2": "^2.1.0",
+    "request": "^2.88.2"
   }
 }
