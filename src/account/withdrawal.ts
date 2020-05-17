@@ -3,6 +3,7 @@ import Auth from "@aws-amplify/auth";
 import { deleteAuthAPI } from "../amplify/api";
 import Swal from "sweetalert2";
 import { signOut, isLogedIn } from "../amplify/auth";
+import { makeLoading, removeLoading } from "../functions";
 configure();
 isLogedIn().then(result => {
     if (!result) {
@@ -19,6 +20,7 @@ const password = document.querySelector<HTMLInputElement>('#password');
 
 withdrawalForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    makeLoading();
     Auth.currentAuthenticatedUser()
         .then(user => {
             return Auth.changePassword(user, password.value, Math.random().toString(36).substr(2,11));
@@ -41,5 +43,6 @@ withdrawalForm.addEventListener('submit', async (e) => {
                     icon: 'warning'
                 });
             }
-        });
+        })
+        .finally(() => removeLoading());
 });
