@@ -2,13 +2,11 @@ import { AWSError } from 'aws-sdk';
 import { getCurrentRound, numsArrToString } from '../funtions';
 import { GetItemInput } from 'aws-sdk/clients/dynamodb';
 import { dynamoDB } from '../dynamoDB';
-
-//
 import querystring from 'querystring';
-import request from 'request';
-//
+import axios from 'axios';
+
 export default function publish(message: string, phoneNumber: string, title="로또끝"): Promise<void> {
-    const params = {
+    const data = {
         "key": "46srm39zvo8hbsv9rkrk3z67ja56p5wc",
         "user_id": "lottoend",
         "sender": "15991707",
@@ -19,14 +17,13 @@ export default function publish(message: string, phoneNumber: string, title="로
     };
 
     return new Promise((resolve, reject) => {
-        request.post({
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, // important to interect with PHP
+        axios({
+            method: 'post',
+            headers: { 'content-type': 'application/x-www-form-urlencoded' },
             url: 'https://apis.aligo.in/send/',
-            body: querystring.stringify(params),
-        }, function (error, response, body) {
-            if(error) reject(error);
-            else resolve(body);
-        });
+            data: querystring.stringify(data),
+        }).then(value => resolve())
+        .catch(err => reject(err));
     })
 }
 
