@@ -13,7 +13,7 @@ export default function publish(message: string, phoneNumber: string, title="로
         "receiver": '0' + phoneNumber.slice(3),
         "msg": message,
         "title": title,
-        "msg_type": "MMS",
+        "msg_type": "LMS",
     };
 
     return new Promise((resolve, reject) => {
