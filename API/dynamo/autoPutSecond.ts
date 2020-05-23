@@ -13,6 +13,9 @@ export default async function autoPutSecond() {
     const answer = await queryLotto2(round);
     const users = await scanUsers(round);
     let winner = new Array<number>(5).fill(0);
+    const first = [];
+    const second = [];
+    const third = [];
     for (let i = 0; i < users.length; i++) {
         const user = users[i];
         if (user.numsArr) {
@@ -23,6 +26,14 @@ export default async function autoPutSecond() {
                     if (1 <= rank && rank <= 5) {
                         winner[rank - 1]++;
                         await addWinnerToLottoData(round, rank, user.userName);
+                        switch(rank){
+                            case 1: first.push(user.userName);
+                            break;
+                            case 2: second.push(user.userName);
+                            break;
+                            case 3: third.push(user.userName);
+                            break;
+                        }
                     }
                 }
             }
@@ -43,13 +54,12 @@ export default async function autoPutSecond() {
         }
     }
     const rand = Math.random();
-    let third;
-    if(rand > 0.5) third = [Math.random().toString(36).substr(2,Math.random()*3+6)];
-    else third = [Math.random().toString(36).substr(2,Math.random()*3+6), Math.random().toString(36).substr(2,Math.random()*3+6)];
+    if(rand > 0.5) third.push(Math.random().toString(36).substr(2,Math.random()*3+6));
+    else third.push(...[Math.random().toString(36).substr(2,Math.random()*3+6), Math.random().toString(36).substr(2,Math.random()*3+6)]);
     const forth = Math.floor(Math.random()*30)+30;
     const fifth = Math.floor(Math.random()*300)+750;
-    await randomPlus(round, [], third, forth, fifth);
-    winner = [0, 0, third.length, forth, fifth];
+    await randomPlus(round, first, second, third, forth, fifth);
+    winner = [first.length, second.length, third.length, forth, fifth];
     await addWinToLottoStats(winner);
     console.log('autoPutSeconds 완료');
 }
@@ -235,7 +245,7 @@ function addWinnerToLottoData(round: number, rank: number, userName?: string) {
     }
 }
 
-export function randomPlus(round:number, second:string[], third:string[], forth:number, fifth:number):Promise<void> {
+export function randomPlus(round:number, first:string[], second:string[], third:string[], forth:number, fifth:number):Promise<void> {
     const params: UpdateItemInput = {
         TableName: 'LottoData',
         ExpressionAttributeValues: {
@@ -260,6 +270,7 @@ export function randomPlus(round:number, second:string[], third:string[], forth:
         },
         UpdateExpression: 'SET Win = :win'
     }
+    if(first.length > 0) params.ExpressionAttributeValues.firstWinner.SS = first;
     if(second.length > 0) params.ExpressionAttributeValues.secondWinner.SS = second;
     return new Promise((resolve, reject) => {
         dynamoDB.updateItem(params, (err: AWSError) => {
