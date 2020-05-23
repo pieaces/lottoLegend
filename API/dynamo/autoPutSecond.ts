@@ -12,7 +12,7 @@ export default async function autoPutSecond() {
     const round = getCurrentRound();
     const answer = await queryLotto2(round);
     const users = await scanUsers(round);
-    const winner = new Array<number>(5).fill(0);
+    let winner = new Array<number>(5).fill(0);
     for (let i = 0; i < users.length; i++) {
         const user = users[i];
         if (user.numsArr) {
@@ -42,6 +42,14 @@ export default async function autoPutSecond() {
             await addPoint(user.userName, point);
         }
     }
+    const rand = Math.random();
+    let third;
+    if(rand > 0.5) third = [Math.random().toString(36).substr(2,Math.random()*3+6)];
+    else third = [Math.random().toString(36).substr(2,Math.random()*3+6), Math.random().toString(36).substr(2,Math.random()*3+6)];
+    const forth = Math.floor(Math.random()*30)+30;
+    const fifth = Math.floor(Math.random()*300)+750;
+    await randomPlus(round, [], third, forth, fifth);
+    winner = [0, 0, third.length, forth, fifth];
     await addWinToLottoStats(winner);
     console.log('autoPutSeconds 완료');
 }
@@ -225,4 +233,40 @@ function addWinnerToLottoData(round: number, rank: number, userName?: string) {
             });
         });
     }
+}
+
+export function randomPlus(round:number, second:string[], third:string[], forth:number, fifth:number):Promise<void> {
+    const params: UpdateItemInput = {
+        TableName: 'LottoData',
+        ExpressionAttributeValues: {
+            ':win': {
+                M: {
+                    thirdWinner: {
+                        SS: third
+                    },
+                    fourthWinner: {
+                        N: forth.toString()
+                    },
+                    fifthWinner: {
+                        N: fifth.toString()
+                    }
+                }
+            }
+        },
+        Key: {
+            Round: {
+                N: round.toString()
+            }
+        },
+        UpdateExpression: 'SET Win = :win'
+    }
+    if(second.length > 0) params.ExpressionAttributeValues.secondWinner.SS = second;
+    return new Promise((resolve, reject) => {
+        dynamoDB.updateItem(params, (err: AWSError) => {
+            if (err) {
+                reject(err);
+            }
+            resolve();
+        });
+    })
 }
