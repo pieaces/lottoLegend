@@ -7,9 +7,9 @@ import { Plan, PlanValue } from './payment';
 
 function planValue(param:{plan?: Plan, until?: string}) {
     const now = Number(new Date());
-    if(!param.plan || !param.until) return PlanValue.default;
     const until = Number(new Date(param.until));
-    if (now <= until) {
+    if(!param.plan || !param.until || now > until) return PlanValue.default;
+    else if (now <= until) {
         switch (param.plan) {
             case Plan.basic:
                 return PlanValue.basic;
