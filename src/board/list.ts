@@ -106,7 +106,7 @@ function makeBoard(objArr: {id:number, title:string, rank:number, nickName:strin
         const boardAuthor = document.createElement('div');
         boardAuthor.classList.add('board-author');
 
-        boardAuthor.innerHTML = `<span class="rank ${rankToClass(objArr[i].rank)}"><div class="rank-text">${objArr[i].rank}</div></span>${objArr[i].nickName}`;
+        boardAuthor.innerHTML = `<span class="rank ${rankToClass(objArr[i].rank)}"><div class="rank-text">${objArr[i].rank !== 0 ? objArr[i].rank : ''}</div></span>${objArr[i].nickName}`;
 
         boardBox.appendChild(boardAuthor);
 
