@@ -23,29 +23,29 @@ export function mqMobileInit() {
     adBox.setAttribute('src', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAVQAAADIAQMAAACNj4t6AAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAAB9JREFUeNrtwYEAAAAAw6D5U5/gBlUBAAAAAAAAAMA3ImAAAUhLoDkAAAAASUVORK5CYII=')
     switch (Math.floor(Math.random() * 2)) {
         case 0:
-            adBox.style.backgroundPosition = "0 49.767682%";
+            adBox.style.backgroundPosition = "0 50.41841%";
             break;
         case 1:
-            adBox.style.backgroundPosition = "0 54.930305%";
+            adBox.style.backgroundPosition = "0 55.648536%";
             break;
     }
     imgBranch = (order: number) => {
         switch (order) {
             case 0:
                 bannerAnchor.setAttribute('href', 'introduce/system.html');
-                banner.style.backgroundPosition = '0 28.15735%';
+                banner.style.backgroundPosition = '0 28.526481%';
                 break;
             case 1:
                 bannerAnchor.setAttribute('href', 'introduce/truth.html');
-                banner.style.backgroundPosition = '0 33.592133%';
+                banner.style.backgroundPosition = '0 34.032512%';
                 break;
             case 2:
                 bannerAnchor.setAttribute('href', 'introduce/pay.html');
-                banner.style.backgroundPosition = '0 39.026915%';
+                banner.style.backgroundPosition = '0 39.538542%';
                 break;
             case 3:
                 bannerAnchor.setAttribute('href', 'introduce/campaign.html');
-                banner.style.backgroundPosition = '0 44.461698%';
+                banner.style.backgroundPosition = '0 45.044573%';
                 break;
         }
     }
@@ -56,10 +56,10 @@ export function mqDeskTopInit() {
     adBox.setAttribute('src', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAP0AAAFtAQMAAAD26v5IAAAAA1BMVEX///+nxBvIAAAAAXRSTlMAQObYZgAAACNJREFUeNrtwQENAAAAwqD3T20ON6AAAAAAAAAAAAAAAODMAC8NAAEIcAnCAAAAAElFTkSuQmCC');
     switch (Math.floor(Math.random() * 2)) {
         case 0:
-            adBox.style.backgroundPosition = "0 62.766244%";
+            adBox.style.backgroundPosition = "0 63.623941%";
             break;
         case 1:
-            adBox.style.backgroundPosition = "0 72.607172%";
+            adBox.style.backgroundPosition = "0 73.599344%";
             break;
     }
     imgBranch = (order: number) => {
@@ -70,15 +70,15 @@ export function mqDeskTopInit() {
                 break;
             case 1:
                 bannerAnchor.setAttribute('href', 'introduce/truth.html');
-                banner.style.backgroundPosition = '0 7.154129%';
+                banner.style.backgroundPosition = '0 7.249467%';
                 break;
             case 2:
                 bannerAnchor.setAttribute('href', 'introduce/pay.html');
-                banner.style.backgroundPosition = '0 14.308259%';
+                banner.style.backgroundPosition = '0 14.498934%';
                 break;
             case 3:
                 bannerAnchor.setAttribute('href', 'introduce/campaign.html');
-                banner.style.backgroundPosition = '0 21.462388%';
+                banner.style.backgroundPosition = '0 21.748401%';
                 break;
         }
     }
