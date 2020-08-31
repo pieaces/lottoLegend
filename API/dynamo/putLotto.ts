@@ -19,9 +19,10 @@ function lottoDataParser(data: any): LottoData {
 export default async function putLotto(round: number): Promise<void> {
     // At request level
     const https = require('https');
+    const url = 'https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=';
     const result = await axios(
         {
-            url: 'http://www.nlotto.co.kr/common.do?method=getLottoNumber&drwNo=' + round,
+            url: url + round,
             method: 'GET',
             httpsAgent: new https.Agent({ rejectUnauthorized: false })
         }
@@ -31,7 +32,7 @@ export default async function putLotto(round: number): Promise<void> {
     let beforeLotto: LottoData = null;
     if (round > 1) {
         before = await axios({
-            url: 'http://www.nlotto.co.kr/common.do?method=getLottoNumber&drwNo=' + (round - 1),
+            url: url + (round - 1),
             method: 'GET',
             httpsAgent: new https.Agent({ rejectUnauthorized: false })
         });
