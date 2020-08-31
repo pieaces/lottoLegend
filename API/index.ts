@@ -71,15 +71,6 @@ exports.handler = async (event: any) => {
                 data = await queryStats(method as StatsMethod);
                 body = data;
             }else if (method in StatsMethod) {
-                const plan = await getPlan(currentId);
-                if(plan !== Plan.premium && plan !== Plan["premium+"]){
-                    console.log('Intruder Alert! - Not Premium!');
-                    return{
-                        statusCode,
-                        headers,
-                        body: JSON.stringify(new Response(true, "프리미엄 회원이 아닙니다.")),
-                    }
-                }
                 const temp: QueryStatsParams = {}
                 const from = event.queryStringParameters && event.queryStringParameters.from
                 const to = event.queryStringParameters && event.queryStringParameters.to;
