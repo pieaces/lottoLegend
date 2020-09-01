@@ -24,9 +24,9 @@ isLogedIn().then((result) => {
                 document.querySelector('#service').textContent = data.user.plan;
             }
             executeMakingBoard(data);
-            // if (!mqMobile.matches) {
-            //     makeScroll(data.notice);
-            // }
+            if (!mqMobile.matches) {
+                makeScroll(data.notice);
+            }
         }).catch(() => {networkAlert();});
     } else {
         loginAfterBox.classList.add('none');
