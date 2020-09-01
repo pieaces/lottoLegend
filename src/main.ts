@@ -44,28 +44,28 @@ isLogedIn().then((result) => {
 
 const winRound = document.getElementById('win-round');
 const officialWinResultBox = document.querySelectorAll<HTMLElement>('.total-win-result-box > div');
-const myWinResultBox = document.querySelectorAll<HTMLElement>('#win-result > div');
+//const myWinResultBox = document.querySelectorAll<HTMLElement>('#win-result > div');
 getUnAuthAPI('/main/numbers').then(data => {
     makeWinNumBox(data);
     document.querySelectorAll('.win-round').forEach(node => node.textContent = data.round);
     winRound.textContent = data.round;
 
-    insertWinCount(data.stats);
+    // insertWinCount(data.stats);
     insertWinResult(data.info, officialWinResultBox);
-    insertWinResult(data.win && data.win.map((winner: number, index: number) => {
-        return {
-            winner,
-            winAmount: winner * data.info[index].winAmount
-        }
-    }), myWinResultBox);
-    document.getElementById('totalAmount').textContent = moneyCompress(data.info && data.info.reduce((acc, cur, index) => acc + cur.winAmount * data.win[index], 0));
-    const winners = [];
-    data.winners && data.winners.forEach((_winners, index) => {
-        _winners && _winners.forEach(winner => {
-            winners.push({ rank: index + 1, money: data.info[index].winAmount, nickName: winner });
-        });
-    });
-    makeWinnersList(winners);
+    // insertWinResult(data.win && data.win.map((winner: number, index: number) => {
+    //     return {
+    //         winner,
+    //         winAmount: winner * data.info[index].winAmount
+    //     }
+    // }), myWinResultBox);
+    // document.getElementById('totalAmount').textContent = moneyCompress(data.info && data.info.reduce((acc, cur, index) => acc + cur.winAmount * data.win[index], 0));
+    // const winners = [];
+    // data.winners && data.winners.forEach((_winners, index) => {
+    //     _winners && _winners.forEach(winner => {
+    //         winners.push({ rank: index + 1, money: data.info[index].winAmount, nickName: winner });
+    //     });
+    // });
+    // makeWinnersList(winners);
 }).catch((err) => console.log(err));
 
 mqFunc(mqMobile);

@@ -32,7 +32,7 @@ export function mqMobileInit() {
     imgBranch = (order: number) => {
         switch (order) {
             case 0:
-                bannerAnchor.setAttribute('href', 'introduce/system.html');
+                bannerAnchor.setAttribute('href', '');
                 banner.style.backgroundPosition = '0 28.526481%';
                 break;
             case 1:
@@ -40,7 +40,7 @@ export function mqMobileInit() {
                 banner.style.backgroundPosition = '0 34.032512%';
                 break;
             case 2:
-                bannerAnchor.setAttribute('href', 'introduce/pay.html');
+                bannerAnchor.setAttribute('href', 'introduce/system.html');
                 banner.style.backgroundPosition = '0 39.538542%';
                 break;
             case 3:
@@ -65,7 +65,7 @@ export function mqDeskTopInit() {
     imgBranch = (order: number) => {
         switch (order) {
             case 0:
-                bannerAnchor.setAttribute('href', 'introduce/system.html');
+                bannerAnchor.setAttribute('href', '');
                 banner.style.backgroundPosition = '0 0%';
                 break;
             case 1:
@@ -73,7 +73,7 @@ export function mqDeskTopInit() {
                 banner.style.backgroundPosition = '0 7.249467%';
                 break;
             case 2:
-                bannerAnchor.setAttribute('href', 'introduce/pay.html');
+                bannerAnchor.setAttribute('href', 'introduce/system.html');
                 banner.style.backgroundPosition = '0 14.498934%';
                 break;
             case 3:
