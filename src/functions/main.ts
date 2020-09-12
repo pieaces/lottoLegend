@@ -172,6 +172,7 @@ scrolling.prototype = {
 
 function insertScrollText(data: {id:number, title:string}[]) {
     for (let i = 0; i < scrollList.length; i++) {
+        if(!data[i]) break;
         scrollList[i].setAttribute('href', `/${getCategoryHtml('notice', 'read')}?id=${data[i].id}`);
         scrollList[i].textContent = data[i].title;
     }

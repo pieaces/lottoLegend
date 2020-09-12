@@ -27,7 +27,7 @@ isLogedIn().then((result) => {
             if (!mqMobile.matches) {
                 makeScroll(data.notice);
             }
-        }).catch(() => {networkAlert();});
+        }).catch((err) => {networkAlert();});
     } else {
         loginAfterBox.classList.add('none');
         loginContainer.classList.remove('none');

@@ -29,32 +29,6 @@ const awsconfig = {
             }
         ]
     },
-    Analytics: {
-        // OPTIONAL - disable Analytics if true
-        disabled: false,
-        // OPTIONAL - Allow recording session events. Default is true.
-        autoSessionRecord: true,
-
-        AWSPinpoint: {
-            appId: 'a47407198ab049d59ea309eb77421020',
-            // Amazon service region
-            region: 'us-west-2',
-            // OPTIONAL -  Customized endpoint
-        },
-
-        // Buffer settings used for reporting analytics events.
-        // OPTIONAL - The buffer size for events in number of items.
-        bufferSize: 1000,
-
-        // OPTIONAL - The interval in milliseconds to perform a buffer check and flush if necessary.
-        flushInterval: 5000, // 5s 
-
-        // OPTIONAL - The number of events to be deleted from the buffer when flushed.
-        flushSize: 100,
-
-        // OPTIONAL - The limit for failed recording retries.
-        resendLimit: 5
-    }
 }
 
 export default awsconfig;
