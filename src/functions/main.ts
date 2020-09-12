@@ -186,7 +186,7 @@ const commTab = document.querySelectorAll('.community-tab');
 const boardPlus = document.getElementById('board-plus');
 export function executeMakingBoard(data: any) {
     let current = 0;
-    const tabs = ['pro', 'analysis', 'include', 'exclude', 'free'];
+    const tabs = ['analysis', 'include', 'exclude', 'free'];
 
     makeBoard(data[tabs[current]]);
 

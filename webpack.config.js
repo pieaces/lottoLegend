@@ -44,7 +44,7 @@ const entries = [
 ];
 const names = ['vendor/non-system', 'vendor/system'];
 
-const INDEX = 1;
+const INDEX = 0;
 module.exports = {
     mode: 'production',
     entry: entries[INDEX],
