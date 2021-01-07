@@ -4,8 +4,8 @@ import counterLotto, { getCurrentRound } from './functions';
 import dynamoDB from '.';
 import { GetItemInput } from 'aws-sdk/clients/dynamodb';
 
-export default async function autoPutLotto() {
-    const total = getCurrentRound();
+export default async function autoPutLotto(_total: number=0) {
+    const total = _total || getCurrentRound();
     const count = await counterLotto() - 1;
     console.log(`현재:${count}, 로또전체:${total}`);
     if (count < total) {
